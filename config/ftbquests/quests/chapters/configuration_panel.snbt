@@ -1,0 +1,193 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	disable_toast: true
+	filename: "configuration_panel"
+	group: ""
+	icon: "mekanism:module_energy_unit"
+	id: "7C55129B7A170351"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["Don't like the darkness of the night? Just click this one simple button and you can forever banish the terrors of the dark!"]
+			icon: "minecraft:sunflower"
+			id: "1450957C6F72830F"
+			rewards: [
+				{
+					auto: "enabled"
+					id: "5B5959E4689A32A0"
+					table_id: 6741767295260868068L
+					title: "Stop the flow of time"
+					type: "questsadditions:repeat"
+				}
+				{
+					auto: "enabled"
+					id: "62C24F14C3E8A8CB"
+					table_id: 1457763491092482768L
+					title: "Make noon"
+					type: "questsadditions:repeat"
+				}
+			]
+			subtitle: "Begone!"
+			tasks: [{
+				id: "2A9A8F20154FDA0F"
+				title: "Steal the moon"
+				type: "checkmark"
+			}]
+			title: "Banish the moon"
+			x: -5.5d
+			y: -4.0d
+		}
+		{
+			description: ["If you changed your mind, you can always go back."]
+			icon: "minecraft:ender_pearl"
+			id: "5BFF3035C0DE3C64"
+			rewards: [{
+				auto: "enabled"
+				id: "5774AEF29E538BA2"
+				table_id: 3127175903169831962L
+				type: "questsadditions:repeat"
+			}]
+			shape: "square"
+			subtitle: "I didn't mean what I said!"
+			tasks: [{
+				id: "23644FED7BBF6A9F"
+				title: "Take me back!"
+				type: "checkmark"
+			}]
+			title: "Moon, come back!"
+			x: -5.5d
+			y: -3.0d
+		}
+		{
+			description: ["If you don't like running after your grave every time you die, you can choose to keep your inventory after each death (or just not die, probably easier)"]
+			icon: "minecraft:skeleton_skull"
+			id: "5D8240A0B2779AC3"
+			rewards: [{
+				auto: "enabled"
+				id: "0CFAED89841C1677"
+				table_id: 2523283000924372420L
+				type: "questsadditions:repeat"
+			}]
+			subtitle: "I hope my items didn't fall into the void..."
+			tasks: [{
+				id: "64C822C3D6EF50A8"
+				title: "\"I actually meant to die right there\""
+				type: "checkmark"
+			}]
+			title: "...Actually, I meant to die right there"
+			x: -4.0d
+			y: -4.0d
+		}
+		{
+			description: ["Go back to losing your items after each death."]
+			icon: "minecraft:lava_bucket"
+			id: "284989B4A4B34E7F"
+			rewards: [{
+				auto: "enabled"
+				id: "7F37E790BECA406F"
+				table_id: 6877507471908056940L
+				type: "questsadditions:repeat"
+			}]
+			shape: "square"
+			subtitle: "Try me, universe!"
+			tasks: [{
+				id: "41A1E2AE3EA4A2CA"
+				title: "\"Actually, I like the challenge\""
+				type: "checkmark"
+			}]
+			title: "I don't like my inventory anyways!"
+			x: -4.0d
+			y: -3.0d
+		}
+		{
+			description: ["By pressing this button, you won't have to remember to keep sleeping in order to stop phantoms from spawning."]
+			icon: "minecraft:white_bed"
+			id: "755DA9653FCF0AB2"
+			rewards: [{
+				auto: "enabled"
+				id: "3C52095A71411E85"
+				table_id: 5031915644954519282L
+				type: "questsadditions:repeat"
+			}]
+			subtitle: "The answer is nobody, nobody likes them"
+			tasks: [{
+				id: "190091CF33EAFD5F"
+				title: "Who likes phantoms anyways?"
+				type: "checkmark"
+			}]
+			x: -2.5d
+			y: -4.0d
+		}
+		{
+			description: ["No description needed, you don't want this anyways"]
+			icon: "minecraft:cobweb"
+			id: "5CDD589A3F6A2C4D"
+			rewards: [{
+				auto: "enabled"
+				id: "1746CEE073B754EE"
+				table_id: 5495574862062641215L
+				type: "questsadditions:repeat"
+			}]
+			shape: "square"
+			subtitle: "This button looks brand new, it seems nobody has ever pressed it..."
+			tasks: [{
+				id: "4743597BA0D6BF66"
+				title: "\"I like phantoms, actually\""
+				type: "checkmark"
+			}]
+			x: -2.5d
+			y: -3.0d
+		}
+		{
+			description: ["If you don't like having your thoughts interrumpted by the sound of rain appearing completely randomly, just stop rain from happening, simple."]
+			icon: "minecraft:lightning_rod"
+			id: "741B7428F9634CEF"
+			rewards: [
+				{
+					auto: "enabled"
+					id: "2EFBAF17E0518750"
+					table_id: 6386785087915326975L
+					type: "questsadditions:repeat"
+				}
+				{
+					auto: "enabled"
+					id: "4BA7DB87B9315AE4"
+					table_id: 5038739109671112373L
+					type: "questsadditions:repeat"
+				}
+			]
+			subtitle: "Just as I was preparing to take a screenshot..."
+			tasks: [{
+				id: "160746D5843C697B"
+				type: "checkmark"
+			}]
+			title: "Why are you here, rain?!"
+			x: -1.0d
+			y: -4.0d
+		}
+		{
+			description: ["If you liked the rain, you can bring it back."]
+			icon: "minecraft:rose_bush"
+			id: "24E60BDA9E928690"
+			rewards: [{
+				auto: "enabled"
+				id: "4DC7A1E00D298607"
+				table_id: 1578231006101341936L
+				type: "questsadditions:repeat"
+			}]
+			shape: "square"
+			subtitle: "Lightning is cool, too!"
+			tasks: [{
+				id: "47E38F40647084BC"
+				title: "But what about my poor garden?"
+				type: "checkmark"
+			}]
+			x: -1.0d
+			y: -3.0d
+		}
+	]
+	subtitle: ["Create your ideal experience here"]
+	title: "Configuration Panel"
+}

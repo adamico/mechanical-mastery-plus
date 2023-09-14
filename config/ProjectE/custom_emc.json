@@ -1,0 +1,12 @@
+{
+  "entries": [
+    {
+      "item": "minecraft:cobblestone",
+      "emc": 1
+    },
+    {
+      "item": "minecraft:coal",
+      "emc": 128
+    }
+  ]
+}

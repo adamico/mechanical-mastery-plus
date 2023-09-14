@@ -1,0 +1,13 @@
+name = "Redstone Pen"
+filename = "redstonepen-1.19.2-forge-1.2.19.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/DwE83ioX/versions/N6jVCv4R/redstonepen-1.19.2-forge-1.2.19.jar"
+hash-format = "sha1"
+hash = "3de1dbe3d1db8049af3c15a92f79216ff15077d7"
+
+[update]
+[update.modrinth]
+mod-id = "DwE83ioX"
+version = "N6jVCv4R"

@@ -1,0 +1,13 @@
+name = "Online Detector (Forge)"
+filename = "online_detector-1.19-3.1.2.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "866c76e7291ceea67ff42bb2715a813ebbeeefc7"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4167054
+project-id = 454487

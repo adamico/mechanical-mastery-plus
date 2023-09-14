@@ -1,0 +1,13 @@
+name = "Runelic"
+filename = "Runelic-Forge-1.19.2-14.1.4.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/P4Xi5huA/versions/reRhkNTi/Runelic-Forge-1.19.2-14.1.4.jar"
+hash-format = "sha1"
+hash = "1f97ca1b4858735fd327abc9a70bf8f4d20d1dc7"
+
+[update]
+[update.modrinth]
+mod-id = "P4Xi5huA"
+version = "reRhkNTi"

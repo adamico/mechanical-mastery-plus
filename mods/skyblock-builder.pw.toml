@@ -1,0 +1,13 @@
+name = "Skyblock Builder"
+filename = "SkyblockBuilder-1.19.2-4.2.17.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/por2AZc5/versions/XJK9d97L/SkyblockBuilder-1.19.2-4.2.17.jar"
+hash-format = "sha1"
+hash = "40992c0541cee18db77f52fce64a2ccfd431e205"
+
+[update]
+[update.modrinth]
+mod-id = "por2AZc5"
+version = "XJK9d97L"

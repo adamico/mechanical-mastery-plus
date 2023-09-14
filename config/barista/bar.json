@@ -1,0 +1,14 @@
+{
+  "moduleList": [
+    {
+      "name": "icon",
+      "display": true,
+      "context": "icon.png"
+    },
+    {
+      "name": "text",
+      "display": true,
+      "context": "Mechanical Mastery Plus | A 1.19 fork by kc00l of a modpack by Ammonium"
+    }
+  ]
+}

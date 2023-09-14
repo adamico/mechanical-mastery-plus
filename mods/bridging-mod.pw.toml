@@ -1,0 +1,13 @@
+name = "Bridging Mod"
+filename = "BridgingMod-2.1.1+1.19.2.forge.jar"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/lO3s8hjs/versions/PJkOhs2H/BridgingMod-2.1.1%2B1.19.2.forge.jar"
+hash-format = "sha1"
+hash = "d44ad69ea4d4c5a72309271613cafcf767d58039"
+
+[update]
+[update.modrinth]
+mod-id = "lO3s8hjs"
+version = "PJkOhs2H"

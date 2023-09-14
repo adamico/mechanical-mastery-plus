@@ -1,0 +1,11 @@
+{
+	id: "2304808539E0FDC4"
+	loot_size: 1
+	order_index: 5
+	rewards: [{
+		command: "/gamerule keepInventory true"
+		player_command: false
+		type: "command"
+	}]
+	title: "activate keepinventory"
+}

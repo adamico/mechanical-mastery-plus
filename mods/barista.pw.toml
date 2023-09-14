@@ -1,0 +1,13 @@
+name = "Barista - Window Title Editor"
+filename = "Barsita-1.19.2-1.1.2.jar"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/Vod0bt60/versions/QJRPkPTO/Barsita-1.19.2-1.1.2.jar"
+hash-format = "sha1"
+hash = "5fe232f6adc1604a611a04099560f73458cd67c6"
+
+[update]
+[update.modrinth]
+mod-id = "Vod0bt60"
+version = "QJRPkPTO"

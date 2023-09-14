@@ -1,0 +1,13 @@
+name = "Refined Storage: Requestify"
+filename = "rsrequestify-2.3.0.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/dSxaHfLO/versions/IDWmRNKn/rsrequestify-2.3.0.jar"
+hash-format = "sha1"
+hash = "113bae01cbc8a1fd9b3647955f8b955eba0382a1"
+
+[update]
+[update.modrinth]
+mod-id = "dSxaHfLO"
+version = "IDWmRNKn"

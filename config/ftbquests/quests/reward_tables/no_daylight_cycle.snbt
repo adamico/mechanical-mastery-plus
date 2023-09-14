@@ -1,0 +1,12 @@
+{
+	id: "5D8F91A2B85EBDE4"
+	loot_size: 1
+	order_index: 2
+	rewards: [{
+		auto: "enabled"
+		command: "/gamerule doDaylightCycle false"
+		player_command: false
+		type: "command"
+	}]
+	title: "no daylight cycle"
+}

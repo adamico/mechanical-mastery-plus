@@ -1,0 +1,13 @@
+name = "mechanical-mastery-plus"
+author = "kc00l"
+version = "a0.0.1"
+pack-format = "packwiz:1.1.0"
+
+[index]
+file = "index.toml"
+hash-format = "sha256"
+hash = "3d580666b927837ed75d535c5eb8cc16ce7c84b5ec90e347c473e9ee74f5f3d2"
+
+[versions]
+forge = "43.2.23"
+minecraft = "1.19.2"

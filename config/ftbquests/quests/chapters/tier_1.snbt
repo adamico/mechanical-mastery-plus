@@ -1,0 +1,721 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "tier_1"
+	group: ""
+	hide_quest_details_until_startable: true
+	hide_quest_until_deps_visible: true
+	icon: "kubejs:cube1"
+	id: "302898E288734A9B"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["Welcome to this modpack, where your objective is to automate every mechanical crystal. Through this quest book, you will receive many of the basic materials you will need to fulfill this job. Make sure to learn the items first before using them up, no refunds!"]
+			id: "491EB18107FC8776"
+			rewards: [
+				{
+					count: 64
+					id: "578138C088B7AE15"
+					item: "minecraft:bread"
+					type: "item"
+				}
+				{
+					id: "2963665AEE0E7133"
+					item: "minecraft:white_bed"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "109FB72945533DB3"
+					item: "minecraft:coal_ore"
+					type: "item"
+				}
+			]
+			subtitle: "Where it all begins"
+			tasks: [{
+				icon: {
+					Count: 1b
+					id: "projecte:philosophers_stone"
+					tag: { }
+				}
+				id: "2ECDA834E28D3B2A"
+				title: "Welcome!"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["491EB18107FC8776"]
+			description: ["Create a basic cobblestone generator to unlock access to some basic resources. REMEMBER: ALWAYS learn the items first before using them!"]
+			id: "5D6996CC9444ADE7"
+			rewards: [{
+				count: 64
+				id: "6214D2CC53B31C53"
+				item: "minecraft:cobblestone"
+				type: "item"
+			}]
+			subtitle: "The beginning..."
+			tasks: [{
+				id: "5C95D4E16A8DDB14"
+				item: "minecraft:cobblestone"
+				type: "item"
+			}]
+			title: "Tier 1 materials"
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["491EB18107FC8776"]
+			description: ["One great way to get EMC before automation is simply growing trees, since logs contain some EMC."]
+			id: "258878D4F87E9F1E"
+			rewards: [{
+				count: 8
+				id: "3C291BB62FF867F2"
+				item: "minecraft:oak_sapling"
+				type: "item"
+			}]
+			tasks: [{
+				id: "08E661E4E8986BF8"
+				item: "minecraft:oak_log"
+				type: "item"
+			}]
+			title: "Wood"
+			x: -1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5D6996CC9444ADE7"]
+			icon: "minecraft:iron_ingot"
+			id: "3E9816CC28A63F1E"
+			rewards: [{
+				count: 16
+				id: "77408D9CF647BDE3"
+				item: "minecraft:raw_iron"
+				type: "item"
+			}]
+			tasks: [{
+				id: "21967A135E5A4E5F"
+				title: "Iron"
+				type: "checkmark"
+			}]
+			x: 1.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["5D6996CC9444ADE7"]
+			icon: "minecraft:gold_ingot"
+			id: "4D62BC450EDA35F2"
+			rewards: [{
+				count: 8
+				id: "440ECADAC1835B8C"
+				item: "minecraft:raw_gold"
+				type: "item"
+			}]
+			tasks: [{
+				id: "56DAE7BBD8C03D06"
+				title: "Gold"
+				type: "checkmark"
+			}]
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5D6996CC9444ADE7"]
+			icon: "minecraft:copper_ingot"
+			id: "2B6B7D3F3994D04F"
+			rewards: [{
+				count: 16
+				id: "7D7ABFBC40F0141D"
+				item: "minecraft:raw_copper"
+				type: "item"
+			}]
+			tasks: [{
+				id: "129702BDFCF53F84"
+				title: "Copper"
+				type: "checkmark"
+			}]
+			x: 2.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["5D6996CC9444ADE7"]
+			icon: "thermal:silver_ingot"
+			id: "412842B354C94B4D"
+			rewards: [{
+				id: "528529B1D1FCCDC1"
+				item: "thermal:raw_silver"
+				type: "item"
+			}]
+			tasks: [{
+				id: "71DC41304EA1CCBF"
+				title: "Silver"
+				type: "checkmark"
+			}]
+			x: 2.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["5D6996CC9444ADE7"]
+			icon: "thermal:lead_ingot"
+			id: "113A2B5A7CC48A73"
+			rewards: [{
+				id: "77137AD9DCECADC2"
+				item: "mekanism:raw_lead"
+				type: "item"
+			}]
+			tasks: [{
+				id: "4B428A080DD87786"
+				title: "Lead"
+				type: "checkmark"
+			}]
+			x: 1.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["5D6996CC9444ADE7"]
+			icon: "minecraft:redstone"
+			id: "5B0813AE6F64E7C0"
+			rewards: [{
+				count: 8
+				id: "047BB67E95397EF1"
+				item: "minecraft:redstone_ore"
+				type: "item"
+			}]
+			tasks: [{
+				id: "63ACEFFE0D2618BF"
+				title: "Redstone"
+				type: "checkmark"
+			}]
+			x: 0.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["3E9816CC28A63F1E"]
+			description: ["With these raw resources, it will not be too difficult to make your first power generator: a stirling dynamo. Although far from ideal, it will be of great importance early on."]
+			id: "19A22A30A2BFEDAB"
+			rewards: [{
+				id: "57AA7677EF15CC50"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "5F6664EDD2BFC0A3"
+				item: "thermal:dynamo_stirling"
+				type: "item"
+			}]
+			title: "Beginning Automation: Thermal"
+			x: 1.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["19A22A30A2BFEDAB"]
+			description: ["You have probably already noticed that in this modpack, ores give less than one ingot when regularly smelted. Thankfully, with the pulverizer, you can negate this by getting 1-2 ore dust from each ore chunk!"]
+			id: "13AA6AFAF9C8DD0B"
+			rewards: [{
+				id: "061C05EC445B401B"
+				type: "xp"
+				xp: 100
+			}]
+			subtitle: "Finally, some decent ore processing!"
+			tasks: [{
+				id: "36592AE3FE51D5B9"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			title: "Pulverizer"
+			x: 1.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["13AA6AFAF9C8DD0B"]
+			description: ["Some items can serve as a \"catalyst\" inside the pulverizer, increasing primary and secondary output, plus some other modifiers. Check JEI for a list of them."]
+			id: "3434FB0FA0702973"
+			rewards: [
+				{
+					id: "53F79A89E3A01C68"
+					type: "xp"
+					xp: 100
+				}
+				{
+					count: 16
+					id: "62F604ABEF1D8C9F"
+					item: "minecraft:flint"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "76E571A53E0C24D7"
+				item: "minecraft:flint"
+				type: "item"
+			}]
+			title: "Pulverizer Catalysts"
+			x: 1.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["3E9816CC28A63F1E"]
+			description: ["The engineer's hammer is how you will get your first plates and rods. It's not very efficient, though, there must be some better way to do this in the future..."]
+			id: "19499868D936A165"
+			rewards: [{
+				id: "0CD4C1F6848C1355"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [
+				{
+					id: "24292B7DFF1162E3"
+					item: {
+						Count: 1b
+						id: "itemfilters:tag"
+						tag: {
+							value: "forge:plates"
+						}
+					}
+					title: "Any #forge:plates"
+					type: "item"
+				}
+				{
+					id: "32988525234A9483"
+					item: {
+						Count: 1b
+						id: "itemfilters:tag"
+						tag: {
+							value: "forge:rods"
+						}
+					}
+					title: "Any #forge:rods"
+					type: "item"
+				}
+				{
+					id: "3146CFF5CA32B5FA"
+					item: {
+						Count: 1b
+						id: "immersiveengineering:hammer"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Plates and Rods"
+			x: 0.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["258878D4F87E9F1E"]
+			description: ["Clay can be turned into bricks, another important resource for automation and crafting."]
+			icon: "minecraft:clay_ball"
+			id: "2B8F40D3510E2D05"
+			rewards: [{
+				count: 16
+				id: "3F9606F24886C828"
+				item: "minecraft:clay_ball"
+				type: "item"
+			}]
+			tasks: [{
+				id: "019E0C2501327EBC"
+				title: "Clay"
+				type: "checkmark"
+			}]
+			x: -3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"19A22A30A2BFEDAB"
+				"6039A6C800474F6D"
+			]
+			description: ["With the multiservo press, you can automate what the engineer's hammer does and more, without losing item durability and with a little extra efficiency. You can craft plates and more with it!"]
+			id: "54983CC37DD93E7A"
+			rewards: [{
+				id: "0077B72A897EB181"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "32825235F7A53270"
+				item: "thermal:machine_press"
+				type: "item"
+			}]
+			x: -0.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["547050DB11C5FFB7"]
+			description: ["The induction smelter can make many alloys that will be valuable in the future."]
+			id: "07DB08AC0D1516A4"
+			rewards: [{
+				id: "3D3E26A5B494407C"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "366B1B5714C30D04"
+				item: "thermal:machine_smelter"
+				type: "item"
+			}]
+			x: 2.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["07DB08AC0D1516A4"]
+			description: ["Just like the pulverizer, certain \"catalysts\" can be used inside the induction smelter to boost primary and secondary output, energy efficiency, and some other things. Check JEI for more info."]
+			id: "1A1486F396BCEA3C"
+			rewards: [
+				{
+					id: "63F601802149EA38"
+					type: "xp"
+					xp: 100
+				}
+				{
+					count: 16
+					id: "4F72F3FDA9A3B4E9"
+					item: "minecraft:sand"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "1C51B69ECBD925F2"
+				item: "minecraft:sand"
+				type: "item"
+			}]
+			title: "Induction Smelter Catalysts"
+			x: 2.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["54983CC37DD93E7A"]
+			description: ["You can place special dies on the bottom slot of the multiservo press to change its functionality, such as crafting gears instead of plates. This modpack adds a custom rod die which can be used to make rods from plates."]
+			id: "2746A3F7A98C2134"
+			rewards: [
+				{
+					id: "5F49998A6AFA70CB"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "32ACBFB925B3577D"
+					table_id: 1602564825145878379L
+					type: "choice"
+				}
+			]
+			tasks: [{
+				id: "267A63D03350CEBE"
+				item: {
+					Count: 1b
+					id: "itemfilters:tag"
+					tag: {
+						value: "thermal:crafting/dies"
+					}
+				}
+				title: "Any #thermal:crafting/dies"
+				type: "item"
+			}]
+			title: "Press Dies"
+			x: -0.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["19499868D936A165"]
+			description: [
+				""
+				"By crafting some gears and rods together, you managed to craft the first of the mechanical essences! This cube has an EMC value higher than the sum of its parts, so if you can manage to automate it, it will serve as a great EMC source!"
+			]
+			id: "7A0CB1037E6BE4D7"
+			rewards: [
+				{
+					id: "5B75C6A7D8E9D38E"
+					type: "xp"
+					xp: 100
+				}
+				{
+					count: 16
+					id: "23176832183B31BF"
+					item: "kubejs:cube1_packaged"
+					type: "item"
+				}
+			]
+			shape: "gear"
+			tasks: [
+				{
+					id: "0DA904B48F32E904"
+					item: "kubejs:cube1"
+					type: "item"
+				}
+				{
+					id: "2806B1586B29E196"
+					item: "kubejs:cube1_packaged"
+					type: "item"
+				}
+			]
+			x: -1.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["19A22A30A2BFEDAB"]
+			description: ["The redstone furnace allows you to smelt things just like a regular furnace can, except it consumes RF instead of fuel."]
+			id: "2B65C5DE4AA944BA"
+			rewards: [{
+				id: "0F55EF2A479BC037"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "082AE7EADA5E2A06"
+				item: "thermal:machine_furnace"
+				type: "item"
+			}]
+			x: 0.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["19A22A30A2BFEDAB"]
+			description: ["Eventually, you will want to power multiple machines with the same dynamos. Use these energy cables to connect your machines and generators together so they can share power with each other."]
+			id: "7DC5EA17257FC5B8"
+			rewards: [
+				{
+					id: "4128516CC3CF2B67"
+					type: "xp"
+					xp: 100
+				}
+				{
+					count: 16
+					id: "0B38C6061A14BE38"
+					item: "powah:energy_cable_basic"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "3B341A44F107DC84"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "powah:energy_cable_starter"
+							}
+							{
+								Count: 1b
+								id: "powah:energy_cable_basic"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Basic Power Transport"
+			x: 5.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["5D6996CC9444ADE7"]
+			icon: "thermal:tin_ingot"
+			id: "2F86A0F2D202B4B7"
+			rewards: [{
+				id: "69FE01406485C986"
+				item: "mekanism:raw_tin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "55D6D705ABE5F4AC"
+				title: "Tin"
+				type: "checkmark"
+			}]
+			x: 0.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["5D6996CC9444ADE7"]
+			icon: "immersiveengineering:ingot_aluminum"
+			id: "4E3ACB7B16B45645"
+			rewards: [{
+				count: 16
+				id: "6F479738816D1A7F"
+				item: "immersiveengineering:raw_aluminum"
+				type: "item"
+			}]
+			tasks: [{
+				id: "17750BF1BA8BC6C2"
+				title: "Aluminum"
+				type: "checkmark"
+			}]
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["19A22A30A2BFEDAB"]
+			description: ["In order to actually automate stuff, you want an effective way to move items from machine to machine. Hoppers are too slow and filtering with them is too space consuming. Pretty pipes, however, are a great solution early on. If you dont want items to overflow, you need to install stack limiter modules on each output (or get a high extraction module, but we're not there yet)."]
+			id: "5B12C19CBD25995E"
+			rewards: [
+				{
+					count: 16
+					id: "1232AFE722AF8194"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "1A216B457279F0F1"
+					item: "prettypipes:low_extraction_module"
+					type: "item"
+				}
+				{
+					id: "42202DF002239C0E"
+					item: "prettypipes:low_filter_module"
+					type: "item"
+				}
+				{
+					id: "69BCE6AE223E1C0E"
+					item: "prettypipes:stack_size_module"
+					type: "item"
+				}
+				{
+					id: "6FB2B4AA92BC6DA9"
+					item: "prettypipes:wrench"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "6E627EA35AE1C664"
+				item: "prettypipes:pipe"
+				type: "item"
+			}]
+			title: "Basic Item Transport"
+			x: 5.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["19A22A30A2BFEDAB"]
+			description: ["With the basic EMC link, you can automatically convert items to EMC and vice versa. With them, you can fully automate the production of mechanical essences."]
+			id: "4AB3B5469D68C46D"
+			rewards: [{
+				id: "2C69027CF205BC78"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "4AFCCAA14047AEF0"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			title: "Basic EMC I/O"
+			x: 5.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["113A2B5A7CC48A73"]
+			icon: "thermal:nickel_ingot"
+			id: "44EFFDB0CE9EB078"
+			rewards: [{
+				id: "3B45D0E841423BA4"
+				item: "thermal:raw_nickel"
+				type: "item"
+			}]
+			tasks: [{
+				id: "01B1F78368449929"
+				title: "Nickel"
+				type: "checkmark"
+			}]
+			x: 1.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["19A22A30A2BFEDAB"]
+			description: ["The sequential fabricator allows you to automate crafting, you only have to select the recipe and insert the ingredients, then they will be crafted into the output."]
+			id: "387D9ECF1CD0B4F8"
+			rewards: [{
+				id: "56DE53737C24A26C"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "29D6E0B76CB72710"
+				item: "thermal:machine_crafter"
+				type: "item"
+			}]
+			x: 3.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["7A0CB1037E6BE4D7"]
+			description: ["EMC links output 1 item per second, yet redstone furnaces and pulverizers take longer than that to process one item. Because of this, you will most likely need one pulverizer and redstone furnace per each raw material needed for automation (copper, iron, aluminum). Remember to trash unwanted byproducts such as slag, or they might stop your machines from working. You can use the stack limiter module to limit how much your machines can accept, which is useful so your one iron pulverizer doesn't consume all your EMC by filling with 64 raw iron."]
+			id: "09BAD2F7D01D16FD"
+			optional: true
+			rewards: [{
+				id: "0F2165D0F13CC47C"
+				type: "xp"
+				xp: 100
+			}]
+			shape: "diamond"
+			subtitle: "You are not alone"
+			tasks: [{
+				id: "1366549E16545D0A"
+				title: "Tips for automation"
+				type: "checkmark"
+			}]
+			x: -3.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["19499868D936A165"]
+			description: ["Pulverize copper and nickel to craft constantan blend, which can be smelted into constantan ingots"]
+			id: "6039A6C800474F6D"
+			rewards: [{
+				count: 4
+				id: "773AD79BFE07336A"
+				item: "thermal:constantan_ingot"
+				type: "item"
+			}]
+			tasks: [{
+				id: "7A5298D1E8EFA6E5"
+				item: {
+					Count: 1b
+					id: "itemfilters:tag"
+					tag: {
+						RepairCost: 0
+						display: {
+							Name: "{\"text\":\"Any Constantan Dust\"}"
+						}
+						value: "forge:dusts/constantan"
+					}
+				}
+				type: "item"
+			}]
+			x: -0.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["19A22A30A2BFEDAB"]
+			description: ["How do you get invar before having the induction smelter? Easy, pulverize iron and nickel, and craft the dusts together to form invar blend, which you can smelt into invar ingots"]
+			id: "547050DB11C5FFB7"
+			rewards: [{
+				count: 4
+				id: "62CCD410368BEF61"
+				item: "thermal:invar_ingot"
+				type: "item"
+			}]
+			tasks: [{
+				id: "4E6DA9CBF61B6DB1"
+				item: {
+					Count: 1b
+					id: "itemfilters:tag"
+					tag: {
+						RepairCost: 0
+						display: {
+							Name: "{\"text\":\"Any Invar Dust\"}"
+						}
+						value: "forge:dusts/invar"
+					}
+				}
+				type: "item"
+			}]
+			x: 2.5d
+			y: -4.0d
+		}
+	]
+	title: "Tier 1: Thermal"
+}

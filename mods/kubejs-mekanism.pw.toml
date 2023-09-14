@@ -1,0 +1,13 @@
+name = "KubeJS Mekanism"
+filename = "kubejs-mekanism-1902.1.5-build.15.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/sY2Fy24K/versions/GLkghm6r/kubejs-mekanism-1902.1.5-build.15.jar"
+hash-format = "sha1"
+hash = "7e1bde3cd6f24337935b5f40f0e203b7f2223b3e"
+
+[update]
+[update.modrinth]
+mod-id = "sY2Fy24K"
+version = "GLkghm6r"

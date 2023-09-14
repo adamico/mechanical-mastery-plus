@@ -1,0 +1,13 @@
+name = "TorchMaster"
+filename = "torchmaster-19.2.93.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/Tl8ESrhX/versions/XuZH2hD2/torchmaster-19.2.93.jar"
+hash-format = "sha1"
+hash = "678890ce4af28f05004a2097b83a96b401331bd8"
+
+[update]
+[update.modrinth]
+mod-id = "Tl8ESrhX"
+version = "XuZH2hD2"

@@ -1,0 +1,10 @@
+{
+  "name": "Zinc",
+  "colors": [
+    "bce6ef",
+    "bce6ef"
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/zinc"
+  }
+}

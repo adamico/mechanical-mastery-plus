@@ -1,0 +1,13 @@
+name = "Construction Wand"
+filename = "constructionwand-1.19.2-2.10.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/bV2crgLh/versions/aHdfYfXB/constructionwand-1.19.2-2.10.jar"
+hash-format = "sha1"
+hash = "fb8862cd690e1d2f1ef179a1fb895d8de8d8b46e"
+
+[update]
+[update.modrinth]
+mod-id = "bV2crgLh"
+version = "aHdfYfXB"

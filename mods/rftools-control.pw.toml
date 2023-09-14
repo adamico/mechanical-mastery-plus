@@ -1,0 +1,13 @@
+name = "RFTools Control"
+filename = "rftoolscontrol-1.19-6.1.4.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/DQjhR62z/versions/Cjinisl7/rftoolscontrol-1.19-6.1.4.jar"
+hash-format = "sha1"
+hash = "56ddcbc76d831def6b4976c5010d36e28ffb4155"
+
+[update]
+[update.modrinth]
+mod-id = "DQjhR62z"
+version = "Cjinisl7"
