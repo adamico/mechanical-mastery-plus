@@ -1,2 +1,8 @@
-# Specify filepatterns you want git to ignore.
+# exclude packwiz
 packwiz.exe
+
+# Exclude exported CurseForge zip files
+*.zip
+
+# Exclude exported Modrinth modpacks
+*.mrpack
