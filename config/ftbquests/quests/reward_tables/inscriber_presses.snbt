@@ -1,0 +1,12 @@
+{
+	id: "359E6496F5540E0B"
+	loot_size: 1
+	order_index: 12
+	rewards: [
+		{ item: "ae2:silicon_press" }
+		{ item: "ae2:logic_processor_press" }
+		{ item: "ae2:engineering_processor_press" }
+		{ item: "ae2:calculation_processor_press" }
+	]
+	title: "Inscriber Presses"
+}

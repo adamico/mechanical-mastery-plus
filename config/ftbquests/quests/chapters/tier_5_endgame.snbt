@@ -1,0 +1,528 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "tier_5_endgame"
+	group: ""
+	hide_quest_details_until_startable: true
+	hide_quest_until_deps_visible: true
+	icon: "projectexpansion:final_star"
+	id: "41DDE820BE913888"
+	order_index: 7
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["157D4C0E9C7A0928"]
+			description: ["I understand everything now. The meaning behind all the crystals I have birthed into this universe. They were guiding me, slowly teaching me how to create stronger, more powerful catalysts, in order to achieve the final goal. The final star awaits me..."]
+			icon: "kubejs:cube4"
+			id: "07980075BFE4C586"
+			rewards: [{
+				count: 64
+				id: "6EF6444338A6F5F8"
+				item: "create:experience_nugget"
+				type: "item"
+			}]
+			subtitle: "Finally, I have them all"
+			tasks: [{
+				id: "120AF98B995C2B33"
+				title: "After all this time..."
+				type: "checkmark"
+			}]
+			title: "After all these years..."
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			description: ["Some say, this is what the emptyness of space is made of."]
+			icon: "kubejs:black_essence"
+			id: "059DCF9720BF62A2"
+			rewards: [{
+				count: 4
+				id: "355174964BFE7C2E"
+				item: "kubejs:black_essence"
+				type: "item"
+			}]
+			tasks: [{
+				id: "1E04BCFD21FF51AD"
+				title: "Essence of Darkness"
+				type: "checkmark"
+			}]
+			x: 1.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["059DCF9720BF62A2"]
+			description: ["Infusing things with raw essence of darkness is inefficient, if I enrich it first I can extract *20 times* more darkness essence out of it."]
+			id: "2A54B4D2619C6CD8"
+			tasks: [{
+				id: "78EDF4223CDC7F5B"
+				item: "kubejs:enriched_black_essence"
+				type: "item"
+			}]
+			x: 2.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["059DCF9720BF62A2"]
+			description: ["A unique superalloy, nearly 100% inmune to any type of radiation."]
+			id: "133E1F837FA4A41B"
+			rewards: [{
+				count: 4
+				id: "16C9D04597D15877"
+				item: "extendedcrafting:black_iron_ingot"
+				type: "item"
+			}]
+			tasks: [{
+				id: "09B189D88272BD7C"
+				item: "extendedcrafting:black_iron_ingot"
+				type: "item"
+			}]
+			x: 2.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["133E1F837FA4A41B"]
+			description: ["By coating HPE sheets with this superalloy, I may be able to experiment with polonium and even antimatter production."]
+			id: "53F4A40B4EAECB3E"
+			tasks: [{
+				id: "6A85AA47BC93CE53"
+				item: "kubejs:black_hdpe_sheet"
+				type: "item"
+			}]
+			x: 3.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["53F4A40B4EAECB3E"]
+			description: ["When in direct sunlight, the solar neutron activator can turn nuclear waste from my fission reactor into polonium."]
+			id: "41E380D0E0E5E75A"
+			tasks: [{
+				id: "0D8DCA89FD12C7E3"
+				item: "mekanism:solar_neutron_activator"
+				type: "item"
+			}]
+			x: 4.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			description: ["I can create skeleton skulls with some bone and a body stone, and infuse it with darkness essence to create wither skeleton skulls, which can be used to summon the wither."]
+			id: "72B98B8FDAC0BC45"
+			rewards: [
+				{
+					count: 3
+					id: "51319CE00B5C2E91"
+					item: "minecraft:wither_skeleton_skull"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "458F9B32CB5FE339"
+					item: "minecraft:soul_sand"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					count: 3L
+					id: "27F4994572067C96"
+					item: "minecraft:wither_skeleton_skull"
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "3122F67E65383D36"
+					item: "minecraft:soul_sand"
+					type: "item"
+				}
+			]
+			title: "Summoning the wither"
+			x: -1.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["72B98B8FDAC0BC45"]
+			description: ["A powerful star in and of itself, it serves as an ingredient for the most powerful star."]
+			id: "384BB4E82F5D69C6"
+			rewards: [{
+				id: "2C30B178D34BDF57"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "35F207A74B6EAA09"
+				item: "minecraft:nether_star"
+				type: "item"
+			}]
+			x: -1.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["4B9AE47D2EBF5155"]
+			description: ["There are multiple ways to summon the wither automatically, but one of the easiest is to use the wither builder. I just add the required items, and it will summon it automatically for me, which I can then kill with a mob crusher for automatic nether stars."]
+			id: "2D4CFBD09E6AFA85"
+			optional: true
+			rewards: [{
+				id: "550D8B6CF244D38D"
+				item: "minecraft:nether_star"
+				type: "item"
+			}]
+			shape: "gear"
+			tasks: [
+				{
+					id: "00A26E4F9FAA8300"
+					item: "industrialforegoing:wither_builder"
+					type: "item"
+				}
+				{
+					id: "31C401704351B201"
+					item: "industrialforegoing:mob_crusher"
+					type: "item"
+				}
+			]
+			title: "Automating withers"
+			x: -3.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["41E380D0E0E5E75A"]
+			id: "41D9B7AC1089FA83"
+			tasks: [
+				{
+					count: 60L
+					id: "5914B4A680D30F75"
+					item: "mekanism:sps_casing"
+					type: "item"
+				}
+				{
+					count: 123L
+					id: "4A62CCF59257CE86"
+					item: "mekanism:structural_glass"
+					type: "item"
+				}
+				{
+					count: 3L
+					id: "08A3E2771E114453"
+					item: "mekanism:sps_port"
+					type: "item"
+				}
+				{
+					id: "05B673DAC24FBB1E"
+					item: "mekanism:supercharged_coil"
+					type: "item"
+				}
+			]
+			title: "Supercritical Phase Shifter"
+			x: 4.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["41D9B7AC1089FA83"]
+			description: ["Although slow and expensive to obtain, this antimatter will certainly help me create stuff that would otherwise be physically impossible."]
+			id: "6A313C7F7A10ABE7"
+			rewards: [{
+				count: 2
+				id: "1D0807CDA07757A1"
+				item: "mekanism:pellet_antimatter"
+				type: "item"
+			}]
+			tasks: [{
+				id: "2241E41C58273405"
+				item: "mekanism:pellet_antimatter"
+				type: "item"
+			}]
+			x: 3.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			id: "4DA3EFBDC9FE2FDF"
+			tasks: [{
+				id: "543077701DABA7CD"
+				item: "powah:crystal_nitro"
+				type: "item"
+			}]
+			x: -0.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			id: "21736DEF38D368D1"
+			tasks: [{
+				id: "308E6FF10841A021"
+				item: "create:precision_mechanism"
+				type: "item"
+			}]
+			x: 0.5d
+			y: -4.0d
+		}
+		{
+			dependencies: [
+				"384BB4E82F5D69C6"
+				"4DA3EFBDC9FE2FDF"
+				"21736DEF38D368D1"
+			]
+			id: "2BA7E55C7B7EB3C3"
+			tasks: [{
+				id: "0694DCFB36A75BB7"
+				item: "projectexpansion:final_star_shard"
+				type: "item"
+			}]
+			x: 0.0d
+			y: -5.5d
+		}
+		{
+			dependencies: [
+				"2BA7E55C7B7EB3C3"
+				"6A313C7F7A10ABE7"
+				"1449829DCB1B39C4"
+			]
+			description: ["There it is. The most powerful star ever created. With the EMC this gives me I would be set for life. However, I can find better uses out of it."]
+			id: "53B7C4EFD1B28F70"
+			shape: "octagon"
+			tasks: [{
+				id: "440C55230602ECF4"
+				item: "projectexpansion:final_star"
+				type: "item"
+			}]
+			x: 0.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			description: ["By fusing 1000 of each metal and gem together, I am able to create the ultimate singularity, containing every element necessary for the creation of the final star."]
+			id: "1449829DCB1B39C4"
+			tasks: [{
+				id: "0E9D814D30592F58"
+				item: "extendedcrafting:ultimate_singularity"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -4.0d
+		}
+		{
+			dependencies: [
+				"53B7C4EFD1B28F70"
+				"0F08BE53368BBA0E"
+				"4912D9951F6B69A9"
+				"001789AD77BFECCF"
+				"643082630E0B6CFD"
+				"72B973D152D0D797"
+			]
+			description: ["The true potential of the final star. With this, EMC and raw materials are something I shall never have to worry about again."]
+			id: "1D6666CFC0B349E1"
+			shape: "pentagon"
+			tasks: [{
+				id: "6E754D97D3E78A68"
+				item: "projectexpansion:final_power_flower"
+				type: "item"
+			}]
+			x: 0.0d
+			y: -10.5d
+		}
+		{
+			dependencies: ["1D6666CFC0B349E1"]
+			description: ["Store and retrieve items from the infinitely deep center of the final star. If you crafted this, congratulations, you win the modpack."]
+			id: "79B1FCD79D650A18"
+			rewards: [{
+				id: "7A303AA3ED13A4E6"
+				item: "minecraft:cod"
+				type: "item"
+			}]
+			shape: "gear"
+			tasks: [{
+				id: "3F1FE18A9C21E03D"
+				item: "functionalstorage:creative_vending_upgrade"
+				type: "item"
+			}]
+			x: 0.0d
+			y: -12.0d
+		}
+		{
+			dependencies: ["53B7C4EFD1B28F70"]
+			description: ["Infinite kinetic stress capacity."]
+			id: "0F08BE53368BBA0E"
+			tasks: [{
+				id: "7C236303EF71DB29"
+				item: "create:creative_motor"
+				type: "item"
+			}]
+			x: -1.5d
+			y: -7.5d
+		}
+		{
+			dependencies: ["53B7C4EFD1B28F70"]
+			description: ["Unlimited Power. Note: DO NOT Place the ultimate energy cube down in order to charge it, charge it either wirlessly or by putting it as an item in any charging machine, placing it down will make you the owner, and not recognize it for the crafting recipe."]
+			id: "643082630E0B6CFD"
+			subtitle: "READ QUEST FOR HOW TO CRAFT"
+			tasks: [{
+				id: "6B6B22A465884FF5"
+				item: {
+					Count: 1b
+					id: "mekanism:creative_energy_cube"
+					tag: {
+						mekData: {
+							EnergyContainers: [{
+								Container: 0b
+								stored: "18446744073709551615.9999"
+							}]
+						}
+					}
+				}
+				type: "item"
+			}]
+			x: 1.0d
+			y: -8.5d
+		}
+		{
+			dependencies: ["53B7C4EFD1B28F70"]
+			description: ["Infinite fluid storage and withdrawal."]
+			id: "4912D9951F6B69A9"
+			tasks: [{
+				id: "500E0937561BCE1C"
+				item: "mekanism:creative_fluid_tank"
+				type: "item"
+			}]
+			x: -1.0d
+			y: -8.5d
+		}
+		{
+			dependencies: ["6D84D702189A9505"]
+			description: ["Infinite Item to EMC import/export."]
+			id: "448F9E6FE3FC4F04"
+			optional: true
+			shape: "hexagon"
+			tasks: [{
+				id: "4BE9E7FC0757F556"
+				item: "projectexpansion:final_emc_link"
+				type: "item"
+			}]
+			x: -3.0d
+			y: -5.5d
+		}
+		{
+			dependencies: ["53B7C4EFD1B28F70"]
+			description: ["Unlimited refined storage capacity"]
+			id: "001789AD77BFECCF"
+			tasks: [{
+				id: "4F9815D48862D2A4"
+				item: "refinedstorage:creative_storage_disk"
+				type: "item"
+			}]
+			x: 0.0d
+			y: -9.0d
+		}
+		{
+			dependencies: [
+				"2BA7E55C7B7EB3C3"
+				"6A313C7F7A10ABE7"
+			]
+			description: ["Infinite gas and chemical storage and withdrawal. Highly recommended to craft before final star, since it allows for infinite antimatter."]
+			id: "72B973D152D0D797"
+			subtitle: "Recommended before Final Star"
+			tasks: [{
+				id: "7CC64EE6B88CD556"
+				item: "mekanism:creative_chemical_tank"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -7.5d
+		}
+		{
+			dependencies: ["2BA7E55C7B7EB3C3"]
+			description: ["Not all creative items are needed for the creative vending upgrade, some are simply optional if you want to go after them or not."]
+			id: "6D84D702189A9505"
+			optional: true
+			tasks: [{
+				id: "04885001577E80D6"
+				title: "Optional Creative Items"
+				type: "checkmark"
+			}]
+			x: -2.0d
+			y: -5.5d
+		}
+		{
+			dependencies: ["6D84D702189A9505"]
+			description: ["Can set the heat level of blaze burners permanently and at no cost."]
+			id: "5414E6D079200533"
+			optional: true
+			shape: "hexagon"
+			tasks: [{
+				id: "20511334736BEEF1"
+				item: "create:creative_blaze_cake"
+				type: "item"
+			}]
+			x: -3.0d
+			y: -6.5d
+		}
+		{
+			dependencies: ["6D84D702189A9505"]
+			description: ["No RF used, very fast processing"]
+			id: "7CE54486D31A47BA"
+			optional: true
+			shape: "hexagon"
+			tasks: [{
+				id: "52A22B4A47C791B2"
+				item: "thermal:machine_efficiency_creative_augment"
+				type: "item"
+			}]
+			x: -3.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["72B98B8FDAC0BC45"]
+			description: ["Trap a wither inside a stasis chamber and place a fluid laser base directly above it to passively obtain ether gas."]
+			id: "05A0C01966A06A98"
+			optional: true
+			rewards: [{
+				id: "6932205E63F2FBA1"
+				item: "industrialforegoing:ether_gas_bucket"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "4CE0541FA8CC0B50"
+					item: "industrialforegoing:ether_gas_bucket"
+					type: "item"
+				}
+				{
+					id: "45FF0C8EE95F6CB6"
+					item: "industrialforegoing:stasis_chamber"
+					type: "item"
+				}
+				{
+					id: "028BB5B8B978C1B4"
+					item: "industrialforegoing:laser_drill"
+					type: "item"
+				}
+				{
+					id: "3AEF9320EDC346FB"
+					item: "industrialforegoing:fluid_laser_base"
+					type: "item"
+				}
+				{
+					id: "6A2FE44642802298"
+					item: "industrialforegoing:laser_lens10"
+					type: "item"
+				}
+			]
+			title: "Getting Ether Gas"
+			x: -2.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["05A0C01966A06A98"]
+			description: ["Use the Ether Gas to craft the highest tier machine frame."]
+			id: "4B9AE47D2EBF5155"
+			optional: true
+			tasks: [{
+				id: "3DEBDD1821AE9150"
+				item: "industrialforegoing:machine_frame_supreme"
+				type: "item"
+			}]
+			x: -3.5d
+			y: -1.0d
+		}
+	]
+	title: "Tier 5: Endgame"
+}

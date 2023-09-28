@@ -1,0 +1,11 @@
+{
+	id: "45D4F49E6D3EA6F2"
+	loot_size: 1
+	order_index: 7
+	rewards: [{
+		command: "/gamerule doInsomnia false"
+		player_command: false
+		type: "command"
+	}]
+	title: "remove phantoms"
+}

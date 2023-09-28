@@ -1,0 +1,12 @@
+{
+	id: "143B042BED19CAD0"
+	loot_size: 1
+	order_index: 3
+	rewards: [{
+		auto: "enabled"
+		command: "/time set 6000"
+		player_command: false
+		type: "command"
+	}]
+	title: "make noon"
+}

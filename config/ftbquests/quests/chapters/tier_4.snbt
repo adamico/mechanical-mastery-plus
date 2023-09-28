@@ -1,0 +1,667 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "tier_4"
+	group: ""
+	hide_quest_details_until_startable: true
+	hide_quest_until_deps_visible: true
+	icon: "kubejs:cube4"
+	id: "38378A6F4FF9F098"
+	order_index: 6
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["1A67C9B9ABB4E969"]
+			description: ["New tier, new materials; you know the deal already."]
+			icon: "kubejs:cube3"
+			id: "4E81E76086558A19"
+			tasks: [{
+				id: "6DC696B8987D5178"
+				title: "Tier 4 Materials"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			icon: "mekanism:ingot_uranium"
+			id: "15AFC0BA95FC8B41"
+			rewards: [{
+				id: "653B7682B1D7AA45"
+				item: "mekanism:raw_uranium"
+				type: "item"
+			}]
+			tasks: [{
+				id: "1782ECBC146EE156"
+				title: "Uranium"
+				type: "checkmark"
+			}]
+			x: 1.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			icon: "mekanism:fluorite_gem"
+			id: "67A2B456E7E5CFF6"
+			rewards: [{
+				id: "1AE0F0065287BD62"
+				item: "mekanism:fluorite_ore"
+				type: "item"
+			}]
+			tasks: [{
+				id: "760694F06091D57D"
+				title: "Fluorite"
+				type: "checkmark"
+			}]
+			x: 1.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			description: ["Works as slime balls in recipes and can be turned into crude oil at the magma crucible."]
+			icon: "kubejs:oil_clump"
+			id: "17DAE811CFBA10B9"
+			rewards: [{
+				id: "479DEC2CE37B4174"
+				item: "kubejs:oil_clump"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5704CDE574DD30D8"
+				title: "Oil clump"
+				type: "checkmark"
+			}]
+			x: -1.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["17DAE811CFBA10B9"]
+			description: ["The fractionating still can process crude oil into usable products, such as light/heavy oil."]
+			id: "6201AC6B5614B2EA"
+			rewards: [
+				{
+					id: "18A3AD161F07ED8F"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "42B50B4BC6DE9380"
+					item: "thermal:crude_oil_bucket"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "29A1C4C987D9ACC0"
+				item: "thermal:machine_refinery"
+				type: "item"
+			}]
+			x: -2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7943076114A42DFC"]
+			description: ["The compression dynamo can burn liquids such as refined fuel into large amounts of RF."]
+			id: "2E769FE13EC39E0D"
+			optional: true
+			rewards: [{
+				id: "6F611A64AAAEBA76"
+				item: "thermal:refined_fuel_bucket"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "7BF588900AFA9032"
+				item: "thermal:dynamo_compression"
+				type: "item"
+			}]
+			x: -4.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["6201AC6B5614B2EA"]
+			description: ["The refining process used to obtain refined fuel also gives additional bitumen, sulfur and tar as byproducts, making it especially useful."]
+			id: "7943076114A42DFC"
+			rewards: [{
+				id: "5A90134AE0BB17CA"
+				item: "thermal:refined_fuel_bucket"
+				type: "item"
+			}]
+			tasks: [{
+				id: "2D2A9DE21E8A4EB6"
+				item: "thermal:refined_fuel_bucket"
+				type: "item"
+			}]
+			x: -2.0d
+			y: -4.0d
+		}
+		{
+			dependencies: [
+				"67A2B456E7E5CFF6"
+				"15AFC0BA95FC8B41"
+			]
+			description: ["The Fissile Fuel production line can be complicated to understand just from JEI alone, but this quest tells you every machine required to produce fissile fuel, which only requires four raw ingredients: uranium, sulphur, fluorite, and water. Good luck!"]
+			icon: "mekanism:radioactive_waste_barrel"
+			id: "3E8F024835BB58F7"
+			rewards: [
+				{
+					id: "68F44F9925BE925D"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "3D1DD6ABE4262F65"
+					item: "kubejs:cube2_packaged"
+					type: "item"
+				}
+			]
+			shape: "square"
+			tasks: [
+				{
+					id: "3C52E0B443C0D654"
+					item: "mekanism:isotopic_centrifuge"
+					type: "item"
+				}
+				{
+					count: 2L
+					id: "759EAF578A1E1A21"
+					item: "mekanism:chemical_oxidizer"
+					type: "item"
+				}
+				{
+					count: 3L
+					id: "3B9ED8F416DDDC77"
+					item: "mekanism:chemical_infuser"
+					type: "item"
+				}
+				{
+					id: "2E5991C74AB20581"
+					item: "mekanism:chemical_dissolution_chamber"
+					type: "item"
+				}
+				{
+					id: "374A668C81C85286"
+					item: "mekanism:enrichment_chamber"
+					type: "item"
+				}
+				{
+					id: "75BA3A1BB3DA4403"
+					item: "mekanism:rotary_condensentrator"
+					type: "item"
+				}
+				{
+					id: "38947FCE079E8D2C"
+					item: "mekanism:electrolytic_separator"
+					type: "item"
+				}
+			]
+			title: "Fissile Fuel Production"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3E8F024835BB58F7"]
+			description: ["You can combine fissile fuel and fluorite dust in a purification chamber to obtain a fissile fuel pellet, useful for crafting the next tier of mechanical essences."]
+			id: "56E72EB694287116"
+			tasks: [{
+				id: "081EADF184E19536"
+				item: "kubejs:fission_pellet"
+				type: "item"
+			}]
+			x: 2.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			icon: "minecraft:sugar_cane"
+			id: "085C56EE894594B1"
+			rewards: [{
+				id: "6EAB5D9FB8F9DFC0"
+				item: "minecraft:sugar_cane"
+				type: "item"
+			}]
+			tasks: [{
+				id: "14F96EDE05D0F6E7"
+				title: "Sugar Cane"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			description: ["Use these wisely, no refunds. Alternatively, you may also bulk haunt dough to get eggs."]
+			icon: "minecraft:egg"
+			id: "767667B65ECABE77"
+			rewards: [{
+				count: 3
+				id: "7D23D09A6A3CC6BF"
+				item: "minecraft:chicken_spawn_egg"
+				type: "item"
+			}]
+			tasks: [{
+				id: "207B115AC6793C3F"
+				title: "Eggs"
+				type: "checkmark"
+			}]
+			title: "Eggs"
+			x: -1.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["3E8F024835BB58F7"]
+			description: ["The fission reactor is a large Mekanism multiblock which can burn fissile fuel to heat large amounts of water into steam. How do you build it? Idk, google it or look up a youtube tutorial. It does not, however, produce power by itself. Beware of nuclear meltdowns! Manage your nuclear waste properly and ensure that enough coolant (water) is available to the reactor at all times."]
+			id: "2B2DAA2647444F4F"
+			rewards: [
+				{
+					count: 10
+					id: "539659B391A36962"
+					item: "mekanism:radioactive_waste_barrel"
+					type: "item"
+				}
+				{
+					id: "697B2186AB389257"
+					type: "xp"
+					xp: 100
+				}
+			]
+			shape: "hexagon"
+			subtitle: "!!! Obligatory, needed for future quests"
+			tasks: [
+				{
+					id: "2775BE8442BC35A4"
+					item: "mekanismgenerators:fission_reactor_casing"
+					type: "item"
+				}
+				{
+					id: "4AA0F34B63C1855E"
+					item: "mekanismgenerators:reactor_glass"
+					type: "item"
+				}
+				{
+					id: "57E18EB88364E4EE"
+					item: "mekanismgenerators:fission_reactor_port"
+					type: "item"
+				}
+				{
+					id: "18081A49D91442C0"
+					item: "mekanismgenerators:fission_fuel_assembly"
+					type: "item"
+				}
+				{
+					id: "223923EE220F05D0"
+					item: "mekanismgenerators:control_rod_assembly"
+					type: "item"
+				}
+			]
+			title: "Fission Reactor"
+			x: 3.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["2B2DAA2647444F4F"]
+			description: ["The steam turbine, another large multiblock, lets you use all that steam the fission reactor produces to generate power, and cools it down back to water which you can then feed back into the reactor. Caution: if the turbine's internal power buffer gets full, it will stop cooling down steam, which can result in a bad time if you depended on that steam being cooled for your reactor's coolant. Again, just search a tutorial on how to build a good turbine."]
+			id: "593EEC1F5CA967D5"
+			rewards: [{
+				id: "4C494F95D2B34E5B"
+				type: "xp"
+				xp: 100
+			}]
+			shape: "hexagon"
+			subtitle: "Large-scale power production at last"
+			tasks: [
+				{
+					id: "5BE685BFAB4E0346"
+					item: "mekanismgenerators:turbine_casing"
+					type: "item"
+				}
+				{
+					id: "29F426A8F69DAE89"
+					item: "mekanismgenerators:turbine_valve"
+					type: "item"
+				}
+				{
+					id: "243CC1EE4C9BBF13"
+					item: "mekanismgenerators:turbine_vent"
+					type: "item"
+				}
+				{
+					id: "4869929171368DA3"
+					item: "mekanismgenerators:turbine_rotor"
+					type: "item"
+				}
+				{
+					id: "59E8C6F9EC135A13"
+					item: "mekanismgenerators:turbine_blade"
+					type: "item"
+				}
+				{
+					id: "1589118E7696970F"
+					item: "mekanismgenerators:saturating_condenser"
+					type: "item"
+				}
+				{
+					id: "3F7FFBB3EF3FAA9A"
+					item: "mekanismgenerators:rotational_complex"
+					type: "item"
+				}
+				{
+					id: "269D877736C64988"
+					item: "mekanismgenerators:electromagnetic_coil"
+					type: "item"
+				}
+				{
+					id: "317485D4DF5A2E28"
+					item: "mekanism:structural_glass"
+					type: "item"
+				}
+			]
+			title: "Steam turbine"
+			x: 5.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0850DE0A32947FA8"]
+			description: ["Craft a blaze cake base and then fill it with lava using a spout to obtain a blaze cake, which can be fed to blaze burners to make them superheated, needed for some mixing recipes."]
+			id: "13C6D580E33815D5"
+			rewards: [{
+				id: "7862B771EE891969"
+				item: "create:blaze_cake"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "7E5989D620BABE65"
+					item: "create:blaze_cake_base"
+					type: "item"
+				}
+				{
+					id: "3C1D9AE7CAF566F9"
+					item: "create:blaze_cake"
+					type: "item"
+				}
+			]
+			title: "Blaze Cake"
+			x: 0.0d
+			y: -4.0d
+		}
+		{
+			dependencies: [
+				"085C56EE894594B1"
+				"767667B65ECABE77"
+			]
+			description: ["Crush netherrack to obtain cinder flour."]
+			id: "0850DE0A32947FA8"
+			rewards: [{
+				count: 16
+				id: "460D3015EAE7E617"
+				item: "create:cinder_flour"
+				type: "item"
+			}]
+			tasks: [{
+				id: "446EFFEEECAB24BA"
+				item: "create:cinder_flour"
+				type: "item"
+			}]
+			x: 0.0d
+			y: -2.5d
+		}
+		{
+			dependencies: [
+				"13C6D580E33815D5"
+				"56E72EB694287116"
+				"26277A0FD5DA798E"
+				"0EE1192BF90562ED"
+			]
+			description: ["Just as before, combine all the required ingredients in a superheated mixer and... wait, it's not done yet? It seems like it needs to be activated some way... Maybe that fission reactor can help?"]
+			id: "2FE7FB850DB23DC1"
+			tasks: [{
+				id: "74FB67C7495D4ACD"
+				item: "kubejs:cube4_inert"
+				type: "item"
+			}]
+			x: 1.0d
+			y: -5.5d
+		}
+		{
+			dependencies: ["1A67C9B9ABB4E969"]
+			description: ["Use your philosopher's stone to transmute several coal into a more dense fuel source."]
+			id: "26277A0FD5DA798E"
+			rewards: [
+				{
+					count: 8
+					id: "4ED93AC66233E67A"
+					item: "projecte:mobius_fuel"
+					type: "item"
+				}
+				{
+					id: "2199D5BB0F86CA54"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [{
+				id: "61F50B290D27170B"
+				item: "projecte:mobius_fuel"
+				type: "item"
+			}]
+			x: 2.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["1A67C9B9ABB4E969"]
+			description: ["Mekanism's second-to-last tiered circuit."]
+			id: "0EE1192BF90562ED"
+			rewards: [{
+				id: "1D8AEA82223D07F2"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "630EFAA39D279506"
+				item: "mekanism:elite_control_circuit"
+				type: "item"
+			}]
+			x: 2.5d
+			y: -5.0d
+		}
+		{
+			dependencies: [
+				"7943076114A42DFC"
+				"2FE7FB850DB23DC1"
+			]
+			description: ["As it turns out, using refined fuel and infusing it with large amounts of energy is able to give the mechanical essence the power it needed to activate into it's full glory."]
+			id: "157D4C0E9C7A0928"
+			rewards: [
+				{
+					count: 2
+					id: "7C1787B15B45C8FB"
+					item: "kubejs:cube3_packaged"
+					type: "item"
+				}
+				{
+					id: "2A5A9D8FDB633CC7"
+					type: "xp"
+					xp: 100
+				}
+			]
+			shape: "gear"
+			tasks: [
+				{
+					id: "121DC9C8822A6410"
+					item: "kubejs:cube4"
+					type: "item"
+				}
+				{
+					id: "777000DE9150BF38"
+					item: "kubejs:cube4_packaged"
+					type: "item"
+				}
+			]
+			x: -0.5d
+			y: -7.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			description: ["Processed into netherite."]
+			icon: "minecraft:ancient_debris"
+			id: "1AEFCBE4B6A87AE4"
+			rewards: [{
+				id: "195DFA3C6915D188"
+				item: "minecraft:ancient_debris"
+				type: "item"
+			}]
+			tasks: [{
+				id: "1C7E1DA5F037C9C6"
+				title: "Ancient Debris"
+				type: "checkmark"
+			}]
+			x: -1.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			icon: "minecraft:emerald"
+			id: "5E91DCD550B96352"
+			rewards: [{
+				count: 2
+				id: "5D740AF328508122"
+				item: "minecraft:emerald_ore"
+				type: "item"
+			}]
+			tasks: [{
+				id: "39DA9058B9F4F397"
+				title: "Emerald"
+				type: "checkmark"
+			}]
+			x: 1.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["26277A0FD5DA798E"]
+			description: ["Powerful Fuel Source"]
+			id: "1BA8F6047EC4694E"
+			optional: true
+			tasks: [{
+				id: "29CAAD65CDC4EBC6"
+				item: "projecte:aeternalis_fuel"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -7.0d
+		}
+		{
+			dependencies: ["1BA8F6047EC4694E"]
+			description: ["Crafting ingredient for powerful ProjectE gadgets"]
+			id: "0B14BDB8AF4F57C3"
+			optional: true
+			tasks: [{
+				id: "1A9FCA86B142B03B"
+				item: "projecte:dark_matter"
+				type: "item"
+			}]
+			x: 2.5d
+			y: -8.0d
+		}
+		{
+			dependencies: ["0B14BDB8AF4F57C3"]
+			description: ["When placed on a pedestal, drastically increases nearby machine's speed"]
+			id: "158C15F8B10B3DBB"
+			optional: true
+			rewards: [{
+				id: "6B429B6F08EAC8BC"
+				item: "projecte:dm_pedestal"
+				type: "item"
+			}]
+			tasks: [{
+				id: "47E66A5E054D0AC4"
+				item: {
+					Count: 1b
+					ForgeCaps: {
+						Parent: { }
+					}
+					id: "projecte:watch_of_flowing_time"
+					tag: { }
+				}
+				type: "item"
+			}]
+			x: 1.5d
+			y: -9.0d
+		}
+		{
+			dependencies: [
+				"157D4C0E9C7A0928"
+				"158C15F8B10B3DBB"
+			]
+			description: ["Due to their internal RF transfer limit, Thermal machines usually don't behave when combined with tick accelerating like the watch of flowing time. The solution? Increase their transfer limit, of course! The ideal setup for a machine is one resonant integral component and three localized time destabilizer augments."]
+			id: "1F4DCE63D7FA0449"
+			optional: true
+			rewards: [{
+				id: "294823914E17CB0E"
+				item: {
+					Count: 1b
+					id: "kubejs:time_augment"
+					tag: {
+						AugmentData: {
+							MachineEnergy: 0.75d
+							MachinePower: 1.0d
+							RFXfer: 20.0d
+							Type: "Machine"
+						}
+					}
+				}
+				type: "item"
+			}]
+			shape: "rsquare"
+			subtitle: "I need SPEED"
+			tasks: [{
+				id: "23AAE391F8B8AA17"
+				item: {
+					Count: 1b
+					id: "kubejs:time_augment"
+					tag: {
+						AugmentData: {
+							MachineEnergy: 0.75d
+							MachinePower: 1.0d
+							RFXfer: 20.0d
+							Type: "Machine"
+						}
+					}
+				}
+				type: "item"
+			}]
+			x: -0.5d
+			y: -9.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			description: ["The transmutation interface is a useful block that lets your digital storage draw and insert items directly from your EMC table, making EMC links replacable by refined storage importers/exporters."]
+			id: "1D17BB2C9280B0C7"
+			shape: "square"
+			subtitle: "EMC links? Pathetic..."
+			tasks: [{
+				id: "57948E436FCBF75C"
+				item: "projectexpansion:transmutation_interface"
+				type: "item"
+			}]
+			x: 0.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"157D4C0E9C7A0928"
+				"007DAA376A57BF37"
+			]
+			description: ["So you saw how to get infinite water with the evertide amulet but you still want more? Fine, you may have the sink, now stop whining ;)"]
+			id: "174E355F55DE59F8"
+			tasks: [{
+				id: "6D8D0E6A16383E3D"
+				item: "cookingforblockheads:sink"
+				type: "item"
+			}]
+			x: -2.5d
+			y: -7.0d
+		}
+	]
+	title: "Tier 4: Advanced Mekanism"
+}
