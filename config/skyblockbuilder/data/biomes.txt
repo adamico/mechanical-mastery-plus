@@ -28,6 +28,7 @@ minecraft:jagged_peaks
 minecraft:jungle
 minecraft:lukewarm_ocean
 minecraft:lush_caves
+compactmachines:machine
 minecraft:mangrove_swamp
 minecraft:meadow
 minecraft:mushroom_fields

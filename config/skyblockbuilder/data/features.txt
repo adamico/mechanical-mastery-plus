@@ -6,6 +6,7 @@ minecraft:bamboo_some_podzol
 minecraft:bamboo_vegetation
 minecraft:basalt_blobs
 minecraft:basalt_pillar
+immersiveengineering:bauxite
 minecraft:birch
 minecraft:birch_bees_0002
 minecraft:birch_bees_002
@@ -25,8 +26,13 @@ minecraft:crimson_fungus
 minecraft:crimson_fungus_planted
 minecraft:dark_forest_vegetation
 minecraft:dark_oak
+immersiveengineering:deep_nickel
 minecraft:delta
 minecraft:desert_well
+rftoolsbase:dimshard_dimensions
+rftoolsbase:dimshard_end
+rftoolsbase:dimshard_nether
+rftoolsbase:dimshard_overworld
 minecraft:disk_clay
 minecraft:disk_grass
 minecraft:disk_gravel
@@ -68,6 +74,7 @@ minecraft:kelp
 minecraft:lake_lava
 minecraft:large_basalt_columns
 minecraft:large_dripstone
+immersiveengineering:lead
 minecraft:lush_caves_clay
 minecraft:mangrove
 minecraft:mangrove_vegetation
@@ -75,14 +82,17 @@ minecraft:meadow_trees
 minecraft:mega_jungle_tree
 minecraft:mega_pine
 minecraft:mega_spruce
+immersiveengineering:mineral_veins
 minecraft:monster_room
 minecraft:moss_patch
 minecraft:moss_patch_bonemeal
 minecraft:moss_patch_ceiling
 minecraft:moss_vegetation
+waystones:mossy_waystone
 minecraft:mushroom_island_vegetation
 minecraft:nether_sprouts
 minecraft:nether_sprouts_bonemeal
+immersiveengineering:nickel
 minecraft:oak
 minecraft:oak_bees_0002
 minecraft:oak_bees_002
@@ -166,6 +176,7 @@ minecraft:pointed_dripstone
 minecraft:rooted_azalea_tree
 mekanism:salt
 mekanism:salt_retrogen
+waystones:sandy_waystone
 minecraft:sculk_patch_ancient_city
 minecraft:sculk_patch_deep_dark
 minecraft:sculk_vein
@@ -175,6 +186,7 @@ minecraft:seagrass_short
 minecraft:seagrass_simple
 minecraft:seagrass_slightly_less_short
 minecraft:seagrass_tall
+immersiveengineering:silver
 minecraft:single_piece_of_grass
 minecraft:small_basalt_columns
 minecraft:spore_blossom
@@ -209,6 +221,7 @@ minecraft:underwater_magma
 powah:uraninite_ore
 powah:uraninite_ore_dense
 powah:uraninite_ore_poor
+immersiveengineering:uranium
 minecraft:vines
 minecraft:void_start_platform
 minecraft:warm_ocean_vegetation
@@ -216,5 +229,6 @@ minecraft:warped_forest_vegetation
 minecraft:warped_forest_vegetation_bonemeal
 minecraft:warped_fungus
 minecraft:warped_fungus_planted
+waystones:waystone
 minecraft:weeping_vines
 create:zinc_ore
