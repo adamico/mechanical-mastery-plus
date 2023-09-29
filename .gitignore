@@ -98,7 +98,6 @@ whitelist.json
 /**/*.bak
 /config/emendatusenigmatica/default
 /config/forgeendertech/Biomes/
-/config/jei/world/local
 /config/darkmodeeverywhereshaders.json
 /config/enigmaticgraves-common.toml
 /config/ftbbackups2.json
@@ -106,6 +105,8 @@ whitelist.json
 /config/jei/bookmarks.ini
 /config/jei/lookupHistory.zip
 /config/jei/worldSettings.cfg
+/config/jei/recipe-category-sort-order.ini
+/config/jei/world/local
 /config/MouseTweaks.cfg
 /config/oculus.properties
 /config/pneumaticcraft/ArmorFeatureStatus.cfg
@@ -155,3 +156,4 @@ automation/CDL-Logs/*.log.gz
 automation/CDL-Logs/CDL-Instance-cache.json
 automation/Cat-Downloader-Legacy-Settings.json5
 automation/game-versions.json
+emi.json
