@@ -1,28 +1,15 @@
 {
+	always_invisible: true
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "tier_4"
-	group: ""
+	group: "266075897C77E3FC"
 	hide_quest_details_until_startable: true
 	hide_quest_until_deps_visible: true
-	icon: "kubejs:cube4"
 	id: "38378A6F4FF9F098"
-	order_index: 6
+	order_index: 4
 	quest_links: [ ]
 	quests: [
-		{
-			dependencies: ["1A67C9B9ABB4E969"]
-			description: ["New tier, new materials; you know the deal already."]
-			icon: "kubejs:cube3"
-			id: "4E81E76086558A19"
-			tasks: [{
-				id: "6DC696B8987D5178"
-				title: "Tier 4 Materials"
-				type: "checkmark"
-			}]
-			x: 0.0d
-			y: 0.0d
-		}
 		{
 			dependencies: ["4E81E76086558A19"]
 			icon: "mekanism:ingot_uranium"
@@ -521,6 +508,12 @@
 		}
 		{
 			dependencies: ["4E81E76086558A19"]
+			description: [
+				"No freebie here! Do your homework.."
+				""
+				"{@pagebreak}"
+				"Ok, Ok... you can transmute diamonds into emeralds, that's all I can say"
+			]
 			icon: "minecraft:emerald"
 			id: "5E91DCD550B96352"
 			rewards: [{
@@ -530,9 +523,9 @@
 				type: "item"
 			}]
 			tasks: [{
-				id: "39DA9058B9F4F397"
-				title: "Emerald"
-				type: "checkmark"
+				id: "043457E7C3A946EB"
+				item: "minecraft:emerald"
+				type: "item"
 			}]
 			x: 1.0d
 			y: 1.5d
@@ -662,6 +655,19 @@
 			x: -2.5d
 			y: -7.0d
 		}
+		{
+			dependencies: ["1A67C9B9ABB4E969"]
+			description: ["New tier, new materials; you know the deal already."]
+			icon: "kubejs:cube3"
+			id: "4E81E76086558A19"
+			tasks: [{
+				id: "6DC696B8987D5178"
+				title: "Tier 4 Materials"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
 	]
-	title: "Tier 4: Advanced Mekanism"
+	title: "Advanced Mekanism"
 }

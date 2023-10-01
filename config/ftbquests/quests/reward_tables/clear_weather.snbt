@@ -4,7 +4,6 @@
 	order_index: 10
 	rewards: [{
 		command: "/weather clear"
-		player_command: false
 		type: "command"
 	}]
 	title: "clear weather"

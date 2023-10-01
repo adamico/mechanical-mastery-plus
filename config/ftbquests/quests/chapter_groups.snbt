@@ -1,3 +1,7 @@
 {
-	chapter_groups: [ ]
+	chapter_groups: [
+		{ id: "58A9AE48C2BA95FD", title: "Intro" }
+		{ id: "266075897C77E3FC", title: "Main " }
+		{ id: "65EDAD7A7D1200E9", title: "Challenges" }
+	]
 }

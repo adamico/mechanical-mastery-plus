@@ -2,8 +2,21 @@
 
 ServerEvents.recipes(event => {
 	console.log('[AMMONIUM@KUBEJS]: Adding custom recipes...');
-	
-	// REPLACING RECIPES
+
+	const bTier1 = ["Raw Gold", "Raw Zinc", "Diamond Ore", "Emerald Ore", "Lapis Ore", "Nether Quartz Ore"]
+	const sTier1 = ["Regular Mechanical Crystal"]
+	event.shaped(Item.of('adminshop:permit', "{display:{Lore:['[{\"text\":\"Buy: " + bTier1.join(', ') + " \",\"italic\":false}]','[{\"text\":\"Sell: " + sTier1.join(', ') + "\",\"italic\":false}]'],Name:'[{\"text\":\"Tier 1 Trade Permit\",\"color\":\"cyan\",\"italic\":false}]'},key:1}"), [
+		'EPE',
+		'PIP',
+		'EPE'
+	], {
+		E: 'kubejs:cube1',
+		P: 'minecraft:paper',
+		I: 'minecraft:iron_block'
+	})		
+
+	event.replaceInput({id: 'adminshop:shop'}, 'minecraft:ender_chest', '#sophisticatedstorage:base_tier_wooden_storage')
+
 	event.remove({id: 'thermal:machine_frame'})
 	event.shaped('thermal:machine_frame', [
 		'ICI',
@@ -116,22 +129,6 @@ ServerEvents.recipes(event => {
 			B: 'kubejs:cube3'
 	});
 
-	event.remove({id: 'trashcans:item_trash_can'});
-	event.shapeless('trashcans:item_trash_can', ['thermal:device_nullifier', '#forge:chests']);
-	event.remove({id: 'trashcans:liquid_trash_can'});
-	event.shapeless('trashcans:liquid_trash_can', ['thermal:device_nullifier', 'minecraft:bucket']);
-	event.remove({id: 'trashcans:energy_trash_can'});
-	event.shaped('trashcans:energy_trash_can', [
-		'ABA',
-		'CDC',
-		'ABA'
-		], {
-			A: 'mekanism:induction_casing',
-			B: 'mekanism:ultimate_induction_cell',
-			C: 'mekanism:ultimate_induction_provider',
-			D: 'mekanism:induction_port'
-	});
-
 	event.remove({id: 'creativecrafter:creative_crafter'});
 	event.shaped('creativecrafter:creative_crafter', [
 		'ABA',
@@ -156,13 +153,17 @@ ServerEvents.recipes(event => {
 			D: 'projecte:evertide_amulet'
 		}
 	);
-	
+
 	event.recipes.createSplashing([Item.of('ae2:certus_quartz_crystal').withChance(0.75), Item.of('ae2:charged_certus_quartz_crystal').withChance(0.25)], 'ae2:sky_dust')
 	event.remove({id: 'create:compat/ae2/milling/sky_stone_block'});
 	event.recipes.createMilling(['ae2:sky_dust', 'ae2:sky_stone_block'], 'ae2:sky_stone_block');
 
-	event.remove({id: 'create:milling/sandstone'});
-	event.recipes.createMilling([Item.of('minecraft:sand'), Item.of('immersiveengineering:dust_saltpeter').withChance(0.8)], 'minecraft:sandstone');
+	event.remove([{id: 'create:crushing/gravel'}, {id: 'create:crushing/cobblestone'}])
+	event.recipes.createCrushing([Item.of('minecraft:gravel'), Item.of('minecraft:gravel').withChance(0.75)], 'minecraft:cobblestone')
+	event.recipes.createCrushing([Item.of('minecraft:sand'), Item.of('minecraft:sand').withChance(0.75)], 'minecraft:gravel')
+	event.recipes.createMilling(['minecraft:sand', Item.of('minecraft:flint').withChance(0.1), Item.of('minecraft:clay_ball').withChance(0.05)], 'minecraft:gravel')
+	//event.remove({id: 'create:milling/sandstone'});
+	//event.recipes.createMilling([Item.of('minecraft:sand'), Item.of('immersiveengineering:dust_saltpeter').withChance(0.8)], 'minecraft:sandstone');
 	
 	event.remove({id: 'thermal:machines/crucible/crucible_glowstone_dust'});
 	event.recipes.thermal.crucible(Fluid.of('thermal:glowstone', 250), '#forge:dusts/glowstone').energy(1200);
@@ -182,6 +183,15 @@ ServerEvents.recipes(event => {
 	event.remove({id: 'thermal:machines/crucible/crucible_netherrack_to_lava'});
 	event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 500), '#forge:netherrack').energy(1500);
 	
+
+	event.remove({id: 'immersiveengineering:crafting/blastbrick'})
+	event.blasting('immersiveengineering:slab_blastbrick','immersiveengineering:cokebrick')
+	event.shapeless('minecraft:gravel', ['minecraft:cobblestone', Item.of('immersiveengineering:hammer')]).damageIngredient(Item.of('immersiveengineering:hammer'), 1)
+	event.shapeless('minecraft:sand', ['minecraft:gravel', Item.of('immersiveengineering:hammer')]).damageIngredient(Item.of('immersiveengineering:hammer'), 1)
+	event.shapeless('minecraft:clay', ['minecraft:coarse_dirt', 'minecraft:water_bucket', Item.of('immersiveengineering:hammer')])
+		.damageIngredient(Item.of('immersiveengineering:hammer'), 1).replaceIngredient('minecraft:water_bucket', 'minecraft:bucket')
+	
+
 	event.replaceInput({id: 'mob_grinding_utils:recipe_fan'}, '#forge:ingots/iron', '#forge:plates/iron');	
 	event.replaceInput({id: 'mob_grinding_utils:recipe_spikes'}, 'minecraft:iron_sword', '#forge:rods/iron');
 	event.replaceInput({id: 'powah:crafting/dielectric_paste_2'}, 'minecraft:blaze_powder', 'minecraft:redstone');
@@ -192,8 +202,7 @@ ServerEvents.recipes(event => {
 	event.replaceInput({id: 'projecte:condenser_mk1'}, 'minecraft:obsidian', 'minecraft:gold_ingot');
 	event.replaceInput({id: 'projecte:condenser_mk1'}, 'minecraft:diamond', 'projecte:high_covalence_dust');
 	event.replaceInput({id: 'extendedcrafting:redstone_ingot'}, 'minecraft:iron_ingot', '#forge:ingots/lead');
-	event.replaceInput({id: 'immersiveengineering:crafting/blastbrick'}, 'minecraft:magma_block', 'create:andesite_alloy');
-	event.replaceInput({id: 'immersiveengineering:crafting/cokebrick'}, '#forge:sandstone', 'create:andesite_alloy');
+
 	event.replaceInput({id: 'thermal:augments/upgrade_augment_1'}, '#forge:gears/gold', 'kubejs:cube1');
 	event.replaceInput({id: 'thermal:machine_pyrolyzer'}, 'minecraft:blaze_rod', '#forge:ingots/steel');
 	event.replaceInput({id: 'mekanism:transmitter/logistical_transporter/basic'}, 'mekanism:basic_control_circuit', 'prettypipes:pipe');
@@ -526,6 +535,8 @@ ServerEvents.recipes(event => {
 	'{AugmentData:{Type:"Machine",MachinePower:1d,MachineEnergy:0.75d,RFXfer:20d}}'),
 	[Fluid.of('industrialforegoing:ether_gas', 500), 'kubejs:incomplete_time_augment']);
 	
+	event.shapeless('kubejs:cube1_packaged', ['kubejs:cube1', 'kubejs:cube1'])
+
 	cube_packaging('kubejs:cube1_packaged', 'kubejs:cube1', 600);
 	cube_packaging('kubejs:cube2_packaged', 'kubejs:cube2', 400);
 	cube_packaging('kubejs:cube3_packaged', 'kubejs:cube3', 200);
@@ -564,8 +575,6 @@ ServerEvents.recipes(event => {
 	event.recipes.thermal.sawmill('thermal:basalz_rod', 'kubejs:basalz_effigy').energy(2000);
 	
 	event.shapeless('mekanism:ingot_steel','immersiveengineering:ingot_steel');
-	event.shapeless(Item.of('minecraft:andesite', 2), [Item.of('minecraft:cobblestone', 2), Item.of('projecte:high_covalence_dust', 2)]);
-	event.shapeless(Item.of('minecraft:andesite', 8), [Item.of('minecraft:cobblestone', 8), Item.of('minecraft:quartz', 1)]);
 	event.shapeless('kubejs:cube1', ['#forge:gears/aluminum', Item.of('#forge:rods/copper', 2), '#forge:gears/iron']);
 	event.shapeless('kubejs:diamond_plate', ['#forge:gems/diamond', '#forge:gems/diamond', Item.of('immersiveengineering:hammer')])
 	.damageIngredient(Item.of('immersiveengineering:hammer'), 1);

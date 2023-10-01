@@ -1,0 +1,478 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "pneumatic_craft"
+	group: "266075897C77E3FC"
+	icon: "kubejs:cube3"
+	id: "12B2426927E43DE5"
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["78775CE81571FAC9"]
+			icon: "kubejs:cube2"
+			id: "5F729DFEA4ED563B"
+			tasks: [{
+				id: "667DE8CF8888ADB1"
+				item: "kubejs:cube1"
+				type: "item"
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3F58AD4EAE336B1E"]
+			description: ["By combining the power of the elements with the power of machinery, you managed to further enhance mechanical essences, making them much more powerful and with a much higer EMC value."]
+			id: "1A67C9B9ABB4E969"
+			rewards: [
+				{
+					id: "7593102392587CD6"
+					item: "kubejs:cube3_packaged"
+					type: "item"
+				}
+				{
+					id: "42B111B959E9854B"
+					type: "xp"
+					xp: 100
+				}
+			]
+			shape: "gear"
+			tasks: [
+				{
+					id: "7C9B3A9DC8EC9311"
+					item: "kubejs:cube3"
+					type: "item"
+				}
+				{
+					id: "72C60D5DB41BB470"
+					item: "kubejs:cube3_packaged"
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["1A67C9B9ABB4E969"]
+			description: ["Finally, a good storage solution!"]
+			id: "167B6648066F358B"
+			optional: true
+			rewards: [
+				{
+					count: 16
+					id: "6DB2EB02CC46D76E"
+					item: "refinedstorage:cable"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "26B3C25AA39B1B57"
+					item: "refinedstorage:storage_housing"
+					type: "item"
+				}
+			]
+			shape: "heart"
+			subtitle: "My beloved"
+			tasks: [{
+				id: "1E5BC3B3084F5543"
+				item: "refinedstorage:controller"
+				type: "item"
+			}]
+			title: "Refined storage!"
+			x: 5.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"52CFEB2AD82AB105"
+				"0936B0DE389AE023"
+			]
+			description: ["Craft an empty blaze burner then right click a blaze with it to obtain a blaze burner. The blaze burner goes below basins and can be fed fuel to provide heat needed for some mixing recipes."]
+			id: "3F58AD4EAE336B1E"
+			rewards: [{
+				count: 16
+				id: "1CADA153CF75D7DC"
+				item: "minecraft:coal"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "18FBE000A5EAEF5F"
+					item: "create:empty_blaze_burner"
+					type: "item"
+				}
+				{
+					id: "32EBFDECB1D9CAD5"
+					item: "create:blaze_burner"
+					type: "item"
+				}
+			]
+			title: "Blaze Burner"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1A67C9B9ABB4E969"]
+			description: ["If you prefer AE2 over RS, there is a way.\\nInscriber presses have a Create sequence assembly recipe.\\nCraft a sky stone block with 8 polished deepslate (obtained deepslate from igneous extruder) and 1 yellow essence. You only need ONE. Then, cycle the block through a create millstone or crusher (it outputs itself as part of the recipe) and produce sky stone dust. Finally, wash the sky stone dust to obtain certus quartz, and welcome to AE2."]
+			id: "182209ACB7DE7F78"
+			optional: true
+			rewards: [
+				{
+					count: 16
+					id: "09E14E179E2A0C14"
+					item: "ae2:certus_quartz_crystal"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "13945813F903F1E9"
+					item: "ae2:charged_certus_quartz_crystal"
+					type: "item"
+				}
+				{
+					exclude_from_claim_all: true
+					icon: "ae2:silicon_press"
+					id: "00E6D25EB03C4F8E"
+					table_id: 3863636129854262795L
+					type: "choice"
+				}
+			]
+			shape: "heart"
+			subtitle: "My Other Beloved"
+			tasks: [
+				{
+					id: "4DB195C36AF91F07"
+					item: "ae2:sky_stone_block"
+					type: "item"
+				}
+				{
+					id: "7724ACE26190768B"
+					item: "ae2:sky_dust"
+					type: "item"
+				}
+				{
+					id: "4FC7537991F758B1"
+					item: "ae2:certus_quartz_crystal"
+					type: "item"
+				}
+				{
+					id: "4388CA1EDF6E8AA2"
+					item: "ae2:charged_certus_quartz_crystal"
+					type: "item"
+				}
+				{
+					id: "0844A607CE3806B4"
+					item: {
+						Count: 1b
+						id: "itemfilters:or"
+						tag: {
+							RepairCost: 0
+							display: {
+								Name: "{\"text\":\"Any Inscriber Press\"}"
+							}
+							items: [
+								{
+									Count: 1b
+									id: "ae2:silicon_press"
+								}
+								{
+									Count: 1b
+									id: "ae2:logic_processor_press"
+								}
+								{
+									Count: 1b
+									id: "ae2:engineering_processor_press"
+								}
+								{
+									Count: 1b
+									id: "ae2:calculation_processor_press"
+								}
+							]
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "AE2 Route"
+			x: 3.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["182209ACB7DE7F78"]
+			description: ["With these items, you are now set for beginning your ME System"]
+			id: "511A43E0281B8171"
+			optional: true
+			rewards: [
+				{
+					count: 64
+					id: "24FD9DC7C8CA34DC"
+					item: "ae2:certus_quartz_crystal"
+					type: "item"
+				}
+				{
+					count: 32
+					id: "1A624BFC478D6992"
+					item: "ae2:charged_certus_quartz_crystal"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "739F01D8C50A2685"
+					item: "ae2:quartz_glass"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "76C0A0877ECE001A"
+					item: "ae2:logic_processor"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "25FF6E65505B14B7"
+					item: "ae2:calculation_processor"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "2339252C70938B27"
+					item: "ae2:engineering_processor"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "0328C9D1C84B45B9"
+					item: "ae2:silicon"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "10A8B77859650451"
+					item: "ae2:controller"
+					type: "item"
+				}
+				{
+					id: "57D1FCAA1BF8131C"
+					item: "ae2:drive"
+					type: "item"
+				}
+				{
+					id: "60F2ACB10074439D"
+					item: {
+						Count: 1b
+						id: "itemfilters:or"
+						tag: {
+							RepairCost: 0
+							display: {
+								Name: "{\"text\":\"Any ME Inventory Terminal\"}"
+							}
+							items: [
+								{
+									Count: 1b
+									id: "ae2:terminal"
+								}
+								{
+									Count: 1b
+									id: "ae2:crafting_terminal"
+								}
+							]
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "3EC67BA769B3DCC1"
+					item: {
+						Count: 1b
+						id: "itemfilters:or"
+						tag: {
+							RepairCost: 0
+							display: {
+								Name: "{\"text\":\"Any ME Item Cell\"}"
+							}
+							items: [
+								{
+									Count: 1b
+									id: "ae2:item_storage_cell_1k"
+									tag: { }
+								}
+								{
+									Count: 1b
+									id: "ae2:item_storage_cell_4k"
+									tag: { }
+								}
+								{
+									Count: 1b
+									id: "ae2:item_storage_cell_16k"
+									tag: { }
+								}
+								{
+									Count: 1b
+									id: "ae2:item_storage_cell_64k"
+									tag: { }
+								}
+								{
+									Count: 1b
+									id: "ae2:item_storage_cell_256k"
+									tag: { }
+								}
+							]
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "6301695AB309C3F6"
+					item: "ae2:inscriber"
+					type: "item"
+				}
+			]
+			title: "ME Starter Kit"
+			x: 3.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["167B6648066F358B"]
+			description: ["With these items, you are now set for beginning with Refined Storage"]
+			id: "18DF39CA8357AD3F"
+			optional: true
+			rewards: [
+				{
+					count: 32
+					id: "738FFC25B2818EBC"
+					item: "refinedstorage:quartz_enriched_iron"
+					type: "item"
+				}
+				{
+					count: 32
+					id: "535A98A84DA0F9C2"
+					item: "refinedstorage:silicon"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "237F6A62CCB95F49"
+					item: "refinedstorage:basic_processor"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "65AE8C9B1E4CCE33"
+					item: "refinedstorage:improved_processor"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "32E562C47E471D7A"
+					item: "refinedstorage:advanced_processor"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "4D4D42A7605FC4EF"
+					item: "refinedstorage:controller"
+					type: "item"
+				}
+				{
+					id: "00ED491BCF377CE5"
+					item: "refinedstorage:disk_drive"
+					type: "item"
+				}
+				{
+					id: "353009C09F0128F7"
+					item: {
+						Count: 1b
+						id: "itemfilters:or"
+						tag: {
+							RepairCost: 0
+							display: {
+								Name: "{\"text\":\"Any RS Inventory Grid\"}"
+							}
+							items: [
+								{
+									Count: 1b
+									id: "refinedstorage:grid"
+								}
+								{
+									Count: 1b
+									id: "refinedstorage:crafting_grid"
+								}
+							]
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "10BCB6264C141C1F"
+					item: {
+						Count: 1b
+						id: "itemfilters:or"
+						tag: {
+							RepairCost: 0
+							display: {
+								Name: "{\"text\":\"Any RS Storage Disk\"}"
+							}
+							items: [
+								{
+									Count: 1b
+									id: "refinedstorage:1k_storage_disk"
+									tag: {
+										Id: [I;
+											-471233038
+											-526889163
+											-1092333615
+											-1707433844
+										]
+									}
+								}
+								{
+									Count: 1b
+									id: "refinedstorage:4k_storage_disk"
+									tag: {
+										Id: [I;
+											-1731940105
+											1176519294
+											-1248971641
+											1677986171
+										]
+									}
+								}
+								{
+									Count: 1b
+									id: "refinedstorage:16k_storage_disk"
+									tag: {
+										Id: [I;
+											1797258540
+											1740917755
+											-1608151539
+											1228748077
+										]
+									}
+								}
+								{
+									Count: 1b
+									id: "refinedstorage:64k_storage_disk"
+									tag: {
+										Id: [I;
+											-1521006630
+											-1921954549
+											-1124975719
+											-538253071
+										]
+									}
+								}
+							]
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Refined Storage Starter Kit"
+			x: 5.0d
+			y: -2.5d
+		}
+	]
+	title: "Tier 3: Don't pressure me"
+}

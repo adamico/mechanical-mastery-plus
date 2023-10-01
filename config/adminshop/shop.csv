@@ -1,0 +1,30 @@
+// Welcome to Admin Shop! Please do not put anything else in the first row,,,,
+"// Rows beginning with // are considered comments, and aren't processed. Put helpful notes here if you need them",,,,
+,,,,
+// Blank lines are also ignored.,,"// Cells that begin with // are ignored, along with any cells to the right of them. Cells to the left won't be ignored if they do not have a //",,
+,,,,
+,,,,
+,,,,
+// Define shop items below categories. They are as formatted:,,,,
+"// ""buy"" or ""sell"" (the letters b and s also work)","""item""",item id,price,permit tier (only positive values, 0=unlocked by default)
+b,item,minecraft:oak_log,2,0
+b,item,minecraft:coal_ore,8,0
+b,item,minecraft:raw_copper,8,0
+b,item,minecraft:raw_iron,16,0
+b,item,immersiveengineering:bauxite,16
+b,item,minecraft:redstone_ore,4,0
+b,item,minecraft:sugar_cane,32,0
+b,item,immersiveengineering:seed,32,0
+b,item,minecraft:bone,32,0
+,,,,
+b,item,minecraft:raw_gold,256,0
+b,item,create:raw_zinc,192,1
+b,item,minecraft:diamond_ore,1024,1
+b,item,minecraft:emerald_ore,2048,1
+b,item,minecraft:lapis_ore,64,1
+b,item,minecraft:nether_quartz_ore,512,1
+,,,,
+s,item,kubejs:cube1_packaged,512,0
+s,item,kubejs:cube2_packaged,1280,1
+s,item,kubejs:cube3_packaged,9600,2
+s,item,kubejs:cube4_packaged,144000,3

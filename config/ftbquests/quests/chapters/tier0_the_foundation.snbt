@@ -1,0 +1,533 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "tier0_the_foundation"
+	group: "266075897C77E3FC"
+	icon: "kubejs:cube1"
+	id: "05700C03C3761D13"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			id: "43FD34360E0D352D"
+			rewards: [
+				{
+					exclude_from_claim_all: true
+					id: "25CB69D8403E600A"
+					table_id: 560947285046105589L
+					type: "choice"
+				}
+				{
+					count: 16
+					id: "4FCD2CE9E05BB31F"
+					item: "minecraft:bread"
+					type: "item"
+				}
+				{
+					id: "1B204612A4311AC3"
+					item: "minecraft:bone_block"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "1CC537563AF43BE6"
+				item: "minecraft:oak_log"
+				type: "item"
+			}]
+			title: "Basic Start"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["43FD34360E0D352D"]
+			id: "3C8E7E4160B6EC75"
+			rewards: [
+				{
+					count: 3
+					id: "2C24C4514DA09A45"
+					item: "minecraft:raw_iron_block"
+					type: "item"
+				}
+				{
+					id: "7C0AF579E431AFA8"
+					item: "minecraft:raw_copper_block"
+					type: "item"
+				}
+				{
+					id: "3F5A6FD4A10CA7DE"
+					item: "minecraft:raw_gold_block"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "54272B5DD0CBFAB0"
+				item: "minecraft:crafting_table"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3C8E7E4160B6EC75"]
+			id: "695015043C13D2AA"
+			rewards: [
+				{
+					count: 64
+					id: "092C4B808AFBEE30"
+					item: "minecraft:cobblestone"
+					type: "item"
+				}
+				{
+					id: "07A4A9A9B46FB7BA"
+					item: "minecraft:redstone_ore"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "586C8314EACECB10"
+				item: "minecraft:cobblestone"
+				type: "item"
+			}]
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["695015043C13D2AA"]
+			description: [
+				"Sophisticated Storage is a very powerful vanilla-like storage system."
+				""
+				"Vanilla chests can converted to sophisticated chests using basic tier upgrades."
+				""
+				"Once you unlock more resources you can craft a controller to create a multiblock storage using the controller, the linking tool and the links."
+				""
+				"Sophisticated chests can have hopper, filters, stack and even crafting upgrades which allow a smooth transition to one of the digital storage mods in the pack."
+				" "
+			]
+			hide_dependency_lines: false
+			id: "6C722C3BF60EEFFA"
+			rewards: [
+				{
+					id: "1F485C04605328FF"
+					item: {
+						Count: 1b
+						id: "sophisticatedstorage:iron_chest"
+						tag: {
+							woodType: "oak"
+						}
+					}
+					type: "item"
+				}
+				{
+					count: 4
+					id: "1D8623A6CA982158"
+					item: "sophisticatedstorage:basic_tier_upgrade"
+					type: "item"
+				}
+				{
+					id: "6246AD0C6349CB8C"
+					item: "sophisticatedstorage:crafting_upgrade"
+					type: "item"
+				}
+			]
+			subtitle: "who needs drawers?"
+			tasks: [{
+				id: "56E190895B823A37"
+				item: {
+					Count: 1b
+					id: "itemfilters:tag"
+					tag: {
+						value: "sophisticatedstorage:base_tier_wooden_storage"
+					}
+				}
+				type: "item"
+			}]
+			title: "Sophisticated Storage"
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"6C722C3BF60EEFFA"
+				"4233A945A422B10D"
+			]
+			description: [
+				"The shop block will allow buying raw resources and selling packaged mechanical essences."
+				""
+				"To buy and sell higher value items you will need trade contracts which you'll be able to craft using different tier mechanical essences."
+			]
+			id: "13AF7A8A3489432C"
+			rewards: [
+				{
+					id: "17BE3838A6BA4CAC"
+					item: "minecraft:raw_iron_block"
+					type: "item"
+				}
+				{
+					id: "3D288062AF378137"
+					item: "minecraft:raw_copper_block"
+					type: "item"
+				}
+				{
+					id: "000F90C9C3817518"
+					item: "minecraft:raw_gold_block"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "5380D96DCAD5491E"
+					item: "minecraft:redstone_ore"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "3626A89C1B165D73"
+				item: "adminshop:shop"
+				type: "item"
+			}]
+			title: "Buy low and sell high"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"00FD463A90371DE0"
+				"77DFF02094D824D6"
+				"76EDF34396541438"
+			]
+			description: [
+				""
+				"By crafting some gears and rods together, you managed to craft the first of the mechanical essences! "
+				"This cube has a higher sell value than the sum of its parts, so if you can manage to automate it, it will serve as a great money source!"
+				""
+				"In the automation hints chapter you will learn how to to package mechanical essences through dedicated machines and double your income."
+			]
+			id: "7A0CB1037E6BE4D7"
+			rewards: [{
+				count: 16
+				id: "23176832183B31BF"
+				item: "kubejs:cube1_packaged"
+				type: "item"
+			}]
+			shape: "gear"
+			tasks: [
+				{
+					id: "0DA904B48F32E904"
+					item: "kubejs:cube1"
+					type: "item"
+				}
+				{
+					id: "2806B1586B29E196"
+					item: "kubejs:cube1_packaged"
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["695015043C13D2AA"]
+			description: ["Immersive engineering adds its own set of machines, power generators, and logistics. More importantly, it will be your first source of steel."]
+			icon: {
+				Count: 1b
+				id: "immersiveengineering:hammer"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "2ECECEF6F26FEEDD"
+			rewards: [{
+				id: "45EEC5A4B1D12626"
+				item: "immersiveengineering:manual"
+				type: "item"
+			}]
+			tasks: [{
+				id: "26878ADF8E35434E"
+				item: {
+					Count: 1b
+					id: "immersiveengineering:hammer"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 3.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["2ECECEF6F26FEEDD"]
+			description: ["Create a 3x3x3 cube of coke bricks and right click the middle with an engineer's hammer to create a coke oven, allowing you to (slowly) turn coal into coal coke and creosote oil"]
+			id: "62EFBE3479276302"
+			rewards: [{
+				id: "2A734C17C2CE839E"
+				item: "thermal:coal_coke_block"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "0D825491E91AA464"
+					item: "immersiveengineering:coke"
+					type: "item"
+				}
+				{
+					advancement: "immersiveengineering:main/mb_cokeoven"
+					criterion: ""
+					id: "19C98175A87C2C64"
+					type: "advancement"
+				}
+			]
+			title: "Coke is it!"
+			x: 4.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["62EFBE3479276302"]
+			description: ["Too much creosote oil or slag and don't know what to do with it? Craft an Item and Fluid trash and automatically void all this waste."]
+			id: "43D3AF6AA4C1D1D1"
+			optional: true
+			rewards: [
+				{
+					count: 64
+					id: "0AEE55D236CEF00C"
+					item: "engineersdecor:slag_brick_block"
+					type: "item"
+				}
+				{
+					count: 64
+					id: "68B2840C12CE9826"
+					item: "immersiveengineering:treated_scaffold"
+					type: "item"
+				}
+			]
+			shape: "diamond"
+			tasks: [
+				{
+					id: "742D5783B4997F88"
+					item: "trashcans:item_trash_can"
+					type: "item"
+				}
+				{
+					id: "2A702245C6BF50E9"
+					item: "trashcans:liquid_trash_can"
+					type: "item"
+				}
+			]
+			title: "I probably don't need those..."
+			x: 4.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["62EFBE3479276302"]
+			description: ["With creosote oil, you can craft treated planks, which can then make generators that passively make RF at no cost."]
+			id: "7516EFF9A22748A3"
+			rewards: [
+				{
+					id: "58BD87F6DB7C3741"
+					item: "immersiveengineering:dynamo"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "23682F4961FDE363"
+					item: "immersiveengineering:connector_lv"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "6E451526F485088B"
+					item: "immersiveengineering:connector_lv_relay"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "23E1E5AE3FA143E6"
+					item: "immersiveengineering:wirecoil_copper_ins"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "672A0BF2B9E99ACA"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "immersiveengineering:watermill"
+							}
+							{
+								Count: 1b
+								id: "immersiveengineering:windmill"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Immersive Generation"
+			x: 6.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["62EFBE3479276302"]
+			description: [
+				"To start producing steel you must build Blast Furnaces."
+				""
+				"The Crude Blast Furnace is formed by building a 3x3x3 Blast Brick cube structure and then right click the middle block with a Hammer."
+				""
+				"You cannot automate the CBF (or can you?), you must build the Improved Blast Furnace for that."
+			]
+			id: "4233A945A422B10D"
+			rewards: [{
+				count: 27
+				id: "2CC986E9AB45A798"
+				item: "immersiveengineering:blastbrick"
+				type: "item"
+			}]
+			tasks: [{
+				advancement: "immersiveengineering:main/mb_blastfurnace"
+				criterion: ""
+				id: "1B6EC335AF298777"
+				type: "advancement"
+			}]
+			title: "Blast from the Past"
+			x: 6.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"4233A945A422B10D"
+				"7516EFF9A22748A3"
+			]
+			id: "308ECA3B4106E8B9"
+			rewards: [{
+				count: 2
+				id: "3E274D1F7F3E5E8F"
+				item: "immersiveengineering:blastfurnace_preheater"
+				type: "item"
+			}]
+			tasks: [{
+				count: 27L
+				id: "78BC0DA9C53CAF36"
+				item: "immersiveengineering:blastbrick_reinforced"
+				type: "item"
+			}]
+			title: "It's a Mega Blast"
+			x: 7.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["2ECECEF6F26FEEDD"]
+			description: ["This could have been an optional quest but you'll realize in the next chapter the Alloy Kiln is slow but the first way to create brass, bronze, etc. "]
+			id: "7139C759BE2983BB"
+			rewards: [{
+				count: 16
+				id: "37D4D18B51F82D04"
+				item: "minecraft:cooked_beef"
+				type: "item"
+			}]
+			tasks: [{
+				count: 8L
+				id: "0855ED691AA49CE8"
+				item: "immersiveengineering:alloybrick"
+				type: "item"
+			}]
+			title: "You're kiln me!"
+			x: 3.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["189B80E7CF4B6B24"]
+			id: "77DFF02094D824D6"
+			tasks: [{
+				id: "4816D25C11791704"
+				item: "kubejs:aluminum_gear"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["189B80E7CF4B6B24"]
+			id: "00FD463A90371DE0"
+			tasks: [{
+				id: "1B75F2CFD309A6EE"
+				item: "thermal:iron_gear"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["189B80E7CF4B6B24"]
+			id: "76EDF34396541438"
+			tasks: [{
+				id: "6980A1827724D6C0"
+				item: "createaddition:copper_rod"
+				type: "item"
+			}]
+			x: 10.5d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"308ECA3B4106E8B9"
+				"2377CD0D33D19F31"
+			]
+			id: "189B80E7CF4B6B24"
+			tasks: [{
+				advancement: "immersiveengineering:multiblocks/mb_metalpress"
+				criterion: ""
+				id: "74E68C76DBF15C62"
+				type: "advancement"
+			}]
+			x: 9.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["13AF7A8A3489432C"]
+			id: "2377CD0D33D19F31"
+			rewards: [
+				{
+					count: 16
+					id: "16FF590B6351C07E"
+					item: "immersiveengineering:conveyor_basic"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "1B9DDE070E71887F"
+					item: "immersiveengineering:conveyor_dropper"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "3DFF7ADCA4D2E3AB"
+					item: "immersiveengineering:conveyor_vertical"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "6381830A23FAAF90"
+					item: "immersiveengineering:conveyor_splitter"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "2126BBF328FE4437"
+					item: "immersiveengineering:conveyor_extract"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "3D04510BE527CCCD"
+				item: "immersiveengineering:conveyor_basic"
+				type: "item"
+			}]
+			x: 7.5d
+			y: 0.0d
+		}
+	]
+	title: "Tier 1: Immerse Yourself"
+}

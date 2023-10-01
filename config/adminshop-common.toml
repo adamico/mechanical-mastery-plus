@@ -1,0 +1,21 @@
+
+#General configurations. Shop contents stored in "adminshop.csv"
+[general_config]
+	#Amount of money each player starts with. Must be a whole number.
+	#Range: 0 ~ 9223372036854775807
+	starting_money = 100
+	#Sell price for each unit of Forge Energy.
+	#Keep this low or else a simple 100 FE/t generator will make 2000x this price per second!
+	#Range: 0.0 ~ 1.7976931348623157E308
+	power_price = 5.0E-4
+	#How much fluid needs to be inside the auto seller before it converts it to money.
+	#Higher values might reduce lag, lower values help with slow fluid production (eg. UU matter)
+	#Does NOT affect prices, modify only if you know what you're doing.
+	#Range: > 1
+	liquid_sell_packet_size = 10
+	#How much power needs to be inside the auto seller before it converts it to money.
+	#Higher values might reduce lag, lower values help with low power production (eg. low tech)
+	#DOES NOT affect prices, use power_price to set that instead!
+	#Range: > 1
+	power_sell_packet_size = 100
+

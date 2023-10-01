@@ -5,7 +5,6 @@
 	rewards: [{
 		auto: "enabled"
 		command: "/gamerule doDaylightCycle false"
-		player_command: false
 		type: "command"
 	}]
 	title: "no daylight cycle"

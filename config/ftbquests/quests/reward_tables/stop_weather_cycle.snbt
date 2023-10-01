@@ -4,7 +4,6 @@
 	order_index: 9
 	rewards: [{
 		command: "/gamerule doWeatherCycle false"
-		player_command: false
 		type: "command"
 	}]
 	title: "stop weather cycle"

@@ -4,7 +4,6 @@
 	order_index: 7
 	rewards: [{
 		command: "/gamerule doInsomnia false"
-		player_command: false
 		type: "command"
 	}]
 	title: "remove phantoms"

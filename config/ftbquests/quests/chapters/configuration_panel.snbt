@@ -3,8 +3,8 @@
 	default_quest_shape: ""
 	disable_toast: true
 	filename: "configuration_panel"
-	group: ""
-	icon: "mekanism:module_energy_unit"
+	group: "58A9AE48C2BA95FD"
+	icon: "chipped:loded_amethyst_block"
 	id: "7C55129B7A170351"
 	order_index: 1
 	quest_links: [ ]

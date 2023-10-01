@@ -97,6 +97,7 @@ minecraft:oak
 minecraft:oak_bees_0002
 minecraft:oak_bees_002
 minecraft:oak_bees_005
+pneumaticcraft:oil_lake
 minecraft:ore_ancient_debris_large
 minecraft:ore_ancient_debris_small
 minecraft:ore_andesite

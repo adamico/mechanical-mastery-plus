@@ -55,6 +55,14 @@
     "hud.status": true,
     "hud.contents": true
   },
+  "pneumaticcraft": {
+    "pneumatic": true,
+    "tube_module": true,
+    "entity": true,
+    "redstone": true,
+    "camo": true,
+    "semiblock": true
+  },
   "immersiveengineering": {
     "hemp": true,
     "multiblock_icon": true

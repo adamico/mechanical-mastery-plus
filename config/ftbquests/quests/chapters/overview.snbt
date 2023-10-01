@@ -2,16 +2,21 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "overview"
-	group: ""
+	group: "58A9AE48C2BA95FD"
 	icon: "minecraft:totem_of_undying"
 	id: "77FF66ED47CBD889"
 	order_index: 0
 	quest_links: [ ]
 	quests: [
 		{
-			description: ["Mechanical Mastery is an expert-yet-not-horribly-grindy skyblock modpack, focused around automating everything in order to keep progressing. EMC has been completely overhauled, and only raw resources such as ore chunks have EMC, and new \"mechanical essences\" can be crafted out of these raw materials, with multiple tiers giving exponentially more EMC the more complicated they get. In order to succeed in this modpack, you need to learn how to automate these mechanical essences and gain as much EMC as possible, good luck!"]
+			description: [
+				"Mechanical Mastery Plus is a Minecraft 1.19.2 port of Mechanical Mastery by Ammonium with a twist!"
+				""
+				"As the original modpack, it's an expert-yet-not-horribly-grindy skyblock modpack, focused around automating everything in order to keep progressing."
+			]
 			id: "0A440BFFAD3F083E"
-			subtitle: "Introduction and Explanation"
+			shape: "gear"
+			size: 1.5d
 			tasks: [{
 				id: "3BB2FA8389857375"
 				title: "Welcome!"
@@ -22,79 +27,64 @@
 		}
 		{
 			dependencies: ["0A440BFFAD3F083E"]
-			icon: "thermal:machine_frame"
-			id: "6F0F8C3F6B5E2310"
+			description: [
+				"AdminShop is a mod where you can buy and sell stuff manually or automatically. "
+				""
+				"To buy and sell items manually, right-click the Shop block."
+				""
+				"To buy and sell items automatically, use the Buyer or Seller blocks."
+				""
+				"The buyer block needs to be set a \"target\" by opening its GUI and clicking the item that you want to buy. Not all items are buyable, and some can be locked behind trade permits."
+				""
+				"AdminShop uses \"bank accounts\", which means that a player can have more than one account at a time. These accounts can be shared with other players to play Co-Op in servers or modpacks."
+			]
+			icon: "adminshop:permit"
+			id: "14D3FA880FD9153B"
 			tasks: [{
-				id: "2C584B6EE7B58636"
-				title: "Tier 1: Thermal"
+				id: "6329222FD32F0102"
+				title: "AdminShop!"
 				type: "checkmark"
 			}]
-			x: -3.5d
-			y: 0.5d
+			x: -5.5d
+			y: 2.0d
 		}
 		{
-			dependencies: [
-				"6F0F8C3F6B5E2310"
-				"7A0CB1037E6BE4D7"
+			dependencies: ["14D3FA880FD9153B"]
+			description: [
+				"Visit"
+				"https://github.com/AmmoniumX/AdminShopOverhauled"
 			]
-			icon: "create:crushing_wheel"
-			id: "2A9795581CE1CACF"
-			shape: "square"
+			icon: "adminshop:shop"
+			id: "606C035AFA47F866"
+			shape: "heart"
 			tasks: [{
-				id: "3BCA0B433ED08A4D"
-				title: "Tier 2: Create and Immersive Engineering"
+				id: "40750B622D569FEE"
 				type: "checkmark"
 			}]
-			x: -2.0d
-			y: 0.5d
+			title: "Need more information?"
+			x: -5.5d
+			y: 3.0d
 		}
 		{
-			dependencies: [
-				"78775CE81571FAC9"
-				"2A9795581CE1CACF"
+			can_repeat: true
+			dependencies: ["0A440BFFAD3F083E"]
+			description: [
+				"Mob Grinding Utils replaces Mini Utilities for aggressive and passive mob farms creation."
+				""
+				"It has blocks and items to spawn, move, kill with sharpness and looting, collect, filter and stock items and xp."
+				""
+				"You can even create most mob spawn eggs and customized spawners if you need to kill a specific mob."
+				"Otherwise you can create Dreaded and Delightful earth blocks to spawn either aggressive or passive mobs."
 			]
-			icon: "mekanism:basic_control_circuit"
-			id: "636712D15DD7E2E8"
-			shape: "pentagon"
+			icon: "mob_grinding_utils:wither_muffler"
+			id: "5A81A5F98E27339D"
 			tasks: [{
-				id: "71B39DED89D5A45C"
-				title: "Tier 3: Mekanism"
+				id: "058E91C2E671488D"
 				type: "checkmark"
 			}]
-			x: -0.5d
-			y: 0.5d
-		}
-		{
-			dependencies: [
-				"636712D15DD7E2E8"
-				"1A67C9B9ABB4E969"
-			]
-			icon: "mekanism:elite_control_circuit"
-			id: "7B8B9AE6979535D8"
-			shape: "hexagon"
-			tasks: [{
-				id: "15A723F6047E80F3"
-				title: "Tier 4: Advanced Mekanism"
-				type: "checkmark"
-			}]
-			x: 1.0d
-			y: 0.5d
-		}
-		{
-			dependencies: [
-				"7B8B9AE6979535D8"
-				"157D4C0E9C7A0928"
-			]
-			icon: "projectexpansion:final_star"
-			id: "72E0FB7ABA0FF258"
-			shape: "gear"
-			tasks: [{
-				id: "3DA63D196473D774"
-				type: "checkmark"
-			}]
-			title: "Tier 5: Endgame"
-			x: 2.5d
-			y: 0.5d
+			title: "Mob Grinding Utils"
+			x: -4.5d
+			y: 2.0d
 		}
 	]
 	title: "Overview"

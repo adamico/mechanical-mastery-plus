@@ -5,7 +5,6 @@
 	rewards: [{
 		auto: "enabled"
 		command: "/time set 6000"
-		player_command: false
 		type: "command"
 	}]
 	title: "make noon"
