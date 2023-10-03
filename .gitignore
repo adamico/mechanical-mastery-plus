@@ -95,6 +95,7 @@ whitelist.json
 
 # Client Configs
 /**/*client.*
+!/ae2/client.json
 /**/*.bak
 /config/emendatusenigmatica/default
 /config/forgeendertech/Biomes/
@@ -115,7 +116,6 @@ whitelist.json
 /rhino.local.properties
 /config/terraforged/performance_internal.conf
 /config/sidebar_buttons.json
-/config/emi.css
 /config/cherishedworlds/favorites.dat
 /config/XaeroWorldMap/*
 /config/bridgingmod.json
@@ -130,7 +130,6 @@ rubidium-mixins.properties
 rubidium-options.json
 sdrp-common.json
 smoothboot.json
-
 
 # GDLauncher
 config.json
@@ -156,4 +155,5 @@ automation/CDL-Logs/*.log.gz
 automation/CDL-Logs/CDL-Instance-cache.json
 automation/Cat-Downloader-Legacy-Settings.json5
 automation/game-versions.json
+/config/emi.css
 emi.json
