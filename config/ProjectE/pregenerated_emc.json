@@ -73,5 +73,7 @@
   "powah:uraninite": 2048,
   "minecraft:kelp": 8,
   "minecraft:ancient_debris": 65536,
-  "minecraft:dirt": 1
+  "minecraft:dirt": 1,
+  "integrateddynamics:menril_sapling": 32,
+  "integrateddynamics:menril_log": 32
 }

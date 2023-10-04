@@ -4,7 +4,6 @@
 	order_index: 8
 	rewards: [{
 		command: "/gamerule doInsomnia true"
-		player_command: false
 		type: "command"
 	}]
 	title: "bring back phantoms"

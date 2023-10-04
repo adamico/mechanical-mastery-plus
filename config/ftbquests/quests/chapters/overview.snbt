@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "overview"
-	group: ""
+	group: "56617BF3F24DD586"
 	icon: "minecraft:totem_of_undying"
 	id: "77FF66ED47CBD889"
 	order_index: 0

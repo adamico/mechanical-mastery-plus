@@ -3,7 +3,7 @@
 	default_quest_shape: ""
 	disable_toast: true
 	filename: "configuration_panel"
-	group: ""
+	group: "56617BF3F24DD586"
 	icon: "mekanism:module_energy_unit"
 	id: "7C55129B7A170351"
 	order_index: 1

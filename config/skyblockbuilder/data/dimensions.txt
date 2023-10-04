@@ -1,5 +1,4 @@
 minecraft:overworld
-minecraft:the_end
 minecraft:the_nether
-compactmachines:compact_world
+minecraft:the_end
 ae2:spatial_storage

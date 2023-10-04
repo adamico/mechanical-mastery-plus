@@ -1,12 +1,6 @@
-// priority: 0
-
 ServerEvents.recipes(event => {
-	let all_metals = ['iron', 'gold', 'osmium', 'copper', 'tin', 'lead', 'uranium', 'aluminum', 'silver', 'nickel', 'zinc'];
-	let vanilla_metals = ['iron', 'copper', 'gold'];
-	let mekanism_metals = ['iron', 'gold', 'osmium', 'copper', 'tin', 'lead', 'uranium'];
-	let thermal_metals = ['tin', 'lead', 'silver', 'nickel'];
-	let create_metals = ['iron', 'gold', 'copper', 'zinc', 'osmium', 'silver', 'tin', 'lead', 'aluminum', 'uranium', 'nickel'];
-	let jaopca_metals = ['aluminum', 'silver', 'nickel', 'zinc']
+	const all_metals = global.all_metals;
+	let create_metals = ['iron', 'gold', 'copper', 'zinc', 'osmium', 'silver', 'tin', 'lead', 'uranium', 'nickel'];
   
   let process_metals = (metals) => {
     metals.forEach(metal => {

@@ -1,3 +1,6 @@
 {
-	chapter_groups: [ ]
+	chapter_groups: [
+		{ id: "56617BF3F24DD586", title: "Intro" }
+		{ id: "2D94E5A1412E2495", title: "Main questline" }
+	]
 }

@@ -19,8 +19,17 @@ customization {
 }
 
 customization {
-  keepaspectratio = false
+  keepaspectratio = true
   action = backgroundoptions
+}
+
+customization {
+  identifier = %id=604346%
+  orientation = element
+  orientation_element = vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button
+  x = 26
+  action = movebutton
+  y = 82
 }
 
 customization {
@@ -63,9 +72,14 @@ customization {
   identifier = %id=button_compatibility_id:mc_titlescreen_quit_button%
   orientation = element
   orientation_element = vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button
-  x = 52
+  x = 51
   action = movebutton
   y = 82
+}
+
+customization {
+  identifier = %id=button_compatibility_id:mc_titlescreen_language_button%
+  action = hidebutton
 }
 
 customization {

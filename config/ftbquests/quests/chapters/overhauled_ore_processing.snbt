@@ -2,9 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "overhauled_ore_processing"
-	group: ""
-	hide_quest_details_until_startable: true
-	hide_quest_until_deps_visible: true
+	group: "56617BF3F24DD586"
 	id: "44EDDD35E8CC68F2"
 	order_index: 2
 	quest_links: [ ]

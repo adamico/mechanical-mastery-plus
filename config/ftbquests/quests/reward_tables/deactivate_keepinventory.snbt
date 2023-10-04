@@ -4,7 +4,6 @@
 	order_index: 6
 	rewards: [{
 		command: "/gamerule keepInventory false"
-		player_command: false
 		type: "command"
 	}]
 	title: "deactivate keepInventory"

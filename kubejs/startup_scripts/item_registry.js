@@ -1,4 +1,4 @@
-// priority: 900
+// priority: 100
 
 StartupEvents.registry('item', event => {
   // Register new items here
@@ -26,10 +26,8 @@ StartupEvents.registry('item', event => {
 	event.create('dormant_effigy').displayName('Dormant effigy').tooltip('The power to create life, just not fully awoken');
 
 	event.create('steel_gear').displayName('Steel Gear');
-	event.create('bronze_rod').displayName('Bronze Rod');
-	event.create('diamond_rod').displayName('Diamond Rod');
+	event.create('steel_rod').displayName('Steel Rod');
 	event.create('diamond_plate').displayName('Diamond Plate');
-	event.create('aluminum_gear').displayName('Aluminum Gear');
 
 	event.create('black_essence').displayName('Essence of Darkness');
 	event.create('enriched_black_essence').displayName('Enriched Essence of Darkness');
@@ -37,7 +35,6 @@ StartupEvents.registry('item', event => {
 	event.create('basilic_reagent').displayName('Basilic Reagent');
 	event.create('enriched_basilic_reagent').displayName('Enriched Basilic Reagent');
 
-	event.create('stable_waste').displayName('Stable Spent Nuclear Waste').tooltip('(Disabled) Safe for storage or disposal');
 	event.create('incomplete_final_shard').displayName('Incomplete Final Star Shard');
 
 	event.create('incomplete_time_augment').displayName('Time Destabilizer Components').texture('kubejs:item/basic_package');

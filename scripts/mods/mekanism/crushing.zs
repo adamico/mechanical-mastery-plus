@@ -19,7 +19,7 @@ import mods.mekanism.api.ingredient.ItemStackIngredient;
 <recipetype:mekanism:crushing>.removeByName("mekanism:crushing/flint_to_gunpowder");
 
 var mek_metals = ["iron", "gold", "osmium", "copper", "tin", "lead", "uranium"] as string[];
-var jaopca_metals = ["aluminum", "silver", "nickel", "zinc"] as string[];
+var jaopca_metals = ["silver", "nickel", "zinc"] as string[];
 
 for metal in mek_metals {
   <recipetype:mekanism:crushing>.addRecipe("mekanism_processing/" + metal + "/dirty_dust/from_crushed_raw", ItemStackIngredient.from(<item:create:crushed_raw_${metal}>), <item:mekanism:dirty_dust_${metal}>);

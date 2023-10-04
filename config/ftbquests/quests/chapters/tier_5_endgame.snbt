@@ -2,12 +2,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "tier_5_endgame"
-	group: ""
-	hide_quest_details_until_startable: true
-	hide_quest_until_deps_visible: true
+	group: "2D94E5A1412E2495"
 	icon: "projectexpansion:final_star"
 	id: "41DDE820BE913888"
-	order_index: 7
+	order_index: 4
 	quest_links: [ ]
 	quests: [
 		{

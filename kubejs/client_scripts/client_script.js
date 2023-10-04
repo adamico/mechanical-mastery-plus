@@ -9,12 +9,28 @@ JEIEvents.hideItems(event => {
 		event.hide(`projecte:collector_mk${num}`);	
 	});
 
-  ['basic', 'dark', 'red', 'magenta', 'pink', 'purple', 'violet',
-  'blue', 'cyan', 'green', 'lime', 'yellow', 'orange', 'white', 'fading']
-  .forEach(num => {	
-		event.hide(`projectexpansion:${num}_power_flower`);
+  ['basic', 'dark', 'red', 'magenta', 'pink', 'purple', 'violet', 'blue', 'cyan', 'green', 'lime', 'yellow', 'orange', 'white', 'fading']
+  .forEach(color => {
+    ['power_flower', 'collector', 'compressed_collector','relay'].forEach(peItem => {
+      event.hide(`projectexpansion:${color}_${peItem}`);
+    });
 	});
-  event.hide('immersiveengineering:dust_constantan')
+
+  ['collector', 'compressed_collector', 'relay'].forEach(peItem => {
+    event.hide(`projectexpansion:final_${peItem}`);
+  });
+
+  ['electrum'].forEach(metal =>{
+    event.hide(`createaddition:${metal}_rod`);
+  })  
+
+  ['iron', 'gold', 'diamond'].forEach(material => {
+    event.hide(`industrialforegoing:${material}_gear`);
+  });
+})
+
+JEIEvents.removeCategories(event => {
+  //console.log(event.getCategoryIds()) //log a list of all category ids to logs/kubejs/client.txt
 })
 
 JEIEvents.subtypes(event => {

@@ -31,3 +31,4 @@ minecraft:village_plains
 minecraft:village_savanna
 minecraft:village_snowy
 minecraft:village_taiga
+supplementaries:way_sign

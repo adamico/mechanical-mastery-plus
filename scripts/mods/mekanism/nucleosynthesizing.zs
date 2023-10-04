@@ -22,3 +22,6 @@ import mods.mekanism.api.ingredient.ItemStackIngredient;
 // <recipetype:mekanism:nucleosynthesizing>.addRecipe(name as string, itemInput as ItemStackIngredient, gasInput as GasStackIngredient, output as IItemStack, duration as int)
 
 <recipetype:mekanism:nucleosynthesizing>.addRecipe("nucleosynthesizing/dragon_head", <item:minecraft:wither_skeleton_skull>, <gas:mekanism:antimatter> * 5, <item:minecraft:dragon_head>, 1000);
+<recipetype:mekanism:nucleosynthesizing>.addRecipe("nucleosynthesizing/ghast_spawn_egg", <item:kubejs:cube4>, <gas:mekanism:antimatter> * 1, <item:minecraft:ghast_spawn_egg>, 1000);
+<recipetype:mekanism:nucleosynthesizing>.addRecipe("nucleosynthesizing/shulker_spawn_egg", <item:minecraft:chorus_flower>, <gas:mekanism:antimatter> * 1, <item:minecraft:shulker_spawn_egg>, 1000);
+<recipetype:mekanism:nucleosynthesizing>.addRecipe("nucleosynthesizing/elytra", <item:minecraft:dragon_egg>, <gas:mekanism:antimatter> * 1, <item:minecraft:elytra>, 1000);

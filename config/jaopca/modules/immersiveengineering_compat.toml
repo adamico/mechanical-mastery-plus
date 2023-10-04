@@ -17,5 +17,5 @@
 	#The materials that should not have press to wire recipes added.
 	toWireMaterialBlacklist = []
 	#The materials that should not have hammering recipes added.
-	hammerToPlateMaterialBlacklist = []
+	hammerToPlateMaterialBlacklist = ["gold", "iron", "nickel", "silver", "lead", "tin", "copper", "aluminum", "diamond"]
 

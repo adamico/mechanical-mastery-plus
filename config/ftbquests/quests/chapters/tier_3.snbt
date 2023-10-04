@@ -2,12 +2,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "tier_3"
-	group: ""
-	hide_quest_details_until_startable: true
-	hide_quest_until_deps_visible: true
+	group: "2D94E5A1412E2495"
 	icon: "kubejs:cube3"
 	id: "680AAFF5D8F57095"
-	order_index: 5
+	order_index: 2
 	quest_links: [ ]
 	quests: [
 		{
@@ -64,8 +62,8 @@
 				}
 				type: "item"
 			}]
-			x: 0.0d
-			y: -3.0d
+			x: 1.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["597011E2824EC464"]
@@ -81,8 +79,8 @@
 				item: "minecraft:ender_pearl"
 				type: "item"
 			}]
-			x: 0.0d
-			y: -4.5d
+			x: 1.0d
+			y: -4.0d
 		}
 		{
 			dependencies: ["550E4D68A98180F5"]
@@ -96,73 +94,70 @@
 				type: "item"
 			}]
 			title: "Summoning with effigies"
-			x: -3.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["1B6E93FE3C6D5966"]
-			description: ["You can get lava from cobblestone or netherrack using the magma crucible."]
-			id: "0936B0DE389AE023"
-			rewards: [{
-				id: "523AAAFF752165D2"
-				item: "minecraft:blaze_rod"
-				type: "item"
-			}]
-			tasks: [{
-				id: "12001DE24F6A53D6"
-				item: "kubejs:blaze_effigy"
-				type: "item"
-			}]
-			x: -3.0d
-			y: -1.5d
-		}
-		{
-			dependencies: ["1B6E93FE3C6D5966"]
-			id: "1726AEFF59B7051C"
-			rewards: [{
-				id: "2B43E487682AD397"
-				item: "thermal:blizz_rod"
-				type: "item"
-			}]
-			tasks: [{
-				id: "68769268F26AAABD"
-				item: "kubejs:blizz_effigy"
-				type: "item"
-			}]
-			x: -4.0d
-			y: -1.0d
-		}
-		{
-			dependencies: ["1B6E93FE3C6D5966"]
-			id: "26BC4F630EFDF4FE"
-			rewards: [{
-				id: "49129F8D536C550F"
-				item: "thermal:blitz_rod"
-				type: "item"
-			}]
-			tasks: [{
-				id: "236CEF3BE6D8DF0C"
-				item: "kubejs:blitz_effigy"
-				type: "item"
-			}]
 			x: -4.5d
 			y: 0.0d
 		}
 		{
 			dependencies: ["1B6E93FE3C6D5966"]
-			id: "4067313DEFDFF97F"
-			rewards: [{
-				id: "6FE9188B030270D8"
-				item: "thermal:basalz_rod"
-				type: "item"
-			}]
-			tasks: [{
-				id: "6B5455EF12B63C5E"
-				item: "kubejs:basalz_effigy"
-				type: "item"
-			}]
-			x: -4.0d
-			y: 1.0d
+			description: [
+				"To awaken the Dormant Effigies you need to be infused with a specific liquefied material from Thermal Magma Crucibles."
+				""
+				"&6Blaze&r: Lava from Netherrack (most efficient material)"
+				""
+				"&bBlizz&r: Resonant Ender from Ender Pearls"
+				""
+				"&eBlitz&r: Energized Glowstone from Glowstone"
+				""
+				"&4Basalz&r: Destabilized Redstone from Redstone"
+			]
+			id: "0936B0DE389AE023"
+			rewards: [
+				{
+					id: "523AAAFF752165D2"
+					item: "minecraft:blaze_rod"
+					type: "item"
+				}
+				{
+					id: "4134EBBDBC1DF3BA"
+					item: "thermal:blizz_rod"
+					type: "item"
+				}
+				{
+					id: "6042565ACE7C5D9C"
+					item: "thermal:blitz_rod"
+					type: "item"
+				}
+				{
+					id: "28E34DEB42C182AF"
+					item: "thermal:basalz_rod"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "12001DE24F6A53D6"
+					item: "kubejs:blaze_effigy"
+					type: "item"
+				}
+				{
+					id: "5820E9F66904453A"
+					item: "kubejs:blizz_effigy"
+					type: "item"
+				}
+				{
+					id: "143EB57B720EB713"
+					item: "kubejs:blitz_effigy"
+					type: "item"
+				}
+				{
+					id: "3943080E09EDE35E"
+					item: "kubejs:basalz_effigy"
+					type: "item"
+				}
+			]
+			title: "Awakening the Effigies"
+			x: -6.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["550E4D68A98180F5"]
@@ -233,8 +228,8 @@
 				}
 			]
 			title: "Effigy Automation"
-			x: -3.5d
-			y: 2.0d
+			x: -5.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["3BBD496B7BFF1015"]
@@ -259,15 +254,10 @@
 				type: "item"
 			}]
 			x: -2.0d
-			y: -2.0d
+			y: -1.5d
 		}
 		{
-			dependencies: [
-				"0936B0DE389AE023"
-				"1726AEFF59B7051C"
-				"26BC4F630EFDF4FE"
-				"4067313DEFDFF97F"
-			]
+			dependencies: ["0936B0DE389AE023"]
 			id: "52CFEB2AD82AB105"
 			rewards: [
 				{
@@ -314,7 +304,7 @@
 				}
 			]
 			title: "Elemental charges"
-			x: -6.5d
+			x: -7.5d
 			y: 0.0d
 		}
 		{
@@ -365,8 +355,8 @@
 				item: "thermal:upgrade_augment_2"
 				type: "item"
 			}]
-			x: -1.0d
-			y: 2.5d
+			x: -2.0d
+			y: 2.0d
 		}
 		{
 			dependencies: ["71C9474E4BD142E3"]
@@ -476,7 +466,7 @@
 				type: "item"
 			}]
 			title: "Mekanism machine upgrades"
-			x: 7.5d
+			x: 8.0d
 			y: 0.0d
 		}
 		{
@@ -515,7 +505,7 @@
 			}]
 			title: "Passive power generation"
 			x: 4.0d
-			y: 1.5d
+			y: 2.0d
 		}
 		{
 			dependencies: ["6BC0E03B21A767EA"]
@@ -552,8 +542,8 @@
 				type: "item"
 			}]
 			title: "Active power generation"
-			x: 5.0d
-			y: 2.5d
+			x: 6.0d
+			y: 2.0d
 		}
 		{
 			dependencies: ["3F58AD4EAE336B1E"]
@@ -584,7 +574,7 @@
 					type: "item"
 				}
 			]
-			x: -6.5d
+			x: -7.5d
 			y: -3.0d
 		}
 		{
@@ -614,7 +604,7 @@
 				type: "item"
 			}]
 			title: "Refined storage!"
-			x: -5.5d
+			x: -6.5d
 			y: -3.5d
 		}
 		{
@@ -680,8 +670,8 @@
 				item: "thermal:upgrade_augment_3"
 				type: "item"
 			}]
-			x: -1.0d
-			y: 3.5d
+			x: -2.0d
+			y: 3.0d
 		}
 		{
 			dependencies: ["550E4D68A98180F5"]
@@ -753,48 +743,74 @@
 			y: -1.0d
 		}
 		{
-			dependencies: [
-				"52CFEB2AD82AB105"
-				"0936B0DE389AE023"
-			]
+			dependencies: ["52CFEB2AD82AB105"]
 			description: ["Craft an empty blaze burner then right click a blaze with it to obtain a blaze burner. The blaze burner goes below basins and can be fed fuel to provide heat needed for some mixing recipes."]
 			id: "3F58AD4EAE336B1E"
 			rewards: [{
-				count: 16
-				id: "1CADA153CF75D7DC"
-				item: "minecraft:coal"
+				id: "51772590BB45E967"
+				item: "create:blaze_burner"
 				type: "item"
 			}]
-			tasks: [
-				{
-					id: "18FBE000A5EAEF5F"
-					item: "create:empty_blaze_burner"
-					type: "item"
-				}
-				{
-					id: "32EBFDECB1D9CAD5"
-					item: "create:blaze_burner"
-					type: "item"
-				}
-			]
+			tasks: [{
+				id: "32EBFDECB1D9CAD5"
+				item: "create:blaze_burner"
+				type: "item"
+			}]
 			title: "Blaze Burner"
-			x: -6.5d
+			x: -7.5d
 			y: -1.5d
 		}
 		{
 			dependencies: ["1B6E93FE3C6D5966"]
-			description: ["Whether you're playing on peaceful mode or just don't want to hurt innocent creatures, the sawmill can extract the materials directly from the effigies without spawning mobs, at the cost of potential efficiency."]
+			description: [
+				"Whether you're playing on peaceful mode or just don't want to hurt innocent creatures, the purifier can extract the materials directly from the effigies without spawning mobs. "
+				""
+				"Don't forget you can boost output production by using pulverizer catalysts."
+			]
 			id: "26BD8CE4BDC37C65"
 			optional: true
+			rewards: [
+				{
+					count: 4
+					id: "14C814CD8B8D8949"
+					item: "minecraft:blaze_rod"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "297FBF51E139103C"
+					item: "thermal:blitz_rod"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "764559ED75440D98"
+					item: "thermal:blizz_rod"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "704BEDA9E4560522"
+					item: "thermal:basalz_rod"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "55C36D9E971D3461"
+					item: "kubejs:enriched_basilic_reagent"
+					type: "item"
+				}
+			]
 			shape: "gear"
 			tasks: [{
+				count: 4L
 				id: "2942D6B4EFE510EA"
-				item: "thermal:machine_sawmill"
+				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
 			title: "Peaceful route"
-			x: -2.5d
-			y: 2.0d
+			x: -4.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["550E4D68A98180F5"]
@@ -840,7 +856,11 @@
 		}
 		{
 			dependencies: ["2F6C7F4F8FAC880A"]
-			description: ["Easily the most OP energy transporting mod, flux networks lets you wirelessly transfer energy from inputs (flux plugs) into outputs (flux points), with no transfer limit."]
+			description: [
+				"Using the Flux Block you can start crafting Flux Dust manually but don't worry you can automate it with Thermal and Mekanism."
+				""
+				"Easily the most OP energy transporting mod, flux networks lets you wirelessly transfer energy from inputs (flux plugs) into outputs (flux points), with no transfer limit."
+			]
 			id: "5328C8928A16E3CB"
 			rewards: [{
 				id: "1A9000D39CDD5CFF"
@@ -860,8 +880,8 @@
 				}
 			]
 			title: "Flux Networks"
-			x: 2.5d
-			y: 6.0d
+			x: 5.0d
+			y: 5.0d
 		}
 		{
 			dependencies: ["597011E2824EC464"]
@@ -911,27 +931,7 @@
 				type: "item"
 			}]
 			title: "Building Material: More Log Types"
-			x: 1.5d
-			y: -3.0d
-		}
-		{
-			dependencies: ["1726AEFF59B7051C"]
-			description: ["No actual use, just nice for building."]
-			id: "0C2B0B4B953B7912"
-			optional: true
-			rewards: [{
-				id: "073370A7A3846888"
-				type: "xp"
-				xp: 100
-			}]
-			shape: "diamond"
-			tasks: [{
-				id: "3F09C31B37DF82A6"
-				item: "minecraft:cobbled_deepslate"
-				type: "item"
-			}]
-			title: "Building Material: Deepslate"
-			x: -4.0d
+			x: 2.5d
 			y: -2.5d
 		}
 		{
@@ -993,8 +993,8 @@
 				}
 			]
 			title: "Building Material: Nether Logs"
-			x: 1.5d
-			y: -4.0d
+			x: 2.0d
+			y: -3.5d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
@@ -1003,21 +1003,13 @@
 			optional: true
 			rewards: [
 				{
-					count: 16
 					id: "09E14E179E2A0C14"
-					item: "ae2:certus_quartz_crystal"
-					type: "item"
-				}
-				{
-					count: 16
-					id: "13945813F903F1E9"
-					item: "ae2:charged_certus_quartz_crystal"
+					item: "ae2:flawless_budding_quartz"
 					type: "item"
 				}
 				{
 					exclude_from_claim_all: true
-					icon: "ae2:silicon_press"
-					id: "00E6D25EB03C4F8E"
+					id: "373AE58A0552F0D1"
 					table_id: 3863636129854262795L
 					type: "choice"
 				}
@@ -1046,40 +1038,13 @@
 					type: "item"
 				}
 				{
-					id: "0844A607CE3806B4"
-					item: {
-						Count: 1b
-						id: "itemfilters:or"
-						tag: {
-							RepairCost: 0
-							display: {
-								Name: "{\"text\":\"Any Inscriber Press\"}"
-							}
-							items: [
-								{
-									Count: 1b
-									id: "ae2:silicon_press"
-								}
-								{
-									Count: 1b
-									id: "ae2:logic_processor_press"
-								}
-								{
-									Count: 1b
-									id: "ae2:engineering_processor_press"
-								}
-								{
-									Count: 1b
-									id: "ae2:calculation_processor_press"
-								}
-							]
-						}
-					}
+					id: "6AC6B2741C3D1D59"
+					item: "ae2:silicon_press"
 					type: "item"
 				}
 			]
 			title: "AE2 Route"
-			x: -7.5d
+			x: -8.5d
 			y: -3.5d
 		}
 		{
@@ -1214,7 +1179,7 @@
 				}
 			]
 			title: "ME Starter Kit"
-			x: -7.0d
+			x: -8.5d
 			y: -4.5d
 		}
 		{
@@ -1255,11 +1220,6 @@
 				}
 			]
 			tasks: [
-				{
-					id: "4D4D42A7605FC4EF"
-					item: "refinedstorage:controller"
-					type: "item"
-				}
 				{
 					id: "00ED491BCF377CE5"
 					item: "refinedstorage:disk_drive"
@@ -1355,7 +1315,7 @@
 				}
 			]
 			title: "Refined Storage Starter Kit"
-			x: -6.0d
+			x: -6.5d
 			y: -4.5d
 		}
 		{
@@ -1414,59 +1374,39 @@
 				}
 			]
 			title: "Infinite Water?"
-			x: -1.5d
-			y: -3.0d
+			x: 0.0d
+			y: -3.5d
 		}
 		{
-			dependencies: ["182209ACB7DE7F78"]
-			description: ["You may want amethyst to get into LazierAE2 and AE2Things later on. In order to get your first amethyst, you can combine 1 improved mechanical essence and 1 charged certus quartz in an induction smelter.\\nThis is an expensive recipe and takes a lot of time and energy to complete, so once you have your first amethyst, you may prefer to dupe it. To do this, combine your amethyst shard with water in a crystalizer to get an amethyst cluster, which can be crushed for even more shards."]
-			id: "36AF346F44428B81"
-			optional: true
+			dependencies: [
+				"482E9CE8C89D097B"
+				"6BC0E03B21A767EA"
+			]
+			dependency_requirement: "one_completed"
+			description: ["In order to unlock Flux Network you have to build up FE and submit it through the FTB Quests Task Screen."]
+			id: "2F6C7F4F8FAC880A"
 			rewards: [{
-				count: 16
-				id: "4D55D8307F567227"
-				item: "minecraft:amethyst_shard"
+				id: "3AEA2ADDDB7FF25E"
+				item: "fluxnetworks:flux_block"
 				type: "item"
 			}]
-			tasks: [
-				{
-					id: "654EAAC804946EAA"
-					item: "minecraft:amethyst_shard"
-					type: "item"
-				}
-				{
-					id: "6ED37996F85DABE7"
-					item: "minecraft:amethyst_cluster"
-					type: "item"
-				}
-			]
-			title: "Amethyst Automation"
-			x: -8.0d
-			y: -4.5d
-		}
-		{
-			dependencies: ["482E9CE8C89D097B"]
-			dependency_requirement: "one_completed"
-			id: "2F6C7F4F8FAC880A"
-			tasks: [
-				{
-					id: "45A0271B5CC31478"
-					max_input: 20000L
-					type: "forge_energy"
-					value: 100000000L
-				}
-				{
-					id: "467CFF3D2494ED17"
-					item: "ftbquests:screen_1"
-					type: "item"
-				}
-			]
+			tasks: [{
+				id: "45A0271B5CC31478"
+				max_input: 20000L
+				type: "forge_energy"
+				value: 100000000L
+			}]
 			title: "We need more energy!"
-			x: 2.5d
-			y: 4.0d
+			x: 5.0d
+			y: 3.5d
 		}
 		{
 			dependencies: ["65CCE43B4B2AEC6F"]
+			description: [
+				"Progressing through Powah requires creating more advanced parts using the energize mechanics."
+				""
+				"Just as everything you will craft things manually until you can automate the process with Refined Storage, Modular Routers and/or Applied Energistics"
+			]
 			id: "1CB1D2ADD015C590"
 			rewards: [{
 				count: 8
@@ -1488,8 +1428,8 @@
 				}
 			]
 			title: "Advanced Powah!"
-			x: 1.0d
-			y: 2.5d
+			x: 2.0d
+			y: 2.0d
 		}
 		{
 			dependencies: ["550E4D68A98180F5"]
@@ -1527,7 +1467,7 @@
 				type: "item"
 			}]
 			x: 2.0d
-			y: -1.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["550E4D68A98180F5"]
@@ -1644,14 +1584,87 @@
 				"{image:powah:textures/gui/book/images/reactor.png width:200 height:100 align:1}"
 			]
 			id: "482E9CE8C89D097B"
+			rewards: [{
+				id: "3B98175A64C5484E"
+				item: "ftbquests:screen_1"
+				type: "item"
+			}]
 			tasks: [{
 				count: 36L
 				id: "78143023467B41FF"
 				item: "powah:reactor_spirited"
 				type: "item"
 			}]
-			x: 1.0d
-			y: 4.0d
+			x: 3.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["0A7E1E8B5F04A64F"]
+			description: [
+				"None of the 4 awakened effigies can be duplicated with the Mob Duplicator from Industrial Foregoing."
+				""
+				"That's life! You will have plenty of loot using the mob crusher with looting upgrades, don't worry"
+			]
+			id: "55FF155FE79BD182"
+			rewards: [{
+				count: 4
+				id: "350C4B792D73864D"
+				item: "kubejs:dormant_effigy"
+				type: "item"
+			}]
+			tasks: [{
+				id: "23F2BBDEE0DDEFC6"
+				item: "industrialforegoing:mob_duplicator"
+				type: "item"
+			}]
+			title: "No duping!"
+			x: -5.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["1A67C9B9ABB4E969"]
+			description: ["You can use either RS or AE2 silicon for all silicon based recipes."]
+			id: "7470035A489CE08D"
+			optional: true
+			rewards: [{
+				exclude_from_claim_all: true
+				id: "49629F4D8AD2F971"
+				table_id: 5925849308766390323L
+				type: "random"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "3E5368D2024301E9"
+				item: {
+					Count: 1b
+					id: "itemfilters:tag"
+					tag: {
+						value: "forge:silicon"
+					}
+				}
+				type: "item"
+			}]
+			title: "Silicon is Silicon"
+			x: -7.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["0EDC3D332067E0BB"]
+			description: ["The magma crucible can, among other things, liquify cobblestone and netherrack into lava. Liquifying netherrack costs less RF and is therefore faster."]
+			id: "42C45408AC05B498"
+			rewards: [{
+				id: "0F3B89038F35F644"
+				item: "minecraft:lava_bucket"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5465F96CB57980E0"
+				item: "thermal:machine_crucible"
+				type: "item"
+			}]
+			title: "Lava generation is OP!"
+			x: -0.5d
+			y: 2.5d
 		}
 	]
 	title: "Tier 3: Basic Mekanism"

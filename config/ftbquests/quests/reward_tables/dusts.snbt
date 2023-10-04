@@ -1,0 +1,11 @@
+{
+	id: "0C045148A7D4E936"
+	loot_size: 1
+	order_index: 15
+	rewards: [
+		{ count: 2, item: "thermal:iron_dust" }
+		{ count: 2, item: "thermal:copper_dust" }
+		{ count: 2, item: "thermal:gold_dust" }
+	]
+	title: "dusts"
+}

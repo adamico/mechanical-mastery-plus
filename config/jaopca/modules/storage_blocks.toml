@@ -1,5 +1,5 @@
 
 [general]
 	#The material blacklist of this module.
-	materialBlacklist = ["wood", "saltpeter", "obsidian", "brick", "fluix", "hop_graphite", "lithium", "nether_brick", "prismarine", "salt"]
+	materialBlacklist = ["wood", "obsidian", "brick", "fluix", "nether_brick", "prismarine"]
 

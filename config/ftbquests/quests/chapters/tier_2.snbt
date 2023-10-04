@@ -2,12 +2,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "tier_2"
-	group: ""
-	hide_quest_details_until_startable: true
-	hide_quest_until_deps_visible: true
+	group: "2D94E5A1412E2495"
 	icon: "kubejs:cube2"
 	id: "032540945468AB53"
-	order_index: 4
+	order_index: 1
 	quest_links: [ ]
 	quests: [
 		{
@@ -15,6 +13,31 @@
 			description: ["Suddenly, the basic mechanical essence whispers to you, granting you knowledge of various materials, allowing you to transmute them at will."]
 			icon: "kubejs:cube1"
 			id: "167C9AF69BB16B8B"
+			rewards: [
+				{
+					count: 8
+					id: "09085582740A17F7"
+					item: "minecraft:lapis_ore"
+					type: "item"
+				}
+				{
+					count: 32
+					id: "716665370B9A1BB0"
+					item: "minecraft:netherrack"
+					type: "item"
+				}
+				{
+					count: 32
+					id: "758C25765DE0E45E"
+					item: "minecraft:soul_sand"
+					type: "item"
+				}
+				{
+					id: "68ACD79CE84307F9"
+					item: "create:raw_zinc"
+					type: "item"
+				}
+			]
 			subtitle: "Are these things... alive?!"
 			tasks: [{
 				id: "4E0FFF9832476439"
@@ -24,77 +47,6 @@
 			title: "Tier 2 Materials"
 			x: 0.0d
 			y: 0.0d
-		}
-		{
-			dependencies: ["167C9AF69BB16B8B"]
-			icon: "minecraft:lapis_lazuli"
-			id: "45E6447D17E3E9FE"
-			rewards: [{
-				count: 8
-				id: "5B7761A892DCB09B"
-				item: "minecraft:lapis_ore"
-				type: "item"
-			}]
-			tasks: [{
-				id: "42376ED93828C59F"
-				title: "Lapis"
-				type: "checkmark"
-			}]
-			x: 1.0d
-			y: -1.0d
-		}
-		{
-			dependencies: ["167C9AF69BB16B8B"]
-			icon: "minecraft:netherrack"
-			id: "0F28231FB970AA04"
-			rewards: [{
-				count: 32
-				id: "2A2F78C9570ED837"
-				item: "minecraft:netherrack"
-				type: "item"
-			}]
-			tasks: [{
-				id: "418E2BFD6F1B022A"
-				title: "Netherrack"
-				type: "checkmark"
-			}]
-			x: 1.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["0F28231FB970AA04"]
-			icon: "minecraft:soul_sand"
-			id: "57C0D867E451666D"
-			rewards: [{
-				count: 32
-				id: "1A31500ACADDED17"
-				item: "minecraft:soul_sand"
-				type: "item"
-			}]
-			tasks: [{
-				id: "6780E14F184EC655"
-				title: "Soul Sand"
-				type: "checkmark"
-			}]
-			x: 3.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["167C9AF69BB16B8B"]
-			icon: "create:zinc_ingot"
-			id: "0FD59AE2D88297F3"
-			rewards: [{
-				id: "3654084581C677AF"
-				item: "create:raw_zinc"
-				type: "item"
-			}]
-			tasks: [{
-				id: "7B252E5DBF4C53C9"
-				title: "Zinc"
-				type: "checkmark"
-			}]
-			x: 0.0d
-			y: 1.5d
 		}
 		{
 			dependencies: ["167C9AF69BB16B8B"]
@@ -136,6 +88,11 @@
 					item: "minecraft:kelp"
 					type: "item"
 				}
+				{
+					id: "4702BF7FFD51B2EC"
+					item: "create:wrench"
+					type: "item"
+				}
 			]
 			tasks: [
 				{
@@ -150,8 +107,8 @@
 				}
 			]
 			title: "Getting Creative"
-			x: 0.0d
-			y: -3.0d
+			x: 1.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["5F73D5F328C236A9"]
@@ -191,11 +148,11 @@
 				type: "item"
 			}]
 			title: "Create Power Generation"
-			x: 0.0d
-			y: -4.5d
+			x: 1.5d
+			y: -3.0d
 		}
 		{
-			dependencies: ["5F73D5F328C236A9"]
+			dependencies: ["7C0D8A15D01EC79E"]
 			description: ["With the mechanical mixer, you can automate shapeless crafting recipes, plus many other item/fluid recipes specific to the mixer."]
 			id: "09E7EB6E38E84886"
 			rewards: [{
@@ -215,11 +172,11 @@
 					type: "item"
 				}
 			]
-			x: 1.0d
-			y: -4.5d
+			x: 3.0d
+			y: -3.0d
 		}
 		{
-			dependencies: ["5F73D5F328C236A9"]
+			dependencies: ["7C0D8A15D01EC79E"]
 			description: ["Encased fans serve a variety of purposes, from pushing/pulling entities, to fuel-free smelting and item washing. Remember: you can learn more from most Create machines by hovering over them and holding \"W\"."]
 			id: "6DB9CDAA51747A17"
 			rewards: [{
@@ -232,11 +189,11 @@
 				item: "create:encased_fan"
 				type: "item"
 			}]
-			x: -1.0d
+			x: 1.5d
 			y: -4.5d
 		}
 		{
-			dependencies: ["5F73D5F328C236A9"]
+			dependencies: ["7C0D8A15D01EC79E"]
 			description: ["The mechanical press offers an RF-free way of converting ingots into plates."]
 			id: "662DE7460CCF2AA7"
 			rewards: [{
@@ -256,11 +213,11 @@
 					type: "item"
 				}
 			]
-			x: 2.0d
+			x: 3.0d
 			y: -4.5d
 		}
 		{
-			dependencies: ["5F73D5F328C236A9"]
+			dependencies: ["7C0D8A15D01EC79E"]
 			description: ["Create's mechanical belts allow for transportation of items with customizable speed. Since Pretty Pipes offer some advantages and disadvantages to mechanical belts, this quest is optional."]
 			id: "388F7E8E6658980D"
 			optional: true
@@ -275,8 +232,8 @@
 				item: "create:belt_connector"
 				type: "item"
 			}]
-			x: 2.0d
-			y: -3.5d
+			x: 3.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["6DB9CDAA51747A17"]
@@ -300,166 +257,8 @@
 				item: "minecraft:quartz"
 				type: "item"
 			}]
-			x: -1.0d
+			x: 1.5d
 			y: -6.0d
-		}
-		{
-			dependencies: ["167C9AF69BB16B8B"]
-			description: ["You can use industrial hemp for tough fabric and string."]
-			icon: "immersiveengineering:seed"
-			id: "1D1148421443BCF1"
-			rewards: [{
-				count: 8
-				id: "25DAB80917C280C2"
-				item: "immersiveengineering:seed"
-				type: "item"
-			}]
-			tasks: [{
-				id: "5C2A4057E52E27FD"
-				title: "String"
-				type: "checkmark"
-			}]
-			title: "Industrial Hemp Seeds"
-			x: -1.0d
-			y: -1.0d
-		}
-		{
-			dependencies: ["5F73D5F328C236A9"]
-			description: ["Immersive engineering adds its own set of machines, power generators, and logistics. More importantly, it will be your first source of steel."]
-			icon: "immersiveengineering:manual"
-			id: "2ECECEF6F26FEEDD"
-			rewards: [
-				{
-					id: "45EEC5A4B1D12626"
-					item: "immersiveengineering:manual"
-					type: "item"
-				}
-				{
-					id: "0BA8A59ECD0BE1CC"
-					item: {
-						Count: 1b
-						id: "immersiveengineering:hammer"
-						tag: {
-							Damage: 0
-						}
-					}
-					type: "item"
-				}
-			]
-			tasks: [{
-				id: "6FF50A92C97AC7DF"
-				title: "Getting Immersed"
-				type: "checkmark"
-			}]
-			x: -3.5d
-			y: -3.0d
-		}
-		{
-			dependencies: ["2ECECEF6F26FEEDD"]
-			description: ["Create a 3x3x3 cube of coke bricks and right click the middle with an engineer's hammer to create a coke oven, allowing you to (slowly) turn coal into coal coke and creosote oil"]
-			id: "62EFBE3479276302"
-			rewards: [
-				{
-					id: "1CB04CEE1A777047"
-					type: "xp"
-					xp: 100
-				}
-				{
-					count: 4
-					id: "2A734C17C2CE839E"
-					item: "thermal:coal_coke_block"
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					count: 27L
-					id: "1E5C56F1FAD78137"
-					item: "immersiveengineering:cokebrick"
-					type: "item"
-				}
-				{
-					count: 4L
-					id: "0D825491E91AA464"
-					item: "thermal:coal_coke_block"
-					type: "item"
-				}
-			]
-			title: "Coke Oven \\& Coal Coke"
-			x: -5.0d
-			y: -3.0d
-		}
-		{
-			dependencies: [
-				"62EFBE3479276302"
-				"7516EFF9A22748A3"
-			]
-			description: ["Create a 3x3x3 cube of blast bricks and right click the middle with an engineer's hammer to make a blast furnace, allowing you to turn iron and coke coal into steel and slag. Alternatively, you can use an induction smelter for a heavy RF cost."]
-			id: "3F35726F4CE8AE5E"
-			rewards: [
-				{
-					id: "576359C9FBB85BD1"
-					type: "xp"
-					xp: 100
-				}
-				{
-					count: 16
-					id: "33E056A32F5261CE"
-					item: "immersiveengineering:ingot_steel"
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					count: 27L
-					id: "5390C74229D23ABE"
-					item: "immersiveengineering:blastbrick_reinforced"
-					type: "item"
-				}
-				{
-					id: "3ABD7F664B766F79"
-					item: "minecraft:hopper"
-					type: "item"
-				}
-				{
-					count: 2L
-					id: "6763FDD4421F0304"
-					item: "immersiveengineering:blastfurnace_preheater"
-					type: "item"
-				}
-			]
-			title: "We need more Steel!"
-			x: -7.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["62EFBE3479276302"]
-			description: [
-				"Too much creosote oil or slag and don't know what to do with it? Craft an Item and Fluid trash and automatically void all this waste."
-				"The Nullifier combines both type of trash cans."
-			]
-			id: "43D3AF6AA4C1D1D1"
-			optional: true
-			rewards: [{
-				id: "152BFA95D5A52E97"
-				item: "thermal:device_nullifier"
-				type: "item"
-			}]
-			tasks: [
-				{
-					id: "742D5783B4997F88"
-					item: "trashcans:item_trash_can"
-					type: "item"
-				}
-				{
-					id: "2A702245C6BF50E9"
-					item: "trashcans:liquid_trash_can"
-					type: "item"
-				}
-			]
-			title: "I probably don't need those..."
-			x: -4.0d
-			y: -4.5d
 		}
 		{
 			dependencies: ["167C9AF69BB16B8B"]
@@ -474,11 +273,11 @@
 				title: "Continued Thermal Automation"
 				type: "checkmark"
 			}]
-			x: -3.5d
-			y: 0.0d
+			x: 1.5d
+			y: 1.5d
 		}
 		{
-			dependencies: ["0F60C65F3D731A56"]
+			dependencies: ["07DB08AC0D1516A4"]
 			description: ["Invar can be made in the induction smelter with 2 iron and 1 nickel."]
 			id: "60D3472A8BB177C9"
 			rewards: [{
@@ -493,11 +292,11 @@
 				item: "thermal:invar_ingot"
 				type: "item"
 			}]
-			x: -5.0d
-			y: -0.5d
+			x: 5.5d
+			y: 0.75d
 		}
 		{
-			dependencies: ["0F60C65F3D731A56"]
+			dependencies: ["07DB08AC0D1516A4"]
 			description: ["Bronze can be made in the induction smelter with 3 copper and 1 tin."]
 			id: "45DC5DB7E7D45DD5"
 			rewards: [{
@@ -512,14 +311,14 @@
 				item: "thermal:bronze_ingot"
 				type: "item"
 			}]
-			x: -5.0d
-			y: 0.5d
+			x: 3.5d
+			y: 0.75d
 		}
 		{
 			dependencies: [
-				"3F35726F4CE8AE5E"
 				"60D3472A8BB177C9"
 				"45DC5DB7E7D45DD5"
+				"18C14136EA02ADD9"
 			]
 			description: ["With all your new-found knowledge of materials and alloys, you have managed to create a refined version of mechanical essence, worth even more EMC than its basic form."]
 			id: "78775CE81571FAC9"
@@ -549,64 +348,11 @@
 					type: "item"
 				}
 			]
-			x: -7.5d
+			x: 4.5d
 			y: 0.0d
 		}
 		{
-			dependencies: ["62EFBE3479276302"]
-			description: ["With creosote oil, you can craft treated planks, which can then make generators that passively make RF at no cost."]
-			id: "7516EFF9A22748A3"
-			rewards: [
-				{
-					id: "58BD87F6DB7C3741"
-					item: "immersiveengineering:dynamo"
-					type: "item"
-				}
-				{
-					count: 4
-					id: "23682F4961FDE363"
-					item: "immersiveengineering:connector_lv"
-					type: "item"
-				}
-				{
-					count: 2
-					id: "6E451526F485088B"
-					item: "immersiveengineering:connector_lv_relay"
-					type: "item"
-				}
-				{
-					count: 8
-					id: "23E1E5AE3FA143E6"
-					item: "immersiveengineering:wirecoil_copper_ins"
-					type: "item"
-				}
-			]
-			tasks: [{
-				id: "672A0BF2B9E99ACA"
-				item: {
-					Count: 1b
-					id: "itemfilters:or"
-					tag: {
-						items: [
-							{
-								Count: 1b
-								id: "immersiveengineering:watermill"
-							}
-							{
-								Count: 1b
-								id: "immersiveengineering:windmill"
-							}
-						]
-					}
-				}
-				type: "item"
-			}]
-			title: "Immersive Generation"
-			x: -6.0d
-			y: -4.5d
-		}
-		{
-			dependencies: ["3F35726F4CE8AE5E"]
+			dependencies: ["18C14136EA02ADD9"]
 			description: ["With steel, you can craft the basic tier of mekanism logistic pipes, allowing you to transfer items, fluids, or energy in an easier manner."]
 			icon: "mekanism:configurator"
 			id: "0B10D556104887A9"
@@ -616,14 +362,16 @@
 				item: "mekanism:configurator"
 				type: "item"
 			}]
+			shape: "diamond"
+			size: 0.8d
 			tasks: [{
 				id: "76C8E57263E432D3"
 				title: "Meknism Logistics"
 				type: "checkmark"
 			}]
 			title: "Mekanism Logistics"
-			x: -9.0d
-			y: -3.0d
+			x: 6.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["0B10D556104887A9"]
@@ -636,6 +384,8 @@
 				item: "mekanism:basic_logistical_transporter"
 				type: "item"
 			}]
+			shape: "diamond"
+			size: 0.8d
 			tasks: [{
 				id: "1FF84F8D3581A381"
 				item: {
@@ -669,8 +419,8 @@
 				type: "item"
 			}]
 			title: "Logistical Transporters"
-			x: -9.0d
-			y: -4.5d
+			x: 7.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["0B10D556104887A9"]
@@ -683,6 +433,8 @@
 				item: "mekanism:basic_mechanical_pipe"
 				type: "item"
 			}]
+			shape: "diamond"
+			size: 0.8d
 			tasks: [{
 				id: "7D45659EBD165567"
 				item: {
@@ -716,8 +468,8 @@
 				type: "item"
 			}]
 			title: "Mechanical Pipes"
-			x: -8.0d
-			y: -4.5d
+			x: 7.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["0B10D556104887A9"]
@@ -730,6 +482,8 @@
 				item: "mekanism:basic_universal_cable"
 				type: "item"
 			}]
+			shape: "diamond"
+			size: 0.8d
 			tasks: [{
 				id: "5D0001CEFA17F21F"
 				item: {
@@ -763,28 +517,8 @@
 				type: "item"
 			}]
 			title: "Universal Cables"
-			x: -10.0d
-			y: -4.5d
-		}
-		{
-			dependencies: ["0F60C65F3D731A56"]
-			description: ["The lapidary dynamo has a special purpose in this modpack: it accepts mechanical essences and outputs large amounts of RF."]
-			id: "5C0C4A60E68CD434"
-			rewards: [{
-				count: 16
-				id: "3987C99375CD522F"
-				item: "kubejs:cube1"
-				type: "item"
-			}]
-			shape: "gear"
-			subtitle: "IMPORTANT: READ QUEST DESCRIPTION"
-			tasks: [{
-				id: "6080E30D0B427DAC"
-				item: "thermal:dynamo_lapidary"
-				type: "item"
-			}]
-			x: -3.0d
-			y: -1.5d
+			x: 7.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["0F60C65F3D731A56"]
@@ -818,29 +552,8 @@
 				}
 			]
 			title: "Can Thermal machines be more efficient?"
-			x: -3.0d
-			y: 1.5d
-		}
-		{
-			dependencies: [
-				"0F60C65F3D731A56"
-				"62EFBE3479276302"
-			]
-			description: ["The pyrolizer is an RF alternative to the coke oven."]
-			id: "01F6B599E8AF1370"
-			rewards: [{
-				count: 8
-				id: "141D0ED9713F9074"
-				item: "immersiveengineering:coal_coke"
-				type: "item"
-			}]
-			tasks: [{
-				id: "7535D116FA67D640"
-				item: "thermal:machine_pyrolyzer"
-				type: "item"
-			}]
-			x: -4.0d
-			y: -1.5d
+			x: 1.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["167C9AF69BB16B8B"]
@@ -857,41 +570,22 @@
 				title: "Cactus"
 				type: "checkmark"
 			}]
-			x: -1.0d
-			y: 1.0d
+			x: -1.5d
+			y: 1.5d
 		}
 		{
-			dependencies: [
-				"158062BBA9E40847"
-				"6A69E64613966190"
-			]
+			dependencies: ["158062BBA9E40847"]
 			description: ["The auxiliary cactus removes any EXCESS secondary outputs you may not want.\\nIf you don't understand what is meant by \"excess\", read the next quest"]
 			id: "22AE3DD6943A96AB"
 			optional: true
+			shape: "diamond"
+			size: 0.8d
 			tasks: [{
 				id: "744D96677974079D"
 				item: "thermal:machine_null_augment"
 				type: "item"
 			}]
-			x: -2.0d
-			y: 1.5d
-		}
-		{
-			dependencies: ["0F60C65F3D731A56"]
-			description: ["The magma crucible can, among other things, liquify cobblestone and netherrack into lava. Liquifying netherrack costs less RF and is therefore faster."]
-			id: "42C45408AC05B498"
-			rewards: [{
-				id: "0F3B89038F35F644"
-				item: "minecraft:lava_bucket"
-				type: "item"
-			}]
-			tasks: [{
-				id: "5465F96CB57980E0"
-				item: "thermal:machine_crucible"
-				type: "item"
-			}]
-			title: "Lava generation is OP!"
-			x: -4.0d
+			x: -2.5d
 			y: 1.5d
 		}
 		{
@@ -909,82 +603,31 @@
 				title: "Bone"
 				type: "checkmark"
 			}]
-			x: 1.0d
-			y: 1.0d
-		}
-		{
-			dependencies: ["5F73D5F328C236A9"]
-			description: ["Crushing wheels can be used to further increase ore yield."]
-			id: "3CBA430E4EC15E5D"
-			tasks: [{
-				count: 2L
-				id: "1C22B4909962568D"
-				item: "create:crushing_wheel"
-				type: "item"
-			}]
-			title: "Crushing Wheels"
-			x: 2.0d
-			y: -2.5d
-		}
-		{
-			dependencies: ["1D1148421443BCF1"]
-			description: ["You can cook tough fabric into leather"]
-			id: "02C583C6E7F1EDD0"
-			rewards: [{
-				count: 16
-				id: "4CBB11E919669C7E"
-				item: "minecraft:leather"
-				type: "item"
-			}]
-			tasks: [{
-				id: "32CB4D43FC955228"
-				item: "minecraft:leather"
-				type: "item"
-			}]
-			x: -2.0d
-			y: -2.0d
+			x: -1.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["3E8161FF2C2AF01F"]
 			description: ["Consumes EMC into renewable food."]
 			id: "6CB8640C5BF269DC"
 			optional: true
-			shape: "hexagon"
+			shape: "diamond"
+			size: 0.8d
 			tasks: [{
 				id: "5120FC89CDF0BECF"
 				item: "projectexpansion:infinite_steak"
 				type: "item"
 			}]
-			x: 2.0d
-			y: 2.0d
-		}
-		{
-			dependencies: ["0F28231FB970AA04"]
-			description: ["You can crush netherrack into cinder flour, which can be used as an alternative source of redstone."]
-			icon: "minecraft:redstone"
-			id: "58CDD90E19203B8F"
-			optional: true
-			rewards: [{
-				count: 16
-				id: "1F98D5B2DA9DD4AE"
-				item: "minecraft:redstone"
-				type: "item"
-			}]
-			tasks: [{
-				id: "15D53E57CB74571E"
-				item: "create:cinder_flour"
-				type: "item"
-			}]
-			title: "Alternative Redstone Source"
-			x: 2.5d
-			y: -1.0d
+			x: -2.5d
+			y: -1.5071428571428669d
 		}
 		{
 			dependencies: ["158062BBA9E40847"]
 			description: ["The Dye Mixer takes red, green, and blue dyes, and can mix them into any other dye color. You can get green dye by smelting cactus, red from flowers obtained by bone mealing grass and blue from lapis."]
 			id: "508D237427CDE318"
 			optional: true
-			shape: "hexagon"
+			shape: "diamond"
+			size: 0.8d
 			subtitle: "Infinite amounts of any dye"
 			tasks: [{
 				id: "078BC4A0FDC88F04"
@@ -992,7 +635,7 @@
 				type: "item"
 			}]
 			title: "RGB or CMYK or RGY...?!?"
-			x: -1.0d
+			x: -1.5d
 			y: 2.5d
 		}
 		{
@@ -1000,6 +643,14 @@
 			description: ["Some thermal machines have multiple output slots. For example, the pulverizer has 4 output \"buffers\". The auxiliary cactus voids EXCESS secondary outputs ONLY if there are no free output slots for them to fill OR there's only enough space for the primary output.\\nWhat's the difference? For example, let's say you are pulverizing gravel, which can make sand (primary) with a chance for flint (secondary).\\nWithout the augment, if there's only enough space for sand but the pulverizer \"wants\" to output 1 sand AND 1 flint, it will STOP working since there isn't enough space to output ALL its contents.\\nWITH the augment however, if the machine wants to output sand and flint BUT there's only enough space for the sand, it will VOID the flint, and will continue working.\\nThis doesn't really matter for automation, since it will still VOID the EXCESS, so:\\nTLDR: the machines WILL still produce secondary outputs but WONT stop if they fill with them, so the only difference is that you need make sure to filter when extracting out of the machine."]
 			id: "619D1281059B0F35"
 			optional: true
+			rewards: [{
+				count: 4
+				id: "43662522692BBEDD"
+				item: "thermal:machine_null_augment"
+				type: "item"
+			}]
+			shape: "diamond"
+			size: 0.8d
 			subtitle: "Yes it does. Read this description if you don't understand"
 			tasks: [{
 				id: "646F62138C710376"
@@ -1007,9 +658,66 @@
 				type: "checkmark"
 			}]
 			title: "\"ThE cActUs AUgmENT dOEs NoT wORk!!!!!!\""
-			x: -2.5d
-			y: 2.5d
+			x: -3.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["0F60C65F3D731A56"]
+			description: ["The induction smelter can make many alloys that will be valuable in the future."]
+			id: "07DB08AC0D1516A4"
+			rewards: [{
+				id: "3D3E26A5B494407C"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "366B1B5714C30D04"
+				item: "thermal:machine_smelter"
+				type: "item"
+			}]
+			x: 4.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["07DB08AC0D1516A4"]
+			description: ["Just like the pulverizer, certain \"catalysts\" can be used inside the induction smelter to boost primary and secondary output, energy efficiency, and some other things. Check JEI for more info."]
+			id: "1A1486F396BCEA3C"
+			optional: true
+			rewards: [
+				{
+					id: "63F601802149EA38"
+					type: "xp"
+					xp: 100
+				}
+				{
+					count: 16
+					id: "4F72F3FDA9A3B4E9"
+					item: "minecraft:sand"
+					type: "item"
+				}
+			]
+			shape: "diamond"
+			size: 0.8d
+			tasks: [{
+				id: "1C51B69ECBD925F2"
+				item: "minecraft:sand"
+				type: "item"
+			}]
+			title: "Induction Smelter Catalysts"
+			x: 4.550000000000004d
+			y: 2.8999999999999986d
+		}
+		{
+			dependencies: ["09E7EB6E38E84886"]
+			id: "18C14136EA02ADD9"
+			tasks: [{
+				id: "7F07722947D06F17"
+				item: "mekanism:ingot_steel"
+				type: "item"
+			}]
+			x: 4.5d
+			y: -1.5d
 		}
 	]
-	title: "Tier 2: Create \\& Immersive Engineering"
+	title: "Tier 2: Create"
 }

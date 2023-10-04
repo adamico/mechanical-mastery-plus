@@ -1,0 +1,11 @@
+{
+	id: "03A0E6D9BC7DF15C"
+	loot_size: 1
+	order_index: 14
+	rewards: [
+		{ count: 4, item: "minecraft:gold_ingot" }
+		{ count: 4, item: "minecraft:iron_ingot" }
+		{ count: 4, item: "minecraft:copper_ingot" }
+	]
+	title: "Ingots"
+}

@@ -1,17 +1,17 @@
 
 [general]
 	#The material blacklist of this module.
-	materialBlacklist = []
+	materialBlacklist = ["lapis", "emerald", "quartz"]
 
 [recipes]
 	#The materials that should not have pulverizer to dust recipes added.
-	toDustMaterialBlacklist = []
+	toDustMaterialBlacklist = ["netherite"]
 	#The materials that should not have smelter to ingot recipes added.
-	dustToIngotMaterialBlacklist = []
+	dustToIngotMaterialBlacklist = ["netherite"]
 	#The materials that should not have press to plate recipes added.
-	toPlateMaterialBlacklist = []
+	toPlateMaterialBlacklist = ["netherite"]
 	#The materials that should not have press to gear recipes added.
-	toGearMaterialBlacklist = []
+	toGearMaterialBlacklist = ["netherite"]
 	#The materials that should not have press material to coin recipes added.
 	materialToCoinMaterialBlacklist = []
 	#The materials that should not have press nugget to coin recipes added.
