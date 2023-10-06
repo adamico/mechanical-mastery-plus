@@ -199,10 +199,7 @@ function Remove-BlacklistedFiles {
 }
 
 function New-Changelog {
-    if ($ENABLE_CHANGELOG_GENERATOR_MODULE) {
-        if ((Test-Path "$INSTANCE_ROOT/$LAST_MODPACK_ZIP_NAME.zip") -and (Test-Path "$INSTANCE_ROOT/$CLIENT_ZIP_NAME.zip")) {
-            throw "You must set have the last modpack zip: $LAST_MODPACK_ZIP_NAME.zip and the updated zip: $CLIENT_ZIP_NAME.zip to use the changelog generator module."
-        }
+    if ($ENABLE_CHANGELOG_GENERATOR_MODULE -and (Test-Path "$INSTANCE_ROOT/$LAST_MODPACK_ZIP_NAME.zip") -and (Test-Path "$INSTANCE_ROOT/$CLIENT_ZIP_NAME.zip")) {        
         if (-not (Test-Path $CHANGELOG_GENERATOR_JAR) -or $ENABLE_ALWAYS_UPDATE_JARS) {
             Remove-Item $CHANGELOG_GENERATOR_JAR -Recurse -Force -ErrorAction SilentlyContinue
             Get-GitHubRelease -repo "ModdingX/ModListCreator" -file $CHANGELOG_GENERATOR_JAR
@@ -221,7 +218,7 @@ function New-Changelog {
 
         Write-Host "Mod changelog generated!" -ForegroundColor Green
     } else {
-        Write-Host "Skipping changelog generation..." -ForegroundColor Cyan
+        Write-Host "Skipping changelog generation beacause you don't have the correct new and old modpack files" -ForegroundColor Cyan
     }
 }
 

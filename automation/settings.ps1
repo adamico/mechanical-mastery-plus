@@ -181,7 +181,7 @@ $ENABLE_MODPACK_UPLOADER_MODULE = $false
 
 # Toggle server file feature on/off
 # Default: $true
-$ENABLE_SERVER_FILE_MODULE = $false
+$ENABLE_SERVER_FILE_MODULE = $true
 
 # Toggle serverstarter compatibility on/off
 # This will update the "modpackUrl" in the file found at $SERVER_SETUP_CONFIG_PATH
@@ -245,7 +245,7 @@ $SERVER_CHANGELOG = $CLIENT_CHANGELOG
 $SERVER_RELEASE_TYPE = $CLIENT_RELEASE_TYPE
 
 # Default: "$CLIENT_NAME Server $MODPACK_VERSION"
-$SERVER_ZIP_NAME = "$CLIENT_NAME`Server-$MODPACK_VERSION"
+$SERVER_ZIP_NAME = "$MODPACK_NAME-Server-$MODPACK_VERSION"
 
 # Default: $SERVER_FILENAME
 $SERVER_FILE_DISPLAY_NAME = "$CLIENT_NAME Server $MODPACK_VERSION"
