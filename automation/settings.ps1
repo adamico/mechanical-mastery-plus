@@ -23,7 +23,7 @@ $CURSEFORGE_PROJECT_ID = 914505
 #  MAIN MODPACK SETTINGS
 # =====================================================================//
 
-# This is the modpack name as seen in it's CurseForge url: https://www.curseforge.com/minecraft/modpacks/[enigmatica6]
+# This is the modpack name as seen in it's CurseForge url: https://www.curseforge.com/minecraft/modpacks/[modpackslug]
 $MODPACK_NAME = "mechanical-mastery-plus"
 
 # Name of the Modpack in the ZIP File
@@ -177,7 +177,7 @@ $ENABLE_CLIENT_FILE_MODULE = $true
 # Toggle the modpack uploader on/off
 # Setting this to $false will also disable the Server File and Changelog Generator Modules.
 # Default: $true
-$ENABLE_MODPACK_UPLOADER_MODULE = $true
+$ENABLE_MODPACK_UPLOADER_MODULE = $false
 
 # Toggle server file feature on/off
 # Default: $true
@@ -224,10 +224,10 @@ $ENABLE_GITHUB_RELEASE_MODULE = $false
 # =====================================================================//
 
 # Syntax of the Client ZIP File
-$CLIENT_ZIP_NAME = "$CLIENT_NAME-$MODPACK_VERSION"
+$CLIENT_ZIP_NAME = "$MODPACK_NAME-$MODPACK_VERSION"
 
 # Syntax of the Previous Versions Client ZIP File
-$LAST_MODPACK_ZIP_NAME = "$CLIENT_NAME-$LAST_MODPACK_VERSION"
+$LAST_MODPACK_ZIP_NAME = "$MODPACK_NAME-$LAST_MODPACK_VERSION"
 
 # Default: "$CLIENT_NAME $MODPACK_VERSION"
 $CLIENT_FILE_DISPLAY_NAME = "$CLIENT_NAME $MODPACK_VERSION"

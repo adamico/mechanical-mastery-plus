@@ -125,7 +125,6 @@ function New-ClientFiles {
 
         Remove-Item $manifest -Force -Recurse -ErrorAction SilentlyContinue
         Write-Host "Client files $clientZip created!" -ForegroundColor Green
-
     }
 }
 
@@ -200,12 +199,10 @@ function Remove-BlacklistedFiles {
 }
 
 function New-Changelog {
-    if ($ENABLE_CHANGELOG_GENERATOR_MODULE `
-            -and $null -ne $MODPACK_VERSION `
-            -and $null -ne $LAST_MODPACK_VERSION `
-            -and (Test-Path "$INSTANCE_ROOT/$LAST_MODPACK_ZIP_NAME.zip") `
-            -and (Test-Path "$INSTANCE_ROOT/$CLIENT_ZIP_NAME.zip")
-    ) {
+    if ($ENABLE_CHANGELOG_GENERATOR_MODULE) {
+        if ((Test-Path "$INSTANCE_ROOT/$LAST_MODPACK_ZIP_NAME.zip") -and (Test-Path "$INSTANCE_ROOT/$CLIENT_ZIP_NAME.zip")) {
+            throw "You must set have the last modpack zip: $LAST_MODPACK_ZIP_NAME.zip and the updated zip: $CLIENT_ZIP_NAME.zip to use the changelog generator module."
+        }
         if (-not (Test-Path $CHANGELOG_GENERATOR_JAR) -or $ENABLE_ALWAYS_UPDATE_JARS) {
             Remove-Item $CHANGELOG_GENERATOR_JAR -Recurse -Force -ErrorAction SilentlyContinue
             Get-GitHubRelease -repo "ModdingX/ModListCreator" -file $CHANGELOG_GENERATOR_JAR
@@ -223,6 +220,8 @@ function New-Changelog {
             --old "$LAST_MODPACK_ZIP_NAME.zip"
 
         Write-Host "Mod changelog generated!" -ForegroundColor Green
+    } else {
+        Write-Host "Skipping changelog generation..." -ForegroundColor Cyan
     }
 }
 
@@ -438,5 +437,3 @@ Update-Modlist
 
 Write-Host "Modpack Upload Complete!" -ForegroundColor Green
 Set-Location $startLocation
-
-pause
