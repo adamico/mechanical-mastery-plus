@@ -159,3 +159,5 @@ automation/game-versions.json
 emi.json
 .qmenu_opened.marker
 not-enough-crashes/Uploaded Crash logs.txt
+config/jade/sort-order.json
+config/powah.json5
