@@ -185,32 +185,6 @@
 			y: -1.0d
 		}
 		{
-			dependencies: ["13AA6AFAF9C8DD0B"]
-			description: ["Some items can serve as a \"catalyst\" inside the pulverizer, increasing primary and secondary output, plus some other modifiers. Check JEI for a list of them."]
-			id: "3434FB0FA0702973"
-			rewards: [
-				{
-					id: "53F79A89E3A01C68"
-					type: "xp"
-					xp: 100
-				}
-				{
-					count: 16
-					id: "62F604ABEF1D8C9F"
-					item: "minecraft:flint"
-					type: "item"
-				}
-			]
-			tasks: [{
-				id: "76E571A53E0C24D7"
-				item: "minecraft:flint"
-				type: "item"
-			}]
-			title: "Pulverizer Catalysts"
-			x: 12.0d
-			y: -2.5d
-		}
-		{
 			dependencies: ["491EB18107FC8776"]
 			description: [
 				"The mysterious Inscriber is how you will get your first plates and rods. "
@@ -421,47 +395,6 @@
 			y: -1.0d
 		}
 		{
-			dependencies: ["387D9ECF1CD0B4F8"]
-			description: ["In order to actually automate stuff, you want an effective way to move items from machine to machine. Hoppers are too slow and filtering with them is too space consuming. Pretty pipes, however, are a great solution early on. If you dont want items to overflow, you need to install stack limiter modules on each output (or get a high extraction module, but we're not there yet)."]
-			id: "5B12C19CBD25995E"
-			rewards: [
-				{
-					count: 16
-					id: "1232AFE722AF8194"
-					item: "prettypipes:pipe"
-					type: "item"
-				}
-				{
-					id: "1A216B457279F0F1"
-					item: "prettypipes:low_extraction_module"
-					type: "item"
-				}
-				{
-					id: "42202DF002239C0E"
-					item: "prettypipes:low_filter_module"
-					type: "item"
-				}
-				{
-					id: "69BCE6AE223E1C0E"
-					item: "prettypipes:stack_size_module"
-					type: "item"
-				}
-				{
-					id: "6FB2B4AA92BC6DA9"
-					item: "prettypipes:wrench"
-					type: "item"
-				}
-			]
-			tasks: [{
-				id: "6E627EA35AE1C664"
-				item: "prettypipes:pipe"
-				type: "item"
-			}]
-			title: "Basic Item Transport"
-			x: 12.0d
-			y: 1.5d
-		}
-		{
 			dependencies: ["547050DB11C5FFB7"]
 			description: ["With the basic EMC link, you can automatically convert items to EMC and vice versa. With them, you can fully automate the production of mechanical essences."]
 			id: "4AB3B5469D68C46D"
@@ -588,8 +521,9 @@
 			description: ["Inscribing plates gives rods... makes sense! not"]
 			id: "73FA28F897740068"
 			rewards: [{
-				id: "29B9611E8632F1EE"
-				item: "mekanism:basic_fluid_tank"
+				count: 2
+				id: "7B9D8ADC7677C8CE"
+				item: "createaddition:copper_rod"
 				type: "item"
 			}]
 			tasks: [{
@@ -606,21 +540,8 @@
 			description: ["Gears require plates, since when?"]
 			id: "2E308530A5C47F6E"
 			rewards: [{
-				id: "64BDA98D29990B1D"
-				item: {
-					Count: 1b
-					id: "sophisticatedbackpacks:backpack"
-					tag: {
-						contentsUuid: [I;
-							923808502
-							1262308754
-							-1298370256
-							-1818280167
-						]
-						inventorySlots: 27
-						upgradeSlots: 1
-					}
-				}
+				id: "65963C80FE787126"
+				item: "thermal:iron_gear"
 				type: "item"
 			}]
 			tasks: [{
@@ -636,14 +557,8 @@
 			description: ["&eGold&r gears? Where are my aluminum gears?"]
 			id: "4E4618EE8D6D07B9"
 			rewards: [{
-				id: "1962963A0F41320A"
-				item: {
-					Count: 1b
-					id: "createchromaticreturn:bone_shadow_steel_paxel"
-					tag: {
-						Damage: 0
-					}
-				}
+				id: "478FAAE47D905ABC"
+				item: "thermal:gold_gear"
 				type: "item"
 			}]
 			tasks: [{
@@ -691,6 +606,50 @@
 			}]
 			title: "Ore doubling!"
 			x: 2.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"13AA6AFAF9C8DD0B"
+				"387D9ECF1CD0B4F8"
+			]
+			description: ["In order to actually automate stuff, you want an effective way to move items from machine to machine. Hoppers are too slow and filtering with them is too space consuming. Pretty pipes, however, are a great solution early on. If you dont want items to overflow, you need to install stack limiter modules on each output (or get a high extraction module, but we're not there yet)."]
+			id: "5B12C19CBD25995E"
+			rewards: [
+				{
+					count: 16
+					id: "1232AFE722AF8194"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "1A216B457279F0F1"
+					item: "prettypipes:low_extraction_module"
+					type: "item"
+				}
+				{
+					id: "42202DF002239C0E"
+					item: "prettypipes:low_filter_module"
+					type: "item"
+				}
+				{
+					id: "69BCE6AE223E1C0E"
+					item: "prettypipes:stack_size_module"
+					type: "item"
+				}
+				{
+					id: "6FB2B4AA92BC6DA9"
+					item: "prettypipes:wrench"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "6E627EA35AE1C664"
+				item: "prettypipes:pipe"
+				type: "item"
+			}]
+			title: "Basic Item Transport"
+			x: 13.5d
 			y: -0.5d
 		}
 	]

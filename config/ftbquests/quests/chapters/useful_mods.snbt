@@ -2,9 +2,9 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "useful_mods"
-	group: "56617BF3F24DD586"
+	group: "349666CD0199D4FD"
 	id: "50F84AC199F39453"
-	order_index: 4
+	order_index: 2
 	quest_links: [ ]
 	quests: [
 		{
@@ -925,6 +925,11 @@
 		}
 		{
 			id: "41129A0B7A2CCF8D"
+			rewards: [{
+				id: "2AC60FD7BB95A757"
+				item: "minecraft:bone"
+				type: "item"
+			}]
 			tasks: [{
 				id: "3A4FB2FE673A1268"
 				title: "I'm hungry!"
@@ -1018,6 +1023,42 @@
 			x: 4.0d
 			y: -4.5d
 		}
+		{
+			dependencies: ["41129A0B7A2CCF8D"]
+			description: ["Crush bones into bone meal to spawn grass and get seeds for a source of food."]
+			icon: "minecraft:bone"
+			id: "3E8161FF2C2AF01F"
+			rewards: [{
+				id: "313A01BDE8220A12"
+				item: "minecraft:bone"
+				type: "item"
+			}]
+			tasks: [{
+				id: "0DEA348928DD0F46"
+				title: "Bone"
+				type: "checkmark"
+			}]
+			x: 9.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["41129A0B7A2CCF8D"]
+			description: ["Consumes EMC into renewable food."]
+			id: "6CB8640C5BF269DC"
+			rewards: [{
+				count: 16
+				id: "2194A24191369AAF"
+				item: "projecte:alchemical_coal"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5120FC89CDF0BECF"
+				item: "projectexpansion:infinite_steak"
+				type: "item"
+			}]
+			x: 8.0d
+			y: -1.0d
+		}
 	]
-	title: "Useful mods"
+	title: "Other mods"
 }

@@ -1,7 +1,7 @@
 ServerEvents.recipes(event => {
   console.log('[AMMONIUM@KUBEJS]: rods & sticks recipes...');  
   
-  const rodMaterials = ['iron', 'brass', 'copper', 'gold'];
+  const rodMaterials = ['iron', 'copper', 'gold'];
 
   rodMaterials.forEach(material => {
     event.custom({
@@ -20,7 +20,7 @@ ServerEvents.recipes(event => {
     event.recipes.thermal.press([Item.of(`createaddition:${material}_rod`, 2)], [`#forge:ingots/${material}`, 'kubejs:press_rod_die']).energy(600);
   });
   
-	['bronze', 'steel'].forEach(metal => {
+	['steel'].forEach(metal => {
 		event.custom({
 			type:"createaddition:rolling",
 			input: {

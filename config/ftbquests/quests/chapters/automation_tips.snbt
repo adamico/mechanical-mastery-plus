@@ -18,6 +18,23 @@
 				"You can use the stack limiter module to limit how much your machines can accept, which is useful so your one iron pulverizer doesn't consume all your EMC by filling with 64 raw iron."
 			]
 			id: "464AD5024525CC94"
+			rewards: [
+				{
+					id: "1CC48FDBCCADB0C8"
+					item: "minecraft:raw_iron"
+					type: "item"
+				}
+				{
+					id: "33A17593632C3FC6"
+					item: "minecraft:raw_copper"
+					type: "item"
+				}
+				{
+					id: "745E6BD145D46586"
+					item: "minecraft:raw_gold"
+					type: "item"
+				}
+			]
 			tasks: [{
 				id: "5963183003D0CE59"
 				title: "Chapter 1 tips"
@@ -199,7 +216,7 @@
 				type: "item"
 			}]
 			x: 0.0d
-			y: 8.5d
+			y: 9.0d
 		}
 		{
 			dependencies: ["3DD3696B51A16BB3"]

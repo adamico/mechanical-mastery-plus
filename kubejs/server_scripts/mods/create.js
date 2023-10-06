@@ -13,4 +13,8 @@ ServerEvents.recipes(event => {
 	event.remove({id: 'createchromaticreturn:refined_mixture_recipe'});
 	event.remove({id: 'createchromaticreturn:chromatic_compound_recipe'});
 	event.remove({id: 'createchromaticreturn:bedrock_shard_crushing'});
+
+	event.recipes.createMechanicalExtruderExtruding(Item.of('minecraft:andesite'),
+	[Fluid.of('minecraft:water'),Fluid.of('minecraft:lava')]).withCatalyst('supplementaries:flint_block').requiredBonks(4);
+	// create mixing for invar, steel and brass dusts with low yield
 });

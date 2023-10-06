@@ -15,12 +15,6 @@
 			id: "167C9AF69BB16B8B"
 			rewards: [
 				{
-					count: 8
-					id: "09085582740A17F7"
-					item: "minecraft:lapis_ore"
-					type: "item"
-				}
-				{
 					count: 32
 					id: "716665370B9A1BB0"
 					item: "minecraft:netherrack"
@@ -45,12 +39,16 @@
 				type: "checkmark"
 			}]
 			title: "Tier 2 Materials"
-			x: 0.0d
-			y: 0.0d
+			x: -4.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["167C9AF69BB16B8B"]
-			description: ["In order to get into create, you will need large quantities of andesite. You can initially get andesite with cobblestone and high covalence dust or quartz, but once you get a mechanical mixer you can get andesite from gravel, flint and lava."]
+			description: [
+				"In order to get into create, you will need large quantities of andesite."
+				""
+				"You can initially get andesite with cobblestone and high covalence dust."
+			]
 			id: "5F73D5F328C236A9"
 			rewards: [
 				{
@@ -107,7 +105,7 @@
 				}
 			]
 			title: "Getting Creative"
-			x: 1.5d
+			x: -3.0d
 			y: -1.5d
 		}
 		{
@@ -148,8 +146,8 @@
 				type: "item"
 			}]
 			title: "Create Power Generation"
-			x: 1.5d
-			y: -3.0d
+			x: -1.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["7C0D8A15D01EC79E"]
@@ -172,116 +170,15 @@
 					type: "item"
 				}
 			]
-			x: 3.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["7C0D8A15D01EC79E"]
-			description: ["Encased fans serve a variety of purposes, from pushing/pulling entities, to fuel-free smelting and item washing. Remember: you can learn more from most Create machines by hovering over them and holding \"W\"."]
-			id: "6DB9CDAA51747A17"
-			rewards: [{
-				id: "082B0F37654EE0A8"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "22A72426F98C212C"
-				item: "create:encased_fan"
-				type: "item"
-			}]
-			x: 1.5d
-			y: -4.5d
-		}
-		{
-			dependencies: ["7C0D8A15D01EC79E"]
-			description: ["The mechanical press offers an RF-free way of converting ingots into plates."]
-			id: "662DE7460CCF2AA7"
-			rewards: [{
-				id: "36C070A70E586552"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [
-				{
-					id: "0B1288DE703C62EB"
-					item: "create:mechanical_press"
-					type: "item"
-				}
-				{
-					id: "5ECDC5EFEA029617"
-					item: "create:depot"
-					type: "item"
-				}
-			]
-			x: 3.0d
-			y: -4.5d
-		}
-		{
-			dependencies: ["7C0D8A15D01EC79E"]
-			description: ["Create's mechanical belts allow for transportation of items with customizable speed. Since Pretty Pipes offer some advantages and disadvantages to mechanical belts, this quest is optional."]
-			id: "388F7E8E6658980D"
-			optional: true
-			rewards: [{
-				count: 2
-				id: "751F99F0E75F37B0"
-				item: "create:andesite_funnel"
-				type: "item"
-			}]
-			tasks: [{
-				id: "32FFCBAC2EFF492D"
-				item: "create:belt_connector"
-				type: "item"
-			}]
-			x: 3.0d
+			x: 0.0d
 			y: -1.5d
 		}
 		{
-			dependencies: ["6DB9CDAA51747A17"]
-			description: ["By washing soul sand with water, you can obtain large amounts of quartz."]
-			id: "638EE765C8F23D1A"
-			rewards: [
-				{
-					count: 16
-					id: "75C8D7D0F91C2163"
-					item: "minecraft:quartz"
-					type: "item"
-				}
-				{
-					id: "0BA610FB0963A21E"
-					type: "xp"
-					xp: 100
-				}
-			]
-			tasks: [{
-				id: "0BA8192E6C74F3FA"
-				item: "minecraft:quartz"
-				type: "item"
-			}]
-			x: 1.5d
-			y: -6.0d
-		}
-		{
-			dependencies: ["167C9AF69BB16B8B"]
-			description: [
-				""
-				"If you want to continue your path to automation, you will need to create new machines and alloys to help you."
-			]
-			icon: "thermal:gold_gear"
-			id: "0F60C65F3D731A56"
-			tasks: [{
-				id: "54E03CBC83BD6270"
-				title: "Continued Thermal Automation"
-				type: "checkmark"
-			}]
-			x: 1.5d
-			y: 1.5d
-		}
-		{
-			dependencies: ["07DB08AC0D1516A4"]
+			dependencies: ["09E7EB6E38E84886"]
 			description: ["Invar can be made in the induction smelter with 2 iron and 1 nickel."]
 			id: "60D3472A8BB177C9"
 			rewards: [{
-				count: 12
+				count: 8
 				id: "007267A8F7F2FDCA"
 				item: "thermal:invar_ingot"
 				type: "item"
@@ -292,33 +189,33 @@
 				item: "thermal:invar_ingot"
 				type: "item"
 			}]
-			x: 5.5d
-			y: 0.75d
+			x: 1.5d
+			y: 0.0d
 		}
 		{
-			dependencies: ["07DB08AC0D1516A4"]
+			dependencies: ["09E7EB6E38E84886"]
 			description: ["Bronze can be made in the induction smelter with 3 copper and 1 tin."]
 			id: "45DC5DB7E7D45DD5"
 			rewards: [{
-				count: 12
+				count: 8
 				id: "0F4E8846354FAD97"
-				item: "thermal:bronze_ingot"
+				item: "create:brass_ingot"
 				type: "item"
 			}]
 			tasks: [{
 				count: 4L
 				id: "25672B3F06A73B0D"
-				item: "thermal:bronze_ingot"
+				item: "create:brass_ingot"
 				type: "item"
 			}]
-			x: 3.5d
-			y: 0.75d
+			x: 1.5d
+			y: -3.0d
 		}
 		{
 			dependencies: [
-				"60D3472A8BB177C9"
-				"45DC5DB7E7D45DD5"
-				"18C14136EA02ADD9"
+				"5DA64773FD308F26"
+				"402D936947B4FBD4"
+				"30297A5669810E41"
 			]
 			description: ["With all your new-found knowledge of materials and alloys, you have managed to create a refined version of mechanical essence, worth even more EMC than its basic form."]
 			id: "78775CE81571FAC9"
@@ -349,373 +246,76 @@
 				}
 			]
 			x: 4.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["18C14136EA02ADD9"]
-			description: ["With steel, you can craft the basic tier of mekanism logistic pipes, allowing you to transfer items, fluids, or energy in an easier manner."]
-			icon: "mekanism:configurator"
-			id: "0B10D556104887A9"
-			optional: true
-			rewards: [{
-				id: "6D26A3CC75F15790"
-				item: "mekanism:configurator"
-				type: "item"
-			}]
-			shape: "diamond"
-			size: 0.8d
-			tasks: [{
-				id: "76C8E57263E432D3"
-				title: "Meknism Logistics"
-				type: "checkmark"
-			}]
-			title: "Mekanism Logistics"
-			x: 6.0d
 			y: -1.5d
-		}
-		{
-			dependencies: ["0B10D556104887A9"]
-			description: ["Mekanism's item transport solution."]
-			id: "38555B7B5AE725D4"
-			optional: true
-			rewards: [{
-				count: 16
-				id: "0657F9353985185F"
-				item: "mekanism:basic_logistical_transporter"
-				type: "item"
-			}]
-			shape: "diamond"
-			size: 0.8d
-			tasks: [{
-				id: "1FF84F8D3581A381"
-				item: {
-					Count: 1b
-					id: "itemfilters:or"
-					tag: {
-						RepairCost: 0
-						display: {
-							Name: "{\"text\":\"Any Logistical Transporter\"}"
-						}
-						items: [
-							{
-								Count: 1b
-								id: "mekanism:basic_logistical_transporter"
-							}
-							{
-								Count: 1b
-								id: "mekanism:advanced_logistical_transporter"
-							}
-							{
-								Count: 1b
-								id: "mekanism:elite_logistical_transporter"
-							}
-							{
-								Count: 1b
-								id: "mekanism:ultimate_logistical_transporter"
-							}
-						]
-					}
-				}
-				type: "item"
-			}]
-			title: "Logistical Transporters"
-			x: 7.0d
-			y: -1.5d
-		}
-		{
-			dependencies: ["0B10D556104887A9"]
-			description: ["Mekanism's fluid transport solution."]
-			id: "6559161759CB03B7"
-			optional: true
-			rewards: [{
-				count: 16
-				id: "2EC367DFD9875A54"
-				item: "mekanism:basic_mechanical_pipe"
-				type: "item"
-			}]
-			shape: "diamond"
-			size: 0.8d
-			tasks: [{
-				id: "7D45659EBD165567"
-				item: {
-					Count: 1b
-					id: "itemfilters:or"
-					tag: {
-						RepairCost: 0
-						display: {
-							Name: "{\"text\":\"Any Mechanical Pipe\"}"
-						}
-						items: [
-							{
-								Count: 1b
-								id: "mekanism:basic_mechanical_pipe"
-							}
-							{
-								Count: 1b
-								id: "mekanism:advanced_mechanical_pipe"
-							}
-							{
-								Count: 1b
-								id: "mekanism:elite_mechanical_pipe"
-							}
-							{
-								Count: 1b
-								id: "mekanism:ultimate_mechanical_pipe"
-							}
-						]
-					}
-				}
-				type: "item"
-			}]
-			title: "Mechanical Pipes"
-			x: 7.0d
-			y: -2.5d
-		}
-		{
-			dependencies: ["0B10D556104887A9"]
-			description: ["Mekanism's energy transport solution."]
-			id: "08C76B396B7ACA4B"
-			optional: true
-			rewards: [{
-				count: 16
-				id: "5F552566F2C24AC5"
-				item: "mekanism:basic_universal_cable"
-				type: "item"
-			}]
-			shape: "diamond"
-			size: 0.8d
-			tasks: [{
-				id: "5D0001CEFA17F21F"
-				item: {
-					Count: 1b
-					id: "itemfilters:or"
-					tag: {
-						RepairCost: 0
-						display: {
-							Name: "{\"text\":\"Any Universal Cable\"}"
-						}
-						items: [
-							{
-								Count: 1b
-								id: "mekanism:basic_universal_cable"
-							}
-							{
-								Count: 1b
-								id: "mekanism:advanced_universal_cable"
-							}
-							{
-								Count: 1b
-								id: "mekanism:elite_universal_cable"
-							}
-							{
-								Count: 1b
-								id: "mekanism:ultimate_universal_cable"
-							}
-						]
-					}
-				}
-				type: "item"
-			}]
-			title: "Universal Cables"
-			x: 7.0d
-			y: -0.5d
-		}
-		{
-			dependencies: ["0F60C65F3D731A56"]
-			description: ["Integral components can be inserted to thermal machines to increase their base values."]
-			id: "6A69E64613966190"
-			rewards: [
-				{
-					count: 3
-					id: "2F04E8C4EF50CF1C"
-					item: "thermal:upgrade_augment_1"
-					type: "item"
-				}
-				{
-					count: 9
-					id: "539B3C22A687264B"
-					item: "thermal:machine_speed_augment"
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					id: "4C613ACC70C3D281"
-					item: "thermal:upgrade_augment_1"
-					type: "item"
-				}
-				{
-					count: 3L
-					id: "1E81B3AEF57FF23F"
-					item: "thermal:machine_speed_augment"
-					type: "item"
-				}
-			]
-			title: "Can Thermal machines be more efficient?"
-			x: 1.5d
-			y: 3.0d
-		}
-		{
-			dependencies: ["167C9AF69BB16B8B"]
-			description: ["Another simple EMC farm"]
-			icon: "minecraft:cactus"
-			id: "158062BBA9E40847"
-			rewards: [{
-				id: "43095D7168969172"
-				item: "minecraft:cactus"
-				type: "item"
-			}]
-			tasks: [{
-				id: "236710BAA73A5CF7"
-				title: "Cactus"
-				type: "checkmark"
-			}]
-			x: -1.5d
-			y: 1.5d
-		}
-		{
-			dependencies: ["158062BBA9E40847"]
-			description: ["The auxiliary cactus removes any EXCESS secondary outputs you may not want.\\nIf you don't understand what is meant by \"excess\", read the next quest"]
-			id: "22AE3DD6943A96AB"
-			optional: true
-			shape: "diamond"
-			size: 0.8d
-			tasks: [{
-				id: "744D96677974079D"
-				item: "thermal:machine_null_augment"
-				type: "item"
-			}]
-			x: -2.5d
-			y: 1.5d
-		}
-		{
-			dependencies: ["167C9AF69BB16B8B"]
-			description: ["Crush bones into bone meal to spawn grass and get seeds for a source of food."]
-			icon: "minecraft:bone"
-			id: "3E8161FF2C2AF01F"
-			rewards: [{
-				id: "313A01BDE8220A12"
-				item: "minecraft:bone"
-				type: "item"
-			}]
-			tasks: [{
-				id: "0DEA348928DD0F46"
-				title: "Bone"
-				type: "checkmark"
-			}]
-			x: -1.5d
-			y: -1.5d
-		}
-		{
-			dependencies: ["3E8161FF2C2AF01F"]
-			description: ["Consumes EMC into renewable food."]
-			id: "6CB8640C5BF269DC"
-			optional: true
-			shape: "diamond"
-			size: 0.8d
-			tasks: [{
-				id: "5120FC89CDF0BECF"
-				item: "projectexpansion:infinite_steak"
-				type: "item"
-			}]
-			x: -2.5d
-			y: -1.5071428571428669d
-		}
-		{
-			dependencies: ["158062BBA9E40847"]
-			description: ["The Dye Mixer takes red, green, and blue dyes, and can mix them into any other dye color. You can get green dye by smelting cactus, red from flowers obtained by bone mealing grass and blue from lapis."]
-			id: "508D237427CDE318"
-			optional: true
-			shape: "diamond"
-			size: 0.8d
-			subtitle: "Infinite amounts of any dye"
-			tasks: [{
-				id: "078BC4A0FDC88F04"
-				item: "industrialforegoing:dye_mixer"
-				type: "item"
-			}]
-			title: "RGB or CMYK or RGY...?!?"
-			x: -1.5d
-			y: 2.5d
-		}
-		{
-			dependencies: ["22AE3DD6943A96AB"]
-			description: ["Some thermal machines have multiple output slots. For example, the pulverizer has 4 output \"buffers\". The auxiliary cactus voids EXCESS secondary outputs ONLY if there are no free output slots for them to fill OR there's only enough space for the primary output.\\nWhat's the difference? For example, let's say you are pulverizing gravel, which can make sand (primary) with a chance for flint (secondary).\\nWithout the augment, if there's only enough space for sand but the pulverizer \"wants\" to output 1 sand AND 1 flint, it will STOP working since there isn't enough space to output ALL its contents.\\nWITH the augment however, if the machine wants to output sand and flint BUT there's only enough space for the sand, it will VOID the flint, and will continue working.\\nThis doesn't really matter for automation, since it will still VOID the EXCESS, so:\\nTLDR: the machines WILL still produce secondary outputs but WONT stop if they fill with them, so the only difference is that you need make sure to filter when extracting out of the machine."]
-			id: "619D1281059B0F35"
-			optional: true
-			rewards: [{
-				count: 4
-				id: "43662522692BBEDD"
-				item: "thermal:machine_null_augment"
-				type: "item"
-			}]
-			shape: "diamond"
-			size: 0.8d
-			subtitle: "Yes it does. Read this description if you don't understand"
-			tasks: [{
-				id: "646F62138C710376"
-				title: "\"The cactus augment doesnt work!!!!\""
-				type: "checkmark"
-			}]
-			title: "\"ThE cActUs AUgmENT dOEs NoT wORk!!!!!!\""
-			x: -3.5d
-			y: 1.5d
-		}
-		{
-			dependencies: ["0F60C65F3D731A56"]
-			description: ["The induction smelter can make many alloys that will be valuable in the future."]
-			id: "07DB08AC0D1516A4"
-			rewards: [{
-				id: "3D3E26A5B494407C"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "366B1B5714C30D04"
-				item: "thermal:machine_smelter"
-				type: "item"
-			}]
-			x: 4.5d
-			y: 1.5d
-		}
-		{
-			dependencies: ["07DB08AC0D1516A4"]
-			description: ["Just like the pulverizer, certain \"catalysts\" can be used inside the induction smelter to boost primary and secondary output, energy efficiency, and some other things. Check JEI for more info."]
-			id: "1A1486F396BCEA3C"
-			optional: true
-			rewards: [
-				{
-					id: "63F601802149EA38"
-					type: "xp"
-					xp: 100
-				}
-				{
-					count: 16
-					id: "4F72F3FDA9A3B4E9"
-					item: "minecraft:sand"
-					type: "item"
-				}
-			]
-			shape: "diamond"
-			size: 0.8d
-			tasks: [{
-				id: "1C51B69ECBD925F2"
-				item: "minecraft:sand"
-				type: "item"
-			}]
-			title: "Induction Smelter Catalysts"
-			x: 4.550000000000004d
-			y: 2.8999999999999986d
 		}
 		{
 			dependencies: ["09E7EB6E38E84886"]
 			id: "18C14136EA02ADD9"
+			rewards: [{
+				count: 8
+				id: "711E568D567D31D7"
+				item: "mekanism:ingot_steel"
+				type: "item"
+			}]
 			tasks: [{
+				count: 4L
 				id: "7F07722947D06F17"
 				item: "mekanism:ingot_steel"
 				type: "item"
 			}]
-			x: 4.5d
+			x: 1.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["45DC5DB7E7D45DD5"]
+			id: "30297A5669810E41"
+			rewards: [{
+				count: 4
+				id: "18F5BD6D1B26342B"
+				item: "createaddition:brass_rod"
+				type: "item"
+			}]
+			tasks: [{
+				count: 2L
+				id: "6D0341F40125105E"
+				item: "createaddition:brass_rod"
+				type: "item"
+			}]
+			x: 3.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["60D3472A8BB177C9"]
+			id: "5DA64773FD308F26"
+			rewards: [{
+				count: 2
+				id: "5161D07F17994616"
+				item: "thermal:invar_gear"
+				type: "item"
+			}]
+			tasks: [{
+				id: "0FD21ABE37AA086F"
+				item: "thermal:invar_gear"
+				type: "item"
+			}]
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["18C14136EA02ADD9"]
+			id: "402D936947B4FBD4"
+			rewards: [{
+				count: 2
+				id: "7C42F1A0193087A4"
+				item: "kubejs:steel_gear"
+				type: "item"
+			}]
+			tasks: [{
+				id: "401C669E93105EBD"
+				item: "kubejs:steel_gear"
+				type: "item"
+			}]
+			x: 3.0d
 			y: -1.5d
 		}
 	]

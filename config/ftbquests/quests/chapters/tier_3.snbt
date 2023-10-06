@@ -13,6 +13,12 @@
 			description: ["You managed to create an improved version of your mechanical essence, but you feel it can still be made better, and you are going to find out how."]
 			icon: "kubejs:cube2"
 			id: "550E4D68A98180F5"
+			rewards: [{
+				count: 8
+				id: "585E9D31C00C7C21"
+				item: "minecraft:lapis_ore"
+				type: "item"
+			}]
 			subtitle: "Still need more power..."
 			tasks: [{
 				id: "63BAB42990FDBE64"
