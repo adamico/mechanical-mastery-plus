@@ -30,7 +30,7 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "v0.1.0-beta"
+$MODPACK_VERSION = "v0.0.5-alpha"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
@@ -65,7 +65,7 @@ $CLIENT_CHANGELOG = "The Changelog is currently being written."
 $GAME_VERSIONS = @(9366)
 
 # Can be "alpha", "beta" or "release"
-$CLIENT_RELEASE_TYPE = "beta"
+$CLIENT_RELEASE_TYPE = "alpha"
 
 #=====================================================================//
 #  DEPENDENCIES
@@ -87,7 +87,6 @@ $FOLDERS_TO_INCLUDE_IN_CLIENT_FILES = @(
     "config",
     "defaultconfigs",
     "kubejs",
-    "local",
     "scripts",
     "schematics"
     )
@@ -95,6 +94,7 @@ $FOLDERS_TO_INCLUDE_IN_CLIENT_FILES = @(
 $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"ae2/client.json",
 	"appleskin-client.toml",
+	"buildinggadgets-client.toml",
 	"carryon-client.toml",
 	"chiselsandbits-client.toml",
 	"cofh_core-client.toml",
@@ -106,24 +106,20 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"create-client.toml",
 	"cucumber-client.toml",
 	"curios-client.toml",
+	"dankstorage-client.toml",
 	"defaultworldtype/client-config.toml",
-	"effortlessbuilding-client.toml",
-	"emojiful-client.toml",
-	"enderchests-client.toml",
-	"endertanks-client.toml",
 	"extendedcrafting-client.toml",
 	"extremesoundmuffler-client.toml",
-	"findme-client.toml",
+	"farmersdelight-client.toml",
+	"findme.json",
 	"fluxnetworks-client.toml",
-	"flywheel-client.toml",
 	"forge-client.toml",
 	"framedblocks-client.toml",
 	"ftbchunks-client.toml",
 	"functionalstorage\functionalstorage-client.toml",
 	"gravestone-client.toml",
-	"immersiveengineering-client.toml",
-	"ironjetpacks-client.toml",
-	"itemzoom-client.toml",
+	"hyperbox-client.toml",
+	"ironfurnaces-client.toml",
 	"jei/bookmarks.ini",
 	"jei/jei-client.ini",
 	"mcjtylib-client.toml",
@@ -132,12 +128,10 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"Mekanism/additions-client.toml",
 	"modnametooltip-client.toml",
 	"modularrouters-client.toml",
+	"mouseTweaks.cfg",
 	"naturescompass-client.toml",
 	"online_detector-client.toml",
 	"patchouli-client.toml",
-	"pipez-client.toml",
-	"pneumaticcraft/ArmorFeatureStatus.cfg",
-	"pneumaticcraft/PneumaticArmorHUDLayout.cfg",
 	"ProjectE/client.toml"
 	"questsadditions-client.toml",
 	"refinedstorage-client.toml",
@@ -147,16 +141,18 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"rftoolsstorage-client.toml",
 	"rftoolsutility-client.toml",
 	"shetiphiancore-client.toml",
+	"sidebar_buttons.json",
 	"smoothboot.json",
-	"sophisticatedbackpacks-client.toml",
 	"sophisticatedcore-client.toml",
-	"theoneprobe-client.toml",
+	"sophisticatedstorage-client.toml",
+	"supplementaries-client.toml",
 	"thermal-client.toml",
+	"travelersbackpack-client.toml",
 	"visualworkbench-client.toml",
 	"xnet-client.toml"
 )
 
-$FOLDERS_TO_REMOVE_FROM_CLIENT_FILES = @("kubejs/probe", "local/ftbutilities", "local/ftbchunks/data", "local/ftbultimine", "local/ftbultimine-client.snbt", "resourcepacks")
+$FOLDERS_TO_REMOVE_FROM_CLIENT_FILES = @("localconfigs", "kubejs/probe", "local/ftbutilities", "local/ftbchunks/data", "local/ftbultimine", "local/ftbultimine-client.snbt", "resourcepacks")
 
 # Example: 
 # $FILES_TO_INCLUDE_IN_MODS_FOLDER_IN_CLIENT_FILES = @("mods/Apotheosis-1.19.2-6.2.1.jar", "mods/create-1.19.2-0.5.1.b.jar")
