@@ -189,8 +189,5 @@ ServerEvents.recipes(event => {
   event.recipes.thermal.pulverizer(['minecraft:dirt', Item.of('minecraft:red_mushroom').withChance(0.25), Item.of('minecraft:brown_mushroom').withChance(0.25)], 'minecraft:podzol').energy(200);
   event.recipes.thermal.press('fluxnetworks:flux_dust', ['kubejs:coated_redstone', 'fluxnetworks:flux_block']).energy(200);
 
-  event.recipes.thermal.press('fluxnetworks:flux_dust', ['kubejs:coated_redstone', 'fluxnetworks:flux_block']).energy(200);
-
   event.replaceInput({id: 'thermal:dynamo_stirling'}, '#forge:gears/iron', 'ae2:vibration_chamber');
-
 });

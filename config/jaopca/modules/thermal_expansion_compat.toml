@@ -5,7 +5,7 @@
 
 [recipes]
 	#The materials that should not have pulverizer to dust recipes added.
-	toDustMaterialBlacklist = ["netherite"]
+	toDustMaterialBlacklist = ["netherite", "brass", "invar"]
 	#The materials that should not have smelter to ingot recipes added.
 	dustToIngotMaterialBlacklist = ["netherite"]
 	#The materials that should not have press to plate recipes added.

@@ -142,7 +142,7 @@
 		}
 		{
 			dependencies: ["09BAD2F7D01D16FD"]
-			description: ["With these raw resources, it will not be too difficult to make your first power generator: a stirling dynamo. Although far from ideal, it will be of great importance early on."]
+			description: ["It's time to craft your first power generator: a stirling dynamo. Although far from ideal, it will be of great importance early on."]
 			id: "19A22A30A2BFEDAB"
 			rewards: [{
 				id: "57AA7677EF15CC50"
@@ -154,9 +154,9 @@
 				item: "thermal:dynamo_stirling"
 				type: "item"
 			}]
-			title: "Beginning Automation: Thermal"
-			x: 8.0d
-			y: -0.5d
+			title: "Dynamic integration"
+			x: 6.5d
+			y: -2.0d
 		}
 		{
 			dependencies: ["54983CC37DD93E7A"]
@@ -181,8 +181,8 @@
 				type: "item"
 			}]
 			title: "Pulverizer"
-			x: 12.0d
-			y: -1.0d
+			x: 11.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["491EB18107FC8776"]
@@ -247,7 +247,10 @@
 			y: -0.5d
 		}
 		{
-			dependencies: ["6039A6C800474F6D"]
+			dependencies: [
+				"547050DB11C5FFB7"
+				"2746A3F7A98C2134"
+			]
 			description: ["With the multiservo press, you can automate what the engineer's hammer does and more, without losing item durability and with a little extra efficiency. You can craft plates and more with it!"]
 			id: "54983CC37DD93E7A"
 			rewards: [
@@ -267,14 +270,11 @@
 				item: "thermal:machine_press"
 				type: "item"
 			}]
-			x: 10.5d
+			x: 9.5d
 			y: -0.5d
 		}
 		{
-			dependencies: [
-				"54983CC37DD93E7A"
-				"547050DB11C5FFB7"
-			]
+			dependencies: ["547050DB11C5FFB7"]
 			description: ["You can place special dies on the bottom slot of the multiservo press to change its functionality, such as crafting gears instead of plates. This modpack adds a custom rod die which can be used to make rods from plates."]
 			id: "2746A3F7A98C2134"
 			rewards: [
@@ -302,8 +302,8 @@
 				type: "item"
 			}]
 			title: "Press Dies"
-			x: 10.5d
-			y: 1.5d
+			x: 8.0d
+			y: 1.0d
 		}
 		{
 			dependencies: [
@@ -364,35 +364,8 @@
 				item: "thermal:machine_furnace"
 				type: "item"
 			}]
-			x: 10.5d
-			y: -2.5d
-		}
-		{
-			dependencies: ["19A22A30A2BFEDAB"]
-			description: ["Eventually, you will want to power multiple machines with the same dynamos. Use these energy cables to connect your machines and generators together so they can share power with each other."]
-			id: "7DC5EA17257FC5B8"
-			rewards: [
-				{
-					id: "4128516CC3CF2B67"
-					type: "xp"
-					xp: 100
-				}
-				{
-					count: 12
-					id: "0B38C6061A14BE38"
-					item: "powah:energy_cable_basic"
-					type: "item"
-				}
-			]
-			tasks: [{
-				count: 12L
-				id: "249FD46D60AF01E4"
-				item: "powah:energy_cable_starter"
-				type: "item"
-			}]
-			title: "Basic Power Transport"
-			x: 9.0d
-			y: -1.0d
+			x: 8.0d
+			y: -2.0d
 		}
 		{
 			dependencies: ["547050DB11C5FFB7"]
@@ -416,8 +389,8 @@
 				type: "item"
 			}]
 			title: "Basic EMC I/O"
-			x: 9.0d
-			y: 0.0d
+			x: 6.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["54983CC37DD93E7A"]
@@ -433,8 +406,8 @@
 				item: "thermal:machine_crafter"
 				type: "item"
 			}]
-			x: 12.0d
-			y: 0.0d
+			x: 11.0d
+			y: -2.0d
 		}
 		{
 			dependencies: ["7A0CB1037E6BE4D7"]
@@ -471,50 +444,46 @@
 		}
 		{
 			dependencies: ["09BAD2F7D01D16FD"]
-			description: ["Pulverize copper and nickel to craft constantan blend, which can be smelted into constantan ingots"]
-			id: "6039A6C800474F6D"
-			rewards: [{
-				count: 4
-				id: "773AD79BFE07336A"
-				item: "thermal:constantan_ingot"
-				type: "item"
-			}]
-			tasks: [{
-				id: "7A5298D1E8EFA6E5"
-				item: "thermal:constantan_dust"
-				type: "item"
-			}]
-			title: "Constantan Blend"
-			x: 9.0d
-			y: -2.5d
-		}
-		{
-			dependencies: ["09BAD2F7D01D16FD"]
-			description: ["How do you get invar before having the induction smelter? Easy, pulverize iron and nickel, and craft the dusts together to form invar blend, which you can smelt into invar ingots"]
+			description: [
+				"You get alloys before having the induction smelter by pulverizing the raw ores and crafting the dusts together."
+				"You can then smelt alloy dusts to obtain ingots."
+			]
 			id: "547050DB11C5FFB7"
 			rewards: [{
-				count: 4
-				id: "62CCD410368BEF61"
-				item: "thermal:invar_ingot"
-				type: "item"
+				exclude_from_claim_all: true
+				id: "69C2B59340725641"
+				table_id: 730431930992961248L
+				type: "choice"
 			}]
 			tasks: [{
-				id: "4E6DA9CBF61B6DB1"
+				count: 4L
+				id: "4CA78D9953A59B84"
 				item: {
 					Count: 1b
-					id: "itemfilters:tag"
+					id: "itemfilters:or"
 					tag: {
-						RepairCost: 0
-						display: {
-							Name: "{\"text\":\"Any Invar Dust\"}"
-						}
-						value: "forge:dusts/invar"
+						items: [
+							{
+								Count: 1b
+								id: "thermal:constantan_dust"
+							}
+							{
+								Count: 1b
+								id: "thermal:invar_dust"
+							}
+							{
+								Count: 1b
+								id: "thermal:bronze_dust"
+							}
+						]
 					}
 				}
+				title: "Alloy Dusts"
 				type: "item"
 			}]
-			x: 9.0d
-			y: 1.5d
+			title: "Alloys"
+			x: 8.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["793AABD9C2DEC680"]
@@ -606,50 +575,6 @@
 			}]
 			title: "Ore doubling!"
 			x: 2.0d
-			y: -0.5d
-		}
-		{
-			dependencies: [
-				"13AA6AFAF9C8DD0B"
-				"387D9ECF1CD0B4F8"
-			]
-			description: ["In order to actually automate stuff, you want an effective way to move items from machine to machine. Hoppers are too slow and filtering with them is too space consuming. Pretty pipes, however, are a great solution early on. If you dont want items to overflow, you need to install stack limiter modules on each output (or get a high extraction module, but we're not there yet)."]
-			id: "5B12C19CBD25995E"
-			rewards: [
-				{
-					count: 16
-					id: "1232AFE722AF8194"
-					item: "prettypipes:pipe"
-					type: "item"
-				}
-				{
-					id: "1A216B457279F0F1"
-					item: "prettypipes:low_extraction_module"
-					type: "item"
-				}
-				{
-					id: "42202DF002239C0E"
-					item: "prettypipes:low_filter_module"
-					type: "item"
-				}
-				{
-					id: "69BCE6AE223E1C0E"
-					item: "prettypipes:stack_size_module"
-					type: "item"
-				}
-				{
-					id: "6FB2B4AA92BC6DA9"
-					item: "prettypipes:wrench"
-					type: "item"
-				}
-			]
-			tasks: [{
-				id: "6E627EA35AE1C664"
-				item: "prettypipes:pipe"
-				type: "item"
-			}]
-			title: "Basic Item Transport"
-			x: 13.5d
 			y: -0.5d
 		}
 	]

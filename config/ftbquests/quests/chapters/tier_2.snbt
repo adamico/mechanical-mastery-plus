@@ -174,49 +174,6 @@
 			y: -1.5d
 		}
 		{
-			dependencies: ["09E7EB6E38E84886"]
-			description: ["Invar can be made in the induction smelter with 2 iron and 1 nickel."]
-			id: "60D3472A8BB177C9"
-			rewards: [{
-				count: 8
-				id: "007267A8F7F2FDCA"
-				item: "thermal:invar_ingot"
-				type: "item"
-			}]
-			tasks: [{
-				count: 4L
-				id: "6EA7E41FC1D0B712"
-				item: "thermal:invar_ingot"
-				type: "item"
-			}]
-			x: 1.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["09E7EB6E38E84886"]
-			description: ["Bronze can be made in the induction smelter with 3 copper and 1 tin."]
-			id: "45DC5DB7E7D45DD5"
-			rewards: [{
-				count: 8
-				id: "0F4E8846354FAD97"
-				item: "create:brass_ingot"
-				type: "item"
-			}]
-			tasks: [{
-				count: 4L
-				id: "25672B3F06A73B0D"
-				item: "create:brass_ingot"
-				type: "item"
-			}]
-			x: 1.5d
-			y: -3.0d
-		}
-		{
-			dependencies: [
-				"5DA64773FD308F26"
-				"402D936947B4FBD4"
-				"30297A5669810E41"
-			]
 			description: ["With all your new-found knowledge of materials and alloys, you have managed to create a refined version of mechanical essence, worth even more EMC than its basic form."]
 			id: "78775CE81571FAC9"
 			rewards: [
@@ -229,6 +186,16 @@
 					count: 16
 					id: "672FDAB6D9B8D23D"
 					item: "kubejs:cube2_packaged"
+					type: "item"
+				}
+				{
+					id: "52E72E895FCDFC98"
+					item: "minecraft:blaze_rod"
+					type: "item"
+				}
+				{
+					id: "7E94A1E4207BE58D"
+					item: "minecraft:skeleton_spawn_egg"
 					type: "item"
 				}
 			]
@@ -249,25 +216,10 @@
 			y: -1.5d
 		}
 		{
-			dependencies: ["09E7EB6E38E84886"]
-			id: "18C14136EA02ADD9"
-			rewards: [{
-				count: 8
-				id: "711E568D567D31D7"
-				item: "mekanism:ingot_steel"
-				type: "item"
-			}]
-			tasks: [{
-				count: 4L
-				id: "7F07722947D06F17"
-				item: "mekanism:ingot_steel"
-				type: "item"
-			}]
-			x: 1.5d
-			y: -1.5d
-		}
-		{
-			dependencies: ["45DC5DB7E7D45DD5"]
+			dependencies: [
+				"5BFA974392560603"
+				"78775CE81571FAC9"
+			]
 			id: "30297A5669810E41"
 			rewards: [{
 				count: 4
@@ -285,7 +237,10 @@
 			y: -3.0d
 		}
 		{
-			dependencies: ["60D3472A8BB177C9"]
+			dependencies: [
+				"76178D4338B90780"
+				"78775CE81571FAC9"
+			]
 			id: "5DA64773FD308F26"
 			rewards: [{
 				count: 2
@@ -302,10 +257,12 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["18C14136EA02ADD9"]
+			dependencies: [
+				"3AB0EBDE89F95DF4"
+				"78775CE81571FAC9"
+			]
 			id: "402D936947B4FBD4"
 			rewards: [{
-				count: 2
 				id: "7C42F1A0193087A4"
 				item: "kubejs:steel_gear"
 				type: "item"
@@ -317,6 +274,91 @@
 			}]
 			x: 3.0d
 			y: -1.5d
+		}
+		{
+			dependencies: ["09E7EB6E38E84886"]
+			id: "5BFA974392560603"
+			rewards: [{
+				count: 8
+				id: "333D9065184DAA69"
+				item: "jaopca:dusts.brass"
+				type: "item"
+			}]
+			tasks: [{
+				count: 4L
+				id: "14CA01DE92233F86"
+				item: "jaopca:dusts.brass"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["09E7EB6E38E84886"]
+			id: "3AB0EBDE89F95DF4"
+			rewards: [{
+				count: 8
+				id: "0FFDC72870C1D179"
+				item: "mekanism:dust_steel"
+				type: "item"
+			}]
+			tasks: [{
+				count: 4L
+				id: "41C2926B99FDF2B9"
+				item: "mekanism:dust_steel"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["09E7EB6E38E84886"]
+			id: "76178D4338B90780"
+			rewards: [{
+				count: 8
+				id: "6952686E4E22ED56"
+				item: "thermal:invar_dust"
+				type: "item"
+			}]
+			tasks: [{
+				count: 4L
+				id: "36D94FB80BD9E5D7"
+				item: "thermal:invar_dust"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			id: "795CAB9459E38500"
+			tasks: [{
+				id: "4694DBC4DDF3DAA4"
+				item: "create:blaze_burner"
+				type: "item"
+			}]
+			x: 7.5d
+			y: -1.5d
+		}
+		{
+			id: "64A34C776CC41FAB"
+			invisible: true
+			rewards: [{
+				auto: "invisible"
+				command: "/say Hi, @p!"
+				id: "63C811F9F6247FFA"
+				type: "command"
+			}]
+			tasks: [{
+				checkItem: true
+				entity: "minecraft:skeleton"
+				id: "3FFE902B252E3C82"
+				item: "minecraft:blaze_rod"
+				nbt: { }
+				type: "questsadditions:interaction"
+				value: 4L
+			}]
+			x: 4.5d
+			y: -0.5d
 		}
 	]
 	title: "Tier 2: Create"

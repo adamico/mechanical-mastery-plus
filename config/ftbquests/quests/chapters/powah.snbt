@@ -1,0 +1,37 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "powah"
+	group: "349666CD0199D4FD"
+	icon: "powah:energizing_orb"
+	id: "651963EB5098050C"
+	order_index: 5
+	quest_links: [ ]
+	quests: [{
+		description: ["Eventually, you will want to power multiple machines with the same dynamos. Use these energy cables to connect your machines and generators together so they can share power with each other."]
+		id: "7DC5EA17257FC5B8"
+		rewards: [
+			{
+				id: "4128516CC3CF2B67"
+				type: "xp"
+				xp: 100
+			}
+			{
+				count: 12
+				id: "0B38C6061A14BE38"
+				item: "powah:energy_cable_basic"
+				type: "item"
+			}
+		]
+		tasks: [{
+			count: 12L
+			id: "249FD46D60AF01E4"
+			item: "powah:energy_cable_starter"
+			type: "item"
+		}]
+		title: "Basic Power Transport"
+		x: 0.0d
+		y: 0.0d
+	}]
+	title: "Powah"
+}

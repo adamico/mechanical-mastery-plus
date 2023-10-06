@@ -4,7 +4,15 @@ ServerEvents.recipes(event => {
 
   event.recipes.createHaunting('minecraft:egg', 'create:dough');
 
-	event.createMixing('mekanism:dust_steel', [Item.of('minecraft:iron_ingot', 3), 'minecraft:coal', 'minecraft:charcoal']).processingTime(60);
+	let alloysRecipes = [
+		{ output: '#forge:dusts/steel', inputs: [Item.of('#forge:dusts/iron', 2), Item.of("forge:dusts/coal")]},
+		{ output: '#forge:dusts/brass', inputs: [Item.of('#forge:dusts/copper'), '#forge:dusts/zinc']},
+		{ output: '#forge:dusts/invar', inputs: [Item.of('#forge:dusts/iron', 2), '#forge:dusts/nickel']}
+	];
+	alloysRecipes.forEach(alloysRecipe => {	
+		event.recipes.createMixing(Item.of(alloysRecipe.output), alloysRecipe.inputs).processingTime(60);
+	});
+
 	event.remove({id: 'createchromaticreturn:motor_recipe'});
 	event.remove({id: 'createchromaticreturn:cf_to_gp'});
 	event.remove({id: 'createchromaticreturn:gp_to_bp'});
@@ -16,5 +24,4 @@ ServerEvents.recipes(event => {
 
 	event.recipes.createMechanicalExtruderExtruding(Item.of('minecraft:andesite'),
 	[Fluid.of('minecraft:water'),Fluid.of('minecraft:lava')]).withCatalyst('supplementaries:flint_block').requiredBonks(4);
-	// create mixing for invar, steel and brass dusts with low yield
 });

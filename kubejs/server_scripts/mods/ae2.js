@@ -44,7 +44,7 @@ ServerEvents.recipes(event => {
   	
 	event.replaceInput({input: 'ae2:silicon'}, 'ae2:silicon', '#forge/silicon');
 	event.replaceInput({id: 'ae2:network/blocks/inscribers'}, 'minecraft:sticky_piston', 'minecraft:piston');
-	event.replaceInput({id: "ae2:vibration_chamber"}, "ae2:energy_acceptor", "kubejs:cube1_packaged");
+	event.replaceInput({output: 'ae2:vibration_chamber'}, "ae2:energy_acceptor", "kubejs:cube1_packaged");
 
   all_metals.forEach(metal =>{
     event.custom({

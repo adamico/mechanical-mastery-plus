@@ -1059,6 +1059,47 @@
 			x: 8.0d
 			y: -1.0d
 		}
+		{
+			dependencies: ["210F2431A8A257E3"]
+			description: ["In order to actually automate stuff, you want an effective way to move items from machine to machine. Hoppers are too slow and filtering with them is too space consuming. Pretty pipes, however, are a great solution early on. If you dont want items to overflow, you need to install stack limiter modules on each output (or get a high extraction module, but we're not there yet)."]
+			id: "5B12C19CBD25995E"
+			rewards: [
+				{
+					count: 16
+					id: "1232AFE722AF8194"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "1A216B457279F0F1"
+					item: "prettypipes:low_extraction_module"
+					type: "item"
+				}
+				{
+					id: "42202DF002239C0E"
+					item: "prettypipes:low_filter_module"
+					type: "item"
+				}
+				{
+					id: "69BCE6AE223E1C0E"
+					item: "prettypipes:stack_size_module"
+					type: "item"
+				}
+				{
+					id: "6FB2B4AA92BC6DA9"
+					item: "prettypipes:wrench"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "6E627EA35AE1C664"
+				item: "prettypipes:pipe"
+				type: "item"
+			}]
+			title: "Basic Item Transport"
+			x: 3.0d
+			y: -3.5d
+		}
 	]
 	title: "Other mods"
 }
