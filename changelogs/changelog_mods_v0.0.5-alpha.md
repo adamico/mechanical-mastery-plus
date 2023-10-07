@@ -32,6 +32,7 @@
   * [Iron Chests](https://www.curseforge.com/minecraft/mc-mods/iron-chests) (by [ProgWML6](https://www.curseforge.com/members/ProgWML6/projects))
   * [Iron Furnaces [FORGE]](https://www.curseforge.com/minecraft/mc-mods/iron-furnaces) (by [XenoMustache](https://www.curseforge.com/members/XenoMustache/projects))
   * [Kube Utils](https://www.curseforge.com/minecraft/mc-mods/kube-utils) (by [ErrorMikey](https://www.curseforge.com/members/ErrorMikey/projects))
+  * [Lazy DataFixerUpper(LazyDFU) [FORGE]](https://www.curseforge.com/minecraft/mc-mods/lazy-dfu-forge) (by [Corgi_Taco](https://www.curseforge.com/members/Corgi_Taco/projects))
   * [Light Overlay (Rift/Forge/Fabric)](https://www.curseforge.com/minecraft/mc-mods/light-overlay) (by [shedaniel](https://www.curseforge.com/members/shedaniel/projects))
   * [ME Requester](https://www.curseforge.com/minecraft/mc-mods/merequester) (by [Relentless](https://www.curseforge.com/members/Relentless/projects))
   * [Mekanism-Evolution](https://www.curseforge.com/minecraft/mc-mods/mekanism-evolution) (by [Pocky](https://www.curseforge.com/members/Pocky/projects))
@@ -41,6 +42,7 @@
   * [Recipe Stages](https://www.curseforge.com/minecraft/mc-mods/recipe-stages) (by [Jaredlll08](https://www.curseforge.com/members/Jaredlll08/projects))
   * [Sophisticated Storage](https://www.curseforge.com/minecraft/mc-mods/sophisticated-storage) (by [P3pp3rF1y](https://www.curseforge.com/members/P3pp3rF1y/projects))
   * [spark](https://www.curseforge.com/minecraft/mc-mods/spark) (by [Iucko](https://www.curseforge.com/members/Iucko/projects))
+  * [Starlight (Forge)](https://www.curseforge.com/minecraft/mc-mods/starlight-forge) (by [Spottedstar](https://www.curseforge.com/members/Spottedstar/projects))
   * [Super Factory Manager ( SFM )](https://www.curseforge.com/minecraft/mc-mods/super-factory-manager) (by [TeamDman](https://www.curseforge.com/members/TeamDman/projects))
   * [Supplementaries](https://www.curseforge.com/minecraft/mc-mods/supplementaries) (by [MehVahdJukaar](https://www.curseforge.com/members/MehVahdJukaar/projects))
   * [TipTheScales](https://www.curseforge.com/minecraft/mc-mods/tipthescales) (by [Jaredlll08](https://www.curseforge.com/members/Jaredlll08/projects))
@@ -58,6 +60,7 @@
   * [Iron Chests: Restocked](https://www.curseforge.com/minecraft/mc-mods/ironchests) (by [ThatGravyBoat](https://www.curseforge.com/members/ThatGravyBoat/projects))
   * [Nature's Compass](https://www.curseforge.com/minecraft/mc-mods/natures-compass) (by [Chaosyr](https://www.curseforge.com/members/Chaosyr/projects))
   * [Precision Mining](https://www.curseforge.com/minecraft/mc-mods/precision-mining) (by [thanksihadtosignupforthis](https://www.curseforge.com/members/thanksihadtosignupforthis/projects))
+  * [Smooth Boot (Reloaded)](https://www.curseforge.com/minecraft/mc-mods/smooth-boot-reloaded) (by [AbdElAziz333](https://www.curseforge.com/members/AbdElAziz333/projects))
   * [Sophisticated Backpacks](https://www.curseforge.com/minecraft/mc-mods/sophisticated-backpacks) (by [P3pp3rF1y](https://www.curseforge.com/members/P3pp3rF1y/projects))
   * [Waystones](https://www.curseforge.com/minecraft/mc-mods/waystones) (by [BlayTheNinth](https://www.curseforge.com/members/BlayTheNinth/projects))
 
