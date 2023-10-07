@@ -339,27 +339,6 @@
 			x: 7.5d
 			y: -1.5d
 		}
-		{
-			id: "64A34C776CC41FAB"
-			invisible: true
-			rewards: [{
-				auto: "invisible"
-				command: "/say Hi, @p!"
-				id: "63C811F9F6247FFA"
-				type: "command"
-			}]
-			tasks: [{
-				checkItem: true
-				entity: "minecraft:skeleton"
-				id: "3FFE902B252E3C82"
-				item: "minecraft:blaze_rod"
-				nbt: { }
-				type: "questsadditions:interaction"
-				value: 4L
-			}]
-			x: 4.5d
-			y: -0.5d
-		}
 	]
 	title: "Tier 2: Create"
 }
