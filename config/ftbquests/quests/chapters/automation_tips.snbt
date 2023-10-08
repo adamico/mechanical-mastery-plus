@@ -2,12 +2,13 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "automation_tips"
-	group: "56617BF3F24DD586"
+	group: "2D94E5A1412E2495"
 	id: "1FBDE1284A64A60E"
-	order_index: 3
+	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["7A0CB1037E6BE4D7"]
 			description: [
 				"EMC links output 1 item per second, yet redstone furnaces and pulverizers take longer than that to process one item. "
 				""
@@ -37,11 +38,11 @@
 			]
 			tasks: [{
 				id: "5963183003D0CE59"
-				title: "Chapter 1 tips"
+				title: "Chapter 1 automation"
 				type: "checkmark"
 			}]
-			x: 0.0d
-			y: 0.0d
+			x: -0.5d
+			y: -4.5d
 		}
 		{
 			dependencies: ["464AD5024525CC94"]
@@ -51,52 +52,52 @@
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 0.0d
-			y: 1.5d
+			x: -0.5d
+			y: -3.0d
 		}
 		{
-			dependencies: ["2043A1E7C9D6AC49"]
+			dependencies: ["695AC43A0FBFEF28"]
 			id: "47F34027B9B2C056"
 			tasks: [{
 				id: "461E23AB3C055C39"
 				item: "thermal:machine_furnace"
 				type: "item"
 			}]
-			x: 0.0d
-			y: 4.5d
+			x: -0.5d
+			y: 3.0d
 		}
 		{
-			dependencies: ["1D611F270CD2DD32"]
+			dependencies: ["045BC11BF46E3F2A"]
 			id: "20ECACE23EAADBA8"
 			tasks: [{
 				id: "61693AD9CD816B46"
 				item: "thermal:machine_furnace"
 				type: "item"
 			}]
-			x: -1.5d
-			y: 4.5d
+			x: -2.0d
+			y: 3.0d
 		}
 		{
-			dependencies: ["3EA4CBDC0BF8BBA3"]
+			dependencies: ["19C375B5450007EE"]
 			id: "3F403E7ADB4001B2"
 			tasks: [{
 				id: "6BF5A31F884A5AB4"
 				item: "thermal:machine_furnace"
 				type: "item"
 			}]
-			x: 1.5d
-			y: 4.5d
+			x: 1.0d
+			y: 3.0d
 		}
 		{
-			dependencies: ["453AECAB3E34BB23"]
+			dependencies: ["65D26F5AEEEF8D21"]
 			id: "1D611F270CD2DD32"
 			tasks: [{
 				id: "589AE9F3FAB38281"
 				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
-			x: -1.5d
-			y: 3.0d
+			x: -2.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["464AD5024525CC94"]
@@ -106,8 +107,8 @@
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: -1.5d
-			y: 1.5d
+			x: -2.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["464AD5024525CC94"]
@@ -117,32 +118,14 @@
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 1.5d
-			y: 1.5d
-		}
-		{
-			dependencies: ["20ECACE23EAADBA8"]
-			id: "7ADD70BA2AB816C1"
-			tasks: [
-				{
-					id: "29F5B58B54281060"
-					item: "prettypipes:pipe"
-					type: "item"
-				}
-				{
-					id: "5E8F33A7182FCA48"
-					item: "prettypipes:low_extraction_module"
-					type: "item"
-				}
-			]
-			x: -1.5d
-			y: 5.5d
+			x: 1.0d
+			y: -3.0d
 		}
 		{
 			dependencies: [
-				"7EE7D665AAD42533"
-				"2641495A5A92092E"
-				"7ADD70BA2AB816C1"
+				"7564483E055AF237"
+				"703D246CC23F791D"
+				"6BE7A697966FBFA9"
 			]
 			id: "74D5487F1FA2BDC4"
 			tasks: [
@@ -157,44 +140,8 @@
 					type: "item"
 				}
 			]
-			x: 0.0d
-			y: 6.5d
-		}
-		{
-			dependencies: ["47F34027B9B2C056"]
-			id: "2641495A5A92092E"
-			tasks: [
-				{
-					id: "240E9C4644618112"
-					item: "prettypipes:pipe"
-					type: "item"
-				}
-				{
-					id: "6DECBE3899DD5082"
-					item: "prettypipes:low_extraction_module"
-					type: "item"
-				}
-			]
-			x: 0.0d
-			y: 5.5d
-		}
-		{
-			dependencies: ["3F403E7ADB4001B2"]
-			id: "7EE7D665AAD42533"
-			tasks: [
-				{
-					id: "5E5C0AB644172694"
-					item: "prettypipes:pipe"
-					type: "item"
-				}
-				{
-					id: "25DEFC263DEBE2CD"
-					item: "prettypipes:low_extraction_module"
-					type: "item"
-				}
-			]
-			x: 1.5d
-			y: 5.5d
+			x: -0.5d
+			y: 8.0d
 		}
 		{
 			dependencies: ["74D5487F1FA2BDC4"]
@@ -204,42 +151,1154 @@
 				item: "thermal:machine_crafter"
 				type: "item"
 			}]
-			x: 0.0d
-			y: 7.5d
-		}
-		{
-			dependencies: ["181444BA6E90A921"]
-			id: "3E071B8EE0935718"
-			tasks: [{
-				id: "588F385529F936AE"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 0.0d
+			x: -0.5d
 			y: 9.0d
 		}
 		{
-			dependencies: ["3DD3696B51A16BB3"]
+			dependencies: ["123BB83D3F180906"]
 			id: "2043A1E7C9D6AC49"
 			tasks: [{
 				id: "36D8E31FBE1837E4"
 				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
-			x: 0.0d
-			y: 3.0d
+			x: -0.5d
+			y: 1.0d
 		}
 		{
-			dependencies: ["32515ADFB13EFAD6"]
+			dependencies: ["342810432994697D"]
 			id: "3EA4CBDC0BF8BBA3"
 			tasks: [{
 				id: "6C5EA607FFD4AA2A"
 				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
-			x: 1.5d
+			x: 1.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["78775CE81571FAC9"]
+			id: "14DD0D705D827133"
+			tasks: [{
+				id: "6A1EEE63B8113EB8"
+				title: "Chapter 2 automation"
+				type: "checkmark"
+			}]
+			x: 7.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["181444BA6E90A921"]
+			id: "6670E8852A38CA41"
+			rewards: [{
+				count: 4
+				id: "71887C2676CAD3E7"
+				item: "kubejs:cube1"
+				type: "item"
+			}]
+			tasks: [{
+				id: "4FF6DCCF4FFB662E"
+				item: "kubejs:cube1"
+				type: "item"
+			}]
+			x: 2.0d
+			y: 9.0d
+		}
+		{
+			dependencies: [
+				"6670E8852A38CA41"
+				"37D55022DE62376F"
+			]
+			id: "1A365AE5BC4E44E2"
+			tasks: [{
+				id: "669EFF17A7EA0163"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 7.0d
+			y: 11.0d
+		}
+		{
+			dependencies: ["2F261F411FB81E79"]
+			id: "37D55022DE62376F"
+			rewards: [{
+				count: 4
+				id: "097B75BDCF4C6616"
+				item: "kubejs:cube2"
+				type: "item"
+			}]
+			tasks: [{
+				id: "63204D0A7418021F"
+				item: "kubejs:cube2"
+				type: "item"
+			}]
+			x: 12.0d
+			y: 9.0d
+		}
+		{
+			dependencies: [
+				"6670E8852A38CA41"
+				"5BD49EB5A1444C10"
+				"033F6A05FEE6E2C4"
+				"42488971EBC3D3F6"
+			]
+			id: "2F261F411FB81E79"
+			tasks: [
+				{
+					id: "59AD64412E1D64A6"
+					item: "create:basin"
+					type: "item"
+				}
+				{
+					id: "2E134F9070F78505"
+					item: "create:mechanical_mixer"
+					type: "item"
+				}
+			]
+			x: 7.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["00B9321197A81D41"]
+			id: "72A792FCE1E5C0E6"
+			tasks: [{
+				id: "2D517C6E21C33AEC"
+				item: "thermal:machine_press"
+				type: "item"
+			}]
+			x: 1.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["0AE30A4757927B20"]
+			id: "3281E4A601E79AB6"
+			tasks: [{
+				id: "070B3FF7D4FF0587"
+				item: "thermal:machine_press"
+				type: "item"
+			}]
+			x: -0.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["1623E9979304E253"]
+			id: "3FE799DAC9AF48EE"
+			tasks: [{
+				id: "60917155CFE24E40"
+				item: "thermal:machine_press"
+				type: "item"
+			}]
+			x: -2.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["32515ADFB13EFAD6"]
+			id: "30FE357E37FB42D8"
+			tasks: [
+				{
+					id: "144D5D0B99A978F3"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "3883E0A255A9743F"
+					item: "prettypipes:low_extraction_module"
+					type: "item"
+				}
+			]
+			x: 1.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3DD3696B51A16BB3"]
+			id: "14F40856902214E8"
+			tasks: [
+				{
+					id: "011875A58FA7EE91"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "3B962E56E091344A"
+					item: "prettypipes:low_extraction_module"
+					type: "item"
+				}
+			]
+			x: -0.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["453AECAB3E34BB23"]
+			id: "30E74A2A36AFF48A"
+			tasks: [
+				{
+					id: "08ECE9668F6C46AF"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "45A2EE4ABB80ABDF"
+					item: "prettypipes:low_extraction_module"
+					type: "item"
+				}
+			]
+			x: -2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["02CE7372DA811625"]
+			id: "342810432994697D"
+			tasks: [
+				{
+					id: "0479F35031CEC8F4"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "2654F063FD17D9B5"
+					item: "prettypipes:stack_size_module"
+					type: "item"
+				}
+			]
+			x: 1.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["15A1F71D241A34D8"]
+			id: "123BB83D3F180906"
+			tasks: [
+				{
+					id: "1A2D765EFD5D7CCF"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "4412F2A388A33305"
+					item: "prettypipes:stack_size_module"
+					type: "item"
+				}
+			]
+			x: -0.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["033425272AE7C801"]
+			id: "65D26F5AEEEF8D21"
+			tasks: [
+				{
+					id: "0E6153ED98AE1A43"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "19B0D422B3B084A9"
+					item: "prettypipes:stack_size_module"
+					type: "item"
+				}
+			]
+			x: -2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3281E4A601E79AB6"]
+			id: "239445AE36A9DA0F"
+			tasks: [
+				{
+					id: "700C88D435AA1722"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "173F25DC79C293AE"
+					item: "prettypipes:low_extraction_module"
+					type: "item"
+				}
+			]
+			x: -0.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["3FE799DAC9AF48EE"]
+			id: "7E344A89BEC96C63"
+			tasks: [
+				{
+					id: "7E0852F6E608EC6D"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "0A6FC0A5C9C569A5"
+					item: "prettypipes:low_extraction_module"
+					type: "item"
+				}
+			]
+			x: -2.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["72A792FCE1E5C0E6"]
+			id: "463AB6F353B5B885"
+			tasks: [
+				{
+					id: "29F3D084C11EE5BA"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "0D37FBB68C5C2364"
+					item: "prettypipes:low_extraction_module"
+					type: "item"
+				}
+			]
+			x: 1.0d
+			y: 6.0d
+		}
+		{
+			id: "480A798F45C0860F"
+			tasks: [{
+				id: "255FCF628554B166"
+				title: "Pipes/filters omitted"
+				type: "checkmark"
+			}]
+			x: -3.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["4A9697BA3B2AD6F4"]
+			id: "129BE1D8203CB3AF"
+			tasks: [{
+				id: "44079A3F39335B33"
+				item: "thermal:machine_press"
+				type: "item"
+			}]
+			x: 4.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["4FCE5E94C66E1385"]
+			id: "58DB2A2587AD9A65"
+			tasks: [{
+				id: "6027B076A701B802"
+				item: "thermal:machine_press"
+				type: "item"
+			}]
+			x: 10.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["45585E0E791134B8"]
+			id: "0E0CD71B6C54D530"
+			tasks: [{
+				id: "45B4CEA84EF8B83C"
+				item: "createaddition:rolling_mill"
+				type: "item"
+			}]
+			x: 7.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["2BF028A5C1ADDA55"]
+			id: "3B37F72B7BF81FE0"
+			tasks: [{
+				id: "10CEF8E4204FC3FF"
+				item: "thermal:machine_furnace"
+				type: "item"
+			}]
+			x: 7.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["58DB2A2587AD9A65"]
+			id: "033F6A05FEE6E2C4"
+			tasks: [{
+				id: "2E6691FD7D1EBB0F"
+				item: "kubejs:steel_gear"
+				type: "item"
+			}]
+			x: 8.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["129BE1D8203CB3AF"]
+			id: "42488971EBC3D3F6"
+			tasks: [{
+				id: "46852302C44B800E"
+				item: "thermal:invar_gear"
+				type: "item"
+			}]
+			x: 5.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["15F39065D795D209"]
+			id: "3D8A74A734308E4F"
+			tasks: [{
+				id: "73DC9709B9E882EB"
+				item: "thermal:machine_furnace"
+				type: "item"
+			}]
+			x: 4.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["3DF15BB71C9FB034"]
+			id: "393B639420EB7776"
+			tasks: [{
+				id: "7D27EF2F42CCFE98"
+				item: "thermal:machine_furnace"
+				type: "item"
+			}]
+			x: 10.0d
+			y: 5.0d
+		}
+		{
+			dependencies: [
+				"19B453F28A1B3D22"
+				"6F831F8E5C98F5A9"
+			]
+			id: "4479164E99B865EE"
+			tasks: [
+				{
+					id: "5414B2DC9F86DDFF"
+					item: "create:basin"
+					type: "item"
+				}
+				{
+					id: "16EECA5D52E43A96"
+					item: "create:mechanical_mixer"
+					type: "item"
+				}
+			]
+			x: 10.0d
 			y: 3.0d
 		}
+		{
+			dependencies: ["406443AD3ED60F9A"]
+			id: "0B1CA04BE0517C36"
+			tasks: [{
+				id: "0A8F7E8688DC8D2F"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "create:millstone"
+							}
+							{
+								Count: 1b
+								id: "integrateddynamics:squeezer"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Mills"
+			x: 11.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["0E0CD71B6C54D530"]
+			id: "5BD49EB5A1444C10"
+			tasks: [{
+				count: 2L
+				id: "41FD4C40250919D1"
+				item: "createaddition:brass_rod"
+				type: "item"
+			}]
+			x: 7.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["239445AE36A9DA0F"]
+			id: "7564483E055AF237"
+			tasks: [{
+				count: 2L
+				id: "42AB60213A3B82DD"
+				item: "createaddition:copper_rod"
+				type: "item"
+			}]
+			x: -0.5d
+			y: 7.0d
+		}
+		{
+			dependencies: ["463AB6F353B5B885"]
+			id: "6BE7A697966FBFA9"
+			tasks: [{
+				id: "73641F7884FCE21C"
+				item: "thermal:iron_gear"
+				type: "item"
+			}]
+			x: 1.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["7E344A89BEC96C63"]
+			id: "703D246CC23F791D"
+			tasks: [{
+				id: "7542B495DD9F26E2"
+				item: "thermal:gold_gear"
+				type: "item"
+			}]
+			x: -2.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["3F403E7ADB4001B2"]
+			id: "00B9321197A81D41"
+			tasks: [{
+				id: "1A867CA7CC50DBC9"
+				item: "minecraft:iron_ingot"
+				type: "item"
+			}]
+			x: 1.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["47F34027B9B2C056"]
+			id: "0AE30A4757927B20"
+			tasks: [{
+				id: "3D6E0EDF3C9D43DE"
+				item: "minecraft:copper_ingot"
+				type: "item"
+			}]
+			x: -0.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["20ECACE23EAADBA8"]
+			id: "1623E9979304E253"
+			tasks: [{
+				id: "452B4DADEF6D9B48"
+				item: "minecraft:gold_ingot"
+				type: "item"
+			}]
+			x: -2.0d
+			y: 4.0d
+		}
+		{
+			id: "0540E3BDEE91B6A9"
+			tasks: [{
+				id: "3B6931DDF48AE234"
+				title: "Pipes/filters omitted"
+				type: "checkmark"
+			}]
+			x: -3.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["3EA4CBDC0BF8BBA3"]
+			id: "19C375B5450007EE"
+			tasks: [{
+				id: "5DF54820B5311F00"
+				item: "thermal:iron_dust"
+				type: "item"
+			}]
+			x: 1.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["2043A1E7C9D6AC49"]
+			id: "695AC43A0FBFEF28"
+			tasks: [{
+				id: "41CD8428ED45E07D"
+				item: "thermal:copper_dust"
+				type: "item"
+			}]
+			x: -0.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["1D611F270CD2DD32"]
+			id: "045BC11BF46E3F2A"
+			tasks: [{
+				id: "01F9BD99CC69C5C9"
+				item: "thermal:gold_dust"
+				type: "item"
+			}]
+			x: -2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["30E74A2A36AFF48A"]
+			id: "033425272AE7C801"
+			tasks: [{
+				id: "4B27DA1D7153B9EC"
+				item: "minecraft:raw_gold"
+				type: "item"
+			}]
+			x: -2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["14F40856902214E8"]
+			id: "15A1F71D241A34D8"
+			tasks: [{
+				id: "7678E533A25E27D1"
+				item: "minecraft:raw_copper"
+				type: "item"
+			}]
+			x: -0.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["30FE357E37FB42D8"]
+			id: "02CE7372DA811625"
+			tasks: [{
+				id: "55A5CBE08EFE8D88"
+				item: "minecraft:raw_iron"
+				type: "item"
+			}]
+			x: 1.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["393B639420EB7776"]
+			id: "4FCE5E94C66E1385"
+			tasks: [{
+				count: 4L
+				id: "294A02D9EFA0C125"
+				item: "mekanism:ingot_steel"
+				type: "item"
+			}]
+			x: 10.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["3B37F72B7BF81FE0"]
+			id: "45585E0E791134B8"
+			tasks: [{
+				count: 2L
+				id: "51CE1ABA7B405B79"
+				item: "create:brass_ingot"
+				type: "item"
+			}]
+			x: 7.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["3D8A74A734308E4F"]
+			id: "4A9697BA3B2AD6F4"
+			tasks: [{
+				count: 4L
+				id: "6FE1AC27762B4D0B"
+				item: "thermal:invar_ingot"
+				type: "item"
+			}]
+			x: 4.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["4479164E99B865EE"]
+			id: "3DF15BB71C9FB034"
+			tasks: [{
+				id: "7DC18085A5ED2907"
+				item: "mekanism:dust_steel"
+				type: "item"
+			}]
+			x: 10.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["3E9DB55CA618BE54"]
+			id: "19B453F28A1B3D22"
+			tasks: [{
+				count: 2L
+				id: "16FC91B974A21A52"
+				item: "thermal:iron_dust"
+				type: "item"
+			}]
+			x: 9.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["0B1CA04BE0517C36"]
+			id: "6F831F8E5C98F5A9"
+			tasks: [{
+				id: "38D2EB3F76E38F8A"
+				item: "mekanism:dust_coal"
+				type: "item"
+			}]
+			x: 11.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["49B2CD4BE4085BED"]
+			id: "3E9DB55CA618BE54"
+			tasks: [{
+				id: "4099DF613696AE53"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "ae2:inscriber"
+							}
+							{
+								Count: 1b
+								id: "thermal:machine_pulverizer"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			x: 9.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["61C819297476A15F"]
+			id: "49B2CD4BE4085BED"
+			tasks: [{
+				id: "411B8766F31C8D10"
+				item: "minecraft:raw_iron"
+				type: "item"
+			}]
+			x: 9.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["29EE40CA8FAE7018"]
+			id: "406443AD3ED60F9A"
+			tasks: [{
+				id: "529A3B79529E17C5"
+				item: "minecraft:coal"
+				type: "item"
+			}]
+			x: 11.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["14DD0D705D827133"]
+			id: "29EE40CA8FAE7018"
+			tasks: [{
+				id: "419D53A70193AD99"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 11.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["14DD0D705D827133"]
+			id: "61C819297476A15F"
+			tasks: [{
+				id: "5C6A8F220F1CE84A"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 9.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["656070314A81611B"]
+			id: "2BF028A5C1ADDA55"
+			tasks: [{
+				id: "222880A12790B167"
+				item: "jaopca:dusts.brass"
+				type: "item"
+			}]
+			x: 7.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"6705D349EF23EEC8"
+				"44242DAF19D2826E"
+			]
+			id: "656070314A81611B"
+			tasks: [
+				{
+					id: "7165E26E441616ED"
+					item: "create:basin"
+					type: "item"
+				}
+				{
+					id: "607DEA5C2061226C"
+					item: "create:mechanical_mixer"
+					type: "item"
+				}
+			]
+			x: 7.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["7AA2C9F13BDE592E"]
+			id: "44242DAF19D2826E"
+			tasks: [{
+				id: "337FF938B86E20F8"
+				item: "thermal:copper_dust"
+				type: "item"
+			}]
+			x: 6.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["7CC4F48697536E2B"]
+			id: "6705D349EF23EEC8"
+			tasks: [{
+				id: "67546BDCFF69436E"
+				item: "jaopca:dusts.zinc"
+				type: "item"
+			}]
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["07B504C9A76C7E47"]
+			id: "7CC4F48697536E2B"
+			tasks: [{
+				id: "12D99C95EFD1E583"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["6050DD19AE8735B1"]
+			id: "7AA2C9F13BDE592E"
+			tasks: [{
+				id: "0AFF8B88889A5C46"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "ae2:inscriber"
+							}
+							{
+								Count: 1b
+								id: "thermal:machine_pulverizer"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			x: 6.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["16F042B69BE141EB"]
+			id: "6050DD19AE8735B1"
+			tasks: [{
+				id: "7A5565028C8ED0C7"
+				item: "minecraft:raw_copper"
+				type: "item"
+			}]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["2A41DF6A15DF4A63"]
+			id: "07B504C9A76C7E47"
+			tasks: [{
+				id: "34EB1E20274B190D"
+				item: "create:raw_zinc"
+				type: "item"
+			}]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["14DD0D705D827133"]
+			id: "2A41DF6A15DF4A63"
+			tasks: [{
+				id: "2D14EB407F00C2EA"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 8.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["14DD0D705D827133"]
+			id: "16F042B69BE141EB"
+			tasks: [{
+				id: "5D4F21C6764F5379"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["34AF4F5EEE0432A1"]
+			id: "15F39065D795D209"
+			tasks: [{
+				id: "2C118F08A0C0E1EE"
+				item: "thermal:invar_dust"
+				type: "item"
+			}]
+			x: 4.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"053DFBAE0CAD6D03"
+				"55EDC8E1B74E46AD"
+			]
+			id: "34AF4F5EEE0432A1"
+			tasks: [
+				{
+					id: "359B343182CF865B"
+					item: "create:basin"
+					type: "item"
+				}
+				{
+					id: "743708EE6BEF17EB"
+					item: "create:mechanical_mixer"
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["75EB2B44A7B74CDA"]
+			id: "55EDC8E1B74E46AD"
+			tasks: [{
+				count: 2L
+				id: "057F76308FF074EF"
+				item: "thermal:iron_dust"
+				type: "item"
+			}]
+			x: 5.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["65B9D706E2970669"]
+			id: "053DFBAE0CAD6D03"
+			tasks: [{
+				id: "0F244702A9A1AF25"
+				item: "thermal:nickel_dust"
+				type: "item"
+			}]
+			x: 3.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["02D7CF9669333097"]
+			id: "75EB2B44A7B74CDA"
+			tasks: [{
+				id: "7F5F287CF999FE46"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "ae2:inscriber"
+							}
+							{
+								Count: 1b
+								id: "thermal:machine_pulverizer"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			x: 5.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["1BE8351BDCBFEDB3"]
+			id: "65B9D706E2970669"
+			tasks: [{
+				id: "14FB3936A20AD4A9"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "ae2:inscriber"
+							}
+							{
+								Count: 1b
+								id: "thermal:machine_pulverizer"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			x: 3.0d
+			y: 1.0d
+		}
+		{
+			id: "02D7CF9669333097"
+			tasks: [{
+				id: "227EB47C749191E0"
+				item: "minecraft:raw_iron"
+				type: "item"
+			}]
+			x: 5.0d
+			y: 0.0d
+		}
+		{
+			id: "1BE8351BDCBFEDB3"
+			tasks: [{
+				id: "58CA04A909BF1010"
+				item: "thermal:raw_nickel"
+				type: "item"
+			}]
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["14DD0D705D827133"]
+			id: "4B578BDA0D24A7E3"
+			tasks: [{
+				id: "0CDD8075004A6354"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 5.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["14DD0D705D827133"]
+			id: "36349856413CECB3"
+			tasks: [{
+				id: "3192C1E9E9E1D882"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 3.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["0A7E1E8B5F04A64F"]
+			description: [
+				"None of the 4 awakened effigies can be duplicated with the Mob Duplicator from Industrial Foregoing."
+				""
+				"That's life! You will have plenty of loot using the mob crusher with looting upgrades, don't worry"
+			]
+			id: "55FF155FE79BD182"
+			rewards: [{
+				count: 4
+				id: "350C4B792D73864D"
+				item: "kubejs:dormant_effigy"
+				type: "item"
+			}]
+			tasks: [{
+				id: "23F2BBDEE0DDEFC6"
+				item: "industrialforegoing:mob_duplicator"
+				type: "item"
+			}]
+			title: "No duping!"
+			x: 14.5d
+			y: -1.5d
+		}
+		{
+			description: ["Place a Click Machine facing a wall to activate effigies. It doesn't use power, so set it to click as fast as you want. You can use Mob Grinding Utils to automate moving the mobs, killing them and collecting their loot. This is just one way to do this, if you have another idea feel free to do it your way."]
+			id: "0A7E1E8B5F04A64F"
+			optional: true
+			rewards: [{
+				count: 4
+				id: "44938649FE3E592B"
+				item: "kubejs:cube2_packaged"
+				type: "item"
+			}]
+			shape: "gear"
+			tasks: [
+				{
+					id: "6D847F1FD7A72A39"
+					item: "mob_grinding_utils:saw"
+					type: "item"
+				}
+				{
+					id: "4D69EA4B2B78C6B9"
+					item: "mob_grinding_utils:absorption_hopper"
+					type: "item"
+				}
+				{
+					id: "45A986D84D1BCD93"
+					item: "clickmachine:auto_clicker"
+					type: "item"
+				}
+				{
+					id: "69F4F257D0590E7F"
+					item: "mob_grinding_utils:fan"
+					type: "item"
+				}
+			]
+			title: "Effigy Automation"
+			x: 14.5d
+			y: 0.0d
+		}
+		{
+			description: [
+				"Whether you're playing on peaceful mode or just don't want to hurt innocent creatures, the purifier can extract the materials directly from the effigies without spawning mobs. "
+				""
+				"Don't forget you can boost output production by using pulverizer catalysts."
+			]
+			id: "26BD8CE4BDC37C65"
+			optional: true
+			rewards: [
+				{
+					count: 4
+					id: "14C814CD8B8D8949"
+					item: "minecraft:blaze_rod"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "297FBF51E139103C"
+					item: "thermal:blitz_rod"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "764559ED75440D98"
+					item: "thermal:blizz_rod"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "704BEDA9E4560522"
+					item: "thermal:basalz_rod"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "55C36D9E971D3461"
+					item: "kubejs:enriched_basilic_reagent"
+					type: "item"
+				}
+			]
+			shape: "gear"
+			tasks: [{
+				count: 4L
+				id: "2942D6B4EFE510EA"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			title: "Peaceful route"
+			x: 16.5d
+			y: -1.5d
+		}
+		{
+			id: "6831CC73795A75BA"
+			tasks: [{
+				id: "6FA79F8370B6DD4E"
+				title: "Chapter 3 automation"
+				type: "checkmark"
+			}]
+			x: 15.5d
+			y: -4.5d
+		}
 	]
-	title: "Automation Tips"
+	title: "Automation"
 }

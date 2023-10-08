@@ -5,5 +5,5 @@
 
 [recipes]
 	#The materials that should not have pressing to plate recipes added.
-	toPlateMaterialBlacklist = ["electrum", "constantan"]
+	toPlateMaterialBlacklist = ["electrum", "constantan", "steel"]
 

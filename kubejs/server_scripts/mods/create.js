@@ -1,16 +1,20 @@
 ServerEvents.recipes(event => {
-  event.remove({id: 'create:milling/sandstone'});
+	event.remove({id: 'create:milling/sandstone'});
 	event.recipes.createMilling([Item.of('minecraft:sand'), Item.of('thermal:sulfur').withChance(0.8)], 'minecraft:sandstone');
-
-  event.recipes.createHaunting('minecraft:egg', 'create:dough');
+	event.recipes.createMilling([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal').withChance(0.25)], 'minecraft:coal');
+	event.recipes.createMilling([Item.of('#forge/dusts/zinc'), Item.of('#forge/dusts/zinc')], Item.of('#forge:raw_ores/zinc'));
+	event.recipes.createCrushing([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal')], 'minecraft:coal');
+	
+	event.recipes.createHaunting('minecraft:egg', 'create:dough');
 
 	let alloysRecipes = [
-		{ output: '#forge:dusts/steel', inputs: [Item.of('#forge:dusts/iron', 2), Item.of("forge:dusts/coal")]},
-		{ output: '#forge:dusts/brass', inputs: [Item.of('#forge:dusts/copper'), '#forge:dusts/zinc']},
-		{ output: '#forge:dusts/invar', inputs: [Item.of('#forge:dusts/iron', 2), '#forge:dusts/nickel']}
+		{ output: '#forge:dusts/steel', output_count: 3, inputs: [Item.of('#forge:dusts/iron', 2), Item.of("#forge:dusts/coal")]},
+		{ output: '#forge:dusts/brass', output_count: 2, inputs: [Item.of('#forge:dusts/copper'), Item.of('#forge:dusts/zinc')]},
+		{ output: '#forge:dusts/invar', output_count: 3, inputs: [Item.of('#forge:dusts/iron', 2), Item.of('#forge:dusts/nickel')]}
 	];
-	alloysRecipes.forEach(alloysRecipe => {	
-		event.recipes.createMixing(Item.of(alloysRecipe.output), alloysRecipe.inputs).processingTime(60);
+
+	alloysRecipes.forEach(alloysRecipe => {  
+		event.recipes.createMixing(Item.of(alloysRecipe.output, alloysRecipe.output_count), alloysRecipe.inputs).processingTime(60);
 	});
 
 	event.remove({id: 'createchromaticreturn:motor_recipe'});

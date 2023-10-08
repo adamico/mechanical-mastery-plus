@@ -4,7 +4,6 @@ ServerEvents.recipes(event => {
 	};
 	
 	let bottling = (output, input) => {
-		event.recipes.thermal.bottler(output, input).energy(800);
 		event.recipes.createFilling(output, input);
 	};
 	
@@ -20,6 +19,8 @@ ServerEvents.recipes(event => {
 	event.recipes.createMixing('kubejs:cube3', ['kubejs:cube2', 'minecraft:fire_charge', 'thermal:lightning_charge', 'thermal:ice_charge', 'thermal:earth_charge', 'mekanism:basic_control_circuit']).heated();
 	event.recipes.createMixing('kubejs:cube4_inert', ['kubejs:cube3', 'kubejs:fission_pellet', 'projecte:mobius_fuel', 'mekanism:elite_control_circuit']).superheated();
 
+	event.recipes.createMixing(Item.of('minecraft:gunpowder', 4), [Item.of('#minecraft:coals', 2), ['thermal:niter', 'thermal:niter_dust'], ['thermal:sulfur', 'thermal:sulfur_dust']]).heated();
+
 	event.recipes.createMixing(Item.of('extendedcrafting:luminessence', 4), ['minecraft:gunpowder', 'minecraft:redstone', Fluid.of('thermal:glowstone', 500)]).heated();
 	event.recipes.createMixing(Fluid.of('createchromaticreturn:refined_mixture', 250), [Item.of('minecraft:smooth_quartz', 8), Item.of('minecraft:glowstone', 8), Item.of('projecte:mobius_fuel', 4), Item.of('mekanism:hdpe_sheet', 4),Fluid.of('minecraft:water', 1000)]).superheated();  
   event.recipes.createMixing(Item.of('createchromaticreturn:chromatic_compound', 2), [Item.of('createchromaticreturn:glowing_ingot', 2), Item.of('create:polished_rose_quartz', 2), Item.of('create:powdered_obsidian', 2), Item.of('create:andesite_alloy', 2)]).superheated();
@@ -34,23 +35,23 @@ ServerEvents.recipes(event => {
 	event.shapeless('create:blaze_burner', ['create:empty_blaze_burner', 'kubejs:blaze_effigy']);
 
   event.shaped('kubejs:dormant_effigy', [
-		' C ',
-		'III',
-		' I '
+		' S ',
+		'BBB',
+		' B '
 		], {
-			I: 'minecraft:calcite',
-			C: 'projecte:soul_stone'
+			B: 'minecraft:bone_block',
+			S: 'minecraft:skeleton_skull'
 	});
 
-	event.remove({id: 'projecte:soul_stone'});
-	event.shaped('projecte:soul_stone', [
-		'GGG',
-		'LEL',
-		'GGG'
+	event.remove({id: 'projecte:body_stone'});
+	event.shaped('projecte:body_stone', [
+		'LRL',
+		'RDR',
+		'LRL'
 		], {
-			G: 'minecraft:glowstone_dust',
-			L: 'minecraft:lapis_lazuli',
-			E: 'minecraft:redstone'
+			D: 'minecraft:diamond',
+			R: 'minecraft:redstone_block',
+			L: 'minecraft:lapis_block'
 	});
 
   event.shaped('kubejs:incomplete_time_augment', [
@@ -190,4 +191,6 @@ ServerEvents.recipes(event => {
   event.recipes.thermal.press('fluxnetworks:flux_dust', ['kubejs:coated_redstone', 'fluxnetworks:flux_block']).energy(200);
 
   event.replaceInput({id: 'thermal:dynamo_stirling'}, '#forge:gears/iron', 'ae2:vibration_chamber');
+
+	event.replaceInput({output: 'create:empty_blaze_burner'}, 'minecraft:netherrack', 'kubejs:carbonized_netherrack');
 });

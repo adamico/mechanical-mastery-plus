@@ -660,6 +660,171 @@
 			x: -2.5d
 			y: -7.0d
 		}
+		{
+			description: ["Mekanism has its own generators to produce large amonuts of RF, however some of the most powerful ones aren't available to you yet."]
+			icon: "mekanism:basic_energy_cube"
+			id: "6BC0E03B21A767EA"
+			tasks: [{
+				id: "624D93FD44FD3044"
+				item: "mekanism:basic_energy_cube"
+				type: "item"
+			}]
+			title: "Mekanism Power"
+			x: 6.5d
+			y: -6.5d
+		}
+		{
+			description: [
+				"Powah! is a beautiful and powerful mod that you can use to generate, store, and transmit Energy wired and wireless."
+				""
+				"(Where's Flux Network?)"
+			]
+			icon: "powah:dielectric_paste"
+			id: "65CCE43B4B2AEC6F"
+			rewards: [
+				{
+					id: "219FAD265DF75B3B"
+					item: "powah:book"
+					type: "item"
+				}
+				{
+					id: "04398F7C1F4654C6"
+					item: "powah:energy_cell_basic"
+					type: "item"
+				}
+				{
+					id: "647EC3EC7F274234"
+					item: "powah:magmator_basic"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "14B8EFCA2C7D530D"
+					item: "powah:energy_cable_basic"
+					type: "item"
+				}
+			]
+			tasks: [{
+				count: 24L
+				id: "264D55BB9949E0D6"
+				item: "powah:dielectric_paste"
+				type: "item"
+			}]
+			title: "Powah is OPawah!"
+			x: 5.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["2F6C7F4F8FAC880A"]
+			description: [
+				"Using the Flux Block you can start crafting Flux Dust manually but don't worry you can automate it with Thermal and Mekanism."
+				""
+				"Easily the most OP energy transporting mod, flux networks lets you wirelessly transfer energy from inputs (flux plugs) into outputs (flux points), with no transfer limit."
+			]
+			id: "5328C8928A16E3CB"
+			rewards: [{
+				id: "1A9000D39CDD5CFF"
+				item: "fluxnetworks:flux_controller"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "2E12FB4D8D2EAAD0"
+					item: "fluxnetworks:flux_plug"
+					type: "item"
+				}
+				{
+					id: "3E52C674A60D7304"
+					item: "fluxnetworks:flux_point"
+					type: "item"
+				}
+			]
+			title: "Flux Networks"
+			x: 9.5d
+			y: -2.5d
+		}
+		{
+			dependencies: [
+				"482E9CE8C89D097B"
+				"6BC0E03B21A767EA"
+			]
+			dependency_requirement: "one_completed"
+			description: ["In order to unlock Flux Network you have to build up FE and submit it through the FTB Quests Task Screen."]
+			id: "2F6C7F4F8FAC880A"
+			rewards: [{
+				id: "3AEA2ADDDB7FF25E"
+				item: "fluxnetworks:flux_block"
+				type: "item"
+			}]
+			tasks: [{
+				id: "45A0271B5CC31478"
+				max_input: 20000L
+				type: "forge_energy"
+				value: 100000000L
+			}]
+			title: "We need more energy!"
+			x: 9.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["65CCE43B4B2AEC6F"]
+			description: [
+				"Progressing through Powah requires creating more advanced parts using the energize mechanics."
+				""
+				"Just as everything you will craft things manually until you can automate the process with Refined Storage, Modular Routers and/or Applied Energistics"
+			]
+			id: "1CB1D2ADD015C590"
+			rewards: [{
+				count: 8
+				id: "79DA233EAF6B3CCC"
+				item: "powah:uraninite"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "6B8B0526234ACA58"
+					item: "powah:energizing_orb"
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "4F3318976A149B52"
+					item: "powah:energizing_rod_hardened"
+					type: "item"
+				}
+			]
+			title: "Advanced Powah!"
+			x: 7.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["1CB1D2ADD015C590"]
+			description: [
+				"Powah! reactors are powerful and easy to build and manage."
+				""
+				"With a bit of help from Applied Energistics or Refined Storage you can easily automate the components to build a max tier reactor."
+				""
+				"To form the multiblock you need to have 36 Reactor Blocks of the desired tier and place one Reactor Block in a 3x4 empty area."
+				"The reactor will then build itself"
+				""
+				""
+				"{image:powah:textures/gui/book/images/reactor.png width:200 height:100 align:1}"
+			]
+			id: "482E9CE8C89D097B"
+			rewards: [{
+				id: "3B98175A64C5484E"
+				item: "ftbquests:screen_1"
+				type: "item"
+			}]
+			tasks: [{
+				count: 36L
+				id: "78143023467B41FF"
+				item: "powah:reactor_spirited"
+				type: "item"
+			}]
+			x: 7.5d
+			y: -4.5d
+		}
 	]
 	title: "Tier 4: Advanced Mekanism"
 }

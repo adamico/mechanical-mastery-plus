@@ -207,73 +207,7 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["53FE9CDC8A72CA5C"]
-			id: "69334BC3FEC45E88"
-			subtitle: "x1.1"
-			tasks: [{
-				id: "1F43661FC880E703"
-				item: "minecraft:flint"
-				type: "item"
-			}]
-			title: "Pulverizer Catalyst: Flint"
-			x: 3.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["53FE9CDC8A72CA5C"]
-			id: "07194DDB411AFDBE"
-			subtitle: "x1.25"
-			tasks: [{
-				id: "0D1893079FFC92FB"
-				item: "thermal:basalz_powder"
-				type: "item"
-			}]
-			title: "Pulverizer Catalyst: Basalz Powder"
-			x: 3.0d
-			y: 1.0d
-		}
-		{
-			dependencies: ["53FE9CDC8A72CA5C"]
-			id: "71015BE55E0EF504"
-			subtitle: "x1.5"
-			tasks: [{
-				id: "11DB810DB86E7503"
-				item: "thermal:earth_charge"
-				type: "item"
-			}]
-			title: "Pulverizer Catalyst: Earth Charge"
-			x: 3.0d
-			y: 2.0d
-		}
-		{
-			dependencies: ["53FE9CDC8A72CA5C"]
-			id: "7986E28D02F23868"
-			subtitle: "x2.0"
-			tasks: [{
-				id: "7A9FD278EE78EBF4"
-				item: "kubejs:basilic_reagent"
-				type: "item"
-			}]
-			title: "Pulverizer Catalyst: Basilic Reagent"
-			x: 3.0d
-			y: 3.0d
-		}
-		{
-			dependencies: ["53FE9CDC8A72CA5C"]
-			id: "2AAD31BA89F48BFC"
-			subtitle: "x2.5"
-			tasks: [{
-				id: "06957F501491A80E"
-				item: "kubejs:enriched_basilic_reagent"
-				type: "item"
-			}]
-			title: "Pulverizer Catalyst: Enriched Basilic Reagent"
-			x: 3.0d
-			y: 4.0d
-		}
-		{
 			dependencies: [
-				"69334BC3FEC45E88"
 				"07194DDB411AFDBE"
 				"71015BE55E0EF504"
 				"7986E28D02F23868"

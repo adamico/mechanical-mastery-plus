@@ -1,0 +1,249 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "projectexpansion"
+	group: "349666CD0199D4FD"
+	icon: {
+		Count: 1b
+		ForgeCaps: {
+			Parent: { }
+		}
+		id: "projecte:philosophers_stone"
+		tag: { }
+	}
+	id: "62E1F0FE3BD6148C"
+	order_index: 6
+	quest_links: [ ]
+	quests: [
+		{
+			id: "597011E2824EC464"
+			rewards: [{
+				id: "5902B7E422223948"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "24FC94D07F8B4E0C"
+				item: {
+					Count: 1b
+					ForgeCaps: {
+						Parent: { }
+					}
+					id: "projecte:philosophers_stone"
+					tag: { }
+				}
+				type: "item"
+			}]
+			x: -2.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["597011E2824EC464"]
+			description: ["You can get ender pearls from transmuting iron."]
+			id: "5C667632EEBBC370"
+			rewards: [{
+				id: "54E16351B3BEB335"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "25CF896DE55A409A"
+				item: "minecraft:ender_pearl"
+				type: "item"
+			}]
+			x: -2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["597011E2824EC464"]
+			description: ["Use the philosopher's stone to transmute oak logs into other logs, to decorate your base as you want."]
+			id: "6E8F9BEE7C543449"
+			optional: true
+			rewards: [{
+				id: "03A38344953175E6"
+				type: "xp"
+				xp: 100
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "775CD28183F5B9F3"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						RepairCost: 0
+						display: {
+							Name: "{\"text\":\"Other Logs\"}"
+						}
+						items: [
+							{
+								Count: 1b
+								id: "minecraft:dark_oak_log"
+							}
+							{
+								Count: 1b
+								id: "minecraft:acacia_log"
+							}
+							{
+								Count: 1b
+								id: "minecraft:jungle_log"
+							}
+							{
+								Count: 1b
+								id: "minecraft:birch_log"
+							}
+							{
+								Count: 1b
+								id: "minecraft:spruce_log"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Building Material: More Log Types"
+			x: -0.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["597011E2824EC464"]
+			description: ["This one is a bit complicated: Craft Podzol either using slag and compost or in the metallurgic infuser and pulverize it to get mushrooms. Bulk haunt those mushrooms to get the nether mushrooms, which can be bone mealed in their respective nylium blocks to get the nether woods. (Nylium can be obtained through the philosopher's stone)"]
+			id: "1D326E02F860A929"
+			optional: true
+			rewards: [{
+				id: "46EF84C5E7415053"
+				type: "xp"
+				xp: 100
+			}]
+			shape: "diamond"
+			tasks: [
+				{
+					id: "6A45A95FD46A1E46"
+					item: "minecraft:crimson_fungus"
+					type: "item"
+				}
+				{
+					id: "55B2574448B77664"
+					item: "minecraft:warped_fungus"
+					type: "item"
+				}
+				{
+					id: "2C2C33E232BB2611"
+					item: "minecraft:crimson_nylium"
+					type: "item"
+				}
+				{
+					id: "0C8C220550314E2F"
+					item: "minecraft:warped_nylium"
+					type: "item"
+				}
+				{
+					id: "27ACE610FDC0CC23"
+					item: "minecraft:crimson_stem"
+					type: "item"
+				}
+				{
+					id: "0158948C4AA9749F"
+					item: "minecraft:warped_stem"
+					type: "item"
+				}
+				{
+					id: "796AFDADEACD76C2"
+					item: "minecraft:brown_mushroom"
+					type: "item"
+				}
+				{
+					id: "6564FAC14E0AE9DF"
+					item: "minecraft:red_mushroom"
+					type: "item"
+				}
+				{
+					id: "15C6725939B928D1"
+					item: "minecraft:podzol"
+					type: "item"
+				}
+			]
+			title: "Building Material: Nether Logs"
+			x: -1.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["597011E2824EC464"]
+			description: ["The quest icon shows a sink but you don't need it for infinite water.\\nCraft an evertide amulet and place it inside any mekanism fluid tank. Now all you need is to set the fluid tank to \"empty\" by clicking the *blue button*, and boom infinite water!\\n\\nWarning, do *NOT* place the evertide amulet inside a rotary condensentrator, it will crash your game and corrupt your save!"]
+			icon: "cookingforblockheads:sink"
+			id: "007DAA376A57BF37"
+			rewards: [{
+				id: "59044C012A235A48"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [
+				{
+					id: "2AC9F6422D4D3E31"
+					item: {
+						Count: 1b
+						ForgeCaps: {
+							Parent: { }
+						}
+						id: "projecte:evertide_amulet"
+					}
+					type: "item"
+				}
+				{
+					id: "6B6774C1238263FD"
+					item: {
+						Count: 1b
+						id: "itemfilters:or"
+						tag: {
+							RepairCost: 0
+							display: {
+								Name: "{\"text\":\"Any Mekanism Fluid Tank\"}"
+							}
+							items: [
+								{
+									Count: 1b
+									id: "mekanism:basic_fluid_tank"
+								}
+								{
+									Count: 1b
+									id: "mekanism:advanced_fluid_tank"
+								}
+								{
+									Count: 1b
+									id: "mekanism:elite_fluid_tank"
+								}
+								{
+									Count: 1b
+									id: "mekanism:ultimate_fluid_tank"
+								}
+							]
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Infinite Water?"
+			x: -3.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["597011E2824EC464"]
+			description: ["Consumes EMC into renewable food."]
+			id: "6CB8640C5BF269DC"
+			rewards: [{
+				count: 16
+				id: "2194A24191369AAF"
+				item: "projecte:alchemical_coal"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5120FC89CDF0BECF"
+				item: "projectexpansion:infinite_steak"
+				type: "item"
+			}]
+			x: -3.5d
+			y: 0.5d
+		}
+	]
+	title: "ProjectE(xpansion)"
+}

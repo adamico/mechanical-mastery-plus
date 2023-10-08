@@ -175,6 +175,296 @@
 			x: 1.0d
 			y: 1.2d
 		}
+		{
+			dependencies: ["3513339FE594C05C"]
+			icon: "mekanism:alloy_atomic"
+			id: "620E4524D30159AA"
+			rewards: [{
+				count: 4
+				id: "5425E86CDA0643A6"
+				item: "mekanism:alloy_atomic"
+				type: "item"
+			}]
+			tasks: [{
+				id: "51607BCCD2E526E9"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mekanism:ultimate_universal_cable"
+							}
+							{
+								Count: 1b
+								id: "mekanism:ultimate_mechanical_pipe"
+							}
+							{
+								Count: 1b
+								id: "mekanism:ultimate_logistical_transporter"
+							}
+							{
+								Count: 1b
+								id: "mekanism:ultimate_pressurized_tube"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Ultimate Mekanism Logistics"
+			x: -5.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["3D8A15299F1A5FD8"]
+			icon: "mekanism:alloy_reinforced"
+			id: "3513339FE594C05C"
+			rewards: [{
+				count: 8
+				id: "6750C71EFA3E46CF"
+				item: "mekanism:alloy_reinforced"
+				type: "item"
+			}]
+			tasks: [{
+				id: "44CB165ABD5B8E33"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mekanism:elite_universal_cable"
+							}
+							{
+								Count: 1b
+								id: "mekanism:elite_mechanical_pipe"
+							}
+							{
+								Count: 1b
+								id: "mekanism:elite_logistical_transporter"
+							}
+							{
+								Count: 1b
+								id: "mekanism:elite_pressurized_tube"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Elite Mekanism Logistics"
+			x: -4.0d
+			y: -1.0d
+		}
+		{
+			description: [
+				"You can upgrade every mechanism logistic pipe, allowing for greater throughput."
+				""
+				"Pro tip: you can upgrade up to 8 placed and connected basic pipes by right clicking with a piece of infused alloy "
+				"{image:mekanism:item/alloy_infused width:50 height:50 align:1}"
+			]
+			icon: "mekanism:alloy_infused"
+			id: "3D8A15299F1A5FD8"
+			rewards: [{
+				count: 16
+				id: "2E85D1C0E7C6040D"
+				item: "mekanism:alloy_infused"
+				type: "item"
+			}]
+			tasks: [{
+				id: "7DF6E6F76F9C0321"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mekanism:advanced_universal_cable"
+							}
+							{
+								Count: 1b
+								id: "mekanism:advanced_mechanical_pipe"
+							}
+							{
+								Count: 1b
+								id: "mekanism:advanced_logistical_transporter"
+							}
+							{
+								Count: 1b
+								id: "mekanism:advanced_pressurized_tube"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Advanced Mekanism Logistics"
+			x: -1.5d
+			y: -1.5d
+		}
+		{
+			description: ["The energized smelter can quickly smelt items at the cost of RF, and can be upgraded to smelt multiple items at a time."]
+			id: "3E46FBB08203CFFC"
+			rewards: [{
+				id: "03190CD048189AFC"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "4EDEADCA66981F6C"
+				item: "mekanism:energized_smelter"
+				type: "item"
+			}]
+			x: -3.5d
+			y: 1.0d
+		}
+		{
+			description: ["Many Mekanism machines can be upgraded with Tier Installers, which increase the amount of items that can be processed at once, making their overall speed much faster. However, some machines cannot be upgraded this way."]
+			id: "459286FB757CF09E"
+			rewards: [{
+				count: 3
+				id: "6983C8AF41438B59"
+				item: "mekanism:basic_tier_installer"
+				type: "item"
+			}]
+			tasks: [{
+				id: "694FD689B92AA0C2"
+				item: "mekanism:basic_tier_installer"
+				type: "item"
+			}]
+			title: "Mekanism machine tiers"
+			x: -1.5d
+			y: 0.0d
+		}
+		{
+			description: ["You can insert up to 8 speed/energy upgrades into a Mekanism machine to increase their processing speed and energy efficiency, respectively. Some machines allow up to 8 gas upgrades which increase their gas consumption efficiency."]
+			id: "543452935C91E989"
+			rewards: [
+				{
+					count: 8
+					id: "273CF1C888B4640F"
+					item: "mekanism:upgrade_speed"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "1FE83D441A940124"
+					item: "mekanism:upgrade_energy"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "7F1AD60BB7FD6799"
+					item: "mekanism:upgrade_gas"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "6B49CF6900FE6740"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mekanism:upgrade_energy"
+							}
+							{
+								Count: 1b
+								id: "mekanism:upgrade_speed"
+							}
+							{
+								Count: 1b
+								id: "mekanism:upgrade_gas"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Mekanism machine upgrades"
+			x: -5.0d
+			y: 0.0d
+		}
+		{
+			description: ["These generators consume items or fluids to generate RF, at the advantage of higher RF output and less variability. Hold SHIFT + N over these items for a basic description."]
+			id: "0284F10C4BF84652"
+			optional: true
+			rewards: [{
+				id: "4E6CD6FC00807DE5"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "6B3444E34F8BEA58"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mekanismgenerators:heat_generator"
+							}
+							{
+								Count: 1b
+								id: "mekanismgenerators:bio_generator"
+							}
+							{
+								Count: 1b
+								id: "mekanismgenerators:gas_burning_generator"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Active power generation"
+			x: -4.5d
+			y: 3.0d
+		}
+		{
+			description: ["These mekanism generators allow you to passively generate RF without any active material cost. However, their power output is usually variable and you may have to adjust for it with energy storage. Hold SHIFT + N over these items for a basic description."]
+			id: "725C03AFA45FEE68"
+			optional: true
+			rewards: [{
+				id: "5E9EAB7CBABC5C40"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "563C7EEDCF04E1DF"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mekanismgenerators:heat_generator"
+							}
+							{
+								Count: 1b
+								id: "mekanismgenerators:advanced_solar_generator"
+							}
+							{
+								Count: 1b
+								id: "mekanismgenerators:wind_generator"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Passive power generation"
+			x: -7.0d
+			y: 2.0d
+		}
 	]
 	title: "mekanism"
 }

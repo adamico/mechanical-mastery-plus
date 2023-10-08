@@ -8,70 +8,17 @@
 	quest_links: [ ]
 	quests: [
 		{
-			description: ["Integral components can be inserted to thermal machines to increase their base values."]
-			id: "6A69E64613966190"
-			rewards: [
-				{
-					count: 3
-					id: "2F04E8C4EF50CF1C"
-					item: "thermal:upgrade_augment_1"
-					type: "item"
-				}
-				{
-					count: 9
-					id: "539B3C22A687264B"
-					item: "thermal:machine_speed_augment"
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					id: "4C613ACC70C3D281"
-					item: "thermal:upgrade_augment_1"
-					type: "item"
-				}
-				{
-					count: 3L
-					id: "1E81B3AEF57FF23F"
-					item: "thermal:machine_speed_augment"
-					type: "item"
-				}
-			]
-			title: "Can Thermal machines be more efficient?"
-			x: -0.5d
-			y: -2.0d
-		}
-		{
-			description: ["Another simple EMC farm"]
-			icon: "minecraft:cactus"
-			id: "158062BBA9E40847"
-			rewards: [{
-				id: "43095D7168969172"
-				item: "minecraft:cactus"
-				type: "item"
-			}]
-			tasks: [{
-				id: "236710BAA73A5CF7"
-				title: "Cactus"
-				type: "checkmark"
-			}]
-			x: -0.5d
-			y: -1.0d
-		}
-		{
-			dependencies: ["158062BBA9E40847"]
+			dependencies: ["61BE356972B79B00"]
 			description: ["The auxiliary cactus removes any EXCESS secondary outputs you may not want.\\nIf you don't understand what is meant by \"excess\", read the next quest"]
 			id: "22AE3DD6943A96AB"
 			optional: true
-			shape: "diamond"
-			size: 0.8d
 			tasks: [{
 				id: "744D96677974079D"
 				item: "thermal:machine_null_augment"
 				type: "item"
 			}]
-			x: -1.6d
-			y: -1.2d
+			x: 0.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["22AE3DD6943A96AB"]
@@ -85,7 +32,6 @@
 				type: "item"
 			}]
 			shape: "diamond"
-			size: 0.8d
 			subtitle: "Yes it does. Read this description if you don't understand"
 			tasks: [{
 				id: "646F62138C710376"
@@ -93,77 +39,212 @@
 				type: "checkmark"
 			}]
 			title: "\"ThE cActUs AUgmENT dOEs NoT wORk!!!!!!\""
-			x: -2.4d
-			y: -1.2d
+			x: 0.0d
+			y: -1.0d
 		}
 		{
+			dependencies: ["22FF4FC891025F81"]
 			description: ["Just like the pulverizer, certain \"catalysts\" can be used inside the induction smelter to boost primary and secondary output, energy efficiency, and some other things. Check JEI for more info."]
 			id: "1A1486F396BCEA3C"
-			optional: true
-			rewards: [
-				{
-					id: "63F601802149EA38"
-					type: "xp"
-					xp: 100
-				}
-				{
-					count: 16
-					id: "4F72F3FDA9A3B4E9"
-					item: "minecraft:sand"
-					type: "item"
-				}
-			]
-			shape: "diamond"
-			size: 0.8d
+			rewards: [{
+				count: 16
+				id: "4F72F3FDA9A3B4E9"
+				item: "minecraft:sand"
+				type: "item"
+			}]
 			tasks: [{
 				id: "1C51B69ECBD925F2"
 				item: "minecraft:sand"
 				type: "item"
 			}]
 			title: "Induction Smelter Catalysts"
-			x: -2.4d
-			y: -2.4d
+			x: -1.5d
+			y: -2.5d
 		}
 		{
+			dependencies: ["22FF4FC891025F81"]
 			description: ["Some items can serve as a \"catalyst\" inside the pulverizer, increasing primary and secondary output, plus some other modifiers. Check JEI for a list of them."]
 			id: "3434FB0FA0702973"
-			rewards: [
-				{
-					id: "53F79A89E3A01C68"
-					type: "xp"
-					xp: 100
-				}
-				{
-					count: 16
-					id: "62F604ABEF1D8C9F"
-					item: "minecraft:flint"
-					type: "item"
-				}
-			]
+			rewards: [{
+				count: 16
+				id: "62F604ABEF1D8C9F"
+				item: "minecraft:flint"
+				type: "item"
+			}]
+			subtitle: "x1.1"
 			tasks: [{
 				id: "76E571A53E0C24D7"
 				item: "minecraft:flint"
 				type: "item"
 			}]
-			title: "Pulverizer Catalysts"
 			x: -3.5d
 			y: -2.5d
 		}
 		{
-			description: ["The induction smelter can make many alloys that will be valuable in the future."]
-			id: "07DB08AC0D1516A4"
-			rewards: [{
-				id: "3D3E26A5B494407C"
-				type: "xp"
-				xp: 100
-			}]
+			description: [
+				"Thermal offers the option to use catalysts for Pulverizers and Induction Smelters."
+				""
+				"Each catalyst has different modifiers for primary and auxiliary outputs, chance to use catalysts, energy consumption."
+			]
+			id: "22FF4FC891025F81"
 			tasks: [{
-				id: "366B1B5714C30D04"
-				item: "thermal:machine_smelter"
+				id: "4858400BA8BEA95A"
+				title: "Catalysts'n'Stuff"
+				type: "checkmark"
+			}]
+			x: -2.5d
+			y: -3.5d
+		}
+		{
+			dependencies: [
+				"53FE9CDC8A72CA5C"
+				"3434FB0FA0702973"
+			]
+			id: "07194DDB411AFDBE"
+			rewards: [{
+				count: 8
+				id: "13C2BF5300F88356"
+				item: "thermal:basalz_powder"
+				type: "item"
+			}]
+			subtitle: "x1.25"
+			tasks: [{
+				count: 4L
+				id: "0D1893079FFC92FB"
+				item: "thermal:basalz_powder"
+				type: "item"
+			}]
+			x: -3.5d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"53FE9CDC8A72CA5C"
+				"07194DDB411AFDBE"
+			]
+			id: "71015BE55E0EF504"
+			rewards: [{
+				count: 4
+				id: "5CE8BDC58AABAE87"
+				item: "thermal:earth_charge"
+				type: "item"
+			}]
+			subtitle: "x1.5"
+			tasks: [{
+				count: 2L
+				id: "11DB810DB86E7503"
+				item: "thermal:earth_charge"
+				type: "item"
+			}]
+			x: -3.5d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"53FE9CDC8A72CA5C"
+				"71015BE55E0EF504"
+			]
+			id: "7986E28D02F23868"
+			rewards: [{
+				count: 2
+				id: "49FA505773644F83"
+				item: "kubejs:basilic_reagent"
+				type: "item"
+			}]
+			subtitle: "x2.0"
+			tasks: [{
+				id: "7A9FD278EE78EBF4"
+				item: "kubejs:basilic_reagent"
+				type: "item"
+			}]
+			x: -3.5d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"53FE9CDC8A72CA5C"
+				"7986E28D02F23868"
+			]
+			id: "2AAD31BA89F48BFC"
+			rewards: [{
+				count: 16
+				id: "15450C956E04BA11"
+				item: "kubejs:enriched_basilic_reagent"
+				type: "item"
+			}]
+			subtitle: "x2.5"
+			tasks: [{
+				id: "06957F501491A80E"
+				item: "kubejs:enriched_basilic_reagent"
+				type: "item"
+			}]
+			x: -3.5d
+			y: 1.5d
+		}
+		{
+			description: [
+				"Augments can modify many aspects of your Thermal machines."
+				""
+				"Increasing primary and aux output, reinject products in the input slot (useful for Phytogenic Insulator)"
+			]
+			id: "61BE356972B79B00"
+			tasks: [{
+				id: "19F436D9C752640E"
+				title: "Augments'n'Stuff"
+				type: "checkmark"
+			}]
+			x: 1.0d
+			y: -3.5d
+		}
+		{
+			dependencies: ["61BE356972B79B00"]
+			id: "1EA6159D66704C53"
+			tasks: [{
+				id: "5310A9CC1EE38392"
+				item: "thermal:dynamo_output_augment"
 				type: "item"
 			}]
 			x: 1.0d
-			y: -3.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["61BE356972B79B00"]
+			id: "05A02748A9756DFC"
+			tasks: [{
+				id: "2EC9A0B6C9F91A8F"
+				item: "thermal:machine_cycle_augment"
+				type: "item"
+			}]
+			x: 2.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["05A02748A9756DFC"]
+			id: "7C6DA4DDF8FF0360"
+			tasks: [{
+				id: "44FF65C499BD2159"
+				item: "thermal:machine_insolator"
+				type: "item"
+			}]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["7C6DA4DDF8FF0360"]
+			icon: "thermal:apatite"
+			id: "1CC0266CBBF64519"
+			rewards: [{
+				id: "01618F127768E2B5"
+				item: "thermal:apatite_ore"
+				type: "item"
+			}]
+			tasks: [{
+				id: "64EDC0FF782046FA"
+				title: "Apatite"
+				type: "checkmark"
+			}]
+			x: 2.0d
+			y: 0.5d
 		}
 	]
 	title: "Thermal"

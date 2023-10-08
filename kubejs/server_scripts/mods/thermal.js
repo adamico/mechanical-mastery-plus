@@ -21,7 +21,11 @@ ServerEvents.recipes(event => {
     event.recipes.thermal.smelter(Item.of(recipe.output, recipe.outputCount), recipe.inputs).energy(recipe.energy);
   });
 
-  event.remove({id: 'thermal:machine_frame'})
+  event.replaceInput({id: 'thermal:machine_smelter'}, 'thermal:rf_coil', 'kubejs:cube2');
+  event.replaceInput({id: 'thermal:augments/machine_speed_augment'}, 'thermal:rf_coil', 'kubejs:cube2');
+  event.replaceInput({id: 'thermal:machine_crucible'}, 'thermal:rf_coil', 'kubejs:cube2');
+
+  event.remove({id: 'thermal:machine_frame'});
   event.shaped('thermal:machine_frame', [
     'ICI',
     'CGC',
@@ -77,4 +81,5 @@ ServerEvents.recipes(event => {
   event.replaceInput({id: 'thermal:machine_pyrolyzer'}, 'minecraft:blaze_rod', '#forge:ingots/steel');
 
   event.remove({id: 'thermal:machines/pyrolyzer/pyrolyzer_coal'});
+  event.remove({id: 'thermal:gunpowder_4'});
 })

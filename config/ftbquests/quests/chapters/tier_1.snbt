@@ -141,24 +141,6 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["09BAD2F7D01D16FD"]
-			description: ["It's time to craft your first power generator: a stirling dynamo. Although far from ideal, it will be of great importance early on."]
-			id: "19A22A30A2BFEDAB"
-			rewards: [{
-				id: "57AA7677EF15CC50"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "5F6664EDD2BFC0A3"
-				item: "thermal:dynamo_stirling"
-				type: "item"
-			}]
-			title: "Dynamic integration"
-			x: 6.5d
-			y: -2.0d
-		}
-		{
 			dependencies: ["54983CC37DD93E7A"]
 			description: ["You have probably already noticed that in this modpack, ores give less than one ingot when regularly smelted. Thankfully, with the pulverizer, you can negate this by getting 1-2 ore dust from each ore chunk!"]
 			id: "13AA6AFAF9C8DD0B"
@@ -191,7 +173,9 @@
 				""
 				"It's not very efficient, though, and it requires manual cranking... there must be some better way to do this in the future..."
 				""
-				"Hint: use the wrench to rotate the Inscriber to insert from the top and extract from the bottom... with the provided hoppers..."
+				"&1Hint:&r use the wrench to rotate the Inscriber to insert from the top and extract from the bottom... with the provided hoppers..."
+				""
+				"&4Disclaimer:&r the crank is very fragile and breaks if the inscriber is full of energy! If you're thinking about going afk with a macro... it doesn't work!"
 				""
 				"{image:ae2:textures/patchouli/images/inscriber_setup.png width:100 height:100 align:1}"
 			]
@@ -302,7 +286,7 @@
 				type: "item"
 			}]
 			title: "Press Dies"
-			x: 8.0d
+			x: 9.5d
 			y: 1.0d
 		}
 		{
@@ -364,7 +348,7 @@
 				item: "thermal:machine_furnace"
 				type: "item"
 			}]
-			x: 8.0d
+			x: 11.0d
 			y: -2.0d
 		}
 		{
@@ -389,7 +373,7 @@
 				type: "item"
 			}]
 			title: "Basic EMC I/O"
-			x: 6.5d
+			x: 8.0d
 			y: 1.0d
 		}
 		{
@@ -407,39 +391,6 @@
 				type: "item"
 			}]
 			x: 11.0d
-			y: -2.0d
-		}
-		{
-			dependencies: ["7A0CB1037E6BE4D7"]
-			description: [
-				"Congratulations! You crafted your first Mechanical Essence."
-				""
-				"The following quests will cover automating the production of the Basic Essence."
-				""
-				"Oh, I almost forgot: craft a Vibration Chamber to stop cranking the Inscriber!"
-			]
-			id: "09BAD2F7D01D16FD"
-			rewards: [
-				{
-					id: "0F2165D0F13CC47C"
-					type: "xp"
-					xp: 100
-				}
-				{
-					id: "13381831351CFE93"
-					item: "ae2:vibration_chamber"
-					type: "item"
-				}
-			]
-			shape: "diamond"
-			subtitle: "but don't rest on your achievements"
-			tasks: [{
-				id: "447D9411372AF198"
-				item: "ae2:vibration_chamber"
-				type: "item"
-			}]
-			title: "A fast start..."
-			x: 6.5d
 			y: -0.5d
 		}
 		{
@@ -576,6 +527,75 @@
 			title: "Ore doubling!"
 			x: 2.0d
 			y: -0.5d
+		}
+		{
+			dependencies: ["09BAD2F7D01D16FD"]
+			description: ["It's time to craft your first power generator: a stirling dynamo. Although far from ideal, it will be of great importance early on."]
+			id: "595F27B933ECC168"
+			rewards: [{
+				id: "52C82ECD38D30CD7"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "59807C43371F532B"
+				item: "thermal:dynamo_stirling"
+				type: "item"
+			}]
+			title: "Dynamic Integration"
+			x: 8.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7A0CB1037E6BE4D7"]
+			description: [
+				"Congratulations! You crafted your first Mechanical Essence."
+				""
+				"The following quests will cover automating the production of the Basic Essence."
+				""
+				"Oh, I almost forgot: craft a Vibration Chamber to stop cranking the Inscriber!"
+			]
+			id: "09BAD2F7D01D16FD"
+			rewards: [
+				{
+					id: "0F2165D0F13CC47C"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "13381831351CFE93"
+					item: "ae2:vibration_chamber"
+					type: "item"
+				}
+			]
+			shape: "diamond"
+			subtitle: "but don't rest on your achievements"
+			tasks: [{
+				id: "447D9411372AF198"
+				item: "ae2:vibration_chamber"
+				type: "item"
+			}]
+			title: "A fast start..."
+			x: 6.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["547050DB11C5FFB7"]
+			description: ["Integral components can be inserted to thermal machines to increase their base values."]
+			id: "6A69E64613966190"
+			rewards: [{
+				id: "2F04E8C4EF50CF1C"
+				item: "thermal:upgrade_augment_1"
+				type: "item"
+			}]
+			tasks: [{
+				id: "4C613ACC70C3D281"
+				item: "thermal:upgrade_augment_1"
+				type: "item"
+			}]
+			title: "Can Thermal machines be more efficient?"
+			x: 9.5d
+			y: -2.0d
 		}
 	]
 	title: "Tier 1: Thermal"

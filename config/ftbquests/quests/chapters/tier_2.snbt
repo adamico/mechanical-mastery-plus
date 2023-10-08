@@ -3,6 +3,7 @@
 	default_quest_shape: ""
 	filename: "tier_2"
 	group: "2D94E5A1412E2495"
+	hide_quest_details_until_startable: true
 	icon: "kubejs:cube2"
 	id: "032540945468AB53"
 	order_index: 1
@@ -31,6 +32,11 @@
 					item: "create:raw_zinc"
 					type: "item"
 				}
+				{
+					id: "346940C2CA4D6F1F"
+					item: "minecraft:cactus"
+					type: "item"
+				}
 			]
 			subtitle: "Are these things... alive?!"
 			tasks: [{
@@ -40,7 +46,7 @@
 			}]
 			title: "Tier 2 Materials"
 			x: -4.5d
-			y: -1.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["167C9AF69BB16B8B"]
@@ -106,7 +112,7 @@
 			]
 			title: "Getting Creative"
 			x: -3.0d
-			y: -1.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["5F73D5F328C236A9"]
@@ -147,7 +153,7 @@
 			}]
 			title: "Create Power Generation"
 			x: -1.5d
-			y: -1.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["7C0D8A15D01EC79E"]
@@ -170,10 +176,15 @@
 					type: "item"
 				}
 			]
-			x: 0.0d
-			y: -1.5d
+			x: 0.5d
+			y: -4.0d
 		}
 		{
+			dependencies: [
+				"5DA64773FD308F26"
+				"402D936947B4FBD4"
+				"30297A5669810E41"
+			]
 			description: ["With all your new-found knowledge of materials and alloys, you have managed to create a refined version of mechanical essence, worth even more EMC than its basic form."]
 			id: "78775CE81571FAC9"
 			rewards: [
@@ -186,16 +197,6 @@
 					count: 16
 					id: "672FDAB6D9B8D23D"
 					item: "kubejs:cube2_packaged"
-					type: "item"
-				}
-				{
-					id: "52E72E895FCDFC98"
-					item: "minecraft:blaze_rod"
-					type: "item"
-				}
-				{
-					id: "7E94A1E4207BE58D"
-					item: "minecraft:skeleton_spawn_egg"
 					type: "item"
 				}
 			]
@@ -212,17 +213,17 @@
 					type: "item"
 				}
 			]
-			x: 4.5d
-			y: -1.5d
+			x: 6.0d
+			y: -3.0d
 		}
 		{
 			dependencies: [
+				"60B1EB81382B2E66"
 				"5BFA974392560603"
-				"78775CE81571FAC9"
 			]
 			id: "30297A5669810E41"
 			rewards: [{
-				count: 4
+				count: 2
 				id: "18F5BD6D1B26342B"
 				item: "createaddition:brass_rod"
 				type: "item"
@@ -233,17 +234,13 @@
 				item: "createaddition:brass_rod"
 				type: "item"
 			}]
-			x: 3.0d
-			y: -3.0d
+			x: 6.0d
+			y: -1.0d
 		}
 		{
-			dependencies: [
-				"76178D4338B90780"
-				"78775CE81571FAC9"
-			]
+			dependencies: ["76178D4338B90780"]
 			id: "5DA64773FD308F26"
 			rewards: [{
-				count: 2
 				id: "5161D07F17994616"
 				item: "thermal:invar_gear"
 				type: "item"
@@ -253,14 +250,11 @@
 				item: "thermal:invar_gear"
 				type: "item"
 			}]
-			x: 3.0d
-			y: 0.0d
+			x: 4.5d
+			y: -3.0d
 		}
 		{
-			dependencies: [
-				"3AB0EBDE89F95DF4"
-				"78775CE81571FAC9"
-			]
+			dependencies: ["6EF61C629B2FA814"]
 			id: "402D936947B4FBD4"
 			rewards: [{
 				id: "7C42F1A0193087A4"
@@ -272,11 +266,14 @@
 				item: "kubejs:steel_gear"
 				type: "item"
 			}]
-			x: 3.0d
-			y: -1.5d
+			x: 6.0d
+			y: -5.0d
 		}
 		{
-			dependencies: ["09E7EB6E38E84886"]
+			dependencies: [
+				"75C1F15B9623C089"
+				"09E7EB6E38E84886"
+			]
 			id: "5BFA974392560603"
 			rewards: [{
 				count: 8
@@ -290,8 +287,8 @@
 				item: "jaopca:dusts.brass"
 				type: "item"
 			}]
-			x: 1.5d
-			y: -3.0d
+			x: 3.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["09E7EB6E38E84886"]
@@ -309,7 +306,7 @@
 				type: "item"
 			}]
 			x: 1.5d
-			y: -1.5d
+			y: -5.0d
 		}
 		{
 			dependencies: ["09E7EB6E38E84886"]
@@ -326,18 +323,171 @@
 				item: "thermal:invar_dust"
 				type: "item"
 			}]
-			x: 1.5d
-			y: 0.0d
+			x: 3.0d
+			y: -3.0d
 		}
 		{
-			id: "795CAB9459E38500"
+			dependencies: ["7C0D8A15D01EC79E"]
+			id: "60B1EB81382B2E66"
+			rewards: [{
+				id: "116B89FD1D600B84"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
-				id: "4694DBC4DDF3DAA4"
-				item: "create:blaze_burner"
+				id: "793A32E47E3EBF72"
+				item: "createaddition:rolling_mill"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"3AB0EBDE89F95DF4"
+				"3BB53E976576BE90"
+			]
+			id: "6EF61C629B2FA814"
+			rewards: [{
+				count: 4
+				id: "46688C25B26B4449"
+				item: "alloyed:steel_sheet"
+				type: "item"
+			}]
+			tasks: [{
+				count: 4L
+				id: "513B3EBFD0B24950"
+				item: "alloyed:steel_sheet"
+				type: "item"
+			}]
+			x: 3.0d
+			y: -5.0d
+		}
+		{
+			dependencies: ["7C0D8A15D01EC79E"]
+			id: "3BB53E976576BE90"
+			rewards: [{
+				id: "061B9A676A48EE88"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "2D1018D4A72C962F"
+				item: "create:mechanical_press"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -6.5d
+		}
+		{
+			dependencies: ["044413B6EB71F5E6"]
+			id: "75C1F15B9623C089"
+			rewards: [{
+				count: 2
+				id: "09AFD3D8A6A2795F"
+				item: "jaopca:dusts.zinc"
+				type: "item"
+			}]
+			tasks: [{
+				count: 2L
+				id: "0181E662B7842614"
+				item: "jaopca:dusts.zinc"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["78775CE81571FAC9"]
+			description: [
+				"The induction smelter can smelt and make alloys very quickly. "
+				""
+				"That will be valuable in the future."
+			]
+			id: "74C8E42F285DC4F6"
+			rewards: [{
+				id: "1ADFA4AA032E28FC"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "19236D78C91C9E6C"
+				item: "thermal:machine_smelter"
 				type: "item"
 			}]
 			x: 7.5d
-			y: -1.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["7C0D8A15D01EC79E"]
+			id: "044413B6EB71F5E6"
+			rewards: [{
+				id: "696ACB676A426318"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "4964F5067F422067"
+				item: "create:millstone"
+				type: "item"
+			}]
+			x: 0.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["78775CE81571FAC9"]
+			description: ["Further enhance a machine's base stats."]
+			id: "07B8B18695DBBD1B"
+			rewards: [{
+				id: "7951CC84F17A0124"
+				item: "thermal:upgrade_augment_2"
+				type: "item"
+			}]
+			tasks: [{
+				id: "60EFB8C4512584A4"
+				item: "thermal:upgrade_augment_2"
+				type: "item"
+			}]
+			x: 7.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["78775CE81571FAC9"]
+			description: ["Integral components can be inserted to thermal machines to increase their base values."]
+			id: "448403A5D2EB82B3"
+			rewards: [{
+				count: 3
+				id: "1D857DBFA099D119"
+				item: "thermal:machine_speed_augment"
+				type: "item"
+			}]
+			tasks: [{
+				count: 3L
+				id: "551FB5B678544B73"
+				item: "thermal:machine_speed_augment"
+				type: "item"
+			}]
+			title: "Can Thermal machines be more efficient?"
+			x: 7.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["78775CE81571FAC9"]
+			description: ["The magma crucible can, among other things, liquify cobblestone and netherrack into lava. Liquifying netherrack costs less RF and is therefore faster."]
+			id: "42C45408AC05B498"
+			rewards: [{
+				id: "0F3B89038F35F644"
+				item: "minecraft:lava_bucket"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5465F96CB57980E0"
+				item: "thermal:machine_crucible"
+				type: "item"
+			}]
+			title: "Lava generation is OP!"
+			x: 7.5d
+			y: -3.5d
 		}
 	]
 	title: "Tier 2: Create"
