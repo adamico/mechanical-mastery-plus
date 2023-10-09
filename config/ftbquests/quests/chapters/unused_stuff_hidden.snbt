@@ -8,15 +8,6 @@
 	order_index: 3
 	progression_mode: "flexible"
 	quest_links: [ ]
-	quests: [{
-		id: "795CAB9459E38500"
-		tasks: [{
-			id: "4694DBC4DDF3DAA4"
-			item: "create:blaze_burner"
-			type: "item"
-		}]
-		x: 0.0d
-		y: 0.0d
-	}]
+	quests: [ ]
 	title: "Unused stuff (hidden)"
 }

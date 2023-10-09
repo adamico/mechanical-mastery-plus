@@ -59,6 +59,4 @@ StartupEvents.registry('item', event => {
 	event.create('incomplete_range_2').displayName('Incomplete Range 2 Addon').texture('kubejs:item/basic_package');
 
 	event.create('incomplete_press').displayName('Incomplete Inscriber Press').texture('kubejs:item/incomplete_press');
-
-	event.create('carbonized_netherrack').displayName('Carbonized Netherrack').texture('kubejs:item/carbonized_netherrack');
 });

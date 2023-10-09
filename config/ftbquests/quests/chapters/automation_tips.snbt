@@ -42,7 +42,7 @@
 				type: "checkmark"
 			}]
 			x: -0.5d
-			y: -4.5d
+			y: -2.0d
 		}
 		{
 			dependencies: ["464AD5024525CC94"]
@@ -54,65 +54,22 @@
 				type: "item"
 			}]
 			x: -0.5d
-			y: -3.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["695AC43A0FBFEF28"]
 			id: "47F34027B9B2C056"
 			tasks: [{
+				count: 3L
 				id: "461E23AB3C055C39"
 				item: "thermal:machine_furnace"
 				type: "item"
 			}]
 			x: -0.5d
-			y: 3.0d
+			y: 5.0d
 		}
 		{
-			dependencies: ["045BC11BF46E3F2A"]
-			id: "20ECACE23EAADBA8"
-			tasks: [{
-				id: "61693AD9CD816B46"
-				item: "thermal:machine_furnace"
-				type: "item"
-			}]
-			x: -2.0d
-			y: 3.0d
-		}
-		{
-			dependencies: ["19C375B5450007EE"]
-			id: "3F403E7ADB4001B2"
-			tasks: [{
-				id: "6BF5A31F884A5AB4"
-				item: "thermal:machine_furnace"
-				type: "item"
-			}]
-			x: 1.0d
-			y: 3.0d
-		}
-		{
-			dependencies: [
-				"7564483E055AF237"
-				"703D246CC23F791D"
-				"6BE7A697966FBFA9"
-			]
-			id: "74D5487F1FA2BDC4"
-			tasks: [
-				{
-					id: "0A46D48B26A40F90"
-					item: "prettypipes:pipe"
-					type: "item"
-				}
-				{
-					id: "2C68C2299E65746A"
-					item: "prettypipes:stack_size_module"
-					type: "item"
-				}
-			]
-			x: -0.5d
-			y: 8.0d
-		}
-		{
-			dependencies: ["74D5487F1FA2BDC4"]
+			dependencies: ["7564483E055AF237"]
 			id: "181444BA6E90A921"
 			tasks: [{
 				id: "6715909E4BF3BA1F"
@@ -132,7 +89,7 @@
 				type: "item"
 			}]
 			x: -0.5d
-			y: 1.0d
+			y: 3.0d
 		}
 		{
 			dependencies: ["78775CE81571FAC9"]
@@ -142,8 +99,8 @@
 				title: "Chapter 2 automation"
 				type: "checkmark"
 			}]
-			x: 7.0d
-			y: -4.5d
+			x: 4.5d
+			y: -2.5d
 		}
 		{
 			dependencies: ["181444BA6E90A921"]
@@ -159,7 +116,7 @@
 				item: "kubejs:cube1"
 				type: "item"
 			}]
-			x: 2.0d
+			x: 1.5d
 			y: 9.0d
 		}
 		{
@@ -173,7 +130,7 @@
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 7.0d
+			x: 4.5d
 			y: 11.0d
 		}
 		{
@@ -190,15 +147,15 @@
 				item: "kubejs:cube2"
 				type: "item"
 			}]
-			x: 12.0d
+			x: 7.5d
 			y: 9.0d
 		}
 		{
 			dependencies: [
 				"6670E8852A38CA41"
 				"5BD49EB5A1444C10"
-				"033F6A05FEE6E2C4"
-				"42488971EBC3D3F6"
+				"1FF01C85D3DBCC8F"
+				"537EFFE8C97C5A03"
 			]
 			id: "2F261F411FB81E79"
 			tasks: [
@@ -213,41 +170,20 @@
 					type: "item"
 				}
 			]
-			x: 7.0d
+			x: 4.5d
 			y: 9.0d
-		}
-		{
-			dependencies: ["00B9321197A81D41"]
-			id: "72A792FCE1E5C0E6"
-			tasks: [{
-				id: "2D517C6E21C33AEC"
-				item: "thermal:machine_press"
-				type: "item"
-			}]
-			x: 1.0d
-			y: 5.0d
 		}
 		{
 			dependencies: ["0AE30A4757927B20"]
 			id: "3281E4A601E79AB6"
 			tasks: [{
+				count: 3L
 				id: "070B3FF7D4FF0587"
 				item: "thermal:machine_press"
 				type: "item"
 			}]
 			x: -0.5d
-			y: 5.0d
-		}
-		{
-			dependencies: ["1623E9979304E253"]
-			id: "3FE799DAC9AF48EE"
-			tasks: [{
-				id: "60917155CFE24E40"
-				item: "thermal:machine_press"
-				type: "item"
-			}]
-			x: -2.0d
-			y: 5.0d
+			y: 7.0d
 		}
 		{
 			dependencies: ["3DD3696B51A16BB3"]
@@ -267,7 +203,7 @@
 				}
 			]
 			x: -0.5d
-			y: -2.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["15A1F71D241A34D8"]
@@ -287,61 +223,7 @@
 				}
 			]
 			x: -0.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["3281E4A601E79AB6"]
-			id: "239445AE36A9DA0F"
-			tasks: [
-				{
-					id: "700C88D435AA1722"
-					item: "prettypipes:pipe"
-					type: "item"
-				}
-				{
-					id: "173F25DC79C293AE"
-					item: "prettypipes:low_extraction_module"
-					type: "item"
-				}
-			]
-			x: -0.5d
-			y: 6.0d
-		}
-		{
-			dependencies: ["3FE799DAC9AF48EE"]
-			id: "7E344A89BEC96C63"
-			tasks: [
-				{
-					id: "7E0852F6E608EC6D"
-					item: "prettypipes:pipe"
-					type: "item"
-				}
-				{
-					id: "0A6FC0A5C9C569A5"
-					item: "prettypipes:low_extraction_module"
-					type: "item"
-				}
-			]
-			x: -2.0d
-			y: 6.0d
-		}
-		{
-			dependencies: ["72A792FCE1E5C0E6"]
-			id: "463AB6F353B5B885"
-			tasks: [
-				{
-					id: "29F3D084C11EE5BA"
-					item: "prettypipes:pipe"
-					type: "item"
-				}
-				{
-					id: "0D37FBB68C5C2364"
-					item: "prettypipes:low_extraction_module"
-					type: "item"
-				}
-			]
-			x: 1.0d
-			y: 6.0d
+			y: 2.0d
 		}
 		{
 			dependencies: ["4A9697BA3B2AD6F4"]
@@ -351,7 +233,7 @@
 				item: "thermal:machine_press"
 				type: "item"
 			}]
-			x: 4.0d
+			x: 3.5d
 			y: 7.0d
 		}
 		{
@@ -362,7 +244,7 @@
 				item: "thermal:machine_press"
 				type: "item"
 			}]
-			x: 10.0d
+			x: 5.5d
 			y: 7.0d
 		}
 		{
@@ -373,7 +255,7 @@
 				item: "createaddition:rolling_mill"
 				type: "item"
 			}]
-			x: 7.0d
+			x: 4.5d
 			y: 7.0d
 		}
 		{
@@ -384,73 +266,8 @@
 				item: "thermal:machine_furnace"
 				type: "item"
 			}]
-			x: 7.0d
+			x: 4.5d
 			y: 5.0d
-		}
-		{
-			dependencies: ["58DB2A2587AD9A65"]
-			id: "033F6A05FEE6E2C4"
-			tasks: [{
-				id: "2E6691FD7D1EBB0F"
-				item: "kubejs:steel_gear"
-				type: "item"
-			}]
-			x: 8.5d
-			y: 8.0d
-		}
-		{
-			dependencies: ["129BE1D8203CB3AF"]
-			id: "42488971EBC3D3F6"
-			tasks: [{
-				id: "46852302C44B800E"
-				item: "thermal:invar_gear"
-				type: "item"
-			}]
-			x: 5.5d
-			y: 8.0d
-		}
-		{
-			dependencies: ["15F39065D795D209"]
-			id: "3D8A74A734308E4F"
-			tasks: [{
-				id: "73DC9709B9E882EB"
-				item: "thermal:machine_furnace"
-				type: "item"
-			}]
-			x: 4.0d
-			y: 5.0d
-		}
-		{
-			dependencies: ["3DF15BB71C9FB034"]
-			id: "393B639420EB7776"
-			tasks: [{
-				id: "7D27EF2F42CCFE98"
-				item: "thermal:machine_furnace"
-				type: "item"
-			}]
-			x: 10.0d
-			y: 5.0d
-		}
-		{
-			dependencies: [
-				"19B453F28A1B3D22"
-				"6F831F8E5C98F5A9"
-			]
-			id: "4479164E99B865EE"
-			tasks: [
-				{
-					id: "5414B2DC9F86DDFF"
-					item: "create:basin"
-					type: "item"
-				}
-				{
-					id: "16EECA5D52E43A96"
-					item: "create:mechanical_mixer"
-					type: "item"
-				}
-			]
-			x: 10.0d
-			y: 3.0d
 		}
 		{
 			dependencies: ["406443AD3ED60F9A"]
@@ -476,7 +293,7 @@
 				type: "item"
 			}]
 			title: "Mills"
-			x: 11.0d
+			x: 6.5d
 			y: 1.0d
 		}
 		{
@@ -488,75 +305,55 @@
 				item: "createaddition:brass_rod"
 				type: "item"
 			}]
-			x: 7.0d
+			x: 4.5d
 			y: 8.0d
 		}
 		{
-			dependencies: ["239445AE36A9DA0F"]
+			dependencies: ["3281E4A601E79AB6"]
 			id: "7564483E055AF237"
-			tasks: [{
-				count: 2L
-				id: "42AB60213A3B82DD"
-				item: "createaddition:copper_rod"
-				type: "item"
-			}]
+			tasks: [
+				{
+					count: 2L
+					id: "42AB60213A3B82DD"
+					item: "createaddition:copper_rod"
+					type: "item"
+				}
+				{
+					id: "4D16B34409F9C9B9"
+					item: "thermal:gold_gear"
+					type: "item"
+				}
+				{
+					id: "493919C2D8C666C9"
+					item: "thermal:iron_gear"
+					type: "item"
+				}
+			]
 			x: -0.5d
-			y: 7.0d
-		}
-		{
-			dependencies: ["463AB6F353B5B885"]
-			id: "6BE7A697966FBFA9"
-			tasks: [{
-				id: "73641F7884FCE21C"
-				item: "thermal:iron_gear"
-				type: "item"
-			}]
-			x: 1.0d
-			y: 7.0d
-		}
-		{
-			dependencies: ["7E344A89BEC96C63"]
-			id: "703D246CC23F791D"
-			tasks: [{
-				id: "7542B495DD9F26E2"
-				item: "thermal:gold_gear"
-				type: "item"
-			}]
-			x: -2.0d
-			y: 7.0d
-		}
-		{
-			dependencies: ["3F403E7ADB4001B2"]
-			id: "00B9321197A81D41"
-			tasks: [{
-				id: "1A867CA7CC50DBC9"
-				item: "minecraft:iron_ingot"
-				type: "item"
-			}]
-			x: 1.0d
-			y: 4.0d
+			y: 8.0d
 		}
 		{
 			dependencies: ["47F34027B9B2C056"]
 			id: "0AE30A4757927B20"
-			tasks: [{
-				id: "3D6E0EDF3C9D43DE"
-				item: "minecraft:copper_ingot"
-				type: "item"
-			}]
+			tasks: [
+				{
+					id: "3D6E0EDF3C9D43DE"
+					item: "minecraft:copper_ingot"
+					type: "item"
+				}
+				{
+					id: "5815272B90462F02"
+					item: "minecraft:gold_ingot"
+					type: "item"
+				}
+				{
+					id: "3315E681B7987E24"
+					item: "minecraft:iron_ingot"
+					type: "item"
+				}
+			]
 			x: -0.5d
-			y: 4.0d
-		}
-		{
-			dependencies: ["20ECACE23EAADBA8"]
-			id: "1623E9979304E253"
-			tasks: [{
-				id: "452B4DADEF6D9B48"
-				item: "minecraft:gold_ingot"
-				type: "item"
-			}]
-			x: -2.0d
-			y: 4.0d
+			y: 6.0d
 		}
 		{
 			dependencies: ["464AD5024525CC94"]
@@ -583,39 +380,31 @@
 				title: "Pipes/filters omitted"
 				type: "checkmark"
 			}]
-			x: 3.0d
-			y: -4.5d
-		}
-		{
-			id: "19C375B5450007EE"
-			tasks: [{
-				id: "5DF54820B5311F00"
-				item: "thermal:iron_dust"
-				type: "item"
-			}]
 			x: 1.0d
-			y: 2.0d
+			y: -2.0d
 		}
 		{
 			dependencies: ["2043A1E7C9D6AC49"]
 			id: "695AC43A0FBFEF28"
-			tasks: [{
-				id: "41CD8428ED45E07D"
-				item: "thermal:copper_dust"
-				type: "item"
-			}]
+			tasks: [
+				{
+					id: "41CD8428ED45E07D"
+					item: "thermal:copper_dust"
+					type: "item"
+				}
+				{
+					id: "2FACC200A110A8F2"
+					item: "thermal:gold_dust"
+					type: "item"
+				}
+				{
+					id: "35DB09E5358B4AB6"
+					item: "thermal:iron_dust"
+					type: "item"
+				}
+			]
 			x: -0.5d
-			y: 2.0d
-		}
-		{
-			id: "045BC11BF46E3F2A"
-			tasks: [{
-				id: "01F9BD99CC69C5C9"
-				item: "thermal:gold_dust"
-				type: "item"
-			}]
-			x: -2.0d
-			y: 2.0d
+			y: 4.0d
 		}
 		{
 			dependencies: ["14F40856902214E8"]
@@ -638,10 +427,10 @@
 				}
 			]
 			x: -0.5d
-			y: -1.0d
+			y: 1.0d
 		}
 		{
-			dependencies: ["393B639420EB7776"]
+			dependencies: ["3B37F72B7BF81FE0"]
 			id: "4FCE5E94C66E1385"
 			tasks: [{
 				count: 4L
@@ -649,7 +438,7 @@
 				item: "mekanism:ingot_steel"
 				type: "item"
 			}]
-			x: 10.0d
+			x: 5.5d
 			y: 6.0d
 		}
 		{
@@ -661,11 +450,11 @@
 				item: "create:brass_ingot"
 				type: "item"
 			}]
-			x: 7.0d
+			x: 4.5d
 			y: 6.0d
 		}
 		{
-			dependencies: ["3D8A74A734308E4F"]
+			dependencies: ["3B37F72B7BF81FE0"]
 			id: "4A9697BA3B2AD6F4"
 			tasks: [{
 				count: 4L
@@ -673,41 +462,29 @@
 				item: "thermal:invar_ingot"
 				type: "item"
 			}]
-			x: 4.0d
+			x: 3.5d
 			y: 6.0d
 		}
 		{
-			dependencies: ["4479164E99B865EE"]
-			id: "3DF15BB71C9FB034"
-			tasks: [{
-				id: "7DC18085A5ED2907"
-				item: "mekanism:dust_steel"
-				type: "item"
-			}]
-			x: 10.0d
-			y: 4.0d
-		}
-		{
-			dependencies: ["3E9DB55CA618BE54"]
+			dependencies: [
+				"3E9DB55CA618BE54"
+				"0B1CA04BE0517C36"
+			]
 			id: "19B453F28A1B3D22"
-			tasks: [{
-				count: 2L
-				id: "16FC91B974A21A52"
-				item: "thermal:iron_dust"
-				type: "item"
-			}]
-			x: 9.0d
-			y: 2.0d
-		}
-		{
-			dependencies: ["0B1CA04BE0517C36"]
-			id: "6F831F8E5C98F5A9"
-			tasks: [{
-				id: "38D2EB3F76E38F8A"
-				item: "mekanism:dust_coal"
-				type: "item"
-			}]
-			x: 11.0d
+			tasks: [
+				{
+					count: 2L
+					id: "16FC91B974A21A52"
+					item: "thermal:iron_dust"
+					type: "item"
+				}
+				{
+					id: "23B481BC78DDAA09"
+					item: "mekanism:dust_coal"
+					type: "item"
+				}
+			]
+			x: 5.5d
 			y: 2.0d
 		}
 		{
@@ -733,7 +510,7 @@
 				}
 				type: "item"
 			}]
-			x: 9.0d
+			x: 5.5d
 			y: 1.0d
 		}
 		{
@@ -744,7 +521,7 @@
 				item: "minecraft:raw_iron"
 				type: "item"
 			}]
-			x: 9.0d
+			x: 5.5d
 			y: 0.0d
 		}
 		{
@@ -755,7 +532,7 @@
 				item: "minecraft:coal"
 				type: "item"
 			}]
-			x: 11.0d
+			x: 6.5d
 			y: 0.0d
 		}
 		{
@@ -766,7 +543,7 @@
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 11.0d
+			x: 6.5d
 			y: -1.0d
 		}
 		{
@@ -777,24 +554,38 @@
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 9.0d
+			x: 5.5d
 			y: -1.0d
 		}
 		{
 			dependencies: ["656070314A81611B"]
 			id: "2BF028A5C1ADDA55"
-			tasks: [{
-				id: "222880A12790B167"
-				item: "jaopca:dusts.brass"
-				type: "item"
-			}]
-			x: 7.0d
+			tasks: [
+				{
+					id: "222880A12790B167"
+					item: "jaopca:dusts.brass"
+					type: "item"
+				}
+				{
+					id: "2CADAFB46C1A9CD5"
+					item: "thermal:invar_dust"
+					type: "item"
+				}
+				{
+					id: "621C78953D62B3FE"
+					item: "mekanism:dust_steel"
+					type: "item"
+				}
+			]
+			title: "Alloy Dusts"
+			x: 4.5d
 			y: 4.0d
 		}
 		{
 			dependencies: [
-				"6705D349EF23EEC8"
 				"44242DAF19D2826E"
+				"19B453F28A1B3D22"
+				"55EDC8E1B74E46AD"
 			]
 			id: "656070314A81611B"
 			tasks: [
@@ -809,41 +600,26 @@
 					type: "item"
 				}
 			]
-			x: 7.0d
+			x: 4.5d
 			y: 3.0d
 		}
 		{
 			dependencies: ["7AA2C9F13BDE592E"]
 			id: "44242DAF19D2826E"
-			tasks: [{
-				id: "337FF938B86E20F8"
-				item: "thermal:copper_dust"
-				type: "item"
-			}]
-			x: 6.0d
+			tasks: [
+				{
+					id: "337FF938B86E20F8"
+					item: "thermal:copper_dust"
+					type: "item"
+				}
+				{
+					id: "7B5F1878F7305651"
+					item: "jaopca:dusts.zinc"
+					type: "item"
+				}
+			]
+			x: 4.5d
 			y: 2.0d
-		}
-		{
-			dependencies: ["7CC4F48697536E2B"]
-			id: "6705D349EF23EEC8"
-			tasks: [{
-				id: "67546BDCFF69436E"
-				item: "jaopca:dusts.zinc"
-				type: "item"
-			}]
-			x: 8.0d
-			y: 2.0d
-		}
-		{
-			dependencies: ["07B504C9A76C7E47"]
-			id: "7CC4F48697536E2B"
-			tasks: [{
-				id: "12D99C95EFD1E583"
-				item: "thermal:machine_pulverizer"
-				type: "item"
-			}]
-			x: 8.0d
-			y: 1.0d
 		}
 		{
 			dependencies: ["6050DD19AE8735B1"]
@@ -868,106 +644,56 @@
 				}
 				type: "item"
 			}]
-			x: 6.0d
+			x: 3.5d
 			y: 1.0d
 		}
 		{
 			dependencies: ["16F042B69BE141EB"]
 			id: "6050DD19AE8735B1"
-			tasks: [{
-				id: "7A5565028C8ED0C7"
-				item: "minecraft:raw_copper"
-				type: "item"
-			}]
-			x: 6.0d
+			tasks: [
+				{
+					id: "7A5565028C8ED0C7"
+					item: "minecraft:raw_copper"
+					type: "item"
+				}
+				{
+					id: "21E84900C85139BB"
+					item: "create:raw_zinc"
+					type: "item"
+				}
+			]
+			x: 3.5d
 			y: 0.0d
-		}
-		{
-			dependencies: ["2A41DF6A15DF4A63"]
-			id: "07B504C9A76C7E47"
-			tasks: [{
-				id: "34EB1E20274B190D"
-				item: "create:raw_zinc"
-				type: "item"
-			}]
-			x: 8.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["14DD0D705D827133"]
-			id: "2A41DF6A15DF4A63"
-			tasks: [{
-				id: "2D14EB407F00C2EA"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 8.0d
-			y: -1.0d
 		}
 		{
 			dependencies: ["14DD0D705D827133"]
 			id: "16F042B69BE141EB"
 			tasks: [{
+				count: 2L
 				id: "5D4F21C6764F5379"
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 6.0d
+			x: 3.5d
 			y: -1.0d
-		}
-		{
-			dependencies: ["34AF4F5EEE0432A1"]
-			id: "15F39065D795D209"
-			tasks: [{
-				id: "2C118F08A0C0E1EE"
-				item: "thermal:invar_dust"
-				type: "item"
-			}]
-			x: 4.0d
-			y: 4.0d
-		}
-		{
-			dependencies: [
-				"053DFBAE0CAD6D03"
-				"55EDC8E1B74E46AD"
-			]
-			id: "34AF4F5EEE0432A1"
-			tasks: [
-				{
-					id: "359B343182CF865B"
-					item: "create:basin"
-					type: "item"
-				}
-				{
-					id: "743708EE6BEF17EB"
-					item: "create:mechanical_mixer"
-					type: "item"
-				}
-			]
-			x: 4.0d
-			y: 3.0d
 		}
 		{
 			dependencies: ["75EB2B44A7B74CDA"]
 			id: "55EDC8E1B74E46AD"
-			tasks: [{
-				count: 2L
-				id: "057F76308FF074EF"
-				item: "thermal:iron_dust"
-				type: "item"
-			}]
-			x: 5.0d
-			y: 2.0d
-		}
-		{
-			dependencies: ["65B9D706E2970669"]
-			id: "053DFBAE0CAD6D03"
-			tasks: [{
-				id: "0F244702A9A1AF25"
-				item: "thermal:nickel_dust"
-				type: "item"
-			}]
-			x: 3.0d
+			tasks: [
+				{
+					count: 2L
+					id: "057F76308FF074EF"
+					item: "thermal:iron_dust"
+					type: "item"
+				}
+				{
+					id: "7845B4CFA48A3E8B"
+					item: "thermal:nickel_dust"
+					type: "item"
+				}
+			]
+			x: 3.5d
 			y: 2.0d
 		}
 		{
@@ -993,77 +719,37 @@
 				}
 				type: "item"
 			}]
-			x: 5.0d
-			y: 1.0d
-		}
-		{
-			dependencies: ["1BE8351BDCBFEDB3"]
-			id: "65B9D706E2970669"
-			tasks: [{
-				id: "14FB3936A20AD4A9"
-				item: {
-					Count: 1b
-					id: "itemfilters:or"
-					tag: {
-						items: [
-							{
-								Count: 1b
-								id: "ae2:inscriber"
-							}
-							{
-								Count: 1b
-								id: "thermal:machine_pulverizer"
-							}
-						]
-					}
-				}
-				type: "item"
-			}]
-			x: 3.0d
+			x: 2.5d
 			y: 1.0d
 		}
 		{
 			dependencies: ["4B578BDA0D24A7E3"]
 			id: "02D7CF9669333097"
-			tasks: [{
-				id: "227EB47C749191E0"
-				item: "minecraft:raw_iron"
-				type: "item"
-			}]
-			x: 5.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["36349856413CECB3"]
-			id: "1BE8351BDCBFEDB3"
-			tasks: [{
-				id: "58CA04A909BF1010"
-				item: "thermal:raw_nickel"
-				type: "item"
-			}]
-			x: 3.0d
+			tasks: [
+				{
+					id: "227EB47C749191E0"
+					item: "minecraft:raw_iron"
+					type: "item"
+				}
+				{
+					id: "09C37BA4C49D9BCB"
+					item: "thermal:raw_nickel"
+					type: "item"
+				}
+			]
+			x: 2.5d
 			y: 0.0d
 		}
 		{
 			dependencies: ["14DD0D705D827133"]
 			id: "4B578BDA0D24A7E3"
 			tasks: [{
+				count: 2L
 				id: "0CDD8075004A6354"
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 5.0d
-			y: -1.0d
-		}
-		{
-			dependencies: ["14DD0D705D827133"]
-			id: "36349856413CECB3"
-			tasks: [{
-				id: "3192C1E9E9E1D882"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 3.0d
+			x: 2.5d
 			y: -1.0d
 		}
 		{
@@ -1086,7 +772,7 @@
 				type: "item"
 			}]
 			title: "No duping!"
-			x: 13.0d
+			x: 10.0d
 			y: 4.0d
 		}
 		{
@@ -1124,7 +810,7 @@
 				}
 			]
 			title: "MobGrinding Route"
-			x: 14.0d
+			x: 11.0d
 			y: 4.0d
 		}
 		{
@@ -1176,7 +862,7 @@
 				type: "item"
 			}]
 			title: "Peaceful route"
-			x: 16.0d
+			x: 12.0d
 			y: 4.0d
 		}
 		{
@@ -1187,8 +873,8 @@
 				title: "Chapter 3 automation"
 				type: "checkmark"
 			}]
-			x: 17.0d
-			y: -12.0d
+			x: 13.5d
+			y: -15.5d
 		}
 		{
 			dependencies: ["4E862D712FEE7DB5"]
@@ -1204,16 +890,14 @@
 				item: "kubejs:cube3"
 				type: "item"
 			}]
-			x: 22.0d
+			x: 18.0d
 			y: 9.0d
 		}
 		{
 			dependencies: [
 				"37D55022DE62376F"
-				"5240210D343EC08A"
-				"3A272D9ED14A1079"
-				"083344DEB510FD01"
 				"7C99E826901CA82D"
+				"209B14B16AB9B6F7"
 			]
 			id: "4E862D712FEE7DB5"
 			tasks: [
@@ -1233,95 +917,47 @@
 					type: "item"
 				}
 			]
-			x: 17.5d
+			x: 13.5d
 			y: 9.0d
 		}
 		{
-			dependencies: ["37B1E69AD87BA006"]
-			id: "7C99E826901CA82D"
-			tasks: [{
-				id: "05C48F9526C0F2C6"
-				item: "minecraft:fire_charge"
-				type: "item"
-			}]
-			x: 16.0d
-			y: 8.0d
-		}
-		{
 			dependencies: ["20AE7B532DF5EFB1"]
-			id: "3A272D9ED14A1079"
-			tasks: [{
-				id: "32D6AE8CECD61504"
-				item: "thermal:ice_charge"
-				type: "item"
-			}]
-			x: 17.0d
+			id: "7C99E826901CA82D"
+			tasks: [
+				{
+					id: "05C48F9526C0F2C6"
+					item: "minecraft:fire_charge"
+					type: "item"
+				}
+				{
+					id: "0DE07E3B557F9A84"
+					item: "thermal:blizz_rod"
+					type: "item"
+				}
+				{
+					id: "6C5C17E6D09CEA6B"
+					item: "thermal:blitz_rod"
+					type: "item"
+				}
+				{
+					id: "34C294CE720DD626"
+					item: "thermal:basalz_rod"
+					type: "item"
+				}
+			]
+			x: 13.5d
 			y: 8.0d
-		}
-		{
-			dependencies: ["128574D92BA39A13"]
-			id: "083344DEB510FD01"
-			tasks: [{
-				id: "7657482977325EA8"
-				item: "thermal:lightning_charge"
-				type: "item"
-			}]
-			x: 18.0d
-			y: 8.0d
-		}
-		{
-			dependencies: ["477E8DB6060D3FDE"]
-			id: "5240210D343EC08A"
-			tasks: [{
-				id: "7B9374A160893694"
-				item: "thermal:earth_charge"
-				type: "item"
-			}]
-			x: 19.0d
-			y: 8.0d
-		}
-		{
-			dependencies: ["1844E76220626C3B"]
-			id: "37B1E69AD87BA006"
-			tasks: [{
-				id: "0B4A8E57995B164F"
-				item: "thermal:machine_crafter"
-				type: "item"
-			}]
-			x: 16.0d
-			y: 7.0d
 		}
 		{
 			dependencies: ["1844E76220626C3B"]
 			id: "20AE7B532DF5EFB1"
 			tasks: [{
+				count: 4L
 				id: "67D7A251BC59DF92"
 				item: "thermal:machine_crafter"
 				type: "item"
 			}]
-			x: 17.0d
-			y: 7.0d
-		}
-		{
-			dependencies: ["1844E76220626C3B"]
-			id: "128574D92BA39A13"
-			tasks: [{
-				id: "59D563FC03480479"
-				item: "thermal:machine_crafter"
-				type: "item"
-			}]
-			x: 18.0d
-			y: 7.0d
-		}
-		{
-			dependencies: ["1844E76220626C3B"]
-			id: "477E8DB6060D3FDE"
-			tasks: [{
-				id: "1219FD0358108D52"
-				item: "thermal:machine_crafter"
-				type: "item"
-			}]
-			x: 19.0d
+			x: 13.5d
 			y: 7.0d
 		}
 		{
@@ -1366,13 +1002,12 @@
 				}
 			]
 			title: "4 effigies destroyed"
-			x: 17.5d
+			x: 13.5d
 			y: 6.0d
 		}
 		{
 			dependencies: [
 				"787722DC6887AE8D"
-				"16D31A99646B7516"
 				"22820DD6447970FE"
 			]
 			id: "17E3757BBCCA12E3"
@@ -1393,52 +1028,44 @@
 					type: "item"
 				}
 			]
-			x: 19.5d
+			x: 15.0d
 			y: 5.0d
-		}
-		{
-			dependencies: ["6FE2680249A83FCD"]
-			id: "16D31A99646B7516"
-			tasks: [{
-				id: "165574F9E07B502B"
-				item: "thermal:niter"
-				type: "item"
-			}]
-			x: 18.5d
-			y: 4.0d
 		}
 		{
 			dependencies: ["656C9C26BFE9E000"]
 			id: "0B0B0ED54CC805B6"
-			tasks: [{
-				id: "61220F351BF035F8"
-				item: "thermal:sulfur_ore"
-				type: "item"
-			}]
-			x: 19.5d
+			tasks: [
+				{
+					id: "61220F351BF035F8"
+					item: "thermal:sulfur_ore"
+					type: "item"
+				}
+				{
+					id: "6EE7E66F5AC6C26D"
+					item: "thermal:niter_ore"
+					type: "item"
+				}
+			]
+			x: 15.0d
 			y: 0.5d
 		}
 		{
 			dependencies: ["60414CC591E9EB8F"]
 			id: "787722DC6887AE8D"
-			tasks: [{
-				id: "2ECBD1DF6FFB8F92"
-				item: "thermal:sulfur"
-				type: "item"
-			}]
-			x: 19.5d
+			tasks: [
+				{
+					id: "2ECBD1DF6FFB8F92"
+					item: "thermal:sulfur"
+					type: "item"
+				}
+				{
+					id: "5A8E096DF01E1332"
+					item: "thermal:niter"
+					type: "item"
+				}
+			]
+			x: 15.0d
 			y: 4.0d
-		}
-		{
-			dependencies: ["4977666DFED5C820"]
-			id: "2D5AEB70D9D4CA5E"
-			tasks: [{
-				id: "08DEFEE170A4B1EF"
-				item: "thermal:niter_ore"
-				type: "item"
-			}]
-			x: 18.5d
-			y: 0.5d
 		}
 		{
 			dependencies: ["2A0A00E8A811DB22"]
@@ -1449,29 +1076,19 @@
 				item: "minecraft:coal"
 				type: "item"
 			}]
-			x: 20.5d
+			x: 16.0d
 			y: 6.0d
-		}
-		{
-			dependencies: ["2D5AEB70D9D4CA5E"]
-			id: "6FE2680249A83FCD"
-			tasks: [{
-				id: "019AE17F1F8B91DE"
-				item: "thermal:machine_pulverizer"
-				type: "item"
-			}]
-			x: 18.5d
-			y: 1.5d
 		}
 		{
 			dependencies: ["0B0B0ED54CC805B6"]
 			id: "60414CC591E9EB8F"
 			tasks: [{
+				count: 2L
 				id: "4A40D8A267317D76"
 				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
-			x: 19.5d
+			x: 15.0d
 			y: 1.5d
 		}
 		{
@@ -1482,7 +1099,7 @@
 				item: "integrateddynamics:mechanical_squeezer"
 				type: "item"
 			}]
-			x: 21.5d
+			x: 17.0d
 			y: 6.0d
 		}
 		{
@@ -1493,19 +1110,8 @@
 				item: "minecraft:coal_ore"
 				type: "item"
 			}]
-			x: 21.5d
+			x: 17.0d
 			y: 0.5d
-		}
-		{
-			dependencies: ["6831CC73795A75BA"]
-			id: "4977666DFED5C820"
-			tasks: [{
-				id: "01AC75580CDFE071"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 18.5d
-			y: -0.5d
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
@@ -1515,8 +1121,8 @@
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 21.5d
-			y: -6.0d
+			x: 17.0d
+			y: -12.5d
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
@@ -1526,8 +1132,8 @@
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 19.5d
-			y: -0.5d
+			x: 15.0d
+			y: -12.5d
 		}
 		{
 			dependencies: ["3107958440563499"]
@@ -1537,7 +1143,7 @@
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 26.0d
+			x: 22.5d
 			y: 11.0d
 		}
 		{
@@ -1549,7 +1155,7 @@
 				item: "minecraft:coal"
 				type: "item"
 			}]
-			x: 20.5d
+			x: 16.0d
 			y: 4.0d
 		}
 		{
@@ -1581,7 +1187,7 @@
 				}
 			]
 			title: "Rods"
-			x: 15.0d
+			x: 11.5d
 			y: 5.0d
 		}
 		{
@@ -1593,7 +1199,7 @@
 				item: "integrateddynamics:mechanical_squeezer"
 				type: "item"
 			}]
-			x: 15.0d
+			x: 11.5d
 			y: 6.0d
 		}
 		{
@@ -1623,7 +1229,7 @@
 				}
 			]
 			title: "Effigies"
-			x: 15.0d
+			x: 11.5d
 			y: 3.0d
 		}
 		{
@@ -1637,7 +1243,7 @@
 				type: "item"
 			}]
 			title: "Bottling Effigies"
-			x: 15.0d
+			x: 11.5d
 			y: 2.0d
 		}
 		{
@@ -1671,15 +1277,13 @@
 				}
 				type: "item"
 			}]
-			x: 15.0d
+			x: 11.5d
 			y: 1.0d
 		}
 		{
 			dependencies: [
-				"0EE3CD6BEE76EC19"
 				"52F129C7DEC5EDAF"
 				"78301FD6CE90B218"
-				"7B1016CE26C529F5"
 			]
 			id: "02F1C7D8620A2FE0"
 			tasks: [{
@@ -1688,20 +1292,8 @@
 				item: "thermal:machine_crucible"
 				type: "item"
 			}]
-			x: 15.0d
+			x: 11.5d
 			y: 0.0d
-		}
-		{
-			dependencies: ["4DC72BB4B7082F52"]
-			id: "0EE3CD6BEE76EC19"
-			tasks: [{
-				id: "76566D32AB4787AB"
-				item: "thermal:signalum_block"
-				type: "item"
-			}]
-			title: "Blocks of Alloyed Ingots"
-			x: 14.0d
-			y: -1.0d
 		}
 		{
 			dependencies: ["160F8C39C06F3796"]
@@ -1711,7 +1303,7 @@
 				item: "kubejs:carbonized_netherrack"
 				type: "item"
 			}]
-			x: 13.0d
+			x: 9.5d
 			y: 0.0d
 		}
 		{
@@ -1719,6 +1311,7 @@
 				"0E9BA150B201AEA0"
 				"6B2AE9A914C28FEB"
 				"4C9CF51649FD5B3B"
+				"5CA7CC181BC5B13C"
 			]
 			id: "4DC72BB4B7082F52"
 			tasks: [{
@@ -1727,7 +1320,7 @@
 				item: "thermal:machine_smelter"
 				type: "item"
 			}]
-			x: 15.0d
+			x: 11.5d
 			y: -2.0d
 		}
 		{
@@ -1741,7 +1334,7 @@
 				item: "mekanism:metallurgic_infuser"
 				type: "item"
 			}]
-			x: 13.0d
+			x: 9.5d
 			y: -2.0d
 		}
 		{
@@ -1752,7 +1345,7 @@
 				item: "minecraft:netherrack"
 				type: "item"
 			}]
-			x: 13.0d
+			x: 9.5d
 			y: -3.0d
 		}
 		{
@@ -1763,8 +1356,8 @@
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 13.0d
-			y: -10.5d
+			x: 9.5d
+			y: -12.5d
 		}
 		{
 			dependencies: ["2C0842CC5AE0F3FC"]
@@ -1774,7 +1367,7 @@
 				item: "mekanism:enriched_carbon"
 				type: "item"
 			}]
-			x: 12.0d
+			x: 8.5d
 			y: -2.0d
 		}
 		{
@@ -1785,52 +1378,19 @@
 				item: "mekanism:enrichment_chamber"
 				type: "item"
 			}]
-			x: 12.0d
+			x: 8.5d
 			y: -3.0d
 		}
 		{
-			dependencies: ["03AAD05A6EB90180"]
+			dependencies: ["10EB55BC4BA4E496"]
 			id: "56BB242070B9840A"
 			tasks: [{
 				id: "5C6F77A66A4A6F67"
 				item: "minecraft:coal"
 				type: "item"
 			}]
-			x: 12.0d
+			x: 8.5d
 			y: -4.0d
-		}
-		{
-			dependencies: ["70D235F0E5CEAEE7"]
-			id: "03AAD05A6EB90180"
-			tasks: [{
-				id: "0FF553821964E1E8"
-				item: "integrateddynamics:mechanical_squeezer"
-				type: "item"
-			}]
-			x: 12.0d
-			y: -5.0d
-		}
-		{
-			dependencies: ["52D31E7461AE5D8E"]
-			id: "70D235F0E5CEAEE7"
-			tasks: [{
-				id: "44476E735F3CE54C"
-				item: "minecraft:coal_ore"
-				type: "item"
-			}]
-			x: 12.0d
-			y: -6.0d
-		}
-		{
-			dependencies: ["6831CC73795A75BA"]
-			id: "52D31E7461AE5D8E"
-			tasks: [{
-				id: "433B401CD5258161"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 12.0d
-			y: -10.5d
 		}
 		{
 			dependencies: ["5BDA73B4E18C57B2"]
@@ -1853,31 +1413,31 @@
 					type: "item"
 				}
 			]
-			x: 16.0d
+			x: 11.5d
 			y: -3.0d
 		}
 		{
 			dependencies: ["4DC72BB4B7082F52"]
 			id: "78301FD6CE90B218"
-			tasks: [{
-				id: "132CDED80F629862"
-				item: "thermal:lumium_block"
-				type: "item"
-			}]
+			tasks: [
+				{
+					id: "41FA34470224AC4D"
+					item: "thermal:signalum_block"
+					type: "item"
+				}
+				{
+					id: "25E4C08FDB2BCC66"
+					item: "thermal:lumium_block"
+					type: "item"
+				}
+				{
+					id: "010455C01E42368A"
+					item: "thermal:enderium_block"
+					type: "item"
+				}
+			]
 			title: "Blocks of Alloyed Ingots"
-			x: 15.0d
-			y: -1.0d
-		}
-		{
-			dependencies: ["4DC72BB4B7082F52"]
-			id: "7B1016CE26C529F5"
-			tasks: [{
-				id: "21A09694371C76F1"
-				item: "thermal:enderium_block"
-				type: "item"
-			}]
-			title: "Blocks of Alloyed Ingots"
-			x: 16.0d
+			x: 11.5d
 			y: -1.0d
 		}
 		{
@@ -1895,14 +1455,8 @@
 					item: "thermal:silver_block"
 					type: "item"
 				}
-				{
-					count: 2L
-					id: "76551C2684A2406A"
-					item: "minecraft:glowstone"
-					type: "item"
-				}
 			]
-			x: 15.0d
+			x: 12.5d
 			y: -3.0d
 		}
 		{
@@ -1927,123 +1481,59 @@
 					type: "item"
 				}
 			]
-			x: 14.0d
+			x: 10.5d
 			y: -3.0d
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
 			id: "2F7A507A72EA5CF3"
 			tasks: [{
-				count: 4L
 				id: "78D0F7C4F63789B8"
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 15.0d
-			y: -10.5d
+			x: 11.5d
+			y: -12.5d
 		}
 		{
 			dependencies: ["2F7A507A72EA5CF3"]
 			id: "1F2E213053FC6D2D"
-			tasks: [
-				{
-					id: "71319B38A763EB65"
-					item: "thermal:raw_silver"
-					type: "item"
-				}
-				{
-					id: "06380AF33B7AE382"
-					item: "thermal:raw_tin"
-					type: "item"
-				}
-				{
-					id: "46EA860662EEE754"
-					item: "minecraft:glowstone_dust"
-					type: "item"
-				}
-			]
-			x: 15.0d
+			tasks: [{
+				id: "66C9DAA05F449727"
+				item: "minecraft:diamond_ore"
+				type: "item"
+			}]
+			x: 11.5d
 			y: -9.5d
 		}
 		{
-			dependencies: ["2F7A507A72EA5CF3"]
-			id: "53FF9613D5C2F414"
-			tasks: [
-				{
-					id: "3FF96132B0EC42FF"
-					item: "minecraft:redstone_ore"
-					type: "item"
-				}
-				{
-					id: "0AE0A1B63A76DA17"
-					item: "minecraft:raw_copper"
-					type: "item"
-				}
-			]
-			x: 14.0d
-			y: -9.5d
-		}
-		{
-			dependencies: ["53FF9613D5C2F414"]
-			id: "5797553E386C275D"
-			tasks: [{
-				count: 2L
-				id: "2EB449561F9C572F"
-				item: "thermal:machine_pulverizer"
-				type: "item"
-			}]
-			x: 14.0d
-			y: -8.5d
-		}
-		{
-			dependencies: ["1F2E213053FC6D2D"]
-			id: "12D413D7A8B017A5"
-			tasks: [{
-				count: 2L
-				id: "19DEBFAD6FCE301B"
-				item: "thermal:machine_pulverizer"
-				type: "item"
-			}]
-			x: 15.0d
-			y: -8.5d
-		}
-		{
-			dependencies: ["3F1995C99BC3500B"]
-			id: "0A960DE2B5D8EF80"
-			tasks: [{
-				id: "4FD47F77C1201A0C"
-				item: "thermal:machine_furnace"
-				type: "item"
-			}]
-			x: 15.0d
-			y: -6.5d
-		}
-		{
-			dependencies: ["12D413D7A8B017A5"]
-			id: "3F1995C99BC3500B"
-			tasks: [{
-				id: "335282D63207E35A"
-				item: "thermal:tin_dust"
-				type: "item"
-			}]
-			x: 15.0d
-			y: -7.5d
-		}
-		{
-			dependencies: ["0A960DE2B5D8EF80"]
+			dependencies: ["40C99EE531C8A2D6"]
 			id: "3D038749B36551D3"
-			tasks: [{
-				id: "02B25015164540E9"
-				item: "thermal:tin_ingot"
-				type: "item"
-			}]
-			x: 15.0d
+			tasks: [
+				{
+					id: "37766279D31A3444"
+					item: "thermal:silver_ingot"
+					type: "item"
+				}
+				{
+					id: "7997E70F7BC4C755"
+					item: "thermal:tin_ingot"
+					type: "item"
+				}
+				{
+					id: "40E21A7F815BE170"
+					item: "minecraft:copper_ingot"
+					type: "item"
+				}
+			]
+			x: 11.5d
 			y: -5.5d
 		}
 		{
 			dependencies: [
 				"006CEB53EC93F7E1"
 				"6EEC1633A31E11BE"
+				"3D038749B36551D3"
 			]
 			id: "5BDA73B4E18C57B2"
 			tasks: [
@@ -2078,11 +1568,11 @@
 					type: "item"
 				}
 			]
-			x: 15.0d
+			x: 11.5d
 			y: -4.5d
 		}
 		{
-			dependencies: ["3BB68BDDB9D43D27"]
+			dependencies: ["4EDBC2DDBF103E4F"]
 			id: "006CEB53EC93F7E1"
 			tasks: [
 				{
@@ -2096,38 +1586,280 @@
 					type: "item"
 				}
 			]
-			x: 16.0d
+			x: 12.5d
 			y: -5.5d
 		}
 		{
+			dependencies: ["7EE39F7966E9EAA3"]
 			id: "6EEC1633A31E11BE"
 			tasks: [{
 				id: "15E0D5B832C26B8B"
 				item: "minecraft:redstone"
 				type: "item"
 			}]
-			x: 14.0d
+			x: 10.5d
 			y: -5.5d
 		}
 		{
-			id: "3BB68BDDB9D43D27"
+			dependencies: ["129BE1D8203CB3AF"]
+			id: "537EFFE8C97C5A03"
 			tasks: [{
-				id: "3556285670BEBA15"
+				id: "45EEF12A7E139456"
+				item: "thermal:invar_gear"
+				type: "item"
+			}]
+			x: 3.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["58DB2A2587AD9A65"]
+			id: "1FF01C85D3DBCC8F"
+			tasks: [{
+				id: "3C86B50D98DB1D24"
+				item: "kubejs:steel_gear"
+				type: "item"
+			}]
+			x: 5.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["2AEF1358C1C07C1A"]
+			id: "5CA7CC181BC5B13C"
+			tasks: [{
+				count: 2L
+				id: "3BE6CA7856B9C4BB"
+				item: "minecraft:glowstone"
+				type: "item"
+			}]
+			x: 13.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6831CC73795A75BA"]
+			id: "2AEF1358C1C07C1A"
+			tasks: [{
+				id: "4268535D2B8E3B05"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 13.5d
+			y: -12.5d
+		}
+		{
+			dependencies: [
+				"1F2E213053FC6D2D"
+				"589004C69162233A"
+			]
+			id: "7EE39F7966E9EAA3"
+			tasks: [{
+				id: "1A454173ABF777D9"
 				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
-			x: 16.0d
+			x: 10.5d
 			y: -8.5d
 		}
 		{
-			id: "35E20460FB171B77"
+			dependencies: [
+				"1F2E213053FC6D2D"
+				"74F048A7032C0DF3"
+			]
+			id: "4EDBC2DDBF103E4F"
 			tasks: [{
-				id: "5423998BB81BE1FE"
-				item: "minecraft:diamond_ore"
+				id: "213E8DBDF01CA2A0"
+				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
-			x: 16.0d
+			x: 12.5d
+			y: -8.5d
+		}
+		{
+			dependencies: ["2F8B2A7308DD4185"]
+			id: "74F048A7032C0DF3"
+			tasks: [{
+				id: "53BF8116292AC7EF"
+				item: "minecraft:ender_pearl"
+				type: "item"
+			}]
+			x: 12.5d
 			y: -9.5d
+		}
+		{
+			dependencies: ["1690E3B0293D400A"]
+			id: "41FD95EE45E3AEAA"
+			tasks: [
+				{
+					count: 4L
+					id: "375A136E591EB69A"
+					item: "minecraft:iron_ingot"
+					type: "item"
+				}
+				{
+					id: "2804A1871789078C"
+					item: {
+						Count: 1b
+						ForgeCaps: {
+							Parent: { }
+						}
+						id: "projecte:philosophers_stone"
+						tag: { }
+					}
+					type: "item"
+				}
+			]
+			x: 12.5d
+			y: -11.5d
+		}
+		{
+			dependencies: ["41FD95EE45E3AEAA"]
+			id: "2F8B2A7308DD4185"
+			tasks: [{
+				id: "458F04730FDA79E6"
+				item: "thermal:machine_crafter"
+				type: "item"
+			}]
+			x: 12.5d
+			y: -10.5d
+		}
+		{
+			dependencies: ["6831CC73795A75BA"]
+			hide_dependency_lines: true
+			id: "1690E3B0293D400A"
+			tasks: [{
+				id: "6E5F617ACF382938"
+				title: "source of iron"
+				type: "checkmark"
+			}]
+			x: 12.5d
+			y: -12.5d
+		}
+		{
+			dependencies: [
+				"1032351A34EF9B65"
+				"255EEBD54F27170E"
+			]
+			id: "2993BAAF0B61C724"
+			tasks: [{
+				id: "42BF48CF4C6F94AF"
+				item: "mekanism:metallurgic_infuser"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["2993BAAF0B61C724"]
+			id: "209B14B16AB9B6F7"
+			tasks: [{
+				id: "2337CFC4944E781E"
+				item: "mekanism:basic_control_circuit"
+				type: "item"
+			}]
+			x: 12.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["45F629DE91E6B8DD"]
+			id: "255EEBD54F27170E"
+			tasks: [{
+				id: "6E3DB7DC80414AC1"
+				item: "mekanism:ingot_osmium"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["2A1F649B35F17795"]
+			id: "1032351A34EF9B65"
+			tasks: [{
+				id: "50D871D2333EC81F"
+				item: "mekanism:enriched_redstone"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 7.0d
+		}
+		{
+			dependencies: ["1EA8115693F39E92"]
+			id: "2A1F649B35F17795"
+			tasks: [{
+				id: "07FE7DCEC3831F7B"
+				item: "mekanism:enrichment_chamber"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 7.0d
+		}
+		{
+			dependencies: ["6831CC73795A75BA"]
+			hide_dependency_lines: true
+			id: "10EB55BC4BA4E496"
+			tasks: [{
+				id: "638405E56C833B0E"
+				title: "source of coal"
+				type: "checkmark"
+			}]
+			x: 8.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["6831CC73795A75BA"]
+			hide_dependency_lines: true
+			id: "45F629DE91E6B8DD"
+			tasks: [{
+				id: "144CAB2483D1EB96"
+				title: "source of osmium"
+				type: "checkmark"
+			}]
+			x: 8.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["117E5682BDCB39A8"]
+			id: "1EA8115693F39E92"
+			tasks: [{
+				id: "3D3C12A4D4A8E957"
+				item: "minecraft:redstone"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["6831CC73795A75BA"]
+			hide_dependency_lines: true
+			id: "117E5682BDCB39A8"
+			tasks: [{
+				id: "6C7D5E81ACC9D5B0"
+				title: "source of redstone"
+				type: "checkmark"
+			}]
+			x: 8.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["2F7A507A72EA5CF3"]
+			id: "589004C69162233A"
+			tasks: [{
+				id: "424261788189D816"
+				item: "minecraft:redstone_ore"
+				type: "item"
+			}]
+			x: 10.5d
+			y: -9.5d
+		}
+		{
+			dependencies: ["6831CC73795A75BA"]
+			hide_dependency_lines: true
+			id: "40C99EE531C8A2D6"
+			tasks: [{
+				id: "080C245F06E05FE1"
+				title: "source of tin, silver and copper"
+				type: "checkmark"
+			}]
+			x: 11.5d
+			y: -6.5d
 		}
 	]
 	title: "Automation"

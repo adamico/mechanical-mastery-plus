@@ -168,26 +168,26 @@ ServerEvents.recipes(event => {
   event.recipes.thermal.pulverizer_catalyst('kubejs:enriched_basilic_reagent').primaryMod(2.5).secondaryMod(5.0).energyMod(0.25).minChance(0.0).useChance(0.1);
 
   event.remove({id: 'thermal:machines/crucible/crucible_glowstone_dust'});
-  event.recipes.thermal.crucible(Fluid.of('thermal:glowstone', 250), '#forge:ingots/lumium').energy(1200);
+  event.recipes.thermal.crucible(Fluid.of('thermal:glowstone', 100), '#forge:ingots/lumium').energy(600);
   
   event.remove({id: 'thermal:machines/crucible/crucible_glowstone_block'});
-  event.recipes.thermal.crucible(Fluid.of('thermal:glowstone', 1000), '#forge:storage_blocks/lumium').energy(4800);
+  event.recipes.thermal.crucible(Fluid.of('thermal:glowstone', 1000), '#forge:storage_blocks/lumium').energy(3600);
   
 	event.remove({id: 'thermal:machines/crucible/crucible_redstone_dust'});
-	event.recipes.thermal.crucible(Fluid.of('thermal:redstone', 250), '#forge:ingots/signalum').energy(1200);
+	event.recipes.thermal.crucible(Fluid.of('thermal:redstone', 100), '#forge:ingots/signalum').energy(600);
 
   event.remove({id: 'thermal:machines/crucible/crucible_redstone_block'});
-  event.recipes.thermal.crucible(Fluid.of('thermal:redstone', 1000), '#forge:storage_blocks/signalum').energy(4800);
+  event.recipes.thermal.crucible(Fluid.of('thermal:redstone', 1000), '#forge:storage_blocks/signalum').energy(3600);
   
   event.remove({id: 'thermal:machines/crucible/crucible_ender_pearl'});
-  event.recipes.thermal.crucible(Fluid.of('thermal:ender', 250), '#forge:ingots/enderium').energy(1200);
-	event.recipes.thermal.crucible(Fluid.of('thermal:ender', 1000), '#forge:storage_blocks/enderium').energy(4800);
+  event.recipes.thermal.crucible(Fluid.of('thermal:ender', 100), '#forge:ingots/enderium').energy(600);
+	event.recipes.thermal.crucible(Fluid.of('thermal:ender', 1000), '#forge:storage_blocks/enderium').energy(3600);
 
   event.remove({id: 'thermal:machines/crucible/crucible_cobblestone_to_lava'});
-  event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 50), '#forge:cobblestone').energy(1200);
+  event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 50), '#forge:cobblestone').energy(300);
   
   event.remove({id: 'thermal:machines/crucible/crucible_netherrack_to_lava'});
-  event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 1000), 'kubejs:carbonized_netherrack').energy(4800);
+  event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 1000), 'kubejs:carbonized_netherrack').energy(3600);
 
   event.recipes.thermal.bottler(Item.of('kubejs:time_augment', '{AugmentData:{Type:"Machine",MachinePower:1d,MachineEnergy:0.75d,RFXfer:20d}}'), [Fluid.of('industrialforegoing:ether_gas', 500), 'kubejs:incomplete_time_augment']);
 
