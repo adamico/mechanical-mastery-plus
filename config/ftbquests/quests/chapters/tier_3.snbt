@@ -58,7 +58,7 @@
 				title: "Tier 3 Materials"
 				type: "checkmark"
 			}]
-			x: 4.0d
+			x: 5.0d
 			y: -4.0d
 		}
 		{
@@ -88,11 +88,11 @@
 				type: "item"
 			}]
 			title: "Summoning with effigies"
-			x: 7.0d
+			x: 8.5d
 			y: -4.0d
 		}
 		{
-			dependencies: ["303BD15C71F45C21"]
+			dependencies: ["131EF687B47D577F"]
 			description: [
 				"To awaken the Dormant Effigies you need to be infused with a specific liquefied material from Thermal Magma Crucibles."
 				""
@@ -150,13 +150,13 @@
 				}
 			]
 			title: "Awakening the Effigies"
-			x: 7.0d
-			y: -1.0d
+			x: 10.5d
+			y: -1.5d
 		}
 		{
 			dependencies: [
-				"0936B0DE389AE023"
 				"38612D037FCFBFD6"
+				"7B47B85C4B684347"
 			]
 			id: "52CFEB2AD82AB105"
 			rewards: [
@@ -205,7 +205,7 @@
 			]
 			title: "Elemental charges"
 			x: 11.5d
-			y: -1.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["550E4D68A98180F5"]
@@ -216,8 +216,8 @@
 				item: "mekanism:metallurgic_infuser"
 				type: "item"
 			}]
-			x: 7.0d
-			y: -7.0d
+			x: 10.5d
+			y: -6.5d
 		}
 		{
 			dependencies: ["1A983E23E641CA16"]
@@ -228,7 +228,7 @@
 				type: "item"
 			}]
 			x: 11.5d
-			y: -7.0d
+			y: -6.5d
 		}
 		{
 			dependencies: [
@@ -263,7 +263,7 @@
 					type: "item"
 				}
 			]
-			x: 13.0d
+			x: 14.0d
 			y: -4.0d
 		}
 		{
@@ -293,8 +293,8 @@
 				type: "item"
 			}]
 			title: "Refined storage!"
-			x: 13.0d
-			y: -1.0d
+			x: 14.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
@@ -311,7 +311,7 @@
 				item: "thermal:upgrade_augment_3"
 				type: "item"
 			}]
-			x: 14.5d
+			x: 15.5d
 			y: -5.5d
 		}
 		{
@@ -332,8 +332,8 @@
 				type: "item"
 			}]
 			title: "Blaze Burner"
-			x: 10.0d
-			y: -4.0d
+			x: 11.5d
+			y: -5.5d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
@@ -383,8 +383,8 @@
 				}
 			]
 			title: "AE2 Route"
-			x: 13.0d
-			y: -7.0d
+			x: 14.0d
+			y: -5.5d
 		}
 		{
 			dependencies: ["182209ACB7DE7F78"]
@@ -518,8 +518,8 @@
 				}
 			]
 			title: "ME Starter Kit"
-			x: 14.5d
-			y: -7.0d
+			x: 14.0d
+			y: -6.5d
 		}
 		{
 			dependencies: ["167B6648066F358B"]
@@ -654,8 +654,8 @@
 				}
 			]
 			title: "Refined Storage Starter Kit"
-			x: 14.5d
-			y: -1.0d
+			x: 14.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["550E4D68A98180F5"]
@@ -674,7 +674,7 @@
 				type: "item"
 			}]
 			title: "Dr Frankenstein's Dream"
-			x: 5.5d
+			x: 7.5d
 			y: -4.0d
 		}
 		{
@@ -685,19 +685,8 @@
 				item: "thermal:machine_crucible"
 				type: "item"
 			}]
-			x: 8.5d
+			x: 9.5d
 			y: -4.0d
-		}
-		{
-			dependencies: ["1503E72A3505D8A6"]
-			id: "303BD15C71F45C21"
-			tasks: [{
-				id: "08A6E5183DCA51FC"
-				item: "create:spout"
-				type: "item"
-			}]
-			x: 8.5d
-			y: -2.5d
 		}
 		{
 			dependencies: ["3F58AD4EAE336B1E"]
@@ -714,8 +703,8 @@
 				item: "minecraft:gunpowder"
 				type: "item"
 			}]
-			x: 10.0d
-			y: -2.5d
+			x: 12.5d
+			y: -4.0d
 		}
 		{
 			dependencies: ["612B4AC5C732EF19"]
@@ -725,8 +714,8 @@
 				item: "create:empty_blaze_burner"
 				type: "item"
 			}]
-			x: 10.0d
-			y: -5.5d
+			x: 10.5d
+			y: -4.0d
 		}
 		{
 			dependencies: [
@@ -739,8 +728,8 @@
 				item: "kubejs:carbonized_netherrack"
 				type: "item"
 			}]
-			x: 8.5d
-			y: -5.5d
+			x: 9.5d
+			y: -5.0d
 		}
 		{
 			dependencies: ["550E4D68A98180F5"]
@@ -750,8 +739,8 @@
 				item: "mekanism:enrichment_chamber"
 				type: "item"
 			}]
-			x: 7.0d
-			y: -5.5d
+			x: 8.5d
+			y: -5.0d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
@@ -761,8 +750,8 @@
 				item: "hyperbox:hyperbox"
 				type: "item"
 			}]
-			x: 14.5d
-			y: -4.0d
+			x: 15.5d
+			y: -4.5d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
@@ -772,7 +761,7 @@
 				item: "farmingforblockheads:market"
 				type: "item"
 			}]
-			x: 14.5d
+			x: 15.5d
 			y: -2.5d
 		}
 		{
@@ -788,8 +777,72 @@
 				item: "minecraft:skeleton_skull"
 				type: "item"
 			}]
-			x: 7.0d
-			y: -2.5d
+			x: 8.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["1A67C9B9ABB4E969"]
+			description: [
+				"The Mechanical Squeezer is an (almost) op machine producing solid and fluid outputs from ores and other materials."
+				""
+				"You can use it to process Blaze/Blizz/Blitz/Basalz rods to get powders and some of the liquid used to produce the Effigies."
+			]
+			id: "78E84152C4FC1F66"
+			rewards: [{
+				id: "58EFEF87419A8DAC"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "2FC222A13779344C"
+				item: "integrateddynamics:mechanical_squeezer"
+				type: "item"
+			}]
+			title: "Squeeze me mechanically!"
+			x: 15.5d
+			y: -3.5d
+		}
+		{
+			dependencies: ["1503E72A3505D8A6"]
+			description: ["sorry but no sorry, no more fluid encapsulator from the overused Thermal mod :)"]
+			id: "131EF687B47D577F"
+			tasks: [{
+				id: "3A7FC622637711D2"
+				item: "create:spout"
+				type: "item"
+			}]
+			title: "Bottling Effigies"
+			x: 9.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["0936B0DE389AE023"]
+			id: "7B47B85C4B684347"
+			tasks: [
+				{
+					id: "0ED1167391489190"
+					item: "minecraft:blaze_rod"
+					type: "item"
+				}
+				{
+					id: "49C2DA94A08894C8"
+					item: "thermal:blizz_rod"
+					type: "item"
+				}
+				{
+					id: "576CAAC3E3BBE84A"
+					item: "thermal:blitz_rod"
+					type: "item"
+				}
+				{
+					id: "07028D13321B5C67"
+					item: "thermal:basalz_rod"
+					type: "item"
+				}
+			]
+			title: "Rods"
+			x: 11.5d
+			y: -1.5d
 		}
 	]
 	title: "Tier 3: Basic Mekanism"

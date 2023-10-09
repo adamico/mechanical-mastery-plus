@@ -3,6 +3,7 @@
 	default_quest_shape: ""
 	filename: "tier_4"
 	group: "2D94E5A1412E2495"
+	hide_quest_details_until_startable: true
 	icon: "kubejs:cube4"
 	id: "38378A6F4FF9F098"
 	order_index: 3
@@ -646,10 +647,7 @@
 			y: 1.5d
 		}
 		{
-			dependencies: [
-				"157D4C0E9C7A0928"
-				"007DAA376A57BF37"
-			]
+			dependencies: ["157D4C0E9C7A0928"]
 			description: ["So you saw how to get infinite water with the evertide amulet but you still want more? Fine, you may have the sink, now stop whining ;)"]
 			id: "174E355F55DE59F8"
 			tasks: [{
@@ -661,6 +659,7 @@
 			y: -7.0d
 		}
 		{
+			dependencies: ["0EE1192BF90562ED"]
 			description: ["Mekanism has its own generators to produce large amonuts of RF, however some of the most powerful ones aren't available to you yet."]
 			icon: "mekanism:basic_energy_cube"
 			id: "6BC0E03B21A767EA"
@@ -670,10 +669,11 @@
 				type: "item"
 			}]
 			title: "Mekanism Power"
-			x: 6.5d
-			y: -6.5d
+			x: 4.5d
+			y: -5.5d
 		}
 		{
+			dependencies: ["4E81E76086558A19"]
 			description: [
 				"Powah! is a beautiful and powerful mod that you can use to generate, store, and transmit Energy wired and wireless."
 				""
@@ -711,8 +711,8 @@
 				type: "item"
 			}]
 			title: "Powah is OPawah!"
-			x: 5.5d
-			y: -4.0d
+			x: 3.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["2F6C7F4F8FAC880A"]
@@ -740,8 +740,8 @@
 				}
 			]
 			title: "Flux Networks"
-			x: 9.5d
-			y: -2.5d
+			x: 7.0d
+			y: 6.5d
 		}
 		{
 			dependencies: [
@@ -763,8 +763,8 @@
 				value: 100000000L
 			}]
 			title: "We need more energy!"
-			x: 9.5d
-			y: -4.0d
+			x: 7.0d
+			y: 5.0d
 		}
 		{
 			dependencies: ["65CCE43B4B2AEC6F"]
@@ -794,8 +794,8 @@
 				}
 			]
 			title: "Advanced Powah!"
-			x: 7.0d
-			y: -3.0d
+			x: 4.5d
+			y: 6.0d
 		}
 		{
 			dependencies: ["1CB1D2ADD015C590"]
@@ -822,8 +822,8 @@
 				item: "powah:reactor_spirited"
 				type: "item"
 			}]
-			x: 7.5d
-			y: -4.5d
+			x: 5.0d
+			y: 4.5d
 		}
 	]
 	title: "Tier 4: Advanced Mekanism"
