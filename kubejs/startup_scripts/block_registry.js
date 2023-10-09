@@ -11,9 +11,3 @@ StartupEvents.registry('block', (event) => {
 	.tagBlock('forge:netherrack')
 	.tagBlock('infiniburn_overworld')
 });
-
-BlockEvents.modification(event => {
-  event.modify('kubejs:carbonized_netherrack', block => {
-    block.soundType('netherrack');
-  })
-});
