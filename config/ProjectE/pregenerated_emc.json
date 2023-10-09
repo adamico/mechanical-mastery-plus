@@ -38,7 +38,7 @@
   "kubejs:cube2_packaged": 24860,
   "kubejs:cube3_packaged": 153600,
   "kubejs:cube4_packaged": 460800,
-  "kubejs:oil_clump": 512,
+  "thermal:oil_sand": 512,
   "minecraft:cactus": 32,
   "minecraft:sugar_cane": 32,
   "minecraft:bone": 144,

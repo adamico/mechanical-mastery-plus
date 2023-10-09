@@ -16,6 +16,7 @@
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["550E4D68A98180F5"]
 			id: "597011E2824EC464"
 			rewards: [{
 				id: "5902B7E422223948"

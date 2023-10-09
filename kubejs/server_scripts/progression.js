@@ -160,7 +160,34 @@ ServerEvents.recipes(event => {
     '{AugmentData:{Type:"Machine",MachinePower:1d,MachineEnergy:0.75d,RFXfer:20d}}'), 
     [Fluid.of('industrialforegoing:ether_gas', 500), 'kubejs:incomplete_time_augment']);
 
-  event.recipes.thermal.crucible(Fluid.of('thermal:crude_oil', 125), 'kubejs:oil_clump').energy(400);
+	event.remove({id: 'thermal:machines/centrifuge/centrifuge_oil_sand'});
+	event.remove({id: 'thermal:machines/centrifuge/centrifuge_oil_red_sand'});
+
+	event.custom({
+		type: 'thermal:centrifuge',
+		ingredient: { item: 'thermal:oil_sand'},
+		result: [ 
+			{
+				item: "minecraft:sand",
+				chance: 0.75,
+				locked: true
+			},
+			{
+				item: "thermal:bitumen",
+				chance: 1.5
+			},
+			{
+				item: "thermal:tar",
+				chance: 1.0
+			},
+			{
+				fluid: "thermal:crude_oil",
+				amount: 125
+			}
+		],
+		energy: 4000
+	});
+		//Fluid.of('thermal:crude_oil', 125), 'kubejs:oil_clump').energy(400);
 
   event.recipes.thermal.pulverizer_catalyst('thermal:basalz_powder').primaryMod(1.25).secondaryMod(3.0).energyMod(0.75).minChance(0.0).useChance(0.5);
   event.recipes.thermal.pulverizer_catalyst('thermal:earth_charge').primaryMod(1.5).secondaryMod(4.0).energyMod(0.5).minChance(0.0).useChance(0.375);

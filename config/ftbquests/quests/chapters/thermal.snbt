@@ -246,6 +246,24 @@
 			x: 2.0d
 			y: 0.5d
 		}
+		{
+			description: ["The compression dynamo can burn liquids such as refined fuel into large amounts of RF."]
+			id: "2E769FE13EC39E0D"
+			optional: true
+			rewards: [{
+				id: "6F611A64AAAEBA76"
+				item: "thermal:refined_fuel_bucket"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "7BF588900AFA9032"
+				item: "thermal:dynamo_compression"
+				type: "item"
+			}]
+			x: 3.5d
+			y: -2.5d
+		}
 	]
 	title: "Thermal"
 }

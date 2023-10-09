@@ -11,71 +11,63 @@
 	quests: [
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
-			description: ["New tier, new materials; you know the deal already."]
+			description: [
+				"New tier, new materials; you know the deal already."
+				""
+				"Use the chicken spawn eggs wisely, no refunds. "
+				"Alternatively, you may also bulk haunt dough to get eggs."
+			]
 			icon: "kubejs:cube3"
 			id: "4E81E76086558A19"
+			rewards: [
+				{
+					id: "5739A8D3F96D66E0"
+					item: "thermal:oil_sand"
+					type: "item"
+				}
+				{
+					id: "41894172CF08A8A0"
+					item: "mekanism:raw_uranium"
+					type: "item"
+				}
+				{
+					id: "5621230CE2F4C362"
+					item: "mekanism:fluorite_ore"
+					type: "item"
+				}
+				{
+					id: "7B700D21153CE4E1"
+					item: "minecraft:sugar_cane"
+					type: "item"
+				}
+				{
+					count: 3
+					id: "7C50CA00C18BDCB7"
+					item: "minecraft:chicken_spawn_egg"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "3C6DA66318B827A5"
+					item: "minecraft:emerald_ore"
+					type: "item"
+				}
+				{
+					id: "49E08DE13B74C2CE"
+					item: "minecraft:ancient_debris"
+					type: "item"
+				}
+			]
 			tasks: [{
 				id: "6DC696B8987D5178"
 				title: "Tier 4 Materials"
 				type: "checkmark"
 			}]
-			x: 0.0d
-			y: 0.0d
+			x: -7.0d
+			y: -2.0d
 		}
 		{
 			dependencies: ["4E81E76086558A19"]
-			icon: "mekanism:ingot_uranium"
-			id: "15AFC0BA95FC8B41"
-			rewards: [{
-				id: "653B7682B1D7AA45"
-				item: "mekanism:raw_uranium"
-				type: "item"
-			}]
-			tasks: [{
-				id: "1782ECBC146EE156"
-				title: "Uranium"
-				type: "checkmark"
-			}]
-			x: 1.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["4E81E76086558A19"]
-			icon: "mekanism:fluorite_gem"
-			id: "67A2B456E7E5CFF6"
-			rewards: [{
-				id: "1AE0F0065287BD62"
-				item: "mekanism:fluorite_ore"
-				type: "item"
-			}]
-			tasks: [{
-				id: "760694F06091D57D"
-				title: "Fluorite"
-				type: "checkmark"
-			}]
-			x: 1.0d
-			y: -1.5d
-		}
-		{
-			dependencies: ["4E81E76086558A19"]
-			description: ["Works as slime balls in recipes and can be turned into crude oil at the magma crucible."]
-			icon: "kubejs:oil_clump"
-			id: "17DAE811CFBA10B9"
-			rewards: [{
-				id: "479DEC2CE37B4174"
-				item: "kubejs:oil_clump"
-				type: "item"
-			}]
-			tasks: [{
-				id: "5704CDE574DD30D8"
-				title: "Oil clump"
-				type: "checkmark"
-			}]
-			x: -1.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["17DAE811CFBA10B9"]
 			description: ["The fractionating still can process crude oil into usable products, such as light/heavy oil."]
 			id: "6201AC6B5614B2EA"
 			rewards: [
@@ -95,27 +87,8 @@
 				item: "thermal:machine_refinery"
 				type: "item"
 			}]
-			x: -2.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["7943076114A42DFC"]
-			description: ["The compression dynamo can burn liquids such as refined fuel into large amounts of RF."]
-			id: "2E769FE13EC39E0D"
-			optional: true
-			rewards: [{
-				id: "6F611A64AAAEBA76"
-				item: "thermal:refined_fuel_bucket"
-				type: "item"
-			}]
-			shape: "diamond"
-			tasks: [{
-				id: "7BF588900AFA9032"
-				item: "thermal:dynamo_compression"
-				type: "item"
-			}]
-			x: -4.0d
-			y: -4.0d
+			x: -7.0d
+			y: -5.0d
 		}
 		{
 			dependencies: ["6201AC6B5614B2EA"]
@@ -131,29 +104,19 @@
 				item: "thermal:refined_fuel_bucket"
 				type: "item"
 			}]
-			x: -2.0d
-			y: -4.0d
+			x: 0.5d
+			y: -5.0d
 		}
 		{
-			dependencies: [
-				"67A2B456E7E5CFF6"
-				"15AFC0BA95FC8B41"
-			]
+			dependencies: ["4E81E76086558A19"]
 			description: ["The Fissile Fuel production line can be complicated to understand just from JEI alone, but this quest tells you every machine required to produce fissile fuel, which only requires four raw ingredients: uranium, sulphur, fluorite, and water. Good luck!"]
 			icon: "mekanism:radioactive_waste_barrel"
 			id: "3E8F024835BB58F7"
-			rewards: [
-				{
-					id: "68F44F9925BE925D"
-					type: "xp"
-					xp: 100
-				}
-				{
-					id: "3D1DD6ABE4262F65"
-					item: "kubejs:cube2_packaged"
-					type: "item"
-				}
-			]
+			rewards: [{
+				id: "68F44F9925BE925D"
+				type: "xp"
+				xp: 100
+			}]
 			shape: "square"
 			tasks: [
 				{
@@ -195,8 +158,8 @@
 				}
 			]
 			title: "Fissile Fuel Production"
-			x: 2.0d
-			y: 0.0d
+			x: -5.0d
+			y: -2.0d
 		}
 		{
 			dependencies: ["3E8F024835BB58F7"]
@@ -207,45 +170,8 @@
 				item: "kubejs:fission_pellet"
 				type: "item"
 			}]
-			x: 2.0d
-			y: -4.0d
-		}
-		{
-			dependencies: ["4E81E76086558A19"]
-			icon: "minecraft:sugar_cane"
-			id: "085C56EE894594B1"
-			rewards: [{
-				id: "6EAB5D9FB8F9DFC0"
-				item: "minecraft:sugar_cane"
-				type: "item"
-			}]
-			tasks: [{
-				id: "14F96EDE05D0F6E7"
-				title: "Sugar Cane"
-				type: "checkmark"
-			}]
-			x: 0.0d
-			y: -1.5d
-		}
-		{
-			dependencies: ["4E81E76086558A19"]
-			description: ["Use these wisely, no refunds. Alternatively, you may also bulk haunt dough to get eggs."]
-			icon: "minecraft:egg"
-			id: "767667B65ECABE77"
-			rewards: [{
-				count: 3
-				id: "7D23D09A6A3CC6BF"
-				item: "minecraft:chicken_spawn_egg"
-				type: "item"
-			}]
-			tasks: [{
-				id: "207B115AC6793C3F"
-				title: "Eggs"
-				type: "checkmark"
-			}]
-			title: "Eggs"
-			x: -1.0d
-			y: -1.5d
+			x: -4.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["3E8F024835BB58F7"]
@@ -294,8 +220,8 @@
 				}
 			]
 			title: "Fission Reactor"
-			x: 3.5d
-			y: 0.0d
+			x: -4.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["2B2DAA2647444F4F"]
@@ -356,8 +282,8 @@
 				}
 			]
 			title: "Steam turbine"
-			x: 5.0d
-			y: 0.0d
+			x: -2.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["0850DE0A32947FA8"]
@@ -381,14 +307,11 @@
 				}
 			]
 			title: "Blaze Cake"
-			x: 0.0d
-			y: -4.0d
+			x: -4.0d
+			y: -3.5d
 		}
 		{
-			dependencies: [
-				"085C56EE894594B1"
-				"767667B65ECABE77"
-			]
+			dependencies: ["4E81E76086558A19"]
 			description: ["Crush netherrack to obtain cinder flour."]
 			id: "0850DE0A32947FA8"
 			rewards: [{
@@ -402,8 +325,8 @@
 				item: "create:cinder_flour"
 				type: "item"
 			}]
-			x: 0.0d
-			y: -2.5d
+			x: -5.0d
+			y: -3.5d
 		}
 		{
 			dependencies: [
@@ -419,50 +342,46 @@
 				item: "kubejs:cube4_inert"
 				type: "item"
 			}]
-			x: 1.0d
-			y: -5.5d
+			x: -1.0d
+			y: -2.0d
 		}
 		{
-			dependencies: ["1A67C9B9ABB4E969"]
+			dependencies: [
+				"1A67C9B9ABB4E969"
+				"597011E2824EC464"
+			]
 			description: ["Use your philosopher's stone to transmute several coal into a more dense fuel source."]
 			id: "26277A0FD5DA798E"
-			rewards: [
-				{
-					count: 8
-					id: "4ED93AC66233E67A"
-					item: "projecte:mobius_fuel"
-					type: "item"
-				}
-				{
-					id: "2199D5BB0F86CA54"
-					type: "xp"
-					xp: 100
-				}
-			]
+			rewards: [{
+				count: 8
+				id: "4ED93AC66233E67A"
+				item: "projecte:mobius_fuel"
+				type: "item"
+			}]
 			tasks: [{
 				id: "61F50B290D27170B"
 				item: "projecte:mobius_fuel"
 				type: "item"
 			}]
-			x: 2.5d
-			y: -6.0d
+			x: 0.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
 			description: ["Mekanism's second-to-last tiered circuit."]
 			id: "0EE1192BF90562ED"
 			rewards: [{
-				id: "1D8AEA82223D07F2"
-				type: "xp"
-				xp: 100
+				id: "0CC8C68728326987"
+				item: "mekanism:elite_control_circuit"
+				type: "item"
 			}]
 			tasks: [{
 				id: "630EFAA39D279506"
 				item: "mekanism:elite_control_circuit"
 				type: "item"
 			}]
-			x: 2.5d
-			y: -5.0d
+			x: 0.5d
+			y: -3.0d
 		}
 		{
 			dependencies: [
@@ -497,60 +416,11 @@
 					type: "item"
 				}
 			]
-			x: -0.5d
-			y: -7.0d
+			x: 2.0d
+			y: -2.0d
 		}
 		{
-			dependencies: ["4E81E76086558A19"]
-			description: ["Processed into netherite."]
-			icon: "minecraft:ancient_debris"
-			id: "1AEFCBE4B6A87AE4"
-			rewards: [{
-				id: "195DFA3C6915D188"
-				item: "minecraft:ancient_debris"
-				type: "item"
-			}]
-			tasks: [{
-				id: "1C7E1DA5F037C9C6"
-				title: "Ancient Debris"
-				type: "checkmark"
-			}]
-			x: -1.0d
-			y: 1.5d
-		}
-		{
-			dependencies: ["4E81E76086558A19"]
-			icon: "minecraft:emerald"
-			id: "5E91DCD550B96352"
-			rewards: [{
-				count: 2
-				id: "5D740AF328508122"
-				item: "minecraft:emerald_ore"
-				type: "item"
-			}]
-			tasks: [{
-				id: "39DA9058B9F4F397"
-				title: "Emerald"
-				type: "checkmark"
-			}]
-			x: 1.0d
-			y: 1.5d
-		}
-		{
-			dependencies: ["26277A0FD5DA798E"]
-			description: ["Powerful Fuel Source"]
-			id: "1BA8F6047EC4694E"
-			optional: true
-			tasks: [{
-				id: "29CAAD65CDC4EBC6"
-				item: "projecte:aeternalis_fuel"
-				type: "item"
-			}]
-			x: 1.5d
-			y: -7.0d
-		}
-		{
-			dependencies: ["1BA8F6047EC4694E"]
+			dependencies: ["157D4C0E9C7A0928"]
 			description: ["Crafting ingredient for powerful ProjectE gadgets"]
 			id: "0B14BDB8AF4F57C3"
 			optional: true
@@ -559,39 +429,11 @@
 				item: "projecte:dark_matter"
 				type: "item"
 			}]
-			x: 2.5d
-			y: -8.0d
+			x: 3.5d
+			y: -3.5d
 		}
 		{
 			dependencies: ["0B14BDB8AF4F57C3"]
-			description: ["When placed on a pedestal, drastically increases nearby machine's speed"]
-			id: "158C15F8B10B3DBB"
-			optional: true
-			rewards: [{
-				id: "6B429B6F08EAC8BC"
-				item: "projecte:dm_pedestal"
-				type: "item"
-			}]
-			tasks: [{
-				id: "47E66A5E054D0AC4"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projecte:watch_of_flowing_time"
-					tag: { }
-				}
-				type: "item"
-			}]
-			x: 1.5d
-			y: -9.0d
-		}
-		{
-			dependencies: [
-				"157D4C0E9C7A0928"
-				"158C15F8B10B3DBB"
-			]
 			description: ["Due to their internal RF transfer limit, Thermal machines usually don't behave when combined with tick accelerating like the watch of flowing time. The solution? Increase their transfer limit, of course! The ideal setup for a machine is one resonant integral component and three localized time destabilizer augments."]
 			id: "1F4DCE63D7FA0449"
 			optional: true
@@ -629,8 +471,8 @@
 				}
 				type: "item"
 			}]
-			x: -0.5d
-			y: -9.0d
+			x: 5.0d
+			y: -3.5d
 		}
 		{
 			dependencies: ["4E81E76086558A19"]
@@ -643,8 +485,8 @@
 				item: "projectexpansion:transmutation_interface"
 				type: "item"
 			}]
-			x: 0.0d
-			y: 1.5d
+			x: -7.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["157D4C0E9C7A0928"]
@@ -655,22 +497,22 @@
 				item: "cookingforblockheads:sink"
 				type: "item"
 			}]
-			x: -2.5d
-			y: -7.0d
+			x: 3.5d
+			y: -0.5d
 		}
 		{
-			dependencies: ["0EE1192BF90562ED"]
+			dependencies: ["593EEC1F5CA967D5"]
 			description: ["Mekanism has its own generators to produce large amonuts of RF, however some of the most powerful ones aren't available to you yet."]
 			icon: "mekanism:basic_energy_cube"
 			id: "6BC0E03B21A767EA"
 			tasks: [{
 				id: "624D93FD44FD3044"
-				item: "mekanism:basic_energy_cube"
+				item: "mekanism:ultimate_energy_cube"
 				type: "item"
 			}]
 			title: "Mekanism Power"
-			x: 4.5d
-			y: -5.5d
+			x: -1.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["4E81E76086558A19"]
@@ -711,8 +553,8 @@
 				type: "item"
 			}]
 			title: "Powah is OPawah!"
-			x: 3.0d
-			y: 1.5d
+			x: -5.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["2F6C7F4F8FAC880A"]
@@ -740,8 +582,8 @@
 				}
 			]
 			title: "Flux Networks"
-			x: 7.0d
-			y: 6.5d
+			x: 2.0d
+			y: 1.0d
 		}
 		{
 			dependencies: [
@@ -763,8 +605,8 @@
 				value: 100000000L
 			}]
 			title: "We need more energy!"
-			x: 7.0d
-			y: 5.0d
+			x: 0.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["65CCE43B4B2AEC6F"]
@@ -794,8 +636,8 @@
 				}
 			]
 			title: "Advanced Powah!"
-			x: 4.5d
-			y: 6.0d
+			x: -4.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["1CB1D2ADD015C590"]
@@ -822,8 +664,77 @@
 				item: "powah:reactor_spirited"
 				type: "item"
 			}]
-			x: 5.0d
-			y: 4.5d
+			x: -1.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["157D4C0E9C7A0928"]
+			id: "617ADD293B6F4635"
+			rewards: [{
+				id: "3D618CC1CC262ACE"
+				item: {
+					Count: 1b
+					ForgeCaps: {
+						Parent: { }
+					}
+					id: "projectexpansion:magnum_star_ein"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "59F5614093FD63BA"
+				item: {
+					Count: 1b
+					ForgeCaps: {
+						Parent: { }
+					}
+					id: "projecte:swiftwolf_rending_gale"
+				}
+				type: "item"
+			}]
+			x: 2.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["157D4C0E9C7A0928"]
+			id: "12FCDEA62294CF57"
+			rewards: [{
+				count: 2
+				id: "67750E8D96B610DA"
+				item: "minecraft:nether_star"
+				type: "item"
+			}]
+			tasks: [{
+				id: "3E3B6FE5976254CF"
+				item: "angelring:angel_ring"
+				type: "item"
+			}]
+			x: 2.0d
+			y: -3.5d
+		}
+		{
+			description: ["When placed on a pedestal, drastically increases nearby machine's speed"]
+			id: "158C15F8B10B3DBB"
+			optional: true
+			rewards: [{
+				id: "6B429B6F08EAC8BC"
+				item: "projecte:dm_pedestal"
+				type: "item"
+			}]
+			tasks: [{
+				id: "47E66A5E054D0AC4"
+				item: {
+					Count: 1b
+					ForgeCaps: {
+						Parent: { }
+					}
+					id: "projecte:watch_of_flowing_time"
+					tag: { }
+				}
+				type: "item"
+			}]
+			x: 3.5d
+			y: -2.0d
 		}
 	]
 	title: "Tier 4: Advanced Mekanism"

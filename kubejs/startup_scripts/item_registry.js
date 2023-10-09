@@ -15,7 +15,6 @@ StartupEvents.registry('item', event => {
 	event.create('cube4_inert').displayName('Inert Advanced Mechanical Essence').tooltip('So close, yet so far...');
 
 	event.create('press_rod_die').displayName('Rod Die');
-	event.create('oil_clump').displayName('Oil clump');
 	event.create('fission_pellet').displayName('Fissile fuel pellet');
 	event.create('black_hdpe_sheet').displayName('Black HDPE Sheet');
 

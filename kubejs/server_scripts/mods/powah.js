@@ -43,7 +43,7 @@ ServerEvents.recipes(event => {
 		  count: 1
 		}
 	});
-  event.replaceInput({id: 'powah:crafting/dielectric_paste_2'}, 'minecraft:blaze_powder', 'minecraft:redstone');
+  event.replaceInput({output: 'powah:dielectric_paste'}, '#minecraft:coals', 'thermal:tar');
 	event.replaceInput({id: 'powah:crafting/dielectric_rod'}, 'minecraft:iron_bars', 'minecraft:iron_nugget');
 	event.replaceInput({id: 'powah:crafting/dielectric_rod_h'}, 'minecraft:iron_bars', 'minecraft:iron_nugget');
 });
