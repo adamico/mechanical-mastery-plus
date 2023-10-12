@@ -44,6 +44,7 @@ ServerEvents.tags('item', event => {
   event.add('forge:plates', 'kubejs:diamond_plate');
   event.add('forge:slimeballs', 'kubejs:oil_clump');
   event.add('forge:gears/steel', 'kubejs:steel_gear');
+  
   event.add('forge:gears', 'kubejs:steel_gear');
   ['steel'].forEach(metal => {
     event.add(`forge:rods/${metal}`, `kubejs:${metal}_rod`);

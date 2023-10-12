@@ -185,34 +185,23 @@
 				"402D936947B4FBD4"
 				"30297A5669810E41"
 			]
-			description: ["With all your new-found knowledge of materials and alloys, you have managed to create a refined version of mechanical essence, worth even more EMC than its basic form."]
+			description: [
+				"With all your new-found knowledge of materials and alloys, you have managed to create a refined version of mechanical essence."
+				""
+				"You must now compress it into its crystal form which is worth even more EMC than the Basic Crystal!"
+			]
 			id: "78775CE81571FAC9"
-			rewards: [
-				{
-					id: "52CC23DCCFDD805C"
-					type: "xp"
-					xp: 100
-				}
-				{
-					count: 16
-					id: "672FDAB6D9B8D23D"
-					item: "kubejs:cube2_packaged"
-					type: "item"
-				}
-			]
-			shape: "gear"
-			tasks: [
-				{
-					id: "7AF77A99BBFD2A5E"
-					item: "kubejs:cube2"
-					type: "item"
-				}
-				{
-					id: "4D649FF0F1DA781F"
-					item: "kubejs:cube2_packaged"
-					type: "item"
-				}
-			]
+			rewards: [{
+				count: 6
+				id: "672FDAB6D9B8D23D"
+				item: "kubejs:cube2"
+				type: "item"
+			}]
+			tasks: [{
+				id: "7AF77A99BBFD2A5E"
+				item: "kubejs:cube2"
+				type: "item"
+			}]
 			x: 6.0d
 			y: -3.0d
 		}
@@ -234,7 +223,7 @@
 				item: "createaddition:brass_rod"
 				type: "item"
 			}]
-			x: 6.0d
+			x: 4.5d
 			y: -1.0d
 		}
 		{
@@ -266,7 +255,7 @@
 				item: "kubejs:steel_gear"
 				type: "item"
 			}]
-			x: 6.0d
+			x: 4.5d
 			y: -5.0d
 		}
 		{
@@ -415,8 +404,8 @@
 				item: "thermal:machine_smelter"
 				type: "item"
 			}]
-			x: 7.5d
-			y: -2.5d
+			x: 7.0d
+			y: -2.0d
 		}
 		{
 			dependencies: ["7C0D8A15D01EC79E"]
@@ -448,8 +437,8 @@
 				item: "thermal:upgrade_augment_2"
 				type: "item"
 			}]
-			x: 7.5d
-			y: -5.0d
+			x: 6.0d
+			y: -4.5d
 		}
 		{
 			dependencies: ["78775CE81571FAC9"]
@@ -468,8 +457,8 @@
 				type: "item"
 			}]
 			title: "Can Thermal machines be more efficient?"
-			x: 7.5d
-			y: -1.0d
+			x: 6.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["78775CE81571FAC9"]
@@ -486,8 +475,39 @@
 				type: "item"
 			}]
 			title: "Lava generation is OP!"
+			x: 7.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["78775CE81571FAC9"]
+			description: ["Just a bonk and I'm done!"]
+			id: "1C35B03170B0D544"
+			rewards: [{
+				count: 6
+				id: "157A3BF38A641924"
+				item: "kubejs:cube2_packaged"
+				type: "item"
+			}]
+			shape: "gear"
+			tasks: [
+				{
+					id: "2A866E94F9920769"
+					item: "create:mechanical_press"
+					type: "item"
+				}
+				{
+					id: "04229B14B5A65194"
+					item: "create:basin"
+					type: "item"
+				}
+				{
+					id: "0AFCC01297EDB423"
+					item: "kubejs:cube2_packaged"
+					type: "item"
+				}
+			]
 			x: 7.5d
-			y: -3.5d
+			y: -3.0d
 		}
 	]
 	title: "Tier 2: Create"

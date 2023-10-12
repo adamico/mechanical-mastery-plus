@@ -2,9 +2,8 @@ ServerEvents.recipes(event => {
   console.log('[AMMONIUM@KUBEJS]: thermal recipes...');  
 
   const smeltingRecipes = [
-    { output: 'mekanism:ingot_steel', outputCount: 1, inputs: ['#forge:ingots/iron', 'thermal:coal_coke'], energy: 4000 },
+    { output: '#forge:ingots/steel', outputCount: 3, inputs: [Item.of('#forge:ingots/iron', 3), Item.of('#minecraft:coals', 3)], energy: 12000 },
     { output: 'minecraft:calcite', outputCount: 1, inputs: ['minecraft:stone', 'minecraft:bone_meal'], energy: 800 },
-    { output: 'kubejs:black_hdpe_sheet', outputCount: 1, inputs: ['mekanism:hdpe_sheet', 'extendedcrafting:black_iron_ingot'], energy: 2000 },
     { output: 'create:brass_ingot', outputCount: 2, inputs: ['#forge:ingots/copper', '#forge:ingots/zinc'], energy: 2400 },
     { output: 'minecraft:amethyst_shard', outputCount: 1, inputs: ['ae2:charged_certus_quartz_crystal', 'kubejs:cube'], energy: 24000 },
     { output: 'thermal:enderium_block', outputCount: 2, inputs: ['#forge:storage_blocks/diamond', Item.of('#forge:storage_blocks/lead', 3), Item.of('#forge:storage_blocks/ender_pearl', 2)], energy: 144000 },

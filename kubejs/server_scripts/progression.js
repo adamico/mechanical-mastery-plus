@@ -1,7 +1,4 @@
 ServerEvents.recipes(event => {
-	let cube_packaging = (output, input, cooldown) => {
-		event.recipes.thermal.press([output], [input]).energy(cooldown * 20);
-	};
 	
 	let bottling = (output, input) => {
 		event.recipes.createFilling(output, input);
@@ -9,15 +6,16 @@ ServerEvents.recipes(event => {
 	
   event.shapeless('kubejs:cube1_packaged', ['kubejs:cube1', 'kubejs:cube1', 'kubejs:cube1', 'kubejs:cube1']);
 	
-  cube_packaging('kubejs:cube1_packaged', 'kubejs:cube1', 600);
-	cube_packaging('kubejs:cube2_packaged', 'kubejs:cube2', 400);
-	cube_packaging('kubejs:cube3_packaged', 'kubejs:cube3', 200);
-	cube_packaging('kubejs:cube4_packaged', 'kubejs:cube4', 100);
-	
+	event.recipes.thermal.press('kubejs:cube1_packaged', 'kubejs:cube1').energy(600 * 20);
+ 
+	event.recipes.createCompacting('kubejs:cube2_packaged', 'kubejs:cube2');
+
+	event.recipes.createCrushing(Item.of('kubejs:cube4_dust', 2), 'kubejs:cube4');
+
 	event.shapeless('kubejs:cube1', ['#forge:gears/gold', Item.of('#forge:rods/copper', 2), '#forge:gears/iron']);
 	event.recipes.createMixing('kubejs:cube2', ['kubejs:cube1', '#forge:gears/steel', Item.of('#forge:rods/brass', 2), '#forge:gears/invar']);
 	event.recipes.createMixing('kubejs:cube3', ['kubejs:cube2', 'minecraft:fire_charge', 'thermal:lightning_charge', 'thermal:ice_charge', 'thermal:earth_charge', 'mekanism:basic_control_circuit']).heated();
-	event.recipes.createMixing('kubejs:cube4_inert', ['kubejs:cube3', 'kubejs:fission_pellet', 'projecte:mobius_fuel', 'mekanism:elite_control_circuit']).superheated();
+	event.recipes.createMixing('kubejs:cube4_inert', [Fluid.of('thermal:refined_fuel', 1000), 'kubejs:cube3', 'kubejs:fission_pellet', 'projecte:mobius_fuel', 'mekanism:elite_control_circuit']).superheated();
 
 	event.recipes.createMixing(Item.of('minecraft:gunpowder', 4), [Item.of('#minecraft:coals', 2), ['thermal:niter', 'thermal:niter_dust'], ['thermal:sulfur', 'thermal:sulfur_dust']]).heated();
 
@@ -25,7 +23,6 @@ ServerEvents.recipes(event => {
 	event.recipes.createMixing(Fluid.of('createchromaticreturn:refined_mixture', 250), [Item.of('minecraft:smooth_quartz', 8), Item.of('minecraft:glowstone', 8), Item.of('projecte:mobius_fuel', 4), Item.of('mekanism:hdpe_sheet', 4),Fluid.of('minecraft:water', 1000)]).superheated();  
   event.recipes.createMixing(Item.of('createchromaticreturn:chromatic_compound', 2), [Item.of('createchromaticreturn:glowing_ingot', 2), Item.of('create:polished_rose_quartz', 2), Item.of('create:powdered_obsidian', 2), Item.of('create:andesite_alloy', 2)]).superheated();
   event.recipes.createMixing('createchromaticreturn:refined_radiance', ['createchromaticreturn:chromatic_compound', Fluid.of('createchromaticreturn:refined_mixture', 100)]).superheated();
-	event.recipes.thermal.bottler('kubejs:cube4', [Fluid.of('thermal:refined_fuel', 1000), 'kubejs:cube4_inert']).energy(400000);
 	
 	bottling('kubejs:blaze_effigy', [Fluid.of('minecraft:lava', 1000), 'kubejs:dormant_effigy']);
 	bottling('kubejs:blizz_effigy', [Fluid.of('thermal:ender', 1000), 'kubejs:dormant_effigy']);
@@ -54,14 +51,25 @@ ServerEvents.recipes(event => {
 			L: 'minecraft:lapis_block'
 	});
 
+	event.remove({id: 'projecte:soul_stone'});
+	event.shaped('projecte:soul_stone', [
+		'RLR',
+		'LDL',
+		'RLR'
+		], {
+			D: 'minecraft:diamond',
+			R: 'minecraft:redstone_block',
+			L: 'minecraft:lapis_block'
+	});
+
   event.shaped('kubejs:incomplete_time_augment', [
-    'DRD',
+    'RUR',
     'EGE',
-    'DAD'
+    'RAR'
     ], {
-      D: 'extendedcrafting:black_iron_ingot',
-      R: 'thermal:upgrade_augment_3',
-      E: 'extendedcrafting:ultimate_catalyst',
+      R: 'createchromaticreturn:refined_radiance',
+      U: 'thermal:upgrade_augment_3',
+      E: 'createchromaticreturn:shadow_mechanism',
       G: 'thermal:enderium_gear',
       A: 'kubejs:cube4'
     }
@@ -185,9 +193,11 @@ ServerEvents.recipes(event => {
 				amount: 125
 			}
 		],
-		energy: 4000
+		energy: 40000
 	});
-		//Fluid.of('thermal:crude_oil', 125), 'kubejs:oil_clump').energy(400);
+	
+	event.replaceInput({output: 'mekanism:combiner'}, 'mekanism:elite_control_circuit', 'kubejs:cube3');
+	event.remove({id: 'mekanism:control_circuit/elite'});
 
   event.recipes.thermal.pulverizer_catalyst('thermal:basalz_powder').primaryMod(1.25).secondaryMod(3.0).energyMod(0.75).minChance(0.0).useChance(0.5);
   event.recipes.thermal.pulverizer_catalyst('thermal:earth_charge').primaryMod(1.5).secondaryMod(4.0).energyMod(0.5).minChance(0.0).useChance(0.375);

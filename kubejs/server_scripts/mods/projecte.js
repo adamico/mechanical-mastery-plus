@@ -2,7 +2,7 @@ ServerEvents.recipes(event => {
   event.replaceInput({id: 'projecte:high_covalence_dust'}, 'minecraft:diamond', 'minecraft:gold_ingot');
 	event.replaceInput({id: 'projecte:condenser_mk1'}, 'minecraft:obsidian', 'minecraft:gold_ingot');
 	event.replaceInput({id: 'projecte:condenser_mk1'}, 'minecraft:diamond', 'projecte:high_covalence_dust');
-	event.replaceInput({output: 'projecte:swiftwolf_rending_gale'}, 'projecte:iron_band', '64x kubejs:cube4');
+	event.replaceInput({output: 'projecte:swiftwolf_rending_gale'}, 'projecte:iron_band', 'minecraft:nether_star');
 
 	event.replaceInput({id: 'projectexpansion:emc_link/basic'}, 'projecte:condenser_mk1', 'minecraft:barrel');
 	event.replaceInput({id: 'projectexpansion:emc_link/basic'}, 'projecte:transmutation_tablet', '#forge:plates/invar');
@@ -10,6 +10,7 @@ ServerEvents.recipes(event => {
 	event.replaceInput({id: 'projectexpansion:emc_link/red'}, 'projecte:red_matter', 'kubejs:cube2');
 	event.replaceInput({id: 'projectexpansion:emc_link/magenta'}, 'projectexpansion:magenta_matter', 'kubejs:cube3');
 	event.replaceInput({id: 'projectexpansion:emc_link/pink'}, 'projectexpansion:pink_matter', 'kubejs:cube4');
+	event.replaceInput({output: 'projecte:philosophers_stone'}, 'minecraft:diamond', 'minecraft:emerald');
 	event.replaceInput({id: 'projectexpansion:transmutation_interface'}, 'projectexpansion:final_star_shard', 'kubejs:cube3');
 	event.replaceInput({id: 'projectexpansion:transmutation_interface'}, 'projectexpansion:final_emc_link', 'kubejs:cube2');
 	event.replaceInput({id: 'projecte:transmutation_table'}, 'projecte:philosophers_stone', 'minecraft:crafting_table');

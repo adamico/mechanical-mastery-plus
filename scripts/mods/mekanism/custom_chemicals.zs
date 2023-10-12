@@ -1,8 +1,8 @@
 #loader mekanismcontent
 
-// import mods.mekanism.content.builder.GasBuilder;
+import mods.mekanism.content.builder.GasBuilder;
 import mods.mekanism.content.builder.InfuseTypeBuilder;
-// import mods.mekanism.content.builder.PigmentBuilder;
+import mods.mekanism.content.builder.PigmentBuilder;
 // import mods.mekanism.content.builder.SlurryBuilder;
 
 /*
@@ -16,7 +16,14 @@ import mods.mekanism.content.builder.InfuseTypeBuilder;
 
 // GasBuilder.builder().color(0xDF03FC).build("example_gas");
 
+GasBuilder.builder().color(0xFF20FF).build("advanced_mechanical_gas");
+GasBuilder.builder().color(0xCC20CC).build("inactive_advanced_mechanical_gas");
+
 InfuseTypeBuilder.builder().color(0x000000).build("darkness");
+
+PigmentBuilder.builder().color(0x0020FF).build("mechanical_blue");
+PigmentBuilder.builder().color(0xFF2000).build("mechanical_red");
+PigmentBuilder.builder().color(0xFF20FF).build("mechanical_magenta");
 
 // PigmentBuilder.builder().color(0xCAFC03).build("example_pigment");
 // SlurryBuilder.dirty().color(0xF0FC03).build("example_dirty_slurry");

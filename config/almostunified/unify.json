@@ -4,8 +4,8 @@
     "kubejs",
     "crafttweaker",
     "thermal",
-    "create",
-    "mekanism"
+    "mekanism",
+    "create"
   ],
   "stoneStrata": [
     "stone",

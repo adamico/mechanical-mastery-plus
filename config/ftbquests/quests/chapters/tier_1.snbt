@@ -298,19 +298,12 @@
 			description: ["By crafting some gears and rods together, you managed to craft the first of the mechanical essences! This cube has an EMC value higher than the sum of its parts, so if you can manage to automate it, it will serve as a great EMC source!"]
 			hide: false
 			id: "7A0CB1037E6BE4D7"
-			rewards: [
-				{
-					id: "5B75C6A7D8E9D38E"
-					type: "xp"
-					xp: 100
-				}
-				{
-					count: 16
-					id: "23176832183B31BF"
-					item: "kubejs:cube1_packaged"
-					type: "item"
-				}
-			]
+			rewards: [{
+				count: 16
+				id: "23176832183B31BF"
+				item: "kubejs:cube1_packaged"
+				type: "item"
+			}]
 			shape: "gear"
 			tasks: [
 				{

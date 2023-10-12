@@ -23,3 +23,4 @@ import mods.mekanism.api.ingredient.ItemStackIngredient;
 <recipetype:mekanism:metallurgic_infusing>.addRecipe("black_infuse_basilic_reagent", <item:kubejs:basilic_reagent>, <infuse_type:crafttweaker:darkness> * 40, <item:kubejs:enriched_basilic_reagent>);
 <recipetype:mekanism:metallurgic_infusing>.addRecipe("black_infuse_skull", <item:minecraft:skeleton_skull>, <infuse_type:crafttweaker:darkness> * 40, <item:minecraft:wither_skeleton_skull>);
 <recipetype:mekanism:metallurgic_infusing>.addRecipe("coal_infuse_netherrack", <item:minecraft:netherrack>, <infuse_type:mekanism:carbon> * 80, <item:kubejs:carbonized_netherrack>);
+<recipetype:mekanism:metallurgic_infusing>.addRecipe("black_infuse_hdpe_sheet", <item:mekanism:hdpe_sheet>, <infuse_type:crafttweaker:darkness> * 10, <item:kubejs:black_hdpe_sheet>);

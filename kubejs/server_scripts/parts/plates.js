@@ -11,8 +11,7 @@ ServerEvents.recipes(event => {
     { name: 'copper', mod: 'thermal', inputType: 'ingots', output: 'thermal:copper_plate' },
     { name: 'diamond', mod: 'kubejs', inputType: 'gems', output: 'kubejs:diamond_plate' },
     { name: 'constantan', mod: 'thermal', inputType: 'ingots', output: 'thermal:constantan_plate' },
-    { name: 'invar', mod: 'thermal', inputType: 'ingots', output: 'thermal:invar_plate' },
-    { name: 'steel', mod: 'alloyed', inputType: 'ingots', output: 'alloyed:steel_sheet' }
+    { name: 'invar', mod: 'thermal', inputType: 'ingots', output: 'thermal:invar_plate' }
   ];
 
   plateMaterials.forEach(material => {

@@ -3,6 +3,8 @@
 	default_quest_shape: ""
 	filename: "automation_tips"
 	group: "2D94E5A1412E2495"
+	hide_quest_details_until_startable: true
+	hide_quest_until_deps_visible: true
 	id: "1FBDE1284A64A60E"
 	order_index: 5
 	quest_links: [ ]
@@ -106,7 +108,7 @@
 			dependencies: ["181444BA6E90A921"]
 			id: "6670E8852A38CA41"
 			rewards: [{
-				count: 4
+				count: 2
 				id: "71887C2676CAD3E7"
 				item: "kubejs:cube1"
 				type: "item"
@@ -116,22 +118,8 @@
 				item: "kubejs:cube1"
 				type: "item"
 			}]
-			x: 1.5d
+			x: 2.0d
 			y: 9.0d
-		}
-		{
-			dependencies: [
-				"6670E8852A38CA41"
-				"37D55022DE62376F"
-			]
-			id: "1A365AE5BC4E44E2"
-			tasks: [{
-				id: "669EFF17A7EA0163"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 4.5d
-			y: 11.0d
 		}
 		{
 			dependencies: ["2F261F411FB81E79"]
@@ -147,7 +135,7 @@
 				item: "kubejs:cube2"
 				type: "item"
 			}]
-			x: 7.5d
+			x: 7.0d
 			y: 9.0d
 		}
 		{
@@ -866,7 +854,7 @@
 			y: 4.0d
 		}
 		{
-			dependencies: ["1A67C9B9ABB4E969"]
+			dependencies: ["47D8F95F5317A47D"]
 			id: "6831CC73795A75BA"
 			tasks: [{
 				id: "6FA79F8370B6DD4E"
@@ -1134,17 +1122,6 @@
 			}]
 			x: 15.0d
 			y: -12.5d
-		}
-		{
-			dependencies: ["3107958440563499"]
-			id: "4EF5A2CA23635FAB"
-			tasks: [{
-				id: "092D03F4C5FB99E0"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 22.5d
-			y: 11.0d
 		}
 		{
 			dependencies: ["50B6B9C0287250E1"]
@@ -1860,6 +1837,473 @@
 			}]
 			x: 11.5d
 			y: -6.5d
+		}
+		{
+			id: "1782AFD3FEDA289D"
+			tasks: [{
+				id: "1CDD229E7D88D131"
+				item: "kubejs:cube4"
+				type: "item"
+			}]
+			x: 27.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["093ED6A840F6DA35"]
+			id: "0827884925F499E6"
+			tasks: [{
+				id: "635015DF2853137F"
+				item: "kubejs:cube4_inert"
+				type: "item"
+			}]
+			x: 25.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["6670E8852A38CA41"]
+			id: "1A40D3321B4C441E"
+			tasks: [{
+				id: "34D02F3FE1E1AF3A"
+				item: "thermal:machine_press"
+				type: "item"
+			}]
+			x: 2.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["1A40D3321B4C441E"]
+			id: "73326041157181E4"
+			rewards: [{
+				count: 2
+				id: "202A5A54DFF2F617"
+				item: "kubejs:cube1_packaged"
+				type: "item"
+			}]
+			tasks: [{
+				id: "4F307FDE04FF80E5"
+				item: "kubejs:cube1_packaged"
+				type: "item"
+			}]
+			x: 2.0d
+			y: 11.0d
+		}
+		{
+			dependencies: ["37D55022DE62376F"]
+			id: "114E6D6EB9678BE2"
+			tasks: [
+				{
+					id: "6E015F96D28F09C4"
+					item: "create:basin"
+					type: "item"
+				}
+				{
+					id: "60835C1F8D682DFF"
+					item: "create:mechanical_press"
+					type: "item"
+				}
+			]
+			x: 7.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["114E6D6EB9678BE2"]
+			id: "69BE714AAC5F1DDF"
+			tasks: [{
+				id: "3F149E5ECEAD5725"
+				item: "kubejs:cube2_packaged"
+				type: "item"
+			}]
+			x: 7.0d
+			y: 11.0d
+		}
+		{
+			dependencies: ["33AAE8F5101428AF"]
+			id: "142AF78AFD2BC46A"
+			tasks: [{
+				id: "6D169796EFA8A04C"
+				item: "kubejs:cube3_packaged"
+				type: "item"
+			}]
+			x: 18.0d
+			y: 11.0d
+		}
+		{
+			dependencies: ["3107958440563499"]
+			id: "33AAE8F5101428AF"
+			tasks: [{
+				id: "145E23CF590C9334"
+				item: "mekanism:osmium_compressor"
+				type: "item"
+			}]
+			x: 18.0d
+			y: 10.0d
+		}
+		{
+			dependencies: [
+				"3107958440563499"
+				"6CFA8A52F22FF77D"
+				"78AE16FD5072FE51"
+			]
+			id: "093ED6A840F6DA35"
+			tasks: [
+				{
+					id: "4D06D8F10CD58221"
+					item: "create:basin"
+					type: "item"
+				}
+				{
+					id: "4650750F5B387C22"
+					item: "create:blaze_burner"
+					type: "item"
+				}
+				{
+					id: "6D0D343C1A29247A"
+					item: "create:mechanical_mixer"
+					type: "item"
+				}
+				{
+					id: "7085C91B6726D312"
+					item: "create:blaze_cake"
+					type: "item"
+				}
+			]
+			x: 22.0d
+			y: 9.0d
+		}
+		{
+			description: ["You can combine fissile fuel and fluorite dust in a purification chamber to obtain a fissile fuel pellet, useful for crafting the next tier of mechanical essences."]
+			id: "24B023237C9D1908"
+			rewards: [{
+				id: "6FB13B2278D8F292"
+				item: "kubejs:fission_pellet"
+				type: "item"
+			}]
+			tasks: [{
+				id: "437F7768B4488B76"
+				item: "kubejs:fission_pellet"
+				type: "item"
+			}]
+			x: 44.0d
+			y: 13.0d
+		}
+		{
+			dependencies: ["58C76679A6C11DCB"]
+			id: "6CFA8A52F22FF77D"
+			tasks: [{
+				id: "1836A24D93D75E8F"
+				item: "kubejs:fission_pellet"
+				type: "item"
+			}]
+			x: 22.0d
+			y: 8.0d
+		}
+		{
+			dependencies: [
+				"1EE4D4CF62E3DABF"
+				"2BAFD3ABA42960FC"
+			]
+			id: "58C76679A6C11DCB"
+			tasks: [{
+				id: "78198AC36B126542"
+				item: "mekanism:purification_chamber"
+				type: "item"
+			}]
+			x: 22.0d
+			y: 7.0d
+		}
+		{
+			id: "1EE4D4CF62E3DABF"
+			tasks: [{
+				id: "32AA02A8B444961F"
+				item: "mekanism:dust_fluorite"
+				type: "item"
+			}]
+			x: 22.0d
+			y: 6.0d
+		}
+		{
+			id: "2BAFD3ABA42960FC"
+			rewards: [{
+				id: "7700B387E31FCBC3"
+				item: {
+					Count: 1b
+					id: "mekanism:basic_chemical_tank"
+					tag: {
+						mekData: {
+							GasTanks: [{
+								Tank: 0b
+								stored: {
+									amount: 64000L
+									gasName: "mekanism:fissile_fuel"
+								}
+							}]
+							InfusionTanks: [ ]
+							Items: [ ]
+							PigmentTanks: [ ]
+							SlurryTanks: [ ]
+							componentConfig: {
+								config2: {
+									side0: 4
+									side1: 1
+									side2: 1
+									side3: 1
+									side4: 1
+									side5: 1
+								}
+								config3: {
+									side0: 4
+									side1: 1
+									side2: 1
+									side3: 1
+									side4: 1
+									side5: 1
+								}
+								config4: {
+									side0: 4
+									side1: 1
+									side2: 1
+									side3: 1
+									side4: 1
+									side5: 1
+								}
+								config5: {
+									side0: 4
+									side1: 1
+									side2: 1
+									side3: 1
+									side4: 1
+									side5: 1
+								}
+								config6: {
+									side0: 4
+									side1: 1
+									side2: 1
+									side3: 1
+									side4: 1
+									side5: 1
+								}
+								eject2: 1b
+								eject3: 1b
+								eject4: 1b
+								eject5: 1b
+								eject6: 0b
+							}
+							componentEjector: {
+								color0: -1
+								color1: -1
+								color2: -1
+								color3: -1
+								color4: -1
+								color5: -1
+								strictInput: 0b
+							}
+							controlType: 0
+							dumping: 0
+							owner: [I;
+								-265032353
+								-257276231
+								-1206336954
+								-524834293
+							]
+							securityMode: 0
+						}
+					}
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "042989A493555F0C"
+				item: {
+					Count: 1b
+					id: "mekanism:basic_chemical_tank"
+					tag: {
+						mekData: {
+							GasTanks: [{
+								Tank: 0b
+								stored: {
+									amount: 64000L
+									gasName: "mekanism:fissile_fuel"
+								}
+							}]
+							InfusionTanks: [ ]
+							Items: [ ]
+							PigmentTanks: [ ]
+							SlurryTanks: [ ]
+							componentConfig: {
+								config2: {
+									side0: 4
+									side1: 1
+									side2: 1
+									side3: 1
+									side4: 1
+									side5: 1
+								}
+								config3: {
+									side0: 4
+									side1: 1
+									side2: 1
+									side3: 1
+									side4: 1
+									side5: 1
+								}
+								config4: {
+									side0: 4
+									side1: 1
+									side2: 1
+									side3: 1
+									side4: 1
+									side5: 1
+								}
+								config5: {
+									side0: 4
+									side1: 1
+									side2: 1
+									side3: 1
+									side4: 1
+									side5: 1
+								}
+								config6: {
+									side0: 4
+									side1: 1
+									side2: 1
+									side3: 1
+									side4: 1
+									side5: 1
+								}
+								eject2: 1b
+								eject3: 1b
+								eject4: 1b
+								eject5: 1b
+								eject6: 0b
+							}
+							componentEjector: {
+								color0: -1
+								color1: -1
+								color2: -1
+								color3: -1
+								color4: -1
+								color5: -1
+								strictInput: 0b
+							}
+							controlType: 0
+							dumping: 0
+							owner: [I;
+								-265032353
+								-257276231
+								-1206336954
+								-524834293
+							]
+							securityMode: 0
+						}
+					}
+				}
+				type: "item"
+			}]
+			title: "Fissile Fuel"
+			x: 23.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["1C75EFEF22263A49"]
+			id: "78AE16FD5072FE51"
+			tasks: [{
+				id: "49545B5F610917E3"
+				item: "mekanism:elite_control_circuit"
+				type: "item"
+			}]
+			x: 20.5d
+			y: 8.0d
+		}
+		{
+			dependencies: [
+				"78F9DD13059B209C"
+				"1E8C13976A193FDA"
+			]
+			id: "1C75EFEF22263A49"
+			tasks: [{
+				id: "0BC0240B5CE01284"
+				item: "mekanism:combiner"
+				type: "item"
+			}]
+			x: 20.5d
+			y: 7.0d
+		}
+		{
+			dependencies: [
+				"66D658A4411B346E"
+				"01EEB343F4CB1697"
+			]
+			id: "1E8C13976A193FDA"
+			tasks: [{
+				id: "1684CC28FBB2F894"
+				item: "mekanism:advanced_control_circuit"
+				type: "item"
+			}]
+			x: 20.5d
+			y: 6.0d
+		}
+		{
+			id: "78F9DD13059B209C"
+			tasks: [{
+				count: 2L
+				id: "4DD46D0C8EC6A53E"
+				item: "mekanism:alloy_reinforced"
+				type: "item"
+			}]
+			x: 19.5d
+			y: 7.0d
+		}
+		{
+			id: "66D658A4411B346E"
+			tasks: [{
+				id: "2D55577D2724EBF1"
+				item: "mekanism:basic_control_circuit"
+				type: "item"
+			}]
+			x: 20.5d
+			y: 5.0d
+		}
+		{
+			id: "01EEB343F4CB1697"
+			tasks: [{
+				count: 2L
+				id: "2869767C0D655112"
+				item: "mekanism:alloy_infused"
+				type: "item"
+			}]
+			x: 19.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["4B95E003C81117FC"]
+			id: "16EC705C8FB3EAC3"
+			tasks: [{
+				id: "21471AA4B8D93769"
+				title: "Chapter 4 automation"
+				type: "checkmark"
+			}]
+			x: 22.0d
+			y: -15.5d
+		}
+		{
+			id: "61134EF3D95BD81E"
+			tasks: [{
+				id: "76BAAAF40E1196F2"
+				item: "kubejs:cube4_dust"
+				type: "item"
+			}]
+			x: 29.5d
+			y: 9.0d
+		}
+		{
+			id: "1C91A5A1864A9379"
+			tasks: [{
+				id: "254AF00A67792DD6"
+				item: "kubejs:cube4_packaged"
+				type: "item"
+			}]
+			x: 31.5d
+			y: 9.0d
 		}
 	]
 	title: "Automation"

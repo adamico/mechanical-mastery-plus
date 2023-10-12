@@ -10,7 +10,7 @@
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["1A67C9B9ABB4E969"]
+			dependencies: ["47D8F95F5317A47D"]
 			description: [
 				"New tier, new materials; you know the deal already."
 				""
@@ -67,31 +67,25 @@
 			y: -2.0d
 		}
 		{
-			dependencies: ["4E81E76086558A19"]
+			dependencies: ["36E164D94BE0A6E3"]
 			description: ["The fractionating still can process crude oil into usable products, such as light/heavy oil."]
 			id: "6201AC6B5614B2EA"
-			rewards: [
-				{
-					id: "18A3AD161F07ED8F"
-					type: "xp"
-					xp: 100
-				}
-				{
-					id: "42B50B4BC6DE9380"
-					item: "thermal:crude_oil_bucket"
-					type: "item"
-				}
-			]
+			rewards: [{
+				count: 2
+				id: "6C8A9ACDA95A5EB4"
+				item: "thermal:machine_refinery"
+				type: "item"
+			}]
 			tasks: [{
 				id: "29A1C4C987D9ACC0"
 				item: "thermal:machine_refinery"
 				type: "item"
 			}]
-			x: -7.0d
+			x: -5.0d
 			y: -5.0d
 		}
 		{
-			dependencies: ["6201AC6B5614B2EA"]
+			dependencies: ["0F7EF0BDD2AE23CD"]
 			description: ["The refining process used to obtain refined fuel also gives additional bitumen, sulfur and tar as byproducts, making it especially useful."]
 			id: "7943076114A42DFC"
 			rewards: [{
@@ -104,8 +98,8 @@
 				item: "thermal:refined_fuel_bucket"
 				type: "item"
 			}]
-			x: 0.5d
-			y: -5.0d
+			x: -1.0d
+			y: -4.0d
 		}
 		{
 			dependencies: ["4E81E76086558A19"]
@@ -159,19 +153,7 @@
 			]
 			title: "Fissile Fuel Production"
 			x: -5.0d
-			y: -2.0d
-		}
-		{
-			dependencies: ["3E8F024835BB58F7"]
-			description: ["You can combine fissile fuel and fluorite dust in a purification chamber to obtain a fissile fuel pellet, useful for crafting the next tier of mechanical essences."]
-			id: "56E72EB694287116"
-			tasks: [{
-				id: "081EADF184E19536"
-				item: "kubejs:fission_pellet"
-				type: "item"
-			}]
-			x: -4.0d
-			y: -2.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["3E8F024835BB58F7"]
@@ -187,7 +169,7 @@
 				{
 					id: "697B2186AB389257"
 					type: "xp"
-					xp: 100
+					xp: 200
 				}
 			]
 			shape: "hexagon"
@@ -220,8 +202,8 @@
 				}
 			]
 			title: "Fission Reactor"
-			x: -4.0d
-			y: -1.5d
+			x: -5.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["2B2DAA2647444F4F"]
@@ -230,7 +212,7 @@
 			rewards: [{
 				id: "4C494F95D2B34E5B"
 				type: "xp"
-				xp: 100
+				xp: 400
 			}]
 			shape: "hexagon"
 			subtitle: "Large-scale power production at last"
@@ -282,8 +264,8 @@
 				}
 			]
 			title: "Steam turbine"
-			x: -2.5d
-			y: -1.5d
+			x: -3.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["0850DE0A32947FA8"]
@@ -307,8 +289,8 @@
 				}
 			]
 			title: "Blaze Cake"
-			x: -4.0d
-			y: -3.5d
+			x: -3.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["4E81E76086558A19"]
@@ -326,17 +308,27 @@
 				type: "item"
 			}]
 			x: -5.0d
-			y: -3.5d
+			y: -3.0d
 		}
 		{
 			dependencies: [
 				"13C6D580E33815D5"
-				"56E72EB694287116"
 				"26277A0FD5DA798E"
 				"0EE1192BF90562ED"
+				"7943076114A42DFC"
+				"734A1AA8AB0B96B3"
 			]
-			description: ["Just as before, combine all the required ingredients in a superheated mixer and... wait, it's not done yet? It seems like it needs to be activated some way... Maybe that fission reactor can help?"]
+			description: [
+				"Just as before, combine all the required ingredients in a superheated mixer and... wait, it's not done yet? It seems like it needs to be activated some way... "
+				""
+				"It looks a bit pale... maybe with a bit of color?"
+			]
 			id: "2FE7FB850DB23DC1"
+			rewards: [{
+				id: "6B9633FAE10F4C2D"
+				type: "xp"
+				xp: 400
+			}]
 			tasks: [{
 				id: "74FB67C7495D4ACD"
 				item: "kubejs:cube4_inert"
@@ -349,6 +341,7 @@
 			dependencies: [
 				"1A67C9B9ABB4E969"
 				"597011E2824EC464"
+				"3610828C7BB6B916"
 			]
 			description: ["Use your philosopher's stone to transmute several coal into a more dense fuel source."]
 			id: "26277A0FD5DA798E"
@@ -363,11 +356,14 @@
 				item: "projecte:mobius_fuel"
 				type: "item"
 			}]
-			x: 0.5d
-			y: -1.0d
+			x: -3.0d
+			y: -2.0d
 		}
 		{
-			dependencies: ["1A67C9B9ABB4E969"]
+			dependencies: [
+				"1A67C9B9ABB4E969"
+				"3BA40F043222AB03"
+			]
 			description: ["Mekanism's second-to-last tiered circuit."]
 			id: "0EE1192BF90562ED"
 			rewards: [{
@@ -380,30 +376,19 @@
 				item: "mekanism:elite_control_circuit"
 				type: "item"
 			}]
-			x: 0.5d
-			y: -3.0d
+			x: -3.0d
+			y: -4.0d
 		}
 		{
-			dependencies: [
-				"7943076114A42DFC"
-				"2FE7FB850DB23DC1"
-			]
-			description: ["As it turns out, using refined fuel and infusing it with large amounts of energy is able to give the mechanical essence the power it needed to activate into it's full glory."]
+			dependencies: ["2FE7FB850DB23DC1"]
+			description: ["As it turns out, with a good old paint job the mechanical essence is finally activated into its full glory."]
 			id: "157D4C0E9C7A0928"
-			rewards: [
-				{
-					count: 2
-					id: "7C1787B15B45C8FB"
-					item: "kubejs:cube3_packaged"
-					type: "item"
-				}
-				{
-					id: "2A5A9D8FDB633CC7"
-					type: "xp"
-					xp: 100
-				}
-			]
-			shape: "gear"
+			rewards: [{
+				count: 2
+				id: "69AEDCC7DE7818F5"
+				item: "kubejs:cube4"
+				type: "item"
+			}]
 			tasks: [
 				{
 					id: "121DC9C8822A6410"
@@ -411,73 +396,33 @@
 					type: "item"
 				}
 				{
-					id: "777000DE9150BF38"
-					item: "kubejs:cube4_packaged"
+					id: "2890FB8CDF96DD2C"
+					item: "mekanism:painting_machine"
+					type: "item"
+				}
+				{
+					id: "5234A46EDA14DB4C"
+					item: "mekanism:pigment_mixer"
+					type: "item"
+				}
+				{
+					id: "0D5B87826C461B93"
+					item: "mekanism:pigment_extractor"
 					type: "item"
 				}
 			]
-			x: 2.0d
+			x: 1.0d
 			y: -2.0d
-		}
-		{
-			dependencies: ["157D4C0E9C7A0928"]
-			description: ["Crafting ingredient for powerful ProjectE gadgets"]
-			id: "0B14BDB8AF4F57C3"
-			optional: true
-			tasks: [{
-				id: "1A9FCA86B142B03B"
-				item: "projecte:dark_matter"
-				type: "item"
-			}]
-			x: 3.5d
-			y: -3.5d
-		}
-		{
-			dependencies: ["0B14BDB8AF4F57C3"]
-			description: ["Due to their internal RF transfer limit, Thermal machines usually don't behave when combined with tick accelerating like the watch of flowing time. The solution? Increase their transfer limit, of course! The ideal setup for a machine is one resonant integral component and three localized time destabilizer augments."]
-			id: "1F4DCE63D7FA0449"
-			optional: true
-			rewards: [{
-				id: "294823914E17CB0E"
-				item: {
-					Count: 1b
-					id: "kubejs:time_augment"
-					tag: {
-						AugmentData: {
-							MachineEnergy: 0.75d
-							MachinePower: 1.0d
-							RFXfer: 20.0d
-							Type: "Machine"
-						}
-					}
-				}
-				type: "item"
-			}]
-			shape: "rsquare"
-			subtitle: "I need SPEED"
-			tasks: [{
-				id: "23AAE391F8B8AA17"
-				item: {
-					Count: 1b
-					id: "kubejs:time_augment"
-					tag: {
-						AugmentData: {
-							MachineEnergy: 0.75d
-							MachinePower: 1.0d
-							RFXfer: 20.0d
-							Type: "Machine"
-						}
-					}
-				}
-				type: "item"
-			}]
-			x: 5.0d
-			y: -3.5d
 		}
 		{
 			dependencies: ["4E81E76086558A19"]
 			description: ["The transmutation interface is a useful block that lets your digital storage draw and insert items directly from your EMC table, making EMC links replacable by refined storage importers/exporters."]
 			id: "1D17BB2C9280B0C7"
+			rewards: [{
+				id: "14CCBD0BDFE9CFC7"
+				type: "xp"
+				xp: 100
+			}]
 			shape: "square"
 			subtitle: "EMC links? Pathetic..."
 			tasks: [{
@@ -485,34 +430,31 @@
 				item: "projectexpansion:transmutation_interface"
 				type: "item"
 			}]
-			x: -7.0d
-			y: 1.0d
+			x: -8.5d
+			y: -2.0d
 		}
 		{
 			dependencies: ["157D4C0E9C7A0928"]
 			description: ["So you saw how to get infinite water with the evertide amulet but you still want more? Fine, you may have the sink, now stop whining ;)"]
 			id: "174E355F55DE59F8"
+			rewards: [{
+				id: "0507DDF5E75E4C9E"
+				item: {
+					Count: 1b
+					ForgeCaps: {
+						Parent: { }
+					}
+					id: "projecte:evertide_amulet"
+				}
+				type: "item"
+			}]
 			tasks: [{
 				id: "6D8D0E6A16383E3D"
 				item: "cookingforblockheads:sink"
 				type: "item"
 			}]
-			x: 3.5d
-			y: -0.5d
-		}
-		{
-			dependencies: ["593EEC1F5CA967D5"]
-			description: ["Mekanism has its own generators to produce large amonuts of RF, however some of the most powerful ones aren't available to you yet."]
-			icon: "mekanism:basic_energy_cube"
-			id: "6BC0E03B21A767EA"
-			tasks: [{
-				id: "624D93FD44FD3044"
-				item: "mekanism:ultimate_energy_cube"
-				type: "item"
-			}]
-			title: "Mekanism Power"
-			x: -1.0d
-			y: -0.5d
+			x: 0.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["4E81E76086558A19"]
@@ -553,8 +495,8 @@
 				type: "item"
 			}]
 			title: "Powah is OPawah!"
-			x: -5.0d
-			y: -0.5d
+			x: -7.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["2F6C7F4F8FAC880A"]
@@ -564,11 +506,18 @@
 				"Easily the most OP energy transporting mod, flux networks lets you wirelessly transfer energy from inputs (flux plugs) into outputs (flux points), with no transfer limit."
 			]
 			id: "5328C8928A16E3CB"
-			rewards: [{
-				id: "1A9000D39CDD5CFF"
-				item: "fluxnetworks:flux_controller"
-				type: "item"
-			}]
+			rewards: [
+				{
+					id: "1A9000D39CDD5CFF"
+					item: "fluxnetworks:flux_controller"
+					type: "item"
+				}
+				{
+					id: "6FE977D0BFA76E19"
+					item: "fluxnetworks:flux_point"
+					type: "item"
+				}
+			]
 			tasks: [
 				{
 					id: "2E12FB4D8D2EAAD0"
@@ -582,13 +531,13 @@
 				}
 			]
 			title: "Flux Networks"
-			x: 2.0d
-			y: 1.0d
+			x: 0.5d
+			y: -1.0d
 		}
 		{
 			dependencies: [
 				"482E9CE8C89D097B"
-				"6BC0E03B21A767EA"
+				"593EEC1F5CA967D5"
 			]
 			dependency_requirement: "one_completed"
 			description: ["In order to unlock Flux Network you have to build up FE and submit it through the FTB Quests Task Screen."]
@@ -605,8 +554,8 @@
 				value: 100000000L
 			}]
 			title: "We need more energy!"
-			x: 0.5d
-			y: 1.0d
+			x: -1.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["65CCE43B4B2AEC6F"]
@@ -636,8 +585,8 @@
 				}
 			]
 			title: "Advanced Powah!"
-			x: -4.0d
-			y: -0.5d
+			x: -5.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["1CB1D2ADD015C590"]
@@ -664,61 +613,24 @@
 				item: "powah:reactor_spirited"
 				type: "item"
 			}]
-			x: -1.5d
-			y: 2.0d
+			x: -3.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["157D4C0E9C7A0928"]
-			id: "617ADD293B6F4635"
-			rewards: [{
-				id: "3D618CC1CC262ACE"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projectexpansion:magnum_star_ein"
-				}
-				type: "item"
-			}]
-			tasks: [{
-				id: "59F5614093FD63BA"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projecte:swiftwolf_rending_gale"
-				}
-				type: "item"
-			}]
-			x: 2.0d
-			y: -0.5d
-		}
-		{
-			dependencies: ["157D4C0E9C7A0928"]
-			id: "12FCDEA62294CF57"
-			rewards: [{
-				count: 2
-				id: "67750E8D96B610DA"
-				item: "minecraft:nether_star"
-				type: "item"
-			}]
-			tasks: [{
-				id: "3E3B6FE5976254CF"
-				item: "angelring:angel_ring"
-				type: "item"
-			}]
-			x: 2.0d
-			y: -3.5d
-		}
-		{
 			description: ["When placed on a pedestal, drastically increases nearby machine's speed"]
 			id: "158C15F8B10B3DBB"
 			optional: true
 			rewards: [{
-				id: "6B429B6F08EAC8BC"
-				item: "projecte:dm_pedestal"
+				id: "01A4FB769638B399"
+				item: {
+					Count: 1b
+					ForgeCaps: {
+						Parent: { }
+					}
+					id: "projecte:watch_of_flowing_time"
+					tag: { }
+				}
 				type: "item"
 			}]
 			tasks: [{
@@ -731,6 +643,206 @@
 					id: "projecte:watch_of_flowing_time"
 					tag: { }
 				}
+				type: "item"
+			}]
+			x: 1.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["157D4C0E9C7A0928"]
+			id: "44A70964598EE49B"
+			rewards: [{
+				id: "6D24095EAD548072"
+				item: "projecte:dm_pedestal"
+				type: "item"
+			}]
+			tasks: [{
+				id: "123FDF1D902908D9"
+				item: "projecte:dm_pedestal"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			description: [
+				"Nicolas Flamel himself would be proud of my Magnus Opus!"
+				""
+				"I can now transmute metals and gems and obtain Ender Pearls from iron!"
+			]
+			id: "3610828C7BB6B916"
+			rewards: [{
+				id: "282E262ACF03A0A1"
+				item: "projecte:blue_alchemical_bag"
+				type: "item"
+			}]
+			tasks: [{
+				id: "6DB3FA711471B4A7"
+				item: {
+					Count: 1b
+					ForgeCaps: {
+						Parent: { }
+					}
+					id: "projecte:philosophers_stone"
+					tag: { }
+				}
+				type: "item"
+			}]
+			title: "Lapis Philosophorum"
+			x: -5.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			description: [
+				"To obtain more advanced Circuits you have to use a Combiner."
+				""
+				"Tip: you can transform the machine into a factory with the appropriate Tier upgrader."
+			]
+			id: "3BA40F043222AB03"
+			rewards: [{
+				id: "647612FE82C8599D"
+				item: "mekanism:basic_tier_installer"
+				type: "item"
+			}]
+			tasks: [{
+				id: "06CE6D0AAB691463"
+				item: "mekanism:combiner"
+				type: "item"
+			}]
+			x: -5.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["6201AC6B5614B2EA"]
+			id: "0F7EF0BDD2AE23CD"
+			rewards: [
+				{
+					id: "4F09C39BE2CD124F"
+					item: "thermal:light_oil_bucket"
+					type: "item"
+				}
+				{
+					id: "4661696206E482B0"
+					item: "thermal:heavy_oil_bucket"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "29EED4A5A8B64070"
+					item: "thermal:heavy_oil_bucket"
+					type: "item"
+				}
+				{
+					id: "13F9EEA2C8372698"
+					item: "thermal:light_oil_bucket"
+					type: "item"
+				}
+			]
+			x: -3.0d
+			y: -5.0d
+		}
+		{
+			dependencies: [
+				"5E71405449C5F19D"
+				"1B885B1F413015D4"
+			]
+			id: "4B95E003C81117FC"
+			rewards: [{
+				count: 2
+				id: "13B0397C6C896F68"
+				item: "kubejs:cube4_packaged"
+				type: "item"
+			}]
+			shape: "gear"
+			tasks: [
+				{
+					id: "1CC445062EDCC764"
+					item: "kubejs:cube4_packaged"
+					type: "item"
+				}
+				{
+					id: "64381A2A61CBBAAA"
+					item: "mekanism:pressurized_reaction_chamber"
+					type: "item"
+				}
+			]
+			x: 4.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			id: "36E164D94BE0A6E3"
+			rewards: [{
+				id: "685319FEB19CE7A9"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "240F4B0C2E05DFFD"
+				item: "thermal:machine_centrifuge"
+				type: "item"
+			}]
+			x: -7.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["3E8F024835BB58F7"]
+			id: "734A1AA8AB0B96B3"
+			rewards: [{
+				id: "6A45A20048DDB7A3"
+				item: "kubejs:fission_pellet"
+				type: "item"
+			}]
+			tasks: [{
+				id: "4737D51B71DEE50B"
+				item: "kubejs:fission_pellet"
+				type: "item"
+			}]
+			x: -3.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["1BA45133DB917C98"]
+			id: "5E71405449C5F19D"
+			tasks: [{
+				id: "132BE40B1363DAE8"
+				item: "kubejs:cube4_dust"
+				type: "item"
+			}]
+			x: 3.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["157D4C0E9C7A0928"]
+			id: "1BA45133DB917C98"
+			tasks: [{
+				id: "0D03738A93A386DE"
+				item: "create:crushing_wheel"
+				type: "item"
+			}]
+			x: 2.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["0EFF3C51AF78C4B8"]
+			id: "1B885B1F413015D4"
+			tasks: [{
+				id: "6271A97CB4A050F2"
+				item: "mekanism:solar_neutron_activator"
+				type: "item"
+			}]
+			x: 3.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["5E71405449C5F19D"]
+			id: "0EFF3C51AF78C4B8"
+			tasks: [{
+				id: "168C3D2F2AB2418F"
+				item: "mekanism:chemical_oxidizer"
 				type: "item"
 			}]
 			x: 3.5d

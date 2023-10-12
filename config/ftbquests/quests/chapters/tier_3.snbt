@@ -9,7 +9,7 @@
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["78775CE81571FAC9"]
+			dependencies: ["1C35B03170B0D544"]
 			dependency_requirement: "one_completed"
 			description: ["You managed to create an improved version of your mechanical essence, but you feel it can still be made better, and you are going to find out how."]
 			icon: "kubejs:cube2"
@@ -93,7 +93,10 @@
 			y: -4.0d
 		}
 		{
-			dependencies: ["131EF687B47D577F"]
+			dependencies: [
+				"131EF687B47D577F"
+				"367BFFFD63D1CA88"
+			]
 			description: [
 				"To awaken the Dormant Effigies you need to be infused with a specific liquefied material from Thermal Magma Crucibles."
 				""
@@ -152,7 +155,7 @@
 			]
 			title: "Awakening the Effigies"
 			x: 10.5d
-			y: -1.5d
+			y: -2.5d
 		}
 		{
 			dependencies: [
@@ -212,12 +215,17 @@
 			dependencies: ["550E4D68A98180F5"]
 			description: ["The most essential Mekanism machine. With this, you will be able to craft increasingly powerful alloys and circuits in order to craft more advanced machines."]
 			id: "1A983E23E641CA16"
+			rewards: [{
+				id: "1CB23BC0C9815229"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
 				id: "556CA1EB382FD7EA"
 				item: "mekanism:metallurgic_infuser"
 				type: "item"
 			}]
-			x: 10.5d
+			x: 9.5d
 			y: -6.5d
 		}
 		{
@@ -233,37 +241,27 @@
 		}
 		{
 			dependencies: [
-				"3F58AD4EAE336B1E"
 				"52CFEB2AD82AB105"
 				"64F073734D1826C5"
+				"3F58AD4EAE336B1E"
 			]
-			description: ["By combining the power of the elements with the power of machinery, you managed to further enhance mechanical essences, making them much more powerful and with a much higer EMC value."]
+			description: [
+				"By combining the power of the elements with the power of machinery, you managed to further enhance mechanical essences, making them much more powerful."
+				""
+				"You know the drill, time to package the essence into its crystal form."
+			]
 			id: "1A67C9B9ABB4E969"
-			rewards: [
-				{
-					id: "7593102392587CD6"
-					item: "kubejs:cube3_packaged"
-					type: "item"
-				}
-				{
-					id: "42B111B959E9854B"
-					type: "xp"
-					xp: 100
-				}
-			]
-			shape: "gear"
-			tasks: [
-				{
-					id: "7C9B3A9DC8EC9311"
-					item: "kubejs:cube3"
-					type: "item"
-				}
-				{
-					id: "72C60D5DB41BB470"
-					item: "kubejs:cube3_packaged"
-					type: "item"
-				}
-			]
+			rewards: [{
+				count: 4
+				id: "7593102392587CD6"
+				item: "kubejs:cube3"
+				type: "item"
+			}]
+			tasks: [{
+				id: "7C9B3A9DC8EC9311"
+				item: "kubejs:cube3"
+				type: "item"
+			}]
 			x: 14.0d
 			y: -4.0d
 		}
@@ -306,13 +304,12 @@
 				item: "thermal:upgrade_augment_3"
 				type: "item"
 			}]
-			shape: "gear"
 			tasks: [{
 				id: "656E0F048CF98250"
 				item: "thermal:upgrade_augment_3"
 				type: "item"
 			}]
-			x: 15.5d
+			x: 15.0d
 			y: -5.5d
 		}
 		{
@@ -681,6 +678,11 @@
 		{
 			dependencies: ["1B6E93FE3C6D5966"]
 			id: "1503E72A3505D8A6"
+			rewards: [{
+				id: "248FE48076701778"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
 				id: "2D76A8958643FAE2"
 				item: "thermal:machine_crucible"
@@ -704,19 +706,24 @@
 				item: "minecraft:gunpowder"
 				type: "item"
 			}]
-			x: 12.5d
+			x: 12.0d
 			y: -4.0d
 		}
 		{
 			dependencies: ["612B4AC5C732EF19"]
 			id: "559F68C9913B2CFA"
+			rewards: [{
+				id: "58AB214AF82ACE2B"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
 				id: "0C0692AC6830F79D"
 				item: "create:empty_blaze_burner"
 				type: "item"
 			}]
 			x: 10.5d
-			y: -4.0d
+			y: -5.5d
 		}
 		{
 			dependencies: [
@@ -730,11 +737,16 @@
 				type: "item"
 			}]
 			x: 9.5d
-			y: -5.0d
+			y: -5.5d
 		}
 		{
 			dependencies: ["550E4D68A98180F5"]
 			id: "396A16E573D2EAFF"
+			rewards: [{
+				id: "48A1C088FDF173D8"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
 				id: "0E4BC293E1C31725"
 				item: "mekanism:enrichment_chamber"
@@ -751,8 +763,8 @@
 				item: "hyperbox:hyperbox"
 				type: "item"
 			}]
-			x: 15.5d
-			y: -4.5d
+			x: 16.0d
+			y: -5.0d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
@@ -762,16 +774,16 @@
 				item: "farmingforblockheads:market"
 				type: "item"
 			}]
-			x: 15.5d
+			x: 15.0d
 			y: -2.5d
 		}
 		{
 			dependencies: ["2C3D96AA3C9853ED"]
 			id: "63562122843997F6"
 			rewards: [{
-				id: "1E7F0A73E5D93653"
-				type: "xp"
-				xp: 100
+				id: "1FB70040ABD3A14F"
+				item: "minecraft:skeleton_skull"
+				type: "item"
 			}]
 			tasks: [{
 				id: "4ABD583553478E8A"
@@ -800,13 +812,18 @@
 				type: "item"
 			}]
 			title: "Squeeze me mechanically!"
-			x: 15.5d
-			y: -3.5d
+			x: 16.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["1503E72A3505D8A6"]
 			description: ["sorry but no sorry, no more fluid encapsulator from the overused Thermal mod :)"]
 			id: "131EF687B47D577F"
+			rewards: [{
+				id: "3EEB22E47BFF7890"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
 				id: "3A7FC622637711D2"
 				item: "create:spout"
@@ -814,7 +831,7 @@
 			}]
 			title: "Bottling Effigies"
 			x: 9.5d
-			y: -3.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["0936B0DE389AE023"]
@@ -844,6 +861,61 @@
 			title: "Rods"
 			x: 11.5d
 			y: -1.5d
+		}
+		{
+			dependencies: [
+				"63562122843997F6"
+				"7C7832CD5506088C"
+			]
+			description: ["Old tales speak about an old ritual requiring to infuse a skeleton skull with water..."]
+			icon: "thermal:ender_bucket"
+			id: "367BFFFD63D1CA88"
+			rewards: [{
+				id: "5ADEC8F5D517E09A"
+				item: "thermal:ender_bucket"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5784FC92307E1864"
+				item: "thermal:ender_bucket"
+				type: "item"
+			}]
+			title: "Bucket of Ender"
+			x: 9.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["1A67C9B9ABB4E969"]
+			description: [""]
+			id: "47D8F95F5317A47D"
+			rewards: [{
+				count: 4
+				id: "489E55DD09D7C060"
+				item: "kubejs:cube3_packaged"
+				type: "item"
+			}]
+			shape: "gear"
+			subtitle: "Compress yourself!"
+			tasks: [
+				{
+					id: "5C6FA3ECB6F2FAE9"
+					item: "mekanism:osmium_compressor"
+					type: "item"
+				}
+				{
+					id: "5E2C4697524581EE"
+					item: "kubejs:cube3_packaged"
+					type: "item"
+				}
+				{
+					id: "540CD1D13B549254"
+					item: "mekanism:block_osmium"
+					type: "item"
+				}
+			]
+			title: "Yellow Cubes"
+			x: 16.5d
+			y: -4.0d
 		}
 	]
 	title: "Tier 3: Basic Mekanism"

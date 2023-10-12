@@ -17,16 +17,14 @@
 				{
 					auto: "enabled"
 					id: "5B5959E4689A32A0"
-					table_id: 6741767295260868068L
 					title: "Stop the flow of time"
-					type: "questsadditions:repeat"
+					type: "custom"
 				}
 				{
 					auto: "enabled"
 					id: "62C24F14C3E8A8CB"
-					table_id: 1457763491092482768L
 					title: "Make noon"
-					type: "questsadditions:repeat"
+					type: "custom"
 				}
 			]
 			subtitle: "Begone!"
@@ -46,8 +44,7 @@
 			rewards: [{
 				auto: "enabled"
 				id: "5774AEF29E538BA2"
-				table_id: 3127175903169831962L
-				type: "questsadditions:repeat"
+				type: "custom"
 			}]
 			shape: "square"
 			subtitle: "I didn't mean what I said!"
@@ -67,8 +64,7 @@
 			rewards: [{
 				auto: "enabled"
 				id: "0CFAED89841C1677"
-				table_id: 2523283000924372420L
-				type: "questsadditions:repeat"
+				type: "custom"
 			}]
 			subtitle: "I hope my items didn't fall into the void..."
 			tasks: [{
@@ -87,8 +83,7 @@
 			rewards: [{
 				auto: "enabled"
 				id: "7F37E790BECA406F"
-				table_id: 6877507471908056940L
-				type: "questsadditions:repeat"
+				type: "custom"
 			}]
 			shape: "square"
 			subtitle: "Try me, universe!"
@@ -108,8 +103,7 @@
 			rewards: [{
 				auto: "enabled"
 				id: "3C52095A71411E85"
-				table_id: 5031915644954519282L
-				type: "questsadditions:repeat"
+				type: "custom"
 			}]
 			subtitle: "The answer is nobody, nobody likes them"
 			tasks: [{
@@ -127,8 +121,7 @@
 			rewards: [{
 				auto: "enabled"
 				id: "1746CEE073B754EE"
-				table_id: 5495574862062641215L
-				type: "questsadditions:repeat"
+				type: "custom"
 			}]
 			shape: "square"
 			subtitle: "This button looks brand new, it seems nobody has ever pressed it..."
@@ -148,14 +141,12 @@
 				{
 					auto: "enabled"
 					id: "2EFBAF17E0518750"
-					table_id: 6386785087915326975L
-					type: "questsadditions:repeat"
+					type: "custom"
 				}
 				{
 					auto: "enabled"
 					id: "4BA7DB87B9315AE4"
-					table_id: 5038739109671112373L
-					type: "questsadditions:repeat"
+					type: "custom"
 				}
 			]
 			subtitle: "Just as I was preparing to take a screenshot..."
@@ -174,8 +165,7 @@
 			rewards: [{
 				auto: "enabled"
 				id: "4DC7A1E00D298607"
-				table_id: 1578231006101341936L
-				type: "questsadditions:repeat"
+				type: "custom"
 			}]
 			shape: "square"
 			subtitle: "Lightning is cool, too!"
