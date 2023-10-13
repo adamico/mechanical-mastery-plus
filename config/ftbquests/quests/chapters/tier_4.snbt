@@ -316,7 +316,7 @@
 				"26277A0FD5DA798E"
 				"0EE1192BF90562ED"
 				"7943076114A42DFC"
-				"734A1AA8AB0B96B3"
+				"24B023237C9D1908"
 			]
 			description: [
 				"Just as before, combine all the required ingredients in a superheated mixer and... wait, it's not done yet? It seems like it needs to be activated some way... "
@@ -780,29 +780,20 @@
 				type: "xp"
 				xp: 100
 			}]
-			tasks: [{
-				id: "240F4B0C2E05DFFD"
-				item: "thermal:machine_centrifuge"
-				type: "item"
-			}]
+			tasks: [
+				{
+					id: "240F4B0C2E05DFFD"
+					item: "thermal:machine_centrifuge"
+					type: "item"
+				}
+				{
+					id: "66A7D7C638195EBF"
+					item: "thermal:crude_oil_bucket"
+					type: "item"
+				}
+			]
 			x: -7.0d
 			y: -4.0d
-		}
-		{
-			dependencies: ["3E8F024835BB58F7"]
-			id: "734A1AA8AB0B96B3"
-			rewards: [{
-				id: "6A45A20048DDB7A3"
-				item: "kubejs:fission_pellet"
-				type: "item"
-			}]
-			tasks: [{
-				id: "4737D51B71DEE50B"
-				item: "kubejs:fission_pellet"
-				type: "item"
-			}]
-			x: -3.0d
-			y: -1.0d
 		}
 		{
 			dependencies: ["1BA45133DB917C98"]
@@ -847,6 +838,23 @@
 			}]
 			x: 3.5d
 			y: -2.0d
+		}
+		{
+			dependencies: ["3E8F024835BB58F7"]
+			description: ["You can combine fissile fuel and fluorite dust in a purification chamber to obtain a fissile fuel pellet, useful for crafting the next tier of mechanical essences."]
+			id: "24B023237C9D1908"
+			rewards: [{
+				id: "6FB13B2278D8F292"
+				item: "kubejs:fission_pellet"
+				type: "item"
+			}]
+			tasks: [{
+				id: "437F7768B4488B76"
+				item: "kubejs:fission_pellet"
+				type: "item"
+			}]
+			x: -3.0d
+			y: -1.0d
 		}
 	]
 	title: "Tier 4: Advanced Mekanism"

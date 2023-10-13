@@ -13,17 +13,13 @@ ServerEvents.recipes(event => {
 	event.recipes.createCrushing(Item.of('kubejs:cube4_dust', 2), 'kubejs:cube4');
 
 	event.shapeless('kubejs:cube1', ['#forge:gears/gold', Item.of('#forge:rods/copper', 2), '#forge:gears/iron']);
-	event.recipes.createMixing('kubejs:cube2', ['kubejs:cube1', '#forge:gears/steel', Item.of('#forge:rods/brass', 2), '#forge:gears/invar']);
+	event.recipes.createMixing('kubejs:cube2', ['kubejs:cube1', '#forge:gears/steel', Item.of('#forge:dusts/quartz', 2), Item.of('#forge:rods/brass', 2), '#forge:gears/invar']);
+
 	event.recipes.createMixing('kubejs:cube3', ['kubejs:cube2', 'minecraft:fire_charge', 'thermal:lightning_charge', 'thermal:ice_charge', 'thermal:earth_charge', 'mekanism:basic_control_circuit']).heated();
 	event.recipes.createMixing('kubejs:cube4_inert', [Fluid.of('thermal:refined_fuel', 1000), 'kubejs:cube3', 'kubejs:fission_pellet', 'projecte:mobius_fuel', 'mekanism:elite_control_circuit']).superheated();
 
 	event.recipes.createMixing(Item.of('minecraft:gunpowder', 4), [Item.of('#minecraft:coals', 2), ['thermal:niter', 'thermal:niter_dust'], ['thermal:sulfur', 'thermal:sulfur_dust']]).heated();
 
-	event.recipes.createMixing(Item.of('extendedcrafting:luminessence', 4), ['minecraft:gunpowder', 'minecraft:redstone', Fluid.of('thermal:glowstone', 500)]).heated();
-	event.recipes.createMixing(Fluid.of('createchromaticreturn:refined_mixture', 250), [Item.of('minecraft:smooth_quartz', 8), Item.of('minecraft:glowstone', 8), Item.of('projecte:mobius_fuel', 4), Item.of('mekanism:hdpe_sheet', 4),Fluid.of('minecraft:water', 1000)]).superheated();  
-  event.recipes.createMixing(Item.of('createchromaticreturn:chromatic_compound', 2), [Item.of('createchromaticreturn:glowing_ingot', 2), Item.of('create:polished_rose_quartz', 2), Item.of('create:powdered_obsidian', 2), Item.of('create:andesite_alloy', 2)]).superheated();
-  event.recipes.createMixing('createchromaticreturn:refined_radiance', ['createchromaticreturn:chromatic_compound', Fluid.of('createchromaticreturn:refined_mixture', 100)]).superheated();
-	
 	bottling('kubejs:blaze_effigy', [Fluid.of('minecraft:lava', 1000), 'kubejs:dormant_effigy']);
 	bottling('kubejs:blizz_effigy', [Fluid.of('thermal:ender', 1000), 'kubejs:dormant_effigy']);
 	bottling('kubejs:blitz_effigy', [Fluid.of('thermal:glowstone', 1000), 'kubejs:dormant_effigy']);
@@ -124,24 +120,13 @@ ServerEvents.recipes(event => {
 		]).transitionalItem('kubejs:incomplete_creative_upgrade').loops(10);
 
 	event.recipes.createSequencedAssembly([
-		'create:creative_blaze_cake'
-		], 'projectexpansion:final_star_shard', [
-		event.recipes.createDeploying('kubejs:incomplete_creative_blaze_cake', ['kubejs:incomplete_creative_blaze_cake', 'create:blaze_cake']),
-		event.recipes.createDeploying('kubejs:incomplete_creative_blaze_cake', ['kubejs:incomplete_creative_blaze_cake', 'create:blaze_cake']),
-		event.recipes.createFilling('kubejs:incomplete_creative_blaze_cake', ['kubejs:incomplete_creative_blaze_cake', Fluid.of('minecraft:lava', 1000)]),
-		event.recipes.createFilling('kubejs:incomplete_creative_blaze_cake', ['kubejs:incomplete_creative_blaze_cake', Fluid.of('thermal:ender', 1000)]),
-		event.recipes.createFilling('kubejs:incomplete_creative_blaze_cake', ['kubejs:incomplete_creative_blaze_cake', Fluid.of('thermal:redstone', 1000)]),
-		event.recipes.createFilling('kubejs:incomplete_creative_blaze_cake', ['kubejs:incomplete_creative_blaze_cake', Fluid.of('thermal:glowstone', 1000)]),
-		]).transitionalItem('kubejs:incomplete_creative_blaze_cake').loops(100);
-
-	event.recipes.createSequencedAssembly([
 		'projectexpansion:final_star_shard' // have this item be a guaranteed output
 		], 'minecraft:nether_star', [ 
 		// the transitional item set by transitionalItem()
 		// is the item that will be used during the recipe as the item that the input is using to transition to the output.
 		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'createchromaticreturn:refined_radiance']), 
 		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'powah:crystal_nitro']), 
-		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'create:precision_mechanism']), 
+		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'createchromaticreturn:refined_mechanism']), 
 		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'kubejs:cube1']), 
 		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'kubejs:cube2']), 
 		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'kubejs:cube3']), 
@@ -152,7 +137,7 @@ ServerEvents.recipes(event => {
 	  ' ABABA ',
 	  'ABCCCBA',
 	  'BCDDDCB',
-	  'ACDEDCA',
+	  'ACDSDCA',
 	  'BCDDDCB',
 	  'ABCCCBA',
 	  ' ABABA '
@@ -161,7 +146,7 @@ ServerEvents.recipes(event => {
 	  B: 'mekanism:pellet_antimatter',
 	  C: 'projecte:dark_matter',
 	  D: 'projecte:aeternalis_fuel_block',
-	  E: 'extendedcrafting:ultimate_singularity'
+	  S: 'createchromaticreturn:bedrock_shard'
 	});
 
   event.recipes.thermal.bottler(Item.of('kubejs:time_augment',
@@ -224,7 +209,7 @@ ServerEvents.recipes(event => {
   event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 50), '#forge:cobblestone').energy(300);
   
   event.remove({id: 'thermal:machines/crucible/crucible_netherrack_to_lava'});
-  event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 1000), 'kubejs:carbonized_netherrack').energy(3600);
+  event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 1000), 'kubejs:netherrack').energy(3600);
 
   event.recipes.thermal.bottler(Item.of('kubejs:time_augment', '{AugmentData:{Type:"Machine",MachinePower:1d,MachineEnergy:0.75d,RFXfer:20d}}'), [Fluid.of('industrialforegoing:ether_gas', 500), 'kubejs:incomplete_time_augment']);
 
@@ -232,6 +217,4 @@ ServerEvents.recipes(event => {
   event.recipes.thermal.press('fluxnetworks:flux_dust', ['kubejs:coated_redstone', 'fluxnetworks:flux_block']).energy(200);
 
   event.replaceInput({id: 'thermal:dynamo_stirling'}, '#forge:gears/iron', 'ae2:vibration_chamber');
-
-	event.replaceInput({output: 'create:empty_blaze_burner'}, 'minecraft:netherrack', 'kubejs:carbonized_netherrack');
 });

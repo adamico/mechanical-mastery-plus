@@ -247,6 +247,7 @@
 			y: 0.5d
 		}
 		{
+			dependencies: ["733C4D5387EDD61C"]
 			description: ["The compression dynamo can burn liquids such as refined fuel into large amounts of RF."]
 			id: "2E769FE13EC39E0D"
 			optional: true
@@ -263,6 +264,35 @@
 			}]
 			x: 3.5d
 			y: -2.5d
+		}
+		{
+			dependencies: [
+				"61BE356972B79B00"
+				"2BA7E55C7B7EB3C3"
+			]
+			description: ["No RF used, very fast processing"]
+			hide: true
+			hide_dependency_lines: true
+			id: "7CE54486D31A47BA"
+			optional: true
+			shape: "hexagon"
+			tasks: [{
+				id: "52A22B4A47C791B2"
+				item: "thermal:machine_efficiency_creative_augment"
+				type: "item"
+			}]
+			x: 1.0d
+			y: -1.0d
+		}
+		{
+			id: "733C4D5387EDD61C"
+			tasks: [{
+				id: "126BC37C483FC765"
+				title: "Energy'r'us"
+				type: "checkmark"
+			}]
+			x: 3.5d
+			y: -3.5d
 		}
 	]
 	title: "Thermal"

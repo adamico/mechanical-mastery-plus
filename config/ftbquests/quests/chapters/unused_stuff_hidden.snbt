@@ -8,28 +8,6 @@
 	order_index: 3
 	progression_mode: "flexible"
 	quest_links: [ ]
-	quests: [{
-		disable_toast: true
-		id: "7C7832CD5506088C"
-		rewards: [{
-			auto: "invisible"
-			id: "4628E290FC3E8264"
-			item: "thermal:ender_bucket"
-			type: "item"
-		}]
-		secret: true
-		tasks: [{
-			block: "minecraft:skeleton_skull"
-			block_type: 0
-			icon: "minecraft:water_bucket"
-			id: "206FBF6BF445BBE5"
-			replace: true
-			replaced: "minecraft:water"
-			type: "questsadditions:place"
-			value: 1L
-		}]
-		x: 0.0d
-		y: 0.0d
-	}]
+	quests: [ ]
 	title: "Hidden \\& secret quests"
 }

@@ -3,6 +3,8 @@
 	default_quest_shape: ""
 	filename: "tier_5_endgame"
 	group: "2D94E5A1412E2495"
+	hide_quest_details_until_startable: true
+	hide_quest_until_deps_visible: true
 	icon: "projectexpansion:final_star"
 	id: "41DDE820BE913888"
 	order_index: 4
@@ -10,7 +12,13 @@
 	quests: [
 		{
 			dependencies: ["157D4C0E9C7A0928"]
-			description: ["I understand everything now. The meaning behind all the crystals I have birthed into this universe. They were guiding me, slowly teaching me how to create stronger, more powerful catalysts, in order to achieve the final goal. The final star awaits me..."]
+			description: [
+				"\"I understand everything now. The meaning behind all the crystals I have birthed into this universe. "
+				""
+				"They were guiding me, slowly teaching me how to create stronger, more powerful catalysts, in order to achieve the final goal. The final star awaits me...\""
+				""
+				"In this chapter you will mix and match Create Chromatic Return, Mekanism and Project E."
+			]
 			icon: "kubejs:cube4"
 			id: "07980075BFE4C586"
 			rewards: [{
@@ -26,39 +34,38 @@
 				type: "checkmark"
 			}]
 			title: "After all these years..."
-			x: 0.0d
-			y: 0.0d
+			x: -15.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["07980075BFE4C586"]
-			description: ["Some say, this is what the emptyness of space is made of."]
+			dependencies: ["081C1697195680DC"]
+			description: [
+				"Some say, this is what the emptyness of space is made of."
+				""
+				"Infusing things with raw essence of darkness is inefficient, if I enrich it first I can extract *8 times* more darkness essence out of it."
+			]
 			icon: "kubejs:black_essence"
 			id: "059DCF9720BF62A2"
 			rewards: [{
 				count: 4
 				id: "355174964BFE7C2E"
-				item: "kubejs:black_essence"
-				type: "item"
-			}]
-			tasks: [{
-				id: "1E04BCFD21FF51AD"
-				title: "Essence of Darkness"
-				type: "checkmark"
-			}]
-			x: 1.5d
-			y: -1.0d
-		}
-		{
-			dependencies: ["059DCF9720BF62A2"]
-			description: ["Infusing things with raw essence of darkness is inefficient, if I enrich it first I can extract *20 times* more darkness essence out of it."]
-			id: "2A54B4D2619C6CD8"
-			tasks: [{
-				id: "78EDF4223CDC7F5B"
 				item: "kubejs:enriched_black_essence"
 				type: "item"
 			}]
-			x: 2.5d
-			y: 0.0d
+			tasks: [
+				{
+					id: "7F3711C0AD95DC1F"
+					item: "kubejs:black_essence"
+					type: "item"
+				}
+				{
+					id: "216AD4222596F736"
+					item: "kubejs:enriched_black_essence"
+					type: "item"
+				}
+			]
+			x: -13.0d
+			y: 4.5d
 		}
 		{
 			dependencies: ["059DCF9720BF62A2"]
@@ -67,16 +74,16 @@
 			rewards: [{
 				count: 4
 				id: "16C9D04597D15877"
-				item: "extendedcrafting:black_iron_ingot"
+				item: "mekanism:hdpe_sheet"
 				type: "item"
 			}]
 			tasks: [{
 				id: "09B189D88272BD7C"
-				item: "extendedcrafting:black_iron_ingot"
+				item: "mekanism:hdpe_sheet"
 				type: "item"
 			}]
-			x: 2.5d
-			y: -1.0d
+			x: -12.0d
+			y: 4.5d
 		}
 		{
 			dependencies: ["133E1F837FA4A41B"]
@@ -87,8 +94,8 @@
 				item: "kubejs:black_hdpe_sheet"
 				type: "item"
 			}]
-			x: 3.5d
-			y: -1.0d
+			x: -12.0d
+			y: 6.0d
 		}
 		{
 			dependencies: ["53F4A40B4EAECB3E"]
@@ -99,91 +106,40 @@
 				item: "mekanism:solar_neutron_activator"
 				type: "item"
 			}]
-			x: 4.0d
-			y: -2.0d
+			x: -10.5d
+			y: 4.5d
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
-			description: ["I can create skeleton skulls with some bone and a body stone, and infuse it with darkness essence to create wither skeleton skulls, which can be used to summon the wither."]
-			id: "72B98B8FDAC0BC45"
-			rewards: [
-				{
-					count: 3
-					id: "51319CE00B5C2E91"
-					item: "minecraft:wither_skeleton_skull"
-					type: "item"
-				}
-				{
-					count: 4
-					id: "458F9B32CB5FE339"
-					item: "minecraft:soul_sand"
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					count: 3L
-					id: "27F4994572067C96"
-					item: "minecraft:wither_skeleton_skull"
-					type: "item"
-				}
-				{
-					count: 4L
-					id: "3122F67E65383D36"
-					item: "minecraft:soul_sand"
-					type: "item"
-				}
-			]
-			title: "Summoning the wither"
-			x: -1.5d
-			y: -1.0d
-		}
-		{
-			dependencies: ["72B98B8FDAC0BC45"]
-			description: ["A powerful star in and of itself, it serves as an ingredient for the most powerful star."]
+			description: ["With darkness essence I can now create create wither skeleton skulls, which can be used to summon the wither."]
 			id: "384BB4E82F5D69C6"
 			rewards: [{
 				id: "2C30B178D34BDF57"
 				type: "xp"
 				xp: 100
 			}]
-			tasks: [{
-				id: "35F207A74B6EAA09"
-				item: "minecraft:nether_star"
-				type: "item"
-			}]
-			x: -1.5d
-			y: -4.0d
-		}
-		{
-			dependencies: ["4B9AE47D2EBF5155"]
-			description: ["There are multiple ways to summon the wither automatically, but one of the easiest is to use the wither builder. I just add the required items, and it will summon it automatically for me, which I can then kill with a mob crusher for automatic nether stars."]
-			id: "2D4CFBD09E6AFA85"
-			optional: true
-			rewards: [{
-				id: "550D8B6CF244D38D"
-				item: "minecraft:nether_star"
-				type: "item"
-			}]
-			shape: "gear"
 			tasks: [
 				{
-					id: "00A26E4F9FAA8300"
-					item: "industrialforegoing:wither_builder"
+					count: 4L
+					id: "7A64FB616CDF2212"
+					item: "minecraft:soul_sand"
 					type: "item"
 				}
 				{
-					id: "31C401704351B201"
-					item: "industrialforegoing:mob_crusher"
+					count: 3L
+					id: "4B37C69EB76CDE02"
+					item: "minecraft:wither_skeleton_skull"
 					type: "item"
 				}
 			]
-			title: "Automating withers"
-			x: -3.5d
-			y: -2.5d
+			x: -13.5d
+			y: 2.0d
 		}
 		{
-			dependencies: ["41E380D0E0E5E75A"]
+			dependencies: [
+				"41E380D0E0E5E75A"
+				"53F4A40B4EAECB3E"
+			]
 			id: "41D9B7AC1089FA83"
 			tasks: [
 				{
@@ -211,12 +167,23 @@
 				}
 			]
 			title: "Supercritical Phase Shifter"
-			x: 4.0d
-			y: -3.0d
+			x: -10.5d
+			y: 6.0d
 		}
 		{
-			dependencies: ["41D9B7AC1089FA83"]
-			description: ["Although slow and expensive to obtain, this antimatter will certainly help me create stuff that would otherwise be physically impossible."]
+			dependencies: [
+				"41D9B7AC1089FA83"
+				"13EE1ECF3DC0491D"
+				"31C75750B2530381"
+				"716AE122DA75B4CC"
+			]
+			description: [
+				"Although slow and expensive to obtain, this antimatter will certainly help me create stuff that would otherwise be physically impossible."
+				""
+				"I also discovered a way to obtain antimatter pellets through Create Chromatic Return!"
+			]
+			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "6A313C7F7A10ABE7"
 			rewards: [{
 				count: 2
@@ -229,8 +196,8 @@
 				item: "mekanism:pellet_antimatter"
 				type: "item"
 			}]
-			x: 3.0d
-			y: -4.0d
+			x: -8.5d
+			y: 1.5d
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
@@ -240,42 +207,54 @@
 				item: "powah:crystal_nitro"
 				type: "item"
 			}]
-			x: -0.5d
-			y: -4.0d
+			x: -13.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
 			id: "21736DEF38D368D1"
 			tasks: [{
-				id: "308E6FF10841A021"
-				item: "create:precision_mechanism"
+				id: "17624FD411EEB46C"
+				item: "createchromaticreturn:refined_mechanism"
 				type: "item"
 			}]
-			x: 0.5d
-			y: -4.0d
+			x: -13.5d
+			y: 1.0d
 		}
 		{
 			dependencies: [
-				"384BB4E82F5D69C6"
 				"4DA3EFBDC9FE2FDF"
 				"21736DEF38D368D1"
+				"2F6F2DB24C399EAA"
+			]
+			description: [
+				"The &dFinal Star Shard&r allows the creation of some of the creative items."
+				""
+				"Not all creative items are needed for the creative vending upgrade, some are simply optional if you want to go after them or not."
 			]
 			id: "2BA7E55C7B7EB3C3"
+			rewards: [{
+				id: "1243FCC35F5F5DB9"
+				item: "projectexpansion:final_star_shard"
+				type: "item"
+			}]
 			tasks: [{
 				id: "0694DCFB36A75BB7"
 				item: "projectexpansion:final_star_shard"
 				type: "item"
 			}]
-			x: 0.0d
-			y: -5.5d
+			x: -12.0d
+			y: 1.5d
 		}
 		{
 			dependencies: [
 				"2BA7E55C7B7EB3C3"
 				"6A313C7F7A10ABE7"
-				"1449829DCB1B39C4"
+				"146B61BAC1D8D21C"
 			]
 			description: ["There it is. The most powerful star ever created. With the EMC this gives me I would be set for life. However, I can find better uses out of it."]
+			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "53B7C4EFD1B28F70"
 			shape: "octagon"
 			tasks: [{
@@ -283,20 +262,8 @@
 				item: "projectexpansion:final_star"
 				type: "item"
 			}]
-			x: 0.0d
-			y: -7.5d
-		}
-		{
-			dependencies: ["07980075BFE4C586"]
-			description: ["By fusing 1000 of each metal and gem together, I am able to create the ultimate singularity, containing every element necessary for the creation of the final star."]
-			id: "1449829DCB1B39C4"
-			tasks: [{
-				id: "0E9D814D30592F58"
-				item: "extendedcrafting:ultimate_singularity"
-				type: "item"
-			}]
-			x: 1.5d
-			y: -4.0d
+			x: -7.0d
+			y: 1.5d
 		}
 		{
 			dependencies: [
@@ -304,8 +271,8 @@
 				"0F08BE53368BBA0E"
 				"4912D9951F6B69A9"
 				"001789AD77BFECCF"
-				"643082630E0B6CFD"
 				"72B973D152D0D797"
+				"643082630E0B6CFD"
 			]
 			description: ["The true potential of the final star. With this, EMC and raw materials are something I shall never have to worry about again."]
 			id: "1D6666CFC0B349E1"
@@ -315,8 +282,8 @@
 				item: "projectexpansion:final_power_flower"
 				type: "item"
 			}]
-			x: 0.0d
-			y: -10.5d
+			x: -4.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["1D6666CFC0B349E1"]
@@ -333,11 +300,10 @@
 				item: "functionalstorage:creative_vending_upgrade"
 				type: "item"
 			}]
-			x: 0.0d
-			y: -12.0d
+			x: -2.5d
+			y: 1.5d
 		}
 		{
-			dependencies: ["53B7C4EFD1B28F70"]
 			description: ["Infinite kinetic stress capacity."]
 			id: "0F08BE53368BBA0E"
 			tasks: [{
@@ -345,12 +311,12 @@
 				item: "create:creative_motor"
 				type: "item"
 			}]
-			x: -1.5d
-			y: -7.5d
+			x: -5.5d
+			y: 1.5d
 		}
 		{
 			dependencies: ["53B7C4EFD1B28F70"]
-			description: ["Unlimited Power. Note: DO NOT Place the ultimate energy cube down in order to charge it, charge it either wirlessly or by putting it as an item in any charging machine, placing it down will make you the owner, and not recognize it for the crafting recipe."]
+			description: ["Unlimited Power."]
 			id: "643082630E0B6CFD"
 			subtitle: "READ QUEST FOR HOW TO CRAFT"
 			tasks: [{
@@ -369,8 +335,8 @@
 				}
 				type: "item"
 			}]
-			x: 1.0d
-			y: -8.5d
+			x: -5.5d
+			y: 0.5d
 		}
 		{
 			dependencies: ["53B7C4EFD1B28F70"]
@@ -381,22 +347,8 @@
 				item: "mekanism:creative_fluid_tank"
 				type: "item"
 			}]
-			x: -1.0d
-			y: -8.5d
-		}
-		{
-			dependencies: ["6D84D702189A9505"]
-			description: ["Infinite Item to EMC import/export."]
-			id: "448F9E6FE3FC4F04"
-			optional: true
-			shape: "hexagon"
-			tasks: [{
-				id: "4BE9E7FC0757F556"
-				item: "projectexpansion:final_emc_link"
-				type: "item"
-			}]
-			x: -3.0d
-			y: -5.5d
+			x: -5.5d
+			y: -0.5d
 		}
 		{
 			dependencies: ["53B7C4EFD1B28F70"]
@@ -407,15 +359,15 @@
 				item: "refinedstorage:creative_storage_disk"
 				type: "item"
 			}]
-			x: 0.0d
-			y: -9.0d
+			x: -5.5d
+			y: 2.5d
 		}
 		{
 			dependencies: [
-				"2BA7E55C7B7EB3C3"
 				"6A313C7F7A10ABE7"
+				"53B7C4EFD1B28F70"
 			]
-			description: ["Infinite gas and chemical storage and withdrawal. Highly recommended to craft before final star, since it allows for infinite antimatter."]
+			description: ["Infinite gas and chemical storage and withdrawal."]
 			id: "72B973D152D0D797"
 			subtitle: "Recommended before Final Star"
 			tasks: [{
@@ -423,105 +375,11 @@
 				item: "mekanism:creative_chemical_tank"
 				type: "item"
 			}]
-			x: 1.5d
-			y: -7.5d
+			x: -5.5d
+			y: 3.5d
 		}
 		{
-			dependencies: ["2BA7E55C7B7EB3C3"]
-			description: ["Not all creative items are needed for the creative vending upgrade, some are simply optional if you want to go after them or not."]
-			id: "6D84D702189A9505"
-			optional: true
-			tasks: [{
-				id: "04885001577E80D6"
-				title: "Optional Creative Items"
-				type: "checkmark"
-			}]
-			x: -2.0d
-			y: -5.5d
-		}
-		{
-			dependencies: ["6D84D702189A9505"]
-			description: ["Can set the heat level of blaze burners permanently and at no cost."]
-			id: "5414E6D079200533"
-			optional: true
-			shape: "hexagon"
-			tasks: [{
-				id: "20511334736BEEF1"
-				item: "create:creative_blaze_cake"
-				type: "item"
-			}]
-			x: -3.0d
-			y: -6.5d
-		}
-		{
-			dependencies: ["6D84D702189A9505"]
-			description: ["No RF used, very fast processing"]
-			id: "7CE54486D31A47BA"
-			optional: true
-			shape: "hexagon"
-			tasks: [{
-				id: "52A22B4A47C791B2"
-				item: "thermal:machine_efficiency_creative_augment"
-				type: "item"
-			}]
-			x: -3.0d
-			y: -4.5d
-		}
-		{
-			dependencies: ["72B98B8FDAC0BC45"]
-			description: ["Trap a wither inside a stasis chamber and place a fluid laser base directly above it to passively obtain ether gas."]
-			id: "05A0C01966A06A98"
-			optional: true
-			rewards: [{
-				id: "6932205E63F2FBA1"
-				item: "industrialforegoing:ether_gas_bucket"
-				type: "item"
-			}]
-			tasks: [
-				{
-					id: "4CE0541FA8CC0B50"
-					item: "industrialforegoing:ether_gas_bucket"
-					type: "item"
-				}
-				{
-					id: "45FF0C8EE95F6CB6"
-					item: "industrialforegoing:stasis_chamber"
-					type: "item"
-				}
-				{
-					id: "028BB5B8B978C1B4"
-					item: "industrialforegoing:laser_drill"
-					type: "item"
-				}
-				{
-					id: "3AEF9320EDC346FB"
-					item: "industrialforegoing:fluid_laser_base"
-					type: "item"
-				}
-				{
-					id: "6A2FE44642802298"
-					item: "industrialforegoing:laser_lens10"
-					type: "item"
-				}
-			]
-			title: "Getting Ether Gas"
-			x: -2.5d
-			y: -1.5d
-		}
-		{
-			dependencies: ["05A0C01966A06A98"]
-			description: ["Use the Ether Gas to craft the highest tier machine frame."]
-			id: "4B9AE47D2EBF5155"
-			optional: true
-			tasks: [{
-				id: "3DEBDD1821AE9150"
-				item: "industrialforegoing:machine_frame_supreme"
-				type: "item"
-			}]
-			x: -3.5d
-			y: -1.0d
-		}
-		{
+			dependencies: ["07980075BFE4C586"]
 			description: ["Due to their internal RF transfer limit, Thermal machines usually don't behave when combined with tick accelerating like the watch of flowing time. The solution? Increase their transfer limit, of course! The ideal setup for a machine is one resonant integral component and three localized time destabilizer augments."]
 			id: "1F4DCE63D7FA0449"
 			optional: true
@@ -541,7 +399,6 @@
 				}
 				type: "item"
 			}]
-			shape: "rsquare"
 			subtitle: "I need SPEED"
 			tasks: [{
 				id: "23AAE391F8B8AA17"
@@ -559,10 +416,11 @@
 				}
 				type: "item"
 			}]
-			x: -4.5d
-			y: -5.5d
+			x: -16.0d
+			y: 2.5d
 		}
 		{
+			dependencies: ["07980075BFE4C586"]
 			id: "617ADD293B6F4635"
 			rewards: [{
 				id: "3D618CC1CC262ACE"
@@ -586,10 +444,11 @@
 				}
 				type: "item"
 			}]
-			x: -5.0d
-			y: -1.5d
+			x: -16.5d
+			y: 1.5d
 		}
 		{
+			dependencies: ["07980075BFE4C586"]
 			id: "12FCDEA62294CF57"
 			rewards: [{
 				count: 2
@@ -602,8 +461,346 @@
 				item: "angelring:angel_ring"
 				type: "item"
 			}]
-			x: -5.0d
-			y: -4.5d
+			x: -16.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["799C7A2E5C9265DB"]
+			id: "081C1697195680DC"
+			tasks: [{
+				id: "06811927C1845A13"
+				item: "createchromaticreturn:shadow_essence_bucket"
+				type: "item"
+			}]
+			x: -14.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["7F828305491C1CB4"]
+			id: "799C7A2E5C9265DB"
+			tasks: [{
+				id: "54E65B1C9931ADA3"
+				item: "createchromaticreturn:carbon_powder"
+				type: "item"
+			}]
+			x: -15.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			id: "7F828305491C1CB4"
+			tasks: [{
+				id: "06239B9A472654A1"
+				item: "projecte:dark_matter"
+				type: "item"
+			}]
+			x: -15.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["384BB4E82F5D69C6"]
+			description: [
+				"A Nether Star, finally!"
+				""
+				"A powerful item in and of itself, it serves as an ingredient for the most powerful star."
+			]
+			id: "2F6F2DB24C399EAA"
+			tasks: [{
+				id: "02BC1A7A17F01DD5"
+				item: "minecraft:nether_star"
+				type: "item"
+			}]
+			x: -13.5d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"41E380D0E0E5E75A"
+				"11E00D93DEF3B126"
+			]
+			dependency_requirement: "one_completed"
+			description: [
+				"Polonium and Plutonium can be obtained in two ways :"
+				""
+				"- processing Nuclear Waste from a Mekanism Fission Reactor"
+				""
+				"- processing Uranium crystals with Create Chromatic Return recipes"
+			]
+			id: "13EE1ECF3DC0491D"
+			rewards: [
+				{
+					count: 4
+					id: "3E3F1174C7017C27"
+					item: "mekanism:pellet_plutonium"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "4311C40FBB69DB03"
+					item: "mekanism:pellet_polonium"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "00A8E9F6942827FB"
+					item: "mekanism:pellet_plutonium"
+					type: "item"
+				}
+				{
+					id: "74EB63DD5CD1C96D"
+					item: "mekanism:pellet_polonium"
+					type: "item"
+				}
+			]
+			x: -10.5d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"4845D27E265AF3F4"
+				"09ED24BFED3BBE29"
+			]
+			id: "11E00D93DEF3B126"
+			rewards: [
+				{
+					id: "521C075C8D33C7F4"
+					item: "createchromaticreturn:polonium_nugget"
+					type: "item"
+				}
+				{
+					id: "166FA38CEDE98FA6"
+					item: "createchromaticreturn:plutonium_nugget"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "0EA395DCD833F4A0"
+					item: "createchromaticreturn:plutonium_nugget"
+					type: "item"
+				}
+				{
+					id: "2B3E9D6096E1833B"
+					item: "createchromaticreturn:polonium_nugget"
+					type: "item"
+				}
+			]
+			x: -10.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["4556B0134F410EC5"]
+			id: "4845D27E265AF3F4"
+			tasks: [{
+				id: "7024ADCD3338E20C"
+				item: "mekanism:crystal_uranium"
+				type: "item"
+			}]
+			x: -12.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"081C1697195680DC"
+				"56D5909AEA258984"
+			]
+			description: [
+				"To obtain Shadow steel I need to mix chromatic compound with shadow essence."
+				""
+				"I can then crush it to obtain Shadow Steel Powder which is an ingredient for the Creative Blaze Cake."
+				"And I even get a 75% refund of the Shadow Steel used in the process!"
+			]
+			hide_dependency_lines: true
+			id: "09ED24BFED3BBE29"
+			rewards: [{
+				count: 4
+				id: "0B8681D420BE2B88"
+				item: "createchromaticreturn:shadow_steel"
+				type: "item"
+			}]
+			tasks: [{
+				count: 4L
+				id: "729334D9A268D496"
+				item: "createchromaticreturn:shadow_steel"
+				type: "item"
+			}]
+			x: -10.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["3ABB6AD99E3C09EC"]
+			id: "4556B0134F410EC5"
+			tasks: [{
+				id: "5A0C9E032B9144DD"
+				item: "mekanism:chemical_crystallizer"
+				type: "item"
+			}]
+			x: -13.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["07B8B19717AA7365"]
+			id: "3ABB6AD99E3C09EC"
+			tasks: [{
+				id: "5F8916A7D7CE583E"
+				item: "mekanism:chemical_washer"
+				type: "item"
+			}]
+			x: -14.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["24C282ED9BA60D78"]
+			id: "07B8B19717AA7365"
+			tasks: [{
+				id: "6E5DE3B36637498A"
+				item: "mekanism:chemical_dissolution_chamber"
+				type: "item"
+			}]
+			x: -15.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			id: "24C282ED9BA60D78"
+			tasks: [
+				{
+					id: "39A0EA13CBC52FCD"
+					item: "mekanism:chemical_infuser"
+					type: "item"
+				}
+				{
+					id: "773FE3067B95922D"
+					item: "mekanism:rotary_condensentrator"
+					type: "item"
+				}
+				{
+					id: "66DCCF254F08F5AA"
+					item: "mekanism:chemical_oxidizer"
+					type: "item"
+				}
+				{
+					id: "1DDADC933EF46C54"
+					item: "mekanism:electrolytic_separator"
+					type: "item"
+				}
+			]
+			title: "Into the rabbit gas hole"
+			x: -15.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			hide_dependency_lines: true
+			id: "56D5909AEA258984"
+			tasks: [{
+				id: "27CB841D3051C864"
+				item: "createchromaticreturn:chromatic_compound"
+				type: "item"
+			}]
+			x: -12.0d
+			y: -3.0d
+		}
+		{
+			dependencies: [
+				"48440A9003383920"
+				"429F208B1F91C217"
+			]
+			hide_dependency_lines: true
+			id: "31C75750B2530381"
+			tasks: [{
+				id: "578894E787C3CF84"
+				item: "createchromaticreturn:multiplite_ingot"
+				type: "item"
+			}]
+			x: -8.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["41D9B7AC1089FA83"]
+			id: "48440A9003383920"
+			tasks: [
+				{
+					id: "5BE23F2C4F5A960A"
+					item: "minecraft:shulker_shell"
+					type: "item"
+				}
+				{
+					id: "07D4587FC74361BD"
+					item: "minecraft:dragon_breath"
+					type: "item"
+				}
+			]
+			x: -8.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			hide_dependency_lines: true
+			id: "716AE122DA75B4CC"
+			tasks: [{
+				count: 32L
+				id: "383B6D7DF97E75F6"
+				item: "mekanism:block_refined_obsidian"
+				type: "item"
+			}]
+			x: -8.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["56D5909AEA258984"]
+			hide_dependency_lines: true
+			id: "429F208B1F91C217"
+			tasks: [{
+				count: 16L
+				id: "53B45F060C0522FA"
+				item: "createchromaticreturn:refined_radiance"
+				type: "item"
+			}]
+			x: -8.5d
+			y: -1.0d
+		}
+		{
+			description: [
+				"The radiant glow saber is a weapon forged by the sacred mechanical monks long ago."
+				""
+				"It can one shot any normal monster."
+				""
+				"Are there more powerful weapons than this?"
+			]
+			hide_dependency_lines: true
+			id: "1F8697E9A977FE16"
+			tasks: [{
+				id: "5116A223F31165BF"
+				item: "createchromaticreturn:radiant_glow_saber"
+				type: "item"
+			}]
+			x: -7.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"31C75750B2530381"
+				"1F8697E9A977FE16"
+			]
+			description: [
+				"\"The final weapon is mine! With this glowing claws I can rip the very bedrock apart!\""
+				""
+				"The radiant glow claws are powerful weapons which vaporize enemies and disintegrate blocks."
+				"You can even remove bedrock and rarely obtain &0bedrock shards&r!"
+				""
+				"Wait, where's bedrock?"
+			]
+			hide_dependency_lines: true
+			id: "146B61BAC1D8D21C"
+			tasks: [{
+				id: "3835248C8A5161B7"
+				item: "createchromaticreturn:radiant_glow_claws"
+				type: "item"
+			}]
+			x: -7.0d
+			y: 3.0d
 		}
 	]
 	title: "Tier 5: Endgame"

@@ -16,3 +16,4 @@ import mods.mekanism.api.ingredient.ChemicalStackIngredient.GasStackIngredient;
 //<recipetype:mekanism:activating>.removeByName("mekanism:processing/lategame/polonium");
 
 <recipetype:mekanism:activating>.addRecipe("activate_advanced_mechanical_gas", <gas:crafttweaker:inactive_advanced_mechanical_gas>, <gas:crafttweaker:advanced_mechanical_gas>);
+<recipetype:mekanism:activating>.addRecipe("activate_plutonium", <gas:mekanism:nuclear_waste> * 10, <gas:mekanism:plutonium>);

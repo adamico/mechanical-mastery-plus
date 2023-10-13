@@ -245,6 +245,19 @@
 			x: -3.5d
 			y: 0.5d
 		}
+		{
+			description: ["Infinite Item to EMC import/export."]
+			id: "448F9E6FE3FC4F04"
+			optional: true
+			shape: "hexagon"
+			tasks: [{
+				id: "4BE9E7FC0757F556"
+				item: "projectexpansion:final_emc_link"
+				type: "item"
+			}]
+			x: -2.5d
+			y: 2.0d
+		}
 	]
 	title: "ProjectE(xpansion)"
 }

@@ -211,26 +211,6 @@
 			y: -0.5d
 		}
 		{
-			dependencies: ["491EB18107FC8776"]
-			description: ["Clay can be turned into bricks, another important resource for automation and crafting."]
-			hide: false
-			icon: "minecraft:clay_ball"
-			id: "2B8F40D3510E2D05"
-			rewards: [{
-				count: 16
-				id: "3F9606F24886C828"
-				item: "minecraft:clay_ball"
-				type: "item"
-			}]
-			tasks: [{
-				id: "019E0C2501327EBC"
-				title: "Clay"
-				type: "checkmark"
-			}]
-			x: -2.5d
-			y: -0.5d
-		}
-		{
 			dependencies: [
 				"547050DB11C5FFB7"
 				"2746A3F7A98C2134"

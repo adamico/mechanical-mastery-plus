@@ -8,57 +8,18 @@
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["4B0CD7A24F972E0A"]
 			id: "62E9915998AF3BDB"
 			tasks: [{
 				id: "1A6EDF638EBD1526"
 				item: "create_mechanical_extruder:mechanical_extruder"
 				type: "item"
 			}]
-			x: 0.0d
+			x: -1.5d
 			y: 0.0d
 		}
 		{
-			description: ["Encased fans serve a variety of purposes, from pushing/pulling entities, to fuel-free smelting and item washing. Remember: you can learn more from most Create machines by hovering over them and holding \"W\"."]
-			id: "6DB9CDAA51747A17"
-			rewards: [{
-				id: "082B0F37654EE0A8"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "22A72426F98C212C"
-				item: "create:encased_fan"
-				type: "item"
-			}]
-			x: 1.5d
-			y: 1.5d
-		}
-		{
-			dependencies: ["6DB9CDAA51747A17"]
-			description: ["By washing soul sand with water, you can obtain large amounts of quartz."]
-			id: "638EE765C8F23D1A"
-			rewards: [
-				{
-					count: 16
-					id: "75C8D7D0F91C2163"
-					item: "minecraft:quartz"
-					type: "item"
-				}
-				{
-					id: "0BA610FB0963A21E"
-					type: "xp"
-					xp: 100
-				}
-			]
-			tasks: [{
-				id: "0BA8192E6C74F3FA"
-				item: "minecraft:quartz"
-				type: "item"
-			}]
-			x: 1.5d
-			y: 0.0d
-		}
-		{
+			dependencies: ["4B0CD7A24F972E0A"]
 			description: ["The mechanical press offers an RF-free way of converting ingots into plates."]
 			id: "662DE7460CCF2AA7"
 			rewards: [{
@@ -78,10 +39,11 @@
 					type: "item"
 				}
 			]
-			x: 3.0d
+			x: 1.5d
 			y: 0.0d
 		}
 		{
+			dependencies: ["2C57677F53935E60"]
 			description: ["Create's mechanical belts allow for transportation of items with customizable speed. Since Pretty Pipes offer some advantages and disadvantages to mechanical belts, this quest is optional."]
 			id: "388F7E8E6658980D"
 			optional: true
@@ -96,8 +58,57 @@
 				item: "create:belt_connector"
 				type: "item"
 			}]
-			x: 4.5d
+			x: 1.5d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"4B0CD7A24F972E0A"
+				"2BA7E55C7B7EB3C3"
+			]
+			description: ["Can set the heat level of blaze burners permanently and at no cost."]
+			id: "5414E6D079200533"
+			optional: true
+			shape: "hexagon"
+			tasks: [{
+				id: "20511334736BEEF1"
+				item: "create:creative_blaze_cake"
+				type: "item"
+			}]
+			x: 0.0d
+			y: 1.5d
+		}
+		{
+			id: "4B0CD7A24F972E0A"
+			rewards: [{
+				id: "160021CEDF481944"
+				item: "create:goggles"
+				type: "item"
+			}]
+			tasks: [{
+				id: "0A5F00356EF6D888"
+				item: "create:wrench"
+				type: "item"
+			}]
+			x: 0.0d
 			y: 0.0d
+		}
+		{
+			dependencies: ["4B0CD7A24F972E0A"]
+			icon: "minecraft:kelp"
+			id: "2C57677F53935E60"
+			rewards: [{
+				count: 32
+				id: "18A160D34E965794"
+				item: "minecraft:kelp"
+				type: "item"
+			}]
+			tasks: [{
+				id: "164071F672935F92"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: -1.5d
 		}
 	]
 	title: "Create"

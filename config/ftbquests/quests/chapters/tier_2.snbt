@@ -22,12 +22,6 @@
 					type: "item"
 				}
 				{
-					count: 32
-					id: "758C25765DE0E45E"
-					item: "minecraft:soul_sand"
-					type: "item"
-				}
-				{
 					id: "68ACD79CE84307F9"
 					item: "create:raw_zinc"
 					type: "item"
@@ -35,6 +29,12 @@
 				{
 					id: "346940C2CA4D6F1F"
 					item: "minecraft:cactus"
+					type: "item"
+				}
+				{
+					count: 32
+					id: "72FA3C25A017DC4A"
+					item: "industrialforegoing:tinydryrubber"
 					type: "item"
 				}
 			]
@@ -81,22 +81,6 @@
 					item: "create:shaft"
 					type: "item"
 				}
-				{
-					id: "6E06E0177879977A"
-					item: "create:goggles"
-					type: "item"
-				}
-				{
-					count: 32
-					id: "5441CD08DB7CDD08"
-					item: "minecraft:kelp"
-					type: "item"
-				}
-				{
-					id: "4702BF7FFD51B2EC"
-					item: "create:wrench"
-					type: "item"
-				}
 			]
 			tasks: [
 				{
@@ -112,11 +96,11 @@
 			]
 			title: "Getting Creative"
 			x: -3.0d
-			y: -3.0d
+			y: -2.0d
 		}
 		{
 			dependencies: ["5F73D5F328C236A9"]
-			description: ["In order to use Create machines, you need to generate rotational force. There's a variety of ways to do this, each with their own advantages and disadvantages. You can learn more about each of them by searching them on JEI and holding \"W\"."]
+			description: ["In order to use Create machines, you need to generate rotational force. There's a variety of ways to do this, each with their own advantages and disadvantages. You can learn more about each of them by searching them on JEI and holding the ponder key (search for the correct shortcut in the options."]
 			id: "7C0D8A15D01EC79E"
 			rewards: [{
 				id: "06F39F5878944945"
@@ -152,8 +136,8 @@
 				type: "item"
 			}]
 			title: "Create Power Generation"
-			x: -1.5d
-			y: -3.0d
+			x: -2.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["7C0D8A15D01EC79E"]
@@ -176,14 +160,15 @@
 					type: "item"
 				}
 			]
-			x: 0.5d
-			y: -4.0d
+			x: 1.0d
+			y: -3.0d
 		}
 		{
 			dependencies: [
 				"5DA64773FD308F26"
 				"402D936947B4FBD4"
 				"30297A5669810E41"
+				"1C64CD9F1574DD6D"
 			]
 			description: [
 				"With all your new-found knowledge of materials and alloys, you have managed to create a refined version of mechanical essence."
@@ -223,7 +208,7 @@
 				item: "createaddition:brass_rod"
 				type: "item"
 			}]
-			x: 4.5d
+			x: 4.0d
 			y: -1.0d
 		}
 		{
@@ -239,11 +224,11 @@
 				item: "thermal:invar_gear"
 				type: "item"
 			}]
-			x: 4.5d
-			y: -3.0d
+			x: 4.0d
+			y: -2.5d
 		}
 		{
-			dependencies: ["6EF61C629B2FA814"]
+			dependencies: ["3AB0EBDE89F95DF4"]
 			id: "402D936947B4FBD4"
 			rewards: [{
 				id: "7C42F1A0193087A4"
@@ -255,8 +240,8 @@
 				item: "kubejs:steel_gear"
 				type: "item"
 			}]
-			x: 4.5d
-			y: -5.0d
+			x: 4.0d
+			y: -3.5d
 		}
 		{
 			dependencies: [
@@ -276,7 +261,7 @@
 				item: "jaopca:dusts.brass"
 				type: "item"
 			}]
-			x: 3.0d
+			x: 2.5d
 			y: -1.0d
 		}
 		{
@@ -294,8 +279,8 @@
 				item: "mekanism:dust_steel"
 				type: "item"
 			}]
-			x: 1.5d
-			y: -5.0d
+			x: 2.5d
+			y: -3.5d
 		}
 		{
 			dependencies: ["09E7EB6E38E84886"]
@@ -312,8 +297,8 @@
 				item: "thermal:invar_dust"
 				type: "item"
 			}]
-			x: 3.0d
-			y: -3.0d
+			x: 2.5d
+			y: -2.5d
 		}
 		{
 			dependencies: ["7C0D8A15D01EC79E"]
@@ -328,45 +313,8 @@
 				item: "createaddition:rolling_mill"
 				type: "item"
 			}]
-			x: 1.5d
+			x: 1.0d
 			y: 0.5d
-		}
-		{
-			dependencies: [
-				"3AB0EBDE89F95DF4"
-				"3BB53E976576BE90"
-			]
-			id: "6EF61C629B2FA814"
-			rewards: [{
-				count: 4
-				id: "46688C25B26B4449"
-				item: "alloyed:steel_sheet"
-				type: "item"
-			}]
-			tasks: [{
-				count: 4L
-				id: "513B3EBFD0B24950"
-				item: "alloyed:steel_sheet"
-				type: "item"
-			}]
-			x: 3.0d
-			y: -5.0d
-		}
-		{
-			dependencies: ["7C0D8A15D01EC79E"]
-			id: "3BB53E976576BE90"
-			rewards: [{
-				id: "061B9A676A48EE88"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "2D1018D4A72C962F"
-				item: "create:mechanical_press"
-				type: "item"
-			}]
-			x: 1.5d
-			y: -6.5d
 		}
 		{
 			dependencies: ["044413B6EB71F5E6"]
@@ -383,7 +331,7 @@
 				item: "jaopca:dusts.zinc"
 				type: "item"
 			}]
-			x: 1.5d
+			x: 1.0d
 			y: -1.0d
 		}
 		{
@@ -404,7 +352,7 @@
 				item: "thermal:machine_smelter"
 				type: "item"
 			}]
-			x: 7.0d
+			x: 7.5d
 			y: -2.0d
 		}
 		{
@@ -420,8 +368,8 @@
 				item: "create:millstone"
 				type: "item"
 			}]
-			x: 0.5d
-			y: -2.0d
+			x: -0.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["78775CE81571FAC9"]
@@ -462,7 +410,11 @@
 		}
 		{
 			dependencies: ["78775CE81571FAC9"]
-			description: ["The magma crucible can, among other things, liquify cobblestone and netherrack into lava. Liquifying netherrack costs less RF and is therefore faster."]
+			description: [
+				"The magma crucible can liquify several types of stones into lava. "
+				""
+				"In the next chapter you will discover how to produce netherrack which is a very good source of lava in this modpack."
+			]
 			id: "42C45408AC05B498"
 			rewards: [{
 				id: "0F3B89038F35F644"
@@ -475,7 +427,7 @@
 				type: "item"
 			}]
 			title: "Lava generation is OP!"
-			x: 7.0d
+			x: 7.5d
 			y: -4.0d
 		}
 		{
@@ -506,9 +458,153 @@
 					type: "item"
 				}
 			]
-			x: 7.5d
+			x: 8.0d
 			y: -3.0d
 		}
+		{
+			dependencies: ["66AF222E0F698323"]
+			id: "651A240785AEB869"
+			rewards: [{
+				count: 16
+				id: "30C6E6B376AEFD59"
+				item: "minecraft:soul_sand"
+				type: "item"
+			}]
+			tasks: [{
+				id: "0E9D6103FA73FED5"
+				item: "minecraft:soul_sand"
+				type: "item"
+			}]
+			x: 1.0d
+			y: -6.5d
+		}
+		{
+			dependencies: ["0A9ECC5960974D82"]
+			id: "66AF222E0F698323"
+			rewards: [{
+				id: "28674E2553628172"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "70C7BF59FB140127"
+				item: "industrialforegoing:sludge_refiner"
+				type: "item"
+			}]
+			x: -0.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["167C9AF69BB16B8B"]
+			description: [
+				"Aaaah, the old Industrial Foregoing (IF for us)!"
+				""
+				"IF is a very versatile mod to automate farms for crops, trees, mobs and even ore generation."
+				""
+				"In this modpack it will help automating dirt, gravel, sand, clay and soulsand generation."
+				""
+				"You can then obtain quartz by washing soulsand with an Encased Fan from Create."
+			]
+			id: "7031E0FDBA3BCE40"
+			rewards: [{
+				count: 8
+				id: "70D32C7AE5CA27F4"
+				item: "industrialforegoing:plastic"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "51D7B298E8DB8993"
+					item: "industrialforegoing:dryrubber"
+					type: "item"
+				}
+				{
+					id: "16A61E11D2046403"
+					item: "industrialforegoing:plastic"
+					type: "item"
+				}
+			]
+			title: "Foreplay of Industry"
+			x: -3.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["7031E0FDBA3BCE40"]
+			description: [
+				"The Plant Gatherer can harvest crops and cut trees and produce sludge."
+				""
+				"Once you start producing ether gas you can feed it to the gatherer to automate crops replanting."
+			]
+			id: "0A9ECC5960974D82"
+			rewards: [{
+				count: 4
+				id: "6E25444B81790751"
+				item: "industrialforegoing:sludge_bucket"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "4C937CF0EFD2EE47"
+					item: "industrialforegoing:plant_gatherer"
+					type: "item"
+				}
+				{
+					id: "136231F3F348ABE7"
+					item: "industrialforegoing:sludge_bucket"
+					type: "item"
+				}
+			]
+			x: -2.0d
+			y: -5.0d
+		}
+		{
+			dependencies: [
+				"1DEE3BE68AEE289D"
+				"651A240785AEB869"
+			]
+			description: ["By washing soul sand with water, you can obtain large amounts of quartz."]
+			id: "5F9F6C2676715766"
+			rewards: [{
+				count: 8
+				id: "71BC92B194B56C86"
+				item: "minecraft:quartz"
+				type: "item"
+			}]
+			tasks: [{
+				id: "229ADCDD80AAE7E6"
+				item: "minecraft:quartz"
+				type: "item"
+			}]
+			x: 2.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["5F73D5F328C236A9"]
+			id: "1DEE3BE68AEE289D"
+			rewards: [{
+				id: "05C70220CB433CE4"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "1B3C4CD90144F6EA"
+				item: "create:encased_fan"
+				type: "item"
+			}]
+			x: 1.0d
+			y: -5.0d
+		}
+		{
+			dependencies: ["5F9F6C2676715766"]
+			id: "1C64CD9F1574DD6D"
+			tasks: [{
+				id: "024A967D1B886E6F"
+				item: "thermal:quartz_dust"
+				type: "item"
+			}]
+			x: 4.0d
+			y: -5.0d
+		}
 	]
-	title: "Tier 2: Create"
+	title: "Tier 2: Create \\& Industrial Foregoing"
 }

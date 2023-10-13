@@ -5,6 +5,7 @@
 	group: "2D94E5A1412E2495"
 	hide_quest_details_until_startable: true
 	hide_quest_until_deps_visible: true
+	icon: "create:flywheel"
 	id: "1FBDE1284A64A60E"
 	order_index: 5
 	quest_links: [ ]
@@ -43,7 +44,7 @@
 				title: "Chapter 1 automation"
 				type: "checkmark"
 			}]
-			x: -0.5d
+			x: -3.0d
 			y: -2.0d
 		}
 		{
@@ -55,7 +56,7 @@
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: -0.5d
+			x: -3.0d
 			y: -1.0d
 		}
 		{
@@ -67,7 +68,7 @@
 				item: "thermal:machine_furnace"
 				type: "item"
 			}]
-			x: -0.5d
+			x: -3.0d
 			y: 5.0d
 		}
 		{
@@ -78,7 +79,7 @@
 				item: "thermal:machine_crafter"
 				type: "item"
 			}]
-			x: -0.5d
+			x: -3.0d
 			y: 9.0d
 		}
 		{
@@ -90,7 +91,7 @@
 				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
-			x: -0.5d
+			x: -3.0d
 			y: 3.0d
 		}
 		{
@@ -101,8 +102,8 @@
 				title: "Chapter 2 automation"
 				type: "checkmark"
 			}]
-			x: 4.5d
-			y: -2.5d
+			x: 3.5d
+			y: -2.0d
 		}
 		{
 			dependencies: ["181444BA6E90A921"]
@@ -118,7 +119,7 @@
 				item: "kubejs:cube1"
 				type: "item"
 			}]
-			x: 2.0d
+			x: -0.5d
 			y: 9.0d
 		}
 		{
@@ -135,7 +136,7 @@
 				item: "kubejs:cube2"
 				type: "item"
 			}]
-			x: 7.0d
+			x: 6.5d
 			y: 9.0d
 		}
 		{
@@ -144,6 +145,7 @@
 				"5BD49EB5A1444C10"
 				"1FF01C85D3DBCC8F"
 				"537EFFE8C97C5A03"
+				"7BF73C7663F72EE7"
 			]
 			id: "2F261F411FB81E79"
 			tasks: [
@@ -158,7 +160,7 @@
 					type: "item"
 				}
 			]
-			x: 4.5d
+			x: 3.0d
 			y: 9.0d
 		}
 		{
@@ -170,7 +172,7 @@
 				item: "thermal:machine_press"
 				type: "item"
 			}]
-			x: -0.5d
+			x: -3.0d
 			y: 7.0d
 		}
 		{
@@ -190,7 +192,7 @@
 					type: "item"
 				}
 			]
-			x: -0.5d
+			x: -3.0d
 			y: 0.0d
 		}
 		{
@@ -210,7 +212,7 @@
 					type: "item"
 				}
 			]
-			x: -0.5d
+			x: -3.0d
 			y: 2.0d
 		}
 		{
@@ -221,7 +223,7 @@
 				item: "thermal:machine_press"
 				type: "item"
 			}]
-			x: 3.5d
+			x: 2.5d
 			y: 7.0d
 		}
 		{
@@ -232,7 +234,7 @@
 				item: "thermal:machine_press"
 				type: "item"
 			}]
-			x: 5.5d
+			x: 4.5d
 			y: 7.0d
 		}
 		{
@@ -243,7 +245,7 @@
 				item: "createaddition:rolling_mill"
 				type: "item"
 			}]
-			x: 4.5d
+			x: 3.5d
 			y: 7.0d
 		}
 		{
@@ -254,7 +256,7 @@
 				item: "thermal:machine_furnace"
 				type: "item"
 			}]
-			x: 4.5d
+			x: 3.5d
 			y: 5.0d
 		}
 		{
@@ -281,7 +283,7 @@
 				type: "item"
 			}]
 			title: "Mills"
-			x: 6.5d
+			x: 5.5d
 			y: 1.0d
 		}
 		{
@@ -293,7 +295,7 @@
 				item: "createaddition:brass_rod"
 				type: "item"
 			}]
-			x: 4.5d
+			x: 3.5d
 			y: 8.0d
 		}
 		{
@@ -317,7 +319,7 @@
 					type: "item"
 				}
 			]
-			x: -0.5d
+			x: -3.0d
 			y: 8.0d
 		}
 		{
@@ -340,7 +342,7 @@
 					type: "item"
 				}
 			]
-			x: -0.5d
+			x: -3.0d
 			y: 6.0d
 		}
 		{
@@ -368,7 +370,7 @@
 				title: "Pipes/filters omitted"
 				type: "checkmark"
 			}]
-			x: 1.0d
+			x: -1.5d
 			y: -2.0d
 		}
 		{
@@ -391,7 +393,7 @@
 					type: "item"
 				}
 			]
-			x: -0.5d
+			x: -3.0d
 			y: 4.0d
 		}
 		{
@@ -414,7 +416,7 @@
 					type: "item"
 				}
 			]
-			x: -0.5d
+			x: -3.0d
 			y: 1.0d
 		}
 		{
@@ -426,7 +428,7 @@
 				item: "mekanism:ingot_steel"
 				type: "item"
 			}]
-			x: 5.5d
+			x: 4.5d
 			y: 6.0d
 		}
 		{
@@ -438,7 +440,7 @@
 				item: "create:brass_ingot"
 				type: "item"
 			}]
-			x: 4.5d
+			x: 3.5d
 			y: 6.0d
 		}
 		{
@@ -450,7 +452,7 @@
 				item: "thermal:invar_ingot"
 				type: "item"
 			}]
-			x: 3.5d
+			x: 2.5d
 			y: 6.0d
 		}
 		{
@@ -472,7 +474,7 @@
 					type: "item"
 				}
 			]
-			x: 5.5d
+			x: 4.5d
 			y: 2.0d
 		}
 		{
@@ -498,22 +500,22 @@
 				}
 				type: "item"
 			}]
-			x: 5.5d
+			x: 4.5d
 			y: 1.0d
 		}
 		{
-			dependencies: ["61C819297476A15F"]
+			dependencies: ["3FD84ECCF794F0F1"]
 			id: "49B2CD4BE4085BED"
 			tasks: [{
 				id: "411B8766F31C8D10"
 				item: "minecraft:raw_iron"
 				type: "item"
 			}]
-			x: 5.5d
+			x: 4.5d
 			y: 0.0d
 		}
 		{
-			dependencies: ["29EE40CA8FAE7018"]
+			dependencies: ["423EF84B52CE4AD0"]
 			id: "406443AD3ED60F9A"
 			tasks: [{
 				id: "529A3B79529E17C5"
@@ -521,29 +523,7 @@
 				type: "item"
 			}]
 			x: 6.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["14DD0D705D827133"]
-			id: "29EE40CA8FAE7018"
-			tasks: [{
-				id: "419D53A70193AD99"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 6.5d
-			y: -1.0d
-		}
-		{
-			dependencies: ["14DD0D705D827133"]
-			id: "61C819297476A15F"
-			tasks: [{
-				id: "5C6A8F220F1CE84A"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 5.5d
-			y: -1.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["656070314A81611B"]
@@ -566,7 +546,7 @@
 				}
 			]
 			title: "Alloy Dusts"
-			x: 4.5d
+			x: 3.5d
 			y: 4.0d
 		}
 		{
@@ -588,7 +568,7 @@
 					type: "item"
 				}
 			]
-			x: 4.5d
+			x: 3.5d
 			y: 3.0d
 		}
 		{
@@ -606,7 +586,7 @@
 					type: "item"
 				}
 			]
-			x: 4.5d
+			x: 3.5d
 			y: 2.0d
 		}
 		{
@@ -632,11 +612,11 @@
 				}
 				type: "item"
 			}]
-			x: 3.5d
+			x: 2.5d
 			y: 1.0d
 		}
 		{
-			dependencies: ["16F042B69BE141EB"]
+			dependencies: ["20C93B6EA0D8D45D"]
 			id: "6050DD19AE8735B1"
 			tasks: [
 				{
@@ -650,20 +630,8 @@
 					type: "item"
 				}
 			]
-			x: 3.5d
+			x: 2.5d
 			y: 0.0d
-		}
-		{
-			dependencies: ["14DD0D705D827133"]
-			id: "16F042B69BE141EB"
-			tasks: [{
-				count: 2L
-				id: "5D4F21C6764F5379"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 3.5d
-			y: -1.0d
 		}
 		{
 			dependencies: ["75EB2B44A7B74CDA"]
@@ -681,7 +649,7 @@
 					type: "item"
 				}
 			]
-			x: 3.5d
+			x: 2.5d
 			y: 2.0d
 		}
 		{
@@ -707,11 +675,11 @@
 				}
 				type: "item"
 			}]
-			x: 2.5d
+			x: 1.5d
 			y: 1.0d
 		}
 		{
-			dependencies: ["4B578BDA0D24A7E3"]
+			dependencies: ["6EA283C21C922986"]
 			id: "02D7CF9669333097"
 			tasks: [
 				{
@@ -725,20 +693,8 @@
 					type: "item"
 				}
 			]
-			x: 2.5d
+			x: 1.5d
 			y: 0.0d
-		}
-		{
-			dependencies: ["14DD0D705D827133"]
-			id: "4B578BDA0D24A7E3"
-			tasks: [{
-				count: 2L
-				id: "0CDD8075004A6354"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 2.5d
-			y: -1.0d
 		}
 		{
 			dependencies: ["0A7E1E8B5F04A64F"]
@@ -861,8 +817,8 @@
 				title: "Chapter 3 automation"
 				type: "checkmark"
 			}]
-			x: 13.5d
-			y: -15.5d
+			x: 12.5d
+			y: -11.5d
 		}
 		{
 			dependencies: ["4E862D712FEE7DB5"]
@@ -996,7 +952,7 @@
 		{
 			dependencies: [
 				"787722DC6887AE8D"
-				"22820DD6447970FE"
+				"50B6B9C0287250E1"
 			]
 			id: "17E3757BBCCA12E3"
 			tasks: [
@@ -1016,7 +972,7 @@
 					type: "item"
 				}
 			]
-			x: 15.0d
+			x: 15.5d
 			y: 5.0d
 		}
 		{
@@ -1034,8 +990,8 @@
 					type: "item"
 				}
 			]
-			x: 15.0d
-			y: 0.5d
+			x: 15.5d
+			y: 2.0d
 		}
 		{
 			dependencies: ["60414CC591E9EB8F"]
@@ -1052,11 +1008,11 @@
 					type: "item"
 				}
 			]
-			x: 15.0d
+			x: 15.5d
 			y: 4.0d
 		}
 		{
-			dependencies: ["2A0A00E8A811DB22"]
+			dependencies: ["3490C3E66D245F06"]
 			id: "50B6B9C0287250E1"
 			tasks: [{
 				count: 6L
@@ -1064,7 +1020,7 @@
 				item: "minecraft:coal"
 				type: "item"
 			}]
-			x: 16.0d
+			x: 16.5d
 			y: 6.0d
 		}
 		{
@@ -1076,64 +1032,20 @@
 				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
-			x: 15.0d
-			y: 1.5d
-		}
-		{
-			dependencies: ["62BEF5F852A44DAE"]
-			id: "2A0A00E8A811DB22"
-			tasks: [{
-				id: "3953BE8CF33E9727"
-				item: "integrateddynamics:mechanical_squeezer"
-				type: "item"
-			}]
-			x: 17.0d
-			y: 6.0d
-		}
-		{
-			dependencies: ["3AB2FE9182BBA28E"]
-			id: "62BEF5F852A44DAE"
-			tasks: [{
-				id: "7F057F1626129BD9"
-				item: "minecraft:coal_ore"
-				type: "item"
-			}]
-			x: 17.0d
-			y: 0.5d
+			x: 15.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
-			id: "3AB2FE9182BBA28E"
-			tasks: [{
-				id: "2A03ED37ABA992AD"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 17.0d
-			y: -12.5d
-		}
-		{
-			dependencies: ["6831CC73795A75BA"]
+			hide_dependency_lines: true
 			id: "656C9C26BFE9E000"
 			tasks: [{
 				id: "3BC79C79E21931D9"
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 15.0d
-			y: -12.5d
-		}
-		{
-			dependencies: ["50B6B9C0287250E1"]
-			id: "22820DD6447970FE"
-			tasks: [{
-				count: 2L
-				id: "16863C9FD87E9228"
-				item: "minecraft:coal"
-				type: "item"
-			}]
-			x: 16.0d
-			y: 4.0d
+			x: 15.5d
+			y: 1.0d
 		}
 		{
 			dependencies: [
@@ -1226,42 +1138,33 @@
 		{
 			dependencies: ["02F1C7D8620A2FE0"]
 			id: "270DA6A88306EE8C"
-			tasks: [{
-				id: "2C0E5FA09341C82A"
-				item: {
-					Count: 1b
-					id: "itemfilters:or"
-					tag: {
-						items: [
-							{
-								Count: 1b
-								id: "thermal:redstone_bucket"
-							}
-							{
-								Count: 1b
-								id: "thermal:glowstone_bucket"
-							}
-							{
-								Count: 1b
-								id: "thermal:ender_bucket"
-							}
-							{
-								Count: 1b
-								id: "minecraft:lava_bucket"
-							}
-						]
-					}
+			tasks: [
+				{
+					id: "575FB23E31C07A60"
+					item: "thermal:redstone_bucket"
+					type: "item"
 				}
-				type: "item"
-			}]
+				{
+					id: "45B00095D290D6B2"
+					item: "thermal:glowstone_bucket"
+					type: "item"
+				}
+				{
+					id: "24C0D400E8A3EE82"
+					item: "thermal:ender_bucket"
+					type: "item"
+				}
+				{
+					id: "1B6929A893DBC5F5"
+					item: "minecraft:lava_bucket"
+					type: "item"
+				}
+			]
 			x: 11.5d
 			y: 1.0d
 		}
 		{
-			dependencies: [
-				"52F129C7DEC5EDAF"
-				"78301FD6CE90B218"
-			]
+			dependencies: ["78301FD6CE90B218"]
 			id: "02F1C7D8620A2FE0"
 			tasks: [{
 				count: 4L
@@ -1273,22 +1176,10 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["160F8C39C06F3796"]
-			id: "52F129C7DEC5EDAF"
-			tasks: [{
-				id: "0E1190B225B0B4BB"
-				item: "kubejs:carbonized_netherrack"
-				type: "item"
-			}]
-			x: 9.5d
-			y: 0.0d
-		}
-		{
 			dependencies: [
 				"0E9BA150B201AEA0"
 				"6B2AE9A914C28FEB"
 				"4C9CF51649FD5B3B"
-				"5CA7CC181BC5B13C"
 			]
 			id: "4DC72BB4B7082F52"
 			tasks: [{
@@ -1299,75 +1190,6 @@
 			}]
 			x: 11.5d
 			y: -2.0d
-		}
-		{
-			dependencies: [
-				"345D45CC07C8A569"
-				"35223774B6BB36FD"
-			]
-			id: "160F8C39C06F3796"
-			tasks: [{
-				id: "3912BEE7A354D2B7"
-				item: "mekanism:metallurgic_infuser"
-				type: "item"
-			}]
-			x: 9.5d
-			y: -2.0d
-		}
-		{
-			dependencies: ["35CB48275AED5E2A"]
-			id: "345D45CC07C8A569"
-			tasks: [{
-				id: "74AB904F5B239DE8"
-				item: "minecraft:netherrack"
-				type: "item"
-			}]
-			x: 9.5d
-			y: -3.0d
-		}
-		{
-			dependencies: ["6831CC73795A75BA"]
-			id: "35CB48275AED5E2A"
-			tasks: [{
-				id: "61AA8887EE8C4391"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 9.5d
-			y: -12.5d
-		}
-		{
-			dependencies: ["2C0842CC5AE0F3FC"]
-			id: "35223774B6BB36FD"
-			tasks: [{
-				id: "3E9CD515782D1ADC"
-				item: "mekanism:enriched_carbon"
-				type: "item"
-			}]
-			x: 8.5d
-			y: -2.0d
-		}
-		{
-			dependencies: ["56BB242070B9840A"]
-			id: "2C0842CC5AE0F3FC"
-			tasks: [{
-				id: "0B2F8976A73548EC"
-				item: "mekanism:enrichment_chamber"
-				type: "item"
-			}]
-			x: 8.5d
-			y: -3.0d
-		}
-		{
-			dependencies: ["10EB55BC4BA4E496"]
-			id: "56BB242070B9840A"
-			tasks: [{
-				id: "5C6F77A66A4A6F67"
-				item: "minecraft:coal"
-				type: "item"
-			}]
-			x: 8.5d
-			y: -4.0d
 		}
 		{
 			dependencies: ["5BDA73B4E18C57B2"]
@@ -1394,7 +1216,10 @@
 			y: -3.0d
 		}
 		{
-			dependencies: ["4DC72BB4B7082F52"]
+			dependencies: [
+				"4DC72BB4B7082F52"
+				"78BD8F4F7290FE10"
+			]
 			id: "78301FD6CE90B218"
 			tasks: [
 				{
@@ -1412,13 +1237,21 @@
 					item: "thermal:enderium_block"
 					type: "item"
 				}
+				{
+					id: "0589A3C424408861"
+					item: "minecraft:netherrack"
+					type: "item"
+				}
 			]
 			title: "Blocks of Alloyed Ingots"
 			x: 11.5d
 			y: -1.0d
 		}
 		{
-			dependencies: ["5BDA73B4E18C57B2"]
+			dependencies: [
+				"5BDA73B4E18C57B2"
+				"082FE9F8EC7B19FD"
+			]
 			id: "6B2AE9A914C28FEB"
 			tasks: [
 				{
@@ -1430,6 +1263,12 @@
 				{
 					id: "74E0191BCEED4F59"
 					item: "thermal:silver_block"
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "08D94A31213EFBB8"
+					item: "minecraft:glowstone"
 					type: "item"
 				}
 			]
@@ -1463,14 +1302,15 @@
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
+			hide_dependency_lines: true
 			id: "2F7A507A72EA5CF3"
 			tasks: [{
 				id: "78D0F7C4F63789B8"
 				item: "projectexpansion:basic_emc_link"
 				type: "item"
 			}]
-			x: 11.5d
-			y: -12.5d
+			x: 11.0d
+			y: -10.5d
 		}
 		{
 			dependencies: ["2F7A507A72EA5CF3"]
@@ -1512,6 +1352,7 @@
 				"6EEC1633A31E11BE"
 				"3D038749B36551D3"
 			]
+			description: ["choose your poison"]
 			id: "5BDA73B4E18C57B2"
 			tasks: [
 				{
@@ -1585,7 +1426,7 @@
 				item: "thermal:invar_gear"
 				type: "item"
 			}]
-			x: 3.5d
+			x: 2.5d
 			y: 8.0d
 		}
 		{
@@ -1596,31 +1437,8 @@
 				item: "kubejs:steel_gear"
 				type: "item"
 			}]
-			x: 5.5d
+			x: 4.5d
 			y: 8.0d
-		}
-		{
-			dependencies: ["2AEF1358C1C07C1A"]
-			id: "5CA7CC181BC5B13C"
-			tasks: [{
-				count: 2L
-				id: "3BE6CA7856B9C4BB"
-				item: "minecraft:glowstone"
-				type: "item"
-			}]
-			x: 13.5d
-			y: -2.0d
-		}
-		{
-			dependencies: ["6831CC73795A75BA"]
-			id: "2AEF1358C1C07C1A"
-			tasks: [{
-				id: "4268535D2B8E3B05"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			x: 13.5d
-			y: -12.5d
 		}
 		{
 			dependencies: [
@@ -1651,64 +1469,15 @@
 			y: -8.5d
 		}
 		{
-			dependencies: ["2F8B2A7308DD4185"]
+			dependencies: ["127B5F2EB02980E9"]
 			id: "74F048A7032C0DF3"
 			tasks: [{
 				id: "53BF8116292AC7EF"
 				item: "minecraft:ender_pearl"
 				type: "item"
 			}]
-			x: 12.5d
-			y: -9.5d
-		}
-		{
-			dependencies: ["1690E3B0293D400A"]
-			id: "41FD95EE45E3AEAA"
-			tasks: [
-				{
-					count: 4L
-					id: "375A136E591EB69A"
-					item: "minecraft:iron_ingot"
-					type: "item"
-				}
-				{
-					id: "2804A1871789078C"
-					item: {
-						Count: 1b
-						ForgeCaps: {
-							Parent: { }
-						}
-						id: "projecte:philosophers_stone"
-						tag: { }
-					}
-					type: "item"
-				}
-			]
-			x: 12.5d
-			y: -11.5d
-		}
-		{
-			dependencies: ["41FD95EE45E3AEAA"]
-			id: "2F8B2A7308DD4185"
-			tasks: [{
-				id: "458F04730FDA79E6"
-				item: "thermal:machine_crafter"
-				type: "item"
-			}]
-			x: 12.5d
-			y: -10.5d
-		}
-		{
-			dependencies: ["6831CC73795A75BA"]
-			hide_dependency_lines: true
-			id: "1690E3B0293D400A"
-			tasks: [{
-				id: "6E5F617ACF382938"
-				title: "source of iron"
-				type: "checkmark"
-			}]
-			x: 12.5d
-			y: -12.5d
+			x: 13.5d
+			y: -8.5d
 		}
 		{
 			dependencies: [
@@ -1771,18 +1540,6 @@
 		{
 			dependencies: ["6831CC73795A75BA"]
 			hide_dependency_lines: true
-			id: "10EB55BC4BA4E496"
-			tasks: [{
-				id: "638405E56C833B0E"
-				title: "source of coal"
-				type: "checkmark"
-			}]
-			x: 8.5d
-			y: -5.0d
-		}
-		{
-			dependencies: ["6831CC73795A75BA"]
-			hide_dependency_lines: true
 			id: "45F629DE91E6B8DD"
 			tasks: [{
 				id: "144CAB2483D1EB96"
@@ -1839,13 +1596,14 @@
 			y: -6.5d
 		}
 		{
+			dependencies: ["2FFBA747C9D687AC"]
 			id: "1782AFD3FEDA289D"
 			tasks: [{
 				id: "1CDD229E7D88D131"
 				item: "kubejs:cube4"
 				type: "item"
 			}]
-			x: 27.5d
+			x: 31.5d
 			y: 9.0d
 		}
 		{
@@ -1856,7 +1614,7 @@
 				item: "kubejs:cube4_inert"
 				type: "item"
 			}]
-			x: 25.5d
+			x: 28.0d
 			y: 9.0d
 		}
 		{
@@ -1867,7 +1625,7 @@
 				item: "thermal:machine_press"
 				type: "item"
 			}]
-			x: 2.0d
+			x: -0.5d
 			y: 10.0d
 		}
 		{
@@ -1884,7 +1642,7 @@
 				item: "kubejs:cube1_packaged"
 				type: "item"
 			}]
-			x: 2.0d
+			x: -0.5d
 			y: 11.0d
 		}
 		{
@@ -1902,7 +1660,7 @@
 					type: "item"
 				}
 			]
-			x: 7.0d
+			x: 6.5d
 			y: 10.0d
 		}
 		{
@@ -1913,7 +1671,7 @@
 				item: "kubejs:cube2_packaged"
 				type: "item"
 			}]
-			x: 7.0d
+			x: 6.5d
 			y: 11.0d
 		}
 		{
@@ -1943,6 +1701,8 @@
 				"3107958440563499"
 				"6CFA8A52F22FF77D"
 				"78AE16FD5072FE51"
+				"7A151FD72E30891A"
+				"608D0EE62CF1F094"
 			]
 			id: "093ED6A840F6DA35"
 			tasks: [
@@ -1967,24 +1727,8 @@
 					type: "item"
 				}
 			]
-			x: 22.0d
+			x: 22.5d
 			y: 9.0d
-		}
-		{
-			description: ["You can combine fissile fuel and fluorite dust in a purification chamber to obtain a fissile fuel pellet, useful for crafting the next tier of mechanical essences."]
-			id: "24B023237C9D1908"
-			rewards: [{
-				id: "6FB13B2278D8F292"
-				item: "kubejs:fission_pellet"
-				type: "item"
-			}]
-			tasks: [{
-				id: "437F7768B4488B76"
-				item: "kubejs:fission_pellet"
-				type: "item"
-			}]
-			x: 44.0d
-			y: 13.0d
 		}
 		{
 			dependencies: ["58C76679A6C11DCB"]
@@ -1994,8 +1738,8 @@
 				item: "kubejs:fission_pellet"
 				type: "item"
 			}]
-			x: 22.0d
-			y: 8.0d
+			x: 21.5d
+			y: 7.5d
 		}
 		{
 			dependencies: [
@@ -2008,20 +1752,22 @@
 				item: "mekanism:purification_chamber"
 				type: "item"
 			}]
-			x: 22.0d
-			y: 7.0d
+			x: 21.5d
+			y: 6.0d
 		}
 		{
+			dependencies: ["08D68DECDD33FBE8"]
 			id: "1EE4D4CF62E3DABF"
 			tasks: [{
 				id: "32AA02A8B444961F"
 				item: "mekanism:dust_fluorite"
 				type: "item"
 			}]
-			x: 22.0d
+			x: 20.5d
 			y: 6.0d
 		}
 		{
+			dependencies: ["001862E1A993D89C"]
 			id: "2BAFD3ABA42960FC"
 			rewards: [{
 				id: "7700B387E31FCBC3"
@@ -2200,8 +1946,8 @@
 				type: "item"
 			}]
 			title: "Fissile Fuel"
-			x: 23.0d
-			y: 7.0d
+			x: 22.5d
+			y: 6.0d
 		}
 		{
 			dependencies: ["1C75EFEF22263A49"]
@@ -2211,8 +1957,8 @@
 				item: "mekanism:elite_control_circuit"
 				type: "item"
 			}]
-			x: 20.5d
-			y: 8.0d
+			x: 23.5d
+			y: 7.5d
 		}
 		{
 			dependencies: [
@@ -2225,8 +1971,8 @@
 				item: "mekanism:combiner"
 				type: "item"
 			}]
-			x: 20.5d
-			y: 7.0d
+			x: 23.5d
+			y: 6.0d
 		}
 		{
 			dependencies: [
@@ -2239,10 +1985,12 @@
 				item: "mekanism:advanced_control_circuit"
 				type: "item"
 			}]
-			x: 20.5d
-			y: 6.0d
+			x: 23.5d
+			y: 5.0d
 		}
 		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
 			id: "78F9DD13059B209C"
 			tasks: [{
 				count: 2L
@@ -2250,20 +1998,22 @@
 				item: "mekanism:alloy_reinforced"
 				type: "item"
 			}]
-			x: 19.5d
-			y: 7.0d
+			x: 24.5d
+			y: 6.0d
 		}
 		{
+			dependencies: ["267997B9E7D079B8"]
 			id: "66D658A4411B346E"
 			tasks: [{
 				id: "2D55577D2724EBF1"
 				item: "mekanism:basic_control_circuit"
 				type: "item"
 			}]
-			x: 20.5d
-			y: 5.0d
+			x: 23.5d
+			y: 4.0d
 		}
 		{
+			dependencies: ["267997B9E7D079B8"]
 			id: "01EEB343F4CB1697"
 			tasks: [{
 				count: 2L
@@ -2271,39 +2021,1172 @@
 				item: "mekanism:alloy_infused"
 				type: "item"
 			}]
-			x: 19.5d
-			y: 6.0d
+			x: 24.5d
+			y: 4.0d
 		}
 		{
 			dependencies: ["4B95E003C81117FC"]
+			description: [
+				"Wow, a lot less automation needed!"
+				"Not... don't be fooled by the simplified automation diagram, there's a lot to automate in Chapter 4:"
+				""
+				"- Fissile Fuel"
+				"- Blaze Cake"
+				"- Refined Fuel"
+				"- Magenta Mechanical Pigment"
+				"- Chorus Fluid"
+			]
 			id: "16EC705C8FB3EAC3"
 			tasks: [{
 				id: "21471AA4B8D93769"
 				title: "Chapter 4 automation"
 				type: "checkmark"
 			}]
-			x: 22.0d
-			y: -15.5d
+			x: 27.5d
+			y: -1.5d
 		}
 		{
+			dependencies: ["5EFFD7A225141E8F"]
 			id: "61134EF3D95BD81E"
 			tasks: [{
 				id: "76BAAAF40E1196F2"
 				item: "kubejs:cube4_dust"
 				type: "item"
 			}]
-			x: 29.5d
+			x: 33.5d
 			y: 9.0d
 		}
 		{
+			dependencies: ["54DF11466A99A5E6"]
 			id: "1C91A5A1864A9379"
 			tasks: [{
 				id: "254AF00A67792DD6"
 				item: "kubejs:cube4_packaged"
 				type: "item"
 			}]
-			x: 31.5d
+			x: 35.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "7A151FD72E30891A"
+			tasks: [{
+				id: "328E496219A3EBDC"
+				item: "projecte:mobius_fuel"
+				type: "item"
+			}]
+			x: 19.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["34F1407E4C56FCBB"]
+			description: ["The refining process used to obtain refined fuel also gives additional bitumen, sulfur and tar as byproducts, making it especially useful."]
+			id: "608D0EE62CF1F094"
+			rewards: [{
+				count: 2
+				id: "0E151C68B97F3462"
+				item: "thermal:refined_fuel_bucket"
+				type: "item"
+			}]
+			tasks: [{
+				count: 2L
+				id: "01EAA6E1D7645A1B"
+				item: "thermal:refined_fuel_bucket"
+				type: "item"
+			}]
+			x: 26.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["53D62B7BD84DCD73"]
+			id: "34F1407E4C56FCBB"
+			tasks: [{
+				count: 2L
+				id: "0341719615329CA2"
+				item: "thermal:machine_refinery"
+				type: "item"
+			}]
+			x: 26.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["06E1A56DD989914F"]
+			id: "53D62B7BD84DCD73"
+			rewards: [
+				{
+					id: "569AEAA9FF6BECD4"
+					item: "thermal:light_oil_bucket"
+					type: "item"
+				}
+				{
+					id: "20957BC46A6403F6"
+					item: "thermal:heavy_oil_bucket"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "0E888BFD86F772C2"
+					item: "thermal:heavy_oil_bucket"
+					type: "item"
+				}
+				{
+					id: "0E07BCFD7C7ABFDC"
+					item: "thermal:light_oil_bucket"
+					type: "item"
+				}
+			]
+			x: 26.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["75CEB115906F0559"]
+			id: "06E1A56DD989914F"
+			tasks: [{
+				id: "60169FF03FEF5542"
+				item: "thermal:machine_refinery"
+				type: "item"
+			}]
+			x: 26.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["7F445CC0DC11D4B0"]
+			id: "75CEB115906F0559"
+			tasks: [{
+				id: "63525D6B1AB3422C"
+				item: "thermal:crude_oil_bucket"
+				type: "item"
+			}]
+			x: 26.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["2E520EAB02B746C5"]
+			id: "7F445CC0DC11D4B0"
+			tasks: [{
+				id: "5BE13CB81E37084B"
+				item: "thermal:machine_centrifuge"
+				type: "item"
+			}]
+			x: 26.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["17C36D0CD9A77322"]
+			id: "2E520EAB02B746C5"
+			tasks: [{
+				id: "4930253FF21C4A99"
+				item: "thermal:oil_sand"
+				type: "item"
+			}]
+			x: 26.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"0827884925F499E6"
+				"24242FF0CB7546D7"
+			]
+			id: "2FFBA747C9D687AC"
+			tasks: [{
+				id: "021ED52B0014F00E"
+				item: "mekanism:painting_machine"
+				type: "item"
+			}]
+			x: 30.0d
 			y: 9.0d
+		}
+		{
+			dependencies: ["6F571A990D4704BA"]
+			id: "24242FF0CB7546D7"
+			tasks: [{
+				id: "71A41DD3D2FCEA7B"
+				item: "mekanism:pigment_mixer"
+				type: "item"
+			}]
+			x: 30.0d
+			y: 8.0d
+		}
+		{
+			dependencies: [
+				"64421D101FA8B834"
+				"6CBE9370A940FFDE"
+			]
+			id: "6F571A990D4704BA"
+			tasks: [{
+				count: 2L
+				id: "3F6BB423C52BF6C6"
+				item: "mekanism:pigment_extractor"
+				type: "item"
+			}]
+			x: 30.0d
+			y: 7.0d
+		}
+		{
+			dependencies: [
+				"5463A66C6B0E7711"
+				"113D773B0524C57A"
+			]
+			id: "64421D101FA8B834"
+			tasks: [{
+				count: 8L
+				id: "6942E7D32DE24E32"
+				item: "ae2:blue_lumen_paint_ball"
+				type: "item"
+			}]
+			x: 29.0d
+			y: 6.0d
+		}
+		{
+			dependencies: [
+				"015DB02799CFAEAD"
+				"113D773B0524C57A"
+			]
+			id: "6CBE9370A940FFDE"
+			tasks: [{
+				count: 8L
+				id: "01FF53864F1670E2"
+				item: "ae2:red_lumen_paint_ball"
+				type: "item"
+			}]
+			x: 31.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["4FCD925FB41FD12C"]
+			id: "5463A66C6B0E7711"
+			tasks: [{
+				count: 8L
+				id: "1FF733E94F1A5E32"
+				item: "ae2:blue_paint_ball"
+				type: "item"
+			}]
+			x: 29.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["43DF55014E06BDB3"]
+			id: "113D773B0524C57A"
+			tasks: [{
+				count: 2L
+				id: "5B79138D10726FF8"
+				item: "minecraft:glowstone_dust"
+				type: "item"
+			}]
+			x: 30.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["4FCD925FB41FD12C"]
+			id: "015DB02799CFAEAD"
+			tasks: [{
+				count: 8L
+				id: "4B614B4389CA2665"
+				item: "ae2:red_paint_ball"
+				type: "item"
+			}]
+			x: 31.0d
+			y: 5.0d
+		}
+		{
+			dependencies: [
+				"6C55AD9EE4DC3057"
+				"14813E9366FB1E8C"
+			]
+			id: "4FCD925FB41FD12C"
+			tasks: [
+				{
+					id: "0D3810168F0F3693"
+					item: "minecraft:blue_dye"
+					type: "item"
+				}
+				{
+					id: "1E0647C35188C747"
+					item: "minecraft:red_dye"
+					type: "item"
+				}
+				{
+					count: 16L
+					id: "1859FE705B1450F6"
+					item: "ae2:matter_ball"
+					type: "item"
+				}
+			]
+			x: 30.0d
+			y: 4.0d
+		}
+		{
+			dependencies: [
+				"2ED3AD3C34B8DC22"
+				"3566DC6D41A3270D"
+			]
+			id: "6C55AD9EE4DC3057"
+			tasks: [
+				{
+					count: 2L
+					id: "0163E372D2AC1C5E"
+					item: "mekanism:painting_machine"
+					type: "item"
+				}
+				{
+					count: 2L
+					id: "575E5BEE936E97D6"
+					item: "mekanism:dye_base"
+					type: "item"
+				}
+				{
+					count: 2L
+					id: "323D840A7315E4F9"
+					item: "mekanism:pigment_extractor"
+					type: "item"
+				}
+			]
+			x: 29.0d
+			y: 3.5d
+		}
+		{
+			dependencies: [
+				"16EC705C8FB3EAC3"
+				"182209ACB7DE7F78"
+			]
+			hide_dependency_lines: true
+			id: "14813E9366FB1E8C"
+			tasks: [
+				{
+					id: "62E3F4167204DFF1"
+					item: "ae2:condenser"
+					type: "item"
+				}
+				{
+					id: "065E05479A2A33DC"
+					item: "ae2:cell_component_1k"
+					type: "item"
+				}
+			]
+			x: 31.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["28409249C3918A15"]
+			id: "2ED3AD3C34B8DC22"
+			tasks: [{
+				count: 2L
+				id: "36BC5228A9A14211"
+				item: "thermal:sawdust"
+				type: "item"
+			}]
+			x: 30.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["1782AFD3FEDA289D"]
+			id: "5EFFD7A225141E8F"
+			tasks: [{
+				count: 2L
+				id: "00EAF67814344C2F"
+				item: "create:crushing_wheel"
+				type: "item"
+			}]
+			x: 32.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["61134EF3D95BD81E"]
+			id: "6803CAAE889FCE1F"
+			tasks: [{
+				id: "41A6755575D4A189"
+				item: "mekanism:chemical_oxidizer"
+				type: "item"
+			}]
+			x: 35.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["6803CAAE889FCE1F"]
+			id: "7268102E0A8A326B"
+			tasks: [{
+				id: "05D671EFC912E272"
+				item: "mekanism:solar_neutron_activator"
+				type: "item"
+			}]
+			x: 35.0d
+			y: 9.0d
+		}
+		{
+			dependencies: [
+				"7268102E0A8A326B"
+				"61134EF3D95BD81E"
+				"4DDB534BA82AD355"
+			]
+			id: "54DF11466A99A5E6"
+			tasks: [{
+				id: "3FFB40E216FDAA6B"
+				item: "mekanism:pressurized_reaction_chamber"
+				type: "item"
+			}]
+			x: 35.5d
+			y: 10.0d
+		}
+		{
+			dependencies: [
+				"51E3D1442533F9A8"
+				"416B2443039B33C1"
+			]
+			id: "4DDB534BA82AD355"
+			tasks: [{
+				id: "0F65AD8D6A544780"
+				item: "integrateddynamics:bucket_liquid_chorus"
+				type: "item"
+			}]
+			x: 36.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "51E3D1442533F9A8"
+			tasks: [{
+				id: "5BE1555E149DD4B9"
+				item: "integrateddynamics:mechanical_squeezer"
+				type: "item"
+			}]
+			x: 36.0d
+			y: 8.0d
+		}
+		{
+			dependencies: [
+				"6005E06F7705E09D"
+				"46B731EA4CA34AC6"
+			]
+			hide_dependency_lines: false
+			id: "416B2443039B33C1"
+			tasks: [{
+				id: "391241D5DF5518D5"
+				item: "integrateddynamics:proto_chorus"
+				type: "item"
+			}]
+			x: 37.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["08BFA859BE45F1F5"]
+			id: "7BF73C7663F72EE7"
+			tasks: [{
+				count: 2L
+				id: "7DD69BA22BB9039A"
+				item: "thermal:quartz_dust"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["5485625B0A26C9C2"]
+			id: "08BFA859BE45F1F5"
+			tasks: [{
+				id: "56AC3A8DAF6B3D13"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 7.0d
+		}
+		{
+			dependencies: ["2F4EA541379B6261"]
+			id: "5485625B0A26C9C2"
+			tasks: [{
+				id: "69836F1BB9969C4C"
+				item: "minecraft:quartz"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["664BA3C552E2CFAF"]
+			id: "2F4EA541379B6261"
+			tasks: [{
+				id: "2059820B2771096E"
+				item: "create:encased_fan"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["5513B1B4A5281F2E"]
+			id: "664BA3C552E2CFAF"
+			tasks: [{
+				id: "445D24CE6A6B452C"
+				item: "minecraft:soul_sand"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["4CBEB32BE5F86201"]
+			id: "5513B1B4A5281F2E"
+			tasks: [{
+				id: "5A19D4163C4DFFCA"
+				item: "industrialforegoing:sludge_refiner"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["6A1889F2B93EB6B4"]
+			id: "4CBEB32BE5F86201"
+			tasks: [{
+				id: "441B5842916D9044"
+				item: "industrialforegoing:sludge_bucket"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["0135FC32C810ECC2"]
+			id: "6A1889F2B93EB6B4"
+			tasks: [{
+				id: "7095F41521681ADF"
+				item: "industrialforegoing:plant_gatherer"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["14DD0D705D827133"]
+			hide_dependency_lines: true
+			id: "0135FC32C810ECC2"
+			tasks: [
+				{
+					id: "1D25A58F5F3292DA"
+					item: "minecraft:wheat_seeds"
+					type: "item"
+				}
+				{
+					id: "5FE985CE35305CD3"
+					item: "minecraft:oak_sapling"
+					type: "item"
+				}
+			]
+			x: 0.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["496B193897DBC2EB"]
+			id: "78BD8F4F7290FE10"
+			tasks: [{
+				id: "1EF5C428752A8E4B"
+				item: "industrialforegoing:material_stonework_factory"
+				type: "item"
+			}]
+			x: 9.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6831CC73795A75BA"]
+			hide_dependency_lines: true
+			id: "496B193897DBC2EB"
+			tasks: [
+				{
+					id: "48E1CD90BFAD0EBA"
+					item: "minecraft:water_bucket"
+					type: "item"
+				}
+				{
+					id: "14785B82D1313BA4"
+					item: "minecraft:lava_bucket"
+					type: "item"
+				}
+			]
+			x: 9.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["323EC25077EC878F"]
+			id: "082FE9F8EC7B19FD"
+			tasks: [
+				{
+					id: "2B6603781AA86EBB"
+					item: "create:encased_fan"
+					type: "item"
+				}
+				{
+					id: "0CB56EA488454629"
+					item: "minecraft:lava_bucket"
+					type: "item"
+				}
+			]
+			x: 13.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["4784D6FB9AD63EA5"]
+			id: "323EC25077EC878F"
+			tasks: [{
+				id: "46B595D0B87258D8"
+				item: "create:cinder_flour"
+				type: "item"
+			}]
+			x: 13.5d
+			y: -5.5d
+		}
+		{
+			dependencies: ["323EC25077EC878F"]
+			id: "127B5F2EB02980E9"
+			tasks: [
+				{
+					id: "5A770829888613EB"
+					item: "create:encased_fan"
+					type: "item"
+				}
+				{
+					id: "166B73EB3CFD057A"
+					item: "minecraft:soul_campfire"
+					type: "item"
+				}
+			]
+			x: 13.5d
+			y: -7.0d
+		}
+		{
+			dependencies: ["78F5AB8DFBCDB111"]
+			id: "4784D6FB9AD63EA5"
+			tasks: [{
+				id: "7CDF3588710D77EF"
+				item: "mekanism:enrichment_chamber"
+				type: "item"
+			}]
+			x: 14.5d
+			y: -5.5d
+		}
+		{
+			dependencies: ["04F5CFB7A4FA6AAA"]
+			id: "1F1CBE441613D531"
+			tasks: [{
+				id: "59994C9072AF7BAF"
+				item: "industrialforegoing:material_stonework_factory"
+				type: "item"
+			}]
+			x: 14.5d
+			y: -8.5d
+		}
+		{
+			dependencies: ["6831CC73795A75BA"]
+			hide_dependency_lines: true
+			id: "04F5CFB7A4FA6AAA"
+			tasks: [
+				{
+					id: "46361DD853153360"
+					item: "minecraft:water_bucket"
+					type: "item"
+				}
+				{
+					id: "2031A1D7BD001325"
+					item: "minecraft:lava_bucket"
+					type: "item"
+				}
+			]
+			x: 14.5d
+			y: -9.5d
+		}
+		{
+			dependencies: ["1F1CBE441613D531"]
+			id: "78F5AB8DFBCDB111"
+			tasks: [{
+				id: "2B371527B77621A4"
+				item: "minecraft:netherrack"
+				type: "item"
+			}]
+			x: 14.5d
+			y: -7.0d
+		}
+		{
+			dependencies: ["697D90D25E9DBB08"]
+			id: "6005E06F7705E09D"
+			tasks: [{
+				count: 2L
+				id: "6D1C3A7F5A85630B"
+				item: "integrateddynamics:menril_berries"
+				type: "item"
+			}]
+			x: 37.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["4D88395F048E8733"]
+			id: "46B731EA4CA34AC6"
+			tasks: [{
+				count: 2L
+				id: "1799E76213F05BD8"
+				item: "minecraft:ender_pearl"
+				type: "item"
+			}]
+			x: 38.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["5156EB9E09BB3E03"]
+			id: "697D90D25E9DBB08"
+			tasks: [{
+				id: "2841FBAD9B298B50"
+				item: "integrateddynamics:menril_sapling"
+				type: "item"
+			}]
+			x: 37.5d
+			y: 7.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "5156EB9E09BB3E03"
+			tasks: [{
+				id: "318F8E45051451B0"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 37.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["14DD0D705D827133"]
+			hide_dependency_lines: true
+			id: "6EA283C21C922986"
+			tasks: [{
+				id: "0D90DC23E298BBF7"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["14DD0D705D827133"]
+			hide_dependency_lines: true
+			id: "20C93B6EA0D8D45D"
+			tasks: [{
+				id: "2A9C9DAB5CBECD9D"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 2.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["14DD0D705D827133"]
+			hide_dependency_lines: true
+			id: "3FD84ECCF794F0F1"
+			tasks: [{
+				id: "67ABE223E0171B52"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 4.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["14DD0D705D827133"]
+			hide_dependency_lines: true
+			id: "4623A5E11588F8FB"
+			tasks: [{
+				id: "7404643C82CBC594"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 7.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["7287E6AF78D0ABBE"]
+			id: "423EF84B52CE4AD0"
+			tasks: [{
+				id: "17C7A71DACB21920"
+				item: "integrateddynamics:mechanical_squeezer"
+				type: "item"
+			}]
+			x: 7.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["4623A5E11588F8FB"]
+			id: "7287E6AF78D0ABBE"
+			tasks: [{
+				id: "1141D31E7F7D5575"
+				item: "minecraft:coal_ore"
+				type: "item"
+			}]
+			x: 7.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6831CC73795A75BA"]
+			hide_dependency_lines: true
+			id: "3490C3E66D245F06"
+			tasks: [{
+				id: "666C072DC755832F"
+				title: "source of coal"
+				type: "checkmark"
+			}]
+			x: 17.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "4D88395F048E8733"
+			tasks: [{
+				id: "214BCF30D102A82E"
+				title: "source of ender pearls"
+				type: "checkmark"
+			}]
+			x: 38.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["134CDBBEE48AD329"]
+			id: "28409249C3918A15"
+			tasks: [{
+				id: "6DE2F363979E17FD"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			x: 30.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["2495512973053A61"]
+			id: "3566DC6D41A3270D"
+			tasks: [{
+				id: "497C868C8C451A0A"
+				item: "minecraft:clay_ball"
+				type: "item"
+			}]
+			x: 28.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "001862E1A993D89C"
+			tasks: [{
+				id: "6E901F3421E6C299"
+				title: "fissile fuel automation"
+				type: "checkmark"
+			}]
+			x: 22.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "2495512973053A61"
+			tasks: [{
+				id: "2A7CA89082A95040"
+				title: "source of clay balls"
+				type: "checkmark"
+			}]
+			x: 28.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "17C36D0CD9A77322"
+			tasks: [{
+				id: "10544839ED1E9AE6"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 26.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["0795417DBEED4FB8"]
+			id: "134CDBBEE48AD329"
+			tasks: [{
+				id: "0CB91E4CFE3524A8"
+				item: "minecraft:oak_log"
+				type: "item"
+			}]
+			x: 31.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "0795417DBEED4FB8"
+			tasks: [{
+				id: "75BEC5A998630BA2"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 31.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "101CACD36947951D"
+			tasks: [{
+				id: "613261F63C5C451D"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 20.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["101CACD36947951D"]
+			id: "70B424B585A8CD42"
+			tasks: [{
+				id: "257FB72C8D1E915D"
+				item: "mekanism:fluorite_ore"
+				type: "item"
+			}]
+			x: 20.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["28B1616F8128787B"]
+			id: "08D68DECDD33FBE8"
+			tasks: [{
+				id: "0811F08291F06F03"
+				item: "mekanism:crusher"
+				type: "item"
+			}]
+			x: 20.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["70B424B585A8CD42"]
+			id: "48ED2984D6B72957"
+			tasks: [{
+				id: "41D4ABFDBFA53107"
+				item: "mekanism:enrichment_chamber"
+				type: "item"
+			}]
+			x: 20.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["48ED2984D6B72957"]
+			id: "28B1616F8128787B"
+			tasks: [{
+				id: "48BC304ED8E64350"
+				item: "mekanism:fluorite_gem"
+				type: "item"
+			}]
+			x: 20.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "43DF55014E06BDB3"
+			tasks: [{
+				id: "506ABDB347F36371"
+				title: "source of glowstone dust"
+				type: "checkmark"
+			}]
+			x: 30.0d
+			y: 5.0d
+		}
+		{
+			dependencies: [
+				"08BFFF664885C393"
+				"6F0844360442F374"
+				"0D147A787D1AE549"
+			]
+			id: "267997B9E7D079B8"
+			tasks: [{
+				id: "69B56648E120F437"
+				item: "mekanism:metallurgic_infuser"
+				type: "item"
+			}]
+			x: 23.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["08CBB3F48FE6DD0C"]
+			id: "6F0844360442F374"
+			tasks: [{
+				id: "3E4227BD4AB4F1FE"
+				item: "mekanism:enriched_redstone"
+				type: "item"
+			}]
+			x: 23.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["781DDCA7ECC20AAB"]
+			id: "08BFFF664885C393"
+			tasks: [{
+				id: "26480C59BDA17849"
+				item: "mekanism:ingot_osmium"
+				type: "item"
+			}]
+			x: 22.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "781DDCA7ECC20AAB"
+			tasks: [{
+				id: "4413228AB2B50133"
+				title: "source of osmium"
+				type: "checkmark"
+			}]
+			x: 22.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["1C1032A21174FA62"]
+			id: "08CBB3F48FE6DD0C"
+			tasks: [{
+				id: "5BFBC3B9D5F30E5D"
+				item: "mekanism:enrichment_chamber"
+				type: "item"
+			}]
+			x: 23.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["06E607E409908FFD"]
+			id: "1C1032A21174FA62"
+			tasks: [{
+				id: "68D809368E3C38EE"
+				item: "minecraft:redstone"
+				type: "item"
+			}]
+			x: 23.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "06E607E409908FFD"
+			tasks: [{
+				id: "7A908A4A33D9EB43"
+				title: "source of redstone dust"
+				type: "checkmark"
+			}]
+			x: 23.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["03410C275DD34CA3"]
+			id: "0D147A787D1AE549"
+			tasks: [{
+				id: "2EF63DF99AF7F332"
+				item: "minecraft:iron_ingot"
+				type: "item"
+			}]
+			x: 24.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "03410C275DD34CA3"
+			tasks: [{
+				id: "60C795DDAFCB660D"
+				title: "source of iron"
+				type: "checkmark"
+			}]
+			x: 24.5d
+			y: 2.0d
+		}
+		{
+			description: ["Trap a wither inside a stasis chamber and place a fluid laser base directly above it to passively obtain ether gas."]
+			id: "05A0C01966A06A98"
+			optional: true
+			rewards: [{
+				id: "6932205E63F2FBA1"
+				item: "industrialforegoing:ether_gas_bucket"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "4CE0541FA8CC0B50"
+					item: "industrialforegoing:ether_gas_bucket"
+					type: "item"
+				}
+				{
+					id: "45FF0C8EE95F6CB6"
+					item: "industrialforegoing:stasis_chamber"
+					type: "item"
+				}
+				{
+					id: "028BB5B8B978C1B4"
+					item: "industrialforegoing:laser_drill"
+					type: "item"
+				}
+				{
+					id: "3AEF9320EDC346FB"
+					item: "industrialforegoing:fluid_laser_base"
+					type: "item"
+				}
+				{
+					id: "6A2FE44642802298"
+					item: "industrialforegoing:laser_lens10"
+					type: "item"
+				}
+			]
+			title: "Getting Ether Gas"
+			x: 42.5d
+			y: 6.5d
+		}
+		{
+			dependencies: ["05A0C01966A06A98"]
+			description: ["Use the Ether Gas to craft the highest tier machine frame."]
+			id: "4B9AE47D2EBF5155"
+			optional: true
+			rewards: [{
+				id: "6C328EC758FB27B0"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "3DEBDD1821AE9150"
+				item: "industrialforegoing:machine_frame_supreme"
+				type: "item"
+			}]
+			x: 42.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["4B9AE47D2EBF5155"]
+			description: ["There are multiple ways to summon the wither automatically, but one of the easiest is to use the wither builder. I just add the required items, and it will summon it automatically for me, which I can then kill with a mob crusher for automatic nether stars."]
+			id: "2D4CFBD09E6AFA85"
+			optional: true
+			rewards: [{
+				id: "550D8B6CF244D38D"
+				item: "minecraft:nether_star"
+				type: "item"
+			}]
+			shape: "gear"
+			tasks: [
+				{
+					id: "00A26E4F9FAA8300"
+					item: "industrialforegoing:wither_builder"
+					type: "item"
+				}
+				{
+					id: "31C401704351B201"
+					item: "industrialforegoing:mob_crusher"
+					type: "item"
+				}
+			]
+			title: "Automating withers"
+			x: 43.5d
+			y: 7.5d
 		}
 	]
 	title: "Automation"

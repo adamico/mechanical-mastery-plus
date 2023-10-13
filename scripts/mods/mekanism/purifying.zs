@@ -20,3 +20,5 @@ import mods.mekanism.api.ingredient.ItemStackIngredient;
 
 <recipetype:mekanism:purifying>.addRecipe('purify_earth_charge', <item:thermal:earth_charge>, <gas:mekanism:sulfuric_acid>, <item:kubejs:basilic_reagent>);
 <recipetype:mekanism:purifying>.addRecipe('purifying/fission_pellet', <tag:items:forge:dusts/fluorite>, <gas:mekanism:fissile_fuel>, <item:kubejs:fission_pellet>);
+
+<recipetype:mekanism:purifying>.addRecipe("dragon_breath_bottling", <item:minecraft:glass_bottle> * 16, <gas:crafttweaker:dragon_breath>, <item:minecraft:dragon_breath> * 16);

@@ -1,17 +1,6 @@
 ServerEvents.recipes(event => {
   console.log('[AMMONIUM@KUBEJS]: gears recipes...');
 
-  ['steel'].forEach(metal => {
-    event.shaped(`kubejs:${metal}_gear`, [
-      ' A ',
-      'AIA',
-      ' A '
-      ], {
-        I: '#forge:nuggets/iron',
-        A: `#forge:plates/${metal}`
-    });
-  });
-
   let replaceGearRecipes = (gearRecipes) => {
     gearRecipes.forEach(recipe => {
       event.replaceInput({ id: `thermal:parts/${recipe.id}_gear` }, `${recipe.inputType}/${recipe.material}`, `${recipe.outputType}/${recipe.material}`);

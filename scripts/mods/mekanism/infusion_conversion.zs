@@ -16,4 +16,4 @@ import mods.mekanism.api.ingredient.ItemStackIngredient;
 // <recipetype:mekanism:infusion_conversion>.removeByName("mekanism:infusion_conversion/bio/from_bio_fuel");
 
 <recipetype:mekanism:infusion_conversion>.addRecipe("infusion_conversion/dark_essence/from_black_essence", <item:kubejs:black_essence>, <infuse_type:crafttweaker:darkness> * 10);
-<recipetype:mekanism:infusion_conversion>.addRecipe("infusion_conversion/dark_essence/from_enriched", <item:kubejs:enriched_black_essence>, <infuse_type:crafttweaker:darkness> * 200);
+<recipetype:mekanism:infusion_conversion>.addRecipe("infusion_conversion/dark_essence/from_enriched", <item:kubejs:enriched_black_essence>, <infuse_type:crafttweaker:darkness> * 80);

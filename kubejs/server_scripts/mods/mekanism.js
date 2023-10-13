@@ -14,7 +14,7 @@ ServerEvents.recipes(event => {
 		' E '
 		], {
 			A: 'projectexpansion:final_star',
-			B: Item.of('mekanism:ultimate_energy_cube', '{mekData:{EnergyContainers:[{Container:0b,stored:"256000000"}]}}'),
+			B: Item.of('mekanism:ultimate_energy_cube'),
 			C: 'powah:ender_gate_nitro',
 			D: 'powah:ender_cell_nitro',
 			E: 'kubejs:enriched_black_essence'
@@ -22,25 +22,25 @@ ServerEvents.recipes(event => {
 	);
 	
 	event.shaped('mekanism:creative_fluid_tank', [
-		' A ',
-		'DBD',
+		' S ',
+		'MTM',
 		' E '
 		], {
-			A: 'projectexpansion:final_star',
-			B: 'mekanism:ultimate_fluid_tank',
-			D: 'industrialforegoing:ether_gas_bucket',
+			S: 'projectexpansion:final_star',
+			T: Item.of('mekanism:ultimate_fluid_tank'),
+			M: 'createchromaticreturn:multiplite_ingot',
 			E: 'kubejs:enriched_black_essence'
 		}
 	);
 	
 	event.shaped('mekanism:creative_chemical_tank', [
-		'DAD',
-		'DBD',
-		'DAD'
+		'ASA',
+		'ATA',
+		'ASA'
 		], {
-			A: 'projectexpansion:final_star_shard',
-			B: 'mekanism:ultimate_chemical_tank',
-			D: 'mekanism:pellet_antimatter',
+			S: 'projectexpansion:final_star',
+			T: Item.of('mekanism:ultimate_chemical_tank'),
+			A: 'mekanism:pellet_antimatter',
 		}
 	);
 

@@ -18,7 +18,7 @@ import mods.mekanism.content.builder.PigmentBuilder;
 
 GasBuilder.builder().color(0xFF20FF).build("advanced_mechanical_gas");
 GasBuilder.builder().color(0xCC20CC).build("inactive_advanced_mechanical_gas");
-
+GasBuilder.builder().color(0xF38BAA).build("dragon_breath");
 InfuseTypeBuilder.builder().color(0x000000).build("darkness");
 
 PigmentBuilder.builder().color(0x0020FF).build("mechanical_blue");

@@ -3,7 +3,6 @@
   "minecraft:grass_block": 16,
   "minecraft:coal_ore": 128,
   "minecraft:redstone_ore": 128,
-  "minecraft:glowstone": 1536,
   "minecraft:emerald_ore": 16384,
   "minecraft:lapis_ore": 864,
   "minecraft:diamond_ore": 8192,
@@ -31,9 +30,6 @@
   "minecraft:cobbled_deepslate": 1,
   "minecraft:crimson_stem": 32,
   "minecraft:warped_stem": 32,
-  "minecraft:clay_ball": 16,
-  "minecraft:netherrack": 192,
-  "minecraft:soul_sand": 12,
   "kubejs:cube1_packaged": 11520,
   "kubejs:cube2_packaged": 24860,
   "kubejs:cube3_packaged": 153600,
@@ -71,11 +67,10 @@
   "projectexpansion:white_fuel": 4294967296,
   "projectexpansion:final_star": 100000000000,
   "projecte:alchemical_coal": 64,
-  "kubejs:black_essence": 20480,
   "powah:uraninite": 2048,
   "minecraft:kelp": 8,
   "minecraft:ancient_debris": 65536,
-  "minecraft:dirt": 1,
   "integrateddynamics:menril_sapling": 32,
-  "integrateddynamics:menril_log": 32
+  "integrateddynamics:menril_log": 32,
+  "industrialforegoing:tinydryrubber": 128
 }

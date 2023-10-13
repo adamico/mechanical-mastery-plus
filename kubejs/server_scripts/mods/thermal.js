@@ -7,8 +7,8 @@ ServerEvents.recipes(event => {
     { output: 'create:brass_ingot', outputCount: 2, inputs: ['#forge:ingots/copper', '#forge:ingots/zinc'], energy: 2400 },
     { output: 'minecraft:amethyst_shard', outputCount: 1, inputs: ['ae2:charged_certus_quartz_crystal', 'kubejs:cube'], energy: 24000 },
     { output: 'thermal:enderium_block', outputCount: 2, inputs: ['#forge:storage_blocks/diamond', Item.of('#forge:storage_blocks/lead', 3), Item.of('#forge:storage_blocks/ender_pearl', 2)], energy: 144000 },
-    { output: 'thermal:lumium_block', outputCount: 4, inputs: ['#forge:storage_blocks/silver', Item.of('#forge:storage_blocks/tin', 3), Item.of('#forge:storage_blocks/glowstone', 2)], energy: 108000 },
-    { output: 'thermal:signalum_block', outputCount: 4, inputs: ['#forge:storage_blocks/silver', Item.of('#forge:storage_blocks/copper', 3), Item.of('#forge:storage_blocks/redstone', 4)], energy: 108000 },
+    { output: 'thermal:lumium_block', outputCount: 4, inputs: ['#forge:storage_blocks/silver', Item.of('#forge:storage_blocks/tin', 3), Item.of('minecraft:glowstone', 4)], energy: 108000 },
+    { output: 'thermal:signalum_block', outputCount: 4, inputs: ['#forge:storage_blocks/silver', Item.of('#forge:storage_blocks/copper', 3), Item.of('minecraft:redstone_block', 4)], energy: 108000 },
     { output: 'thermal:constantan_block', outputCount: 2, inputs: ['#forge:storage_blocks/nickel', '#forge:storage_blocks/copper'], energy: 28800 },
     { output: 'thermal:invar_block', outputCount: 3, inputs: ['#forge:storage_blocks/nickel', Item.of('#forge:storage_blocks/iron')], energy: 43200 },
     { output: 'thermal:electrum_block', outputCount: 2, inputs: ['#forge:storage_blocks/silver', '#forge:storage_blocks/gold'], energy: 28800 },
@@ -23,6 +23,7 @@ ServerEvents.recipes(event => {
   event.replaceInput({id: 'thermal:machine_smelter'}, 'thermal:rf_coil', 'kubejs:cube2');
   event.replaceInput({id: 'thermal:augments/machine_speed_augment'}, 'thermal:rf_coil', 'kubejs:cube2');
   event.replaceInput({id: 'thermal:machine_crucible'}, 'thermal:rf_coil', 'kubejs:cube2');
+  event.replaceInput({id: 'thermal:machine_furnace'}, 'minecraft:bricks', 'minecraft:blast_furnace');
 
   event.remove({id: 'thermal:machine_frame'});
   event.shaped('thermal:machine_frame', [
@@ -81,4 +82,6 @@ ServerEvents.recipes(event => {
 
   event.remove({id: 'thermal:machines/pyrolyzer/pyrolyzer_coal'});
   event.remove({id: 'thermal:gunpowder_4'});
+
+  event.recipes.thermal.chiller(Item.of('kubejs:black_essence', 4), 'createchromaticreturn:shadow_essence').energy(20000);
 })

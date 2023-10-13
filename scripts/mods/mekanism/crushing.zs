@@ -28,3 +28,5 @@ for metal in mek_metals {
 for metal in jaopca_metals {
   <recipetype:mekanism:crushing>.addRecipe("mekanism_processing/" + metal + "/dirty_dust/from_crushed_raw", ItemStackIngredient.from(<item:create:crushed_raw_${metal}>), <item:jaopca:mekanism_dirty_dusts.${metal}>);
 }
+
+<recipetype:mekanism:crushing>.addRecipe("crush_netherrack", <item:minecraft:netherrack>, <item:create:cinder_flour> * 2);

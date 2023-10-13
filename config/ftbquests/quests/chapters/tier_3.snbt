@@ -22,12 +22,6 @@
 					type: "item"
 				}
 				{
-					count: 8
-					id: "35C79CA2611C8761"
-					item: "minecraft:glowstone"
-					type: "item"
-				}
-				{
 					id: "05EFBF2E5E866415"
 					item: "minecraft:bone"
 					type: "item"
@@ -59,7 +53,7 @@
 				title: "Tier 3 Materials"
 				type: "checkmark"
 			}]
-			x: 5.0d
+			x: 4.5d
 			y: -4.0d
 		}
 		{
@@ -89,14 +83,11 @@
 				type: "item"
 			}]
 			title: "Summoning with effigies"
-			x: 8.5d
-			y: -4.0d
+			x: 7.5d
+			y: -2.5d
 		}
 		{
-			dependencies: [
-				"131EF687B47D577F"
-				"367BFFFD63D1CA88"
-			]
+			dependencies: ["131EF687B47D577F"]
 			description: [
 				"To awaken the Dormant Effigies you need to be infused with a specific liquefied material from Thermal Magma Crucibles."
 				""
@@ -154,8 +145,8 @@
 				}
 			]
 			title: "Awakening the Effigies"
-			x: 10.5d
-			y: -2.5d
+			x: 11.0d
+			y: -4.0d
 		}
 		{
 			dependencies: [
@@ -208,8 +199,8 @@
 				}
 			]
 			title: "Elemental charges"
-			x: 11.5d
-			y: -2.5d
+			x: 13.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["550E4D68A98180F5"]
@@ -225,7 +216,7 @@
 				item: "mekanism:metallurgic_infuser"
 				type: "item"
 			}]
-			x: 9.5d
+			x: 6.0d
 			y: -6.5d
 		}
 		{
@@ -236,7 +227,7 @@
 				item: "mekanism:basic_control_circuit"
 				type: "item"
 			}]
-			x: 11.5d
+			x: 13.0d
 			y: -6.5d
 		}
 		{
@@ -262,7 +253,7 @@
 				item: "kubejs:cube3"
 				type: "item"
 			}]
-			x: 14.0d
+			x: 14.5d
 			y: -4.0d
 		}
 		{
@@ -292,7 +283,7 @@
 				type: "item"
 			}]
 			title: "Refined storage!"
-			x: 14.0d
+			x: 14.5d
 			y: -2.5d
 		}
 		{
@@ -309,7 +300,7 @@
 				item: "thermal:upgrade_augment_3"
 				type: "item"
 			}]
-			x: 15.0d
+			x: 15.5d
 			y: -5.5d
 		}
 		{
@@ -330,7 +321,7 @@
 				type: "item"
 			}]
 			title: "Blaze Burner"
-			x: 11.5d
+			x: 11.0d
 			y: -5.5d
 		}
 		{
@@ -381,7 +372,7 @@
 				}
 			]
 			title: "AE2 Route"
-			x: 14.0d
+			x: 14.5d
 			y: -5.5d
 		}
 		{
@@ -516,7 +507,7 @@
 				}
 			]
 			title: "ME Starter Kit"
-			x: 14.0d
+			x: 14.5d
 			y: -6.5d
 		}
 		{
@@ -652,7 +643,7 @@
 				}
 			]
 			title: "Refined Storage Starter Kit"
-			x: 14.0d
+			x: 14.5d
 			y: -1.5d
 		}
 		{
@@ -672,24 +663,49 @@
 				type: "item"
 			}]
 			title: "Dr Frankenstein's Dream"
-			x: 7.5d
-			y: -4.0d
+			x: 6.0d
+			y: -3.0d
 		}
 		{
-			dependencies: ["1B6E93FE3C6D5966"]
+			dependencies: [
+				"1B6E93FE3C6D5966"
+				"3A7F4033C8881566"
+			]
 			id: "1503E72A3505D8A6"
 			rewards: [{
 				id: "248FE48076701778"
 				type: "xp"
 				xp: 100
 			}]
-			tasks: [{
-				id: "2D76A8958643FAE2"
-				item: "thermal:machine_crucible"
-				type: "item"
-			}]
-			x: 9.5d
-			y: -4.0d
+			tasks: [
+				{
+					id: "2D76A8958643FAE2"
+					item: "thermal:machine_crucible"
+					type: "item"
+				}
+				{
+					id: "592408EFEA1AFB90"
+					item: "thermal:lumium_block"
+					type: "item"
+				}
+				{
+					id: "3D225E86FB187528"
+					item: "thermal:signalum_block"
+					type: "item"
+				}
+				{
+					id: "25CCB4904C5646C1"
+					item: "minecraft:netherrack"
+					type: "item"
+				}
+				{
+					id: "63CE178773A13720"
+					item: "thermal:enderium_block"
+					type: "item"
+				}
+			]
+			x: 8.5d
+			y: -2.5d
 		}
 		{
 			dependencies: ["3F58AD4EAE336B1E"]
@@ -710,7 +726,7 @@
 			y: -4.0d
 		}
 		{
-			dependencies: ["612B4AC5C732EF19"]
+			dependencies: ["204617216E309BB4"]
 			id: "559F68C9913B2CFA"
 			rewards: [{
 				id: "58AB214AF82ACE2B"
@@ -722,38 +738,8 @@
 				item: "create:empty_blaze_burner"
 				type: "item"
 			}]
-			x: 10.5d
-			y: -5.5d
-		}
-		{
-			dependencies: [
-				"1A983E23E641CA16"
-				"396A16E573D2EAFF"
-			]
-			id: "612B4AC5C732EF19"
-			tasks: [{
-				id: "3A6203764B68CA78"
-				item: "kubejs:carbonized_netherrack"
-				type: "item"
-			}]
-			x: 9.5d
-			y: -5.5d
-		}
-		{
-			dependencies: ["550E4D68A98180F5"]
-			id: "396A16E573D2EAFF"
-			rewards: [{
-				id: "48A1C088FDF173D8"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "0E4BC293E1C31725"
-				item: "mekanism:enrichment_chamber"
-				type: "item"
-			}]
 			x: 8.5d
-			y: -5.0d
+			y: -5.5d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
@@ -763,7 +749,7 @@
 				item: "hyperbox:hyperbox"
 				type: "item"
 			}]
-			x: 16.0d
+			x: 16.5d
 			y: -5.0d
 		}
 		{
@@ -774,7 +760,7 @@
 				item: "farmingforblockheads:market"
 				type: "item"
 			}]
-			x: 15.0d
+			x: 15.5d
 			y: -2.5d
 		}
 		{
@@ -790,8 +776,8 @@
 				item: "minecraft:skeleton_skull"
 				type: "item"
 			}]
-			x: 8.5d
-			y: -3.0d
+			x: 6.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
@@ -812,7 +798,7 @@
 				type: "item"
 			}]
 			title: "Squeeze me mechanically!"
-			x: 16.0d
+			x: 16.5d
 			y: -3.0d
 		}
 		{
@@ -824,14 +810,36 @@
 				type: "xp"
 				xp: 100
 			}]
-			tasks: [{
-				id: "3A7FC622637711D2"
-				item: "create:spout"
-				type: "item"
-			}]
+			tasks: [
+				{
+					id: "3A7FC622637711D2"
+					item: "create:spout"
+					type: "item"
+				}
+				{
+					id: "6048653E7568AED4"
+					item: "thermal:glowstone_bucket"
+					type: "item"
+				}
+				{
+					id: "26279C793E805D54"
+					item: "thermal:redstone_bucket"
+					type: "item"
+				}
+				{
+					id: "31CCED09F326ABB1"
+					item: "minecraft:lava_bucket"
+					type: "item"
+				}
+				{
+					id: "417703CE1E9238F4"
+					item: "thermal:ender_bucket"
+					type: "item"
+				}
+			]
 			title: "Bottling Effigies"
-			x: 9.5d
-			y: -2.5d
+			x: 10.0d
+			y: -4.0d
 		}
 		{
 			dependencies: ["0936B0DE389AE023"]
@@ -859,30 +867,8 @@
 				}
 			]
 			title: "Rods"
-			x: 11.5d
-			y: -1.5d
-		}
-		{
-			dependencies: [
-				"63562122843997F6"
-				"7C7832CD5506088C"
-			]
-			description: ["Old tales speak about an old ritual requiring to infuse a skeleton skull with water..."]
-			icon: "thermal:ender_bucket"
-			id: "367BFFFD63D1CA88"
-			rewards: [{
-				id: "5ADEC8F5D517E09A"
-				item: "thermal:ender_bucket"
-				type: "item"
-			}]
-			tasks: [{
-				id: "5784FC92307E1864"
-				item: "thermal:ender_bucket"
-				type: "item"
-			}]
-			title: "Bucket of Ender"
-			x: 9.5d
-			y: -1.5d
+			x: 11.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
@@ -914,8 +900,100 @@
 				}
 			]
 			title: "Yellow Cubes"
-			x: 16.5d
+			x: 17.0d
 			y: -4.0d
+		}
+		{
+			dependencies: ["7D0C55A7BC9A056C"]
+			description: [
+				"Bulk washing, haunting and blasting cinder flour produces many useful resources."
+				""
+				"Here we are using it to produce &6glowstone.&r"
+			]
+			id: "3A7F4033C8881566"
+			rewards: [{
+				count: 8
+				id: "1FFD55B14DCECCF2"
+				item: "minecraft:glowstone"
+				type: "item"
+			}]
+			tasks: [{
+				id: "7B46E664DB9E4508"
+				item: "minecraft:glowstone_dust"
+				type: "item"
+			}]
+			x: 8.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["204617216E309BB4"]
+			description: [
+				"The Enrichment Chamber from Mekanism can increase the value of many resources."
+				""
+				"Here it will alloy obtaining cinder flour from netherrack."
+			]
+			id: "7D0C55A7BC9A056C"
+			rewards: [{
+				id: "2D49263CA34EC06B"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [
+				{
+					id: "79649C15D4C89190"
+					item: "mekanism:enrichment_chamber"
+					type: "item"
+				}
+				{
+					id: "0861BC1CD3CBEB61"
+					item: "create:cinder_flour"
+					type: "item"
+				}
+			]
+			x: 7.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["3D0BAEB298C3B791"]
+			id: "204617216E309BB4"
+			rewards: [{
+				count: 64
+				id: "6792C8E0DE1C1FC0"
+				item: "minecraft:netherrack"
+				type: "item"
+			}]
+			tasks: [{
+				id: "3FEC9BD107B051D6"
+				item: "minecraft:netherrack"
+				type: "item"
+			}]
+			x: 7.5d
+			y: -5.5d
+		}
+		{
+			dependencies: ["550E4D68A98180F5"]
+			description: [
+				"Another interesting machine from IF, the Stonework Factory."
+				""
+				"It has two modes:"
+				""
+				"- a generatord mode which produces &4netherrack&r and other stones from lava and water"
+				""
+				"- a factory mode which creates various items and blocks from wood and stone"
+			]
+			id: "3D0BAEB298C3B791"
+			rewards: [{
+				id: "4F20DD1734D2E3CE"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "572B051515588683"
+				item: "industrialforegoing:material_stonework_factory"
+				type: "item"
+			}]
+			x: 6.0d
+			y: -5.0d
 		}
 	]
 	title: "Tier 3: Basic Mekanism"
