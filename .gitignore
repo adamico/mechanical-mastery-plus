@@ -96,6 +96,7 @@ whitelist.json
 # Client Configs
 /**/*client.*
 !/ae2/client.json
+!/config/inventorysorter-client.toml
 /**/*.bak
 /config/emendatusenigmatica/default
 /config/forgeendertech/Biomes/
@@ -162,3 +163,4 @@ not-enough-crashes/Uploaded Crash logs.txt
 config/jade/sort-order.json
 config/powah.json5
 manifest.json
+profileImage/mmplus_title_screen.jpg
