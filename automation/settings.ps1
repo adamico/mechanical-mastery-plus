@@ -108,7 +108,6 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"cucumber-client.toml",
 	"curios-client.toml",
 	"dankstorage-client.toml",
-	"defaultworldtype/client-config.toml",
 	"ding.toml",
 	"extremesoundmuffler-client.toml",
 	"farmersdelight-client.toml",
