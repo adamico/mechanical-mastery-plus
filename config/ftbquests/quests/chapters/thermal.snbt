@@ -82,25 +82,6 @@
 			y: -2.5d
 		}
 		{
-			dependencies: ["22FF4FC891025F81"]
-			description: ["Some items can serve as a \"catalyst\" inside the pulverizer, increasing primary and secondary output, plus some other modifiers. Check JEI for a list of them."]
-			id: "3434FB0FA0702973"
-			rewards: [{
-				count: 16
-				id: "62F604ABEF1D8C9F"
-				item: "minecraft:flint"
-				type: "item"
-			}]
-			subtitle: "x1.1"
-			tasks: [{
-				id: "76E571A53E0C24D7"
-				item: "minecraft:flint"
-				type: "item"
-			}]
-			x: -3.5d
-			y: -2.5d
-		}
-		{
 			dependencies: ["0F66F328C11046E4"]
 			description: [
 				"Thermal offers the option to use catalysts for Pulverizers and Induction Smelters."
@@ -117,92 +98,6 @@
 			}]
 			x: -2.5d
 			y: -3.5d
-		}
-		{
-			dependencies: [
-				"53FE9CDC8A72CA5C"
-				"3434FB0FA0702973"
-			]
-			id: "07194DDB411AFDBE"
-			rewards: [{
-				count: 8
-				id: "13C2BF5300F88356"
-				item: "thermal:basalz_powder"
-				type: "item"
-			}]
-			subtitle: "x1.25"
-			tasks: [{
-				count: 4L
-				id: "0D1893079FFC92FB"
-				item: "thermal:basalz_powder"
-				type: "item"
-			}]
-			x: -3.5d
-			y: -1.5d
-		}
-		{
-			dependencies: [
-				"53FE9CDC8A72CA5C"
-				"07194DDB411AFDBE"
-			]
-			id: "71015BE55E0EF504"
-			rewards: [{
-				count: 4
-				id: "5CE8BDC58AABAE87"
-				item: "thermal:earth_charge"
-				type: "item"
-			}]
-			subtitle: "x1.5"
-			tasks: [{
-				count: 2L
-				id: "11DB810DB86E7503"
-				item: "thermal:earth_charge"
-				type: "item"
-			}]
-			x: -3.5d
-			y: -0.5d
-		}
-		{
-			dependencies: [
-				"53FE9CDC8A72CA5C"
-				"71015BE55E0EF504"
-			]
-			id: "7986E28D02F23868"
-			rewards: [{
-				count: 2
-				id: "49FA505773644F83"
-				item: "kubejs:basilic_reagent"
-				type: "item"
-			}]
-			subtitle: "x2.0"
-			tasks: [{
-				id: "7A9FD278EE78EBF4"
-				item: "kubejs:basilic_reagent"
-				type: "item"
-			}]
-			x: -3.5d
-			y: 0.5d
-		}
-		{
-			dependencies: [
-				"53FE9CDC8A72CA5C"
-				"7986E28D02F23868"
-			]
-			id: "2AAD31BA89F48BFC"
-			rewards: [{
-				count: 16
-				id: "15450C956E04BA11"
-				item: "kubejs:enriched_basilic_reagent"
-				type: "item"
-			}]
-			subtitle: "x2.5"
-			tasks: [{
-				id: "06957F501491A80E"
-				item: "kubejs:enriched_basilic_reagent"
-				type: "item"
-			}]
-			x: -3.5d
-			y: 1.5d
 		}
 		{
 			dependencies: ["0F66F328C11046E4"]

@@ -58,7 +58,7 @@ ServerEvents.recipes(event => {
       mode: 'inscribe',
       result: {
         item: result,
-      count: 2
+      count: 1
       }
     })
   });

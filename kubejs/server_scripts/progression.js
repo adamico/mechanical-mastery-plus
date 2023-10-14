@@ -184,6 +184,7 @@ ServerEvents.recipes(event => {
 	event.replaceInput({output: 'mekanism:combiner'}, 'mekanism:elite_control_circuit', 'kubejs:cube3');
 	event.remove({id: 'mekanism:control_circuit/elite'});
 
+	event.remove({id: 'thermal:machines/pulverizer/pulverizer_catalyst_basalz_powder'});
   event.recipes.thermal.pulverizer_catalyst('thermal:basalz_powder').primaryMod(1.25).secondaryMod(3.0).energyMod(0.75).minChance(0.0).useChance(0.5);
   event.recipes.thermal.pulverizer_catalyst('thermal:earth_charge').primaryMod(1.5).secondaryMod(4.0).energyMod(0.5).minChance(0.0).useChance(0.375);
   event.recipes.thermal.pulverizer_catalyst('kubejs:basilic_reagent').primaryMod(2.0).secondaryMod(5.0).energyMod(0.25).minChance(0.0).useChance(0.25);

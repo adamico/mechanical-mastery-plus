@@ -483,7 +483,7 @@
 		}
 		{
 			dependencies: ["19499868D936A165"]
-			description: ["The inscriber also gives you early ore doubling... but you still need to crank your way to richness... for now"]
+			description: ["The inscriber can also crush raw ores into dust... but you still need to crank your way to richness... for now"]
 			id: "793AABD9C2DEC680"
 			rewards: [{
 				exclude_from_claim_all: true
@@ -516,7 +516,7 @@
 				}
 				type: "item"
 			}]
-			title: "Ore doubling!"
+			title: "Another one bites the..."
 			x: 2.0d
 			y: -0.5d
 		}
