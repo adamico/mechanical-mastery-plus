@@ -1,8 +1,8 @@
 ServerEvents.recipes(event => {
-	event.recipes.createMilling([Item.of('minecraft:sand'), Item.of('thermal:sulfur').withChance(0.8)], 'minecraft:sandstone');
-	event.recipes.createMilling([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal').withChance(0.25)], 'minecraft:coal');
-	event.recipes.createMilling([Item.of('#forge/dusts/zinc'), Item.of('#forge/dusts/zinc')], Item.of('#forge:raw_ores/zinc'));
-	event.recipes.createCrushing([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal')], 'minecraft:coal');
+	event.recipes.createMilling([Item.of('minecraft:sand'), Item.of('thermal:sulfur').withChance(0.8)], ['minecraft:sandstone']).processingTime(250);
+	event.recipes.createMilling([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal').withChance(0.25)], 'minecraft:coal').processingTime(250);
+	event.recipes.createMilling([Item.of('#forge:dusts/zinc'), Item.of('#forge:dusts/zinc')], Item.of('#forge:raw_materials/zinc')).processingTime(250);
+	event.recipes.createCrushing([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal')], 'minecraft:coal').processingTime(250);
 	
 	event.recipes.createHaunting('minecraft:egg', 'create:dough');
 
