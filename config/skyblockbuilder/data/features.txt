@@ -4,7 +4,6 @@ minecraft:azalea_tree
 minecraft:bamboo_no_podzol
 minecraft:bamboo_some_podzol
 minecraft:bamboo_vegetation
-supplementaries:basalt_ash
 minecraft:basalt_blobs
 minecraft:basalt_pillar
 minecraft:birch
@@ -15,7 +14,6 @@ minecraft:birch_tall
 minecraft:blackstone_blobs
 minecraft:blue_ice
 minecraft:bonus_chest
-supplementaries:cave_urns
 minecraft:cave_vine
 minecraft:cave_vine_in_moss
 minecraft:chorus_plant
@@ -29,10 +27,6 @@ minecraft:dark_forest_vegetation
 minecraft:dark_oak
 minecraft:delta
 minecraft:desert_well
-rftoolsbase:dimshard_dimensions
-rftoolsbase:dimshard_end
-rftoolsbase:dimshard_nether
-rftoolsbase:dimshard_overworld
 minecraft:disk_clay
 minecraft:disk_grass
 minecraft:disk_gravel
@@ -81,7 +75,6 @@ minecraft:mangrove_vegetation
 minecraft:meadow_trees
 minecraft:mega_jungle_tree
 minecraft:mega_pine
-thermal:mega_rubberwood_tree
 minecraft:mega_spruce
 minecraft:monster_room
 minecraft:moss_patch
@@ -148,7 +141,6 @@ mekanism:ore_uranium_small
 mekanism:ore_uranium_small_retrogen
 minecraft:patch_berry_bush
 minecraft:patch_brown_mushroom
-farmersdelight:patch_brown_mushroom_colonies
 minecraft:patch_cactus
 minecraft:patch_crimson_roots
 minecraft:patch_dead_bush
@@ -159,21 +151,12 @@ minecraft:patch_large_fern
 minecraft:patch_melon
 minecraft:patch_pumpkin
 minecraft:patch_red_mushroom
-farmersdelight:patch_red_mushroom_colonies
-farmersdelight:patch_sandy_shrub
 minecraft:patch_soul_fire
 minecraft:patch_sugar_cane
 minecraft:patch_sunflower
 minecraft:patch_taiga_grass
 minecraft:patch_tall_grass
 minecraft:patch_waterlily
-farmersdelight:patch_wild_beetroots
-farmersdelight:patch_wild_cabbages
-farmersdelight:patch_wild_carrots
-farmersdelight:patch_wild_onions
-farmersdelight:patch_wild_potatoes
-farmersdelight:patch_wild_rice
-farmersdelight:patch_wild_tomatoes
 minecraft:pile_hay
 minecraft:pile_ice
 minecraft:pile_melon
@@ -181,9 +164,7 @@ minecraft:pile_pumpkin
 minecraft:pile_snow
 minecraft:pine
 minecraft:pointed_dripstone
-supplementaries:road_sign
 minecraft:rooted_azalea_tree
-thermal:rubberwood_tree
 mekanism:salt
 mekanism:salt_retrogen
 minecraft:sculk_patch_ancient_city
@@ -211,7 +192,6 @@ minecraft:super_birch_bees
 minecraft:super_birch_bees_0002
 minecraft:swamp_oak
 minecraft:tall_mangrove
-integrateddynamics:tree_menril
 minecraft:trees_birch_and_oak
 minecraft:trees_flower_forest
 minecraft:trees_grove
@@ -239,5 +219,4 @@ minecraft:warped_forest_vegetation_bonemeal
 minecraft:warped_fungus
 minecraft:warped_fungus_planted
 minecraft:weeping_vines
-supplementaries:wild_flax
 create:zinc_ore

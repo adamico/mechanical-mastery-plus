@@ -1,4 +1,4 @@
-## mechanical-mastery-plus - v0.1.1-beta
+## mechanical-mastery-plus - v0.1.0-beta
 
   * [AdvancedPeripherals-1.19.2-0.7.30r.jar](https://www.curseforge.com/minecraft/mc-mods/advanced-peripherals/files/4684339) (by [srrendi](https://www.curseforge.com/members/srrendi/projects))
   * [AEInfinityBooster-1.19.2-1.2.0+11.jar](https://www.curseforge.com/minecraft/mc-mods/aeinfinitybooster/files/3940200) (by [hexeptiondev](https://www.curseforge.com/members/hexeptiondev/projects))
@@ -79,7 +79,6 @@
   * [ftbbackups2-forge-1.19.2-1.0.22.jar](https://www.curseforge.com/minecraft/mc-mods/ftb-backups-2/files/4771062) (by [FTB](https://www.curseforge.com/members/FTB/projects))
   * [ftb-chunks-forge-1902.4.2-build.302.jar](https://www.curseforge.com/minecraft/mc-mods/ftb-chunks-forge/files/4727833) (by [FTB](https://www.curseforge.com/members/FTB/projects))
   * [ftb-library-forge-1902.4.1-build.236.jar](https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge/files/4661834) (by [FTB](https://www.curseforge.com/members/FTB/projects))
-  * [ftb-quests-forge-1902.5.6-build.304.jar](https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge/files/4779003) (by [FTB](https://www.curseforge.com/members/FTB/projects))
   * [ftb-ranks-forge-1902.1.15-build.77.jar](https://www.curseforge.com/minecraft/mc-mods/ftb-ranks-forge/files/4462454) (by [FTB](https://www.curseforge.com/members/FTB/projects))
   * [ftb-teams-forge-1902.2.14-build.123.jar](https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge/files/4611938) (by [FTB](https://www.curseforge.com/members/FTB/projects))
   * [ftb-ultimine-forge-1902.4.1-build.90.jar](https://www.curseforge.com/minecraft/mc-mods/ftb-ultimine-forge/files/4598468) (by [FTB](https://www.curseforge.com/members/FTB/projects))

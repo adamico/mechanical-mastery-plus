@@ -23,7 +23,6 @@ minecraft:frozen_ocean
 minecraft:frozen_peaks
 minecraft:frozen_river
 minecraft:grove
-hyperbox:hyperbox
 minecraft:ice_spikes
 minecraft:jagged_peaks
 minecraft:jungle
