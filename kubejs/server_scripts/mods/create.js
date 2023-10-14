@@ -19,7 +19,23 @@ ServerEvents.recipes(event => {
 	event.recipes.createMixing(Item.of('#forge:ingots/steel', 3), [Item.of('#forge:ingots/iron', 3), Item.of("#minecraft:coals", 3)]).heated().processingTime(120);
 
 	event.remove({id: 'create:milling/sandstone'});
-	// event.remove({id: 'createchromaticreturn:motor_recipe'}); //review this recipe
+
+	event.remove({id: 'createchromaticreturn:motor_recipe'});
+	event.recipes.createMechanicalCrafting('create:creative_motor', [
+    "MNYNM",
+    "NNRNN",
+    "NRSRN",
+    "NNRNN",
+    "MNCNM"
+	], {
+			N: "minecraft:netherite_block",
+			R: "createchromaticreturn:refined_mechanism",
+			M: "createchromaticreturn:multiplite_ingot",
+			S: 'projectexpansion:final_star',
+			Y: "create:rotation_speed_controller",
+			C: "create:shaft"
+    }
+	);
 
 	event.remove({id: 'createchromaticreturn:cf_to_gp'});
 	event.remove({id: 'createchromaticreturn:gp_to_bp'});
@@ -29,8 +45,6 @@ ServerEvents.recipes(event => {
 	
 	event.remove({id: 'createchromaticreturn:carbon_powder_recipe'});
 	event.recipes.createCrushing([Item.of('projecte:dark_matter').withChance(0.5), Item.of('createchromaticreturn:carbon_powder', 8).withChance(0.5)], 'projecte:dark_matter_block');
-
-	// event.remove({id: 'createchromaticreturn:bedrock_shard_crushing'}); //review this recipe
 
 	[
 		{input: 'iron', output: 'redstone'}, 

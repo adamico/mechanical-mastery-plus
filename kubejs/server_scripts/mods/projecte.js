@@ -2,7 +2,8 @@ ServerEvents.recipes(event => {
   event.replaceInput({id: 'projecte:high_covalence_dust'}, 'minecraft:diamond', 'minecraft:gold_ingot');
 	event.replaceInput({id: 'projecte:condenser_mk1'}, 'minecraft:obsidian', 'minecraft:gold_ingot');
 	event.replaceInput({id: 'projecte:condenser_mk1'}, 'minecraft:diamond', 'projecte:high_covalence_dust');
-	event.replaceInput({output: 'projecte:swiftwolf_rending_gale'}, 'projecte:iron_band', 'minecraft:nether_star');
+	event.replaceInput({output: 'projecte:swiftwolf_rending_gale'}, 'projecte:iron_band', 'kubejs:cube4');
+	event.replaceInput({output: 'projecte:swiftwolf_rending_gale'}, 'projecte:dark_matter', 'minecraft:nether_star');
 
 	event.replaceInput({id: 'projectexpansion:emc_link/basic'}, 'projecte:condenser_mk1', 'minecraft:barrel');
 	event.replaceInput({id: 'projectexpansion:emc_link/basic'}, 'projecte:transmutation_tablet', '#forge:plates/invar');

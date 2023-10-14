@@ -3,24 +3,91 @@
 	default_quest_shape: ""
 	filename: "industrial_foregoing"
 	group: "349666CD0199D4FD"
+	hide_quest_details_until_startable: true
+	hide_quest_until_deps_visible: true
+	icon: {
+		Count: 1b
+		id: "industrialforegoing:infinity_hammer"
+		tag: {
+			Beheading: 0
+			CanCharge: 1b
+			Energy: 9223372036854775807L
+			Fluid: {
+				Amount: 1000000
+				FluidName: "biofuel"
+			}
+			Selected: "ARTIFACT"
+			Special: 1b
+		}
+	}
 	id: "33638AE1DDEC6E55"
-	order_index: 3
-	quest_links: [ ]
-	quests: [{
-		description: ["The Dye Mixer takes red, green, and blue dyes, and can mix them into any other dye color. You can get green dye by smelting cactus, red from flowers obtained by bone mealing grass and blue from lapis."]
-		id: "508D237427CDE318"
-		optional: true
-		shape: "diamond"
-		size: 0.8d
-		subtitle: "Infinite amounts of any dye"
-		tasks: [{
-			id: "078BC4A0FDC88F04"
-			item: "industrialforegoing:dye_mixer"
-			type: "item"
-		}]
-		title: "RGB or CMYK or RGY...?!?"
+	images: [{
+		click: "https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing"
+		corner: false
+		dependency: "660442FEB44ACCDC"
+		dev: false
+		height: 2.0d
+		hover: ["visit https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing"]
+		image: "industrialforegoing:blocks/fluid_collector_front"
+		rotation: 0.0d
+		width: 2.0d
 		x: 0.0d
-		y: 0.0d
+		y: -4.0d
 	}]
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["660442FEB44ACCDC"]
+			description: ["The Dye Mixer takes red, green, and blue dyes, and can mix them into any other dye color. You can get green dye by smelting cactus, red from flowers obtained by bone mealing grass and blue from lapis."]
+			id: "508D237427CDE318"
+			subtitle: "Infinite amounts of any dye"
+			tasks: [{
+				id: "078BC4A0FDC88F04"
+				item: "industrialforegoing:dye_mixer"
+				type: "item"
+			}]
+			title: "RGB or CMYK or RGY...?!?"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["2A9795581CE1CACF"]
+			description: [
+				"&lIndustrial Foregoing&r"
+				""
+				"a mod that allows you to automate most of minecraft's functions. It has machines for everything!"
+			]
+			id: "660442FEB44ACCDC"
+			rewards: [{
+				id: "4C5AAF3FFED736E1"
+				item: {
+					Count: 1b
+					id: "patchouli:guide_book"
+					tag: {
+						"patchouli:book": "industrialforegoing:industrial_foregoing"
+					}
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "5B6655C32934F80C"
+				item: {
+					Count: 1b
+					id: "industrialforegoing:infinity_backpack"
+					tag: {
+						CanCharge: 1b
+						Energy: 0L
+						Selected: "POOR"
+						Special: 0b
+					}
+				}
+				type: "item"
+			}]
+			title: "Industrial Foregoing"
+			x: 0.0d
+			y: -1.5d
+		}
+	]
 	title: "Industrial Foregoing"
 }

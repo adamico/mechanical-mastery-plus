@@ -3104,7 +3104,9 @@
 			y: 2.0d
 		}
 		{
+			dependencies: ["63718E3892A50039"]
 			description: ["Trap a wither inside a stasis chamber and place a fluid laser base directly above it to passively obtain ether gas."]
+			hide_dependency_lines: true
 			id: "05A0C01966A06A98"
 			optional: true
 			rewards: [{
@@ -3187,6 +3189,17 @@
 			title: "Automating withers"
 			x: 43.5d
 			y: 7.5d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			id: "63718E3892A50039"
+			tasks: [{
+				id: "3D0DA49EA3445F38"
+				title: "Chapter 5 automation"
+				type: "checkmark"
+			}]
+			x: 42.5d
+			y: -1.5d
 		}
 	]
 	title: "Automation"

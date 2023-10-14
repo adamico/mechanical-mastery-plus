@@ -3,7 +3,25 @@
 	default_quest_shape: ""
 	filename: "thermal"
 	group: "349666CD0199D4FD"
+	icon: {
+		Count: 1b
+		id: "thermal:wrench"
+		tag: { }
+	}
 	id: "0772CA892C963BCC"
+	images: [{
+		click: "https://www.curseforge.com/minecraft/mc-mods/thermal-foundation"
+		corner: false
+		dependency: "0F66F328C11046E4"
+		dev: false
+		height: 2.0d
+		hover: ["visit https://www.curseforge.com/minecraft/mc-mods/thermal-foundation"]
+		image: "thermal:block/machines/machine_pulverizer_active"
+		rotation: 0.0d
+		width: 2.0d
+		x: 0.0d
+		y: -8.0d
+	}]
 	order_index: 0
 	quest_links: [ ]
 	quests: [
@@ -81,11 +99,14 @@
 			y: -2.5d
 		}
 		{
+			dependencies: ["0F66F328C11046E4"]
 			description: [
 				"Thermal offers the option to use catalysts for Pulverizers and Induction Smelters."
 				""
 				"Each catalyst has different modifiers for primary and auxiliary outputs, chance to use catalysts, energy consumption."
 			]
+			hide_dependency_lines: false
+			hide_dependent_lines: true
 			id: "22FF4FC891025F81"
 			tasks: [{
 				id: "4858400BA8BEA95A"
@@ -182,11 +203,13 @@
 			y: 1.5d
 		}
 		{
+			dependencies: ["0F66F328C11046E4"]
 			description: [
 				"Augments can modify many aspects of your Thermal machines."
 				""
 				"Increasing primary and aux output, reinject products in the input slot (useful for Phytogenic Insulator)"
 			]
+			hide_dependent_lines: true
 			id: "61BE356972B79B00"
 			tasks: [{
 				id: "19F436D9C752640E"
@@ -285,6 +308,8 @@
 			y: -1.0d
 		}
 		{
+			dependencies: ["0F66F328C11046E4"]
+			hide_dependent_lines: true
 			id: "733C4D5387EDD61C"
 			tasks: [{
 				id: "126BC37C483FC765"
@@ -293,6 +318,39 @@
 			}]
 			x: 3.5d
 			y: -3.5d
+		}
+		{
+			dependencies: ["6F0F8C3F6B5E2310"]
+			description: [
+				"&lThermal Series mod&r"
+				""
+				"\"The Foundation of a Thermally-enhanced world!!\""
+			]
+			hide_dependent_lines: true
+			id: "0F66F328C11046E4"
+			rewards: [{
+				id: "02E810B816B06624"
+				item: {
+					Count: 1b
+					id: "patchouli:guide_book"
+					tag: {
+						"patchouli:book": "thermal:guidebook"
+					}
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "4421F7E09A435286"
+				item: {
+					Count: 1b
+					id: "thermal:wrench"
+					tag: { }
+				}
+				title: "Thermal Foundation"
+				type: "item"
+			}]
+			x: 0.0d
+			y: -5.5d
 		}
 	]
 	title: "Thermal"

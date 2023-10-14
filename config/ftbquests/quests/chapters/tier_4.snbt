@@ -467,11 +467,6 @@
 			id: "65CCE43B4B2AEC6F"
 			rewards: [
 				{
-					id: "219FAD265DF75B3B"
-					item: "powah:book"
-					type: "item"
-				}
-				{
 					id: "04398F7C1F4654C6"
 					item: "powah:energy_cell_basic"
 					type: "item"

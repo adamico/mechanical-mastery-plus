@@ -19,6 +19,7 @@
 				""
 				"In this chapter you will mix and match Create Chromatic Return, Mekanism and Project E."
 			]
+			hide_dependent_lines: true
 			icon: "kubejs:cube4"
 			id: "07980075BFE4C586"
 			rewards: [{
@@ -94,8 +95,8 @@
 				item: "kubejs:black_hdpe_sheet"
 				type: "item"
 			}]
-			x: -12.0d
-			y: 6.0d
+			x: -11.5d
+			y: 5.5d
 		}
 		{
 			dependencies: ["53F4A40B4EAECB3E"]
@@ -107,11 +108,12 @@
 				type: "item"
 			}]
 			x: -10.5d
-			y: 4.5d
+			y: 3.5d
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
 			description: ["With darkness essence I can now create create wither skeleton skulls, which can be used to summon the wither."]
+			hide_dependent_lines: true
 			id: "384BB4E82F5D69C6"
 			rewards: [{
 				id: "2C30B178D34BDF57"
@@ -140,6 +142,7 @@
 				"41E380D0E0E5E75A"
 				"53F4A40B4EAECB3E"
 			]
+			hide_dependent_lines: true
 			id: "41D9B7AC1089FA83"
 			tasks: [
 				{
@@ -167,8 +170,8 @@
 				}
 			]
 			title: "Supercritical Phase Shifter"
-			x: -10.5d
-			y: 6.0d
+			x: -10.0d
+			y: 5.0d
 		}
 		{
 			dependencies: [
@@ -182,7 +185,6 @@
 				""
 				"I also discovered a way to obtain antimatter pellets through Create Chromatic Return!"
 			]
-			hide_dependency_lines: true
 			hide_dependent_lines: true
 			id: "6A313C7F7A10ABE7"
 			rewards: [{
@@ -196,11 +198,12 @@
 				item: "mekanism:pellet_antimatter"
 				type: "item"
 			}]
-			x: -8.5d
+			x: -8.0d
 			y: 1.5d
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
+			hide_dependent_lines: true
 			id: "4DA3EFBDC9FE2FDF"
 			tasks: [{
 				id: "543077701DABA7CD"
@@ -212,6 +215,7 @@
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
+			hide_dependent_lines: true
 			id: "21736DEF38D368D1"
 			tasks: [{
 				id: "17624FD411EEB46C"
@@ -262,7 +266,7 @@
 				item: "projectexpansion:final_star"
 				type: "item"
 			}]
-			x: -7.0d
+			x: -6.0d
 			y: 1.5d
 		}
 		{
@@ -275,6 +279,7 @@
 				"643082630E0B6CFD"
 			]
 			description: ["The true potential of the final star. With this, EMC and raw materials are something I shall never have to worry about again."]
+			hide_dependent_lines: true
 			id: "1D6666CFC0B349E1"
 			shape: "pentagon"
 			tasks: [{
@@ -282,7 +287,7 @@
 				item: "projectexpansion:final_power_flower"
 				type: "item"
 			}]
-			x: -4.0d
+			x: -2.0d
 			y: 1.5d
 		}
 		{
@@ -300,23 +305,26 @@
 				item: "functionalstorage:creative_vending_upgrade"
 				type: "item"
 			}]
-			x: -2.5d
+			x: -0.5d
 			y: 1.5d
 		}
 		{
+			dependencies: ["53B7C4EFD1B28F70"]
 			description: ["Infinite kinetic stress capacity."]
+			hide_dependent_lines: true
 			id: "0F08BE53368BBA0E"
 			tasks: [{
 				id: "7C236303EF71DB29"
 				item: "create:creative_motor"
 				type: "item"
 			}]
-			x: -5.5d
+			x: -3.5d
 			y: 1.5d
 		}
 		{
 			dependencies: ["53B7C4EFD1B28F70"]
 			description: ["Unlimited Power."]
+			hide_dependent_lines: true
 			id: "643082630E0B6CFD"
 			subtitle: "READ QUEST FOR HOW TO CRAFT"
 			tasks: [{
@@ -335,31 +343,33 @@
 				}
 				type: "item"
 			}]
-			x: -5.5d
+			x: -4.0d
 			y: 0.5d
 		}
 		{
 			dependencies: ["53B7C4EFD1B28F70"]
 			description: ["Infinite fluid storage and withdrawal."]
+			hide_dependent_lines: true
 			id: "4912D9951F6B69A9"
 			tasks: [{
 				id: "500E0937561BCE1C"
 				item: "mekanism:creative_fluid_tank"
 				type: "item"
 			}]
-			x: -5.5d
+			x: -4.5d
 			y: -0.5d
 		}
 		{
 			dependencies: ["53B7C4EFD1B28F70"]
 			description: ["Unlimited refined storage capacity"]
+			hide_dependent_lines: true
 			id: "001789AD77BFECCF"
 			tasks: [{
 				id: "4F9815D48862D2A4"
 				item: "refinedstorage:creative_storage_disk"
 				type: "item"
 			}]
-			x: -5.5d
+			x: -4.0d
 			y: 2.5d
 		}
 		{
@@ -368,6 +378,7 @@
 				"53B7C4EFD1B28F70"
 			]
 			description: ["Infinite gas and chemical storage and withdrawal."]
+			hide_dependent_lines: true
 			id: "72B973D152D0D797"
 			subtitle: "Recommended before Final Star"
 			tasks: [{
@@ -375,7 +386,7 @@
 				item: "mekanism:creative_chemical_tank"
 				type: "item"
 			}]
-			x: -5.5d
+			x: -4.5d
 			y: 3.5d
 		}
 		{
@@ -416,8 +427,8 @@
 				}
 				type: "item"
 			}]
-			x: -16.0d
-			y: 2.5d
+			x: -16.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
@@ -444,8 +455,8 @@
 				}
 				type: "item"
 			}]
-			x: -16.5d
-			y: 1.5d
+			x: -17.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
@@ -461,8 +472,8 @@
 				item: "angelring:angel_ring"
 				type: "item"
 			}]
-			x: -16.0d
-			y: 0.5d
+			x: -16.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["799C7A2E5C9265DB"]
@@ -494,8 +505,8 @@
 				item: "projecte:dark_matter"
 				type: "item"
 			}]
-			x: -15.0d
-			y: 3.5d
+			x: -16.0d
+			y: 4.0d
 		}
 		{
 			dependencies: ["384BB4E82F5D69C6"]
@@ -504,6 +515,7 @@
 				""
 				"A powerful item in and of itself, it serves as an ingredient for the most powerful star."
 			]
+			hide_dependent_lines: true
 			id: "2F6F2DB24C399EAA"
 			tasks: [{
 				id: "02BC1A7A17F01DD5"
@@ -526,6 +538,7 @@
 				""
 				"- processing Uranium crystals with Create Chromatic Return recipes"
 			]
+			hide_dependent_lines: true
 			id: "13EE1ECF3DC0491D"
 			rewards: [
 				{
@@ -587,7 +600,7 @@
 				}
 			]
 			x: -10.5d
-			y: -1.5d
+			y: -0.5d
 		}
 		{
 			dependencies: ["4556B0134F410EC5"]
@@ -625,8 +638,8 @@
 				item: "createchromaticreturn:shadow_steel"
 				type: "item"
 			}]
-			x: -10.5d
-			y: -3.0d
+			x: -10.0d
+			y: -2.0d
 		}
 		{
 			dependencies: ["3ABB6AD99E3C09EC"]
@@ -687,38 +700,41 @@
 				}
 			]
 			title: "Into the rabbit gas hole"
-			x: -15.0d
-			y: -0.5d
+			x: -16.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
 			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "56D5909AEA258984"
 			tasks: [{
 				id: "27CB841D3051C864"
 				item: "createchromaticreturn:chromatic_compound"
 				type: "item"
 			}]
-			x: -12.0d
-			y: -3.0d
+			x: -11.5d
+			y: -2.5d
 		}
 		{
 			dependencies: [
 				"48440A9003383920"
 				"429F208B1F91C217"
 			]
-			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "31C75750B2530381"
 			tasks: [{
 				id: "578894E787C3CF84"
 				item: "createchromaticreturn:multiplite_ingot"
 				type: "item"
 			}]
-			x: -8.5d
+			x: -9.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["41D9B7AC1089FA83"]
+			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "48440A9003383920"
 			tasks: [
 				{
@@ -732,12 +748,13 @@
 					type: "item"
 				}
 			]
-			x: -8.5d
+			x: -9.0d
 			y: 4.0d
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
 			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "716AE122DA75B4CC"
 			tasks: [{
 				count: 32L
@@ -745,12 +762,12 @@
 				item: "mekanism:block_refined_obsidian"
 				type: "item"
 			}]
-			x: -8.5d
+			x: -9.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["56D5909AEA258984"]
-			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "429F208B1F91C217"
 			tasks: [{
 				count: 16L
@@ -758,10 +775,11 @@
 				item: "createchromaticreturn:refined_radiance"
 				type: "item"
 			}]
-			x: -8.5d
+			x: -9.0d
 			y: -1.0d
 		}
 		{
+			dependencies: ["31C75750B2530381"]
 			description: [
 				"The radiant glow saber is a weapon forged by the sacred mechanical monks long ago."
 				""
@@ -777,7 +795,7 @@
 				type: "item"
 			}]
 			x: -7.0d
-			y: 0.0d
+			y: 0.5d
 		}
 		{
 			dependencies: [
@@ -800,7 +818,32 @@
 				type: "item"
 			}]
 			x: -7.0d
-			y: 3.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			id: "05F5D6913E3CD4BD"
+			rewards: [
+				{
+					count: 2
+					id: "650F313B9BBABDB2"
+					item: "rftoolsutility:environmental_controller"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "75AA753FFCA209E4"
+					item: "fluxnetworks:flux_point"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "412A2BEFAF0806AA"
+				item: "rftoolsutility:flight_module"
+				type: "item"
+			}]
+			x: -17.0d
+			y: 2.0d
 		}
 	]
 	title: "Tier 5: Endgame"

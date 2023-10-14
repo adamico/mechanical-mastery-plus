@@ -5,33 +5,73 @@
 	group: "349666CD0199D4FD"
 	icon: "powah:energizing_orb"
 	id: "651963EB5098050C"
-	order_index: 5
-	quest_links: [ ]
-	quests: [{
-		description: ["Eventually, you will want to power multiple machines with the same dynamos. Use these energy cables to connect your machines and generators together so they can share power with each other."]
-		id: "7DC5EA17257FC5B8"
-		rewards: [
-			{
-				id: "4128516CC3CF2B67"
-				type: "xp"
-				xp: 100
-			}
-			{
-				count: 12
-				id: "0B38C6061A14BE38"
-				item: "powah:energy_cable_basic"
-				type: "item"
-			}
-		]
-		tasks: [{
-			count: 12L
-			id: "249FD46D60AF01E4"
-			item: "powah:energy_cable_starter"
-			type: "item"
-		}]
-		title: "Basic Power Transport"
+	images: [{
+		click: ""
+		corner: false
+		dependency: "7F72B5E55A32BE30"
+		dev: false
+		height: 2.0d
+		hover: [ ]
+		image: "powah:item/charged_snowball"
+		rotation: 0.0d
+		width: 2.0d
 		x: 0.0d
-		y: 0.0d
+		y: -3.5d
 	}]
+	order_index: 4
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["7F72B5E55A32BE30"]
+			description: ["Eventually, you will want to power multiple machines with the same dynamos. Use these energy cables to connect your machines and generators together so they can share power with each other."]
+			id: "7DC5EA17257FC5B8"
+			rewards: [
+				{
+					id: "4128516CC3CF2B67"
+					type: "xp"
+					xp: 100
+				}
+				{
+					count: 12
+					id: "0B38C6061A14BE38"
+					item: "powah:energy_cable_basic"
+					type: "item"
+				}
+			]
+			tasks: [{
+				count: 12L
+				id: "249FD46D60AF01E4"
+				item: "powah:energy_cable_starter"
+				type: "item"
+			}]
+			title: "Basic Power Transport"
+			x: 0.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["65CCE43B4B2AEC6F"]
+			hide_dependent_lines: true
+			id: "7F72B5E55A32BE30"
+			rewards: [{
+				id: "2B17B068815CF310"
+				item: "powah:book"
+				type: "item"
+			}]
+			tasks: [{
+				id: "4AC1FC4216CFDC24"
+				item: {
+					Count: 1b
+					id: "powah:wrench"
+					tag: {
+						PowahWrenchNBT: { }
+					}
+				}
+				type: "item"
+			}]
+			title: "Powah"
+			x: 0.0d
+			y: -1.0d
+		}
+	]
 	title: "Powah"
 }

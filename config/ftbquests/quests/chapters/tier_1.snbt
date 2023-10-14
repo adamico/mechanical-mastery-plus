@@ -10,6 +10,7 @@
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["6F0F8C3F6B5E2310"]
 			description: [
 				"Welcome to &6Mechanical Mastery&r!"
 				""

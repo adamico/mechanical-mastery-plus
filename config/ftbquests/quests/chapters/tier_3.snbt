@@ -3,6 +3,8 @@
 	default_quest_shape: ""
 	filename: "tier_3"
 	group: "2D94E5A1412E2495"
+	hide_quest_details_until_startable: true
+	hide_quest_until_deps_visible: true
 	icon: "kubejs:cube3"
 	id: "680AAFF5D8F57095"
 	order_index: 2
@@ -996,5 +998,5 @@
 			y: -5.0d
 		}
 	]
-	title: "Tier 3: Basic Mekanism"
+	title: "Tier 3: Mekanism"
 }

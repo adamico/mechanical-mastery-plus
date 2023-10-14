@@ -3,44 +3,61 @@
 	default_quest_shape: ""
 	filename: "mekanism"
 	group: "349666CD0199D4FD"
+	hide_quest_details_until_startable: true
+	hide_quest_until_deps_visible: true
+	icon: {
+		Count: 1b
+		id: "mekanism:configurator"
+		tag: {
+			mekData: {
+				EnergyContainers: [{
+					Container: 0b
+					stored: "60000"
+				}]
+			}
+		}
+	}
 	id: "26A60F149D870E2B"
-	order_index: 4
+	images: [
+		{
+			click: "https://www.curseforge.com/minecraft/mc-mods/mekanism"
+			corner: false
+			dependency: "002491C83950B2B1"
+			dev: false
+			height: 2.0d
+			hover: ["visit https://www.curseforge.com/minecraft/mc-mods/mekanism"]
+			image: "mekanism:item/mekasuit_helmet"
+			rotation: 0.0d
+			width: 2.0d
+			x: -2.0d
+			y: -6.5d
+		}
+		{
+			click: ""
+			corner: false
+			dev: false
+			height: 2.0d
+			hover: [ ]
+			image: "mekanism:item/mekasuit_helmet_tint_layer"
+			rotation: 0.0d
+			width: 2.0d
+			x: -2.0d
+			y: -6.5d
+		}
+	]
+	order_index: 3
 	quest_links: [ ]
 	quests: [
 		{
-			description: ["With steel, you can craft the basic tier of mekanism logistic pipes, allowing you to transfer items, fluids, or energy in an easier manner."]
-			icon: "mekanism:configurator"
-			id: "0B10D556104887A9"
-			optional: true
-			rewards: [{
-				id: "6D26A3CC75F15790"
-				item: "mekanism:configurator"
-				type: "item"
-			}]
-			shape: "diamond"
-			size: 0.8d
-			tasks: [{
-				id: "76C8E57263E432D3"
-				title: "Meknism Logistics"
-				type: "checkmark"
-			}]
-			title: "Mekanism Logistics"
-			x: 0.0d
-			y: 0.19999999999999996d
-		}
-		{
-			dependencies: ["0B10D556104887A9"]
+			dependencies: ["002491C83950B2B1"]
 			description: ["Mekanism's fluid transport solution."]
 			id: "6559161759CB03B7"
-			optional: true
 			rewards: [{
 				count: 16
 				id: "2EC367DFD9875A54"
 				item: "mekanism:basic_mechanical_pipe"
 				type: "item"
 			}]
-			shape: "diamond"
-			size: 0.8d
 			tasks: [{
 				id: "7D45659EBD165567"
 				item: {
@@ -74,22 +91,19 @@
 				type: "item"
 			}]
 			title: "Mechanical Pipes"
-			x: 1.0d
-			y: -0.8d
+			x: 0.5d
+			y: -3.5d
 		}
 		{
-			dependencies: ["0B10D556104887A9"]
+			dependencies: ["002491C83950B2B1"]
 			description: ["Mekanism's item transport solution."]
 			id: "38555B7B5AE725D4"
-			optional: true
 			rewards: [{
 				count: 16
 				id: "0657F9353985185F"
 				item: "mekanism:basic_logistical_transporter"
 				type: "item"
 			}]
-			shape: "diamond"
-			size: 0.8d
 			tasks: [{
 				id: "1FF84F8D3581A381"
 				item: {
@@ -123,22 +137,19 @@
 				type: "item"
 			}]
 			title: "Logistical Transporters"
-			x: 1.0d
-			y: 0.19999999999999996d
+			x: 0.5d
+			y: -4.5d
 		}
 		{
-			dependencies: ["0B10D556104887A9"]
+			dependencies: ["002491C83950B2B1"]
 			description: ["Mekanism's energy transport solution."]
 			id: "08C76B396B7ACA4B"
-			optional: true
 			rewards: [{
 				count: 16
 				id: "5F552566F2C24AC5"
 				item: "mekanism:basic_universal_cable"
 				type: "item"
 			}]
-			shape: "diamond"
-			size: 0.8d
 			tasks: [{
 				id: "5D0001CEFA17F21F"
 				item: {
@@ -172,8 +183,8 @@
 				type: "item"
 			}]
 			title: "Universal Cables"
-			x: 1.0d
-			y: 1.2d
+			x: 0.5d
+			y: -5.5d
 		}
 		{
 			dependencies: ["3513339FE594C05C"]
@@ -214,8 +225,8 @@
 				type: "item"
 			}]
 			title: "Ultimate Mekanism Logistics"
-			x: -5.5d
-			y: -1.5d
+			x: -3.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["3D8A15299F1A5FD8"]
@@ -256,10 +267,11 @@
 				type: "item"
 			}]
 			title: "Elite Mekanism Logistics"
-			x: -4.0d
-			y: -1.0d
+			x: -3.0d
+			y: -0.5d
 		}
 		{
+			dependencies: ["002491C83950B2B1"]
 			description: [
 				"You can upgrade every mechanism logistic pipe, allowing for greater throughput."
 				""
@@ -303,10 +315,11 @@
 				type: "item"
 			}]
 			title: "Advanced Mekanism Logistics"
-			x: -1.5d
+			x: -3.0d
 			y: -1.5d
 		}
 		{
+			dependencies: ["002491C83950B2B1"]
 			description: ["The energized smelter can quickly smelt items at the cost of RF, and can be upgraded to smelt multiple items at a time."]
 			id: "3E46FBB08203CFFC"
 			rewards: [{
@@ -319,10 +332,11 @@
 				item: "mekanism:energized_smelter"
 				type: "item"
 			}]
-			x: -3.5d
-			y: 1.0d
+			x: -5.5d
+			y: -1.5d
 		}
 		{
+			dependencies: ["002491C83950B2B1"]
 			description: ["Many Mekanism machines can be upgraded with Tier Installers, which increase the amount of items that can be processed at once, making their overall speed much faster. However, some machines cannot be upgraded this way."]
 			id: "459286FB757CF09E"
 			rewards: [{
@@ -337,10 +351,11 @@
 				type: "item"
 			}]
 			title: "Mekanism machine tiers"
-			x: -1.5d
-			y: 0.0d
+			x: -2.0d
+			y: -1.5d
 		}
 		{
+			dependencies: ["002491C83950B2B1"]
 			description: ["You can insert up to 8 speed/energy upgrades into a Mekanism machine to increase their processing speed and energy efficiency, respectively. Some machines allow up to 8 gas upgrades which increase their gas consumption efficiency."]
 			id: "543452935C91E989"
 			rewards: [
@@ -388,13 +403,13 @@
 				type: "item"
 			}]
 			title: "Mekanism machine upgrades"
-			x: -5.0d
-			y: 0.0d
+			x: -1.0d
+			y: -1.5d
 		}
 		{
+			dependencies: ["002491C83950B2B1"]
 			description: ["These generators consume items or fluids to generate RF, at the advantage of higher RF output and less variability. Hold SHIFT + N over these items for a basic description."]
 			id: "0284F10C4BF84652"
-			optional: true
 			rewards: [{
 				id: "4E6CD6FC00807DE5"
 				type: "xp"
@@ -426,12 +441,12 @@
 			}]
 			title: "Active power generation"
 			x: -4.5d
-			y: 3.0d
+			y: -4.5d
 		}
 		{
+			dependencies: ["002491C83950B2B1"]
 			description: ["These mekanism generators allow you to passively generate RF without any active material cost. However, their power output is usually variable and you may have to adjust for it with energy storage. Hold SHIFT + N over these items for a basic description."]
 			id: "725C03AFA45FEE68"
-			optional: true
 			rewards: [{
 				id: "5E9EAB7CBABC5C40"
 				type: "xp"
@@ -462,9 +477,173 @@
 				type: "item"
 			}]
 			title: "Passive power generation"
-			x: -7.0d
-			y: 2.0d
+			x: -4.5d
+			y: -3.5d
+		}
+		{
+			dependencies: ["3A86CBC50AE2EA6B"]
+			id: "7A37395CCEB19DA1"
+			rewards: [{
+				id: "619754A52B8E4345"
+				item: "mekanism:module_gyroscopic_stabilization_unit"
+				type: "item"
+			}]
+			tasks: [{
+				id: "2FF776E5D8F33182"
+				item: "mekanism:module_elytra_unit"
+				type: "item"
+			}]
+			x: 4.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["3A86CBC50AE2EA6B"]
+			id: "6C6B418B2A123971"
+			rewards: [{
+				count: 3
+				id: "0E8BA2EA8A2CD8B7"
+				item: "mekanism:pellet_antimatter"
+				type: "item"
+			}]
+			tasks: [{
+				id: "1EBCB88B472FBE2D"
+				item: "mekanism:module_gravitational_modulating_unit"
+				type: "item"
+			}]
+			x: 5.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"43436B86E124D94D"
+				"002491C83950B2B1"
+			]
+			hide_dependent_lines: true
+			id: "0003D5A05EC70AFB"
+			rewards: [{
+				id: "689BB01CEE0CFAD4"
+				item: "mekanism:basic_chemical_tank"
+				type: "item"
+			}]
+			tasks: [{
+				id: "00107462A8F4F37A"
+				item: "mekanism:jetpack"
+				type: "item"
+			}]
+			x: 4.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["636712D15DD7E2E8"]
+			hide_dependent_lines: true
+			id: "002491C83950B2B1"
+			rewards: [{
+				id: "396AB6E28CA9DFB1"
+				item: {
+					Count: 1b
+					id: "mekanismtools:osmium_paxel"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "5E0EBD47CC666A7A"
+				item: "mekanism:configurator"
+				type: "item"
+			}]
+			title: "Mekanism"
+			x: -2.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["002491C83950B2B1"]
+			id: "2D98E93775E5B7F7"
+			tasks: [{
+				id: "050134447FCF5D15"
+				item: "mekanism:mekasuit_helmet"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["002491C83950B2B1"]
+			id: "35B7CEAE1B2635C6"
+			tasks: [{
+				id: "5C280BCF0407E924"
+				item: "mekanism:mekasuit_bodyarmor"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["002491C83950B2B1"]
+			id: "2309C454CEA4AE97"
+			tasks: [{
+				id: "4458A249C842F812"
+				item: "mekanism:mekasuit_pants"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["002491C83950B2B1"]
+			id: "2A96ACD2E54F44F4"
+			tasks: [{
+				id: "2C3506E7A6F3CFE9"
+				item: "mekanism:mekasuit_boots"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["0003D5A05EC70AFB"]
+			hide_dependency_lines: false
+			hide_dependent_lines: true
+			id: "3A86CBC50AE2EA6B"
+			tasks: [{
+				id: "24E6E55E76C8454B"
+				item: {
+					Count: 1b
+					id: "mekanism:hdpe_elytra"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 4.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["0E156DC78EE27D2D"]
+			hide_dependency_lines: false
+			id: "5B3E3EEFC22290F9"
+			tasks: [{
+				id: "535286F3BAB92451"
+				item: "mekanism:meka_tool"
+				type: "item"
+			}]
+			x: 3.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["002491C83950B2B1"]
+			hide_dependent_lines: true
+			id: "0E156DC78EE27D2D"
+			tasks: [{
+				id: "5DF82C3C6D239C29"
+				item: "mekanism:atomic_disassembler"
+				type: "item"
+			}]
+			x: 3.0d
+			y: -1.5d
 		}
 	]
-	title: "mekanism"
+	title: "Mekanism"
 }

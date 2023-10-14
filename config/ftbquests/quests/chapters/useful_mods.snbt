@@ -4,7 +4,7 @@
 	filename: "useful_mods"
 	group: "349666CD0199D4FD"
 	id: "50F84AC199F39453"
-	order_index: 2
+	order_index: 6
 	quest_links: [ ]
 	quests: [
 		{
@@ -72,47 +72,6 @@
 				type: "checkmark"
 			}]
 			x: 5.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["43436B86E124D94D"]
-			id: "0003D5A05EC70AFB"
-			rewards: [{
-				id: "689BB01CEE0CFAD4"
-				item: "mekanism:basic_chemical_tank"
-				type: "item"
-			}]
-			tasks: [{
-				id: "00107462A8F4F37A"
-				item: "mekanism:jetpack"
-				type: "item"
-			}]
-			x: 6.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["43436B86E124D94D"]
-			id: "05F5D6913E3CD4BD"
-			rewards: [
-				{
-					count: 2
-					id: "650F313B9BBABDB2"
-					item: "rftoolsutility:environmental_controller"
-					type: "item"
-				}
-				{
-					count: 2
-					id: "75AA753FFCA209E4"
-					item: "fluxnetworks:flux_point"
-					type: "item"
-				}
-			]
-			tasks: [{
-				id: "412A2BEFAF0806AA"
-				item: "rftoolsutility:flight_module"
-				type: "item"
-			}]
-			x: 4.0d
 			y: 0.0d
 		}
 		{
@@ -914,55 +873,6 @@
 			y: -5.0d
 		}
 		{
-			dependencies: ["43436B86E124D94D"]
-			id: "37A5B7CA987BADA6"
-			rewards: [{
-				id: "64FEEEC9E5ED265E"
-				item: "createchromaticreturn:durasteel_book"
-				type: "item"
-			}]
-			tasks: [{
-				id: "6AEAF8CE494057BD"
-				item: "createchromaticreturn:multiplite_charm"
-				type: "item"
-			}]
-			x: 6.0d
-			y: -1.0d
-		}
-		{
-			dependencies: ["43436B86E124D94D"]
-			id: "6C6B418B2A123971"
-			rewards: [{
-				count: 3
-				id: "0E8BA2EA8A2CD8B7"
-				item: "mekanism:pellet_antimatter"
-				type: "item"
-			}]
-			tasks: [{
-				id: "1EBCB88B472FBE2D"
-				item: "mekanism:module_gravitational_modulating_unit"
-				type: "item"
-			}]
-			x: 6.0d
-			y: 1.0d
-		}
-		{
-			dependencies: ["43436B86E124D94D"]
-			id: "7A37395CCEB19DA1"
-			rewards: [{
-				id: "619754A52B8E4345"
-				item: "mekanism:module_gyroscopic_stabilization_unit"
-				type: "item"
-			}]
-			tasks: [{
-				id: "2FF776E5D8F33182"
-				item: "mekanism:module_elytra_unit"
-				type: "item"
-			}]
-			x: 4.0d
-			y: 1.0d
-		}
-		{
 			dependencies: ["210F2431A8A257E3"]
 			id: "4C3985DECC043A5C"
 			rewards: [{
@@ -1082,5 +992,5 @@
 			y: -7.0d
 		}
 	]
-	title: "Other mods"
+	title: "Miscellanea"
 }

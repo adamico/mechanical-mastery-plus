@@ -3,7 +3,23 @@
 	default_quest_shape: ""
 	filename: "create"
 	group: "349666CD0199D4FD"
+	hide_quest_details_until_startable: true
+	hide_quest_until_deps_visible: true
+	icon: "create:wrench"
 	id: "55F201FDF3D25A91"
+	images: [{
+		click: "https://www.curseforge.com/minecraft/mc-mods/create"
+		corner: false
+		dependency: "4B0CD7A24F972E0A"
+		dev: false
+		height: 2.0d
+		hover: ["visit https://www.curseforge.com/minecraft/mc-mods/create"]
+		image: "create:item/goggles"
+		rotation: 0.0d
+		width: 2.0d
+		x: 0.0d
+		y: -3.5d
+	}]
 	order_index: 1
 	quest_links: [ ]
 	quests: [
@@ -58,8 +74,8 @@
 				item: "create:belt_connector"
 				type: "item"
 			}]
-			x: 1.5d
-			y: -1.5d
+			x: 0.0d
+			y: 1.0d
 		}
 		{
 			dependencies: [
@@ -67,18 +83,20 @@
 				"2BA7E55C7B7EB3C3"
 			]
 			description: ["Can set the heat level of blaze burners permanently and at no cost."]
+			hide_dependency_lines: true
 			id: "5414E6D079200533"
 			optional: true
-			shape: "hexagon"
 			tasks: [{
 				id: "20511334736BEEF1"
 				item: "create:creative_blaze_cake"
 				type: "item"
 			}]
-			x: 0.0d
-			y: 1.5d
+			x: 2.0d
+			y: -3.0d
 		}
 		{
+			dependencies: ["2A9795581CE1CACF"]
+			hide_dependent_lines: true
 			id: "4B0CD7A24F972E0A"
 			rewards: [{
 				id: "160021CEDF481944"
@@ -91,10 +109,11 @@
 				type: "item"
 			}]
 			x: 0.0d
-			y: 0.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["4B0CD7A24F972E0A"]
+			hide_dependent_lines: true
 			icon: "minecraft:kelp"
 			id: "2C57677F53935E60"
 			rewards: [{
@@ -108,6 +127,22 @@
 				type: "checkmark"
 			}]
 			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["43436B86E124D94D"]
+			id: "37A5B7CA987BADA6"
+			rewards: [{
+				id: "64FEEEC9E5ED265E"
+				item: "createchromaticreturn:durasteel_book"
+				type: "item"
+			}]
+			tasks: [{
+				id: "6AEAF8CE494057BD"
+				item: "createchromaticreturn:multiplite_charm"
+				type: "item"
+			}]
+			x: 2.0d
 			y: -1.5d
 		}
 	]
