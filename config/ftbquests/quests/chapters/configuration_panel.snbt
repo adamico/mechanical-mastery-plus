@@ -10,21 +10,24 @@
 	quest_links: [ ]
 	quests: [
 		{
+			can_repeat: true
 			description: ["Don't like the darkness of the night? Just click this one simple button and you can forever banish the terrors of the dark!"]
 			icon: "minecraft:sunflower"
 			id: "1450957C6F72830F"
 			rewards: [
 				{
 					auto: "enabled"
-					id: "5B5959E4689A32A0"
+					command: "/gamerule doDaylightCycle false"
+					id: "53E74EFEA97C22B2"
 					title: "Stop the flow of time"
-					type: "custom"
+					type: "command"
 				}
 				{
 					auto: "enabled"
-					id: "62C24F14C3E8A8CB"
+					command: "/time set noon"
+					id: "124E8D1D801F6DC2"
 					title: "Make noon"
-					type: "custom"
+					type: "command"
 				}
 			]
 			subtitle: "Begone!"
@@ -38,13 +41,15 @@
 			y: -4.0d
 		}
 		{
+			can_repeat: true
 			description: ["If you changed your mind, you can always go back."]
 			icon: "minecraft:ender_pearl"
 			id: "5BFF3035C0DE3C64"
 			rewards: [{
 				auto: "enabled"
-				id: "5774AEF29E538BA2"
-				type: "custom"
+				command: "/gamerule doDaylightCycle true"
+				id: "002DF7526C287714"
+				type: "command"
 			}]
 			shape: "square"
 			subtitle: "I didn't mean what I said!"
@@ -58,13 +63,15 @@
 			y: -3.0d
 		}
 		{
+			can_repeat: true
 			description: ["If you don't like running after your grave every time you die, you can choose to keep your inventory after each death (or just not die, probably easier)"]
 			icon: "minecraft:skeleton_skull"
 			id: "5D8240A0B2779AC3"
 			rewards: [{
 				auto: "enabled"
-				id: "0CFAED89841C1677"
-				type: "custom"
+				command: "/gamerule keepInventory true"
+				id: "64B0346E26B246CE"
+				type: "command"
 			}]
 			subtitle: "I hope my items didn't fall into the void..."
 			tasks: [{
@@ -77,13 +84,15 @@
 			y: -4.0d
 		}
 		{
+			can_repeat: true
 			description: ["Go back to losing your items after each death."]
 			icon: "minecraft:lava_bucket"
 			id: "284989B4A4B34E7F"
 			rewards: [{
 				auto: "enabled"
-				id: "7F37E790BECA406F"
-				type: "custom"
+				command: "/gamerule keepInventory false"
+				id: "18C04A88E2919112"
+				type: "command"
 			}]
 			shape: "square"
 			subtitle: "Try me, universe!"
@@ -97,13 +106,15 @@
 			y: -3.0d
 		}
 		{
+			can_repeat: true
 			description: ["By pressing this button, you won't have to remember to keep sleeping in order to stop phantoms from spawning."]
 			icon: "minecraft:white_bed"
 			id: "755DA9653FCF0AB2"
 			rewards: [{
 				auto: "enabled"
-				id: "3C52095A71411E85"
-				type: "custom"
+				command: "/gamerule doInsomnia false"
+				id: "4D99758B613B6849"
+				type: "command"
 			}]
 			subtitle: "The answer is nobody, nobody likes them"
 			tasks: [{
@@ -115,13 +126,15 @@
 			y: -4.0d
 		}
 		{
+			can_repeat: true
 			description: ["No description needed, you don't want this anyways"]
 			icon: "minecraft:cobweb"
 			id: "5CDD589A3F6A2C4D"
 			rewards: [{
 				auto: "enabled"
-				id: "1746CEE073B754EE"
-				type: "custom"
+				command: "/gamerule doInsomnia true"
+				id: "098B4D4765CA849B"
+				type: "command"
 			}]
 			shape: "square"
 			subtitle: "This button looks brand new, it seems nobody has ever pressed it..."
@@ -134,19 +147,22 @@
 			y: -3.0d
 		}
 		{
+			can_repeat: true
 			description: ["If you don't like having your thoughts interrumpted by the sound of rain appearing completely randomly, just stop rain from happening, simple."]
 			icon: "minecraft:lightning_rod"
 			id: "741B7428F9634CEF"
 			rewards: [
 				{
 					auto: "enabled"
-					id: "2EFBAF17E0518750"
-					type: "custom"
+					command: "/gamerule doWeatherCycle false"
+					id: "4B1BD3B9E26FAE94"
+					type: "command"
 				}
 				{
 					auto: "enabled"
-					id: "4BA7DB87B9315AE4"
-					type: "custom"
+					command: "/weather clear"
+					id: "57F12FB689706098"
+					type: "command"
 				}
 			]
 			subtitle: "Just as I was preparing to take a screenshot..."
