@@ -30,12 +30,12 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "v0.0.5-alpha"
+$MODPACK_VERSION = "v0.1.0-beta"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
 # Should be "$null" if this is the first release
-$LAST_MODPACK_VERSION = "v0.0.4-alpha"
+$LAST_MODPACK_VERSION = "v0.0.5-alpha"
 
 # Which modloader the modpack uses
 # Can be "forge" or "fabric"
@@ -65,7 +65,7 @@ $CLIENT_CHANGELOG = "The Changelog is currently being written."
 $GAME_VERSIONS = @(9366)
 
 # Can be "alpha", "beta" or "release"
-$CLIENT_RELEASE_TYPE = "alpha"
+$CLIENT_RELEASE_TYPE = "beta"
 
 #=====================================================================//
 #  DEPENDENCIES
@@ -102,20 +102,21 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"configured-client.toml",
 	"constructionwand-client.toml",
 	"cosmeticarmorreworked-client.toml",
+	"craftingstation-client.toml",
 	"craftingtweaks-client.toml",
 	"create-client.toml",
 	"cucumber-client.toml",
 	"curios-client.toml",
 	"dankstorage-client.toml",
 	"defaultworldtype/client-config.toml",
-	"extendedcrafting-client.toml",
+	"ding.toml",
 	"extremesoundmuffler-client.toml",
 	"farmersdelight-client.toml",
 	"findme.json",
 	"fluxnetworks-client.toml",
+	"flywheel-client.toml",
 	"forge-client.toml",
 	"framedblocks-client.toml",
-	"ftbchunks-client.toml",
 	"functionalstorage\functionalstorage-client.toml",
 	"gravestone-client.toml",
 	"hyperbox-client.toml",
@@ -129,7 +130,6 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"modnametooltip-client.toml",
 	"modularrouters-client.toml",
 	"mouseTweaks.cfg",
-	"naturescompass-client.toml",
 	"online_detector-client.toml",
 	"patchouli-client.toml",
 	"ProjectE/client.toml"
@@ -145,6 +145,7 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"smoothboot.json",
 	"sophisticatedcore-client.toml",
 	"sophisticatedstorage-client.toml",
+	"srdp-common.json",
 	"supplementaries-client.toml",
 	"thermal-client.toml",
 	"travelersbackpack-client.toml",
@@ -152,7 +153,7 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"xnet-client.toml"
 )
 
-$FOLDERS_TO_REMOVE_FROM_CLIENT_FILES = @("localconfigs", "kubejs/probe", "local/ftbutilities", "local/ftbchunks/data", "local/ftbultimine", "local/ftbultimine-client.snbt", "resourcepacks")
+$FOLDERS_TO_REMOVE_FROM_CLIENT_FILES = @("localconfigs", "kubejs/probe", "local/ftbutilities", "local/ftbchunks/data", "local/ftbultimine", "local/ftbultimine-client.snbt")
 
 # Example: 
 # $FILES_TO_INCLUDE_IN_MODS_FOLDER_IN_CLIENT_FILES = @("mods/Apotheosis-1.19.2-6.2.1.jar", "mods/create-1.19.2-0.5.1.b.jar")
@@ -177,7 +178,7 @@ $ENABLE_CLIENT_FILE_MODULE = $true
 # Toggle the modpack uploader on/off
 # Setting this to $false will also disable the Server File and Changelog Generator Modules.
 # Default: $true
-$ENABLE_MODPACK_UPLOADER_MODULE = $false
+$ENABLE_MODPACK_UPLOADER_MODULE = $true
 
 # Toggle server file feature on/off
 # Default: $true
