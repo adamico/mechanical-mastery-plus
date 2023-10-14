@@ -3202,5 +3202,6 @@
 			y: -1.5d
 		}
 	]
+	subtitle: ["zoom out to see all quests :)"]
 	title: "Automation"
 }

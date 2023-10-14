@@ -175,13 +175,15 @@
 			y: -4.0d
 		}
 		{
+			can_repeat: true
 			description: ["If you liked the rain, you can bring it back."]
 			icon: "minecraft:rose_bush"
 			id: "24E60BDA9E928690"
 			rewards: [{
 				auto: "enabled"
-				id: "4DC7A1E00D298607"
-				type: "custom"
+				command: "/gamerule doWeatherCycle true"
+				id: "55F5A31E391C4BA9"
+				type: "command"
 			}]
 			shape: "square"
 			subtitle: "Lightning is cool, too!"

@@ -143,26 +143,44 @@
 		}
 		{
 			dependencies: ["54983CC37DD93E7A"]
-			description: ["You have probably already noticed that in this modpack, ores give less than one ingot when regularly smelted. Thankfully, with the pulverizer, you can negate this by getting 1-2 ore dust from each ore chunk!"]
+			description: [
+				"With the Pulverizer you can setup ore processing automation to help crafting the basic mechanical essence."
+				""
+				"You can also get sand from gravel from cobblestone"
+			]
 			id: "13AA6AFAF9C8DD0B"
 			rewards: [
 				{
-					id: "061C05EC445B401B"
-					type: "xp"
-					xp: 100
+					count: 16
+					id: "4FF77AB5FCDB74C6"
+					item: "minecraft:sand"
+					type: "item"
 				}
 				{
-					id: "7EAA9D91A0600948"
-					item: "thermal:machine_pulverizer"
+					count: 16
+					id: "40E9C33F73AFD437"
+					item: "minecraft:gravel"
 					type: "item"
 				}
 			]
 			subtitle: "Finally, some decent ore processing!"
-			tasks: [{
-				id: "36592AE3FE51D5B9"
-				item: "thermal:machine_pulverizer"
-				type: "item"
-			}]
+			tasks: [
+				{
+					id: "36592AE3FE51D5B9"
+					item: "thermal:machine_pulverizer"
+					type: "item"
+				}
+				{
+					id: "762E9D8833D30C63"
+					item: "minecraft:gravel"
+					type: "item"
+				}
+				{
+					id: "3F7CEF738612B5F7"
+					item: "minecraft:sand"
+					type: "item"
+				}
+			]
 			title: "Pulverizer"
 			x: 11.0d
 			y: 1.0d

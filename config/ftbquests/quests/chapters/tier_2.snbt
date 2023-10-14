@@ -4,13 +4,17 @@
 	filename: "tier_2"
 	group: "2D94E5A1412E2495"
 	hide_quest_details_until_startable: true
+	hide_quest_until_deps_visible: true
 	icon: "kubejs:cube2"
 	id: "032540945468AB53"
 	order_index: 1
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["7A0CB1037E6BE4D7"]
+			dependencies: [
+				"7A0CB1037E6BE4D7"
+				"2A9795581CE1CACF"
+			]
 			description: ["Suddenly, the basic mechanical essence whispers to you, granting you knowledge of various materials, allowing you to transmute them at will."]
 			icon: "kubejs:cube1"
 			id: "167C9AF69BB16B8B"
