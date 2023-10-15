@@ -93,10 +93,12 @@ customization {
 
 customization {
   identifier = %id=button_compatibility_id:mc_titlescreen_singleplayer_button%
-  orientation = top-centered
-  x = -116
+  orientation = top-left
+  x = 0
   action = movebutton
-  y = 283
+  y = 0
+  advanced_posx = {"placeholder":"calc","values":{"expression":"({"placeholder":"guiwidth"} - {"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}})/ 2","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"}/2 + ({"placeholder":"guiheight"}*0.05)","decimal":"true"}}
 }
 
 customization {
@@ -185,6 +187,8 @@ customization {
   slim = false
   auto_skin = false
   scale = 50
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}-({"placeholder":"elementwidth","values":{"id":"32df5d07-72f2-4adb-af91-28ef16a100ab1694978365695"}}+({"placeholder":"guiwidth"}*0.05))","decimal":"true"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposy","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}","decimal":"true"}}
   showname = true
   follow_mouse = true
   capeurl = http://textures.minecraft.net/texture/2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
@@ -202,10 +206,10 @@ customization {
   headrotationx = 0.0
   skinurl = http://textures.minecraft.net/texture/b5d2c29c2fa33517570c24cc719fee52d9e9ce4a7abea3eefd4f1e763eaa86d1
   crouching = false
-  x = 282
+  x = 0
   width = 30
   parrot_left_shoulder = false
-  y = 293
+  y = 0
   parrot = false
 }
 
@@ -213,6 +217,8 @@ customization {
   slim = false
   auto_skin = true
   scale = 50
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}+{"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}+({"placeholder":"guiwidth"}*0.05)","decimal":"true"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposy","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}","decimal":"true"}}
   showname = true
   follow_mouse = true
   capeurl = http://textures.minecraft.net/texture/2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
@@ -230,10 +236,10 @@ customization {
   headrotationx = 0.0
   skinurl = http://textures.minecraft.net/texture/b5d2c29c2fa33517570c24cc719fee52d9e9ce4a7abea3eefd4f1e763eaa86d1
   crouching = false
-  x = 604
+  x = 0
   width = 30
   parrot_left_shoulder = false
-  y = 293
+  y = 0
   parrot = false
 }
 
