@@ -20,12 +20,6 @@
 			id: "167C9AF69BB16B8B"
 			rewards: [
 				{
-					count: 32
-					id: "716665370B9A1BB0"
-					item: "minecraft:netherrack"
-					type: "item"
-				}
-				{
 					id: "68ACD79CE84307F9"
 					item: "create:raw_zinc"
 					type: "item"

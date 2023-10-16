@@ -38,20 +38,15 @@
 
 # Utilities
 !config/defaultoptions/options.txt
-!packmenu/*.zip
 !server_files/**
 !server_files/server-guide.txt
-!server_files_expert/**
-!server_files_expert/server-guide.txt
 .curseclient
 .github_changelog_generator
 .ReAuth.cfg
 .vote2020_marker
-1.16.5.json
 automation/secrets.ps1
 banned-ips.json
 banned-players.json
-BotaniaVars.dat
 CHANGELOG-GENERATED.md
 crafttweaker.log
 ds_private_storage.json
@@ -163,6 +158,5 @@ not-enough-crashes/Uploaded Crash logs.txt
 config/jade/sort-order.json
 manifest.json
 profileImage/mmplus_title_screen.jpg
-config/skyblockbuilder/data/biomes.txt
-config/powah.json5
-config/skyblockbuilder/data/structures.txt
+/config/powah.json5
+config/skyblockbuilder/data/**

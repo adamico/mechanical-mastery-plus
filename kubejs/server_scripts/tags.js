@@ -52,4 +52,6 @@ ServerEvents.tags('item', event => {
   })
 
   event.add('forge:storage_blocks/steel', 'industrialforegoing:steel_block');
+
+  event.add('forge:heads', 'supplementaries:enderman_head');
 })

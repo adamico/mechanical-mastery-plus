@@ -88,8 +88,13 @@
 		}
 		{
 			dependencies: ["133E1F837FA4A41B"]
-			description: ["By coating HPE sheets with this superalloy, I may be able to experiment with polonium and even antimatter production."]
+			description: ["By coating HDPE sheets with pure darkness, I may be able to experiment with polonium and even antimatter production."]
 			id: "53F4A40B4EAECB3E"
+			rewards: [{
+				id: "5D504A615B12116C"
+				item: "kubejs:black_hdpe_sheet"
+				type: "item"
+			}]
 			tasks: [{
 				id: "6A85AA47BC93CE53"
 				item: "kubejs:black_hdpe_sheet"
@@ -178,7 +183,6 @@
 				"41D9B7AC1089FA83"
 				"13EE1ECF3DC0491D"
 				"31C75750B2530381"
-				"716AE122DA75B4CC"
 			]
 			description: [
 				"Although slow and expensive to obtain, this antimatter will certainly help me create stuff that would otherwise be physically impossible."
@@ -511,7 +515,7 @@
 		{
 			dependencies: ["384BB4E82F5D69C6"]
 			description: [
-				"A Nether Star, finally!"
+				"\"A Nether Star, finally!\""
 				""
 				"A powerful item in and of itself, it serves as an ingredient for the most powerful star."
 			]
@@ -540,6 +544,7 @@
 			]
 			hide_dependent_lines: true
 			id: "13EE1ECF3DC0491D"
+			min_required_dependencies: 1
 			rewards: [
 				{
 					count: 4
@@ -605,6 +610,11 @@
 		{
 			dependencies: ["4556B0134F410EC5"]
 			id: "4845D27E265AF3F4"
+			rewards: [{
+				id: "1BBEA806A56B8FF6"
+				item: "mekanism:crystal_uranium"
+				type: "item"
+			}]
 			tasks: [{
 				id: "7024ADCD3338E20C"
 				item: "mekanism:crystal_uranium"
@@ -708,6 +718,11 @@
 			hide_dependency_lines: true
 			hide_dependent_lines: true
 			id: "56D5909AEA258984"
+			rewards: [{
+				id: "41116B03F76A100C"
+				item: "createchromaticreturn:chromatic_compound"
+				type: "item"
+			}]
 			tasks: [{
 				id: "27CB841D3051C864"
 				item: "createchromaticreturn:chromatic_compound"
@@ -723,6 +738,11 @@
 			]
 			hide_dependent_lines: true
 			id: "31C75750B2530381"
+			rewards: [{
+				id: "5C95F3F8CE440974"
+				item: "createchromaticreturn:multiplite_ingot"
+				type: "item"
+			}]
 			tasks: [{
 				id: "578894E787C3CF84"
 				item: "createchromaticreturn:multiplite_ingot"
@@ -732,10 +752,17 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["41D9B7AC1089FA83"]
-			hide_dependency_lines: true
+			dependencies: [
+				"41D9B7AC1089FA83"
+				"11A5CEEFEE37D7FF"
+			]
 			hide_dependent_lines: true
 			id: "48440A9003383920"
+			rewards: [{
+				id: "7AF48C044181FF25"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [
 				{
 					id: "5BE23F2C4F5A960A"
@@ -749,26 +776,18 @@
 				}
 			]
 			x: -9.0d
-			y: 4.0d
-		}
-		{
-			dependencies: ["07980075BFE4C586"]
-			hide_dependency_lines: true
-			hide_dependent_lines: true
-			id: "716AE122DA75B4CC"
-			tasks: [{
-				count: 32L
-				id: "383B6D7DF97E75F6"
-				item: "mekanism:block_refined_obsidian"
-				type: "item"
-			}]
-			x: -9.0d
 			y: 3.0d
 		}
 		{
 			dependencies: ["56D5909AEA258984"]
 			hide_dependent_lines: true
 			id: "429F208B1F91C217"
+			rewards: [{
+				count: 16
+				id: "41E6415651379CA8"
+				item: "createchromaticreturn:refined_radiance"
+				type: "item"
+			}]
 			tasks: [{
 				count: 16L
 				id: "53B45F060C0522FA"
@@ -844,6 +863,119 @@
 			}]
 			x: -17.0d
 			y: 2.0d
+		}
+		{
+			dependencies: ["41D9B7AC1089FA83"]
+			description: [
+				"I know, I know, we all hate mob farms but it won't be so painful, I promise!"
+				""
+				"Here's a small tip to point you in the right direction:"
+				""
+				"Mob Grinding Utils has all kind of tools to create mob farms..."
+			]
+			hide_dependent_lines: true
+			id: "0411623715D35216"
+			rewards: [{
+				id: "022452408F4E3A68"
+				item: "minecraft:cookie"
+				type: "item"
+			}]
+			secret: true
+			tasks: [{
+				elapsedTime: 1800L
+				id: "51AF240FB3524C4B"
+				secret: true
+				title: "Ok, here's one for free..."
+				type: "questsadditions:time"
+			}]
+			x: -9.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["0411623715D35216"]
+			description: [
+				"Fine... here's another:"
+				""
+				"No need to wait all day for endermen to spawn..."
+				""
+				"Dreadful earth speeds up mob spawning in dark spots"
+			]
+			hide_dependent_lines: true
+			id: "1933F4C458289C5F"
+			rewards: [{
+				id: "3E9767471A1974DF"
+				item: "farmersdelight:sweet_berry_cookie"
+				type: "item"
+			}]
+			secret: true
+			tasks: [{
+				elapsedTime: 3600L
+				id: "690206D63B6B9256"
+				secret: true
+				type: "questsadditions:time"
+			}]
+			title: "...and another..."
+			x: -7.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["1933F4C458289C5F"]
+			description: [
+				"I'll tell you all I know:"
+				""
+				"Create a Rotten Egg"
+				""
+				"You can obtain an enderman head in two ways:"
+				""
+				"- the vanilla way, by killing an enderman with a charged keeper explosion"
+				"- killing the mob using Mob Grinding Utils beheading upgrade"
+				""
+				"To get an infinite source of endermen you can build a normal mob farm until one spawns and then use again MGU to:"
+				""
+				"- craft a mob swab and use it on an enderman to collect its DNA"
+				"- use the mob swab with the DNA to craft a GM Chicken Feed"
+				"- feed a chicken with the GM Chicken Feed to obtain a spawn egg"
+				"- use the spawn egg on a MGU Entity Spawner"
+			]
+			id: "63A85FCB13B32F24"
+			rewards: [{
+				id: "1CE1B816EB95E85E"
+				item: "farmersdelight:honey_cookie"
+				type: "item"
+			}]
+			secret: true
+			tasks: [{
+				elapsedTime: 5400L
+				id: "564D20B2141627D1"
+				title: "...good things come in three!"
+				type: "questsadditions:time"
+			}]
+			x: -6.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["41D9B7AC1089FA83"]
+			hide_dependent_lines: true
+			id: "11A5CEEFEE37D7FF"
+			rewards: [{
+				id: "488DA08093013A80"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [
+				{
+					id: "52AE41680341E08F"
+					item: "supplementaries:enderman_head"
+					type: "item"
+				}
+				{
+					id: "247A693923B3FCB4"
+					item: "minecraft:dragon_head"
+					type: "item"
+				}
+			]
+			x: -9.0d
+			y: 4.0d
 		}
 	]
 	title: "Tier 5: Endgame"
