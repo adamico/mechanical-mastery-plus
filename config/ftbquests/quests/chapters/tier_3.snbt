@@ -292,6 +292,7 @@
 			dependencies: ["1A67C9B9ABB4E969"]
 			description: ["Thermal's highest tier of integral components."]
 			id: "63F60669596D10F2"
+			optional: true
 			rewards: [{
 				id: "0D251ADC21E3485C"
 				item: "thermal:upgrade_augment_3"
@@ -746,6 +747,7 @@
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
 			id: "184193B5D69E282D"
+			optional: true
 			tasks: [{
 				id: "7D8ADC7F3075C102"
 				item: "hyperbox:hyperbox"
@@ -757,6 +759,7 @@
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
 			id: "7CBA0D27686067D3"
+			optional: true
 			tasks: [{
 				id: "424A8399288C25D3"
 				item: "farmingforblockheads:market"
@@ -789,6 +792,7 @@
 				"You can use it to process Blaze/Blizz/Blitz/Basalz rods to get powders and some of the liquid used to produce the Effigies."
 			]
 			id: "78E84152C4FC1F66"
+			optional: true
 			rewards: [{
 				id: "58EFEF87419A8DAC"
 				type: "xp"

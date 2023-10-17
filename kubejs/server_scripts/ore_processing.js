@@ -20,31 +20,29 @@ ServerEvents.recipes(event => {
 				event[recipe.name](Item.of(`#forge:nuggets/${metal.name}`, 6), Item.of(`#forge:raw_materials/${metal.name}`)).xp(0.6).cookingTime(recipe.time);
 			});
 
+			event.remove({type: "thermal:smelter", output: Item.of(`#forge:ingots/${metal.name}`)}); // remove thermal smelter ingot recipes
 			event.remove({id: `create:crushing/raw_${metal.name}`});
 			event.remove({id: `create:crushing/raw_${metal.name}_block`});
-			event.recipes.createMilling([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#forge:raw_materials/${metal.name}`)).processingTime(200)			
+			event.recipes.createMilling([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#forge:raw_materials/${metal.name}`)).processingTime(200);			
 			event.recipes.createCrushing([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#forge:raw_materials/${metal.name}`)).processingTime(100);
-     	event.recipes.thermal.pulverizer([Item.of(`#forge:dusts/${metal.name}`).withChance(1.2), metal.extraDust], Item.of(`#mekanism:dirty_dusts/${metal.name}`)).energy(3000);
-			event.recipes.thermal.pulverizer([Item.of(`#forge:dusts/${metal.name}`).withChance(1.2), metal.extraDust], Item.of(`create:crushed_raw_${metal.name}`)).energy(3000);
-		
-			event.remove({id: `create:splashing/${metal.mod}/crushed_raw_${metal.ore}`});
-			event.recipes.createSplashing([Item.of(`#forge:nuggets/${metal.ore}`, 9), Item.of(`#forge:dusts/${metal.ore}`).withChance(0.5)], `create:crushed_raw_${metal.ore}`)
+			event.recipes.createMilling([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#mekanism:clumps/${metal.name}`)).processingTime(200);			
+			event.recipes.createCrushing([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#mekanism:clumps/${metal.name}`)).processingTime(100);	
+			
+			event.recipes.thermal.pulverizer([Item.of(`#forge:dusts/${metal.name}`).withChance(1.2), metal.extraDust], Item.of(`#mekanism:dirty_dusts/${metal.name}`)).energy(3000);
+					
+			event.remove({id: `create:splashing/thermal/crushed_raw_${metal.name}`});
+			event.remove({id: `create:splashing/mekanism/crushed_raw_${metal.name}`});
+			event.remove({id: `create:splashing/crushed_raw_${metal.name}`});
+
+			event.recipes.createSplashing([Item.of(`#forge:nuggets/${metal.name}`, 9), Item.of(`#forge:nuggets/${metal.name}`, 2).withChance(0.1)], `create:crushed_raw_${metal.name}`);
 			
 			event.remove({id: `mekanism:processing/${metal.name}/dust/from_raw_ore`});
 			event.remove({id: `mekanism:processing/${metal.name}/dust/from_raw_block`});
 			event.remove({id: "jaopca:mekanism.raw_material_to_dust." + metal.name});
 			event.remove({id: "jaopca:mekanism.raw_storage_block_to_dust." + metal.name});
+			event.remove({id: "jaopca:thermal_expansion.dust_to_material." + metal.name});
 		});
   };
 	 
   process_metals(all_metals);
-
-	[
-		{input: 'iron', output: 'redstone'}, 
-		{input: 'gold', output: 'quartz'}, 
-		{input: 'copper', output: 'clay_ball'}, 
-		{input: 'zinc', output: 'gunpowder'}
-	].forEach(metal => {
-		event.replaceOutput({id: `create:splashing/crushed_raw_${metal.input}`}, `minecraft:${metal.output}`, `#forge:dusts/${metal.input}`)
-	});
 });

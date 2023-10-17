@@ -9,244 +9,7 @@
 	quest_links: [ ]
 	quests: [
 		{
-			description: ["This modpack offers incredibly powerful methods of increasing ore yield per ore chunk, starting at double output and going up to over 25 ingots per ore. Although not strictly necessary, this will be particularly useful to you since it will allow you to get more materials with less EMC cost. Do note that the machines shown on the quest aren't necessarily all the machines that will be required for the whole process."]
-			id: "0A6DCD0DA11C6642"
-			optional: true
-			shape: "square"
-			tasks: [{
-				id: "739F6F2F289363EC"
-				item: {
-					Count: 1b
-					id: "itemfilters:tag"
-					tag: {
-						value: "forge:ingots"
-					}
-				}
-				type: "item"
-			}]
-			title: "Overhauled ore processing"
-			x: -13.0d
-			y: -1.0d
-		}
-		{
-			dependencies: ["0A6DCD0DA11C6642"]
-			id: "53FE9CDC8A72CA5C"
-			rewards: [{
-				id: "5A38A316648103DD"
-				type: "xp"
-				xp: 100
-			}]
-			subtitle: "x1.2"
-			tasks: [
-				{
-					id: "75F441893A3E5830"
-					item: {
-						Count: 1b
-						id: "itemfilters:tag"
-						tag: {
-							value: "forge:dusts"
-						}
-					}
-					title: "Any #forge:dusts"
-					type: "item"
-				}
-				{
-					id: "48E02F0D9429DB0E"
-					item: {
-						Count: 1b
-						id: "itemfilters:or"
-						tag: {
-							items: [
-								{
-									Count: 1b
-									id: "thermal:machine_pulverizer"
-								}
-								{
-									Count: 1b
-									id: "mekanism:enrichment_chamber"
-								}
-							]
-						}
-					}
-					type: "item"
-				}
-			]
-			title: "Thermal Pulverizer"
-			x: -11.5d
-			y: -1.0d
-		}
-		{
-			dependencies: ["2DD85B456F8E35B6"]
-			id: "3F5B3402F07BFDB3"
-			subtitle: "x1.3"
-			tasks: [
-				{
-					id: "39FAEE2A6DFDC326"
-					item: "create:crushing_wheel"
-					type: "item"
-				}
-				{
-					id: "197BCDF580A92D4F"
-					item: {
-						Count: 1b
-						id: "itemfilters:tag"
-						tag: {
-							value: "create:crushed_raw_materials"
-						}
-					}
-					type: "item"
-				}
-			]
-			title: "Create Crushing Wheel"
-			x: -13.0d
-			y: 1.0d
-		}
-		{
-			dependencies: ["3C29B9915BC52C91"]
-			description: ["Note: "]
-			id: "5B3E3AFD70AA55DA"
-			rewards: [{
-				id: "10E09E3B3F5B1ED2"
-				type: "xp"
-				xp: 100
-			}]
-			subtitle: "x2*"
-			tasks: [
-				{
-					id: "767AA6269C6DD815"
-					item: "mekanism:purification_chamber"
-					type: "item"
-				}
-				{
-					id: "2C34B6177F52C9C6"
-					item: {
-						Count: 1b
-						id: "itemfilters:tag"
-						tag: {
-							value: "mekanism:clumps"
-						}
-					}
-					title: "Any #mekanism:clumps"
-					type: "item"
-				}
-			]
-			title: "Purification Chamber"
-			x: -10.0d
-			y: 1.0d
-		}
-		{
-			dependencies: ["5B3E3AFD70AA55DA"]
-			id: "3654F4DD1B835750"
-			rewards: [{
-				id: "1FCB7BE293D0BB79"
-				type: "xp"
-				xp: 100
-			}]
-			subtitle: "x2.66*"
-			tasks: [
-				{
-					id: "0CF270F3EDFEAB69"
-					item: "mekanism:chemical_injection_chamber"
-					type: "item"
-				}
-				{
-					id: "23B37A20D7A70503"
-					item: {
-						Count: 1b
-						id: "itemfilters:tag"
-						tag: {
-							value: "mekanism:shards"
-						}
-					}
-					title: "Any #mekanism:shards"
-					type: "item"
-				}
-			]
-			title: "Chemical Injection Chamber"
-			x: -13.0d
-			y: 3.5d
-		}
-		{
-			dependencies: ["3654F4DD1B835750"]
-			description: ["The most efficient ore processing... for now."]
-			id: "45522B13D9D5FE22"
-			rewards: [
-				{
-					id: "4E5CABCCAEC1CB08"
-					type: "xp"
-					xp: 100
-				}
-				{
-					id: "27289410C2DB107A"
-					item: "kubejs:cube3_packaged"
-					type: "item"
-				}
-			]
-			shape: "gear"
-			subtitle: "x3.33*"
-			tasks: [
-				{
-					id: "36BB2F485CAEF2E7"
-					item: "mekanism:chemical_dissolution_chamber"
-					type: "item"
-				}
-				{
-					id: "0E772D8DB9CE06AA"
-					item: {
-						Count: 1b
-						id: "itemfilters:tag"
-						tag: {
-							value: "mekanism:crystals"
-						}
-					}
-					title: "Any #mekanism:crystals"
-					type: "item"
-				}
-			]
-			title: "Chemical Dissolution Chamber"
-			x: -11.5d
-			y: 3.5d
-		}
-		{
-			id: "2DD85B456F8E35B6"
-			subtitle: "x2"
-			tasks: [
-				{
-					id: "7712E5F7B00ABA10"
-					item: "mekanism:crusher"
-					type: "item"
-				}
-				{
-					id: "0DC061D2707F7E16"
-					item: {
-						Count: 1b
-						id: "itemfilters:tag"
-						tag: {
-							value: "mekanism:dirty_dusts"
-						}
-					}
-					type: "item"
-				}
-			]
-			title: "Mekanism Crusher"
-			x: -14.5d
-			y: 1.0d
-		}
-		{
-			dependencies: ["3F5B3402F07BFDB3"]
-			description: ["The multiplication values for the purification chamber, chemical injection chamber, and chemical crystalizer apply *only* if you begin processing from there. Basically, you cannot multiply these values together, although you can do it for the steps before these."]
-			id: "3C29B9915BC52C91"
-			subtitle: "x?"
-			tasks: [{
-				id: "1D06A2C2AF9DECA4"
-				title: "Read this before going further"
-				type: "checkmark"
-			}]
-			x: -11.5d
-			y: 1.0d
-		}
-		{
-			dependencies: ["45522B13D9D5FE22"]
+			dependencies: ["5701BDB41D89BF60"]
 			id: "7EFF27C03DDC04BF"
 			optional: true
 			tasks: [{
@@ -255,11 +18,11 @@
 				type: "item"
 			}]
 			title: "Input: Sulfuric Acid"
-			x: -11.5d
-			y: 5.0d
+			x: -3.5d
+			y: 16.5d
 		}
 		{
-			dependencies: ["3654F4DD1B835750"]
+			dependencies: ["5701BDB41D89BF60"]
 			id: "26407132F7520320"
 			optional: true
 			tasks: [{
@@ -268,11 +31,11 @@
 				type: "item"
 			}]
 			title: "Input: Hydrogen Chloride"
-			x: -13.0d
-			y: 5.0d
+			x: 0.5d
+			y: 16.5d
 		}
 		{
-			dependencies: ["5B3E3AFD70AA55DA"]
+			dependencies: ["5701BDB41D89BF60"]
 			id: "2EB50A85B6F4D37D"
 			optional: true
 			tasks: [{
@@ -281,8 +44,8 @@
 				type: "item"
 			}]
 			title: "Input: Oxygen"
-			x: -10.0d
-			y: 2.5d
+			x: 2.5d
+			y: 16.5d
 		}
 		{
 			dependencies: ["3989FE4246F9B6BC"]
@@ -293,8 +56,8 @@
 				item: "minecraft:iron_ingot"
 				type: "item"
 			}]
-			x: 4.5d
-			y: -4.5d
+			x: 10.5d
+			y: -3.5d
 		}
 		{
 			dependencies: ["313309351D8E84C3"]
@@ -304,33 +67,22 @@
 				item: "thermal:iron_dust"
 				type: "item"
 			}]
-			x: -1.0d
-			y: -4.5d
+			x: 9.5d
+			y: -3.5d
 		}
 		{
-			dependencies: ["2A7920AC4B4F3175"]
+			dependencies: ["5397F92E9DA37B69"]
 			id: "313309351D8E84C3"
 			tasks: [{
 				id: "047FD45F2EB6C271"
 				item: "ae2:inscriber"
 				type: "item"
 			}]
-			x: -3.0d
-			y: -4.5d
+			x: 8.5d
+			y: -3.5d
 		}
 		{
-			hide_dependent_lines: true
-			id: "344236248F71EC32"
-			subtitle: "2x"
-			tasks: [{
-				id: "7B3C5ABB9E57AAB1"
-				title: "Tier 0"
-				type: "checkmark"
-			}]
-			x: -6.0d
-			y: -7.5d
-		}
-		{
+			dependencies: ["7A0CB1037E6BE4D7"]
 			hide_dependent_lines: true
 			id: "3CF702D957530570"
 			subtitle: "2x"
@@ -339,66 +91,25 @@
 				title: "Tier 1"
 				type: "checkmark"
 			}]
-			x: -6.0d
+			x: 6.0d
 			y: -3.5d
 		}
 		{
-			dependencies: ["3CF702D957530570"]
-			hide_dependent_lines: true
-			id: "2A7920AC4B4F3175"
-			tasks: [{
-				id: "6AF885A393F8A835"
-				item: "minecraft:raw_iron"
-				type: "item"
-			}]
-			x: -4.5d
-			y: -3.5d
-		}
-		{
-			dependencies: ["3434FB0FA0702973"]
+			dependencies: ["14D6C2F198EAF7AA"]
 			id: "12BC7FD165163F29"
 			tasks: [{
 				id: "3C16330F26E8964D"
 				item: "thermal:iron_dust"
 				type: "item"
 			}]
-			x: -1.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["5AD37133568FC34E"]
-			id: "57B2B1802CE989F5"
-			tasks: [{
-				id: "36CA7006ABE98260"
-				item: "thermal:iron_dust"
-				type: "item"
-			}]
-			x: 3.0d
-			y: -0.5d
+			x: 9.5d
+			y: -2.0d
 		}
 		{
 			dependencies: [
-				"22FF4FC891025F81"
-				"14D6C2F198EAF7AA"
+				"7271A12201A2D75A"
+				"032659B7B0471A1D"
 			]
-			description: ["Some items can serve as a \"catalyst\" inside the pulverizer, increasing primary and secondary output, plus some other modifiers. Check JEI for a list of them."]
-			id: "3434FB0FA0702973"
-			rewards: [{
-				count: 16
-				id: "62F604ABEF1D8C9F"
-				item: "minecraft:flint"
-				type: "item"
-			}]
-			subtitle: "x1.1"
-			tasks: [{
-				id: "76E571A53E0C24D7"
-				item: "minecraft:flint"
-				type: "item"
-			}]
-			x: -2.0d
-			y: -2.5d
-		}
-		{
 			id: "07194DDB411AFDBE"
 			rewards: [{
 				count: 8
@@ -413,10 +124,11 @@
 				item: "thermal:basalz_powder"
 				type: "item"
 			}]
-			x: -10.5d
-			y: 7.5d
+			x: 13.0d
+			y: 3.5d
 		}
 		{
+			dependencies: ["07194DDB411AFDBE"]
 			id: "71015BE55E0EF504"
 			rewards: [{
 				count: 4
@@ -431,10 +143,14 @@
 				item: "thermal:earth_charge"
 				type: "item"
 			}]
-			x: -10.5d
-			y: 8.5d
+			x: 13.0d
+			y: 4.5d
 		}
 		{
+			dependencies: [
+				"71015BE55E0EF504"
+				"13CAA865435BF667"
+			]
 			id: "7986E28D02F23868"
 			rewards: [{
 				count: 2
@@ -448,10 +164,14 @@
 				item: "kubejs:basilic_reagent"
 				type: "item"
 			}]
-			x: -10.5d
-			y: 9.5d
+			x: 13.0d
+			y: 11.0d
 		}
 		{
+			dependencies: [
+				"7986E28D02F23868"
+				"5701BDB41D89BF60"
+			]
 			id: "2AAD31BA89F48BFC"
 			rewards: [{
 				count: 16
@@ -465,22 +185,11 @@
 				item: "kubejs:enriched_basilic_reagent"
 				type: "item"
 			}]
-			x: -10.5d
-			y: 10.5d
+			x: 13.0d
+			y: 15.5d
 		}
 		{
-			dependencies: ["5397F92E9DA37B69"]
-			id: "1CD8DB6D83B295D7"
-			tasks: [{
-				id: "63C5DB7EA5055C31"
-				item: "minecraft:furnace"
-				type: "item"
-			}]
-			x: -3.0d
-			y: -8.0d
-		}
-		{
-			dependencies: ["344236248F71EC32"]
+			dependencies: ["3CF702D957530570"]
 			hide_dependent_lines: true
 			id: "5397F92E9DA37B69"
 			tasks: [{
@@ -488,101 +197,83 @@
 				item: "minecraft:raw_iron"
 				type: "item"
 			}]
-			x: -4.5d
-			y: -7.5d
+			x: 7.0d
+			y: -3.5d
 		}
 		{
 			dependencies: ["5397F92E9DA37B69"]
 			id: "3B7C0E2D92CB07FB"
-			tasks: [{
-				id: "0761DDFB040FAA9D"
-				item: "minecraft:blast_furnace"
-				type: "item"
-			}]
-			x: -3.0d
-			y: -7.0d
+			tasks: [
+				{
+					id: "0761DDFB040FAA9D"
+					item: "minecraft:blast_furnace"
+					type: "item"
+				}
+				{
+					id: "5841FDD9B2F141F9"
+					item: "minecraft:furnace"
+					type: "item"
+				}
+			]
+			x: 8.5d
+			y: -5.0d
 		}
 		{
 			dependencies: ["3B7C0E2D92CB07FB"]
 			id: "33F615D61AB532D2"
 			tasks: [{
-				count: 6L
 				id: "75C979F22BEDF12E"
 				item: "minecraft:iron_nugget"
 				type: "item"
 			}]
-			x: -1.0d
-			y: -7.0d
+			x: 9.5d
+			y: -5.0d
 		}
 		{
-			dependencies: ["2A7920AC4B4F3175"]
+			dependencies: ["5397F92E9DA37B69"]
 			id: "14D6C2F198EAF7AA"
 			tasks: [{
 				id: "361A2BB1C19E21F7"
 				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
-			x: -3.0d
-			y: -2.5d
+			x: 8.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["12BC7FD165163F29"]
 			id: "59DC3A579C9963ED"
-			subtitle: "1.3x"
+			subtitle: "1.25x"
 			tasks: [{
 				id: "25D146B12EC6FBBD"
 				item: "minecraft:iron_ingot"
 				type: "item"
 			}]
-			x: 4.5d
-			y: -3.0d
+			x: 10.5d
+			y: -2.0d
 		}
 		{
-			dependencies: ["1CD8DB6D83B295D7"]
-			id: "7FC26AA2DBCF9277"
-			tasks: [{
-				count: 3L
-				id: "54E18E3C22AB3B17"
-				item: "minecraft:iron_nugget"
-				type: "item"
-			}]
-			x: -1.0d
-			y: -8.0d
-		}
-		{
-			dependencies: ["3434FB0FA0702973"]
+			dependencies: ["14D6C2F198EAF7AA"]
 			id: "0242E49F43433663"
 			tasks: [{
 				id: "64F4BB4D2BE88AC7"
 				item: "thermal:nickel_dust"
 				type: "item"
 			}]
-			x: -1.0d
-			y: -2.0d
+			x: 9.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["0242E49F43433663"]
 			id: "4C7C58B4BE63076E"
-			subtitle: "0.1x"
+			subtitle: "0.05x"
 			tasks: [{
 				id: "06EDF0B117150C3A"
 				item: "thermal:nickel_ingot"
 				type: "item"
 			}]
-			x: 4.5d
-			y: -2.0d
-		}
-		{
-			dependencies: ["7FC26AA2DBCF9277"]
-			id: "6031F93AEF190CD9"
-			subtitle: "0.33x"
-			tasks: [{
-				id: "65ECCD923C93979E"
-				item: "minecraft:iron_ingot"
-				type: "item"
-			}]
-			x: 4.5d
-			y: -8.0d
+			x: 10.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["33F615D61AB532D2"]
@@ -593,8 +284,8 @@
 				item: "minecraft:iron_ingot"
 				type: "item"
 			}]
-			x: 4.5d
-			y: -7.0d
+			x: 10.5d
+			y: -5.0d
 		}
 		{
 			dependencies: ["47A9862C41997254"]
@@ -605,18 +296,25 @@
 				item: "minecraft:raw_iron"
 				type: "item"
 			}]
-			x: -4.5d
-			y: 3.5d
+			x: 5.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["62AC876F32A3AFF0"]
 			id: "2245BF4B323DB8DD"
-			tasks: [{
-				id: "2A3DBB1D377B7DA2"
-				item: "create:millstone"
-				type: "item"
-			}]
-			x: -3.0d
+			tasks: [
+				{
+					id: "2A3DBB1D377B7DA2"
+					item: "create:millstone"
+					type: "item"
+				}
+				{
+					id: "7EA2C9F3EB8C4C9C"
+					item: "create:crushing_wheel"
+					type: "item"
+				}
+			]
+			x: 6.5d
 			y: 1.0d
 		}
 		{
@@ -627,10 +325,11 @@
 				item: "create:crushed_raw_iron"
 				type: "item"
 			}]
-			x: -1.0d
+			x: 7.5d
 			y: 1.0d
 		}
 		{
+			dependencies: ["167C9AF69BB16B8B"]
 			hide_dependent_lines: true
 			id: "47A9862C41997254"
 			tasks: [{
@@ -638,321 +337,850 @@
 				title: "tier2"
 				type: "checkmark"
 			}]
-			x: -6.0d
-			y: 3.5d
+			x: 4.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["2296FDFBD5872799"]
 			id: "008FAEEC13DC543F"
-			tasks: [{
-				id: "7D28210BCB8E898C"
-				item: "create:encased_fan"
-				type: "item"
-			}]
-			x: 0.5d
-			y: 0.0d
+			tasks: [
+				{
+					id: "7D28210BCB8E898C"
+					item: "create:encased_fan"
+					type: "item"
+				}
+				{
+					id: "703F3C8F7A6D10BE"
+					item: "minecraft:water_bucket"
+					type: "item"
+				}
+			]
+			x: 8.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["008FAEEC13DC543F"]
-			id: "5AD37133568FC34E"
-			tasks: [{
-				id: "4D33383F6692123E"
-				item: "minecraft:water_bucket"
-				type: "item"
-			}]
-			x: 1.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["5AD37133568FC34E"]
 			id: "771DDD8085267E07"
 			tasks: [{
-				count: 9L
 				id: "7F62FF1D37E3D945"
 				item: "minecraft:iron_nugget"
 				type: "item"
 			}]
-			x: 3.0d
-			y: 0.5d
+			x: 9.5d
+			y: 1.0d
 		}
 		{
-			dependencies: [
-				"771DDD8085267E07"
-				"57B2B1802CE989F5"
-			]
+			dependencies: ["771DDD8085267E07"]
 			id: "1501514708CBEC00"
-			subtitle: "1.75x"
+			subtitle: "x1.56"
 			tasks: [{
 				id: "40A2EE0631FE16A3"
 				item: "minecraft:iron_ingot"
 				type: "item"
 			}]
-			x: 4.5d
-			y: 0.0d
+			x: 10.5d
+			y: 1.0d
 		}
 		{
-			dependencies: ["62AC876F32A3AFF0"]
-			id: "2310F733255AB838"
+			dependencies: ["550E4D68A98180F5"]
+			hide_dependent_lines: true
+			id: "7271A12201A2D75A"
 			tasks: [{
-				id: "755A127A7074327C"
+				id: "7A6330025A46DD14"
+				title: "tier3"
+				type: "checkmark"
+			}]
+			x: 0.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["7271A12201A2D75A"]
+			hide_dependent_lines: true
+			id: "29E4CAC4AB66E3A0"
+			tasks: [{
+				id: "28F5373604B2B4F3"
+				item: "minecraft:raw_iron"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["4CC996317E0F65B5"]
+			id: "459276969F5173E7"
+			tasks: [{
+				id: "7A99B22DE5AF982B"
 				item: "create:crushing_wheel"
 				type: "item"
 			}]
-			x: -3.0d
-			y: 5.5d
+			x: 4.5d
+			y: 4.0d
 		}
 		{
-			dependencies: ["2310F733255AB838"]
-			id: "08EC0D56134AA3C1"
+			dependencies: ["459276969F5173E7"]
+			id: "0FFEC1066995375F"
 			tasks: [{
-				id: "427CF978D97AE7DD"
+				id: "5A8426FC30638A2E"
 				item: "create:crushed_raw_iron"
 				type: "item"
 			}]
-			x: -1.0d
+			x: 5.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["0FFEC1066995375F"]
+			id: "611EFCA3BE883F68"
+			tasks: [{
+				id: "54F28A4B1C5DFDAB"
+				item: "mekanism:crusher"
+				type: "item"
+			}]
+			x: 6.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["611EFCA3BE883F68"]
+			id: "52E073503543047C"
+			tasks: [{
+				id: "593E54DFFAC6921F"
+				item: "mekanism:dirty_dust_iron"
+				type: "item"
+			}]
+			x: 7.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["52E073503543047C"]
+			id: "78DED0436E36ED46"
+			tasks: [{
+				id: "7D59F04096D14930"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			x: 8.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["78DED0436E36ED46"]
+			id: "03A26121028DB7D2"
+			tasks: [{
+				id: "6294DEB407DAFE67"
+				item: "thermal:iron_dust"
+				type: "item"
+			}]
+			x: 9.5d
 			y: 5.5d
 		}
 		{
-			dependencies: ["08EC0D56134AA3C1"]
-			id: "50772A5CA286F569"
+			dependencies: ["03A26121028DB7D2"]
+			id: "6A68AE9DCEF07BEE"
+			subtitle: "3.12x"
 			tasks: [{
-				id: "02A1564F47D064C4"
-				item: "create:encased_fan"
+				id: "05A68E8BC60AE424"
+				item: "minecraft:iron_ingot"
 				type: "item"
 			}]
-			x: 0.5d
+			x: 10.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["52E073503543047C"]
+			id: "7A017931953E0519"
+			tasks: [{
+				id: "579DFF62F2AFFC0C"
+				item: "mekanism:enrichment_chamber"
+				type: "item"
+			}]
+			x: 8.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["7A017931953E0519"]
+			id: "7CF2F5F3E7CA855E"
+			tasks: [{
+				id: "3F0D8C36BF8B821C"
+				item: "thermal:iron_dust"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["7CF2F5F3E7CA855E"]
+			id: "04A9BA62C93CFF6F"
+			subtitle: "2.6x"
+			tasks: [{
+				id: "703836ED81A6AD77"
+				item: "minecraft:iron_ingot"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["78DED0436E36ED46"]
+			id: "29C0BC746E43C511"
+			tasks: [{
+				id: "5EBE221EB2EF4BCA"
+				item: "thermal:nickel_dust"
+				type: "item"
+			}]
+			x: 9.5d
 			y: 4.5d
 		}
 		{
-			dependencies: ["50772A5CA286F569"]
-			id: "0D21B2CC13E8AF16"
+			dependencies: ["29C0BC746E43C511"]
+			id: "7A67C29C7EEEB51D"
+			subtitle: "0.13x"
 			tasks: [{
-				id: "7B1235115BFBA121"
+				id: "623F769006616792"
+				item: "thermal:nickel_ingot"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["29E4CAC4AB66E3A0"]
+			id: "1B78448FD83AD4D1"
+			tasks: [{
+				id: "4B3378AF2DF88601"
+				item: "mekanism:purification_chamber"
+				type: "item"
+			}]
+			x: 2.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["1B78448FD83AD4D1"]
+			id: "4CC996317E0F65B5"
+			tasks: [{
+				id: "7A8659737BBC93D5"
+				item: "mekanism:clump_iron"
+				type: "item"
+			}]
+			x: 3.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["1A67C9B9ABB4E969"]
+			hide_dependent_lines: true
+			id: "13CAA865435BF667"
+			tasks: [{
+				id: "56109C48CE797AE3"
+				title: "tier4"
+				type: "checkmark"
+			}]
+			x: -1.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["13CAA865435BF667"]
+			hide_dependent_lines: true
+			id: "45311E441F67E6DE"
+			tasks: [{
+				id: "1C3BF4972B2523C2"
+				item: "minecraft:raw_iron"
+				type: "item"
+			}]
+			x: -0.5d
+			y: 11.0d
+		}
+		{
+			dependencies: [
+				"45311E441F67E6DE"
+				"333EB92C5842BC22"
+			]
+			id: "33766F011F6CFA06"
+			tasks: [{
+				id: "5C10F51650FA310C"
+				item: "industrialforegoing:washing_factory"
+				type: "item"
+			}]
+			x: 5.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["33766F011F6CFA06"]
+			id: "7916A1F135EEBE8E"
+			tasks: [{
+				id: "53170762C71C067D"
+				item: "industrialforegoing:raw_ore_meat_bucket"
+				type: "item"
+			}]
+			x: 6.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["7916A1F135EEBE8E"]
+			id: "38479FC40B99D024"
+			tasks: [{
+				id: "0B0892476432C997"
+				item: "industrialforegoing:fermentation_station"
+				type: "item"
+			}]
+			x: 7.5d
+			y: 7.5d
+		}
+		{
+			dependencies: [
+				"38479FC40B99D024"
+				"249CF964D7ACF1F8"
+			]
+			id: "0CCBC0F563E8FB3E"
+			tasks: [{
+				id: "6DD6E1436D1093A8"
+				item: "industrialforegoing:fluid_sieving_machine"
+				type: "item"
+			}]
+			x: 8.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["0CCBC0F563E8FB3E"]
+			id: "02E855C19793D5C1"
+			tasks: [{
+				id: "47003A63CC1C58F5"
+				item: "thermal:iron_dust"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["02E855C19793D5C1"]
+			id: "7FEAF8513415C5AE"
+			subtitle: "4x"
+			tasks: [{
+				id: "7C8D9F177F4B9E47"
+				item: "minecraft:iron_ingot"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["26BCEACA50DDC9C1"]
+			id: "299AF3A22FCA96A9"
+			tasks: [{
+				id: "3347493837D90A1D"
+				item: "mekanism:shard_iron"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 11.0d
+		}
+		{
+			dependencies: [
+				"299AF3A22FCA96A9"
+				"51990A37AC87CE31"
+			]
+			id: "2D3899450133C676"
+			tasks: [{
+				id: "37925ADF73F720A1"
+				item: "mekanism:purification_chamber"
+				type: "item"
+			}]
+			x: 2.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["2D3899450133C676"]
+			id: "260BEBF449E2B9C5"
+			tasks: [{
+				id: "314DA192BD87929A"
+				item: "mekanism:clump_iron"
+				type: "item"
+			}]
+			x: 3.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["260BEBF449E2B9C5"]
+			id: "4087833049F58ECD"
+			tasks: [{
+				id: "0EF6CCF2AEC23295"
+				item: "create:crushing_wheel"
+				type: "item"
+			}]
+			x: 4.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["4087833049F58ECD"]
+			id: "24E879D60E8AF248"
+			tasks: [{
+				id: "5766E07D423EE8D9"
+				item: "create:crushed_raw_iron"
+				type: "item"
+			}]
+			x: 5.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["24E879D60E8AF248"]
+			id: "3F363A038FD24C9D"
+			tasks: [{
+				id: "4C7ED7B3394E0274"
+				item: "mekanism:crusher"
+				type: "item"
+			}]
+			x: 6.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["3F363A038FD24C9D"]
+			id: "001EF710A3455A66"
+			tasks: [{
+				id: "7DEC18DC18A5B13A"
+				item: "mekanism:dirty_dust_iron"
+				type: "item"
+			}]
+			x: 7.5d
+			y: 11.0d
+		}
+		{
+			dependencies: ["3345E072C4F99772"]
+			id: "0324D550EE9B3A21"
+			subtitle: "4.16x"
+			tasks: [{
+				id: "7F436199C7CD97CF"
+				item: "minecraft:iron_ingot"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 12.5d
+		}
+		{
+			dependencies: ["001EF710A3455A66"]
+			id: "357AB8CAFD4FBA7F"
+			tasks: [{
+				id: "28D4A040DDDDD342"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			x: 8.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["357AB8CAFD4FBA7F"]
+			id: "3345E072C4F99772"
+			tasks: [{
+				id: "3182D19CA92B1703"
+				item: "thermal:iron_dust"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 12.5d
+		}
+		{
+			dependencies: ["357AB8CAFD4FBA7F"]
+			id: "1AAD9F05EAA2A2A0"
+			tasks: [{
+				id: "12C87CD956D041E3"
+				item: "thermal:nickel_dust"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 11.5d
+		}
+		{
+			dependencies: ["1AAD9F05EAA2A2A0"]
+			id: "038FF9A180FF73CA"
+			subtitle: "0.17x"
+			tasks: [{
+				id: "2E0A22AFB64A0EBA"
+				item: "thermal:nickel_ingot"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 11.5d
+		}
+		{
+			dependencies: ["001EF710A3455A66"]
+			id: "658689B2BF2E6213"
+			tasks: [{
+				id: "4A7987393BFF6F87"
+				item: "mekanism:enrichment_chamber"
+				type: "item"
+			}]
+			x: 8.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["658689B2BF2E6213"]
+			id: "40B97C53B5BE9A85"
+			tasks: [{
+				id: "4D581B377B3E8645"
+				item: "thermal:iron_dust"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 10.0d
+		}
+		{
+			dependencies: ["40B97C53B5BE9A85"]
+			id: "12402B30567EB472"
+			subtitle: "3.46x"
+			tasks: [{
+				id: "5F8A3CBD6992D6D2"
+				item: "minecraft:iron_ingot"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 10.0d
+		}
+		{
+			dependencies: [
+				"45311E441F67E6DE"
+				"2A9ADF4404CBA7BF"
+			]
+			id: "26BCEACA50DDC9C1"
+			tasks: [{
+				id: "4A6954A993586CAE"
+				item: "mekanism:chemical_injection_chamber"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 11.0d
+		}
+		{
+			dependencies: [
+				"27A6CC80EBC6458B"
+				"7EFF27C03DDC04BF"
+			]
+			id: "51621A9AB27C3743"
+			tasks: [{
+				id: "1F5CAF0A78663182"
+				item: "mekanism:chemical_dissolution_chamber"
+				type: "item"
+			}]
+			x: -3.5d
+			y: 15.5d
+		}
+		{
+			dependencies: [
+				"51621A9AB27C3743"
+				"0B1A59187C59D9AD"
+			]
+			id: "4598BAC6A3F48B16"
+			tasks: [{
+				id: "0B7F54CC30210CDB"
+				item: "mekanism:chemical_washer"
+				type: "item"
+			}]
+			x: -2.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["4598BAC6A3F48B16"]
+			id: "351AE52B6FCEA91C"
+			tasks: [{
+				id: "4CACF3F6BDF1FBAE"
+				item: "mekanism:chemical_crystallizer"
+				type: "item"
+			}]
+			x: -1.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["157D4C0E9C7A0928"]
+			hide_dependent_lines: true
+			id: "5701BDB41D89BF60"
+			tasks: [{
+				id: "25BED986EE2F3574"
+				title: "tier5"
+				type: "checkmark"
+			}]
+			x: -5.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["5701BDB41D89BF60"]
+			hide_dependent_lines: true
+			id: "27A6CC80EBC6458B"
+			tasks: [{
+				id: "3BAF8C99D08B3034"
+				item: "minecraft:raw_iron"
+				type: "item"
+			}]
+			x: -4.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["351AE52B6FCEA91C"]
+			id: "49F28ADC5F043081"
+			tasks: [{
+				id: "3271984526DAEDF7"
+				item: "mekanism:crystal_iron"
+				type: "item"
+			}]
+			x: -0.5d
+			y: 15.5d
+		}
+		{
+			dependencies: [
+				"49F28ADC5F043081"
+				"26407132F7520320"
+			]
+			id: "1D4EF133D6129E01"
+			tasks: [{
+				id: "14D2DAA2BFFADE0C"
+				item: "mekanism:chemical_injection_chamber"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["1D4EF133D6129E01"]
+			id: "4267587C7DEB6DC4"
+			tasks: [{
+				id: "35954725ECC0EADA"
+				item: "mekanism:shard_iron"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["6286D01B035D0F9F"]
+			id: "0F56601D1EC30BBF"
+			tasks: [{
+				id: "06CDCA37EAAE2833"
+				item: "mekanism:clump_iron"
+				type: "item"
+			}]
+			x: 3.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["0F56601D1EC30BBF"]
+			id: "72BD3EEA3E86652A"
+			tasks: [{
+				id: "756CA5C1EA5B8C8C"
+				item: "create:crushing_wheel"
+				type: "item"
+			}]
+			x: 4.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["72BD3EEA3E86652A"]
+			id: "181ED2372AAE21F8"
+			tasks: [{
+				id: "0D36C7775E6D1DC5"
+				item: "create:crushed_raw_iron"
+				type: "item"
+			}]
+			x: 5.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["181ED2372AAE21F8"]
+			id: "1CC44DD81BE63F71"
+			tasks: [{
+				id: "5965A7EAA55BBE90"
+				item: "mekanism:crusher"
+				type: "item"
+			}]
+			x: 6.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["1CC44DD81BE63F71"]
+			id: "24DDD840D0EA397E"
+			tasks: [{
+				id: "00A250686F659ECB"
+				item: "mekanism:dirty_dust_iron"
+				type: "item"
+			}]
+			x: 7.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["24DDD840D0EA397E"]
+			id: "2087F7B3DD86FBDC"
+			tasks: [{
+				id: "600F1EBC9D6EF2FA"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			x: 8.5d
+			y: 16.5d
+		}
+		{
+			dependencies: ["2087F7B3DD86FBDC"]
+			id: "3D07D6492ED6503D"
+			tasks: [{
+				id: "3B5EE2CFDF9A6633"
+				item: "thermal:iron_dust"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 17.0d
+		}
+		{
+			dependencies: ["3D07D6492ED6503D"]
+			id: "45D16ADED9BE082E"
+			subtitle: "4.16x"
+			tasks: [{
+				id: "2E66AD9DCB3D5F39"
+				item: "minecraft:iron_ingot"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 17.0d
+		}
+		{
+			dependencies: ["2087F7B3DD86FBDC"]
+			id: "619E26432576A450"
+			tasks: [{
+				id: "2B78658D299224C9"
+				item: "thermal:nickel_dust"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 16.0d
+		}
+		{
+			dependencies: ["619E26432576A450"]
+			id: "4AE00B57E52779CB"
+			subtitle: "0.17x"
+			tasks: [{
+				id: "678049F6754BA568"
+				item: "thermal:nickel_ingot"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 16.0d
+		}
+		{
+			dependencies: ["24DDD840D0EA397E"]
+			id: "37BFE1F1F0FA276A"
+			tasks: [{
+				id: "56DC8B70EC693125"
+				item: "mekanism:enrichment_chamber"
+				type: "item"
+			}]
+			x: 8.5d
+			y: 14.5d
+		}
+		{
+			dependencies: ["37BFE1F1F0FA276A"]
+			id: "4A8A2CA8EF6D41AA"
+			tasks: [{
+				id: "7B645F2A3FC8A0E1"
+				item: "thermal:iron_dust"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 14.5d
+		}
+		{
+			dependencies: ["4A8A2CA8EF6D41AA"]
+			id: "5AEC475EAB2B7C6F"
+			subtitle: "3.46x"
+			tasks: [{
+				id: "3599835F65DF6971"
+				item: "minecraft:iron_ingot"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 14.5d
+		}
+		{
+			dependencies: ["5701BDB41D89BF60"]
+			id: "0B1A59187C59D9AD"
+			tasks: [{
+				id: "260BACAD2B48269F"
 				item: "minecraft:water_bucket"
 				type: "item"
 			}]
-			x: 1.5d
-			y: 4.5d
+			x: -2.5d
+			y: 16.5d
 		}
 		{
-			dependencies: ["0D21B2CC13E8AF16"]
-			id: "008AD988C6D9FE19"
+			dependencies: ["13CAA865435BF667"]
+			id: "2A9ADF4404CBA7BF"
+			optional: true
 			tasks: [{
-				id: "6BA7AF2DCE42A683"
-				item: "thermal:iron_dust"
+				id: "7D091ED6D8EBD6C1"
+				item: "mekanism:hydrogen_chloride_bucket"
 				type: "item"
 			}]
-			x: 3.0d
-			y: 4.5d
-		}
-		{
-			dependencies: [
-				"0D21B2CC13E8AF16"
-				"061F5E2F6236EB89"
-			]
-			id: "31EA86E884AB8289"
-			tasks: [{
-				count: 9L
-				id: "779A4B1DB02A6C5E"
-				item: "minecraft:iron_nugget"
-				type: "item"
-			}]
-			x: 3.0d
-			y: 3.5d
-		}
-		{
-			dependencies: [
-				"31EA86E884AB8289"
-				"008AD988C6D9FE19"
-			]
-			id: "0DB0E4FB7667AFAB"
-			subtitle: "2.25x"
-			tasks: [{
-				id: "119C1FBAD6A6C38F"
-				item: "minecraft:iron_ingot"
-				type: "item"
-			}]
-			x: 4.5d
-			y: 3.5d
-		}
-		{
-			dependencies: ["2296FDFBD5872799"]
-			id: "129AC982AA8F8C22"
-			tasks: [{
-				id: "5FA7C58D0FD20CA1"
-				item: "thermal:machine_pulverizer"
-				type: "item"
-			}]
+			title: "Input: Hydrogen Chloride"
 			x: 0.5d
-			y: 2.0d
+			y: 12.0d
 		}
 		{
-			dependencies: ["129AC982AA8F8C22"]
-			description: ["Some items can serve as a \"catalyst\" inside the pulverizer, increasing primary and secondary output, plus some other modifiers. Check JEI for a list of them."]
-			id: "7BFF64FDA946F51D"
+			dependencies: [
+				"4267587C7DEB6DC4"
+				"2EB50A85B6F4D37D"
+			]
+			id: "6286D01B035D0F9F"
+			tasks: [{
+				id: "62179D0D4DEF7CFC"
+				item: "mekanism:purification_chamber"
+				type: "item"
+			}]
+			x: 2.5d
+			y: 15.5d
+		}
+		{
+			dependencies: ["13CAA865435BF667"]
+			id: "51990A37AC87CE31"
+			optional: true
+			tasks: [{
+				id: "082A83BA59D77573"
+				item: "mekanism:oxygen_bucket"
+				type: "item"
+			}]
+			title: "Input: Oxygen"
+			x: 2.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["13CAA865435BF667"]
+			id: "333EB92C5842BC22"
+			tasks: [{
+				id: "68A1F22C3B3AE864"
+				item: "industrialforegoing:meat_bucket"
+				type: "item"
+			}]
+			x: 5.5d
+			y: 8.5d
+		}
+		{
+			dependencies: ["13CAA865435BF667"]
+			id: "249CF964D7ACF1F8"
+			tasks: [{
+				id: "6576D21C361D8EBC"
+				item: "minecraft:sand"
+				type: "item"
+			}]
+			x: 8.5d
+			y: 8.5d
+		}
+		{
+			dependencies: ["3CF702D957530570"]
+			hide_dependent_lines: true
+			id: "032659B7B0471A1D"
 			rewards: [{
 				count: 16
-				id: "68E6B0060FD62701"
+				id: "6CE1D497FD75B1EC"
 				item: "minecraft:flint"
 				type: "item"
 			}]
-			subtitle: "x1.1"
+			subtitle: "1.1x"
 			tasks: [{
-				id: "16ACAA61D64D611E"
+				count: 8L
+				id: "5E3D9EFB0FCF4FEB"
 				item: "minecraft:flint"
 				type: "item"
 			}]
-			x: 1.5d
-			y: 2.0d
-		}
-		{
-			dependencies: ["7BFF64FDA946F51D"]
-			id: "3B5BD94826A5BD2C"
-			tasks: [{
-				id: "6C26EDCE02A2BB58"
-				item: "thermal:iron_dust"
-				type: "item"
-			}]
-			x: 3.0d
-			y: 2.5d
-		}
-		{
-			dependencies: ["3B5BD94826A5BD2C"]
-			id: "4B10C460BC4663BB"
-			subtitle: "1.75x"
-			tasks: [{
-				id: "3EC0519A6BB3C271"
-				item: "minecraft:iron_ingot"
-				type: "item"
-			}]
-			x: 4.5d
-			y: 2.5d
-		}
-		{
-			dependencies: ["2310F733255AB838"]
-			id: "061F5E2F6236EB89"
-			tasks: [{
-				count: 5L
-				id: "105A78E5C4725020"
-				item: "minecraft:iron_nugget"
-				type: "item"
-			}]
-			x: -1.0d
-			y: 3.5d
-		}
-		{
-			dependencies: ["08EC0D56134AA3C1"]
-			id: "7ADABB1A34583C3A"
-			tasks: [{
-				id: "1C8023A97C0367C8"
-				item: "thermal:machine_pulverizer"
-				type: "item"
-			}]
-			x: 0.5d
-			y: 6.5d
-		}
-		{
-			dependencies: [
-				"141EA510908A46D3"
-				"1F21313EDC98B354"
-			]
-			id: "40E972AD2BDBDF9A"
-			subtitle: "2.25x"
-			tasks: [{
-				id: "26F81C9D2C732937"
-				item: "minecraft:iron_ingot"
-				type: "item"
-			}]
-			x: 4.5d
-			y: 7.5d
-		}
-		{
-			dependencies: ["658F8C82E0343FEA"]
-			id: "141EA510908A46D3"
-			tasks: [{
-				id: "1B00F9417832FFE7"
-				item: "thermal:iron_dust"
-				type: "item"
-			}]
-			x: 3.0d
-			y: 7.0d
-		}
-		{
-			dependencies: ["7ADABB1A34583C3A"]
-			description: ["Some items can serve as a \"catalyst\" inside the pulverizer, increasing primary and secondary output, plus some other modifiers. Check JEI for a list of them."]
-			id: "658F8C82E0343FEA"
-			rewards: [{
-				count: 16
-				id: "4AC39551C222373F"
-				item: "minecraft:flint"
-				type: "item"
-			}]
-			subtitle: "x1.1"
-			tasks: [{
-				id: "15672D8B2103F464"
-				item: "minecraft:flint"
-				type: "item"
-			}]
-			x: 1.5d
-			y: 6.5d
-		}
-		{
-			dependencies: ["2310F733255AB838"]
-			id: "1F21313EDC98B354"
-			tasks: [{
-				count: 5L
-				id: "3EBDCC598999A4F1"
-				item: "minecraft:iron_nugget"
-				type: "item"
-			}]
-			x: -1.0d
-			y: 7.5d
-		}
-		{
-			dependencies: ["658F8C82E0343FEA"]
-			id: "3E0CCBAAF3CC34C1"
-			tasks: [{
-				id: "5E5469C4332D3749"
-				item: "thermal:nickel_dust"
-				type: "item"
-			}]
-			x: 3.0d
-			y: 6.0d
-		}
-		{
-			dependencies: ["3E0CCBAAF3CC34C1"]
-			id: "5F51C84BB670FFDD"
-			subtitle: "0.2x"
-			tasks: [{
-				id: "5798197C90EA8E6A"
-				item: "thermal:nickel_ingot"
-				type: "item"
-			}]
-			x: 4.5d
-			y: 6.0d
-		}
-		{
-			dependencies: ["7BFF64FDA946F51D"]
-			id: "70B01ADFCD86E662"
-			tasks: [{
-				id: "12B0F64AC2833306"
-				item: "thermal:nickel_dust"
-				type: "item"
-			}]
-			x: 3.0d
-			y: 1.5d
-		}
-		{
-			dependencies: ["70B01ADFCD86E662"]
-			id: "24DA0D1E42FE12C2"
-			subtitle: "0.2x"
-			tasks: [{
-				id: "0BA67BE4615C7467"
-				item: "thermal:nickel_ingot"
-				type: "item"
-			}]
-			x: 4.5d
-			y: 1.5d
+			x: 13.0d
+			y: -3.5d
 		}
 	]
 	title: "Overhauled Ore Processing"

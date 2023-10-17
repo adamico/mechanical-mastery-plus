@@ -19,3 +19,5 @@ import mods.mekanism.api.ingredient.ItemStackIngredient;
 // <recipetype:mekanism:combining>.removeByName(name as string)
 
 <recipetype:mekanism:combining>.addRecipe("combining/elite_control_circuit", <item:mekanism:advanced_control_circuit>, <item:mekanism:alloy_reinforced> * 2, <item:mekanism:elite_control_circuit>);
+<recipetype:mekanism:combining>.addRecipe("combining/ultimate_control_circuit", <item:mekanism:elite_control_circuit>, <item:mekanism:alloy_atomic> * 2, <item:mekanism:ultimate_control_circuit>);
+<recipetype:mekanism:combining>.addRecipe("combining/basilic_reagent", <item:thermal:earth_charge>, <item:thermal:sulfur>, <item:kubejs:basilic_reagent>);

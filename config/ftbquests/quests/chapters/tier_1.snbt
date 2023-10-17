@@ -148,7 +148,9 @@
 				""
 				"You can also get sand from gravel from cobblestone"
 			]
+			hide: false
 			id: "13AA6AFAF9C8DD0B"
+			optional: true
 			rewards: [
 				{
 					count: 16
@@ -163,6 +165,7 @@
 					type: "item"
 				}
 			]
+			shape: "diamond"
 			subtitle: "Finally, some decent ore processing!"
 			tasks: [
 				{
@@ -235,7 +238,9 @@
 				"2746A3F7A98C2134"
 			]
 			description: ["With the multiservo press, you can automate what the engineer's hammer does and more, without losing item durability and with a little extra efficiency. You can craft plates and more with it!"]
+			hide: false
 			id: "54983CC37DD93E7A"
+			optional: true
 			rewards: [
 				{
 					id: "0077B72A897EB181"
@@ -248,6 +253,7 @@
 					type: "item"
 				}
 			]
+			shape: "diamond"
 			tasks: [{
 				id: "32825235F7A53270"
 				item: "thermal:machine_press"
@@ -259,7 +265,9 @@
 		{
 			dependencies: ["547050DB11C5FFB7"]
 			description: ["You can place special dies on the bottom slot of the multiservo press to change its functionality, such as crafting gears instead of plates. This modpack adds a custom rod die which can be used to make rods from plates."]
+			hide: false
 			id: "2746A3F7A98C2134"
+			optional: true
 			rewards: [
 				{
 					id: "5F49998A6AFA70CB"
@@ -272,6 +280,7 @@
 					type: "choice"
 				}
 			]
+			shape: "diamond"
 			tasks: [{
 				id: "267A63D03350CEBE"
 				item: {
@@ -306,6 +315,7 @@
 			shape: "gear"
 			tasks: [
 				{
+					count: 4L
 					id: "0DA904B48F32E904"
 					item: "kubejs:cube1"
 					type: "item"
@@ -322,7 +332,9 @@
 		{
 			dependencies: ["54983CC37DD93E7A"]
 			description: ["The redstone furnace allows you to smelt things just like a regular furnace can, except it consumes RF instead of fuel."]
+			hide: false
 			id: "2B65C5DE4AA944BA"
+			optional: true
 			rewards: [
 				{
 					id: "0F55EF2A479BC037"
@@ -335,6 +347,7 @@
 					type: "item"
 				}
 			]
+			shape: "diamond"
 			tasks: [{
 				id: "082AE7EADA5E2A06"
 				item: "thermal:machine_furnace"
@@ -346,7 +359,9 @@
 		{
 			dependencies: ["547050DB11C5FFB7"]
 			description: ["With the basic EMC link, you can automatically convert items to EMC and vice versa. With them, you can fully automate the production of mechanical essences."]
+			hide: false
 			id: "4AB3B5469D68C46D"
+			optional: true
 			rewards: [
 				{
 					id: "2C69027CF205BC78"
@@ -359,6 +374,7 @@
 					type: "item"
 				}
 			]
+			shape: "diamond"
 			tasks: [{
 				id: "4AFCCAA14047AEF0"
 				item: "projectexpansion:basic_emc_link"
@@ -371,12 +387,15 @@
 		{
 			dependencies: ["54983CC37DD93E7A"]
 			description: ["The sequential fabricator allows you to automate crafting, you only have to select the recipe and insert the ingredients, then they will be crafted into the output."]
+			hide: false
 			id: "387D9ECF1CD0B4F8"
+			optional: true
 			rewards: [{
 				id: "56DE53737C24A26C"
 				type: "xp"
 				xp: 100
 			}]
+			shape: "diamond"
 			tasks: [{
 				id: "29D6E0B76CB72710"
 				item: "thermal:machine_crafter"
@@ -391,13 +410,17 @@
 				"You get alloys before having the induction smelter by pulverizing the raw ores and crafting the dusts together."
 				"You can then smelt alloy dusts to obtain ingots."
 			]
+			hide: false
+			hide_details_until_startable: false
 			id: "547050DB11C5FFB7"
+			optional: true
 			rewards: [{
 				exclude_from_claim_all: true
 				id: "69C2B59340725641"
 				table_id: 730431930992961248L
 				type: "choice"
 			}]
+			shape: "diamond"
 			tasks: [{
 				count: 4L
 				id: "4CA78D9953A59B84"
@@ -523,12 +546,16 @@
 		{
 			dependencies: ["09BAD2F7D01D16FD"]
 			description: ["It's time to craft your first power generator: a stirling dynamo. Although far from ideal, it will be of great importance early on."]
+			hide: false
+			hide_details_until_startable: false
 			id: "595F27B933ECC168"
+			optional: true
 			rewards: [{
 				id: "52C82ECD38D30CD7"
 				type: "xp"
 				xp: 100
 			}]
+			shape: "diamond"
 			tasks: [{
 				id: "59807C43371F532B"
 				item: "thermal:dynamo_stirling"
@@ -548,6 +575,7 @@
 				"Oh, I almost forgot: craft a Vibration Chamber to stop cranking the Inscriber!"
 			]
 			id: "09BAD2F7D01D16FD"
+			optional: true
 			rewards: [
 				{
 					id: "0F2165D0F13CC47C"
@@ -574,12 +602,15 @@
 		{
 			dependencies: ["547050DB11C5FFB7"]
 			description: ["Integral components can be inserted to thermal machines to increase their base values."]
+			hide: false
 			id: "6A69E64613966190"
+			optional: true
 			rewards: [{
 				id: "2F04E8C4EF50CF1C"
 				item: "thermal:upgrade_augment_1"
 				type: "item"
 			}]
+			shape: "diamond"
 			tasks: [{
 				id: "4C613ACC70C3D281"
 				item: "thermal:upgrade_augment_1"

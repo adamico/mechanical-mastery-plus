@@ -437,6 +437,7 @@
 			dependencies: ["157D4C0E9C7A0928"]
 			description: ["So you saw how to get infinite water with the evertide amulet but you still want more? Fine, you may have the sink, now stop whining ;)"]
 			id: "174E355F55DE59F8"
+			optional: true
 			rewards: [{
 				id: "0507DDF5E75E4C9E"
 				item: {
@@ -645,7 +646,18 @@
 		}
 		{
 			dependencies: ["157D4C0E9C7A0928"]
+			description: [
+				"The &lDark Matter Pedestal&r produces several AOE effects in a 9x9 area centered on the pedestal."
+				""
+				"Some examples:"
+				""
+				"- Watch of flowing time: slow or accelerates tick"
+				"- Swiftwolf Rending Gale: damage and shock enemies"
+				""
+				"just use EMI with the keyword &opedestal&r"
+			]
 			id: "44A70964598EE49B"
+			optional: true
 			rewards: [{
 				id: "6D24095EAD548072"
 				item: "projecte:dm_pedestal"

@@ -316,19 +316,32 @@
 		}
 		{
 			dependencies: ["044413B6EB71F5E6"]
+			description: [
+				"Mill Raw to Crushed Raw"
+				"Pulverize Crushed Raw to Dust"
+			]
 			id: "75C1F15B9623C089"
 			rewards: [{
-				count: 2
+				count: 4
 				id: "09AFD3D8A6A2795F"
 				item: "jaopca:dusts.zinc"
 				type: "item"
 			}]
-			tasks: [{
-				count: 2L
-				id: "0181E662B7842614"
-				item: "jaopca:dusts.zinc"
-				type: "item"
-			}]
+			tasks: [
+				{
+					count: 2L
+					id: "0181E662B7842614"
+					item: "create:crushed_raw_zinc"
+					type: "item"
+				}
+				{
+					count: 2L
+					id: "6A2DF9AB22C29179"
+					item: "jaopca:dusts.zinc"
+					type: "item"
+				}
+			]
+			title: "2x Double"
 			x: 1.0d
 			y: -1.0d
 		}

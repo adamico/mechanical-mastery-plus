@@ -152,7 +152,7 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"xnet-client.toml"
 )
 
-$FOLDERS_TO_REMOVE_FROM_CLIENT_FILES = @("fancymenu_setups", "localconfigs", "kubejs/probe", "local/ftbutilities", "local/ftbchunks/data", "local/ftbultimine", "local/ftbultimine-client.snbt")
+$FOLDERS_TO_REMOVE_FROM_CLIENT_FILES = @("crafttweaker_examples", "fancymenu_setups", "localconfigs", "kubejs/probe", "local/ftbutilities", "local/ftbchunks/data", "local/ftbultimine", "local/ftbultimine-client.snbt")
 
 # Example: 
 # $FILES_TO_INCLUDE_IN_MODS_FOLDER_IN_CLIENT_FILES = @("mods/Apotheosis-1.19.2-6.2.1.jar", "mods/create-1.19.2-0.5.1.b.jar")

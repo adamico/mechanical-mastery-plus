@@ -1,7 +1,7 @@
 ServerEvents.recipes(event => {
 	event.recipes.createMilling([Item.of('minecraft:sand'), Item.of('thermal:sulfur').withChance(0.8)], ['minecraft:sandstone']).processingTime(250);
 	event.recipes.createMilling([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal').withChance(0.25)], 'minecraft:coal').processingTime(250);
-	event.recipes.createMilling([Item.of('#forge:dusts/zinc'), Item.of('#forge:dusts/zinc')], Item.of('#forge:raw_materials/zinc')).processingTime(250);
+
 	event.recipes.createCrushing([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal')], 'minecraft:coal').processingTime(250);
 	
 	event.recipes.createHaunting('minecraft:egg', 'create:dough');
@@ -45,27 +45,6 @@ ServerEvents.recipes(event => {
 	
 	event.remove({id: 'createchromaticreturn:carbon_powder_recipe'});
 	event.recipes.createCrushing([Item.of('projecte:dark_matter').withChance(0.5), Item.of('createchromaticreturn:carbon_powder', 8).withChance(0.5)], 'projecte:dark_matter_block');
-
-	[
-		{input: 'iron', output: 'redstone'}, 
-		{input: 'gold', output: 'quartz'}, 
-		{input: 'copper', output: 'clay_ball'}, 
-		{input: 'zinc', output: 'gunpowder'}
-	].forEach(metal => {
-		event.replaceOutput({id: `create:splashing/crushed_raw_${metal.input}`}, `minecraft:${metal.output}`, `#forge:dusts/${metal.input}`)
-	});
-
-	[
-		{mod: 'thermal', ore: 'nickel'},
-		{mod: 'thermal', ore: 'silver'},
-		{mod: 'mekanism', ore: 'osmium'},
-		{mod: 'mekanism', ore: 'tin'},
-		{mod: 'mekanism', ore: 'lead'},
-		{mod: 'mekanism', ore: 'uranium'}
-	].forEach(metal => {
-		event.remove({id: `create:splashing/${metal.mod}/crushed_raw_${metal.ore}`});
-		event.recipes.createSplashing([Item.of(`#forge:nuggets/${metal.ore}`, 9), Item.of(`#forge:dusts/${metal.ore}`).withChance(0.5)], `create:crushed_raw_${metal.ore}`)
-	});
 
 	event.remove({id: 'createchromaticreturn:refined_mixture_recipe'});
 	event.recipes.createMixing(Fluid.of('createchromaticreturn:refined_mixture', 250), [Item.of('minecraft:smooth_quartz', 8), Item.of('minecraft:glowstone', 8), Item.of('projecte:mobius_fuel', 4), Item.of('mekanism:hdpe_sheet', 4),Fluid.of('minecraft:water', 1000)]).superheated();  

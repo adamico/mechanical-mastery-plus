@@ -107,6 +107,11 @@
 			dependencies: ["53F4A40B4EAECB3E"]
 			description: ["When in direct sunlight, the solar neutron activator can turn nuclear waste from my fission reactor into polonium."]
 			id: "41E380D0E0E5E75A"
+			rewards: [{
+				id: "2AA8A81628309085"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
 				id: "0D8DCA89FD12C7E3"
 				item: "mekanism:solar_neutron_activator"
@@ -209,6 +214,11 @@
 			dependencies: ["07980075BFE4C586"]
 			hide_dependent_lines: true
 			id: "4DA3EFBDC9FE2FDF"
+			rewards: [{
+				id: "43A2CDD945F3A04E"
+				item: "powah:crystal_nitro"
+				type: "item"
+			}]
 			tasks: [{
 				id: "543077701DABA7CD"
 				item: "powah:crystal_nitro"
@@ -221,6 +231,11 @@
 			dependencies: ["07980075BFE4C586"]
 			hide_dependent_lines: true
 			id: "21736DEF38D368D1"
+			rewards: [{
+				id: "3D0254A8DBF1A816"
+				item: "createchromaticreturn:refined_mechanism"
+				type: "item"
+			}]
 			tasks: [{
 				id: "17624FD411EEB46C"
 				item: "createchromaticreturn:refined_mechanism"
@@ -264,6 +279,11 @@
 			hide_dependency_lines: true
 			hide_dependent_lines: true
 			id: "53B7C4EFD1B28F70"
+			rewards: [{
+				id: "308FBE949915C81D"
+				type: "xp"
+				xp: 100
+			}]
 			shape: "octagon"
 			tasks: [{
 				id: "440C55230602ECF4"
@@ -285,6 +305,11 @@
 			description: ["The true potential of the final star. With this, EMC and raw materials are something I shall never have to worry about again."]
 			hide_dependent_lines: true
 			id: "1D6666CFC0B349E1"
+			rewards: [{
+				id: "34E7321C7A21EED5"
+				item: "minecraft:grass_block"
+				type: "item"
+			}]
 			shape: "pentagon"
 			tasks: [{
 				id: "6E754D97D3E78A68"
@@ -317,6 +342,11 @@
 			description: ["Infinite kinetic stress capacity."]
 			hide_dependent_lines: true
 			id: "0F08BE53368BBA0E"
+			rewards: [{
+				id: "3A0A3C4339708746"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
 				id: "7C236303EF71DB29"
 				item: "create:creative_motor"
@@ -330,6 +360,11 @@
 			description: ["Unlimited Power."]
 			hide_dependent_lines: true
 			id: "643082630E0B6CFD"
+			rewards: [{
+				id: "4A5FBCAA3077A4D5"
+				type: "xp_levels"
+				xp_levels: 5
+			}]
 			subtitle: "READ QUEST FOR HOW TO CRAFT"
 			tasks: [{
 				id: "6B6B22A465884FF5"
@@ -355,6 +390,11 @@
 			description: ["Infinite fluid storage and withdrawal."]
 			hide_dependent_lines: true
 			id: "4912D9951F6B69A9"
+			rewards: [{
+				id: "1D5936D56DDF2E00"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
 				id: "500E0937561BCE1C"
 				item: "mekanism:creative_fluid_tank"
@@ -368,6 +408,11 @@
 			description: ["Unlimited refined storage capacity"]
 			hide_dependent_lines: true
 			id: "001789AD77BFECCF"
+			rewards: [{
+				id: "0E75051A6141038B"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
 				id: "4F9815D48862D2A4"
 				item: "refinedstorage:creative_storage_disk"
@@ -384,6 +429,11 @@
 			description: ["Infinite gas and chemical storage and withdrawal."]
 			hide_dependent_lines: true
 			id: "72B973D152D0D797"
+			rewards: [{
+				id: "09A212AC1FB52612"
+				type: "xp"
+				xp: 100
+			}]
 			subtitle: "Recommended before Final Star"
 			tasks: [{
 				id: "7CC64EE6B88CD556"
@@ -504,6 +554,11 @@
 		{
 			dependencies: ["07980075BFE4C586"]
 			id: "7F828305491C1CB4"
+			rewards: [{
+				id: "6E8735EFA185E224"
+				item: "projecte:dark_matter"
+				type: "item"
+			}]
 			tasks: [{
 				id: "06239B9A472654A1"
 				item: "projecte:dark_matter"
@@ -521,6 +576,11 @@
 			]
 			hide_dependent_lines: true
 			id: "2F6F2DB24C399EAA"
+			rewards: [{
+				id: "79FD2E3E39E2BD3D"
+				item: "minecraft:nether_star"
+				type: "item"
+			}]
 			tasks: [{
 				id: "02BC1A7A17F01DD5"
 				item: "minecraft:nether_star"
@@ -808,6 +868,11 @@
 			]
 			hide_dependency_lines: true
 			id: "1F8697E9A977FE16"
+			rewards: [{
+				id: "25FC3E274ADBA2B6"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
 				id: "5116A223F31165BF"
 				item: "createchromaticreturn:radiant_glow_saber"
@@ -831,6 +896,11 @@
 			]
 			hide_dependency_lines: true
 			id: "146B61BAC1D8D21C"
+			rewards: [{
+				id: "01727DE399505536"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
 				id: "3835248C8A5161B7"
 				item: "createchromaticreturn:radiant_glow_claws"
