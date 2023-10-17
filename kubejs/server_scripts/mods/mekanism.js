@@ -44,6 +44,8 @@ ServerEvents.recipes(event => {
 		}
 	);
 
+	event.replaceInput({id: 'mekanism:transmitter/universal_cable/basic'}, 'minecraft:redstone', 'kubejs:cube2');
+
   event.shapeless('mekanism:creative_fluid_tank','mekanism:creative_fluid_tank');
 	event.shapeless('mekanism:creative_chemical_tank','mekanism:creative_chemical_tank');
 

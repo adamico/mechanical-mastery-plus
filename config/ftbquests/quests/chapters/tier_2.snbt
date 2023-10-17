@@ -616,6 +616,38 @@
 			x: 4.0d
 			y: -5.0d
 		}
+		{
+			dependencies: ["167C9AF69BB16B8B"]
+			description: [
+				"\"Oh, thanks for the red pipez! I put those to good use!\""
+				""
+				"You may have noticed there's no easy way to craft energy cables in the first chapters."
+				""
+				"Don't lose hope, though! Here's some hints/options:"
+				""
+				"- rush chapters to get access to energy cables from one of the major tech mods"
+				""
+				"- obtain glowstone with a bit of effort with Industrial Foregoing and Create "
+				""
+				"- use Energy Exporters, Importers and Interfaces from Integrated Dynamics"
+			]
+			hide_dependency_lines: true
+			hide_dependent_lines: true
+			id: "3B1B32BEEE188BAD"
+			rewards: [{
+				count: 12
+				id: "297C77DDA61E7969"
+				item: "pipez:energy_pipe"
+				type: "item"
+			}]
+			tasks: [{
+				id: "1ACDE7E92E50A3D6"
+				title: "Energy transport, please?"
+				type: "checkmark"
+			}]
+			x: -3.0d
+			y: -3.0d
+		}
 	]
 	title: "Tier 2: Create \\& Industrial Foregoing"
 }
