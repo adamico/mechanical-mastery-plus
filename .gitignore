@@ -100,6 +100,7 @@ whitelist.json
 /config/ftbbackups2.json
 /config/InvTweaks.cfg
 /config/jei/bookmarks.ini
+/config/jei/ingredient-list-mod-sort-order.ini
 /config/jei/lookupHistory.zip
 /config/jei/worldSettings.cfg
 /config/jei/recipe-category-sort-order.ini
@@ -160,3 +161,4 @@ manifest.json
 profileImage/mmplus_title_screen.jpg
 /config/powah.json5
 config/skyblockbuilder/data/**
+fancymenu_data/last_world.fmdata

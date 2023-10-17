@@ -1,6 +1,4 @@
 ServerEvents.recipes(event => {
-  const all_metals = global.all_metals;
-
   event.recipes.createSequencedAssembly([
     'ae2:silicon_press'
   ], 'minecraft:iron_block', [

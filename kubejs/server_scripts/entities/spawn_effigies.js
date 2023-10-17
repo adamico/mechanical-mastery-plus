@@ -46,33 +46,5 @@ ServerEvents.entityLootTables(event => {
 				pool.addItem(Item.of(mob.drop));
 			})
 		})
-	})
-})
-
-let spawnBlaze = (e, x, y, z) => {
-	let mob = e.level.createEntity('minecraft:blaze');
-	mob.x = x;
-	mob.y = y;
-	mob.z = z;
-	mob.spawn();
-}
-
-
-ItemEvents.entityInteracted('minecraft:blaze_rod', event => {
-	const entity = event.getTarget();
-	let fireDuration = 4;
-	let ticks = 20*fireDuration;
-
-	if (!event.server) return;
-	if (!entity.type.includes('minecraft:skeleton')) return;
-
-	entity.setSecondsOnFire(4);
-	Utils.server.scheduleInTicks(ticks, event =>{
-
-		if (entity.removed || entity.deadOrDying || !entity.isAlive()) return;
-		spawnBlaze(event, entity.x, entity.y, entity.z);
-        
-		event.reschedule();
-	})
-	event.item.count--;
+	});
 })
