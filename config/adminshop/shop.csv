@@ -2,10 +2,8 @@ b,item,minecraft:oak_log,2,0
 b,item,minecraft:coal_ore,8,0
 b,item,minecraft:raw_copper,8,0
 b,item,minecraft:raw_iron,16,0
-b,item,immersiveengineering:bauxite,16
 b,item,minecraft:redstone_ore,4,0
 b,item,minecraft:sugar_cane,32,0
-b,item,immersiveengineering:seed,32,0
 b,item,minecraft:bone,32,0
 ,,,,
 b,item,minecraft:raw_gold,256,0
