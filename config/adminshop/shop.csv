@@ -1,0 +1,62 @@
+// Welcome to Admin Shop! Please do not put anything else in the first row,,,,
+"// Rows beginning with // are considered comments, and aren't processed. Put helpful notes here if you need them",,,,
+,,,,
+// Blank lines are also ignored.,,"// Cells that begin with // are ignored, along with any cells to the right of them. Cells to the left won't be ignored if they do not have a //",,
+,,,,
+"// Items can be formatted in different ways, using KubeJS syntax for easy copying from the game. See each cell in the next line for examples",,,,
+//,KubeJS style,KubeJS tags,
+//,minecraft:iron_ore,#forge:gems/lapis,
+//,,#minecraft:wool,
+,,,,
+"// Fluids can be formatted in different ways as well, using KubeJS syntax for easy copying from the game",,,,
+//,KubeJS style,KubeJS tags,
+//,minecraft:water,#minecraft:water,
+,,,,
+// WARNING: if you delete an entry for buying items with NBT and there are Buyers that currently are set to that item, that may cause a crash or corrupt your world,
+// so if you need to delete an NBT entry for some reason, first remove any Buyers set to it
+,,
+// Define shop items below categories. They are as formatted:,,,,
+"// ""buy"" or ""sell"" (the letters b and s also work)","""fluid"" or ""item"" (letters f and i also work)",item or fluid,price,permit tier (only positive values, 0=unlocked by default)
+b,i,minecraft:cobblestone,1,0
+b,i,minecraft:grass_block,1024,0
+b,i,minecraft:oak_log,128,0
+b,i,minecraft:oak_sapling,32,0
+b,i,minecraft:coal_ore,128,0
+b,i,minecraft:raw_copper,256,0
+b,i,minecraft:raw_iron,256,0
+b,i,minecraft:raw_gold,256,0
+b,i,minecraft:redstone_ore,128,0
+b,i,thermal:raw_silver,512,0
+b,i,thermal:raw_lead,512,0
+b,i,thermal:raw_nickel,1024,0
+b,i,thermal:raw_tin,256,0
+b,i,thermal:apatite_ore,846,0
+b,i,integrateddynamics:menril_log,32,0
+b,i,integrateddynamics:menril_sapling,32,0
+b,i,minecraft:cobbled_deepslate,1,0
+b,i,minecraft:sugar_cane,32,0
+b,i,minecraft:cactus,32,0
+,,,,
+b,i,create:raw_zinc,3072,1
+b,i,minecraft:kelp,8,1
+b,i,industrialforegoing:tinydryrubber,128,1
+b,i,minecraft:bone,144,1
+b,i,minecraft:lapis_ore,864,1
+,,,,
+b,f,thermal:crude_oil,1,2
+b,i,mekanism:raw_osmium,2048,2
+b,i,minecraft:diamond_ore,8192,2
+b,i,thermal:niter_ore,2048,2
+b,i,thermal:oil_sand,150,2
+b,i,thermal:sulfur_ore,2048,2
+,,,,
+b,i,minecraft:emerald_ore,16384,3
+b,i,mekanism:raw_uranium,4096,3
+b,i,mekanism:fluorite_ore,1024,3
+b,i,minecraft:ancient_debris,65536,3
+b,i,powah:uraninite,2048,3
+,,,,
+s,i,kubejs:cube1_packaged,11520,0
+s,i,kubejs:cube2_packaged,24860,1
+s,i,kubejs:cube3_packaged,153600,2
+s,i,kubejs:cube4_packaged,460800,3

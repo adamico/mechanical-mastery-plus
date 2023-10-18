@@ -23,7 +23,9 @@ ServerEvents.recipes(event => {
     let outputSolidMaybe = {item: mod + ':' + powder, chance: 0.5}; // 50% chance
 
     event.custom({ type: "integrateddynamics:mechanical_squeezer",
-      item: input, result: {fluid: outputFluid, items: [outputSolid, outputSolidMaybe]}, duration: 80
-    })
+      item: input,
+      result: {fluid: outputFluid, items: [outputSolid, outputSolidMaybe]},
+      duration: 40
+    });
   });
 });

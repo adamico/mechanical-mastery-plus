@@ -47,19 +47,8 @@ ServerEvents.recipes(event => {
 	event.replaceInput({id: 'pipez:item_pipe'}, 'minecraft:redstone', 'minecraft:glowstone_dust');
 
 	event.replaceInput({output: 'angelring:angel_ring'}, 'angelring:diamond_ring', 'kubejs:cube4');
-
 	event.replaceInput({output: 'hyperbox:hyperbox'}, 'minecraft:crying_obsidian', 'kubejs:cube3');
 
-	event.remove({output: 'farmingforblockheads:market'});
-	event.shaped('farmingforblockheads:market', [
-		'PWP',
-		'LCL',
-		'LLL'
-		], {
-			P: 'minecraft:planks',
-			L: 'minecraft:oak_log',
-			C: 'kubejs:cube3',
-			W: 'minecraft:red_wool'
-		}
-	);	
+	event.replaceInput({id: 'functionalstorage:linking_tool'}, 'minecraft:diamond', 'minecraft:light_blue_dye');
+	event.replaceInput({id: 'functionalstorage:configuration_tool'}, 'minecraft:emerald', 'minecraft:lime_dye');
 });
