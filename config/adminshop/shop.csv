@@ -1,12 +1,12 @@
 // Welcome to Admin Shop! Please do not put anything else in the first row,,,,
-"// Rows beginning with // are considered comments, and aren't processed. Put helpful notes here if you need them",,,,
+// Rows beginning with // are considered comments, and aren't processed. Put helpful notes here if you need them",,,,
 ,,,,
 // Blank lines are also ignored.,,"// Cells that begin with // are ignored, along with any cells to the right of them. Cells to the left won't be ignored if they do not have a //",,
 ,,,,
 ,,,,
 ,,,,
 // Define shop items below categories. They are as formatted:,,,,
-"// ""buy"" or ""sell"" (the letters b and s also work)","""item""",item id,price,permit tier (only positive values, 0=unlocked by default)
+// ""buy"" or ""sell"" (the letters b and s also work)","""item""",item id,price,permit tier (only positive values, 0=unlocked by default)
 b,item,minecraft:oak_log,2,0
 b,item,minecraft:coal_ore,8,0
 b,item,minecraft:raw_copper,8,0
