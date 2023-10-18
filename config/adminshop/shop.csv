@@ -1,4 +1,3 @@
-// buy or sell (the letters b and s also work),item,item id,price,permit tier (only positive values, 0=unlocked by default)
 b,item,minecraft:oak_log,2,0
 b,item,minecraft:coal_ore,8,0
 b,item,minecraft:raw_copper,8,0
