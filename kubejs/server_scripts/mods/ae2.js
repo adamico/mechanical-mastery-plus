@@ -46,6 +46,7 @@ ServerEvents.recipes(event => {
 
   ['iron', 'copper', 'gold', 'tin', 'nickel'].forEach(metal => {
     let result = `thermal:${metal}_dust`;
+    let dustCount = ['iron', 'gold', 'copper'].includes(metal) ? 2 : 1;
     event.custom({
       type: 'ae2:inscriber',
       ingredients: {
@@ -56,7 +57,7 @@ ServerEvents.recipes(event => {
       mode: 'inscribe',
       result: {
         item: result,
-      count: 1
+      count: dustCount
       }
     })
   });

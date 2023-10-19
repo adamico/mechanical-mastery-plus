@@ -12,12 +12,15 @@
 		{
 			dependencies: ["6F0F8C3F6B5E2310"]
 			description: [
-				"Welcome to &6Mechanical Mastery&r!"
+				"\"&oSo it begins...&r\""
+				""
+				"Welcome to &6Mechanical Mastery &1Plus&r"
 				""
 				"Your objective is to automate every mechanical crystal. "
 				""
-				"Through this quest book, you will receive many of the basic materials you will need to fulfill this job. Make sure to learn the items first before using them up, no refunds!"
+				"Through this quest book, you will receive many of the basic materials you will need to fulfill this job. "
 			]
+			icon: "adminshop:permit"
 			id: "491EB18107FC8776"
 			rewards: [
 				{
@@ -56,7 +59,11 @@
 		}
 		{
 			dependencies: ["491EB18107FC8776"]
-			description: ["Create a basic cobblestone generator to unlock access to some basic resources. REMEMBER: ALWAYS learn the items first before using them!"]
+			description: [
+				"\"&oTwo birds one stone. I'm sure I'll need these in the future&r.\""
+				""
+				"Create a basic cobblestone generator to unlock access to some basic resources."
+			]
 			hide: false
 			id: "5D6996CC9444ADE7"
 			rewards: [
@@ -85,45 +92,30 @@
 					type: "item"
 				}
 				{
-					count: 16
+					count: 8
 					id: "402F6ACCA849C8DB"
 					item: "minecraft:raw_gold"
 					type: "item"
 				}
-				{
-					id: "2C55084FDFC3029D"
-					item: "mekanism:raw_tin"
-					type: "item"
-				}
-				{
-					id: "28B7FFDD46BCA883"
-					item: "thermal:raw_silver"
-					type: "item"
-				}
-				{
-					id: "2C337D9A561302EE"
-					item: "thermal:raw_nickel"
-					type: "item"
-				}
-				{
-					id: "48FA61C68C180827"
-					item: "thermal:raw_lead"
-					type: "item"
-				}
 			]
-			subtitle: "The beginning..."
+			subtitle: "Bought from the stone"
 			tasks: [{
 				id: "5C95D4E16A8DDB14"
 				item: "minecraft:cobblestone"
 				type: "item"
 			}]
-			title: "Tier 1 materials"
+			title: "De lapide emptus"
 			x: -1.0d
 			y: -2.0d
 		}
 		{
 			dependencies: ["491EB18107FC8776"]
-			description: ["One great way to get EMC before automation is simply growing trees, since logs contain some EMC."]
+			description: [
+				"\"&oI'll grow an army of trees to kill the Necromancer...&r\""
+				""
+				"Ehm, I think it's the wrong game for the wrong computer..."
+				"Here you just need trees to get things started... and you can punch them fine!"
+			]
 			hide: false
 			id: "258878D4F87E9F1E"
 			rewards: [{
@@ -132,12 +124,13 @@
 				item: "minecraft:oak_sapling"
 				type: "item"
 			}]
+			subtitle: "A tree is known by its fruit"
 			tasks: [{
 				id: "08E661E4E8986BF8"
 				item: "minecraft:oak_log"
 				type: "item"
 			}]
-			title: "Wood"
+			title: "E fructu arbor cognoscitur"
 			x: -1.0d
 			y: 1.0d
 		}
@@ -191,6 +184,8 @@
 		{
 			dependencies: ["491EB18107FC8776"]
 			description: [
+				"\"&oWonderful! An inscriber, I wonder what can I do with it...&r\""
+				""
 				"The mysterious Inscriber is how you will get your first plates and rods. "
 				""
 				"It's not very efficient, though, and it requires manual cranking... there must be some better way to do this in the future..."
@@ -303,16 +298,34 @@
 				"2E308530A5C47F6E"
 				"4E4618EE8D6D07B9"
 			]
-			description: ["By crafting some gears and rods together, you managed to craft the first of the mechanical essences! This cube has an EMC value higher than the sum of its parts, so if you can manage to automate it, it will serve as a great EMC source!"]
+			description: [
+				"\"&oFascinating! Using these simple components I can create something... essential for my future&r\""
+				""
+				"By crafting some gears and rods together, you managed to craft the first of the mechanical essences! "
+				""
+				"You even managed to compress 4 essences into one crystal."
+				""
+				"Using the Shop you can now sell crystals to gain some funds for your future factory."
+				""
+				"You'll soon realize the mechanical crystals have a value higher than the sum of its parts, so if you must automate the process to proceed in your quest."
+			]
 			hide: false
 			id: "7A0CB1037E6BE4D7"
-			rewards: [{
-				count: 16
-				id: "23176832183B31BF"
-				item: "kubejs:cube1_packaged"
-				type: "item"
-			}]
+			rewards: [
+				{
+					count: 16
+					id: "23176832183B31BF"
+					item: "kubejs:cube1_packaged"
+					type: "item"
+				}
+				{
+					id: "3F6B0AEAAE9F8A42"
+					item: "adminshop:shop"
+					type: "item"
+				}
+			]
 			shape: "gear"
+			subtitle: "Love is the essence of life"
 			tasks: [
 				{
 					count: 4L
@@ -326,6 +339,7 @@
 					type: "item"
 				}
 			]
+			title: "Amor est vitae essentia"
 			x: 5.0d
 			y: -0.5d
 		}
@@ -489,7 +503,7 @@
 		}
 		{
 			dependencies: ["793AABD9C2DEC680"]
-			description: ["&eGold&r gears? Where are my aluminum gears?"]
+			description: ["&eGold&r gears? What about aluminum?"]
 			id: "4E4618EE8D6D07B9"
 			rewards: [{
 				id: "478FAAE47D905ABC"
@@ -506,7 +520,7 @@
 		}
 		{
 			dependencies: ["19499868D936A165"]
-			description: ["The inscriber can also crush raw ores into dust... but you still need to crank your way to richness... for now"]
+			description: ["The inscriber can also crush raw ores into 2 dusts... but you still need to crank your way to richness..."]
 			id: "793AABD9C2DEC680"
 			rewards: [{
 				exclude_from_claim_all: true
@@ -568,9 +582,7 @@
 		{
 			dependencies: ["7A0CB1037E6BE4D7"]
 			description: [
-				"Congratulations! You crafted your first Mechanical Essence."
-				""
-				"The following quests will cover automating the production of the Basic Essence."
+				"Now that you've crafted your first Mechanical Essence, the following quests will help you automate the production."
 				""
 				"Oh, I almost forgot: craft a Vibration Chamber to stop cranking the Inscriber!"
 			]
@@ -589,13 +601,13 @@
 				}
 			]
 			shape: "diamond"
-			subtitle: "but don't rest on your achievements"
+			subtitle: "He who has begun his task has half done it"
 			tasks: [{
 				id: "447D9411372AF198"
 				item: "ae2:vibration_chamber"
 				type: "item"
 			}]
-			title: "A fast start..."
+			title: "Dimidium facti, qui coepit, habet"
 			x: 6.5d
 			y: -0.5d
 		}

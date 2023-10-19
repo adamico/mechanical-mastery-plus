@@ -48,4 +48,6 @@ ServerEvents.recipes(event => {
   let tier4BItems = ['Nothing'];
   let tier4SItems = ['Advanced Mechanical Crystal'];
   createPermit(4, tier4BItems, tier4SItems);
+
+  event.replaceInput({id: 'adminshop:shop'}, 'minecraft:ender_chest', 'kubejs:cube1_packaged');
 });

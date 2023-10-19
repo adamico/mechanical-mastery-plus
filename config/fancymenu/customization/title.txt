@@ -9,7 +9,7 @@ customization-meta {
 }
 
 customization {
-  path = config/fancymenu/mmplus_title_screen.jpg
+  path = config/fancymenu/mmplus_bg.png
   action = texturizebackground
 }
 
@@ -133,18 +133,18 @@ customization {
   width = 143
   action = deep_customization_element:title_screen_branding
   actionid = f9649601-94b8-4fa8-9df3-ca33237757661694977925492
-  y = 447
+  y = 322
   height = 60
 }
 
 customization {
   orientation = top-left
   hidden = false
-  x = 731
+  x = 283
   width = 228
   action = deep_customization_element:title_screen_forge_copyright
   actionid = 351eb3ec-4834-4f51-9892-979a301ebc8d1694977925493
-  y = 489
+  y = 364
   height = 9
 }
 
@@ -185,36 +185,6 @@ customization {
 
 customization {
   slim = false
-  auto_skin = false
-  scale = 50
-  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}-({"placeholder":"elementwidth","values":{"id":"32df5d07-72f2-4adb-af91-28ef16a100ab1694978365695"}}+({"placeholder":"guiwidth"}*0.05))","decimal":"true"}}
-  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposy","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}","decimal":"true"}}
-  showname = true
-  follow_mouse = true
-  capeurl = http://textures.minecraft.net/texture/2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
-  action = custom_layout_element:fancymenu_customization_player_entity
-  actionid = 32df5d07-72f2-4adb-af91-28ef16a100ab1694978365695
-  playername = kc00l
-  bodyrotationx = 0.0
-  bodyrotationy = 0.0
-  auto_cape = false
-  is_baby = false
-  height = 90
-  orientation = top-left
-  copy_client_player = true
-  headrotationy = 0.0
-  headrotationx = 0.0
-  skinurl = http://textures.minecraft.net/texture/b5d2c29c2fa33517570c24cc719fee52d9e9ce4a7abea3eefd4f1e763eaa86d1
-  crouching = false
-  x = 0
-  width = 30
-  parrot_left_shoulder = false
-  y = 0
-  parrot = false
-}
-
-customization {
-  slim = false
   auto_skin = true
   scale = 50
   advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}+{"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}+({"placeholder":"guiwidth"}*0.05)","decimal":"true"}}
@@ -232,6 +202,49 @@ customization {
   height = 90
   orientation = top-left
   copy_client_player = false
+  headrotationy = 0.0
+  headrotationx = 0.0
+  skinurl = http://textures.minecraft.net/texture/b5d2c29c2fa33517570c24cc719fee52d9e9ce4a7abea3eefd4f1e763eaa86d1
+  crouching = false
+  x = 0
+  width = 30
+  parrot_left_shoulder = false
+  y = 0
+  parrot = false
+}
+
+customization {
+  path = config/fancymenu/mmplus_title.png
+  orientation = top-left
+  x = 0
+  width = 324
+  action = addtexture
+  actionid = 26a7c2ae-c1a2-4043-9186-c2d3a71ee07f1697711207450
+  y = 0
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"}/2-({"placeholder":"elementwidth","values":{"id":"26a7c2ae-c1a2-4043-9186-c2d3a71ee07f1697711207450"}}/2)","decimal":"true"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"}/2-({"placeholder":"elementheight","values":{"id":"26a7c2ae-c1a2-4043-9186-c2d3a71ee07f1697711207450"}})","decimal":"true"}}
+  height = 100
+}
+
+customization {
+  slim = false
+  auto_skin = false
+  scale = 50
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}-({"placeholder":"elementwidth","values":{"id":"32df5d07-72f2-4adb-af91-28ef16a100ab1694978365695"}}+({"placeholder":"guiwidth"}*0.05))","decimal":"true"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposy","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}","decimal":"true"}}
+  showname = true
+  follow_mouse = true
+  capeurl = http://textures.minecraft.net/texture/2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+  action = custom_layout_element:fancymenu_customization_player_entity
+  actionid = 32df5d07-72f2-4adb-af91-28ef16a100ab1694978365695
+  playername = kc00l
+  bodyrotationx = 0.0
+  bodyrotationy = 0.0
+  auto_cape = false
+  is_baby = false
+  height = 90
+  orientation = top-left
+  copy_client_player = true
   headrotationy = 0.0
   headrotationx = 0.0
   skinurl = http://textures.minecraft.net/texture/b5d2c29c2fa33517570c24cc719fee52d9e9ce4a7abea3eefd4f1e763eaa86d1
