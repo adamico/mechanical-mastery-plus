@@ -1,16 +1,20 @@
 ServerEvents.recipes(event => {
+	let millAndCrushRecipes = (output, input) => {
+		[{name: 'createMilling', time: 250}, {name: 'createCrushing', time: 125}].forEach(recipe => {
+			event.recipes[recipe.name](output, input).processingTime(recipe.time);
+		});
+	}
+
+	event.remove({id: 'create:milling/sandstone'});
 	event.remove({id: 'create:milling/gravel'});
 	event.remove({id: 'create:crushing/gravel'});
 	event.remove({id: 'create:milling/cobblestone'});
+	event.remove({id: 'create:crushing/cobblestone'});
 
-	event.recipes.createMilling([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal')], 'minecraft:coal').processingTime(250);
-	event.recipes.createMilling([Item.of('minecraft:sand'), Item.of('minecraft:flint').withChance(0.1), Item.of('minecraft:clay_ball').withChance(0.05)], 'minecraft:gravel').processingTime(250);
-	event.recipes.createCrushing([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal')], 'minecraft:coal').processingTime(125);
-
-	event.recipes.createMilling(['minecraft:gravel'], 'minecraft:cobblestone').processingTime(250);
-	event.recipes.createCrushing(['minecraft:gravel'], 'minecraft:cobblestone').processingTime(125);
-	event.recipes.createCrushing([Item.of('minecraft:sand'), Item.of('minecraft:flint').withChance(0.1), Item.of('minecraft:clay_ball').withChance(0.05)], 'minecraft:gravel').processingTime(125);
-
+	millAndCrushRecipes(['minecraft:gravel'], 'minecraft:cobblestone');
+	millAndCrushRecipes([Item.of('minecraft:sand'), Item.of('minecraft:flint').withChance(0.1), Item.of('minecraft:clay_ball').withChance(0.05)], 'minecraft:gravel');
+	millAndCrushRecipes([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal')], 'minecraft:coal');
+	
 	event.recipes.createHaunting('minecraft:egg', 'create:dough');
 
 	let alloysRecipes = [
@@ -24,8 +28,6 @@ ServerEvents.recipes(event => {
 	});
 
 	event.recipes.createMixing(Item.of('#forge:ingots/steel', 3), [Item.of('#forge:ingots/iron', 3), Item.of("#minecraft:coals", 3)]).heated().processingTime(120);
-
-	event.remove({id: 'create:milling/sandstone'});
 
 	event.remove({id: 'createchromaticreturn:motor_recipe'});
 	event.recipes.createMechanicalCrafting('create:creative_motor', [

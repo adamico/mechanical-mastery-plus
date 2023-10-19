@@ -49,11 +49,11 @@ b,i,minecraft:diamond_ore,8192,2
 b,i,thermal:niter_ore,2048,2
 b,i,thermal:oil_sand,150,2
 b,i,thermal:sulfur_ore,2048,2
+b,i,minecraft:ancient_debris,16384,2
 ,,,,
 b,i,minecraft:emerald_ore,16384,3
 b,i,mekanism:raw_uranium,4096,3
 b,i,mekanism:fluorite_ore,1024,3
-b,i,minecraft:ancient_debris,65536,3
 b,i,powah:uraninite,2048,3
 ,,,,
 s,i,kubejs:cube1_packaged,11520,0

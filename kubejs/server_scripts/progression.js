@@ -36,28 +36,6 @@ ServerEvents.recipes(event => {
 			S: 'minecraft:skeleton_skull'
 	});
 
-	event.remove({id: 'projecte:body_stone'});
-	event.shaped('projecte:body_stone', [
-		'LRL',
-		'RDR',
-		'LRL'
-		], {
-			D: 'minecraft:diamond',
-			R: 'minecraft:redstone_block',
-			L: 'minecraft:lapis_block'
-	});
-
-	event.remove({id: 'projecte:soul_stone'});
-	event.shaped('projecte:soul_stone', [
-		'RLR',
-		'LDL',
-		'RLR'
-		], {
-			D: 'minecraft:diamond',
-			R: 'minecraft:redstone_block',
-			L: 'minecraft:lapis_block'
-	});
-
   event.shaped('kubejs:incomplete_time_augment', [
     'RUR',
     'EGE',
@@ -72,12 +50,13 @@ ServerEvents.recipes(event => {
   );
   	
 	event.shaped('minecraft:skeleton_skull', [
-		'GGG',
-		'GEG',
-		'GGG'
+		'BBB',
+		'DCD',
+		'BBB'
 		], {
-			G: 'minecraft:bone_block',
-			E: 'projecte:body_stone'
+			B: 'minecraft:bone_block',
+			D: 'minecraft:black_dye',
+			C: 'kubejs:cube1'
 	});
 
   event.recipes.thermal.pulverizer(['minecraft:blaze_rod', Item.of('minecraft:blaze_rod').withChance(0.25)], 'kubejs:blaze_effigy').energy(2000);

@@ -47,6 +47,11 @@
 					item: "minecraft:diamond_ore"
 					type: "item"
 				}
+				{
+					id: "3B061AD7E569979B"
+					item: "minecraft:ancient_debris"
+					type: "item"
+				}
 			]
 			subtitle: "Still need more power..."
 			tasks: [{
@@ -960,6 +965,13 @@
 		}
 		{
 			dependencies: ["3D0BAEB298C3B791"]
+			description: [
+				"Egg and chicken, chicken and egg?"
+				""
+				"How can I get netherrack if it's one of the ingredients of the Stonework Factory?"
+				""
+				"Hint: use the (rotational) force"
+			]
 			id: "204617216E309BB4"
 			rewards: [{
 				count: 64

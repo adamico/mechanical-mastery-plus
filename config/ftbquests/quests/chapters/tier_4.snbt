@@ -52,11 +52,6 @@
 					item: "minecraft:emerald_ore"
 					type: "item"
 				}
-				{
-					id: "49E08DE13B74C2CE"
-					item: "minecraft:ancient_debris"
-					type: "item"
-				}
 			]
 			tasks: [{
 				id: "6DC696B8987D5178"
