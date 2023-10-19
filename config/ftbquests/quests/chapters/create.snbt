@@ -25,17 +25,6 @@
 	quests: [
 		{
 			dependencies: ["4B0CD7A24F972E0A"]
-			id: "62E9915998AF3BDB"
-			tasks: [{
-				id: "1A6EDF638EBD1526"
-				item: "create_mechanical_extruder:mechanical_extruder"
-				type: "item"
-			}]
-			x: -1.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["4B0CD7A24F972E0A"]
 			description: ["The mechanical press offers an RF-free way of converting ingots into plates."]
 			id: "662DE7460CCF2AA7"
 			rewards: [{
@@ -59,7 +48,7 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["2C57677F53935E60"]
+			dependencies: ["4B0CD7A24F972E0A"]
 			description: ["Create's mechanical belts allow for transportation of items with customizable speed. Since Pretty Pipes offer some advantages and disadvantages to mechanical belts, this quest is optional."]
 			id: "388F7E8E6658980D"
 			optional: true
@@ -75,7 +64,7 @@
 				type: "item"
 			}]
 			x: 0.0d
-			y: 1.0d
+			y: 0.0d
 		}
 		{
 			dependencies: [
@@ -110,24 +99,6 @@
 			}]
 			x: 0.0d
 			y: -1.5d
-		}
-		{
-			dependencies: ["4B0CD7A24F972E0A"]
-			hide_dependent_lines: true
-			icon: "minecraft:kelp"
-			id: "2C57677F53935E60"
-			rewards: [{
-				count: 32
-				id: "18A160D34E965794"
-				item: "minecraft:kelp"
-				type: "item"
-			}]
-			tasks: [{
-				id: "164071F672935F92"
-				type: "checkmark"
-			}]
-			x: 0.0d
-			y: 0.0d
 		}
 		{
 			dependencies: ["31C75750B2530381"]

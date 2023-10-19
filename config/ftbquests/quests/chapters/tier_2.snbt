@@ -4,7 +4,6 @@
 	filename: "tier_2"
 	group: "2D94E5A1412E2495"
 	hide_quest_details_until_startable: true
-	hide_quest_until_deps_visible: true
 	icon: "kubejs:cube2"
 	id: "032540945468AB53"
 	order_index: 1
@@ -15,7 +14,12 @@
 				"7A0CB1037E6BE4D7"
 				"2A9795581CE1CACF"
 			]
-			description: ["Suddenly, the basic mechanical essence whispers to you, granting you knowledge of various materials, allowing you to transmute them at will."]
+			description: [
+				"\"&oSuddenly, the basic mechanical essence whispers to me... the factory must grow!&r\""
+				""
+				"With the tier 1 trade permit you can now buy more resources."
+				"Here, some freebies to help you on your quest."
+			]
 			icon: "kubejs:cube1"
 			id: "167C9AF69BB16B8B"
 			rewards: [
@@ -35,23 +39,31 @@
 					item: "industrialforegoing:tinydryrubber"
 					type: "item"
 				}
+				{
+					count: 8
+					id: "53B9CF806292BBE9"
+					item: "create:andesite_alloy"
+					type: "item"
+				}
 			]
-			subtitle: "Are these things... alive?!"
+			subtitle: "Thus begins a new life"
 			tasks: [{
 				id: "4E0FFF9832476439"
 				title: "Tier 2"
 				type: "checkmark"
 			}]
-			title: "Tier 2 Materials"
+			title: "Incipit vita nova"
 			x: -4.5d
 			y: -3.0d
 		}
 		{
 			dependencies: ["167C9AF69BB16B8B"]
 			description: [
-				"In order to get into create, you will need large quantities of andesite."
+				"In order to get into Create, you will need large quantities of andesite."
 				""
-				"You can initially get andesite with cobblestone and high covalence dust."
+				"Until you discover a way to mass produce quartz you can use a Mechanical Extruder."
+				""
+				"Generating andesite requires water, lava and a block of flint."
 			]
 			id: "5F73D5F328C236A9"
 			rewards: [
@@ -69,12 +81,6 @@
 				}
 				{
 					count: 16
-					id: "1C8E3B13FE9765DB"
-					item: "create:andesite_alloy"
-					type: "item"
-				}
-				{
-					count: 16
 					id: "6EBB19C03D7E320B"
 					item: "create:shaft"
 					type: "item"
@@ -83,16 +89,16 @@
 			tasks: [
 				{
 					id: "4659928179B09A0D"
-					item: "minecraft:andesite"
+					item: "create_mechanical_extruder:mechanical_extruder"
 					type: "item"
 				}
 				{
-					id: "43CF504D18D80E62"
-					item: "create:andesite_alloy"
+					id: "2E6B1D770DFFA22F"
+					item: "minecraft:andesite"
 					type: "item"
 				}
 			]
-			title: "Getting Creative"
+			title: "Sic mundus creatus est"
 			x: -3.0d
 			y: -2.0d
 		}
@@ -169,9 +175,9 @@
 				"1C64CD9F1574DD6D"
 			]
 			description: [
-				"With all your new-found knowledge of materials and alloys, you have managed to create a refined version of mechanical essence."
+				"With all your new-found knowledge of materials and alloys, you have managed to create a refined version of the basic mechanical essence."
 				""
-				"You must now compress it into its crystal form which is worth even more EMC than the Basic Crystal!"
+				"You must now compress it into a Refined Mechanical Crystal which is worth even more than the Basic one!"
 			]
 			id: "78775CE81571FAC9"
 			rewards: [{
@@ -608,6 +614,11 @@
 		{
 			dependencies: ["5F9F6C2676715766"]
 			id: "1C64CD9F1574DD6D"
+			rewards: [{
+				id: "2CF9D11ECC6CB48B"
+				item: "thermal:quartz_dust"
+				type: "item"
+			}]
 			tasks: [{
 				id: "024A967D1B886E6F"
 				item: "thermal:quartz_dust"
@@ -619,7 +630,7 @@
 		{
 			dependencies: ["167C9AF69BB16B8B"]
 			description: [
-				"\"Oh, thanks for the red pipez! I put those to good use!\""
+				"\"Oh, thanks for the red pipez! I'll put those to good use!\""
 				""
 				"You may have noticed there's no easy way to craft energy cables in the first chapters."
 				""
@@ -646,6 +657,34 @@
 				type: "checkmark"
 			}]
 			x: -3.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["167C9AF69BB16B8B"]
+			description: [
+				"You need a specific trade permit to buy and sell higher value resources."
+				""
+				"You can craft permits using mechanical essences and 8 pieces of paper."
+			]
+			id: "426BDA4723D7CD03"
+			rewards: [{
+				id: "42DB27763EA86312"
+				item: "kubejs:cube1"
+				type: "item"
+			}]
+			tasks: [{
+				id: "0D33EDD4D6388918"
+				item: {
+					Count: 1b
+					id: "adminshop:permit"
+					tag: {
+						display: { }
+						key: 1
+					}
+				}
+				type: "item"
+			}]
+			x: -6.0d
 			y: -3.0d
 		}
 	]

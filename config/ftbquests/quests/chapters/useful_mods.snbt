@@ -3,8 +3,9 @@
 	default_quest_shape: ""
 	filename: "useful_mods"
 	group: "349666CD0199D4FD"
+	hide_quest_details_until_startable: true
 	id: "50F84AC199F39453"
-	order_index: 6
+	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{

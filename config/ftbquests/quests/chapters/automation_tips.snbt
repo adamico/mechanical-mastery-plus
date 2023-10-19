@@ -3,8 +3,6 @@
 	default_quest_shape: ""
 	filename: "automation_tips"
 	group: "2D94E5A1412E2495"
-	hide_quest_details_until_startable: true
-	hide_quest_until_deps_visible: true
 	icon: "create:flywheel"
 	id: "1FBDE1284A64A60E"
 	order_index: 5

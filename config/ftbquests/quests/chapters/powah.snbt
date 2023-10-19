@@ -3,6 +3,7 @@
 	default_quest_shape: ""
 	filename: "powah"
 	group: "349666CD0199D4FD"
+	hide_quest_details_until_startable: true
 	icon: "powah:energizing_orb"
 	id: "651963EB5098050C"
 	images: [{

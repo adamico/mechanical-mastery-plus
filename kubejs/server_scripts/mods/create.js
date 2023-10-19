@@ -1,9 +1,16 @@
 ServerEvents.recipes(event => {
-	event.recipes.createMilling([Item.of('minecraft:sand'), Item.of('thermal:sulfur').withChance(0.8)], ['minecraft:sandstone']).processingTime(250);
-	event.recipes.createMilling([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal').withChance(0.25)], 'minecraft:coal').processingTime(250);
+	event.remove({id: 'create:milling/gravel'});
+	event.remove({id: 'create:crushing/gravel'});
+	event.remove({id: 'create:milling/cobblestone'});
 
-	event.recipes.createCrushing([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal')], 'minecraft:coal').processingTime(250);
-	
+	event.recipes.createMilling([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal')], 'minecraft:coal').processingTime(250);
+	event.recipes.createMilling([Item.of('minecraft:sand'), Item.of('minecraft:flint').withChance(0.1), Item.of('minecraft:clay_ball').withChance(0.05)], 'minecraft:gravel').processingTime(250);
+	event.recipes.createCrushing([Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal'), Item.of('mekanism:dust_coal')], 'minecraft:coal').processingTime(125);
+
+	event.recipes.createMilling(['minecraft:gravel'], 'minecraft:cobblestone').processingTime(250);
+	event.recipes.createCrushing(['minecraft:gravel'], 'minecraft:cobblestone').processingTime(125);
+	event.recipes.createCrushing([Item.of('minecraft:sand'), Item.of('minecraft:flint').withChance(0.1), Item.of('minecraft:clay_ball').withChance(0.05)], 'minecraft:gravel').processingTime(125);
+
 	event.recipes.createHaunting('minecraft:egg', 'create:dough');
 
 	let alloysRecipes = [

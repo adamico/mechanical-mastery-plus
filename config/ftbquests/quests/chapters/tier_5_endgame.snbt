@@ -4,7 +4,6 @@
 	filename: "tier_5_endgame"
 	group: "2D94E5A1412E2495"
 	hide_quest_details_until_startable: true
-	hide_quest_until_deps_visible: true
 	icon: "projectexpansion:final_star"
 	id: "41DDE820BE913888"
 	order_index: 4
@@ -445,75 +444,6 @@
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
-			description: ["Due to their internal RF transfer limit, Thermal machines usually don't behave when combined with tick accelerating like the watch of flowing time. The solution? Increase their transfer limit, of course! The ideal setup for a machine is one resonant integral component and three localized time destabilizer augments."]
-			id: "1F4DCE63D7FA0449"
-			optional: true
-			rewards: [{
-				id: "294823914E17CB0E"
-				item: {
-					Count: 1b
-					id: "kubejs:time_augment"
-					tag: {
-						AugmentData: {
-							MachineEnergy: 0.75d
-							MachinePower: 1.0d
-							RFXfer: 20.0d
-							Type: "Machine"
-						}
-					}
-				}
-				type: "item"
-			}]
-			subtitle: "I need SPEED"
-			tasks: [{
-				id: "23AAE391F8B8AA17"
-				item: {
-					Count: 1b
-					id: "kubejs:time_augment"
-					tag: {
-						AugmentData: {
-							MachineEnergy: 0.75d
-							MachinePower: 1.0d
-							RFXfer: 20.0d
-							Type: "Machine"
-						}
-					}
-				}
-				type: "item"
-			}]
-			x: -16.5d
-			y: 3.0d
-		}
-		{
-			dependencies: ["07980075BFE4C586"]
-			id: "617ADD293B6F4635"
-			rewards: [{
-				id: "3D618CC1CC262ACE"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projectexpansion:magnum_star_ein"
-				}
-				type: "item"
-			}]
-			tasks: [{
-				id: "59F5614093FD63BA"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projecte:swiftwolf_rending_gale"
-				}
-				type: "item"
-			}]
-			x: -17.0d
-			y: 1.0d
-		}
-		{
-			dependencies: ["07980075BFE4C586"]
 			id: "12FCDEA62294CF57"
 			rewards: [{
 				count: 2
@@ -931,8 +861,8 @@
 				item: "rftoolsutility:flight_module"
 				type: "item"
 			}]
-			x: -17.0d
-			y: 2.0d
+			x: -16.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["41D9B7AC1089FA83"]

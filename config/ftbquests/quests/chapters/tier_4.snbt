@@ -340,7 +340,6 @@
 		{
 			dependencies: [
 				"1A67C9B9ABB4E969"
-				"597011E2824EC464"
 				"3610828C7BB6B916"
 			]
 			description: ["Use your philosopher's stone to transmute several coal into a more dense fuel source."]
