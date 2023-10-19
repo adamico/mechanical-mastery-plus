@@ -752,6 +752,11 @@
 			dependencies: ["1A67C9B9ABB4E969"]
 			id: "184193B5D69E282D"
 			optional: true
+			rewards: [{
+				id: "588908396BFB3B67"
+				item: "hyperbox:hyperbox"
+				type: "item"
+			}]
 			tasks: [{
 				id: "7D8ADC7F3075C102"
 				item: "hyperbox:hyperbox"

@@ -16,7 +16,7 @@ ServerEvents.recipes(event => {
 	event.recipes.createMixing('kubejs:cube2', ['kubejs:cube1', '#forge:gears/steel', Item.of('#forge:dusts/quartz', 2), Item.of('#forge:rods/brass', 2), '#forge:gears/invar']);
 
 	event.recipes.createMixing('kubejs:cube3', ['kubejs:cube2', 'minecraft:fire_charge', 'thermal:lightning_charge', 'thermal:ice_charge', 'thermal:earth_charge', 'mekanism:basic_control_circuit']).heated();
-	event.recipes.createMixing('kubejs:cube4_inert', [Fluid.of('thermal:refined_fuel', 1000), 'kubejs:cube3', 'kubejs:fission_pellet', 'projecte:mobius_fuel', 'mekanism:elite_control_circuit']).superheated();
+	event.recipes.createMixing('kubejs:cube4_inert', [Fluid.of('thermal:refined_fuel', 1000), 'kubejs:cube3', 'kubejs:fission_pellet', FLuid.of('#forge:experience', 1000), 'mekanism:elite_control_circuit']).superheated();
 
 	event.recipes.createMixing(Item.of('minecraft:gunpowder', 4), [Item.of('#minecraft:coals', 2), ['thermal:niter', 'thermal:niter_dust'], ['thermal:sulfur', 'thermal:sulfur_dust']]).heated();
 
@@ -64,6 +64,9 @@ ServerEvents.recipes(event => {
   ['blizz', 'blitz', 'basalz'].forEach(prefix => {
     event.recipes.thermal.pulverizer([`thermal:${prefix}_rod`, Item.of(`thermal:${prefix}_rod`).withChance(0.25)], `kubejs:${prefix}_effigy`).energy(2000);   
   })
+
+	event.recipes.shapeless('mob_grinding_utils:fluid_xp_bucket', ['industrialforegoing:essence_bucket']);
+	event.recipes.shapeless('industrialforegoing:essence_bucket', ['mob_grinding_utils:fluid_xp_bucket']);
 
 	event.shaped('functionalstorage:creative_vending_upgrade', [
 		'CAC',
@@ -165,15 +168,27 @@ ServerEvents.recipes(event => {
 
 	event.replaceInput({output: 'mekanism:combiner'}, 'mekanism:elite_control_circuit', 'kubejs:cube3');
 
-	event.remove({id: 'mekanism:chemical_dissolution_chamber'});
-	
-	event.shaped('mekanism:chemical_dissolution_chamber', [
+	event.remove({id: 'mekanism:chemical_washer'});
+	event.shaped('mekanism:chemical_washer', [
 		'CTC',
 		'USU',
-		'CTC'
+		'CKC'
 	], {
 		C: 'kubejs:cube4',
-		T: 'mekanism:basic_chemical_tank',
+		K: 'mekanism:basic_chemical_tank',
+		T: 'mekanism:basic_fluid_tank',
+		U: 'mekanism:ultimate_control_circuit',
+		S: 'mekanism:steel_casing'
+	});
+
+	event.remove({id: 'mekanism:chemical_crystallizer'});
+	event.shaped('mekanism:chemical_crystallizer', [
+		'CFC',
+		'USU',
+		'CFC'
+	], {
+		C: 'kubejs:cube4',
+		F: 'mekanism:fluorite_gem',
 		U: 'mekanism:ultimate_control_circuit',
 		S: 'mekanism:steel_casing'
 	});

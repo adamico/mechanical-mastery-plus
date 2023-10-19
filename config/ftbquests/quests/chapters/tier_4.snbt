@@ -308,10 +308,10 @@
 		{
 			dependencies: [
 				"13C6D580E33815D5"
-				"26277A0FD5DA798E"
 				"0EE1192BF90562ED"
 				"7943076114A42DFC"
 				"24B023237C9D1908"
+				"425E1C7023D29E31"
 			]
 			description: [
 				"Just as before, combine all the required ingredients in a superheated mixer and... wait, it's not done yet? It seems like it needs to be activated some way... "
@@ -330,27 +330,6 @@
 				type: "item"
 			}]
 			x: -1.0d
-			y: -2.0d
-		}
-		{
-			dependencies: [
-				"1A67C9B9ABB4E969"
-				"3610828C7BB6B916"
-			]
-			description: ["Use your philosopher's stone to transmute several coal into a more dense fuel source."]
-			id: "26277A0FD5DA798E"
-			rewards: [{
-				count: 8
-				id: "4ED93AC66233E67A"
-				item: "projecte:mobius_fuel"
-				type: "item"
-			}]
-			tasks: [{
-				id: "61F50B290D27170B"
-				item: "projecte:mobius_fuel"
-				type: "item"
-			}]
-			x: -3.0d
 			y: -2.0d
 		}
 		{
@@ -406,25 +385,6 @@
 				}
 			]
 			x: 1.0d
-			y: -2.0d
-		}
-		{
-			dependencies: ["4E81E76086558A19"]
-			description: ["The transmutation interface is a useful block that lets your digital storage draw and insert items directly from your EMC table, making EMC links replacable by refined storage importers/exporters."]
-			id: "1D17BB2C9280B0C7"
-			rewards: [{
-				id: "14CCBD0BDFE9CFC7"
-				type: "xp"
-				xp: 100
-			}]
-			shape: "square"
-			subtitle: "EMC links? Pathetic..."
-			tasks: [{
-				id: "57948E436FCBF75C"
-				item: "projectexpansion:transmutation_interface"
-				type: "item"
-			}]
-			x: -8.5d
 			y: -2.0d
 		}
 		{
@@ -668,35 +628,6 @@
 		{
 			dependencies: ["4E81E76086558A19"]
 			description: [
-				"Nicolas Flamel himself would be proud of my Magnus Opus!"
-				""
-				"I can now transmute metals and gems and obtain Ender Pearls from iron!"
-			]
-			id: "3610828C7BB6B916"
-			rewards: [{
-				id: "282E262ACF03A0A1"
-				item: "projecte:blue_alchemical_bag"
-				type: "item"
-			}]
-			tasks: [{
-				id: "6DB3FA711471B4A7"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projecte:philosophers_stone"
-					tag: { }
-				}
-				type: "item"
-			}]
-			title: "Lapis Philosophorum"
-			x: -5.0d
-			y: -2.0d
-		}
-		{
-			dependencies: ["4E81E76086558A19"]
-			description: [
 				"To obtain more advanced Circuits you have to use a Combiner."
 				""
 				"Tip: you can transform the machine into a factory with the appropriate Tier upgrader."
@@ -856,6 +787,79 @@
 			}]
 			x: -3.0d
 			y: -1.0d
+		}
+		{
+			dependencies: ["7E40BDE1846E9542"]
+			description: [
+				"\"I'm lacking the essence of the fourth mechanical essence... I must have it!\""
+				""
+				"To create the first step of the final Mechanical Essence you need... essence of mobs!"
+			]
+			id: "425E1C7023D29E31"
+			rewards: [{
+				count: 4
+				id: "543148B6BB056FB2"
+				item: "minecraft:experience_bottle"
+				type: "item"
+			}]
+			subtitle: "recursive"
+			tasks: [
+				{
+					id: "1CFE546D4C0316AE"
+					item: "minecraft:experience_bottle"
+					type: "item"
+				}
+				{
+					id: "6E63ADA7310990F0"
+					item: "thermal:machine_bottler"
+					type: "item"
+				}
+			]
+			title: "Essence is of the Essence"
+			x: -3.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			description: [
+				"To craft an Enchanted Bottle you can use any kind of fluid experience."
+				""
+				"You can get fluid experience from:"
+				""
+				"- Create (Nuggets of Experience)"
+				""
+				"- Thermal (Essence of Knowledge from Insightful Condenser, Insightful Crystal and Knowledge Concentrator Augmented Machines)"
+				""
+				"- Industrial Foregoing (Essence from Mob Crusher)"
+				""
+				"- Mob Grinding Utils (Fluid Xp)"
+			]
+			id: "7E40BDE1846E9542"
+			tasks: [
+				{
+					id: "7C710E111CB2FE3C"
+					item: "industrialforegoing:essence_bucket"
+					type: "item"
+				}
+				{
+					id: "1D5A53819DC918C5"
+					item: "thermal:xp_storage_augment"
+					type: "item"
+				}
+				{
+					id: "1533024E99E04171"
+					item: "mob_grinding_utils:fluid_xp_bucket"
+					type: "item"
+				}
+				{
+					count: 3L
+					id: "1093D29FC8DA0441"
+					item: "create:experience_nugget"
+					type: "item"
+				}
+			]
+			x: -5.0d
+			y: -2.0d
 		}
 	]
 	title: "Tier 4: Advanced Mekanism"

@@ -17,6 +17,8 @@ ServerEvents.recipes(event => {
 	
 	event.recipes.createHaunting('minecraft:egg', 'create:dough');
 
+	event.recipes.createMixing(Fluid.of('cofh_core:experience', 250), [Item.of('create:experience_nugget', 3)]).superheated();
+
 	let alloysRecipes = [
 		{ output: '#forge:dusts/steel', output_count: 3, inputs: [Item.of('#forge:dusts/iron', 2), Item.of("#forge:dusts/coal")]},
 		{ output: '#forge:dusts/brass', output_count: 2, inputs: [Item.of('#forge:dusts/copper'), Item.of('#forge:dusts/zinc')]},
