@@ -15,7 +15,13 @@ customization {
 
 customization {
   action = setscale
-  scale = 2
+  scale = 3
+}
+
+customization {
+  baseheight = 1081
+  action = autoscale
+  basewidth = 1923
 }
 
 customization {
@@ -25,56 +31,138 @@ customization {
 
 customization {
   identifier = %id=604346%
-  orientation = element
-  orientation_element = vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button
-  x = 26
+  orientation = top-left
+  x = 0
   action = movebutton
-  y = 82
+  y = 0
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposx","values":{"id":"vanillabtn:376322"}}+({"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_accessibility_button"}}-{"placeholder":"elementposx","values":{"id":"vanillabtn:376322"}}+{"placeholder":"elementwidth","values":{"id":"vanillabtn:376322"}})/2-{"placeholder":"elementwidth","values":{"id":"vanillabtn:604346"}}/2","decimal":"true"}}
+  advanced_posy = {"placeholder":"elementposy","values":{"id":"vanillabtn:376322"}}
+}
+
+customization {
+  identifier = %id=604346%
+  action = setbuttondescription
+  description = Supplementaries
 }
 
 customization {
   identifier = %id=button_compatibility_id:mc_titlescreen_multiplayer_button%
-  orientation = element
-  orientation_element = vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button
+  orientation = top-left
   x = 0
   action = movebutton
-  y = 27
+  y = 0
+  advanced_posx = {"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposy","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}+{"placeholder":"elementheight","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}+10","decimal":"true"}}
+}
+
+customization {
+  advanced_height = 20
+  identifier = %id=button_compatibility_id:mc_titlescreen_multiplayer_button%
+  width = 50
+  action = resizebutton
+  advanced_width = {"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button"}}
+  height = 50
+}
+
+customization {
+  identifier = %id=button_compatibility_id:mc_titlescreen_multiplayer_button%
+  action = setbuttonlabel
+  value = 
+}
+
+customization {
+  identifier = %id=button_compatibility_id:mc_titlescreen_multiplayer_button%
+  loopbackgroundanimations = true
+  restartbackgroundanimations = true
+  action = setbuttontexture
+  backgroundhovered = config/fancymenu/multiplayer_hover_gold.png
+  backgroundnormal = config/fancymenu/multiplayer.png
+}
+
+customization {
+  identifier = %id=button_compatibility_id:mc_titlescreen_multiplayer_button%
+  action = sethoverlabel
+  label = 
 }
 
 customization {
   identifier = %id=button_compatibility_id:mc_titlescreen_accessibility_button%
-  orientation = element
-  orientation_element = vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button
-  x = 180
+  orientation = top-left
+  x = 0
   action = movebutton
-  y = 82
+  y = 0
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_multiplayer_button"}}+{"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_multiplayer_button"}}/2-{"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_accessibility_button"}}/2","decimal":"true"}}
+  advanced_posy = {"placeholder":"elementposy","values":{"id":"vanillabtn:376322"}}
+}
+
+customization {
+  identifier = %id=button_compatibility_id:mc_titlescreen_accessibility_button%
+  action = setbuttonlabel
+  value = A
 }
 
 customization {
   identifier = %id=376322%
-  orientation = element
-  orientation_element = vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button
+  orientation = top-left
   x = 0
   action = movebutton
-  y = 82
+  y = 0
+  advanced_posx = {"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:forge_titlescreen_mods_button"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposy","values":{"id":"vanillabtn:button_compatibility_id:forge_titlescreen_mods_button"}}+{"placeholder":"elementheight","values":{"id":"vanillabtn:button_compatibility_id:forge_titlescreen_mods_button"}}+{"placeholder":"guiheight"}/60","decimal":"true"}}
+}
+
+customization {
+  identifier = %id=376322%
+  action = setbuttondescription
+  description = Create
 }
 
 customization {
   identifier = %id=button_compatibility_id:mc_titlescreen_options_button%
-  orientation = element
-  orientation_element = vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button
-  x = 103
+  orientation = top-left
+  x = 0
   action = movebutton
-  y = 53
+  y = 0
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_multiplayer_button"}}+{"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_multiplayer_button"}}*3/4-({"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_options_button"}}/2)-5","decimal":"true"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposy","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_quit_button"}}","decimal":"true"}}
+}
+
+customization {
+  identifier = %id=button_compatibility_id:mc_titlescreen_options_button%
+  width = 50
+  action = resizebutton
+  advanced_width = {"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_accessibility_button"}}
+  height = 20
+}
+
+customization {
+  identifier = %id=button_compatibility_id:mc_titlescreen_options_button%
+  action = setbuttonlabel
+  value = O
 }
 
 customization {
   identifier = %id=button_compatibility_id:mc_titlescreen_quit_button%
-  orientation = element
-  orientation_element = vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button
-  x = 51
+  orientation = top-left
+  x = 0
   action = movebutton
-  y = 82
+  y = 0
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_multiplayer_button"}}+{"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_multiplayer_button"}}-{"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_quit_button"}}","decimal":"true"}}
+  advanced_posy = {"placeholder":"elementposy","values":{"id":"vanillabtn:376322"}}
+}
+
+customization {
+  identifier = %id=button_compatibility_id:mc_titlescreen_quit_button%
+  width = 50
+  action = resizebutton
+  advanced_width = 20
+  height = 20
+}
+
+customization {
+  identifier = %id=button_compatibility_id:mc_titlescreen_quit_button%
+  action = setbuttonlabel
+  value = Q
 }
 
 customization {
@@ -102,12 +190,61 @@ customization {
 }
 
 customization {
+  advanced_height = 20
+  identifier = %id=button_compatibility_id:mc_titlescreen_singleplayer_button%
+  width = 50
+  action = resizebutton
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"}/4","decimal":"true"}}
+  height = 50
+}
+
+customization {
+  identifier = %id=button_compatibility_id:mc_titlescreen_singleplayer_button%
+  action = setbuttonlabel
+  value = 
+}
+
+customization {
+  identifier = %id=button_compatibility_id:mc_titlescreen_singleplayer_button%
+  loopbackgroundanimations = true
+  restartbackgroundanimations = true
+  action = setbuttontexture
+  backgroundhovered = config/fancymenu/singleplayer_hover_gold.png
+  backgroundnormal = config/fancymenu/singleplayer.png
+}
+
+customization {
   identifier = %id=button_compatibility_id:forge_titlescreen_mods_button%
-  orientation = element
-  orientation_element = vanillabtn:button_compatibility_id:mc_titlescreen_singleplayer_button
+  orientation = top-left
   x = 0
   action = movebutton
-  y = 54
+  y = 0
+  advanced_posx = {"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_multiplayer_button"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposy","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_multiplayer_button"}}+{"placeholder":"elementheight","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_multiplayer_button"}}+10","decimal":"true"}}
+}
+
+customization {
+  advanced_height = 20
+  identifier = %id=button_compatibility_id:forge_titlescreen_mods_button%
+  width = 50
+  action = resizebutton
+  advanced_width = {"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:mc_titlescreen_multiplayer_button"}}
+  height = 50
+}
+
+customization {
+  identifier = %id=button_compatibility_id:forge_titlescreen_mods_button%
+  action = setbuttonlabel
+  value = 
+}
+
+customization {
+  identifier = %id=button_compatibility_id:forge_titlescreen_mods_button%
+  loopbackgroundanimations = false
+  restartbackgroundanimations = true
+  action = setbuttontexture
+  backgroundhovered = config/fancymenu/mods_hover_gold.png
+  backgroundnormal = config/fancymenu/mods.png
 }
 
 customization {
@@ -133,18 +270,18 @@ customization {
   width = 143
   action = deep_customization_element:title_screen_branding
   actionid = f9649601-94b8-4fa8-9df3-ca33237757661694977925492
-  y = 322
+  y = 299
   height = 60
 }
 
 customization {
   orientation = top-left
   hidden = false
-  x = 283
+  x = 452
   width = 228
   action = deep_customization_element:title_screen_forge_copyright
   actionid = 351eb3ec-4834-4f51-9892-979a301ebc8d1694977925493
-  y = 364
+  y = 341
   height = 9
 }
 
