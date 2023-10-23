@@ -21,7 +21,7 @@
 		rotation: 0.0d
 		width: 2.0d
 		x: 0.0d
-		y: -8.0d
+		y: -9.0d
 	}]
 	order_index: 0
 	quest_links: [ ]
@@ -31,13 +31,18 @@
 			description: ["The auxiliary cactus removes any EXCESS secondary outputs you may not want.\\nIf you don't understand what is meant by \"excess\", read the next quest"]
 			id: "22AE3DD6943A96AB"
 			optional: true
+			rewards: [{
+				id: "6784479CDDB038A8"
+				item: "thermal:machine_null_augment"
+				type: "item"
+			}]
 			tasks: [{
 				id: "744D96677974079D"
 				item: "thermal:machine_null_augment"
 				type: "item"
 			}]
-			x: 0.0d
-			y: -2.5d
+			x: 2.5d
+			y: -6.0d
 		}
 		{
 			dependencies: ["22AE3DD6943A96AB"]
@@ -58,8 +63,8 @@
 				type: "checkmark"
 			}]
 			title: "\"ThE cActUs AUgmENT dOEs NoT wORk!!!!!!\""
-			x: 0.0d
-			y: -1.0d
+			x: 2.5d
+			y: -5.0d
 		}
 		{
 			dependencies: ["22FF4FC891025F81"]
@@ -77,8 +82,8 @@
 				type: "item"
 			}]
 			title: "Induction Smelter Catalysts"
-			x: -1.5d
-			y: -2.5d
+			x: -0.5d
+			y: -7.0d
 		}
 		{
 			dependencies: ["0F66F328C11046E4"]
@@ -95,8 +100,8 @@
 				title: "Catalysts'n'Stuff"
 				type: "checkmark"
 			}]
-			x: -2.5d
-			y: -3.5d
+			x: 0.5d
+			y: -7.0d
 		}
 		{
 			dependencies: ["0F66F328C11046E4"]
@@ -112,111 +117,60 @@
 				title: "Augments'n'Stuff"
 				type: "checkmark"
 			}]
-			x: 1.0d
-			y: -3.5d
+			x: 2.5d
+			y: -7.0d
 		}
 		{
 			dependencies: ["61BE356972B79B00"]
 			id: "1EA6159D66704C53"
+			rewards: [{
+				id: "49A3232A03FFABDB"
+				item: "thermal:dynamo_output_augment"
+				type: "item"
+			}]
 			tasks: [{
 				id: "5310A9CC1EE38392"
 				item: "thermal:dynamo_output_augment"
 				type: "item"
 			}]
-			x: 1.0d
-			y: -2.5d
+			x: 3.5d
+			y: -7.0d
 		}
 		{
 			dependencies: ["61BE356972B79B00"]
+			description: [
+				"The cyclical upgrade allows thermal machines to automatically put the output item into the input slot."
+				""
+				"This is very useful for growing crops (see the next quest) or converting cobblestone into gravel into sand."
+			]
 			id: "05A02748A9756DFC"
 			tasks: [{
 				id: "2EC9A0B6C9F91A8F"
 				item: "thermal:machine_cycle_augment"
 				type: "item"
 			}]
-			x: 2.0d
-			y: -2.5d
+			x: 2.5d
+			y: -8.0d
 		}
 		{
 			dependencies: ["05A02748A9756DFC"]
+			description: ["The Phytogenic Insolator can grow crops automatically and by the use of a cyclical upgrade you can reuse the output as an input (seeds from crops)"]
 			id: "7C6DA4DDF8FF0360"
+			rewards: [{
+				count: 16
+				id: "2260968A4ED69210"
+				item: "thermal:phytogro"
+				type: "item"
+			}]
 			tasks: [{
 				id: "44FF65C499BD2159"
 				item: "thermal:machine_insolator"
 				type: "item"
 			}]
-			x: 2.0d
-			y: -1.0d
+			x: 2.5d
+			y: -9.0d
 		}
 		{
-			dependencies: ["7C6DA4DDF8FF0360"]
-			icon: "thermal:apatite"
-			id: "1CC0266CBBF64519"
-			rewards: [{
-				id: "01618F127768E2B5"
-				item: "thermal:apatite_ore"
-				type: "item"
-			}]
-			tasks: [{
-				id: "64EDC0FF782046FA"
-				title: "Apatite"
-				type: "checkmark"
-			}]
-			x: 2.0d
-			y: 0.5d
-		}
-		{
-			dependencies: ["733C4D5387EDD61C"]
-			description: ["The compression dynamo can burn liquids such as refined fuel into large amounts of RF."]
-			id: "2E769FE13EC39E0D"
-			optional: true
-			rewards: [{
-				id: "6F611A64AAAEBA76"
-				item: "thermal:refined_fuel_bucket"
-				type: "item"
-			}]
-			shape: "diamond"
-			tasks: [{
-				id: "7BF588900AFA9032"
-				item: "thermal:dynamo_compression"
-				type: "item"
-			}]
-			x: 3.5d
-			y: -2.5d
-		}
-		{
-			dependencies: [
-				"61BE356972B79B00"
-				"2BA7E55C7B7EB3C3"
-			]
-			description: ["No RF used, very fast processing"]
-			hide: true
-			hide_dependency_lines: true
-			id: "7CE54486D31A47BA"
-			optional: true
-			shape: "hexagon"
-			tasks: [{
-				id: "52A22B4A47C791B2"
-				item: "thermal:machine_efficiency_creative_augment"
-				type: "item"
-			}]
-			x: 1.0d
-			y: -1.0d
-		}
-		{
-			dependencies: ["0F66F328C11046E4"]
-			hide_dependent_lines: true
-			id: "733C4D5387EDD61C"
-			tasks: [{
-				id: "126BC37C483FC765"
-				title: "Energy'r'us"
-				type: "checkmark"
-			}]
-			x: 3.5d
-			y: -3.5d
-		}
-		{
-			dependencies: ["6F0F8C3F6B5E2310"]
 			description: [
 				"&lThermal Series mod&r"
 				""
@@ -245,8 +199,8 @@
 				title: "Thermal Foundation"
 				type: "item"
 			}]
-			x: 0.0d
-			y: -5.5d
+			x: 1.5d
+			y: -7.0d
 		}
 	]
 	title: "Thermal"

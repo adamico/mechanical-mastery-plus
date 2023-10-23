@@ -13,7 +13,6 @@ StartupEvents.registry('item', event => {
 	event.create('cube4').displayName('Advanced Mechanical Essence');
 	event.create('cube4_packaged').displayName('Advanced Mechanical Crystal');
 	event.create('cube4_inert').displayName('Inert Advanced Mechanical Essence').tooltip('So close, yet so far...');
-
 	event.create('cube4_dust').displayName('Advanced Mechanical Dust').tooltip('A fine powder of advanced mechanical essence');
 	
 	event.create('press_rod_die').displayName('Rod Die');
@@ -36,11 +35,8 @@ StartupEvents.registry('item', event => {
 	event.create('basilic_reagent').displayName('Basilic Reagent');
 	event.create('enriched_basilic_reagent').displayName('Enriched Basilic Reagent');
 
-	event.create('incomplete_final_shard').displayName('Incomplete Final Star Shard');
-
-	event.create('incomplete_time_augment').displayName('Time Destabilizer Components').texture('kubejs:item/basic_package');
-	event.create('time_augment').displayName('Localized time destabilizer').tooltip('Enables machine compatibility with watch' +
-	' of flowing time. Best used alongside resonant integral components')
+	event.create('incomplete_dragon_dna').displayName('Incomplete Ender Dragon DNA');
+	event.create('dragon_dna').displayName('Ender Dragon DNA');
 
 	event.create('incomplete_creative_blaze_cake').displayName('Incomplete Creative Blaze Cake');
 	event.create('incomplete_creative_upgrade').displayName('Incomplete Creative Augment');

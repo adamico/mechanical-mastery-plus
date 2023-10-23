@@ -4,7 +4,6 @@
 	filename: "create"
 	group: "349666CD0199D4FD"
 	hide_quest_details_until_startable: true
-	hide_quest_until_deps_visible: true
 	icon: "create:wrench"
 	id: "55F201FDF3D25A91"
 	images: [{
@@ -45,11 +44,15 @@
 				}
 			]
 			x: 1.5d
-			y: 0.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["4B0CD7A24F972E0A"]
-			description: ["Create's mechanical belts allow for transportation of items with customizable speed. Since Pretty Pipes offer some advantages and disadvantages to mechanical belts, this quest is optional."]
+			description: [
+				"Create's mechanical belts allow for transportation of items with customizable speed. Since Pretty Pipes offer some advantages and disadvantages to mechanical belts, this quest is optional."
+				""
+				"When you start crafting sequenced assembly recipes you will discover the need of using and abusing belts."
+			]
 			id: "388F7E8E6658980D"
 			optional: true
 			rewards: [{
@@ -67,25 +70,6 @@
 			y: 0.0d
 		}
 		{
-			dependencies: [
-				"4B0CD7A24F972E0A"
-				"2BA7E55C7B7EB3C3"
-			]
-			description: ["Can set the heat level of blaze burners permanently and at no cost."]
-			hide_dependency_lines: true
-			id: "5414E6D079200533"
-			optional: true
-			tasks: [{
-				id: "20511334736BEEF1"
-				item: "create:creative_blaze_cake"
-				type: "item"
-			}]
-			x: 2.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["2A9795581CE1CACF"]
-			hide_dependent_lines: true
 			id: "4B0CD7A24F972E0A"
 			rewards: [{
 				id: "160021CEDF481944"
@@ -101,19 +85,106 @@
 			y: -1.5d
 		}
 		{
-			dependencies: ["31C75750B2530381"]
-			id: "37A5B7CA987BADA6"
+			dependencies: ["4B0CD7A24F972E0A"]
+			id: "383FC1F48931FDDF"
 			rewards: [{
-				id: "64FEEEC9E5ED265E"
-				item: "createchromaticreturn:durasteel_book"
+				id: "39E316E53CAFE53D"
+				item: "create:andesite_funnel"
 				type: "item"
 			}]
 			tasks: [{
-				id: "6AEAF8CE494057BD"
-				item: "createchromaticreturn:multiplite_charm"
+				id: "469149DB3599DC92"
+				item: "create:andesite_funnel"
 				type: "item"
 			}]
-			x: 2.0d
+			x: -1.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["383FC1F48931FDDF"]
+			id: "2FC84EB7F93428A1"
+			rewards: [{
+				id: "089618CE79D1A30C"
+				item: "create:brass_funnel"
+				type: "item"
+			}]
+			tasks: [{
+				id: "268D4C54BE502867"
+				item: "create:brass_funnel"
+				type: "item"
+			}]
+			x: -3.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["4B0CD7A24F972E0A"]
+			description: [
+				"Create Item vaults are the ultimate storage system, really!"
+				""
+				"You can insert and remove object with any inventory interaction block (hoppers, funnels, chutes, item pipes) but you cannot access its inventory manually."
+				""
+				"You can build multiblock vaults with bases of 1x1, 2x2 and 3x3 and length up to 3x the diameter (3, 6 and 9 respectively)"
+				""
+				"To give you an idea of the capacity of item vaults, a 2x3 vault can contain the equivalent of 4 double chests."
+				""
+				"One of the advantages of using these massive multiblocks is the possibility to input items at one end and output at the other end."
+				""
+				"This allows instant transport of items up to 9 block distance."
+			]
+			id: "458097E57CE286B7"
+			rewards: [{
+				count: 2
+				id: "54C728BCD9D8CF24"
+				item: "create:item_vault"
+				type: "item"
+			}]
+			tasks: [{
+				id: "56C8B38070CCE8BE"
+				item: "create:item_vault"
+				type: "item"
+			}]
+			x: -1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4B0CD7A24F972E0A"]
+			description: [
+				"With the mixer you can automate most shapeless crafting table recipes and some others too."
+				""
+				"Some recipes require heat in the form of a blaze burner."
+				""
+				"NOTE: the mixer requires a speed of at least 32 RPM to function"
+			]
+			id: "6136697C2620F88B"
+			tasks: [{
+				id: "30B41D6CF9C29995"
+				item: "create:mechanical_mixer"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"6136697C2620F88B"
+				"662DE7460CCF2AA7"
+			]
+			description: [
+				"A basin is a very versatile block."
+				""
+				"You can craft many 2x2 and 3x3 recipes (resources to storage blocks) with a press and mix items and fluids with a mixer."
+				""
+				"The basin automatically outputs to specific blocks (chests, belts, other logistical blocks from create) at each of its sides and below."
+				""
+				"You can set a filter to craft a particular recipe."
+			]
+			id: "0B967E3E5BC47404"
+			tasks: [{
+				id: "347AC792B9677F9D"
+				item: "create:basin"
+				type: "item"
+			}]
+			x: 3.0d
 			y: -1.5d
 		}
 	]

@@ -12,9 +12,10 @@
 		{
 			dependencies: ["47D8F95F5317A47D"]
 			description: [
-				"New tier, new materials; you know the deal already."
+				"New tier, new materials; you know the deal already. Don't forget to craft the new permit to get more of these."
 				""
-				"Use the chicken spawn eggs wisely, no refunds. "
+				"Use the chicken spawn eggs wisely, no refunds. Well... you can still buy another in the shop if you have the funds at this point..."
+				""
 				"Alternatively, you may also bulk haunt dough to get eggs."
 			]
 			icon: "kubejs:cube3"
@@ -389,27 +390,29 @@
 		}
 		{
 			dependencies: ["157D4C0E9C7A0928"]
-			description: ["So you saw how to get infinite water with the evertide amulet but you still want more? Fine, you may have the sink, now stop whining ;)"]
+			description: [
+				"\"Plenty of water ran under my bridge, but I want more!\""
+				""
+				"You probably figured all the options to get infinite water in this pack."
+				""
+				"I beg your pardon? You still want more? Fine, you may have the sink, now stop whining ;)"
+			]
 			id: "174E355F55DE59F8"
 			optional: true
 			rewards: [{
-				id: "0507DDF5E75E4C9E"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projecte:evertide_amulet"
-				}
+				id: "7E98BD3D44C5C7BC"
+				item: "cookingforblockheads:sink"
 				type: "item"
 			}]
+			subtitle: "Water Source"
 			tasks: [{
 				id: "6D8D0E6A16383E3D"
 				item: "cookingforblockheads:sink"
 				type: "item"
 			}]
-			x: 0.5d
-			y: -3.0d
+			title: "Fontes aquarum"
+			x: 1.0d
+			y: -4.0d
 		}
 		{
 			dependencies: ["4E81E76086558A19"]
@@ -481,8 +484,8 @@
 				}
 			]
 			title: "Flux Networks"
-			x: 0.5d
-			y: -1.0d
+			x: 1.0d
+			y: 0.0d
 		}
 		{
 			dependencies: [
@@ -567,65 +570,6 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["157D4C0E9C7A0928"]
-			description: ["When placed on a pedestal, drastically increases nearby machine's speed"]
-			id: "158C15F8B10B3DBB"
-			optional: true
-			rewards: [{
-				id: "01A4FB769638B399"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projecte:watch_of_flowing_time"
-					tag: { }
-				}
-				type: "item"
-			}]
-			tasks: [{
-				id: "47E66A5E054D0AC4"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projecte:watch_of_flowing_time"
-					tag: { }
-				}
-				type: "item"
-			}]
-			x: 1.5d
-			y: -3.0d
-		}
-		{
-			dependencies: ["157D4C0E9C7A0928"]
-			description: [
-				"The &lDark Matter Pedestal&r produces several AOE effects in a 9x9 area centered on the pedestal."
-				""
-				"Some examples:"
-				""
-				"- Watch of flowing time: slow or accelerates tick"
-				"- Swiftwolf Rending Gale: damage and shock enemies"
-				""
-				"just use EMI with the keyword &opedestal&r"
-			]
-			id: "44A70964598EE49B"
-			optional: true
-			rewards: [{
-				id: "6D24095EAD548072"
-				item: "projecte:dm_pedestal"
-				type: "item"
-			}]
-			tasks: [{
-				id: "123FDF1D902908D9"
-				item: "projecte:dm_pedestal"
-				type: "item"
-			}]
-			x: 1.5d
-			y: -1.0d
-		}
-		{
 			dependencies: ["4E81E76086558A19"]
 			description: [
 				"To obtain more advanced Circuits you have to use a Combiner."
@@ -681,6 +625,12 @@
 				"5E71405449C5F19D"
 				"1B885B1F413015D4"
 			]
+			description: [
+				"\"Eureka! The final Mechanical Crystal is in my hands! Now I can become a god!\""
+				""
+				"Well done! Now comes the time to mass produce all the essences and create powerful creative items."
+				"I mean it's one of the goals, but you can just become filthy rich and build wonderful contraptions with those free resources!"
+			]
 			id: "4B95E003C81117FC"
 			rewards: [{
 				count: 2
@@ -706,6 +656,7 @@
 		}
 		{
 			dependencies: ["4E81E76086558A19"]
+			description: ["Using thermal centrifugal separator you can obtain crude oil from bituminous sand... or you can buy the oil directly..."]
 			id: "36E164D94BE0A6E3"
 			rewards: [{
 				id: "685319FEB19CE7A9"
@@ -724,12 +675,18 @@
 					type: "item"
 				}
 			]
+			title: "To buy oil or not?"
 			x: -7.0d
 			y: -4.0d
 		}
 		{
 			dependencies: ["1BA45133DB917C98"]
 			id: "5E71405449C5F19D"
+			rewards: [{
+				id: "0DF38F19B93B7A2B"
+				item: "kubejs:cube4_dust"
+				type: "item"
+			}]
 			tasks: [{
 				id: "132BE40B1363DAE8"
 				item: "kubejs:cube4_dust"
@@ -740,7 +697,17 @@
 		}
 		{
 			dependencies: ["157D4C0E9C7A0928"]
+			description: [
+				"I never told you it would be easier..."
+				""
+				"The following steps are straightforward and I hope you love automating things..."
+			]
 			id: "1BA45133DB917C98"
+			rewards: [{
+				id: "012A6123B95D9646"
+				item: "create:crushing_wheel"
+				type: "item"
+			}]
 			tasks: [{
 				id: "0D03738A93A386DE"
 				item: "create:crushing_wheel"
@@ -752,6 +719,11 @@
 		{
 			dependencies: ["0EFF3C51AF78C4B8"]
 			id: "1B885B1F413015D4"
+			rewards: [{
+				id: "0BB8D34112CDBC3E"
+				type: "xp"
+				xp: 1000
+			}]
 			tasks: [{
 				id: "6271A97CB4A050F2"
 				item: "mekanism:solar_neutron_activator"
@@ -763,6 +735,11 @@
 		{
 			dependencies: ["5E71405449C5F19D"]
 			id: "0EFF3C51AF78C4B8"
+			rewards: [{
+				id: "1E5C4EF6B0596EC9"
+				type: "xp"
+				xp: 1000
+			}]
 			tasks: [{
 				id: "168C3D2F2AB2418F"
 				item: "mekanism:chemical_oxidizer"
@@ -859,6 +836,41 @@
 				}
 			]
 			x: -5.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			id: "59F5B766F6827461"
+			rewards: [{
+				id: "3FCE3A682E07A0E4"
+				item: "kubejs:cube3"
+				type: "item"
+			}]
+			tasks: [{
+				id: "1560C3D4BAB468B2"
+				item: {
+					Count: 1b
+					id: "adminshop:permit"
+					tag: {
+						display: {
+							Lore: [
+								"[{\"text\":\"Buy: Emerald Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Raw Uranium\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Fluorite Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Uraninite\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Rubberwood Sapling\",\"italic\":false}]"
+								"[{\"text\":\"Buy: End Gobber Ore\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Advanced Mechanical Crystal\",\"italic\":false}]"
+							]
+							Name: "[{\"text\":\"Tier 3 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
+						}
+						key: 3
+					}
+				}
+				match_nbt: true
+				type: "item"
+			}]
+			x: -8.5d
 			y: -2.0d
 		}
 	]

@@ -82,6 +82,4 @@ ServerEvents.recipes(event => {
 
   event.remove({id: 'thermal:machines/pyrolyzer/pyrolyzer_coal'});
   event.remove({id: 'thermal:gunpowder_4'});
- 
-  event.recipes.thermal.chiller(Item.of('kubejs:black_essence', 4), 'createchromaticreturn:shadow_essence').energy(20000);
 })

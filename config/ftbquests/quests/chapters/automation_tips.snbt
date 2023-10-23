@@ -51,7 +51,7 @@
 			tasks: [{
 				count: 3L
 				id: "05A246FD99A1538A"
-				item: "projectexpansion:basic_emc_link"
+				item: "adminshop:buyer_1"
 				type: "item"
 			}]
 			x: -3.0d
@@ -1039,7 +1039,7 @@
 			id: "656C9C26BFE9E000"
 			tasks: [{
 				id: "3BC79C79E21931D9"
-				item: "projectexpansion:basic_emc_link"
+				item: "adminshop:buyer_1"
 				type: "item"
 			}]
 			x: 15.5d
@@ -1304,7 +1304,7 @@
 			id: "2F7A507A72EA5CF3"
 			tasks: [{
 				id: "78D0F7C4F63789B8"
-				item: "projectexpansion:basic_emc_link"
+				item: "adminshop:buyer_1"
 				type: "item"
 			}]
 			x: 11.0d
@@ -2034,6 +2034,7 @@
 				"- Magenta Mechanical Pigment"
 				"- Chorus Fluid"
 			]
+			hide_dependent_lines: true
 			id: "16EC705C8FB3EAC3"
 			tasks: [{
 				id: "21471AA4B8D93769"
@@ -2066,12 +2067,14 @@
 			y: 11.0d
 		}
 		{
-			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
+			dependencies: [
+				"16EC705C8FB3EAC3"
+				"1CCBA4DBC7B6E2DD"
+			]
 			id: "7A151FD72E30891A"
 			tasks: [{
 				id: "328E496219A3EBDC"
-				item: "projecte:mobius_fuel"
+				item: "minecraft:experience_bottle"
 				type: "item"
 			}]
 			x: 19.5d
@@ -2746,7 +2749,7 @@
 			id: "5156EB9E09BB3E03"
 			tasks: [{
 				id: "318F8E45051451B0"
-				item: "projectexpansion:basic_emc_link"
+				item: "adminshop:buyer_1"
 				type: "item"
 			}]
 			x: 37.5d
@@ -2758,7 +2761,7 @@
 			id: "6EA283C21C922986"
 			tasks: [{
 				id: "0D90DC23E298BBF7"
-				item: "projectexpansion:basic_emc_link"
+				item: "adminshop:buyer_1"
 				type: "item"
 			}]
 			x: 1.5d
@@ -2770,7 +2773,7 @@
 			id: "20C93B6EA0D8D45D"
 			tasks: [{
 				id: "2A9C9DAB5CBECD9D"
-				item: "projectexpansion:basic_emc_link"
+				item: "adminshop:buyer_1"
 				type: "item"
 			}]
 			x: 2.5d
@@ -2782,7 +2785,7 @@
 			id: "3FD84ECCF794F0F1"
 			tasks: [{
 				id: "67ABE223E0171B52"
-				item: "projectexpansion:basic_emc_link"
+				item: "adminshop:buyer_1"
 				type: "item"
 			}]
 			x: 4.5d
@@ -2794,7 +2797,7 @@
 			id: "4623A5E11588F8FB"
 			tasks: [{
 				id: "7404643C82CBC594"
-				item: "projectexpansion:basic_emc_link"
+				item: "adminshop:buyer_1"
 				type: "item"
 			}]
 			x: 7.5d
@@ -2898,7 +2901,7 @@
 			id: "17C36D0CD9A77322"
 			tasks: [{
 				id: "10544839ED1E9AE6"
-				item: "projectexpansion:basic_emc_link"
+				item: "adminshop:buyer_1"
 				type: "item"
 			}]
 			x: 26.0d
@@ -2921,7 +2924,7 @@
 			id: "0795417DBEED4FB8"
 			tasks: [{
 				id: "75BEC5A998630BA2"
-				item: "projectexpansion:basic_emc_link"
+				item: "adminshop:buyer_1"
 				type: "item"
 			}]
 			x: 31.0d
@@ -2933,7 +2936,7 @@
 			id: "101CACD36947951D"
 			tasks: [{
 				id: "613261F63C5C451D"
-				item: "projectexpansion:basic_emc_link"
+				item: "adminshop:buyer_1"
 				type: "item"
 			}]
 			x: 20.5d
@@ -3102,102 +3105,26 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["63718E3892A50039"]
-			description: ["Trap a wither inside a stasis chamber and place a fluid laser base directly above it to passively obtain ether gas."]
-			hide_dependency_lines: true
-			id: "05A0C01966A06A98"
-			optional: true
-			rewards: [{
-				id: "6932205E63F2FBA1"
-				item: "industrialforegoing:ether_gas_bucket"
-				type: "item"
-			}]
-			tasks: [
-				{
-					id: "4CE0541FA8CC0B50"
-					item: "industrialforegoing:ether_gas_bucket"
-					type: "item"
-				}
-				{
-					id: "45FF0C8EE95F6CB6"
-					item: "industrialforegoing:stasis_chamber"
-					type: "item"
-				}
-				{
-					id: "028BB5B8B978C1B4"
-					item: "industrialforegoing:laser_drill"
-					type: "item"
-				}
-				{
-					id: "3AEF9320EDC346FB"
-					item: "industrialforegoing:fluid_laser_base"
-					type: "item"
-				}
-				{
-					id: "6A2FE44642802298"
-					item: "industrialforegoing:laser_lens10"
-					type: "item"
-				}
-			]
-			title: "Getting Ether Gas"
-			x: 42.5d
-			y: 6.5d
-		}
-		{
-			dependencies: ["05A0C01966A06A98"]
-			description: ["Use the Ether Gas to craft the highest tier machine frame."]
-			id: "4B9AE47D2EBF5155"
-			optional: true
-			rewards: [{
-				id: "6C328EC758FB27B0"
-				type: "xp"
-				xp: 100
-			}]
+			dependencies: ["4C7EAE5E6F1128A0"]
+			id: "1CCBA4DBC7B6E2DD"
 			tasks: [{
-				id: "3DEBDD1821AE9150"
-				item: "industrialforegoing:machine_frame_supreme"
+				id: "0C50B72738DCFA43"
+				item: "thermal:machine_bottler"
 				type: "item"
 			}]
-			x: 42.5d
-			y: 7.5d
+			x: 19.5d
+			y: 7.0d
 		}
 		{
-			dependencies: ["4B9AE47D2EBF5155"]
-			description: ["There are multiple ways to summon the wither automatically, but one of the easiest is to use the wither builder. I just add the required items, and it will summon it automatically for me, which I can then kill with a mob crusher for automatic nether stars."]
-			id: "2D4CFBD09E6AFA85"
-			optional: true
-			rewards: [{
-				id: "550D8B6CF244D38D"
-				item: "minecraft:nether_star"
-				type: "item"
-			}]
-			shape: "gear"
-			tasks: [
-				{
-					id: "00A26E4F9FAA8300"
-					item: "industrialforegoing:wither_builder"
-					type: "item"
-				}
-				{
-					id: "31C401704351B201"
-					item: "industrialforegoing:mob_crusher"
-					type: "item"
-				}
-			]
-			title: "Automating withers"
-			x: 43.5d
-			y: 7.5d
-		}
-		{
-			dependencies: ["07980075BFE4C586"]
-			id: "63718E3892A50039"
+			dependencies: ["16EC705C8FB3EAC3"]
+			id: "4C7EAE5E6F1128A0"
 			tasks: [{
-				id: "3D0DA49EA3445F38"
-				title: "Chapter 5 automation"
+				id: "709B0D9D00EC5D0B"
+				title: "source of liquid exp"
 				type: "checkmark"
 			}]
-			x: 42.5d
-			y: -1.5d
+			x: 19.5d
+			y: 6.0d
 		}
 	]
 	subtitle: ["zoom out to see all quests :)"]

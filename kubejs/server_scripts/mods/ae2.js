@@ -40,25 +40,6 @@ ServerEvents.recipes(event => {
 	event.remove({id: 'create:compat/ae2/milling/sky_stone_block'});
 	event.recipes.createMilling(['ae2:sky_dust', 'ae2:sky_stone_block'], 'ae2:sky_stone_block').processingTime(200);
   	
-	event.replaceInput({input: 'ae2:silicon'}, 'ae2:silicon', '#forge/silicon');
 	event.replaceInput({id: 'ae2:network/blocks/inscribers'}, 'minecraft:sticky_piston', 'minecraft:piston');
 	event.replaceInput({output: 'ae2:vibration_chamber'}, "ae2:energy_acceptor", "kubejs:cube1_packaged");
-
-  ['iron', 'copper', 'gold', 'tin', 'nickel'].forEach(metal => {
-    let result = `thermal:${metal}_dust`;
-    let dustCount = ['iron', 'gold', 'copper'].includes(metal) ? 2 : 1;
-    event.custom({
-      type: 'ae2:inscriber',
-      ingredients: {
-        middle: {
-          tag: `forge:raw_materials/${metal}`
-        }
-      },
-      mode: 'inscribe',
-      result: {
-        item: result,
-      count: dustCount
-      }
-    })
-  });
 });

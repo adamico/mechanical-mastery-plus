@@ -10,7 +10,6 @@
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["6F0F8C3F6B5E2310"]
 			description: [
 				"\"&oSo it begins...&r\""
 				""
@@ -20,7 +19,7 @@
 				""
 				"Through this quest book, you will receive many of the basic materials you will need to fulfill this job. "
 			]
-			icon: "adminshop:permit"
+			icon: "minecraft:oak_sapling"
 			id: "491EB18107FC8776"
 			rewards: [
 				{
@@ -38,6 +37,11 @@
 					count: 16
 					id: "109FB72945533DB3"
 					item: "minecraft:coal_ore"
+					type: "item"
+				}
+				{
+					id: "22275F477983F2F2"
+					item: "minecraft:oak_sapling"
 					type: "item"
 				}
 			]
@@ -259,7 +263,11 @@
 		}
 		{
 			dependencies: ["547050DB11C5FFB7"]
-			description: ["You can place special dies on the bottom slot of the multiservo press to change its functionality, such as crafting gears instead of plates. This modpack adds a custom rod die which can be used to make rods from plates."]
+			description: [
+				"You can place special dies on the bottom slot of the multiservo press to change its functionality, such as crafting gears instead of plates."
+				""
+				"There's also a custom rod die which can be used to make rods from ingots."
+			]
 			hide: false
 			id: "2746A3F7A98C2134"
 			optional: true
@@ -367,12 +375,16 @@
 				item: "thermal:machine_furnace"
 				type: "item"
 			}]
-			x: 11.0d
+			x: 9.5d
 			y: -2.0d
 		}
 		{
-			dependencies: ["547050DB11C5FFB7"]
-			description: ["With the basic EMC link, you can automatically convert items to EMC and vice versa. With them, you can fully automate the production of mechanical essences."]
+			dependencies: ["7A0CB1037E6BE4D7"]
+			description: [
+				"With the Buyer and Seller blocks from AdminShop, you can automatically buy and sell a selection of items. "
+				""
+				"With them, you can fully automate the production of mechanical essences and crystals."
+			]
 			hide: false
 			id: "4AB3B5469D68C46D"
 			optional: true
@@ -383,19 +395,26 @@
 					xp: 100
 				}
 				{
-					id: "3213031B44F88BBD"
-					item: "projectexpansion:basic_emc_link"
+					id: "6C9F3D8DEDBF1DC9"
+					item: "adminshop:buyer_1"
 					type: "item"
 				}
 			]
 			shape: "diamond"
-			tasks: [{
-				id: "4AFCCAA14047AEF0"
-				item: "projectexpansion:basic_emc_link"
-				type: "item"
-			}]
-			title: "Basic EMC I/O"
-			x: 8.0d
+			tasks: [
+				{
+					id: "4AFCCAA14047AEF0"
+					item: "adminshop:buyer_1"
+					type: "item"
+				}
+				{
+					id: "18D18542692D423D"
+					item: "adminshop:seller"
+					type: "item"
+				}
+			]
+			title: "Trading 101"
+			x: 5.0d
 			y: 1.0d
 		}
 		{
@@ -416,7 +435,7 @@
 				type: "item"
 			}]
 			x: 11.0d
-			y: -0.5d
+			y: -2.0d
 		}
 		{
 			dependencies: ["09BAD2F7D01D16FD"]
@@ -629,7 +648,40 @@
 				type: "item"
 			}]
 			title: "Can Thermal machines be more efficient?"
-			x: 9.5d
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["7A0CB1037E6BE4D7"]
+			description: [
+				"\"Oh, thanks for the red pipez! I'll put those to good use!\""
+				""
+				"You may have noticed there's no easy way to craft energy cables in the first chapters."
+				""
+				"Don't lose hope, though! Here's some hints/options:"
+				""
+				"- rush chapters to get access to energy cables from one of the major tech mods"
+				""
+				"- obtain glowstone with a bit of effort with Industrial Foregoing and Create "
+				""
+				"- use Energy Exporters, Importers and Interfaces from Integrated Dynamics"
+			]
+			icon: "pipez:energy_pipe"
+			id: "57FC68E7348A690A"
+			optional: true
+			rewards: [{
+				count: 12
+				id: "0F39712859BE018C"
+				item: "pipez:energy_pipe"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "1849115F74704104"
+				title: "Energy transport, please?"
+				type: "checkmark"
+			}]
+			x: 5.0d
 			y: -2.0d
 		}
 	]

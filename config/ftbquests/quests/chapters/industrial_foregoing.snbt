@@ -51,7 +51,6 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["2A9795581CE1CACF"]
 			description: [
 				"&lIndustrial Foregoing&r"
 				""
@@ -85,6 +84,17 @@
 			}]
 			title: "Industrial Foregoing"
 			x: 0.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["660442FEB44ACCDC"]
+			id: "3F4CF3C8D987A25E"
+			tasks: [{
+				id: "58CD40773C08F299"
+				title: "WIP"
+				type: "checkmark"
+			}]
+			x: 1.0d
 			y: -1.5d
 		}
 	]

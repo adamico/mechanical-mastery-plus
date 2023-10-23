@@ -45,4 +45,26 @@ ServerEvents.recipes(event => {
   };
 	 
   process_metals(all_metals);
+	
+  ['iron', 'copper', 'gold', 'tin', 'nickel'].forEach(metal => {
+    let result = `thermal:${metal}_dust`;
+    let dustCount = ['iron', 'gold', 'copper'].includes(metal) ? 2 : 1;
+    event.custom({
+      type: 'ae2:inscriber',
+      ingredients: {
+        middle: {
+          tag: `forge:raw_materials/${metal}`
+        }
+      },
+      mode: 'inscribe',
+      result: {
+        item: result,
+      count: dustCount
+      }
+    })
+  });
+
+	event.replaceInput({id: 'gobber2:gobber2_ingot'}, 'minecraft:diamond', 'kubejs:cube2');
+	event.replaceInput({id: 'gobber2:gobber2_ingot_nether'}, 'minecraft:netherite_scrap', 'kubejs:cube3');
+	event.replaceInput({id: 'gobber2:gobber2_ingot_end'}, 'minecraft:chorus_flower', 'kubejs:cube4');
 });

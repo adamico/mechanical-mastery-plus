@@ -228,6 +228,11 @@
 		{
 			dependencies: ["1A983E23E641CA16"]
 			id: "64F073734D1826C5"
+			rewards: [{
+				id: "08880C0A8F957E47"
+				item: "mekanism:basic_control_circuit"
+				type: "item"
+			}]
 			tasks: [{
 				id: "4A87BC6A2667AB78"
 				item: "mekanism:basic_control_circuit"
@@ -315,7 +320,13 @@
 				"0936B0DE389AE023"
 				"559F68C9913B2CFA"
 			]
-			description: ["Craft an empty blaze burner then right click a blaze with it to obtain a blaze burner. The blaze burner goes below basins and can be fed fuel to provide heat needed for some mixing recipes."]
+			description: [
+				"\"Fascinating! I have managed to trap a creature of pure fire and use it for my future plans! I wonder if I can somehow super-heat it?\""
+				""
+				"Craft an empty blaze burner then right click a blaze with it to obtain a blaze burner. The blaze burner goes below basins and can be fed fuel to provide heat needed for some mixing recipes."
+				""
+				"Using straws you can even feed the blaze burners with liquid fuel..."
+			]
 			id: "3F58AD4EAE336B1E"
 			rewards: [{
 				id: "51772590BB45E967"
@@ -678,6 +689,7 @@
 				"1B6E93FE3C6D5966"
 				"3A7F4033C8881566"
 			]
+			description: ["Using the magma crucible you can melt down block of special alloys and use the special fluids to craft the effigies."]
 			id: "1503E72A3505D8A6"
 			rewards: [{
 				id: "248FE48076701778"
@@ -716,6 +728,14 @@
 		}
 		{
 			dependencies: ["3F58AD4EAE336B1E"]
+			description: [
+				"You can obtain gunpowder in 4 ways:"
+				""
+				"- grow and smelt boomshroom spores"
+				"- mix coal, niter and sulfur dust"
+				"- pour a harming potion into cinder flour"
+				"- ... farm creepers"
+			]
 			id: "38612D037FCFBFD6"
 			rewards: [{
 				count: 8
@@ -750,6 +770,11 @@
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
+			description: [
+				"Compact machines?"
+				""
+				"This is better (IMHO)"
+			]
 			id: "184193B5D69E282D"
 			optional: true
 			rewards: [{
@@ -767,6 +792,7 @@
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
+			description: ["There! Stop asking how to get seeds/saplings/crops in the pack..."]
 			id: "7CBA0D27686067D3"
 			optional: true
 			tasks: [{
@@ -779,6 +805,11 @@
 		}
 		{
 			dependencies: ["2C3D96AA3C9853ED"]
+			description: [
+				"\"I am sure I can create life with bones! I am not far!\""
+				""
+				"Using compacted bones you can craft skeleton skulls."
+			]
 			id: "63562122843997F6"
 			rewards: [{
 				id: "1FB70040ABD3A14F"
@@ -858,7 +889,30 @@
 		}
 		{
 			dependencies: ["0936B0DE389AE023"]
+			description: ["Each living effigy drops a specific \"rod\" which you need to pulverize to create the next mechanical essence."]
 			id: "7B47B85C4B684347"
+			rewards: [
+				{
+					id: "01A533B587052343"
+					item: "minecraft:blaze_rod"
+					type: "item"
+				}
+				{
+					id: "2C253838CD61913C"
+					item: "thermal:blizz_rod"
+					type: "item"
+				}
+				{
+					id: "518B56DB669BC855"
+					item: "thermal:blitz_rod"
+					type: "item"
+				}
+				{
+					id: "7F089156933487BC"
+					item: "thermal:basalz_rod"
+					type: "item"
+				}
+			]
 			tasks: [
 				{
 					id: "0ED1167391489190"
@@ -887,7 +941,11 @@
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
-			description: [""]
+			description: [
+				"\"Alas! The elusive yellow cube is mine! I wonder what color is the next one...\""
+				""
+				"One of the less used Mekanism Machines is very useful here... I mean you cannot progress in the pack without it!"
+			]
 			id: "47D8F95F5317A47D"
 			rewards: [{
 				count: 4
@@ -1016,6 +1074,44 @@
 			}]
 			x: 6.0d
 			y: -5.0d
+		}
+		{
+			dependencies: ["550E4D68A98180F5"]
+			description: [""]
+			id: "6D15A9C7A60DC717"
+			rewards: [{
+				id: "2511746D517E659F"
+				item: "kubejs:cube2"
+				type: "item"
+			}]
+			tasks: [{
+				id: "7DCB3E128C1E720F"
+				item: {
+					Count: 1b
+					id: "adminshop:permit"
+					tag: {
+						display: {
+							Lore: [
+								"[{\"text\":\"Buy: Crude Oil\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Oil Sand\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Raw Osmium\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Diamond Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Niter Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Sulfur Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Ancient Debris\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Nether Gobber Ore\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Improved Mechanical Crystal\",\"italic\":false}]"
+							]
+							Name: "[{\"text\":\"Tier 2 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
+						}
+						key: 2
+					}
+				}
+				match_nbt: true
+				type: "item"
+			}]
+			x: 3.0d
+			y: -4.0d
 		}
 	]
 	title: "Tier 3: Mekanism"

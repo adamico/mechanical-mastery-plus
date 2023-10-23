@@ -530,7 +530,6 @@
 			y: -0.5d
 		}
 		{
-			dependencies: ["636712D15DD7E2E8"]
 			hide_dependent_lines: true
 			id: "002491C83950B2B1"
 			rewards: [{
@@ -639,6 +638,17 @@
 			}]
 			x: 3.0d
 			y: -1.5d
+		}
+		{
+			dependencies: ["002491C83950B2B1"]
+			id: "2E78CC7CB50D978F"
+			tasks: [{
+				id: "51B1C8221B65A3A3"
+				title: "WIP"
+				type: "checkmark"
+			}]
+			x: -2.0d
+			y: -3.5d
 		}
 	]
 	title: "Mekanism"

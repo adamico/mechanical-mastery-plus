@@ -10,10 +10,7 @@
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: [
-				"7A0CB1037E6BE4D7"
-				"2A9795581CE1CACF"
-			]
+			dependencies: ["7A0CB1037E6BE4D7"]
 			description: [
 				"\"&oSuddenly, the basic mechanical essence whispers to me... the factory must grow!&r\""
 				""
@@ -46,6 +43,7 @@
 					type: "item"
 				}
 			]
+			shape: "square"
 			subtitle: "Thus begins a new life"
 			tasks: [{
 				id: "4E0FFF9832476439"
@@ -145,7 +143,13 @@
 		}
 		{
 			dependencies: ["7C0D8A15D01EC79E"]
-			description: ["With the mechanical mixer, you can automate shapeless crafting recipes, plus many other item/fluid recipes specific to the mixer."]
+			description: [
+				"With the mechanical mixer, you can automate shapeless crafting recipes, plus many other item/fluid recipes specific to the mixer."
+				""
+				"Here you need it to mix metal alloy blends in a primitive and inefficient way."
+				""
+				"You will discover a more efficient way at the end of this chapter."
+			]
 			id: "09E7EB6E38E84886"
 			rewards: [{
 				id: "10C7F429CDF6E94E"
@@ -306,6 +310,11 @@
 		}
 		{
 			dependencies: ["7C0D8A15D01EC79E"]
+			description: [
+				"The rolling mill is a create machine added by Create: Crafts \\& Additions."
+				""
+				"It works just as many other create blocks, you can input and output with funnels (or hoppers or other item transportation blocks)"
+			]
 			id: "60B1EB81382B2E66"
 			rewards: [{
 				id: "116B89FD1D600B84"
@@ -374,6 +383,11 @@
 		}
 		{
 			dependencies: ["7C0D8A15D01EC79E"]
+			description: [
+				"If you look carefully, millstone and mechanical crusher recipes are the same in this pack."
+				""
+				"The crusher is twice faster though..."
+			]
 			id: "044413B6EB71F5E6"
 			rewards: [{
 				id: "696ACB676A426318"
@@ -449,7 +463,11 @@
 		}
 		{
 			dependencies: ["78775CE81571FAC9"]
-			description: ["Just a bonk and I'm done!"]
+			description: [
+				"\"Just a bonk and I'm done!\""
+				""
+				"Congratulations, you have created your second mechanical crystal. Now, sell it for a much higher profit than the basic one!"
+			]
 			id: "1C35B03170B0D544"
 			rewards: [{
 				count: 6
@@ -514,6 +532,8 @@
 		{
 			dependencies: ["167C9AF69BB16B8B"]
 			description: [
+				"\"I know these machines, they say they can let you eat metal and drink souls!\""
+				""
 				"Aaaah, the old Industrial Foregoing (IF for us)!"
 				""
 				"IF is a very versatile mod to automate farms for crops, trees, mobs and even ore generation."
@@ -597,6 +617,16 @@
 		}
 		{
 			dependencies: ["5F73D5F328C236A9"]
+			description: [
+				"The encased fan allows you to use the rotational power to push or pull air."
+				""
+				"Putting different stuff in front of the fan allows you to use it for different recipes:"
+				""
+				"- soul fire = haunting"
+				"- water = washing"
+				"- campfire = smoking"
+				"- lava = blasting"
+			]
 			id: "1DEE3BE68AEE289D"
 			rewards: [{
 				id: "05C70220CB433CE4"
@@ -630,38 +660,6 @@
 		{
 			dependencies: ["167C9AF69BB16B8B"]
 			description: [
-				"\"Oh, thanks for the red pipez! I'll put those to good use!\""
-				""
-				"You may have noticed there's no easy way to craft energy cables in the first chapters."
-				""
-				"Don't lose hope, though! Here's some hints/options:"
-				""
-				"- rush chapters to get access to energy cables from one of the major tech mods"
-				""
-				"- obtain glowstone with a bit of effort with Industrial Foregoing and Create "
-				""
-				"- use Energy Exporters, Importers and Interfaces from Integrated Dynamics"
-			]
-			hide_dependency_lines: true
-			hide_dependent_lines: true
-			id: "3B1B32BEEE188BAD"
-			rewards: [{
-				count: 12
-				id: "297C77DDA61E7969"
-				item: "pipez:energy_pipe"
-				type: "item"
-			}]
-			tasks: [{
-				id: "1ACDE7E92E50A3D6"
-				title: "Energy transport, please?"
-				type: "checkmark"
-			}]
-			x: -3.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["167C9AF69BB16B8B"]
-			description: [
 				"You need a specific trade permit to buy and sell higher value resources."
 				""
 				"You can craft permits using mechanical essences and 8 pieces of paper."
@@ -678,10 +676,22 @@
 					Count: 1b
 					id: "adminshop:permit"
 					tag: {
-						display: { }
+						display: {
+							Lore: [
+								"[{\"text\":\"Buy: Raw Zinc\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Kelp\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Tiny Dry Rubber\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Bone\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Lapis Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Gobber Ore\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Regular Mechanical Crystal\",\"italic\":false}]"
+							]
+							Name: "[{\"text\":\"Tier 1 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
+						}
 						key: 1
 					}
 				}
+				match_nbt: true
 				type: "item"
 			}]
 			x: -6.0d
