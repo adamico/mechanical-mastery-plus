@@ -2,10 +2,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "useful_mods"
-	group: "349666CD0199D4FD"
+	group: "56617BF3F24DD586"
 	hide_quest_details_until_startable: true
 	id: "50F84AC199F39453"
-	order_index: 5
+	order_index: 2
 	quest_links: [ ]
 	quests: [
 		{
@@ -942,33 +942,6 @@
 			y: -2.5d
 		}
 		{
-			dependencies: ["1A67C9B9ABB4E969"]
-			description: ["You can use either RS or AE2 silicon for all silicon based recipes."]
-			id: "7470035A489CE08D"
-			optional: true
-			rewards: [{
-				exclude_from_claim_all: true
-				id: "49629F4D8AD2F971"
-				table_id: 5925849308766390323L
-				type: "random"
-			}]
-			shape: "diamond"
-			tasks: [{
-				id: "3E5368D2024301E9"
-				item: {
-					Count: 1b
-					id: "itemfilters:tag"
-					tag: {
-						value: "forge:silicon"
-					}
-				}
-				type: "item"
-			}]
-			title: "Silicon is Silicon"
-			x: 4.0d
-			y: -2.5d
-		}
-		{
 			dependencies: ["7B3EE270553254E3"]
 			hide: true
 			id: "142576A350BF2C99"
@@ -1272,6 +1245,159 @@
 			x: 12.0d
 			y: 0.5d
 		}
+		{
+			dependencies: ["32E5A4A9433E5337"]
+			id: "2D98E93775E5B7F7"
+			tasks: [{
+				id: "050134447FCF5D15"
+				item: "mekanism:mekasuit_helmet"
+				type: "item"
+			}]
+			x: 17.0d
+			y: -7.0d
+		}
+		{
+			dependencies: ["32E5A4A9433E5337"]
+			id: "35B7CEAE1B2635C6"
+			tasks: [{
+				id: "5C280BCF0407E924"
+				item: "mekanism:mekasuit_bodyarmor"
+				type: "item"
+			}]
+			x: 15.5d
+			y: -5.5d
+		}
+		{
+			dependencies: ["32E5A4A9433E5337"]
+			id: "2309C454CEA4AE97"
+			tasks: [{
+				id: "4458A249C842F812"
+				item: "mekanism:mekasuit_pants"
+				type: "item"
+			}]
+			x: 15.5d
+			y: -4.5d
+		}
+		{
+			dependencies: ["32E5A4A9433E5337"]
+			id: "2A96ACD2E54F44F4"
+			tasks: [{
+				id: "2C3506E7A6F3CFE9"
+				item: "mekanism:mekasuit_boots"
+				type: "item"
+			}]
+			x: 17.0d
+			y: -3.0d
+		}
+		{
+			dependencies: [
+				"3A86CBC50AE2EA6B"
+				"32E5A4A9433E5337"
+			]
+			id: "7A37395CCEB19DA1"
+			rewards: [{
+				id: "619754A52B8E4345"
+				item: "mekanism:module_gyroscopic_stabilization_unit"
+				type: "item"
+			}]
+			tasks: [{
+				id: "2FF776E5D8F33182"
+				item: "mekanism:module_elytra_unit"
+				type: "item"
+			}]
+			x: 16.0d
+			y: -6.5d
+		}
+		{
+			dependencies: [
+				"3A86CBC50AE2EA6B"
+				"32E5A4A9433E5337"
+			]
+			id: "6C6B418B2A123971"
+			rewards: [{
+				count: 3
+				id: "0E8BA2EA8A2CD8B7"
+				item: "mekanism:pellet_antimatter"
+				type: "item"
+			}]
+			tasks: [{
+				id: "1EBCB88B472FBE2D"
+				item: "mekanism:module_gravitational_modulating_unit"
+				type: "item"
+			}]
+			x: 16.0d
+			y: -3.5d
+		}
+		{
+			dependencies: ["32E5A4A9433E5337"]
+			hide_dependent_lines: true
+			id: "0003D5A05EC70AFB"
+			rewards: [{
+				id: "689BB01CEE0CFAD4"
+				item: "mekanism:basic_chemical_tank"
+				type: "item"
+			}]
+			tasks: [{
+				id: "00107462A8F4F37A"
+				item: "mekanism:jetpack"
+				type: "item"
+			}]
+			x: 18.0d
+			y: -3.5d
+		}
+		{
+			dependencies: ["0003D5A05EC70AFB"]
+			hide_dependency_lines: false
+			hide_dependent_lines: true
+			id: "3A86CBC50AE2EA6B"
+			tasks: [{
+				id: "24E6E55E76C8454B"
+				item: {
+					Count: 1b
+					id: "mekanism:hdpe_elytra"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 18.5d
+			y: -4.5d
+		}
+		{
+			dependencies: ["0E156DC78EE27D2D"]
+			hide_dependency_lines: false
+			id: "5B3E3EEFC22290F9"
+			tasks: [{
+				id: "535286F3BAB92451"
+				item: "mekanism:meka_tool"
+				type: "item"
+			}]
+			x: 18.5d
+			y: -5.5d
+		}
+		{
+			dependencies: ["32E5A4A9433E5337"]
+			hide_dependent_lines: true
+			id: "0E156DC78EE27D2D"
+			tasks: [{
+				id: "5DF82C3C6D239C29"
+				item: "mekanism:atomic_disassembler"
+				type: "item"
+			}]
+			x: 18.0d
+			y: -6.5d
+		}
+		{
+			id: "32E5A4A9433E5337"
+			tasks: [{
+				id: "4750FC01F6CB5B32"
+				title: "Meka-nichal"
+				type: "checkmark"
+			}]
+			x: 17.0d
+			y: -5.0d
+		}
 	]
-	title: "Miscellanea"
+	title: "All the other mods \\& stuff"
 }

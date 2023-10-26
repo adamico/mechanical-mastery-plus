@@ -16,39 +16,41 @@ ServerEvents.recipes(event => {
     metals.forEach(metal => {
 			console.log('Processing metal: ' + metal.name);
 			[{name: 'smelting', time: 200}, {name: 'blasting', time: 100}].forEach((recipe) => {
-				event.remove({id: `${metal.mod}:${metal.name}_ingot_from_${recipe.name}_raw_${metal.name}`});
 				event[recipe.name](Item.of(`#forge:nuggets/${metal.name}`, 6), Item.of(`#forge:raw_materials/${metal.name}`)).xp(0.6).cookingTime(recipe.time);
 			});
-
-			event.remove({type: "thermal:smelter", output: Item.of(`#forge:ingots/${metal.name}`)}); // remove thermal smelter ingot recipes
-			event.remove({id: `create:crushing/raw_${metal.name}`});
-			event.remove({id: `create:crushing/raw_${metal.name}_block`});
 			event.recipes.createMilling([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#forge:raw_materials/${metal.name}`)).processingTime(200);			
 			event.recipes.createCrushing([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#forge:raw_materials/${metal.name}`)).processingTime(100);
 			event.recipes.createMilling([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#mekanism:clumps/${metal.name}`)).processingTime(200);			
 			event.recipes.createCrushing([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#mekanism:clumps/${metal.name}`)).processingTime(100);	
-			
 			event.recipes.thermal.pulverizer([Item.of(`#forge:dusts/${metal.name}`).withChance(1.2), metal.extraDust], Item.of(`#mekanism:dirty_dusts/${metal.name}`)).energy(3000);
-					
-			event.remove({id: `create:splashing/thermal/crushed_raw_${metal.name}`});
-			event.remove({id: `create:splashing/mekanism/crushed_raw_${metal.name}`});
-			event.remove({id: `create:splashing/crushed_raw_${metal.name}`});
-
 			event.recipes.createSplashing([Item.of(`#forge:nuggets/${metal.name}`, 9), Item.of(`#forge:nuggets/${metal.name}`, 2).withChance(0.1)], `create:crushed_raw_${metal.name}`);
-			
-			event.remove({id: `mekanism:processing/${metal.name}/dust/from_raw_ore`});
-			event.remove({id: `mekanism:processing/${metal.name}/dust/from_raw_block`});
-			event.remove({id: "jaopca:mekanism.raw_material_to_dust." + metal.name});
-			event.remove({id: "jaopca:mekanism.raw_storage_block_to_dust." + metal.name});
-			event.remove({id: "jaopca:thermal_expansion.dust_to_material." + metal.name});
 		});
   };
-	 
-  process_metals(all_metals);
+
+	['raw_materials', 'storage_blocks'].forEach(inputType => {		
+		['create:crushing', 'blasting', 'quark:tweaks/smelting', 'thermal:smelter'].forEach(recipeType => {
+			event.remove({type: recipeType, input: '#forge:'+ inputType});
+		});
+	});
+	
+	['ingots', 'storage_blocks'].forEach(type => {
+		event.remove({type: 'smelting', output: '#forge:' + type});
+		event.remove({type: 'thermal:smelter', output: '#forge:' + type, not: [{output: '#forge:alloys'}, {output: '#forge:alloys/special'}]});
+	});
+
+	['enderium', 'lumium', 'signalum'].forEach(alloy => {
+		event.remove({input: '#forge:dusts/' + alloy, output: '#forge:ingots/' + alloy});
+	});
+
+	event.remove({type: 'create:splashing', input: '#create:crushed_raw_materials'})
+	event.remove({type: 'mekanism:crushing', output: '#forge:dusts'});
+
+	// event.remove({type: 'blasting', input: })
+
+	process_metals(all_metals);
 	
   ['iron', 'copper', 'gold', 'tin', 'nickel'].forEach(metal => {
     let result = `thermal:${metal}_dust`;
-    let dustCount = ['iron', 'gold', 'copper'].includes(metal) ? 2 : 1;
     event.custom({
       type: 'ae2:inscriber',
       ingredients: {
@@ -59,10 +61,48 @@ ServerEvents.recipes(event => {
       mode: 'inscribe',
       result: {
         item: result,
-      count: dustCount
+      count: 1
       }
     })
+	});
+
+	['iron', 'copper', 'gold'].forEach(metal => {
+		event.custom({
+			"type": "lychee:block_interacting",
+			"item_in": [
+				{
+					"item": "kubejs:ore_hammer"
+				},
+				{
+					"item": "raw_" + metal
+				}
+			],
+			"block_in": "stone",
+			"post": [
+				{
+					"type": "drop_item",
+					"item": "thermal:" + metal + "_dust",
+				},
+				{
+					"type": "damage_item"
+				},
+				{
+					"type": "add_item_cooldown",
+					"s": 3
+				}
+			]
+		});
   });
+
+	event.shaped('kubejs:ore_hammer', [
+		' Sb',
+		' rS',
+		'r  '
+	], {
+		r: '#forge:rods/wooden',
+		S: '#forge:stone',
+		b: 'minecraft:oak_button'
+	});
 
 	event.replaceInput({id: 'gobber2:gobber2_ingot'}, 'minecraft:diamond', 'kubejs:cube2');
 	event.replaceInput({id: 'gobber2:gobber2_ingot_nether'}, 'minecraft:netherite_scrap', 'kubejs:cube3');

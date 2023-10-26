@@ -25,7 +25,7 @@ ServerEvents.recipes(event => {
     ], {
       P: "minecraft:paper",
       E: `kubejs:cube${tier}`
-    });
+    }).id(`adminshop:permit_tier_${tier}`);
   }
 
   let tier1BItems = ['Raw Zinc', 'Kelp', 'Tiny Dry Rubber', 'Bone', 'Lapis Ore', 'Gobber Ore', 'Apatite Ore', 'Cobbled Deepslate'];

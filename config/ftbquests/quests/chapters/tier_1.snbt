@@ -6,148 +6,31 @@
 	hide_quest_details_until_startable: true
 	icon: "kubejs:cube1"
 	id: "302898E288734A9B"
-	order_index: 0
+	images: [{
+		click: "https://www.curseforge.com/minecraft/mc-mods/thermal-foundation"
+		corner: false
+		dev: false
+		height: 2.0d
+		hover: ["visit https://www.curseforge.com/minecraft/mc-mods/thermal-foundation"]
+		image: "thermal:block/machines/machine_pulverizer_active"
+		rotation: 0.0d
+		width: 2.0d
+		x: -8.5d
+		y: -0.5d
+	}]
+	order_index: 1
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["595F27B933ECC168"]
 			description: [
-				"\"&oSo it begins...&r\""
+				"With the Pulverizer you can have better ore processing ratios to help crafting the basic mechanical essence."
 				""
-				"Welcome to &6Mechanical Mastery &1Plus&r"
-				""
-				"Your objective is to automate every mechanical crystal. "
-				""
-				"Through this quest book, you will receive many of the basic materials you will need to fulfill this job. "
-			]
-			icon: "minecraft:oak_sapling"
-			id: "491EB18107FC8776"
-			rewards: [
-				{
-					count: 64
-					id: "578138C088B7AE15"
-					item: "minecraft:bread"
-					type: "item"
-				}
-				{
-					id: "2963665AEE0E7133"
-					item: "minecraft:white_bed"
-					type: "item"
-				}
-				{
-					count: 16
-					id: "109FB72945533DB3"
-					item: "minecraft:coal_ore"
-					type: "item"
-				}
-				{
-					id: "22275F477983F2F2"
-					item: "minecraft:oak_sapling"
-					type: "item"
-				}
-			]
-			shape: "square"
-			size: 1.2d
-			subtitle: "Where it all begins"
-			tasks: [{
-				icon: {
-					Count: 1b
-					id: "projecte:philosophers_stone"
-					tag: { }
-				}
-				id: "2ECDA834E28D3B2A"
-				title: "Welcome!"
-				type: "checkmark"
-			}]
-			x: -1.0142857142857125d
-			y: -0.48571428571428754d
-		}
-		{
-			dependencies: ["491EB18107FC8776"]
-			description: [
-				"\"&oTwo birds one stone. I'm sure I'll need these in the future&r.\""
-				""
-				"Create a basic cobblestone generator to unlock access to some basic resources."
+				"You can also get sand from gravel from cobblestone."
 			]
 			hide: false
-			id: "5D6996CC9444ADE7"
-			rewards: [
-				{
-					count: 64
-					id: "6214D2CC53B31C53"
-					item: "minecraft:cobblestone"
-					type: "item"
-				}
-				{
-					count: 8
-					id: "14B9A5FBA686504B"
-					item: "minecraft:redstone_ore"
-					type: "item"
-				}
-				{
-					count: 16
-					id: "29CA015CCCF6F23E"
-					item: "minecraft:raw_iron"
-					type: "item"
-				}
-				{
-					count: 16
-					id: "7B1392A49C964D4A"
-					item: "minecraft:raw_copper"
-					type: "item"
-				}
-				{
-					count: 8
-					id: "402F6ACCA849C8DB"
-					item: "minecraft:raw_gold"
-					type: "item"
-				}
-			]
-			subtitle: "Bought from the stone"
-			tasks: [{
-				id: "5C95D4E16A8DDB14"
-				item: "minecraft:cobblestone"
-				type: "item"
-			}]
-			title: "De lapide emptus"
-			x: -1.0d
-			y: -2.0d
-		}
-		{
-			dependencies: ["491EB18107FC8776"]
-			description: [
-				"\"&oI'll grow an army of trees to kill the Necromancer...&r\""
-				""
-				"Ehm, I think it's the wrong game for the wrong computer..."
-				"Here you just need trees to get things started... and you can punch them fine!"
-			]
-			hide: false
-			id: "258878D4F87E9F1E"
-			rewards: [{
-				count: 8
-				id: "3C291BB62FF867F2"
-				item: "minecraft:oak_sapling"
-				type: "item"
-			}]
-			subtitle: "A tree is known by its fruit"
-			tasks: [{
-				id: "08E661E4E8986BF8"
-				item: "minecraft:oak_log"
-				type: "item"
-			}]
-			title: "E fructu arbor cognoscitur"
-			x: -1.0d
-			y: 1.0d
-		}
-		{
-			dependencies: ["54983CC37DD93E7A"]
-			description: [
-				"With the Pulverizer you can setup ore processing automation to help crafting the basic mechanical essence."
-				""
-				"You can also get sand from gravel from cobblestone"
-			]
-			hide: false
+			icon: "thermal:machine_pulverizer"
 			id: "13AA6AFAF9C8DD0B"
-			optional: true
 			rewards: [
 				{
 					count: 16
@@ -162,7 +45,6 @@
 					type: "item"
 				}
 			]
-			shape: "diamond"
 			subtitle: "Finally, some decent ore processing!"
 			tasks: [
 				{
@@ -182,64 +64,14 @@
 				}
 			]
 			title: "Pulverizer"
-			x: 11.0d
-			y: 1.0d
-		}
-		{
-			dependencies: ["491EB18107FC8776"]
-			description: [
-				"\"&oWonderful! An inscriber, I wonder what can I do with it...&r\""
-				""
-				"The mysterious Inscriber is how you will get your first plates and rods. "
-				""
-				"It's not very efficient, though, and it requires manual cranking... there must be some better way to do this in the future..."
-				""
-				"&1Hint:&r use the wrench to rotate the Inscriber to insert from the top and extract from the bottom... with the provided hoppers..."
-				""
-				"&4Disclaimer:&r the crank is very fragile and breaks if the inscriber is full of energy! If you're thinking about going afk with a macro... it doesn't work!"
-				""
-				"{image:ae2:textures/patchouli/images/inscriber_setup.png width:100 height:100 align:1}"
-			]
-			hide: false
-			id: "19499868D936A165"
-			rewards: [
-				{
-					count: 2
-					id: "706CE2571DCA3C22"
-					item: "minecraft:hopper"
-					type: "item"
-				}
-				{
-					id: "347254C4E4EC82DE"
-					item: "ae2:certus_quartz_wrench"
-					type: "item"
-				}
-			]
-			tasks: [
-				{
-					id: "1516922219022AB1"
-					item: "ae2:inscriber"
-					type: "item"
-				}
-				{
-					id: "2B5D3474AB09DF5E"
-					item: "ae2:crank"
-					type: "item"
-				}
-			]
-			title: "HAMM... INSCRIBAH!"
-			x: 0.5d
+			x: -1.5d
 			y: -0.5d
 		}
 		{
-			dependencies: [
-				"547050DB11C5FFB7"
-				"2746A3F7A98C2134"
-			]
+			dependencies: ["547050DB11C5FFB7"]
 			description: ["With the multiservo press, you can automate what the engineer's hammer does and more, without losing item durability and with a little extra efficiency. You can craft plates and more with it!"]
 			hide: false
 			id: "54983CC37DD93E7A"
-			optional: true
 			rewards: [
 				{
 					id: "0077B72A897EB181"
@@ -252,17 +84,16 @@
 					type: "item"
 				}
 			]
-			shape: "diamond"
 			tasks: [{
 				id: "32825235F7A53270"
 				item: "thermal:machine_press"
 				type: "item"
 			}]
-			x: 9.5d
+			x: 0.5d
 			y: -0.5d
 		}
 		{
-			dependencies: ["547050DB11C5FFB7"]
+			dependencies: ["54983CC37DD93E7A"]
 			description: [
 				"You can place special dies on the bottom slot of the multiservo press to change its functionality, such as crafting gears instead of plates."
 				""
@@ -270,7 +101,6 @@
 			]
 			hide: false
 			id: "2746A3F7A98C2134"
-			optional: true
 			rewards: [
 				{
 					id: "5F49998A6AFA70CB"
@@ -278,34 +108,38 @@
 					xp: 100
 				}
 				{
-					id: "32ACBFB925B3577D"
+					exclude_from_claim_all: true
+					id: "5E3940EC1BF5D8FE"
 					table_id: 1602564825145878379L
 					type: "choice"
 				}
 			]
-			shape: "diamond"
 			tasks: [{
-				id: "267A63D03350CEBE"
+				id: "546578FF1EE9CECD"
 				item: {
 					Count: 1b
-					id: "itemfilters:tag"
+					id: "itemfilters:or"
 					tag: {
-						value: "thermal:crafting/dies"
+						items: [
+							{
+								Count: 1b
+								id: "thermal:press_gear_die"
+							}
+							{
+								Count: 1b
+								id: "kubejs:press_rod_die"
+							}
+						]
 					}
 				}
-				title: "Any #thermal:crafting/dies"
 				type: "item"
 			}]
 			title: "Press Dies"
-			x: 9.5d
-			y: 1.0d
+			x: 1.5d
+			y: -0.5d
 		}
 		{
-			dependencies: [
-				"73FA28F897740068"
-				"2E308530A5C47F6E"
-				"4E4618EE8D6D07B9"
-			]
+			dependencies: ["387D9ECF1CD0B4F8"]
 			description: [
 				"\"&oFascinating! Using these simple components I can create something... essential for my future&r\""
 				""
@@ -336,7 +170,6 @@
 			subtitle: "Love is the essence of life"
 			tasks: [
 				{
-					count: 4L
 					id: "0DA904B48F32E904"
 					item: "kubejs:cube1"
 					type: "item"
@@ -352,11 +185,10 @@
 			y: -0.5d
 		}
 		{
-			dependencies: ["54983CC37DD93E7A"]
+			dependencies: ["595F27B933ECC168"]
 			description: ["The redstone furnace allows you to smelt things just like a regular furnace can, except it consumes RF instead of fuel."]
 			hide: false
 			id: "2B65C5DE4AA944BA"
-			optional: true
 			rewards: [
 				{
 					id: "0F55EF2A479BC037"
@@ -369,14 +201,13 @@
 					type: "item"
 				}
 			]
-			shape: "diamond"
 			tasks: [{
 				id: "082AE7EADA5E2A06"
 				item: "thermal:machine_furnace"
 				type: "item"
 			}]
-			x: 9.5d
-			y: -2.0d
+			x: -2.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["7A0CB1037E6BE4D7"]
@@ -418,42 +249,42 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["54983CC37DD93E7A"]
+			dependencies: [
+				"2E308530A5C47F6E"
+				"4E4618EE8D6D07B9"
+				"73FA28F897740068"
+			]
 			description: ["The sequential fabricator allows you to automate crafting, you only have to select the recipe and insert the ingredients, then they will be crafted into the output."]
 			hide: false
 			id: "387D9ECF1CD0B4F8"
-			optional: true
 			rewards: [{
 				id: "56DE53737C24A26C"
 				type: "xp"
 				xp: 100
 			}]
-			shape: "diamond"
 			tasks: [{
 				id: "29D6E0B76CB72710"
 				item: "thermal:machine_crafter"
 				type: "item"
 			}]
-			x: 11.0d
-			y: -2.0d
+			x: 3.5d
+			y: -0.5d
 		}
 		{
-			dependencies: ["09BAD2F7D01D16FD"]
+			dependencies: ["13AA6AFAF9C8DD0B"]
 			description: [
 				"You get alloys before having the induction smelter by pulverizing the raw ores and crafting the dusts together."
-				"You can then smelt alloy dusts to obtain ingots."
+				"You can then blast alloy dusts to obtain ingots."
 			]
 			hide: false
 			hide_details_until_startable: false
 			id: "547050DB11C5FFB7"
-			optional: true
 			rewards: [{
 				exclude_from_claim_all: true
 				id: "69C2B59340725641"
 				table_id: 730431930992961248L
 				type: "choice"
 			}]
-			shape: "diamond"
 			tasks: [{
 				count: 4L
 				id: "4CA78D9953A59B84"
@@ -481,12 +312,12 @@
 				type: "item"
 			}]
 			title: "Alloys"
-			x: 8.0d
+			x: -0.5d
 			y: -0.5d
 		}
 		{
-			dependencies: ["793AABD9C2DEC680"]
-			description: ["Inscribing plates gives rods... makes sense! not"]
+			dependencies: ["2746A3F7A98C2134"]
+			description: [""]
 			id: "73FA28F897740068"
 			rewards: [{
 				count: 2
@@ -500,12 +331,12 @@
 				item: "createaddition:copper_rod"
 				type: "item"
 			}]
-			x: 3.5d
+			x: 2.5d
 			y: -0.5d
 		}
 		{
-			dependencies: ["793AABD9C2DEC680"]
-			description: ["Gears require plates, since when?"]
+			dependencies: ["2746A3F7A98C2134"]
+			description: [""]
 			id: "2E308530A5C47F6E"
 			rewards: [{
 				id: "65963C80FE787126"
@@ -517,11 +348,11 @@
 				item: "thermal:iron_gear"
 				type: "item"
 			}]
-			x: 3.5d
-			y: -2.0d
+			x: 2.5d
+			y: -1.5d
 		}
 		{
-			dependencies: ["793AABD9C2DEC680"]
+			dependencies: ["2746A3F7A98C2134"]
 			description: ["&eGold&r gears? What about aluminum?"]
 			id: "4E4618EE8D6D07B9"
 			rewards: [{
@@ -534,47 +365,8 @@
 				item: "thermal:gold_gear"
 				type: "item"
 			}]
-			x: 3.5d
-			y: 1.0d
-		}
-		{
-			dependencies: ["19499868D936A165"]
-			description: ["The inscriber can also crush raw ores into 2 dusts... but you still need to crank your way to richness..."]
-			id: "793AABD9C2DEC680"
-			rewards: [{
-				exclude_from_claim_all: true
-				id: "2EAADA2F07B07F17"
-				table_id: 865906400857221430L
-				type: "choice"
-			}]
-			tasks: [{
-				count: 2L
-				id: "4E9865179A8ECEEC"
-				item: {
-					Count: 1b
-					id: "itemfilters:or"
-					tag: {
-						items: [
-							{
-								Count: 1b
-								id: "thermal:iron_dust"
-							}
-							{
-								Count: 1b
-								id: "thermal:copper_dust"
-							}
-							{
-								Count: 1b
-								id: "thermal:gold_dust"
-							}
-						]
-					}
-				}
-				type: "item"
-			}]
-			title: "Another one bites the..."
-			x: 2.0d
-			y: -0.5d
+			x: 2.5d
+			y: 0.5d
 		}
 		{
 			dependencies: ["09BAD2F7D01D16FD"]
@@ -582,56 +374,22 @@
 			hide: false
 			hide_details_until_startable: false
 			id: "595F27B933ECC168"
-			optional: true
 			rewards: [{
 				id: "52C82ECD38D30CD7"
 				type: "xp"
 				xp: 100
 			}]
-			shape: "diamond"
 			tasks: [{
 				id: "59807C43371F532B"
 				item: "thermal:dynamo_stirling"
 				type: "item"
 			}]
 			title: "Dynamic Integration"
-			x: 8.0d
-			y: -2.0d
-		}
-		{
-			dependencies: ["7A0CB1037E6BE4D7"]
-			description: [
-				"Now that you've crafted your first Mechanical Essence, the following quests will help you automate the production."
-				""
-				"Oh, I almost forgot: craft a Vibration Chamber to stop cranking the Inscriber!"
-			]
-			id: "09BAD2F7D01D16FD"
-			optional: true
-			rewards: [
-				{
-					id: "0F2165D0F13CC47C"
-					type: "xp"
-					xp: 100
-				}
-				{
-					id: "13381831351CFE93"
-					item: "ae2:vibration_chamber"
-					type: "item"
-				}
-			]
-			shape: "diamond"
-			subtitle: "He who has begun his task has half done it"
-			tasks: [{
-				id: "447D9411372AF198"
-				item: "ae2:vibration_chamber"
-				type: "item"
-			}]
-			title: "Dimidium facti, qui coepit, habet"
-			x: 6.5d
+			x: -3.5d
 			y: -0.5d
 		}
 		{
-			dependencies: ["547050DB11C5FFB7"]
+			dependencies: ["7A0CB1037E6BE4D7"]
 			description: ["Integral components can be inserted to thermal machines to increase their base values."]
 			hide: false
 			id: "6A69E64613966190"
@@ -648,11 +406,11 @@
 				type: "item"
 			}]
 			title: "Can Thermal machines be more efficient?"
-			x: 8.0d
-			y: 1.0d
+			x: 5.0d
+			y: -2.0d
 		}
 		{
-			dependencies: ["7A0CB1037E6BE4D7"]
+			dependencies: ["595F27B933ECC168"]
 			description: [
 				"\"Oh, thanks for the red pipez! I'll put those to good use!\""
 				""
@@ -662,7 +420,7 @@
 				""
 				"- rush chapters to get access to energy cables from one of the major tech mods"
 				""
-				"- obtain glowstone with a bit of effort with Industrial Foregoing and Create "
+				"- obtain early glowstone from dirt based blocks"
 				""
 				"- use Energy Exporters, Importers and Interfaces from Integrated Dynamics"
 			]
@@ -681,9 +439,232 @@
 				title: "Energy transport, please?"
 				type: "checkmark"
 			}]
-			x: 5.0d
+			x: -3.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["19499868D936A165"]
+			description: [
+				"&lThermal Series mod&r"
+				""
+				"\"The Foundation of a Thermally-enhanced world!!\""
+			]
+			id: "7899043495724E2A"
+			rewards: [{
+				id: "7DE4CED48E738184"
+				item: {
+					Count: 1b
+					id: "patchouli:guide_book"
+					tag: {
+						"patchouli:book": "thermal:guidebook"
+					}
+				}
+				type: "item"
+			}]
+			shape: "square"
+			tasks: [{
+				id: "225223E64D4598DC"
+				item: {
+					Count: 1b
+					id: "thermal:wrench"
+					tag: { }
+				}
+				title: "Thermal Foundation"
+				type: "item"
+			}]
+			x: -6.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["7899043495724E2A"]
+			description: ["With a Vibration Chamber you can finally stop cranking the inscriber."]
+			id: "09BAD2F7D01D16FD"
+			rewards: [
+				{
+					id: "0F2165D0F13CC47C"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "13381831351CFE93"
+					item: "ae2:vibration_chamber"
+					type: "item"
+				}
+			]
+			subtitle: "He who has begun his task has half done it"
+			tasks: [{
+				id: "447D9411372AF198"
+				item: "ae2:vibration_chamber"
+				type: "item"
+			}]
+			title: "Dimidium facti, qui coepit, habet"
+			x: -5.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["7C6DA4DDF8FF0360"]
+			description: ["The auxiliary cactus removes any EXCESS secondary outputs you may not want.\\nIf you don't understand what is meant by \"excess\", read the next quest"]
+			id: "22AE3DD6943A96AB"
+			optional: true
+			rewards: [{
+				id: "6784479CDDB038A8"
+				item: "thermal:machine_null_augment"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "744D96677974079D"
+				item: "thermal:machine_null_augment"
+				type: "item"
+			}]
+			x: 7.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["22AE3DD6943A96AB"]
+			description: ["Some thermal machines have multiple output slots. For example, the pulverizer has 4 output \"buffers\". The auxiliary cactus voids EXCESS secondary outputs ONLY if there are no free output slots for them to fill OR there's only enough space for the primary output.\\nWhat's the difference? For example, let's say you are pulverizing gravel, which can make sand (primary) with a chance for flint (secondary).\\nWithout the augment, if there's only enough space for sand but the pulverizer \"wants\" to output 1 sand AND 1 flint, it will STOP working since there isn't enough space to output ALL its contents.\\nWITH the augment however, if the machine wants to output sand and flint BUT there's only enough space for the sand, it will VOID the flint, and will continue working.\\nThis doesn't really matter for automation, since it will still VOID the EXCESS, so:\\nTLDR: the machines WILL still produce secondary outputs but WONT stop if they fill with them, so the only difference is that you need make sure to filter when extracting out of the machine."]
+			id: "619D1281059B0F35"
+			optional: true
+			rewards: [{
+				count: 4
+				id: "43662522692BBEDD"
+				item: "thermal:machine_null_augment"
+				type: "item"
+			}]
+			shape: "diamond"
+			subtitle: "Yes it does. Read this description if you don't understand"
+			tasks: [{
+				id: "646F62138C710376"
+				title: "\"The cactus augment doesnt work!!!!\""
+				type: "checkmark"
+			}]
+			title: "\"ThE cActUs AUgmENT dOEs NoT wORk!!!!!!\""
+			x: 8.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["595F27B933ECC168"]
+			id: "1EA6159D66704C53"
+			optional: true
+			rewards: [{
+				id: "49A3232A03FFABDB"
+				item: "thermal:dynamo_output_augment"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "5310A9CC1EE38392"
+				item: "thermal:dynamo_output_augment"
+				type: "item"
+			}]
+			x: -3.5d
 			y: -2.0d
 		}
+		{
+			dependencies: ["7C6DA4DDF8FF0360"]
+			description: [
+				"The cyclical upgrade allows thermal machines to automatically put the output item into the input slot."
+				""
+				"This is very useful for growing crops in the Phytogenic Insulator or pulverizing cobblestone into gravel into sand."
+			]
+			id: "05A02748A9756DFC"
+			optional: true
+			shape: "diamond"
+			tasks: [{
+				id: "2EC9A0B6C9F91A8F"
+				item: "thermal:machine_cycle_augment"
+				type: "item"
+			}]
+			x: 7.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["7A0CB1037E6BE4D7"]
+			description: ["The Phytogenic Insolator can grow crops automatically and by the use of a cyclical upgrade you can reuse the output as an input (seeds from crops)"]
+			id: "7C6DA4DDF8FF0360"
+			rewards: [{
+				count: 16
+				id: "2260968A4ED69210"
+				item: "thermal:phytogro"
+				type: "item"
+			}]
+			tasks: [{
+				id: "44FF65C499BD2159"
+				item: "thermal:machine_insolator"
+				type: "item"
+			}]
+			x: 6.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["13AA6AFAF9C8DD0B"]
+			description: [
+				"Thermal offers the option to use catalysts for Pulverizers."
+				""
+				"Each catalyst has different modifiers for primary and auxiliary outputs, chance to use catalysts, energy consumption."
+			]
+			hide_dependency_lines: false
+			hide_dependent_lines: true
+			id: "22FF4FC891025F81"
+			optional: true
+			rewards: [{
+				count: 8
+				id: "377B0DB5C6BE14DE"
+				item: "minecraft:flint"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "45FBEFB409EE59D6"
+				item: "minecraft:flint"
+				type: "item"
+			}]
+			title: "Pulverizer Catalysts"
+			x: -2.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["74C8E42F285DC4F6"]
+			description: ["Just like the pulverizer, certain \"catalysts\" can be used inside the induction smelter to boost primary and secondary output, energy efficiency, and some other things. Check JEI for more info."]
+			id: "1A1486F396BCEA3C"
+			optional: true
+			rewards: [{
+				count: 16
+				id: "4F72F3FDA9A3B4E9"
+				item: "minecraft:sand"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "1C51B69ECBD925F2"
+				item: "minecraft:sand"
+				type: "item"
+			}]
+			title: "Induction Smelter Catalysts"
+			x: 7.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["7A0CB1037E6BE4D7"]
+			description: [
+				"The induction smelter can make alloys very quickly without crafting the metal blend."
+				""
+				"That will be valuable in the future."
+			]
+			id: "74C8E42F285DC4F6"
+			rewards: [{
+				id: "1ADFA4AA032E28FC"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "19236D78C91C9E6C"
+				item: "thermal:machine_smelter"
+				type: "item"
+			}]
+			x: 6.5d
+			y: -1.5d
+		}
 	]
-	title: "Tier 1: Thermal"
+	title: "Chapter 1: Thermal Series"
 }

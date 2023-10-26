@@ -4,6 +4,8 @@ ServerEvents.recipes(event => {
 		event.recipes.createFilling(output, input);
 	};
 	
+	//tier0
+
 	//tier1
   event.shapeless('kubejs:cube1_packaged', ['kubejs:cube1', 'kubejs:cube1', 'kubejs:cube1', 'kubejs:cube1']);
 	event.recipes.thermal.press('kubejs:cube1_packaged', 'kubejs:cube1').energy(600 * 20);

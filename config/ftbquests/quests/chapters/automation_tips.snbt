@@ -2,10 +2,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "automation_tips"
-	group: "2D94E5A1412E2495"
+	group: "56617BF3F24DD586"
 	icon: "create:flywheel"
 	id: "1FBDE1284A64A60E"
-	order_index: 5
+	order_index: 4
 	quest_links: [ ]
 	quests: [
 		{
@@ -250,8 +250,8 @@
 			dependencies: ["2BF028A5C1ADDA55"]
 			id: "3B37F72B7BF81FE0"
 			tasks: [{
-				id: "10CEF8E4204FC3FF"
-				item: "thermal:machine_furnace"
+				id: "6E6BA3B2F807F471"
+				item: "thermal:machine_smelter"
 				type: "item"
 			}]
 			x: 3.5d
@@ -479,23 +479,8 @@
 			dependencies: ["49B2CD4BE4085BED"]
 			id: "3E9DB55CA618BE54"
 			tasks: [{
-				id: "4099DF613696AE53"
-				item: {
-					Count: 1b
-					id: "itemfilters:or"
-					tag: {
-						items: [
-							{
-								Count: 1b
-								id: "ae2:inscriber"
-							}
-							{
-								Count: 1b
-								id: "thermal:machine_pulverizer"
-							}
-						]
-					}
-				}
+				id: "55996B53B4AFF881"
+				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
 			x: 4.5d
@@ -591,23 +576,8 @@
 			dependencies: ["6050DD19AE8735B1"]
 			id: "7AA2C9F13BDE592E"
 			tasks: [{
-				id: "0AFF8B88889A5C46"
-				item: {
-					Count: 1b
-					id: "itemfilters:or"
-					tag: {
-						items: [
-							{
-								Count: 1b
-								id: "ae2:inscriber"
-							}
-							{
-								Count: 1b
-								id: "thermal:machine_pulverizer"
-							}
-						]
-					}
-				}
+				id: "098248E0F5947DDF"
+				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
 			x: 2.5d
@@ -654,23 +624,8 @@
 			dependencies: ["02D7CF9669333097"]
 			id: "75EB2B44A7B74CDA"
 			tasks: [{
-				id: "7F5F287CF999FE46"
-				item: {
-					Count: 1b
-					id: "itemfilters:or"
-					tag: {
-						items: [
-							{
-								Count: 1b
-								id: "ae2:inscriber"
-							}
-							{
-								Count: 1b
-								id: "thermal:machine_pulverizer"
-							}
-						]
-					}
-				}
+				id: "1D80513938E87F1B"
+				item: "thermal:machine_pulverizer"
 				type: "item"
 			}]
 			x: 1.5d
@@ -2153,8 +2108,12 @@
 			y: 5.0d
 		}
 		{
-			dependencies: ["7F445CC0DC11D4B0"]
+			dependencies: [
+				"7F445CC0DC11D4B0"
+				"1FF5BDF7E94835C4"
+			]
 			id: "75CEB115906F0559"
+			min_required_dependencies: 1
 			tasks: [{
 				id: "63525D6B1AB3422C"
 				item: "thermal:crude_oil_bucket"
@@ -3125,6 +3084,18 @@
 			}]
 			x: 19.5d
 			y: 6.0d
+		}
+		{
+			dependencies: ["16EC705C8FB3EAC3"]
+			hide_dependency_lines: true
+			id: "1FF5BDF7E94835C4"
+			tasks: [{
+				id: "70897AAD80F30F12"
+				item: "adminshop:buyer_1"
+				type: "item"
+			}]
+			x: 27.0d
+			y: 4.0d
 		}
 	]
 	subtitle: ["zoom out to see all quests :)"]

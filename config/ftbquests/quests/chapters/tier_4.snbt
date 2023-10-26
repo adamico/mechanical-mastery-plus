@@ -6,7 +6,19 @@
 	hide_quest_details_until_startable: true
 	icon: "kubejs:cube4"
 	id: "38378A6F4FF9F098"
-	order_index: 3
+	images: [{
+		click: ""
+		corner: false
+		dev: false
+		height: 2.0d
+		hover: [ ]
+		image: "powah:item/charged_snowball"
+		rotation: 0.0d
+		width: 2.0d
+		x: -10.0d
+		y: -2.0d
+	}]
+	order_index: 4
 	quest_links: [ ]
 	quests: [
 		{
@@ -404,6 +416,7 @@
 				item: "cookingforblockheads:sink"
 				type: "item"
 			}]
+			shape: "diamond"
 			subtitle: "Water Source"
 			tasks: [{
 				id: "6D8D0E6A16383E3D"
@@ -435,18 +448,36 @@
 					type: "item"
 				}
 				{
-					count: 16
+					count: 12
 					id: "14B8EFCA2C7D530D"
 					item: "powah:energy_cable_basic"
 					type: "item"
 				}
+				{
+					id: "514E3B6FFD9DDBC7"
+					item: "powah:book"
+					type: "item"
+				}
 			]
-			tasks: [{
-				count: 24L
-				id: "264D55BB9949E0D6"
-				item: "powah:dielectric_paste"
-				type: "item"
-			}]
+			tasks: [
+				{
+					count: 24L
+					id: "264D55BB9949E0D6"
+					item: "powah:dielectric_paste"
+					type: "item"
+				}
+				{
+					id: "3FAD5EA79F0BAF90"
+					item: {
+						Count: 1b
+						id: "powah:wrench"
+						tag: {
+							PowahWrenchNBT: { }
+						}
+					}
+					type: "item"
+				}
+			]
 			title: "Powah is OPawah!"
 			x: -7.0d
 			y: 0.0d
@@ -874,5 +905,5 @@
 			y: -2.0d
 		}
 	]
-	title: "Tier 4: Advanced Mekanism"
+	title: "Chapter 4: Advanced Mekanism"
 }

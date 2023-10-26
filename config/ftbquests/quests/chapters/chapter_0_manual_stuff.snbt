@@ -1,0 +1,674 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "chapter_0_manual_stuff"
+	group: "2D94E5A1412E2495"
+	icon: {
+		Count: 1b
+		id: "kubejs:ore_hammer"
+		tag: {
+			Damage: 0
+		}
+	}
+	id: "060CE836D1F0150E"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: [
+				"5A7A38C8FA72C931"
+				"11218A6DB4F045CE"
+				"333AD01B70C4D1DC"
+				"6574C2772D94CB68"
+				"4FD2F442421FE4CE"
+			]
+			description: ["Use the ore hammer to get better ore smelting ratio... slowly..."]
+			id: "14BDC4B45EB6CBE9"
+			rewards: [{
+				id: "41331A30C6AF8A87"
+				type: "xp"
+				xp: 100
+			}]
+			subtitle: "have a beginning"
+			tasks: [{
+				id: "4D55D5C973F6302B"
+				item: {
+					Count: 1b
+					id: "kubejs:ore_hammer"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			title: "All good things"
+			x: 9.0d
+			y: 0.0d
+		}
+		{
+			description: [
+				"\"&oSo it begins...&r\""
+				""
+				"Welcome to &6Mechanical Mastery &1Plus&r"
+				""
+				"Your objective is to automate every mechanical crystal. "
+				""
+				"Through this quest book, you will receive many of the basic materials you will need to fulfill this job. "
+			]
+			icon: "minecraft:oak_sapling"
+			id: "491EB18107FC8776"
+			rewards: [{
+				id: "2ED712EE358A85CE"
+				item: "akashictome:tome"
+				type: "item"
+			}]
+			shape: "square"
+			subtitle: "Where it all begins"
+			tasks: [{
+				icon: {
+					Count: 1b
+					id: "projecte:philosophers_stone"
+					tag: { }
+				}
+				id: "2ECDA834E28D3B2A"
+				title: "Welcome!"
+				type: "checkmark"
+			}]
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["491EB18107FC8776"]
+			description: [
+				"\"&oTwo birds one stone. I'm sure I'll need these in the future&r.\""
+				""
+				"Create a basic cobblestone generator to unlock hidden knowledge."
+			]
+			hide: false
+			id: "5D6996CC9444ADE7"
+			rewards: [
+				{
+					count: 8
+					id: "6214D2CC53B31C53"
+					item: "minecraft:cobblestone"
+					type: "item"
+				}
+				{
+					id: "3E4A38DFA52023C9"
+					item: {
+						Count: 1b
+						id: "minecraft:written_book"
+						tag: {
+							author: "kc00l"
+							pages: ["{\"text\":\"Hi! Have you tried exploring your island, yet?\"}"]
+							title: "Hidden Knowledge"
+						}
+					}
+					type: "item"
+				}
+			]
+			subtitle: "Bought from the stone"
+			tasks: [{
+				id: "5C95D4E16A8DDB14"
+				item: "minecraft:cobblestone"
+				type: "item"
+			}]
+			title: "De lapide emptus"
+			x: 3.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["491EB18107FC8776"]
+			description: [
+				"\"&oI'll grow an army of trees to kill the Necromancer...&r\""
+				""
+				"Ehm, I think it's the wrong game for the wrong computer..."
+				"Here you just need trees to get things started... and you can punch them fine!"
+			]
+			hide: false
+			id: "258878D4F87E9F1E"
+			rewards: [{
+				count: 4
+				id: "3C291BB62FF867F2"
+				item: "minecraft:oak_sapling"
+				type: "item"
+			}]
+			subtitle: "A tree is known by its fruit"
+			tasks: [{
+				id: "08E661E4E8986BF8"
+				item: "minecraft:oak_log"
+				type: "item"
+			}]
+			title: "E fructu arbor cognoscitur"
+			x: 3.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"640F06D0A7A8C63A"
+				"29D5601941CC9696"
+			]
+			description: [
+				"\"&oWonderful! An inscriber, I wonder what can I do with it...&r\""
+				""
+				"The mysterious Inscriber is how you will do your first steps into automation. "
+				""
+				"It's not very efficient, though, and it requires manual cranking... there must be some better way to do this in the future..."
+				""
+				"&bHint:&r use the wrench to rotate the Inscriber to insert from the top and extract from the bottom... with the provided hoppers..."
+				""
+				"&6Disclaimer&r: the crank is very fragile and breaks if the inscriber is full of energy! If you're thinking about going afk with a macro... it doesn't work!"
+				""
+				"{image:ae2:textures/patchouli/images/inscriber_setup.png width:100 height:100 align:1}"
+			]
+			hide: false
+			id: "19499868D936A165"
+			rewards: [
+				{
+					count: 2
+					id: "706CE2571DCA3C22"
+					item: "minecraft:hopper"
+					type: "item"
+				}
+				{
+					id: "347254C4E4EC82DE"
+					item: "ae2:certus_quartz_wrench"
+					type: "item"
+				}
+			]
+			shape: "gear"
+			tasks: [
+				{
+					id: "1516922219022AB1"
+					item: "ae2:inscriber"
+					type: "item"
+				}
+				{
+					id: "2B5D3474AB09DF5E"
+					item: "ae2:crank"
+					type: "item"
+				}
+			]
+			title: "HAMM... INSCRIBAH!"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"14BDC4B45EB6CBE9"
+				"32BAF91B15C74931"
+			]
+			description: ["Using the ore hammer you can finally get 1:1 ore to ingots... believe me, you will get better ratios soon"]
+			id: "793AABD9C2DEC680"
+			rewards: [{
+				exclude_from_claim_all: true
+				id: "2EAADA2F07B07F17"
+				table_id: 865906400857221430L
+				type: "choice"
+			}]
+			tasks: [{
+				count: 2L
+				id: "4E9865179A8ECEEC"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "thermal:iron_dust"
+							}
+							{
+								Count: 1b
+								id: "thermal:copper_dust"
+							}
+							{
+								Count: 1b
+								id: "thermal:gold_dust"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Another one bites the..."
+			x: 9.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["793AABD9C2DEC680"]
+			description: ["Blast dusts to obtain ingots."]
+			id: "640F06D0A7A8C63A"
+			rewards: [{
+				exclude_from_claim_all: true
+				id: "7765315C70BE122F"
+				table_id: 261462601232150876L
+				type: "choice"
+			}]
+			tasks: [{
+				id: "24B81482339F0EF1"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "minecraft:iron_ingot"
+							}
+							{
+								Count: 1b
+								id: "minecraft:copper_ingot"
+							}
+							{
+								Count: 1b
+								id: "minecraft:gold_ingot"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Ingots"
+			x: 10.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["258878D4F87E9F1E"]
+			description: [
+				"\"I wonder what I can find nowadays buried in dirt...\""
+				""
+				"I think you know by now shovels can dig dirt paths. "
+				""
+				"What you probably don't know is the fact that in this pack you can move faster on paths (and other blocks have higher speed...)."
+				""
+				"Have you tried sneaking and trying digging a path in dirt?"
+			]
+			id: "6CC80ACF716A2566"
+			rewards: [{
+				id: "47D66FF5C0465BEA"
+				item: "minecraft:bone"
+				type: "item"
+			}]
+			tasks: [{
+				id: "21B2FD8CD18FFB5D"
+				item: {
+					Count: 1b
+					id: "minecraft:stone_shovel"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 4.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6CC80ACF716A2566"]
+			description: ["If mud is wet dirt, packed mud is... what? "]
+			id: "6C83711E303711B7"
+			rewards: [{
+				id: "76980954E71FED80"
+				item: "minecraft:packed_mud"
+				type: "item"
+			}]
+			tasks: [{
+				id: "542393BDE4E93ECB"
+				item: "minecraft:packed_mud"
+				type: "item"
+			}]
+			title: "No, there's no golem"
+			x: 6.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6C83711E303711B7"]
+			description: ["Clayworks mod adds the Kiln furnace which can smelt stones and other items faster than the normal furnace."]
+			id: "0843FDA66C3268E6"
+			rewards: [{
+				id: "081E4A1F8479BB3D"
+				item: "minecraft:clay"
+				type: "item"
+			}]
+			tasks: [{
+				id: "41ABFD99E584D188"
+				item: "clayworks:kiln"
+				type: "item"
+			}]
+			x: 7.5d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"78F6EEAA67844814"
+				"0729B02421E5A1D7"
+			]
+			description: ["The blast furnace still produces 6 nuggets from a raw ore but it's twice faster!"]
+			id: "32BAF91B15C74931"
+			rewards: [{
+				id: "71AF290274C6CEF0"
+				item: "ironfurnaces:augment_blasting"
+				type: "item"
+			}]
+			tasks: [{
+				id: "74B061B6A3C4F8A4"
+				item: "minecraft:blast_furnace"
+				type: "item"
+			}]
+			x: 7.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["5D6996CC9444ADE7"]
+			description: [
+				"The first step of ore processing... forget it quickly because it's not very efficient in this pack."
+				""
+				"You will discover many smelting recipes have been moved to other more specific machines (kiln, blast furnace, etc.)"
+			]
+			id: "2939AEFF3B458884"
+			rewards: [{
+				id: "5A86A3D98095118D"
+				item: "minecraft:furnace"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5F4F7C88BBD83A91"
+				item: "minecraft:furnace"
+				type: "item"
+			}]
+			x: 4.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["2939AEFF3B458884"]
+			description: ["{\"text\": \"Iron Furnaces\", \"underlined\": true, \"clickEvent\": {\"action\": \"open_url\", \"value\": \"https://www.curseforge.com/minecraft/mc-mods/iron-furnaces\"}, \"extra\": [{\"text\": \" mod adds furnaces of different tiers with increasing smelting speed, reconfigurable sides, augments for smoking and blasting and much more\", \"underlined\": false}]}"]
+			id: "3DE84738AD56FC5C"
+			optional: true
+			rewards: [{
+				id: "01FA019C95134399"
+				item: "ironfurnaces:upgrade_iron"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "4686471B6A8AE89D"
+				item: "ironfurnaces:iron_furnace"
+				type: "item"
+			}]
+			x: 4.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["066BF5AF5165E3AB"]
+			description: [
+				"{\"text\": \"Sophisticated Storage\", \"underlined\": true, \"clickEvent\": {\"action\": \"open_url\", \"value\": \"https://www.curseforge.com/minecraft/mc-mods/sophisticated-storage\"}, \"extra\": [{\"text\": \" adds multiple tiers of Barrels, Chests and Shulker Boxes in many different combinations of two colors and different wood varieties.\", \"underlined\": false}]}"
+				""
+				"Each storage block can have many different upgrades to augment their functionality. "
+				""
+				"You can even use Limited Barrels that only have 1 to 4 slots for items with higher stack size limits."
+			]
+			id: "2BEEFB6FF4D50B3B"
+			optional: true
+			rewards: [
+				{
+					id: "275BF242818BB36A"
+					item: "sophisticatedstorage:storage_tool"
+					type: "item"
+				}
+				{
+					id: "4A8CC8674326F686"
+					item: "sophisticatedstorage:crafting_upgrade"
+					type: "item"
+				}
+			]
+			shape: "diamond"
+			tasks: [
+				{
+					id: "61624B1491D32E4B"
+					item: "sophisticatedstorage:basic_tier_upgrade"
+					type: "item"
+				}
+				{
+					id: "36C82B419284B5E3"
+					item: "sophisticatedstorage:controller"
+					type: "item"
+				}
+			]
+			title: "Sophisticated Storage"
+			x: 3.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["258878D4F87E9F1E"]
+			description: [
+				"As you have probably noticed there's quite a lot of storage mods in this pack."
+				""
+				"From normal chests you can upgrade to Sophisticated Storage, Iron Chests and Functional Storage."
+				""
+				"Each of these mods have pros and cons and specific uses for each situation."
+			]
+			id: "066BF5AF5165E3AB"
+			optional: true
+			rewards: [{
+				id: "4C4BC0AF589E9173"
+				item: "minecraft:chest"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "65C9B40132CC4CFB"
+				item: "minecraft:chest"
+				type: "item"
+			}]
+			title: "Storage"
+			x: 4.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["066BF5AF5165E3AB"]
+			description: ["{\"text\": \"Iron Chests\", \"underlined\": true, \"clickEvent\": {\"action\": \"open_url\", \"value\": \"https://www.curseforge.com/minecraft/mc-mods/iron-chests\"}, \"extra\": [{\"text\": \" mod has chests made from different vanilla metals with varying sizes!\", \"underlined\": false}]}"]
+			id: "27035D061752CF6A"
+			optional: true
+			rewards: [{
+				id: "232AF5D583CE89FA"
+				item: "ironchest:wood_to_iron_chest_upgrade"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "1A6C02015D7A1513"
+				item: "ironchest:iron_chest"
+				type: "item"
+			}]
+			title: "Iron Chests"
+			x: 5.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["066BF5AF5165E3AB"]
+			description: ["{\"text\": \"Functional Storage\", \"underlined\": true, \"clickEvent\": {\"action\": \"open_url\", \"value\": \"https://www.curseforge.com/minecraft/mc-mods/functional-storage\"}, \"extra\": [{\"text\": \" is an alternative to the classic Storage Drawers mod, with an updated look and additional functionalities like pushing/pulling/collector upgrades and more.\", \"underlined\": false}]}"]
+			id: "6724FE192AB217C7"
+			optional: true
+			rewards: [
+				{
+					id: "11F55268165B7F92"
+					item: {
+						Count: 1b
+						id: "functionalstorage:linking_tool"
+						tag: {
+							Action: "ADD"
+							Mode: "SINGLE"
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "16AADD4FEA4EA4A5"
+					item: {
+						Count: 1b
+						id: "functionalstorage:configuration_tool"
+						tag: {
+							Mode: "LOCKING"
+						}
+					}
+					type: "item"
+				}
+			]
+			shape: "diamond"
+			tasks: [{
+				id: "512F37D461C59242"
+				item: "functionalstorage:oak_1"
+				type: "item"
+			}]
+			title: "Functional Storage"
+			x: 4.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["3DE84738AD56FC5C"]
+			description: ["normal furnaces can be upgraded to iron ones through specific upgrades"]
+			id: "1319A67EFB4CD118"
+			optional: true
+			rewards: [{
+				id: "19DCFA27D6BDCB4F"
+				item: "ironfurnaces:upgrade_iron2"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "72DDEB88E96D8138"
+				item: "ironfurnaces:upgrade_copper"
+				type: "item"
+			}]
+			x: 4.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["3DE84738AD56FC5C"]
+			description: ["The smoking augment turns a furnace into a smoker"]
+			id: "36DB18BB954991CA"
+			optional: true
+			shape: "diamond"
+			tasks: [{
+				id: "1C5CD6FC0A748A24"
+				item: "ironfurnaces:augment_smoking"
+				type: "item"
+			}]
+			x: 3.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["3DE84738AD56FC5C"]
+			description: [
+				"The generator augment turns a furnace into a solid fuel based generator."
+				""
+				"Note: the augmented furnace cannot smelt items anymore."
+			]
+			id: "0DA6F25576424767"
+			optional: true
+			rewards: [{
+				id: "7BEE59EF0FDF9C33"
+				item: "ironfurnaces:augment_fuel"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "3E81A2E2FC63E85F"
+				item: "ironfurnaces:augment_generator"
+				type: "item"
+			}]
+			x: 5.5d
+			y: 4.0d
+		}
+		{
+			dependencies: ["0843FDA66C3268E6"]
+			description: ["You can only bake stones in the kiln."]
+			id: "4FD2F442421FE4CE"
+			rewards: [{
+				count: 4
+				id: "7BCFAE67D217E538"
+				item: "minecraft:stone"
+				type: "item"
+			}]
+			tasks: [{
+				id: "44D7F1C182958305"
+				item: "minecraft:stone"
+				type: "item"
+			}]
+			x: 7.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["4FD2F442421FE4CE"]
+			description: ["Same for smooth stones (and other stones)"]
+			id: "78F6EEAA67844814"
+			rewards: [{
+				count: 4
+				id: "50FBAC8699263C13"
+				item: "minecraft:smooth_stone"
+				type: "item"
+			}]
+			tasks: [{
+				id: "60575CCC068B6D80"
+				item: "minecraft:smooth_stone"
+				type: "item"
+			}]
+			x: 7.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["47B8CC100AA540EB"]
+			description: ["\"The final component of the mysterious inscriber...\""]
+			id: "29D5601941CC9696"
+			rewards: [{
+				id: "640763D9CB6C1375"
+				item: "minecraft:piston"
+				type: "item"
+			}]
+			tasks: [{
+				id: "0B64C8E58FE02824"
+				item: "minecraft:piston"
+				type: "item"
+			}]
+			x: 10.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["0843FDA66C3268E6"]
+			id: "47B8CC100AA540EB"
+			rewards: [{
+				id: "7375A4E54284A212"
+				item: "clayworks:glazed_terracotta"
+				type: "item"
+			}]
+			tasks: [{
+				id: "23E99897246585D4"
+				item: "clayworks:glazed_terracotta"
+				type: "item"
+			}]
+			x: 9.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["2939AEFF3B458884"]
+			description: ["I told you it wasn't very efficient..."]
+			id: "0729B02421E5A1D7"
+			rewards: [{
+				count: 12
+				id: "3F418BF21A669563"
+				item: "minecraft:iron_nugget"
+				type: "item"
+			}]
+			tasks: [{
+				count: 6L
+				id: "27DAC8F24DDB159A"
+				item: "minecraft:iron_nugget"
+				type: "item"
+			}]
+			x: 6.0d
+			y: 2.0d
+		}
+	]
+	title: "Chapter 0: Primitive beginnings"
+}

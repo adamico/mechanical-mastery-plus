@@ -36,6 +36,7 @@ ServerEvents.tags('item', event => {
   event.add('forge:gears/steel', 'kubejs:steel_gear');
   
   event.add('forge:gears', 'kubejs:steel_gear');
+  
   ['steel'].forEach(metal => {
     event.add(`forge:rods/${metal}`, `kubejs:${metal}_rod`);
     event.add('forge:rods', `kubejs:${metal}_rod`);
@@ -45,6 +46,28 @@ ServerEvents.tags('item', event => {
 
   event.add('forge:heads', 'supplementaries:enderman_head');
 
-  event.add('forge:ingots', 'createchromaticreturn:fortunite_bar');
-  event.add('forge:ingots/fortunite', 'createchromaticreturn:fortunite_bar');
-})
+  ['create:brass', 'thermal:bronze', 'thermal:constantan', 'thermal:electrum', 'thermal:enderium',
+   'thermal:invar', 'thermal:lumium', 'thermal:signalum', 'steel'].forEach(alloy => {
+    ['ingot', 'block'].forEach(type => {
+      let materialName = (alloy == 'steel') ? `mekanism:${type}_${alloy}` : `${alloy}_${type}`;
+      event.add('forge:alloys', materialName);
+    });
+  });
+
+  
+  ['enderium', 'lumium', 'signalum'].forEach(alloy => {
+    ['ingot', 'block'].forEach(type => {
+      event.add('forge:alloys/special', `thermal:${alloy}_${type}`);
+    });
+    event.add('c:hidden_from_recipe_viewers', `${alloy}_dust`);
+  });
+});
+
+
+ServerEvents.tags('block', event => {
+  event.add('blockrunner:very_quick_blocks', '#engineersdecor:plain_concretes');
+  // let concretes = event.get('engineersdecor:plain_concretes').getObjectIds();
+  // concretes.forEach(concrete => {
+  //   event.add('blockrunner:very_quick_blocks', concrete);
+  // });
+});

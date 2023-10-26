@@ -6,6 +6,10 @@ JEIEvents.hideItems(event => {
   ['iron', 'gold', 'diamond'].forEach(material => {
     event.hide(`industrialforegoing:${material}_gear`);
   });
+
+  ['enderium', 'lumium', 'signalum'].forEach(alloy => {
+    event.hide(`thermal:${alloy}_dust`);
+  });
 })
 
 JEIEvents.removeCategories(event => {

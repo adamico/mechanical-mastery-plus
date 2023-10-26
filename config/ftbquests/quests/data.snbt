@@ -12,7 +12,7 @@
 		{ Count: 1b, id: "minecraft:oak_sapling" }
 		{ Count: 1b, id: "minecraft:lava_bucket" }
 	]
-	emergency_items_cooldown: 900
+	emergency_items_cooldown: 180
 	grid_scale: 0.5d
 	lock_message: ""
 	loot_crate_no_drop: {

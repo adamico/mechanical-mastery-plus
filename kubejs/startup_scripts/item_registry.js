@@ -42,6 +42,9 @@ StartupEvents.registry('item', event => {
 	event.create('incomplete_creative_upgrade').displayName('Incomplete Creative Augment');
   
 	event.create('coated_redstone').displayName('Obsidian-Coated Redstone');
+
+	event.create('ore_hammer', 'pickaxe').tier('wood').displayName('Ore Hammer').maxDamage(100)
+		.tooltip('Right click a block of stone with a raw ore in off hand to crush it into dust');
   
   // industrial foregoing items
 	event.create('incomplete_simple_frame').displayName('Incomplete Simple Machine Frame').texture('kubejs:item/basic_package');

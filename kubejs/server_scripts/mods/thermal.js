@@ -1,8 +1,7 @@
 ServerEvents.recipes(event => {
   console.log('[AMMONIUM@KUBEJS]: thermal recipes...');  
 
-  const smeltingRecipes = [
-    { output: '#forge:ingots/steel', outputCount: 3, inputs: [Item.of('#forge:ingots/iron', 3), Item.of('#minecraft:coals', 3)], energy: 12000 },
+  const smeltingRecipes = [,
     { output: 'minecraft:calcite', outputCount: 1, inputs: ['minecraft:stone', 'minecraft:bone_meal'], energy: 800 },
     { output: 'create:brass_ingot', outputCount: 2, inputs: ['#forge:ingots/copper', '#forge:ingots/zinc'], energy: 2400 },
     { output: 'minecraft:amethyst_shard', outputCount: 1, inputs: ['ae2:charged_certus_quartz_crystal', 'kubejs:cube'], energy: 24000 },
@@ -20,10 +19,16 @@ ServerEvents.recipes(event => {
     event.recipes.thermal.smelter(Item.of(recipe.output, recipe.outputCount), recipe.inputs).energy(recipe.energy);
   });
 
-  event.replaceInput({id: 'thermal:machine_smelter'}, 'thermal:rf_coil', 'kubejs:cube2');
+  ['enderium', 'lumium', 'signalum'].forEach(alloy => {
+    event.remove({id: `thermal:fire_charge/${alloy}_glass_2`});
+    event.remove({id: `thermal:machines/smelter/smelter_glass_${alloy}`});
+    event.recipes.thermal.smelter(Item.of(`thermal:${alloy}_glass`, 2), [Item.of('thermal:obsidian_glass', 2), `thermal:${alloy}_ingot`]).energy(4800);
+    event.shapeless(`thermal:${alloy}_glass`, [Item.of('thermal:obsidian_glass', 2), 'minecraft:fire_charge', `thermal:${alloy}_ingot`]);
+  });
+
+  event.replaceInput({id: 'thermal:machine_smelter'}, 'thermal:rf_coil', 'kubejs:cube1');
   event.replaceInput({id: 'thermal:augments/machine_speed_augment'}, 'thermal:rf_coil', 'kubejs:cube2');
   event.replaceInput({id: 'thermal:machine_crucible'}, 'thermal:rf_coil', 'kubejs:cube2');
-  event.replaceInput({id: 'thermal:machine_furnace'}, 'minecraft:bricks', 'minecraft:blast_furnace');
 
   event.remove({id: 'thermal:machine_frame'});
   event.shaped('thermal:machine_frame', [
@@ -82,4 +87,18 @@ ServerEvents.recipes(event => {
 
   event.remove({id: 'thermal:machines/pyrolyzer/pyrolyzer_coal'});
   event.remove({id: 'thermal:gunpowder_4'});
+
+  event.remove({id: 'thermal:press_gear_die'});
+  event.shaped('thermal:press_gear_die', [
+    ' I ',
+    'IGI',
+    ' I '
+    ], {
+      I: '#forge:plates/invar',
+      G: '#forge:gears/gold'
+  });
+
+  ['enderium', 'lumium', 'signalum'].forEach(material => {
+    event.remove({id: `thermal:${material}_dust_4`});
+  });
 })

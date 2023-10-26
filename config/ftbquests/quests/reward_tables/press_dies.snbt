@@ -4,11 +4,7 @@
 	order_index: 1
 	rewards: [
 		{ item: "kubejs:press_rod_die" }
-		{ item: "thermal:press_coin_die" }
 		{ item: "thermal:press_gear_die" }
-		{ item: "thermal:press_packing_2x2_die" }
-		{ item: "thermal:press_packing_3x3_die" }
-		{ item: "thermal:press_unpacking_die" }
 	]
 	title: "Press dies"
 }

@@ -41,5 +41,5 @@ ServerEvents.recipes(event => {
 	event.recipes.createMilling(['ae2:sky_dust', 'ae2:sky_stone_block'], 'ae2:sky_stone_block').processingTime(200);
   	
 	event.replaceInput({id: 'ae2:network/blocks/inscribers'}, 'minecraft:sticky_piston', 'minecraft:piston');
-	event.replaceInput({output: 'ae2:vibration_chamber'}, "ae2:energy_acceptor", "kubejs:cube1_packaged");
+  event.replaceInput({id: 'ae2:network/blocks/energy_energy_acceptor'}, 'ae2:quartz_glass', 'minecraft:light_gray_stained_glass');
 });

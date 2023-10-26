@@ -87,6 +87,11 @@ customization {
 
 customization {
   identifier = %id=button_compatibility_id:mc_titlescreen_accessibility_button%
+  action = hidebutton
+}
+
+customization {
+  identifier = %id=button_compatibility_id:mc_titlescreen_accessibility_button%
   orientation = top-left
   x = 0
   action = movebutton
@@ -391,5 +396,15 @@ customization {
   parrot_left_shoulder = false
   y = 0
   parrot = false
+}
+
+customization {
+  identifier = %id=376346%
+  orientation = top-left
+  x = 0
+  action = movebutton
+  y = 0
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"elementposx","values":{"id":"vanillabtn:button_compatibility_id:forge_titlescreen_mods_button"}}+{"placeholder":"elementwidth","values":{"id":"vanillabtn:button_compatibility_id:forge_titlescreen_mods_button"}}/2-({"placeholder":"elementwidth","values":{"id":"vanillabtn:376346"}}/2)","decimal":"true"}}
+  advanced_posy = {"placeholder":"elementposy","values":{"id":"vanillabtn:376322"}}
 }
 

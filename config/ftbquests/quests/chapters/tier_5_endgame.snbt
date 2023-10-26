@@ -6,7 +6,7 @@
 	hide_quest_details_until_startable: true
 	icon: "kubejs:dragon_dna"
 	id: "41DDE820BE913888"
-	order_index: 4
+	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{
@@ -65,7 +65,7 @@
 					type: "item"
 				}
 			]
-			x: -13.5d
+			x: -13.0d
 			y: 2.5d
 		}
 		{
@@ -99,7 +99,7 @@
 				}
 			]
 			title: "Oh Sheet, HDPE!"
-			x: -12.0d
+			x: -11.0d
 			y: 4.5d
 		}
 		{
@@ -116,7 +116,7 @@
 				item: "kubejs:black_hdpe_sheet"
 				type: "item"
 			}]
-			x: -8.0d
+			x: -7.0d
 			y: 4.0d
 		}
 		{
@@ -133,7 +133,7 @@
 				item: "mekanism:solar_neutron_activator"
 				type: "item"
 			}]
-			x: -9.0d
+			x: -8.5d
 			y: 3.0d
 		}
 		{
@@ -159,7 +159,7 @@
 					type: "item"
 				}
 			]
-			x: -13.0d
+			x: -12.0d
 			y: 1.5d
 		}
 		{
@@ -195,7 +195,7 @@
 				}
 			]
 			title: "Supercritical Phase Shifter"
-			x: -8.0d
+			x: -7.0d
 			y: 3.0d
 		}
 		{
@@ -218,7 +218,7 @@
 				item: "mekanism:pellet_antimatter"
 				type: "item"
 			}]
-			x: -4.0d
+			x: -3.5d
 			y: 2.0d
 		}
 		{
@@ -240,8 +240,8 @@
 				item: "powah:crystal_nitro"
 				type: "item"
 			}]
-			x: -6.0d
-			y: 0.5d
+			x: -5.0d
+			y: 4.0d
 		}
 		{
 			dependencies: ["756E1F5554A92D83"]
@@ -253,6 +253,11 @@
 				"Congratulations, you are now a "
 				""
 				"&6Mechanical Master&r!"
+				""
+				""
+				"COD acronym by"
+				""
+				"{\"text\": \"Darkstar\", \"color\": \"red\", \"underlined\": true, \"clickEvent\": {\"action\": \"open_url\", \"value\": \"https://discord.com/channels/1022548429337006111/1152905805071384586/1166841218215444580\"}, \"extra\": [{\"text\": \" from Discord\", \"color\": \"white\", \"underlined\": false}]}"
 			]
 			icon: "minecraft:cod"
 			id: "79B1FCD79D650A18"
@@ -284,6 +289,7 @@
 				}
 			]
 			shape: "gear"
+			subtitle: "Certificate of Doneness!"
 			tasks: [
 				{
 					id: "52E114BEEF25A1BA"
@@ -344,8 +350,8 @@
 					type: "item"
 				}
 			]
-			title: "I know you can do it..."
-			x: 5.0d
+			title: "COD"
+			x: 4.5d
 			y: 1.5d
 		}
 		{
@@ -364,7 +370,7 @@
 				type: "item"
 			}]
 			x: 2.5d
-			y: 2.5d
+			y: 2.0d
 		}
 		{
 			dependencies: ["756E1F5554A92D83"]
@@ -426,12 +432,17 @@
 				"Essence of Darkness is a custom Mekanism Infuse Type used to create ingredient for the end game Mekanism blocks and items."
 			]
 			id: "081C1697195680DC"
+			rewards: [{
+				id: "3E41AF8452F38C58"
+				item: "createchromaticreturn:shadow_essence_bucket"
+				type: "item"
+			}]
 			tasks: [{
 				id: "06811927C1845A13"
 				item: "createchromaticreturn:shadow_essence_bucket"
 				type: "item"
 			}]
-			x: -15.0d
+			x: -14.5d
 			y: 2.5d
 		}
 		{
@@ -448,7 +459,7 @@
 				item: "createchromaticreturn:carbon_powder"
 				type: "item"
 			}]
-			x: -16.5d
+			x: -16.0d
 			y: 2.5d
 		}
 		{
@@ -470,7 +481,7 @@
 				item: "minecraft:nether_star"
 				type: "item"
 			}]
-			x: -12.0d
+			x: -11.0d
 			y: 1.5d
 		}
 		{
@@ -509,7 +520,7 @@
 					type: "item"
 				}
 			]
-			x: -9.0d
+			x: -8.5d
 			y: 1.5d
 		}
 		{
@@ -542,7 +553,7 @@
 					type: "item"
 				}
 			]
-			x: -9.0d
+			x: -8.5d
 			y: 0.0d
 		}
 		{
@@ -558,7 +569,7 @@
 				item: "mekanism:crystal_uranium"
 				type: "item"
 			}]
-			x: -12.0d
+			x: -11.0d
 			y: -1.5d
 		}
 		{
@@ -589,7 +600,7 @@
 				item: "createchromaticreturn:shadow_steel"
 				type: "item"
 			}]
-			x: -8.0d
+			x: -7.0d
 			y: 0.0d
 		}
 		{
@@ -600,7 +611,7 @@
 				item: "mekanism:chemical_crystallizer"
 				type: "item"
 			}]
-			x: -13.5d
+			x: -12.5d
 			y: -1.5d
 		}
 		{
@@ -611,7 +622,7 @@
 				item: "mekanism:chemical_washer"
 				type: "item"
 			}]
-			x: -15.0d
+			x: -14.0d
 			y: -1.5d
 		}
 		{
@@ -622,7 +633,7 @@
 				item: "mekanism:chemical_dissolution_chamber"
 				type: "item"
 			}]
-			x: -16.5d
+			x: -15.5d
 			y: -1.5d
 		}
 		{
@@ -656,7 +667,7 @@
 				}
 			]
 			title: "Into the rabbit gas hole"
-			x: -18.0d
+			x: -17.0d
 			y: -1.5d
 		}
 		{
@@ -674,7 +685,7 @@
 				item: "createchromaticreturn:chromatic_compound"
 				type: "item"
 			}]
-			x: -8.0d
+			x: -7.0d
 			y: -1.0d
 		}
 		{
@@ -696,7 +707,7 @@
 				item: "createchromaticreturn:multiplite_ingot"
 				type: "item"
 			}]
-			x: -7.0d
+			x: -6.0d
 			y: 0.0d
 		}
 		{
@@ -714,7 +725,7 @@
 				item: "minecraft:shulker_shell"
 				type: "item"
 			}]
-			x: -6.0d
+			x: -5.0d
 			y: 2.5d
 		}
 		{
@@ -733,7 +744,7 @@
 				item: "createchromaticreturn:refined_radiance"
 				type: "item"
 			}]
-			x: -7.0d
+			x: -6.0d
 			y: -1.0d
 		}
 		{
@@ -762,7 +773,7 @@
 				type: "item"
 			}]
 			x: -5.0d
-			y: -0.5d
+			y: 0.5d
 		}
 		{
 			dependencies: ["41D9B7AC1089FA83"]
@@ -788,7 +799,7 @@
 				title: "Ok, here's one for free..."
 				type: "questsadditions:time"
 			}]
-			x: -7.0d
+			x: -6.0d
 			y: 5.5d
 		}
 		{
@@ -815,7 +826,7 @@
 				type: "questsadditions:time"
 			}]
 			title: "...and another..."
-			x: -6.0d
+			x: -5.0d
 			y: 5.5d
 		}
 		{
@@ -850,7 +861,7 @@
 				title: "...good things come in three!"
 				type: "questsadditions:time"
 			}]
-			x: -5.0d
+			x: -4.0d
 			y: 5.5d
 		}
 		{
@@ -868,7 +879,7 @@
 				item: "supplementaries:enderman_head"
 				type: "item"
 			}]
-			x: -7.0d
+			x: -6.0d
 			y: 4.0d
 		}
 		{
@@ -892,7 +903,7 @@
 				type: "item"
 			}]
 			title: "Aurum Nigrum"
-			x: -18.0d
+			x: -17.5d
 			y: 2.5d
 		}
 		{
@@ -920,7 +931,7 @@
 				item: "minecraft:dragon_head"
 				type: "item"
 			}]
-			x: -1.0d
+			x: -0.5d
 			y: 1.5d
 		}
 		{
@@ -955,7 +966,7 @@
 				}
 			]
 			title: "Kill the Warden!"
-			x: -0.5d
+			x: 0.0d
 			y: -0.5d
 		}
 		{
@@ -977,7 +988,7 @@
 				item: "createchromaticreturn:bedrock_shard"
 				type: "item"
 			}]
-			x: -1.5d
+			x: -1.0d
 			y: -0.5d
 		}
 		{
@@ -1000,7 +1011,7 @@
 				item: "minecraft:dragon_breath"
 				type: "item"
 			}]
-			x: -0.5d
+			x: 0.0d
 			y: 3.5d
 		}
 		{
@@ -1029,7 +1040,7 @@
 				item: "kubejs:dragon_dna"
 				type: "item"
 			}]
-			x: -4.0d
+			x: -3.5d
 			y: 1.0d
 		}
 		{
@@ -1044,7 +1055,7 @@
 				item: "createchromaticreturn:refined_mechanism"
 				type: "item"
 			}]
-			x: -6.0d
+			x: -5.0d
 			y: -1.0d
 		}
 		{
@@ -1069,7 +1080,7 @@
 				item: "minecraft:end_crystal"
 				type: "item"
 			}]
-			x: -6.0d
+			x: -5.0d
 			y: 1.5d
 		}
 		{
@@ -1094,7 +1105,7 @@
 				}
 			]
 			title: "Automating Wither"
-			x: -10.5d
+			x: -10.0d
 			y: 0.0d
 		}
 		{
@@ -1112,7 +1123,7 @@
 				item: "thermal:cured_rubber_block"
 				type: "item"
 			}]
-			x: -1.5d
+			x: -1.0d
 			y: 3.5d
 		}
 		{
@@ -1123,7 +1134,7 @@
 				item: "thermal:rubberwood_sapling"
 				type: "item"
 			}]
-			x: -18.0d
+			x: -17.5d
 			y: 0.5d
 		}
 		{
@@ -1134,7 +1145,7 @@
 				item: "thermal:device_tree_extractor"
 				type: "item"
 			}]
-			x: -16.5d
+			x: -16.0d
 			y: 0.5d
 		}
 		{
@@ -1145,7 +1156,7 @@
 				item: "thermal:rubber"
 				type: "item"
 			}]
-			x: -15.0d
+			x: -14.5d
 			y: 0.5d
 		}
 		{
@@ -1159,7 +1170,7 @@
 				type: "item"
 			}]
 			x: -6.0d
-			y: 4.0d
+			y: 3.0d
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
@@ -1188,7 +1199,6 @@
 		}
 		{
 			dependencies: [
-				"4B0CD7A24F972E0A"
 				"756E1F5554A92D83"
 				"09ED24BFED3BBE29"
 			]
@@ -1201,7 +1211,7 @@
 				type: "item"
 			}]
 			x: 2.5d
-			y: 0.5d
+			y: 1.0d
 		}
 		{
 			description: ["Trap a wither inside a stasis chamber and place a fluid laser base directly above it to passively obtain ether gas."]
@@ -1241,7 +1251,7 @@
 				}
 			]
 			title: "Getting Ether Gas"
-			x: -10.5d
+			x: -10.0d
 			y: 3.0d
 		}
 		{
@@ -1262,7 +1272,7 @@
 				item: "industrialforegoing:machine_frame_supreme"
 				type: "item"
 			}]
-			x: -10.5d
+			x: -10.0d
 			y: 1.5d
 		}
 		{
@@ -1274,7 +1284,7 @@
 				item: "thermal:cured_rubber"
 				type: "item"
 			}]
-			x: -13.5d
+			x: -13.0d
 			y: 0.5d
 		}
 		{
@@ -1300,7 +1310,7 @@
 					type: "item"
 				}
 			]
-			x: -13.5d
+			x: -12.5d
 			y: 4.5d
 		}
 		{
@@ -1330,7 +1340,7 @@
 					type: "item"
 				}
 			]
-			x: -15.0d
+			x: -14.0d
 			y: 4.5d
 		}
 		{
@@ -1356,7 +1366,7 @@
 				}
 			]
 			title: "Composting bio mass"
-			x: -16.5d
+			x: -15.5d
 			y: 4.5d
 		}
 		{
@@ -1373,7 +1383,7 @@
 				type: "item"
 			}]
 			title: "H2O = H2 + O-"
-			x: -18.0d
+			x: -17.0d
 			y: 4.5d
 		}
 		{
@@ -1392,7 +1402,7 @@
 				item: "thermal:machine_efficiency_creative_augment"
 				type: "item"
 			}]
-			x: -2.5d
+			x: -2.0d
 			y: -0.5d
 		}
 		{
@@ -1411,7 +1421,7 @@
 				item: "thermal:machine_catalyst_creative_augment"
 				type: "item"
 			}]
-			x: -2.5d
+			x: -2.0d
 			y: 3.5d
 		}
 		{
@@ -1457,9 +1467,9 @@
 				}
 			]
 			title: "Induction Matrix"
-			x: -8.0d
+			x: -7.0d
 			y: 1.5d
 		}
 	]
-	title: "Tier 5: Endgame"
+	title: "Chapter 5: Endgame"
 }
