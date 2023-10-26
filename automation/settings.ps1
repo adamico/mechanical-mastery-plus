@@ -30,7 +30,7 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "v0.2.0"
+$MODPACK_VERSION = "v1.0.0"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
@@ -65,7 +65,7 @@ $CLIENT_CHANGELOG = "The Changelog is currently being written."
 $GAME_VERSIONS = @(9366)
 
 # Can be "alpha", "beta" or "release"
-$CLIENT_RELEASE_TYPE = "beta"
+$CLIENT_RELEASE_TYPE = "release"
 
 #=====================================================================//
 #  DEPENDENCIES
@@ -84,16 +84,19 @@ $MODLIST_CREATOR_JAR = "ModListCreator-4.0.3-fatjar.jar"
 $CLIENT_FILE_AUTHOR = "kc00l"
 
 $FOLDERS_TO_INCLUDE_IN_CLIENT_FILES = @(
-    "config",
-    "defaultconfigs",
-    "kubejs",
-    "scripts",
-    "schematics"
-    )
+	"buddingcrystals",
+	"config",
+	"defaultconfigs",
+	"kubejs",
+	"scripts",
+	"schematics"
+	)
 
 $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"ae2/client.json",
 	"appleskin-client.toml",
+	"betteradvancements-client.toml",
+	"blockrunner-client.toml",
 	"buildinggadgets-client.toml",
 	"carryon-client.toml",
 	"chiselsandbits-client.toml",
@@ -105,6 +108,7 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"craftingstation-client.toml",
 	"craftingtweaks-client.toml",
 	"create-client.toml",
+	"create_jetpack-client.toml",
 	"cucumber-client.toml",
 	"curios-client.toml",
 	"dankstorage-client.toml",
@@ -120,6 +124,7 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"gravestone-client.toml",
 	"hyperbox-client.toml",
 	"ironfurnaces-client.toml",
+	"itlt-client.toml",
 	"jei/bookmarks.ini",
 	"jei/jei-client.ini",
 	"mcjtylib-client.toml",
@@ -128,9 +133,12 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"Mekanism/additions-client.toml",
 	"modnametooltip-client.toml",
 	"modularrouters-client.toml",
-	"mouseTweaks.cfg",
+	"MouseTweaks.cfg",
 	"online_detector-client.toml",
 	"patchouli-client.toml",
+	"personality-client.toml",
+	"placebo.cfg",
+	"powah.json5",
 	"ProjectE/client.toml"
 	"questsadditions-client.toml",
 	"refinedstorage-client.toml",
@@ -139,6 +147,8 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"rftoolspower-client.toml",
 	"rftoolsstorage-client.toml",
 	"rftoolsutility-client.toml",
+	"rubidium-mixins.properties",
+	"rubidium-options.json",
 	"shetiphiancore-client.toml",
 	"sidebar_buttons.json",
 	"smoothboot.json",
@@ -149,6 +159,8 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"thermal-client.toml",
 	"travelersbackpack-client.toml",
 	"visualworkbench-client.toml",
+	"voicechat/voicechat-client.properties",
+	"voicechat-client.toml",
 	"xnet-client.toml"
 )
 
@@ -181,7 +193,7 @@ $ENABLE_MODPACK_UPLOADER_MODULE = $true
 
 # Toggle server file feature on/off
 # Default: $true
-$ENABLE_SERVER_FILE_MODULE = $true
+$ENABLE_SERVER_FILE_MODULE = $false
 
 # Toggle serverstarter compatibility on/off
 # This will update the "modpackUrl" in the file found at $SERVER_SETUP_CONFIG_PATH

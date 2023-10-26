@@ -22,7 +22,6 @@
 		{
 			click: "https://www.curseforge.com/minecraft/mc-mods/mekanism"
 			corner: false
-			dependency: "002491C83950B2B1"
 			dev: false
 			height: 2.0d
 			hover: ["visit https://www.curseforge.com/minecraft/mc-mods/mekanism"]
