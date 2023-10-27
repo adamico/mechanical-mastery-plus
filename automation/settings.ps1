@@ -30,12 +30,12 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "v1.0.0"
+$MODPACK_VERSION = "v1.0.1"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
 # Should be "$null" if this is the first release
-$LAST_MODPACK_VERSION = "v0.1.4"
+$LAST_MODPACK_VERSION = "v1.0.0"
 
 # Which modloader the modpack uses
 # Can be "forge" or "fabric"
@@ -164,7 +164,16 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"xnet-client.toml"
 )
 
-$FOLDERS_TO_REMOVE_FROM_CLIENT_FILES = @("crafttweaker_examples", "fancymenu_setups", "localconfigs", "kubejs/probe", "local/ftbutilities", "local/ftbchunks/data", "local/ftbultimine", "local/ftbultimine-client.snbt")
+$FOLDERS_TO_REMOVE_FROM_CLIENT_FILES = @(
+	"crafttweaker_examples",
+	"fancymenu_setups",
+	"localconfigs",
+	"kubejs/probe",
+	"local/ftbutilities",
+	"local/ftbchunks/data",
+	"local/ftbultimine",
+	"local/ftbultimine-client.snbt"
+)
 
 # Example: 
 # $FILES_TO_INCLUDE_IN_MODS_FOLDER_IN_CLIENT_FILES = @("mods/Apotheosis-1.19.2-6.2.1.jar", "mods/create-1.19.2-0.5.1.b.jar")
@@ -189,17 +198,17 @@ $ENABLE_CLIENT_FILE_MODULE = $true
 # Toggle the modpack uploader on/off
 # Setting this to $false will also disable the Server File and Changelog Generator Modules.
 # Default: $true
-$ENABLE_MODPACK_UPLOADER_MODULE = $true
+$ENABLE_MODPACK_UPLOADER_MODULE = $false
 
 # Toggle server file feature on/off
 # Default: $true
-$ENABLE_SERVER_FILE_MODULE = $false
+$ENABLE_SERVER_FILE_MODULE = $true
 
 # Toggle serverstarter compatibility on/off
 # This will update the "modpackUrl" in the file found at $SERVER_SETUP_CONFIG_PATH
 # to point to your newly created client files on the CurseForge CDN.
 # Default: $false
-$ENABLE_SERVERSTARTER_MODULE = $false
+$ENABLE_SERVERSTARTER_MODULE = $true
 
 # Toggle automatic changelog generator on/off
 # This module requires an older modpack manifest zip to be present, 

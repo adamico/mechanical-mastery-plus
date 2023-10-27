@@ -6,6 +6,75 @@ ServerEvents.recipes(event => {
 	
 	//tier0
 
+	event.replaceInput({id: 'create:crafting/appliances/slime_ball'}, 'create:dough', '#forge:dough');
+
+	event.remove({id: 'framedblocks:framed_cube'});
+	event.custom({
+		"type": "woodworks:sawmill",
+		"ingredient": {
+			"tag": "minecraft:logs"
+		},
+		"result": "framedblocks:framed_cube",
+		"count": 4,
+	});
+
+	event.replaceInput({output: 'integrateddynamics:squeezer'}, '#minecraft:planks', 'framedblocks:framed_cube');
+	event.replaceInput({output: 'integrateddynamics:squeezer'}, 'minecraft:stick', 'createaddition:iron_rod');
+
+	['squeezer', 'mechanical_squeezer'].forEach(recipe => {
+		event.remove({id: `integrateddynamics:${recipe}/convenience/minecraft_dye_white_bone`});
+		event.custom({
+			type: `integrateddynamics:${recipe}`,
+			item: {
+				item: "minecraft:bone"
+			},
+			result: {
+				items: [
+					{
+						item: {
+							item: "minecraft:bone_meal",
+							count: 3
+						}
+					},
+					{
+						item: {
+							item: "minecraft:bone_meal",
+							count: 1
+						},
+						chance: 0.5
+					},
+					{
+						"item": {
+							item: "minecraft:white_dye",
+							count: 2
+						},
+						chance: 0.5
+					}
+				]	
+			},
+			duration: 10
+		});
+
+		event.remove({id: `integrateddynamics:${recipe}/ore/flint`});
+		event.custom({
+			type: `integrateddynamics:${recipe}`,
+			item: "minecraft:gravel",
+			result: {
+				items: [
+					{
+						item: "minecraft:sand"
+					},
+					{
+						item: "minecraft:flint",
+						chance: 0.5
+					}
+				]
+			},
+			duration: 30
+		})
+	});
+
+
 	//tier1
   event.shapeless('kubejs:cube1_packaged', ['kubejs:cube1', 'kubejs:cube1', 'kubejs:cube1', 'kubejs:cube1']);
 	event.recipes.thermal.press('kubejs:cube1_packaged', 'kubejs:cube1').energy(600 * 20);

@@ -115,7 +115,7 @@
 			}]
 			title: "De lapide emptus"
 			x: 3.0d
-			y: 2.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["491EB18107FC8776"]
@@ -141,13 +141,10 @@
 			}]
 			title: "E fructu arbor cognoscitur"
 			x: 3.0d
-			y: -2.0d
+			y: -1.5d
 		}
 		{
-			dependencies: [
-				"640F06D0A7A8C63A"
-				"29D5601941CC9696"
-			]
+			dependencies: ["29D5601941CC9696"]
 			description: [
 				"\"&oWonderful! An inscriber, I wonder what can I do with it...&r\""
 				""
@@ -176,7 +173,6 @@
 					type: "item"
 				}
 			]
-			shape: "gear"
 			tasks: [
 				{
 					id: "1516922219022AB1"
@@ -191,7 +187,7 @@
 			]
 			title: "HAMM... INSCRIBAH!"
 			x: 12.0d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
 			dependencies: [
@@ -233,7 +229,7 @@
 			}]
 			title: "Another one bites the..."
 			x: 9.0d
-			y: 2.0d
+			y: 2.5d
 		}
 		{
 			dependencies: ["793AABD9C2DEC680"]
@@ -271,7 +267,7 @@
 			}]
 			title: "Ingots"
 			x: 10.5d
-			y: 2.0d
+			y: 2.5d
 		}
 		{
 			dependencies: ["258878D4F87E9F1E"]
@@ -302,7 +298,7 @@
 				type: "item"
 			}]
 			x: 4.5d
-			y: -2.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["6CC80ACF716A2566"]
@@ -320,7 +316,7 @@
 			}]
 			title: "No, there's no golem"
 			x: 6.0d
-			y: -2.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["6C83711E303711B7"]
@@ -337,7 +333,7 @@
 				type: "item"
 			}]
 			x: 7.5d
-			y: -2.0d
+			y: -1.5d
 		}
 		{
 			dependencies: [
@@ -357,7 +353,7 @@
 				type: "item"
 			}]
 			x: 7.5d
-			y: 2.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["5D6996CC9444ADE7"]
@@ -378,7 +374,7 @@
 				type: "item"
 			}]
 			x: 4.5d
-			y: 2.0d
+			y: 1.5d
 		}
 		{
 			dependencies: ["2939AEFF3B458884"]
@@ -397,7 +393,7 @@
 				type: "item"
 			}]
 			x: 4.5d
-			y: 3.0d
+			y: 2.5d
 		}
 		{
 			dependencies: ["066BF5AF5165E3AB"]
@@ -542,7 +538,7 @@
 				type: "item"
 			}]
 			x: 4.5d
-			y: 4.0d
+			y: 3.5d
 		}
 		{
 			dependencies: ["3DE84738AD56FC5C"]
@@ -556,7 +552,7 @@
 				type: "item"
 			}]
 			x: 3.5d
-			y: 4.0d
+			y: 3.5d
 		}
 		{
 			dependencies: ["3DE84738AD56FC5C"]
@@ -579,7 +575,7 @@
 				type: "item"
 			}]
 			x: 5.5d
-			y: 4.0d
+			y: 3.5d
 		}
 		{
 			dependencies: ["0843FDA66C3268E6"]
@@ -597,7 +593,7 @@
 				type: "item"
 			}]
 			x: 7.5d
-			y: -1.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["4FD2F442421FE4CE"]
@@ -615,7 +611,7 @@
 				type: "item"
 			}]
 			x: 7.5d
-			y: 1.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["47B8CC100AA540EB"]
@@ -632,7 +628,7 @@
 				type: "item"
 			}]
 			x: 10.5d
-			y: -2.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["0843FDA66C3268E6"]
@@ -648,7 +644,7 @@
 				type: "item"
 			}]
 			x: 9.0d
-			y: -2.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["2939AEFF3B458884"]
@@ -667,7 +663,164 @@
 				type: "item"
 			}]
 			x: 6.0d
-			y: 2.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["7642C16EC994F8B5"]
+			description: ["With a Vibration Chamber you can finally stop cranking the inscriber."]
+			id: "09BAD2F7D01D16FD"
+			rewards: [
+				{
+					id: "0F2165D0F13CC47C"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "13381831351CFE93"
+					item: "ae2:vibration_chamber"
+					type: "item"
+				}
+			]
+			shape: "gear"
+			subtitle: "He who has begun his task has half done it"
+			tasks: [{
+				id: "447D9411372AF198"
+				item: "ae2:vibration_chamber"
+				type: "item"
+			}]
+			title: "Dimidium facti, qui coepit, habet"
+			x: 13.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0230E9F2A7377AB8"]
+			description: ["Glass is rare nowadays! And methods to obtain it as well..."]
+			id: "7642C16EC994F8B5"
+			rewards: [
+				{
+					count: 4
+					id: "70FF5A8A3F4685E3"
+					item: "minecraft:glass"
+					type: "item"
+				}
+				{
+					id: "24245C5F6C0445FA"
+					type: "xp"
+					xp: 100
+				}
+			]
+			tasks: [{
+				id: "4DA53617520DFB45"
+				item: "ae2:energy_acceptor"
+				type: "item"
+			}]
+			x: 12.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"35B1004C26C828D0"
+				"0843FDA66C3268E6"
+			]
+			description: [
+				"Don't forget (the milk) that you cannot process stones in the furnace. "
+				""
+				"Use the kiln!"
+			]
+			id: "0230E9F2A7377AB8"
+			rewards: [{
+				count: 4
+				id: "489701ED71D55288"
+				item: "minecraft:glass"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5145DC852C6E8F8F"
+				item: "minecraft:glass"
+				type: "item"
+			}]
+			x: 10.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["178A06063C3F8666"]
+			id: "35B1004C26C828D0"
+			rewards: [{
+				count: 4
+				id: "1FBE114BE02638EE"
+				item: "minecraft:sand"
+				type: "item"
+			}]
+			tasks: [{
+				id: "706350C86815DA23"
+				item: "minecraft:sand"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"640F06D0A7A8C63A"
+				"6BB4AE57210C496A"
+			]
+			description: [
+				"The squeezer from Integrated Dynamics is a manual pulverizer/compressor/extractor used to extract many solid and liquid resources."
+				""
+				"There's a way to automate it using a bouncing entity instead of the player."
+				""
+				""
+				"{\"text\": \"MM Discord server is your friend\", \"color\": \"orange\", \"underlined\": true, \"clickEvent\": {\"action\": \"open_url\", \"value\": \"https://discord.com/channels/1022548429337006111/1164285420394266725/1164297226646990918\"}}"
+				""
+				"Here you will need it to create gravel and sand."
+			]
+			id: "178A06063C3F8666"
+			rewards: [{
+				id: "3F11BFD22BD4653C"
+				item: "minecraft:armor_stand"
+				type: "item"
+			}]
+			tasks: [{
+				id: "72BCD575F9D7B944"
+				item: "integrateddynamics:squeezer"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["5B6E21BFD8E56705"]
+			id: "6BB4AE57210C496A"
+			rewards: [{
+				id: "32B558B2858BB656"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "718F2876E674ED59"
+				item: "framedblocks:framed_cube"
+				type: "item"
+			}]
+			x: 12.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["640F06D0A7A8C63A"]
+			description: ["The sawmill is minecraft:wood_cutter"]
+			id: "5B6E21BFD8E56705"
+			rewards: [{
+				count: 4
+				id: "154B783164902425"
+				item: "minecraft:oak_log"
+				type: "item"
+			}]
+			tasks: [{
+				id: "0AE43F67BD229178"
+				item: "woodworks:sawmill"
+				type: "item"
+			}]
+			x: 12.0d
+			y: 2.5d
 		}
 	]
 	title: "Chapter 0: Primitive beginnings"

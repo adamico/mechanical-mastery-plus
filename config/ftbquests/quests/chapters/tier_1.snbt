@@ -65,7 +65,7 @@
 			]
 			title: "Pulverizer"
 			x: -1.5d
-			y: -0.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["547050DB11C5FFB7"]
@@ -145,27 +145,16 @@
 				""
 				"By crafting some gears and rods together, you managed to craft the first of the mechanical essences! "
 				""
-				"You even managed to compress 4 essences into one crystal."
-				""
-				"Using the Shop you can now sell crystals to gain some funds for your future factory."
-				""
 				"You'll soon realize the mechanical crystals have a value higher than the sum of its parts, so if you must automate the process to proceed in your quest."
 			]
 			hide: false
 			id: "7A0CB1037E6BE4D7"
-			rewards: [
-				{
-					count: 16
-					id: "23176832183B31BF"
-					item: "kubejs:cube1_packaged"
-					type: "item"
-				}
-				{
-					id: "3F6B0AEAAE9F8A42"
-					item: "adminshop:shop"
-					type: "item"
-				}
-			]
+			rewards: [{
+				count: 16
+				id: "23176832183B31BF"
+				item: "kubejs:cube1_packaged"
+				type: "item"
+			}]
 			shape: "gear"
 			subtitle: "Love is the essence of life"
 			tasks: [
@@ -246,7 +235,7 @@
 			]
 			title: "Trading 101"
 			x: 5.0d
-			y: 1.0d
+			y: 0.5d
 		}
 		{
 			dependencies: [
@@ -369,7 +358,7 @@
 			y: 0.5d
 		}
 		{
-			dependencies: ["09BAD2F7D01D16FD"]
+			dependencies: ["7899043495724E2A"]
 			description: ["It's time to craft your first power generator: a stirling dynamo. Although far from ideal, it will be of great importance early on."]
 			hide: false
 			hide_details_until_startable: false
@@ -407,7 +396,7 @@
 			}]
 			title: "Can Thermal machines be more efficient?"
 			x: 5.0d
-			y: -2.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["595F27B933ECC168"]
@@ -439,11 +428,11 @@
 				title: "Energy transport, please?"
 				type: "checkmark"
 			}]
-			x: -3.5d
-			y: 1.0d
+			x: -2.5d
+			y: 0.5d
 		}
 		{
-			dependencies: ["19499868D936A165"]
+			dependencies: ["09BAD2F7D01D16FD"]
 			description: [
 				"&lThermal Series mod&r"
 				""
@@ -472,33 +461,7 @@
 				title: "Thermal Foundation"
 				type: "item"
 			}]
-			x: -6.5d
-			y: -0.5d
-		}
-		{
-			dependencies: ["7899043495724E2A"]
-			description: ["With a Vibration Chamber you can finally stop cranking the inscriber."]
-			id: "09BAD2F7D01D16FD"
-			rewards: [
-				{
-					id: "0F2165D0F13CC47C"
-					type: "xp"
-					xp: 100
-				}
-				{
-					id: "13381831351CFE93"
-					item: "ae2:vibration_chamber"
-					type: "item"
-				}
-			]
-			subtitle: "He who has begun his task has half done it"
-			tasks: [{
-				id: "447D9411372AF198"
-				item: "ae2:vibration_chamber"
-				type: "item"
-			}]
-			title: "Dimidium facti, qui coepit, habet"
-			x: -5.0d
+			x: -6.0d
 			y: -0.5d
 		}
 		{
@@ -557,8 +520,8 @@
 				item: "thermal:dynamo_output_augment"
 				type: "item"
 			}]
-			x: -3.5d
-			y: -2.0d
+			x: -4.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["7C6DA4DDF8FF0360"]
@@ -620,8 +583,8 @@
 				type: "item"
 			}]
 			title: "Pulverizer Catalysts"
-			x: -2.5d
-			y: 0.5d
+			x: -1.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["74C8E42F285DC4F6"]
@@ -664,6 +627,27 @@
 			}]
 			x: 6.5d
 			y: -1.5d
+		}
+		{
+			dependencies: ["595F27B933ECC168"]
+			description: [
+				"Using the Shop you can now buy some resources to craft Thermal Machines."
+				""
+				"Don't worry about money, you will start gaining a lot of it very soon!"
+			]
+			id: "30AFF35D8B46E82B"
+			rewards: [{
+				id: "37D6B3FE7F4C71E7"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "0794BE0AE18C3ECF"
+				item: "adminshop:shop"
+				type: "item"
+			}]
+			x: -4.5d
+			y: 0.5d
 		}
 	]
 	title: "Chapter 1: Thermal Series"

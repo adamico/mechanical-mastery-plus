@@ -4,6 +4,12 @@ ServerEvents.recipes(event => {
   const rodMaterials = ['iron', 'copper', 'gold'];
 
   rodMaterials.forEach(material => {
+		event.shaped(`createaddition:${material}_rod`, [
+			'I',
+			'I'
+		], {
+			I: `#forge:ingots/${material}`
+		});
     event.recipes.thermal.press([Item.of(`createaddition:${material}_rod`, 2)], [`#forge:ingots/${material}`, 'kubejs:press_rod_die']).energy(600);
   });
   

@@ -53,7 +53,6 @@ ServerEvents.tags('item', event => {
       event.add('forge:alloys', materialName);
     });
   });
-
   
   ['enderium', 'lumium', 'signalum'].forEach(alloy => {
     ['ingot', 'block'].forEach(type => {
@@ -61,13 +60,11 @@ ServerEvents.tags('item', event => {
     });
     event.add('c:hidden_from_recipe_viewers', `${alloy}_dust`);
   });
-});
 
+  event.add('minecraft:terracotta', 'clayworks:glazed_terracotta');
+});
 
 ServerEvents.tags('block', event => {
   event.add('blockrunner:very_quick_blocks', '#engineersdecor:plain_concretes');
-  // let concretes = event.get('engineersdecor:plain_concretes').getObjectIds();
-  // concretes.forEach(concrete => {
-  //   event.add('blockrunner:very_quick_blocks', concrete);
-  // });
+  event.add('forge:budding', '#forge:budding_blocks');
 });

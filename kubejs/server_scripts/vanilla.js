@@ -7,8 +7,9 @@ ServerEvents.recipes(event => {
 		{name: 'glass', mod: 'forge'},
 		{name: 'sandstone', mod: 'forge'},
 		{name: 'stone', mod: 'forge'},
-		{name: 'coals', mod: 'minecraft'}
+		{name: 'coals', mod: 'minecraft'},
 	];
+	
 	outputs.forEach(output => {
 		event.remove({type: 'smelting', output: `#${output.mod}:${output.name}`});
 		event.remove({type: 'smelting', output: '#engineersdecor:accepted_mineral_smelter_input'});

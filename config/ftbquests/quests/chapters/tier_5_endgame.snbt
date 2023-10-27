@@ -292,12 +292,6 @@
 			subtitle: "Certificate of Doneness!"
 			tasks: [
 				{
-					id: "52E114BEEF25A1BA"
-					max_input: 1000L
-					type: "forge_energy"
-					value: 2147483647L
-				}
-				{
 					amount: 2147483647000L
 					fluid: "industrialforegoing:essence"
 					id: "1658F8FB52CCAB0F"

@@ -3,6 +3,6 @@
   "texture": "minecraft:item/redstone",
   "growth_chance": 1,
   "dropped_item": "minecraft:redstone",
-  "normal_drop_chance": 2,
-  "max_drop_chance": 4
+  "normal_drop_chance": 1,
+  "max_drop_chance": 2
 }

@@ -46,7 +46,7 @@ install:
 
     # Link to where the file where the modpack can be distributed
     # This supports loading from local files as well for most pack types if there is file://{PathToFile} in the beginning
-    modpackUrl: https://media.forgecdn.net/files/4791/987/Enigmatica9-1.14.2.zip
+    modpackUrl: https://media.forgecdn.net/files/4817/968/mechanical-mastery-plus-v1.0.0.zip
 
     # This is used to specify in which format the modpack is distributed, the server launcher has to handle each individually if their format differs
     # current supported formats:
@@ -59,35 +59,42 @@ install:
     formatSpecific:
         # optional paramenter used for curse to specify a whole project to ignore (mostly if it is client side only)
         ignoreProject:
-            - 231275 # Ding
-            - 521714 # PonderJS
-            - 363363 # Extreme Sound Muffler
-            - 613067 # audio extension for fancymenu
-            - 606159 # auudio
-            - 367706 # fancymenu
-            - 552324 # barista
-            - 533942 # bridging mod
-            - 459701 # catalogue
+            - 613067 # audio extension for fancymenu  
+            - 606159 # auudio  
+            - 552324 # barista  
+            - 533942 # bridging mod  
+            - 459701 # catalogue  
             - 251407 # client tweaks
-            - 457570 # configured
-            - 250398 # controlling
-            - 373014 # default world type
+            - 888790 # client crafting
+            - 457570 # configured  
+            - 250398 # controlling  
+            - 373014 # default world type  
+            - 231275 # Ding  
             - 511770 # DrippyLoadingScreen
+            - 908741 # embeddium
+            - 363363 # Extreme Sound Muffler  
+            - 367706 # fancymenu
+            - 882495 # fix gpu memory leak
             - 280294 # FpsReducer
             - 686911 # ImmediatelyFast
-            - 325492 # light-overlay
-            - 821790 # Lightspeed
-            - 60089  # MouseTweaks
+            - 232791 # it's the little things
+            - 325492 # light-overlay  
+            - 821790 # Lightspeed  
+            - 60089  # MouseTweaks   
+            - 521714 # PonderJS  
             - 585406 # probejs
-            - 237701 # ReAuth
-            - 853424 # Reforgium
-            - 654373 # rubidium-extra
-            - 574856 # rubidium
-            - 670986 # saturn
-            - 334853 # SimpleDiscordRichPresence
-            - 663125 # TextruesRubidiumOptions
+            - 570368 # Raised
+            - 237701 # ReAuth  
+            - 853424 # Reforgium  
+            - 574856 # rubidium  
+            - 654373 # rubidium-extra  
+            - 670986 # saturn  
+            - 411816 # Simple Discord RPC
+            - 910506 # TexTrue's embeddium options
+            - 663125 # Textrues Rubidium Options  
             - 282313 # TipTheScales
-            - 635427 # Yeetus Experimentus
+            - 271740 # Toast Control
+            - 635427 # Yeetus Experimentus  
 
     # The base path where the server should be installed to, ~ for current path
     baseInstallPath: ~
@@ -96,28 +103,33 @@ install:
     # this can either use regex or glob {default glob: https://docs.oracle.com/javase/8/docs/api/java/nio/file/FileSystem.html#getPathMatcher-java.lang.String-}
     # specify with regex:.... or glob:.... if you want to force a matching type
     ignoreFiles:
-        - resources/**
+        - config/*-client.toml
+        - config/ftbquests/quests/chapters/configuration_panel.snbt
+        - config/openloader/resources/**
+        - config/simple-rpc/**
+        - defaultconfigs/*-client.toml
+        - config/itlt/**
         - kubejs/assets/**
         - kubejs/client_scripts/**
         - kubejs/probe/**
-        - building_gadgets_patterns/**
-        - config/*-client.toml
-        - defaultconfigs/*-client.toml
-        - local/**
+        - kubejs/config/client.properties
+        - kubejs/config/probejs.json
         - lightspeed-cache/**
-        - fancymenu_data/**
-        - fancymenu_instance_data/**
-        - fancymenu_setups/**
+        - local/**
         - not-enough-crashes/**
+        - resources/**
+        - resourcepacks/**
+        - schematics/**
         - skyblock_exports/**
-        - backups/**
-
 
     # often a server needs more files, which are nearly useless on the client, such as tickprofiler
     # This is a list of files, each ' - ' is a new file:
     # url is the directlink to the file, destination is the path to where the file should be copied to
     additionalFiles:
-        ~
+        - url: https://media.forgecdn.net/files/4285/455/PlayerTrade-1.19.2-1.1.jar
+          destination: mods/PlayerTrade-1.19.2-1.1.jar
+        - url: https://media.forgecdn.net/files/4775/501/dcintegration-forge-3.0.3-1.19.2.jar
+          destination: mods/dcintegration-forge-3.0.3-1.19.2.jar
         #- url: https://media.forgecdn.net/files/2844/278/restrictedportals-1.15-1.0.jar
         #  destination: mods/restrictedportals-1.15-1.0.jar
         #- url: https://media.forgecdn.net/files/2874/966/Morpheus-1.15.2-4.2.46.jar

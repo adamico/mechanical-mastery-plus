@@ -44,7 +44,7 @@ ServerEvents.recipes(event => {
   let tier4SItems = ['Liquid Experience', 'Refined Fuel', 'Lava'];
   createPermit(4, tier4BItems, tier4SItems);
 
-  event.replaceInput({id: 'adminshop:shop'}, 'minecraft:ender_chest', 'kubejs:cube1_packaged');
+  event.replaceInput({id: 'adminshop:shop'}, 'minecraft:ender_chest', 'ironchest:crystal_chest');
   event.replaceInput({id: 'adminshop:buyer_1'}, 'minecraft:ender_chest', 'kubejs:cube1_packaged');
   event.replaceInput({id: 'adminshop:buyer_2'}, 'minecraft:barrel', 'kubejs:cube2_packaged');
   event.replaceInput({id: 'adminshop:buyer_3'}, 'minecraft:barrel', 'kubejs:cube3_packaged');
