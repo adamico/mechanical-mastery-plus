@@ -14,7 +14,6 @@ ServerEvents.recipes(event => {
 
   let process_metals = (metals) => {
     metals.forEach(metal => {
-			console.log('Processing metal: ' + metal.name);
 			[{name: 'smelting', time: 200}, {name: 'blasting', time: 100}].forEach((recipe) => {
 				event[recipe.name](Item.of(`#forge:nuggets/${metal.name}`, 6), Item.of(`#forge:raw_materials/${metal.name}`)).xp(0.6).cookingTime(recipe.time);
 			});
@@ -23,6 +22,7 @@ ServerEvents.recipes(event => {
 			event.recipes.createMilling([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#mekanism:clumps/${metal.name}`)).processingTime(200);			
 			event.recipes.createCrushing([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#mekanism:clumps/${metal.name}`)).processingTime(100);	
 			event.recipes.thermal.pulverizer([Item.of(`#forge:dusts/${metal.name}`).withChance(1.2), metal.extraDust], Item.of(`#mekanism:dirty_dusts/${metal.name}`)).energy(3000);
+			event.recipes.thermal.furnace(Item.of(`#forge:ingots/${metal.name}`), `#forge:dusts/${metal.name}`).xp(0.2);
 			event.recipes.createSplashing([Item.of(`#forge:nuggets/${metal.name}`, 9), Item.of(`#forge:nuggets/${metal.name}`, 2).withChance(0.1)], `create:crushed_raw_${metal.name}`);
 		});
   };
@@ -44,8 +44,6 @@ ServerEvents.recipes(event => {
 
 	event.remove({type: 'create:splashing', input: '#create:crushed_raw_materials'})
 	event.remove({type: 'mekanism:crushing', output: '#forge:dusts'});
-
-	// event.remove({type: 'blasting', input: })
 
 	process_metals(all_metals);
 	
