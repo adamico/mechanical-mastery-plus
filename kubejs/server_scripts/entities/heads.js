@@ -8,6 +8,4 @@ ServerEvents.recipes((event) => {
       }
     }
   );
-
-  
  })

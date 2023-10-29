@@ -4,10 +4,9 @@
 	filename: "tier_5_endgame"
 	group: "2D94E5A1412E2495"
 	hide_quest_details_until_startable: true
-	hide_quest_until_deps_visible: true
-	icon: "projectexpansion:final_star"
+	icon: "kubejs:dragon_dna"
 	id: "41DDE820BE913888"
-	order_index: 4
+	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{
@@ -17,9 +16,10 @@
 				""
 				"They were guiding me, slowly teaching me how to create stronger, more powerful catalysts, in order to achieve the final goal. The final star awaits me...\""
 				""
-				"In this chapter you will mix and match Create Chromatic Return, Mekanism and Project E."
+				"In this chapter you will mix and match almost all the major mods of the pack"
+				""
+				"The cute Create: Chromatic Return has a cameo appearance too!"
 			]
-			hide_dependent_lines: true
 			icon: "kubejs:cube4"
 			id: "07980075BFE4C586"
 			rewards: [{
@@ -35,13 +35,13 @@
 				type: "checkmark"
 			}]
 			title: "After all these years..."
-			x: -15.0d
+			x: -19.5d
 			y: 1.5d
 		}
 		{
 			dependencies: ["081C1697195680DC"]
 			description: [
-				"Some say, this is what the emptyness of space is made of."
+				"\"Some say, this is what the universal void is made of! I thought that was called 'Ether'... weird!\""
 				""
 				"Infusing things with raw essence of darkness is inefficient, if I enrich it first I can extract *8 times* more darkness essence out of it."
 			]
@@ -66,11 +66,19 @@
 				}
 			]
 			x: -13.0d
-			y: 4.5d
+			y: 2.5d
 		}
 		{
-			dependencies: ["059DCF9720BF62A2"]
-			description: ["A unique superalloy, nearly 100% inmune to any type of radiation."]
+			dependencies: [
+				"059DCF9720BF62A2"
+				"782C51624A9C63BD"
+			]
+			description: [
+				"I lied! There's a final step to Enrich HDPE pellets into sheets."
+				""
+				"A unique superalloy, nearly 100% inmune to any type of radiation."
+			]
+			hide_dependent_lines: true
 			id: "133E1F837FA4A41B"
 			rewards: [{
 				count: 4
@@ -78,12 +86,20 @@
 				item: "mekanism:hdpe_sheet"
 				type: "item"
 			}]
-			tasks: [{
-				id: "09B189D88272BD7C"
-				item: "mekanism:hdpe_sheet"
-				type: "item"
-			}]
-			x: -12.0d
+			tasks: [
+				{
+					id: "09B189D88272BD7C"
+					item: "mekanism:enrichment_chamber"
+					type: "item"
+				}
+				{
+					id: "66286AA7B2314394"
+					item: "mekanism:hdpe_sheet"
+					type: "item"
+				}
+			]
+			title: "Oh Sheet, HDPE!"
+			x: -11.0d
 			y: 4.5d
 		}
 		{
@@ -100,8 +116,8 @@
 				item: "kubejs:black_hdpe_sheet"
 				type: "item"
 			}]
-			x: -11.5d
-			y: 5.5d
+			x: -7.0d
+			y: 4.0d
 		}
 		{
 			dependencies: ["53F4A40B4EAECB3E"]
@@ -117,13 +133,12 @@
 				item: "mekanism:solar_neutron_activator"
 				type: "item"
 			}]
-			x: -10.5d
-			y: 3.5d
+			x: -8.5d
+			y: 3.0d
 		}
 		{
-			dependencies: ["07980075BFE4C586"]
+			dependencies: ["059DCF9720BF62A2"]
 			description: ["With darkness essence I can now create create wither skeleton skulls, which can be used to summon the wither."]
-			hide_dependent_lines: true
 			id: "384BB4E82F5D69C6"
 			rewards: [{
 				id: "2C30B178D34BDF57"
@@ -144,13 +159,13 @@
 					type: "item"
 				}
 			]
-			x: -13.5d
-			y: 2.0d
+			x: -12.0d
+			y: 1.5d
 		}
 		{
 			dependencies: [
-				"41E380D0E0E5E75A"
 				"53F4A40B4EAECB3E"
+				"6D8D70B5DDDE619E"
 			]
 			hide_dependent_lines: true
 			id: "41D9B7AC1089FA83"
@@ -180,8 +195,8 @@
 				}
 			]
 			title: "Supercritical Phase Shifter"
-			x: -10.0d
-			y: 5.0d
+			x: -7.0d
+			y: 3.0d
 		}
 		{
 			dependencies: [
@@ -189,11 +204,7 @@
 				"13EE1ECF3DC0491D"
 				"31C75750B2530381"
 			]
-			description: [
-				"Although slow and expensive to obtain, this antimatter will certainly help me create stuff that would otherwise be physically impossible."
-				""
-				"I also discovered a way to obtain antimatter pellets through Create Chromatic Return!"
-			]
+			description: ["\"This antimatter will certainly help me create stuff that would otherwise be physically impossible!\""]
 			hide_dependent_lines: true
 			id: "6A313C7F7A10ABE7"
 			rewards: [{
@@ -207,11 +218,16 @@
 				item: "mekanism:pellet_antimatter"
 				type: "item"
 			}]
-			x: -8.0d
-			y: 1.5d
+			x: -3.5d
+			y: 2.0d
 		}
 		{
-			dependencies: ["07980075BFE4C586"]
+			dependencies: ["2F6F2DB24C399EAA"]
+			description: [
+				"Powah final component."
+				""
+				"It will require a lot of energy and high level energizing rods. Have you automated the energizing process yet?"
+			]
 			hide_dependent_lines: true
 			id: "4DA3EFBDC9FE2FDF"
 			rewards: [{
@@ -224,121 +240,116 @@
 				item: "powah:crystal_nitro"
 				type: "item"
 			}]
-			x: -13.5d
-			y: 0.0d
+			x: -5.0d
+			y: 4.0d
 		}
 		{
-			dependencies: ["07980075BFE4C586"]
-			hide_dependent_lines: true
-			id: "21736DEF38D368D1"
-			rewards: [{
-				id: "3D0254A8DBF1A816"
-				item: "createchromaticreturn:refined_mechanism"
-				type: "item"
-			}]
-			tasks: [{
-				id: "17624FD411EEB46C"
-				item: "createchromaticreturn:refined_mechanism"
-				type: "item"
-			}]
-			x: -13.5d
-			y: 1.0d
-		}
-		{
-			dependencies: [
-				"4DA3EFBDC9FE2FDF"
-				"21736DEF38D368D1"
-				"2F6F2DB24C399EAA"
-			]
+			dependencies: ["756E1F5554A92D83"]
 			description: [
-				"The &dFinal Star Shard&r allows the creation of some of the creative items."
+				"If you got this far...."
 				""
-				"Not all creative items are needed for the creative vending upgrade, some are simply optional if you want to go after them or not."
+				"{image:ftbquests:textures/gui/congratulations.png width:180 height:180 align:1}"
+				""
+				"Congratulations, you are now a "
+				""
+				"&6Mechanical Master&r!"
+				""
+				""
+				"COD acronym by"
+				""
+				"{\"text\": \"Darkstar\", \"color\": \"red\", \"underlined\": true, \"clickEvent\": {\"action\": \"open_url\", \"value\": \"https://discord.com/channels/1022548429337006111/1152905805071384586/1166841218215444580\"}, \"extra\": [{\"text\": \" from Discord\", \"color\": \"white\", \"underlined\": false}]}"
 			]
-			id: "2BA7E55C7B7EB3C3"
-			rewards: [{
-				id: "1243FCC35F5F5DB9"
-				item: "projectexpansion:final_star_shard"
-				type: "item"
-			}]
-			tasks: [{
-				id: "0694DCFB36A75BB7"
-				item: "projectexpansion:final_star_shard"
-				type: "item"
-			}]
-			x: -12.0d
-			y: 1.5d
-		}
-		{
-			dependencies: [
-				"2BA7E55C7B7EB3C3"
-				"6A313C7F7A10ABE7"
-				"146B61BAC1D8D21C"
-			]
-			description: ["There it is. The most powerful star ever created. With the EMC this gives me I would be set for life. However, I can find better uses out of it."]
-			hide_dependency_lines: true
-			hide_dependent_lines: true
-			id: "53B7C4EFD1B28F70"
-			rewards: [{
-				id: "308FBE949915C81D"
-				type: "xp"
-				xp: 100
-			}]
-			shape: "octagon"
-			tasks: [{
-				id: "440C55230602ECF4"
-				item: "projectexpansion:final_star"
-				type: "item"
-			}]
-			x: -6.0d
-			y: 1.5d
-		}
-		{
-			dependencies: [
-				"53B7C4EFD1B28F70"
-				"0F08BE53368BBA0E"
-				"4912D9951F6B69A9"
-				"001789AD77BFECCF"
-				"72B973D152D0D797"
-				"643082630E0B6CFD"
-			]
-			description: ["The true potential of the final star. With this, EMC and raw materials are something I shall never have to worry about again."]
-			hide_dependent_lines: true
-			id: "1D6666CFC0B349E1"
-			rewards: [{
-				id: "34E7321C7A21EED5"
-				item: "minecraft:grass_block"
-				type: "item"
-			}]
-			shape: "pentagon"
-			tasks: [{
-				id: "6E754D97D3E78A68"
-				item: "projectexpansion:final_power_flower"
-				type: "item"
-			}]
-			x: -2.0d
-			y: 1.5d
-		}
-		{
-			dependencies: ["1D6666CFC0B349E1"]
-			description: ["Store and retrieve items from the infinitely deep center of the final star. If you crafted this, congratulations, you win the modpack."]
+			icon: "minecraft:cod"
 			id: "79B1FCD79D650A18"
-			rewards: [{
-				id: "7A303AA3ED13A4E6"
-				item: "minecraft:cod"
-				type: "item"
-			}]
+			rewards: [
+				{
+					id: "7A303AA3ED13A4E6"
+					item: "minecraft:cod"
+					type: "item"
+				}
+				{
+					id: "6A4CF603C44761A2"
+					item: "ae2:creative_item_cell"
+					type: "item"
+				}
+				{
+					id: "783A1D5132892150"
+					item: "ae2:creative_fluid_cell"
+					type: "item"
+				}
+				{
+					id: "7568C55D1C4DEB5F"
+					item: "create:creative_crate"
+					type: "item"
+				}
+				{
+					id: "201B6013A18422A3"
+					item: "functionalstorage:creative_vending_upgrade"
+					type: "item"
+				}
+			]
 			shape: "gear"
-			tasks: [{
-				id: "3F1FE18A9C21E03D"
-				item: "functionalstorage:creative_vending_upgrade"
-				type: "item"
-			}]
-			x: -0.5d
+			subtitle: "Certificate of Doneness!"
+			tasks: [
+				{
+					amount: 2147483647000L
+					fluid: "industrialforegoing:essence"
+					id: "1658F8FB52CCAB0F"
+					type: "fluid"
+				}
+				{
+					amount: 2147483647000L
+					fluid: "mekanismgenerators:fusion_fuel"
+					id: "5BBE8B51FC4B3D1D"
+					type: "fluid"
+				}
+				{
+					amount: 2147483647000L
+					fluid: "mekanism:superheated_sodium"
+					id: "43F557F5742FC8E9"
+					type: "fluid"
+				}
+				{
+					amount: 2147483647000L
+					fluid: "industrialforegoing:ether_gas"
+					id: "529F30F9DE3D3546"
+					type: "fluid"
+				}
+				{
+					consume_items: true
+					count: 64738L
+					id: "15126A5E9BCF3EA6"
+					item: "kubejs:cube1"
+					type: "item"
+				}
+				{
+					consume_items: true
+					count: 64738L
+					id: "5B247897C3BFB08F"
+					item: "kubejs:cube2"
+					type: "item"
+				}
+				{
+					consume_items: true
+					count: 64738L
+					id: "0B25FE9034455655"
+					item: "kubejs:cube3"
+					type: "item"
+				}
+				{
+					consume_items: true
+					count: 64738L
+					id: "3FBFC65C22D77CA0"
+					item: "kubejs:cube4"
+					type: "item"
+				}
+			]
+			title: "COD"
+			x: 4.5d
 			y: 1.5d
 		}
 		{
-			dependencies: ["53B7C4EFD1B28F70"]
+			dependencies: ["756E1F5554A92D83"]
 			description: ["Infinite kinetic stress capacity."]
 			hide_dependent_lines: true
 			id: "0F08BE53368BBA0E"
@@ -352,12 +363,16 @@
 				item: "create:creative_motor"
 				type: "item"
 			}]
-			x: -3.5d
-			y: 1.5d
+			x: 2.5d
+			y: 2.0d
 		}
 		{
-			dependencies: ["53B7C4EFD1B28F70"]
-			description: ["Unlimited Power."]
+			dependencies: ["756E1F5554A92D83"]
+			description: [
+				"\"Unlimited Power. "
+				""
+				"Note: DO NOT Place the ultimate energy cube down in order to charge it, charge it either wirlessly or by putting it as an item in any charging machine, placing it down will make you the owner, and not recognize it for the crafting recipe.Unlimited Power."
+			]
 			hide_dependent_lines: true
 			id: "643082630E0B6CFD"
 			rewards: [{
@@ -382,29 +397,11 @@
 				}
 				type: "item"
 			}]
-			x: -4.0d
-			y: 0.5d
+			x: 1.5d
+			y: 0.0d
 		}
 		{
-			dependencies: ["53B7C4EFD1B28F70"]
-			description: ["Infinite fluid storage and withdrawal."]
-			hide_dependent_lines: true
-			id: "4912D9951F6B69A9"
-			rewards: [{
-				id: "1D5936D56DDF2E00"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "500E0937561BCE1C"
-				item: "mekanism:creative_fluid_tank"
-				type: "item"
-			}]
-			x: -4.5d
-			y: -0.5d
-		}
-		{
-			dependencies: ["53B7C4EFD1B28F70"]
+			dependencies: ["756E1F5554A92D83"]
 			description: ["Unlimited refined storage capacity"]
 			hide_dependent_lines: true
 			id: "001789AD77BFECCF"
@@ -418,154 +415,48 @@
 				item: "refinedstorage:creative_storage_disk"
 				type: "item"
 			}]
-			x: -4.0d
-			y: 2.5d
-		}
-		{
-			dependencies: [
-				"6A313C7F7A10ABE7"
-				"53B7C4EFD1B28F70"
-			]
-			description: ["Infinite gas and chemical storage and withdrawal."]
-			hide_dependent_lines: true
-			id: "72B973D152D0D797"
-			rewards: [{
-				id: "09A212AC1FB52612"
-				type: "xp"
-				xp: 100
-			}]
-			subtitle: "Recommended before Final Star"
-			tasks: [{
-				id: "7CC64EE6B88CD556"
-				item: "mekanism:creative_chemical_tank"
-				type: "item"
-			}]
-			x: -4.5d
-			y: 3.5d
-		}
-		{
-			dependencies: ["07980075BFE4C586"]
-			description: ["Due to their internal RF transfer limit, Thermal machines usually don't behave when combined with tick accelerating like the watch of flowing time. The solution? Increase their transfer limit, of course! The ideal setup for a machine is one resonant integral component and three localized time destabilizer augments."]
-			id: "1F4DCE63D7FA0449"
-			optional: true
-			rewards: [{
-				id: "294823914E17CB0E"
-				item: {
-					Count: 1b
-					id: "kubejs:time_augment"
-					tag: {
-						AugmentData: {
-							MachineEnergy: 0.75d
-							MachinePower: 1.0d
-							RFXfer: 20.0d
-							Type: "Machine"
-						}
-					}
-				}
-				type: "item"
-			}]
-			subtitle: "I need SPEED"
-			tasks: [{
-				id: "23AAE391F8B8AA17"
-				item: {
-					Count: 1b
-					id: "kubejs:time_augment"
-					tag: {
-						AugmentData: {
-							MachineEnergy: 0.75d
-							MachinePower: 1.0d
-							RFXfer: 20.0d
-							Type: "Machine"
-						}
-					}
-				}
-				type: "item"
-			}]
-			x: -16.5d
+			x: 1.5d
 			y: 3.0d
 		}
 		{
-			dependencies: ["07980075BFE4C586"]
-			id: "617ADD293B6F4635"
-			rewards: [{
-				id: "3D618CC1CC262ACE"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projectexpansion:magnum_star_ein"
-				}
-				type: "item"
-			}]
-			tasks: [{
-				id: "59F5614093FD63BA"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projecte:swiftwolf_rending_gale"
-				}
-				type: "item"
-			}]
-			x: -17.0d
-			y: 1.0d
-		}
-		{
-			dependencies: ["07980075BFE4C586"]
-			id: "12FCDEA62294CF57"
-			rewards: [{
-				count: 2
-				id: "67750E8D96B610DA"
-				item: "minecraft:nether_star"
-				type: "item"
-			}]
-			tasks: [{
-				id: "3E3B6FE5976254CF"
-				item: "angelring:angel_ring"
-				type: "item"
-			}]
-			x: -16.5d
-			y: 0.0d
-		}
-		{
 			dependencies: ["799C7A2E5C9265DB"]
+			description: [
+				"Shadow Essence is the main ingredient for the essence of darkness."
+				""
+				"Essence of Darkness is a custom Mekanism Infuse Type used to create ingredient for the end game Mekanism blocks and items."
+				""
+				"NOTE: the shadow essence bucket has no use as an item, it's just used to complete the quest. You're supposed to use the liquid in a Create mixer"
+			]
 			id: "081C1697195680DC"
+			rewards: [{
+				id: "3E41AF8452F38C58"
+				item: "createchromaticreturn:shadow_essence_bucket"
+				type: "item"
+			}]
 			tasks: [{
 				id: "06811927C1845A13"
 				item: "createchromaticreturn:shadow_essence_bucket"
 				type: "item"
 			}]
-			x: -14.0d
-			y: 4.5d
+			x: -14.5d
+			y: 2.5d
 		}
 		{
-			dependencies: ["7F828305491C1CB4"]
+			dependencies: ["623433DBF296A6DF"]
+			description: ["Crushing Gilded Blackstone gives you carbon powder and shards of bedrock at a very low chance."]
 			id: "799C7A2E5C9265DB"
+			rewards: [{
+				id: "0355E89CB4276D68"
+				item: "createchromaticreturn:carbon_powder"
+				type: "item"
+			}]
 			tasks: [{
 				id: "54E65B1C9931ADA3"
 				item: "createchromaticreturn:carbon_powder"
 				type: "item"
 			}]
-			x: -15.0d
-			y: 4.5d
-		}
-		{
-			dependencies: ["07980075BFE4C586"]
-			id: "7F828305491C1CB4"
-			rewards: [{
-				id: "6E8735EFA185E224"
-				item: "projecte:dark_matter"
-				type: "item"
-			}]
-			tasks: [{
-				id: "06239B9A472654A1"
-				item: "projecte:dark_matter"
-				type: "item"
-			}]
 			x: -16.0d
-			y: 4.0d
+			y: 2.5d
 		}
 		{
 			dependencies: ["384BB4E82F5D69C6"]
@@ -586,8 +477,8 @@
 				item: "minecraft:nether_star"
 				type: "item"
 			}]
-			x: -13.5d
-			y: 3.0d
+			x: -11.0d
+			y: 1.5d
 		}
 		{
 			dependencies: [
@@ -595,13 +486,7 @@
 				"11E00D93DEF3B126"
 			]
 			dependency_requirement: "one_completed"
-			description: [
-				"Polonium and Plutonium can be obtained in two ways :"
-				""
-				"- processing Nuclear Waste from a Mekanism Fission Reactor"
-				""
-				"- processing Uranium crystals with Create Chromatic Return recipes"
-			]
+			description: ["With polonium and plutonium you are now able to craft antimatter"]
 			hide_dependent_lines: true
 			id: "13EE1ECF3DC0491D"
 			min_required_dependencies: 1
@@ -631,7 +516,7 @@
 					type: "item"
 				}
 			]
-			x: -10.5d
+			x: -8.5d
 			y: 1.5d
 		}
 		{
@@ -664,8 +549,8 @@
 					type: "item"
 				}
 			]
-			x: -10.5d
-			y: -0.5d
+			x: -8.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["4556B0134F410EC5"]
@@ -680,7 +565,7 @@
 				item: "mekanism:crystal_uranium"
 				type: "item"
 			}]
-			x: -12.0d
+			x: -11.0d
 			y: -1.5d
 		}
 		{
@@ -689,12 +574,15 @@
 				"56D5909AEA258984"
 			]
 			description: [
-				"To obtain Shadow steel I need to mix chromatic compound with shadow essence."
+				"\"To obtain the shadow form of steel I need to mix colors and shadows!\""
 				""
-				"I can then crush it to obtain Shadow Steel Powder which is an ingredient for the Creative Blaze Cake."
-				"And I even get a 75% refund of the Shadow Steel used in the process!"
+				""
+				"Mixing Chromatic Compound with Shadow Essence you can craft Shadow Steel."
+				""
+				"You will need shadow steel to craft "
 			]
 			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "09ED24BFED3BBE29"
 			rewards: [{
 				count: 4
@@ -708,8 +596,8 @@
 				item: "createchromaticreturn:shadow_steel"
 				type: "item"
 			}]
-			x: -10.0d
-			y: -2.0d
+			x: -7.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["3ABB6AD99E3C09EC"]
@@ -719,7 +607,7 @@
 				item: "mekanism:chemical_crystallizer"
 				type: "item"
 			}]
-			x: -13.0d
+			x: -12.5d
 			y: -1.5d
 		}
 		{
@@ -741,11 +629,16 @@
 				item: "mekanism:chemical_dissolution_chamber"
 				type: "item"
 			}]
-			x: -15.0d
+			x: -15.5d
 			y: -1.5d
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
+			description: [
+				"This branch of the questline guides you to the creation of metal crystals, which is part of the most efficient ore processing line."
+				""
+				"It will allow using uranium crystals to obtain plutonium and polonium nuggets and ultimately antimatter with create, instead of the Mekanism SPS path."
+			]
 			id: "24C282ED9BA60D78"
 			tasks: [
 				{
@@ -770,8 +663,8 @@
 				}
 			]
 			title: "Into the rabbit gas hole"
-			x: -16.0d
-			y: -1.0d
+			x: -17.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["07980075BFE4C586"]
@@ -788,14 +681,16 @@
 				item: "createchromaticreturn:chromatic_compound"
 				type: "item"
 			}]
-			x: -11.5d
-			y: -2.5d
+			x: -7.0d
+			y: -1.0d
 		}
 		{
 			dependencies: [
 				"48440A9003383920"
 				"429F208B1F91C217"
+				"11A5CEEFEE37D7FF"
 			]
+			hide_dependency_lines: false
 			hide_dependent_lines: true
 			id: "31C75750B2530381"
 			rewards: [{
@@ -808,14 +703,12 @@
 				item: "createchromaticreturn:multiplite_ingot"
 				type: "item"
 			}]
-			x: -9.0d
+			x: -6.0d
 			y: 0.0d
 		}
 		{
-			dependencies: [
-				"41D9B7AC1089FA83"
-				"11A5CEEFEE37D7FF"
-			]
+			dependencies: ["41D9B7AC1089FA83"]
+			description: ["...and shulker shells as well..."]
 			hide_dependent_lines: true
 			id: "48440A9003383920"
 			rewards: [{
@@ -823,23 +716,19 @@
 				type: "xp"
 				xp: 100
 			}]
-			tasks: [
-				{
-					id: "5BE23F2C4F5A960A"
-					item: "minecraft:shulker_shell"
-					type: "item"
-				}
-				{
-					id: "07D4587FC74361BD"
-					item: "minecraft:dragon_breath"
-					type: "item"
-				}
-			]
-			x: -9.0d
-			y: 3.0d
+			tasks: [{
+				id: "5BE23F2C4F5A960A"
+				item: "minecraft:shulker_shell"
+				type: "item"
+			}]
+			x: -5.0d
+			y: 2.5d
 		}
 		{
-			dependencies: ["56D5909AEA258984"]
+			dependencies: [
+				"56D5909AEA258984"
+				"133E1F837FA4A41B"
+			]
 			hide_dependent_lines: true
 			id: "429F208B1F91C217"
 			rewards: [{
@@ -854,37 +743,13 @@
 				item: "createchromaticreturn:refined_radiance"
 				type: "item"
 			}]
-			x: -9.0d
+			x: -6.0d
 			y: -1.0d
-		}
-		{
-			dependencies: ["31C75750B2530381"]
-			description: [
-				"The radiant glow saber is a weapon forged by the sacred mechanical monks long ago."
-				""
-				"It can one shot any normal monster."
-				""
-				"Are there more powerful weapons than this?"
-			]
-			hide_dependency_lines: true
-			id: "1F8697E9A977FE16"
-			rewards: [{
-				id: "25FC3E274ADBA2B6"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "5116A223F31165BF"
-				item: "createchromaticreturn:radiant_glow_saber"
-				type: "item"
-			}]
-			x: -7.0d
-			y: 0.5d
 		}
 		{
 			dependencies: [
 				"31C75750B2530381"
-				"1F8697E9A977FE16"
+				"130D59A469F3041C"
 			]
 			description: [
 				"\"The final weapon is mine! With this glowing claws I can rip the very bedrock apart!\""
@@ -894,7 +759,7 @@
 				""
 				"Wait, where's bedrock?"
 			]
-			hide_dependency_lines: true
+			hide_dependent_lines: true
 			id: "146B61BAC1D8D21C"
 			rewards: [{
 				id: "01727DE399505536"
@@ -906,33 +771,8 @@
 				item: "createchromaticreturn:radiant_glow_claws"
 				type: "item"
 			}]
-			x: -7.0d
-			y: 2.5d
-		}
-		{
-			dependencies: ["07980075BFE4C586"]
-			id: "05F5D6913E3CD4BD"
-			rewards: [
-				{
-					count: 2
-					id: "650F313B9BBABDB2"
-					item: "rftoolsutility:environmental_controller"
-					type: "item"
-				}
-				{
-					count: 2
-					id: "75AA753FFCA209E4"
-					item: "fluxnetworks:flux_point"
-					type: "item"
-				}
-			]
-			tasks: [{
-				id: "412A2BEFAF0806AA"
-				item: "rftoolsutility:flight_module"
-				type: "item"
-			}]
-			x: -17.0d
-			y: 2.0d
+			x: -5.0d
+			y: 0.5d
 		}
 		{
 			dependencies: ["41D9B7AC1089FA83"]
@@ -958,8 +798,8 @@
 				title: "Ok, here's one for free..."
 				type: "questsadditions:time"
 			}]
-			x: -9.0d
-			y: 6.0d
+			x: -6.0d
+			y: 5.5d
 		}
 		{
 			dependencies: ["0411623715D35216"]
@@ -985,8 +825,8 @@
 				type: "questsadditions:time"
 			}]
 			title: "...and another..."
-			x: -7.5d
-			y: 6.0d
+			x: -5.0d
+			y: 5.5d
 		}
 		{
 			dependencies: ["1933F4C458289C5F"]
@@ -1020,11 +860,12 @@
 				title: "...good things come in three!"
 				type: "questsadditions:time"
 			}]
-			x: -6.0d
-			y: 6.0d
+			x: -4.0d
+			y: 5.5d
 		}
 		{
 			dependencies: ["41D9B7AC1089FA83"]
+			description: ["Do you really need help for this?"]
 			hide_dependent_lines: true
 			id: "11A5CEEFEE37D7FF"
 			rewards: [{
@@ -1032,21 +873,609 @@
 				type: "xp"
 				xp: 100
 			}]
+			tasks: [{
+				id: "52AE41680341E08F"
+				item: "supplementaries:enderman_head"
+				type: "item"
+			}]
+			x: -6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			description: [
+				"{image:ftbquests:textures/gui/cat.png width:204 height:136 align:1}"
+				""
+				"Infusing blackstone with gold produces this wonderful feline!"
+			]
+			id: "623433DBF296A6DF"
+			rewards: [{
+				count: 4
+				id: "3DBF83BD45A7AFA8"
+				item: "minecraft:gilded_blackstone"
+				type: "item"
+			}]
+			subtitle: "Black Gold"
+			tasks: [{
+				id: "7D7DF0531A16DAC0"
+				item: "minecraft:gilded_blackstone"
+				type: "item"
+			}]
+			title: "Aurum Nigrum"
+			x: -17.5d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"6A313C7F7A10ABE7"
+				"1965B5FDEC5FD6B3"
+				"30601B84DACB7390"
+				"6F1E5EAE63AE736A"
+				"0F9E0DC05C6BD1C8"
+			]
+			description: [
+				"\"The head of a mythical and fierce beast! A trophy worth a life of sweat and labor!\""
+				""
+				"You're almost there! The Dragon Head is one of the ingredients of most of the creative items."
+			]
+			hide_dependent_lines: true
+			id: "756E1F5554A92D83"
+			rewards: [{
+				id: "4F2EBDD30EA53A91"
+				type: "xp"
+				xp: 1000
+			}]
+			tasks: [{
+				id: "1531F6AC3B7F081A"
+				item: "minecraft:dragon_head"
+				type: "item"
+			}]
+			x: -0.5d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"692E72B7A959AB55"
+				"6A313C7F7A10ABE7"
+			]
+			description: [
+				"\"I have to kill a great foe to get one of these sound sensitive organic blocks!\""
+				""
+				"The warden drops with 100% chance 1 sculk sensor (no less, no more, even with looting)."
+				""
+				"In order to start a sculk farm you have to place the sensor and surround it with dispensable blocks in a circle of 8 blocks radius."
+				""
+				"Whenever a mob/player dies within the aforementioned circle the experience value of the dead mob/player is used to create a patch of sculk with sculk veins around it."
+				""
+				"{\"text\": \"For more details go to \", \"extra\": [{\"text\": \"Minecraft Wiki\", \"color\": \"yellow\", \"underlined\": true, \"clickEvent\": {\"action\": \"open_url\", \"value\": \"https://minecraft.wiki/w/Sculk_Catalyst\"}}]}"
+			]
+			hide_dependency_lines: false
+			hide_dependent_lines: true
+			id: "1965B5FDEC5FD6B3"
 			tasks: [
 				{
-					id: "52AE41680341E08F"
-					item: "supplementaries:enderman_head"
+					id: "1F4A1003913CD542"
+					item: "minecraft:warden_spawn_egg"
 					type: "item"
 				}
 				{
-					id: "247A693923B3FCB4"
-					item: "minecraft:dragon_head"
+					id: "6FBB7326A4BCF064"
+					item: "minecraft:sculk_catalyst"
 					type: "item"
 				}
 			]
-			x: -9.0d
-			y: 4.0d
+			title: "Kill the Warden!"
+			x: 0.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["146B61BAC1D8D21C"]
+			description: [
+				"Bedrock shards can be crushed into many resources."
+				""
+				"Can you make profit?"
+			]
+			hide_dependent_lines: true
+			id: "30601B84DACB7390"
+			rewards: [{
+				id: "042E2BD52F032D06"
+				item: "createchromaticreturn:bedrock_shard"
+				type: "item"
+			}]
+			tasks: [{
+				id: "48B2C6F73537778A"
+				item: "createchromaticreturn:bedrock_shard"
+				type: "item"
+			}]
+			x: -1.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["692E72B7A959AB55"]
+			description: [
+				"\"I know a foul beast when I smell its breath!\""
+				""
+				"Since you cannot kill Ender Dragons and collect their breath, you have found a way to synthesize it."
+			]
+			hide_dependent_lines: true
+			id: "6F1E5EAE63AE736A"
+			rewards: [{
+				id: "48247B9D8C2E1494"
+				type: "xp"
+				xp: 2000
+			}]
+			tasks: [{
+				count: 16L
+				id: "5699FAAF92D9C6C6"
+				item: "minecraft:dragon_breath"
+				type: "item"
+			}]
+			x: 0.0d
+			y: 3.5d
+		}
+		{
+			dependencies: [
+				"48440A9003383920"
+				"4DA3EFBDC9FE2FDF"
+				"7B800056097E8D63"
+			]
+			description: [
+				"\"This double stranded helix is the final sum of all the Mechanical Essences!\""
+				""
+				"Using all the essences you are now able to synthesize the DNA of a fierce beast."
+				""
+				"I wonder what can you do with it (or what you cannot...)."
+			]
+			hide_dependency_lines: false
+			hide_dependent_lines: true
+			id: "692E72B7A959AB55"
+			rewards: [{
+				id: "205058F2F45B9562"
+				item: "kubejs:dragon_dna"
+				type: "item"
+			}]
+			tasks: [{
+				id: "34E9581B16A62F62"
+				item: "kubejs:dragon_dna"
+				type: "item"
+			}]
+			x: -3.5d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"429F208B1F91C217"
+				"09ED24BFED3BBE29"
+			]
+			hide_dependent_lines: true
+			id: "130D59A469F3041C"
+			tasks: [{
+				id: "1E3F42BFCF464B34"
+				item: "createchromaticreturn:refined_mechanism"
+				type: "item"
+			}]
+			x: -5.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"2F6F2DB24C399EAA"
+				"7860A19AB2ECEF17"
+			]
+			description: [
+				"\"The end times are near, beautiful friend!\""
+				""
+				"Another high end ingredient for the fabled life essence of the dragon!"
+			]
+			hide_dependent_lines: true
+			id: "7B800056097E8D63"
+			rewards: [{
+				id: "786915E57FF9AD21"
+				item: "minecraft:end_crystal"
+				type: "item"
+			}]
+			tasks: [{
+				id: "3A544E38F73A0F4E"
+				item: "minecraft:end_crystal"
+				type: "item"
+			}]
+			x: -5.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["4B9AE47D2EBF5155"]
+			description: ["There are multiple ways to summon the wither automatically, but one of the easiest is to use the wither builder. I just add the required items, and it will summon it automatically for me, which I can then kill with a mob crusher for automatic nether stars."]
+			id: "685293F21555B446"
+			rewards: [{
+				id: "06E0E917631723BB"
+				type: "xp"
+				xp: 1000
+			}]
+			tasks: [
+				{
+					id: "35BB05E3EA972E3B"
+					item: "industrialforegoing:wither_builder"
+					type: "item"
+				}
+				{
+					id: "57530F433B853420"
+					item: "industrialforegoing:mob_crusher"
+					type: "item"
+				}
+			]
+			title: "Automating Wither"
+			x: -10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1893CB9F472AC87C"]
+			description: ["Because that's what Ender Dragons horns are made of!"]
+			hide_dependent_lines: true
+			id: "0F9E0DC05C6BD1C8"
+			rewards: [{
+				id: "2A66EC02EE11D62B"
+				item: "thermal:cured_rubber_block"
+				type: "item"
+			}]
+			tasks: [{
+				id: "3A87E56037C323ED"
+				item: "thermal:cured_rubber_block"
+				type: "item"
+			}]
+			x: -1.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			id: "3F9204C540EA9C29"
+			tasks: [{
+				id: "5F4EE6E2EA431FF7"
+				item: "thermal:rubberwood_sapling"
+				type: "item"
+			}]
+			x: -17.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["3F9204C540EA9C29"]
+			id: "3F3FEAD18FC00E39"
+			tasks: [{
+				id: "38F850E8A0B50A5E"
+				item: "thermal:device_tree_extractor"
+				type: "item"
+			}]
+			x: -16.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["3F3FEAD18FC00E39"]
+			id: "1D5608CACF4CDE80"
+			tasks: [{
+				id: "75BD13DDB8A31DAE"
+				item: "thermal:rubber"
+				type: "item"
+			}]
+			x: -14.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["41D9B7AC1089FA83"]
+			description: ["You can get ghast tears in a similar way as enderman heads..."]
+			hide_dependent_lines: true
+			id: "7860A19AB2ECEF17"
+			tasks: [{
+				id: "79DD177198546FFA"
+				item: "minecraft:ghast_tear"
+				type: "item"
+			}]
+			x: -6.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			id: "06043955D513CDD3"
+			tasks: [{
+				id: "50246BF32EE8D114"
+				item: {
+					Count: 1b
+					id: "adminshop:permit"
+					tag: {
+						display: {
+							Lore: [
+								"[{\"text\":\"Buy: Enchanting Bottle\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Rubberwood Sapling\",\"italic\":false}]"
+								"[{\"text\":\"Buy: End Gobber Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Many liquids\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Many spawn eggs\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Flux Networks Resources\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Liquid Experience\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Refined Fuel\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Lava\",\"italic\":false}]"
+							]
+							Name: "[{\"text\":\"Tier 4 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
+						}
+						key: 4
+					}
+				}
+				match_nbt: true
+				type: "item"
+			}]
+			x: -21.0d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"756E1F5554A92D83"
+				"09ED24BFED3BBE29"
+			]
+			description: ["Can set the heat level of blaze burners permanently and at no cost."]
+			id: "5414E6D079200533"
+			optional: true
+			tasks: [{
+				id: "20511334736BEEF1"
+				item: "create:creative_blaze_cake"
+				type: "item"
+			}]
+			x: 2.5d
+			y: 1.0d
+		}
+		{
+			description: ["Trap a wither inside a stasis chamber and place a fluid laser base directly above it to passively obtain ether gas."]
+			hide_dependency_lines: true
+			id: "05A0C01966A06A98"
+			optional: true
+			rewards: [{
+				id: "6932205E63F2FBA1"
+				item: "industrialforegoing:ether_gas_bucket"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "4CE0541FA8CC0B50"
+					item: "industrialforegoing:ether_gas_bucket"
+					type: "item"
+				}
+				{
+					id: "45FF0C8EE95F6CB6"
+					item: "industrialforegoing:stasis_chamber"
+					type: "item"
+				}
+				{
+					id: "028BB5B8B978C1B4"
+					item: "industrialforegoing:laser_drill"
+					type: "item"
+				}
+				{
+					id: "3AEF9320EDC346FB"
+					item: "industrialforegoing:fluid_laser_base"
+					type: "item"
+				}
+				{
+					id: "6A2FE44642802298"
+					item: "industrialforegoing:laser_lens10"
+					type: "item"
+				}
+			]
+			title: "Getting Ether Gas"
+			x: -10.0d
+			y: 3.0d
+		}
+		{
+			dependencies: [
+				"05A0C01966A06A98"
+				"2F6F2DB24C399EAA"
+			]
+			description: ["Use the Ether Gas to craft the highest tier machine frame."]
+			id: "4B9AE47D2EBF5155"
+			optional: true
+			rewards: [{
+				id: "6C328EC758FB27B0"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "3DEBDD1821AE9150"
+				item: "industrialforegoing:machine_frame_supreme"
+				type: "item"
+			}]
+			x: -10.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["1D5608CACF4CDE80"]
+			hide_dependent_lines: true
+			id: "1893CB9F472AC87C"
+			tasks: [{
+				id: "1F3D11A95AD03ECF"
+				item: "thermal:cured_rubber"
+				type: "item"
+			}]
+			x: -13.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["43AC20FDD93A8C83"]
+			description: ["The last step implies again using the PRC with ethylene, oxygen and substrate to obtain HDPE pellets."]
+			id: "782C51624A9C63BD"
+			rewards: [{
+				count: 8
+				id: "7C55F0AE8A6D82FD"
+				item: "mekanism:hdpe_pellet"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "65CB9F23BD71C0F6"
+					item: "mekanism:pressurized_reaction_chamber"
+					type: "item"
+				}
+				{
+					count: 8L
+					id: "68F20C45799A184A"
+					item: "mekanism:hdpe_pellet"
+					type: "item"
+				}
+			]
+			x: -12.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["5D80E657B7D2E986"]
+			description: [
+				"Next step is putting water, hydrogen and bio fuel in a PRC to obtain substrate and ethylene."
+				""
+				"TIP: you can either burn ethylene for energy production or reuse it to multiply substrate by 8 and get oxygen as a byproduct."
+			]
+			id: "43AC20FDD93A8C83"
+			rewards: [{
+				count: 8
+				id: "179A6B48E3B69CB3"
+				item: "mekanism:substrate"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "58DF17E6C71835E9"
+					item: "mekanism:pressurized_reaction_chamber"
+					type: "item"
+				}
+				{
+					count: 8L
+					id: "2EAE109EAB2C8E89"
+					item: "mekanism:substrate"
+					type: "item"
+				}
+			]
+			x: -14.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["7E039D8211DBDCD6"]
+			description: ["The second step involves processing crops in a Crusher to obtain bio fuel."]
+			id: "5D80E657B7D2E986"
+			rewards: [{
+				count: 8
+				id: "562EB2728F17E049"
+				item: "mekanism:bio_fuel"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "4D4B7C4BC4F8B3B6"
+					item: "mekanism:crusher"
+					type: "item"
+				}
+				{
+					id: "05E4C8E7EBC42B6F"
+					item: "mekanism:bio_fuel"
+					type: "item"
+				}
+			]
+			title: "Composting bio mass"
+			x: -15.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			description: [
+				"This other branch of Mekanism production line guides you to the production of HDPE sheets."
+				""
+				"The first step is to electrolyze water to obtain hydrogen (and oxygen which you can either stock or trash)."
+			]
+			id: "7E039D8211DBDCD6"
+			tasks: [{
+				id: "59E91CD0D3A43B0C"
+				item: "mekanism:electrolytic_separator"
+				type: "item"
+			}]
+			title: "H2O = H2 + O-"
+			x: -17.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["6A313C7F7A10ABE7"]
+			description: ["With this augment Thermal Machines use no energy and process items very fast."]
+			id: "7CE54486D31A47BA"
+			optional: true
+			rewards: [{
+				id: "5E81310812AF4B99"
+				item: "thermal:machine_efficiency_creative_augment"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "52A22B4A47C791B2"
+				item: "thermal:machine_efficiency_creative_augment"
+				type: "item"
+			}]
+			x: -2.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["6A313C7F7A10ABE7"]
+			description: ["With this augment Thermal Machines using catalysts (Induction Smelter, Pulverizer) won't consume them."]
+			id: "21F2CA1F9CDC6892"
+			optional: true
+			rewards: [{
+				id: "00B6F256ADF08CDB"
+				item: "thermal:machine_catalyst_creative_augment"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "75A5F00493F526D1"
+				item: "thermal:machine_catalyst_creative_augment"
+				type: "item"
+			}]
+			x: -2.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["09ED24BFED3BBE29"]
+			description: [
+				"To power the SPS machine you will need a lot of energy."
+				""
+				"I hope you already build one of these, if it's not the case you better do it now and bigger than the minimum size."
+				""
+				"[\"For more details look in the wiki at \", {\"text\": \"https://wiki.aidancbrady.com/wiki/Induction_Matrix\", \"color\": \"yellow\", \"clickEvent\": { \"action\": \"open_url\", \"value\": \"https://wiki.aidancbrady.com/wiki/Induction_Matrix\" }}]"
+			]
+			hide_dependency_lines: false
+			hide_dependent_lines: true
+			id: "6D8D70B5DDDE619E"
+			rewards: [{
+				count: 16
+				id: "3631A096B236BB19"
+				item: "mekanism:ultimate_universal_cable"
+				type: "item"
+			}]
+			tasks: [
+				{
+					count: 32L
+					id: "3B49BA145046C182"
+					item: "mekanism:induction_casing"
+					type: "item"
+				}
+				{
+					count: 2L
+					id: "38BCC1D1092CE0D6"
+					item: "mekanism:induction_port"
+					type: "item"
+				}
+				{
+					id: "594A6F927E7A3F2F"
+					item: "mekanism:basic_induction_cell"
+					type: "item"
+				}
+				{
+					id: "6EE1FEA716E730E8"
+					item: "mekanism:basic_induction_provider"
+					type: "item"
+				}
+			]
+			title: "Induction Matrix"
+			x: -7.0d
+			y: 1.5d
 		}
 	]
-	title: "Tier 5: Endgame"
+	title: "Chapter 5: Endgame"
 }

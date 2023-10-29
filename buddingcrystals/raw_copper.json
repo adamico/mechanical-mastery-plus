@@ -1,0 +1,8 @@
+{
+  "translation": "Raw Copper",
+  "texture": "minecraft:item/raw_copper",
+  "growth_chance": 1,
+  "dropped_item": "minecraft:raw_copper",
+  "normal_drop_chance": 1,
+  "max_drop_chance": 2
+}

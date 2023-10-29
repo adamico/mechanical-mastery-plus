@@ -15,4 +15,4 @@ import mods.mekanism.api.ingredient.ItemStackIngredient;
 
 //<recipetype:mekanism:gas_conversion>.removeByName("mekanism:gas_conversion/osmium_from_block");
 
-<recipetype:mekanism:gas_conversion>.addRecipe("gas_conversion/dragon_breath_from_head", <item:minecraft:dragon_head>, <gas:crafttweaker:dragon_breath> * 200);
+<recipetype:mekanism:gas_conversion>.addRecipe("gas_conversion/dragon_breath_from_dna", <item:kubejs:dragon_dna>, <gas:crafttweaker:dragon_breath> * 200);

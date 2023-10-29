@@ -1,0 +1,8 @@
+{
+  "translation": "Raw Gold",
+  "texture": "minecraft:item/raw_gold",
+  "growth_chance": 1,
+  "dropped_item": "minecraft:raw_gold",
+  "normal_drop_chance": 1,
+  "max_drop_chance": 2
+}

@@ -2,9 +2,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "useful_mods"
-	group: "349666CD0199D4FD"
+	group: "56617BF3F24DD586"
+	hide_quest_details_until_startable: true
 	id: "50F84AC199F39453"
-	order_index: 6
+	order_index: 2
 	quest_links: [ ]
 	quests: [
 		{
@@ -937,41 +938,11 @@
 				}
 				type: "item"
 			}]
-			x: 2.0d
+			x: 7.5d
 			y: -2.5d
 		}
 		{
-			dependencies: ["1A67C9B9ABB4E969"]
-			description: ["You can use either RS or AE2 silicon for all silicon based recipes."]
-			id: "7470035A489CE08D"
-			optional: true
-			rewards: [{
-				exclude_from_claim_all: true
-				id: "49629F4D8AD2F971"
-				table_id: 5925849308766390323L
-				type: "random"
-			}]
-			shape: "diamond"
-			tasks: [{
-				id: "3E5368D2024301E9"
-				item: {
-					Count: 1b
-					id: "itemfilters:tag"
-					tag: {
-						value: "forge:silicon"
-					}
-				}
-				type: "item"
-			}]
-			title: "Silicon is Silicon"
-			x: 4.0d
-			y: -2.5d
-		}
-		{
-			dependencies: [
-				"7B3EE270553254E3"
-				"2BA7E55C7B7EB3C3"
-			]
+			dependencies: ["7B3EE270553254E3"]
 			hide: true
 			id: "142576A350BF2C99"
 			shape: "hexagon"
@@ -983,6 +954,450 @@
 			x: -3.5d
 			y: -7.0d
 		}
+		{
+			dependencies: ["7B2728847CEC37A8"]
+			id: "12FCDEA62294CF57"
+			rewards: [
+				{
+					count: 2
+					id: "67750E8D96B610DA"
+					item: "minecraft:nether_star"
+					type: "item"
+				}
+				{
+					id: "156CED62629E2D0D"
+					type: "xp"
+					xp: 1000
+				}
+			]
+			tasks: [{
+				id: "3E3B6FE5976254CF"
+				item: "angelring:angel_ring"
+				type: "item"
+			}]
+			x: 14.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["55B3F2A3F8029DE6"]
+			id: "05F5D6913E3CD4BD"
+			rewards: [
+				{
+					count: 2
+					id: "650F313B9BBABDB2"
+					item: "rftoolsutility:environmental_controller"
+					type: "item"
+				}
+				{
+					count: 2
+					id: "75AA753FFCA209E4"
+					item: "fluxnetworks:flux_point"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "412A2BEFAF0806AA"
+				item: "rftoolsutility:flight_module"
+				type: "item"
+			}]
+			x: 11.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["7B2728847CEC37A8"]
+			description: ["A very creative way to fly... I mean it's just a normal jetpack but using pressure."]
+			id: "741FF8486E70FF9A"
+			rewards: [
+				{
+					id: "7F346C5DF559D932"
+					type: "xp"
+					xp: 1000
+				}
+				{
+					id: "047A94C8CA8DE7FF"
+					item: "minecraft:nether_star"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "5CFB6E6C9ACD6919"
+				item: {
+					Count: 1b
+					id: "create_jetpack:jetpack"
+					tag: {
+						Air: 900
+					}
+				}
+				type: "item"
+			}]
+			x: 14.0d
+			y: -0.5d
+		}
+		{
+			id: "55B3F2A3F8029DE6"
+			tasks: [{
+				id: "4FC42068A1340288"
+				title: "I believe I can fly"
+				type: "checkmark"
+			}]
+			x: 11.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["7B2728847CEC37A8"]
+			description: [
+				"I know you hate me for removing ProjectE and its OP stuff..."
+				""
+				"here you go, you have something similar..."
+			]
+			id: "4A22FA3502307B57"
+			rewards: [
+				{
+					id: "0D38BFA315C2D2CF"
+					type: "xp"
+					xp: 10000
+				}
+				{
+					id: "2C81F7C75B39E3EE"
+					item: "minecraft:nether_star"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "578B7CAC2210DF5B"
+					item: {
+						Count: 1b
+						id: "gobber2:gobber2_helmet_dragon"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "643895996EF2F5BE"
+					item: {
+						Count: 1b
+						id: "gobber2:gobber2_chestplate_dragon"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "0E78B8ECF23284B9"
+					item: {
+						Count: 1b
+						id: "gobber2:gobber2_leggings_dragon"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+				{
+					id: "7DB39379CBD3A625"
+					item: {
+						Count: 1b
+						id: "gobber2:gobber2_boots_dragon"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			title: "Gobber Gobber Gobber"
+			x: 14.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"55B3F2A3F8029DE6"
+				"41D9B7AC1089FA83"
+			]
+			id: "3BDD68F07B8D1607"
+			tasks: [{
+				id: "5B180587A1EFF7E3"
+				item: "minecraft:phantom_membrane"
+				type: "item"
+			}]
+			x: 12.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["3BDD68F07B8D1607"]
+			id: "7B2728847CEC37A8"
+			tasks: [{
+				id: "35EC7974907370E6"
+				item: {
+					Count: 1b
+					id: "minecraft:elytra"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 13.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["55B3F2A3F8029DE6"]
+			id: "24AB8DAF9CD7AF21"
+			tasks: [{
+				id: "32B8616F7C7C6A13"
+				item: "mekanism:jetpack"
+				type: "item"
+			}]
+			x: 11.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["06E4BECF781A4CE0"]
+			id: "15BF550353FEBEF2"
+			tasks: [{
+				id: "0FF4A36B42105D73"
+				item: {
+					Count: 1b
+					id: "gobber2:gobber2_paxel_stars"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 11.0d
+			y: -5.0d
+		}
+		{
+			dependencies: ["06E4BECF781A4CE0"]
+			id: "20913AB9B4239EE4"
+			tasks: [{
+				id: "2BC1DBCD407460E9"
+				item: "gobber2:gobber2_medallion_healing3"
+				type: "item"
+			}]
+			x: 13.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["06E4BECF781A4CE0"]
+			id: "344E532259C8115A"
+			tasks: [{
+				id: "7AEC8253DEF666C6"
+				item: "gobber2:gobber2_staff_nature"
+				type: "item"
+			}]
+			x: 13.0d
+			y: -5.0d
+		}
+		{
+			dependencies: ["06E4BECF781A4CE0"]
+			id: "68DE14D7757B74B2"
+			tasks: [{
+				id: "6565D4AA4517DA67"
+				item: "gobber2:gobber2_staff_farmer"
+				type: "item"
+			}]
+			x: 12.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["06E4BECF781A4CE0"]
+			id: "4111657F4A9C0AE0"
+			tasks: [{
+				id: "4A43FE00B07A5B9F"
+				item: "gobber2:gobber2_staff_sniper"
+				type: "item"
+			}]
+			x: 11.0d
+			y: -4.0d
+		}
+		{
+			id: "06E4BECF781A4CE0"
+			tasks: [{
+				id: "100633BD23F9CC1C"
+				title: "Gobber yourself"
+				type: "checkmark"
+			}]
+			x: 12.0d
+			y: -5.0d
+		}
+		{
+			dependencies: [
+				"31C75750B2530381"
+				"55B3F2A3F8029DE6"
+			]
+			id: "37A5B7CA987BADA6"
+			rewards: [{
+				id: "64FEEEC9E5ED265E"
+				item: "createchromaticreturn:durasteel_book"
+				type: "item"
+			}]
+			tasks: [{
+				id: "6AEAF8CE494057BD"
+				item: "createchromaticreturn:multiplite_charm"
+				type: "item"
+			}]
+			x: 12.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["32E5A4A9433E5337"]
+			id: "2D98E93775E5B7F7"
+			tasks: [{
+				id: "050134447FCF5D15"
+				item: "mekanism:mekasuit_helmet"
+				type: "item"
+			}]
+			x: 17.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["32E5A4A9433E5337"]
+			id: "35B7CEAE1B2635C6"
+			tasks: [{
+				id: "5C280BCF0407E924"
+				item: "mekanism:mekasuit_bodyarmor"
+				type: "item"
+			}]
+			x: 16.0d
+			y: -3.5d
+		}
+		{
+			dependencies: ["32E5A4A9433E5337"]
+			id: "2309C454CEA4AE97"
+			tasks: [{
+				id: "4458A249C842F812"
+				item: "mekanism:mekasuit_pants"
+				type: "item"
+			}]
+			x: 16.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["32E5A4A9433E5337"]
+			id: "2A96ACD2E54F44F4"
+			tasks: [{
+				id: "2C3506E7A6F3CFE9"
+				item: "mekanism:mekasuit_boots"
+				type: "item"
+			}]
+			x: 17.5d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"3A86CBC50AE2EA6B"
+				"32E5A4A9433E5337"
+			]
+			id: "7A37395CCEB19DA1"
+			rewards: [{
+				id: "619754A52B8E4345"
+				item: "mekanism:module_gyroscopic_stabilization_unit"
+				type: "item"
+			}]
+			tasks: [{
+				id: "2FF776E5D8F33182"
+				item: "mekanism:module_elytra_unit"
+				type: "item"
+			}]
+			x: 16.5d
+			y: -4.5d
+		}
+		{
+			dependencies: [
+				"3A86CBC50AE2EA6B"
+				"32E5A4A9433E5337"
+			]
+			id: "6C6B418B2A123971"
+			rewards: [{
+				count: 3
+				id: "0E8BA2EA8A2CD8B7"
+				item: "mekanism:pellet_antimatter"
+				type: "item"
+			}]
+			tasks: [{
+				id: "1EBCB88B472FBE2D"
+				item: "mekanism:module_gravitational_modulating_unit"
+				type: "item"
+			}]
+			x: 16.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["32E5A4A9433E5337"]
+			hide_dependent_lines: true
+			id: "0003D5A05EC70AFB"
+			rewards: [{
+				id: "689BB01CEE0CFAD4"
+				item: "mekanism:basic_chemical_tank"
+				type: "item"
+			}]
+			tasks: [{
+				id: "00107462A8F4F37A"
+				item: "mekanism:jetpack"
+				type: "item"
+			}]
+			x: 18.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["0003D5A05EC70AFB"]
+			hide_dependency_lines: false
+			hide_dependent_lines: true
+			id: "3A86CBC50AE2EA6B"
+			tasks: [{
+				id: "24E6E55E76C8454B"
+				item: {
+					Count: 1b
+					id: "mekanism:hdpe_elytra"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 19.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["0E156DC78EE27D2D"]
+			hide_dependency_lines: false
+			id: "5B3E3EEFC22290F9"
+			tasks: [{
+				id: "535286F3BAB92451"
+				item: "mekanism:meka_tool"
+				type: "item"
+			}]
+			x: 19.0d
+			y: -3.5d
+		}
+		{
+			dependencies: ["32E5A4A9433E5337"]
+			hide_dependent_lines: true
+			id: "0E156DC78EE27D2D"
+			tasks: [{
+				id: "5DF82C3C6D239C29"
+				item: "mekanism:atomic_disassembler"
+				type: "item"
+			}]
+			x: 18.5d
+			y: -4.5d
+		}
+		{
+			id: "32E5A4A9433E5337"
+			tasks: [{
+				id: "4750FC01F6CB5B32"
+				title: "Meka-nichal"
+				type: "checkmark"
+			}]
+			x: 17.5d
+			y: -3.0d
+		}
 	]
-	title: "Miscellanea"
+	title: "All the other mods \\& stuff"
 }

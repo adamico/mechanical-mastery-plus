@@ -28,24 +28,15 @@ ServerEvents.tags('item', event => {
   //   if (!blacklist.test(stone)) event.add('c:stone', stone)
   // })
 
-  // add more fuels to Fuel Goes Here
-
-  ['blue_fuel', 'orange_fuel', 'pink_fuel', 'magenta_fuel', 'yellow_fuel', 'green_fuel', 'cyan_fuel', 'lime_fuel', 'violet_fuel', 'purple_fuel', 'white_fuel'].forEach(fuel => {
-    let fuel_item = Item.of(`projectexpansion:${fuel}`).getId();
-    console.log('adding ' + fuel_item + ' to all_fuels');
-    event.add('fuelgoeshere:forced_fuels', fuel_item);
-  });
-  
-  event.add('fuelgoeshere:forced_fuels', '#projecte:collector_fuel');
-
   event.add('thermal:crafting/dies', 'kubejs:press_rod_die');
   event.add('thermal:crafting/dies', 'fluxnetworks:flux_block');
   event.add('forge:plates/diamond', 'kubejs:diamond_plate');
   event.add('forge:plates', 'kubejs:diamond_plate');
-  event.add('forge:slimeballs', 'kubejs:oil_clump');
+  event.add('forge:slimeballs', 'kubejs:oil_clump'); //TODO: remove this?
   event.add('forge:gears/steel', 'kubejs:steel_gear');
   
   event.add('forge:gears', 'kubejs:steel_gear');
+  
   ['steel'].forEach(metal => {
     event.add(`forge:rods/${metal}`, `kubejs:${metal}_rod`);
     event.add('forge:rods', `kubejs:${metal}_rod`);
@@ -54,4 +45,26 @@ ServerEvents.tags('item', event => {
   event.add('forge:storage_blocks/steel', 'industrialforegoing:steel_block');
 
   event.add('forge:heads', 'supplementaries:enderman_head');
-})
+
+  ['create:brass', 'thermal:bronze', 'thermal:constantan', 'thermal:electrum', 'thermal:enderium',
+   'thermal:invar', 'thermal:lumium', 'thermal:signalum', 'steel'].forEach(alloy => {
+    ['ingot', 'block'].forEach(type => {
+      let materialName = (alloy == 'steel') ? `mekanism:${type}_${alloy}` : `${alloy}_${type}`;
+      event.add('forge:alloys', materialName);
+    });
+  });
+  
+  ['enderium', 'lumium', 'signalum'].forEach(alloy => {
+    ['ingot', 'block'].forEach(type => {
+      event.add('forge:alloys/special', `thermal:${alloy}_${type}`);
+    });
+    event.add('c:hidden_from_recipe_viewers', `${alloy}_dust`);
+  });
+
+  event.add('minecraft:terracotta', 'clayworks:glazed_terracotta');
+});
+
+ServerEvents.tags('block', event => {
+  event.add('blockrunner:very_quick_blocks', '#engineersdecor:plain_concretes');
+  event.add('forge:budding', '#forge:budding_blocks');
+});

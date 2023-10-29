@@ -13,4 +13,4 @@ import mods.mekanism.api.ingredient.ChemicalStackIngredient.GasStackIngredient;
 
 // <recipetype:mekanism:centrifuging>.removeByName(name as string)
 
-<recipetype:mekanism:centrifuging>.removeByName("mekanism:processing/lategame/plutonium");
+//<recipetype:mekanism:centrifuging>.removeByName("mekanism:processing/lategame/plutonium");

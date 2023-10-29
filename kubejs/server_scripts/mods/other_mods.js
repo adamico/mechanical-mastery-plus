@@ -28,14 +28,14 @@ ServerEvents.recipes(event => {
 
 	event.remove({id: 'cookingforblockheads:sink'});
 	event.shaped('cookingforblockheads:sink', [
-		'ABA',
-		'CDC',
-		'ABA'
+		'III',
+		'CWC',
+		'AAA'
 		], {
 			A: 'minecraft:terracotta',
-			B: 'kubejs:cube4',
-			C: 'mekanism:ultimate_fluid_tank',
-			D: 'projecte:evertide_amulet'
+			C: 'kubejs:cube4',
+			W: 'sfm:water_tank',
+			I: 'minecraft:iron_ingot'
 		}
 	);
 
@@ -46,20 +46,18 @@ ServerEvents.recipes(event => {
 	event.replaceInput({id: 'pipez:fluid_pipe'}, 'minecraft:redstone', 'minecraft:glowstone_dust');
 	event.replaceInput({id: 'pipez:item_pipe'}, 'minecraft:redstone', 'minecraft:glowstone_dust');
 
-	event.replaceInput({output: 'angelring:angel_ring'}, 'angelring:diamond_ring', 'kubejs:cube4');
-
 	event.replaceInput({output: 'hyperbox:hyperbox'}, 'minecraft:crying_obsidian', 'kubejs:cube3');
 
-	event.remove({output: 'farmingforblockheads:market'});
-	event.shaped('farmingforblockheads:market', [
-		'PWP',
-		'LCL',
-		'LLL'
-		], {
-			P: 'minecraft:planks',
-			L: 'minecraft:oak_log',
-			C: 'kubejs:cube3',
-			W: 'minecraft:red_wool'
-		}
-	);	
+	event.replaceInput({id: 'functionalstorage:linking_tool'}, 'minecraft:diamond', 'minecraft:light_blue_dye');
+	event.replaceInput({id: 'functionalstorage:configuration_tool'}, 'minecraft:emerald', 'minecraft:lime_dye');
+
+	event.remove({id: 'gobber2:gobber2_ring_void'});
+	event.remove({id: 'gobber2:gobber2_ring_vision'});
+	event.remove({id: 'gobber2:gobber2_ring_sunshine'});
+	event.remove({id: 'gobber2:gobber2_ring_explorer'});
+	event.remove({id: 'gobber2:gobber2_medallion_hero'});
+	event.remove({id: 'gobber2:gobber2_medallion_dolphin'});
+	
+	
+	
 });

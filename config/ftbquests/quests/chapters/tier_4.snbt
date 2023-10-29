@@ -6,15 +6,28 @@
 	hide_quest_details_until_startable: true
 	icon: "kubejs:cube4"
 	id: "38378A6F4FF9F098"
-	order_index: 3
+	images: [{
+		click: ""
+		corner: false
+		dev: false
+		height: 2.0d
+		hover: [ ]
+		image: "powah:item/charged_snowball"
+		rotation: 0.0d
+		width: 2.0d
+		x: -10.0d
+		y: -2.0d
+	}]
+	order_index: 4
 	quest_links: [ ]
 	quests: [
 		{
 			dependencies: ["47D8F95F5317A47D"]
 			description: [
-				"New tier, new materials; you know the deal already."
+				"New tier, new materials; you know the deal already. Don't forget to craft the new permit to get more of these."
 				""
-				"Use the chicken spawn eggs wisely, no refunds. "
+				"Use the chicken spawn eggs wisely, no refunds. Well... you can still buy another in the shop if you have the funds at this point..."
+				""
 				"Alternatively, you may also bulk haunt dough to get eggs."
 			]
 			icon: "kubejs:cube3"
@@ -50,11 +63,6 @@
 					count: 2
 					id: "3C6DA66318B827A5"
 					item: "minecraft:emerald_ore"
-					type: "item"
-				}
-				{
-					id: "49E08DE13B74C2CE"
-					item: "minecraft:ancient_debris"
 					type: "item"
 				}
 			]
@@ -313,10 +321,10 @@
 		{
 			dependencies: [
 				"13C6D580E33815D5"
-				"26277A0FD5DA798E"
 				"0EE1192BF90562ED"
 				"7943076114A42DFC"
 				"24B023237C9D1908"
+				"425E1C7023D29E31"
 			]
 			description: [
 				"Just as before, combine all the required ingredients in a superheated mixer and... wait, it's not done yet? It seems like it needs to be activated some way... "
@@ -335,28 +343,6 @@
 				type: "item"
 			}]
 			x: -1.0d
-			y: -2.0d
-		}
-		{
-			dependencies: [
-				"1A67C9B9ABB4E969"
-				"597011E2824EC464"
-				"3610828C7BB6B916"
-			]
-			description: ["Use your philosopher's stone to transmute several coal into a more dense fuel source."]
-			id: "26277A0FD5DA798E"
-			rewards: [{
-				count: 8
-				id: "4ED93AC66233E67A"
-				item: "projecte:mobius_fuel"
-				type: "item"
-			}]
-			tasks: [{
-				id: "61F50B290D27170B"
-				item: "projecte:mobius_fuel"
-				type: "item"
-			}]
-			x: -3.0d
 			y: -2.0d
 		}
 		{
@@ -415,47 +401,31 @@
 			y: -2.0d
 		}
 		{
-			dependencies: ["4E81E76086558A19"]
-			description: ["The transmutation interface is a useful block that lets your digital storage draw and insert items directly from your EMC table, making EMC links replacable by refined storage importers/exporters."]
-			id: "1D17BB2C9280B0C7"
-			rewards: [{
-				id: "14CCBD0BDFE9CFC7"
-				type: "xp"
-				xp: 100
-			}]
-			shape: "square"
-			subtitle: "EMC links? Pathetic..."
-			tasks: [{
-				id: "57948E436FCBF75C"
-				item: "projectexpansion:transmutation_interface"
-				type: "item"
-			}]
-			x: -8.5d
-			y: -2.0d
-		}
-		{
 			dependencies: ["157D4C0E9C7A0928"]
-			description: ["So you saw how to get infinite water with the evertide amulet but you still want more? Fine, you may have the sink, now stop whining ;)"]
+			description: [
+				"\"Plenty of water ran under my bridge, but I want more!\""
+				""
+				"You probably figured all the options to get infinite water in this pack."
+				""
+				"I beg your pardon? You still want more? Fine, you may have the sink, now stop whining ;)"
+			]
 			id: "174E355F55DE59F8"
 			optional: true
 			rewards: [{
-				id: "0507DDF5E75E4C9E"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projecte:evertide_amulet"
-				}
+				id: "7E98BD3D44C5C7BC"
+				item: "cookingforblockheads:sink"
 				type: "item"
 			}]
+			shape: "diamond"
+			subtitle: "Water Source"
 			tasks: [{
 				id: "6D8D0E6A16383E3D"
 				item: "cookingforblockheads:sink"
 				type: "item"
 			}]
-			x: 0.5d
-			y: -3.0d
+			title: "Fontes aquarum"
+			x: 1.0d
+			y: -4.0d
 		}
 		{
 			dependencies: ["4E81E76086558A19"]
@@ -478,18 +448,36 @@
 					type: "item"
 				}
 				{
-					count: 16
+					count: 12
 					id: "14B8EFCA2C7D530D"
 					item: "powah:energy_cable_basic"
 					type: "item"
 				}
+				{
+					id: "514E3B6FFD9DDBC7"
+					item: "powah:book"
+					type: "item"
+				}
 			]
-			tasks: [{
-				count: 24L
-				id: "264D55BB9949E0D6"
-				item: "powah:dielectric_paste"
-				type: "item"
-			}]
+			tasks: [
+				{
+					count: 24L
+					id: "264D55BB9949E0D6"
+					item: "powah:dielectric_paste"
+					type: "item"
+				}
+				{
+					id: "3FAD5EA79F0BAF90"
+					item: {
+						Count: 1b
+						id: "powah:wrench"
+						tag: {
+							PowahWrenchNBT: { }
+						}
+					}
+					type: "item"
+				}
+			]
 			title: "Powah is OPawah!"
 			x: -7.0d
 			y: 0.0d
@@ -527,8 +515,8 @@
 				}
 			]
 			title: "Flux Networks"
-			x: 0.5d
-			y: -1.0d
+			x: 1.0d
+			y: 0.0d
 		}
 		{
 			dependencies: [
@@ -613,94 +601,6 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["157D4C0E9C7A0928"]
-			description: ["When placed on a pedestal, drastically increases nearby machine's speed"]
-			id: "158C15F8B10B3DBB"
-			optional: true
-			rewards: [{
-				id: "01A4FB769638B399"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projecte:watch_of_flowing_time"
-					tag: { }
-				}
-				type: "item"
-			}]
-			tasks: [{
-				id: "47E66A5E054D0AC4"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projecte:watch_of_flowing_time"
-					tag: { }
-				}
-				type: "item"
-			}]
-			x: 1.5d
-			y: -3.0d
-		}
-		{
-			dependencies: ["157D4C0E9C7A0928"]
-			description: [
-				"The &lDark Matter Pedestal&r produces several AOE effects in a 9x9 area centered on the pedestal."
-				""
-				"Some examples:"
-				""
-				"- Watch of flowing time: slow or accelerates tick"
-				"- Swiftwolf Rending Gale: damage and shock enemies"
-				""
-				"just use EMI with the keyword &opedestal&r"
-			]
-			id: "44A70964598EE49B"
-			optional: true
-			rewards: [{
-				id: "6D24095EAD548072"
-				item: "projecte:dm_pedestal"
-				type: "item"
-			}]
-			tasks: [{
-				id: "123FDF1D902908D9"
-				item: "projecte:dm_pedestal"
-				type: "item"
-			}]
-			x: 1.5d
-			y: -1.0d
-		}
-		{
-			dependencies: ["4E81E76086558A19"]
-			description: [
-				"Nicolas Flamel himself would be proud of my Magnus Opus!"
-				""
-				"I can now transmute metals and gems and obtain Ender Pearls from iron!"
-			]
-			id: "3610828C7BB6B916"
-			rewards: [{
-				id: "282E262ACF03A0A1"
-				item: "projecte:blue_alchemical_bag"
-				type: "item"
-			}]
-			tasks: [{
-				id: "6DB3FA711471B4A7"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: { }
-					}
-					id: "projecte:philosophers_stone"
-					tag: { }
-				}
-				type: "item"
-			}]
-			title: "Lapis Philosophorum"
-			x: -5.0d
-			y: -2.0d
-		}
-		{
 			dependencies: ["4E81E76086558A19"]
 			description: [
 				"To obtain more advanced Circuits you have to use a Combiner."
@@ -756,6 +656,12 @@
 				"5E71405449C5F19D"
 				"1B885B1F413015D4"
 			]
+			description: [
+				"\"Eureka! The final Mechanical Crystal is in my hands! Now I can become a god!\""
+				""
+				"Well done! Now comes the time to mass produce all the essences and create powerful creative items."
+				"I mean it's one of the goals, but you can just become filthy rich and build wonderful contraptions with those free resources!"
+			]
 			id: "4B95E003C81117FC"
 			rewards: [{
 				count: 2
@@ -781,6 +687,7 @@
 		}
 		{
 			dependencies: ["4E81E76086558A19"]
+			description: ["Using thermal centrifugal separator you can obtain crude oil from bituminous sand... or you can buy the oil directly..."]
 			id: "36E164D94BE0A6E3"
 			rewards: [{
 				id: "685319FEB19CE7A9"
@@ -799,12 +706,18 @@
 					type: "item"
 				}
 			]
+			title: "To buy oil or not?"
 			x: -7.0d
 			y: -4.0d
 		}
 		{
 			dependencies: ["1BA45133DB917C98"]
 			id: "5E71405449C5F19D"
+			rewards: [{
+				id: "0DF38F19B93B7A2B"
+				item: "kubejs:cube4_dust"
+				type: "item"
+			}]
 			tasks: [{
 				id: "132BE40B1363DAE8"
 				item: "kubejs:cube4_dust"
@@ -815,7 +728,17 @@
 		}
 		{
 			dependencies: ["157D4C0E9C7A0928"]
+			description: [
+				"I never told you it would be easier..."
+				""
+				"The following steps are straightforward and I hope you love automating things..."
+			]
 			id: "1BA45133DB917C98"
+			rewards: [{
+				id: "012A6123B95D9646"
+				item: "create:crushing_wheel"
+				type: "item"
+			}]
 			tasks: [{
 				id: "0D03738A93A386DE"
 				item: "create:crushing_wheel"
@@ -827,6 +750,11 @@
 		{
 			dependencies: ["0EFF3C51AF78C4B8"]
 			id: "1B885B1F413015D4"
+			rewards: [{
+				id: "0BB8D34112CDBC3E"
+				type: "xp"
+				xp: 1000
+			}]
 			tasks: [{
 				id: "6271A97CB4A050F2"
 				item: "mekanism:solar_neutron_activator"
@@ -838,6 +766,11 @@
 		{
 			dependencies: ["5E71405449C5F19D"]
 			id: "0EFF3C51AF78C4B8"
+			rewards: [{
+				id: "1E5C4EF6B0596EC9"
+				type: "xp"
+				xp: 1000
+			}]
 			tasks: [{
 				id: "168C3D2F2AB2418F"
 				item: "mekanism:chemical_oxidizer"
@@ -863,6 +796,115 @@
 			x: -3.0d
 			y: -1.0d
 		}
+		{
+			dependencies: ["7E40BDE1846E9542"]
+			description: [
+				"\"I'm lacking the essence of the fourth mechanical essence... I must have it!\""
+				""
+				"To create the first step of the final Mechanical Essence you need... essence of mobs!"
+			]
+			id: "425E1C7023D29E31"
+			rewards: [{
+				count: 4
+				id: "543148B6BB056FB2"
+				item: "minecraft:experience_bottle"
+				type: "item"
+			}]
+			subtitle: "recursive"
+			tasks: [
+				{
+					id: "1CFE546D4C0316AE"
+					item: "minecraft:experience_bottle"
+					type: "item"
+				}
+				{
+					id: "6E63ADA7310990F0"
+					item: "thermal:machine_bottler"
+					type: "item"
+				}
+			]
+			title: "Essence is of the Essence"
+			x: -3.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			description: [
+				"To craft an Enchanted Bottle you can use any kind of fluid experience."
+				""
+				"You can get fluid experience from:"
+				""
+				"- Create (Nuggets of Experience)"
+				""
+				"- Thermal (Essence of Knowledge from Insightful Condenser, Insightful Crystal and Knowledge Concentrator Augmented Machines)"
+				""
+				"- Industrial Foregoing (Essence from Mob Crusher)"
+				""
+				"- Mob Grinding Utils (Fluid Xp)"
+			]
+			id: "7E40BDE1846E9542"
+			tasks: [
+				{
+					id: "7C710E111CB2FE3C"
+					item: "industrialforegoing:essence_bucket"
+					type: "item"
+				}
+				{
+					id: "1D5A53819DC918C5"
+					item: "thermal:xp_storage_augment"
+					type: "item"
+				}
+				{
+					id: "1533024E99E04171"
+					item: "mob_grinding_utils:fluid_xp_bucket"
+					type: "item"
+				}
+				{
+					count: 3L
+					id: "1093D29FC8DA0441"
+					item: "create:experience_nugget"
+					type: "item"
+				}
+			]
+			x: -5.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			id: "59F5B766F6827461"
+			rewards: [{
+				id: "3FCE3A682E07A0E4"
+				item: "kubejs:cube3"
+				type: "item"
+			}]
+			tasks: [{
+				id: "1560C3D4BAB468B2"
+				item: {
+					Count: 1b
+					id: "adminshop:permit"
+					tag: {
+						display: {
+							Lore: [
+								"[{\"text\":\"Buy: Emerald Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Powah Resources\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Mekanism Resources\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Start a village!\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Get passive mobs!\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Advanced Mechanical Crystal\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Liquid Pink Slime\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Liquid Meat\",\"italic\":false}]"
+							]
+							Name: "[{\"text\":\"Tier 3 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
+						}
+						key: 3
+					}
+				}
+				match_nbt: true
+				type: "item"
+			}]
+			x: -8.5d
+			y: -2.0d
+		}
 	]
-	title: "Tier 4: Advanced Mekanism"
+	title: "Chapter 4: Advanced Mekanism"
 }

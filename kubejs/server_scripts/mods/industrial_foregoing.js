@@ -82,8 +82,8 @@ ServerEvents.recipes(event => {
     event.recipes.thermal.bottler(recipe.output, recipe.input).energy(recipe.energy);
   });
 
-  event.replaceInput({id: 'industrialforegoing:mob_imprisonment_tool'}, 'minecraft:ghast_tear', 'projecte:dark_matter');
-	event.replaceInput({id: 'industrialforegoing:stasis_chamber'}, 'minecraft:ghast_tear', 'projecte:dark_matter');
+  event.replaceInput({id: 'industrialforegoing:mob_imprisonment_tool'}, 'minecraft:ghast_tear', 'minecraft:nether_star');
+	event.replaceInput({id: 'industrialforegoing:stasis_chamber'}, 'minecraft:ghast_tear', 'minecraft:nether_star');
 
   event.remove({id: 'industrialforegoing:ore_laser_base'});
 });

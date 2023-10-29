@@ -17,6 +17,9 @@
   "spawns": {
     "default": [
       [ 6, 3, 5 ]
+    ],
+    "mmp": [
+      [ 5, 7, 9 ]
     ]
   },
   
@@ -29,9 +32,9 @@
   "templates": [
     {
       "name": "default",
-      "file": "island1.nbt",
-      "spawns": "default",
-      "direction": "south"
+      "desc": "Default Mechanical Mastery Plus Island",
+      "file": "mmp_island.snbt",
+      "spawns": "mmp"
     }
   ]
 }

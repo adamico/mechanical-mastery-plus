@@ -1,24 +1,93 @@
 ServerEvents.recipes(event => {
-	
+	//functions
 	let bottling = (output, input) => {
 		event.recipes.createFilling(output, input);
 	};
 	
+	//tier0
+
+	event.replaceInput({id: 'create:crafting/appliances/slime_ball'}, 'create:dough', '#forge:dough');
+
+	event.remove({id: 'framedblocks:framed_cube'});
+	event.custom({
+		"type": "woodworks:sawmill",
+		"ingredient": {
+			"tag": "minecraft:logs"
+		},
+		"result": "framedblocks:framed_cube",
+		"count": 4,
+	});
+
+	event.replaceInput({output: 'integrateddynamics:squeezer'}, '#minecraft:planks', 'framedblocks:framed_cube');
+	event.replaceInput({output: 'integrateddynamics:squeezer'}, 'minecraft:stick', 'createaddition:iron_rod');
+
+	['squeezer', 'mechanical_squeezer'].forEach(recipe => {
+		event.remove({id: `integrateddynamics:${recipe}/convenience/minecraft_dye_white_bone`});
+		event.custom({
+			type: `integrateddynamics:${recipe}`,
+			item: {
+				item: "minecraft:bone"
+			},
+			result: {
+				items: [
+					{
+						item: {
+							item: "minecraft:bone_meal",
+							count: 3
+						}
+					},
+					{
+						item: {
+							item: "minecraft:bone_meal",
+							count: 1
+						},
+						chance: 0.5
+					},
+					{
+						"item": {
+							item: "minecraft:white_dye",
+							count: 2
+						},
+						chance: 0.5
+					}
+				]	
+			},
+			duration: 10
+		});
+
+		event.remove({id: `integrateddynamics:${recipe}/ore/flint`});
+		event.custom({
+			type: `integrateddynamics:${recipe}`,
+			item: "minecraft:gravel",
+			result: {
+				items: [
+					{
+						item: "minecraft:sand"
+					},
+					{
+						item: "minecraft:flint",
+						chance: 0.5
+					}
+				]
+			},
+			duration: 30
+		})
+	});
+
+
+	//tier1
   event.shapeless('kubejs:cube1_packaged', ['kubejs:cube1', 'kubejs:cube1', 'kubejs:cube1', 'kubejs:cube1']);
-	
 	event.recipes.thermal.press('kubejs:cube1_packaged', 'kubejs:cube1').energy(600 * 20);
- 
-	event.recipes.createCompacting('kubejs:cube2_packaged', 'kubejs:cube2');
-
-	event.recipes.createCrushing(Item.of('kubejs:cube4_dust', 2), 'kubejs:cube4');
-
 	event.shapeless('kubejs:cube1', ['#forge:gears/gold', Item.of('#forge:rods/copper', 2), '#forge:gears/iron']);
+
+  event.replaceInput({id: 'thermal:dynamo_stirling'}, '#forge:gears/iron', 'ae2:vibration_chamber');
+
+	//tier2
+	event.recipes.createCompacting('kubejs:cube2_packaged', 'kubejs:cube2');
 	event.recipes.createMixing('kubejs:cube2', ['kubejs:cube1', '#forge:gears/steel', Item.of('#forge:dusts/quartz', 2), Item.of('#forge:rods/brass', 2), '#forge:gears/invar']);
 
+	//tier3
 	event.recipes.createMixing('kubejs:cube3', ['kubejs:cube2', 'minecraft:fire_charge', 'thermal:lightning_charge', 'thermal:ice_charge', 'thermal:earth_charge', 'mekanism:basic_control_circuit']).heated();
-	event.recipes.createMixing('kubejs:cube4_inert', [Fluid.of('thermal:refined_fuel', 1000), 'kubejs:cube3', 'kubejs:fission_pellet', 'projecte:mobius_fuel', 'mekanism:elite_control_circuit']).superheated();
-
-	event.recipes.createMixing(Item.of('minecraft:gunpowder', 4), [Item.of('#minecraft:coals', 2), ['thermal:niter', 'thermal:niter_dust'], ['thermal:sulfur', 'thermal:sulfur_dust']]).heated();
 
 	bottling('kubejs:blaze_effigy', [Fluid.of('minecraft:lava', 1000), 'kubejs:dormant_effigy']);
 	bottling('kubejs:blizz_effigy', [Fluid.of('thermal:ender', 1000), 'kubejs:dormant_effigy']);
@@ -26,6 +95,32 @@ ServerEvents.recipes(event => {
 	bottling('kubejs:basalz_effigy', [Fluid.of('thermal:redstone', 1000), 'kubejs:dormant_effigy']);
 
 	event.shapeless('create:blaze_burner', ['create:empty_blaze_burner', 'kubejs:blaze_effigy']);
+
+	event.recipes.createMixing(Item.of('minecraft:gunpowder', 4), [Item.of('#minecraft:coals', 2), ['thermal:niter', 'thermal:niter_dust'], ['thermal:sulfur', 'thermal:sulfur_dust']]).heated();
+
+	event.remove({id: 'createchromaticreturn:creative_cake_recipe'});
+	event.recipes.createSequencedAssembly([
+		Item.of('create:creative_blaze_cake').withChance(60.0),
+		Item.of('createchromaticreturn:creative_flour').withChance(30.0),
+		Item.of('minecraft:dragon_head').withChance(6.0)
+		], "kubejs:dragon_dna", [
+		event.recipes.create.deploying('kubejs:incomplete_creative_blaze_cake', ['kubejs:incomplete_creative_blaze_cake', 'createchromaticreturn:creative_flour']),
+		event.recipes.create.deploying('kubejs:incomplete_creative_blaze_cake', ['kubejs:incomplete_creative_blaze_cake', 'minecraft:dragon_head']),
+		event.recipes.create.filling('kubejs:incomplete_creative_blaze_cake', [Fluid.of('mekanismgenerators:fusion_fuel', 1000), 'kubejs:incomplete_creative_blaze_cake']),
+		event.recipes.create.filling('kubejs:incomplete_creative_blaze_cake', [Fluid.of('thermal:ender', 1000),'kubejs:incomplete_creative_blaze_cake']),
+		event.recipes.create.filling('kubejs:incomplete_creative_blaze_cake', [Fluid.of('thermal:redstone', 1000),'kubejs:incomplete_creative_blaze_cake']),
+		event.recipes.create.filling('kubejs:incomplete_creative_blaze_cake', [Fluid.of('thermal:glowstone', 1000),'kubejs:incomplete_creative_blaze_cake']),
+		]).transitionalItem('kubejs:incomplete_creative_blaze_cake').loops(100);
+
+	event.shaped('minecraft:skeleton_skull', [
+		'BBB',
+		'DCD',
+		'BBB'
+		], {
+			B: 'minecraft:bone_block',
+			D: 'minecraft:black_dye',
+			C: 'kubejs:cube1'
+	});
 
   event.shaped('kubejs:dormant_effigy', [
 		' S ',
@@ -36,122 +131,37 @@ ServerEvents.recipes(event => {
 			S: 'minecraft:skeleton_skull'
 	});
 
-	event.remove({id: 'projecte:body_stone'});
-	event.shaped('projecte:body_stone', [
-		'LRL',
-		'RDR',
-		'LRL'
-		], {
-			D: 'minecraft:diamond',
-			R: 'minecraft:redstone_block',
-			L: 'minecraft:lapis_block'
-	});
-
-	event.remove({id: 'projecte:soul_stone'});
-	event.shaped('projecte:soul_stone', [
-		'RLR',
-		'LDL',
-		'RLR'
-		], {
-			D: 'minecraft:diamond',
-			R: 'minecraft:redstone_block',
-			L: 'minecraft:lapis_block'
-	});
-
-  event.shaped('kubejs:incomplete_time_augment', [
-    'RUR',
-    'EGE',
-    'RAR'
-    ], {
-      R: 'createchromaticreturn:refined_radiance',
-      U: 'thermal:upgrade_augment_3',
-      E: 'createchromaticreturn:shadow_mechanism',
-      G: 'thermal:enderium_gear',
-      A: 'kubejs:cube4'
-    }
-  );
-  	
-	event.shaped('minecraft:skeleton_skull', [
-		'GGG',
-		'GEG',
-		'GGG'
-		], {
-			G: 'minecraft:bone_block',
-			E: 'projecte:body_stone'
-	});
-
   event.recipes.thermal.pulverizer(['minecraft:blaze_rod', Item.of('minecraft:blaze_rod').withChance(0.25)], 'kubejs:blaze_effigy').energy(2000);
 
   ['blizz', 'blitz', 'basalz'].forEach(prefix => {
     event.recipes.thermal.pulverizer([`thermal:${prefix}_rod`, Item.of(`thermal:${prefix}_rod`).withChance(0.25)], `kubejs:${prefix}_effigy`).energy(2000);   
   })
 
-	event.shaped('functionalstorage:creative_vending_upgrade', [
-		'CAC',
-		'ABA',
-		'CAC'
-		], {
-			A: 'projectexpansion:final_power_flower',
-			B: 'functionalstorage:netherite_upgrade',
-			C: 'projectexpansion:final_star'
-		}
-	);
-	
-	event.shaped('projectexpansion:final_power_flower', [
-		'CAE',
-		'ABA',
-		'FGH'
-		], {
-			A: 'projectexpansion:final_star',
-			B: 'extendedcrafting:ultimate_singularity',
-			C: 'mekanism:creative_energy_cube',
-			E: 'create:creative_motor',
-			F: 'refinedstorage:creative_storage_disk',
-			G: 'mekanism:creative_fluid_tank',
-			H: 'mekanism:creative_chemical_tank'
-		}
-	);
+  event.remove({id: 'thermal:machines/crucible/crucible_glowstone_dust'});
+  event.recipes.thermal.crucible(Fluid.of('thermal:glowstone', 100), '#forge:ingots/lumium').energy(600);
+  
+  event.remove({id: 'thermal:machines/crucible/crucible_glowstone_block'});
+  event.recipes.thermal.crucible(Fluid.of('thermal:glowstone', 1000), '#forge:storage_blocks/lumium').energy(3600);
+  
+	event.remove({id: 'thermal:machines/crucible/crucible_redstone_dust'});
+	event.recipes.thermal.crucible(Fluid.of('thermal:redstone', 100), '#forge:ingots/signalum').energy(600);
 
-  event.recipes.createSequencedAssembly([
-		'thermal:machine_efficiency_creative_augment'
-		], 'projectexpansion:final_star', [
-		event.recipes.createDeploying('kubejs:incomplete_creative_upgrade', ['kubejs:incomplete_creative_upgrade', 'kubejs:time_augment']),
-		event.recipes.createFilling('kubejs:incomplete_creative_upgrade', ['kubejs:incomplete_creative_upgrade', Fluid.of('industrialforegoing:ether_gas', 1000)]),
-		]).transitionalItem('kubejs:incomplete_creative_upgrade').loops(10);
+  event.remove({id: 'thermal:machines/crucible/crucible_redstone_block'});
+  event.recipes.thermal.crucible(Fluid.of('thermal:redstone', 1000), '#forge:storage_blocks/signalum').energy(3600);
+  
+  event.remove({id: 'thermal:machines/crucible/crucible_ender_pearl'});
+  event.recipes.thermal.crucible(Fluid.of('thermal:ender', 100), '#forge:ingots/enderium').energy(600);
+	event.recipes.thermal.crucible(Fluid.of('thermal:ender', 1000), '#forge:storage_blocks/enderium').energy(3600);
 
-	event.recipes.createSequencedAssembly([
-		'projectexpansion:final_star_shard' // have this item be a guaranteed output
-		], 'minecraft:nether_star', [ 
-		// the transitional item set by transitionalItem()
-		// is the item that will be used during the recipe as the item that the input is using to transition to the output.
-		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'createchromaticreturn:refined_radiance']), 
-		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'powah:crystal_nitro']), 
-		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'createchromaticreturn:refined_mechanism']), 
-		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'kubejs:cube1']), 
-		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'kubejs:cube2']), 
-		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'kubejs:cube3']), 
-		event.recipes.createDeploying('kubejs:incomplete_final_shard', ['kubejs:incomplete_final_shard', 'kubejs:cube4'])
-		]).transitionalItem('kubejs:incomplete_final_shard').loops(20); // set the transitional item and the loops (amount of repetitions)
-	
-	event.recipes.createMechanicalCrafting('projectexpansion:final_star', [
-	  ' ABABA ',
-	  'ABCCCBA',
-	  'BCDDDCB',
-	  'ACDSDCA',
-	  'BCDDDCB',
-	  'ABCCCBA',
-	  ' ABABA '
-	], {
-	  A: 'projectexpansion:final_star_shard',
-	  B: 'mekanism:pellet_antimatter',
-	  C: 'projecte:dark_matter',
-	  D: 'projecte:aeternalis_fuel_block',
-	  S: 'createchromaticreturn:bedrock_shard'
-	});
+  event.remove({id: 'thermal:machines/crucible/crucible_cobblestone_to_lava'});
+  event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 50), '#forge:cobblestone').energy(300);
+  
+  event.remove({id: 'thermal:machines/crucible/crucible_netherrack_to_lava'});
+  event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 1000), 'kubejs:netherrack').energy(3600);
 
-  event.recipes.thermal.bottler(Item.of('kubejs:time_augment',
-    '{AugmentData:{Type:"Machine",MachinePower:1d,MachineEnergy:0.75d,RFXfer:20d}}'), 
-    [Fluid.of('industrialforegoing:ether_gas', 500), 'kubejs:incomplete_time_augment']);
+	//tier4
+	event.recipes.createMixing('kubejs:cube4_inert', [Fluid.of('thermal:refined_fuel', 1000), 'kubejs:cube3', 'kubejs:fission_pellet', 'minecraft:experience_bottle', 'mekanism:elite_control_circuit']).superheated();
+	event.recipes.createCrushing(Item.of('kubejs:cube4_dust', 2), 'kubejs:cube4');
 
 	event.remove({id: 'thermal:machines/centrifuge/centrifuge_oil_sand'});
 	event.remove({id: 'thermal:machines/centrifuge/centrifuge_oil_red_sand'});
@@ -182,19 +192,95 @@ ServerEvents.recipes(event => {
 	});
 	
 	event.remove({id: 'mekanism:control_circuit/elite'});
-	event.remove({id: 'mekanism:control_circuit/ultimate'});
-
 	event.replaceInput({output: 'mekanism:combiner'}, 'mekanism:elite_control_circuit', 'kubejs:cube3');
 
-	event.remove({id: 'mekanism:chemical_dissolution_chamber'});
+	event.recipes.thermal.press('fluxnetworks:flux_dust', ['kubejs:coated_redstone', 'fluxnetworks:flux_block']).energy(200);
+
+	//tier5
+  event.recipes.thermal.chiller(Item.of('kubejs:black_essence', 4), 'createchromaticreturn:shadow_essence').energy(20000);
+
+	event.remove({output: 'createchromaticreturn:multiplite_ingot'})
+	event.recipes.createMixing(Item.of('createchromaticreturn:multiplite_ingot'), [Item.of('createchromaticreturn:refined_radiance', 16), Item.of('supplementaries:enderman_head', 8), Item.of('minecraft:shulker_shell', 8)]).superheated();
+
+	event.recipes.shapeless('mob_grinding_utils:fluid_xp_bucket', ['industrialforegoing:essence_bucket']);
+	event.recipes.shapeless('industrialforegoing:essence_bucket', ['mob_grinding_utils:fluid_xp_bucket']);
+
+	let inter = 'kubejs:incomplete_creative_upgrade';
+
+  event.recipes.create.sequenced_assembly([
+		Item.of('thermal:machine_efficiency_creative_augment').withChance(30.0),
+		Item.of('mekanism:pellet_antimatter').withChance(2.0),
+		Item.of('thermal:upgrade_augment_3').withChance(16.0),
+		], 'thermal:upgrade_augment_3', [
+			event.recipes.create.deploying(inter, [inter, 'mekanism:pellet_antimatter']),
+			event.recipes.create.filling(inter, [inter, Fluid.of('mekanismgenerators:fusion_fuel', 1000)]),
+			event.recipes.create.pressing(inter, [inter, Fluid.water(1000)])
+		]).transitionalItem(inter);
+
+
+	event.recipes.create.sequenced_assembly([
+		Item.of('thermal:machine_catalyst_creative_augment').withChance(30.0),
+		Item.of('mekanism:pellet_antimatter').withChance(2.0),
+		Item.of('thermal:machine_catalyst_augment').withChance(16.0),
+	], 'thermal:machine_catalyst_augment', [
+		event.recipes.createDeploying(inter, [inter, 'mekanism:pellet_antimatter']),
+		event.recipes.createFilling(inter, [inter, Fluid.of('industrialforegoing:pink_slime', 1000)]),
+		event.recipes.create.pressing(inter, [inter, Fluid.lava(1000)])
+	]).transitionalItem(inter);
+
+	event.recipes.createSequencedAssembly([
+		'kubejs:dragon_dna'
+	], 'minecraft:nether_star', [
+			event.recipes.createDeploying('kubejs:incomplete_dragon_dna', ['kubejs:incomplete_dragon_dna', 'minecraft:shulker_shell']), 
+			event.recipes.createDeploying('kubejs:incomplete_dragon_dna', ['kubejs:incomplete_dragon_dna', 'minecraft:end_crystal']), 
+			event.recipes.createDeploying('kubejs:incomplete_dragon_dna', ['kubejs:incomplete_dragon_dna', 'powah:crystal_nitro']),
+			event.recipes.createDeploying('kubejs:incomplete_dragon_dna', ['kubejs:incomplete_dragon_dna', 'kubejs:cube1']), 
+			event.recipes.createDeploying('kubejs:incomplete_dragon_dna', ['kubejs:incomplete_dragon_dna', 'kubejs:cube2']),
+			event.recipes.createDeploying('kubejs:incomplete_dragon_dna', ['kubejs:incomplete_dragon_dna', 'kubejs:cube3']), 
+			event.recipes.createDeploying('kubejs:incomplete_dragon_dna', ['kubejs:incomplete_dragon_dna', 'kubejs:cube4'])
+	]).transitionalItem('kubejs:incomplete_dragon_dna').loops(20);
 	
-	event.shaped('mekanism:chemical_dissolution_chamber', [
+	event.remove({id: 'thermal:machines/press/press_vine_to_latex'});
+	event.remove({id: 'thermal:machines/press/press_dandelion_to_latex'});
+
+	event.recipes.createMechanicalCrafting('minecraft:dragon_head', [
+	  ' R R ',
+	  ' R R ',
+	  ' SSS ',
+	  'SASAS',
+	  'SCSCS',
+	  'SBBBS',
+	  ' SSS '
+	], {
+	  B: 'minecraft:dragon_breath',
+	  A: 'mekanism:pellet_antimatter',
+	  R: 'thermal:cured_rubber_block',
+	  C: 'createchromaticreturn:bedrock_shard',
+		S: 'minecraft:sculk',
+	});
+
+	event.remove({id: 'mekanism:control_circuit/ultimate'});
+	event.remove({id: 'mekanism:chemical_washer'});
+	event.shaped('mekanism:chemical_washer', [
 		'CTC',
 		'USU',
-		'CTC'
+		'CKC'
 	], {
 		C: 'kubejs:cube4',
-		T: 'mekanism:basic_chemical_tank',
+		K: 'mekanism:basic_chemical_tank',
+		T: 'mekanism:basic_fluid_tank',
+		U: 'mekanism:ultimate_control_circuit',
+		S: 'mekanism:steel_casing'
+	});
+
+	event.remove({id: 'mekanism:chemical_crystallizer'});
+	event.shaped('mekanism:chemical_crystallizer', [
+		'CFC',
+		'USU',
+		'CFC'
+	], {
+		C: 'kubejs:cube4',
+		F: 'mekanism:fluorite_gem',
 		U: 'mekanism:ultimate_control_circuit',
 		S: 'mekanism:steel_casing'
 	});
@@ -204,33 +290,4 @@ ServerEvents.recipes(event => {
   event.recipes.thermal.pulverizer_catalyst('thermal:earth_charge').primaryMod(1.5).secondaryMod(4.0).energyMod(0.5).minChance(0.0).useChance(0.375);
   event.recipes.thermal.pulverizer_catalyst('kubejs:basilic_reagent').primaryMod(2.0).secondaryMod(5.0).energyMod(0.25).minChance(0.0).useChance(0.25);
   event.recipes.thermal.pulverizer_catalyst('kubejs:enriched_basilic_reagent').primaryMod(2.5).secondaryMod(5.0).energyMod(0.25).minChance(0.0).useChance(0.1);
-
-  event.remove({id: 'thermal:machines/crucible/crucible_glowstone_dust'});
-  event.recipes.thermal.crucible(Fluid.of('thermal:glowstone', 100), '#forge:ingots/lumium').energy(600);
-  
-  event.remove({id: 'thermal:machines/crucible/crucible_glowstone_block'});
-  event.recipes.thermal.crucible(Fluid.of('thermal:glowstone', 1000), '#forge:storage_blocks/lumium').energy(3600);
-  
-	event.remove({id: 'thermal:machines/crucible/crucible_redstone_dust'});
-	event.recipes.thermal.crucible(Fluid.of('thermal:redstone', 100), '#forge:ingots/signalum').energy(600);
-
-  event.remove({id: 'thermal:machines/crucible/crucible_redstone_block'});
-  event.recipes.thermal.crucible(Fluid.of('thermal:redstone', 1000), '#forge:storage_blocks/signalum').energy(3600);
-  
-  event.remove({id: 'thermal:machines/crucible/crucible_ender_pearl'});
-  event.recipes.thermal.crucible(Fluid.of('thermal:ender', 100), '#forge:ingots/enderium').energy(600);
-	event.recipes.thermal.crucible(Fluid.of('thermal:ender', 1000), '#forge:storage_blocks/enderium').energy(3600);
-
-  event.remove({id: 'thermal:machines/crucible/crucible_cobblestone_to_lava'});
-  event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 50), '#forge:cobblestone').energy(300);
-  
-  event.remove({id: 'thermal:machines/crucible/crucible_netherrack_to_lava'});
-  event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 1000), 'kubejs:netherrack').energy(3600);
-
-  event.recipes.thermal.bottler(Item.of('kubejs:time_augment', '{AugmentData:{Type:"Machine",MachinePower:1d,MachineEnergy:0.75d,RFXfer:20d}}'), [Fluid.of('industrialforegoing:ether_gas', 500), 'kubejs:incomplete_time_augment']);
-
-  event.recipes.thermal.pulverizer(['minecraft:dirt', Item.of('minecraft:red_mushroom').withChance(0.25), Item.of('minecraft:brown_mushroom').withChance(0.25)], 'minecraft:podzol').energy(200);
-  event.recipes.thermal.press('fluxnetworks:flux_dust', ['kubejs:coated_redstone', 'fluxnetworks:flux_block']).energy(200);
-
-  event.replaceInput({id: 'thermal:dynamo_stirling'}, '#forge:gears/iron', 'ae2:vibration_chamber');
 });

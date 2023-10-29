@@ -98,6 +98,8 @@ whitelist.json
 /config/enigmaticgraves-common.toml
 /config/ftbbackups2.json
 /config/InvTweaks.cfg
+!/config/servers.json
+!/config/itlt-client.toml
 /config/jei/bookmarks.ini
 /config/jei/ingredient-list-mod-sort-order.ini
 /config/jei/lookupHistory.zip
@@ -265,3 +267,11 @@ crafttweaker_examples/thermal/machine/refinery.zs
 crafttweaker_examples/thermal/machine/sawmill.zs
 crafttweaker_examples/thermal/machine/smelter_catalyst.zs
 crafttweaker_examples/thermal/machine/smelter.zs
+mmplus_banner.psd
+mmplus_logo_bg.png
+mmplus_logo_title.png
+mmplus.bbmodel
+profileImage/mmplus_logo.png
+menubuttons.bbmodel
+config/jade/sort-order.json
+kubejs/server_scripts/lychee.js.old

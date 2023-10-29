@@ -10,16 +10,17 @@
 	quests: [
 		{
 			description: [
-				"&cMechanical Mastery&r is an expert-yet-not-horribly-grindy skyblock modpack"
+				"&cMechanical Mastery Plus&r is a fork of the original Mechanical Mastery (see the quest above) with a similar progression."
 				""
 				"It's focused around automating everything in order to keep progressing. "
 				""
-				"EMC has been completely overhauled, and only raw resources such as ore chunks have EMC, and new \"mechanical essences\" can be crafted out of these raw materials, with multiple tiers giving more EMC the more complicated they get. "
+				"ProjectE and EMC are gone... But AdminShop is here!"
 				""
-				"Each chapter introduces a new Technology Mod to combine them all in the final chapter. "
+				"Each chapter introduces one or more new technology mods to combine them all in the final chapter."
 				""
-				"In order to complete the pack, you need to learn how to automate these mechanical essences and gain as much EMC as possible, good luck!"
+				"In order to complete the pack, you need to learn how to automate these mechanical essences and gain as much $ as possible, good luck!"
 			]
+			icon: "kubejs:cube1"
 			id: "0A440BFFAD3F083E"
 			subtitle: "Introduction and Explanation"
 			tasks: [{
@@ -32,80 +33,93 @@
 		}
 		{
 			dependencies: ["0A440BFFAD3F083E"]
-			icon: "thermal:machine_frame"
-			id: "6F0F8C3F6B5E2310"
+			description: [
+				"[\"In the recent past I found a very unique Minecraft modpack called\\n\\n\", {\"text\": \"Mechanical Mastery\", \"color\": \"gold\", \"clickEvent\": { \"action\": \"open_url\", \"value\": \"https://www.curseforge.com/minecraft/modpacks/mechanical-mastery\"}}]"
+				""
+				"I generally burn out before finishing a pack but this one got me hooked until the end (well not really, I never completed the final quest...)."
+				""
+				"I was a bit frustrated not being able to add many 1.19.x mods I adore, so I began recreating the pack and here it is in its final form!"
+				""
+				"Thanks &4Ammonium&r for Mechanical Mastery and for sparkling the passion for modpack and mod development!"
+			]
+			id: "6574C2772D94CB68"
+			rewards: [{
+				id: "0AF389E33776D623"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
-				id: "2C584B6EE7B58636"
-				title: "Tier 1: Thermal"
+				id: "27D023D4D8CA9654"
+				title: "The pack that changed everything"
+				type: "checkmark"
+			}]
+			x: -5.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["0A440BFFAD3F083E"]
+			description: [
+				"{\"text\": \"Adminshop\", \"color\": \"red\", \"underlined\": true, \"clickEvent\": {\"action\": \"open_url\", \"value\": \"https://legacy.curseforge.com/minecraft/mc-mods/adminshop\"}, \"extra\": [{\"text\": \" is a powerful mod that allows both server administrator and modpack developers to add their own shop into Minecraft, where players can buy and sell items at fixed prices.\", \"color\": \"white\", \"underlined\": false}]}"
+				""
+				"It uses a custom \"bank account\" system, in which you can create shared accounts with other players, allowing Co-Op play in servers or modpacks that rely on this mod. The mod was originally for 1.12 by Vnator, but it has been forked to newer versions and overhauled by Ammonium."
+				""
+				"(&otaken from the original mod description&r)"
+			]
+			id: "333AD01B70C4D1DC"
+			rewards: [{
+				id: "01856E23E926CF7C"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "4AB76C8E778E9FDA"
+				title: "AdminShop"
+				type: "checkmark"
+			}]
+			title: "AdminShop Overhaul"
+			x: -6.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["0A440BFFAD3F083E"]
+			description: ["{\"text\": \"Join our \", \"extra\": [{\"text\": \"Discord\", \"underlined\": true, \"color\": \"dark_blue\", \"clickEvent\": {\"action\": \"open_url\", \"value\": \"https://discord.gg/3bYHjXY4\"}}, {\"text\": \" and discuss about the ongoing development of the original pack, my fork and the future projects of our beloved Ammonium\", \"underlined\": false, \"color\": \"white\"}]}"]
+			id: "11218A6DB4F045CE"
+			rewards: [{
+				id: "7DF3F57E40C751A0"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "1E1255711CDF882A"
+				title: "Join our Discord!"
 				type: "checkmark"
 			}]
 			x: -3.5d
 			y: 0.5d
 		}
 		{
-			dependencies: [
-				"6F0F8C3F6B5E2310"
-				"7A0CB1037E6BE4D7"
+			dependencies: ["0A440BFFAD3F083E"]
+			description: [
+				"AKA Overhauled Ore Processing"
+				""
+				"In this pack the ore processing implies the use of all the technical mods to reach the highest ration of raw ores => ingots."
+				""
+				"{\"text\": \"Feel free to browse the \", \"extra\": [{\"text\": \"dedicated chapter\", \"color\": \"yellow\", \"underlined\": true, \"clickEvent\": {\"action\": \"change_page\", \"value\": \"3CF702D957530570\"}}]}"
 			]
-			icon: "create:crushing_wheel"
-			id: "2A9795581CE1CACF"
-			shape: "square"
+			id: "5A7A38C8FA72C931"
+			rewards: [{
+				id: "5E5E003B5381311D"
+				type: "xp"
+				xp: 100
+			}]
 			tasks: [{
-				id: "3BCA0B433ED08A4D"
-				title: "Tier 2: Create and Industrial Foregoing"
+				id: "37AB452D6692E19C"
+				title: "OOP"
 				type: "checkmark"
 			}]
-			x: -2.0d
-			y: 0.5d
-		}
-		{
-			dependencies: [
-				"78775CE81571FAC9"
-				"2A9795581CE1CACF"
-			]
-			icon: "mekanism:basic_control_circuit"
-			id: "636712D15DD7E2E8"
-			shape: "pentagon"
-			tasks: [{
-				id: "71B39DED89D5A45C"
-				title: "Tier 3: Mekanism"
-				type: "checkmark"
-			}]
-			x: -0.5d
-			y: 0.5d
-		}
-		{
-			dependencies: [
-				"636712D15DD7E2E8"
-				"1A67C9B9ABB4E969"
-			]
-			icon: "mekanism:elite_control_circuit"
-			id: "7B8B9AE6979535D8"
-			shape: "hexagon"
-			tasks: [{
-				id: "15A723F6047E80F3"
-				title: "Tier 4: Advanced Mekanism"
-				type: "checkmark"
-			}]
-			x: 1.0d
-			y: 0.5d
-		}
-		{
-			dependencies: [
-				"7B8B9AE6979535D8"
-				"157D4C0E9C7A0928"
-			]
-			icon: "projectexpansion:final_star"
-			id: "72E0FB7ABA0FF258"
-			shape: "gear"
-			tasks: [{
-				id: "3DA63D196473D774"
-				type: "checkmark"
-			}]
-			title: "Tier 5: Endgame"
-			x: 2.5d
-			y: 0.5d
+			x: -5.0d
+			y: 2.0d
 		}
 	]
-	title: "Overview"
+	title: "Topic"
 }

@@ -195,6 +195,49 @@
 			x: -1.0d
 			y: -3.0d
 		}
+		{
+			can_repeat: true
+			description: ["Using this command you can increase random tick speed allowing for example crops and budding crystals to grow faster."]
+			icon: "supplementaries:clock_block"
+			id: "074FF5DAA367B3D0"
+			rewards: [{
+				auto: "enabled"
+				command: "/gamerule randomTickSpeed 300"
+				exclude_from_claim_all: true
+				id: "06971F46E8FB655D"
+				type: "command"
+			}]
+			subtitle: "random tick is boring"
+			tasks: [{
+				id: "1F4EAE3FB4ED5458"
+				title: "I hate waiting!"
+				type: "checkmark"
+			}]
+			x: 0.5d
+			y: -4.0d
+		}
+		{
+			can_repeat: true
+			description: ["Ok, ok, &orandomTickSpeed&r manipulation is OP"]
+			icon: "minecraft:clock"
+			id: "2C1D4B424B01E07D"
+			rewards: [{
+				auto: "enabled"
+				command: "/gamerule randomTickSpeed 3"
+				exclude_from_claim_all: true
+				id: "4E166B265FF8D74A"
+				type: "command"
+			}]
+			shape: "square"
+			subtitle: "random is 3"
+			tasks: [{
+				id: "7B0C17740BBB84DD"
+				title: "I love waiting!"
+				type: "checkmark"
+			}]
+			x: 0.5d
+			y: -3.0d
+		}
 	]
 	subtitle: ["Create your ideal experience here"]
 	title: "Configuration Panel"

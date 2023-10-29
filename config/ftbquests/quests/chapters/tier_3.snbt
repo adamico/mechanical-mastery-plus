@@ -4,57 +4,65 @@
 	filename: "tier_3"
 	group: "2D94E5A1412E2495"
 	hide_quest_details_until_startable: true
-	hide_quest_until_deps_visible: true
 	icon: "kubejs:cube3"
 	id: "680AAFF5D8F57095"
-	order_index: 2
+	images: [
+		{
+			click: ""
+			corner: false
+			dev: false
+			height: 2.0d
+			hover: [ ]
+			image: "mekanism:item/mekasuit_helmet_tint_layer"
+			rotation: 0.0d
+			width: 2.0d
+			x: 1.0d
+			y: -4.0d
+		}
+		{
+			click: "https://www.curseforge.com/minecraft/mc-mods/mekanism"
+			corner: false
+			dev: false
+			height: 2.0d
+			hover: ["visit https://www.curseforge.com/minecraft/mc-mods/mekanism"]
+			image: "mekanism:item/mekasuit_helmet"
+			rotation: 0.0d
+			width: 2.0d
+			x: 1.0d
+			y: -4.0d
+		}
+	]
+	order_index: 3
 	quest_links: [ ]
 	quests: [
 		{
 			dependencies: ["1C35B03170B0D544"]
 			dependency_requirement: "one_completed"
-			description: ["You managed to create an improved version of your mechanical essence, but you feel it can still be made better, and you are going to find out how."]
+			description: [
+				"You managed to create an improved version of your mechanical essence, but you feel it can still be made better, and you are going to find out how."
+				""
+				"Chapter 3 is about all things Mekanism, the basic stuff, though."
+			]
 			icon: "kubejs:cube2"
 			id: "550E4D68A98180F5"
-			rewards: [
-				{
-					count: 8
-					id: "585E9D31C00C7C21"
-					item: "minecraft:lapis_ore"
-					type: "item"
+			rewards: [{
+				id: "5EBD3561DC90F6E9"
+				item: {
+					Count: 1b
+					id: "mekanismtools:diamond_paxel"
+					tag: {
+						Damage: 0
+					}
 				}
-				{
-					id: "05EFBF2E5E866415"
-					item: "minecraft:bone"
-					type: "item"
-				}
-				{
-					id: "03C7439E86D44CD5"
-					item: "thermal:niter_ore"
-					type: "item"
-				}
-				{
-					id: "66AC32680D53AD48"
-					item: "thermal:sulfur_ore"
-					type: "item"
-				}
-				{
-					id: "500BAFB2D134DA37"
-					item: "mekanism:raw_osmium"
-					type: "item"
-				}
-				{
-					id: "37D824B7EB9C2938"
-					item: "minecraft:diamond_ore"
-					type: "item"
-				}
-			]
+				type: "item"
+			}]
 			subtitle: "Still need more power..."
 			tasks: [{
-				id: "63BAB42990FDBE64"
-				title: "Tier 3 Materials"
-				type: "checkmark"
+				id: "7997589309CA5B5E"
+				item: "mekanism:configurator"
+				type: "item"
 			}]
+			title: "Mekanism"
 			x: 4.5d
 			y: -4.0d
 		}
@@ -85,7 +93,7 @@
 				type: "item"
 			}]
 			title: "Summoning with effigies"
-			x: 7.5d
+			x: 8.5d
 			y: -2.5d
 		}
 		{
@@ -147,7 +155,7 @@
 				}
 			]
 			title: "Awakening the Effigies"
-			x: 11.0d
+			x: 11.5d
 			y: -4.0d
 		}
 		{
@@ -201,7 +209,7 @@
 				}
 			]
 			title: "Elemental charges"
-			x: 13.0d
+			x: 12.5d
 			y: -1.5d
 		}
 		{
@@ -218,18 +226,23 @@
 				item: "mekanism:metallurgic_infuser"
 				type: "item"
 			}]
-			x: 6.0d
+			x: 7.0d
 			y: -6.5d
 		}
 		{
 			dependencies: ["1A983E23E641CA16"]
 			id: "64F073734D1826C5"
+			rewards: [{
+				id: "08880C0A8F957E47"
+				item: "mekanism:basic_control_circuit"
+				type: "item"
+			}]
 			tasks: [{
 				id: "4A87BC6A2667AB78"
 				item: "mekanism:basic_control_circuit"
 				type: "item"
 			}]
-			x: 13.0d
+			x: 12.5d
 			y: -6.5d
 		}
 		{
@@ -255,7 +268,7 @@
 				item: "kubejs:cube3"
 				type: "item"
 			}]
-			x: 14.5d
+			x: 14.0d
 			y: -4.0d
 		}
 		{
@@ -285,7 +298,7 @@
 				type: "item"
 			}]
 			title: "Refined storage!"
-			x: 14.5d
+			x: 14.0d
 			y: -2.5d
 		}
 		{
@@ -298,12 +311,13 @@
 				item: "thermal:upgrade_augment_3"
 				type: "item"
 			}]
+			shape: "diamond"
 			tasks: [{
 				id: "656E0F048CF98250"
 				item: "thermal:upgrade_augment_3"
 				type: "item"
 			}]
-			x: 15.5d
+			x: 15.0d
 			y: -5.5d
 		}
 		{
@@ -311,7 +325,13 @@
 				"0936B0DE389AE023"
 				"559F68C9913B2CFA"
 			]
-			description: ["Craft an empty blaze burner then right click a blaze with it to obtain a blaze burner. The blaze burner goes below basins and can be fed fuel to provide heat needed for some mixing recipes."]
+			description: [
+				"\"Fascinating! I have managed to trap a creature of pure fire and use it for my future plans! I wonder if I can somehow super-heat it?\""
+				""
+				"Craft an empty blaze burner then right click a blaze with it to obtain a blaze burner. The blaze burner goes below basins and can be fed fuel to provide heat needed for some mixing recipes."
+				""
+				"Using straws you can even feed the blaze burners with liquid fuel..."
+			]
 			id: "3F58AD4EAE336B1E"
 			rewards: [{
 				id: "51772590BB45E967"
@@ -324,7 +344,7 @@
 				type: "item"
 			}]
 			title: "Blaze Burner"
-			x: 11.0d
+			x: 11.5d
 			y: -5.5d
 		}
 		{
@@ -375,7 +395,7 @@
 				}
 			]
 			title: "AE2 Route"
-			x: 14.5d
+			x: 14.0d
 			y: -5.5d
 		}
 		{
@@ -427,6 +447,7 @@
 					type: "item"
 				}
 			]
+			shape: "diamond"
 			tasks: [
 				{
 					id: "10A8B77859650451"
@@ -510,7 +531,7 @@
 				}
 			]
 			title: "ME Starter Kit"
-			x: 14.5d
+			x: 14.0d
 			y: -6.5d
 		}
 		{
@@ -550,6 +571,7 @@
 					type: "item"
 				}
 			]
+			shape: "diamond"
 			tasks: [
 				{
 					id: "00ED491BCF377CE5"
@@ -646,7 +668,7 @@
 				}
 			]
 			title: "Refined Storage Starter Kit"
-			x: 14.5d
+			x: 14.0d
 			y: -1.5d
 		}
 		{
@@ -666,7 +688,7 @@
 				type: "item"
 			}]
 			title: "Dr Frankenstein's Dream"
-			x: 6.0d
+			x: 7.0d
 			y: -3.0d
 		}
 		{
@@ -674,6 +696,7 @@
 				"1B6E93FE3C6D5966"
 				"3A7F4033C8881566"
 			]
+			description: ["Using the magma crucible you can melt down block of special alloys and use the special fluids to craft the effigies."]
 			id: "1503E72A3505D8A6"
 			rewards: [{
 				id: "248FE48076701778"
@@ -707,11 +730,19 @@
 					type: "item"
 				}
 			]
-			x: 8.5d
+			x: 9.5d
 			y: -2.5d
 		}
 		{
 			dependencies: ["3F58AD4EAE336B1E"]
+			description: [
+				"You can obtain gunpowder in 4 ways:"
+				""
+				"- grow and smelt boomshroom spores"
+				"- mix coal, niter and sulfur dust"
+				"- pour a harming potion into cinder flour"
+				"- ... farm creepers"
+			]
 			id: "38612D037FCFBFD6"
 			rewards: [{
 				count: 8
@@ -725,7 +756,7 @@
 				item: "minecraft:gunpowder"
 				type: "item"
 			}]
-			x: 12.0d
+			x: 12.5d
 			y: -4.0d
 		}
 		{
@@ -741,35 +772,58 @@
 				item: "create:empty_blaze_burner"
 				type: "item"
 			}]
-			x: 8.5d
+			x: 9.5d
 			y: -5.5d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
+			description: [
+				"Compact machines?"
+				""
+				"This is better (IMHO)"
+			]
 			id: "184193B5D69E282D"
 			optional: true
+			rewards: [{
+				id: "588908396BFB3B67"
+				item: "hyperbox:hyperbox"
+				type: "item"
+			}]
+			shape: "diamond"
 			tasks: [{
 				id: "7D8ADC7F3075C102"
 				item: "hyperbox:hyperbox"
 				type: "item"
 			}]
-			x: 16.5d
+			x: 15.5d
 			y: -5.0d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
+			description: ["There! Stop asking how to get seeds/saplings/crops in the pack..."]
 			id: "7CBA0D27686067D3"
 			optional: true
+			rewards: [{
+				id: "4EE98BAF21AC1FA6"
+				item: "minecraft:emerald"
+				type: "item"
+			}]
+			shape: "diamond"
 			tasks: [{
 				id: "424A8399288C25D3"
 				item: "farmingforblockheads:market"
 				type: "item"
 			}]
-			x: 15.5d
+			x: 15.0d
 			y: -2.5d
 		}
 		{
 			dependencies: ["2C3D96AA3C9853ED"]
+			description: [
+				"\"I am sure I can create life with bones! I am not far!\""
+				""
+				"Using compacted bones you can craft skeleton skulls."
+			]
 			id: "63562122843997F6"
 			rewards: [{
 				id: "1FB70040ABD3A14F"
@@ -781,7 +835,7 @@
 				item: "minecraft:skeleton_skull"
 				type: "item"
 			}]
-			x: 6.0d
+			x: 7.0d
 			y: -1.5d
 		}
 		{
@@ -798,13 +852,14 @@
 				type: "xp"
 				xp: 100
 			}]
+			shape: "diamond"
 			tasks: [{
 				id: "2FC222A13779344C"
 				item: "integrateddynamics:mechanical_squeezer"
 				type: "item"
 			}]
 			title: "Squeeze me mechanically!"
-			x: 16.5d
+			x: 15.5d
 			y: -3.0d
 		}
 		{
@@ -844,12 +899,35 @@
 				}
 			]
 			title: "Bottling Effigies"
-			x: 10.0d
+			x: 10.5d
 			y: -4.0d
 		}
 		{
 			dependencies: ["0936B0DE389AE023"]
+			description: ["Each living effigy drops a specific \"rod\" which you need to pulverize to create the next mechanical essence."]
 			id: "7B47B85C4B684347"
+			rewards: [
+				{
+					id: "01A533B587052343"
+					item: "minecraft:blaze_rod"
+					type: "item"
+				}
+				{
+					id: "2C253838CD61913C"
+					item: "thermal:blizz_rod"
+					type: "item"
+				}
+				{
+					id: "518B56DB669BC855"
+					item: "thermal:blitz_rod"
+					type: "item"
+				}
+				{
+					id: "7F089156933487BC"
+					item: "thermal:basalz_rod"
+					type: "item"
+				}
+			]
 			tasks: [
 				{
 					id: "0ED1167391489190"
@@ -873,12 +951,16 @@
 				}
 			]
 			title: "Rods"
-			x: 11.0d
+			x: 11.5d
 			y: -2.5d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
-			description: [""]
+			description: [
+				"\"Alas! The elusive yellow cube is mine! I wonder what color is the next one...\""
+				""
+				"One of the less used Mekanism Machines is very useful here... I mean you cannot progress in the pack without it!"
+			]
 			id: "47D8F95F5317A47D"
 			rewards: [{
 				count: 4
@@ -906,7 +988,7 @@
 				}
 			]
 			title: "Yellow Cubes"
-			x: 17.0d
+			x: 16.0d
 			y: -4.0d
 		}
 		{
@@ -928,7 +1010,7 @@
 				item: "minecraft:glowstone_dust"
 				type: "item"
 			}]
-			x: 8.5d
+			x: 9.5d
 			y: -4.0d
 		}
 		{
@@ -956,11 +1038,18 @@
 					type: "item"
 				}
 			]
-			x: 7.5d
+			x: 8.5d
 			y: -4.0d
 		}
 		{
 			dependencies: ["3D0BAEB298C3B791"]
+			description: [
+				"Egg and chicken, chicken and egg?"
+				""
+				"How can I get netherrack if it's one of the ingredients of the Stonework Factory?"
+				""
+				"Hint: use the (rotational) force"
+			]
 			id: "204617216E309BB4"
 			rewards: [{
 				count: 64
@@ -973,7 +1062,7 @@
 				item: "minecraft:netherrack"
 				type: "item"
 			}]
-			x: 7.5d
+			x: 8.5d
 			y: -5.5d
 		}
 		{
@@ -998,9 +1087,552 @@
 				item: "industrialforegoing:material_stonework_factory"
 				type: "item"
 			}]
-			x: 6.0d
+			x: 7.0d
 			y: -5.0d
 		}
+		{
+			dependencies: ["550E4D68A98180F5"]
+			description: [""]
+			id: "6D15A9C7A60DC717"
+			rewards: [{
+				id: "2511746D517E659F"
+				item: "kubejs:cube2"
+				type: "item"
+			}]
+			tasks: [{
+				id: "7DCB3E128C1E720F"
+				item: {
+					Count: 1b
+					id: "adminshop:permit"
+					tag: {
+						display: {
+							Lore: [
+								"[{\"text\":\"Buy: Crude Oil\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Oil Sand\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Raw Osmium\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Diamond Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Niter Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Sulfur Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Ancient Debris\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Nether Gobber Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Basic Create Items\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Improved Mechanical Crystal\",\"italic\":false}]"
+							]
+							Name: "[{\"text\":\"Tier 2 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
+						}
+						key: 2
+					}
+				}
+				match_nbt: true
+				type: "item"
+			}]
+			x: 3.5d
+			y: -4.0d
+		}
+		{
+			dependencies: [
+				"550E4D68A98180F5"
+				"204617216E309BB4"
+			]
+			description: [
+				"The magma crucible can liquify several types of stones into lava. "
+				""
+				"In the next chapter you will discover how to produce netherrack which is a very good source of lava in this modpack."
+			]
+			id: "42C45408AC05B498"
+			rewards: [{
+				id: "0F3B89038F35F644"
+				item: "minecraft:lava_bucket"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5465F96CB57980E0"
+				item: "thermal:machine_crucible"
+				type: "item"
+			}]
+			title: "Lava generation is OP!"
+			x: 7.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["38555B7B5AE725D4"]
+			description: ["Mekanism's fluid transport solution."]
+			id: "6559161759CB03B7"
+			optional: true
+			rewards: [{
+				count: 16
+				id: "2EC367DFD9875A54"
+				item: "mekanism:basic_mechanical_pipe"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "7D45659EBD165567"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						RepairCost: 0
+						display: {
+							Name: "{\"text\":\"Any Mechanical Pipe\"}"
+						}
+						items: [
+							{
+								Count: 1b
+								id: "mekanism:basic_mechanical_pipe"
+							}
+							{
+								Count: 1b
+								id: "mekanism:advanced_mechanical_pipe"
+							}
+							{
+								Count: 1b
+								id: "mekanism:elite_mechanical_pipe"
+							}
+							{
+								Count: 1b
+								id: "mekanism:ultimate_mechanical_pipe"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Mechanical Pipes"
+			x: 2.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["08C76B396B7ACA4B"]
+			description: ["Mekanism's item transport solution."]
+			id: "38555B7B5AE725D4"
+			optional: true
+			rewards: [{
+				count: 16
+				id: "0657F9353985185F"
+				item: "mekanism:basic_logistical_transporter"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "1FF84F8D3581A381"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						RepairCost: 0
+						display: {
+							Name: "{\"text\":\"Any Logistical Transporter\"}"
+						}
+						items: [
+							{
+								Count: 1b
+								id: "mekanism:basic_logistical_transporter"
+							}
+							{
+								Count: 1b
+								id: "mekanism:advanced_logistical_transporter"
+							}
+							{
+								Count: 1b
+								id: "mekanism:elite_logistical_transporter"
+							}
+							{
+								Count: 1b
+								id: "mekanism:ultimate_logistical_transporter"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Logistical Transporters"
+			x: 3.0d
+			y: -5.5d
+		}
+		{
+			dependencies: ["550E4D68A98180F5"]
+			description: ["Mekanism's energy transport solution."]
+			id: "08C76B396B7ACA4B"
+			optional: true
+			rewards: [{
+				count: 16
+				id: "5F552566F2C24AC5"
+				item: "mekanism:basic_universal_cable"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "5D0001CEFA17F21F"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						RepairCost: 0
+						display: {
+							Name: "{\"text\":\"Any Universal Cable\"}"
+						}
+						items: [
+							{
+								Count: 1b
+								id: "mekanism:basic_universal_cable"
+							}
+							{
+								Count: 1b
+								id: "mekanism:advanced_universal_cable"
+							}
+							{
+								Count: 1b
+								id: "mekanism:elite_universal_cable"
+							}
+							{
+								Count: 1b
+								id: "mekanism:ultimate_universal_cable"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Universal Cables"
+			x: 3.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["3513339FE594C05C"]
+			icon: "mekanism:alloy_atomic"
+			id: "620E4524D30159AA"
+			optional: true
+			rewards: [{
+				count: 4
+				id: "5425E86CDA0643A6"
+				item: "mekanism:alloy_atomic"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "51607BCCD2E526E9"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mekanism:ultimate_universal_cable"
+							}
+							{
+								Count: 1b
+								id: "mekanism:ultimate_mechanical_pipe"
+							}
+							{
+								Count: 1b
+								id: "mekanism:ultimate_logistical_transporter"
+							}
+							{
+								Count: 1b
+								id: "mekanism:ultimate_pressurized_tube"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Ultimate Mekanism Logistics"
+			x: 2.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3D8A15299F1A5FD8"]
+			icon: "mekanism:alloy_reinforced"
+			id: "3513339FE594C05C"
+			optional: true
+			rewards: [{
+				count: 8
+				id: "6750C71EFA3E46CF"
+				item: "mekanism:alloy_reinforced"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "44CB165ABD5B8E33"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mekanism:elite_universal_cable"
+							}
+							{
+								Count: 1b
+								id: "mekanism:elite_mechanical_pipe"
+							}
+							{
+								Count: 1b
+								id: "mekanism:elite_logistical_transporter"
+							}
+							{
+								Count: 1b
+								id: "mekanism:elite_pressurized_tube"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Elite Mekanism Logistics"
+			x: 3.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["550E4D68A98180F5"]
+			description: [
+				"You can upgrade every mechanism logistic pipe, allowing for greater throughput."
+				""
+				"Pro tip: you can upgrade up to 8 placed and connected basic pipes by right clicking with a piece of infused alloy "
+				"{image:mekanism:item/alloy_infused width:50 height:50 align:1}"
+			]
+			icon: "mekanism:alloy_infused"
+			id: "3D8A15299F1A5FD8"
+			optional: true
+			rewards: [{
+				count: 16
+				id: "2E85D1C0E7C6040D"
+				item: "mekanism:alloy_infused"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "7DF6E6F76F9C0321"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mekanism:advanced_universal_cable"
+							}
+							{
+								Count: 1b
+								id: "mekanism:advanced_mechanical_pipe"
+							}
+							{
+								Count: 1b
+								id: "mekanism:advanced_logistical_transporter"
+							}
+							{
+								Count: 1b
+								id: "mekanism:advanced_pressurized_tube"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Advanced Mekanism Logistics"
+			x: 3.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["550E4D68A98180F5"]
+			description: ["The energized smelter can quickly smelt items at the cost of RF, and can be upgraded to smelt multiple items at a time."]
+			id: "3E46FBB08203CFFC"
+			optional: true
+			rewards: [{
+				id: "03190CD048189AFC"
+				type: "xp"
+				xp: 100
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "4EDEADCA66981F6C"
+				item: "mekanism:energized_smelter"
+				type: "item"
+			}]
+			x: 5.0d
+			y: -5.5d
+		}
+		{
+			dependencies: ["550E4D68A98180F5"]
+			description: ["Many Mekanism machines can be upgraded with Tier Installers, which increase the amount of items that can be processed at once, making their overall speed much faster. However, some machines cannot be upgraded this way."]
+			id: "459286FB757CF09E"
+			optional: true
+			rewards: [{
+				count: 3
+				id: "6983C8AF41438B59"
+				item: "mekanism:basic_tier_installer"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "694FD689B92AA0C2"
+				item: "mekanism:basic_tier_installer"
+				type: "item"
+			}]
+			title: "Mekanism machine tiers"
+			x: 4.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["550E4D68A98180F5"]
+			description: ["You can insert up to 8 speed/energy upgrades into a Mekanism machine to increase their processing speed and energy efficiency, respectively. Some machines allow up to 8 gas upgrades which increase their gas consumption efficiency."]
+			id: "543452935C91E989"
+			optional: true
+			rewards: [
+				{
+					count: 8
+					id: "273CF1C888B4640F"
+					item: "mekanism:upgrade_speed"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "1FE83D441A940124"
+					item: "mekanism:upgrade_energy"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "7F1AD60BB7FD6799"
+					item: "mekanism:upgrade_gas"
+					type: "item"
+				}
+			]
+			shape: "diamond"
+			tasks: [{
+				id: "6B49CF6900FE6740"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mekanism:upgrade_energy"
+							}
+							{
+								Count: 1b
+								id: "mekanism:upgrade_speed"
+							}
+							{
+								Count: 1b
+								id: "mekanism:upgrade_gas"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Mekanism machine upgrades"
+			x: 4.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["725C03AFA45FEE68"]
+			description: ["These generators consume items or fluids to generate RF, at the advantage of higher RF output and less variability. Hold SHIFT + N over these items for a basic description."]
+			id: "0284F10C4BF84652"
+			optional: true
+			rewards: [{
+				id: "4E6CD6FC00807DE5"
+				type: "xp"
+				xp: 100
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "6B3444E34F8BEA58"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mekanismgenerators:heat_generator"
+							}
+							{
+								Count: 1b
+								id: "mekanismgenerators:bio_generator"
+							}
+							{
+								Count: 1b
+								id: "mekanismgenerators:gas_burning_generator"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Active power generation"
+			x: 4.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["550E4D68A98180F5"]
+			description: ["These mekanism generators allow you to passively generate RF without any active material cost. However, their power output is usually variable and you may have to adjust for it with energy storage. Hold SHIFT + N over these items for a basic description."]
+			id: "725C03AFA45FEE68"
+			optional: true
+			rewards: [{
+				id: "5E9EAB7CBABC5C40"
+				type: "xp"
+				xp: 100
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "563C7EEDCF04E1DF"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mekanismgenerators:heat_generator"
+							}
+							{
+								Count: 1b
+								id: "mekanismgenerators:advanced_solar_generator"
+							}
+							{
+								Count: 1b
+								id: "mekanismgenerators:wind_generator"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Passive power generation"
+			x: 4.0d
+			y: -5.5d
+		}
+		{
+			dependencies: ["550E4D68A98180F5"]
+			id: "74D55DEF319BBD5B"
+			optional: true
+			rewards: [{
+				id: "56B8E904D092F42D"
+				type: "xp"
+				xp: 200
+			}]
+			shape: "diamond"
+			tasks: [
+				{
+					id: "2274CF939363ECC5"
+					item: "mekanism:basic_fluid_tank"
+					type: "item"
+				}
+				{
+					id: "6C49FABBCB2F4D3D"
+					item: "mekanism:basic_chemical_tank"
+					type: "item"
+				}
+			]
+			x: 5.0d
+			y: -2.5d
+		}
 	]
-	title: "Tier 3: Mekanism"
+	title: "Chapter 3: Mekanism"
 }

@@ -30,12 +30,12 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "v0.1.4"
+$MODPACK_VERSION = "r1.0.2"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
 # Should be "$null" if this is the first release
-$LAST_MODPACK_VERSION = "v0.1.3-beta"
+$LAST_MODPACK_VERSION = "v1.0.1"
 
 # Which modloader the modpack uses
 # Can be "forge" or "fabric"
@@ -65,7 +65,7 @@ $CLIENT_CHANGELOG = "The Changelog is currently being written."
 $GAME_VERSIONS = @(9366)
 
 # Can be "alpha", "beta" or "release"
-$CLIENT_RELEASE_TYPE = "beta"
+$CLIENT_RELEASE_TYPE = "release"
 
 #=====================================================================//
 #  DEPENDENCIES
@@ -84,16 +84,19 @@ $MODLIST_CREATOR_JAR = "ModListCreator-4.0.3-fatjar.jar"
 $CLIENT_FILE_AUTHOR = "kc00l"
 
 $FOLDERS_TO_INCLUDE_IN_CLIENT_FILES = @(
-    "config",
-    "defaultconfigs",
-    "kubejs",
-    "scripts",
-    "schematics"
-    )
+	"buddingcrystals",
+	"config",
+	"defaultconfigs",
+	"kubejs",
+	"scripts",
+	"schematics"
+	)
 
 $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"ae2/client.json",
 	"appleskin-client.toml",
+	"betteradvancements-client.toml",
+	"blockrunner-client.toml",
 	"buildinggadgets-client.toml",
 	"carryon-client.toml",
 	"chiselsandbits-client.toml",
@@ -105,6 +108,7 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"craftingstation-client.toml",
 	"craftingtweaks-client.toml",
 	"create-client.toml",
+	"create_jetpack-client.toml",
 	"cucumber-client.toml",
 	"curios-client.toml",
 	"dankstorage-client.toml",
@@ -128,9 +132,12 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"Mekanism/additions-client.toml",
 	"modnametooltip-client.toml",
 	"modularrouters-client.toml",
-	"mouseTweaks.cfg",
+	"MouseTweaks.cfg",
 	"online_detector-client.toml",
 	"patchouli-client.toml",
+	"personality-client.toml",
+	"placebo.cfg",
+	"powah.json5",
 	"ProjectE/client.toml"
 	"questsadditions-client.toml",
 	"refinedstorage-client.toml",
@@ -139,6 +146,8 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"rftoolspower-client.toml",
 	"rftoolsstorage-client.toml",
 	"rftoolsutility-client.toml",
+	"rubidium-mixins.properties",
+	"rubidium-options.json",
 	"shetiphiancore-client.toml",
 	"sidebar_buttons.json",
 	"smoothboot.json",
@@ -149,10 +158,21 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"thermal-client.toml",
 	"travelersbackpack-client.toml",
 	"visualworkbench-client.toml",
+	"voicechat/voicechat-client.properties",
+	"voicechat-client.toml",
 	"xnet-client.toml"
 )
 
-$FOLDERS_TO_REMOVE_FROM_CLIENT_FILES = @("crafttweaker_examples", "fancymenu_setups", "localconfigs", "kubejs/probe", "local/ftbutilities", "local/ftbchunks/data", "local/ftbultimine", "local/ftbultimine-client.snbt")
+$FOLDERS_TO_REMOVE_FROM_CLIENT_FILES = @(
+	"crafttweaker_examples",
+	"fancymenu_setups",
+	"localconfigs",
+	"kubejs/probe",
+	"local/ftbutilities",
+	"local/ftbchunks/data",
+	"local/ftbultimine",
+	"local/ftbultimine-client.snbt"
+)
 
 # Example: 
 # $FILES_TO_INCLUDE_IN_MODS_FOLDER_IN_CLIENT_FILES = @("mods/Apotheosis-1.19.2-6.2.1.jar", "mods/create-1.19.2-0.5.1.b.jar")
@@ -187,7 +207,7 @@ $ENABLE_SERVER_FILE_MODULE = $true
 # This will update the "modpackUrl" in the file found at $SERVER_SETUP_CONFIG_PATH
 # to point to your newly created client files on the CurseForge CDN.
 # Default: $false
-$ENABLE_SERVERSTARTER_MODULE = $false
+$ENABLE_SERVERSTARTER_MODULE = $true
 
 # Toggle automatic changelog generator on/off
 # This module requires an older modpack manifest zip to be present, 

@@ -1,0 +1,7 @@
+
+#General configurations. Shop contents stored in "adminshop.csv"
+[general_config]
+	#Amount of money each player starts with. Must be a whole number.
+	#Range: 0 ~ 9223372036854775807
+	starting_money = 1000
+
