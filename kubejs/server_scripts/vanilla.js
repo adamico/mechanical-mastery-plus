@@ -1,5 +1,4 @@
 ServerEvents.recipes(event => {
-	event.shapeless(Item.of('minecraft:andesite', 8), [Item.of('minecraft:cobblestone', 8), Item.of('minecraft:quartz', 1)]);
 	event.replaceInput({id: 'minecraft:piston'}, 'cobblestone', 'clayworks:glazed_terracotta');
 
 	// smelting recipes
