@@ -98,6 +98,7 @@ whitelist.json
 /config/enigmaticgraves-common.toml
 /config/ftbbackups2.json
 /config/InvTweaks.cfg
+!/config/servers.json
 !/config/itlt-client.toml
 /config/jei/bookmarks.ini
 /config/jei/ingredient-list-mod-sort-order.ini

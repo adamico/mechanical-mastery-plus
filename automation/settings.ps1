@@ -30,12 +30,12 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "v1.0.1"
+$MODPACK_VERSION = "r1.0.2"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
 # Should be "$null" if this is the first release
-$LAST_MODPACK_VERSION = "v1.0.0"
+$LAST_MODPACK_VERSION = "v1.0.1"
 
 # Which modloader the modpack uses
 # Can be "forge" or "fabric"
@@ -124,7 +124,6 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"gravestone-client.toml",
 	"hyperbox-client.toml",
 	"ironfurnaces-client.toml",
-	"itlt-client.toml",
 	"jei/bookmarks.ini",
 	"jei/jei-client.ini",
 	"mcjtylib-client.toml",
@@ -198,7 +197,7 @@ $ENABLE_CLIENT_FILE_MODULE = $true
 # Toggle the modpack uploader on/off
 # Setting this to $false will also disable the Server File and Changelog Generator Modules.
 # Default: $true
-$ENABLE_MODPACK_UPLOADER_MODULE = $false
+$ENABLE_MODPACK_UPLOADER_MODULE = $true
 
 # Toggle server file feature on/off
 # Default: $true
