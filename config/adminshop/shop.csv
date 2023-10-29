@@ -101,3 +101,7 @@ s,i,kubejs:cube4_packaged,460800,3
 s,f,#forge:experience,3,4
 s,f,thermal:refined_fuel,5,4
 s,f,minecraft:lava,2,4
+,,,,
+s,i,minecraft:iron_block,500,5
+s,i,minecraft:gold_block,500,5
+s,i,minecraft:copper_block,500,5
