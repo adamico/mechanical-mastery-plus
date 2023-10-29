@@ -886,12 +886,13 @@
 						display: {
 							Lore: [
 								"[{\"text\":\"Buy: Emerald Ore\",\"italic\":false}]"
-								"[{\"text\":\"Buy: Raw Uranium\",\"italic\":false}]"
-								"[{\"text\":\"Buy: Fluorite Ore\",\"italic\":false}]"
-								"[{\"text\":\"Buy: Uraninite\",\"italic\":false}]"
-								"[{\"text\":\"Buy: Rubberwood Sapling\",\"italic\":false}]"
-								"[{\"text\":\"Buy: End Gobber Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Powah Resources\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Mekanism Resources\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Start a village!\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Get passive mobs!\",\"italic\":false}]"
 								"[{\"text\":\"Sell: Advanced Mechanical Crystal\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Liquid Pink Slime\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Liquid Meat\",\"italic\":false}]"
 							]
 							Name: "[{\"text\":\"Tier 3 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
 						}

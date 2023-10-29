@@ -22,7 +22,7 @@
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["595F27B933ECC168"]
+			dependencies: ["2B65C5DE4AA944BA"]
 			description: [
 				"With the Pulverizer you can have better ore processing ratios to help crafting the basic mechanical essence."
 				""
@@ -65,7 +65,7 @@
 			]
 			title: "Pulverizer"
 			x: -1.5d
-			y: -1.0d
+			y: -0.5d
 		}
 		{
 			dependencies: ["547050DB11C5FFB7"]
@@ -196,7 +196,7 @@
 				type: "item"
 			}]
 			x: -2.5d
-			y: -1.5d
+			y: -0.5d
 		}
 		{
 			dependencies: ["7A0CB1037E6BE4D7"]
@@ -302,7 +302,7 @@
 			}]
 			title: "Alloys"
 			x: -0.5d
-			y: -0.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["2746A3F7A98C2134"]
@@ -428,8 +428,8 @@
 				title: "Energy transport, please?"
 				type: "checkmark"
 			}]
-			x: -2.5d
-			y: 0.5d
+			x: -3.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["09BAD2F7D01D16FD"]
@@ -437,6 +437,14 @@
 				"&lThermal Series mod&r"
 				""
 				"\"The Foundation of a Thermally-enhanced world!!\""
+				""
+				"In this chapter you will craft a &dBasic Mechanical Essence&r, turn it into a Crystal and sell it for profit."
+				""
+				"To do this you need:"
+				""
+				"- a basic Thermal machines automation setup (look in the automation tips chapter) to crush and smelt ores, craft gears and rods, assemble and press the Essence into a Crystal"
+				""
+				"- an Adminshop shop block to buy new ores for Thermal machines and sell the Crystal"
 			]
 			id: "7899043495724E2A"
 			rewards: [{
@@ -583,7 +591,7 @@
 				type: "item"
 			}]
 			title: "Pulverizer Catalysts"
-			x: -1.5d
+			x: -0.5d
 			y: 0.0d
 		}
 		{
@@ -631,9 +639,13 @@
 		{
 			dependencies: ["595F27B933ECC168"]
 			description: [
-				"Using the Shop you can now buy some resources to craft Thermal Machines."
+				"Using the Shop you can buy nickel and tin raw ores to craft Thermal Machines."
 				""
-				"Don't worry about money, you will start gaining a lot of it very soon!"
+				"You can also sell Mechanical Crystals to gain money."
+				""
+				"Don't worry about getting broke, you get enough starting money to craft a machine setup and make a profit."
+				""
+				"TIP: if you're really out of money you can craft a special trading permit allowing selling metal blocks to get you back on track."
 			]
 			id: "30AFF35D8B46E82B"
 			rewards: [{
@@ -647,6 +659,24 @@
 				type: "item"
 			}]
 			x: -4.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["30AFF35D8B46E82B"]
+			description: [
+				"\"I have to stop gambling, I'm broke, what am I gonna do?\""
+				""
+				"Excuse me? You spent all your money and can't craft your first Mechanical Crystal to get enough raw ores to proceed!!?!"
+				""
+				"There's a solution... craft a special trade permit to get some money back... It's not fast though..."
+			]
+			id: "185C525CF2B473D4"
+			tasks: [{
+				id: "7FD8A567A86037EE"
+				title: "Help! I'm broke"
+				type: "checkmark"
+			}]
+			x: -3.5d
 			y: 0.5d
 		}
 	]

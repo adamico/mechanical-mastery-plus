@@ -424,6 +424,8 @@
 				"Shadow Essence is the main ingredient for the essence of darkness."
 				""
 				"Essence of Darkness is a custom Mekanism Infuse Type used to create ingredient for the end game Mekanism blocks and items."
+				""
+				"NOTE: the shadow essence bucket has no use as an item, it's just used to complete the quest. You're supposed to use the liquid in a Create mixer"
 			]
 			id: "081C1697195680DC"
 			rewards: [{
@@ -723,7 +725,10 @@
 			y: 2.5d
 		}
 		{
-			dependencies: ["56D5909AEA258984"]
+			dependencies: [
+				"56D5909AEA258984"
+				"133E1F837FA4A41B"
+			]
 			hide_dependent_lines: true
 			id: "429F208B1F91C217"
 			rewards: [{
@@ -1178,7 +1183,14 @@
 						display: {
 							Lore: [
 								"[{\"text\":\"Buy: Enchanting Bottle\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Rubberwood Sapling\",\"italic\":false}]"
+								"[{\"text\":\"Buy: End Gobber Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Many liquids\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Many spawn eggs\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Flux Networks Resources\",\"italic\":false}]"
 								"[{\"text\":\"Sell: Liquid Experience\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Refined Fuel\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Lava\",\"italic\":false}]"
 							]
 							Name: "[{\"text\":\"Tier 4 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
 						}

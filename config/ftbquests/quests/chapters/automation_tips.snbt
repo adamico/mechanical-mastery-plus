@@ -11,14 +11,15 @@
 		{
 			dependencies: ["7A0CB1037E6BE4D7"]
 			description: [
-				"EMC links output 1 item per second, yet redstone furnaces and pulverizers take longer than that to process one item. "
+				"AdminShop T1 buyers output 4 items per second, yet redstone furnaces and pulverizers take longer than that to process one item. "
 				""
 				"Because of this, you will most likely need one pulverizer and redstone furnace per each raw material needed for automation (copper, iron, aluminum). "
 				""
-				"Remember to trash unwanted byproducts such as slag, or they might stop your machines from working. "
+				"Remember to store or trash unwanted byproducts (nickel from pulverizing iron, gold from copper, etc.) or they might stop your machines from working. "
 				""
-				"You can use the stack limiter module to limit how much your machines can accept, which is useful so your one iron pulverizer doesn't consume all your EMC by filling with 64 raw iron."
+				"You can use the stack limiter module to limit how much your machines can accept, which is useful so your one iron pulverizer doesn't consume all your money by filling with 64 raw iron."
 			]
+			hide_dependent_lines: true
 			id: "464AD5024525CC94"
 			rewards: [
 				{
@@ -94,6 +95,7 @@
 		}
 		{
 			dependencies: ["78775CE81571FAC9"]
+			hide_dependent_lines: true
 			id: "14DD0D705D827133"
 			tasks: [{
 				id: "6A1EEE63B8113EB8"
@@ -345,7 +347,7 @@
 		}
 		{
 			dependencies: ["464AD5024525CC94"]
-			description: ["You should still put pretty pipes with extraction and stack limiter modules between machines to avoid oversending ingredients"]
+			description: ["Even if not specified in these quests, you should still put pretty pipes with extraction and stack limiter modules between machines to avoid oversending ingredients"]
 			hide_dependency_lines: true
 			id: "0540E3BDEE91B6A9"
 			rewards: [
@@ -657,12 +659,14 @@
 				"That's life! You will have plenty of loot using the mob crusher with looting upgrades, don't worry"
 			]
 			id: "55FF155FE79BD182"
+			optional: true
 			rewards: [{
 				count: 4
 				id: "350C4B792D73864D"
 				item: "kubejs:dormant_effigy"
 				type: "item"
 			}]
+			shape: "diamond"
 			tasks: [{
 				id: "23F2BBDEE0DDEFC6"
 				item: "industrialforegoing:mob_duplicator"
@@ -676,13 +680,12 @@
 			dependencies: ["46E2C620A83B02C8"]
 			description: ["Place a Click Machine facing a wall to activate effigies. It doesn't use power, so set it to click as fast as you want. You can use Mob Grinding Utils to automate moving the mobs, killing them and collecting their loot. This is just one way to do this, if you have another idea feel free to do it your way."]
 			id: "0A7E1E8B5F04A64F"
-			optional: true
 			rewards: [{
 				id: "65619F4B60FD9914"
 				type: "xp"
 				xp: 100
 			}]
-			shape: "gear"
+			shape: "pentagon"
 			tasks: [
 				{
 					id: "6D847F1FD7A72A39"
@@ -718,7 +721,6 @@
 				"Don't forget you can boost output production by using pulverizer catalysts."
 			]
 			id: "26BD8CE4BDC37C65"
-			optional: true
 			rewards: [
 				{
 					count: 4
@@ -751,7 +753,7 @@
 					type: "item"
 				}
 			]
-			shape: "gear"
+			shape: "pentagon"
 			tasks: [{
 				count: 4L
 				id: "2942D6B4EFE510EA"
@@ -764,6 +766,7 @@
 		}
 		{
 			dependencies: ["47D8F95F5317A47D"]
+			hide_dependent_lines: true
 			id: "6831CC73795A75BA"
 			tasks: [{
 				id: "6FA79F8370B6DD4E"
@@ -990,7 +993,6 @@
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
-			hide_dependency_lines: true
 			id: "656C9C26BFE9E000"
 			tasks: [{
 				id: "3BC79C79E21931D9"
@@ -1006,6 +1008,7 @@
 				"26BD8CE4BDC37C65"
 			]
 			id: "2B7544F34FF03E9D"
+			min_required_dependencies: 1
 			tasks: [
 				{
 					id: "7AA8B720F503B7CA"
@@ -1255,7 +1258,6 @@
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
-			hide_dependency_lines: true
 			id: "2F7A507A72EA5CF3"
 			tasks: [{
 				id: "78D0F7C4F63789B8"
@@ -1492,7 +1494,6 @@
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
-			hide_dependency_lines: true
 			id: "45F629DE91E6B8DD"
 			tasks: [{
 				id: "144CAB2483D1EB96"
@@ -1515,7 +1516,6 @@
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
-			hide_dependency_lines: true
 			id: "117E5682BDCB39A8"
 			tasks: [{
 				id: "6C7D5E81ACC9D5B0"
@@ -1538,7 +1538,6 @@
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
-			hide_dependency_lines: true
 			id: "40C99EE531C8A2D6"
 			tasks: [{
 				id: "080C245F06E05FE1"
@@ -1943,7 +1942,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "78F9DD13059B209C"
 			tasks: [{
 				count: 2L
@@ -2125,6 +2123,7 @@
 		{
 			dependencies: ["2E520EAB02B746C5"]
 			id: "7F445CC0DC11D4B0"
+			shape: "pentagon"
 			tasks: [{
 				id: "5BE13CB81E37084B"
 				item: "thermal:machine_centrifuge"
@@ -2311,7 +2310,6 @@
 				"16EC705C8FB3EAC3"
 				"182209ACB7DE7F78"
 			]
-			hide_dependency_lines: true
 			id: "14813E9366FB1E8C"
 			tasks: [
 				{
@@ -2405,7 +2403,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "51E3D1442533F9A8"
 			tasks: [{
 				id: "5BE1555E149DD4B9"
@@ -2521,7 +2518,6 @@
 		}
 		{
 			dependencies: ["14DD0D705D827133"]
-			hide_dependency_lines: true
 			id: "0135FC32C810ECC2"
 			tasks: [
 				{
@@ -2551,7 +2547,6 @@
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
-			hide_dependency_lines: true
 			id: "496B193897DBC2EB"
 			tasks: [
 				{
@@ -2639,7 +2634,6 @@
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
-			hide_dependency_lines: true
 			id: "04F5CFB7A4FA6AAA"
 			tasks: [
 				{
@@ -2704,7 +2698,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "5156EB9E09BB3E03"
 			tasks: [{
 				id: "318F8E45051451B0"
@@ -2716,7 +2709,6 @@
 		}
 		{
 			dependencies: ["14DD0D705D827133"]
-			hide_dependency_lines: true
 			id: "6EA283C21C922986"
 			tasks: [{
 				id: "0D90DC23E298BBF7"
@@ -2728,7 +2720,6 @@
 		}
 		{
 			dependencies: ["14DD0D705D827133"]
-			hide_dependency_lines: true
 			id: "20C93B6EA0D8D45D"
 			tasks: [{
 				id: "2A9C9DAB5CBECD9D"
@@ -2740,7 +2731,6 @@
 		}
 		{
 			dependencies: ["14DD0D705D827133"]
-			hide_dependency_lines: true
 			id: "3FD84ECCF794F0F1"
 			tasks: [{
 				id: "67ABE223E0171B52"
@@ -2752,7 +2742,6 @@
 		}
 		{
 			dependencies: ["14DD0D705D827133"]
-			hide_dependency_lines: true
 			id: "4623A5E11588F8FB"
 			tasks: [{
 				id: "7404643C82CBC594"
@@ -2786,7 +2775,6 @@
 		}
 		{
 			dependencies: ["6831CC73795A75BA"]
-			hide_dependency_lines: true
 			id: "3490C3E66D245F06"
 			tasks: [{
 				id: "666C072DC755832F"
@@ -2798,7 +2786,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "4D88395F048E8733"
 			tasks: [{
 				id: "214BCF30D102A82E"
@@ -2832,7 +2819,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "001862E1A993D89C"
 			tasks: [{
 				id: "6E901F3421E6C299"
@@ -2844,7 +2830,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "2495512973053A61"
 			tasks: [{
 				id: "2A7CA89082A95040"
@@ -2856,7 +2841,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "17C36D0CD9A77322"
 			tasks: [{
 				id: "10544839ED1E9AE6"
@@ -2879,7 +2863,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "0795417DBEED4FB8"
 			tasks: [{
 				id: "75BEC5A998630BA2"
@@ -2891,7 +2874,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "101CACD36947951D"
 			tasks: [{
 				id: "613261F63C5C451D"
@@ -2947,7 +2929,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "43DF55014E06BDB3"
 			tasks: [{
 				id: "506ABDB347F36371"
@@ -2996,7 +2977,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "781DDCA7ECC20AAB"
 			tasks: [{
 				id: "4413228AB2B50133"
@@ -3030,7 +3010,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "06E607E409908FFD"
 			tasks: [{
 				id: "7A908A4A33D9EB43"
@@ -3053,7 +3032,6 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "03410C275DD34CA3"
 			tasks: [{
 				id: "60C795DDAFCB660D"
@@ -3087,8 +3065,8 @@
 		}
 		{
 			dependencies: ["16EC705C8FB3EAC3"]
-			hide_dependency_lines: true
 			id: "1FF5BDF7E94835C4"
+			shape: "pentagon"
 			tasks: [{
 				id: "70897AAD80F30F12"
 				item: "adminshop:buyer_1"

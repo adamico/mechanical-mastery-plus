@@ -41,6 +41,8 @@
 				"\"&oSuddenly, the basic mechanical essence whispers to me... the factory must grow!&r\""
 				""
 				"Having created your first mechanical essence you have now acces to chapter 2 which features Create and Industrial Foregoing."
+				""
+				"HINT: if you can't find any andesite blocks in your island, you can get andesite to to pr"
 			]
 			icon: "create:wrench"
 			id: "167C9AF69BB16B8B"
@@ -599,6 +601,8 @@
 								"[{\"text\":\"Buy: Bone\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Lapis Ore\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Gobber Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Apatite Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Cobbled Deepslate\",\"italic\":false}]"
 								"[{\"text\":\"Sell: Regular Mechanical Crystal\",\"italic\":false}]"
 							]
 							Name: "[{\"text\":\"Tier 1 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
