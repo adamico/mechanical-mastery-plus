@@ -288,8 +288,11 @@
 		{
 			dependencies: ["044413B6EB71F5E6"]
 			description: [
-				"Mill Raw to Crushed Raw"
-				"Pulverize Crushed Raw to Dust"
+				"Milling/Crushing 1 Raw Ore gives 1.3 Crushed Raw Ores"
+				""
+				"Pulverizing 1.3 Crushed Raw ores gives 1.56 Dusts (not counting the catalyst bonus)"
+				""
+				"See the Ore Processing Overhaul chapter for more details."
 			]
 			id: "75C1F15B9623C089"
 			rewards: [{
@@ -301,18 +304,18 @@
 			tasks: [
 				{
 					count: 2L
-					id: "0181E662B7842614"
+					id: "476866A15FCC0156"
 					item: "create:crushed_raw_zinc"
 					type: "item"
 				}
 				{
 					count: 2L
-					id: "6A2DF9AB22C29179"
+					id: "4E21DF5B00D6E47B"
 					item: "jaopca:dusts.zinc"
 					type: "item"
 				}
 			]
-			title: "2x Double"
+			title: "1.3 * 1.2 = 1.56 ?!?!!!!"
 			x: 1.0d
 			y: -1.0d
 		}
@@ -329,11 +332,18 @@
 				type: "xp"
 				xp: 100
 			}]
-			tasks: [{
-				id: "4964F5067F422067"
-				item: "create:millstone"
-				type: "item"
-			}]
+			tasks: [
+				{
+					id: "4964F5067F422067"
+					item: "create:millstone"
+					type: "item"
+				}
+				{
+					id: "50AB8C3B26D08DFA"
+					item: "thermal:machine_pulverizer"
+					type: "item"
+				}
+			]
 			x: -0.5d
 			y: -1.0d
 		}

@@ -1182,6 +1182,40 @@
 			x: 13.0d
 			y: -3.5d
 		}
+		{
+			dependencies: ["2296FDFBD5872799"]
+			id: "12C8FE27E33DEBAD"
+			tasks: [{
+				id: "0648E306B2456FA3"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			x: 8.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["12C8FE27E33DEBAD"]
+			id: "61A1CAD68D229A67"
+			tasks: [{
+				id: "4D0095F4EEB5C9BB"
+				item: "thermal:iron_dust"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["61A1CAD68D229A67"]
+			id: "25F08E5D4CE3D669"
+			subtitle: "x1.56"
+			tasks: [{
+				id: "1E2F5F6DB9DB77EF"
+				item: "minecraft:iron_ingot"
+				type: "item"
+			}]
+			x: 10.5d
+			y: 0.0d
+		}
 	]
 	title: "Overhauled Ore Processing"
 }

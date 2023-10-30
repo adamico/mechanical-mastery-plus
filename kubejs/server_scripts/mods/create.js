@@ -5,6 +5,7 @@ ServerEvents.recipes(event => {
 		});
 	}
 
+	event.remove({id: 'create:milling/coal'});
 	event.remove({id: 'create:milling/sandstone'});
 	event.remove({id: 'create:milling/gravel'});
 	event.remove({id: 'create:crushing/gravel'});
