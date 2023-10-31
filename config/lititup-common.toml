@@ -1,0 +1,7 @@
+#List of items that will ignite furnace, smoker, or blast furnace blocks. This list will only accept items with durability.
+Furnace_executor_item_list = []
+#Enable or disable the requirement to ignite a furnace block with flint and steel item before allowing it to cook items.
+Flint_and_steel_furnace_executor = true
+#Personalized message for missing items when using sparkling flint item
+Message_sparkling_flint = "Missing: Switchgrass Fiber!"
+

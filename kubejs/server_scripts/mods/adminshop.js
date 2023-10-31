@@ -1,10 +1,9 @@
 ServerEvents.recipes(event => {
   const createPermit = (tier, itemsToBuy, itemsToSell, centralItem, name) => {
     if (name == null) {
-      name = `"text":"Tier ${tier} Trade Permit"`
+      name = `"text":"[T${tier}] Trade Permit"`
     }
 
-    console.log(`Creating permit for tier ${tier}, with items to buy: ${itemsToBuy}, and items to sell: ${itemsToSell} with central item ${centralItem} and name ${name}`);
     let toBuyStrings = [];
     itemsToBuy.map(item => {
       toBuyStrings.push(`'[{"text":"Buy: ${item}","italic":false}]'`); 
@@ -51,7 +50,7 @@ ServerEvents.recipes(event => {
 
   let tier5BItems = ['Nothing'];
   let tier5SItems = ['Block of Iron', 'Block of Gold', 'Block of Copper'];
-  let tier5name = '"text":"I need money Trade Permit"';
+  let tier5name = '"text":"[SPECIAL] I need money Trade Permit"';
   createPermit(5, tier5BItems, tier5SItems, 'pipez:universal_pipe', tier5name);
 
   event.replaceInput({id: 'adminshop:shop'}, 'minecraft:ender_chest', 'ironchest:crystal_chest');
