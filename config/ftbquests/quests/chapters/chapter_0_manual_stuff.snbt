@@ -115,7 +115,7 @@
 			}]
 			title: "De lapide emptus"
 			x: 3.0d
-			y: 1.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["491EB18107FC8776"]
@@ -141,7 +141,7 @@
 			}]
 			title: "E fructu arbor cognoscitur"
 			x: 3.0d
-			y: -1.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["29D5601941CC9696"]
@@ -187,7 +187,7 @@
 			]
 			title: "HAMM... INSCRIBAH!"
 			x: 12.0d
-			y: -2.5d
+			y: -3.0d
 		}
 		{
 			dependencies: [
@@ -229,7 +229,7 @@
 			}]
 			title: "Another one bites the..."
 			x: 9.0d
-			y: 2.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["793AABD9C2DEC680"]
@@ -267,7 +267,7 @@
 			}]
 			title: "Ingots"
 			x: 10.5d
-			y: 2.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["258878D4F87E9F1E"]
@@ -298,7 +298,7 @@
 				type: "item"
 			}]
 			x: 4.5d
-			y: -1.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["6CC80ACF716A2566"]
@@ -316,7 +316,7 @@
 			}]
 			title: "No, there's no golem"
 			x: 6.0d
-			y: -1.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["6C83711E303711B7"]
@@ -333,7 +333,7 @@
 				type: "item"
 			}]
 			x: 7.5d
-			y: -1.5d
+			y: -3.0d
 		}
 		{
 			dependencies: [
@@ -353,14 +353,21 @@
 				type: "item"
 			}]
 			x: 7.5d
-			y: 1.5d
+			y: 3.0d
 		}
 		{
-			dependencies: ["5D6996CC9444ADE7"]
+			dependencies: [
+				"5D6996CC9444ADE7"
+				"57016CCF8764FE37"
+			]
 			description: [
-				"The first step of ore processing... forget it quickly because it's not very efficient in this pack."
+				"\"The old furnace... comforting, reliable... NOT!\""
 				""
-				"You will discover many smelting recipes have been moved to other more specific machines (kiln, blast furnace, etc.)"
+				"You probably discovered the furnace is not working..."
+				""
+				"You need to lit the furnace up with a flint \\& steel... or something more primitive and accessible before the iron age."
+				""
+				"INFO: You will discover many smelting recipes have been moved to other more specific machines (kiln, blast furnace, etc.)"
 			]
 			id: "2939AEFF3B458884"
 			rewards: [{
@@ -373,8 +380,9 @@
 				item: "minecraft:furnace"
 				type: "item"
 			}]
+			title: "\"Burning\" Furnace"
 			x: 4.5d
-			y: 1.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["2939AEFF3B458884"]
@@ -393,7 +401,7 @@
 				type: "item"
 			}]
 			x: 4.5d
-			y: 2.5d
+			y: 4.0d
 		}
 		{
 			dependencies: ["066BF5AF5165E3AB"]
@@ -433,7 +441,7 @@
 			]
 			title: "Sophisticated Storage"
 			x: 3.5d
-			y: -4.0d
+			y: -5.0d
 		}
 		{
 			dependencies: ["258878D4F87E9F1E"]
@@ -459,7 +467,7 @@
 			}]
 			title: "Storage"
 			x: 4.5d
-			y: -3.0d
+			y: -4.0d
 		}
 		{
 			dependencies: ["066BF5AF5165E3AB"]
@@ -479,7 +487,7 @@
 			}]
 			title: "Iron Chests"
 			x: 5.5d
-			y: -4.0d
+			y: -5.0d
 		}
 		{
 			dependencies: ["066BF5AF5165E3AB"]
@@ -519,7 +527,7 @@
 			}]
 			title: "Functional Storage"
 			x: 4.5d
-			y: -4.0d
+			y: -5.0d
 		}
 		{
 			dependencies: ["3DE84738AD56FC5C"]
@@ -538,7 +546,7 @@
 				type: "item"
 			}]
 			x: 4.5d
-			y: 3.5d
+			y: 5.0d
 		}
 		{
 			dependencies: ["3DE84738AD56FC5C"]
@@ -552,7 +560,7 @@
 				type: "item"
 			}]
 			x: 3.5d
-			y: 3.5d
+			y: 5.0d
 		}
 		{
 			dependencies: ["3DE84738AD56FC5C"]
@@ -575,7 +583,7 @@
 				type: "item"
 			}]
 			x: 5.5d
-			y: 3.5d
+			y: 5.0d
 		}
 		{
 			dependencies: ["0843FDA66C3268E6"]
@@ -593,7 +601,7 @@
 				type: "item"
 			}]
 			x: 7.5d
-			y: -0.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["4FD2F442421FE4CE"]
@@ -611,7 +619,7 @@
 				type: "item"
 			}]
 			x: 7.5d
-			y: 0.5d
+			y: 1.5d
 		}
 		{
 			dependencies: ["47B8CC100AA540EB"]
@@ -628,7 +636,7 @@
 				type: "item"
 			}]
 			x: 10.5d
-			y: -2.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["0843FDA66C3268E6"]
@@ -644,7 +652,7 @@
 				type: "item"
 			}]
 			x: 9.0d
-			y: -2.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["2939AEFF3B458884"]
@@ -663,7 +671,7 @@
 				type: "item"
 			}]
 			x: 6.0d
-			y: 1.5d
+			y: 3.0d
 		}
 		{
 			dependencies: ["7642C16EC994F8B5"]
@@ -820,7 +828,179 @@
 				type: "item"
 			}]
 			x: 12.0d
-			y: 2.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["6CC80ACF716A2566"]
+			description: [
+				"\"A graveyard under my feet!\""
+				""
+				"You discovered some old bones in the dirt. Make use of this nice organic matter to grow some grass and fertilize your crops."
+			]
+			id: "3EC2DE399FDE833A"
+			rewards: [{
+				count: 4
+				id: "6108E3DC10A47621"
+				item: "minecraft:bone_meal"
+				type: "item"
+			}]
+			tasks: [{
+				id: "07C19303842EA48B"
+				item: "minecraft:bone_meal"
+				type: "item"
+			}]
+			x: 6.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["3C6D192803F59EDD"]
+			description: ["Using the flint knife on grass and tall grass you can obtain straw and switch grass."]
+			id: "56BDA339BD29B98F"
+			rewards: [{
+				id: "3E208EB68D689BE2"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "11F8300C66A19A4C"
+				item: {
+					Count: 1b
+					id: "farmersdelight:flint_knife"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6CC80ACF716A2566"]
+			description: [
+				"\"Yes, I know this dirt is full of interesting things!\""
+				""
+				"You discovered there's flint in dirt. Now you can use it to craft a nice flint knife and get some useful plant based resources."
+			]
+			id: "3C6D192803F59EDD"
+			rewards: [{
+				count: 4
+				id: "3970F903A4E3FC5E"
+				item: "minecraft:flint"
+				type: "item"
+			}]
+			tasks: [{
+				id: "53906E2CFE669FCF"
+				item: "minecraft:flint"
+				type: "item"
+			}]
+			x: 4.5d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"3C6D192803F59EDD"
+				"56BDA339BD29B98F"
+				"3EC2DE399FDE833A"
+			]
+			description: ["The switch grass fiber is a very flammable material. With this fiber you can build a primitive fire starter device."]
+			id: "050B36DCAADFBA43"
+			rewards: [{
+				id: "197B587DAFA4AA66"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "4E6C4008BFFC5C1D"
+				item: "lititup:switchgrass_fiber"
+				type: "item"
+			}]
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["050B36DCAADFBA43"]
+			description: ["Sparkle the flame! Burn the furnace!"]
+			id: "57016CCF8764FE37"
+			rewards: [{
+				id: "0F1DFCB8FE368C08"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "04F66967877CDDFE"
+				item: {
+					Count: 1b
+					id: "lititup:sparkling_flint"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 4.5d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"2939AEFF3B458884"
+				"68D37E05B31A8E52"
+				"3EC2DE399FDE833A"
+			]
+			description: [
+				"\"Ouch! This things is hot!\""
+				""
+				"In order to not getting burned when interacting with hot furnaces you need to protect your hands with paper or towels."
+			]
+			id: "28C6FD5246DD5B70"
+			optional: true
+			rewards: [{
+				id: "062EE23ACF4995D3"
+				item: "burningfurnace:hanger"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [
+				{
+					id: "09DA54B86F9AAD9C"
+					item: "minecraft:paper"
+					type: "item"
+				}
+				{
+					id: "76FB5037D7189136"
+					item: {
+						Count: 1b
+						id: "burningfurnace:towel"
+						tag: {
+							Damage: 0
+						}
+					}
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["3EC2DE399FDE833A"]
+			description: [
+				"With a bit of luck you can get Flax Seeds from grass and tall grass."
+				""
+				"Flax can be used as an early source of string."
+			]
+			id: "68D37E05B31A8E52"
+			rewards: [{
+				id: "63F56151D37B3BF3"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "300F8EA938F599D4"
+				item: "supplementaries:flax"
+				type: "item"
+			}]
+			x: 6.0d
+			y: 0.0d
 		}
 	]
 	title: "Chapter 0: Primitive beginnings"

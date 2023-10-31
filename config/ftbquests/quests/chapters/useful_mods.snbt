@@ -497,7 +497,7 @@
 				type: "item"
 			}]
 			x: 6.5d
-			y: -0.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["41129A0B7A2CCF8D"]
@@ -513,7 +513,7 @@
 				type: "item"
 			}]
 			x: 8.5d
-			y: -0.5d
+			y: 0.0d
 		}
 		{
 			dependencies: ["12724BAC7C9436BA"]
@@ -806,7 +806,7 @@
 				type: "item"
 			}]
 			x: 7.5d
-			y: 0.5d
+			y: 1.0d
 		}
 		{
 			id: "63311B00BE8470FA"
@@ -841,7 +841,7 @@
 				type: "checkmark"
 			}]
 			x: 7.5d
-			y: -0.5d
+			y: 0.0d
 		}
 		{
 			id: "21E1D7488E184EA9"
@@ -1397,6 +1397,30 @@
 			}]
 			x: 17.5d
 			y: -3.0d
+		}
+		{
+			dependencies: ["41129A0B7A2CCF8D"]
+			id: "75A19EFD47C88FB0"
+			rewards: [
+				{
+					id: "656824F180414A31"
+					item: "burningfurnace:cooking_pan"
+					type: "item"
+				}
+				{
+					id: "2E177A3DF1A0A5C4"
+					item: "burningfurnace:dry_golden_apple"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "4670E7BD3FE58272"
+				item: "burningfurnace:generator"
+				type: "item"
+			}]
+			title: "Burning Furnace \\& Lit it Up"
+			x: 7.5d
+			y: -1.0d
 		}
 	]
 	title: "All the other mods \\& stuff"
