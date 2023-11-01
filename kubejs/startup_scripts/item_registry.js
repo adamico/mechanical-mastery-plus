@@ -14,7 +14,7 @@ StartupEvents.registry('item', event => {
 	event.create('cube4_packaged').displayName('Advanced Mechanical Crystal');
 	event.create('cube4_inert').displayName('Inert Advanced Mechanical Essence').tooltip('So close, yet so far...');
 	event.create('cube4_dust').displayName('Advanced Mechanical Dust').tooltip('A fine powder of advanced mechanical essence');
-	
+
 	event.create('press_rod_die').displayName('Rod Die');
 	event.create('fission_pellet').displayName('Fissile fuel pellet');
 	event.create('black_hdpe_sheet').displayName('Black HDPE Sheet');

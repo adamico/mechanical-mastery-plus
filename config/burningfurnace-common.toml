@@ -13,6 +13,9 @@
 	#Configurable value of the percentage for burned food output from the cooking pan.
 	#Range: 0.0 ~ 1.0
 	Burned_food_probability_output = 0.3
+	#Chance to spawn Miner Villager in mineshaft. Range: 0.0 (never) to 1.0 (always). Default: 0.04 (4%)
+	#Range: 0.0 ~ 1.0
+	Miner_villager_spawn_rate = 0.04
 
 ["Custom List"]
 	#List of alternate items that can be used to bypass damage from a lit furnace/smoker/blast furnace. To implement an item, put minecraft's ID system in the brackets with Ditto marks and use comma to separate list of items inside the brackets. Durability Items can't be used as a bypass event.
@@ -27,7 +30,7 @@
 	Item_pairs_burned_near_furnace = []
 
 ["Functionality Handler"]
-	#Enable or disable changed version of vanilla smelting recipes provided by the mod. In case of false, the mod's recipes won't get disabled.
+	#Enable or disable custom vanilla smelting recipes provided by the mod. It's preferable to use this option as it syncs with the 'Cooking Pan transformation' event.
 	Custom_smelting_recipes = true
 	#Enable or disable flint and steel advanced right-click interaction.
 	Advanced_flint_and_steel_interaction = true

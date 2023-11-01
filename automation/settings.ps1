@@ -30,12 +30,12 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "r1.0.4"
+$MODPACK_VERSION = "r1.0.5"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
 # Should be "$null" if this is the first release
-$LAST_MODPACK_VERSION = "r1.0.3"
+$LAST_MODPACK_VERSION = "r1.0.4"
 
 # Which modloader the modpack uses
 # Can be "forge" or "fabric"
@@ -177,6 +177,10 @@ $FOLDERS_TO_REMOVE_FROM_CLIENT_FILES = @(
 # Example: 
 # $FILES_TO_INCLUDE_IN_MODS_FOLDER_IN_CLIENT_FILES = @("mods/Apotheosis-1.19.2-6.2.1.jar", "mods/create-1.19.2-0.5.1.b.jar")
 $FILES_TO_INCLUDE_IN_MODS_FOLDER_IN_CLIENT_FILES = @()
+
+$FILES_TO_INCLUDE_IN_ROOT_FOLDER_IN_CLIENT_FILES = @(
+	"servers.dat"
+)
 
 #=====================================================================//
 #  SERVER FILE SETTINGS

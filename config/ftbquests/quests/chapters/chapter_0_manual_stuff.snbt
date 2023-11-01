@@ -994,11 +994,18 @@
 				type: "xp"
 				xp: 100
 			}]
-			tasks: [{
-				id: "300F8EA938F599D4"
-				item: "supplementaries:flax"
-				type: "item"
-			}]
+			tasks: [
+				{
+					id: "300F8EA938F599D4"
+					item: "supplementaries:flax_seeds"
+					type: "item"
+				}
+				{
+					id: "5EA42824AC104A69"
+					item: "supplementaries:flax"
+					type: "item"
+				}
+			]
 			x: 6.0d
 			y: 0.0d
 		}

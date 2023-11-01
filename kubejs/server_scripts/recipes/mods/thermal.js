@@ -29,6 +29,7 @@ ServerEvents.recipes(event => {
   event.replaceInput({id: 'thermal:machine_smelter'}, 'thermal:rf_coil', 'kubejs:cube1');
   event.replaceInput({id: 'thermal:augments/machine_speed_augment'}, 'thermal:rf_coil', 'kubejs:cube2');
   event.replaceInput({id: 'thermal:machine_crucible'}, 'thermal:rf_coil', 'kubejs:cube2');
+  event.replaceInput({id: 'thermal:machine_chiller'}, 'thermal:rf_coil', 'kubejs:cube2');
 
   event.remove({id: 'thermal:machine_frame'});
   event.shaped('thermal:machine_frame', [
@@ -97,6 +98,10 @@ ServerEvents.recipes(event => {
       I: '#forge:plates/invar',
       G: '#forge:gears/gold'
   });
+
+  event.recipes.thermal.crucible(Fluid.of('kubejs:molten_glass', 1000), 'minecraft:sand').energy(8000);
+  event.recipes.thermal.chiller(Item.of('minecraft:glass', 1), Fluid.of('kubejs:molten_glass', 1000)).energy(8000);
+
 
   ['enderium', 'lumium', 'signalum'].forEach(material => {
     event.remove({id: `thermal:${material}_dust_4`});

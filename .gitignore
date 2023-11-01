@@ -70,8 +70,6 @@ remove-client-mods.ps1
 secrets.ps1
 server-install.sh
 server.properties
-servers.dat
-servers.dat_old
 settings.cfg
 soundsMuffled.dat
 start-automated-server.bat

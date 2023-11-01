@@ -5,7 +5,7 @@ $minecraftInstanceFile = "minecraftinstance.json"
 $overridesFolder = "overrides"
 $secretsFile = "secrets.ps1"
 
-function Validate-SecretsFile {
+function Confirm-SecretsFile {
     if (!(Test-Path "$PSScriptRoot/$secretsFile")) {
         Write-Host "You need a valid CurseForge API Token in a $secretsFile file" -ForegroundColor Red
         Write-Host "Creating $secretsFile" -ForegroundColor Cyan
@@ -115,6 +115,18 @@ function New-ClientFiles {
             Write-Host "Adding " -ForegroundColor Cyan -NoNewline
             Write-Host $_ -ForegroundColor Blue -NoNewline
             Write-Host " to the mods folder in the client files." -ForegroundColor Cyan
+            Copy-Item -Path $_ -Destination "$overridesFolder/$_" -Recurse
+        }
+
+        $destinationFolder = "$overridesFolder"
+       
+        if (!(Test-Path -Path $destinationFolder)) {
+            New-Item $destinationFolder -Type Directory
+        }
+        $FILES_TO_INCLUDE_IN_ROOT_FOLDER_IN_CLIENT_FILES | ForEach-Object {
+            Write-Host "Adding " -ForegroundColor Cyan -NoNewline
+            Write-Host $_ -ForegroundColor Blue -NoNewline
+            Write-Host " to the root folder in the client files." -ForegroundColor Cyan
             Copy-Item -Path $_ -Destination "$overridesFolder/$_" -Recurse
         }
 
@@ -422,7 +434,7 @@ else {
 }
 
 Test-ForDependencies
-Validate-SecretsFile
+Confirm-SecretsFile
 New-ClientFiles
 Push-ClientFiles
 if ($ENABLE_SERVER_FILE_MODULE -and -not $ENABLE_MODPACK_UPLOADER_MODULE) {

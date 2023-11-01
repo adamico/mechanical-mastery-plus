@@ -82,6 +82,18 @@ ServerEvents.recipes(event => {
     event.recipes.thermal.bottler(recipe.output, recipe.input).energy(recipe.energy);
   });
 
+  event.custom({
+    type: "industrialforegoing:stonework_generate",
+    lavaConsume: 200,
+    lavaNeed: 1000,
+    output: {
+      count: 1,
+      item: "minecraft:stone"
+    },
+    waterConsume: 200,
+    waterNeed: 1000
+  });
+
   event.replaceInput({id: 'industrialforegoing:mob_imprisonment_tool'}, 'minecraft:ghast_tear', 'minecraft:nether_star');
 	event.replaceInput({id: 'industrialforegoing:stasis_chamber'}, 'minecraft:ghast_tear', 'minecraft:nether_star');
 

@@ -157,7 +157,7 @@ ServerEvents.recipes(event => {
   event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 50), '#forge:cobblestone').energy(300);
   
   event.remove({id: 'thermal:machines/crucible/crucible_netherrack_to_lava'});
-  event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 1000), 'kubejs:netherrack').energy(3600);
+  event.recipes.thermal.crucible(Fluid.of('minecraft:lava', 1000), 'minecraft:netherrack').energy(3600);
 
 	//tier4
 	event.recipes.createMixing('kubejs:cube4_inert', [Fluid.of('thermal:refined_fuel', 1000), 'kubejs:cube3', 'kubejs:fission_pellet', 'minecraft:experience_bottle', 'mekanism:elite_control_circuit']).superheated();

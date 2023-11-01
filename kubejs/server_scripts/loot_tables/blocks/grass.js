@@ -9,5 +9,8 @@ ServerEvents.blockLootTables(event => {
         });
       pool.addItem(Item.of('lititup:switchgrass_fiber')).randomChance(0.5);
     });
+    table.addPool(pool => {
+      pool.addItem(Item.of('supplementaries:flax_seeds')).randomChance(0.25);
+    })
   });
 });
