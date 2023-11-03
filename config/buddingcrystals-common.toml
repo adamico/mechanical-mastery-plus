@@ -1,7 +1,7 @@
 
 [crystals]
 	#Allow crafting of budding Amethyst block
-	enable_crafting_budding_amethyst = false
+	enable_crafting_budding_amethyst = true
 	#Allow crafting of budding Prismarine block
 	enable_crafting_budding_prismarine = false
 	#Allow crafting of budding Diamond block

@@ -51,6 +51,8 @@ ServerEvents.recipes(event => {
 	event.replaceInput({id: 'functionalstorage:linking_tool'}, 'minecraft:diamond', 'minecraft:light_blue_dye');
 	event.replaceInput({id: 'functionalstorage:configuration_tool'}, 'minecraft:emerald', 'minecraft:lime_dye');
 
+	event.replaceInput({id: 'angelring:angel_ring'}, 'angelring:diamond_ring', 'minecraft:elytra');
+
 	event.remove({id: 'gobber2:gobber2_ring_void'});
 	event.remove({id: 'gobber2:gobber2_ring_vision'});
 	event.remove({id: 'gobber2:gobber2_ring_sunshine'});
@@ -58,6 +60,7 @@ ServerEvents.recipes(event => {
 	event.remove({id: 'gobber2:gobber2_medallion_hero'});
 	event.remove({id: 'gobber2:gobber2_medallion_dolphin'});
 	
-	
-	
+	['eye', 'crystal'].forEach(suffix => {
+		event.remove({id: `darkutils:crafting/charm_portal_${suffix}`})
+	});
 });

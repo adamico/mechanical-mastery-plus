@@ -976,7 +976,7 @@
 				type: "item"
 			}]
 			x: 14.0d
-			y: -1.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["55B3F2A3F8029DE6"]
@@ -1000,11 +1000,11 @@
 				item: "rftoolsutility:flight_module"
 				type: "item"
 			}]
-			x: 11.0d
-			y: -1.5d
+			x: 12.0d
+			y: -1.0d
 		}
 		{
-			dependencies: ["7B2728847CEC37A8"]
+			dependencies: ["55B3F2A3F8029DE6"]
 			description: ["A very creative way to fly... I mean it's just a normal jetpack but using pressure."]
 			id: "741FF8486E70FF9A"
 			rewards: [
@@ -1014,8 +1014,8 @@
 					xp: 1000
 				}
 				{
-					id: "047A94C8CA8DE7FF"
-					item: "minecraft:nether_star"
+					id: "4664A58175122259"
+					item: "kubejs:cube3"
 					type: "item"
 				}
 			]
@@ -1030,8 +1030,8 @@
 				}
 				type: "item"
 			}]
-			x: 14.0d
-			y: -0.5d
+			x: 11.0d
+			y: 1.0d
 		}
 		{
 			id: "55B3F2A3F8029DE6"
@@ -1040,8 +1040,8 @@
 				title: "I believe I can fly"
 				type: "checkmark"
 			}]
-			x: 11.0d
-			y: -0.5d
+			x: 12.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["7B2728847CEC37A8"]
@@ -1111,25 +1111,39 @@
 			]
 			title: "Gobber Gobber Gobber"
 			x: 14.0d
-			y: 0.5d
+			y: 1.0d
 		}
 		{
 			dependencies: [
 				"55B3F2A3F8029DE6"
 				"41D9B7AC1089FA83"
 			]
+			description: ["Pharming or Waiting?"]
 			id: "3BDD68F07B8D1607"
+			rewards: [{
+				id: "305CD8209A124CCB"
+				item: "minecraft:phantom_membrane"
+				type: "item"
+			}]
 			tasks: [{
 				id: "5B180587A1EFF7E3"
 				item: "minecraft:phantom_membrane"
 				type: "item"
 			}]
-			x: 12.0d
-			y: -1.5d
+			x: 13.0d
+			y: 1.0d
 		}
 		{
-			dependencies: ["3BDD68F07B8D1607"]
+			dependencies: [
+				"3BDD68F07B8D1607"
+				"4A891915B126B1B0"
+			]
 			id: "7B2728847CEC37A8"
+			rewards: [{
+				id: "3732224EB46C940C"
+				type: "xp"
+				xp: 1000
+			}]
 			tasks: [{
 				id: "35EC7974907370E6"
 				item: {
@@ -1141,8 +1155,8 @@
 				}
 				type: "item"
 			}]
-			x: 13.0d
-			y: -0.5d
+			x: 14.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["55B3F2A3F8029DE6"]
@@ -1153,10 +1167,11 @@
 				type: "item"
 			}]
 			x: 11.0d
-			y: 0.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["06E4BECF781A4CE0"]
+			description: ["The ultimate all in one tool. It even places torches..."]
 			id: "15BF550353FEBEF2"
 			tasks: [{
 				id: "0FF4A36B42105D73"
@@ -1174,6 +1189,7 @@
 		}
 		{
 			dependencies: ["06E4BECF781A4CE0"]
+			description: ["Auto feeding for days!"]
 			id: "20913AB9B4239EE4"
 			tasks: [{
 				id: "2BC1DBCD407460E9"
@@ -1185,6 +1201,10 @@
 		}
 		{
 			dependencies: ["06E4BECF781A4CE0"]
+			description: [
+				"Converts a sapling into another type."
+				"Converts sugar cane into bamboo."
+			]
 			id: "344E532259C8115A"
 			tasks: [{
 				id: "7AEC8253DEF666C6"
@@ -1196,6 +1216,7 @@
 		}
 		{
 			dependencies: ["06E4BECF781A4CE0"]
+			description: ["Grows crops, grass, flowers!"]
 			id: "68DE14D7757B74B2"
 			tasks: [{
 				id: "6565D4AA4517DA67"
@@ -1207,6 +1228,7 @@
 		}
 		{
 			dependencies: ["06E4BECF781A4CE0"]
+			description: ["Fires arrows! Kill the wither!"]
 			id: "4111657F4A9C0AE0"
 			tasks: [{
 				id: "4A43FE00B07A5B9F"
@@ -1243,7 +1265,7 @@
 				type: "item"
 			}]
 			x: 12.0d
-			y: 0.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["32E5A4A9433E5337"]
@@ -1399,27 +1421,69 @@
 			y: -3.0d
 		}
 		{
-			dependencies: ["41129A0B7A2CCF8D"]
-			id: "75A19EFD47C88FB0"
+			description: ["Dark utilities is a small mod with charms to ward off negative effects and insomnia (say goodbye to phantoms in servers)"]
+			id: "135EF8C85A9CAF07"
+			tasks: [{
+				id: "165BF62B958587A6"
+				title: "Dark Utilities"
+				type: "checkmark"
+			}]
+			x: -6.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["135EF8C85A9CAF07"]
+			id: "34F3CDFE2DAC4DE3"
 			rewards: [
 				{
-					id: "656824F180414A31"
-					item: "burningfurnace:cooking_pan"
-					type: "item"
+					id: "3DECD13E78208567"
+					type: "xp"
+					xp: 100
 				}
 				{
-					id: "2E177A3DF1A0A5C4"
-					item: "burningfurnace:dry_golden_apple"
+					id: "73A964C9F029FEB0"
+					item: "minecraft:phantom_membrane"
 					type: "item"
 				}
 			]
 			tasks: [{
-				id: "4670E7BD3FE58272"
-				item: "burningfurnace:generator"
+				id: "15639541C1C6CED3"
+				item: "darkutils:charm_sleep"
 				type: "item"
 			}]
-			title: "Burning Furnace \\& Lit it Up"
-			x: 7.5d
+			x: -8.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["135EF8C85A9CAF07"]
+			id: "37980124610C552E"
+			rewards: [{
+				id: "6E4816C9F604FE45"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "7A5791B60449D745"
+				item: "darkutils:charm_warding"
+				type: "item"
+			}]
+			x: -5.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["55B3F2A3F8029DE6"]
+			id: "4A891915B126B1B0"
+			rewards: [{
+				id: "4972DA3951F52979"
+				item: "gobber2:gobber2_ingot"
+				type: "item"
+			}]
+			tasks: [{
+				id: "068889C917B34CF1"
+				item: "gobber2:gobber2_ingot"
+				type: "item"
+			}]
+			x: 13.0d
 			y: -1.0d
 		}
 	]

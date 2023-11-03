@@ -4,7 +4,7 @@ ServerEvents.recipes(event => {
   const smeltingRecipes = [,
     { output: 'minecraft:calcite', outputCount: 1, inputs: ['minecraft:stone', 'minecraft:bone_meal'], energy: 800 },
     { output: 'create:brass_ingot', outputCount: 2, inputs: ['#forge:ingots/copper', '#forge:ingots/zinc'], energy: 2400 },
-    { output: 'minecraft:amethyst_shard', outputCount: 1, inputs: ['ae2:charged_certus_quartz_crystal', 'kubejs:cube'], energy: 24000 },
+    { output: 'minecraft:amethyst_shard', outputCount: 1, inputs: ['ae2:charged_certus_quartz_crystal', 'kubejs:cube3'], energy: 24000 },
     { output: 'thermal:enderium_block', outputCount: 2, inputs: ['#forge:storage_blocks/diamond', Item.of('#forge:storage_blocks/lead', 3), Item.of('#forge:storage_blocks/ender_pearl', 2)], energy: 144000 },
     { output: 'thermal:lumium_block', outputCount: 4, inputs: ['#forge:storage_blocks/silver', Item.of('#forge:storage_blocks/tin', 3), Item.of('minecraft:glowstone', 4)], energy: 108000 },
     { output: 'thermal:signalum_block', outputCount: 4, inputs: ['#forge:storage_blocks/silver', Item.of('#forge:storage_blocks/copper', 3), Item.of('minecraft:redstone_block', 4)], energy: 108000 },
@@ -105,5 +105,17 @@ ServerEvents.recipes(event => {
 
   ['enderium', 'lumium', 'signalum'].forEach(material => {
     event.remove({id: `thermal:${material}_dust_4`});
+  });
+
+  event.remove({id: 'thermal:earth_charge/ender_pearl_dust_from_ender_pearl'});
+
+  var recipes = [
+    {input: 'quark:golden_carrot_crate', energy: 380400},
+    {input: 'quark:golden_apple_crate', energy: 512000},
+    {input: 'farmersdelight:cabbage_crate', energy: 32000}
+  ];
+
+  recipes.forEach(recipe => {
+    event.recipes.thermal.gourmand_fuel(recipe.input).energy(recipe.energy);
   });
 })

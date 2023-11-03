@@ -21,6 +21,7 @@
 				"333AD01B70C4D1DC"
 				"6574C2772D94CB68"
 				"4FD2F442421FE4CE"
+				"258878D4F87E9F1E"
 			]
 			description: ["Use the ore hammer to get better ore smelting ratio... slowly..."]
 			id: "14BDC4B45EB6CBE9"
@@ -42,8 +43,8 @@
 				type: "item"
 			}]
 			title: "All good things"
-			x: 9.0d
-			y: 0.0d
+			x: 4.0d
+			y: -1.0d
 		}
 		{
 			description: [
@@ -114,8 +115,8 @@
 				type: "item"
 			}]
 			title: "De lapide emptus"
-			x: 3.0d
-			y: 3.0d
+			x: 2.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["491EB18107FC8776"]
@@ -140,8 +141,8 @@
 				type: "item"
 			}]
 			title: "E fructu arbor cognoscitur"
-			x: 3.0d
-			y: -3.0d
+			x: 2.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["29D5601941CC9696"]
@@ -186,14 +187,11 @@
 				}
 			]
 			title: "HAMM... INSCRIBAH!"
-			x: 12.0d
-			y: -3.0d
+			x: 10.0d
+			y: 1.0d
 		}
 		{
-			dependencies: [
-				"14BDC4B45EB6CBE9"
-				"32BAF91B15C74931"
-			]
+			dependencies: ["14BDC4B45EB6CBE9"]
 			description: ["Using the ore hammer you can finally get 1:1 ore to ingots... believe me, you will get better ratios soon"]
 			id: "793AABD9C2DEC680"
 			rewards: [{
@@ -228,11 +226,11 @@
 				type: "item"
 			}]
 			title: "Another one bites the..."
-			x: 9.0d
-			y: 3.0d
+			x: 5.5d
+			y: -1.0d
 		}
 		{
-			dependencies: ["793AABD9C2DEC680"]
+			dependencies: ["32BAF91B15C74931"]
 			description: ["Blast dusts to obtain ingots."]
 			id: "640F06D0A7A8C63A"
 			rewards: [{
@@ -266,11 +264,11 @@
 				type: "item"
 			}]
 			title: "Ingots"
-			x: 10.5d
-			y: 3.0d
+			x: 8.5d
+			y: 0.0d
 		}
 		{
-			dependencies: ["258878D4F87E9F1E"]
+			dependencies: ["491EB18107FC8776"]
 			description: [
 				"\"I wonder what I can find nowadays buried in dirt...\""
 				""
@@ -281,11 +279,13 @@
 				"Have you tried sneaking and trying digging a path in dirt?"
 			]
 			id: "6CC80ACF716A2566"
+			optional: true
 			rewards: [{
-				id: "47D66FF5C0465BEA"
-				item: "minecraft:bone"
-				type: "item"
+				id: "56D7ADA2BA3D4F8F"
+				type: "xp"
+				xp: 100
 			}]
+			shape: "diamond"
 			tasks: [{
 				id: "21B2FD8CD18FFB5D"
 				item: {
@@ -297,48 +297,14 @@
 				}
 				type: "item"
 			}]
-			x: 4.5d
-			y: -3.0d
-		}
-		{
-			dependencies: ["6CC80ACF716A2566"]
-			description: ["If mud is wet dirt, packed mud is... what? "]
-			id: "6C83711E303711B7"
-			rewards: [{
-				id: "76980954E71FED80"
-				item: "minecraft:packed_mud"
-				type: "item"
-			}]
-			tasks: [{
-				id: "542393BDE4E93ECB"
-				item: "minecraft:packed_mud"
-				type: "item"
-			}]
-			title: "No, there's no golem"
-			x: 6.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["6C83711E303711B7"]
-			description: ["Clayworks mod adds the Kiln furnace which can smelt stones and other items faster than the normal furnace."]
-			id: "0843FDA66C3268E6"
-			rewards: [{
-				id: "081E4A1F8479BB3D"
-				item: "minecraft:clay"
-				type: "item"
-			}]
-			tasks: [{
-				id: "41ABFD99E584D188"
-				item: "clayworks:kiln"
-				type: "item"
-			}]
-			x: 7.5d
-			y: -3.0d
+			x: 0.0d
+			y: 0.0d
 		}
 		{
 			dependencies: [
 				"78F6EEAA67844814"
 				"0729B02421E5A1D7"
+				"793AABD9C2DEC680"
 			]
 			description: ["The blast furnace still produces 6 nuggets from a raw ore but it's twice faster!"]
 			id: "32BAF91B15C74931"
@@ -352,14 +318,11 @@
 				item: "minecraft:blast_furnace"
 				type: "item"
 			}]
-			x: 7.5d
-			y: 3.0d
+			x: 7.0d
+			y: 0.0d
 		}
 		{
-			dependencies: [
-				"5D6996CC9444ADE7"
-				"57016CCF8764FE37"
-			]
+			dependencies: ["5D6996CC9444ADE7"]
 			description: [
 				"\"The old furnace... comforting, reliable... NOT!\""
 				""
@@ -381,8 +344,8 @@
 				type: "item"
 			}]
 			title: "\"Burning\" Furnace"
-			x: 4.5d
-			y: 3.0d
+			x: 4.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["2939AEFF3B458884"]
@@ -400,8 +363,8 @@
 				item: "ironfurnaces:iron_furnace"
 				type: "item"
 			}]
-			x: 4.5d
-			y: 4.0d
+			x: 4.0d
+			y: 2.5d
 		}
 		{
 			dependencies: ["066BF5AF5165E3AB"]
@@ -440,8 +403,8 @@
 				}
 			]
 			title: "Sophisticated Storage"
-			x: 3.5d
-			y: -5.0d
+			x: 3.0d
+			y: -3.5d
 		}
 		{
 			dependencies: ["258878D4F87E9F1E"]
@@ -466,8 +429,8 @@
 				type: "item"
 			}]
 			title: "Storage"
-			x: 4.5d
-			y: -4.0d
+			x: 4.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["066BF5AF5165E3AB"]
@@ -486,8 +449,8 @@
 				type: "item"
 			}]
 			title: "Iron Chests"
-			x: 5.5d
-			y: -5.0d
+			x: 5.0d
+			y: -3.5d
 		}
 		{
 			dependencies: ["066BF5AF5165E3AB"]
@@ -526,8 +489,8 @@
 				type: "item"
 			}]
 			title: "Functional Storage"
-			x: 4.5d
-			y: -5.0d
+			x: 4.0d
+			y: -3.5d
 		}
 		{
 			dependencies: ["3DE84738AD56FC5C"]
@@ -545,8 +508,8 @@
 				item: "ironfurnaces:upgrade_copper"
 				type: "item"
 			}]
-			x: 4.5d
-			y: 5.0d
+			x: 4.0d
+			y: 3.5d
 		}
 		{
 			dependencies: ["3DE84738AD56FC5C"]
@@ -559,8 +522,8 @@
 				item: "ironfurnaces:augment_smoking"
 				type: "item"
 			}]
-			x: 3.5d
-			y: 5.0d
+			x: 3.0d
+			y: 3.5d
 		}
 		{
 			dependencies: ["3DE84738AD56FC5C"]
@@ -582,11 +545,11 @@
 				item: "ironfurnaces:augment_generator"
 				type: "item"
 			}]
-			x: 5.5d
-			y: 5.0d
+			x: 5.0d
+			y: 3.5d
 		}
 		{
-			dependencies: ["0843FDA66C3268E6"]
+			dependencies: ["2939AEFF3B458884"]
 			description: ["You can only bake stones in the kiln."]
 			id: "4FD2F442421FE4CE"
 			rewards: [{
@@ -600,8 +563,8 @@
 				item: "minecraft:stone"
 				type: "item"
 			}]
-			x: 7.5d
-			y: -1.5d
+			x: 4.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["4FD2F442421FE4CE"]
@@ -618,11 +581,11 @@
 				item: "minecraft:smooth_stone"
 				type: "item"
 			}]
-			x: 7.5d
-			y: 1.5d
+			x: 5.5d
+			y: 0.0d
 		}
 		{
-			dependencies: ["47B8CC100AA540EB"]
+			dependencies: ["640F06D0A7A8C63A"]
 			description: ["\"The final component of the mysterious inscriber...\""]
 			id: "29D5601941CC9696"
 			rewards: [{
@@ -635,24 +598,8 @@
 				item: "minecraft:piston"
 				type: "item"
 			}]
-			x: 10.5d
-			y: -3.0d
-		}
-		{
-			dependencies: ["0843FDA66C3268E6"]
-			id: "47B8CC100AA540EB"
-			rewards: [{
-				id: "7375A4E54284A212"
-				item: "clayworks:glazed_terracotta"
-				type: "item"
-			}]
-			tasks: [{
-				id: "23E99897246585D4"
-				item: "clayworks:glazed_terracotta"
-				type: "item"
-			}]
-			x: 9.0d
-			y: -3.0d
+			x: 8.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["2939AEFF3B458884"]
@@ -670,8 +617,8 @@
 				item: "minecraft:iron_nugget"
 				type: "item"
 			}]
-			x: 6.0d
-			y: 3.0d
+			x: 5.5d
+			y: 1.0d
 		}
 		{
 			dependencies: ["7642C16EC994F8B5"]
@@ -697,7 +644,7 @@
 				type: "item"
 			}]
 			title: "Dimidium facti, qui coepit, habet"
-			x: 13.5d
+			x: 13.0d
 			y: 0.0d
 		}
 		{
@@ -722,14 +669,11 @@
 				item: "ae2:energy_acceptor"
 				type: "item"
 			}]
-			x: 12.0d
-			y: -1.5d
+			x: 11.5d
+			y: 0.0d
 		}
 		{
-			dependencies: [
-				"35B1004C26C828D0"
-				"0843FDA66C3268E6"
-			]
+			dependencies: ["35B1004C26C828D0"]
 			description: [
 				"Don't forget (the milk) that you cannot process stones in the furnace. "
 				""
@@ -747,8 +691,8 @@
 				item: "minecraft:glass"
 				type: "item"
 			}]
-			x: 10.5d
-			y: -1.5d
+			x: 10.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["178A06063C3F8666"]
@@ -764,14 +708,11 @@
 				item: "minecraft:sand"
 				type: "item"
 			}]
-			x: 10.5d
-			y: 0.0d
+			x: 10.0d
+			y: -1.0d
 		}
 		{
-			dependencies: [
-				"640F06D0A7A8C63A"
-				"6BB4AE57210C496A"
-			]
+			dependencies: ["640F06D0A7A8C63A"]
 			description: [
 				"The squeezer from Integrated Dynamics is a manual pulverizer/compressor/extractor used to extract many solid and liquid resources."
 				""
@@ -793,42 +734,8 @@
 				item: "integrateddynamics:squeezer"
 				type: "item"
 			}]
-			x: 10.5d
-			y: 1.5d
-		}
-		{
-			dependencies: ["5B6E21BFD8E56705"]
-			id: "6BB4AE57210C496A"
-			rewards: [{
-				id: "32B558B2858BB656"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "718F2876E674ED59"
-				item: "framedblocks:framed_cube"
-				type: "item"
-			}]
-			x: 12.0d
-			y: 1.5d
-		}
-		{
-			dependencies: ["640F06D0A7A8C63A"]
-			description: ["The sawmill is minecraft:wood_cutter"]
-			id: "5B6E21BFD8E56705"
-			rewards: [{
-				count: 4
-				id: "154B783164902425"
-				item: "minecraft:oak_log"
-				type: "item"
-			}]
-			tasks: [{
-				id: "0AE43F67BD229178"
-				item: "woodworks:sawmill"
-				type: "item"
-			}]
-			x: 12.0d
-			y: 3.0d
+			x: 8.5d
+			y: -1.0d
 		}
 		{
 			dependencies: ["6CC80ACF716A2566"]
@@ -838,42 +745,20 @@
 				"You discovered some old bones in the dirt. Make use of this nice organic matter to grow some grass and fertilize your crops."
 			]
 			id: "3EC2DE399FDE833A"
+			optional: true
 			rewards: [{
-				count: 4
 				id: "6108E3DC10A47621"
-				item: "minecraft:bone_meal"
+				item: "minecraft:bone_block"
 				type: "item"
 			}]
+			shape: "diamond"
 			tasks: [{
 				id: "07C19303842EA48B"
-				item: "minecraft:bone_meal"
+				item: "minecraft:bone"
 				type: "item"
 			}]
-			x: 6.0d
-			y: -1.5d
-		}
-		{
-			dependencies: ["3C6D192803F59EDD"]
-			description: ["Using the flint knife on grass and tall grass you can obtain straw and switch grass."]
-			id: "56BDA339BD29B98F"
-			rewards: [{
-				id: "3E208EB68D689BE2"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "11F8300C66A19A4C"
-				item: {
-					Count: 1b
-					id: "farmersdelight:flint_knife"
-					tag: {
-						Damage: 0
-					}
-				}
-				type: "item"
-			}]
-			x: 3.0d
-			y: 0.0d
+			x: 0.0d
+			y: 1.0d
 		}
 		{
 			dependencies: ["6CC80ACF716A2566"]
@@ -883,117 +768,37 @@
 				"You discovered there's flint in dirt. Now you can use it to craft a nice flint knife and get some useful plant based resources."
 			]
 			id: "3C6D192803F59EDD"
+			optional: true
 			rewards: [{
 				count: 4
 				id: "3970F903A4E3FC5E"
 				item: "minecraft:flint"
 				type: "item"
 			}]
+			shape: "diamond"
 			tasks: [{
 				id: "53906E2CFE669FCF"
 				item: "minecraft:flint"
 				type: "item"
 			}]
-			x: 4.5d
-			y: -1.5d
-		}
-		{
-			dependencies: [
-				"3C6D192803F59EDD"
-				"56BDA339BD29B98F"
-				"3EC2DE399FDE833A"
-			]
-			description: ["The switch grass fiber is a very flammable material. With this fiber you can build a primitive fire starter device."]
-			id: "050B36DCAADFBA43"
-			rewards: [{
-				id: "197B587DAFA4AA66"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "4E6C4008BFFC5C1D"
-				item: "lititup:switchgrass_fiber"
-				type: "item"
-			}]
-			x: 4.5d
-			y: 0.0d
-		}
-		{
-			dependencies: ["050B36DCAADFBA43"]
-			description: ["Sparkle the flame! Burn the furnace!"]
-			id: "57016CCF8764FE37"
-			rewards: [{
-				id: "0F1DFCB8FE368C08"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "04F66967877CDDFE"
-				item: {
-					Count: 1b
-					id: "lititup:sparkling_flint"
-					tag: {
-						Damage: 0
-					}
-				}
-				type: "item"
-			}]
-			x: 4.5d
-			y: 1.5d
-		}
-		{
-			dependencies: [
-				"2939AEFF3B458884"
-				"68D37E05B31A8E52"
-				"3EC2DE399FDE833A"
-			]
-			description: [
-				"\"Ouch! This things is hot!\""
-				""
-				"In order to not getting burned when interacting with hot furnaces you need to protect your hands with paper or towels."
-			]
-			id: "28C6FD5246DD5B70"
-			optional: true
-			rewards: [{
-				id: "062EE23ACF4995D3"
-				item: "burningfurnace:hanger"
-				type: "item"
-			}]
-			shape: "diamond"
-			tasks: [
-				{
-					id: "09DA54B86F9AAD9C"
-					item: "minecraft:paper"
-					type: "item"
-				}
-				{
-					id: "76FB5037D7189136"
-					item: {
-						Count: 1b
-						id: "burningfurnace:towel"
-						tag: {
-							Damage: 0
-						}
-					}
-					type: "item"
-				}
-			]
-			x: 6.0d
-			y: 1.5d
+			x: 0.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["3EC2DE399FDE833A"]
 			description: [
-				"With a bit of luck you can get Flax Seeds from grass and tall grass."
+				"With a bit of luck you can get Flax Seeds from grass and tall grass which you can force to grow by using bone meal on grass blocks."
 				""
 				"Flax can be used as an early source of string."
 			]
 			id: "68D37E05B31A8E52"
+			optional: true
 			rewards: [{
 				id: "63F56151D37B3BF3"
 				type: "xp"
 				xp: 100
 			}]
+			shape: "diamond"
 			tasks: [
 				{
 					id: "300F8EA938F599D4"
@@ -1006,8 +811,66 @@
 					type: "item"
 				}
 			]
-			x: 6.0d
-			y: 0.0d
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["3C6D192803F59EDD"]
+			description: ["Using the flint knife on grass and tall grass you can obtain straw which is a primitive form of leather used in some recipes (books for example)"]
+			id: "463FC2D989E97AA2"
+			optional: true
+			shape: "diamond"
+			tasks: [{
+				id: "4C14607193D843B9"
+				item: {
+					Count: 1b
+					id: "farmersdelight:flint_knife"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 0.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6CC80ACF716A2566"]
+			description: ["You can also find clay balls in dirt. This is the earliest source of clay which you will need in the following chapter to craft bricks."]
+			id: "0EC8B0AE485F371B"
+			optional: true
+			rewards: [{
+				id: "50BCD3680D92A365"
+				item: "minecraft:clay"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "64C6C023094C4829"
+				item: "minecraft:clay_ball"
+				type: "item"
+			}]
+			x: -1.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["6CC80ACF716A2566"]
+			description: ["Glowstone dust is a rare resource found in dirt. You will need this to craft Pipez cables!"]
+			id: "07228B2AE2503C6E"
+			optional: true
+			rewards: [{
+				id: "210FF6C41205E20D"
+				item: "minecraft:glowstone"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "421E0D95C3998054"
+				item: "minecraft:glowstone_dust"
+				type: "item"
+			}]
+			x: -1.5d
+			y: -1.0d
 		}
 	]
 	title: "Chapter 0: Primitive beginnings"

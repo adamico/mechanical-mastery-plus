@@ -4,10 +4,6 @@ console.info('Hello, World! (You will see this line every time client resources 
 const $VanillaTypes = Java.loadClass('mezz.jei.api.constants.VanillaTypes');
 
 JEIEvents.hideItems(event => {
-  ['enderium', 'lumium', 'signalum'].forEach(alloy => {
-    event.hide(`thermal:${alloy}_dust`);
-  });
-
   event.hide('adminshop:permit');
   global.jeiRuntime.ingredientManager.addIngredientsAtRuntime($VanillaTypes.ITEM_STACK, [
     Item.of('adminshop:permit', "{display:{Lore:['[{\"text\":\"Buy: Raw Zinc\",\"italic\":false}]','[{\"text\":\"Buy: Kelp\",\"italic\":false}]','[{\"text\":\"Buy: Tiny Dry Rubber\",\"italic\":false}]','[{\"text\":\"Buy: Bone\",\"italic\":false}]','[{\"text\":\"Buy: Lapis Ore\",\"italic\":false}]','[{\"text\":\"Buy: Gobber Ore\",\"italic\":false}]','[{\"text\":\"Buy: Apatite Ore\",\"italic\":false}]','[{\"text\":\"Buy: Cobbled Deepslate\",\"italic\":false}]','[{\"text\":\"Sell: Improved Mechanical Crystal\",\"italic\":false}]'],Name:'[{\"text\":\"[T1] Trade Permit\",\"color\":\"magenta\",\"italic\":false}]'},key:1}").itemStack,

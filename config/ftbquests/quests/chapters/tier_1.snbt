@@ -671,10 +671,30 @@
 				"There's a solution... craft a special trade permit to get some money back... It's not fast though..."
 			]
 			id: "185C525CF2B473D4"
+			rewards: [{
+				id: "627EAE8DB7E3691C"
+				item: "farmersdelight:honey_cookie"
+				type: "item"
+			}]
 			tasks: [{
-				id: "7FD8A567A86037EE"
-				title: "Help! I'm broke"
-				type: "checkmark"
+				id: "53347A612197011C"
+				item: {
+					Count: 1b
+					id: "adminshop:permit"
+					tag: {
+						display: {
+							Lore: [
+								"[{\"text\":\"Buy: Nothing\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Block of Iron\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Block of Gold\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Block of Copper\",\"italic\":false}]"
+							]
+							Name: "[{\"text\":\"[SPECIAL] I need money Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
+						}
+						key: 5
+					}
+				}
+				type: "item"
 			}]
 			x: -3.5d
 			y: 0.5d

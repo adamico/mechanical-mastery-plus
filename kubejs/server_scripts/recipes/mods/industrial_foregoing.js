@@ -96,6 +96,7 @@ ServerEvents.recipes(event => {
 
   event.replaceInput({id: 'industrialforegoing:mob_imprisonment_tool'}, 'minecraft:ghast_tear', 'minecraft:nether_star');
 	event.replaceInput({id: 'industrialforegoing:stasis_chamber'}, 'minecraft:ghast_tear', 'minecraft:nether_star');
+  event.replaceInput({id: 'industrialforegoing:bioreactor'}, '#forge:gears/diamond', 'kubejs:cube4');
 
   event.remove({id: 'industrialforegoing:ore_laser_base'});
 });

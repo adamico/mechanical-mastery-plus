@@ -1100,7 +1100,7 @@
 				type: "item"
 			}]
 			tasks: [{
-				id: "7DCB3E128C1E720F"
+				id: "573313AF8D8C2EB5"
 				item: {
 					Count: 1b
 					id: "adminshop:permit"
@@ -1118,12 +1118,11 @@
 								"[{\"text\":\"Buy: Basic Create Items\",\"italic\":false}]"
 								"[{\"text\":\"Sell: Improved Mechanical Crystal\",\"italic\":false}]"
 							]
-							Name: "[{\"text\":\"Tier 2 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
+							Name: "[{\"text\":\"[T2] Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
 						}
 						key: 2
 					}
 				}
-				match_nbt: true
 				type: "item"
 			}]
 			x: 3.5d

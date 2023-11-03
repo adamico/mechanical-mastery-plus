@@ -1174,8 +1174,13 @@
 		{
 			dependencies: ["07980075BFE4C586"]
 			id: "06043955D513CDD3"
+			rewards: [{
+				id: "19FD7AFFC3677ED6"
+				item: "kubejs:cube4"
+				type: "item"
+			}]
 			tasks: [{
-				id: "50246BF32EE8D114"
+				id: "3BFB6A655EC7B361"
 				item: {
 					Count: 1b
 					id: "adminshop:permit"
@@ -1192,12 +1197,11 @@
 								"[{\"text\":\"Sell: Refined Fuel\",\"italic\":false}]"
 								"[{\"text\":\"Sell: Lava\",\"italic\":false}]"
 							]
-							Name: "[{\"text\":\"Tier 4 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
+							Name: "[{\"text\":\"[T4] Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
 						}
 						key: 4
 					}
 				}
-				match_nbt: true
 				type: "item"
 			}]
 			x: -21.0d

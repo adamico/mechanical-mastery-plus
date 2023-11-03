@@ -70,4 +70,31 @@ ServerEvents.recipes(event => {
 	event.recipes.createMechanicalExtruderExtruding(Item.of('minecraft:bedrock'),
 		[Fluid.of('mekanismgenerators:fusion_fuel'), Fluid.of('integrateddynamics:liquid_chorus')]).withCatalyst('minecraft:respawn_anchor').requiredBonks(10);
 	event.remove({id: 'create:crushing/prismarine_crystals'});
+
+	event.replaceInput({id: 'create_jetpack:jetpack'}, 'minecraft:elytra', 'kubejs:cube3');
+
+	event.remove({id: "createaddition:mixing/bioethanol"});
+
+	event.remove({id: "createaddition:liquid_burning/bioethanol"});
+	event.remove({id: "createaddition:liquid_burning/biofuel"});
+	event.remove({id: "createaddition:liquid_burning/compat/thermal/refined_fuel"});
+
+	event.custom({
+		type: 'createaddition:liquid_burning',
+		input: {
+			fluid: "industrialforegoing:biofuel",
+			amount: 1000
+		},
+		burnTime: 1000,
+		superheated: true
+	});
+	event.custom({
+		type: 'createaddition:liquid_burning',
+		input: {
+			fluid: "thermal:refined_fuel",
+			amount: 1000
+		},
+		burnTime: 1000,
+		superheated: true
+	});
 });

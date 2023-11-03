@@ -598,7 +598,7 @@
 				type: "item"
 			}]
 			tasks: [{
-				id: "0D33EDD4D6388918"
+				id: "56C796F00D8B606E"
 				item: {
 					Count: 1b
 					id: "adminshop:permit"
@@ -615,12 +615,11 @@
 								"[{\"text\":\"Buy: Cobbled Deepslate\",\"italic\":false}]"
 								"[{\"text\":\"Sell: Regular Mechanical Crystal\",\"italic\":false}]"
 							]
-							Name: "[{\"text\":\"Tier 1 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
+							Name: "[{\"text\":\"[T1] Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
 						}
 						key: 1
 					}
 				}
-				match_nbt: true
 				type: "item"
 			}]
 			x: -6.5d

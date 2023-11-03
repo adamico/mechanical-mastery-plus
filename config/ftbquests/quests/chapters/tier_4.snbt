@@ -524,7 +524,7 @@
 				"593EEC1F5CA967D5"
 			]
 			dependency_requirement: "one_completed"
-			description: ["In order to unlock Flux Network you have to build up FE and submit it through the FTB Quests Task Screen."]
+			description: ["In order to unlock Flux Network you have to build up FE and submit it through the FTB Quests Task Screen (which you can craft from stones and books)"]
 			id: "2F6C7F4F8FAC880A"
 			rewards: [{
 				id: "3AEA2ADDDB7FF25E"
@@ -878,7 +878,7 @@
 				type: "item"
 			}]
 			tasks: [{
-				id: "1560C3D4BAB468B2"
+				id: "4807902CB5EDDAE4"
 				item: {
 					Count: 1b
 					id: "adminshop:permit"
@@ -894,12 +894,11 @@
 								"[{\"text\":\"Sell: Liquid Pink Slime\",\"italic\":false}]"
 								"[{\"text\":\"Sell: Liquid Meat\",\"italic\":false}]"
 							]
-							Name: "[{\"text\":\"Tier 3 Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
+							Name: "[{\"text\":\"[T3] Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
 						}
 						key: 3
 					}
 				}
-				match_nbt: true
 				type: "item"
 			}]
 			x: -8.5d

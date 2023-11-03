@@ -112,10 +112,7 @@
     // This is a resource list. See https://moddingx.org/libx/org/moddingx/libx/util/data/ResourceList.html#use_resource_lists_in_configs
     "generationFeatures": {
       "allow_list": true,
-      "elements": [
-        "minecraft:end_spike",
-        "minecraft:end_gateway"
-      ]
+      "elements": []
     },
     
     // All the structures that should be generated.
@@ -123,9 +120,7 @@
     // This is a resource list. See https://moddingx.org/libx/org/moddingx/libx/util/data/ResourceList.html#use_resource_lists_in_configs
     "generationStructures": {
       "allow_list": true,
-      "elements": [
-        "minecraft:fortress"
-      ]
+      "elements": []
     }
   },
   
@@ -157,7 +152,7 @@
       "allowVisits": true,
       
       // Should players be able to teleport to another dimension? [default: true]
-      "crossDimensionTeleportation": true,
+      "crossDimensionTeleportation": false,
       
       // Should players be able to teleport to their home island? [default: true]
       "home": true,
@@ -175,7 +170,7 @@
       // This is a resource list. See https://moddingx.org/libx/org/moddingx/libx/util/data/ResourceList.html#use_resource_lists_in_configs
       "teleportationDimensions": {
         "allow_list": false,
-        "elements": []
+        "elements": ["minecraft:the_nether", "minecraft:the_end"]
       }
     }
   },
@@ -189,11 +184,11 @@
     "biomes": {
       "minecraft:overworld": {
         "allow_list": false,
-        "elements": []
+        "elements": ["minecraft:plains"]
       },
       "minecraft:the_nether": {
         "allow_list": false,
-        "elements": []
+        "elements": ["minecraft:soul_sand_valley"]
       }
     },
     

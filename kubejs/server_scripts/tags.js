@@ -1,4 +1,9 @@
 // Listen to item tag event
+
+var hideInEMI = (event, output) => {
+  event.add('c:hidden_from_recipe_viewers', output);
+}
+
 ServerEvents.tags('item', event => {
   // Get the #forge:cobblestone tag collection and add Diamond Ore to it
   // event.add('forge:cobblestone', 'minecraft:diamond_ore')
@@ -58,10 +63,22 @@ ServerEvents.tags('item', event => {
     ['ingot', 'block'].forEach(type => {
       event.add('forge:alloys/special', `thermal:${alloy}_${type}`);
     });
-    event.add('c:hidden_from_recipe_viewers', `${alloy}_dust`);
+    hideInEMI(event, `thermal:${alloy}_dust`);
+  });
+  
+  [
+    'darkutils:charm_portal',
+    'thermal:ender_pearl_dust'
+  ].forEach(item => {
+    hideInEMI(event, item)
   });
 
-  event.add('minecraft:terracotta', 'clayworks:glazed_terracotta');
+  ['carrot', 'apple', 'potato', 'beetroot', 'onion', 'tomato'].forEach(item => {
+    ['quark', 'farmersdelight'].forEach(mod => {
+      let itemName = `${mod}:${item}_crate`;
+      hideInEMI(event, itemName);
+    })
+  });
 });
 
 ServerEvents.tags('block', event => {

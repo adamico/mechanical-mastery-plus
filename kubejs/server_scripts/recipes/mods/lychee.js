@@ -5,12 +5,12 @@ ServerEvents.recipes(event => {
     "post": [
       {
         "type": "drop_item",
-        "item": "mud"
+        "item": "dripstone_block"
       }
     ],
     "item_in": [
       {
-        "item": "minecraft:dirt"
+        "item": "minecraft:cobblestone"
       }
     ],
     "block_in": {

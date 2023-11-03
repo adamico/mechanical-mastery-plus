@@ -8,17 +8,6 @@ ServerEvents.recipes(event => {
 
 	event.replaceInput({id: 'create:crafting/appliances/slime_ball'}, 'create:dough', '#forge:dough');
 
-	event.remove({id: 'framedblocks:framed_cube'});
-	event.custom({
-		"type": "woodworks:sawmill",
-		"ingredient": {
-			"tag": "minecraft:logs"
-		},
-		"result": "framedblocks:framed_cube",
-		"count": 4,
-	});
-
-	event.replaceInput({output: 'integrateddynamics:squeezer'}, '#minecraft:planks', 'framedblocks:framed_cube');
 	event.replaceInput({output: 'integrateddynamics:squeezer'}, 'minecraft:stick', 'createaddition:iron_rod');
 
 	['squeezer', 'mechanical_squeezer'].forEach(recipe => {
@@ -285,6 +274,15 @@ ServerEvents.recipes(event => {
 		S: 'mekanism:steel_casing'
 	});
 	
+	event.shaped('minecraft:elytra', [
+		' G ',
+		'MGM',
+		'M M'
+	], {
+		G: 'gobber2:gobber2_ingot_end',
+		M: 'minecraft:phantom_membrane'
+	});
+
 	event.remove({id: 'thermal:machines/pulverizer/pulverizer_catalyst_basalz_powder'});
   event.recipes.thermal.pulverizer_catalyst('thermal:basalz_powder').primaryMod(1.25).secondaryMod(3.0).energyMod(0.75).minChance(0.0).useChance(0.5);
   event.recipes.thermal.pulverizer_catalyst('thermal:earth_charge').primaryMod(1.5).secondaryMod(4.0).energyMod(0.5).minChance(0.0).useChance(0.375);
