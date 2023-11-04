@@ -215,17 +215,6 @@
 			y: -6.0d
 		}
 		{
-			dependencies: ["12724BAC7C9436BA"]
-			id: "7999FB1474EABA68"
-			tasks: [{
-				id: "76B2663F0BB58256"
-				title: "Bridging Mod"
-				type: "checkmark"
-			}]
-			x: 2.0d
-			y: -1.0d
-		}
-		{
 			dependencies: ["536DAE6B2A7162D6"]
 			id: "18A1C0D0A3B019E7"
 			rewards: [
@@ -270,17 +259,6 @@
 			}]
 			x: -2.5d
 			y: -4.0d
-		}
-		{
-			dependencies: ["12724BAC7C9436BA"]
-			id: "6F5912D00A6D28F3"
-			tasks: [{
-				id: "6E74BDBEBE3B9CDB"
-				title: "Find me"
-				type: "checkmark"
-			}]
-			x: 4.0d
-			y: -1.0d
 		}
 		{
 			dependencies: ["536DAE6B2A7162D6"]
@@ -516,17 +494,6 @@
 			y: 0.0d
 		}
 		{
-			dependencies: ["12724BAC7C9436BA"]
-			id: "4BC7EA5C8E733B6A"
-			tasks: [{
-				id: "7F5C2C79B4A40ACE"
-				title: "EMI"
-				type: "checkmark"
-			}]
-			x: 3.0d
-			y: -1.0d
-		}
-		{
 			dependencies: ["21E1D7488E184EA9"]
 			id: "560F5161727898B3"
 			rewards: [
@@ -741,7 +708,7 @@
 				type: "item"
 			}]
 			x: 2.0d
-			y: 0.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["12724BAC7C9436BA"]
@@ -757,7 +724,7 @@
 				type: "item"
 			}]
 			x: 4.0d
-			y: 0.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["63311B00BE8470FA"]

@@ -306,7 +306,11 @@
 				"0729B02421E5A1D7"
 				"793AABD9C2DEC680"
 			]
-			description: ["The blast furnace still produces 6 nuggets from a raw ore but it's twice faster!"]
+			description: [
+				"The blast furnace still produces 6 nuggets from a raw ore but it's twice faster!"
+				""
+				"You can also blast ore dust... it's more efficient!"
+			]
 			id: "32BAF91B15C74931"
 			rewards: [{
 				id: "71AF290274C6CEF0"
@@ -326,11 +330,8 @@
 			description: [
 				"\"The old furnace... comforting, reliable... NOT!\""
 				""
-				"You probably discovered the furnace is not working..."
 				""
-				"You need to lit the furnace up with a flint \\& steel... or something more primitive and accessible before the iron age."
-				""
-				"INFO: You will discover many smelting recipes have been moved to other more specific machines (kiln, blast furnace, etc.)"
+				"You probably discovered you cannot smelt ore into ingot in normal furnaces. 6 nuggets is all you can get..."
 			]
 			id: "2939AEFF3B458884"
 			rewards: [{
@@ -343,7 +344,7 @@
 				item: "minecraft:furnace"
 				type: "item"
 			}]
-			title: "\"Burning\" Furnace"
+			title: "Furnace"
 			x: 4.0d
 			y: 1.0d
 		}
@@ -377,31 +378,17 @@
 			]
 			id: "2BEEFB6FF4D50B3B"
 			optional: true
-			rewards: [
-				{
-					id: "275BF242818BB36A"
-					item: "sophisticatedstorage:storage_tool"
-					type: "item"
-				}
-				{
-					id: "4A8CC8674326F686"
-					item: "sophisticatedstorage:crafting_upgrade"
-					type: "item"
-				}
-			]
+			rewards: [{
+				id: "4A8CC8674326F686"
+				item: "sophisticatedstorage:crafting_upgrade"
+				type: "item"
+			}]
 			shape: "diamond"
-			tasks: [
-				{
-					id: "61624B1491D32E4B"
-					item: "sophisticatedstorage:basic_tier_upgrade"
-					type: "item"
-				}
-				{
-					id: "36C82B419284B5E3"
-					item: "sophisticatedstorage:controller"
-					type: "item"
-				}
-			]
+			tasks: [{
+				id: "61624B1491D32E4B"
+				item: "sophisticatedstorage:basic_tier_upgrade"
+				type: "item"
+			}]
 			title: "Sophisticated Storage"
 			x: 3.0d
 			y: -3.5d
@@ -550,7 +537,7 @@
 		}
 		{
 			dependencies: ["2939AEFF3B458884"]
-			description: ["You can only bake stones in the kiln."]
+			description: [""]
 			id: "4FD2F442421FE4CE"
 			rewards: [{
 				count: 4
@@ -568,7 +555,7 @@
 		}
 		{
 			dependencies: ["4FD2F442421FE4CE"]
-			description: ["Same for smooth stones (and other stones)"]
+			description: [""]
 			id: "78F6EEAA67844814"
 			rewards: [{
 				count: 4

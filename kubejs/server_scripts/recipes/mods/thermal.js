@@ -109,6 +109,10 @@ ServerEvents.recipes(event => {
 
   event.remove({id: 'thermal:earth_charge/ender_pearl_dust_from_ender_pearl'});
 
+  ['andesite', 'granite', 'diorite'].forEach(stone => {
+    event.remove({id: 'thermal:machines/pulverizer/pulverizer_' + stone});
+  });
+  
   var recipes = [
     {input: 'quark:golden_carrot_crate', energy: 380400},
     {input: 'quark:golden_apple_crate', energy: 512000},

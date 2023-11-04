@@ -30,7 +30,7 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "r1.0.6f"
+$MODPACK_VERSION = "r1.0.7"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing

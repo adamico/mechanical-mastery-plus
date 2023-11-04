@@ -35,7 +35,7 @@ ServerEvents.recipes(event => {
 	});
 	
 	['ingots', 'storage_blocks'].forEach(type => {
-		event.remove({type: 'smelting', output: '#forge:' + type, not: {input: 'minecraft:clay_ball'}});
+		event.remove({type: 'smelting', output: '#forge:' + type, not: [{input: 'minecraft:clay_ball'}, {input: 'minecraft:netherrack'}]});
 		event.remove({type: 'thermal:smelter', output: '#forge:' + type, not: [{output: '#forge:alloys'}, {output: '#forge:alloys/special'}]});
 	});
 
