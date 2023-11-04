@@ -35,10 +35,14 @@ ServerEvents.recipes(event => {
 	});
 	
 	['ingots', 'storage_blocks'].forEach(type => {
-		event.remove({type: 'smelting', output: '#forge:' + type});
+		event.remove({type: 'smelting', output: '#forge:' + type, not: {input: 'minecraft:clay_ball'}});
 		event.remove({type: 'thermal:smelter', output: '#forge:' + type, not: [{output: '#forge:alloys'}, {output: '#forge:alloys/special'}]});
 	});
 
+	['iron', 'copper', 'gold'].forEach(metal => {
+		event.remove({type: 'blasting', output: `${metal}_block`});
+	});
+	
 	['enderium', 'lumium', 'signalum'].forEach(alloy => {
 		event.remove({input: '#forge:dusts/' + alloy, output: '#forge:ingots/' + alloy});
 	});
