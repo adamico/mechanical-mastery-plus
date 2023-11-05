@@ -996,7 +996,7 @@
 			description: [
 				"Bulk washing, haunting and blasting cinder flour produces many useful resources."
 				""
-				"Here we are using it to produce &6glowstone.&r"
+				"Here we are using it to mass produce &6glowstone.&r"
 			]
 			id: "3A7F4033C8881566"
 			rewards: [{

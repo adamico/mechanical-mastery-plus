@@ -4,6 +4,11 @@ var hideInEMI = (event, output) => {
   event.add('c:hidden_from_recipe_viewers', output);
 }
 
+var bottomless = (event, fluidOrTag) => {
+  event.remove('create:no_infinite_draining', fluidOrTag);
+  event.add('create:bottomless/allow', fluidOrTag);
+}
+
 ServerEvents.tags('item', event => {
   // Get the #forge:cobblestone tag collection and add Diamond Ore to it
   // event.add('forge:cobblestone', 'minecraft:diamond_ore')
@@ -68,7 +73,10 @@ ServerEvents.tags('item', event => {
   
   [
     'darkutils:charm_portal',
-    'thermal:ender_pearl_dust'
+    'thermal:ender_pearl_dust',
+    'createchromaticreturn:shadow_essence_bucket',
+    'createchromaticreturn:refined_mixture_bucket',
+    'mekanism:creative_fluid_tank'
   ].forEach(item => {
     hideInEMI(event, item)
   });
@@ -84,4 +92,22 @@ ServerEvents.tags('item', event => {
 ServerEvents.tags('block', event => {
   event.add('blockrunner:very_quick_blocks', '#engineersdecor:plain_concretes');
   event.add('forge:budding', '#forge:budding_blocks');
+});
+
+ServerEvents.tags('fluid', event => {
+  [
+    '#forge:experience',
+    'mekanismgenerators:fusion_fuel',
+    'mekanism:superheated_sodium',
+    'industrialforegoing:ether_gas'
+  ].forEach(fluidOrTag => {
+    bottomless(event, fluidOrTag);
+  });
+ 
+  [
+    'createchromaticreturn:refined_mixture',
+    'createchromaticreturn:shadow_essence'
+  ].forEach(fluid => {
+    hideInEMI(event, fluid)
+  });
 });

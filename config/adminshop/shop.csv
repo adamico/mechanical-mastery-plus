@@ -61,6 +61,7 @@ b,i,create:gearbox,500,2
 ,,,,
 b,i,minecraft:emerald_ore,16384,3
 b,i,mekanism:raw_uranium,4096,3
+b,i,bigreactors:yellorite_ore,4096,3
 b,i,mekanism:fluorite_ore,1024,3
 b,i,mekanism:ingot_steel,2048,3
 b,i,mekanism:alloy_infused,1024,3
@@ -78,6 +79,8 @@ b,i,minecraft:cow_spawn_egg,5000000,3
 ,,,,
 b,i,thermal:rubberwood_sapling,8192,4
 b,i,gobber2:gobber2_ore_end,32768,4
+b,i,bigreactors:benitoite_ore,32768,4
+b,i,bigreactors:anglesite_ore,65536,4
 b,i,minecraft:experience_bottle,1000,4
 b,f,thermal:refined_fuel,250,4
 b,f,industrialforegoing:biofuel,250,4
@@ -104,6 +107,6 @@ s,f,#forge:experience,3,4
 s,f,thermal:refined_fuel,5,4
 s,f,minecraft:lava,2,4
 ,,,,
-s,i,minecraft:iron_block,500,5
-s,i,minecraft:gold_block,500,5
-s,i,minecraft:copper_block,500,5
+s,i,minecraft:iron_block,1000,5
+s,i,minecraft:gold_block,1000,5
+s,i,minecraft:copper_block,1000,5

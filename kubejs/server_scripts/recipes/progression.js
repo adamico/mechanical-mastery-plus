@@ -1,7 +1,4 @@
 ServerEvents.recipes(event => {
-
-	//console.log("NBT is: "+ Item.of('water_bucket').fluid());
-
 	//functions
 	let bottling = (output, input) => {
 		event.recipes.createFilling(output, input);
@@ -63,9 +60,26 @@ ServerEvents.recipes(event => {
 				]
 			},
 			duration: 30
-		})
-	});
+		});
 
+		event.custom({
+			type: `integrateddynamics:${recipe}`,
+			item: {
+				tag: "minecraft:coals"
+			},
+			result: {
+				items: [
+					{
+						"item": {
+							item: "minecraft:black_dye",
+							count: 2
+						}
+					}
+				]	
+			},
+			duration: 10
+		});
+	});
 
 	//tier1
   event.shapeless('kubejs:cube1_packaged', ['kubejs:cube1', 'kubejs:cube1', 'kubejs:cube1', 'kubejs:cube1']);
@@ -189,6 +203,7 @@ ServerEvents.recipes(event => {
 	event.recipes.thermal.press('fluxnetworks:flux_dust', ['kubejs:coated_redstone', 'fluxnetworks:flux_block']).energy(200);
 
 	//tier5
+
 	['provider', 'cell'].forEach(type => {
 		event.remove({id: 'createchromaticreturn:basic_induction_' + type});
 	});
@@ -201,28 +216,37 @@ ServerEvents.recipes(event => {
 	event.recipes.shapeless('mob_grinding_utils:fluid_xp_bucket', ['industrialforegoing:essence_bucket']);
 	event.recipes.shapeless('industrialforegoing:essence_bucket', ['mob_grinding_utils:fluid_xp_bucket']);
 
-	let inter = 'kubejs:incomplete_creative_upgrade';
-
+	let interThermal = 'kubejs:incomplete_creative_upgrade';
   event.recipes.create.sequenced_assembly([
 		Item.of('thermal:machine_efficiency_creative_augment').withChance(30.0),
 		Item.of('mekanism:pellet_antimatter').withChance(2.0),
-		Item.of('thermal:upgrade_augment_3').withChance(16.0),
-		], 'thermal:upgrade_augment_3', [
-			event.recipes.create.deploying(inter, [inter, 'mekanism:pellet_antimatter']),
-			event.recipes.create.filling(inter, [inter, Fluid.of('mekanismgenerators:fusion_fuel', 1000)]),
-			event.recipes.create.pressing(inter, [inter, Fluid.water(1000)])
-		]).transitionalItem(inter);
-
+		Item.of('thermal:upgrade_augment_3').withChance(16.0)
+	], 'thermal:upgrade_augment_3', [
+		event.recipes.create.deploying(interThermal, [interThermal, 'mekanism:pellet_antimatter']),
+		event.recipes.create.filling(interThermal, [interThermal, Fluid.of('mekanismgenerators:fusion_fuel', 1000)]),
+		event.recipes.create.pressing(interThermal, [interThermal])
+	]).transitionalItem(interThermal).loops(10);
 
 	event.recipes.create.sequenced_assembly([
 		Item.of('thermal:machine_catalyst_creative_augment').withChance(30.0),
 		Item.of('mekanism:pellet_antimatter').withChance(2.0),
-		Item.of('thermal:machine_catalyst_augment').withChance(16.0),
+		Item.of('thermal:machine_catalyst_augment').withChance(16.0)
 	], 'thermal:machine_catalyst_augment', [
-		event.recipes.createDeploying(inter, [inter, 'mekanism:pellet_antimatter']),
-		event.recipes.createFilling(inter, [inter, Fluid.of('industrialforegoing:pink_slime', 1000)]),
-		event.recipes.create.pressing(inter, [inter, Fluid.lava(1000)])
-	]).transitionalItem(inter);
+		event.recipes.createDeploying(interThermal, [interThermal, 'mekanism:pellet_antimatter']),
+		event.recipes.createFilling(interThermal, [interThermal, Fluid.of('industrialforegoing:pink_slime', 1000)]),
+		event.recipes.create.pressing(interThermal, [interThermal])
+	]).transitionalItem(interThermal).loops(10);
+
+	let interBG = 'kubejs:incomplete_creative_paste_container';
+	event.recipes.create.sequenced_assembly([
+		Item.of('buildinggadgets:construction_paste_container_creative').withChance(30.0),
+		Item.of('mekanism:pellet_antimatter').withChance(2.0),
+		Item.of('buildinggadgets:construction_paste_container_t3').withChance(16.0)
+	], 'buildinggadgets:construction_paste_container_t3', [
+		event.recipes.createDeploying(interBG, [interBG, 'mekanism:pellet_antimatter']),
+		event.recipes.createFilling(interBG, [interBG, Fluid.of('cofh_core:honey', 1000)]),
+		event.recipes.create.pressing(interBG, [interBG])
+	]).transitionalItem(interBG).loops(10);
 
 	event.recipes.createSequencedAssembly([
 		'kubejs:dragon_dna'

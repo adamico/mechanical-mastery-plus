@@ -40,7 +40,7 @@ StartupEvents.registry('item', event => {
 
 	event.create('incomplete_creative_blaze_cake').displayName('Incomplete Creative Blaze Cake');
 	event.create('incomplete_creative_upgrade').displayName('Incomplete Creative Augment');
-  
+  event.create('incomplete_creative_paste_container').displayName('Incomplete Derpyness');
 	event.create('coated_redstone').displayName('Obsidian-Coated Redstone');
 
 	event.create('ore_hammer', 'pickaxe').tier('wood').displayName('Ore Hammer').maxDamage(100)

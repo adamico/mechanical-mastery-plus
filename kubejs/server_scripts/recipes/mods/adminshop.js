@@ -40,11 +40,11 @@ ServerEvents.recipes(event => {
   let tier2SItems = ['Improved Mechanical Crystal'];
   createPermit(2, tier2BItems, tier2SItems, 'kubejs:cube2');
 
-  let tier3BItems = ['Emerald Ore', 'Powah Resources', 'Mekanism Resources', 'Start a village!', 'Get passive mobs!'];
+  let tier3BItems = ['Emerald Ore', 'Powah Resources', 'Nuclear ores', 'Mekanism Resources', 'Start a village!', 'Get passive mobs!'];
   let tier3SItems = ['Advanced Mechanical Crystal', "Liquid Pink Slime", "Liquid Meat"];
   createPermit(3, tier3BItems, tier3SItems, 'kubejs:cube3');
 
-  let tier4BItems = ['Enchanting Bottle', 'Rubberwood Sapling', 'End Gobber Ore', 'Many liquids', 'Many spawn eggs', 'Flux Networks Resources'];
+  let tier4BItems = ['Enchanting Bottle', 'Rubberwood Sapling', 'More nuclear ores', 'End Gobber Ore', 'Many liquids', 'Many spawn eggs', 'Flux Networks Resources'];
   let tier4SItems = ['Liquid Experience', 'Refined Fuel', 'Lava'];
   createPermit(4, tier4BItems, tier4SItems, 'kubejs:cube4');
 

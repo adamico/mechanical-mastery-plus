@@ -45,23 +45,23 @@
 				""
 				"Infusing things with raw essence of darkness is inefficient, if I enrich it first I can extract *8 times* more darkness essence out of it."
 			]
-			icon: "kubejs:black_essence"
+			icon: "kubejs:darkness_essence"
 			id: "059DCF9720BF62A2"
 			rewards: [{
 				count: 4
 				id: "355174964BFE7C2E"
-				item: "kubejs:enriched_black_essence"
+				item: "kubejs:enriched_darkness_essence"
 				type: "item"
 			}]
 			tasks: [
 				{
 					id: "7F3711C0AD95DC1F"
-					item: "kubejs:black_essence"
+					item: "kubejs:darkness_essence"
 					type: "item"
 				}
 				{
 					id: "216AD4222596F736"
-					item: "kubejs:enriched_black_essence"
+					item: "kubejs:enriched_darkness_essence"
 					type: "item"
 				}
 			]
@@ -309,7 +309,7 @@
 				}
 				{
 					amount: 2147483647000L
-					fluid: "mekanism:superheated_sodium"
+					fluid: "thermal:syrup"
 					id: "43F557F5742FC8E9"
 					type: "fluid"
 				}
@@ -320,30 +320,36 @@
 					type: "fluid"
 				}
 				{
+					amount: 2147483647000L
+					fluid: "create:chocolate"
+					id: "350A923A6225CF92"
+					type: "fluid"
+				}
+				{
 					consume_items: true
 					count: 64738L
-					id: "15126A5E9BCF3EA6"
+					id: "2FB51FA942EE95DF"
 					item: "kubejs:cube1"
 					type: "item"
 				}
 				{
 					consume_items: true
 					count: 64738L
-					id: "5B247897C3BFB08F"
+					id: "557BEB351DBA6F6D"
 					item: "kubejs:cube2"
 					type: "item"
 				}
 				{
 					consume_items: true
 					count: 64738L
-					id: "0B25FE9034455655"
+					id: "62C57A6AA94BAF00"
 					item: "kubejs:cube3"
 					type: "item"
 				}
 				{
 					consume_items: true
 					count: 64738L
-					id: "3FBFC65C22D77CA0"
+					id: "5CD610B1ABD2C443"
 					item: "kubejs:cube4"
 					type: "item"
 				}
@@ -434,12 +440,12 @@
 			id: "081C1697195680DC"
 			rewards: [{
 				id: "3E41AF8452F38C58"
-				item: "createchromaticreturn:shadow_essence_bucket"
+				item: "kubejs:darkness_essence_bucket"
 				type: "item"
 			}]
 			tasks: [{
 				id: "06811927C1845A13"
-				item: "createchromaticreturn:shadow_essence_bucket"
+				item: "kubejs:darkness_essence_bucket"
 				type: "item"
 			}]
 			x: -14.5d
@@ -1184,7 +1190,7 @@
 				type: "item"
 			}]
 			tasks: [{
-				id: "3BFB6A655EC7B361"
+				id: "63AE938F4FC36BEF"
 				item: {
 					Count: 1b
 					id: "adminshop:permit"
@@ -1193,6 +1199,7 @@
 							Lore: [
 								"[{\"text\":\"Buy: Enchanting Bottle\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Rubberwood Sapling\",\"italic\":false}]"
+								"[{\"text\":\"Buy: More nuclear ores\",\"italic\":false}]"
 								"[{\"text\":\"Buy: End Gobber Ore\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Many liquids\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Many spawn eggs\",\"italic\":false}]"
@@ -1530,28 +1537,21 @@
 			y: 2.5d
 		}
 		{
-			id: "0739C83972F538B5"
-			rewards: [{
-				id: "435F8829157ABE0B"
-				item: {
-					Count: 1b
-					id: "createchromaticreturn:shadow_essence_bucket"
-					tag: {
-						Fluid: {
-							Amount: 1000
-							FluidName: "createchromaticreturn:shadow_essence"
-						}
-					}
-				}
+			dependencies: [
+				"7B3EE270553254E3"
+				"6A313C7F7A10ABE7"
+			]
+			description: ["Because we all want to build some huge structure with no headaches!"]
+			id: "142576A350BF2C99"
+			optional: true
+			shape: "diamond"
+			tasks: [{
+				id: "4E896F3346C76FC6"
+				item: "buildinggadgets:construction_paste_container_creative"
 				type: "item"
 			}]
-			tasks: [{
-				id: "1B70AA0A268012DC"
-				title: "ag"
-				type: "checkmark"
-			}]
-			x: 2.5d
-			y: 4.5d
+			x: -2.0d
+			y: 1.5d
 		}
 	]
 	title: "Chapter 5: Endgame"

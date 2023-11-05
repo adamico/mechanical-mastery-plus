@@ -878,7 +878,7 @@
 				type: "item"
 			}]
 			tasks: [{
-				id: "4807902CB5EDDAE4"
+				id: "5071C9F98CC67555"
 				item: {
 					Count: 1b
 					id: "adminshop:permit"
@@ -887,6 +887,7 @@
 							Lore: [
 								"[{\"text\":\"Buy: Emerald Ore\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Powah Resources\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Nuclear ores\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Mekanism Resources\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Start a village!\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Get passive mobs!\",\"italic\":false}]"

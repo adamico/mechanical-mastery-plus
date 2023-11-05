@@ -9,14 +9,12 @@ StartupEvents.registry('fluid', event => {
     .bucketColor(0x202020)
     .displayName('Darkness Essence')
     .bucketItem
-    .texture('kubejs:darkness_essence_bucket')
     .group('misc');
 
     event.create('light_essence')
     .thinTexture(0xE0E0E0)
     .bucketColor(0xE0E0E0)
-    .displayName('Refined Mixture')
+    .displayName('Light Essence')
     .bucketItem
-    .texture('kubejs:light_essence_bucket')
     .group('misc');
 });

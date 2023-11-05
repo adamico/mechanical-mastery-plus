@@ -909,19 +909,6 @@
 			y: -2.5d
 		}
 		{
-			dependencies: ["7B3EE270553254E3"]
-			hide: true
-			id: "142576A350BF2C99"
-			shape: "hexagon"
-			tasks: [{
-				id: "4E896F3346C76FC6"
-				item: "buildinggadgets:construction_paste_container_creative"
-				type: "item"
-			}]
-			x: -3.5d
-			y: -7.0d
-		}
-		{
 			dependencies: ["7B2728847CEC37A8"]
 			id: "12FCDEA62294CF57"
 			rewards: [
@@ -1395,8 +1382,8 @@
 				title: "Dark Utilities"
 				type: "checkmark"
 			}]
-			x: -6.5d
-			y: -3.0d
+			x: 3.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["135EF8C85A9CAF07"]
@@ -1418,8 +1405,8 @@
 				item: "darkutils:charm_sleep"
 				type: "item"
 			}]
-			x: -8.0d
-			y: -3.0d
+			x: 2.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["135EF8C85A9CAF07"]
@@ -1434,8 +1421,8 @@
 				item: "darkutils:charm_warding"
 				type: "item"
 			}]
-			x: -5.0d
-			y: -3.0d
+			x: 4.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["55B3F2A3F8029DE6"]
@@ -1452,6 +1439,117 @@
 			}]
 			x: 13.0d
 			y: -1.0d
+		}
+		{
+			dependencies: ["12724BAC7C9436BA"]
+			id: "77FDE9D456B08E2D"
+			rewards: [{
+				id: "67E4CCC1098A15E9"
+				item: "sophisticatedbackpacks:stack_upgrade_tier_1"
+				type: "item"
+			}]
+			tasks: [{
+				id: "0AAAF701554C8912"
+				item: {
+					Count: 1b
+					id: "sophisticatedbackpacks:backpack"
+					tag: {
+						contentsUuid: [I;
+							1917610098
+							1053904570
+							-1528151384
+							1780543303
+						]
+						inventorySlots: 27
+						upgradeSlots: 1
+					}
+				}
+				type: "item"
+			}]
+			x: 3.0d
+			y: -1.0d
+		}
+		{
+			description: [
+				"Extreme Reactors is an alternative way of producing energy in this modpack."
+				""
+				"You can buy raw ores in the shop."
+			]
+			id: "3C7D393E6D20380F"
+			tasks: [{
+				id: "4BE677C48AEBB91F"
+				title: "Extremely Big Reactors"
+				type: "checkmark"
+			}]
+			x: 12.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["3C7D393E6D20380F"]
+			id: "0368AF2C22AB338B"
+			tasks: [{
+				id: "59E9D9B38B8CA08F"
+				item: "bigreactors:basic_reactorcasing"
+				type: "item"
+			}]
+			x: 11.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["3C7D393E6D20380F"]
+			id: "53F9E077D1A8BECA"
+			tasks: [{
+				id: "042622C4458E5868"
+				item: {
+					Count: 1b
+					id: "patchouli:guide_book"
+					tag: {
+						"patchouli:book": "bigreactors:erguide"
+					}
+				}
+				type: "item"
+			}]
+			x: 13.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["210F2431A8A257E3"]
+			id: "60FD32EB41925C07"
+			rewards: [{
+				id: "103FEB42F14D22E7"
+				item: {
+					Count: 1b
+					id: "entangled:item"
+					tag: { }
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "747DBCC91A40E1CF"
+				item: {
+					Count: 1b
+					id: "entangled:block"
+					tag: { }
+				}
+				type: "item"
+			}]
+			x: 3.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["12724BAC7C9436BA"]
+			id: "03BACA51A4A40C61"
+			tasks: [{
+				id: "19FF5448937AC388"
+				item: {
+					Count: 1b
+					id: "experienceobelisk:experience_obelisk"
+					tag: { }
+				}
+				type: "item"
+			}]
+			x: 2.0d
+			y: 0.0d
 		}
 	]
 	title: "All the other mods \\& stuff"

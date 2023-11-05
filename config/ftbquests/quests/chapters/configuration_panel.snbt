@@ -238,6 +238,50 @@
 			x: 0.5d
 			y: -3.0d
 		}
+		{
+			can_repeat: true
+			description: ["Using this command you can increase random tick speed allowing for example crops and budding crystals to grow faster."]
+			icon: "minecraft:emerald"
+			id: "4B4BFA652DFFE3E3"
+			rewards: [{
+				auto: "enabled"
+				command: "/gamerule doTraderSpawning false"
+				exclude_from_claim_all: true
+				id: "2A5D692A70841C6A"
+				type: "command"
+			}]
+			subtitle: "go away!"
+			tasks: [{
+				id: "1EB198D81EDC023C"
+				title: "I don't wanna buy anything!"
+				type: "checkmark"
+			}]
+			x: 2.0d
+			y: -4.0d
+		}
+		{
+			can_repeat: true
+			description: ["Ok, ok, &orandomTickSpeed&r manipulation is OP"]
+			icon: "minecraft:diamond"
+			id: "520C17219E5A04EC"
+			rewards: [{
+				auto: "enabled"
+				command: "/gamerule doTraderSpawning true"
+				exclude_from_claim_all: true
+				id: "55135A9E46E19EDE"
+				type: "command"
+			}]
+			shape: "square"
+			subtitle: "I need your wares!"
+			tasks: [{
+				id: "7B15477201F3F021"
+				title: "I love waiting!"
+				type: "checkmark"
+			}]
+			title: "Come back, trader!"
+			x: 2.0d
+			y: -3.0d
+		}
 	]
 	subtitle: ["Create your ideal experience here"]
 	title: "Configuration Panel"

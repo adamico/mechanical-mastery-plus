@@ -1783,10 +1783,10 @@
 
 [oddities]
 	Pipes = true
-	Backpack = true
+	Backpack = false
 	"Tiny Potato" = true
 	"Matrix Enchanting" = true
-	"Totem Of Holding" = true
+	"Totem Of Holding" = false
 	Crate = true
 	Magnets = true
 
