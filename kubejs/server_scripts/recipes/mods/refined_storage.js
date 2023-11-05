@@ -7,7 +7,7 @@ ServerEvents.recipes(event => {
 			A: 'minecraft:dragon_head',
 			B: 'extrastorage:disk_16384k',
 			D: 'refinedstorage:controller',
-			E: 'kubejs:enriched_black_essence'
+			E: 'kubejs:enriched_darkness_essence'
 		}
 	);
 

@@ -19,6 +19,6 @@ import mods.mekanism.api.ingredient.ItemStackIngredient;
 //<recipetype:mekanism:metallurgic_infusing>.removeByName("mekanism:metallurgic_infusing/sand_to_dirt");
 
 <recipetype:mekanism:metallurgic_infusing>.addRecipe("coat_redstone", <item:minecraft:redstone>, <infuse_type:mekanism:refined_obsidian> * 40, <item:kubejs:coated_redstone>);
-<recipetype:mekanism:metallurgic_infusing>.addRecipe("black_infuse_basilic_reagent", <item:kubejs:basilic_reagent>, <infuse_type:crafttweaker:darkness> * 40, <item:kubejs:enriched_basilic_reagent>);
-<recipetype:mekanism:metallurgic_infusing>.addRecipe("black_infuse_skull", <item:minecraft:skeleton_skull>, <infuse_type:crafttweaker:darkness> * 120, <item:minecraft:wither_skeleton_skull>);
-<recipetype:mekanism:metallurgic_infusing>.addRecipe("black_infuse_hdpe_sheet", <item:mekanism:hdpe_sheet>, <infuse_type:crafttweaker:darkness> * 10, <item:kubejs:black_hdpe_sheet>);
+<recipetype:mekanism:metallurgic_infusing>.addRecipe("darkness_infuse_basilic_reagent", <item:kubejs:basilic_reagent>, <infuse_type:crafttweaker:darkness> * 40, <item:kubejs:enriched_basilic_reagent>);
+<recipetype:mekanism:metallurgic_infusing>.addRecipe("darkness_infuse_skull", <item:minecraft:skeleton_skull>, <infuse_type:crafttweaker:darkness> * 120, <item:minecraft:wither_skeleton_skull>);
+<recipetype:mekanism:metallurgic_infusing>.addRecipe("darkness_infuse_hdpe_sheet", <item:mekanism:hdpe_sheet>, <infuse_type:crafttweaker:darkness> * 10, <item:kubejs:black_hdpe_sheet>);

@@ -11,5 +11,5 @@ import mods.mekanism.api.ingredient.ItemStackIngredient;
 
 // <recipetype:mekanism:enriching>.removeByName(name as string)
 
-<recipetype:mekanism:enriching>.addRecipe("enrich_dark_essence", <item:kubejs:black_essence>, <item:kubejs:enriched_black_essence>);
+<recipetype:mekanism:enriching>.addRecipe("enrich_dark_essence", <item:kubejs:darkness_essence>, <item:kubejs:enriched_darkness_essence>);
 <recipetype:mekanism:enriching>.removeByName("mekanism:enriching/conversion/sulfur_to_gunpowder");

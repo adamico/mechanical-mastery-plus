@@ -1,4 +1,7 @@
 ServerEvents.recipes(event => {
+
+	//console.log("NBT is: "+ Item.of('water_bucket').fluid());
+
 	//functions
 	let bottling = (output, input) => {
 		event.recipes.createFilling(output, input);
@@ -186,7 +189,11 @@ ServerEvents.recipes(event => {
 	event.recipes.thermal.press('fluxnetworks:flux_dust', ['kubejs:coated_redstone', 'fluxnetworks:flux_block']).energy(200);
 
 	//tier5
-  event.recipes.thermal.chiller(Item.of('kubejs:black_essence', 4), 'createchromaticreturn:shadow_essence').energy(20000);
+	['provider', 'cell'].forEach(type => {
+		event.remove({id: 'createchromaticreturn:basic_induction_' + type});
+	});
+
+  event.recipes.thermal.chiller(Item.of('kubejs:darkness_essence', 4), Fluid.of('kubejs:darkness_essence')).energy(20000);
 
 	event.remove({output: 'createchromaticreturn:multiplite_ingot'})
 	event.recipes.createMixing(Item.of('createchromaticreturn:multiplite_ingot'), [Item.of('createchromaticreturn:refined_radiance', 16), Item.of('supplementaries:enderman_head', 8), Item.of('minecraft:shulker_shell', 8)]).superheated();

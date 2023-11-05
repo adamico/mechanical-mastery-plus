@@ -29,8 +29,8 @@ StartupEvents.registry('item', event => {
 	event.create('steel_rod').displayName('Steel Rod');
 	event.create('diamond_plate').displayName('Diamond Plate');
 
-	event.create('black_essence').displayName('Essence of Darkness');
-	event.create('enriched_black_essence').displayName('Enriched Essence of Darkness');
+	event.create('darkness_essence').displayName('Essence of Darkness');
+	event.create('enriched_darkness_essence').displayName('Enriched Essence of Darkness');
 
 	event.create('basilic_reagent').displayName('Basilic Reagent');
 	event.create('enriched_basilic_reagent').displayName('Enriched Basilic Reagent');

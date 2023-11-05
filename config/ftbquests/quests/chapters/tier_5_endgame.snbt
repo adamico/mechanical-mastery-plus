@@ -244,7 +244,11 @@
 			y: 4.0d
 		}
 		{
-			dependencies: ["756E1F5554A92D83"]
+			dependencies: [
+				"756E1F5554A92D83"
+				"53B31BBA455722E2"
+				"01A195F380CDB290"
+			]
 			description: [
 				"If you got this far...."
 				""
@@ -1479,6 +1483,75 @@
 			title: "Induction Matrix"
 			x: -7.0d
 			y: 1.5d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			description: ["All of the required max int fluids for the final quest can be made infinite when put in a 10k block volume and can be drained infinitely using a hose pulley."]
+			hide_dependency_lines: true
+			id: "01A195F380CDB290"
+			rewards: [{
+				id: "1027AAB671AAE0C5"
+				type: "xp"
+				xp: 1000
+			}]
+			tasks: [
+				{
+					id: "25A18E61C307EA86"
+					item: "create:hose_pulley"
+					type: "item"
+				}
+				{
+					id: "226682B2A9BB8432"
+					item: "create:mechanical_pump"
+					type: "item"
+				}
+			]
+			title: "Bottomless fluid pits"
+			x: 3.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["07980075BFE4C586"]
+			description: ["Like fluids Mekanism gases can be made infinite by filling a 10k volume with the liquid form."]
+			hide_dependency_lines: true
+			id: "53B31BBA455722E2"
+			rewards: [{
+				id: "2B92B6723E196653"
+				type: "xp"
+				xp: 1000
+			}]
+			tasks: [{
+				id: "364BB236D3DF4414"
+				item: "mekanism:rotary_condensentrator"
+				type: "item"
+			}]
+			title: "Bottomless gas pits"
+			x: 3.5d
+			y: 2.5d
+		}
+		{
+			id: "0739C83972F538B5"
+			rewards: [{
+				id: "435F8829157ABE0B"
+				item: {
+					Count: 1b
+					id: "createchromaticreturn:shadow_essence_bucket"
+					tag: {
+						Fluid: {
+							Amount: 1000
+							FluidName: "createchromaticreturn:shadow_essence"
+						}
+					}
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "1B70AA0A268012DC"
+				title: "ag"
+				type: "checkmark"
+			}]
+			x: 2.5d
+			y: 4.5d
 		}
 	]
 	title: "Chapter 5: Endgame"
