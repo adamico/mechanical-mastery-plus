@@ -349,7 +349,7 @@
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
-			description: ["If you prefer AE2 over RS, there is a way.\\nInscriber presses have a Create sequence assembly recipe.\\nCraft a sky stone block with 8 polished deepslate (obtained deepslate from igneous extruder) and 1 yellow essence. You only need ONE. Then, cycle the block through a create millstone or crusher (it outputs itself as part of the recipe) and produce sky stone dust. Finally, wash the sky stone dust to obtain certus quartz, and welcome to AE2."]
+			description: ["If you prefer AE2 over RS, there is a way.\\nInscriber presses have a Create sequence assembly recipe.\\nCraft a sky stone block with 8 polished deepslate (you can get cobbled deepslate from igneous extruder) and 1 yellow essence. You only need ONE. Then, cycle the block through a create millstone or crusher (it outputs itself as part of the recipe) and produce sky stone dust. Finally, wash the sky stone dust to obtain certus quartz, and welcome to AE2."]
 			id: "182209ACB7DE7F78"
 			optional: true
 			rewards: [

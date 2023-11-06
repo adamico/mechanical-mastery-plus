@@ -1,5 +1,5 @@
 #List of names the merchant can have.
-merchantNames = ["Swap-O-Matic", "Emerald Muncher", "Weathered Salesperson"]
+merchantNames = ["AdminShop Trader Wannabe", "Green Lantern Eater", "Fallen Scrooge Angel", "Scammer Dirt Worm"]
 #The range within animals can be fed by the feeding trough.
 #Range: > -2147483648
 feedingTroughRange = 8

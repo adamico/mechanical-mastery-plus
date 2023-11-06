@@ -7,15 +7,15 @@
 	icon: "kubejs:cube4"
 	id: "38378A6F4FF9F098"
 	images: [{
-		click: ""
+		click: "https://www.curseforge.com/minecraft/mc-mods/powah-rearchitected"
 		corner: false
 		dev: false
 		height: 2.0d
-		hover: [ ]
+		hover: ["visit https://www.curseforge.com/minecraft/mc-mods/powah-rearchitected"]
 		image: "powah:item/charged_snowball"
 		rotation: 0.0d
 		width: 2.0d
-		x: -10.0d
+		x: -10.5d
 		y: -2.0d
 	}]
 	order_index: 4
@@ -834,15 +834,23 @@
 				""
 				"You can get fluid experience from:"
 				""
-				"- Create (Nuggets of Experience)"
+				"- Create's nuggets of experience"
 				""
-				"- Thermal (Essence of Knowledge from Insightful Condenser, Insightful Crystal and Knowledge Concentrator Augmented Machines)"
+				"- Thermal's essence of knowledge from Insightful Condenser, Insightful Crystal and Knowledge Concentrator Augmented Machines"
 				""
-				"- Industrial Foregoing (Essence from Mob Crusher)"
+				"- Industrial Foregoing 's essence from Mob Crusher"
 				""
-				"- Mob Grinding Utils (Fluid Xp)"
+				"- Experience Obelisk's cognitium from stored experience "
+				""
+				"- Mob Grinding Utils's fluid xp"
 			]
 			id: "7E40BDE1846E9542"
+			min_required_tasks: 1
+			rewards: [{
+				id: "203B290668E41257"
+				type: "xp"
+				xp: 1000
+			}]
 			tasks: [
 				{
 					id: "7C710E111CB2FE3C"
@@ -863,6 +871,11 @@
 					count: 3L
 					id: "1093D29FC8DA0441"
 					item: "create:experience_nugget"
+					type: "item"
+				}
+				{
+					id: "3C3A327AA2C5D7DF"
+					item: "experienceobelisk:cognitium_bucket"
 					type: "item"
 				}
 			]

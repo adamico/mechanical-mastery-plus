@@ -30,12 +30,12 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "r1.0.8"
+$MODPACK_VERSION = "r1.0.8f"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
 # Should be "$null" if this is the first release
-$LAST_MODPACK_VERSION = "r1.0.7"
+$LAST_MODPACK_VERSION = "r1.0.8"
 
 # Which modloader the modpack uses
 # Can be "forge" or "fabric"
@@ -98,6 +98,7 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"betteradvancements-client.toml",
 	"blockrunner-client.toml",
 	"buildinggadgets-client.toml",
+	"camera-client.toml",
 	"carryon-client.toml",
 	"chiselsandbits-client.toml",
 	"cofh_core-client.toml",
@@ -115,6 +116,7 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"ding.toml",
 	"emi.css",
 	"extremesoundmuffler-client.toml",
+	"extremereactors/client.toml",
 	"farmersdelight-client.toml",
 	"findme.json",
 	"fluxnetworks-client.toml",
@@ -125,6 +127,7 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"gravestone-client.toml",
 	"hyperbox-client.toml",
 	"ironfurnaces-client.toml",
+	"jade/plugins.json",
 	"jei/bookmarks.ini",
 	"jei/jei-client.ini",
 	"mcjtylib-client.toml",

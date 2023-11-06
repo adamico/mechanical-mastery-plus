@@ -1,1 +1,24 @@
-{}
+{
+  "customCategories": {
+    "vanilla_crops": {
+      "name": "Vanilla Crops",
+      "icon": {
+        "item": "minecraft:cocoa_beans"
+      }
+    }
+  },
+  "customEntries": [
+    {
+      "output": "minecraft:sweet_berries",
+      "category": "vanilla_crops"
+    },
+    {
+      "output": "minecraft:cocoa_beans",
+      "category": "vanilla_crops"
+    },
+    {
+      "output": "minecraft:bamboo",
+      "category": "vanilla_crops"
+    }
+  ]
+}

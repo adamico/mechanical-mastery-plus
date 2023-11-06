@@ -672,7 +672,7 @@
 					type: "item"
 				}
 			]
-			title: "Into the rabbit gas hole"
+			title: "Into the gaseous rabbit hole!"
 			x: -17.0d
 			y: -1.5d
 		}
@@ -896,7 +896,9 @@
 			description: [
 				"{image:ftbquests:textures/gui/cat.png width:204 height:136 align:1}"
 				""
-				"Infusing blackstone with gold produces this wonderful feline!"
+				"Infusing blackstone with gold produces (this wonderful feline) gilded blackstone."
+				""
+				"You can get blackstone by bulk haunting cobblestone with Create or using Thermal's igneous extruder."
 			]
 			id: "623433DBF296A6DF"
 			rewards: [{

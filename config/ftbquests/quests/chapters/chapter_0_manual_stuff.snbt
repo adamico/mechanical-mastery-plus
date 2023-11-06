@@ -609,7 +609,12 @@
 		}
 		{
 			dependencies: ["7642C16EC994F8B5"]
-			description: ["With a Vibration Chamber you can finally stop cranking the inscriber."]
+			description: [
+				"With a Vibration Chamber you can finally stop cranking the inscriber."
+				""
+				""
+				"Tip: you can also power an inscriber with an iron furnace with a generator augment (you have to use energy cables or a battery block from thermal, mekanism, powah because of an unfixed bug)"
+			]
 			id: "09BAD2F7D01D16FD"
 			rewards: [
 				{

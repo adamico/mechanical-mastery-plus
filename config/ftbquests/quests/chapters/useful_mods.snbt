@@ -759,23 +759,6 @@
 			y: -1.0d
 		}
 		{
-			dependencies: ["41129A0B7A2CCF8D"]
-			id: "05FACC5BFB698A34"
-			rewards: [{
-				count: 16
-				id: "169D046A2C3CFCD4"
-				item: "minecraft:emerald"
-				type: "item"
-			}]
-			tasks: [{
-				id: "1D9DBD0293017BC2"
-				item: "farmingforblockheads:market"
-				type: "item"
-			}]
-			x: 7.5d
-			y: 1.0d
-		}
-		{
 			id: "63311B00BE8470FA"
 			tasks: [{
 				id: "205E762E4E05E95F"
