@@ -16,19 +16,19 @@
 			image: "create:item/goggles"
 			rotation: 0.0d
 			width: 2.0d
-			x: -3.0d
-			y: 0.5d
+			x: -7.0d
+			y: 1.0d
 		}
 		{
 			click: "https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing"
 			corner: false
 			dev: false
-			height: 2.0d
+			height: 1.5d
 			hover: ["visit https://www.curseforge.com/minecraft/mc-mods/industrial-foregoing"]
 			image: "industrialforegoing:blocks/fluid_collector_front"
 			rotation: 0.0d
-			width: 2.0d
-			x: -3.0d
+			width: 1.5d
+			x: -7.0d
 			y: -7.0d
 		}
 	]
@@ -41,51 +41,35 @@
 				"\"&oSuddenly, the basic mechanical essence whispers to me... the factory must grow!&r\""
 				""
 				"Having created your first mechanical essence you have now acces to chapter 2 which features Create and Industrial Foregoing."
-				""
-				"HINT: if you can't find any andesite blocks in your island, you can get andesite to to pr"
 			]
-			icon: "create:wrench"
+			icon: "kubejs:cube1"
 			id: "167C9AF69BB16B8B"
-			rewards: [
-				{
-					id: "5A604F3151CE4527"
-					item: "create:goggles"
-					type: "item"
-				}
-				{
-					id: "2B809196F98F7C81"
-					item: {
-						Count: 1b
-						id: "industrialforegoing:infinity_backpack"
-						tag: {
-							CanCharge: 1b
-							Energy: 0L
-							Selected: "POOR"
-							Special: 0b
-						}
-					}
-					type: "item"
-				}
-			]
+			rewards: [{
+				id: "60FFC79077CDD68B"
+				item: "kubejs:cube1"
+				type: "item"
+			}]
 			shape: "square"
 			subtitle: "Thus begins a new life"
 			tasks: [{
-				id: "3705A0AE937D6D07"
-				item: "create:wrench"
-				type: "item"
+				id: "3F6A52248E8034EF"
+				title: "Incipit vita nova"
+				type: "checkmark"
 			}]
 			title: "Incipit vita nova"
-			x: -5.0d
+			x: -7.0d
 			y: -3.0d
 		}
 		{
-			dependencies: ["167C9AF69BB16B8B"]
+			dependencies: ["79A1F5BB61865008"]
 			description: [
 				"In order to get into Create, you will need large quantities of andesite."
 				""
 				"Until you discover a way to mass produce quartz you can use a Mechanical Extruder."
 				""
 				"Generating andesite requires water, lava and a block of flint."
+				""
+				"HINT: if you can't find any andesite blocks in your island for some reason, you can get andesite as an emergency item."
 			]
 			id: "5F73D5F328C236A9"
 			rewards: [
@@ -120,9 +104,9 @@
 					type: "item"
 				}
 			]
-			title: "Sic mundus creatus est"
-			x: -3.0d
-			y: -2.0d
+			title: "Andesite"
+			x: -5.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["5F73D5F328C236A9"]
@@ -162,8 +146,8 @@
 				type: "item"
 			}]
 			title: "Create Power Generation"
-			x: -2.0d
-			y: -1.0d
+			x: -5.5d
+			y: 0.0d
 		}
 		{
 			dependencies: [
@@ -184,19 +168,29 @@
 				item: "kubejs:cube2"
 				type: "item"
 			}]
-			tasks: [{
-				id: "7AF77A99BBFD2A5E"
-				item: "kubejs:cube2"
-				type: "item"
-			}]
-			x: 5.5d
+			tasks: [
+				{
+					id: "7AF77A99BBFD2A5E"
+					item: "create:mechanical_mixer"
+					type: "item"
+				}
+				{
+					id: "5E9EAFD40CCA4D47"
+					item: "create:basin"
+					type: "item"
+				}
+				{
+					id: "528B814465AC6F85"
+					item: "kubejs:cube2"
+					type: "item"
+				}
+			]
+			title: "Mixing it all up"
+			x: 0.5d
 			y: -3.0d
 		}
 		{
-			dependencies: [
-				"60B1EB81382B2E66"
-				"5BFA974392560603"
-			]
+			dependencies: ["60B1EB81382B2E66"]
 			id: "30297A5669810E41"
 			rewards: [{
 				count: 2
@@ -210,8 +204,8 @@
 				item: "createaddition:brass_rod"
 				type: "item"
 			}]
-			x: 4.0d
-			y: -1.0d
+			x: -1.0d
+			y: -3.5d
 		}
 		{
 			dependencies: ["095B3B763B642CB6"]
@@ -226,8 +220,8 @@
 				item: "thermal:invar_gear"
 				type: "item"
 			}]
-			x: 4.0d
-			y: -2.5d
+			x: -1.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["2499F9AAE9DD7CB1"]
@@ -242,8 +236,8 @@
 				item: "kubejs:steel_gear"
 				type: "item"
 			}]
-			x: 4.0d
-			y: -3.5d
+			x: -1.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["75C1F15B9623C089"]
@@ -261,11 +255,11 @@
 				item: "jaopca:dusts.brass"
 				type: "item"
 			}]
-			x: 2.5d
-			y: -1.0d
+			x: -3.0d
+			y: -3.0d
 		}
 		{
-			dependencies: ["7C0D8A15D01EC79E"]
+			dependencies: ["5BFA974392560603"]
 			description: [
 				"The rolling mill is a create machine added by Create: Crafts \\& Additions."
 				""
@@ -282,8 +276,8 @@
 				item: "createaddition:rolling_mill"
 				type: "item"
 			}]
-			x: 1.0d
-			y: 0.5d
+			x: -2.0d
+			y: -3.5d
 		}
 		{
 			dependencies: ["044413B6EB71F5E6"]
@@ -316,8 +310,8 @@
 				}
 			]
 			title: "1.3 * 1.2 = 1.56 ?!?!!!!"
-			x: 1.0d
-			y: -1.0d
+			x: -4.0d
+			y: -3.0d
 		}
 		{
 			dependencies: ["7C0D8A15D01EC79E"]
@@ -344,8 +338,8 @@
 					type: "item"
 				}
 			]
-			x: -0.5d
-			y: -1.0d
+			x: -4.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["78775CE81571FAC9"]
@@ -361,7 +355,7 @@
 				item: "thermal:upgrade_augment_2"
 				type: "item"
 			}]
-			x: 5.5d
+			x: 0.5d
 			y: -4.5d
 		}
 		{
@@ -381,7 +375,7 @@
 				type: "item"
 			}]
 			title: "Can Thermal machines be more efficient?"
-			x: 5.5d
+			x: 0.5d
 			y: -1.5d
 		}
 		{
@@ -418,32 +412,15 @@
 					type: "item"
 				}
 			]
-			x: 7.0d
+			x: 2.0d
 			y: -3.0d
-		}
-		{
-			dependencies: ["66AF222E0F698323"]
-			id: "651A240785AEB869"
-			rewards: [{
-				count: 16
-				id: "30C6E6B376AEFD59"
-				item: "minecraft:soul_sand"
-				type: "item"
-			}]
-			tasks: [{
-				id: "0E9D6103FA73FED5"
-				item: "minecraft:soul_sand"
-				type: "item"
-			}]
-			x: 1.0d
-			y: -6.5d
 		}
 		{
 			dependencies: ["0A9ECC5960974D82"]
 			description: [
 				"The sludge refiner can convert sludge into useful dirt based items."
 				""
-				"Here you need it to obtain soulsand."
+				"Here you need it to obtain your first soulsand."
 			]
 			id: "66AF222E0F698323"
 			rewards: [{
@@ -451,22 +428,29 @@
 				type: "xp"
 				xp: 100
 			}]
-			tasks: [{
-				id: "70C7BF59FB140127"
-				item: "industrialforegoing:sludge_refiner"
-				type: "item"
-			}]
-			x: -0.5d
-			y: -5.0d
+			tasks: [
+				{
+					id: "70C7BF59FB140127"
+					item: "industrialforegoing:sludge_refiner"
+					type: "item"
+				}
+				{
+					id: "5CDCFB6FAE834A02"
+					item: "minecraft:soul_sand"
+					type: "item"
+				}
+			]
+			x: -4.0d
+			y: -4.5d
 		}
 		{
-			dependencies: ["167C9AF69BB16B8B"]
+			dependencies: ["0C96FEB8F6BC6E17"]
 			description: [
-				"\"I know these machines, they say they can let you eat metal and drink souls!\""
+				"Latex can be processed into tiny dry rubber in a Latex Processor."
 				""
-				"Aaaah, the old Industrial Foregoing (IF for us)!"
+				"You can then craft 8 tiny dry rubber into rubber and then smelt this to obtain plastic."
 				""
-				"IF is a very versatile mod to automate farms for crops, trees, mobs and even ore generation."
+				"TIP: tiny dry rubber can also be bought from the shop for 128$/each... it's cheaper than latex but still expensive..."
 			]
 			id: "7031E0FDBA3BCE40"
 			rewards: [{
@@ -477,19 +461,24 @@
 			}]
 			tasks: [
 				{
-					id: "51D7B298E8DB8993"
+					id: "748CD9BE28F5D77D"
+					item: "industrialforegoing:latex_processing_unit"
+					type: "item"
+				}
+				{
+					id: "4EB373DCB8F32626"
 					item: "industrialforegoing:dryrubber"
 					type: "item"
 				}
 				{
-					id: "16A61E11D2046403"
+					id: "2253605719F6EAC5"
 					item: "industrialforegoing:plastic"
 					type: "item"
 				}
 			]
-			title: "Foreplay of Industry"
-			x: -3.0d
-			y: -4.0d
+			title: "Latex"
+			x: -5.5d
+			y: -6.0d
 		}
 		{
 			dependencies: ["7031E0FDBA3BCE40"]
@@ -497,6 +486,8 @@
 				"The Plant Gatherer can harvest crops and cut trees and produce sludge."
 				""
 				"Once you start producing ether gas you can feed it to the gatherer to automate crops replanting."
+				""
+				"TIP: trees are better sludge source than crops!"
 			]
 			id: "0A9ECC5960974D82"
 			rewards: [{
@@ -517,14 +508,11 @@
 					type: "item"
 				}
 			]
-			x: -2.0d
-			y: -5.0d
+			x: -4.0d
+			y: -6.0d
 		}
 		{
-			dependencies: [
-				"1DEE3BE68AEE289D"
-				"651A240785AEB869"
-			]
+			dependencies: ["1DEE3BE68AEE289D"]
 			description: ["By washing soul sand with water, you can obtain large amounts of quartz and a bit of gold."]
 			id: "5F9F6C2676715766"
 			rewards: [{
@@ -538,11 +526,14 @@
 				item: "minecraft:quartz"
 				type: "item"
 			}]
-			x: 2.5d
-			y: -5.0d
+			x: -2.0d
+			y: -4.5d
 		}
 		{
-			dependencies: ["5F73D5F328C236A9"]
+			dependencies: [
+				"5F73D5F328C236A9"
+				"66AF222E0F698323"
+			]
 			description: [
 				"The encased fan allows you to use the rotational power to push or pull air."
 				""
@@ -564,8 +555,8 @@
 				item: "create:encased_fan"
 				type: "item"
 			}]
-			x: 1.0d
-			y: -5.0d
+			x: -5.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["5F9F6C2676715766"]
@@ -581,8 +572,8 @@
 				item: "thermal:quartz_dust"
 				type: "item"
 			}]
-			x: 4.0d
-			y: -5.0d
+			x: -1.0d
+			y: -4.5d
 		}
 		{
 			dependencies: ["167C9AF69BB16B8B"]
@@ -608,6 +599,7 @@
 								"[{\"text\":\"Buy: Raw Zinc\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Kelp\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Tiny Dry Rubber\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Latex\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Bone\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Lapis Ore\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Gobber Ore\",\"italic\":false}]"
@@ -622,89 +614,18 @@
 				}
 				type: "item"
 			}]
-			x: -6.5d
+			x: -8.5d
 			y: -3.0d
 		}
 		{
-			dependencies: ["167C9AF69BB16B8B"]
-			description: ["The mechanical press offers an RF-free way of converting ingots into plates."]
-			id: "662DE7460CCF2AA7"
-			rewards: [{
-				id: "36C070A70E586552"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "0B1288DE703C62EB"
-				item: "create:mechanical_press"
-				type: "item"
-			}]
-			x: -6.0d
-			y: -4.5d
-		}
-		{
-			dependencies: ["167C9AF69BB16B8B"]
+			dependencies: ["79A1F5BB61865008"]
 			description: [
-				"Create's mechanical belts allow for transportation of items with customizable speed. Since Pretty Pipes offer some advantages and disadvantages to mechanical belts, this quest is optional."
+				"&lMechanical Belts&r and &lItem Vaults&r are great item transportation blocks of the Create mod."
 				""
-				"When you start crafting sequenced assembly recipes you will discover the need of using and abusing belts."
-			]
-			id: "388F7E8E6658980D"
-			optional: true
-			rewards: [{
-				id: "20F29EB99022152A"
-				type: "xp"
-				xp: 100
-			}]
-			shape: "diamond"
-			tasks: [{
-				id: "32FFCBAC2EFF492D"
-				item: "create:belt_connector"
-				type: "item"
-			}]
-			x: -6.0d
-			y: -1.5d
-		}
-		{
-			dependencies: ["167C9AF69BB16B8B"]
-			id: "383FC1F48931FDDF"
-			optional: true
-			rewards: [{
-				id: "39E316E53CAFE53D"
-				item: "create:andesite_funnel"
-				type: "item"
-			}]
-			shape: "diamond"
-			tasks: [{
-				id: "469149DB3599DC92"
-				item: "create:andesite_funnel"
-				type: "item"
-			}]
-			x: -5.0d
-			y: -1.5d
-		}
-		{
-			dependencies: ["383FC1F48931FDDF"]
-			id: "2FC84EB7F93428A1"
-			optional: true
-			rewards: [{
-				id: "089618CE79D1A30C"
-				item: "create:brass_funnel"
-				type: "item"
-			}]
-			shape: "diamond"
-			tasks: [{
-				id: "268D4C54BE502867"
-				item: "create:brass_funnel"
-				type: "item"
-			}]
-			x: -5.0d
-			y: -0.5d
-		}
-		{
-			dependencies: ["167C9AF69BB16B8B"]
-			description: [
-				"Create Item vaults are the ultimate storage system, really!"
+				"&lBelts&r allows transporting items with customizable speed. When you start crafting sequenced assembly recipes you will discover the need of using and abusing belts."
+				""
+				""
+				"&lItem vaults&r are the ultimate storage system, &oreally!&r"
 				""
 				"You can insert and remove object with any inventory interaction block (hoppers, funnels, chutes, item pipes) but you cannot access its inventory manually."
 				""
@@ -716,26 +637,86 @@
 				""
 				"This allows instant transport of items up to 9 block distance."
 			]
-			id: "458097E57CE286B7"
+			id: "388F7E8E6658980D"
 			optional: true
-			rewards: [{
-				count: 2
-				id: "54C728BCD9D8CF24"
-				item: "create:item_vault"
-				type: "item"
-			}]
+			rewards: [
+				{
+					count: 8
+					id: "18C6D603F827A6E9"
+					item: "create:belt_connector"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "772A42EB1FB53B96"
+					item: "create:item_vault"
+					type: "item"
+				}
+			]
 			shape: "diamond"
-			tasks: [{
-				id: "56C8B38070CCE8BE"
-				item: "create:item_vault"
-				type: "item"
-			}]
-			x: -4.0d
-			y: -1.5d
+			tasks: [
+				{
+					id: "32FFCBAC2EFF492D"
+					item: "create:belt_connector"
+					type: "item"
+				}
+				{
+					id: "6D2EAC3D6AE5CA2B"
+					item: "create:item_vault"
+					type: "item"
+				}
+			]
+			title: "Belts and Vaults"
+			x: -8.5d
+			y: -1.0d
 		}
 		{
-			dependencies: ["167C9AF69BB16B8B"]
+			dependencies: ["79A1F5BB61865008"]
 			description: [
+				"Funnels allow easy transfering to and from any inventory."
+				""
+				"Brass Funnels allow advanced filtering and customizing the amount of items transfered."
+				""
+				"Look in the ponder section of these blocks to learn more!"
+			]
+			id: "383FC1F48931FDDF"
+			optional: true
+			rewards: [
+				{
+					id: "39E316E53CAFE53D"
+					item: "create:andesite_funnel"
+					type: "item"
+				}
+				{
+					id: "41C090D3A5340135"
+					item: "create:brass_funnel"
+					type: "item"
+				}
+			]
+			shape: "diamond"
+			tasks: [
+				{
+					id: "469149DB3599DC92"
+					item: "create:andesite_funnel"
+					type: "item"
+				}
+				{
+					id: "5AD1741EA664AEA3"
+					item: "create:brass_funnel"
+					type: "item"
+				}
+			]
+			title: "All about funnels"
+			x: -8.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["79A1F5BB61865008"]
+			description: [
+				"The Mixer and the Mechanical Press are the main item custom crafting blocks of create."
+				""
+				"The press offers an RF-free way of converting ingots into plates."
+				""
 				"With the mixer you can automate most shapeless crafting table recipes and some others too."
 				""
 				"Some recipes require heat in the form of a blaze burner."
@@ -743,56 +724,45 @@
 				"NOTE: the mixer requires a speed of at least 32 RPM to function"
 			]
 			id: "6136697C2620F88B"
+			optional: true
 			rewards: [{
 				id: "61DCCC0B51406AB1"
 				type: "xp"
 				xp: 100
 			}]
-			tasks: [{
-				id: "30B41D6CF9C29995"
-				item: "create:mechanical_mixer"
-				type: "item"
-			}]
-			x: -4.0d
-			y: -4.5d
+			shape: "diamond"
+			tasks: [
+				{
+					id: "30B41D6CF9C29995"
+					item: "create:mechanical_mixer"
+					type: "item"
+				}
+				{
+					id: "50B6903CBB25E9FA"
+					item: "create:mechanical_press"
+					type: "item"
+				}
+			]
+			title: "Mixers and Presses"
+			x: -8.0d
+			y: -0.5d
 		}
 		{
-			dependencies: [
-				"6136697C2620F88B"
-				"662DE7460CCF2AA7"
-			]
+			dependencies: ["79A1F5BB61865008"]
 			description: [
-				"A basin is a very versatile block."
+				"Depots and Basins are the main item interaction blocks of Create."
 				""
-				"You can craft many 2x2 and 3x3 recipes (resources to storage blocks) with a press and mix items and fluids with a mixer."
+				""
+				"The depot can serve as a &ostationary&r belt element."
+				""
+				"Mechanical presses, deployers, spouts and many other create blocks can interact with the items on the depot."
+				""
+				""
+				"A basin is can be used to craft many 2x2 and 3x3 recipes (resources to storage blocks) with a press and mix items and fluids with a mixer."
 				""
 				"The basin automatically outputs to specific blocks (chests, belts, other logistical blocks from create) at each of its sides and below."
 				""
 				"You can set a filter to craft a particular recipe."
-			]
-			id: "0B967E3E5BC47404"
-			rewards: [{
-				id: "0AE4B183BC520A5D"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "347AC792B9677F9D"
-				item: "create:basin"
-				type: "item"
-			}]
-			x: -5.0d
-			y: -5.5d
-		}
-		{
-			dependencies: [
-				"167C9AF69BB16B8B"
-				"662DE7460CCF2AA7"
-			]
-			description: [
-				"The depot can serve as a &ostationary&r belt element."
-				""
-				"Mechanical presses, deployers, spouts and many other create blocks can interact with the items on the depot."
 			]
 			id: "6203C7701F3A1D98"
 			optional: true
@@ -802,13 +772,21 @@
 				xp: 100
 			}]
 			shape: "diamond"
-			tasks: [{
-				id: "148C610EE5CB4476"
-				item: "create:depot"
-				type: "item"
-			}]
-			x: -5.0d
-			y: -4.5d
+			tasks: [
+				{
+					id: "148C610EE5CB4476"
+					item: "create:depot"
+					type: "item"
+				}
+				{
+					id: "65E37835F15C8FF5"
+					item: "create:basin"
+					type: "item"
+				}
+			]
+			title: "Basins and Depots"
+			x: -9.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["7EEBC97FD8968C6B"]
@@ -826,8 +804,8 @@
 				item: "mekanism:ingot_steel"
 				type: "item"
 			}]
-			x: 2.5d
-			y: -3.5d
+			x: -2.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["7EEBC97FD8968C6B"]
@@ -845,8 +823,8 @@
 				item: "thermal:invar_ingot"
 				type: "item"
 			}]
-			x: 2.5d
-			y: -2.5d
+			x: -2.0d
+			y: -1.5d
 		}
 		{
 			dependencies: ["7C0D8A15D01EC79E"]
@@ -872,16 +850,6 @@
 			]
 			tasks: [
 				{
-					id: "6B5BF70B36179624"
-					item: "create:mechanical_mixer"
-					type: "item"
-				}
-				{
-					id: "6F4E1A5502AC1043"
-					item: "create:basin"
-					type: "item"
-				}
-				{
 					id: "7D6B3D319B60D88E"
 					item: "thermal:invar_dust"
 					type: "item"
@@ -892,13 +860,14 @@
 					type: "item"
 				}
 			]
-			x: 1.0d
-			y: -3.0d
+			x: -4.0d
+			y: 0.0d
 		}
 		{
-			dependencies: ["7031E0FDBA3BCE40"]
-			description: ["The Dye Mixer takes red, green, and blue dyes, and can mix them into any other dye color. You can get green dye by smelting cactus, red from flowers obtained by bone mealing grass and blue from lapis."]
+			dependencies: ["6C2B5B3B801F84F4"]
+			description: ["The Dye Mixer takes &4red,&r &2green,&r and &1blue&r dyes, and can mix them into any other dye color. You can get green dye by smelting cactus, red from flowers obtained by bone mealing grass and blue from lapis."]
 			id: "508D237427CDE318"
+			optional: true
 			rewards: [
 				{
 					id: "70784B84245A4527"
@@ -916,6 +885,7 @@
 					type: "item"
 				}
 			]
+			shape: "diamond"
 			subtitle: "Infinite amounts of any dye"
 			tasks: [{
 				id: "078BC4A0FDC88F04"
@@ -923,8 +893,142 @@
 				type: "item"
 			}]
 			title: "RGB or CMYK or RGY...?!?"
-			x: -3.0d
-			y: -3.0d
+			x: -8.0d
+			y: -5.5d
+		}
+		{
+			dependencies: ["6C2B5B3B801F84F4"]
+			description: [
+				"Latex can be obtained from trees using a fluid extractor."
+				""
+				"TIP: you can also buy it from the shop at an &ooutrageous&r price of 2$/mb"
+			]
+			id: "0C96FEB8F6BC6E17"
+			rewards: [{
+				id: "0273F753480D3F33"
+				item: "industrialforegoing:latex_bucket"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "3C3E278FC3CA2192"
+					item: "industrialforegoing:fluid_extractor"
+					type: "item"
+				}
+				{
+					id: "1CF6E46C33F9126E"
+					item: "industrialforegoing:latex_bucket"
+					type: "item"
+				}
+			]
+			x: -5.5d
+			y: -4.5d
+		}
+		{
+			dependencies: ["167C9AF69BB16B8B"]
+			description: [
+				"\"I know these machines, they say they can let you eat metal and drink souls!\""
+				""
+				"Aaaah, the old &lIndustrial Foregoing &r(IF for us)!"
+				""
+				"IF is a very versatile mod to automate farms for crops, trees, mobs and even ore generation."
+				""
+				"IF machines have 4 tiers, each requiring a different Machine Frame. Tiers 2 to 4 can only be crafted with a Dissolution Chamber or using Thermal Fluid Encapsulator. In addition, tiers 2-4 require a different fluid which you can unlock by progressing through the quest chapters."
+				""
+				"1. &aPity&r"
+				"2. &bSimple&r => Latex"
+				"3. &dAdvanced&r => Pink Slime"
+				"4. &6Supreme&r => Ether Gas"
+			]
+			id: "6C2B5B3B801F84F4"
+			rewards: [
+				{
+					id: "075F0DF61BA12165"
+					item: "industrialforegoing:pity_black_hole_unit"
+					type: "item"
+				}
+				{
+					id: "44CED26336753FCE"
+					item: "industrialforegoing:pity_black_hole_tank"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "07AB9A56D09A41A6"
+				item: "industrialforegoing:machine_frame_pity"
+				type: "item"
+			}]
+			title: "Foreplay of Industry"
+			x: -7.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["167C9AF69BB16B8B"]
+			description: [
+				"This is Create!"
+				""
+				"Welcome to Create, a mod offering a variety of tools and blocks for Building, Decoration and Aesthetic Automation."
+			]
+			id: "79A1F5BB61865008"
+			rewards: [{
+				id: "2F203795CDFAC2F1"
+				item: "create:goggles"
+				type: "item"
+			}]
+			subtitle: "no fan of Dark?"
+			tasks: [{
+				id: "65038EB9504E04BE"
+				item: "create:wrench"
+				type: "item"
+			}]
+			title: "Sic mundus creatus est"
+			x: -7.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["6C2B5B3B801F84F4"]
+			description: [""]
+			id: "35E61E1B7AD5A79A"
+			optional: true
+			shape: "diamond"
+			tasks: [{
+				id: "05094A5780574BE1"
+				item: "industrialforegoing:animal_rancher"
+				type: "item"
+			}]
+			title: "Rancher"
+			x: -8.5d
+			y: -4.0d
+		}
+		{
+			dependencies: ["6C2B5B3B801F84F4"]
+			description: [""]
+			id: "664171185DA41604"
+			optional: true
+			shape: "diamond"
+			tasks: [{
+				id: "13A2DC19B5CB044D"
+				item: "industrialforegoing:animal_feeder"
+				type: "item"
+			}]
+			title: "Feeder"
+			x: -9.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["6C2B5B3B801F84F4"]
+			description: [""]
+			id: "55C6575CBE4EFE7F"
+			optional: true
+			shape: "diamond"
+			tasks: [{
+				id: "726D16B0829C25C3"
+				item: "industrialforegoing:animal_baby_separator"
+				type: "item"
+			}]
+			title: "Baby separator"
+			x: -8.5d
+			y: -5.0d
 		}
 	]
 	title: "Chapter 2: Create \\& Industrial Foregoing"

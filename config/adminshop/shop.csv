@@ -38,6 +38,7 @@ b,i,minecraft:cactus,32,0
 b,i,create:raw_zinc,3072,1
 b,i,minecraft:kelp,8,1
 b,i,industrialforegoing:tinydryrubber,128,1
+b,f,industrialforegoing:latex,2,1
 b,i,minecraft:bone,144,1
 b,i,minecraft:lapis_ore,864,1
 b,i,gobber2:gobber2_ore,8192,1

@@ -30,12 +30,12 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "r1.0.8f"
+$MODPACK_VERSION = "r1.0.9"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
 # Should be "$null" if this is the first release
-$LAST_MODPACK_VERSION = "r1.0.8"
+$LAST_MODPACK_VERSION = "r1.0.8f"
 
 # Which modloader the modpack uses
 # Can be "forge" or "fabric"
@@ -90,7 +90,7 @@ $FOLDERS_TO_INCLUDE_IN_CLIENT_FILES = @(
 	"kubejs",
 	"scripts",
 	"schematics"
-	)
+)
 
 $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"ae2/client.json",
@@ -192,7 +192,7 @@ $FILES_TO_INCLUDE_IN_ROOT_FOLDER_IN_CLIENT_FILES = @(
 
 $SERVER_FILES_FOLDER = "$INSTANCE_ROOT/server_files"
 
-$SERVER_SETUP_CONFIG_PATH = "$INSTANCE_ROOT/server_files/server-setup-config.yaml"
+$SERVER_SETUP_CONFIG_PATH = "$SERVER_FILES_FOLDER/server-setup-config.yaml"
 
 # =====================================================================//
 #  MODULES

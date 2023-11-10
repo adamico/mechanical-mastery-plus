@@ -6,7 +6,7 @@ ServerEvents.recipes(event => {
 
     let toBuyStrings = [];
     itemsToBuy.map(item => {
-      toBuyStrings.push(`'[{"text":"Buy: ${item}","italic":false}]'`); 
+      toBuyStrings.push(`'[{"text":"Buy: ${item}","italic":false}]'`);
     });
     let toBuy = toBuyStrings.join(',');
 
@@ -18,7 +18,7 @@ ServerEvents.recipes(event => {
 
     let lore = `Lore:[${toBuy},${toSell}]`;
     let fullName = `Name:'[{${name},"color":"magenta","italic":false}]'`;
-    let key = "key:"+ tier;
+    let key = "key:" + tier;
     let nbt = `{display:{${lore},${fullName}},${key}}`;
     let permitItem = Item.of('adminshop:permit', nbt);
 
@@ -27,12 +27,12 @@ ServerEvents.recipes(event => {
       "PEP",
       "PPP"
     ];
-    let recipeHash =  {P: "minecraft:paper", E: centralItem};
+    let recipeHash = { P: "minecraft:paper", E: centralItem };
     let recipeId = `adminshop:permit_tier_${tier}`;
     event.shaped(permitItem, recipeArray, recipeHash).id(recipeId);
   }
 
-  let tier1BItems = ['Raw Zinc', 'Kelp', 'Tiny Dry Rubber', 'Bone', 'Lapis Ore', 'Gobber Ore', 'Apatite Ore', 'Cobbled Deepslate'];
+  let tier1BItems = ['Raw Zinc', 'Kelp', 'Tiny Dry Rubber', 'Latex', 'Bone', 'Lapis Ore', 'Gobber Ore', 'Apatite Ore', 'Cobbled Deepslate'];
   let tier1SItems = ['Regular Mechanical Crystal'];
   createPermit(1, tier1BItems, tier1SItems, 'kubejs:cube1');
 
@@ -53,11 +53,11 @@ ServerEvents.recipes(event => {
   let tier5name = '"text":"[SPECIAL] I need money Trade Permit"';
   createPermit(5, tier5BItems, tier5SItems, 'pipez:universal_pipe', tier5name);
 
-  event.replaceInput({id: 'adminshop:shop'}, 'minecraft:ender_chest', 'ironchest:crystal_chest');
-  event.replaceInput({id: 'adminshop:buyer_1'}, 'minecraft:ender_chest', 'kubejs:cube1_packaged');
-  event.replaceInput({id: 'adminshop:buyer_2'}, 'minecraft:barrel', 'kubejs:cube2_packaged');
-  event.replaceInput({id: 'adminshop:buyer_3'}, 'minecraft:barrel', 'kubejs:cube3_packaged');
-  event.replaceInput({id: 'adminshop:seller'}, 'minecraft:ender_chest', 'kubejs:cube1_packaged');
-  event.replaceInput({id: 'adminshop:fluid_buyer'}, 'minecraft:ender_chest', 'kubejs:cube1_packaged');
-  event.replaceInput({id: 'adminshop:fluid_seller'}, 'minecraft:ender_chest', 'kubejs:cube1_packaged');
+  event.replaceInput({ id: 'adminshop:shop' }, 'minecraft:ender_chest', 'ironchest:crystal_chest');
+  event.replaceInput({ id: 'adminshop:buyer_1' }, 'minecraft:ender_chest', 'kubejs:cube1_packaged');
+  event.replaceInput({ id: 'adminshop:buyer_2' }, 'minecraft:barrel', 'kubejs:cube2_packaged');
+  event.replaceInput({ id: 'adminshop:buyer_3' }, 'minecraft:barrel', 'kubejs:cube3_packaged');
+  event.replaceInput({ id: 'adminshop:seller' }, 'minecraft:ender_chest', 'kubejs:cube1_packaged');
+  event.replaceInput({ id: 'adminshop:fluid_buyer' }, 'minecraft:ender_chest', 'kubejs:cube1_packaged');
+  event.replaceInput({ id: 'adminshop:fluid_seller' }, 'minecraft:ender_chest', 'kubejs:cube1_packaged');
 });

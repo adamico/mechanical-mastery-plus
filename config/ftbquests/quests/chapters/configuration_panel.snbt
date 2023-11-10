@@ -240,7 +240,7 @@
 		}
 		{
 			can_repeat: true
-			description: ["Using this command you can increase random tick speed allowing for example crops and budding crystals to grow faster."]
+			description: ["Using this command you can prevent the Wandering Trader to come visit... who needs his wares anyway?"]
 			icon: "minecraft:emerald"
 			id: "4B4BFA652DFFE3E3"
 			rewards: [{
@@ -261,7 +261,7 @@
 		}
 		{
 			can_repeat: true
-			description: ["Ok, ok, &orandomTickSpeed&r manipulation is OP"]
+			description: ["Ok, I need his wares!"]
 			icon: "minecraft:diamond"
 			id: "520C17219E5A04EC"
 			rewards: [{

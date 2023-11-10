@@ -5,7 +5,7 @@ $minecraftInstanceFile = "minecraftinstance.json"
 $overridesFolder = "overrides"
 $secretsFile = "secrets.ps1"
 
-function Confirm-SecretsFile {
+function Approve-SecretsFile {
     if (!(Test-Path "$PSScriptRoot/$secretsFile")) {
         Write-Host "You need a valid CurseForge API Token in a $secretsFile file" -ForegroundColor Red
         Write-Host "Creating $secretsFile" -ForegroundColor Cyan
@@ -13,9 +13,8 @@ function Confirm-SecretsFile {
     }
 }
 
-. "$PSScriptRoot/settings.ps1"
 . "$PSScriptRoot/$secretsFile"
-
+. "$PSScriptRoot/settings.ps1"
 
 function Get-GitHubRelease {
     param(
@@ -434,7 +433,7 @@ else {
 }
 
 Test-ForDependencies
-Confirm-SecretsFile
+Approve-SecretsFile
 New-ClientFiles
 Push-ClientFiles
 if ($ENABLE_SERVER_FILE_MODULE -and -not $ENABLE_MODPACK_UPLOADER_MODULE) {

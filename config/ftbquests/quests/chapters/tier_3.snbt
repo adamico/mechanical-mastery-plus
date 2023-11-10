@@ -16,7 +16,7 @@
 			image: "mekanism:item/mekasuit_helmet_tint_layer"
 			rotation: 0.0d
 			width: 2.0d
-			x: 1.0d
+			x: 1.5d
 			y: -4.0d
 		}
 		{
@@ -28,7 +28,7 @@
 			image: "mekanism:item/mekasuit_helmet"
 			rotation: 0.0d
 			width: 2.0d
-			x: 1.0d
+			x: 1.5d
 			y: -4.0d
 		}
 	]
@@ -93,7 +93,7 @@
 				type: "item"
 			}]
 			title: "Summoning with effigies"
-			x: 10.0d
+			x: 9.0d
 			y: -2.5d
 		}
 		{
@@ -689,7 +689,7 @@
 			}]
 			title: "Dr Frankenstein's Dream"
 			x: 7.0d
-			y: -2.5d
+			y: -1.5d
 		}
 		{
 			dependencies: [
@@ -836,7 +836,7 @@
 				type: "item"
 			}]
 			x: 7.0d
-			y: -1.5d
+			y: -2.5d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
@@ -1062,11 +1062,11 @@
 				item: "minecraft:netherrack"
 				type: "item"
 			}]
-			x: 10.0d
-			y: -5.5d
+			x: 9.0d
+			y: -4.5d
 		}
 		{
-			dependencies: ["550E4D68A98180F5"]
+			dependencies: ["74F6647E2AE7C5BF"]
 			description: [
 				"Another interesting machine from IF, the Stonework Factory."
 				""
@@ -1078,16 +1078,17 @@
 			]
 			id: "3D0BAEB298C3B791"
 			rewards: [{
-				id: "4F20DD1734D2E3CE"
+				id: "62B91F44565FAAD1"
 				type: "xp"
-				xp: 100
+				xp: 400
 			}]
 			tasks: [{
-				id: "572B051515588683"
+				id: "1CEE5D232A77052F"
 				item: "industrialforegoing:material_stonework_factory"
 				type: "item"
 			}]
-			x: 7.0d
+			title: "Work, work the stone!"
+			x: 9.0d
 			y: -5.5d
 		}
 		{
@@ -1698,8 +1699,45 @@
 				item: "kubejs:molten_glass_bucket"
 				type: "item"
 			}]
-			x: 9.0d
-			y: -4.5d
+			x: 8.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["550E4D68A98180F5"]
+			description: [
+				"To craft advanced IF machines you need Advanced Machine Frames."
+				""
+				"These can be crafted using &dPink Slime&r either using a Dissolution Chamber or a Thermal Fluid Encapsulator (both are accessible at this stage)"
+				""
+				"In order to obtain Pink Slime you have to setup a Mob Slaughter Factory."
+				""
+				"TIPS: passive mobs produce more Slime than hostile. Always look for alternative recipes in JEI/EMI using the top panel which lists all the recipe types."
+			]
+			id: "74F6647E2AE7C5BF"
+			rewards: [{
+				id: "7E980A8CBCFF22F8"
+				item: "industrialforegoing:pink_slime_bucket"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "02038301A04EF624"
+					item: "industrialforegoing:mob_slaughter_factory"
+					type: "item"
+				}
+				{
+					id: "618AD9EFD7148045"
+					item: "industrialforegoing:pink_slime_bucket"
+					type: "item"
+				}
+				{
+					id: "3407189FE21B3E18"
+					item: "industrialforegoing:machine_frame_advanced"
+					type: "item"
+				}
+			]
+			x: 7.0d
+			y: -5.5d
 		}
 	]
 	title: "Chapter 3: Mekanism"

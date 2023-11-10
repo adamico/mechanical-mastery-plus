@@ -12,25 +12,25 @@ var bottomless = (event, fluidOrTag) => {
 ServerEvents.tags('item', event => {
   // Get the #forge:cobblestone tag collection and add Diamond Ore to it
   // event.add('forge:cobblestone', 'minecraft:diamond_ore')
-  
+
   // Get the #forge:cobblestone tag collection and remove Mossy Cobblestone from it
   // event.remove('forge:cobblestone', 'minecraft:mossy_cobblestone')
-  
+
   // Get #forge:ingots/copper tag and remove all entries from it
   // event.removeAll('forge:ingots/copper')
-  
+
   // Required for FTB Quests to check item NBT
   // event.add('itemfilters:check_nbt', 'some_item:that_has_nbt_types')
-  
+
   // You can create new tags the same way you add to existing, just give it a name
   // event.add('forge:completely_new_tag', 'minecraft:clay_ball')
-  
+
   // It supports adding tags to tags as well. Just prefix the second tag with #
   // event.add('c:stones', '#forge:stone')
-  
+
   // Removes all tags from this entry
   // event.removeAllTagsFrom('minecraft:stick')
-  
+
   // Add all items from the forge:stone tag to the c:stone tag, unless the id contains diorite
   // const stones = event.get('forge:stone').getObjectIds()
   // const blacklist = Ingredient.of(/.*diorite.*/)
@@ -44,9 +44,9 @@ ServerEvents.tags('item', event => {
   event.add('forge:plates', 'kubejs:diamond_plate');
   event.add('forge:slimeballs', 'kubejs:oil_clump'); //TODO: remove this?
   event.add('forge:gears/steel', 'kubejs:steel_gear');
-  
+
   event.add('forge:gears', 'kubejs:steel_gear');
-  
+
   ['steel'].forEach(metal => {
     event.add(`forge:rods/${metal}`, `kubejs:${metal}_rod`);
     event.add('forge:rods', `kubejs:${metal}_rod`);
@@ -57,20 +57,20 @@ ServerEvents.tags('item', event => {
   event.add('forge:heads', 'supplementaries:enderman_head');
 
   ['create:brass', 'thermal:bronze', 'thermal:constantan', 'thermal:electrum', 'thermal:enderium',
-   'thermal:invar', 'thermal:lumium', 'thermal:signalum', 'steel'].forEach(alloy => {
-    ['ingot', 'block'].forEach(type => {
-      let materialName = (alloy == 'steel') ? `mekanism:${type}_${alloy}` : `${alloy}_${type}`;
-      event.add('forge:alloys', materialName);
+    'thermal:invar', 'thermal:lumium', 'thermal:signalum', 'steel'].forEach(alloy => {
+      ['ingot', 'block'].forEach(type => {
+        let materialName = (alloy == 'steel') ? `mekanism:${type}_${alloy}` : `${alloy}_${type}`;
+        event.add('forge:alloys', materialName);
+      });
     });
-  });
-  
+
   ['enderium', 'lumium', 'signalum'].forEach(alloy => {
     ['ingot', 'block'].forEach(type => {
       event.add('forge:alloys/special', `thermal:${alloy}_${type}`);
     });
     hideInEMI(event, `thermal:${alloy}_dust`);
   });
-  
+
   [
     'darkutils:charm_portal',
     'thermal:ender_pearl_dust',
@@ -96,14 +96,15 @@ ServerEvents.tags('block', event => {
 
 ServerEvents.tags('fluid', event => {
   [
-    '#forge:experience',
+    'industrialforegoing:essence',
     'mekanismgenerators:fusion_fuel',
-    'mekanism:superheated_sodium',
-    'industrialforegoing:ether_gas'
+    '#forge:chocolate',
+    'kubejs:light_essence',
+    'kubejs:darkness_essence'
   ].forEach(fluidOrTag => {
     bottomless(event, fluidOrTag);
   });
- 
+
   [
     'createchromaticreturn:refined_mixture',
     'createchromaticreturn:shadow_essence'

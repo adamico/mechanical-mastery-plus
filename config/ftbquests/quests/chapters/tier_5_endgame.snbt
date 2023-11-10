@@ -309,13 +309,13 @@
 				}
 				{
 					amount: 2147483647000L
-					fluid: "thermal:syrup"
+					fluid: "kubejs:light_essence"
 					id: "43F557F5742FC8E9"
 					type: "fluid"
 				}
 				{
 					amount: 2147483647000L
-					fluid: "industrialforegoing:ether_gas"
+					fluid: "kubejs:darkness_essence"
 					id: "529F30F9DE3D3546"
 					type: "fluid"
 				}

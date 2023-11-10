@@ -375,6 +375,7 @@
 		}
 		{
 			dependencies: ["21E1D7488E184EA9"]
+			description: ["To upgrade sophisticated chests to higher tiers you need to craft tier upgrades and use it on a placed chest."]
 			id: "6CF7B81C21CAB82C"
 			rewards: [
 				{
