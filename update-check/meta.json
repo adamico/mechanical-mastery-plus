@@ -2,6 +2,14 @@
   "schemaVersion": 1,
   "hotfixesFormat": null,
   "versions": [
- 
+   {
+      "id": "1.0.9f",
+      "releasedAt": 1699636152,
+      "promotions": {
+          "downloads": {
+              "curseforge": "https://curseforge.com/minecraft/modpacks/mechanical-mastery-plus"
+          }
+      }
+    }
   ]
 }
