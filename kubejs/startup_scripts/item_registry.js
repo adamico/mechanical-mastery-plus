@@ -29,6 +29,8 @@ StartupEvents.registry('item', event => {
 	event.create('steel_rod').displayName('Steel Rod');
 	event.create('diamond_plate').displayName('Diamond Plate');
 
+	event.create('hot_tiab').displayName('Hot Time in a Bottle');
+
 	event.create('darkness_essence').displayName('Essence of Darkness');
 	event.create('enriched_darkness_essence').displayName('Enriched Essence of Darkness');
 

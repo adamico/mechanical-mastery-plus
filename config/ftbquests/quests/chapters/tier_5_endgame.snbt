@@ -953,9 +953,9 @@
 			description: [
 				"\"I have to kill a great foe to get one of these sound sensitive organic blocks!\""
 				""
-				"The warden drops with 100% chance 1 sculk sensor (no less, no more, even with looting)."
+				"The warden drops with 100% chance 1 sculk catalyst (no less, no more, even with looting)."
 				""
-				"In order to start a sculk farm you have to place the sensor and surround it with dispensable blocks in a circle of 8 blocks radius."
+				"In order to start a sculk farm you have to craft a sculk sensor using the catalyst and surround it with dispensable blocks in a circle of 8 blocks radius."
 				""
 				"Whenever a mob/player dies within the aforementioned circle the experience value of the dead mob/player is used to create a patch of sculk with sculk veins around it."
 				""

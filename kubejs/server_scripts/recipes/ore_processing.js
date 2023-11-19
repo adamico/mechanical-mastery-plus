@@ -17,6 +17,7 @@ ServerEvents.recipes(event => {
 			[{name: 'smelting', time: 200}, {name: 'blasting', time: 100}].forEach((recipe) => {
 				event[recipe.name](Item.of(`#forge:nuggets/${metal.name}`, 6), Item.of(`#forge:raw_materials/${metal.name}`)).xp(0.6).cookingTime(recipe.time);
 			});
+			event.remove({type: 'thermal:pulverizer', input: Item.of(`#forge:raw_materials/${metal.name}`)});
 			event.recipes.createMilling([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#forge:raw_materials/${metal.name}`)).processingTime(200);			
 			event.recipes.createCrushing([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#forge:raw_materials/${metal.name}`)).processingTime(100);
 			event.recipes.createMilling([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#mekanism:clumps/${metal.name}`)).processingTime(200);			

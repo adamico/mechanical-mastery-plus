@@ -781,7 +781,7 @@ ServerEvents.recipes(event => {
         },
         'O': {
           type: 'compactcrafting:block',
-          block: 'mekanism:block_lead'
+          block: 'thermal:lead_block'
         },
         'G': {
           type: 'compactcrafting:block',
@@ -808,7 +808,7 @@ ServerEvents.recipes(event => {
         },
         'L': {
           type: 'compactcrafting:block',
-          block: 'mekanism:block_lead'
+          block: 'thermal:lead_block'
         }
       },
       outputs: [{

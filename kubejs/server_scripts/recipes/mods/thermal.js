@@ -26,7 +26,7 @@ ServerEvents.recipes(event => {
         }
       ],
       energy: recipe.energy
-    });//event.recipes.thermal.smelter(Item.of(recipe.output, recipe.outputCount), recipe.inputs).energy(recipe.energy);
+    });
   });
 
   ['enderium', 'lumium', 'signalum'].forEach(alloy => {

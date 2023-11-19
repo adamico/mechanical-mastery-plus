@@ -102,6 +102,8 @@ ServerEvents.tags('block', event => {
     event.add(tag, 'compactcrafting:match_proxy');
     event.add(tag, 'compactcrafting:rescan_proxy');
   });
+
+  event.add('lychee:item_exploding_catalysts', 'kubejs:siab');
 });
 
 ServerEvents.tags('fluid', event => {

@@ -1045,6 +1045,33 @@
 			x: -8.5d
 			y: -5.0d
 		}
+		{
+			dependencies: ["426BDA4723D7CD03"]
+			description: [
+				"The time in a bottle can temporarily speed up blocks, how much you can speed things up is limited by how long you have had this item in your inventory."
+				""
+				"The normal recipe requires diamonds but you can get it early with a bit of effort ;)"
+			]
+			id: "0D9714FC638EE0D9"
+			optional: true
+			rewards: [{
+				id: "142DDEC7A803F07F"
+				type: "xp"
+				xp: 100
+			}]
+			shape: "heart"
+			tasks: [{
+				id: "26F35336D6F3ADEB"
+				item: {
+					Count: 1b
+					id: "tiab:time_in_a_bottle"
+					tag: { }
+				}
+				type: "item"
+			}]
+			x: -10.0d
+			y: -3.0d
+		}
 	]
 	title: "Chapter 2: Create \\& Industrial Foregoing"
 }

@@ -745,14 +745,24 @@
 		}
 		{
 			dependencies: ["63311B00BE8470FA"]
+			description: [
+				"Compact Crafting can be automated in many ways."
+				""
+				"You can use RFTools Builder, ComputerCraft or Copy\\&Paste Gadget."
+				""
+				"There are many videos, one of these is by Direwolf20 in the NTC2 let's play."
+				""
+				""
+				"{\"text\": \"https://youtu.be/AlHBg19dv2s?t=1107\", \"color\": \"red\", \"underlined\": true, \"clickEvent\": {\"action\": \"open_url\", \"value\": \"https://youtu.be/AlHBg19dv2s?t=1107\"}}"
+			]
 			id: "7D1C247FF3104E59"
 			rewards: [{
-				count: 3
-				id: "50A0CC50D3FA11CA"
-				item: "compactcrafting:field_projector"
-				type: "item"
+				id: "7CA951971C4BAC80"
+				type: "xp"
+				xp: 1000
 			}]
 			tasks: [{
+				count: 4L
 				id: "4644D23EFD19700E"
 				item: "compactcrafting:field_projector"
 				type: "item"
@@ -872,27 +882,6 @@
 			title: "Basic Item Transport"
 			x: 3.0d
 			y: -4.0d
-		}
-		{
-			dependencies: ["550E4D68A98180F5"]
-			description: ["The time in a bottle can temporarily speed up blocks, how much you can speed things up is limited by how long you have had this item in your inventory."]
-			id: "0D9714FC638EE0D9"
-			rewards: [{
-				id: "142DDEC7A803F07F"
-				type: "xp"
-				xp: 100
-			}]
-			tasks: [{
-				id: "26F35336D6F3ADEB"
-				item: {
-					Count: 1b
-					id: "tiab:time_in_a_bottle"
-					tag: { }
-				}
-				type: "item"
-			}]
-			x: 7.5d
-			y: -2.5d
 		}
 		{
 			dependencies: ["7B2728847CEC37A8"]
@@ -1535,6 +1524,24 @@
 				type: "item"
 			}]
 			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["55B3F2A3F8029DE6"]
+			id: "381D6C1DB2C8AA3E"
+			tasks: [{
+				id: "783A0AFA77C996F0"
+				item: {
+					Count: 1b
+					id: "ironjetpacks:jetpack"
+					tag: {
+						Id: "ironjetpacks:iron"
+						Throttle: 1.0d
+					}
+				}
+				type: "item"
+			}]
+			x: 11.0d
 			y: 0.0d
 		}
 	]
