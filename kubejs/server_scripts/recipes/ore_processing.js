@@ -24,7 +24,7 @@ ServerEvents.recipes(event => {
 			event.recipes.thermal.pulverizer([Item.of(`#forge:dusts/${metal.name}`).withChance(1.2), metal.extraDust], Item.of(`#mekanism:dirty_dusts/${metal.name}`)).energy(3000);
 			event.recipes.thermal.pulverizer([Item.of(`#forge:dusts/${metal.name}`).withChance(1.2), metal.extraDust], Item.of(`create:crushed_raw_${metal.name}`)).energy(3000);
 			event.recipes.thermal.furnace(Item.of(`#forge:ingots/${metal.name}`), `#forge:dusts/${metal.name}`).xp(0.2);
-			event.recipes.createSplashing([Item.of(`#forge:nuggets/${metal.name}`, 9), Item.of(`#forge:nuggets/${metal.name}`, 2).withChance(0.1)], `create:crushed_raw_${metal.name}`);
+			event.recipes.createSplashing([Item.of(`#forge:nuggets/${metal.name}`, 9), Item.of(`#forge:nuggets/${metal.name}`, 9).withChance(0.2)], `create:crushed_raw_${metal.name}`);
 		});
   };
 

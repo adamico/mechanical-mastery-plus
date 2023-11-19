@@ -92,6 +92,16 @@ ServerEvents.tags('item', event => {
 ServerEvents.tags('block', event => {
   event.add('blockrunner:very_quick_blocks', '#engineersdecor:plain_concretes');
   event.add('forge:budding', '#forge:budding_blocks');
+  [
+    'forge:mineable/paxel',
+    'minecraft:mineable/pickaxe',
+    'cucumber:mineable/paxel',
+    'gobber2:paxel_mineable'
+  ].forEach(tag => {
+    event.add(tag, 'compactcrafting:field_projector');
+    event.add(tag, 'compactcrafting:match_proxy');
+    event.add(tag, 'compactcrafting:rescan_proxy');
+  });
 });
 
 ServerEvents.tags('fluid', event => {

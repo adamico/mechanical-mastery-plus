@@ -4,4 +4,4 @@ BlockEvents.modification(e => {
     block.destroySpeed = -0.5;
     });
   });
-})
+});
