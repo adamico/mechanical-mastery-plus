@@ -93,7 +93,7 @@
 				type: "item"
 			}]
 			title: "Summoning with effigies"
-			x: 9.0d
+			x: 7.0d
 			y: -2.5d
 		}
 		{
@@ -213,7 +213,7 @@
 			y: -1.5d
 		}
 		{
-			dependencies: ["550E4D68A98180F5"]
+			dependencies: ["5A3E2F3C3A7751E9"]
 			description: ["The most essential Mekanism machine. With this, you will be able to craft increasingly powerful alloys and circuits in order to craft more advanced machines."]
 			id: "1A983E23E641CA16"
 			rewards: [{
@@ -400,7 +400,11 @@
 		}
 		{
 			dependencies: ["182209ACB7DE7F78"]
-			description: ["With these items, you are now set for beginning your ME System"]
+			description: [
+				"With these items, you are now set for beginning your ME System"
+				""
+				"The ME Controller is crafted through Compact Crafting miniaturization system"
+			]
 			id: "511A43E0281B8171"
 			optional: true
 			rewards: [
@@ -688,15 +692,16 @@
 				type: "item"
 			}]
 			title: "Dr Frankenstein's Dream"
-			x: 7.0d
-			y: -1.5d
+			x: 6.0d
+			y: -2.0d
 		}
 		{
-			dependencies: [
-				"1B6E93FE3C6D5966"
-				"3A7F4033C8881566"
+			dependencies: ["20E5DFEB516904B7"]
+			description: [
+				"Using the magma crucible you can melt down block of special alloys and use the special fluids to craft the effigies."
+				""
+				"You already know how to create a Blaze with lava."
 			]
-			description: ["Using the magma crucible you can melt down block of special alloys and use the special fluids to craft the effigies."]
 			id: "1503E72A3505D8A6"
 			rewards: [{
 				id: "248FE48076701778"
@@ -710,27 +715,28 @@
 					type: "item"
 				}
 				{
-					id: "592408EFEA1AFB90"
-					item: "thermal:lumium_block"
+					id: "34D0D4D5A5DEA8FF"
+					item: "thermal:glowstone_bucket"
 					type: "item"
 				}
 				{
-					id: "3D225E86FB187528"
-					item: "thermal:signalum_block"
+					id: "2C9589E7B89458A1"
+					item: "thermal:redstone_bucket"
 					type: "item"
 				}
 				{
-					id: "25CCB4904C5646C1"
-					item: "minecraft:netherrack"
+					id: "6165A779234A6288"
+					item: "minecraft:lava_bucket"
 					type: "item"
 				}
 				{
-					id: "63CE178773A13720"
-					item: "thermal:enderium_block"
+					id: "4316B79C99FE1ADB"
+					item: "thermal:ender_bucket"
 					type: "item"
 				}
 			]
-			x: 11.0d
+			title: "Special Fluids"
+			x: 10.5d
 			y: -2.5d
 		}
 		{
@@ -772,27 +778,29 @@
 				item: "create:empty_blaze_burner"
 				type: "item"
 			}]
-			x: 11.0d
+			x: 10.5d
 			y: -5.5d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
 			description: [
-				"Compact machines?"
+				"Hyperbox?"
 				""
-				"This is better (IMHO)"
+				"Too young... give it time, use an old Compact Machine!"
+				""
+				"Crafting compact machines requires Compact Craft miniaturization system (see the Steel Casing Quest for more info)"
 			]
 			id: "184193B5D69E282D"
 			optional: true
 			rewards: [{
-				id: "588908396BFB3B67"
-				item: "hyperbox:hyperbox"
+				id: "1C793AF719E4A022"
+				item: "compactmachines:machine_tiny"
 				type: "item"
 			}]
 			shape: "diamond"
 			tasks: [{
-				id: "7D8ADC7F3075C102"
-				item: "hyperbox:hyperbox"
+				id: "4AABB0F49977BD46"
+				item: "compactmachines:machine_tiny"
 				type: "item"
 			}]
 			x: 17.0d
@@ -836,7 +844,7 @@
 				type: "item"
 			}]
 			x: 7.0d
-			y: -2.5d
+			y: -1.5d
 		}
 		{
 			dependencies: ["1A67C9B9ABB4E969"]
@@ -864,7 +872,7 @@
 		}
 		{
 			dependencies: ["1503E72A3505D8A6"]
-			description: ["sorry but no sorry, no more fluid encapsulator from the overused Thermal mod :)"]
+			description: ["To create the awakened effigies you can either use Thermal Fluid Encapsulator or Create Spout."]
 			id: "131EF687B47D577F"
 			rewards: [{
 				id: "3EEB22E47BFF7890"
@@ -878,28 +886,13 @@
 					type: "item"
 				}
 				{
-					id: "6048653E7568AED4"
-					item: "thermal:glowstone_bucket"
-					type: "item"
-				}
-				{
-					id: "26279C793E805D54"
-					item: "thermal:redstone_bucket"
-					type: "item"
-				}
-				{
-					id: "31CCED09F326ABB1"
-					item: "minecraft:lava_bucket"
-					type: "item"
-				}
-				{
-					id: "417703CE1E9238F4"
-					item: "thermal:ender_bucket"
+					id: "3D9B4DEF7E00FE39"
+					item: "thermal:machine_bottler"
 					type: "item"
 				}
 			]
 			title: "Bottling Effigies"
-			x: 12.0d
+			x: 11.5d
 			y: -4.0d
 		}
 		{
@@ -1010,8 +1003,8 @@
 				item: "minecraft:glowstone_dust"
 				type: "item"
 			}]
-			x: 11.0d
-			y: -4.0d
+			x: 10.0d
+			y: -3.5d
 		}
 		{
 			dependencies: ["204617216E309BB4"]
@@ -1039,7 +1032,7 @@
 				}
 			]
 			x: 10.0d
-			y: -4.0d
+			y: -4.5d
 		}
 		{
 			dependencies: ["3D0BAEB298C3B791"]
@@ -1738,6 +1731,78 @@
 			]
 			x: 7.0d
 			y: -5.5d
+		}
+		{
+			dependencies: ["550E4D68A98180F5"]
+			description: [
+				"To craft Steel Casings you need to use the miniaturization procedure of Compact Crafting."
+				""
+				"To do this you need 4 Field Projectors (craft 1 and get 3 for free in the Other Mods Chapter)."
+				""
+				"Put down the first projector at 7 blocks height and right click to see the positions for the 3 others."
+				""
+				"Once the 4 projectors are placed they will start scanning for blocks in the orange volume."
+				""
+				"Check the 3d recipe in JEI/EMI and place the correct blocks at each of the 3 layers."
+				""
+				"Throw the catalyst item (in this case a Regular Mechanical Essence) on the blocks in the orange volume and the crafting will start."
+				""
+				"The Steel Casings items will drop after a few seconds."
+			]
+			id: "5A3E2F3C3A7751E9"
+			rewards: [{
+				count: 4
+				id: "5FCBD6FFF76DB06B"
+				item: "mekanism:steel_casing"
+				type: "item"
+			}]
+			tasks: [{
+				count: 4L
+				id: "1F05A0BA1A8DF60F"
+				item: "mekanism:steel_casing"
+				type: "item"
+			}]
+			title: "3D Printing Steel Casings"
+			x: 6.0d
+			y: -6.0d
+		}
+		{
+			dependencies: [
+				"1B6E93FE3C6D5966"
+				"3A7F4033C8881566"
+			]
+			description: ["Using the induction smelter you can create block of special alloys to get a better ratio than smelting single ingots."]
+			id: "20E5DFEB516904B7"
+			rewards: [{
+				id: "361C76853AB6F2B9"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [
+				{
+					id: "578E46D393F58B00"
+					item: "thermal:machine_smelter"
+					type: "item"
+				}
+				{
+					id: "62912848C293B09C"
+					item: "thermal:lumium_block"
+					type: "item"
+				}
+				{
+					id: "73B4A6874F44A4D0"
+					item: "thermal:signalum_block"
+					type: "item"
+				}
+				{
+					id: "7A66D2BEF81F1BCE"
+					item: "thermal:enderium_block"
+					type: "item"
+				}
+			]
+			title: "Special Alloys"
+			x: 9.0d
+			y: -2.5d
 		}
 	]
 	title: "Chapter 3: Mekanism"

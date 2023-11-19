@@ -61,6 +61,7 @@ b,i,create:belt_connector,250,2
 b,i,create:gearbox,500,2
 ,,,,
 b,i,minecraft:emerald_ore,16384,3
+b,i,minecraft:chorus_flower,65535,3
 b,i,mekanism:raw_uranium,4096,3
 b,i,bigreactors:yellorite_ore,4096,3
 b,i,mekanism:fluorite_ore,1024,3
@@ -93,6 +94,8 @@ b,i,minecraft:allay_spawn_egg,1000000000,4
 b,i,minecraft:phantom_spawn_egg,5000000,4
 b,i,fluxnetworks:flux_point,100000,4
 b,i,fluxnetworks:flux_plug,100000,4
+b,i,mekanismgenerators:fission_reactor_casing,50000,4
+b,i,ae2:controller,1000000,4
 ,,,,
 s,i,kubejs:cube1_packaged,11520,0
 ,,,,

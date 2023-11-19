@@ -1,22 +1,32 @@
 ServerEvents.recipes(event => {
   console.log('[AMMONIUM@KUBEJS]: thermal recipes...');  
 
-  const smeltingRecipes = [,
+  const smeltingRecipes = [
     { output: 'minecraft:calcite', outputCount: 1, inputs: ['minecraft:stone', 'minecraft:bone_meal'], energy: 800 },
-    { output: 'create:brass_ingot', outputCount: 2, inputs: ['#forge:ingots/copper', '#forge:ingots/zinc'], energy: 2400 },
-    { output: 'minecraft:amethyst_shard', outputCount: 1, inputs: ['ae2:charged_certus_quartz_crystal', 'kubejs:cube3'], energy: 24000 },
-    { output: 'thermal:enderium_block', outputCount: 2, inputs: ['#forge:storage_blocks/diamond', Item.of('#forge:storage_blocks/lead', 3), Item.of('#forge:storage_blocks/ender_pearl', 2)], energy: 144000 },
-    { output: 'thermal:lumium_block', outputCount: 4, inputs: ['#forge:storage_blocks/silver', Item.of('#forge:storage_blocks/tin', 3), Item.of('minecraft:glowstone', 4)], energy: 108000 },
-    { output: 'thermal:signalum_block', outputCount: 4, inputs: ['#forge:storage_blocks/silver', Item.of('#forge:storage_blocks/copper', 3), Item.of('minecraft:redstone_block', 4)], energy: 108000 },
-    { output: 'thermal:constantan_block', outputCount: 2, inputs: ['#forge:storage_blocks/nickel', '#forge:storage_blocks/copper'], energy: 28800 },
-    { output: 'thermal:invar_block', outputCount: 3, inputs: ['#forge:storage_blocks/nickel', Item.of('#forge:storage_blocks/iron')], energy: 43200 },
-    { output: 'thermal:electrum_block', outputCount: 2, inputs: ['#forge:storage_blocks/silver', '#forge:storage_blocks/gold'], energy: 28800 },
-    { output: 'thermal:bronze_block', outputCount: 4, inputs: ['#forge:storage_blocks/tin', Item.of('#forge:storage_blocks/copper', 3)], energy: 57600 },
-    { output: 'create:brass_block', outputCount: 2, inputs: ['#forge:storage_blocks/zinc', '#forge:storage_blocks/copper'], energy: 21600 }
+    { output: 'create:brass_ingot', outputCount: 2, inputs: [{value: [{tag: 'forge:ingots/copper'}]}, {value: [{tag: 'forge:ingots/zinc'}]}], energy: 2400 },
+    { output: 'minecraft:amethyst_shard', outputCount: 1, inputs: [{value: [{item: 'ae2:charged_certus_quartz_crystal'}]}, {value: [{item: 'kubejs:cube3'}]}], energy: 24000 },
+    { output: 'thermal:enderium_block', outputCount: 2, inputs: [{value: [{tag: 'forge:storage_blocks/diamond'}]}, {value: [{tag: 'forge:storage_blocks/lead'}], count: 3}, {value: [{tag: 'forge:storage_blocks/ender_pearl'}], count: 2}], energy: 144000 },
+    { output: 'thermal:lumium_block', outputCount: 4, inputs: [{value: [{tag: 'forge:storage_blocks/silver'}]}, {value: [{tag: 'forge:storage_blocks/tin'}], count: 3}, {value: [{item: 'minecraft:glowstone'}], count: 4}], energy: 108000 },
+    { output: 'thermal:signalum_block', outputCount: 4, inputs: [{value: [{tag: 'forge:storage_blocks/silver'}]}, {value: [{tag: 'forge:storage_blocks/copper'}], count: 3}, {value: [{item: 'minecraft:redstone_block'}], count: 4}], energy: 108000 },
+    { output: 'thermal:constantan_block', outputCount: 2, inputs: [{value: [{tag: 'forge:storage_blocks/nickel'}]}, {value: [{tag: 'forge:storage_blocks/copper'}]}], energy: 28800 },
+    { output: 'thermal:invar_block', outputCount: 3, inputs: [{value: [{tag: 'forge:storage_blocks/nickel'}]}, {value: [{tag: 'forge:storage_blocks/iron'}]}], energy: 43200 },
+    { output: 'thermal:electrum_block', outputCount: 2, inputs: [{value: [{tag: 'forge:storage_blocks/silver'}]}, {value: [{tag: 'forge:storage_blocks/gold'}]}], energy: 28800 },
+    { output: 'thermal:bronze_block', outputCount: 4, inputs: [{value: [{tag: 'forge:storage_blocks/tin'}]}, {value: [{tag: 'forge:storage_blocks/copper'}], count: 3}], energy: 57600 },
+    { output: 'create:brass_block', outputCount: 2, inputs: [{value: [{tag: 'forge:storage_blocks/zinc'}]}, {value: [{tag: 'forge:storage_blocks/copper'}]}], energy: 21600 }
   ];
 
   smeltingRecipes.forEach(recipe => {
-    event.recipes.thermal.smelter(Item.of(recipe.output, recipe.outputCount), recipe.inputs).energy(recipe.energy);
+    let count = recipe.outputCount || 1;
+    event.custom({type: "thermal:smelter",
+      ingredients: recipe.inputs,
+      result: [
+        {
+          item: recipe.output,
+          count: count
+        }
+      ],
+      energy: recipe.energy
+    });//event.recipes.thermal.smelter(Item.of(recipe.output, recipe.outputCount), recipe.inputs).energy(recipe.energy);
   });
 
   ['enderium', 'lumium', 'signalum'].forEach(alloy => {
@@ -40,7 +50,7 @@ ServerEvents.recipes(event => {
     I: 'minecraft:iron_ingot',
     C: 'minecraft:cobblestone',
     G: '#forge:gears/tin'
-  })
+  });
   
   event.remove({id: 'thermal:machine_pulverizer'});
   event.shaped('thermal:machine_pulverizer', [
@@ -122,4 +132,4 @@ ServerEvents.recipes(event => {
   recipes.forEach(recipe => {
     event.recipes.thermal.gourmand_fuel(recipe.input).energy(recipe.energy);
   });
-})
+});

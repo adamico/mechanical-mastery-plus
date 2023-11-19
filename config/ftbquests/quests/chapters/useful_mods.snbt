@@ -747,15 +747,17 @@
 			dependencies: ["63311B00BE8470FA"]
 			id: "7D1C247FF3104E59"
 			rewards: [{
+				count: 3
 				id: "50A0CC50D3FA11CA"
-				item: "hyperbox:hyperbox"
+				item: "compactcrafting:field_projector"
 				type: "item"
 			}]
 			tasks: [{
-				id: "57B4522276533EB0"
-				item: "hyperbox:hyperbox"
+				id: "4644D23EFD19700E"
+				item: "compactcrafting:field_projector"
 				type: "item"
 			}]
+			title: "Compact Crafting"
 			x: -2.0d
 			y: -1.0d
 		}

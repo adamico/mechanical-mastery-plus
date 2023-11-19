@@ -1,7 +1,7 @@
 
 ["Creative Crafter Options"]
 	#
-	#Creative Crafter RF Consume
+	#The energy used by the Creative Crafter
 	#Range: > 0
-	creativecrafterrfconsume = 0
+	creativeCrafterEnergyUsage = 0
 

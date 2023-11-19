@@ -2,6 +2,7 @@ ServerEvents.recipes(event => {
 	//functions
 	let bottling = (output, input) => {
 		event.recipes.createFilling(output, input);
+		event.recipes.thermal.bottler(output, input).energy(800);
 	};
 	
 	//tier0
@@ -91,6 +92,7 @@ ServerEvents.recipes(event => {
 	//tier2
 	event.recipes.createCompacting('kubejs:cube2_packaged', 'kubejs:cube2');
 	event.recipes.createMixing('kubejs:cube2', ['kubejs:cube1', '#forge:gears/steel', Item.of('#forge:dusts/quartz', 2), Item.of('#forge:rods/brass', 2), '#forge:gears/invar']);
+	event.recipes.thermal.press([Item.of('#forge:rods/brass', 2)], ['#forge:ingots/brass', 'kubejs:press_rod_die']).energy(600);
 
 	//tier3
 	event.recipes.createMixing('kubejs:cube3', ['kubejs:cube2', 'minecraft:fire_charge', 'thermal:lightning_charge', 'thermal:ice_charge', 'thermal:earth_charge', 'mekanism:basic_control_circuit']).heated();
@@ -167,7 +169,7 @@ ServerEvents.recipes(event => {
 
 	//tier4
 	event.recipes.createMixing('kubejs:cube4_inert', [Fluid.of('thermal:refined_fuel', 1000), 'kubejs:cube3', 'kubejs:fission_pellet', 'minecraft:experience_bottle', 'mekanism:elite_control_circuit']).superheated();
-	event.recipes.createCrushing(Item.of('kubejs:cube4_dust', 2), 'kubejs:cube4');
+	event.recipes.createCrushing(Item.of('kubejs:cube4_dust', 4), 'kubejs:cube4').processingTime(125);
 
 	event.remove({id: 'thermal:machines/centrifuge/centrifuge_oil_sand'});
 	event.remove({id: 'thermal:machines/centrifuge/centrifuge_oil_red_sand'});

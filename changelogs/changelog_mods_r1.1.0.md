@@ -1,0 +1,44 @@
+## mechanical-mastery-plus - r1.0.9f -> r1.1.0
+
+### Added
+
+  * [AE2 Things [Forge]](https://www.curseforge.com/minecraft/mc-mods/ae2-things-forge) (by [thetechnici4n](https://www.curseforge.com/members/thetechnici4n/projects))
+  * [CC:C Bridge](https://www.curseforge.com/minecraft/mc-mods/cccbridge) (by [Sammy_echt](https://www.curseforge.com/members/Sammy_echt/projects))
+  * [Charging Gadgets](https://www.curseforge.com/minecraft/mc-mods/charging-gadgets) (by [Direwolf20](https://www.curseforge.com/members/Direwolf20/projects))
+  * [Compact Crafting](https://www.curseforge.com/minecraft/mc-mods/compact-crafting) (by [RobotGryphon](https://www.curseforge.com/members/RobotGryphon/projects))
+  * [Compact Machines](https://www.curseforge.com/minecraft/mc-mods/compact-machines) (by [davenonymous](https://www.curseforge.com/members/davenonymous/projects))
+  * [Enchantment Descriptions](https://www.curseforge.com/minecraft/mc-mods/enchantment-descriptions) (by [DarkhaxDev](https://www.curseforge.com/members/DarkhaxDev/projects))
+  * [Iron Jetpacks](https://www.curseforge.com/minecraft/mc-mods/iron-jetpacks) (by [BlakeBr0](https://www.curseforge.com/members/BlakeBr0/projects))
+  * [Just Enough Mekanism Multiblocks](https://www.curseforge.com/minecraft/mc-mods/just-enough-mekanism-multiblocks) (by [지젤쟝다](https://www.curseforge.com/members/%EC%A7%80%EC%A0%A4%EC%9F%9D%EB%8B%A4/projects))
+  * [Modpack Update Checker](https://www.curseforge.com/minecraft/mc-mods/modpack-update-checker) (by [Jab125](https://www.curseforge.com/members/Jab125/projects))
+  * [No Chat Reports](https://www.curseforge.com/minecraft/mc-mods/no-chat-reports) (by [Aizistral](https://www.curseforge.com/members/Aizistral/projects))
+  * [Sky GUIs](https://www.curseforge.com/minecraft/mc-mods/sky-guis) (by [MelanX](https://www.curseforge.com/members/MelanX/projects))
+  * [Starlight (Forge)](https://www.curseforge.com/minecraft/mc-mods/starlight-forge) (by [Spottedstar](https://www.curseforge.com/members/Spottedstar/projects))
+  * [Thermal Integration](https://www.curseforge.com/minecraft/mc-mods/thermal-integration) (by [TeamCoFH](https://www.curseforge.com/members/TeamCoFH/projects))
+
+### Changed
+
+  * [AdvancedPeripherals-1.19.2-0.7.31r.jar](https://www.curseforge.com/minecraft/mc-mods/advanced-peripherals/files/4786742) -> [AdvancedPeripherals-1.19.2-0.7.32r.jar](https://www.curseforge.com/minecraft/mc-mods/advanced-peripherals/files/4861042)
+  * [cabletiers-1.19.2-0.5471.jar](https://www.curseforge.com/minecraft/mc-mods/cable-tiers/files/4016187) -> [cabletiers-1.19.2-0.6.jar](https://www.curseforge.com/minecraft/mc-mods/cable-tiers/files/4862241)
+  * [collective-1.19.2-7.3.jar](https://www.curseforge.com/minecraft/mc-mods/collective/files/4850929) -> [collective-1.19.2-7.7.jar](https://www.curseforge.com/minecraft/mc-mods/collective/files/4860334)
+  * [CraftTweaker-forge-1.19.2-10.1.50.jar](https://www.curseforge.com/minecraft/mc-mods/crafttweaker/files/4764852) -> [CraftTweaker-forge-1.19.2-10.1.51.jar](https://www.curseforge.com/minecraft/mc-mods/crafttweaker/files/4861000)
+  * [creativecrafter-1.19.2-1.0.jar](https://www.curseforge.com/minecraft/mc-mods/creative-crafter/files/4318721) -> [creativecrafter-1.19.2-1.2.jar](https://www.curseforge.com/minecraft/mc-mods/creative-crafter/files/4862295)
+  * [embeddium-0.2.7+mc1.19.2.jar](https://www.curseforge.com/minecraft/mc-mods/embeddium/files/4844927) -> [embeddium-0.2.9+mc1.19.2.jar](https://www.curseforge.com/minecraft/mc-mods/embeddium/files/4862489)
+  * [ftb-xmod-compat-forge-1.2.2.jar](https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat/files/4708886) -> [ftb-xmod-compat-forge-1.2.3.jar](https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat/files/4857341)
+  * [fusion-1.0.6-forge-mc1.19.2.jar](https://www.curseforge.com/minecraft/mc-mods/fusion-connected-textures/files/4771452) -> [fusion-1.1.0a-forge-mc1.19.2.jar](https://www.curseforge.com/minecraft/mc-mods/fusion-connected-textures/files/4861608)
+  * [ImmediatelyFast-1.2.6+1.19.2.jar](https://www.curseforge.com/minecraft/mc-mods/immediatelyfast/files/4776112) -> [ImmediatelyFast-1.2.7+1.19.2.jar](https://www.curseforge.com/minecraft/mc-mods/immediatelyfast/files/4855531)
+  * [modernfix-forge-5.9.2+mc1.19.2.jar](https://www.curseforge.com/minecraft/mc-mods/modernfix/files/4849237) -> [modernfix-forge-5.9.3+mc1.19.2.jar](https://www.curseforge.com/minecraft/mc-mods/modernfix/files/4862994)
+  * [nomoportals-1.19.2-3.0.jar](https://www.curseforge.com/minecraft/mc-mods/no-mo-portals/files/4836007) -> [nomoportals-1.19.2-3.1.jar](https://www.curseforge.com/minecraft/mc-mods/no-mo-portals/files/4852073)
+  * [elevatorid-1.19.2-1.8.9.jar](https://www.curseforge.com/minecraft/mc-mods/openblocks-elevator/files/4086868) -> [elevatorid-1.19.2-1.8.10.jar](https://www.curseforge.com/minecraft/mc-mods/openblocks-elevator/files/4859577)
+  * [Placebo-1.19.2-7.3.3.jar](https://www.curseforge.com/minecraft/mc-mods/placebo/files/4759853) -> [Placebo-1.19.2-7.3.4.jar](https://www.curseforge.com/minecraft/mc-mods/placebo/files/4876369)
+  * [rechiseled-1.1.5b-forge-mc1.19.2.jar](https://www.curseforge.com/minecraft/mc-mods/rechiseled/files/4835966) -> [rechiseled-1.1.5c-forge-mc1.19.2.jar](https://www.curseforge.com/minecraft/mc-mods/rechiseled/files/4872816)
+  * [refinedstorage-1.11.6.jar](https://www.curseforge.com/minecraft/mc-mods/refined-storage/files/4465872) -> [refinedstorage-1.11.7.jar](https://www.curseforge.com/minecraft/mc-mods/refined-storage/files/4861827)
+  * [rsrequestify-2.3.0.jar](https://www.curseforge.com/minecraft/mc-mods/rs-requestify/files/4014076) -> [rsrequestify-1.19.2-2.3.1.jar](https://www.curseforge.com/minecraft/mc-mods/rs-requestify/files/4862145)
+  * [smoothchunk-1.19.2-3.4.jar](https://www.curseforge.com/minecraft/mc-mods/smooth-chunk-save/files/4764872) -> [smoothchunk-1.19.2-3.5.jar](https://www.curseforge.com/minecraft/mc-mods/smooth-chunk-save/files/4876162)
+  * [shetiphiancore-forge-1.19-3.11.10.jar](https://www.curseforge.com/minecraft/mc-mods/shetiphiancore/files/4764229) -> [shetiphiancore-forge-1.19-3.11.11.jar](https://www.curseforge.com/minecraft/mc-mods/shetiphiancore/files/4859146)
+  * [sophisticatedbackpacks-1.19.2-3.18.63.934.jar](https://www.curseforge.com/minecraft/mc-mods/sophisticated-backpacks/files/4808058) -> [sophisticatedbackpacks-1.19.2-3.18.64.940.jar](https://www.curseforge.com/minecraft/mc-mods/sophisticated-backpacks/files/4859686)
+  * [sophisticatedcore-1.19.2-0.5.98.459.jar](https://www.curseforge.com/minecraft/mc-mods/sophisticated-core/files/4808232) -> [sophisticatedcore-1.19.2-0.5.103.484.jar](https://www.curseforge.com/minecraft/mc-mods/sophisticated-core/files/4859678)
+  * [sophisticatedstorage-1.19.2-0.8.47.625.jar](https://www.curseforge.com/minecraft/mc-mods/sophisticated-storage/files/4808064) -> [sophisticatedstorage-1.19.2-0.8.48.632.jar](https://www.curseforge.com/minecraft/mc-mods/sophisticated-storage/files/4859702)
+  * [SuperFactoryManager-1.19.2-4.13.0.jar](https://www.curseforge.com/minecraft/mc-mods/super-factory-manager/files/4820051) -> [Super Factory Manager-1.19.2-4.14.1.jar](https://www.curseforge.com/minecraft/mc-mods/super-factory-manager/files/4862715)
+  * [supplementaries-1.19.2-2.4.9.jar](https://www.curseforge.com/minecraft/mc-mods/supplementaries/files/4853182) -> [supplementaries-1.19.2-2.4.11.jar](https://www.curseforge.com/minecraft/mc-mods/supplementaries/files/4876095)
+

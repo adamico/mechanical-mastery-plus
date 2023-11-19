@@ -261,6 +261,8 @@
 		{
 			dependencies: ["5BFA974392560603"]
 			description: [
+				"You can create brass rods either with Create Rolling Mill or Thermal Multiservo Press."
+				""
 				"The rolling mill is a create machine added by Create: Crafts \\& Additions."
 				""
 				"It works just as many other create blocks, you can input and output with funnels (or hoppers or other item transportation blocks)"
@@ -271,11 +273,24 @@
 				type: "xp"
 				xp: 100
 			}]
-			tasks: [{
-				id: "793A32E47E3EBF72"
-				item: "createaddition:rolling_mill"
-				type: "item"
-			}]
+			tasks: [
+				{
+					id: "793A32E47E3EBF72"
+					item: "createaddition:rolling_mill"
+					type: "item"
+				}
+				{
+					id: "2B6B1CBEBEB1CAB0"
+					item: "thermal:machine_press"
+					type: "item"
+				}
+				{
+					id: "63A256CDEB67C5D8"
+					item: "kubejs:press_rod_die"
+					type: "item"
+				}
+			]
+			title: "Hot Rods"
 			x: -2.0d
 			y: -3.5d
 		}

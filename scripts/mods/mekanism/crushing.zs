@@ -30,3 +30,4 @@ for metal in jaopca_metals {
 }
 
 <recipetype:mekanism:crushing>.addRecipe("crush_netherrack", <item:minecraft:netherrack>, <item:create:cinder_flour> * 2);
+<recipetype:mekanism:crushing>.addRecipe("crush_cube4", <item:kubejs:cube4>, <item:kubejs:cube4_dust> *2);

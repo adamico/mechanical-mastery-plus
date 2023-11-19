@@ -30,12 +30,12 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "r1.0.9f"
+$MODPACK_VERSION = "r1.1.0"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
 # Should be "$null" if this is the first release
-$LAST_MODPACK_VERSION = "r1.0.9"
+$LAST_MODPACK_VERSION = "r1.0.9f"
 
 # Which modloader the modpack uses
 # Can be "forge" or "fabric"
@@ -102,6 +102,7 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"carryon-client.toml",
 	"chiselsandbits-client.toml",
 	"cofh_core-client.toml",
+	"compactcrafting-client.toml",
 	"computercraft-client.toml",
 	"configured-client.toml",
 	"constructionwand-client.toml",
@@ -127,9 +128,11 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"gravestone-client.toml",
 	"hyperbox-client.toml",
 	"ironfurnaces-client.toml",
+	"ironjetpacks-client.toml",
 	"jade/plugins.json",
 	"jei/bookmarks.ini",
 	"jei/jei-client.ini",
+	"jei_mekanism_multiblocks-client.toml",
 	"mcjtylib-client.toml",
 	"Mekanism/client.toml",
 	"Mekanism/tools-client.toml",
@@ -137,6 +140,7 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"modnametooltip-client.toml",
 	"modularrouters-client.toml",
 	"MouseTweaks.cfg",
+	"NoChatReports/NCR-Client.json",
 	"online_detector-client.toml",
 	"patchouli-client.toml",
 	"personality-client.toml",

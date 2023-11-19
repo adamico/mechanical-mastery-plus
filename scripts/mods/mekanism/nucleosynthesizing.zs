@@ -28,3 +28,4 @@ import mods.mekanism.api.ingredient.ItemStackIngredient;
 
 <recipetype:mekanism:nucleosynthesizing>.removeByName("mekanism:nucleosynthesizing/wither_skeleton_skull");
 <recipetype:mekanism:nucleosynthesizing>.removeByName("mekanism:nucleosynthesizing/dragon_egg");
+<recipetype:mekanism:nucleosynthesizing>.removeByName("mekanism:nucleosynthesizing/chorus_flower");

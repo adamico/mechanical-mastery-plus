@@ -32,40 +32,12 @@
 			]
 			icon: "kubejs:cube3"
 			id: "4E81E76086558A19"
-			rewards: [
-				{
-					id: "5739A8D3F96D66E0"
-					item: "thermal:oil_sand"
-					type: "item"
-				}
-				{
-					id: "41894172CF08A8A0"
-					item: "mekanism:raw_uranium"
-					type: "item"
-				}
-				{
-					id: "5621230CE2F4C362"
-					item: "mekanism:fluorite_ore"
-					type: "item"
-				}
-				{
-					id: "7B700D21153CE4E1"
-					item: "minecraft:sugar_cane"
-					type: "item"
-				}
-				{
-					count: 3
-					id: "7C50CA00C18BDCB7"
-					item: "minecraft:chicken_spawn_egg"
-					type: "item"
-				}
-				{
-					count: 2
-					id: "3C6DA66318B827A5"
-					item: "minecraft:emerald_ore"
-					type: "item"
-				}
-			]
+			rewards: [{
+				count: 3
+				id: "7C50CA00C18BDCB7"
+				item: "minecraft:chicken_spawn_egg"
+				type: "item"
+			}]
 			tasks: [{
 				id: "6DC696B8987D5178"
 				title: "Tier 4 Materials"
@@ -653,8 +625,9 @@
 		}
 		{
 			dependencies: [
-				"5E71405449C5F19D"
 				"1B885B1F413015D4"
+				"39F9DFDFD50063C5"
+				"1BA45133DB917C98"
 			]
 			description: [
 				"\"Eureka! The final Mechanical Crystal is in my hands! Now I can become a god!\""
@@ -682,7 +655,7 @@
 					type: "item"
 				}
 			]
-			x: 4.5d
+			x: 5.5d
 			y: -2.0d
 		}
 		{
@@ -711,39 +684,36 @@
 			y: -4.0d
 		}
 		{
-			dependencies: ["1BA45133DB917C98"]
-			id: "5E71405449C5F19D"
-			rewards: [{
-				id: "0DF38F19B93B7A2B"
-				item: "kubejs:cube4_dust"
-				type: "item"
-			}]
-			tasks: [{
-				id: "132BE40B1363DAE8"
-				item: "kubejs:cube4_dust"
-				type: "item"
-			}]
-			x: 3.5d
-			y: -1.0d
-		}
-		{
 			dependencies: ["157D4C0E9C7A0928"]
 			description: [
-				"I never told you it would be easier..."
+				"To proceed you need to crush Advanced Essences into dust."
 				""
-				"The following steps are straightforward and I hope you love automating things..."
+				"You can either use Create Crushing Wheel to get 4 per essence or Mekanism Crusher with half the ratio (but you can use factories...)."
 			]
 			id: "1BA45133DB917C98"
 			rewards: [{
-				id: "012A6123B95D9646"
-				item: "create:crushing_wheel"
+				id: "7CBC4E404DC77C45"
+				item: "kubejs:cube4_dust"
 				type: "item"
 			}]
-			tasks: [{
-				id: "0D03738A93A386DE"
-				item: "create:crushing_wheel"
-				type: "item"
-			}]
+			tasks: [
+				{
+					id: "0D03738A93A386DE"
+					item: "create:crushing_wheel"
+					type: "item"
+				}
+				{
+					id: "78E5F328B540430F"
+					item: "mekanism:crusher"
+					type: "item"
+				}
+				{
+					id: "1D53B37178CE402C"
+					item: "kubejs:cube4_dust"
+					type: "item"
+				}
+			]
+			title: "Crushing Essence to Dust"
 			x: 2.5d
 			y: -2.0d
 		}
@@ -760,11 +730,12 @@
 				item: "mekanism:solar_neutron_activator"
 				type: "item"
 			}]
-			x: 3.5d
+			title: "Activating Mechanical Gas"
+			x: 4.0d
 			y: -3.0d
 		}
 		{
-			dependencies: ["5E71405449C5F19D"]
+			dependencies: ["1BA45133DB917C98"]
 			id: "0EFF3C51AF78C4B8"
 			rewards: [{
 				id: "1E5C4EF6B0596EC9"
@@ -776,8 +747,9 @@
 				item: "mekanism:chemical_oxidizer"
 				type: "item"
 			}]
-			x: 3.5d
-			y: -2.0d
+			title: "Oxydizing Dust to Inactive Gas"
+			x: 2.5d
+			y: -3.0d
 		}
 		{
 			dependencies: ["3E8F024835BB58F7"]
@@ -899,6 +871,7 @@
 						display: {
 							Lore: [
 								"[{\"text\":\"Buy: Emerald Ore\",\"italic\":false}]"
+								"[{\"text\":\"Buy: Chorus Flower\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Powah Resources\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Nuclear ores\",\"italic\":false}]"
 								"[{\"text\":\"Buy: Mekanism Resources\",\"italic\":false}]"
@@ -917,6 +890,59 @@
 			}]
 			x: -8.5d
 			y: -2.0d
+		}
+		{
+			dependencies: ["7DD8F81366CCDE0E"]
+			id: "39F9DFDFD50063C5"
+			rewards: [{
+				id: "612B1D58CC44AA29"
+				item: "integrateddynamics:bucket_liquid_chorus"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "20871FD6D6A700E6"
+					item: "integrateddynamics:mechanical_squeezer"
+					type: "item"
+				}
+				{
+					id: "7F07B164BF97E95A"
+					item: "integrateddynamics:bucket_liquid_chorus"
+					type: "item"
+				}
+			]
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["4E81E76086558A19"]
+			description: [
+				"One of the last ingredients for the last mechanical crystal is liquid Chorus."
+				""
+				"You can obtain liquid Chorus either from Proto Chorus or Chorus Fruits."
+			]
+			hide_dependency_lines: true
+			id: "7DD8F81366CCDE0E"
+			rewards: [{
+				id: "565F0D85283DDC67"
+				item: "minecraft:popped_chorus_fruit"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "5531ADF8D5943CAF"
+					item: "integrateddynamics:proto_chorus"
+					type: "item"
+				}
+				{
+					id: "4969F8D2F64A2A09"
+					item: "minecraft:popped_chorus_fruit"
+					type: "item"
+				}
+			]
+			title: "Chorus!"
+			x: 2.5d
+			y: -1.0d
 		}
 	]
 	title: "Chapter 4: Advanced Mekanism"
