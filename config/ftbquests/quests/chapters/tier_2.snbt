@@ -1050,7 +1050,9 @@
 			description: [
 				"The time in a bottle can temporarily speed up blocks, how much you can speed things up is limited by how long you have had this item in your inventory."
 				""
-				"The normal recipe requires diamonds but you can get it early with a bit of effort ;)"
+				"The normal recipe requires diamonds but you can get it early with a bit of effort... as always, JEI/EMI is your friend."
+				""
+				"INFO: the dripping mechanism is affected by random tick..."
 			]
 			id: "0D9714FC638EE0D9"
 			optional: true

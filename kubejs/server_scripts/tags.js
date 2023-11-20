@@ -108,7 +108,7 @@ ServerEvents.tags('block', event => {
 
 ServerEvents.tags('fluid', event => {
   [
-    'industrialforegoing:essence',
+    'experienceobelisk:cognitium',
     'mekanismgenerators:fusion_fuel',
     '#forge:chocolate',
     'kubejs:light_essence',

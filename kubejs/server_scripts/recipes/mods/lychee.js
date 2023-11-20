@@ -16,15 +16,32 @@ ServerEvents.tick(event => {
         let entities = level.allEntities;
         entities.forEach(entity => {
           if (entity && entity.getItem() != null) {
-            if (entity.getItem().is(Item.of("kubejs:hot_tiab"))) { 
-              let pos = entity.blockPosition();
-              let block = level.getBlockState(pos);
-              let fertilizer = Block.getId('sliceanddice:fertilizer');
-              if (block.is(fertilizer)) {
-                event.server.runCommandSilent(
-                  `execute in ${level.dimension} run particle smoke ${pos.x} ${pos.y + 1} ${pos.z} 0.8 1 0.8 0.01 100`
-                );
-                entity.playSound('block.lava.extinguish');
+            let itemEntity = entity.getItem();
+            switch (itemEntity) {
+              case Item.of("kubejs:hot_tiab"): {
+                let pos = entity.blockPosition();
+                let block = level.getBlockState(pos);
+                let liquid = Block.getId('sliceanddice:fertilizer');
+                if (block.is(liquid)) {
+                  event.server.runCommandSilent(
+                    `execute in ${level.dimension} run particle smoke ${pos.x} ${pos.y + 1} ${pos.z} 0.4 0.8 0.4 0.01 50`
+                  );
+                  entity.playSound('block.lava.extinguish');
+                }
+                break;
+              }
+              case Item.of("minecraft:cobblestone"): {
+                let pos = entity.blockPosition();
+                let block = level.getBlockState(pos);
+                let fertilizer = Block.getId('minecraft:water');
+                if (block.is(fertilizer)) {
+                  event.server.runCommandSilent(
+                    // particle <name> <pos> <delta> <speed> <count> [force|normal] [<viewers>]
+                    `execute in ${level.dimension} run particle angry_villager ${pos.x} ${pos.y + 1} ${pos.z} 0 2 0 1 0`
+                  );
+                  entity.playSound('block.bubble_column.bubble_pop');
+                }
+                break;
               }
             }
           }
@@ -90,7 +107,7 @@ ServerEvents.recipes(event => {
         "minecraft:water"
       ]
     },
-    "time": 3
+    "time": 6
   });
   
   event.custom({

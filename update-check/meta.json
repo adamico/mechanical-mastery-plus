@@ -37,6 +37,15 @@
               "curseforge": "https://curseforge.com/minecraft/modpacks/mechanical-mastery-plus"
           }
       }
+    },
+    {
+      "id": "1.1.2",
+      "releasedAt": 1700474221,
+      "promotions": {
+          "downloads": {
+              "curseforge": "https://curseforge.com/minecraft/modpacks/mechanical-mastery-plus"
+          }
+      }
     }
   ]
 }

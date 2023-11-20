@@ -84,8 +84,8 @@ b,i,gobber2:gobber2_ore_end,32768,4
 b,i,bigreactors:benitoite_ore,32768,4
 b,i,bigreactors:anglesite_ore,65536,4
 b,i,minecraft:experience_bottle,1000,4
-b,f,thermal:refined_fuel,250,4
-b,f,industrialforegoing:biofuel,250,4
+b,f,thermal:refined_fuel,20,4
+b,f,industrialforegoing:biofuel,20,4
 b,f,minecraft:lava,10,4
 b,f,minecraft:water,5,4
 b,i,minecraft:ghast_spawn_egg,4000000,4
@@ -108,8 +108,9 @@ s,f,industrialforegoing:meat,1,3
 s,i,kubejs:cube4_packaged,460800,3
 ,,,,
 s,f,industrialforegoing:essence,3,4
-s,f,thermal:refined_fuel,5,4
-s,f,minecraft:lava,2,4
+s,f,thermal:refined_fuel,10,4
+s,f,industrialforegoing:biofuel,10,4
+s,f,minecraft:lava,5,4
 ,,,,
 s,i,minecraft:iron_block,1000,5
 s,i,minecraft:gold_block,1000,5

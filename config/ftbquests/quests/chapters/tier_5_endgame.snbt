@@ -297,7 +297,7 @@
 			tasks: [
 				{
 					amount: 2147483647000L
-					fluid: "industrialforegoing:essence"
+					fluid: "experienceobelisk:cognitium"
 					id: "1658F8FB52CCAB0F"
 					type: "fluid"
 				}
@@ -1208,6 +1208,7 @@
 								"[{\"text\":\"Buy: Flux Networks Resources\",\"italic\":false}]"
 								"[{\"text\":\"Sell: Liquid Experience\",\"italic\":false}]"
 								"[{\"text\":\"Sell: Refined Fuel\",\"italic\":false}]"
+								"[{\"text\":\"Sell: Biofuel\",\"italic\":false}]"
 								"[{\"text\":\"Sell: Lava\",\"italic\":false}]"
 							]
 							Name: "[{\"text\":\"[T4] Trade Permit\",\"color\":\"magenta\",\"italic\":false}]"
