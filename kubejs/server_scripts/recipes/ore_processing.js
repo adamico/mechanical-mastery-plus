@@ -22,6 +22,7 @@ ServerEvents.recipes(event => {
 			event.recipes.createCrushing([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#forge:raw_materials/${metal.name}`)).processingTime(100);
 			event.recipes.createMilling([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#mekanism:clumps/${metal.name}`)).processingTime(200);			
 			event.recipes.createCrushing([Item.of(`create:crushed_raw_${metal.name}`), metal.extraCrushed], Item.of(`#mekanism:clumps/${metal.name}`)).processingTime(100);	
+			event.recipes.thermal.pulverizer([Item.of(`#forge:dusts/${metal.name}`).withChance(1.25), metal.extraDust], Item.of(`#forge:raw_materials/${metal.name}`)).energy(3000);
 			event.recipes.thermal.pulverizer([Item.of(`#forge:dusts/${metal.name}`).withChance(1.2), metal.extraDust], Item.of(`#mekanism:dirty_dusts/${metal.name}`)).energy(3000);
 			event.recipes.thermal.pulverizer([Item.of(`#forge:dusts/${metal.name}`).withChance(1.2), metal.extraDust], Item.of(`create:crushed_raw_${metal.name}`)).energy(3000);
 			event.recipes.thermal.furnace(Item.of(`#forge:ingots/${metal.name}`), `#forge:dusts/${metal.name}`).xp(0.2);
