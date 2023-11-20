@@ -1,4 +1,4 @@
-## mechanical-mastery-plus - r1.1.2f
+## mechanical-mastery-plus - r1.1.2
 
   * [adminshop-1.19.2-1.16.jar](https://www.curseforge.com/minecraft/mc-mods/adminshop/files/4880486) (by [ammoniumx](https://www.curseforge.com/members/ammoniumx/projects))
   * [AdvancedPeripherals-1.19.2-0.7.32r.jar](https://www.curseforge.com/minecraft/mc-mods/advanced-peripherals/files/4861042) (by [srrendi](https://www.curseforge.com/members/srrendi/projects))

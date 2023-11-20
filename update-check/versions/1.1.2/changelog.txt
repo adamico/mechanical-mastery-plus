@@ -3,6 +3,7 @@
 ### Changes
 fixes essence liquid not being infinite (replaced it with cognitium liquid from experience obelisk)
 minor other fixes (biofuel is sellable)
+fixed pulverizer raw ore recipes
 
 ### Mods Changed
 

@@ -30,12 +30,12 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "r1.1.2f"
+$MODPACK_VERSION = "r1.1.2"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
 # Should be "$null" if this is the first release
-$LAST_MODPACK_VERSION = "r1.1.2"
+$LAST_MODPACK_VERSION = "r1.1.1"
 
 # Which modloader the modpack uses
 # Can be "forge" or "fabric"
@@ -168,7 +168,8 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"visualworkbench-client.toml",
 	"voicechat/voicechat-client.properties",
 	"voicechat-client.toml",
-	"xnet-client.toml"
+	"xnet-client.toml",
+	"adminshop/New World_client.json"
 )
 
 $FOLDERS_TO_REMOVE_FROM_CLIENT_FILES = @(
