@@ -1,5 +1,5 @@
 # Mechanical Mastery Plus
-Mechanical Mastery Plus is a Minecraft 1.19.2 fork of the wonderful and beloved Mechanical Mastery skyblock modpack by Ammonium.
+[Mechanical Mastery Plus](https://www.curseforge.com/minecraft/modpacks/mechanical-mastery-plus) is a Minecraft 1.19.2 fork of the wonderful and beloved Mechanical Mastery skyblock modpack by Ammonium.
 
 Join our [Discord](https://discord.gg/PMhDEZge2W)
 
