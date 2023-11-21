@@ -210,7 +210,7 @@ $ENABLE_CLIENT_FILE_MODULE = $true
 # Toggle the modpack uploader on/off
 # Setting this to $false will also disable the Server File and Changelog Generator Modules.
 # Default: $true
-$ENABLE_MODPACK_UPLOADER_MODULE = $true
+$ENABLE_MODPACK_UPLOADER_MODULE = $false
 
 # Toggle server file feature on/off
 # Default: $true
@@ -227,14 +227,10 @@ $ENABLE_SERVERSTARTER_MODULE = $true
 # $LAST_MODPACK_VERSION must be set, and the manifest naming must be consistent.
 # Default: $false
 $ENABLE_CHANGELOG_GENERATOR_MODULE = $true
-# Path to the ChangelogGenerator's output file
-$CHANGELOG_PATH = "$INSTANCE_ROOT/changelogs/changelog_mods_$MODPACK_VERSION.md"
 
 # Toggle creation of a modlist file on/off
 # Default: $true
 $ENABLE_MODLIST_CREATOR_MODULE = $true
-# Path to the ModListCreator's output file
-$MODLIST_PATH = "$INSTANCE_ROOT/changelogs/modlist_$MODPACK_VERSION.md"
 
 # Toggle removal and re-download of jars on/off.
 # Setting this to true will ensure that you always have the latest 
@@ -282,3 +278,8 @@ $SERVER_ZIP_NAME = "$MODPACK_NAME-Server-$MODPACK_VERSION"
 
 # Default: $SERVER_FILENAME
 $SERVER_FILE_DISPLAY_NAME = "$CLIENT_NAME Server $MODPACK_VERSION"
+
+# Path to the ModListCreator's output file
+$MODLIST_PATH = "$INSTANCE_ROOT/changelogs/modlist_$MODPACK_VERSION.md"
+# Path to the ChangelogGenerator's output file
+$CHANGELOG_PATH = "$INSTANCE_ROOT/changelogs/changelog_mods_$MODPACK_VERSION.md"

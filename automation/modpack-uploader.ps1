@@ -26,21 +26,16 @@ function Get-GitHubRelease {
         $file
     )
 	
-    $response = Invoke-RestMethod -Uri "https://api.github.com/repos/$repo/releases"
+    $releases = "https://api.github.com/repos/$repo/releases"
 
-    $matchingRelease = $response.assets -match $file
-    if ($matchingRelease) {
-        $downloadUrl = $matchingRelease.browser_download_url
-    
-        Remove-Item $file -ErrorAction SilentlyContinue
+    Write-Host "Determining latest release of $repo"
+    $tag = (Invoke-WebRequest -Uri $releases -UseBasicParsing | ConvertFrom-Json)[0].tag_name
 
-        Write-Host "Dowloading $file..."
+    $download = "https://github.com/$repo/releases/download/$tag/$file"
 
-        Invoke-RestMethod $downloadUrl -Out $file
-    }
-    else {
-        Write-Error "Found no files matching '$file' in the repository '$repo'"
-    }
+
+    Write-Host "Dowloading $file..."
+    Invoke-WebRequest $download -Out $file
 }
 
 function Test-ForDependencies {
@@ -71,6 +66,40 @@ function Test-ForDependencies {
 
         throw "curl not available. Please follow the instructions above." 
     }
+
+    $isGHAvailable = Get-Command gh
+
+    if (-not $isGHAvailable) {
+        Clear-Host
+        Write-Host 
+        Write-Host "Install GH CLI `n" -ForegroundColor Red
+        Write-Host "from: " -NoNewline
+        Write-Host "https://github.com/cli/cli#installation" -ForegroundColor Blue
+        Write-Host 
+        Write-Host "When you're done, login to github with: `n" -ForegroundColor Red
+        Write-Host "gh auth login `n" -ForegroundColor Blue
+        Write-Host "and rerun this script.`n"
+
+        throw "GH not available. Please follow the instructions above." 
+    }
+}
+
+function Update-BetterCompatibilityCheckerVersion {
+    param(
+        [Parameter(Position = 0)]
+        [string]$mode
+    )
+
+    $configPath = "$INSTANCE_ROOT/config/bcc-common.toml"
+
+    $modpackName = "Mechanical Mastery Pluse"
+
+    # Replace anything that matches semver of the type 1.0.0 with $MODPACK_VERSION
+    $contents = [System.IO.File]::ReadAllText($configPath) -replace "\d+\.\d+\.\d+", $MODPACK_VERSION
+    $contents = $contents -replace "modpackName.*", "modpackName = `"$modpackName`""
+    $contents = $contents -replace "modpackProjectID.*", "modpackProjectID = $CURSEFORGE_PROJECT_ID"
+
+    [System.IO.File]::WriteAllText($configPath, $contents)
 }
 
 function New-ClientFiles {
@@ -228,9 +257,18 @@ function New-Changelog {
             --old "$LAST_MODPACK_ZIP_NAME.zip"
 
         Write-Host "Mod changelog generated!" -ForegroundColor Green
+
     } else {
         Write-Host "Skipping changelog generation beacause you don't have the correct new and old modpack files" -ForegroundColor Cyan
     }
+}
+
+function Update-Modpack-Update-Checker {  
+    gh workflow run $GITHUB_UPDATE_WORKFLOW_ID -R $GITHUB_NAME/$MODPACK_UPDATE_CHECKER_GITHUB_REPOSITORY -f version=$MODPACK_VERSION
+
+    Write-Host 
+    Write-Host "Updating version for Modpack Update Checker..." -ForegroundColor Green
+    Write-Host 
 }
 
 function Push-ClientFiles {
@@ -381,9 +419,12 @@ function New-GitHubRelease {
         };
     
         $Body = @{
-            tag_name               = $MODPACK_VERSION
-            name                   = $MODPACK_VERSION
-            generate_release_notes = $true
+            tag_name         = $MODPACK_VERSION
+            target_commitish = 'main'
+            name             = $MODPACK_VERSION
+            body             = ''
+            draft            = $false
+            prerelease       = $false
         } | ConvertTo-Json
 
     
@@ -436,6 +477,7 @@ Test-ForDependencies
 Approve-SecretsFile
 New-ClientFiles
 Push-ClientFiles
+
 if ($ENABLE_SERVER_FILE_MODULE -and -not $ENABLE_MODPACK_UPLOADER_MODULE) {
     New-ServerFiles
 }
