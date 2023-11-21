@@ -9,9 +9,15 @@ ARGUMENTS_SETUP="-SettingsPath:automation -LogsPath:automation/CDL-Logs -Default
 ARGUMENTS_LAUNCH="-SettingsPath:automation"
 
 cd ..
-echo "#!/bin/sh" > .git/hooks/post-merge
+echo "Setup git hooks"
 
+echo "#!/bin/sh" > .git/hooks/post-merge
 echo "java -jar automation/Cat-Downloader-Legacy.jar" $ARGUMENTS_LAUNCH >> .git/hooks/post-merge
+chmod +x .git/hooks/post-merge
+
+echo "Done setting up hooks"
+
+echo "Running Cat-Downloader-Legacy"
 
 if [ ! -e "automation/Cat-Downloader-Legacy-Settings.json5" ]
 then
