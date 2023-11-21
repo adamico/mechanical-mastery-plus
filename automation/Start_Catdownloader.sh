@@ -2,6 +2,20 @@
 # This script is used to configure and run CatDownloader!
 # You can add few additional arguments to change the behaviour of the app.
 # Check out the github repo of this app for more details https://github.com/Kanzaji/Cat-Downloader-Legacy
+export PS4="\$LINENO: "
+set -xv
 
-# You can configure the command here:
-java -jar Cat-Downloader-Legacy-2.1.3.jar
+ARGUMENTS_SETUP="-SettingsPath:automation -LogsPath:automation/CDL-Logs -DefaultSettings:false -Mode:CF-Instance"
+ARGUMENTS_LAUNCH="-SettingsPath:automation"
+
+cd ..
+echo "#!/bin/sh" > .git/hooks/post-merge
+
+echo "java -jar automation/Cat-Downloader-Legacy.jar" $ARGUMENTS_LAUNCH >> .git/hooks/post-merge
+
+if [ ! -e "automation/Cat-Downloader-Legacy-Settings.json5" ]
+then
+  java -jar automation/Cat-Downloader-Legacy.jar $ARGUMENTS_LAUNCH
+else
+  java -jar automation/Cat-Downloader-Legacy.jar" $ARGUMENTS_SETUP
+fi
