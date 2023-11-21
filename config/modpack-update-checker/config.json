@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 4,
+  "currentVersion": "1.1.2",
+  "modpackName": "Mechanical Mastery Plus",
+  "modpackAuthor": "kc00l",
+  "githubRepo": "https://raw.githubusercontent.com/adamico/mechanical-mastery-plus/main/update-check/",
+  "advanced": {
+    "bccEnabled": true,
+    "expandButton": false,
+    "updateCheckerType": 2,
+    "showAllChangelogsIfUpToDate": false
+  }
+}
