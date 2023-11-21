@@ -1,6 +1,25 @@
 # Mechanical Mastery Plus
-[Mechanical Mastery Plus](https://www.curseforge.com/minecraft/modpacks/mechanical-mastery-plus) is a Minecraft 1.19.2 fork of the wonderful and beloved Mechanical Mastery skyblock modpack by Ammonium.
+This is the official repository and issue-tracker for the modpack Mechanical Mastery Plus for Minecraft 1.19.2, a fork of the wonderful and beloved Mechanical Mastery skyblock modpack by Ammonium.
 
-Join our [Discord](https://discord.gg/PMhDEZge2W)
+### Table of Contents
+-   [Setup](#setup)
+-   [Links](#links)
 
-[![kc00l](https://github.com/adamico/mechanical-mastery-plus/assets/81559/99380b8a-175f-42ca-a4c9-c48eac086e6d)](https://billing.kinetichosting.net/aff.php?aff=627)
+<hr></hr>
+
+# Setup
+
+Follow these steps to get the bleeding edge version of this modpack.
+
+## CurseForge App (Windows / Mac)
+
+1. Download the [CurseForge App](https://www.curseforge.com/download/app) and [Git](https://git-scm.com/downloads) if you haven't already.
+2. Fork and clone the repository to the Instances folder of the CurseForge App, the default path is `C:\Users\{UserName}\Documents\Curse\Minecraft\Instances`.
+3. Double click the script `InstanceSyncSetup.bat` in the `automation` folder to setup InstanceSync.
+4. Open the CurseForge App and you should see the modpack. If you already had CurseForge App open, restart it.
+
+Note: the github version is probably unstable and tested by a single persion. Don't forget to backup your save if you decide to try this dev version.
+
+## Links
+- [Mechanical Mastery Discord](https://discord.gg/PMhDEZge2W)
+- [Mechanical Mastery Plus on Curseforge](https://www.curseforge.com/minecraft/modpacks/mechanical-mastery-plus)
