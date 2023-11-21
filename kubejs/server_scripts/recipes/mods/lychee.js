@@ -12,7 +12,6 @@ ServerEvents.tick(event => {
   server.allLevels.forEach(level => {
     if (level) {
       if (level.dimension.toString().includes("overworld")) {
-
         let entities = level.allEntities;
         entities.forEach(entity => {
           if (entity && entity.getItem() != null) {
@@ -33,11 +32,11 @@ ServerEvents.tick(event => {
               case Item.of("minecraft:cobblestone"): {
                 let pos = entity.blockPosition();
                 let block = level.getBlockState(pos);
-                let fertilizer = Block.getId('minecraft:water');
-                if (block.is(fertilizer)) {
+                let water = Block.getId('minecraft:water');
+                if (block.is(water)) {
                   event.server.runCommandSilent(
                     // particle <name> <pos> <delta> <speed> <count> [force|normal] [<viewers>]
-                    `execute in ${level.dimension} run particle angry_villager ${pos.x} ${pos.y + 1} ${pos.z} 0 2 0 1 0`
+                    `execute in ${level.dimension} run particle cloud ${pos.x} ${pos.y + 1} ${pos.z} 0 2 0 0.05 0`
                   );
                   entity.playSound('block.bubble_column.bubble_pop');
                 }
