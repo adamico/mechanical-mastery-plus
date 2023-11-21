@@ -38,6 +38,7 @@ world
 world_backup
 XaeroWaypoints
 XaeroWorldMap
+technical-traveler-dev
 
 # Client Configs
 !ae2/client.json

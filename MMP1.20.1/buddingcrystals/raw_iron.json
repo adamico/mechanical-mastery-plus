@@ -1,0 +1,8 @@
+{
+  "translation": "Raw Iron",
+  "texture": "minecraft:item/raw_iron",
+  "growth_chance": 1,
+  "dropped_item": "minecraft:raw_iron",
+  "normal_drop_chance": 7,
+  "max_drop_chance": 10
+}

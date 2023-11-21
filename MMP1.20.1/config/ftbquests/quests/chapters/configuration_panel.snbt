@@ -1,0 +1,233 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	disable_toast: true
+	filename: "configuration_panel"
+	group: "56617BF3F24DD586"
+	icon: "mekanism:module_energy_unit"
+	id: "7C55129B7A170351"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			can_repeat: true
+			description: ["Don't like the darkness of the night? Just click this one simple button and you can forever banish the terrors of the dark!"]
+			icon: "minecraft:sunflower"
+			id: "1450957C6F72830F"
+			rewards: [
+				{
+					auto: "no_toast"
+					command: "/time set noon"
+					exclude_from_claim_all: true
+					id: "494B4B18820F0586"
+					type: "command"
+				}
+				{
+					auto: "no_toast"
+					command: "/gamerule doDaylightCycle false"
+					exclude_from_claim_all: true
+					id: "383F808B8BFF5DED"
+					type: "command"
+				}
+			]
+			subtitle: "Begone!"
+			tasks: [{
+				id: "2A9A8F20154FDA0F"
+				title: "Steal the moon"
+				type: "checkmark"
+			}]
+			title: "Banish the moon"
+			x: -5.5d
+			y: -4.0d
+		}
+		{
+			can_repeat: true
+			description: ["If you don't like running after your grave every time you die, you can choose to keep your inventory after each death (or just not die, probably easier)"]
+			icon: "minecraft:skeleton_skull"
+			id: "5D8240A0B2779AC3"
+			rewards: [
+				{
+					auto: "no_toast"
+					command: "/gamerule keepInventory true"
+					exclude_from_claim_all: true
+					id: "4D81D4F384730923"
+					type: "command"
+				}
+				{
+					auto: "no_toast"
+					command: "/gamerule keepWallet true"
+					exclude_from_claim_all: true
+					id: "096876E16E3397FE"
+					type: "command"
+				}
+			]
+			subtitle: "I hope my items didn't fall into the void..."
+			tasks: [{
+				id: "64C822C3D6EF50A8"
+				title: "\"I actually meant to die right there\""
+				type: "checkmark"
+			}]
+			title: "...Actually, I meant to die right there"
+			x: -4.0d
+			y: -4.0d
+		}
+		{
+			can_repeat: true
+			description: ["By pressing this button, you won't have to remember to keep sleeping in order to stop phantoms from spawning."]
+			icon: "minecraft:white_bed"
+			id: "755DA9653FCF0AB2"
+			rewards: [{
+				auto: "no_toast"
+				command: "/gamerule doInsomnia false"
+				exclude_from_claim_all: true
+				id: "1FF19A0906089603"
+				type: "command"
+			}]
+			subtitle: "The answer is nobody, nobody likes them"
+			tasks: [{
+				id: "190091CF33EAFD5F"
+				title: "Who likes phantoms anyways?"
+				type: "checkmark"
+			}]
+			x: -2.5d
+			y: -4.0d
+		}
+		{
+			can_repeat: true
+			description: ["If you don't like having your thoughts interrumpted by the sound of rain appearing completely randomly, just stop rain from happening, simple."]
+			icon: "minecraft:lightning_rod"
+			id: "741B7428F9634CEF"
+			rewards: [
+				{
+					auto: "enabled"
+					id: "4BA7DB87B9315AE4"
+					type: "custom"
+				}
+				{
+					auto: "no_toast"
+					command: "/gamerule doWeatherCycle false"
+					exclude_from_claim_all: true
+					id: "340ECDB93DD721B1"
+					type: "command"
+				}
+				{
+					auto: "no_toast"
+					command: "/weather clear"
+					exclude_from_claim_all: true
+					id: "37A385421D097A24"
+					type: "command"
+				}
+			]
+			subtitle: "Just as I was preparing to take a screenshot..."
+			tasks: [{
+				id: "160746D5843C697B"
+				type: "checkmark"
+			}]
+			title: "Why are you here, rain?!"
+			x: -1.0d
+			y: -4.0d
+		}
+		{
+			can_repeat: true
+			description: ["If you changed your mind, you can always go back."]
+			icon: "minecraft:ender_pearl"
+			id: "26DA2334C3E3DF13"
+			rewards: [{
+				auto: "no_toast"
+				command: "/gamerule doDaylightCycle true"
+				exclude_from_claim_all: true
+				id: "5BEC62A6FC18BEF2"
+				type: "command"
+			}]
+			shape: "square"
+			subtitle: "I didn't mean what I said!"
+			tasks: [{
+				id: "68F6BD6E43497765"
+				title: "Steal the moon"
+				type: "checkmark"
+			}]
+			title: "Moon, come back!"
+			x: -5.5d
+			y: -3.0d
+		}
+		{
+			can_repeat: true
+			description: ["If you don't like running after your grave every time you die, you can choose to keep your inventory after each death (or just not die, probably easier)"]
+			icon: "minecraft:lava_bucket"
+			id: "55A5AB0B6D3F9149"
+			rewards: [
+				{
+					auto: "no_toast"
+					command: "/gamerule keepInventory false"
+					exclude_from_claim_all: true
+					id: "67CA2C6C10DA9E9B"
+					type: "command"
+				}
+				{
+					auto: "no_toast"
+					command: "/gamerule keepWallet false"
+					exclude_from_claim_all: true
+					id: "527F72BBF1896D40"
+					type: "command"
+				}
+			]
+			shape: "square"
+			subtitle: "Try me universe!"
+			tasks: [{
+				id: "65E0F1BFF0A353FC"
+				title: "\"I actually meant to die right there\""
+				type: "checkmark"
+			}]
+			title: "I don't like my inventory anyways!"
+			x: -4.0d
+			y: -3.0d
+		}
+		{
+			can_repeat: true
+			description: ["By pressing this button, you won't have to remember to keep sleeping in order to stop phantoms from spawning."]
+			icon: "minecraft:phantom_membrane"
+			id: "5668EBAF5D0D4DB7"
+			rewards: [{
+				auto: "no_toast"
+				command: "/gamerule doInsomnia true"
+				exclude_from_claim_all: true
+				id: "7665CAB8BF196418"
+				type: "command"
+			}]
+			shape: "square"
+			subtitle: "This button looks brand new, it seems nobody has ever pressed it yet..."
+			tasks: [{
+				id: "36CC906B94A57D29"
+				title: "Who likes phantoms anyways?"
+				type: "checkmark"
+			}]
+			title: "I like phantoms, actually!"
+			x: -2.5d
+			y: -3.0d
+		}
+		{
+			can_repeat: true
+			description: ["If you don't like having your thoughts interrumpted by the sound of rain appearing completely randomly, just stop rain from happening, simple."]
+			icon: "minecraft:rose_bush"
+			id: "3A8AAE8950194A36"
+			rewards: [{
+				auto: "no_toast"
+				command: "/gamerule doWeatherCycle true"
+				exclude_from_claim_all: true
+				id: "57150C5F068BE873"
+				type: "command"
+			}]
+			shape: "square"
+			subtitle: "Lightning is cool, too!"
+			tasks: [{
+				id: "54C87F311221D98B"
+				type: "checkmark"
+			}]
+			title: "But what about my poor garden?"
+			x: -1.0d
+			y: -3.0d
+		}
+	]
+	subtitle: ["Create your ideal experience here"]
+	title: "Configuration Panel"
+}

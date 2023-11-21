@@ -1,0 +1,11 @@
+{
+	id: "0A2303F8A37026E0"
+	loot_size: 1
+	order_index: 16
+	rewards: [
+		{ count: 4, item: "thermal:bronze_ingot" }
+		{ count: 4, item: "thermal:constantan_ingot" }
+		{ count: 4, item: "thermal:invar_ingot" }
+	]
+	title: "alloy ingots"
+}

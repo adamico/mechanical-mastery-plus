@@ -1,0 +1,10 @@
+{
+	id: "45ED32861BD08EB5"
+	loot_size: 1
+	order_index: 10
+	rewards: [{
+		command: "/weather clear"
+		type: "command"
+	}]
+	title: "clear weather"
+}

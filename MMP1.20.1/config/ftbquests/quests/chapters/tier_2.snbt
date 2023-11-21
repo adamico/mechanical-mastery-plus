@@ -1,0 +1,344 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "tier_2"
+	group: "2D94E5A1412E2495"
+	icon: "kubejs:cube2"
+	id: "032540945468AB53"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["7A0CB1037E6BE4D7"]
+			description: ["Suddenly, the basic mechanical essence whispers to you, granting you knowledge of various materials, allowing you to transmute them at will."]
+			icon: "kubejs:cube1"
+			id: "167C9AF69BB16B8B"
+			rewards: [
+				{
+					count: 32
+					id: "716665370B9A1BB0"
+					item: "minecraft:netherrack"
+					type: "item"
+				}
+				{
+					count: 32
+					id: "758C25765DE0E45E"
+					item: "minecraft:soul_sand"
+					type: "item"
+				}
+				{
+					id: "68ACD79CE84307F9"
+					item: "create:raw_zinc"
+					type: "item"
+				}
+			]
+			subtitle: "Are these things... alive?!"
+			tasks: [{
+				id: "4E0FFF9832476439"
+				title: "Tier 2"
+				type: "checkmark"
+			}]
+			title: "Tier 2 Materials"
+			x: -4.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["167C9AF69BB16B8B"]
+			description: [
+				"In order to get into create, you will need large quantities of andesite."
+				""
+				"You can initially get andesite with cobblestone and high covalence dust."
+			]
+			id: "5F73D5F328C236A9"
+			rewards: [
+				{
+					count: 16
+					id: "27426FAABF404269"
+					item: "create:cogwheel"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "497814E023742F5F"
+					item: "create:large_cogwheel"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "1C8E3B13FE9765DB"
+					item: "create:andesite_alloy"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "6EBB19C03D7E320B"
+					item: "create:shaft"
+					type: "item"
+				}
+				{
+					id: "6E06E0177879977A"
+					item: "create:goggles"
+					type: "item"
+				}
+				{
+					count: 32
+					id: "5441CD08DB7CDD08"
+					item: "minecraft:kelp"
+					type: "item"
+				}
+				{
+					id: "4702BF7FFD51B2EC"
+					item: "create:wrench"
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "4659928179B09A0D"
+					item: "minecraft:andesite"
+					type: "item"
+				}
+				{
+					id: "43CF504D18D80E62"
+					item: "create:andesite_alloy"
+					type: "item"
+				}
+			]
+			title: "Getting Creative"
+			x: -3.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["5F73D5F328C236A9"]
+			description: ["In order to use Create machines, you need to generate rotational force. There's a variety of ways to do this, each with their own advantages and disadvantages. You can learn more about each of them by searching them on JEI and holding \"W\"."]
+			id: "7C0D8A15D01EC79E"
+			rewards: [{
+				id: "06F39F5878944945"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "67C1AF6117A80F89"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "create:water_wheel"
+							}
+							{
+								Count: 1b
+								id: "create:large_water_wheel"
+							}
+							{
+								Count: 1b
+								id: "create:windmill_bearing"
+							}
+							{
+								Count: 1b
+								id: "create:steam_engine"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Create Power Generation"
+			x: -1.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["7C0D8A15D01EC79E"]
+			description: ["With the mechanical mixer, you can automate shapeless crafting recipes, plus many other item/fluid recipes specific to the mixer."]
+			id: "09E7EB6E38E84886"
+			rewards: [{
+				id: "10C7F429CDF6E94E"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [
+				{
+					id: "490E23726B73B21F"
+					item: "create:mechanical_mixer"
+					type: "item"
+				}
+				{
+					id: "49C678D1F46259A9"
+					item: "create:basin"
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: -1.5d
+		}
+		{
+			description: ["With all your new-found knowledge of materials and alloys, you have managed to create a refined version of mechanical essence, worth even more EMC than its basic form."]
+			id: "78775CE81571FAC9"
+			rewards: [
+				{
+					id: "52CC23DCCFDD805C"
+					type: "xp"
+					xp: 100
+				}
+				{
+					count: 16
+					id: "672FDAB6D9B8D23D"
+					item: "kubejs:cube2_packaged"
+					type: "item"
+				}
+				{
+					id: "52E72E895FCDFC98"
+					item: "minecraft:blaze_rod"
+					type: "item"
+				}
+				{
+					id: "7E94A1E4207BE58D"
+					item: "minecraft:skeleton_spawn_egg"
+					type: "item"
+				}
+			]
+			shape: "gear"
+			tasks: [
+				{
+					id: "7AF77A99BBFD2A5E"
+					item: "kubejs:cube2"
+					type: "item"
+				}
+				{
+					id: "4D649FF0F1DA781F"
+					item: "kubejs:cube2_packaged"
+					type: "item"
+				}
+			]
+			x: 4.5d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"5BFA974392560603"
+				"78775CE81571FAC9"
+			]
+			id: "30297A5669810E41"
+			rewards: [{
+				count: 4
+				id: "18F5BD6D1B26342B"
+				item: "createaddition:brass_rod"
+				type: "item"
+			}]
+			tasks: [{
+				count: 2L
+				id: "6D0341F40125105E"
+				item: "createaddition:brass_rod"
+				type: "item"
+			}]
+			x: 3.0d
+			y: -3.0d
+		}
+		{
+			dependencies: [
+				"76178D4338B90780"
+				"78775CE81571FAC9"
+			]
+			id: "5DA64773FD308F26"
+			rewards: [{
+				count: 2
+				id: "5161D07F17994616"
+				item: "thermal:invar_gear"
+				type: "item"
+			}]
+			tasks: [{
+				id: "0FD21ABE37AA086F"
+				item: "thermal:invar_gear"
+				type: "item"
+			}]
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"3AB0EBDE89F95DF4"
+				"78775CE81571FAC9"
+			]
+			id: "402D936947B4FBD4"
+			rewards: [{
+				id: "7C42F1A0193087A4"
+				item: "kubejs:steel_gear"
+				type: "item"
+			}]
+			tasks: [{
+				id: "401C669E93105EBD"
+				item: "kubejs:steel_gear"
+				type: "item"
+			}]
+			x: 3.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["09E7EB6E38E84886"]
+			id: "5BFA974392560603"
+			rewards: [{
+				count: 8
+				id: "333D9065184DAA69"
+				item: "jaopca:dusts.brass"
+				type: "item"
+			}]
+			tasks: [{
+				count: 4L
+				id: "14CA01DE92233F86"
+				item: "jaopca:dusts.brass"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["09E7EB6E38E84886"]
+			id: "3AB0EBDE89F95DF4"
+			rewards: [{
+				count: 8
+				id: "0FFDC72870C1D179"
+				item: "mekanism:dust_steel"
+				type: "item"
+			}]
+			tasks: [{
+				count: 4L
+				id: "41C2926B99FDF2B9"
+				item: "mekanism:dust_steel"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["09E7EB6E38E84886"]
+			id: "76178D4338B90780"
+			rewards: [{
+				count: 8
+				id: "6952686E4E22ED56"
+				item: "thermal:invar_dust"
+				type: "item"
+			}]
+			tasks: [{
+				count: 4L
+				id: "36D94FB80BD9E5D7"
+				item: "thermal:invar_dust"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			id: "795CAB9459E38500"
+			tasks: [{
+				id: "4694DBC4DDF3DAA4"
+				item: "create:blaze_burner"
+				type: "item"
+			}]
+			x: 7.5d
+			y: -1.5d
+		}
+	]
+	title: "Tier 2: Create"
+}

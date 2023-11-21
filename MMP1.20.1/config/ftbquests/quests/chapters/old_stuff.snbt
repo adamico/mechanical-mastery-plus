@@ -1,0 +1,116 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "old_stuff"
+	group: ""
+	id: "71BA4584F3931E07"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["One great way to get EMC before automation is simply growing trees, since logs contain some EMC."]
+			hide: false
+			id: "258878D4F87E9F1E"
+			rewards: [{
+				count: 8
+				id: "3C291BB62FF867F2"
+				item: "minecraft:oak_sapling"
+				type: "item"
+			}]
+			tasks: [{
+				id: "08E661E4E8986BF8"
+				item: "minecraft:oak_log"
+				type: "item"
+			}]
+			title: "Wood"
+			x: -6.5d
+			y: -1.0d
+		}
+		{
+			description: ["Clay can be turned into bricks, another important resource for automation and crafting."]
+			hide: false
+			icon: "minecraft:clay_ball"
+			id: "2B8F40D3510E2D05"
+			rewards: [{
+				count: 16
+				id: "3F9606F24886C828"
+				item: "minecraft:clay_ball"
+				type: "item"
+			}]
+			tasks: [{
+				id: "019E0C2501327EBC"
+				title: "Clay"
+				type: "checkmark"
+			}]
+			x: -8.0d
+			y: -2.5d
+		}
+		{
+			description: ["Create a basic cobblestone generator to unlock access to some basic resources. REMEMBER: ALWAYS learn the items first before using them!"]
+			hide: false
+			id: "5D6996CC9444ADE7"
+			rewards: [
+				{
+					count: 64
+					id: "6214D2CC53B31C53"
+					item: "minecraft:cobblestone"
+					type: "item"
+				}
+				{
+					count: 8
+					id: "14B9A5FBA686504B"
+					item: "minecraft:redstone_ore"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "29CA015CCCF6F23E"
+					item: "minecraft:raw_iron"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "7B1392A49C964D4A"
+					item: "minecraft:raw_copper"
+					type: "item"
+				}
+				{
+					count: 16
+					id: "402F6ACCA849C8DB"
+					item: "minecraft:raw_gold"
+					type: "item"
+				}
+				{
+					id: "2C55084FDFC3029D"
+					item: "mekanism:raw_tin"
+					type: "item"
+				}
+				{
+					id: "28B7FFDD46BCA883"
+					item: "thermal:raw_silver"
+					type: "item"
+				}
+				{
+					id: "2C337D9A561302EE"
+					item: "thermal:raw_nickel"
+					type: "item"
+				}
+				{
+					id: "48FA61C68C180827"
+					item: "thermal:raw_lead"
+					type: "item"
+				}
+			]
+			subtitle: "The beginning..."
+			tasks: [{
+				id: "5C95D4E16A8DDB14"
+				item: "minecraft:cobblestone"
+				type: "item"
+			}]
+			title: "Tier 1 materials"
+			x: -6.5d
+			y: -2.5d
+		}
+	]
+	title: "old stuff"
+}

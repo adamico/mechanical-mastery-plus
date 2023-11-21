@@ -1,0 +1,8 @@
+{
+  "translation": "Redstone",
+  "texture": "minecraft:item/Redstone",
+  "growth_chance": 1,
+  "dropped_item": "minecraft:redstone",
+  "normal_drop_chance": 7,
+  "max_drop_chance": 10
+}

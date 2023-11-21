@@ -1,0 +1,101 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "overview"
+	group: "56617BF3F24DD586"
+	icon: "minecraft:totem_of_undying"
+	id: "77FF66ED47CBD889"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["Mechanical Mastery is an expert-yet-not-horribly-grindy skyblock modpack, focused around automating everything in order to keep progressing. EMC has been completely overhauled, and only raw resources such as ore chunks have EMC, and new \"mechanical essences\" can be crafted out of these raw materials, with multiple tiers giving exponentially more EMC the more complicated they get. In order to succeed in this modpack, you need to learn how to automate these mechanical essences and gain as much EMC as possible, good luck!"]
+			id: "0A440BFFAD3F083E"
+			subtitle: "Introduction and Explanation"
+			tasks: [{
+				id: "3BB2FA8389857375"
+				title: "Welcome!"
+				type: "checkmark"
+			}]
+			x: -5.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["0A440BFFAD3F083E"]
+			icon: "thermal:machine_frame"
+			id: "6F0F8C3F6B5E2310"
+			tasks: [{
+				id: "2C584B6EE7B58636"
+				title: "Tier 1: Thermal"
+				type: "checkmark"
+			}]
+			x: -3.5d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"6F0F8C3F6B5E2310"
+				"7A0CB1037E6BE4D7"
+			]
+			icon: "create:crushing_wheel"
+			id: "2A9795581CE1CACF"
+			shape: "square"
+			tasks: [{
+				id: "3BCA0B433ED08A4D"
+				title: "Tier 2: Create and Immersive Engineering"
+				type: "checkmark"
+			}]
+			x: -2.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"78775CE81571FAC9"
+				"2A9795581CE1CACF"
+			]
+			icon: "mekanism:basic_control_circuit"
+			id: "636712D15DD7E2E8"
+			shape: "pentagon"
+			tasks: [{
+				id: "71B39DED89D5A45C"
+				title: "Tier 3: Mekanism"
+				type: "checkmark"
+			}]
+			x: -0.5d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"636712D15DD7E2E8"
+				"1A67C9B9ABB4E969"
+			]
+			icon: "mekanism:elite_control_circuit"
+			id: "7B8B9AE6979535D8"
+			shape: "hexagon"
+			tasks: [{
+				id: "15A723F6047E80F3"
+				title: "Tier 4: Advanced Mekanism"
+				type: "checkmark"
+			}]
+			x: 1.0d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"7B8B9AE6979535D8"
+				"157D4C0E9C7A0928"
+			]
+			icon: "projectexpansion:final_star"
+			id: "72E0FB7ABA0FF258"
+			shape: "gear"
+			tasks: [{
+				id: "3DA63D196473D774"
+				type: "checkmark"
+			}]
+			title: "Tier 5: Endgame"
+			x: 2.5d
+			y: 0.5d
+		}
+	]
+	title: "Overview"
+}

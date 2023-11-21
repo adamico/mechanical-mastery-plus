@@ -1,0 +1,245 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "automation_tips"
+	group: "56617BF3F24DD586"
+	id: "1FBDE1284A64A60E"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"EMC links output 1 item per second, yet redstone furnaces and pulverizers take longer than that to process one item. "
+				""
+				"Because of this, you will most likely need one pulverizer and redstone furnace per each raw material needed for automation (copper, iron, aluminum). "
+				""
+				"Remember to trash unwanted byproducts such as slag, or they might stop your machines from working. "
+				""
+				"You can use the stack limiter module to limit how much your machines can accept, which is useful so your one iron pulverizer doesn't consume all your EMC by filling with 64 raw iron."
+			]
+			id: "464AD5024525CC94"
+			rewards: [
+				{
+					id: "1CC48FDBCCADB0C8"
+					item: "minecraft:raw_iron"
+					type: "item"
+				}
+				{
+					id: "33A17593632C3FC6"
+					item: "minecraft:raw_copper"
+					type: "item"
+				}
+				{
+					id: "745E6BD145D46586"
+					item: "minecraft:raw_gold"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "5963183003D0CE59"
+				title: "Chapter 1 tips"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["464AD5024525CC94"]
+			id: "3DD3696B51A16BB3"
+			tasks: [{
+				id: "05A246FD99A1538A"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 0.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["2043A1E7C9D6AC49"]
+			id: "47F34027B9B2C056"
+			tasks: [{
+				id: "461E23AB3C055C39"
+				item: "thermal:machine_furnace"
+				type: "item"
+			}]
+			x: 0.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["1D611F270CD2DD32"]
+			id: "20ECACE23EAADBA8"
+			tasks: [{
+				id: "61693AD9CD816B46"
+				item: "thermal:machine_furnace"
+				type: "item"
+			}]
+			x: -1.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["3EA4CBDC0BF8BBA3"]
+			id: "3F403E7ADB4001B2"
+			tasks: [{
+				id: "6BF5A31F884A5AB4"
+				item: "thermal:machine_furnace"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["453AECAB3E34BB23"]
+			id: "1D611F270CD2DD32"
+			tasks: [{
+				id: "589AE9F3FAB38281"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			x: -1.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["464AD5024525CC94"]
+			id: "453AECAB3E34BB23"
+			tasks: [{
+				id: "00898EB8F1F3533C"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: -1.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["464AD5024525CC94"]
+			id: "32515ADFB13EFAD6"
+			tasks: [{
+				id: "2763FCDAB4F30212"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["20ECACE23EAADBA8"]
+			id: "7ADD70BA2AB816C1"
+			tasks: [
+				{
+					id: "29F5B58B54281060"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "5E8F33A7182FCA48"
+					item: "prettypipes:low_extraction_module"
+					type: "item"
+				}
+			]
+			x: -1.5d
+			y: 5.5d
+		}
+		{
+			dependencies: [
+				"7EE7D665AAD42533"
+				"2641495A5A92092E"
+				"7ADD70BA2AB816C1"
+			]
+			id: "74D5487F1FA2BDC4"
+			tasks: [
+				{
+					id: "0A46D48B26A40F90"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "2C68C2299E65746A"
+					item: "prettypipes:stack_size_module"
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 6.5d
+		}
+		{
+			dependencies: ["47F34027B9B2C056"]
+			id: "2641495A5A92092E"
+			tasks: [
+				{
+					id: "240E9C4644618112"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "6DECBE3899DD5082"
+					item: "prettypipes:low_extraction_module"
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["3F403E7ADB4001B2"]
+			id: "7EE7D665AAD42533"
+			tasks: [
+				{
+					id: "5E5C0AB644172694"
+					item: "prettypipes:pipe"
+					type: "item"
+				}
+				{
+					id: "25DEFC263DEBE2CD"
+					item: "prettypipes:low_extraction_module"
+					type: "item"
+				}
+			]
+			x: 1.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["74D5487F1FA2BDC4"]
+			id: "181444BA6E90A921"
+			tasks: [{
+				id: "6715909E4BF3BA1F"
+				item: "thermal:machine_crafter"
+				type: "item"
+			}]
+			x: 0.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["181444BA6E90A921"]
+			id: "3E071B8EE0935718"
+			tasks: [{
+				id: "588F385529F936AE"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			x: 0.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["3DD3696B51A16BB3"]
+			id: "2043A1E7C9D6AC49"
+			tasks: [{
+				id: "36D8E31FBE1837E4"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			x: 0.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["32515ADFB13EFAD6"]
+			id: "3EA4CBDC0BF8BBA3"
+			tasks: [{
+				id: "6C5EA607FFD4AA2A"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 3.0d
+		}
+	]
+	title: "Automation Tips"
+}

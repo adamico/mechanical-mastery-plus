@@ -1,0 +1,538 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "tier_1"
+	group: "2D94E5A1412E2495"
+	hide_quest_details_until_startable: true
+	hide_quest_until_deps_visible: true
+	icon: "kubejs:cube1"
+	id: "302898E288734A9B"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"Welcome to &6Mechanical Mastery&r!"
+				""
+				"Your objective is to automate every mechanical crystal. "
+				""
+				"Your starting island contains enough resources to progress through the first chapter, feel free to explore!"
+			]
+			icon: "enderio:sentient_ender"
+			id: "491EB18107FC8776"
+			rewards: [{
+				id: "4989B709FBE3F32A"
+				item: {
+					Count: 1b
+					id: "createchromaticreturn:bone_shadow_steel_paxel"
+					tag: {
+						Damage: 0
+						Enchantments: [{
+							id: "minecraft:unbreaking"
+							lvl: 3s
+						}]
+					}
+				}
+				type: "item"
+			}]
+			shape: "square"
+			size: 1.2d
+			subtitle: "Where it all begins"
+			tasks: [{
+				icon: {
+					Count: 1b
+					id: "projecte:philosophers_stone"
+					tag: { }
+				}
+				id: "2ECDA834E28D3B2A"
+				title: "Welcome!"
+				type: "checkmark"
+			}]
+			x: -4.0142857142857125d
+			y: -0.48571428571428754d
+		}
+		{
+			dependencies: ["09BAD2F7D01D16FD"]
+			description: ["It's time to craft your first power generator: a stirling dynamo. Although far from ideal, it will be of great importance early on."]
+			id: "19A22A30A2BFEDAB"
+			rewards: [{
+				id: "57AA7677EF15CC50"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "5F6664EDD2BFC0A3"
+				item: "thermal:dynamo_stirling"
+				type: "item"
+			}]
+			title: "Dynamic integration"
+			x: 6.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["54983CC37DD93E7A"]
+			description: ["You have probably already noticed that in this modpack, ores give less than one ingot when regularly smelted. Thankfully, with the pulverizer, you can negate this by getting 1-2 ore dust from each ore chunk!"]
+			id: "13AA6AFAF9C8DD0B"
+			rewards: [
+				{
+					id: "061C05EC445B401B"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "7EAA9D91A0600948"
+					item: "thermal:machine_pulverizer"
+					type: "item"
+				}
+			]
+			subtitle: "Finally, some decent ore processing!"
+			tasks: [{
+				id: "36592AE3FE51D5B9"
+				item: "thermal:machine_pulverizer"
+				type: "item"
+			}]
+			title: "Pulverizer"
+			x: 11.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"16ED4C2396DE5F8D"
+				"37D46DC4600FEA76"
+			]
+			description: [
+				"The Primitive Alloyer is how you will get your first . "
+				""
+				"It's not very efficient, though, and it requires solid fuel... there must be some better way to do this in the future..."
+			]
+			hide: false
+			id: "19499868D936A165"
+			rewards: [
+				{
+					count: 2
+					id: "706CE2571DCA3C22"
+					item: "minecraft:hopper"
+					type: "item"
+				}
+				{
+					id: "347254C4E4EC82DE"
+					item: "ae2:certus_quartz_wrench"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "5ADE6E0A5AD4BBBC"
+				item: "enderio:primitive_alloy_smelter"
+				type: "item"
+			}]
+			title: "Alloyus Primitivus"
+			x: 0.5d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"547050DB11C5FFB7"
+				"2746A3F7A98C2134"
+			]
+			description: ["With the multiservo press, you can automate what the engineer's hammer does and more, without losing item durability and with a little extra efficiency. You can craft plates and more with it!"]
+			id: "54983CC37DD93E7A"
+			rewards: [
+				{
+					id: "0077B72A897EB181"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "02283396E036A872"
+					item: "thermal:machine_press"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "32825235F7A53270"
+				item: "thermal:machine_press"
+				type: "item"
+			}]
+			x: 9.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["547050DB11C5FFB7"]
+			description: ["You can place special dies on the bottom slot of the multiservo press to change its functionality, such as crafting gears instead of plates. This modpack adds a custom rod die which can be used to make rods from plates."]
+			id: "2746A3F7A98C2134"
+			rewards: [
+				{
+					id: "5F49998A6AFA70CB"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "32ACBFB925B3577D"
+					table_id: 1602564825145878379L
+					type: "choice"
+				}
+			]
+			tasks: [{
+				id: "267A63D03350CEBE"
+				item: {
+					Count: 1b
+					id: "itemfilters:tag"
+					tag: {
+						value: "thermal:crafting/dies"
+					}
+				}
+				title: "Any #thermal:crafting/dies"
+				type: "item"
+			}]
+			title: "Press Dies"
+			x: 8.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"73FA28F897740068"
+				"2E308530A5C47F6E"
+				"4E4618EE8D6D07B9"
+			]
+			description: ["By crafting some gears and rods together, you managed to craft the first of the mechanical essences! This cube has an EMC value higher than the sum of its parts, so if you can manage to automate it, it will serve as a great EMC source!"]
+			hide: false
+			id: "7A0CB1037E6BE4D7"
+			rewards: [
+				{
+					id: "5B75C6A7D8E9D38E"
+					type: "xp"
+					xp: 100
+				}
+				{
+					count: 16
+					id: "23176832183B31BF"
+					item: "kubejs:cube1_packaged"
+					type: "item"
+				}
+			]
+			shape: "gear"
+			tasks: [
+				{
+					id: "0DA904B48F32E904"
+					item: "kubejs:cube1"
+					type: "item"
+				}
+				{
+					id: "2806B1586B29E196"
+					item: "kubejs:cube1_packaged"
+					type: "item"
+				}
+			]
+			x: 5.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["54983CC37DD93E7A"]
+			description: ["The redstone furnace allows you to smelt things just like a regular furnace can, except it consumes RF instead of fuel."]
+			id: "2B65C5DE4AA944BA"
+			rewards: [
+				{
+					id: "0F55EF2A479BC037"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "68047720F3FFCAAD"
+					item: "thermal:machine_furnace"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "082AE7EADA5E2A06"
+				item: "thermal:machine_furnace"
+				type: "item"
+			}]
+			x: 8.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["547050DB11C5FFB7"]
+			description: ["With the basic EMC link, you can automatically convert items to EMC and vice versa. With them, you can fully automate the production of mechanical essences."]
+			id: "4AB3B5469D68C46D"
+			rewards: [
+				{
+					id: "2C69027CF205BC78"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "3213031B44F88BBD"
+					item: "projectexpansion:basic_emc_link"
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "4AFCCAA14047AEF0"
+				item: "projectexpansion:basic_emc_link"
+				type: "item"
+			}]
+			title: "Basic EMC I/O"
+			x: 6.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["54983CC37DD93E7A"]
+			description: ["The sequential fabricator allows you to automate crafting, you only have to select the recipe and insert the ingredients, then they will be crafted into the output."]
+			id: "387D9ECF1CD0B4F8"
+			rewards: [{
+				id: "56DE53737C24A26C"
+				type: "xp"
+				xp: 100
+			}]
+			tasks: [{
+				id: "29D6E0B76CB72710"
+				item: "thermal:machine_crafter"
+				type: "item"
+			}]
+			x: 11.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["7A0CB1037E6BE4D7"]
+			description: [
+				"Congratulations! You crafted your first Mechanical Essence."
+				""
+				"The following quests will cover automating the production of the Basic Essence."
+				""
+				"Oh, I almost forgot: craft a Vibration Chamber to stop cranking the Inscriber!"
+			]
+			id: "09BAD2F7D01D16FD"
+			rewards: [
+				{
+					id: "0F2165D0F13CC47C"
+					type: "xp"
+					xp: 100
+				}
+				{
+					id: "13381831351CFE93"
+					item: "ae2:vibration_chamber"
+					type: "item"
+				}
+			]
+			shape: "diamond"
+			subtitle: "but don't rest on your achievements"
+			tasks: [{
+				id: "447D9411372AF198"
+				item: "ae2:vibration_chamber"
+				type: "item"
+			}]
+			title: "A fast start..."
+			x: 6.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["09BAD2F7D01D16FD"]
+			description: [
+				"You get alloys before having the induction smelter by pulverizing the raw ores and crafting the dusts together."
+				"You can then smelt alloy dusts to obtain ingots."
+			]
+			id: "547050DB11C5FFB7"
+			rewards: [{
+				exclude_from_claim_all: true
+				id: "69C2B59340725641"
+				table_id: 730431930992961248L
+				type: "choice"
+			}]
+			tasks: [{
+				count: 4L
+				id: "4CA78D9953A59B84"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "thermal:constantan_dust"
+							}
+							{
+								Count: 1b
+								id: "thermal:invar_dust"
+							}
+							{
+								Count: 1b
+								id: "thermal:bronze_dust"
+							}
+						]
+					}
+				}
+				title: "Alloy Dusts"
+				type: "item"
+			}]
+			title: "Alloys"
+			x: 8.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["793AABD9C2DEC680"]
+			description: ["Inscribing plates gives rods... makes sense! not"]
+			id: "73FA28F897740068"
+			rewards: [{
+				count: 2
+				id: "7B9D8ADC7677C8CE"
+				item: "createaddition:copper_rod"
+				type: "item"
+			}]
+			tasks: [{
+				count: 2L
+				id: "1F1757468A1CE472"
+				item: "createaddition:copper_rod"
+				type: "item"
+			}]
+			x: 3.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["793AABD9C2DEC680"]
+			description: ["Gears require plates, since when?"]
+			id: "2E308530A5C47F6E"
+			rewards: [{
+				id: "65963C80FE787126"
+				item: "thermal:iron_gear"
+				type: "item"
+			}]
+			tasks: [{
+				id: "4D5ABE90519268F2"
+				item: "thermal:iron_gear"
+				type: "item"
+			}]
+			x: 3.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["793AABD9C2DEC680"]
+			description: ["&eGold&r gears? Where are my aluminum gears?"]
+			id: "4E4618EE8D6D07B9"
+			rewards: [{
+				id: "478FAAE47D905ABC"
+				item: "thermal:gold_gear"
+				type: "item"
+			}]
+			tasks: [{
+				id: "4D5FA210A20EEDE3"
+				item: "thermal:gold_gear"
+				type: "item"
+			}]
+			x: 3.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["19499868D936A165"]
+			description: ["The inscriber also gives you early ore doubling... but you still need to crank your way to richness... for now"]
+			id: "793AABD9C2DEC680"
+			rewards: [{
+				exclude_from_claim_all: true
+				id: "2EAADA2F07B07F17"
+				table_id: 865906400857221430L
+				type: "choice"
+			}]
+			tasks: [{
+				count: 2L
+				id: "4E9865179A8ECEEC"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "thermal:iron_dust"
+							}
+							{
+								Count: 1b
+								id: "thermal:copper_dust"
+							}
+							{
+								Count: 1b
+								id: "thermal:gold_dust"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Ore doubling!"
+			x: 2.0d
+			y: -0.5d
+		}
+		{
+			id: "6D15A669AD73151D"
+			tasks: [{
+				id: "5ED5FE513CD7082E"
+				item: "enderio:sag_mill"
+				type: "item"
+			}]
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["37D46DC4600FEA76"]
+			description: ["To get your first grains of infinity you"]
+			id: "16ED4C2396DE5F8D"
+			rewards: [{
+				count: 8
+				id: "58353B626BC01CFD"
+				item: "enderio:grains_of_infinity"
+				type: "item"
+			}]
+			tasks: [{
+				id: "1C34A7176C6120ED"
+				item: "enderio:grains_of_infinity"
+				type: "item"
+			}]
+			x: 0.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4891D29319AB7052"]
+			description: [
+				"Using the mysterious and versatile Inscriber you can obtain metal powders for early ore doubling!"
+				""
+				"You did find the ores, did you?"
+			]
+			id: "37D46DC4600FEA76"
+			tasks: [
+				{
+					id: "50B92B55C1653375"
+					item: "ae2:inscriber"
+					type: "item"
+				}
+				{
+					id: "2B53CCF2976DFBAC"
+					item: "ae2:crank"
+					type: "item"
+				}
+			]
+			title: "Duplex Mineralis"
+			x: -1.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["491EB18107FC8776"]
+			description: ["It's time to create a basic cobblestone generator to get access to some basic stone derived materials."]
+			hide: false
+			id: "4891D29319AB7052"
+			rewards: [{
+				count: 64
+				id: "439A15327B8E3AC3"
+				item: "minecraft:cobblestone"
+				type: "item"
+			}]
+			subtitle: "The beginning..."
+			tasks: [{
+				id: "711800971AF887B0"
+				item: "minecraft:cobblestone"
+				type: "item"
+			}]
+			title: "Creatus Petrus"
+			x: -2.5d
+			y: -0.5d
+		}
+	]
+	title: "Tier 1: EnderIo"
+}

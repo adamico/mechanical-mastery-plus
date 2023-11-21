@@ -1,0 +1,10 @@
+{
+	id: "2B65F5EA5A99641A"
+	loot_size: 1
+	order_index: 4
+	rewards: [{
+		command: "/gamerule doDaylightCycle true"
+		type: "command"
+	}]
+	title: "activate daylight cycle"
+}

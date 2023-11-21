@@ -1,0 +1,10 @@
+{
+	id: "15E700BCFC2D86F0"
+	loot_size: 1
+	order_index: 11
+	rewards: [{
+		command: "/gamerule doWeatherCycle true"
+		type: "command"
+	}]
+	title: "reactivate weather cycle"
+}

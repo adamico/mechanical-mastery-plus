@@ -1,0 +1,10 @@
+{
+	id: "58A26B32E5F47DFF"
+	loot_size: 1
+	order_index: 9
+	rewards: [{
+		command: "/gamerule doWeatherCycle false"
+		type: "command"
+	}]
+	title: "stop weather cycle"
+}
