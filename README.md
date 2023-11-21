@@ -15,7 +15,7 @@ Follow these steps to get the bleeding edge version of this modpack.
 
 1. Download the [CurseForge App](https://www.curseforge.com/download/app) and [Git](https://git-scm.com/downloads) if you haven't already.
 2. Fork and clone the repository to the Instances folder of the CurseForge App, the default path is `C:\Users\{UserName}\Documents\Curse\Minecraft\Instances`.
-3. Double click the script `InstanceSyncSetup.bat` in the `automation` folder to setup InstanceSync.
+3. Double click the script `Cat-Downloader-Legacy_Setup.bat` in the `automation` folder to sync the instance.
 4. Open the CurseForge App and you should see the modpack. If you already had CurseForge App open, restart it.
 
 Note: the github version is probably unstable and tested by a single persion. Don't forget to backup your save if you decide to try this dev version.
