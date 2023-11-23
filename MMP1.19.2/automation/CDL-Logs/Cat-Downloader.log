@@ -1,0 +1,479 @@
+[28-09-2023 15:50:01.338] [INFO] "C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\Cat-Downloader.log" file created.
+[28-09-2023 15:50:01.345] [INFO] Logger Initialization completed.
+[28-09-2023 15:50:01.347] [INFO] [Main.Services] Cat Downloader Legacy version: 2.1.3
+[28-09-2023 15:50:01.349] [INFO] [Main.Services] App Path: C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\automation\Cat-Downloader-Legacy.jar
+[28-09-2023 15:50:01.354] [INFO] [Main.Services] Java Path: C:\Program Files\Eclipse Adoptium\jdk-18.0.2.101-hotspot\bin\java.exe
+[28-09-2023 15:50:01.428] [INFO] [Argument Decoder] Running with arguments:
+[28-09-2023 15:50:01.429] [INFO] [Argument Decoder] -SettingsPath:automation
+[28-09-2023 15:50:01.429] [INFO] [Argument Decoder] ---------------------------------------------------------------------
+[28-09-2023 15:50:01.430] [INFO] [Argument Decoder] Program Configuration from Arguments:
+[28-09-2023 15:50:01.430] [INFO] [Argument Decoder] > Working directory: 
+[28-09-2023 15:50:01.431] [INFO] [Argument Decoder] - Full Path: C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus
+[28-09-2023 15:50:01.431] [INFO] [Argument Decoder] > Program Mode: automatic
+[28-09-2023 15:50:01.431] [INFO] [Argument Decoder] > Network Check Bypass: false
+[28-09-2023 15:50:01.432] [INFO] [Argument Decoder] > Updater enabled: true
+[28-09-2023 15:50:01.432] [INFO] [Argument Decoder] > Settings enabled: true
+[28-09-2023 15:50:01.432] [INFO] [Argument Decoder] > Default Settings from the template: true
+[28-09-2023 15:50:01.433] [INFO] [Argument Decoder] > Settings Path: automation
+[28-09-2023 15:50:01.433] [INFO] [Argument Decoder] - Full Path: C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\automation
+[28-09-2023 15:50:01.433] [INFO] [Argument Decoder] > Logger enabled: true
+[28-09-2023 15:50:01.434] [INFO] [Argument Decoder] > Stockpiling logs active: true
+[28-09-2023 15:50:01.434] [INFO] [Argument Decoder] > Amount of logs to keep: 10
+[28-09-2023 15:50:01.435] [INFO] [Argument Decoder] > Compressing of logs active: true
+[28-09-2023 15:50:01.435] [INFO] [Argument Decoder] > Logs Path: 
+[28-09-2023 15:50:01.435] [INFO] [Argument Decoder] - Full Path: C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus
+[28-09-2023 15:50:01.436] [INFO] [Argument Decoder] > Caches enabled: true
+[28-09-2023 15:50:01.436] [INFO] [Argument Decoder] > Caches Path: 
+[28-09-2023 15:50:01.436] [INFO] [Argument Decoder] - Full Path: C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus
+[28-09-2023 15:50:01.437] [INFO] [Argument Decoder] > Thread count for downloads: 16
+[28-09-2023 15:50:01.437] [INFO] [Argument Decoder] > Download attempts for re-downloads: 5
+[28-09-2023 15:50:01.437] [INFO] [Argument Decoder] > Hash Verification: true
+[28-09-2023 15:50:01.438] [INFO] [Argument Decoder] > File Size Verification: true
+[28-09-2023 15:50:01.438] [INFO] [Argument Decoder] ---------------------------------------------------------------------
+[28-09-2023 15:50:01.439] [INFO] [SettingsManager] Settings initialization started.
+[28-09-2023 15:50:01.440] [INFO] [SettingsManager] Found settings file!
+[28-09-2023 15:50:01.440] [INFO] [SettingsManager] - Path to settings file: C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\automation\Cat-Downloader-Legacy-Settings.json5
+[28-09-2023 15:50:01.440] [INFO] [SettingsManager] Parsing data from settings file...
+[28-09-2023 15:50:01.453] [INFO] [SettingsManager] Parsing of Settings was successful!
+[28-09-2023 15:50:01.454] [INFO] [SettingsManager] Saving settings to a file...
+[28-09-2023 15:50:01.475] [INFO] [SettingsManager] Settings have been saved!
+[28-09-2023 15:50:01.476] [INFO] [SettingsManager] Parsing data from settings file...
+[28-09-2023 15:50:01.477] [INFO] [SettingsManager] Parsing of Settings was successful!
+[28-09-2023 15:50:01.477] [INFO] [SettingsManager] Validating settings...
+[28-09-2023 15:50:01.477] [INFO] [SettingsManager] Loading Settings data to Argument Decoder...
+[28-09-2023 15:50:01.478] [INFO] [Argument Decoder] ---------------------------------------------------------------------
+[28-09-2023 15:50:01.478] [INFO] [Argument Decoder] Program Configuration from Settings:
+[28-09-2023 15:50:01.478] [INFO] [Argument Decoder] > Working directory: 
+[28-09-2023 15:50:01.478] [INFO] [Argument Decoder] - Full Path: C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus
+[28-09-2023 15:50:01.479] [INFO] [Argument Decoder] > Program Mode: cf-instance
+[28-09-2023 15:50:01.479] [INFO] [Argument Decoder] > Network Check Bypass: false
+[28-09-2023 15:50:01.479] [INFO] [Argument Decoder] > Updater enabled: true
+[28-09-2023 15:50:01.479] [INFO] [Argument Decoder] > Settings enabled: true
+[28-09-2023 15:50:01.480] [INFO] [Argument Decoder] > Default Settings from the template: true
+[28-09-2023 15:50:01.480] [INFO] [Argument Decoder] > Settings Path: automation
+[28-09-2023 15:50:01.480] [INFO] [Argument Decoder] - Full Path: C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\automation
+[28-09-2023 15:50:01.480] [INFO] [Argument Decoder] > Logger enabled: true
+[28-09-2023 15:50:01.481] [INFO] [Argument Decoder] > Stockpiling logs active: true
+[28-09-2023 15:50:01.481] [INFO] [Argument Decoder] > Amount of logs to keep: 10
+[28-09-2023 15:50:01.481] [INFO] [Argument Decoder] > Compressing of logs active: true
+[28-09-2023 15:50:01.481] [INFO] [Argument Decoder] > Logs Path: automation/CDL-Logs
+[28-09-2023 15:50:01.482] [INFO] [Argument Decoder] - Full Path: C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\automation\CDL-Logs
+[28-09-2023 15:50:01.482] [INFO] [Argument Decoder] > Caches enabled: true
+[28-09-2023 15:50:01.482] [INFO] [Argument Decoder] > Caches Path: automation/CDL-Logs
+[28-09-2023 15:50:01.482] [INFO] [Argument Decoder] - Full Path: C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\automation\CDL-Logs
+[28-09-2023 15:50:01.483] [INFO] [Argument Decoder] > Thread count for downloads: 16
+[28-09-2023 15:50:01.483] [INFO] [Argument Decoder] > Download attempts for re-downloads: 5
+[28-09-2023 15:50:01.483] [INFO] [Argument Decoder] > Hash Verification: true
+[28-09-2023 15:50:01.483] [INFO] [Argument Decoder] > File Size Verification: true
+[28-09-2023 15:50:01.484] [INFO] [Argument Decoder] ---------------------------------------------------------------------
+[28-09-2023 15:50:01.484] [INFO] [SettingsManager] Loading data to ARD finished!
+[28-09-2023 15:50:01.484] [INFO] [SettingsManager] Initialization of Settings finished.
+[28-09-2023 15:50:01.485] [INFO] Post-Initialization of Logger started!
+[28-09-2023 15:50:01.486] [INFO] Custom path for logs has been specified: "C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\automation\CDL-Logs".
+[28-09-2023 15:50:01.487] [INFO] Old log file found in the log Directory! Archiving the log file...
+[28-09-2023 15:50:01.488] [INFO] [File Utilities] Renamed file "Cat-Downloader.log" to "Cat-Downloader Archived.log".
+[28-09-2023 15:50:01.497] [INFO] [File Utilities] Custom file name for archive specified! Archive will be saved under name: "28.9.2023 15-50-1.log.gz"
+[28-09-2023 15:50:01.498] [INFO] [File Utilities] Compressing file "C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\automation\CDL-Logs\Cat-Downloader Archived.log"...
+[28-09-2023 15:50:01.502] [INFO] [File Utilities] Compression done! Deleting original file...
+[28-09-2023 15:50:01.503] [INFO] [File Utilities] File "automation\CDL-Logs\Cat-Downloader Archived.log" has been deleted.
+[28-09-2023 15:50:01.503] [INFO] [File Utilities] File "Cat-Downloader Archived.log" has been deleted.
+[28-09-2023 15:50:01.503] [INFO] Old log file has been archived!
+[28-09-2023 15:50:01.504] [INFO] Moving currently active log file to new location...
+[28-09-2023 15:50:01.505] [INFO] Moved currently active log to the new Location: "C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\automation\CDL-Logs\Cat-Downloader.log".
+[28-09-2023 15:50:01.505] [INFO] Stockpiling of the logs is enabled! Stockpile limit is 10
+[28-09-2023 15:50:01.507] [INFO] Post-Initialization of Logger finished!
+[28-09-2023 15:50:01.507] [INFO] [Main.Services] Checking network connection...
+[28-09-2023 15:50:01.811] [INFO] [Main.Services] Network connection checked! Time to verify network: 0.302 seconds.
+[28-09-2023 15:50:01.812] [INFO] [Updater] Checking for app updates...
+[28-09-2023 15:50:02.069] [INFO] [Updater] App is updated! Running version 2.1.3 when latest version is 2.1.3
+[28-09-2023 15:50:02.070] [INFO] [Main] Found "mods" folder in working directory. Path: C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\mods
+[28-09-2023 15:50:02.071] [INFO] [Main] Fetching data from the manifest file and translating it to CDLInstance Format...
+[28-09-2023 15:50:02.115] [INFO] [CDLInstance Utilities] Translating CF MinecraftInstance into CDLInstance format...
+[28-09-2023 15:50:02.116] [INFO] [CDLInstance Utilities] Translation successful.
+[28-09-2023 15:50:02.117] [INFO] [Main] Data fetched successfully.
+[28-09-2023 15:50:02.117] [INFO] [Main] Looking for cached version of the CDLInstance...
+[28-09-2023 15:50:02.117] [INFO] [CDLInstance Utilities] Parsing CDLInstance file at "C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\automation\CDL-Logs\CDL-Instance-cache.json"...
+[28-09-2023 15:50:02.124] [INFO] [CDLInstance Utilities] CDLInstance file at "C:\Users\andre\curseforge\minecraft\Instances\mechanical-mastery-plus\automation\CDL-Logs\CDL-Instance-cache.json" parsed successfully.
+[28-09-2023 15:50:02.125] [INFO] [File Utilities] File "automation\CDL-Logs\CDL-Instance-cache.json" has been deleted.
+[28-09-2023 15:50:02.125] [CRITICAL] [Main] Exception thrown while looking for cached version of CDLInstance! Verification will be performed from the source.
+[28-09-2023 15:50:02.126] [CRITICAL] java.lang.IllegalArgumentException: Cached CDLInstance json isn't for the pack currently being installed, or the details for the pack has changed. Cache file will be regenerated at the end of the sync process.
+    at com.kanzaji.catdownloaderlegacy.CatDownloader.parseCachedInstanceFile(CatDownloader.java:310)
+    at com.kanzaji.catdownloaderlegacy.CatDownloader.fetchAndVerifyManifestFile(CatDownloader.java:238)
+    at com.kanzaji.catdownloaderlegacy.CatDownloader.main(CatDownloader.java:102)
+[28-09-2023 15:50:02.129] [INFO] [Main] Installing modpack mechanical-mastery-plus v0.0.4-alpha created by kc00l
+[28-09-2023 15:50:02.132] [INFO] [Main] Using mod loader Forge 43.2.23 for Minecraft 1.19.2
+[28-09-2023 15:50:02.134] [INFO] [Main] Mods found in the manifest file: 178 mods.
+[28-09-2023 15:50:02.134] [INFO] [Main] Instance name: mechanical-mastery-plus
+[28-09-2023 15:50:02.136] [INFO] [Sync Manager] Running GC to clear out memory before running synchronization process...
+[28-09-2023 15:50:02.144] [INFO] [Random Utilities] GC Manual Trigger! 14.180199 MegaBytes were cleared up.
+[28-09-2023 15:50:02.145] [INFO] [Sync Manager] Starting synchronization process!
+[28-09-2023 15:50:02.145] [INFO] [Sync Manager] Requesting of lookups for installed mods and their verification started.
+[28-09-2023 15:50:02.146] [INFO] [Sync Manager] Lookup and verification of file craftingcraft-forge-1.19-13.0.0.jar has been requested.
+[28-09-2023 15:50:02.147] [INFO] [Sync Manager] Lookup and verification of file ferritecore-5.0.3-forge.jar has been requested.
+[28-09-2023 15:50:02.148] [INFO] [Sync Manager] Lookup and verification of file ftb-ranks-forge-1902.1.15-build.77.jar has been requested.
+[28-09-2023 15:50:02.148] [INFO] [Sync Manager] Lookup and verification of file simplemagnets-1.1.9-forge-mc1.19.jar has been requested.
+[28-09-2023 15:50:02.148] [INFO] [Sync Manager] Lookup and verification of file xnetgases-1.19.2-4.0.1.jar has been requested.
+[28-09-2023 15:50:02.149] [INFO] [Sync Manager] Lookup and verification of file sophisticatedbackpacks-1.19.2-3.18.58.907.jar has been requested.
+[28-09-2023 15:50:02.149] [INFO] [Sync Manager] Lookup and verification of file thermal_innovation-1.19.2-10.2.0.18.jar has been requested.
+[28-09-2023 15:50:02.150] [INFO] [Sync Manager] Lookup and verification of file titanium-1.19.2-3.7.3-27.jar has been requested.
+[28-09-2023 15:50:02.150] [INFO] [Sync Manager] Lookup and verification of file DefaultWorldType-1.19.1-3.1.0.jar has been requested.
+[28-09-2023 15:50:02.150] [INFO] [Sync Manager] Lookup and verification of file redstonepen-1.19.2-forge-1.2.20.jar has been requested.
+[28-09-2023 15:50:02.151] [INFO] [Sync Manager] Lookup and verification of file fm_audio_extension_forge_1.1.1-1_MC_1.19.jar has been requested.
+[28-09-2023 15:50:02.151] [INFO] [Sync Manager] Lookup and verification of file ftb-teams-forge-1902.2.14-build.123.jar has been requested.
+[28-09-2023 15:50:02.152] [INFO] [Sync Manager] Lookup and verification of file Applied-Mekanistics-1.3.5.jar has been requested.
+[28-09-2023 15:50:02.152] [INFO] [Sync Manager] Lookup and verification of file comforts-forge-6.0.5+1.19.2.jar has been requested.
+[28-09-2023 15:50:02.152] [INFO] [Sync Manager] Lookup and verification of file jei-1.19.2-forge-11.6.0.1018.jar has been requested.
+[28-09-2023 15:50:02.153] [INFO] [Sync Manager] Lookup and verification of file craftingtweaks-forge-1.19.2-15.1.8.jar has been requested.
+[28-09-2023 15:50:02.153] [INFO] [Sync Manager] Lookup and verification of file TextruesRubidiumOptions-1.0.7-mc1.19.2.jar has been requested.
+[28-09-2023 15:50:02.154] [INFO] [Sync Manager] Lookup and verification of file thermal_cultivation-1.19.2-10.2.0.17.jar has been requested.
+[28-09-2023 15:50:02.154] [INFO] [Sync Manager] Lookup and verification of file rhino-forge-1902.2.2-build.272.jar has been requested.
+[28-09-2023 15:50:02.154] [INFO] [Sync Manager] Lookup and verification of file Log-Begone-Forge-1.19-1.0.6.jar has been requested.
+[28-09-2023 15:50:02.154] [INFO] [Sync Manager] Lookup and verification of file squatgrow-3.0.1+mc1.19.2.jar has been requested.
+[28-09-2023 15:50:02.155] [INFO] [Sync Manager] Lookup and verification of file xnet-1.19-5.1.4.jar has been requested.
+[28-09-2023 15:50:02.155] [INFO] [Sync Manager] Lookup and verification of file VisualWorkbench-v4.2.4-1.19.2-Forge.jar has been requested.
+[28-09-2023 15:50:02.155] [INFO] [Sync Manager] Lookup and verification of file Patchouli-1.19.2-77.jar has been requested.
+[28-09-2023 15:50:02.156] [INFO] [Sync Manager] Lookup and verification of file extremesoundmuffler-3.38-forge-1.19.2.jar has been requested.
+[28-09-2023 15:50:02.156] [INFO] [Sync Manager] Lookup and verification of file probejs-5.3.1-forge.jar has been requested.
+[28-09-2023 15:50:02.156] [INFO] [Sync Manager] Lookup and verification of file Cucumber-1.19.2-6.0.9.jar has been requested.
+[28-09-2023 15:50:02.157] [INFO] [Sync Manager] Lookup and verification of file AkashicTome-1.6-23.jar has been requested.
+[28-09-2023 15:50:02.157] [INFO] [Sync Manager] Lookup and verification of file reforgium-1.0.12a.jar has been requested.
+[28-09-2023 15:50:02.157] [INFO] [Sync Manager] Lookup and verification of file appliedenergistics2-forge-12.9.8.jar has been requested.
+[28-09-2023 15:50:02.157] [INFO] [Sync Manager] Lookup and verification of file Runelic-Forge-1.19.2-14.1.4.jar has been requested.
+[28-09-2023 15:50:02.158] [INFO] [Sync Manager] Lookup and verification of file rftoolspower-1.19-5.1.2.jar has been requested.
+[28-09-2023 15:50:02.158] [INFO] [Sync Manager] Lookup and verification of file kotlinforforge-3.12.0-all.jar has been requested.
+[28-09-2023 15:50:02.158] [INFO] [Sync Manager] Lookup and verification of file create-1.19.2-0.5.1.e.jar has been requested.
+[28-09-2023 15:50:02.158] [INFO] [Sync Manager] Lookup and verification of file almostunified-forge-1.19.2-0.7.0.jar has been requested.
+[28-09-2023 15:50:02.159] [INFO] [Sync Manager] Lookup and verification of file rubidium-extra-0.4.19+mc1.19.2-build.105.jar has been requested.
+[28-09-2023 15:50:02.159] [INFO] [Sync Manager] Lookup and verification of file trashslot-forge-1.19.2-12.1.0.jar has been requested.
+[28-09-2023 15:50:02.160] [INFO] [Sync Manager] Lookup and verification of file refinedstorage-1.11.6.jar has been requested.
+[28-09-2023 15:50:02.160] [INFO] [Sync Manager] Lookup and verification of file smoothboot(reloaded)-mc1.19.2-0.0.2.jar has been requested.
+[28-09-2023 15:50:02.160] [INFO] [Sync Manager] Lookup and verification of file balm-forge-1.19.2-4.6.0.jar has been requested.
+[28-09-2023 15:50:02.161] [INFO] [Sync Manager] Lookup and verification of file functionalstorage-1.19.2-1.1.7.jar has been requested.
+[28-09-2023 15:50:02.161] [INFO] [Sync Manager] Lookup and verification of file Controlling-forge-1.19.2-10.0+7.jar has been requested.
+[28-09-2023 15:50:02.161] [INFO] [Sync Manager] Lookup and verification of file thermal_expansion-1.19.2-10.2.0.21.jar has been requested.
+[28-09-2023 15:50:02.161] [INFO] [Sync Manager] Lookup and verification of file curios-forge-1.19.2-5.1.4.1.jar has been requested.
+[28-09-2023 15:50:02.161] [INFO] [Sync Manager] Lookup and verification of file ironchests-3.1.3-forge.jar has been requested.
+[28-09-2023 15:50:02.162] [INFO] [Sync Manager] Lookup and verification of file online_detector-1.19-3.1.2.jar has been requested.
+[28-09-2023 15:50:02.162] [INFO] [Sync Manager] Lookup and verification of file BridgingMod-2.1.1+1.19.2.forge.jar has been requested.
+[28-09-2023 15:50:02.162] [INFO] [Sync Manager] Lookup and verification of file rsrequestify-2.3.0.jar has been requested.
+[28-09-2023 15:50:02.163] [INFO] [Sync Manager] Lookup and verification of file sophisticatedcore-1.19.2-0.5.87.417.jar has been requested.
+[28-09-2023 15:50:02.163] [INFO] [Sync Manager] Lookup and verification of file FastSuite-1.19.2-4.1.1.jar has been requested.
+[28-09-2023 15:50:02.163] [INFO] [Sync Manager] Lookup and verification of file supermartijn642corelib-1.1.12-forge-mc1.19.2.jar has been requested.
+[28-09-2023 15:50:02.163] [INFO] [Sync Manager] Lookup and verification of file creativecrafter-1.19.2-1.0.jar has been requested.
+[28-09-2023 15:50:02.163] [INFO] [Sync Manager] Lookup and verification of file cloth-config-8.3.103-forge.jar has been requested.
+[28-09-2023 15:50:02.164] [INFO] [Sync Manager] Lookup and verification of file memoryleakfix-forge-1.17+-1.0.0.jar has been requested.
+[28-09-2023 15:50:02.164] [INFO] [Sync Manager] Lookup and verification of file CraftTweaker-forge-1.19.2-10.1.50.jar has been requested.
+[28-09-2023 15:50:02.164] [INFO] [Sync Manager] Lookup and verification of file konkrete_forge_1.6.1_MC_1.19-1.19.2.jar has been requested.
+[28-09-2023 15:50:02.164] [INFO] [Sync Manager] Lookup and verification of file SkyblockBuilder-1.19.2-4.2.17.jar has been requested.
+[28-09-2023 15:50:02.165] [INFO] [Sync Manager] Lookup and verification of file appleskin-forge-mc1.19-2.4.2.jar has been requested.
+[28-09-2023 15:50:02.165] [INFO] [Sync Manager] Lookup and verification of file ExtendedCrafting-1.19.2-5.1.8.jar has been requested.
+[28-09-2023 15:50:02.165] [INFO] [Sync Manager] Lookup and verification of file CodeChickenLib-1.19.2-4.3.1.481-universal.jar has been requested.
+[28-09-2023 15:50:02.165] [INFO] [Sync Manager] Lookup and verification of file notenoughcrashes-4.2.1+1.19.2-forge.jar has been requested.
+[28-09-2023 15:50:02.166] [INFO] [Sync Manager] Lookup and verification of file Bookshelf-Forge-1.19.2-16.3.20.jar has been requested.
+[28-09-2023 15:50:02.166] [INFO] [Sync Manager] Lookup and verification of file FramedBlocks-6.8.6.jar has been requested.
+[28-09-2023 15:50:02.166] [INFO] [Sync Manager] Lookup and verification of file cupboard-1.19.2-1.9.jar has been requested.
+[28-09-2023 15:50:02.166] [INFO] [Sync Manager] Lookup and verification of file modnametooltip-1.20.1-1.20.0.jar has been requested.
+[28-09-2023 15:50:02.167] [INFO] [Sync Manager] Lookup and verification of file chipped-forge-1.19.2-2.1.5.jar has been requested.
+[28-09-2023 15:50:02.167] [INFO] [Sync Manager] Lookup and verification of file createaddition-1.19.2-1.1.1.jar has been requested.
+[28-09-2023 15:50:02.167] [INFO] [Sync Manager] Lookup and verification of file clienttweaks-forge-1.19.2-8.3.0.jar has been requested.
+[28-09-2023 15:50:02.167] [INFO] [Sync Manager] Lookup and verification of file modernfix-forge-5.7.4+mc1.19.2.jar has been requested.
+[28-09-2023 15:50:02.167] [INFO] [Sync Manager] Lookup and verification of file laserio-1.5.2.jar has been requested.
+[28-09-2023 15:50:02.168] [INFO] [Sync Manager] Lookup and verification of file item-filters-forge-1902.2.9-build.51.jar has been requested.
+[28-09-2023 15:50:02.168] [INFO] [Sync Manager] Lookup and verification of file ExtraStorage-1.19.2-3.0.1.jar has been requested.
+[28-09-2023 15:50:02.168] [INFO] [Sync Manager] Lookup and verification of file EdivadLib-1.19.2-1.2.0.jar has been requested.
+[28-09-2023 15:50:02.168] [INFO] [Sync Manager] Lookup and verification of file time-in-a-bottle-3.0.1-mc1.19.jar has been requested.
+[28-09-2023 15:50:02.169] [INFO] [Sync Manager] Lookup and verification of file enderchests-forge-1.19-1.10.7.jar has been requested.
+[28-09-2023 15:50:02.169] [INFO] [Sync Manager] Lookup and verification of file AdvancedPeripherals-1.19.2-0.7.30r.jar has been requested.
+[28-09-2023 15:50:02.169] [INFO] [Sync Manager] Lookup and verification of file waystones-forge-1.19.2-11.4.1.jar has been requested.
+[28-09-2023 15:50:02.169] [INFO] [Sync Manager] Lookup and verification of file rftoolscontrol-1.19-6.1.4.jar has been requested.
+[28-09-2023 15:50:02.169] [INFO] [Sync Manager] Lookup and verification of file create-chromaticreturn1.19.2_v1.4.2.jar has been requested.
+[28-09-2023 15:50:02.170] [INFO] [Sync Manager] Lookup and verification of file torchmaster-19.2.93.jar has been requested.
+[28-09-2023 15:50:02.170] [INFO] [Sync Manager] Lookup and verification of file trashcans-1.0.18-forge-mc1.19.jar has been requested.
+[28-09-2023 15:50:02.170] [INFO] [Sync Manager] Lookup and verification of file LibX-1.19.2-4.2.8.jar has been requested.
+[28-09-2023 15:50:02.170] [INFO] [Sync Manager] Lookup and verification of file FluxNetworks-1.19.2-7.1.4.13.jar has been requested.
+[28-09-2023 15:50:02.170] [INFO] [Sync Manager] Lookup and verification of file SimpleCoreLib-1.19.2-5.1.0.2.jar has been requested.
+[28-09-2023 15:50:02.171] [INFO] [Sync Manager] Lookup and verification of file thermal_foundation-1.19.2-10.2.0.47.jar has been requested.
+[28-09-2023 15:50:02.171] [INFO] [Sync Manager] Lookup and verification of file AEInfinityBooster-1.19.2-1.2.0+11.jar has been requested.
+[28-09-2023 15:50:02.171] [INFO] [Sync Manager] Lookup and verification of file Mekanism-1.19.2-10.3.9.13.jar has been requested.
+[28-09-2023 15:50:02.171] [INFO] [Sync Manager] Lookup and verification of file cofh_core-1.19.2-10.2.1.40.jar has been requested.
+[28-09-2023 15:50:02.171] [INFO] [Sync Manager] Lookup and verification of file polylib-forge-1900.0.2-build.73.jar has been requested.
+[28-09-2023 15:50:02.172] [INFO] [Sync Manager] Lookup and verification of file JAOPCA-1.19.2-4.2.8.18.jar has been requested.
+[28-09-2023 15:50:02.172] [INFO] [Sync Manager] Lookup and verification of file canary-mc1.19.2-0.2.8.jar has been requested.
+[28-09-2023 15:50:02.172] [INFO] [Sync Manager] Lookup and verification of file kubejs-create-forge-1902.2.4-build.29.jar has been requested.
+[28-09-2023 15:50:02.172] [INFO] [Sync Manager] Lookup and verification of file auudio_forge_1.0.3_MC_1.19.jar has been requested.
+[28-09-2023 15:50:02.172] [INFO] [Sync Manager] Lookup and verification of file mob_grinding_utils-1.19.2-0.4.50.jar has been requested.
+[28-09-2023 15:50:02.173] [INFO] [Sync Manager] Lookup and verification of file connectivity-1.19.2-4.6.jar has been requested.
+[28-09-2023 15:50:02.173] [INFO] [Sync Manager] Lookup and verification of file ReAuth-1.19-Forge-4.0.7.jar has been requested.
+[28-09-2023 15:50:02.173] [INFO] [Sync Manager] Lookup and verification of file PigPen-Forge-1.19.2-11.1.2.jar has been requested.
+[28-09-2023 15:50:02.173] [INFO] [Sync Manager] Lookup and verification of file mcjtylib-1.19-7.2.5.jar has been requested.
+[28-09-2023 15:50:02.174] [INFO] [Sync Manager] Lookup and verification of file supermartijn642configlib-1.1.8-forge-mc1.19.jar has been requested.
+[28-09-2023 15:50:02.174] [INFO] [Sync Manager] Lookup and verification of file rebornstorage-1.19.2-5.0.3.jar has been requested.
+[28-09-2023 15:50:02.174] [INFO] [Sync Manager] Lookup and verification of file configured-2.1.1-1.19.2.jar has been requested.
+[28-09-2023 15:50:02.174] [INFO] [Sync Manager] Lookup and verification of file rftoolsutility-1.19-5.1.8.jar has been requested.
+[28-09-2023 15:50:02.174] [INFO] [Sync Manager] Lookup and verification of file pluto-mc1.19.2-0.0.9.jar has been requested.
+[28-09-2023 15:50:02.175] [INFO] [Sync Manager] Lookup and verification of file ImmersiveEngineering-1.19.2-9.2.2-165.jar has been requested.
+[28-09-2023 15:50:02.175] [INFO] [Sync Manager] Lookup and verification of file megacells-forge-2.0.3-1.19.2.jar has been requested.
+[28-09-2023 15:50:02.175] [INFO] [Sync Manager] Lookup and verification of file industrial-foregoing-1.19.2-3.3.2.3-5.jar has been requested.
+[28-09-2023 15:50:02.175] [INFO] [Sync Manager] Lookup and verification of file compactmachines-5.1.0.jar has been requested.
+[28-09-2023 15:50:02.175] [INFO] [Sync Manager] Lookup and verification of file PuzzlesLib-v4.4.3-1.19.2-Forge.jar has been requested.
+[28-09-2023 15:50:02.176] [INFO] [Sync Manager] Lookup and verification of file pipez-1.19.2-1.1.5.jar has been requested.
+[28-09-2023 15:50:02.176] [INFO] [Sync Manager] Lookup and verification of file DarkUtilities-Forge-1.19.2-13.1.9.jar has been requested.
+[28-09-2023 15:50:02.176] [INFO] [Sync Manager] Lookup and verification of file MekanismAdditions-1.19.2-10.3.9.13.jar has been requested.
+[28-09-2023 15:50:02.176] [INFO] [Sync Manager] Lookup and verification of file rubidium-mc1.19.2-0.6.2c.jar has been requested.
+[28-09-2023 15:50:02.176] [INFO] [Sync Manager] Lookup and verification of file CosmeticArmorReworked-1.19.2-v1a.jar has been requested.
+[28-09-2023 15:50:02.177] [INFO] [Sync Manager] Lookup and verification of file observable-3.3.1.jar has been requested.
+[28-09-2023 15:50:02.177] [INFO] [Sync Manager] Lookup and verification of file rftoolsstorage-1.19-4.1.2.jar has been requested.
+[28-09-2023 15:50:02.177] [INFO] [Sync Manager] Lookup and verification of file fuelgoeshere-1.19.2-0.1.0.0.jar has been requested.
+[28-09-2023 15:50:02.177] [INFO] [Sync Manager] Lookup and verification of file rechiseled-1.1.4-forge-mc1.19.2.jar has been requested.
+[28-09-2023 15:50:02.177] [INFO] [Sync Manager] Lookup and verification of file SimpleDiscordRichPresence-forge-3.0.4-build.27+mc1.19.2.jar has been requested.
+[28-09-2023 15:50:02.178] [INFO] [Sync Manager] Lookup and verification of file fusion-1.0.6-forge-mc1.19.2.jar has been requested.
+[28-09-2023 15:50:02.178] [INFO] [Sync Manager] Lookup and verification of file Powah-4.0.11.jar has been requested.
+[28-09-2023 15:50:02.178] [INFO] [Sync Manager] Lookup and verification of file ClickMachine-1.19.2-7.0.1.jar has been requested.
+[28-09-2023 15:50:02.178] [INFO] [Sync Manager] Lookup and verification of file saturn-mc1.19.2-0.0.4.jar has been requested.
+[28-09-2023 15:50:02.178] [INFO] [Sync Manager] Lookup and verification of file CTM-1.19.2-1.1.6+8.jar has been requested.
+[28-09-2023 15:50:02.179] [INFO] [Sync Manager] Lookup and verification of file ftbbackups2-forge-1.19.2-1.0.22.jar has been requested.
+[28-09-2023 15:50:02.179] [INFO] [Sync Manager] Lookup and verification of file AE2WTLib-12.9.7.jar has been requested.
+[28-09-2023 15:50:02.179] [INFO] [Sync Manager] Lookup and verification of file polymorph-forge-0.46.4+1.19.2.jar has been requested.
+[28-09-2023 15:50:02.179] [INFO] [Sync Manager] Lookup and verification of file rftoolsbase-1.19-4.1.7.jar has been requested.
+[28-09-2023 15:50:02.179] [INFO] [Sync Manager] Lookup and verification of file cabletiers-1.19.2-0.5471.jar has been requested.
+[28-09-2023 15:50:02.180] [INFO] [Sync Manager] Lookup and verification of file JCPlugin-1.17.x-1.20.x-4.0.4-Forge.jar has been requested.
+[28-09-2023 15:50:02.180] [INFO] [Sync Manager] Lookup and verification of file Morph-o-Tool-1.6-34.jar has been requested.
+[28-09-2023 15:50:02.180] [INFO] [Sync Manager] Lookup and verification of file engineersdecor-1.19.2-forge-1.3.29.jar has been requested.
+[28-09-2023 15:50:02.180] [INFO] [Sync Manager] Lookup and verification of file endertanks-forge-1.19-1.12.8.jar has been requested.
+[28-09-2023 15:50:02.180] [INFO] [Sync Manager] Lookup and verification of file fancymenu_forge_2.14.9_MC_1.19-1.19.2.jar has been requested.
+[28-09-2023 15:50:02.181] [INFO] [Sync Manager] Lookup and verification of file constructionwand-1.19.2-2.10.jar has been requested.
+[28-09-2023 15:50:02.181] [INFO] [Sync Manager] Lookup and verification of file kleeslabs-forge-1.19.2-12.3.0.jar has been requested.
+[28-09-2023 15:50:02.181] [INFO] [Sync Manager] Lookup and verification of file architectury-6.5.85-forge.jar has been requested.
+[28-09-2023 15:50:02.181] [INFO] [Sync Manager] Lookup and verification of file buildinggadgets-3.16.2-build.22+mc1.19.2.jar has been requested.
+[28-09-2023 15:50:02.181] [INFO] [Sync Manager] Lookup and verification of file ftb-quests-forge-1902.5.5-build.297.jar has been requested.
+[28-09-2023 15:50:02.182] [INFO] [Sync Manager] Lookup and verification of file ProjectE-1.19.2-PE1.0.1B.jar has been requested.
+[28-09-2023 15:50:02.182] [INFO] [Sync Manager] Lookup and verification of file MekanismGenerators-1.19.2-10.3.9.13.jar has been requested.
+[28-09-2023 15:50:02.182] [INFO] [Sync Manager] Lookup and verification of file PrettyPipes-1.13.6.jar has been requested.
+[28-09-2023 15:50:02.182] [INFO] [Sync Manager] Lookup and verification of file Ding-1.19.2-Forge-1.4.1.jar has been requested.
+[28-09-2023 15:50:02.182] [INFO] [Sync Manager] Lookup and verification of file rftoolsbuilder-1.19-5.2.8.jar has been requested.
+[28-09-2023 15:50:02.183] [INFO] [Sync Manager] Lookup and verification of file RSInfinityBooster-1.19.2-3.0+27.jar has been requested.
+[28-09-2023 15:50:02.183] [INFO] [Sync Manager] Lookup and verification of file elevatorid-1.19.2-1.8.9.jar has been requested.
+[28-09-2023 15:50:02.183] [INFO] [Sync Manager] Lookup and verification of file ftb-ultimine-forge-1902.4.1-build.90.jar has been requested.
+[28-09-2023 15:50:02.183] [INFO] [Sync Manager] Lookup and verification of file forgivingvoid-forge-1.19-7.0.0.jar has been requested.
+[28-09-2023 15:50:02.184] [INFO] [Sync Manager] Lookup and verification of file PrecisionMining-1.19.2-5.0.jar has been requested.
+[28-09-2023 15:50:02.184] [INFO] [Sync Manager] Lookup and verification of file AutoRegLib-1.8.2-55.jar has been requested.
+[28-09-2023 15:50:02.184] [INFO] [Sync Manager] Lookup and verification of file ProjectExpansion-1.19.2-1.0.8.jar has been requested.
+[28-09-2023 15:50:02.184] [INFO] [Sync Manager] Lookup and verification of file ftb-library-forge-1902.4.1-build.236.jar has been requested.
+[28-09-2023 15:50:02.184] [INFO] [Sync Manager] Lookup and verification of file Shrink-1.19-1.3.5.jar has been requested.
+[28-09-2023 15:50:02.185] [INFO] [Sync Manager] Lookup and verification of file emi-1.0.20+1.19.2+forge.jar has been requested.
+[28-09-2023 15:50:02.185] [INFO] [Sync Manager] Lookup and verification of file questsadditions-1.19.2-1.4.2.jar has been requested.
+[28-09-2023 15:50:02.185] [INFO] [Sync Manager] Lookup and verification of file refinedstorageaddons-0.9.0.jar has been requested.
+[28-09-2023 15:50:02.185] [INFO] [Sync Manager] Lookup and verification of file modular-routers-1.19.2-10.2.19.jar has been requested.
+[28-09-2023 15:50:02.185] [INFO] [Sync Manager] Lookup and verification of file MouseTweaks-forge-mc1.19-2.23.jar has been requested.
+[28-09-2023 15:50:02.186] [INFO] [Sync Manager] Lookup and verification of file cc-tweaked-1.19.2-1.101.3.jar has been requested.
+[28-09-2023 15:50:02.186] [INFO] [Sync Manager] Lookup and verification of file JadeAddons-1.19.2-forge-3.5.0.jar has been requested.
+[28-09-2023 15:50:02.186] [INFO] [Sync Manager] Lookup and verification of file Barsita-1.19.2-1.1.2.jar has been requested.
+[28-09-2023 15:50:02.186] [INFO] [Sync Manager] Lookup and verification of file ImmediatelyFast-1.2.5+1.19.2.jar has been requested.
+[28-09-2023 15:50:02.186] [INFO] [Sync Manager] Lookup and verification of file Clumps-forge-1.19.2-9.0.0+14.jar has been requested.
+[28-09-2023 15:50:02.187] [INFO] [Sync Manager] Lookup and verification of file shetiphiancore-forge-1.19-3.11.10.jar has been requested.
+[28-09-2023 15:50:02.187] [INFO] [Sync Manager] Lookup and verification of file Jade-1.19.1-forge-8.9.0.jar has been requested.
+[28-09-2023 15:50:02.187] [INFO] [Sync Manager] Lookup and verification of file MekanismTools-1.19.2-10.3.9.13.jar has been requested.
+[28-09-2023 15:50:02.187] [INFO] [Sync Manager] Lookup and verification of file lightspeed-1.19.2-1.0.5.jar has been requested.
+[28-09-2023 15:50:02.187] [INFO] [Sync Manager] Lookup and verification of file cookingforblockheads-forge-1.19.2-13.3.3.jar has been requested.
+[28-09-2023 15:50:02.188] [INFO] [Sync Manager] Lookup and verification of file ftb-chunks-forge-1902.4.2-build.302.jar has been requested.
+[28-09-2023 15:50:02.188] [INFO] [Sync Manager] Lookup and verification of file gravestone-1.19.2-1.0.1.jar has been requested.
+[28-09-2023 15:50:02.188] [INFO] [Sync Manager] Lookup and verification of file kubejs-mekanism-1902.1.5-build.15.jar has been requested.
+[28-09-2023 15:50:02.188] [INFO] [Sync Manager] Lookup and verification of file resourcefullib-forge-1.19.2-1.1.24.jar has been requested.
+[28-09-2023 15:50:02.188] [INFO] [Sync Manager] Lookup and verification of file kubejs-thermal-1902.1.9-build.11.jar has been requested.
+[28-09-2023 15:50:02.189] [INFO] [Sync Manager] Lookup and verification of file Placebo-1.19.2-7.3.2.jar has been requested.
+[28-09-2023 15:50:02.189] [INFO] [Sync Manager] Lookup and verification of file NaturesCompass-1.19.2-1.10.0-forge.jar has been requested.
+[28-09-2023 15:50:02.189] [INFO] [Sync Manager] Lookup and verification of file carryon-forge-1.19.2-2.1.1.21.jar has been requested.
+[28-09-2023 15:50:02.189] [INFO] [Sync Manager] Lookup and verification of file crashutilities-6.2.jar has been requested.
+[28-09-2023 15:50:02.189] [INFO] [Sync Manager] Lookup and verification of file FastLeafDecay-30.jar has been requested.
+[28-09-2023 15:50:02.190] [INFO] [Sync Manager] Lookup and verification of file kubejs-forge-1902.6.2-build.15.jar has been requested.
+[28-09-2023 15:50:06.937] [INFO] [Sync Manager] File "mods/craftingcraft-forge-1.19-13.0.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.938] [INFO] [Sync Manager] File "mods/ferritecore-5.0.3-forge.jar" has been verified successfully.
+[28-09-2023 15:50:06.938] [INFO] [Sync Manager] File "mods/ftb-ranks-forge-1902.1.15-build.77.jar" has been verified successfully.
+[28-09-2023 15:50:06.938] [INFO] [Sync Manager] File "mods/simplemagnets-1.1.9-forge-mc1.19.jar" has been verified successfully.
+[28-09-2023 15:50:06.938] [INFO] [Sync Manager] File "mods/xnetgases-1.19.2-4.0.1.jar" has been verified successfully.
+[28-09-2023 15:50:06.938] [INFO] [Sync Manager] File "mods/sophisticatedbackpacks-1.19.2-3.18.58.907.jar" has been verified successfully.
+[28-09-2023 15:50:06.938] [INFO] [Sync Manager] File "mods/thermal_innovation-1.19.2-10.2.0.18.jar" has been verified successfully.
+[28-09-2023 15:50:06.939] [INFO] [Sync Manager] File "mods/titanium-1.19.2-3.7.3-27.jar" has been verified successfully.
+[28-09-2023 15:50:06.939] [INFO] [Sync Manager] File "mods/DefaultWorldType-1.19.1-3.1.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.939] [INFO] [Sync Manager] File "mods/redstonepen-1.19.2-forge-1.2.20.jar" has been verified successfully.
+[28-09-2023 15:50:06.939] [INFO] [Sync Manager] File "mods/fm_audio_extension_forge_1.1.1-1_MC_1.19.jar" has been verified successfully.
+[28-09-2023 15:50:06.939] [INFO] [Sync Manager] File "mods/ftb-teams-forge-1902.2.14-build.123.jar" has been verified successfully.
+[28-09-2023 15:50:06.939] [INFO] [Sync Manager] File "mods/Applied-Mekanistics-1.3.5.jar" has been verified successfully.
+[28-09-2023 15:50:06.940] [INFO] [Sync Manager] File "mods/comforts-forge-6.0.5+1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.940] [INFO] [Sync Manager] File "mods/jei-1.19.2-forge-11.6.0.1018.jar" has been verified successfully.
+[28-09-2023 15:50:06.940] [INFO] [Sync Manager] File "mods/craftingtweaks-forge-1.19.2-15.1.8.jar" has been verified successfully.
+[28-09-2023 15:50:06.940] [INFO] [Sync Manager] File "mods/TextruesRubidiumOptions-1.0.7-mc1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.940] [INFO] [Sync Manager] File "mods/thermal_cultivation-1.19.2-10.2.0.17.jar" has been verified successfully.
+[28-09-2023 15:50:06.940] [INFO] [Sync Manager] File "mods/rhino-forge-1902.2.2-build.272.jar" has been verified successfully.
+[28-09-2023 15:50:06.941] [INFO] [Sync Manager] File "mods/Log-Begone-Forge-1.19-1.0.6.jar" has been verified successfully.
+[28-09-2023 15:50:06.941] [INFO] [Sync Manager] File "mods/squatgrow-3.0.1+mc1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.941] [INFO] [Sync Manager] File "mods/xnet-1.19-5.1.4.jar" has been verified successfully.
+[28-09-2023 15:50:06.941] [INFO] [Sync Manager] File "mods/VisualWorkbench-v4.2.4-1.19.2-Forge.jar" has been verified successfully.
+[28-09-2023 15:50:06.941] [INFO] [Sync Manager] File "mods/Patchouli-1.19.2-77.jar" has been verified successfully.
+[28-09-2023 15:50:06.941] [INFO] [Sync Manager] File "mods/extremesoundmuffler-3.38-forge-1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.942] [INFO] [Sync Manager] File "mods/probejs-5.3.1-forge.jar" has been verified successfully.
+[28-09-2023 15:50:06.942] [INFO] [Sync Manager] File "mods/Cucumber-1.19.2-6.0.9.jar" has been verified successfully.
+[28-09-2023 15:50:06.942] [INFO] [Sync Manager] File "mods/AkashicTome-1.6-23.jar" has been verified successfully.
+[28-09-2023 15:50:06.942] [INFO] [Sync Manager] File "mods/reforgium-1.0.12a.jar" has been verified successfully.
+[28-09-2023 15:50:06.942] [INFO] [Sync Manager] File "mods/appliedenergistics2-forge-12.9.8.jar" has been verified successfully.
+[28-09-2023 15:50:06.942] [INFO] [Sync Manager] File "mods/Runelic-Forge-1.19.2-14.1.4.jar" has been verified successfully.
+[28-09-2023 15:50:06.943] [INFO] [Sync Manager] File "mods/rftoolspower-1.19-5.1.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.943] [INFO] [Sync Manager] File "mods/kotlinforforge-3.12.0-all.jar" has been verified successfully.
+[28-09-2023 15:50:06.943] [INFO] [Sync Manager] File "mods/create-1.19.2-0.5.1.e.jar" has been verified successfully.
+[28-09-2023 15:50:06.943] [INFO] [Sync Manager] File "mods/almostunified-forge-1.19.2-0.7.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.943] [INFO] [Sync Manager] File "mods/rubidium-extra-0.4.19+mc1.19.2-build.105.jar" has been verified successfully.
+[28-09-2023 15:50:06.943] [INFO] [Sync Manager] File "mods/trashslot-forge-1.19.2-12.1.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.944] [INFO] [Sync Manager] File "mods/refinedstorage-1.11.6.jar" has been verified successfully.
+[28-09-2023 15:50:06.944] [INFO] [Sync Manager] File "mods/smoothboot(reloaded)-mc1.19.2-0.0.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.944] [INFO] [Sync Manager] File "mods/balm-forge-1.19.2-4.6.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.944] [INFO] [Sync Manager] File "mods/functionalstorage-1.19.2-1.1.7.jar" has been verified successfully.
+[28-09-2023 15:50:06.944] [INFO] [Sync Manager] File "mods/Controlling-forge-1.19.2-10.0+7.jar" has been verified successfully.
+[28-09-2023 15:50:06.944] [INFO] [Sync Manager] File "mods/thermal_expansion-1.19.2-10.2.0.21.jar" has been verified successfully.
+[28-09-2023 15:50:06.945] [INFO] [Sync Manager] File "mods/curios-forge-1.19.2-5.1.4.1.jar" has been verified successfully.
+[28-09-2023 15:50:06.945] [INFO] [Sync Manager] File "mods/ironchests-3.1.3-forge.jar" has been verified successfully.
+[28-09-2023 15:50:06.945] [INFO] [Sync Manager] File "mods/online_detector-1.19-3.1.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.945] [INFO] [Sync Manager] File "mods/BridgingMod-2.1.1+1.19.2.forge.jar" has been verified successfully.
+[28-09-2023 15:50:06.945] [INFO] [Sync Manager] File "mods/rsrequestify-2.3.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.945] [INFO] [Sync Manager] File "mods/sophisticatedcore-1.19.2-0.5.87.417.jar" has been verified successfully.
+[28-09-2023 15:50:06.946] [INFO] [Sync Manager] File "mods/FastSuite-1.19.2-4.1.1.jar" has been verified successfully.
+[28-09-2023 15:50:06.946] [INFO] [Sync Manager] File "mods/supermartijn642corelib-1.1.12-forge-mc1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.946] [INFO] [Sync Manager] File "mods/creativecrafter-1.19.2-1.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.946] [INFO] [Sync Manager] File "mods/cloth-config-8.3.103-forge.jar" has been verified successfully.
+[28-09-2023 15:50:06.946] [INFO] [Sync Manager] File "mods/memoryleakfix-forge-1.17+-1.0.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.946] [INFO] [Sync Manager] File "mods/CraftTweaker-forge-1.19.2-10.1.50.jar" has been verified successfully.
+[28-09-2023 15:50:06.946] [INFO] [Sync Manager] File "mods/konkrete_forge_1.6.1_MC_1.19-1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.947] [INFO] [Sync Manager] File "mods/SkyblockBuilder-1.19.2-4.2.17.jar" has been verified successfully.
+[28-09-2023 15:50:06.947] [INFO] [Sync Manager] File "mods/appleskin-forge-mc1.19-2.4.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.947] [INFO] [Sync Manager] File "mods/ExtendedCrafting-1.19.2-5.1.8.jar" has been verified successfully.
+[28-09-2023 15:50:06.947] [INFO] [Sync Manager] File "mods/CodeChickenLib-1.19.2-4.3.1.481-universal.jar" has been verified successfully.
+[28-09-2023 15:50:06.947] [INFO] [Sync Manager] File "mods/notenoughcrashes-4.2.1+1.19.2-forge.jar" has been verified successfully.
+[28-09-2023 15:50:06.947] [INFO] [Sync Manager] File "mods/Bookshelf-Forge-1.19.2-16.3.20.jar" has been verified successfully.
+[28-09-2023 15:50:06.947] [INFO] [Sync Manager] File "mods/FramedBlocks-6.8.6.jar" has been verified successfully.
+[28-09-2023 15:50:06.948] [INFO] [Sync Manager] File "mods/cupboard-1.19.2-1.9.jar" has been verified successfully.
+[28-09-2023 15:50:06.948] [INFO] [Sync Manager] File "mods/modnametooltip-1.20.1-1.20.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.948] [INFO] [Sync Manager] File "mods/chipped-forge-1.19.2-2.1.5.jar" has been verified successfully.
+[28-09-2023 15:50:06.948] [INFO] [Sync Manager] File "mods/createaddition-1.19.2-1.1.1.jar" has been verified successfully.
+[28-09-2023 15:50:06.948] [INFO] [Sync Manager] File "mods/clienttweaks-forge-1.19.2-8.3.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.948] [INFO] [Sync Manager] File "mods/modernfix-forge-5.7.4+mc1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.949] [INFO] [Sync Manager] File "mods/laserio-1.5.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.949] [INFO] [Sync Manager] File "mods/item-filters-forge-1902.2.9-build.51.jar" has been verified successfully.
+[28-09-2023 15:50:06.949] [INFO] [Sync Manager] File "mods/ExtraStorage-1.19.2-3.0.1.jar" has been verified successfully.
+[28-09-2023 15:50:06.949] [INFO] [Sync Manager] File "mods/EdivadLib-1.19.2-1.2.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.949] [INFO] [Sync Manager] File "mods/time-in-a-bottle-3.0.1-mc1.19.jar" has been verified successfully.
+[28-09-2023 15:50:06.949] [INFO] [Sync Manager] File "mods/enderchests-forge-1.19-1.10.7.jar" has been verified successfully.
+[28-09-2023 15:50:06.949] [INFO] [Sync Manager] File "mods/AdvancedPeripherals-1.19.2-0.7.30r.jar" has been verified successfully.
+[28-09-2023 15:50:06.950] [INFO] [Sync Manager] File "mods/waystones-forge-1.19.2-11.4.1.jar" has been verified successfully.
+[28-09-2023 15:50:06.950] [INFO] [Sync Manager] File "mods/rftoolscontrol-1.19-6.1.4.jar" has been verified successfully.
+[28-09-2023 15:50:06.950] [INFO] [Sync Manager] File "mods/create-chromaticreturn1.19.2_v1.4.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.950] [INFO] [Sync Manager] File "mods/torchmaster-19.2.93.jar" has been verified successfully.
+[28-09-2023 15:50:06.950] [INFO] [Sync Manager] File "mods/trashcans-1.0.18-forge-mc1.19.jar" has been verified successfully.
+[28-09-2023 15:50:06.950] [INFO] [Sync Manager] File "mods/LibX-1.19.2-4.2.8.jar" has been verified successfully.
+[28-09-2023 15:50:06.951] [INFO] [Sync Manager] File "mods/FluxNetworks-1.19.2-7.1.4.13.jar" has been verified successfully.
+[28-09-2023 15:50:06.951] [INFO] [Sync Manager] File "mods/SimpleCoreLib-1.19.2-5.1.0.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.951] [INFO] [Sync Manager] File "mods/thermal_foundation-1.19.2-10.2.0.47.jar" has been verified successfully.
+[28-09-2023 15:50:06.951] [INFO] [Sync Manager] File "mods/AEInfinityBooster-1.19.2-1.2.0+11.jar" has been verified successfully.
+[28-09-2023 15:50:06.951] [INFO] [Sync Manager] File "mods/Mekanism-1.19.2-10.3.9.13.jar" has been verified successfully.
+[28-09-2023 15:50:06.951] [INFO] [Sync Manager] File "mods/cofh_core-1.19.2-10.2.1.40.jar" has been verified successfully.
+[28-09-2023 15:50:06.952] [INFO] [Sync Manager] File "mods/polylib-forge-1900.0.2-build.73.jar" has been verified successfully.
+[28-09-2023 15:50:06.952] [INFO] [Sync Manager] File "mods/JAOPCA-1.19.2-4.2.8.18.jar" has been verified successfully.
+[28-09-2023 15:50:06.952] [INFO] [Sync Manager] File "mods/canary-mc1.19.2-0.2.8.jar" has been verified successfully.
+[28-09-2023 15:50:06.952] [INFO] [Sync Manager] File "mods/kubejs-create-forge-1902.2.4-build.29.jar" has been verified successfully.
+[28-09-2023 15:50:06.952] [INFO] [Sync Manager] File "mods/auudio_forge_1.0.3_MC_1.19.jar" has been verified successfully.
+[28-09-2023 15:50:06.952] [INFO] [Sync Manager] File "mods/mob_grinding_utils-1.19.2-0.4.50.jar" has been verified successfully.
+[28-09-2023 15:50:06.952] [INFO] [Sync Manager] File "mods/connectivity-1.19.2-4.6.jar" has been verified successfully.
+[28-09-2023 15:50:06.953] [INFO] [Sync Manager] File "mods/ReAuth-1.19-Forge-4.0.7.jar" has been verified successfully.
+[28-09-2023 15:50:06.953] [INFO] [Sync Manager] File "mods/PigPen-Forge-1.19.2-11.1.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.953] [INFO] [Sync Manager] File "mods/mcjtylib-1.19-7.2.5.jar" has been verified successfully.
+[28-09-2023 15:50:06.953] [INFO] [Sync Manager] File "mods/supermartijn642configlib-1.1.8-forge-mc1.19.jar" has been verified successfully.
+[28-09-2023 15:50:06.953] [INFO] [Sync Manager] File "mods/rebornstorage-1.19.2-5.0.3.jar" has been verified successfully.
+[28-09-2023 15:50:06.953] [INFO] [Sync Manager] File "mods/configured-2.1.1-1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.954] [INFO] [Sync Manager] File "mods/rftoolsutility-1.19-5.1.8.jar" has been verified successfully.
+[28-09-2023 15:50:06.954] [INFO] [Sync Manager] File "mods/pluto-mc1.19.2-0.0.9.jar" has been verified successfully.
+[28-09-2023 15:50:06.954] [INFO] [Sync Manager] File "mods/ImmersiveEngineering-1.19.2-9.2.2-165.jar" has been verified successfully.
+[28-09-2023 15:50:06.954] [INFO] [Sync Manager] File "mods/megacells-forge-2.0.3-1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.954] [INFO] [Sync Manager] File "mods/industrial-foregoing-1.19.2-3.3.2.3-5.jar" has been verified successfully.
+[28-09-2023 15:50:06.954] [INFO] [Sync Manager] File "mods/compactmachines-5.1.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.955] [INFO] [Sync Manager] File "mods/PuzzlesLib-v4.4.3-1.19.2-Forge.jar" has been verified successfully.
+[28-09-2023 15:50:06.955] [INFO] [Sync Manager] File "mods/pipez-1.19.2-1.1.5.jar" has been verified successfully.
+[28-09-2023 15:50:06.955] [INFO] [Sync Manager] File "mods/DarkUtilities-Forge-1.19.2-13.1.9.jar" has been verified successfully.
+[28-09-2023 15:50:06.955] [INFO] [Sync Manager] File "mods/MekanismAdditions-1.19.2-10.3.9.13.jar" has been verified successfully.
+[28-09-2023 15:50:06.955] [INFO] [Sync Manager] File "mods/rubidium-mc1.19.2-0.6.2c.jar" has been verified successfully.
+[28-09-2023 15:50:06.955] [INFO] [Sync Manager] File "mods/CosmeticArmorReworked-1.19.2-v1a.jar" has been verified successfully.
+[28-09-2023 15:50:06.955] [INFO] [Sync Manager] File "mods/observable-3.3.1.jar" has been verified successfully.
+[28-09-2023 15:50:06.956] [INFO] [Sync Manager] File "mods/rftoolsstorage-1.19-4.1.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.956] [INFO] [Sync Manager] File "mods/fuelgoeshere-1.19.2-0.1.0.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.956] [INFO] [Sync Manager] File "mods/rechiseled-1.1.4-forge-mc1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.956] [INFO] [Sync Manager] File "mods/SimpleDiscordRichPresence-forge-3.0.4-build.27+mc1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.956] [INFO] [Sync Manager] File "mods/fusion-1.0.6-forge-mc1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.956] [INFO] [Sync Manager] File "mods/Powah-4.0.11.jar" has been verified successfully.
+[28-09-2023 15:50:06.957] [INFO] [Sync Manager] File "mods/ClickMachine-1.19.2-7.0.1.jar" has been verified successfully.
+[28-09-2023 15:50:06.957] [INFO] [Sync Manager] File "mods/saturn-mc1.19.2-0.0.4.jar" has been verified successfully.
+[28-09-2023 15:50:06.957] [INFO] [Sync Manager] File "mods/CTM-1.19.2-1.1.6+8.jar" has been verified successfully.
+[28-09-2023 15:50:06.957] [INFO] [Sync Manager] File "mods/ftbbackups2-forge-1.19.2-1.0.22.jar" has been verified successfully.
+[28-09-2023 15:50:06.957] [INFO] [Sync Manager] File "mods/AE2WTLib-12.9.7.jar" has been verified successfully.
+[28-09-2023 15:50:06.957] [INFO] [Sync Manager] File "mods/polymorph-forge-0.46.4+1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.957] [INFO] [Sync Manager] File "mods/rftoolsbase-1.19-4.1.7.jar" has been verified successfully.
+[28-09-2023 15:50:06.958] [INFO] [Sync Manager] File "mods/cabletiers-1.19.2-0.5471.jar" has been verified successfully.
+[28-09-2023 15:50:06.958] [INFO] [Sync Manager] File "mods/JCPlugin-1.17.x-1.20.x-4.0.4-Forge.jar" has been verified successfully.
+[28-09-2023 15:50:06.958] [INFO] [Sync Manager] File "mods/Morph-o-Tool-1.6-34.jar" has been verified successfully.
+[28-09-2023 15:50:06.958] [INFO] [Sync Manager] File "mods/engineersdecor-1.19.2-forge-1.3.29.jar" has been verified successfully.
+[28-09-2023 15:50:06.958] [INFO] [Sync Manager] File "mods/endertanks-forge-1.19-1.12.8.jar" has been verified successfully.
+[28-09-2023 15:50:06.958] [INFO] [Sync Manager] File "mods/fancymenu_forge_2.14.9_MC_1.19-1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.959] [INFO] [Sync Manager] File "mods/constructionwand-1.19.2-2.10.jar" has been verified successfully.
+[28-09-2023 15:50:06.959] [INFO] [Sync Manager] File "mods/kleeslabs-forge-1.19.2-12.3.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.959] [INFO] [Sync Manager] File "mods/architectury-6.5.85-forge.jar" has been verified successfully.
+[28-09-2023 15:50:06.959] [INFO] [Sync Manager] File "mods/buildinggadgets-3.16.2-build.22+mc1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.959] [INFO] [Sync Manager] File "mods/ftb-quests-forge-1902.5.5-build.297.jar" has been verified successfully.
+[28-09-2023 15:50:06.959] [INFO] [Sync Manager] File "mods/ProjectE-1.19.2-PE1.0.1B.jar" has been verified successfully.
+[28-09-2023 15:50:06.959] [INFO] [Sync Manager] File "mods/MekanismGenerators-1.19.2-10.3.9.13.jar" has been verified successfully.
+[28-09-2023 15:50:06.960] [INFO] [Sync Manager] File "mods/PrettyPipes-1.13.6.jar" has been verified successfully.
+[28-09-2023 15:50:06.960] [INFO] [Sync Manager] File "mods/Ding-1.19.2-Forge-1.4.1.jar" has been verified successfully.
+[28-09-2023 15:50:06.960] [INFO] [Sync Manager] File "mods/rftoolsbuilder-1.19-5.2.8.jar" has been verified successfully.
+[28-09-2023 15:50:06.960] [INFO] [Sync Manager] File "mods/RSInfinityBooster-1.19.2-3.0+27.jar" has been verified successfully.
+[28-09-2023 15:50:06.960] [INFO] [Sync Manager] File "mods/elevatorid-1.19.2-1.8.9.jar" has been verified successfully.
+[28-09-2023 15:50:06.960] [INFO] [Sync Manager] File "mods/ftb-ultimine-forge-1902.4.1-build.90.jar" has been verified successfully.
+[28-09-2023 15:50:06.960] [INFO] [Sync Manager] File "mods/forgivingvoid-forge-1.19-7.0.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.961] [INFO] [Sync Manager] File "mods/PrecisionMining-1.19.2-5.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.961] [INFO] [Sync Manager] File "mods/AutoRegLib-1.8.2-55.jar" has been verified successfully.
+[28-09-2023 15:50:06.961] [INFO] [Sync Manager] File "mods/ProjectExpansion-1.19.2-1.0.8.jar" has been verified successfully.
+[28-09-2023 15:50:06.961] [INFO] [Sync Manager] File "mods/ftb-library-forge-1902.4.1-build.236.jar" has been verified successfully.
+[28-09-2023 15:50:06.961] [INFO] [Sync Manager] File "mods/Shrink-1.19-1.3.5.jar" has been verified successfully.
+[28-09-2023 15:50:06.961] [INFO] [Sync Manager] File "mods/emi-1.0.20+1.19.2+forge.jar" has been verified successfully.
+[28-09-2023 15:50:06.962] [INFO] [Sync Manager] File "mods/questsadditions-1.19.2-1.4.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.962] [INFO] [Sync Manager] File "mods/refinedstorageaddons-0.9.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.962] [INFO] [Sync Manager] File "mods/modular-routers-1.19.2-10.2.19.jar" has been verified successfully.
+[28-09-2023 15:50:06.962] [INFO] [Sync Manager] File "mods/MouseTweaks-forge-mc1.19-2.23.jar" has been verified successfully.
+[28-09-2023 15:50:06.962] [INFO] [Sync Manager] File "mods/cc-tweaked-1.19.2-1.101.3.jar" has been verified successfully.
+[28-09-2023 15:50:06.962] [INFO] [Sync Manager] File "mods/JadeAddons-1.19.2-forge-3.5.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.962] [INFO] [Sync Manager] File "mods/Barsita-1.19.2-1.1.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.963] [INFO] [Sync Manager] File "mods/ImmediatelyFast-1.2.5+1.19.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.963] [INFO] [Sync Manager] File "mods/Clumps-forge-1.19.2-9.0.0+14.jar" has been verified successfully.
+[28-09-2023 15:50:06.963] [INFO] [Sync Manager] File "mods/shetiphiancore-forge-1.19-3.11.10.jar" has been verified successfully.
+[28-09-2023 15:50:06.963] [INFO] [Sync Manager] File "mods/Jade-1.19.1-forge-8.9.0.jar" has been verified successfully.
+[28-09-2023 15:50:06.963] [INFO] [Sync Manager] File "mods/MekanismTools-1.19.2-10.3.9.13.jar" has been verified successfully.
+[28-09-2023 15:50:06.963] [INFO] [Sync Manager] File "mods/lightspeed-1.19.2-1.0.5.jar" has been verified successfully.
+[28-09-2023 15:50:06.963] [INFO] [Sync Manager] File "mods/cookingforblockheads-forge-1.19.2-13.3.3.jar" has been verified successfully.
+[28-09-2023 15:50:06.964] [INFO] [Sync Manager] File "mods/ftb-chunks-forge-1902.4.2-build.302.jar" has been verified successfully.
+[28-09-2023 15:50:06.964] [INFO] [Sync Manager] File "mods/gravestone-1.19.2-1.0.1.jar" has been verified successfully.
+[28-09-2023 15:50:06.964] [INFO] [Sync Manager] File "mods/kubejs-mekanism-1902.1.5-build.15.jar" has been verified successfully.
+[28-09-2023 15:50:06.964] [INFO] [Sync Manager] File "mods/resourcefullib-forge-1.19.2-1.1.24.jar" has been verified successfully.
+[28-09-2023 15:50:06.964] [INFO] [Sync Manager] File "mods/kubejs-thermal-1902.1.9-build.11.jar" has been verified successfully.
+[28-09-2023 15:50:06.964] [INFO] [Sync Manager] File "mods/Placebo-1.19.2-7.3.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.965] [INFO] [Sync Manager] File "mods/NaturesCompass-1.19.2-1.10.0-forge.jar" has been verified successfully.
+[28-09-2023 15:50:06.965] [INFO] [Sync Manager] File "mods/carryon-forge-1.19.2-2.1.1.21.jar" has been verified successfully.
+[28-09-2023 15:50:06.965] [INFO] [Sync Manager] File "mods/crashutilities-6.2.jar" has been verified successfully.
+[28-09-2023 15:50:06.965] [INFO] [Sync Manager] File "mods/FastLeafDecay-30.jar" has been verified successfully.
+[28-09-2023 15:50:06.965] [INFO] [Sync Manager] File "mods/kubejs-forge-1902.6.2-build.15.jar" has been verified successfully.
+[28-09-2023 15:50:06.966] [INFO] [Sync Manager] 178 out of 178 mods have been found on the hard drive!
+[28-09-2023 15:50:06.966] [INFO] [Sync Manager] > 178 mods have been verified successfully.
+[28-09-2023 15:50:06.966] [INFO] [Sync Manager] > No mods are corrupted.
+[28-09-2023 15:50:06.976] [INFO] [Random Utilities] GC Manual Trigger! 12.324402 MegaBytes were cleared up.
+[28-09-2023 15:50:06.976] [INFO] [Sync Manager] Looking for removed mods...
+[28-09-2023 15:50:06.980] [INFO] [Sync Manager] > No mods were removed!
+[28-09-2023 15:50:06.994] [INFO] [Random Utilities] GC Manual Trigger! 3.4004364 MegaBytes were cleared up.
+[28-09-2023 15:50:06.994] [INFO] [Main] Cache file not found! Creating required path for the Cache file...
+[28-09-2023 15:50:06.995] [INFO] [Main] Saving cache data...
+[28-09-2023 15:50:07.005] [INFO] [Main] Cache data has been saved.
+[28-09-2023 15:50:07.005] [INFO] [Main] Entire Process took 5.706s
+[28-09-2023 15:50:07.005] [INFO] [Random Utilities] Cat-Downloader Legacy is created and maintained by Kanzaji! Find the source code and issue tracker here:
+[28-09-2023 15:50:07.006] [INFO] [Random Utilities] https://github.com/Kanzaji/Cat-Downloader-Legacy

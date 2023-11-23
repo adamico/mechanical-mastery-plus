@@ -239,7 +239,7 @@ function Remove-BlacklistedFiles {
 }
 
 function New-Changelog {
-    if ($ENABLE_CHANGELOG_GENERATOR_MODULE -and (Test-Path "$INSTANCE_ROOT/$LAST_MODPACK_ZIP_NAME.zip") -and (Test-Path "$INSTANCE_ROOT/$CLIENT_ZIP_NAME.zip")) {        
+    if ($ENABLE_CHANGELOG_GENERATOR_MODULE -and (Test-Path "$LAST_MODPACK_ZIP_NAME.zip") -and (Test-Path "$CLIENT_ZIP_NAME.zip")) {        
         if (-not (Test-Path $CHANGELOG_GENERATOR_JAR) -or $ENABLE_ALWAYS_UPDATE_JARS) {
             Remove-Item $CHANGELOG_GENERATOR_JAR -Recurse -Force -ErrorAction SilentlyContinue
             Get-GitHubRelease -repo "ModdingX/ModListCreator" -file $CHANGELOG_GENERATOR_JAR
@@ -314,6 +314,9 @@ function Push-ClientFiles {
             Write-Host "Failed to upload client files: $response" -ForegroundColor Red
             throw "Failed to upload client files: $response"
         }
+
+        Update-Modpack-Update-Checker
+        Update-BetterCompatibilityCheckerVersion
 
         Write-Host 
         Write-Host "Uploaded modpack!" -ForegroundColor Green

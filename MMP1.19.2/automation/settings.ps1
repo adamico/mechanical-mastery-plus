@@ -30,12 +30,12 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "r1.1.2"
+$MODPACK_VERSION = "1.1.3"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
 # Should be "$null" if this is the first release
-$LAST_MODPACK_VERSION = "r1.1.1"
+$LAST_MODPACK_VERSION = "r1.1.2"
 
 # Which modloader the modpack uses
 # Can be "forge" or "fabric"
@@ -80,7 +80,7 @@ $MODLIST_CREATOR_JAR = "ModListCreator-4.0.3-fatjar.jar"
 #=====================================================================//
 #  CLIENT FILE SETTINGS
 #=====================================================================//
-
+$CLIENT_FILE_PATH = "$INSTANCE_ROOT/releases/"
 $CLIENT_FILE_AUTHOR = "kc00l"
 
 $FOLDERS_TO_INCLUDE_IN_CLIENT_FILES = @(
@@ -253,10 +253,10 @@ $ENABLE_GITHUB_RELEASE_MODULE = $false
 # =====================================================================//
 
 # Syntax of the Client ZIP File
-$CLIENT_ZIP_NAME = "$MODPACK_NAME-$MODPACK_VERSION"
+$CLIENT_ZIP_NAME = "$CLIENT_FILE_PATH/$MODPACK_NAME-$MODPACK_VERSION"
 
 # Syntax of the Previous Versions Client ZIP File
-$LAST_MODPACK_ZIP_NAME = "$MODPACK_NAME-$LAST_MODPACK_VERSION"
+$LAST_MODPACK_ZIP_NAME = "$CLIENT_FILE_PATH/$MODPACK_NAME-$LAST_MODPACK_VERSION"
 
 # Default: "$CLIENT_NAME $MODPACK_VERSION"
 $CLIENT_FILE_DISPLAY_NAME = "$CLIENT_NAME $MODPACK_VERSION"
