@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:blaze",
+	  "thermal:blizz",
+	  "thermal:blitz",
+	  "thermal:basalz",
+    "minecraft:warden",
+    "minecraft:wither"
+  ]
+}
