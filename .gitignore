@@ -25,7 +25,6 @@ profilekeys
 releases
 saves
 screenshots
-technical-traveler-dev
 world
 world_backup
 
@@ -73,3 +72,7 @@ manifest.json
 *.code-workspace
 profileImage/mmplus_logo.png
 profileImage/mmplus_title_screen.jpg
+
+# ignored instances
+Mechanical Mastery Plus/**
+technical-traveler-dev
