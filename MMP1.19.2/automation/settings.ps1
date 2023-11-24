@@ -210,7 +210,7 @@ $ENABLE_CLIENT_FILE_MODULE = $true
 # Toggle the modpack uploader on/off
 # Setting this to $false will also disable the Server File and Changelog Generator Modules.
 # Default: $true
-$ENABLE_MODPACK_UPLOADER_MODULE = $false
+$ENABLE_MODPACK_UPLOADER_MODULE = $true
 
 # Toggle server file feature on/off
 # Default: $true
