@@ -1,4 +1,5 @@
 !defaultoptions/options.txt
+!kubejs/**/mods
 crafttweaker_examples
 emi.json
 emojiful/cache
