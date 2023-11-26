@@ -108,6 +108,10 @@ s,f,industrialforegoing:meat,1,3
 s,i,kubejs:cube4_packaged,460800,3
 ,,,,
 s,f,industrialforegoing:essence,3,4
+s,f,experienceobelisk:cognitium,3,4
+s,f,mob_grinding_utils:fluid_xp,3,4
+s,f,cofh_core:experience,3,4
+s,f,sophisticatedcore:xp_still,3,4
 s,f,thermal:refined_fuel,10,4
 s,f,industrialforegoing:biofuel,10,4
 s,f,minecraft:lava,5,4
