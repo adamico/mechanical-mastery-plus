@@ -30,12 +30,12 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "1.1.4"
+$MODPACK_VERSION = "1.1.5"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
 # Should be "$null" if this is the first release
-$LAST_MODPACK_VERSION = "1.1.3"
+$LAST_MODPACK_VERSION = "1.1.4"
 
 # Which modloader the modpack uses
 # Can be "forge" or "fabric"

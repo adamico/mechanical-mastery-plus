@@ -1556,6 +1556,58 @@
 			x: -2.0d
 			y: 1.5d
 		}
+		{
+			dependencies: ["79B1FCD79D650A18"]
+			description: ["&o&eYou have done well with all these mechanical essences and crystals.&r"]
+			hide: true
+			hide_details_until_startable: true
+			id: "1B28CB0B4B18DAF8"
+			tasks: [{
+				id: "29936159817D63B2"
+				title: "Is that all?"
+				type: "checkmark"
+			}]
+			x: 6.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["1B28CB0B4B18DAF8"]
+			description: [
+				"&o&eI feel...&r"
+				""
+				"&o&e...pleased.&r"
+				""
+				"&o&eI'm...&r"
+			]
+			hide: true
+			id: "169F7212815B284E"
+			tasks: [{
+				id: "42F6EE426BE76971"
+				title: "Is that all?"
+				type: "checkmark"
+			}]
+			title: "Is there more?"
+			x: 7.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["169F7212815B284E"]
+			description: [
+				"&e&o...alive, after eons of slumber!&r"
+				"{image:ftbquests:textures/gui/cod.png width:100 height:100 align:1}"
+				""
+				"TO BE CONTINUED..."
+			]
+			hide: true
+			id: "068290D81B90B8A9"
+			tasks: [{
+				id: "394A3E22B725B19B"
+				title: "What have I done?"
+				type: "checkmark"
+			}]
+			x: 9.0d
+			y: 1.5d
+		}
 	]
 	title: "Chapter 5: Endgame"
 }

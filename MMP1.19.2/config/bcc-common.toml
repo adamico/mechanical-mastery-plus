@@ -7,7 +7,7 @@
 	#The name of the modpack
 	modpackName = "Mechanical Mastery Pluse"
 	#The version of the modpack
-	modpackVersion = "r1.1.4"
+	modpackVersion = "r1.1.5"
 	#Use the metadata.json to determine the modpack version
 	#ONLY ENABLE THIS IF YOU KNOW WHAT YOU ARE DOING
 	useMetadata = false

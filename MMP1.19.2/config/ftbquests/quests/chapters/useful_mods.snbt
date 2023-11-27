@@ -731,15 +731,17 @@
 			dependencies: ["63311B00BE8470FA"]
 			id: "4F1668EF164D7F9F"
 			rewards: [{
+				count: 4
 				id: "0AF00FCF4499F021"
 				item: "xnet:advanced_connector_red"
 				type: "item"
 			}]
 			tasks: [{
-				id: "4BE7E74AA41AC7B3"
-				item: "xnet:connector_red"
+				id: "0C452ACDF5C2BFF5"
+				item: "xnet:controller"
 				type: "item"
 			}]
+			title: "XNET"
 			x: 0.0d
 			y: 1.0d
 		}

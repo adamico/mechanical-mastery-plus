@@ -1751,13 +1751,12 @@
 			]
 			id: "5A3E2F3C3A7751E9"
 			rewards: [{
-				count: 4
+				count: 2
 				id: "5FCBD6FFF76DB06B"
 				item: "mekanism:steel_casing"
 				type: "item"
 			}]
 			tasks: [{
-				count: 4L
 				id: "1F05A0BA1A8DF60F"
 				item: "mekanism:steel_casing"
 				type: "item"

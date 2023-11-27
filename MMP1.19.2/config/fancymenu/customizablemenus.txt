@@ -6,3 +6,6 @@ net.minecraft.client.gui.screens.TitleScreen {
 de.keksuccino.drippyloadingscreen.customization.DrippyOverlayScreen {
 }
 
+com.jab125.mpuc.client.gui.screen.changelog.SpecificVersionScreen {
+}
+

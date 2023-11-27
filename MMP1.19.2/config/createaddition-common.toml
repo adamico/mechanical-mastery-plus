@@ -23,6 +23,9 @@
 	large_connector_max_output = 4096
 	#Ignore checking if block face can support connector.
 	connector_ignore_face_check = true
+	#Small Connector With Light energy consumption in FE/t.
+	#Range: > 0
+	small_light_connector_consumption = 1
 
 #Make sure config changes are duplicated on both Clients and the Server when running a dedicated Server,
 # as the config isnt synced between Clients and Server.

@@ -368,51 +368,25 @@ ServerEvents.recipes(event => {
       {
         type: 'compactcrafting:mixed',
         pattern: [
-          ["S", "O", "O", "O", "S"],
-          ["O", "S", "O", "S", "O"],
-          ["O", "O", "S", "O", "O"],
-          ["O", "S", "O", "S", "O"],
-          ["S", "O", "O", "O", "S"]
+          ["S", "O", "S"],
+          ["O", "S", "O"],
+          ["S", "O", "S"]
         ]
       },
       {
         type: 'compactcrafting:mixed',
         pattern: [
-          ["O", "S", "O", "S", "O"],
-          ["S", "G", "G", "G", "S"],
-          ["O", "G", "G", "G", "O"],
-          ["S", "G", "G", "G", "S"],
-          ["O", "S", "O", "S", "O"]
+          ["O", "S", "O"],
+          ["S", "G", "S"],
+          ["O", "S", "O"]
         ]
       },
       {
         type: 'compactcrafting:mixed',
         pattern: [
-          ["O", "O", "S", "O", "O"],
-          ["O", "G", "G", "G", "O"],
-          ["S", "G", "G", "G", "S"],
-          ["O", "G", "G", "G", "O"],
-          ["O", "O", "S", "O", "O"]
-        ]
-      },
-      {
-        type: 'compactcrafting:mixed',
-        pattern: [
-          ["O", "S", "O", "S", "O"],
-          ["S", "G", "G", "G", "S"],
-          ["O", "G", "G", "G", "O"],
-          ["S", "G", "G", "G", "S"],
-          ["O", "S", "O", "S", "O"]
-        ]
-      },
-      {
-        type: 'compactcrafting:mixed',
-        pattern: [
-          ["S", "O", "O", "O", "S"],
-          ["O", "S", "O", "S", "O"],
-          ["O", "O", "S", "O", "O"],
-          ["O", "S", "O", "S", "O"],
-          ["S", "O", "O", "O", "S"]
+          ["S", "O", "S"],
+          ["O", "S", "O"],
+          ["S", "O", "S"]
         ]
       }
     ],
@@ -790,7 +764,7 @@ ServerEvents.recipes(event => {
       },
       outputs: [{
         id: 'mekanism:steel_casing',
-        Count: 4
+        Count: 1
       }]
     },
     {
