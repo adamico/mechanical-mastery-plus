@@ -42,4 +42,5 @@ ServerEvents.recipes(event => {
   	
 	event.replaceInput({id: 'ae2:network/blocks/inscribers'}, 'minecraft:sticky_piston', 'minecraft:piston');
   event.replaceInput({id: 'ae2:network/blocks/energy_energy_acceptor'}, 'ae2:quartz_glass', 'minecraft:light_gray_stained_glass');
+  event.replaceInput({output: 'ironfurnaces:upgrade_iron2'}, '#c:glass_blocks', 'minecraft:iron_ingot');
 });

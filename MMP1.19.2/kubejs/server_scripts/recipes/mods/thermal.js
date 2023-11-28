@@ -12,7 +12,9 @@ ServerEvents.recipes(event => {
     { output: 'thermal:invar_block', outputCount: 3, inputs: [{value: [{tag: 'forge:storage_blocks/nickel'}]}, {value: [{tag: 'forge:storage_blocks/iron'}]}], energy: 43200 },
     { output: 'thermal:electrum_block', outputCount: 2, inputs: [{value: [{tag: 'forge:storage_blocks/silver'}]}, {value: [{tag: 'forge:storage_blocks/gold'}]}], energy: 28800 },
     { output: 'thermal:bronze_block', outputCount: 4, inputs: [{value: [{tag: 'forge:storage_blocks/tin'}]}, {value: [{tag: 'forge:storage_blocks/copper'}], count: 3}], energy: 57600 },
-    { output: 'create:brass_block', outputCount: 2, inputs: [{value: [{tag: 'forge:storage_blocks/zinc'}]}, {value: [{tag: 'forge:storage_blocks/copper'}]}], energy: 21600 }
+    { output: 'create:brass_block', outputCount: 2, inputs: [{value: [{tag: 'forge:storage_blocks/zinc'}]}, {value: [{tag: 'forge:storage_blocks/copper'}]}], energy: 21600 },
+    { output: 'bigreactors:graphite_ingot', outputCount: 1, inputs: ["thermal:coal_coke", {value: [{tag: "forge:silicon"}]}], energy: 3000 },
+    { output: 'bigreactors:graphite_block', outputCount: 1, inputs: ["thermal:coal_coke_block", {value: [{tag: "forge:silicon"}], count: 9}], energy: 18000 }
   ];
 
   smeltingRecipes.forEach(recipe => {

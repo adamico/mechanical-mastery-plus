@@ -341,7 +341,7 @@ function Update-FileLinkInServerFiles {
         $idPart2 = $clientFileIdString.Substring(4, $clientFileIdString.length - 4)
         $idPart2 = Remove-LeadingZero -text $idPart2
         # CurseForge replaces whitespace in filenames with + in their CDN urls
-        $sanitizedClientZipName = $CLIENT_ZIP_NAME.Replace(" ", "+")
+        $sanitizedClientZipName = "$MODPACK_NAME-$MODPACK_VERSION".Replace(" ", "+")
         $curseForgeCdnUrl = "https://media.forgecdn.net/files/$idPart1/$idPart2/$sanitizedClientZipName.zip"
         $content = (Get-Content -Path $SERVER_SETUP_CONFIG_PATH) -replace "https://media.forgecdn.net/files/\d+/\d+/.*.zip", $curseForgeCdnUrl 
         [System.IO.File]::WriteAllLines(($SERVER_SETUP_CONFIG_PATH | Resolve-Path), $content)
@@ -363,7 +363,7 @@ function New-ServerFiles {
         Write-Host "Creating server files..." -ForegroundColor Cyan
         Write-Host 
         7z a -tzip $serverZip "$SERVER_FILES_FOLDER/*"
-        Move-Item -Path "automation/$serverZip" -Destination $serverZip -ErrorAction SilentlyContinue
+        Move-Item -Path "$serverZip" -Destination "releases/$serverZip"
         Write-Host "Server files created!" -ForegroundColor Green
 
         if ($ENABLE_MODPACK_UPLOADER_MODULE) {
@@ -377,7 +377,7 @@ function Push-ServerFiles {
         [int]$clientFileReturnId
     )
     if ($ENABLE_SERVER_FILE_MODULE -and $ENABLE_MODPACK_UPLOADER_MODULE) {
-        $serverFilePath = "$SERVER_ZIP_NAME.zip"
+        $serverFilePath = "releases/$SERVER_ZIP_NAME.zip"
 
         $SERVER_METADATA = 
         "{

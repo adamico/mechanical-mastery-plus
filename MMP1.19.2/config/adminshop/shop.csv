@@ -83,6 +83,7 @@ b,i,thermal:rubberwood_sapling,8192,4
 b,i,gobber2:gobber2_ore_end,32768,4
 b,i,bigreactors:benitoite_ore,32768,4
 b,i,bigreactors:anglesite_ore,65536,4
+b,i,minecraft:nether_quartz_ore,16384,4
 b,i,minecraft:experience_bottle,1000,4
 b,f,thermal:refined_fuel,20,4
 b,f,industrialforegoing:biofuel,20,4
