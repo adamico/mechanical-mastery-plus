@@ -1,0 +1,14 @@
+
+#Display configurations. Options for changing client view
+[display_config]
+	#Displays your current balance and gained balance per second in the top left corner
+	"Balance Display" = true
+	#If monetary values should be formatted as M/B/T/etc (Short) instead of Million/Billion/Trillion/etc (Full)
+	"Short mode " = true
+
+#General configurations. Shop contents stored in "adminshop.csv"
+[general_config]
+	#Amount of money each player starts with. Must be a whole number.
+	#Range: 0 ~ 9223372036854775807
+	starting_money = 1000000000
+

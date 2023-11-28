@@ -1,0 +1,29 @@
+// Welcome to Admin Shop! Please do not put anything else in the first row,,,,
+"// Rows beginning with // are considered comments, and aren't processed. Put helpful notes here if you need them",,,,
+,,,,
+// Blank lines are also ignored.,,"// Cells that begin with // are ignored, along with any cells to the right of them. Cells to the left won't be ignored if they do not have a //",,
+,,,,
+"// Items can be formatted in different ways, using KubeJS syntax for easy copying from the game. See each cell in the next line for examples",,,,
+//,KubeJS style,KubeJS tags,
+//,minecraft:iron_ore,#forge:gems/lapis,
+//,,#minecraft:wool,
+,,,,
+"// Fluids can be formatted in different ways as well, using KubeJS syntax for easy copying from the game",,,,
+//,KubeJS style,KubeJS tags,
+//,minecraft:water,#minecraft:water,
+,,,,
+// WARNING: if you delete an entry for buying items with NBT and there are Buyers that currently are set to that item, that may cause a crash or corrupt your world,
+// so if you need to delete an NBT entry for some reason, first remove any Buyers set to it
+,,
+// Define shop items below categories. They are as formatted:,,,,
+"// ""buy"" or ""sell"" (the letters b and s also work)","""fluid"" or ""item"" (letters f and i also work)",item or fluid,price,permit tier (only positive values, 0=unlocked by default)
+,,,,
+//
+// BUY
+//
+b,i,kubejs:cube4,100000,0
+,,,,
+//
+// SELL
+//
+//s,f,kubejs:essence1,1000,1

@@ -1,0 +1,169 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "protection"
+	group: "1B164FDBCB2D6C75"
+	icon: "pneumaticcraft:armor_upgrade"
+	id: "63AC07780B1B6DEA"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			id: "3EF17A5ABF1B0EB4"
+			tasks: [{
+				id: "6331FAD9CB35CDD6"
+				item: {
+					Count: 1b
+					ForgeCaps: {
+						Parent: {
+							energy: {
+								capacity: 1000
+								energy: 1000
+								maxextract: 1000
+								maxreceive: 1000
+							}
+							inventory: {
+								Items: [ ]
+								Size: 10
+							}
+						}
+					}
+					id: "planttech2:cyberarmor_chest"
+				}
+				type: "item"
+			}]
+			x: -1.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["46FE5BEA713DF5EC"]
+			id: "46C7BAAF5980BD24"
+			tasks: [{
+				id: "52A5B1AE20D0CBD7"
+				item: {
+					Count: 1b
+					id: "pneumaticcraft:pneumatic_chestplate"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 0.5d
+			y: -1.0d
+		}
+		{
+			id: "1C9123809D8DF014"
+			tasks: [{
+				id: "3A26B2F944BA11B5"
+				item: {
+					Count: 1b
+					id: "botania:manasteel_chestplate"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -2.5d
+			y: -3.0d
+		}
+		{
+			id: "46FE5BEA713DF5EC"
+			tasks: [{
+				id: "0261144889A2AB4A"
+				item: {
+					Count: 1b
+					id: "pneumaticcraft:compressed_iron_chestplate"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 0.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["1C9123809D8DF014"]
+			id: "040C47D8E5CA1F41"
+			tasks: [{
+				id: "48CF8C17066365A8"
+				item: {
+					Count: 1b
+					id: "botania:elementium_chestplate"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -2.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["040C47D8E5CA1F41"]
+			id: "6986254EFDC06095"
+			tasks: [{
+				id: "362591095B835751"
+				item: {
+					Count: 1b
+					id: "botania:terrasteel_chestplate"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: -2.5d
+			y: -1.0d
+		}
+		{
+			id: "5582CD71B19C43B1"
+			tasks: [{
+				id: "7F18FD221757BDCD"
+				item: {
+					Count: 1b
+					id: "bloodmagic:livingplate"
+					tag: {
+						Damage: 0
+						livingStats: {
+							maxPoints: 100
+							upgrades: [ ]
+						}
+					}
+				}
+				type: "item"
+			}]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			id: "6A442F1CD8A788A5"
+			tasks: [{
+				id: "6CFB77B6F76159CD"
+				item: "pneumaticcraft:guard_drone"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 1.5d
+		}
+		{
+			id: "63DC09DB550E8E80"
+			tasks: [{
+				id: "0848263DC1528DB6"
+				item: {
+					Count: 1b
+					id: "embers:ashen_cloak"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			x: 3.5d
+			y: -1.0d
+		}
+	]
+	title: "Protection"
+}

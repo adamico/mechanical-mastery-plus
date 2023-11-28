@@ -1,0 +1,93 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "ore_processing"
+	group: "1B164FDBCB2D6C75"
+	icon: "pneumaticcraft:volume_upgrade"
+	id: "3220A0BB9AF94295"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			id: "5EE60FD7516A004C"
+			tasks: [{
+				id: "452E8EFE45A5BB80"
+				item: "botania:orechid"
+				type: "item"
+			}]
+			x: -3.5d
+			y: -1.0d
+		}
+		{
+			id: "73C283FE9374F340"
+			tasks: [{
+				id: "12065224C6A8CB2E"
+				item: "botania:orechid_ignem"
+				type: "item"
+			}]
+			x: -2.5d
+			y: -1.0d
+		}
+		{
+			id: "7D61CC34C6CB2045"
+			tasks: [{
+				id: "07C7E2766233611E"
+				item: "embers:geologic_separator"
+				type: "item"
+			}]
+			x: -5.5d
+			y: -1.0d
+		}
+		{
+			id: "1022FC227D0E36D9"
+			tasks: [{
+				id: "700AF6EFC976C9DA"
+				item: "embers:melter"
+				type: "item"
+			}]
+			x: -6.5d
+			y: -1.0d
+		}
+		{
+			id: "3C6A9185E3B3721B"
+			tasks: [{
+				id: "007A9973F73CBD63"
+				item: "planttech2:seedsqueezer"
+				type: "item"
+			}]
+			x: -0.5d
+			y: -1.0d
+		}
+		{
+			id: "28CE393CA1062875"
+			tasks: [{
+				id: "17E136390F13D40F"
+				item: "elementalcraft:purifier"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -1.0d
+		}
+		{
+			id: "40CB2C8631073401"
+			tasks: [{
+				id: "0ED27E4B70C911CB"
+				item: "theurgy:incubator"
+				type: "item"
+			}]
+			x: 3.5d
+			y: -1.0d
+		}
+		{
+			id: "61BBBC33FE9FD0F8"
+			tasks: [{
+				id: "7B1BA70ABA350C05"
+				item: "create:encased_fan"
+				type: "item"
+			}]
+			x: -8.0d
+			y: -1.0d
+		}
+	]
+	title: "Production"
+}

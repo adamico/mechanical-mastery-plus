@@ -1,0 +1,12 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "vegetal_essence"
+	group: "7B898912997734BE"
+	icon: "planttech2:biomass"
+	id: "25E32BF73AF69897"
+	order_index: 4
+	quest_links: [ ]
+	quests: [ ]
+	title: "Vegetal Essence"
+}

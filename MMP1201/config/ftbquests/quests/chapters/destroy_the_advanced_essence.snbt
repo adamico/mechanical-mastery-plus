@@ -1,0 +1,20 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "destroy_the_advanced_essence"
+	group: "339A892EB2308C42"
+	id: "4ABD1630391C3EB4"
+	order_index: 0
+	quest_links: [ ]
+	quests: [{
+		id: "35267194FC25C257"
+		tasks: [{
+			id: "67CA5B78E99C1610"
+			item: "kubejs:cube4"
+			type: "item"
+		}]
+		x: -1.0d
+		y: -0.5d
+	}]
+	title: "Destroy the advanced essence"
+}

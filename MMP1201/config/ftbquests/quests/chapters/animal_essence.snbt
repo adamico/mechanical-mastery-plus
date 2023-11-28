@@ -1,0 +1,12 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "animal_essence"
+	group: "7B898912997734BE"
+	icon: "bloodmagic:weakbloodshard"
+	id: "76E03BFC34D4BA79"
+	order_index: 5
+	quest_links: [ ]
+	quests: [ ]
+	title: "Blood Essence"
+}

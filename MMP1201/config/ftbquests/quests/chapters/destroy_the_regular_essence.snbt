@@ -1,0 +1,21 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "destroy_the_regular_essence"
+	group: "339A892EB2308C42"
+	id: "50EA74E4D9E9A070"
+	order_index: 2
+	quest_links: [ ]
+	quests: [{
+		dependencies: ["5BC1A32081DC132F"]
+		id: "43D0A1FF7EEE1F19"
+		tasks: [{
+			id: "4E512C3E1F2BFE8E"
+			item: "kubejs:cube2"
+			type: "item"
+		}]
+		x: -1.5d
+		y: 0.0d
+	}]
+	title: "Destroy the regular essence"
+}

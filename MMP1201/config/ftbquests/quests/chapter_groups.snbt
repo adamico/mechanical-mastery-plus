@@ -1,0 +1,9 @@
+{
+	chapter_groups: [
+		{ id: "339A892EB2308C42", title: "Destroy the corrupted essences" }
+		{ id: "1B164FDBCB2D6C75", title: "Face COD threats" }
+		{ id: "7B898912997734BE", title: "Rebuild the Original Essences" }
+		{ id: "1D82027E3833BE18", title: "Weaken COD" }
+		{ id: "61695B2EA41F9ACD", title: "Defeat COD" }
+	]
+}

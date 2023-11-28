@@ -1,0 +1,43 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "food"
+	group: "1B164FDBCB2D6C75"
+	icon: "pneumaticcraft:item_life_upgrade"
+	id: "734FF64E0DCC8D34"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			id: "67CF67EFB4DC3602"
+			tasks: [{
+				id: "54899F3E53E69C9B"
+				item: "farmersdelight:stove"
+				type: "item"
+			}]
+			x: -4.0d
+			y: -1.0d
+		}
+		{
+			id: "25B9D6E585BB0446"
+			tasks: [{
+				id: "4F0EDE0A4FF8447E"
+				item: "mm_farming:block_crafter_farm"
+				type: "item"
+			}]
+			x: -5.5d
+			y: -2.0d
+		}
+		{
+			id: "20344AB5642B5961"
+			tasks: [{
+				id: "23C0BCFAC00EAAEB"
+				item: "energizedpower:plant_growth_chamber"
+				type: "item"
+			}]
+			x: -2.5d
+			y: -2.0d
+		}
+	]
+	title: "Food"
+}
