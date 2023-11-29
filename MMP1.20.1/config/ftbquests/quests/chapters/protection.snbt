@@ -2,39 +2,12 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "protection"
-	group: "1B164FDBCB2D6C75"
+	group: "74710C7C9353C2D4"
 	icon: "pneumaticcraft:armor_upgrade"
 	id: "63AC07780B1B6DEA"
-	order_index: 0
+	order_index: 1
 	quest_links: [ ]
 	quests: [
-		{
-			id: "3EF17A5ABF1B0EB4"
-			tasks: [{
-				id: "6331FAD9CB35CDD6"
-				item: {
-					Count: 1b
-					ForgeCaps: {
-						Parent: {
-							energy: {
-								capacity: 1000
-								energy: 1000
-								maxextract: 1000
-								maxreceive: 1000
-							}
-							inventory: {
-								Items: [ ]
-								Size: 10
-							}
-						}
-					}
-					id: "planttech2:cyberarmor_chest"
-				}
-				type: "item"
-			}]
-			x: -1.0d
-			y: -1.0d
-		}
 		{
 			dependencies: ["46FE5BEA713DF5EC"]
 			id: "46C7BAAF5980BD24"
@@ -145,8 +118,8 @@
 				item: "pneumaticcraft:guard_drone"
 				type: "item"
 			}]
-			x: 0.5d
-			y: 1.5d
+			x: 5.0d
+			y: -2.0d
 		}
 		{
 			id: "63DC09DB550E8E80"
@@ -164,6 +137,20 @@
 			x: 3.5d
 			y: -1.0d
 		}
+		{
+			dependencies: ["6E423DDD9AB7EC1E"]
+			description: [""]
+			icon: "pneumaticcraft:armor_upgrade"
+			id: "5BE0FF9BBFEAA183"
+			tasks: [{
+				id: "60A376CA30639DC3"
+				title: "Complete the Protection Challenge"
+				type: "checkmark"
+			}]
+			title: "Protection Challenge"
+			x: 0.5d
+			y: -4.0d
+		}
 	]
-	title: "Protection"
+	title: "No more Protection"
 }

@@ -1,0 +1,181 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "defeat_cod"
+	group: ""
+	icon: "minecraft:cod"
+	id: "54D7233C9C19077E"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"This chapter sums up your mission to destroy COD."
+				""
+				"In MM+ you created a mechanical entity through your dependency on advanced technologies."
+				"The result was the creation of the Advanced Mechanical Essence."
+				""
+				"To weaken COD you must destroy all the essences and stop the automatic production."
+				""
+				"To do this you have to say goodbye to your advanced technologies:"
+				""
+				"- No more energy"
+				"- No more advanced protection"
+				"- No more automatic food production"
+				"- No more money"
+				""
+				"For each lost privilege you gain access to a new way of doing things by means of specific non or less tech oriented mods."
+				""
+				"Up to you to choose in which order to complete the questlines."
+				""
+				"Good luck on your mission and may the factory ever grow!"
+			]
+			id: "6DAE26E5A3699513"
+			rewards: [{
+				id: "296903D7FD5E8BD5"
+				type: "xp"
+				xp: 5
+			}]
+			tasks: [{
+				id: "567EC02584BE9A37"
+				title: "How to defeat COD?"
+				type: "checkmark"
+			}]
+			title: "A new beginning"
+			x: 1.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["6DAE26E5A3699513"]
+			description: [
+				"To stop the production of each of the mechanical essences you have to complete all 4 challenges:"
+				""
+				"- Protection Challenge => lose access to your Mekasuit"
+				"- Food Challenge => lose access to infinite food"
+				"- Energy Challenge => no more energy"
+				"- Money Challenge => no more trades"
+				""
+				"You can complete the challenges in any order you like and each loss gives you access to a new a new non tech or less tech mod."
+			]
+			id: "6E423DDD9AB7EC1E"
+			tasks: [{
+				id: "44A2E4B6BED0AE6E"
+				title: "Check your surroundings"
+				type: "checkmark"
+			}]
+			title: "Start the Challenges"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6DAE26E5A3699513"]
+			description: [
+				"In order to proceed you need to reestablish a resource production facility."
+				""
+				"To do this you can salvage COD's creations and explore your neighborhood for basic resources."
+				""
+				"If you choose to salvage COD's machines be prepared for a fight with COD's mad mechanics and monsters."
+			]
+			id: "720030C2544088EB"
+			tasks: [{
+				id: "0DA813F532A2566A"
+				title: "Get resources"
+				type: "checkmark"
+			}]
+			title: "Restore resource production"
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6DAE26E5A3699513"]
+			description: ["At the end of each challenge questline you will be able to produce a new essence which will stop COD's production of the old essence."]
+			id: "22A015EA67107F57"
+			tasks: [{
+				id: "52739E6A96D2C5AC"
+				title: "Getting resources"
+				type: "checkmark"
+			}]
+			title: "Synthesize new essences"
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"6E423DDD9AB7EC1E"
+				"720030C2544088EB"
+				"22A015EA67107F57"
+			]
+			id: "5D28B48E69F2100A"
+			tasks: [{
+				id: "33767C7812A21EC1"
+				title: "Destroy COD"
+				type: "checkmark"
+			}]
+			x: 1.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["6DAE26E5A3699513"]
+			description: [
+				"You have salvaged your precious Mekasuit and Mekatool."
+				""
+				"They're now fully charged and you can recharge them in the chargepad."
+				""
+				"All of the upgrades are installed allowing to move freely, mine at high speed, defeat COD's minions and defend from their attacks."
+			]
+			id: "71207A9BDC8EFEE4"
+			tasks: [{
+				id: "5598B8A3BBA5335F"
+				title: "Initial equipment"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6DAE26E5A3699513"]
+			description: [
+				"Your Mekasuit helmet can auto-feed you with nutritional paste."
+				""
+				"An infinite source of food is continuously converted to nutritional paste in the Nutritional Liquifier with which you can recharge the helmet."
+			]
+			id: "7960590C2949241A"
+			tasks: [{
+				id: "157BD4190D58763F"
+				title: "Food"
+				type: "checkmark"
+			}]
+			x: 0.5d
+			y: -3.0d
+		}
+		{
+			dependencies: ["6DAE26E5A3699513"]
+			description: [
+				"Your success in creating the mechanical essences has given you access to infinite power generation."
+				""
+				"Use this energy for recharging your Mekasuit and power the machine you have salvaged."
+			]
+			id: "4F4825504EF70D5D"
+			tasks: [{
+				id: "1CF7D188D2C9994A"
+				title: "Infinite power"
+				type: "checkmark"
+			}]
+			x: 3.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["6DAE26E5A3699513"]
+			description: ["You have still some money left in your account."]
+			id: "336AC57E85E8C711"
+			tasks: [{
+				id: "0E4AC78A25A4FD45"
+				title: "I am Rich!"
+				type: "checkmark"
+			}]
+			x: 2.5d
+			y: -3.0d
+		}
+	]
+	title: "The master plan"
+}

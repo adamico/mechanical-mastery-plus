@@ -1,0 +1,9 @@
+<infuse_type:mekanism:bio>
+<infuse_type:mekanism:carbon>
+<infuse_type:mekanism:diamond>
+<infuse_type:mekanism:empty>
+<infuse_type:mekanism:fungi>
+<infuse_type:mekanism:gold>
+<infuse_type:mekanism:redstone>
+<infuse_type:mekanism:refined_obsidian>
+<infuse_type:mekanism:tin>

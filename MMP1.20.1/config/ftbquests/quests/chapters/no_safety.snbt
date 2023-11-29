@@ -1,0 +1,70 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "no_safety"
+	group: "1B164FDBCB2D6C75"
+	icon: "pneumaticcraft:ender_visor_upgrade"
+	id: "198E1CB749CBA2AD"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["6E423DDD9AB7EC1E"]
+			icon: "pneumaticcraft:ender_visor_upgrade"
+			id: "33C946F60C836000"
+			tasks: [{
+				id: "4358F2223A932BDF"
+				title: "No Safety"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: -0.5d
+		}
+		{
+			icon: {
+				Count: 1b
+				id: "pedestals:upgrade_pedestal_planter"
+				tag: { }
+			}
+			id: "10DA8F956FE26825"
+			tasks: [{
+				id: "613900A2C690A016"
+				title: "Nature Essence"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: 1.0d
+		}
+		{
+			id: "4078319AECD6E336"
+			tasks: [{
+				id: "43D99DDD9C9FDEB3"
+				item: "naturesaura:nature_altar"
+				type: "item"
+			}]
+			x: -2.0d
+			y: 1.0d
+		}
+		{
+			id: "0331E5DE036DA7A9"
+			tasks: [{
+				id: "19CF730FC09192A2"
+				item: "farmersdelight:tree_bark"
+				type: "item"
+			}]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			id: "5734BC75FABA4BFF"
+			tasks: [{
+				id: "798C781BE6CBFDA9"
+				item: "elementalcraft:source_breeder"
+				type: "item"
+			}]
+			x: 0.0d
+			y: 2.5d
+		}
+	]
+	title: "No safety"
+}

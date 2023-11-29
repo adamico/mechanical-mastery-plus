@@ -2,10 +2,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "food"
-	group: "1B164FDBCB2D6C75"
+	group: "74710C7C9353C2D4"
 	icon: "pneumaticcraft:item_life_upgrade"
 	id: "734FF64E0DCC8D34"
-	order_index: 1
+	order_index: 0
 	quest_links: [ ]
 	quests: [
 		{
@@ -38,6 +38,20 @@
 			x: -2.5d
 			y: -2.0d
 		}
+		{
+			dependencies: ["6E423DDD9AB7EC1E"]
+			description: [""]
+			icon: "pneumaticcraft:item_life_upgrade"
+			id: "46CA3A79FB1575B2"
+			tasks: [{
+				id: "45717BA6DA9FC623"
+				title: "Complete the Life Challenge"
+				type: "checkmark"
+			}]
+			title: "Life Challenge"
+			x: -4.0d
+			y: -3.0d
+		}
 	]
-	title: "Food"
+	title: "No More Infinite Food"
 }

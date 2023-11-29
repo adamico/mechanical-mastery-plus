@@ -3,91 +3,75 @@
 	default_quest_shape: ""
 	filename: "ore_processing"
 	group: "1B164FDBCB2D6C75"
-	icon: "pneumaticcraft:volume_upgrade"
+	icon: "pneumaticcraft:gilded_upgrade"
 	id: "3220A0BB9AF94295"
-	order_index: 3
+	order_index: 1
 	quest_links: [ ]
 	quests: [
 		{
-			id: "5EE60FD7516A004C"
+			icon: {
+				Count: 1b
+				id: "pedestals:upgrade_pedestal_void"
+				tag: { }
+			}
+			id: "7FCBC36866874BCC"
 			tasks: [{
-				id: "452E8EFE45A5BB80"
-				item: "botania:orechid"
-				type: "item"
-			}]
-			x: -3.5d
-			y: -1.0d
-		}
-		{
-			id: "73C283FE9374F340"
-			tasks: [{
-				id: "12065224C6A8CB2E"
-				item: "botania:orechid_ignem"
-				type: "item"
-			}]
-			x: -2.5d
-			y: -1.0d
-		}
-		{
-			id: "7D61CC34C6CB2045"
-			tasks: [{
-				id: "07C7E2766233611E"
-				item: "embers:geologic_separator"
-				type: "item"
-			}]
-			x: -5.5d
-			y: -1.0d
-		}
-		{
-			id: "1022FC227D0E36D9"
-			tasks: [{
-				id: "700AF6EFC976C9DA"
-				item: "embers:melter"
-				type: "item"
-			}]
-			x: -6.5d
-			y: -1.0d
-		}
-		{
-			id: "3C6A9185E3B3721B"
-			tasks: [{
-				id: "007A9973F73CBD63"
-				item: "planttech2:seedsqueezer"
-				type: "item"
+				id: "5C1B1EBF76F5CFC1"
+				title: "Ancients Essence"
+				type: "checkmark"
 			}]
 			x: -0.5d
-			y: -1.0d
+			y: -4.5d
 		}
 		{
-			id: "28CE393CA1062875"
+			dependencies: ["6E423DDD9AB7EC1E"]
+			icon: "pneumaticcraft:gilded_upgrade"
+			id: "2F4F56ED65E82253"
 			tasks: [{
-				id: "17E136390F13D40F"
-				item: "elementalcraft:purifier"
+				id: "462B85016C4C1140"
+				title: "No Trades"
+				type: "checkmark"
+			}]
+			x: -0.5d
+			y: -6.0d
+		}
+		{
+			id: "5D2C7EB06B85F869"
+			tasks: [{
+				id: "031583810CDAC89B"
+				item: "embers:ember_crystal_cluster"
 				type: "item"
 			}]
 			x: 1.5d
-			y: -1.0d
+			y: -4.5d
 		}
 		{
-			id: "40CB2C8631073401"
+			id: "332F0A1B4C56D083"
 			tasks: [{
-				id: "0ED27E4B70C911CB"
-				item: "theurgy:incubator"
+				id: "1C4BE80F5ED6C61E"
+				item: "occultism:spirit_fire"
 				type: "item"
 			}]
-			x: 3.5d
-			y: -1.0d
+			x: -0.5d
+			y: -3.0d
 		}
 		{
-			id: "61BBBC33FE9FD0F8"
-			tasks: [{
-				id: "7B1BA70ABA350C05"
-				item: "create:encased_fan"
-				type: "item"
-			}]
-			x: -8.0d
-			y: -1.0d
+			id: "7FF7296B0B8EC425"
+			tasks: [
+				{
+					id: "3BFF1CB818DA76FB"
+					item: "create:flywheel"
+					type: "item"
+				}
+				{
+					id: "12C934FF7BF4D5E7"
+					item: "pneumaticcraft:air_compressor"
+					type: "item"
+				}
+			]
+			x: -2.5d
+			y: -4.5d
 		}
 	]
-	title: "Production"
+	title: "No Trades"
 }

@@ -5,39 +5,71 @@
 	group: "1B164FDBCB2D6C75"
 	icon: "pneumaticcraft:standby_upgrade"
 	id: "58BD1748492DF03F"
-	order_index: 2
+	order_index: 0
 	quest_links: [ ]
 	quests: [
 		{
-			id: "788F1B5A7CEBBDAF"
+			dependencies: ["6E423DDD9AB7EC1E"]
+			icon: "pneumaticcraft:standby_upgrade"
+			id: "3B00515E6C683B8D"
 			tasks: [{
-				id: "063C20BCA32FD2DE"
-				item: "enderio:stirling_generator"
-				type: "item"
+				id: "639AA746CC509630"
+				title: "Complete the Energy Challenge"
+				type: "checkmark"
 			}]
-			x: -3.0d
-			y: -2.5d
+			title: "No Energy"
+			x: -1.5d
+			y: -4.5d
 		}
 		{
-			id: "64C87BD05C6B9D7F"
+			icon: {
+				Count: 1b
+				id: "pedestals:upgrade_pedestal_pump"
+				tag: { }
+			}
+			id: "192260958707F41D"
 			tasks: [{
-				id: "1FCFBC0E750B1BD8"
-				item: "planttech2:solargenerator"
+				id: "0C7C11BFE8F87196"
+				title: "Magic Essence"
+				type: "checkmark"
+			}]
+			x: -1.5d
+			y: -3.0d
+		}
+		{
+			id: "30FE3B7D935DD46E"
+			tasks: [{
+				id: "4B509C922B773D0A"
+				item: "ars_nouveau:source_gem"
+				type: "item"
+			}]
+			x: -3.5d
+			y: -3.0d
+		}
+		{
+			id: "45A1B4F9D6A87A24"
+			tasks: [{
+				id: "04170B85ECABD7B0"
+				item: {
+					Count: 1b
+					id: "forbidden_arcanus:eternal_stella"
+					tag: { }
+				}
+				type: "item"
+			}]
+			x: 0.5d
+			y: -3.0d
+		}
+		{
+			id: "6CB054D134007122"
+			tasks: [{
+				id: "4BCC751A629074FE"
+				item: "botania:terrasteel_ingot"
 				type: "item"
 			}]
 			x: -1.5d
-			y: -2.5d
-		}
-		{
-			id: "2B6F04CC1C899EE8"
-			tasks: [{
-				id: "7855B36D0370D6D8"
-				item: "energizedpower:solar_panel_1"
-				type: "item"
-			}]
-			x: 0.0d
-			y: -2.5d
+			y: -1.5d
 		}
 	]
-	title: "Energy"
+	title: "No Energy"
 }

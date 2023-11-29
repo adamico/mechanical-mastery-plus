@@ -1,0 +1,15 @@
+<slurry:mekanism:clean_copper>
+<slurry:mekanism:clean_gold>
+<slurry:mekanism:clean_iron>
+<slurry:mekanism:clean_lead>
+<slurry:mekanism:clean_osmium>
+<slurry:mekanism:clean_tin>
+<slurry:mekanism:clean_uranium>
+<slurry:mekanism:dirty_copper>
+<slurry:mekanism:dirty_gold>
+<slurry:mekanism:dirty_iron>
+<slurry:mekanism:dirty_lead>
+<slurry:mekanism:dirty_osmium>
+<slurry:mekanism:dirty_tin>
+<slurry:mekanism:dirty_uranium>
+<slurry:mekanism:empty>

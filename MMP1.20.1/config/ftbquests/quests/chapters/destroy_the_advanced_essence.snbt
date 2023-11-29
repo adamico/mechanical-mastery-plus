@@ -3,18 +3,81 @@
 	default_quest_shape: ""
 	filename: "destroy_the_advanced_essence"
 	group: "339A892EB2308C42"
+	icon: "kubejs:cube4"
 	id: "4ABD1630391C3EB4"
-	order_index: 0
+	order_index: 2
 	quest_links: [ ]
-	quests: [{
-		id: "35267194FC25C257"
-		tasks: [{
-			id: "67CA5B78E99C1610"
-			item: "kubejs:cube4"
-			type: "item"
-		}]
-		x: -1.0d
-		y: -0.5d
-	}]
-	title: "Destroy the advanced essence"
+	quests: [
+		{
+			dependencies: ["557B1822A8A65F34"]
+			id: "35267194FC25C257"
+			tasks: [{
+				id: "67CA5B78E99C1610"
+				item: "kubejs:cube4"
+				type: "item"
+			}]
+			x: -2.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["35267194FC25C257"]
+			description: [
+				"test"
+				""
+				"{ \"text\": \"Go to quest!\", \"color\": \"yellow\", \"underlined\":\"true\", \"clickEvent\": { \"action\" : \"change_page\", \"value\" : \"52B66B7ED0AF38CD\"} }\""
+			]
+			id: "5BC1A32081DC132F"
+			tasks: [{
+				id: "4F7601CE597A42F0"
+				item: "kubejs:cube3"
+				type: "item"
+			}]
+			x: -1.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["5BC1A32081DC132F"]
+			id: "43D0A1FF7EEE1F19"
+			tasks: [{
+				id: "4E512C3E1F2BFE8E"
+				item: "kubejs:cube2"
+				type: "item"
+			}]
+			x: 0.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["43D0A1FF7EEE1F19"]
+			id: "3A55780ECF97F525"
+			tasks: [{
+				id: "5DE041D664210181"
+				item: "kubejs:cube1"
+				type: "item"
+			}]
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			description: [
+				"Thanks to your help COD can produce infinite amounts of the old mechanical essences."
+				""
+				"You can freely take the essences, COD won't mind and even better he will restore used essences up to a fixed amount."
+				""
+				"You can process each essence in multiple ways except for the Advanced one."
+				""
+				"The less complex the essence the higher the number of processing methods and the processing complexity."
+				""
+				"Quick warning, once you start processing essences faster than he can produce them, COD will get angry and his challenges will be harder and will have to be completed in less time."
+			]
+			id: "557B1822A8A65F34"
+			tasks: [{
+				id: "25788500D3ACF2FE"
+				title: "COD's resources"
+				type: "checkmark"
+			}]
+			x: -2.5d
+			y: -0.5d
+		}
+	]
+	title: "Process old essences"
 }

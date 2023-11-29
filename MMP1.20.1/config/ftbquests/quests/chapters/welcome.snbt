@@ -1,0 +1,21 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "welcome"
+	group: ""
+	id: "0E5CAA684BB59128"
+	order_index: 0
+	quest_links: [ ]
+	quests: [{
+		description: ["You find yourself in your safe outpost surrounded by COD's corrupted factory."]
+		id: "3DD3548E76A3F3B3"
+		tasks: [{
+			id: "2A32A3CC3C4087AA"
+			title: "Welcome!"
+			type: "checkmark"
+		}]
+		x: -1.0d
+		y: -1.0d
+	}]
+	title: "Welcome!"
+}

@@ -1,0 +1,70 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "no_autocraft"
+	group: "1B164FDBCB2D6C75"
+	icon: "pneumaticcraft:security_upgrade"
+	id: "68F8C69B01410FE7"
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["6E423DDD9AB7EC1E"]
+			icon: "pneumaticcraft:security_upgrade"
+			id: "740141A4B48613F5"
+			tasks: [{
+				id: "3ACD32A7ED6E10A5"
+				title: "No autocraft"
+				type: "checkmark"
+			}]
+			x: -0.5d
+			y: 0.5d
+		}
+		{
+			icon: {
+				Count: 1b
+				id: "pedestals:upgrade_pedestal_fluidconverter"
+				tag: { }
+			}
+			id: "188887E0E7F21B79"
+			tasks: [{
+				id: "7E96F44AD5EF2BA3"
+				title: "Alchemical Essence"
+				type: "checkmark"
+			}]
+			x: -0.5d
+			y: 2.0d
+		}
+		{
+			id: "64D1B50F2916F29A"
+			tasks: [{
+				id: "0F3AEAF7D4FC6790"
+				item: "bloodmagic:alchemytable"
+				type: "item"
+			}]
+			x: -2.5d
+			y: 2.0d
+		}
+		{
+			id: "2BB8D646BF3B9351"
+			tasks: [{
+				id: "5DF8018039108913"
+				item: "theurgy:calcination_oven"
+				type: "item"
+			}]
+			x: 1.5d
+			y: 2.0d
+		}
+		{
+			id: "624BD373F97B6034"
+			tasks: [{
+				id: "24BA3DA363B9F07E"
+				item: "evilcraft:blood_potash"
+				type: "item"
+			}]
+			x: -0.5d
+			y: 3.5d
+		}
+	]
+	title: "No autocraft"
+}

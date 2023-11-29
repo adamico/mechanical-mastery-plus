@@ -1,0 +1,12 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "no_more_digital_storage"
+	group: "74710C7C9353C2D4"
+	icon: "ae2:controller"
+	id: "6A8338EAC91C414D"
+	order_index: 2
+	quest_links: [ ]
+	quests: [ ]
+	title: "No more Digital Storage"
+}

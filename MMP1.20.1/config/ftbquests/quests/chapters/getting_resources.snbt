@@ -1,0 +1,382 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "getting_resources"
+	group: "339A892EB2308C42"
+	icon: "minecraft:oak_log"
+	id: "59DFC29C32C1062D"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"COD's madness has spared some parts of the dimension in which small islands reside."
+				""
+				"They're full of life and useful resources to gather."
+				""
+				"Once you've gathered enough of these basic resources you can use them to let COD synthesize them infinitely... not for free though!"
+			]
+			hide_dependent_lines: true
+			id: "04B21B380B8C152B"
+			tasks: [{
+				id: "6D318A9B8B560974"
+				title: "Explore"
+				type: "checkmark"
+			}]
+			x: -4.5d
+			y: -6.0d
+		}
+		{
+			dependencies: ["3D7805B33F83D480"]
+			id: "3A2CC0F1F58D3161"
+			tasks: [{
+				id: "20013F1A44195029"
+				item: "enderio:energy_conduit"
+				type: "item"
+			}]
+			x: -2.5d
+			y: 1.5d
+		}
+		{
+			dependencies: [
+				"569F6B8AFC2733D3"
+				"788A3D7CF916175C"
+			]
+			id: "13009356B2C43F01"
+			tasks: [{
+				id: "7FE1E937A6921AAB"
+				item: "enderio:grains_of_infinity"
+				type: "item"
+			}]
+			x: -4.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["3A4F05B4EF31C8DC"]
+			id: "788A3D7CF916175C"
+			tasks: [{
+				id: "386B9C00ED5E75CC"
+				item: "minecraft:flint"
+				type: "item"
+			}]
+			x: -3.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["04B21B380B8C152B"]
+			id: "569F6B8AFC2733D3"
+			rewards: [{
+				id: "3E33EA186091EBD4"
+				item: "farmersdelight:fried_egg"
+				type: "item"
+			}]
+			shape: "gear"
+			tasks: [{
+				id: "64147C02487EE5AB"
+				item: "minecraft:cobbled_deepslate"
+				type: "item"
+			}]
+			x: -4.5d
+			y: -3.5d
+		}
+		{
+			dependencies: ["33B6004B0E26E3F7"]
+			id: "6ED4E773FE4A4716"
+			tasks: [{
+				id: "337976040D34E0BB"
+				item: "minecraft:iron_ingot"
+				type: "item"
+			}]
+			x: -6.5d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"13009356B2C43F01"
+				"6ED4E773FE4A4716"
+			]
+			id: "35CBCED1C5440F09"
+			tasks: [{
+				id: "73399FE7C4BC236B"
+				item: "enderio:void_chassis"
+				type: "item"
+			}]
+			x: -4.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["04B21B380B8C152B"]
+			id: "33B6004B0E26E3F7"
+			shape: "gear"
+			tasks: [{
+				id: "314DEFD84EF1CEE7"
+				item: "minecraft:raw_iron"
+				type: "item"
+			}]
+			x: -6.5d
+			y: -3.5d
+		}
+		{
+			dependencies: ["62CC88FE70790CFA"]
+			id: "32DC292C0E5E6AD1"
+			tasks: [{
+				id: "7693FAA90A65642B"
+				item: "mekanism:ingot_steel"
+				type: "item"
+			}]
+			x: -6.5d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"6ED4E773FE4A4716"
+				"4DC30A4DED997EC9"
+			]
+			id: "62CC88FE70790CFA"
+			tasks: [{
+				id: "4F09146BB358A653"
+				item: "mekanism:enriched_iron"
+				type: "item"
+			}]
+			x: -6.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["04B21B380B8C152B"]
+			id: "3EC78535367D2948"
+			shape: "gear"
+			tasks: [{
+				id: "0A8818A2B4D40B1F"
+				item: "minecraft:obsidian"
+				type: "item"
+			}]
+			x: -10.5d
+			y: -3.5d
+		}
+		{
+			dependencies: ["74FE46FB51FD5E67"]
+			id: "4DC30A4DED997EC9"
+			tasks: [{
+				id: "4C927EB02F457E76"
+				item: "mekanism:enriched_carbon"
+				type: "item"
+			}]
+			x: -8.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["54BFEEC1EEC11C37"]
+			id: "3A4F05B4EF31C8DC"
+			tasks: [{
+				id: "677403FC646531C3"
+				item: "minecraft:gravel"
+				type: "item"
+			}]
+			x: -2.5d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"3EC78535367D2948"
+				"32DC292C0E5E6AD1"
+			]
+			id: "36F034352D2ABD5C"
+			tasks: [{
+				id: "52C184AA0B2DCF5A"
+				item: "enderio:dark_steel_ingot"
+				type: "item"
+			}]
+			x: -10.5d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"3A4F05B4EF31C8DC"
+				"2ADD6F7CA73D149B"
+				"68921C4F77202AEA"
+			]
+			id: "6A9DFBB410A75F2F"
+			tasks: [{
+				id: "67682918BC209D5B"
+				item: "enderio:conduit_binder_composite"
+				type: "item"
+			}]
+			x: -2.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["6A9DFBB410A75F2F"]
+			id: "3D7805B33F83D480"
+			tasks: [{
+				id: "4B29B0FA1CCB3141"
+				item: "enderio:conduit_binder"
+				type: "item"
+			}]
+			x: -2.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["3A4F05B4EF31C8DC"]
+			id: "2ADD6F7CA73D149B"
+			tasks: [{
+				id: "3634B4CCCABE750C"
+				item: "minecraft:sand"
+				type: "item"
+			}]
+			x: -1.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["672F50B7ACBD03F8"]
+			id: "68921C4F77202AEA"
+			tasks: [{
+				id: "44C246FE98A335D9"
+				item: "minecraft:clay_ball"
+				type: "item"
+			}]
+			x: -1.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["04B21B380B8C152B"]
+			id: "74FE46FB51FD5E67"
+			shape: "gear"
+			tasks: [{
+				id: "4CB208142965345E"
+				item: "minecraft:coal"
+				type: "item"
+			}]
+			x: -8.5d
+			y: -3.5d
+		}
+		{
+			dependencies: ["04B21B380B8C152B"]
+			id: "54BFEEC1EEC11C37"
+			shape: "gear"
+			tasks: [{
+				id: "6E5A551AE106B88A"
+				item: "minecraft:cobblestone"
+				type: "item"
+			}]
+			x: -2.5d
+			y: -3.5d
+		}
+		{
+			dependencies: ["315A1FFD867F90E0"]
+			id: "672F50B7ACBD03F8"
+			tasks: [{
+				id: "2BD025F0D7D1DEB1"
+				item: "minecraft:clay"
+				type: "item"
+			}]
+			x: -0.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["7DFAE7C65EA7AA93"]
+			id: "315A1FFD867F90E0"
+			tasks: [{
+				id: "3A38BEC3CB3E0DB6"
+				item: "minecraft:mud"
+				type: "item"
+			}]
+			x: -0.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["04B21B380B8C152B"]
+			id: "7DFAE7C65EA7AA93"
+			shape: "gear"
+			tasks: [{
+				id: "090648A697B99F42"
+				item: "minecraft:dirt"
+				type: "item"
+			}]
+			x: -0.5d
+			y: -3.5d
+		}
+		{
+			dependencies: ["04B21B380B8C152B"]
+			id: "73397B1D0F1624A2"
+			shape: "gear"
+			tasks: [{
+				id: "6215FAA0F3344741"
+				item: "minecraft:oak_log"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -3.5d
+		}
+		{
+			dependencies: ["73397B1D0F1624A2"]
+			id: "765890F40A6FFF95"
+			tasks: [{
+				id: "34D750071BF7818A"
+				item: "minecraft:oak_planks"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["3EC78535367D2948"]
+			id: "136153585CD926E2"
+			tasks: [{
+				id: "0CAD8590A9BFFFDD"
+				item: "adminshop:permit"
+				type: "item"
+			}]
+			x: -10.5d
+			y: -4.5d
+		}
+		{
+			dependencies: ["74FE46FB51FD5E67"]
+			id: "7F77E55BFF4B36E5"
+			tasks: [{
+				id: "40BDEF5FAD96BB6D"
+				item: "adminshop:permit"
+				type: "item"
+			}]
+			x: -8.5d
+			y: -4.5d
+		}
+		{
+			dependencies: ["33B6004B0E26E3F7"]
+			id: "56E7A6D06ACF7F8B"
+			tasks: [{
+				id: "7299F88C8C1B2970"
+				item: "adminshop:permit"
+				type: "item"
+			}]
+			x: -6.5d
+			y: -4.5d
+		}
+		{
+			dependencies: [
+				"54BFEEC1EEC11C37"
+				"569F6B8AFC2733D3"
+				"7DFAE7C65EA7AA93"
+			]
+			id: "17222797FADC7C10"
+			tasks: [{
+				id: "719C28A6130DEF4A"
+				item: "adminshop:permit"
+				type: "item"
+			}]
+			x: -2.5d
+			y: -4.5d
+		}
+		{
+			dependencies: ["73397B1D0F1624A2"]
+			id: "0CB4406B11875453"
+			tasks: [{
+				id: "443DF7D925B36C45"
+				item: "adminshop:permit"
+				type: "item"
+			}]
+			x: 1.5d
+			y: -4.5d
+		}
+	]
+	title: "Getting basic resources"
+}
