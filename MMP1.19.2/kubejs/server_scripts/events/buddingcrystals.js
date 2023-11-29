@@ -8,15 +8,15 @@ const GROW_RANGE = 3;
 const GROW_CHANCE = 0.5;
 const GROW_FOOD_DECREASE_CHANCE = 0.01;
 const GROW_BLOCKS_TAGS = [
-  { tag: 'minecraft.crops', growAttempt: 200 },
-  { tag: 'minecraft.saplings', growAttempt: 75 }
+  { tag: 'minecraft.crops', growAttempt: 30 },
+  { tag: 'minecraft.saplings', growAttempt: 30 }
 ];
 const GROW_BLOCKS_IDS = [
-  { id: 'minecraft:cactus', growAttempt: 300 },
-  { id: 'minecraft:sugar_cane', growAttempt: 300 },
-  { id: 'minecraft:sweet_berry_bush', growAttempt: 75 },
-  { id: 'minecraft:budding_amethyst', growAttempt: 50 },
-  { id: 'buddingcrystals:budding_*', growAttempt: 50 },
+  { id: 'minecraft:cactus', growAttempt: 30 },
+  { id: 'minecraft:sugar_cane', growAttempt: 30 },
+  { id: 'minecraft:sweet_berry_bush', growAttempt: 30 },
+  { id: 'minecraft:budding_amethyst', growAttempt: 20 },
+  { id: 'buddingcrystals:budding_*', growAttempt: 20 },
 ];
 
 let crouchingPlayers = [];
