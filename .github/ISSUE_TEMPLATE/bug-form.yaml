@@ -9,9 +9,9 @@ body:
   attributes:
     label: Which OS are you using?
     options:
+      - LINUX
       - MACOS
       - WINDOWS
-      - LINUX
   validations:
     required: true
 - type: input
@@ -41,7 +41,6 @@ body:
       4. <action that causes the bug>
       5. error 
       ...
-    render: bash
   validations:
     required: true
 - type: textarea
