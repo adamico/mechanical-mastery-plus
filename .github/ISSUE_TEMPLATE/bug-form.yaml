@@ -1,7 +1,7 @@
 name: Bug report
 description: Create a report to help us improve
 title: Crash/Visual glitch/Recipe not working etc.
-labels: 'unlabeled'
+labels: 'bug'
 assignees: adamico
 body:
 - type: dropdown
