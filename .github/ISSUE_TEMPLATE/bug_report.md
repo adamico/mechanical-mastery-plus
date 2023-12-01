@@ -46,12 +46,12 @@ body:
   validations:
     required: true
 - type: textarea
-    id: expected
-    attributes:
-      label: Expected behavior
-      description: "A clear and concise description of what you expected to happen."
-    validations:
-      required: true
+  id: expected
+  attributes:
+    label: Expected behavior
+    description: "A clear and concise description of what you expected to happen."
+  validations:
+    required: true
 - type: textarea
   id: logs
   attributes:
