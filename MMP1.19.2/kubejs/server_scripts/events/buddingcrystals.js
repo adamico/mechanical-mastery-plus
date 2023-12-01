@@ -7,14 +7,7 @@ console.info('Squat growing addon server script loaded.')
 const GROW_RANGE = 3;
 const GROW_CHANCE = 0.5;
 const GROW_FOOD_DECREASE_CHANCE = 0.01;
-const GROW_BLOCKS_TAGS = [
-  { tag: 'minecraft.crops', growAttempt: 30 },
-  { tag: 'minecraft.saplings', growAttempt: 30 }
-];
 const GROW_BLOCKS_IDS = [
-  { id: 'minecraft:cactus', growAttempt: 30 },
-  { id: 'minecraft:sugar_cane', growAttempt: 30 },
-  { id: 'minecraft:sweet_berry_bush', growAttempt: 30 },
   { id: 'minecraft:budding_amethyst', growAttempt: 20 },
   { id: 'buddingcrystals:budding_*', growAttempt: 20 },
 ];
@@ -25,11 +18,11 @@ PlayerEvents.tick(event => {
   let isCrouching = event.player.crouching;
   let playerUuid = event.player.stringUuid;
   let index = crouchingPlayers.indexOf(playerUuid);
-  
+
   if (isCrouching && index === -1) {
     // console.log('Player is crouching');
     crouchingPlayers.push(playerUuid);
-    
+
     growBlocksAround(event.player);
   } else if (!isCrouching && index !== -1) {
     // console.log('Player is standing');
@@ -54,13 +47,13 @@ function matchesPattern(blockId, pattern) {
 function growBlocksAround(player) {
   let level = player.level;
   let pos = player.blockPosition();
-  
+
   // Skip growth attempts if food level is too low
   if (player.foodLevel <= 6) {
     player.sendSystemMessage("Too hungry for making grow effect");
-    return; 
+    return;
   }
-  
+
   for (let x = -GROW_RANGE; x <= GROW_RANGE; x++) {
     for (let z = -GROW_RANGE; z <= GROW_RANGE; z++) {
       for (let y = -1; y <= 1; y++) {
@@ -68,19 +61,10 @@ function growBlocksAround(player) {
         let blockState = level.getBlockState(blockPos);
         let block = blockState.getBlock();
         let tags = blockState.tags.toArray();
-        
+
         let growAttempts = 0;
         let matchFound = false;
-        
-        // Check against TAGS
-        for (const entry of GROW_BLOCKS_TAGS) {
-          if (tags.some(tag => tag.location().toLanguageKey() === entry.tag)) {
-            growAttempts = entry.growAttempt;
-            matchFound = true;
-            break;
-          }
-        }
-        
+
         // Check against IDS
         if (!matchFound) {
           for (const entry of GROW_BLOCKS_IDS) {
@@ -91,18 +75,18 @@ function growBlocksAround(player) {
             }
           }
         }
-        
-        if (GROW_CHANCE > Math.random() && 
-        !blockState.isAir() && matchFound) {
+
+        if (GROW_CHANCE > Math.random() &&
+          !blockState.isAir() && matchFound) {
           console.log("growing " + block.arch$registryName());
-          
+
           for (let i = 0; i < growAttempts; i++)
-          block.randomTick(blockState, level, blockPos, level.random);
-          
+            block.randomTick(blockState, level, blockPos, level.random);
+
           if (Math.random() < GROW_FOOD_DECREASE_CHANCE) {
             player.setFoodLevel(player.foodLevel - 1);
           }
-          
+
           level.sendParticles(player, "happy_villager", false, blockPos.x + 0.5, blockPos.y + 0.8, blockPos.z + 0.5, 2, 0, 0, 0.5, 0.5);
           level.playSound(null, blockPos, "item.bone_meal.use", "master", 0.1, 1.0);
         }
