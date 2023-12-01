@@ -48,7 +48,7 @@ body:
 - type: textarea
     id: expected
     attributes:
-      label: Expected behavio
+      label: Expected behavior
       description: "A clear and concise description of what you expected to happen."
     validations:
       required: true
@@ -63,3 +63,4 @@ body:
   validations:
     required: true
 ---
+tete
