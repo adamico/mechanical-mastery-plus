@@ -42,20 +42,32 @@
 				"You managed to create an improved version of your mechanical essence, but you feel it can still be made better, and you are going to find out how."
 				""
 				"Chapter 3 is about all things Mekanism, the basic stuff, though."
+				""
+				"[\"\",{\"text\":\"TIP: \",\"color\":\"gold\"},\"if your island is in a biome preventing spawning chickens you can use the chicken spawn eggs to setup a starting passive mob farm. Use those to get into \",{\"text\":\"[ Mob Grinding Utils ]\",\"color\":\"red\",\"clickEvent\":{\"action\":\"change_page\",\"value\":\"76598CFCD001E86D\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":[\"Go to quest\"]}},\".\"]"
+				""
+				"If you waste all your eggs and chickens, you may also bulk haunt dough to get eggs."
 			]
 			icon: "kubejs:cube2"
 			id: "550E4D68A98180F5"
-			rewards: [{
-				id: "5EBD3561DC90F6E9"
-				item: {
-					Count: 1b
-					id: "mekanismtools:diamond_paxel"
-					tag: {
-						Damage: 0
+			rewards: [
+				{
+					id: "5EBD3561DC90F6E9"
+					item: {
+						Count: 1b
+						id: "mekanismtools:diamond_paxel"
+						tag: {
+							Damage: 0
+						}
 					}
+					type: "item"
 				}
-				type: "item"
-			}]
+				{
+					count: 3
+					id: "622E80C1112F753C"
+					item: "minecraft:chicken_spawn_egg"
+					type: "item"
+				}
+			]
 			subtitle: "Still need more power..."
 			tasks: [{
 				id: "7997589309CA5B5E"

@@ -23,7 +23,7 @@
 				title: "Integrated Dynamics"
 				type: "checkmark"
 			}]
-			x: 0.0d
+			x: -0.5d
 			y: -1.0d
 		}
 		{
@@ -45,7 +45,7 @@
 				type: "item"
 			}]
 			title: "Traveler's Backpack"
-			x: 3.0d
+			x: 2.5d
 			y: 1.0d
 		}
 		{
@@ -62,7 +62,7 @@
 				type: "item"
 			}]
 			title: "Computer Craft"
-			x: 0.0d
+			x: -0.5d
 			y: 0.0d
 		}
 		{
@@ -302,7 +302,7 @@
 				}
 				type: "item"
 			}]
-			x: 2.0d
+			x: 1.5d
 			y: 1.0d
 		}
 		{
@@ -327,7 +327,7 @@
 				item: "laserio:laser_wrench"
 				type: "item"
 			}]
-			x: 4.0d
+			x: 3.5d
 			y: -6.0d
 		}
 		{
@@ -343,7 +343,7 @@
 				item: "enderstorage:ender_chest"
 				type: "item"
 			}]
-			x: 2.0d
+			x: 1.5d
 			y: -5.0d
 		}
 		{
@@ -359,7 +359,7 @@
 				item: "pipez:item_pipe"
 				type: "item"
 			}]
-			x: 2.0d
+			x: 1.5d
 			y: -6.0d
 		}
 		{
@@ -476,7 +476,7 @@
 				type: "item"
 			}]
 			x: 6.5d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["41129A0B7A2CCF8D"]
@@ -492,7 +492,7 @@
 				type: "item"
 			}]
 			x: 8.5d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
 			dependencies: ["21E1D7488E184EA9"]
@@ -547,7 +547,7 @@
 				item: "ironfurnaces:diamond_furnace"
 				type: "item"
 			}]
-			x: -1.0d
+			x: -1.5d
 			y: -1.0d
 		}
 		{
@@ -564,7 +564,7 @@
 				item: "merequester:requester"
 				type: "item"
 			}]
-			x: -2.0d
+			x: -2.5d
 			y: 0.0d
 		}
 		{
@@ -581,7 +581,7 @@
 				item: "rsrequestify:requester"
 				type: "item"
 			}]
-			x: -2.0d
+			x: -2.5d
 			y: 1.0d
 		}
 		{
@@ -612,7 +612,7 @@
 				item: "modularrouters:modular_router"
 				type: "item"
 			}]
-			x: 2.0d
+			x: 1.5d
 			y: -4.0d
 		}
 		{
@@ -628,7 +628,7 @@
 				item: "morphtool:tool"
 				type: "item"
 			}]
-			x: 4.0d
+			x: 3.5d
 			y: 1.0d
 		}
 		{
@@ -651,7 +651,7 @@
 				}
 				type: "item"
 			}]
-			x: 4.0d
+			x: 3.5d
 			y: -4.0d
 		}
 		{
@@ -688,7 +688,7 @@
 				item: "sfm:manager"
 				type: "item"
 			}]
-			x: -1.0d
+			x: -1.5d
 			y: 1.0d
 		}
 		{
@@ -708,7 +708,7 @@
 				}
 				type: "item"
 			}]
-			x: 2.0d
+			x: 1.5d
 			y: -1.0d
 		}
 		{
@@ -724,7 +724,7 @@
 				item: "torchmaster:megatorch"
 				type: "item"
 			}]
-			x: 4.0d
+			x: 3.5d
 			y: -1.0d
 		}
 		{
@@ -742,7 +742,7 @@
 				type: "item"
 			}]
 			title: "XNET"
-			x: 0.0d
+			x: -0.5d
 			y: 1.0d
 		}
 		{
@@ -770,7 +770,7 @@
 				type: "item"
 			}]
 			title: "Compact Crafting"
-			x: -2.0d
+			x: -2.5d
 			y: -1.0d
 		}
 		{
@@ -780,7 +780,7 @@
 				title: "I like to automate!"
 				type: "checkmark"
 			}]
-			x: -1.0d
+			x: -1.5d
 			y: 0.0d
 		}
 		{
@@ -790,7 +790,7 @@
 				title: "Life is easy!"
 				type: "checkmark"
 			}]
-			x: 3.0d
+			x: 2.5d
 			y: 0.0d
 		}
 		{
@@ -806,7 +806,7 @@
 				type: "checkmark"
 			}]
 			x: 7.5d
-			y: 0.0d
+			y: -2.5d
 		}
 		{
 			id: "21E1D7488E184EA9"
@@ -825,7 +825,7 @@
 				title: "Logistical, dear Watson!"
 				type: "checkmark"
 			}]
-			x: 3.0d
+			x: 2.5d
 			y: -5.0d
 		}
 		{
@@ -841,7 +841,7 @@
 				item: "enderstorage:ender_tank"
 				type: "item"
 			}]
-			x: 4.0d
+			x: 3.5d
 			y: -5.0d
 		}
 		{
@@ -882,7 +882,7 @@
 				type: "item"
 			}]
 			title: "Basic Item Transport"
-			x: 3.0d
+			x: 2.5d
 			y: -4.0d
 		}
 		{
@@ -906,7 +906,7 @@
 				item: "angelring:angel_ring"
 				type: "item"
 			}]
-			x: 14.0d
+			x: 14.5d
 			y: -1.0d
 		}
 		{
@@ -931,7 +931,7 @@
 				item: "rftoolsutility:flight_module"
 				type: "item"
 			}]
-			x: 12.0d
+			x: 12.5d
 			y: -1.0d
 		}
 		{
@@ -961,7 +961,7 @@
 				}
 				type: "item"
 			}]
-			x: 11.0d
+			x: 11.5d
 			y: 1.0d
 		}
 		{
@@ -971,7 +971,7 @@
 				title: "I believe I can fly"
 				type: "checkmark"
 			}]
-			x: 12.0d
+			x: 12.5d
 			y: 0.0d
 		}
 		{
@@ -1041,7 +1041,7 @@
 				}
 			]
 			title: "Gobber Gobber Gobber"
-			x: 14.0d
+			x: 14.5d
 			y: 1.0d
 		}
 		{
@@ -1061,7 +1061,7 @@
 				item: "minecraft:phantom_membrane"
 				type: "item"
 			}]
-			x: 13.0d
+			x: 13.5d
 			y: 1.0d
 		}
 		{
@@ -1086,7 +1086,7 @@
 				}
 				type: "item"
 			}]
-			x: 14.0d
+			x: 14.5d
 			y: 0.0d
 		}
 		{
@@ -1097,7 +1097,7 @@
 				item: "mekanism:jetpack"
 				type: "item"
 			}]
-			x: 11.0d
+			x: 11.5d
 			y: -1.0d
 		}
 		{
@@ -1115,7 +1115,7 @@
 				}
 				type: "item"
 			}]
-			x: 11.0d
+			x: 11.5d
 			y: -5.0d
 		}
 		{
@@ -1127,7 +1127,7 @@
 				item: "gobber2:gobber2_medallion_healing3"
 				type: "item"
 			}]
-			x: 13.0d
+			x: 13.5d
 			y: -4.0d
 		}
 		{
@@ -1142,7 +1142,7 @@
 				item: "gobber2:gobber2_staff_nature"
 				type: "item"
 			}]
-			x: 13.0d
+			x: 13.5d
 			y: -5.0d
 		}
 		{
@@ -1154,7 +1154,7 @@
 				item: "gobber2:gobber2_staff_farmer"
 				type: "item"
 			}]
-			x: 12.0d
+			x: 12.5d
 			y: -6.0d
 		}
 		{
@@ -1166,7 +1166,7 @@
 				item: "gobber2:gobber2_staff_sniper"
 				type: "item"
 			}]
-			x: 11.0d
+			x: 11.5d
 			y: -4.0d
 		}
 		{
@@ -1176,7 +1176,7 @@
 				title: "Gobber yourself"
 				type: "checkmark"
 			}]
-			x: 12.0d
+			x: 12.5d
 			y: -5.0d
 		}
 		{
@@ -1195,7 +1195,7 @@
 				item: "createchromaticreturn:multiplite_charm"
 				type: "item"
 			}]
-			x: 12.0d
+			x: 12.5d
 			y: 1.0d
 		}
 		{
@@ -1206,7 +1206,7 @@
 				item: "mekanism:mekasuit_helmet"
 				type: "item"
 			}]
-			x: 17.5d
+			x: 18.0d
 			y: -5.0d
 		}
 		{
@@ -1217,7 +1217,7 @@
 				item: "mekanism:mekasuit_bodyarmor"
 				type: "item"
 			}]
-			x: 16.0d
+			x: 16.5d
 			y: -3.5d
 		}
 		{
@@ -1228,7 +1228,7 @@
 				item: "mekanism:mekasuit_pants"
 				type: "item"
 			}]
-			x: 16.0d
+			x: 16.5d
 			y: -2.5d
 		}
 		{
@@ -1239,7 +1239,7 @@
 				item: "mekanism:mekasuit_boots"
 				type: "item"
 			}]
-			x: 17.5d
+			x: 18.0d
 			y: -1.0d
 		}
 		{
@@ -1258,7 +1258,7 @@
 				item: "mekanism:module_elytra_unit"
 				type: "item"
 			}]
-			x: 16.5d
+			x: 17.0d
 			y: -4.5d
 		}
 		{
@@ -1278,7 +1278,7 @@
 				item: "mekanism:module_gravitational_modulating_unit"
 				type: "item"
 			}]
-			x: 16.5d
+			x: 17.0d
 			y: -1.5d
 		}
 		{
@@ -1295,7 +1295,7 @@
 				item: "mekanism:jetpack"
 				type: "item"
 			}]
-			x: 18.5d
+			x: 19.0d
 			y: -1.5d
 		}
 		{
@@ -1314,7 +1314,7 @@
 				}
 				type: "item"
 			}]
-			x: 19.0d
+			x: 19.5d
 			y: -2.5d
 		}
 		{
@@ -1326,7 +1326,7 @@
 				item: "mekanism:meka_tool"
 				type: "item"
 			}]
-			x: 19.0d
+			x: 19.5d
 			y: -3.5d
 		}
 		{
@@ -1338,7 +1338,7 @@
 				item: "mekanism:atomic_disassembler"
 				type: "item"
 			}]
-			x: 18.5d
+			x: 19.0d
 			y: -4.5d
 		}
 		{
@@ -1348,7 +1348,7 @@
 				title: "Meka-nichal"
 				type: "checkmark"
 			}]
-			x: 17.5d
+			x: 18.0d
 			y: -3.0d
 		}
 		{
@@ -1359,7 +1359,7 @@
 				title: "Dark Utilities"
 				type: "checkmark"
 			}]
-			x: 3.0d
+			x: 2.5d
 			y: -2.5d
 		}
 		{
@@ -1382,7 +1382,7 @@
 				item: "darkutils:charm_sleep"
 				type: "item"
 			}]
-			x: 2.0d
+			x: 1.5d
 			y: -2.5d
 		}
 		{
@@ -1398,7 +1398,7 @@
 				item: "darkutils:charm_warding"
 				type: "item"
 			}]
-			x: 4.0d
+			x: 3.5d
 			y: -2.5d
 		}
 		{
@@ -1414,7 +1414,7 @@
 				item: "gobber2:gobber2_ingot"
 				type: "item"
 			}]
-			x: 13.0d
+			x: 13.5d
 			y: -1.0d
 		}
 		{
@@ -1443,7 +1443,7 @@
 				}
 				type: "item"
 			}]
-			x: 3.0d
+			x: 2.5d
 			y: -1.0d
 		}
 		{
@@ -1458,7 +1458,7 @@
 				title: "Extremely Big Reactors"
 				type: "checkmark"
 			}]
-			x: 12.0d
+			x: 12.5d
 			y: -2.5d
 		}
 		{
@@ -1469,7 +1469,7 @@
 				item: "bigreactors:basic_reactorcasing"
 				type: "item"
 			}]
-			x: 11.0d
+			x: 11.5d
 			y: -2.5d
 		}
 		{
@@ -1486,7 +1486,7 @@
 				}
 				type: "item"
 			}]
-			x: 13.0d
+			x: 13.5d
 			y: -2.5d
 		}
 		{
@@ -1510,7 +1510,7 @@
 				}
 				type: "item"
 			}]
-			x: 3.0d
+			x: 2.5d
 			y: -6.0d
 		}
 		{
@@ -1525,7 +1525,7 @@
 				}
 				type: "item"
 			}]
-			x: 2.0d
+			x: 1.5d
 			y: 0.0d
 		}
 		{
@@ -1543,8 +1543,181 @@
 				}
 				type: "item"
 			}]
-			x: 11.0d
+			x: 11.5d
 			y: 0.0d
+		}
+		{
+			description: [
+				"In order to start Mob Grinding Utils you have to complete some basic steps:"
+				""
+				"1. get some basic hostile mob loot"
+				""
+				"2. craft a Mob Swab and collect mob DNA"
+				""
+				"3. get 5 buckets of any liquid xp (the easiest way is to store 5 levels into the Experience Obelisk and use an empty bucket on the obelisk)"
+			]
+			id: "76598CFCD001E86D"
+			tasks: [{
+				id: "4CCAE395028D0CEC"
+				title: "MGU"
+				type: "checkmark"
+			}]
+			title: "MGU: mob farms for dummies"
+			x: 7.5d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"5A5CB5F0598570D8"
+				"4D93B9254FEC6B50"
+			]
+			id: "4CE9B6751DCDDEB8"
+			rewards: [{
+				count: 10
+				id: "596E6211DC272CAB"
+				item: "minecraft:egg"
+				type: "item"
+			}]
+			tasks: [{
+				id: "4A9E22D2D6C006F0"
+				item: "mob_grinding_utils:nutritious_chicken_feed"
+				type: "item"
+			}]
+			x: 6.5d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"5A5CB5F0598570D8"
+				"2E2DED2526ED2624"
+			]
+			id: "4E3F218F43F32E69"
+			rewards: [{
+				count: 10
+				id: "3E4C2D98F1A9F69B"
+				item: "minecraft:egg"
+				type: "item"
+			}]
+			tasks: [{
+				id: "513A959D4892F80E"
+				item: "mob_grinding_utils:gm_chicken_feed_cursed"
+				type: "item"
+			}]
+			x: 8.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["76598CFCD001E86D"]
+			id: "5A5CB5F0598570D8"
+			rewards: [{
+				id: "499BF6AFE6076CE1"
+				type: "xp_levels"
+				xp_levels: 2
+			}]
+			tasks: [{
+				count: 5L
+				id: "44E847D06CFBA7D4"
+				item: "experienceobelisk:cognitium_bucket"
+				type: "item"
+			}]
+			title: "Liquid Exp"
+			x: 7.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["4CE9B6751DCDDEB8"]
+			id: "5887F491590E770B"
+			rewards: [{
+				id: "1605B139781751E9"
+				item: "minecraft:grass_block"
+				type: "item"
+			}]
+			tasks: [{
+				id: "2C9022709527CB92"
+				item: "mob_grinding_utils:golden_egg"
+				type: "item"
+			}]
+			x: 5.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["4E3F218F43F32E69"]
+			id: "7672DCC3CAFC3B03"
+			rewards: [{
+				id: "4F7F73561EB012BC"
+				item: "minecraft:grass_block"
+				type: "item"
+			}]
+			tasks: [{
+				id: "461900E3D2522376"
+				item: "mob_grinding_utils:rotten_egg"
+				type: "item"
+			}]
+			x: 9.5d
+			y: 1.0d
+		}
+		{
+			dependencies: ["76598CFCD001E86D"]
+			id: "4D93B9254FEC6B50"
+			rewards: [{
+				id: "3D9AD4C8E4E7ED69"
+				type: "xp_levels"
+				xp_levels: 1
+			}]
+			subtitle: "say aaaaah"
+			tasks: [{
+				id: "1E0564781DE24CF2"
+				item: "mob_grinding_utils:mob_swab"
+				type: "item"
+			}]
+			x: 6.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["76598CFCD001E86D"]
+			id: "2E2DED2526ED2624"
+			rewards: [{
+				id: "73FBAE77E1CB0BEF"
+				type: "xp_levels"
+				xp_levels: 3
+			}]
+			tasks: [
+				{
+					id: "4DD58DC842A4B59F"
+					item: "minecraft:rotten_flesh"
+					type: "item"
+				}
+				{
+					id: "3D3A288583B7B1A4"
+					item: "minecraft:gunpowder"
+					type: "item"
+				}
+				{
+					id: "0E0115206B6B0808"
+					item: "minecraft:spider_eye"
+					type: "item"
+				}
+				{
+					id: "405ED16097A5DBAD"
+					item: "minecraft:wheat_seeds"
+					type: "item"
+				}
+			]
+			title: "Zombie \\& Creeper \\& Spider \\& Seed"
+			x: 8.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["4D93B9254FEC6B50"]
+			id: "637530ADE77B3FE6"
+			tasks: [{
+				id: "1681784CB57D56BB"
+				item: "mob_grinding_utils:gm_chicken_feed"
+				type: "item"
+			}]
+			title: "Spawn Eggs for everybody"
+			x: 7.5d
+			y: -1.0d
 		}
 	]
 	title: "All the other mods \\& stuff"

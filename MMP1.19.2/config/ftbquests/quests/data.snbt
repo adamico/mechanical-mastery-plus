@@ -11,7 +11,7 @@
 		{ Count: 1b, id: "minecraft:water_bucket" }
 		{ Count: 1b, id: "minecraft:oak_sapling" }
 		{ Count: 1b, id: "minecraft:lava_bucket" }
-		{ Count: 14b, id: "minecraft:andesite" }
+		{ Count: 1b, id: "minecraft:andesite" }
 	]
 	emergency_items_cooldown: 180
 	grid_scale: 0.5d

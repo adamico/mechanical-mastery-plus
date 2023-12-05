@@ -23,20 +23,13 @@
 	quests: [
 		{
 			dependencies: ["47D8F95F5317A47D"]
-			description: [
-				"New tier, new materials; you know the deal already. Don't forget to craft the new permit to get more of these."
-				""
-				"Use the chicken spawn eggs wisely, no refunds. Well... you can still buy another in the shop if you have the funds at this point..."
-				""
-				"Alternatively, you may also bulk haunt dough to get eggs."
-			]
+			description: ["New tier, new materials; you know the deal already. Don't forget to craft the new permit to get these."]
 			icon: "kubejs:cube3"
 			id: "4E81E76086558A19"
 			rewards: [{
-				count: 3
-				id: "7C50CA00C18BDCB7"
-				item: "minecraft:chicken_spawn_egg"
-				type: "item"
+				id: "0876A86EE30EA0BC"
+				type: "xp"
+				xp: 100
 			}]
 			tasks: [{
 				id: "6DC696B8987D5178"
