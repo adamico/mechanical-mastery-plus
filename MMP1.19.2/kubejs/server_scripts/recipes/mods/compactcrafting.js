@@ -787,7 +787,7 @@ ServerEvents.recipes(event => {
       },
       outputs: [{
         id: 'mekanismgenerators:fission_reactor_casing',
-        Count: 4
+        Count: 8
       }]
     },
     {
@@ -810,7 +810,7 @@ ServerEvents.recipes(event => {
       },
       outputs: [{
         id: 'mekanism:boiler_casing',
-        Count: 4
+        Count: 8
       }]
     },
     {
@@ -833,7 +833,7 @@ ServerEvents.recipes(event => {
       },
       outputs: [{
         id: 'mekanismgenerators:turbine_casing',
-        Count: 4
+        Count: 8
       }]
     },
     {
@@ -864,7 +864,7 @@ ServerEvents.recipes(event => {
       },
       outputs: [{
         id: 'mekanism:induction_casing',
-        Count: 4
+        Count: 8
       }]
     },
     {
@@ -891,7 +891,7 @@ ServerEvents.recipes(event => {
       },
       outputs: [{
         id: 'mekanismgenerators:fusion_reactor_frame',
-        Count: 4
+        Count: 8
       }]
     }
   ];
