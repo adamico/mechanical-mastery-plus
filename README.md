@@ -1,11 +1,12 @@
+
 # Mechanical Mastery Plus
+
 This is the official repository and issue-tracker for the modpack Mechanical Mastery Plus for Minecraft 1.19.2, a fork of the wonderful and beloved Mechanical Mastery skyblock modpack by Ammonium.
 
-### Table of Contents
--   [Setup](#setup)
--   [Links](#links)
+## Table of Contents
 
-<hr></hr>
+- [Setup](#setup)
+- [Links](#links)
 
 # Setup
 
@@ -21,5 +22,6 @@ Follow these steps to get the bleeding edge version of this modpack.
 Note: the github version is probably unstable and tested by a single persion. Don't forget to backup your save if you decide to try this dev version.
 
 ## Links
+
 - [Mechanical Mastery Discord](https://discord.gg/PMhDEZge2W)
 - [Mechanical Mastery Plus on Curseforge](https://www.curseforge.com/minecraft/modpacks/mechanical-mastery-plus)
