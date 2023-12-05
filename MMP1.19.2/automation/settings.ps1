@@ -30,12 +30,12 @@ $MODPACK_NAME = "mechanical-mastery-plus"
 $CLIENT_NAME = "Mechanical Mastery Plus"
 
 # Version Of The Modpack
-$MODPACK_VERSION = "1.1.7"
+$MODPACK_VERSION = "1.1.8"
 
 # Last Version Of The Modpack
 # Needed For Changelog Parsing
 # Should be "$null" if this is the first release
-$LAST_MODPACK_VERSION = "1.1.6"
+$LAST_MODPACK_VERSION = "1.1.7"
 
 # Which modloader the modpack uses
 # Can be "forge" or "fabric"
@@ -87,7 +87,12 @@ $FOLDERS_TO_INCLUDE_IN_CLIENT_FILES = @(
 	"buddingcrystals",
 	"config",
 	"defaultconfigs",
-	"kubejs",
+	"kubejs/assets",
+	"kubejs/client_scripts",
+	"kubejs/config",
+	"kubejs/data",
+	"kubejs/server_scripts",
+	"kubejs/startup_scripts",
 	"scripts",
 	"schematics"
 )
@@ -146,7 +151,6 @@ $CONFIGS_TO_REMOVE_FROM_CLIENT_FILES = @(
 	"patchouli-client.toml",
 	"personality-client.toml",
 	"placebo.cfg",
-	"powah.json5",
 	"ProjectE/client.toml"
 	"questsadditions-client.toml",
 	"refinedstorage-client.toml",
