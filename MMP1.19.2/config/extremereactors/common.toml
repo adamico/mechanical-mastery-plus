@@ -77,7 +77,7 @@
 	[common.recipes]
 		#If set, charcoal will be smeltable into graphite bars.
 		#Disable this if other mods need to smelt charcoal into their own products.
-		registerCharcoalForSmelting = true
+		registerCharcoalForSmelting = false
 		#If set, coal will be smeltable into graphite bars.
 		#Disable this if other mods need to smelt coal into their own products.
 		registerCoalForSmelting = true
