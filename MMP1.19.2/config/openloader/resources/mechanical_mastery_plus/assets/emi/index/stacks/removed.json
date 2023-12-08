@@ -1,0 +1,7 @@
+{
+  "filters": [
+    "item:bigreactors:yellorium_ingot",
+    "item:bigreactors:yellorium_block",
+    "item:bigreactors:yellorium_nugget"
+  ]
+}

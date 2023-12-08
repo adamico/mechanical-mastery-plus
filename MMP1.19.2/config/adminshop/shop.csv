@@ -63,7 +63,6 @@ b,i,create:gearbox,500,2
 b,i,minecraft:emerald_ore,16384,3
 b,i,minecraft:chorus_flower,65535,3
 b,i,mekanism:raw_uranium,4096,3
-b,i,bigreactors:yellorite_ore,4096,3
 b,i,mekanism:fluorite_ore,1024,3
 b,i,mekanism:ingot_steel,2048,3
 b,i,mekanism:alloy_infused,1024,3

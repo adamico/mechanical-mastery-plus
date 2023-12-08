@@ -1,7 +1,7 @@
 
 [general]
 	#The material blacklist of this module.
-	materialBlacklist = ["lapis", "emerald", "quartz"]
+	materialBlacklist = ["lapis", "emerald", "quartz", "yellorium"]
 
 [recipes]
 	#The materials that should not have pulverizer to dust recipes added.

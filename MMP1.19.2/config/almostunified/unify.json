@@ -5,7 +5,8 @@
     "crafttweaker",
     "thermal",
     "mekanism",
-    "create"
+    "create",
+    "bigreactors"
   ],
   "stoneStrata": [
     "stone",
@@ -62,11 +63,27 @@
     "steel",
     "sulfur",
     "tin",
+    "uranium",
+    "yellorium",
     "zinc"
   ],
   "priorityOverrides": {},
-  "customTags": {},
-  "tagOwnerships": {},
+  "customTags": {
+    "forge:storage_blocks": [
+      "bigreactors:yellorium_block"
+    ],
+    "forge:nuggets/uranium": [
+      "bigreactors:yellorium_nugget"
+    ]
+  },
+  "tagOwnerships": {
+    "forge:nuggets/uranium": [
+      "forge:nuggets/yellorium"
+    ],
+    "forge:storage_blocks/uranium": [
+      "forge:storage_blocks/yellorium"
+    ]
+  },
   "itemTagInheritanceMode": "ALLOW",
   "itemTagInheritance": {},
   "blockTagInheritanceMode": "ALLOW",
