@@ -94,7 +94,25 @@ ServerEvents.tags('item', event => {
 });
 
 ServerEvents.tags('block', event => {
-  event.add('blockrunner:very_quick_blocks', '#engineersdecor:plain_concretes');
+  Color.DYE.forEach(color => {
+    event.add('blockrunner:very_quick_blocks', `minecraft:${color}_concrete`)
+    event.add('blockrunner:very_quick_blocks', `chipped:${color}_concrete`)
+  });
+
+  ['', '_slab', '_stairs', '_tile', '_tile_slab', '_tile_stairs'].forEach(element => {
+    event.add('blockrunner:very_quick_blocks', `engineersdecor:rebar_concrete${element}`)
+  });
+  event.add('blockrunner:very_quick_blocks', 'engineersdecor:half_slab_rebar_concrete');
+
+  ['', '_stairs', '_ta'].forEach(element => {
+    event.add('blockrunner:quick_blocks', `engineersdecor:steel_catwalk${element}`)
+  });
+
+  event.add('blockrunner:quick_blocks', 'engineersdecor:steel_floor_grating');
+
+  event.add('blockrunner:quick_blocks', 'rechiseled:stone_path');
+  event.add('blockrunner:quick_blocks', 'rechiseled:stone_path_connecting');
+
   event.add('forge:budding', '#forge:budding_blocks');
   [
     'forge:mineable/paxel',
