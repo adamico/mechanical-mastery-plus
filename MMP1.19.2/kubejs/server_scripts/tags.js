@@ -87,6 +87,10 @@ ServerEvents.tags('item', event => {
       hideInEMI(event, itemName);
     })
   });
+
+  ['', '_block', '_seeds'].forEach(id => {
+    hideInEMI(event, `thermal:flax${id}`)
+  });
 });
 
 ServerEvents.tags('block', event => {
