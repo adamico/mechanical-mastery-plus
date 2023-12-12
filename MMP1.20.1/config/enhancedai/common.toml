@@ -376,6 +376,8 @@
 	"Enable Item Disruption" = true
 	#Mobs will run away from exploding creepers / TNT. Use the entity type tag enhancedai:no_run_from_explosion to blacklist them
 	"Enable Avoid Explosions" = true
+	#Makes mobs be able to leap over a few blocks.
+	"Enable Leap" = false
 
 	#Makes mobs be able to move in more ways, like climbing or swim. Only mobs in the enhancedai:allow_climbing entity type tag are allowed to climb.
 	[Mobs.Movement]
@@ -454,6 +456,12 @@
 		#Multiplier for the time a mob takes to break blocks. E.g. with this set to 2, mobs will take twice the time to mine a block.
 		#Range: 0.0 ~ 128.0
 		"Time to break multiplier" = 1.5
+
+		#Dimensions where mobs can't spawn with the ability to mine.
+		[Mobs."Miner Mobs"."Dimension Blacklist"]
+			Blacklist = []
+			#If true the list will be treated as a whitelist instead of blacklist
+			"List as Whitelist" = false
 
 	#Changes attack range to use the 1.20.2 mechanic
 	[Mobs."Melee Attacking"]

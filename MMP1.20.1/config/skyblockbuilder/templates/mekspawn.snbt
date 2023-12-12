@@ -272,7 +272,7 @@
         {pos: [2, 2, 3], state: "mekanismadditions:light_gray_plastic_glow_stairs{facing:north,fluid_logged_extension:empty,half:bottom,shape:straight,waterlogged:false}"},
         {pos: [2, 2, 4], state: "mekanism:personal_chest{facing:east,fluid_logged:empty}", nbt: {Items: [], componentFrequency: {}, componentSecurity: {securityMode: 0}, id: "mekanism:personal_chest", redstone: 0b}},
         {pos: [2, 2, 5], state: "mekanism:chargepad{active:false,facing:east,fluid_logged:empty}", nbt: {EnergyContainers: [{Container: 0b, stored: "2048000"}], activeState: 0b, componentFrequency: {}, id: "mekanism:chargepad", redstone: 0b, updateDelay: 0}},
-        {pos: [2, 2, 6], state: "adminshop:shop",
+        {pos: [2, 2, 6], state: "adminshop:shop"},
         {pos: [2, 2, 7], state: "mekanismadditions:light_gray_plastic_glow_stairs{facing:south,fluid_logged_extension:empty,half:bottom,shape:straight,waterlogged:false}"},
         {pos: [2, 2, 8], state: "mekanismadditions:black_plastic_glow"},
         {pos: [2, 2, 9], state: "mekanismadditions:black_plastic_glow"},

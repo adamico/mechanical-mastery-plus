@@ -1,2 +1,0 @@
-BlockEvents.modification(e => {
-});
