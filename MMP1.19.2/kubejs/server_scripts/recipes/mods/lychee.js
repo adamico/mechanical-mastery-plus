@@ -8,7 +8,7 @@ ServerEvents.tick(event => {
   sPData.Timer++;
   if (sPData.Timer % 60 != 0) return;
   sPData.Timer = 0;
-  
+
   server.allLevels.forEach(level => {
     if (level) {
       if (level.dimension.toString().includes("overworld")) {
@@ -66,7 +66,7 @@ ServerEvents.recipes(event => {
       }
     ]
   });
-  
+
   event.custom({
     "type": "lychee:item_inside",
     "post": [
@@ -87,7 +87,7 @@ ServerEvents.recipes(event => {
     },
     "time": 30
   });
-  
+
   event.custom({
     "type": "lychee:item_inside",
     "post": [
@@ -108,7 +108,7 @@ ServerEvents.recipes(event => {
     },
     "time": 6
   });
-  
+
   event.custom({
     "type": "lychee:block_interacting",
     "item_in": [

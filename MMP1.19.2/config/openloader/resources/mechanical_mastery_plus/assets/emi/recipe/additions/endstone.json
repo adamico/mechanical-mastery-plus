@@ -1,0 +1,9 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:minecraft:end_stone",
+    "item:minecraft:endermite_spawn_egg",
+    "item:minecraft:enderman_spawn_egg"
+  ],
+  "text": "emi.info.endstone"
+}

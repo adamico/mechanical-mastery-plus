@@ -1,3 +1,3 @@
 ServerEvents.recipes(event => {
-  console.log('[kc00l@KUBEJS]: plate recipes...');
+  event.remove({ id: "createaddition:pressing/electrum_ingot" })
 });

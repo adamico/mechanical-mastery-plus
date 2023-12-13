@@ -8,7 +8,7 @@ ServerEvents.recipes(event => {
     })
   }
 
-  recipeCycle(['wheat_seeds', 'beetroot_seeds', 'carrot', 'potato', 'melon_seeds', 'pumpkin_seeds', 'cocoa_beans', 'sweet_berries'])
+  recipeCycle(['wheat_seeds', 'beetroot_seeds', 'carrot', 'potato', 'melon_seeds', 'pumpkin_seeds', 'sweet_berries'])
 
   event.shaped(
     'minecraft:chest',
