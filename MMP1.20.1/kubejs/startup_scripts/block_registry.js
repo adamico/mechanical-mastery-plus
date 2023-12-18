@@ -1,22 +1,9 @@
 // priority: 1000
 
-global.essencesCounter = {
-  cube1: {
-    produced: 0,
-    processed: 0
-  },
-  cube2: {
-    produced: 0,
-    processed: 0
-  },
-  cube3: {
-    produced: 0,
-    processed: 0
-  },
-  cube4: {
-    produced: 0,
-    processed: 0
-  }
+global.essence4producerCoords = {
+  x: 9,
+  y: 67,
+  z: 1
 }
 
 /**
@@ -45,7 +32,7 @@ global.produceEssence = (entity, itemId, count, targetInvId) => {
     } else {
       container.popItemFromFace(item, 'up')
     }
-    incrementEssenceCounter(itemId.split(":")[1], 'produced', count)
+    incrementEssenceCounter(entity, itemId.split(":")[1], 'produced', count)
   }
 }
 
@@ -77,7 +64,7 @@ global.processEssence = (entity, inputId, outputId, sourceContainerId, targetCon
       if (isThereRoom(outputId, targetContainer)) {
         sourceContainer.inventory.extractItem(0, 1, false)
         targetContainer.inventory.insertItem(outputId, false)
-        incrementEssenceCounter(inputId.split(":")[1], 'processed', 1)
+        incrementEssenceCounter(entity, inputId.split(":")[1], 'processed', 1)
       }
     }
   }
@@ -98,12 +85,17 @@ let isThereRoom = (itemId, container) => {
 
 /**
  * Increments the global.essencesCounter produced/processed value
+ * @param {Internal.BlockEntity} entity
  * @param {String} itemId
  * @param {String} countType
  * @param {Number} count
 */
-let incrementEssenceCounter = (itemId, countType, count) => {
-  global.essencesCounter[itemId][countType] += count
+let incrementEssenceCounter = (entity, itemId, countType, count) => {
+  if (entity.persistentData[itemId] === undefined) {
+    entity.persistentData[itemId] = {}
+    entity.persistentData[itemId][countType] = 0
+  }
+  entity.persistentData[itemId][countType] += count
 }
 
 StartupEvents.registry('item', event => {

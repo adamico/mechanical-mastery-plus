@@ -465,7 +465,7 @@
         {pos: [8, 3, 9], state: "minecraft:air"},
         {pos: [8, 3, 10], state: "minecraft:air"},
         {pos: [9, 3, 0], state: "minecraft:air"},
-        {pos: [9, 3, 1], state: "minecraft:air"},
+        {pos: [9, 3, 1], state: "kubejs:essence_producer_4"},
         {pos: [9, 3, 2], state: "minecraft:air"},
         {pos: [9, 3, 3], state: "minecraft:air"},
         {pos: [9, 3, 4], state: "minecraft:air"},
@@ -646,6 +646,7 @@
         "mekanism:ultimate_enriching_factory{active:false,facing:north,fluid_logged:empty}",
         "mekanism:ultimate_infusing_factory{active:false,facing:north,fluid_logged:empty}",
         "mekanism:qio_dashboard{active:true,facing:west,fluid_logged:empty}",
+        "kubejs:essence_producer_4",
         "mekanism:qio_drive_array{active:true,facing:west,fluid_logged:empty}",
         "mekanism:creative_bin{active:false,facing:south}"
     ]
