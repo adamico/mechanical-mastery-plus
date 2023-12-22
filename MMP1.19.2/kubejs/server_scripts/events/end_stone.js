@@ -1,5 +1,9 @@
 EntityEvents.death('enderman', event => {
   const { entity, server, level } = event
+
+  if (event.source.actual.type !== "minecraft:endermite") {
+    event.success()
+  }
   let radius = 3
 
   entity.setHealth(1)
@@ -11,7 +15,6 @@ EntityEvents.death('enderman', event => {
   // Utils.server.tell("bPos = " + bPos)
   entity.remove("killed")
   blocksBetweenCorners(level, aPos, bPos, 'minecraft:stone').forEach(block => {
-    if (event.source.actual.type !== "minecraft:endermite") return
     if (Math.random() <= 0.25) {
       server.runCommandSilent(`execute in ${event.level.dimension} run particle minecraft:dust 1 1 1 1 ${block.x} ${block.y + 1} ${block.z} 0 0 0 0 10 normal`);
       server.runCommandSilent(`playsound minecraft:entity.enderman.teleport block @p ${block.x} ${block.y} ${block.z} 0.4 0.7`);
@@ -19,7 +22,7 @@ EntityEvents.death('enderman', event => {
     }
   })
 
-  event.cancel()
+  event.success()
 
   /**
    * iterates over a 3D grid of blocks and returns an array of blocks with id == matchBlockId.
