@@ -1,0 +1,703 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "all_the_mob_farms"
+	group: "56617BF3F24DD586"
+	id: "18B1DE2E956C680D"
+	order_index: 5
+	quest_links: [ ]
+	quests: [
+		{
+			description: [
+				"&bMob Grinding Utils&r encourages players to create new ways of farming mobs for drops and experience."
+				""
+				"Some of the features of this mod include:"
+			]
+			id: "76598CFCD001E86D"
+			tasks: [{
+				id: "4CCAE395028D0CEC"
+				title: "MGU"
+				type: "checkmark"
+			}]
+			title: "MGU: mob farms for dummies"
+			x: 1.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"5A5CB5F0598570D8"
+				"4D93B9254FEC6B50"
+			]
+			hide_dependency_lines: true
+			id: "4CE9B6751DCDDEB8"
+			rewards: [{
+				count: 10
+				id: "596E6211DC272CAB"
+				item: "minecraft:egg"
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "4A9E22D2D6C006F0"
+					item: "mob_grinding_utils:nutritious_chicken_feed"
+					type: "item"
+				}
+				{
+					id: "50A3DE2698D98559"
+					item: "mob_grinding_utils:gm_chicken_feed_cursed"
+					type: "item"
+				}
+				{
+					id: "2D1139F436EA245C"
+					item: "mob_grinding_utils:golden_egg"
+					type: "item"
+				}
+				{
+					id: "1BBFCAC9A7F7E0BF"
+					item: "mob_grinding_utils:rotten_egg"
+					type: "item"
+				}
+			]
+			x: -2.5d
+			y: 2.5d
+		}
+		{
+			dependencies: [
+				"03BACA51A4A40C61"
+				"1905F6FC1CCA0C94"
+				"407020295344388F"
+			]
+			id: "5A5CB5F0598570D8"
+			rewards: [{
+				id: "499BF6AFE6076CE1"
+				type: "xp_levels"
+				xp_levels: 2
+			}]
+			tasks: [{
+				count: 5L
+				id: "37E1480EE75CCA79"
+				item: {
+					Count: 1b
+					id: "itemfilters:or"
+					tag: {
+						items: [
+							{
+								Count: 1b
+								id: "mob_grinding_utils:fluid_xp_bucket"
+							}
+							{
+								Count: 1b
+								id: "experienceobelisk:cognitium_bucket"
+							}
+							{
+								Count: 1b
+								id: "experienceobelisk:raw_experience_bucket"
+							}
+							{
+								Count: 1b
+								id: "industrialforegoing:essence_bucket"
+							}
+						]
+					}
+				}
+				type: "item"
+			}]
+			title: "Liquid Exp"
+			x: 1.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["76598CFCD001E86D"]
+			dependency_requirement: "all_started"
+			hide_dependency_lines: true
+			id: "4D93B9254FEC6B50"
+			rewards: [{
+				id: "3D9AD4C8E4E7ED69"
+				type: "xp_levels"
+				xp_levels: 1
+			}]
+			subtitle: "say aaaaah"
+			tasks: [{
+				id: "1E0564781DE24CF2"
+				item: "mob_grinding_utils:mob_swab"
+				type: "item"
+			}]
+			x: -2.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["4D93B9254FEC6B50"]
+			id: "637530ADE77B3FE6"
+			tasks: [{
+				id: "1681784CB57D56BB"
+				item: "mob_grinding_utils:gm_chicken_feed"
+				type: "item"
+			}]
+			title: "Spawn Eggs for everybody"
+			x: -2.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["12595CDD8DAA643D"]
+			hide_dependency_lines: false
+			id: "03BACA51A4A40C61"
+			tasks: [{
+				id: "19FF5448937AC388"
+				item: {
+					Count: 1b
+					id: "experienceobelisk:experience_obelisk"
+					tag: { }
+				}
+				type: "item"
+			}]
+			x: -0.5d
+			y: 4.5d
+		}
+		{
+			dependencies: [
+				"5A5CB5F0598570D8"
+				"56B944C91AAFA0C7"
+				"07BA9726B9C45E4A"
+			]
+			id: "689F1A3E5D5B91B2"
+			tasks: [{
+				id: "0AAD59F76FD937E4"
+				item: "thermal:machine_bottler"
+				type: "item"
+			}]
+			x: 1.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["72F19601A5222FCB"]
+			id: "7554F77C5773653E"
+			tasks: [
+				{
+					id: "3FC1116F2F8494AE"
+					item: "mob_grinding_utils:fan_upgrade_width"
+					type: "item"
+				}
+				{
+					id: "04D6EB46D35DBA75"
+					item: "mob_grinding_utils:fan_upgrade_height"
+					type: "item"
+				}
+				{
+					id: "0F1EFA7C33D6DEF9"
+					item: "mob_grinding_utils:fan_upgrade_speed"
+					type: "item"
+				}
+			]
+			title: "Mob fans upgrades"
+			x: -1.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["7A2BE6B1B533B9C6"]
+			id: "0CBFDD79E89B1CAC"
+			tasks: [
+				{
+					id: "57100179E6DFBE5B"
+					item: "mob_grinding_utils:saw_upgrade_sharpness"
+					type: "item"
+				}
+				{
+					id: "701687101A58B9E2"
+					item: "mob_grinding_utils:saw_upgrade_looting"
+					type: "item"
+				}
+				{
+					id: "2E96A2CE2C9A2C2C"
+					item: "mob_grinding_utils:saw_upgrade_beheading"
+					type: "item"
+				}
+			]
+			title: "Mob Masher Upgrades"
+			x: 3.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["78CA98EFC31886AA"]
+			id: "4B1B1A49497CE4BD"
+			tasks: [{
+				id: "6EB5E16477C5E3A4"
+				item: "mob_grinding_utils:solid_xp_baby"
+				type: "item"
+			}]
+			x: -1.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["7C2E3AEFC081FCE6"]
+			description: [
+				"To store Fluid XP you can use:"
+				""
+				"&bSingularity Tank&r: a basic fluid tank that will hold 32 buckets of any fluid. It will retain any fluids it contains when broken which makes it a simple and portable fluid transport system. Right-clicking on The Singularity Tank with an empty bottle will give the player a Bottle O’ Enchanting if enough Fluid XP is available (uses 200Mb of fluid)."
+				""
+				"&bJumbo Tank &r: a larger version of the Singularity Tank and useful for storing up to 1024 buckets of fluid."
+				""
+				"&bXP Drain Singularity Tank&r: same as the standard Singularity Tank but with a drain on top to siphon player experience and convert it to Fluid XP. Players who stand on top of this block can have their exp stored in the tank for later use. A &bXP tap&r can also be attached to convert the stored Fluid XP back into experience orbs."
+			]
+			id: "1905F6FC1CCA0C94"
+			tasks: [
+				{
+					id: "543919559DB6F011"
+					item: "mob_grinding_utils:tank_sink"
+					type: "item"
+				}
+				{
+					id: "5ACAA626ECBE264D"
+					item: "mob_grinding_utils:tank"
+					type: "item"
+				}
+				{
+					id: "559AE5564D1654A9"
+					item: "mob_grinding_utils:xp_tap"
+					type: "item"
+				}
+				{
+					id: "494059B3F44C5F53"
+					item: "mob_grinding_utils:jumbo_tank"
+					type: "item"
+				}
+			]
+			title: "Tanks for XP"
+			x: 1.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["76598CFCD001E86D"]
+			description: ["&6Mob Fans&r are used to push mobs in all directions. They have 3 upgrade options - Width, Height, and Distance modifiers and need to be activated with a &credstone signal&r."]
+			id: "72F19601A5222FCB"
+			tasks: [{
+				id: "09DF573D08864C0F"
+				item: "mob_grinding_utils:fan"
+				type: "item"
+			}]
+			x: 0.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["76598CFCD001E86D"]
+			description: [
+				"&bMob Masher&r is a machine that can be used to automatically kill mobs. "
+				""
+				"It does not require power to run, only a redstone signal which can be activated with a vanilla lever. "
+				""
+				"Anything killed by the Mob Masher counts as a player kill and drops experience."
+				""
+				"Different upgrades can be applied to improve its function."
+			]
+			id: "7A2BE6B1B533B9C6"
+			tasks: [{
+				id: "267046DD2B1F8400"
+				item: "mob_grinding_utils:saw"
+				type: "item"
+			}]
+			x: 2.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"76598CFCD001E86D"
+				"2F85BBFB58DD6581"
+			]
+			description: [
+				"The &bAbsorption Hopper&r will suck up any mob drops and experience orbs within its range. "
+				""
+				"The basic range for an Absorption Hopper is a 3 block radius - this can be increased with upgrades. The Absorption Hopper can store 16 buckets of Fluid XP in its internal tank and has a large inventory for item collection. It can be configured on every side to push out items to inventories or Fluid XP to fluid tanks."
+			]
+			id: "7C2E3AEFC081FCE6"
+			tasks: [{
+				id: "03F6E3EF49C911AB"
+				item: "mob_grinding_utils:absorption_hopper"
+				type: "item"
+			}]
+			x: 1.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"4B1B1A49497CE4BD"
+				"637530ADE77B3FE6"
+			]
+			id: "25404B7E79DC215D"
+			tasks: [{
+				id: "5CE786162734C77C"
+				item: "mob_grinding_utils:entity_spawner"
+				type: "item"
+			}]
+			x: -1.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["76598CFCD001E86D"]
+			id: "265E12E682DF59D7"
+			optional: true
+			shape: "diamond"
+			tasks: [{
+				id: "4E602F70DF4743A7"
+				item: "mob_grinding_utils:ender_inhibitor_on"
+				type: "item"
+			}]
+			title: "Ender Inhibitor"
+			x: 0.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["7C2E3AEFC081FCE6"]
+			description: [
+				"The &bXP Solidifier&r can be used to create XP Jelly Babies from Fluid XP."
+				""
+				"It can be upgraded to hold more fluid."
+			]
+			id: "78CA98EFC31886AA"
+			tasks: [
+				{
+					id: "54247B4FEC06BC4C"
+					item: "mob_grinding_utils:xpsolidifier"
+					type: "item"
+				}
+				{
+					id: "51901BBD0557C817"
+					item: "mob_grinding_utils:solid_xp_mould_baby"
+					type: "item"
+				}
+			]
+			x: -0.5d
+			y: 1.5d
+		}
+		{
+			id: "12595CDD8DAA643D"
+			tasks: [{
+				id: "0DD812631BAF5A63"
+				title: "Playful Experience"
+				type: "checkmark"
+			}]
+			x: -1.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["7C2E3AEFC081FCE6"]
+			id: "63E7FD35ACAED942"
+			tasks: [{
+				id: "53C58EED9FA536B8"
+				item: "mob_grinding_utils:absorption_upgrade"
+				type: "item"
+			}]
+			x: 0.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["25404B7E79DC215D"]
+			id: "7956E09BA486C7E9"
+			tasks: [
+				{
+					id: "0437978EBA4FF63C"
+					item: "mob_grinding_utils:spawner_upgrade_height"
+					type: "item"
+				}
+				{
+					id: "666595D9E29F0E0B"
+					item: "mob_grinding_utils:spawner_upgrade_width"
+					type: "item"
+				}
+			]
+			x: -1.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["76598CFCD001E86D"]
+			description: ["&bTinted Glass&r is a block that can be used to cover mob farms. It is transparent but blocks light, making it useful for creating dark spaces where mobs can spawn."]
+			id: "03502B9763A84193"
+			tasks: [{
+				id: "66D0C6EEC1D42076"
+				item: "mob_grinding_utils:tinted_glass"
+				type: "item"
+			}]
+			x: 2.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["56B944C91AAFA0C7"]
+			id: "194E506E7AC5C270"
+			tasks: [{
+				id: "1038DC799D60398D"
+				item: "thermal:device_xp_condenser"
+				type: "item"
+			}]
+			x: -0.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["37DD11756800FBE9"]
+			id: "07DB088E9EB40A30"
+			tasks: [{
+				id: "10C9B5E877A393D2"
+				item: "create:experience_nugget"
+				type: "item"
+			}]
+			x: 3.5d
+			y: 7.0d
+		}
+		{
+			id: "56B944C91AAFA0C7"
+			tasks: [{
+				id: "2F60C8E34790FD62"
+				title: "Hot experience"
+				type: "checkmark"
+			}]
+			x: -0.5d
+			y: 7.0d
+		}
+		{
+			dependencies: ["56B944C91AAFA0C7"]
+			id: "6A218A91730851B0"
+			tasks: [{
+				id: "4AF8F3DB87DDF166"
+				item: "thermal:xp_storage_augment"
+				type: "item"
+			}]
+			x: -0.5d
+			y: 8.0d
+		}
+		{
+			dependencies: ["56B944C91AAFA0C7"]
+			id: "6C24AB2564BC1773"
+			tasks: [{
+				id: "2B2359D4BAF3B0DA"
+				item: {
+					Count: 1b
+					id: "thermal:xp_crystal"
+					tag: { }
+				}
+				type: "item"
+			}]
+			x: -1.5d
+			y: 7.0d
+		}
+		{
+			dependencies: ["613EBA47BA715697"]
+			id: "37DD11756800FBE9"
+			tasks: [
+				{
+					count: 2L
+					id: "6DF2D1FE40E5E528"
+					item: "create:crushing_wheel"
+					type: "item"
+				}
+				{
+					id: "58BC2F7D063153EA"
+					item: "minecraft:redstone_ore"
+					type: "item"
+				}
+			]
+			x: 2.5d
+			y: 8.0d
+		}
+		{
+			id: "613EBA47BA715697"
+			tasks: [{
+				id: "24A1A1003D36330D"
+				title: "Creative Experience"
+				type: "checkmark"
+			}]
+			x: 2.5d
+			y: 7.0d
+		}
+		{
+			dependencies: ["02D8B336A457D143"]
+			id: "407020295344388F"
+			tasks: [{
+				id: "4A42608CF4D8DFBB"
+				item: "industrialforegoing:mob_crusher"
+				type: "item"
+			}]
+			x: 2.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["07DB088E9EB40A30"]
+			id: "07BA9726B9C45E4A"
+			tasks: [
+				{
+					id: "43541051A8A668CF"
+					item: "create:mechanical_mixer"
+					type: "item"
+				}
+				{
+					id: "11F19BBC3C29DE1E"
+					item: "create:basin"
+					type: "item"
+				}
+				{
+					id: "6E8246750BFFB0A1"
+					item: "create:blaze_burner"
+					type: "item"
+				}
+			]
+			x: 2.5d
+			y: 6.0d
+		}
+		{
+			id: "02D8B336A457D143"
+			tasks: [{
+				id: "50F51A723EB60A07"
+				title: "Industrial experience"
+				type: "checkmark"
+			}]
+			x: 3.5d
+			y: 4.5d
+		}
+		{
+			dependencies: ["2C14E8D9A46727E7"]
+			id: "19CFA2C9333B419F"
+			tasks: [
+				{
+					id: "5B90EAC042658589"
+					item: "rftoolsbuilder:shield_block1"
+					type: "item"
+				}
+				{
+					id: "0A7B40ADAA8A5204"
+					item: "rftoolsbuilder:builder"
+					type: "item"
+				}
+			]
+			x: 3.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["689F1A3E5D5B91B2"]
+			id: "7BEC4850E8A38EF7"
+			tasks: [{
+				id: "13CCA6E326246669"
+				item: "minecraft:experience_bottle"
+				type: "item"
+			}]
+			x: 1.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["6624FE15AB93E670"]
+			id: "2F85BBFB58DD6581"
+			tasks: [{
+				id: "6D8DA184E6221BC8"
+				item: "rftoolsutility:spawner"
+				type: "item"
+			}]
+			x: 2.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["2C14E8D9A46727E7"]
+			id: "6624FE15AB93E670"
+			tasks: [{
+				id: "54BF82D55209A014"
+				item: "rftoolsutility:syringe"
+				type: "item"
+			}]
+			x: 3.0d
+			y: 0.5d
+		}
+		{
+			id: "2C14E8D9A46727E7"
+			tasks: [{
+				id: "2327099CE092A33A"
+				title: "RFToolable Experience"
+				type: "checkmark"
+			}]
+			x: 2.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["4BD70AF72EEA66EA"]
+			id: "42745CA3048608A9"
+			tasks: [{
+				id: "6249DFE7EAAFC47D"
+				item: "rftoolsutility:noteleport_module"
+				type: "item"
+			}]
+			x: 4.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["4BD70AF72EEA66EA"]
+			id: "28A0262D9E79DF9B"
+			tasks: [{
+				id: "6F385D87FEDED1B9"
+				item: "rftoolsutility:poison_module"
+				type: "item"
+			}]
+			x: 4.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["2C14E8D9A46727E7"]
+			id: "4BD70AF72EEA66EA"
+			tasks: [{
+				id: "763C1E12A5A8D9D2"
+				item: "rftoolsutility:environmental_controller"
+				type: "item"
+			}]
+			x: 3.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["4BD70AF72EEA66EA"]
+			id: "2D825786FED71B2B"
+			tasks: [{
+				id: "4060A24A865DBE17"
+				item: "rftoolsutility:luck_module"
+				type: "item"
+			}]
+			x: 4.5d
+			y: 0.5d
+		}
+		{
+			description: [
+				""
+				""
+				""
+				"1. get some basic hostile mob loot"
+				""
+				"2. craft a Mob Swab and collect mob DNA"
+				""
+				"3. get 5 buckets of any liquid xp (the easiest way is to store 5 levels into the Experience Obelisk and use an empty bucket on the obelisk)"
+			]
+			id: "5976E64E4FDEA879"
+			tasks: [{
+				id: "7FAC527FE77C3B61"
+				title: "t"
+				type: "checkmark"
+			}]
+			x: -7.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["19CFA2C9333B419F"]
+			id: "5E93A01D81763E76"
+			tasks: [{
+				id: "51BC33F436A9B737"
+				item: "rftoolsbuilder:shield_block2"
+				type: "item"
+			}]
+			x: 2.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["78CA98EFC31886AA"]
+			id: "06277976AA195EB0"
+			optional: true
+			shape: "diamond"
+			tasks: [{
+				id: "0D1EF4957B5602E0"
+				item: "mob_grinding_utils:xp_solidifier_upgrade"
+				type: "item"
+			}]
+			x: -0.5d
+			y: 2.5d
+		}
+	]
+	title: "Experience \\& you"
+}
