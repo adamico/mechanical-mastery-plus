@@ -1,4 +1,6 @@
 ## mechanical-mastery-plus - 1.1.11 -> 1.1.12
+partial fix: Effigy can spawn blazes in invalid coordinates [#148](https://github.com/adamico/mechanical-mastery-plus/issues/148)
+fixe: add an early way of obtaining other saplings than oak [#151](https://github.com/adamico/mechanical-mastery-plus/issues/151)
 
 ### Added
 
