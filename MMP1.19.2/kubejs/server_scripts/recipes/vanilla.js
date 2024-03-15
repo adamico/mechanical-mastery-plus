@@ -9,6 +9,7 @@ ServerEvents.recipes(event => {
   }
 
   recipeCycle(['wheat_seeds', 'beetroot_seeds', 'carrot', 'potato', 'melon_seeds', 'pumpkin_seeds', 'sweet_berries'])
+  recipeCycle(['oak_sapling', 'spruce_sapling', 'birch_sapling', 'jungle_sapling', 'acacia_sapling', 'dark_oak_sapling', 'mangrove_propagule'])
 
   event.shaped(
     'minecraft:chest',
