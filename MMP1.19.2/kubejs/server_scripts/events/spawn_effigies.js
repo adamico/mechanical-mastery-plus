@@ -5,27 +5,30 @@ const mobList = [
 	{effigy: 'kubejs:basalz_effigy', mobName: 'thermal:basalz', drop: 'thermal:basalz_rod'}
 ]
 
+let spawnMob = (mob, x, y, z) => {
+	mob.x = x
+	mob.y = y
+	mob.z = z
+	mob.spawn()
+}
+
 mobList.forEach(mob => {
-	let effigy = mob.effigy;
-	let mobName = mob.mobName;
+	let effigy = mob.effigy
+	let mobName = mob.mobName
 	
 	ItemEvents.rightClicked(effigy, event => {
-		if (!event.server){
-			return
-		}
+		if (!event.server) return
 
 		const player = event.player;
-		const hit = player.rayTrace(8);
-		const x = hit.hitX;
-		const y = hit.hitY + 1;
-		const z = hit.hitZ;
+		const hit = player.rayTrace(8)
+		const x = hit.hitX
+		const y = hit.hitY + 1
+		const z = hit.hitZ
 
-		let mob = event.level.createEntity(mobName);
-		mob.x = x;
-		mob.y = y;
-		mob.z = z;
-		mob.spawn();
-		event.item.count--;
+		if (Number.isNaN(x) || Number.isNaN(y) || Number.isNaN(z) ) return
+		let mob = event.level.createEntity(mobName)
+		spawnMob(mob, x, y, z)
+		event.item.count--
 	})
 })
 
@@ -42,9 +45,9 @@ ServerEvents.entityLootTables(event => {
 	mobList.forEach(mob => {
 		event.modifyEntity(mob.mobName, table => {
 			table.addPool(pool => {
-				pool.rolls = [3, 5];
-				pool.addItem(Item.of(mob.drop));
+				pool.rolls = [3, 5]
+				pool.addItem(Item.of(mob.drop))
 			})
 		})
-	});
+	})
 })
