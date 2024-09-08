@@ -1,5 +1,0 @@
-{
-    "replaceDefaultEnderman": true,
-    // Flashes the screen when getting teleported by an End Enderman.
-    "flashScreen": true
-}

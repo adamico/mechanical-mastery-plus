@@ -1,9 +1,0 @@
-{
-  "protectPetsFromOwner": true,
-  "protectPetsFromPets": true,
-  "protectChildren": true,
-  "reflectDamage": false,
-  "displayHitWarning": true,
-  "protectTeamMembers": true,
-  "respectTeamRules": false
-}
