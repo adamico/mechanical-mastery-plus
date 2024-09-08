@@ -35,4 +35,7 @@ ServerEvents.recipes(event => {
   let createBItems = ['Zinc Nugget'];
   let createSItems = ['Zinc Coin', 'Brass Coin', 'Industrial Iron Coin'];
   createPermit('Create', createBItems, createSItems, 'create:zinc_block');
+
+  event.replaceInput({id: 'adminshop:buyer_1'}, 'minecraft:ender_chest', 'ironchest:iron_chest')
+  event.replaceInput({id: 'adminshop:seller'}, 'minecraft:ender_chest', 'ironchest:iron_chest')
 });
