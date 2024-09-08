@@ -1,0 +1,28 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "unused"
+	group: "74710C7C9353C2D4"
+	id: "4E660B916E0F422D"
+	order_index: 7
+	quest_links: [ ]
+	quests: [{
+		description: [
+			"COD's madness has spared some parts of the dimension in which small islands reside."
+			""
+			"They're full of life and useful resources to gather."
+			""
+			"Once you've gathered enough of these basic resources you can use them to let COD synthesize them infinitely... not for free though!"
+		]
+		hide_dependent_lines: true
+		id: "3DCB6992D5AB9F4C"
+		tasks: [{
+			id: "66D1B8D89FC67530"
+			item: "kubejs:cube4"
+			type: "item"
+		}]
+		x: -5.0d
+		y: -3.5d
+	}]
+	title: "unused"
+}

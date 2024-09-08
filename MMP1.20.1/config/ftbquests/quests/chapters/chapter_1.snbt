@@ -1,0 +1,22 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "chapter_1"
+	group: ""
+	id: "22E5A8EF88211981"
+	order_index: 6
+	quest_links: [ ]
+	quests: [{
+		dependencies: ["2DF3944B35123EB3"]
+		id: "34DB873571F2E683"
+		tasks: [{
+			id: "78E9A9676160AB45"
+			title: "Create \\& Friends"
+			type: "checkmark"
+		}]
+		title: "Create \\& Friends"
+		x: 0.0d
+		y: -3.0d
+	}]
+	title: "Chapter 1"
+}

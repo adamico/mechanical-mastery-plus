@@ -1,8 +1,3 @@
 {
-	chapter_groups: [
-		{ id: "339A892EB2308C42", title: "Restore resources production" }
-		{ id: "1B164FDBCB2D6C75", title: "Lose your privileges" }
-		{ id: "06D5C8F4900C444D", title: "Defeat COD" }
-		{ id: "74710C7C9353C2D4", title: "hidden" }
-	]
+	chapter_groups: [{ id: "74710C7C9353C2D4", title: "hidden" }]
 }

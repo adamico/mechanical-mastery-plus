@@ -39,7 +39,6 @@
 			y: -2.0d
 		}
 		{
-			dependencies: ["6E423DDD9AB7EC1E"]
 			description: [""]
 			icon: "pneumaticcraft:item_life_upgrade"
 			id: "46CA3A79FB1575B2"

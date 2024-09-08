@@ -1,0 +1,62 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "alchemy"
+	group: ""
+	id: "42957A20680B781C"
+	order_index: 4
+	quest_links: [ ]
+	quests: [
+		{
+			id: "72F1CF135D2BBF00"
+			tasks: [{
+				id: "2C012CBCB67EFA63"
+				item: "alchemistry:dissolver"
+				type: "item"
+			}]
+			x: -2.0d
+			y: -2.0d
+		}
+		{
+			id: "1E0A8F6A60AAA5FF"
+			tasks: [{
+				id: "506CF710376050E7"
+				item: "alchemistry:combiner"
+				type: "item"
+			}]
+			x: -0.5d
+			y: -2.0d
+		}
+		{
+			id: "42F1A24BE988F41C"
+			tasks: [{
+				id: "3CE2928E1FEDDF1E"
+				item: "alchemistry:compactor"
+				type: "item"
+			}]
+			x: -3.5d
+			y: -2.0d
+		}
+		{
+			id: "5B893A7DD5A72993"
+			tasks: [{
+				id: "40D2CEB61B6D3DBA"
+				item: "alchemistry:atomizer"
+				type: "item"
+			}]
+			x: -2.0d
+			y: -0.5d
+		}
+		{
+			id: "1751116C3B58157B"
+			tasks: [{
+				id: "64C6245561E5CE85"
+				item: "alchemistry:liquifier"
+				type: "item"
+			}]
+			x: -2.0d
+			y: -3.5d
+		}
+	]
+	title: "Alchemy"
+}

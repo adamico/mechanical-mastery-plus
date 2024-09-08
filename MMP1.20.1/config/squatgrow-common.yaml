@@ -12,5 +12,12 @@ ignoreList: ['minecraft:grass_block', 'minecraft:grass', 'minecraft:tall_grass',
 randomTickMultiplier: 4
 range: 3
 requireHoe: false
+requirements:
+  durabilityDamage: 1
+  enabled: true
+  equipmentRequirement: {}
+  heldItemRequirement: []
+  requiredEnchantment: ''
+  requiredItemTakesDamage: false
 sugarcaneMultiplier: 4
 useWhitelist: false

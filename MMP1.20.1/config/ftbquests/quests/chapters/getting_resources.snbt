@@ -2,46 +2,63 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "getting_resources"
-	group: "339A892EB2308C42"
+	group: ""
 	icon: "minecraft:oak_log"
 	id: "59DFC29C32C1062D"
-	order_index: 0
+	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{
 			description: [
-				"COD's madness has spared some parts of the dimension in which small islands reside."
+				"Ok I lied! There are 5 chapters and you are now in chapter 0."
 				""
-				"They're full of life and useful resources to gather."
+				"This covers the gathering of a small set of resources which will help you start chapter 1."
 				""
-				"Once you've gathered enough of these basic resources you can use them to let COD synthesize them infinitely... not for free though!"
+				"Skyblock FTW!"
 			]
 			hide_dependent_lines: true
 			id: "04B21B380B8C152B"
-			tasks: [{
-				id: "6D318A9B8B560974"
-				title: "Explore"
-				type: "checkmark"
+			rewards: [{
+				count: 2
+				id: "137A6B7C3BEFC4D2"
+				item: "kubejs:cube4"
+				type: "item"
 			}]
+			tasks: [{
+				id: "1FBC390730A9F5A1"
+				item: "kubejs:cube4"
+				type: "item"
+			}]
+			title: "I lied..."
 			x: -4.5d
-			y: -6.0d
+			y: -5.0d
 		}
 		{
-			dependencies: ["3D7805B33F83D480"]
+			dependencies: [
+				"3D7805B33F83D480"
+				"1B7E8BAF95F07076"
+			]
+			disable_toast: true
 			id: "3A2CC0F1F58D3161"
+			optional: true
+			rewards: [{
+				count: 2
+				id: "1FCD62DBA9FA5754"
+				item: "qualitycrops:apple_gold"
+				type: "item"
+			}]
+			shape: "diamond"
 			tasks: [{
+				count: 8L
 				id: "20013F1A44195029"
 				item: "enderio:energy_conduit"
 				type: "item"
 			}]
-			x: -2.5d
+			x: -1.5d
 			y: 1.5d
 		}
 		{
-			dependencies: [
-				"569F6B8AFC2733D3"
-				"788A3D7CF916175C"
-			]
+			dependencies: ["788A3D7CF916175C"]
 			id: "13009356B2C43F01"
 			tasks: [{
 				id: "7FE1E937A6921AAB"
@@ -52,14 +69,14 @@
 			y: -1.5d
 		}
 		{
-			dependencies: ["3A4F05B4EF31C8DC"]
+			dependencies: ["3029B0003B8ABA27"]
 			id: "788A3D7CF916175C"
 			tasks: [{
 				id: "386B9C00ED5E75CC"
 				item: "minecraft:flint"
 				type: "item"
 			}]
-			x: -3.5d
+			x: -2.5d
 			y: -1.5d
 		}
 		{
@@ -80,33 +97,33 @@
 			y: -3.5d
 		}
 		{
-			dependencies: ["33B6004B0E26E3F7"]
-			id: "6ED4E773FE4A4716"
+			dependencies: [
+				"13009356B2C43F01"
+				"33B6004B0E26E3F7"
+			]
+			id: "35CBCED1C5440F09"
+			rewards: [{
+				count: 16
+				id: "242A460C095E56CA"
+				item: "createdeco:gold_coin"
+				type: "item"
+			}]
 			tasks: [{
-				id: "337976040D34E0BB"
-				item: "minecraft:iron_ingot"
+				id: "73399FE7C4BC236B"
+				item: "enderio:void_chassis"
 				type: "item"
 			}]
 			x: -6.5d
 			y: -1.5d
 		}
 		{
-			dependencies: [
-				"13009356B2C43F01"
-				"6ED4E773FE4A4716"
-			]
-			id: "35CBCED1C5440F09"
-			tasks: [{
-				id: "73399FE7C4BC236B"
-				item: "enderio:void_chassis"
-				type: "item"
-			}]
-			x: -4.5d
-			y: -0.5d
-		}
-		{
 			dependencies: ["04B21B380B8C152B"]
 			id: "33B6004B0E26E3F7"
+			rewards: [{
+				id: "62D28CAD6442A89B"
+				item: "qualitycrops:apple_iron"
+				type: "item"
+			}]
 			shape: "gear"
 			tasks: [{
 				id: "314DEFD84EF1CEE7"
@@ -117,141 +134,112 @@
 			y: -3.5d
 		}
 		{
-			dependencies: ["62CC88FE70790CFA"]
-			id: "32DC292C0E5E6AD1"
-			tasks: [{
-				id: "7693FAA90A65642B"
-				item: "mekanism:ingot_steel"
-				type: "item"
-			}]
-			x: -6.5d
-			y: 0.5d
-		}
-		{
-			dependencies: [
-				"6ED4E773FE4A4716"
-				"4DC30A4DED997EC9"
-			]
-			id: "62CC88FE70790CFA"
-			tasks: [{
-				id: "4F09146BB358A653"
-				item: "mekanism:enriched_iron"
-				type: "item"
-			}]
-			x: -6.5d
-			y: -0.5d
-		}
-		{
 			dependencies: ["04B21B380B8C152B"]
+			description: [
+				"Don't worry about consuming your precious lava, you need the obsidian block more even if you can't break it for now."
+				""
+				"You should still have another lava source on the island which you can put to good use!"
+				""
+				"Or you can buy lava from the shop... it's not cheap, though!"
+			]
 			id: "3EC78535367D2948"
+			rewards: [
+				{
+					id: "4D6368993C4B8E85"
+					item: "minecraft:cauldron"
+					type: "item"
+				}
+				{
+					count: 4
+					id: "71070C3A8702A146"
+					item: "minecraft:pointed_dripstone"
+					type: "item"
+				}
+			]
 			shape: "gear"
 			tasks: [{
-				id: "0A8818A2B4D40B1F"
-				item: "minecraft:obsidian"
-				type: "item"
-			}]
-			x: -10.5d
-			y: -3.5d
-		}
-		{
-			dependencies: ["74FE46FB51FD5E67"]
-			id: "4DC30A4DED997EC9"
-			tasks: [{
-				id: "4C927EB02F457E76"
-				item: "mekanism:enriched_carbon"
-				type: "item"
+				icon: "minecraft:obsidian"
+				id: "6EDB25808F9C4984"
+				observe_type: 0
+				timer: 0L
+				to_observe: "minecraft:obsidian"
+				type: "observation"
 			}]
 			x: -8.5d
-			y: -0.5d
-		}
-		{
-			dependencies: ["54BFEEC1EEC11C37"]
-			id: "3A4F05B4EF31C8DC"
-			tasks: [{
-				id: "677403FC646531C3"
-				item: "minecraft:gravel"
-				type: "item"
-			}]
-			x: -2.5d
 			y: -1.5d
 		}
 		{
 			dependencies: [
 				"3EC78535367D2948"
-				"32DC292C0E5E6AD1"
+				"33B6004B0E26E3F7"
 			]
 			id: "36F034352D2ABD5C"
+			rewards: [{
+				count: 6
+				id: "3B14D1E87EB60774"
+				item: "enderio:dark_steel_ingot"
+				type: "item"
+			}]
 			tasks: [{
+				count: 3L
 				id: "52C184AA0B2DCF5A"
 				item: "enderio:dark_steel_ingot"
 				type: "item"
 			}]
-			x: -10.5d
-			y: 0.5d
+			x: -7.5d
+			y: -2.5d
 		}
 		{
-			dependencies: [
-				"3A4F05B4EF31C8DC"
-				"2ADD6F7CA73D149B"
-				"68921C4F77202AEA"
-			]
+			dependencies: ["672F50B7ACBD03F8"]
+			disable_toast: true
 			id: "6A9DFBB410A75F2F"
+			optional: true
+			rewards: [{
+				count: 16
+				id: "7C75C742FF5B943C"
+				item: "enderio:conduit_binder_composite"
+				type: "item"
+			}]
+			shape: "diamond"
 			tasks: [{
+				count: 8L
 				id: "67682918BC209D5B"
 				item: "enderio:conduit_binder_composite"
 				type: "item"
 			}]
-			x: -2.5d
+			x: 0.5d
 			y: -0.5d
 		}
 		{
 			dependencies: ["6A9DFBB410A75F2F"]
+			disable_toast: true
 			id: "3D7805B33F83D480"
+			optional: true
+			rewards: [{
+				count: 12
+				id: "3ACEA4D3D8890872"
+				item: "enderio:conduit_binder"
+				type: "item"
+			}]
+			shape: "diamond"
 			tasks: [{
+				count: 6L
 				id: "4B29B0FA1CCB3141"
 				item: "enderio:conduit_binder"
 				type: "item"
 			}]
-			x: -2.5d
+			x: -0.5d
 			y: 0.5d
-		}
-		{
-			dependencies: ["3A4F05B4EF31C8DC"]
-			id: "2ADD6F7CA73D149B"
-			tasks: [{
-				id: "3634B4CCCABE750C"
-				item: "minecraft:sand"
-				type: "item"
-			}]
-			x: -1.5d
-			y: -1.5d
-		}
-		{
-			dependencies: ["672F50B7ACBD03F8"]
-			id: "68921C4F77202AEA"
-			tasks: [{
-				id: "44C246FE98A335D9"
-				item: "minecraft:clay_ball"
-				type: "item"
-			}]
-			x: -1.5d
-			y: -0.5d
-		}
-		{
-			dependencies: ["04B21B380B8C152B"]
-			id: "74FE46FB51FD5E67"
-			shape: "gear"
-			tasks: [{
-				id: "4CB208142965345E"
-				item: "minecraft:coal"
-				type: "item"
-			}]
-			x: -8.5d
-			y: -3.5d
 		}
 		{
 			dependencies: ["04B21B380B8C152B"]
 			id: "54BFEEC1EEC11C37"
+			rewards: [{
+				count: 8
+				id: "7174B48C96ED0C59"
+				item: "minecraft:cobblestone"
+				type: "item"
+			}]
 			shape: "gear"
 			tasks: [{
 				id: "6E5A551AE106B88A"
@@ -262,121 +250,294 @@
 			y: -3.5d
 		}
 		{
-			dependencies: ["315A1FFD867F90E0"]
+			dependencies: ["04B21B380B8C152B"]
+			disable_toast: true
 			id: "672F50B7ACBD03F8"
+			optional: true
+			rewards: [{
+				count: 2
+				id: "6B140FD44448E00E"
+				item: "minecraft:clay"
+				type: "item"
+			}]
+			shape: "diamond"
 			tasks: [{
 				id: "2BD025F0D7D1DEB1"
 				item: "minecraft:clay"
 				type: "item"
 			}]
 			x: -0.5d
-			y: -0.5d
-		}
-		{
-			dependencies: ["7DFAE7C65EA7AA93"]
-			id: "315A1FFD867F90E0"
-			tasks: [{
-				id: "3A38BEC3CB3E0DB6"
-				item: "minecraft:mud"
-				type: "item"
-			}]
-			x: -0.5d
 			y: -1.5d
-		}
-		{
-			dependencies: ["04B21B380B8C152B"]
-			id: "7DFAE7C65EA7AA93"
-			shape: "gear"
-			tasks: [{
-				id: "090648A697B99F42"
-				item: "minecraft:dirt"
-				type: "item"
-			}]
-			x: -0.5d
-			y: -3.5d
-		}
-		{
-			dependencies: ["04B21B380B8C152B"]
-			id: "73397B1D0F1624A2"
-			shape: "gear"
-			tasks: [{
-				id: "6215FAA0F3344741"
-				item: "minecraft:oak_log"
-				type: "item"
-			}]
-			x: 1.5d
-			y: -3.5d
-		}
-		{
-			dependencies: ["73397B1D0F1624A2"]
-			id: "765890F40A6FFF95"
-			tasks: [{
-				id: "34D750071BF7818A"
-				item: "minecraft:oak_planks"
-				type: "item"
-			}]
-			x: 1.5d
-			y: -1.5d
-		}
-		{
-			dependencies: ["3EC78535367D2948"]
-			id: "136153585CD926E2"
-			tasks: [{
-				id: "0CAD8590A9BFFFDD"
-				item: "adminshop:permit"
-				type: "item"
-			}]
-			x: -10.5d
-			y: -4.5d
-		}
-		{
-			dependencies: ["74FE46FB51FD5E67"]
-			id: "7F77E55BFF4B36E5"
-			tasks: [{
-				id: "40BDEF5FAD96BB6D"
-				item: "adminshop:permit"
-				type: "item"
-			}]
-			x: -8.5d
-			y: -4.5d
-		}
-		{
-			dependencies: ["33B6004B0E26E3F7"]
-			id: "56E7A6D06ACF7F8B"
-			tasks: [{
-				id: "7299F88C8C1B2970"
-				item: "adminshop:permit"
-				type: "item"
-			}]
-			x: -6.5d
-			y: -4.5d
 		}
 		{
 			dependencies: [
-				"54BFEEC1EEC11C37"
 				"569F6B8AFC2733D3"
-				"7DFAE7C65EA7AA93"
+				"13009356B2C43F01"
 			]
-			id: "17222797FADC7C10"
+			id: "0057EBB6A3E014D5"
+			rewards: [{
+				count: 4
+				id: "6114E16963AFE52B"
+				item: "createdeco:copper_coin"
+				type: "item"
+			}]
 			tasks: [{
-				id: "719C28A6130DEF4A"
+				id: "726A7A1C44C9AC57"
+				item: "enderio:primitive_alloy_smelter"
+				type: "item"
+			}]
+			x: -3.5d
+			y: -2.5d
+		}
+		{
+			dependencies: [
+				"35CBCED1C5440F09"
+				"57E5469BBFC35DA0"
+			]
+			id: "7CCEFFF3A716A796"
+			rewards: [{
+				count: 8
+				id: "2FDFFF058C7D4E74"
+				item: "createdeco:gold_coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "4D1366799C572B6A"
+				item: "enderio:alloy_smelter"
+				type: "item"
+			}]
+			x: -7.5d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"35CBCED1C5440F09"
+				"57E5469BBFC35DA0"
+			]
+			id: "40579635E979ABD7"
+			rewards: [{
+				count: 8
+				id: "251352AEB719DD1E"
+				item: "createdeco:gold_coin"
+				type: "item"
+			}]
+			shape: "octagon"
+			tasks: [{
+				id: "6350B0A0407C1BBF"
+				item: "enderio:sag_mill"
+				type: "item"
+			}]
+			x: -5.5d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"35CBCED1C5440F09"
+				"57E5469BBFC35DA0"
+			]
+			id: "4D4D54EF15DA1E7F"
+			rewards: [{
+				count: 8
+				id: "4D62E9BC594E2263"
+				item: "createdeco:gold_coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "3E1482D4C12818BD"
+				item: "enderio:stirling_generator"
+				type: "item"
+			}]
+			x: -6.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["33B6004B0E26E3F7"]
+			id: "4B5E394B65445115"
+			rewards: [{
+				count: 8
+				id: "1D9F5CB16C291DFA"
+				item: "createdeco:iron_coin"
+				type: "item"
+			}]
+			shape: "octagon"
+			tasks: [{
+				id: "2F105FA168BAF73D"
+				item: "integrateddynamics:squeezer"
+				type: "item"
+			}]
+			x: -5.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["54BFEEC1EEC11C37"]
+			id: "3029B0003B8ABA27"
+			rewards: [{
+				count: 8
+				id: "45B49B749BB8E939"
+				item: "minecraft:gravel"
+				type: "item"
+			}]
+			tasks: [{
+				id: "7305633533C24C99"
+				item: "minecraft:gravel"
+				type: "item"
+			}]
+			x: -1.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["40579635E979ABD7"]
+			disable_toast: true
+			id: "369707BE91C1598F"
+			optional: true
+			rewards: [{
+				count: 4
+				id: "68CC085C8380CC5E"
+				item: "createdeco:gold_coin"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				count: 3L
+				id: "250BD6ACDE62C1C9"
+				item: "enderio:silicon"
+				type: "item"
+			}]
+			x: -3.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["04B21B380B8C152B"]
+			id: "701357A82790A479"
+			rewards: [{
+				id: "6B843B1CEB3ECF60"
+				item: "qualitycrops:apple_gold"
+				type: "item"
+			}]
+			shape: "gear"
+			tasks: [{
+				id: "35CB791E67B8B331"
+				item: "minecraft:raw_gold"
+				type: "item"
+			}]
+			x: -8.5d
+			y: 0.5d
+		}
+		{
+			dependencies: [
+				"701357A82790A479"
+				"207686641D3A8D51"
+			]
+			id: "57E5469BBFC35DA0"
+			rewards: [{
+				id: "3A873602922B2245"
+				item: "enderio:basic_capacitor"
+				type: "item"
+			}]
+			tasks: [{
+				id: "26C9F72089ABF65C"
+				item: "enderio:basic_capacitor"
+				type: "item"
+			}]
+			x: -7.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["04B21B380B8C152B"]
+			id: "207686641D3A8D51"
+			rewards: [{
+				count: 2
+				id: "004EF54404433FAE"
+				item: "minecraft:apple"
+				type: "item"
+			}]
+			shape: "gear"
+			tasks: [{
+				id: "409E2E28F032A03E"
+				item: "minecraft:raw_copper"
+				type: "item"
+			}]
+			x: -9.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["5F6E0A7C50186361"]
+			description: [
+				"To complete this chapter and start the following you need to craft the Create Trade Permit."
+				""
+				"The recipe doesn't show correctly in EMI:"
+				""
+				"a block of zinc surrounded by 8 papers"
+			]
+			id: "2DF3944B35123EB3"
+			rewards: [{
+				count: 16
+				id: "108E5124B91530AB"
+				item: "createdeco:gold_coin"
+				type: "item"
+			}]
+			tasks: [{
+				id: "2F33D19483C0961D"
 				item: "adminshop:permit"
+				type: "item"
+			}]
+			x: -4.5d
+			y: 2.0d
+		}
+		{
+			dependencies: ["40579635E979ABD7"]
+			id: "5F6E0A7C50186361"
+			rewards: [{
+				count: 4
+				id: "63780FB189E4A682"
+				item: "create:zinc_ingot"
+				type: "item"
+			}]
+			tasks: [{
+				id: "677B76126B44A628"
+				item: "create:zinc_ingot"
+				type: "item"
+			}]
+			x: -4.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["369707BE91C1598F"]
+			disable_toast: true
+			id: "1A5F01A65ADA0761"
+			rewards: [{
+				count: 2
+				id: "500DD749C27FDE97"
+				item: "enderio:copper_alloy_ingot"
+				type: "item"
+			}]
+			shape: "diamond"
+			tasks: [{
+				id: "41770A9CCFD4A492"
+				item: "enderio:copper_alloy_ingot"
 				type: "item"
 			}]
 			x: -2.5d
-			y: -4.5d
+			y: -0.5d
 		}
 		{
-			dependencies: ["73397B1D0F1624A2"]
-			id: "0CB4406B11875453"
-			tasks: [{
-				id: "443DF7D925B36C45"
-				item: "adminshop:permit"
+			dependencies: ["1A5F01A65ADA0761"]
+			id: "1B7E8BAF95F07076"
+			rewards: [{
+				count: 2
+				id: "1A2CF4F5EFB57809"
+				item: "enderio:conductive_alloy_ingot"
 				type: "item"
 			}]
-			x: 1.5d
-			y: -4.5d
+			shape: "diamond"
+			tasks: [{
+				id: "62E0E3701607CFDF"
+				item: "enderio:conductive_alloy_ingot"
+				type: "item"
+			}]
+			x: -1.5d
+			y: -0.5d
 		}
 	]
-	title: "Getting basic resources"
+	title: "Chapter 0"
 }

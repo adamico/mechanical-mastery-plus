@@ -14,7 +14,7 @@
 			tasks: [{
 				id: "52A5B1AE20D0CBD7"
 				item: {
-					Count: 1b
+					Count: 1
 					id: "pneumaticcraft:pneumatic_chestplate"
 					tag: {
 						Damage: 0
@@ -30,7 +30,7 @@
 			tasks: [{
 				id: "3A26B2F944BA11B5"
 				item: {
-					Count: 1b
+					Count: 1
 					id: "botania:manasteel_chestplate"
 					tag: {
 						Damage: 0
@@ -46,7 +46,7 @@
 			tasks: [{
 				id: "0261144889A2AB4A"
 				item: {
-					Count: 1b
+					Count: 1
 					id: "pneumaticcraft:compressed_iron_chestplate"
 					tag: {
 						Damage: 0
@@ -63,7 +63,7 @@
 			tasks: [{
 				id: "48CF8C17066365A8"
 				item: {
-					Count: 1b
+					Count: 1
 					id: "botania:elementium_chestplate"
 					tag: {
 						Damage: 0
@@ -80,7 +80,7 @@
 			tasks: [{
 				id: "362591095B835751"
 				item: {
-					Count: 1b
+					Count: 1
 					id: "botania:terrasteel_chestplate"
 					tag: {
 						Damage: 0
@@ -96,7 +96,7 @@
 			tasks: [{
 				id: "7F18FD221757BDCD"
 				item: {
-					Count: 1b
+					Count: 1
 					id: "bloodmagic:livingplate"
 					tag: {
 						Damage: 0
@@ -126,7 +126,7 @@
 			tasks: [{
 				id: "0848263DC1528DB6"
 				item: {
-					Count: 1b
+					Count: 1
 					id: "embers:ashen_cloak"
 					tag: {
 						Damage: 0
@@ -138,7 +138,6 @@
 			y: -1.0d
 		}
 		{
-			dependencies: ["6E423DDD9AB7EC1E"]
 			description: [""]
 			icon: "pneumaticcraft:armor_upgrade"
 			id: "5BE0FF9BBFEAA183"

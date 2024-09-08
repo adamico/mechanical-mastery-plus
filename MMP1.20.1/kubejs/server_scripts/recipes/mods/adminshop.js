@@ -1,7 +1,7 @@
 ServerEvents.recipes(event => {
   const createPermit = (tier, itemsToBuy, itemsToSell, centralItem, name) => {
     if (name == null) {
-      name = `"text":"[T${tier}] Trade Permit"`
+      name = `"text":"[${tier}] Trade Permit"`
     }
 
     let toBuyStrings = [];
@@ -28,11 +28,11 @@ ServerEvents.recipes(event => {
       "PPP"
     ];
     let recipeHash = { P: "minecraft:paper", E: centralItem };
-    let recipeId = `adminshop:permit_tier_${tier}`;
+    let recipeId = `adminshop:permit_tier_${tier.toLowerCase()}`;
     event.shaped(permitItem, recipeArray, recipeHash).id(recipeId);
   }
 
-  let tier1BItems = ['Raw Zinc', 'Kelp', 'Tiny Dry Rubber', 'Latex', 'Bone', 'Lapis Ore', 'Gobber Ore', 'Apatite Ore', 'Cobbled Deepslate'];
-  let tier1SItems = ['Regular Mechanical Crystal'];
-  createPermit(1, tier1BItems, tier1SItems, 'kubejs:cube1');
+  let createBItems = ['Zinc Nugget'];
+  let createSItems = ['Zinc Coin', 'Brass Coin', 'Industrial Iron Coin'];
+  createPermit('Create', createBItems, createSItems, 'create:zinc_block');
 });

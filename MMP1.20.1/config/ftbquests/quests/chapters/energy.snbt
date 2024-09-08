@@ -2,14 +2,13 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "energy"
-	group: "1B164FDBCB2D6C75"
+	group: "74710C7C9353C2D4"
 	icon: "pneumaticcraft:standby_upgrade"
 	id: "58BD1748492DF03F"
-	order_index: 0
+	order_index: 3
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["6E423DDD9AB7EC1E"]
 			icon: "pneumaticcraft:standby_upgrade"
 			id: "3B00515E6C683B8D"
 			tasks: [{
@@ -23,7 +22,7 @@
 		}
 		{
 			icon: {
-				Count: 1b
+				Count: 1
 				id: "pedestals:upgrade_pedestal_pump"
 				tag: { }
 			}

@@ -1,0 +1,17 @@
+
+#Settings for the mod's added generation
+[world]
+
+	[world.loot]
+		#Add Lerasium to dungeon and other loot tables
+		generate_lerasium = true
+		#Add Unbreakable Obsidian Daggers to end city and other loot tables
+		generate_unbreakable_daggers = true
+
+#Settings for the gameplay elements of the mod
+[gameplay]
+	#Spawn players as a random Misting
+	random_mistings = true
+	#Decides whether your spawn metal is based off your UUID (this will cause it to be consistent across worlds)
+	respect_player_UUID = false
+

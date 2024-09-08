@@ -2,14 +2,13 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "no_autocraft"
-	group: "1B164FDBCB2D6C75"
+	group: "74710C7C9353C2D4"
 	icon: "pneumaticcraft:security_upgrade"
 	id: "68F8C69B01410FE7"
-	order_index: 2
+	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{
-			dependencies: ["6E423DDD9AB7EC1E"]
 			icon: "pneumaticcraft:security_upgrade"
 			id: "740141A4B48613F5"
 			tasks: [{
@@ -22,7 +21,7 @@
 		}
 		{
 			icon: {
-				Count: 1b
+				Count: 1
 				id: "pedestals:upgrade_pedestal_fluidconverter"
 				tag: { }
 			}

@@ -1,33 +1,6 @@
 {
   "items": [
     {
-      "item": "mekanism:meka_tool",
-      "nbt": "{mekData:{Enchantments:[{id:\"minecraft:fortune\",lvl:3s}],EnergyContainers:[{Container:0b,stored:\"4096000000\"}],modules:{\"mekanism:attack_amplification_unit\":{amount:4,attack_damage:2,enabled:1b,renderHUD:1b},\"mekanism:blasting_unit\":{amount:4,blast_radius:1,enabled:1b,handleModeChange:1b,renderHUD:1b},\"mekanism:energy_unit\":{amount:8,enabled:1b},\"mekanism:excavation_escalation_unit\":{amount:4,enabled:1b,excavation_mode:2,handleModeChange:0b,renderHUD:1b},\"mekanism:farming_unit\":{amount:4,enabled:1b,farming_radius:1},\"mekanism:fortune_unit\":{amount:3,enabled:1b},\"mekanism:shearing_unit\":{amount:1,enabled:0b},\"mekanism:silk_touch_unit\":{amount:1,enabled:0b},\"mekanism:teleportation_unit\":{amount:1,enabled:0b,require_block_target:1b},\"mekanism:vein_mining_unit\":{amount:4,enabled:0b,excavation_range:1,extended_mode:0b,handleModeChange:0b,renderHUD:1b}}}}"
-    },
-    {
-      "item": "mekanism:portable_qio_dashboard"
-    },
-    {
-      "item": "mekanism:mekasuit_boots",
-      "nbt": "{mekData:{EnergyContainers:[{Container:0b,stored:\"4095999992.9349\"}],modules:{\"mekanism:color_modulation_unit\":{},\"mekanism:energy_unit\":{amount:8,enabled:1b},\"mekanism:hydraulic_propulsion_unit\":{amount:4,enabled:1b,jump_boost:1,step_assist:1},\"mekanism:laser_dissipation_unit\":{},\"mekanism:magnetic_attraction_unit\":{amount:4,enabled:1b,handleModeChange:1b,range:1},\"mekanism:radiation_shielding_unit\":{}}}}",
-      "Slot": "feet"
-    },
-    {
-      "item": "mekanism:mekasuit_pants",
-      "nbt": "{mekData:{Enchantments:[{id:\"minecraft:swift_sneak\",lvl:5s}],EnergyContainers:[{Container:0b,stored:\"4095999992.9349\"}],modules:{\"mekanism:color_modulation_unit\":{},\"mekanism:energy_unit\":{amount:8,enabled:1b},\"mekanism:laser_dissipation_unit\":{},\"mekanism:locomotive_boosting_unit\":{amount:4,enabled:1b,handleModeChange:1b,sprint_boost:1},\"mekanism:motorized_servo_unit\":{amount:5,enabled:1b},\"mekanism:radiation_shielding_unit\":{}}}}",
-      "Slot": "legs"
-    },
-    {
-      "item": "mekanism:mekasuit_bodyarmor",
-      "nbt": "{mekData:{EnergyContainers:[{Container:0b,stored:\"4095999992.9349\"}],modules:{\"mekanism:charge_distribution_unit\":{},\"mekanism:color_modulation_unit\":{},\"mekanism:dosimeter_unit\":{},\"mekanism:energy_unit\":{amount:8,enabled:1b},\"mekanism:geiger_unit\":{},\"mekanism:gravitational_modulating_unit\":{},\"mekanism:laser_dissipation_unit\":{},\"mekanism:radiation_shielding_unit\":{}}}}",
-      "Slot": "chest"
-    },
-    {
-      "item": "mekanism:mekasuit_helmet",
-      "nbt": "{mekData:{EnergyContainers:[{Container:0b,stored:\"16000000\"}],FluidTanks:[{Tank:0b,stored:{Amount:128000,FluidName:\"mekanism:nutritional_paste\"}}],modules:{\"mekanism:color_modulation_unit\":{},\"mekanism:electrolytic_breathing_unit\":{amount:4,enabled:1b,fill_held:1b},\"mekanism:inhalation_purification_unit\":{},\"mekanism:laser_dissipation_unit\":{},\"mekanism:nutritional_injection_unit\":{},\"mekanism:radiation_shielding_unit\":{},\"mekanism:vision_enhancement_unit\":{amount:4,enabled:0b,handleModeChange:1b,renderHUD:1b},\"mekanismgenerators:solar_recharging_unit\":{amount:8,enabled:1b}}}}",
-      "Slot": "head"
-    },
-    {
       item: "adminshop:shop"
     }
   ]

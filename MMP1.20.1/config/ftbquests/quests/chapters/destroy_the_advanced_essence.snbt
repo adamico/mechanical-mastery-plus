@@ -2,10 +2,10 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "destroy_the_advanced_essence"
-	group: "339A892EB2308C42"
+	group: ""
 	icon: "kubejs:cube4"
 	id: "4ABD1630391C3EB4"
-	order_index: 2
+	order_index: 3
 	quest_links: [ ]
 	quests: [
 		{
@@ -59,15 +59,13 @@
 		}
 		{
 			description: [
-				"Thanks to your help COD can produce infinite amounts of the old mechanical essences."
+				"Thanks to your help COD can produce infinite amounts of Advanced Mechanical Essences."
 				""
-				"You can freely take the essences, COD won't mind and even better he will restore used essences up to a fixed amount."
+				"You can take all the essences you like and start processing them (use EMI!)."
 				""
-				"You can process each essence in multiple ways except for the Advanced one."
+				"Each processing step is done in a separate questing chapter using a specific set of mods."
 				""
-				"The less complex the essence the higher the number of processing methods and the processing complexity."
-				""
-				"Quick warning, once you start processing essences faster than he can produce them, COD will get angry and his challenges will be harder and will have to be completed in less time."
+				"Progressing in the quests allows you to discover more and more efficient and faster ways to process the essences."
 			]
 			id: "557B1822A8A65F34"
 			tasks: [{

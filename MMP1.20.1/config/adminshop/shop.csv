@@ -21,9 +21,32 @@
 //
 // BUY
 //
-b,i,kubejs:cube4,100000,0
+b,i,kubejs:cube4,100,0
+b,i,create:copper_nugget,150,0
+b,i,minecraft:iron_nugget,225,0
+b,i,minecraft:gold_nugget,300,0
+b,i,minecraft:redstone,300,0
+b,i,minecraft:clay_ball,200,0
+b,i,minecraft:sugar_cane,500,0
+b,f,minecraft:lava,1,0
+,,,,
+b,i,create:zinc_nugget,400,1
+,,,,
+//b,i,createdeco:netherite_nugget,750,2
 ,,,,
 //
 // SELL
 //
-//s,f,kubejs:essence1,1000,1
+s,i,createdeco:copper_coin,100,0
+s,i,createdeco:iron_coin,150,0
+s,i,createdeco:gold_coin,200,0
+s,i,qualitycrops:apple_iron,300,0
+s,i,qualitycrops:apple_gold,600,0
+s,i,qualitycrops:apple_diamond,1200,0
+s,f,minecraft:lava,2,0
+,,,,
+s,i,createdeco:zinc_coin,300,1
+s,i,createdeco:brass_coin,500,1
+s,i,createdeco:industrial_iron_coin,600,1
+,,,,
+//s,i,createdeco:netherite_coin,1000,2
