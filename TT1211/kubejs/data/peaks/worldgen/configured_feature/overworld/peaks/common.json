@@ -1,0 +1,115 @@
+{
+  "type": "peaks:weighted_random_selector",
+  "config": {
+    "features": [
+      {
+        "weight": 150,
+        "feature": {
+          "feature": "peaks:overworld/peaks/base/coal",
+          "placement": [
+            {
+              "type": "peaks:biome_filter",
+              "allowed_biomes": "#minecraft:is_overworld"
+            }
+          ]
+        }
+      },
+      {
+        "weight": 150,
+        "feature": {
+          "feature": "peaks:overworld/peaks/base/iron",
+          "placement": [
+            {
+              "type": "peaks:biome_filter",
+              "allowed_biomes": "#minecraft:is_overworld"
+            }
+          ]
+        }
+      },
+      {
+        "weight": 150,
+        "feature": {
+          "feature": "peaks:overworld/peaks/base/copper",
+          "placement": [
+            {
+              "type": "peaks:biome_filter",
+              "allowed_biomes": "#minecraft:is_overworld"
+            }
+          ]
+        }
+      },
+      {
+        "weight": 100,
+        "feature": {
+          "feature": "peaks:overworld/peaks/compat/aluminum",
+          "placement": [
+            {
+              "type": "peaks:biome_filter",
+              "allowed_biomes": "#minecraft:is_overworld"
+            }
+          ]
+        }
+      },
+      {
+        "weight": 100,
+        "feature": {
+          "feature": "peaks:overworld/peaks/compat/lead",
+          "placement": [
+            {
+              "type": "peaks:biome_filter",
+              "allowed_biomes": "#minecraft:is_overworld"
+            }
+          ]
+        }
+      },
+      {
+        "weight": 100,
+        "feature": {
+          "feature": "peaks:overworld/peaks/compat/antimony",
+          "placement": [
+            {
+              "type": "peaks:biome_filter",
+              "allowed_biomes": "#minecraft:is_overworld"
+            }
+          ]
+        }
+      },
+      {
+        "weight": 50,
+        "feature": {
+          "feature": "peaks:overworld/peaks/compat/silver",
+          "placement": [
+            {
+              "type": "peaks:biome_filter",
+              "allowed_biomes": "#minecraft:is_overworld"
+            }
+          ]
+        }
+      },
+      {
+        "weight": 50,
+        "feature": {
+          "feature": "peaks:overworld/peaks/compat/tin",
+          "placement": [
+            {
+              "type": "peaks:biome_filter",
+              "allowed_biomes": "#minecraft:is_overworld"
+            }
+          ]
+        }
+      },
+      {
+        "weight": 50,
+        "feature": {
+          "feature": "peaks:overworld/peaks/compat/zinc",
+          "placement": [
+            {
+              "type": "peaks:biome_filter",
+              "allowed_biomes": "#minecraft:is_overworld"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

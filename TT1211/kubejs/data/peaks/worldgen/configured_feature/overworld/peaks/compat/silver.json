@@ -1,0 +1,72 @@
+{
+  "type": "peaks:peak_gen",
+  "config": {
+    "radius": 8,
+    "delta_radius": 3,
+
+    "top_height_multiplier": 1.2,
+
+    "bottom_height_multiplier": 1.2,
+    "bottom_deposit": {
+      "provider" : {
+        "type": "peaks:compat_priority_selector",
+        "blocks": ["immersiveengineering:storage_silver", "thermal:silver_block", "eidolon:silver_block", "embers:silver_block", "occultism:silver_block"]
+      }
+    },
+
+    "cylindrical_surfaces": [
+      {
+        "min_radius": 0,
+        "max_radius": 0.2,
+        "targets": [
+          {
+            "provider" : {
+              "type": "peaks:compat_priority_selector",
+              "blocks": ["immersiveengineering:raw_silver_block", "thermal:raw_silver_block", "eidolon:raw_silver_block", "embers:raw_silver_block", "occultism:raw_silver_block"]
+            },
+            "target": {
+              "predicate_type": "minecraft:tag_match",
+              "tag": "minecraft:stone_ore_replaceables"
+            }
+          },
+          {
+            "provider" : {
+              "type": "peaks:compat_priority_selector",
+              "blocks": ["immersiveengineering:raw_silver_block", "thermal:raw_silver_block", "eidolon:raw_silver_block", "embers:raw_silver_block", "occultism:raw_silver_block"]
+            },
+            "target": {
+              "predicate_type": "minecraft:tag_match",
+              "tag": "minecraft:deepslate_ore_replaceables"
+            }
+          }
+        ]
+      },
+      {
+        "min_radius": 0.2,
+        "max_radius": 1.0,
+        "targets": [
+          {
+            "provider" : {
+              "type": "peaks:compat_priority_selector",
+              "blocks": ["immersiveengineering:ore_silver", "thermal:silver_ore", "eidolon:silver_ore", "embers:silver_ore", "occultism:silver_ore"]
+            },
+            "target": {
+              "predicate_type": "minecraft:tag_match",
+              "tag": "minecraft:stone_ore_replaceables"
+            }
+          },
+          {
+            "provider" : {
+              "type": "peaks:compat_priority_selector",
+              "blocks": ["immersiveengineering:deepslate_ore_silver", "thermal:deepslate_silver_ore", "eidolon:deep_silver_ore", "embers:deepslate_silver_ore", "occultism:silver_ore_deepslate"]
+            },
+            "target": {
+              "predicate_type": "minecraft:tag_match",
+              "tag": "minecraft:deepslate_ore_replaceables"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

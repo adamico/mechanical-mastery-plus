@@ -1,0 +1,72 @@
+{
+  "type": "peaks:peak_gen",
+  "config": {
+    "radius": 8,
+    "delta_radius": 2,
+
+    "top_height_multiplier": 1.2,
+
+    "bottom_height_multiplier": 1.5,
+    "bottom_deposit": {
+      "provider" : {
+        "type": "peaks:compat_priority_selector",
+        "blocks": ["modern_industrialization:nickel_block"]
+      }
+    },
+
+    "cylindrical_surfaces": [
+      {
+        "min_radius": 0,
+        "max_radius": 0.15,
+        "targets": [
+          {
+            "provider" : {
+              "type": "peaks:compat_priority_selector",
+              "blocks": ["modern_industrialization:raw_nickel_block"]
+            },
+            "target": {
+              "predicate_type": "minecraft:tag_match",
+              "tag": "minecraft:stone_ore_replaceables"
+            }
+          },
+          {
+            "provider" : {
+              "type": "peaks:compat_priority_selector",
+              "blocks": ["modern_industrialization:raw_nickel_block"]
+            },
+            "target": {
+              "predicate_type": "minecraft:tag_match",
+              "tag": "minecraft:deepslate_ore_replaceables"
+            }
+          }
+        ]
+      },
+      {
+        "min_radius": 0.15,
+        "max_radius": 1.0,
+        "targets": [
+          {
+            "provider" : {
+              "type": "peaks:compat_priority_selector",
+              "blocks": ["modern_industrialization:nickel_ore"]
+            },
+            "target": {
+              "predicate_type": "minecraft:tag_match",
+              "tag": "minecraft:stone_ore_replaceables"
+            }
+          },
+          {
+            "provider" : {
+              "type": "peaks:compat_priority_selector",
+              "blocks": ["modern_industrialization:deepslate_nickel_ore"]
+            },
+            "target": {
+              "predicate_type": "minecraft:tag_match",
+              "tag": "minecraft:deepslate_ore_replaceables"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
