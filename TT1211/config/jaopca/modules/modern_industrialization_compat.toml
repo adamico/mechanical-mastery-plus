@@ -1,0 +1,23 @@
+[general]
+	#The material blacklist of this module.
+	materialBlacklist = []
+
+[recipes]
+	#The materials that should not have compressor to material recipes added.
+	compressorToCrystalMaterialBlacklist = []
+	#The materials that should not have implosion to material recipes added.
+	implosionToCrystalMaterialBlacklist = []
+	#The materials that should not have compressor to plate recipes added.
+	toPlateMaterialBlacklist = []
+	#The materials that should not have cutting to rod recipes added.
+	toRodMaterialBlacklist = []
+	#The materials that should not have storage block packing recipes added.
+	storageBlockPackingMaterialBlacklist = []
+	#The materials that should not have nugget packing recipes added.
+	nuggetPackingMaterialBlacklist = []
+	#The materials that should not have raw storage block packing recipes added.
+	rawStorageBlockPackingMaterialBlacklist = []
+	#The materials that should not have tiny dust packing recipes added.
+	tinyDustPackingMaterialBlacklist = []
+	#The materials that should not have macerator recycling recipes added.
+	recyclingMaterialBlacklist = []

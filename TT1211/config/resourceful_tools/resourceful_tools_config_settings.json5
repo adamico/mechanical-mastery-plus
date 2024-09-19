@@ -1,0 +1,94 @@
+{
+	/* 
+	   
+	   ***********************
+	   Copper Tools Settings
+	   ***********************
+	*/
+	"copperToolsDurability": 128,
+	"copperToolsMiningSpeed": 4.5,
+	"copperToolsAttackDamage": 2.0,
+	"copperToolsEnchantability": 18,
+	/* 
+	   
+	   ***********************
+	   Hand Scraper Settings
+	   ***********************
+	*/
+	"handScraperIronDurability": 250,
+	"handScraperCopperDurability": 128,
+	/* 
+	   
+	   ***********************
+	   Hand Tiller Settings
+	   - chance values range from 0.0 to 1.0
+	   ***********************
+	*/
+	"chanceBoneFragment": 0.20000000298023224,
+	"chanceInkSack": 0.20000000298023224,
+	"chanceBitOSlime": 0.20000000298023224,
+	/* 
+	   
+	   ***********************
+	   Hand Pick Settings
+	   - chance values range from 0.0 to 1.0
+	   ***********************
+	*/
+	"chanceSaltpeter": 0.20000000298023224,
+	"chanceSulfur": 0.20000000298023224,
+	"chanceSmallBlazePile": 0.10000000149011612,
+	"chanceGhastTearFragment": 0.10000000149011612,
+	"chanceNetherstarFragment": 0.10000000149011612,
+	"chanceNetheriteFragment": 0.10000000149011612,
+	/* 
+	   
+	   ***********************
+	   Hand (tree) Trimmer Settings
+	   - chance values range from 0.0 to 1.0
+	   ***********************
+	*/
+	"chanceFeather": 0.15000000596046448,
+	"chanceString": 0.15000000596046448,
+	"chanceExtraApple": 0.25,
+	"chanceRabbitFoot": 0.05000000074505806,
+	"chanceSpiderEye": 0.10000000149011612,
+	"chanceEnderPearlFragment": 0.10000000149011612,
+	"chancePrismarineCrystal": 0.15000000596046448,
+	"chancePrismarineShard": 0.15000000596046448,
+	"chancePhantomMembrane": 0.10000000149011612,
+	"chanceEgg": 0.10000000149011612,
+	"chanceAcorn": 0.05000000074505806,
+	"chanceAcornDark": 0.05000000074505806,
+	/* 
+	   
+	   ***********************
+	   Clam Digger Settings
+	   ***********************
+	*/
+	"chanceRawClam": 0.10000000149011612,
+	/* 
+	   
+	   ***********************
+	   Food Settings
+	   ***********************
+	*/
+	"cookedClamHunger": 6,
+	"cookedClamSaturation": 0.800000011920929,
+	"jerkyHunger": 6,
+	"jerkySaturation": 0.800000011920929,
+	"acornHunger": 7,
+	"acornSaturation": 0.8999999761581421,
+	"acornDarkHunger": 7,
+	"acornDarkSaturation": 0.8999999761581421,
+	/* 
+	   
+	   ***********************
+	   Misc. Settings
+	   ***********************
+	*/
+	"chanceAnvilDamage": 0.0,
+	"changeSticksFuelBurntime": false,
+	"sticksFuelDuration": 2400,
+	"breathWhileBucketOffhand": false,
+	"kevinsSafeMode": false
+}

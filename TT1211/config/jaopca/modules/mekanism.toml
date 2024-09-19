@@ -1,0 +1,10 @@
+[general]
+	#The material blacklist of this module.
+	materialBlacklist = []
+
+#Configurations related to chemical tags.
+[chemicalTags]
+	#List of infuse type tags that should not be added.
+	blacklist = []
+	#List of infuse type tags that should be considered as defined.
+	customDefined = []

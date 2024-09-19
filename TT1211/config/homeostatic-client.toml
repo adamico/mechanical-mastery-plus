@@ -1,0 +1,53 @@
+#Use Fahrenheit, otherwise use Celcius.
+useFahrenheit = true
+#Show degree symbol next to temperature value.
+showDegreeSymbol = true
+#Position of debug info, one of: [TOPLEFT, TOPCENTER, TOPRIGHT, BOTTOMLEFT, BOTTOMCENTER, BOTTOMRIGHT]
+position = "TOPRIGHT"
+#Debug text X offset
+#Range: -100 ~ 100
+debugOffsetX = 3
+#Debug text Y offset
+#Range: -100 ~ 100
+debugOffsetY = 3
+#The size of the text info (multiplier)
+#Range: 0.5 ~ 2.0
+scale = 0.5
+#Temperature color range (Format (cold->hot): #3ab3da->#f9801d)
+temperatureColorRange = "#3ab3da->#f9801d"
+#Select which hud element to display for body and area temperature. One of: [CENTER_GLOBE, RIGHT_THERMOMETER]
+temperatureHudOption = "CENTER_GLOBE"
+#Position of the RIGHT_THERMOMETER HUD if enabled, one of: [TOPLEFT, TOPCENTER, TOPRIGHT, BOTTOMLEFT, BOTTOMCENTER, BOTTOMRIGHT]
+thermometerPosition = "BOTTOMRIGHT"
+#RIGHT_THERMOMETER HUD X offset
+#Range: -500 ~ 500
+thermometerOffsetX = 133
+#RIGHT_THERMOMETER HUD Y offset
+#Range: -500 ~ 500
+thermometerOffsetY = 27
+#RIGHT_THERMOMETER HUD Y offset
+#Range: -500 ~ 500
+thermometerTextOffsetY = 15
+#Show rate change symbols to left/right of thermometer. Left is core temp, right is skin temperature.
+showThermometerRateChangeSymbols = true
+#Position of the CENTER_GLOBE HUD if enabled, one of: [TOPLEFT, TOPCENTER, TOPRIGHT, BOTTOMLEFT, BOTTOMCENTER, BOTTOMRIGHT]
+globePosition = "BOTTOMCENTER"
+#CENTER_GLOBE HUD X offset
+#Range: -500 ~ 500
+globeOffsetX = 0
+#CENTER_GLOBE HUD Y offset
+#Range: -500 ~ 500
+globeOffsetY = 50
+#CENTER_GLOBE HUD Y offset
+#Range: -500 ~ 500
+globeTextOffsetY = 90
+#Set to true to force position of the water bar.
+forceWaterBarPosition = false
+#Position of the Water Bar HUD if forceWaterBarPosition is true, one of: [TOPLEFT, TOPCENTER, TOPRIGHT, BOTTOMLEFT, BOTTOMCENTER, BOTTOMRIGHT]
+waterBarPosition = "BOTTOMCENTER"
+#Water Bar HUD X offset
+#Range: -500 ~ 500
+waterBarOffsetX = 96
+#Water Bar HUD Y offset
+#Range: -500 ~ 500
+waterBarOffsetY = 50

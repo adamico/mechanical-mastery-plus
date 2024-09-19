@@ -1,0 +1,200 @@
+["World Generation"]
+	#Enable generation of rocks
+	enableRocks = true
+	#Range: 0.0 ~ 1.0
+	rocksWeight = 1.0
+	#Enable generation of twigs
+	enableTwigs = true
+	#Range: 0.0 ~ 1.0
+	twigsWeight = 1.0
+	#Enable generation of fallen leaves
+	enableFallenLeaves = true
+	#Range: 0.0 ~ 1.0
+	fallenLeavesWeight = 1.0
+	#Enable generation of bones
+	enableBones = true
+	#Range: 0.0 ~ 1.0
+	bonesWeight = 1.0
+	#Enable generation of charred bones
+	enableCharredBones = true
+	#Range: 0.0 ~ 1.0
+	charredBonesWeight = 1.0
+	#Enable generation of ice chunks
+	enableIceChunks = true
+	#Range: 0.0 ~ 1.0
+	iceChunksWeight = 1.0
+	#Enable generation of pinecones
+	enablePinecones = true
+	#Range: 0.0 ~ 1.0
+	pineconesWeight = 1.0
+	#Enable generation of seashells
+	enableSeashells = true
+	#Range: 0.0 ~ 1.0
+	seashellsWeight = 1.0
+	#Enable generation of fallen trees
+	enableFallenTrees = true
+	#Range: 0.0 ~ 1.0
+	fallenTreesWeight = 1.0
+	#Enable generation of sea oats
+	enableSeaOats = true
+	#Range: 0.0 ~ 1.0
+	seaOatsWeight = 1.0
+	#Enable generation of cattails
+	enableCattails = true
+	#Range: 0.0 ~ 1.0
+	cattailsWeight = 1.0
+	#Enable generation of beach grass
+	enableBeachGrass = true
+	#Range: 0.0 ~ 1.0
+	beachGrassWeight = 1.0
+	#Enable generation of bark mushrooms
+	enableBarkMushrooms = true
+	#Range: 0.0 ~ 1.0
+	barkMushroomsWeight = 1.0
+	#Enable generation of glowcap
+	enableGlowcap = true
+	#Range: 0.0 ~ 1.0
+	glowcapWeight = 1.0
+	#Enable generation of cindercane
+	enableCindercane = true
+	#Range: 0.0 ~ 1.0
+	cindercaneWeight = 1.0
+	#Enable generation of nether nettles
+	enableNetherNettles = true
+	#Range: 0.0 ~ 1.0
+	netherNettlesWeight = 1.0
+	#Enable generation of short grass
+	enableShortGrass = true
+	#Range: 0.0 ~ 1.0
+	shortGrassWeight = 1.0
+	#Enable generation of natural cobwebs
+	enableNaturalCobwebs = true
+	#Range: 0.0 ~ 1.0
+	naturalCobwebsWeight = 1.0
+	#Enable generation of small cacti
+	enableSmallCacti = true
+	#Range: 0.0 ~ 1.0
+	smallCactiWeight = 1.0
+	#Enable generation of prickly bushes
+	enablePricklyBush = true
+	#Range: 0.0 ~ 1.0
+	pricklyBushWeight = 1.0
+	#Enable generation of reeds
+	enableReeds = true
+	#Range: 0.0 ~ 1.0
+	reedsWeight = 1.0
+	#Enable generation of icicles
+	enableIcicles = true
+	#Range: 0.0 ~ 1.0
+	iciclesWeight = 1.0
+	#Enable generation of sandy sprouts
+	enableSandySprouts = true
+	#Range: 0.0 ~ 1.0
+	sandySproutsWeight = 1.0
+	#Enable generation of watergrass
+	enableWatergrass = true
+	#Range: 0.0 ~ 1.0
+	watergrassWeight = 1.0
+	#Enable generation of gravel pits
+	enableGravelPits = true
+	#Range: 0.0 ~ 1.0
+	gravelPitWeight = 1.0
+	#Enable generation of gold pits
+	enableGoldPits = true
+	#Range: 0.0 ~ 1.0
+	goldPitWeight = 1.0
+	#Enable generation of beached kelp
+	enableBeachedKelp = true
+	#Range: 0.0 ~ 1.0
+	beachedKelpWeight = 1.0
+	#Enable generation of extra lilypads in lakes
+	enableExtraLilypads = true
+	#Range: 0.0 ~ 1.0
+	extraLilypadsWeight = 1.0
+	#Enable generation of extra seagrass in lakes
+	enableExtraSeagrass = true
+	#Range: 0.0 ~ 1.0
+	extraSeagrassWeight = 1.0
+	#Enable generation of extra grass in rivers
+	enableExtraRiverGrass = true
+	#Range: 0.0 ~ 1.0
+	extraRiverGrassWeight = 1.0
+	#Enable moss carpets in old growth taiga biomes
+	enableMossCarpets = true
+	#Range: 0.0 ~ 1.0
+	mossCarpetsWeight = 1.0
+	#Enable of tide pools in stony shores
+	enableTidePools = true
+	#Range: 0.0 ~ 1.0
+	tidePoolsWeight = 1.0
+	#Enable cave roots
+	enableCaveRoots = true
+	#Range: 0.0 ~ 1.0
+	caveRootsWeight = 1.0
+	#Enable better ruined nether portals
+	enableBetterRuinedNetherPortals = true
+	#Range: 0.0 ~ 1.0
+	betterRuinedNetherPortalsWeight = 1.0
+	#Enable generation of dried beached kelp
+	enableDriedBeachedKelp = true
+	#Range: 0.0 ~ 1.0
+	driedBeachedKelpWeight = 1.0
+	#Enable generation of glowing blue fungus
+	enableGlowingBlueFungus = true
+	#Range: 0.0 ~ 1.0
+	glowingBlueFungusWeight = 1.0
+	#Enable generation of bamboo in cherry groves
+	enableCherryGroveBamboo = true
+	#Range: 0.0 ~ 1.0
+	cherryGroveBambooWeight = 1.0
+	#Enable generation of muddy bones
+	enableMuddyBones = true
+	#Range: 0.0 ~ 1.0
+	muddyBonesWeight = 1.0
+	#Enable generation of lotus ponds in cherry groves
+	enableLotusPonds = true
+	#Range: 0.0 ~ 1.0
+	lotusPondWeight = 1.0
+	#Enable generation of pink lotuses in flower forests
+	enableFloatingPinkLotus = true
+	#Range: 0.0 ~ 1.0
+	floatingPinkLotusWeight = 1.0
+	#Enable generation of hot springs
+	enableHotSprings = true
+	#Range: 0.0 ~ 1.0
+	hotSpringsWeight = 1.0
+	#Enable generation of bushes
+	enableBushes = true
+	#Range: 0.0 ~ 1.0
+	bushWeight = 1.0
+	#Enable generation of wildflowers
+	enableWildflowers = true
+	#Range: 0.0 ~ 1.0
+	wildflowersWeight = 1.0
+	#Enable generation of bogged remains
+	enableBoggedRemains = true
+	#Range: 0.0 ~ 1.0
+	boggedRemainsWeight = 1.0
+	#Enable generation of slime nodules
+	enableSlimeNodules = true
+	#Range: 0.0 ~ 1.0
+	slimeNodulesWeight = 1.0
+	#Enable generation of pink vines
+	enablePinkVines = true
+	#Range: 0.0 ~ 1.0
+	pinkVinesWeight = 1.0
+
+["Entity Options"]
+	#Enable spawning of tropical fish in jungles
+	enableJungleTropicalFish = true
+
+["Feature Options"]
+	#Allow bogged to spawn from bogged remains
+	allowBoggedFromBoggedRemains = true
+	#Chance for a bogged to spawn from bogged remains
+	#Range: 0.0 ~ 1.0
+	boggedChance = 0.15
+	#Allow short grass to grow when use bone meal grass blocks
+	shortGrassFromBoneMeal = true
+	#Enable replaceable groundcover behavior - i.e. makes it behave like tall grass when placing blocks
+	replaceableGroundcover = true
