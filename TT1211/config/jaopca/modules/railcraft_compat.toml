@@ -1,9 +1,0 @@
-[general]
-	#The material blacklist of this module.
-	materialBlacklist = []
-
-[recipes]
-	#The materials that should not have crusher to dust recipes added.
-	toDustMaterialBlacklist = []
-	#The materials that should not have rolling to plate recipes added.
-	toCrystalMaterialBlacklist = []
