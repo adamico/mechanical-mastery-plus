@@ -56,7 +56,7 @@ cartDispenserDelay = 0
 #Change the vanilla dungeon loot
 changeDungeonLoot = true
 #An ordered list of mod ids from which the items will be chosen, which Railcraft does not add, and which are necessary for recipes based on tags to work.
-preferredOres = ["railcraft", "minecraft"]
+preferredOres = ["modern_industrialization", "mekanism", "railcraft", "minecraft"]
 
 #High Speed Track Configuration
 [highSpeedTrack]
