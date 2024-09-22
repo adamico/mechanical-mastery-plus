@@ -1,5 +1,14 @@
 {
   "bookGuiScale": 0,
   "clickedVisualize": false,
-  "bookData": {}
+  "bookData": {
+    "modern_industrialization:book": {
+      "viewedEntries": [
+        "modern_industrialization:electric_age/electric_quarry",
+        "modern_industrialization:steam_age/quarry"
+      ],
+      "bookmarks": [],
+      "completedManualQuests": []
+    }
+  }
 }

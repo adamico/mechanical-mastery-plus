@@ -84,3 +84,15 @@ Island Adventure - QUALITY UPDATE
 omc1204
 omcf121
 omcrl
+omcrl1211
+
+**/emojiful/cache
+**/ESM
+**/spark-modernfix/tmp
+**/fancymenu_data
+**/config/jei/**
+command_history.txt
+emi.json
+supportercache.json
+TrashSlotSaveState.json
+TT1211/config/worldedit/**
