@@ -1,6 +1,0 @@
-[Blacklist]
-	#xrite the registry name of the entities
-	banned = [""]
-	death_messages = []
-	#please respect this format 'xxx/namespace:mobname' where xxx is the level writen in 3 digits for example '010/minecraft:zombie'
-	locked_mobs = ["100/minecraft:ender_dragon", "150/minecraft:wither", "1/minecraft:cow", "1/minecraft:sheep", "1/minecraft:pig", "1/minecraft:rabbit"]

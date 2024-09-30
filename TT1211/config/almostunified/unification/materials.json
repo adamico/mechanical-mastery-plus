@@ -2,8 +2,10 @@
   "mod_priorities": [
     "minecraft",
     "kubejs",
+    "modern_industrialization",
     "mekanism",
-    "modern_industrialization"
+    "railcraft",
+    "occultism"
   ],
   "priority_overrides": {},
   "stone_variants": [
