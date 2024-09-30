@@ -1,0 +1,47 @@
+["Distance Scale Settings"]
+	#Recommended over 25 000
+	scale_distance = 55000.0
+	#The scale type can be 'vertical' , 'horizontal' , 'both', 'random' or 'MOTP'
+	scale_type = "both"
+	day_factor = 1.0
+	random_min = 0.0
+	random_max = 200.0
+
+["Mobs Levels Settings"]
+	base_level = 0.0
+	scale_factor = 0.5
+	base_level_nether = 50.0
+	base_level_end = 100.0
+	#Mods after a cartain level get random buffs 
+	random_effects = true
+	#[1-200]
+	random_effects_level = 100.0
+	#[1-100]
+	random_effects_chance = 10.0
+	base_level_territory = 75.0
+	max_level_overworld = 75.0
+	max_level_nether = 100.0
+	max_level_end = 200.0
+
+["Ingame Overlay Settings"]
+	display_lvl_name = true
+
+["Random Effects Chances"]
+	#[1-10]
+	strength_chance = 2.0
+	#[1-10]
+	speed_chance = 2.0
+	#[1-10]
+	resistance_chance = 2.0
+
+["Scale Factors"]
+	damage_modifier = 5.0
+	health_modifier = 5.0
+	protection_modifier = 5.0
+	speed_modifier = 0.3
+	xp_modfier = 5.0
+	min_speed = 0.1
+
+["Advanced Behaviour"]
+	leader_radius = 30.0
+	toggle_leadership = true

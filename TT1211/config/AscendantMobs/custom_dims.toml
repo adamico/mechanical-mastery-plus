@@ -1,0 +1,3 @@
+["Custom Dimensions Config"]
+	#(min/max/dimensionName) Make sure levels are written in 3 digits, e.g. (005/010/twilightforest:twilight_forest) in this example, you will limit the spawning level for the twilight forest to level 5 and level 10.
+	dimensions_settings = ["005/010/twilightforest:twilight_forest", "020/050/the_bumblezone:the_bumblezone"]

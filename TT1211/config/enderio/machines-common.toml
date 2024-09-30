@@ -1,3 +1,7 @@
+[energy]
+	#Whether or not the machine should throttle energy input to 2x it's consumption rate
+	throttleEnergyUsage = true
+
 	[energy.alloySmelter]
 		#The base energy capacity in uI.
 		#Range: > 1

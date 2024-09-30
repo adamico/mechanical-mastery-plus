@@ -230,3 +230,5 @@
 !terralith:yellowstone,
 !terralith:yosemite_cliffs,
 !terralith:yosemite_lowlands,
+!ttcompanion:test_biome,
+!ttcompanion:test_biome2,

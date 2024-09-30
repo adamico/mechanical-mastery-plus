@@ -415,7 +415,7 @@
 	/**
 	 * Copies the hovered recipe's ID to the clipboard
 	 */
-	copy-recipe-id: "key.keyboard.unknown";
+	copy-recipe-id: "key.mouse.middle";
 
 	/**
 	 * In edit mode, hide the hovered stack

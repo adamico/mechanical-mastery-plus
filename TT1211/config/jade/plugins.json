@@ -100,9 +100,6 @@
   "functionalstorage": {
     "drawer": true
   },
-  "custommachinery": {
-    "machine_component_provider": true
-  },
   "ae2": {
     "part_icon": true,
     "charger": true,
@@ -132,6 +129,9 @@
   },
   "waystones": {
     "waystone": true
+  },
+  "gravestone": {
+    "grave": true
   },
   "cookingforblockheads": {
     "fridge": true,

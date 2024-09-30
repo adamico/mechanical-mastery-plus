@@ -1,0 +1,89 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "chapter_0"
+	group: ""
+	id: "316EB73BBC11EAE4"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			id: "017F7045FB7B9E50"
+			tasks: [{
+				id: "356396FE9D4FAE9E"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: -2.5d
+		}
+		{
+			id: "2DB88A17961E7772"
+			tasks: [{
+				id: "679BE3E5CC28B774"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["017F7045FB7B9E50"]
+			id: "360EBF65B265FBB0"
+			rewards: [{
+				id: "5DCD0BC3A362546A"
+				item: {
+					components: {
+						"minecraft:custom_name": "\"Tree Feller\""
+						"minecraft:enchantments": {
+							levels: {
+								"minecraft:efficiency": 5
+								"minecraft:unbreaking": 3
+							}
+						}
+						"minecraft:repair_cost": 3
+					}
+					count: 1
+					id: "ae2:certus_quartz_axe"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 16L
+				id: "0F76DBDB4B766DAC"
+				item: { components: { "ftbfiltersystem:filter": "or(item_tag(minecraft:logs))" }, count: 1, id: "ftbfiltersystem:smart_filter" }
+				type: "item"
+			}]
+			x: -1.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["017F7045FB7B9E50"]
+			id: "596B05AC73222B84"
+			rewards: [{
+				id: "2D7549724C796877"
+				item: {
+					components: {
+						"minecraft:custom_name": "\"Stone Breaker\""
+						"minecraft:enchantments": {
+							levels: {
+								"minecraft:efficiency": 5
+								"minecraft:unbreaking": 3
+							}
+						}
+						"minecraft:repair_cost": 3
+					}
+					count: 1
+					id: "ae2:certus_quartz_pickaxe"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 32L
+				id: "5ADD309BFACABAC1"
+				item: { count: 32, id: "minecraft:cobblestone" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: -1.0d
+		}
+	]
+}

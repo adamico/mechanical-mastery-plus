@@ -1,0 +1,62 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "dire_please"
+	group: ""
+	id: "12C3AFBD3EEC639C"
+	order_index: 4
+	quest_links: [ ]
+	quests: [
+		{
+			id: "5592E887C288EE36"
+			tasks: [{
+				id: "51351E180AFC451D"
+				type: "checkmark"
+			}]
+			x: -0.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["5592E887C288EE36"]
+			id: "730C1073CD89FFF6"
+			rewards: [
+				{
+					count: 2
+					id: "42A5EFD4819ADF71"
+					item: {
+						count: 1
+						id: "minecraft:coal_block"
+					}
+					type: "item"
+				}
+				{
+					count: 2
+					id: "2B36D049C8F178B6"
+					item: {
+						count: 1
+						id: "minecraft:iron_block"
+					}
+					type: "item"
+				}
+			]
+			tasks: [{
+				id: "682D3D8295D57947"
+				item: { count: 1, id: "justdirethings:gooblock_tier1" }
+				type: "item"
+			}]
+			x: -3.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["730C1073CD89FFF6"]
+			id: "001CB2363CBB847E"
+			tasks: [{
+				id: "1F2334E3F9691C7B"
+				item: { count: 1, id: "justdirethings:fuel_canister" }
+				type: "item"
+			}]
+			x: -3.5d
+			y: 2.0d
+		}
+	]
+}

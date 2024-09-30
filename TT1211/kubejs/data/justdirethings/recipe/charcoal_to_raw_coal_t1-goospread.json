@@ -1,0 +1,15 @@
+{
+  "type": "justdirethings:goospread",
+  "craftingDuration": 2400,
+  "id": "justdirethings:coal_block_t1_from_charcoal",
+  "input": {
+    "Name": "mekanism:block_charcoal"
+  },
+  "output": {
+    "Name": "justdirethings:raw_coal_t1_ore",
+    "Properties": {
+      "facing": "north"
+    }
+  },
+  "tierRequirement": 1
+}

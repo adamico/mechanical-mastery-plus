@@ -1,0 +1,80 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "info"
+	group: ""
+	id: "3ECB8C7663171543"
+	order_index: 3
+	quest_links: [ ]
+	quests: [
+		{
+			id: "1234677DC16DA330"
+			tasks: [{
+				id: "767E700550DCE81A"
+				item: { count: 1, id: "homeostatic:book" }
+				type: "item"
+			}]
+			x: -3.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["1234677DC16DA330"]
+			id: "731CEDAE976D12D4"
+			rewards: [{
+				count: 4
+				id: "0AD0A17DA3BA2F89"
+				item: {
+					count: 1
+					id: "minecraft:leather"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "3821F3792F352FB9"
+				item: { components: { "homeostatic:water_container": { Amount: 0L, Fluid: "minecraft:empty" } }, count: 1, id: "homeostatic:leather_flask" }
+				type: "item"
+			}]
+			x: -3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1234677DC16DA330"]
+			id: "21BE5964748370F6"
+			rewards: [{
+				count: 4
+				id: "3243AB51E235C5EC"
+				item: {
+					count: 1
+					id: "minecraft:paper"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "2B6E1871E1AAF889"
+				item: { count: 1, id: "homeostatic:water_filter" }
+				type: "item"
+			}]
+			x: -4.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1234677DC16DA330"]
+			id: "0EB37A224DC8B815"
+			rewards: [{
+				id: "1ABB2A0C4848181A"
+				item: {
+					count: 1
+					id: "minecraft:bucket"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "0AE7DF27EC3D9866"
+				item: { count: 1, id: "homeostatic:purified_water_bucket" }
+				type: "item"
+			}]
+			x: -1.5d
+			y: 0.0d
+		}
+	]
+}

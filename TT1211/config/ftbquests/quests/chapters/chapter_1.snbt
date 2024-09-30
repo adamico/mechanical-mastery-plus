@@ -1,0 +1,172 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "chapter_1"
+	group: ""
+	id: "7AABC65E90041AF2"
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["3D6933329C2E8135"]
+			id: "6D9CA4DCE8165083"
+			tasks: [{
+				id: "042DCAF10F4C3992"
+				item: { count: 1, id: "minecraft:iron_ore" }
+				type: "item"
+			}]
+			x: -5.0d
+			y: -5.0d
+		}
+		{
+			dependencies: ["3D6933329C2E8135"]
+			id: "06D8591AFD00AE07"
+			tasks: [{
+				id: "171E41D2536A958B"
+				item: { count: 1, id: "minecraft:copper_ore" }
+				type: "item"
+			}]
+			x: -3.0d
+			y: -5.0d
+		}
+		{
+			id: "692D7AB4F6021484"
+			tasks: [{
+				id: "552320882DA3F702"
+				type: "checkmark"
+			}]
+			x: -3.0d
+			y: 2.0d
+		}
+		{
+			id: "2A2880F01E9C2B70"
+			tasks: [{
+				id: "24AD73ABBD3B5596"
+				type: "checkmark"
+			}]
+			x: -6.5d
+			y: -7.0d
+		}
+		{
+			dependencies: ["6D9CA4DCE8165083"]
+			id: "2ED4FA4426F3A551"
+			tasks: [{
+				id: "4889DE55CA2417CA"
+				item: { count: 1, id: "enderio:dark_steel_ingot" }
+				type: "item"
+			}]
+			x: -5.0d
+			y: -3.5d
+		}
+		{
+			dependencies: [
+				"2ED4FA4426F3A551"
+				"58B98EC34CD6CD65"
+			]
+			id: "14DAF8B4C67B2C7C"
+			tasks: [{
+				id: "6A35D3A6332517FF"
+				item: { count: 1, id: "enderio:void_chassis" }
+				type: "item"
+			}]
+			x: -5.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["14DAF8B4C67B2C7C"]
+			id: "716CE2BF21D73D65"
+			tasks: [{
+				id: "5F9C8134A1E1FCB8"
+				item: { count: 1, id: "enderio:alloy_smelter" }
+				type: "item"
+			}]
+			x: -5.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"14DAF8B4C67B2C7C"
+				"62479FBC67521C62"
+			]
+			id: "74F42C55C2E65613"
+			tasks: [{
+				id: "5FEEB173128AF8D0"
+				item: { count: 1, id: "enderio:stirling_generator" }
+				type: "item"
+			}]
+			x: -4.0d
+			y: -1.5d
+		}
+		{
+			dependencies: [
+				"14DAF8B4C67B2C7C"
+				"62479FBC67521C62"
+			]
+			id: "289F8BC9A98CD0F7"
+			tasks: [{
+				id: "637A02796D474FFC"
+				item: { count: 1, id: "enderio:sag_mill" }
+				type: "item"
+			}]
+			x: -4.0d
+			y: -2.5d
+		}
+		{
+			dependencies: [
+				"6190F0FEAD7E3134"
+				"4DAC3C5313E4B9E0"
+			]
+			id: "58B98EC34CD6CD65"
+			tasks: [{
+				id: "583775A2517CAEEA"
+				item: { count: 1, id: "enderio:grains_of_infinity" }
+				type: "item"
+			}]
+			x: -6.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3D6933329C2E8135"]
+			id: "6190F0FEAD7E3134"
+			tasks: [{
+				id: "675AA61A9CF142E7"
+				item: { count: 1, id: "minecraft:deepslate" }
+				type: "item"
+			}]
+			x: -8.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["3D6933329C2E8135"]
+			id: "4DAC3C5313E4B9E0"
+			tasks: [{
+				id: "13A48F8A252643DB"
+				item: { count: 1, id: "minecraft:gravel" }
+				type: "item"
+			}]
+			x: -8.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["06D8591AFD00AE07"]
+			id: "62479FBC67521C62"
+			tasks: [{
+				id: "612AB8F1FF22D0AB"
+				item: { count: 1, id: "minecraft:piston" }
+				type: "item"
+			}]
+			x: -3.0d
+			y: -2.0d
+		}
+		{
+			hide_dependent_lines: true
+			id: "3D6933329C2E8135"
+			tasks: [{
+				id: "0BD47FB6B6F32DB0"
+				type: "checkmark"
+			}]
+			x: -4.0d
+			y: -7.0d
+		}
+	]
+}

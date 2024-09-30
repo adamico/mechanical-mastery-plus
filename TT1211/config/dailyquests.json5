@@ -1,0 +1,81 @@
+{
+	// At what time new quests should generate. Default is day, at 1000 ticks.
+	// min: 0, max: 24000
+	"newQuestGenerateTimeInTicks": 20,
+	// How many daily quests should be generated for a player.
+	// min: 1, max: 5
+	"defaultTotalQuestCount": 3,
+	// The maximum amount of quest re-rolls a player has each day. Resets during 'newQuestGenerateTimeInTicks'.
+	// min: 0, max: 1000
+	"maximumQuestReRollsPerDay": 1,
+	// If completed quests should be able to be re-rolled.
+	"allowReRollingCompletedQuests": false,
+	// If the dailyquests loot tables '1th_quest', '10th_quest', '50th_quest' and '100th_quest' should be used.
+	"useQuestCompletionItemLootTables": true,
+	// Whether experience should be given to the player upon completing a quest, based on the task difficulty.
+	"giveExperienceOnQuestCompletion": true,
+	// Can be used to decrease/increase the amount of experience given when completing quests.
+	// min: 0.0, max: 100.0
+	"questCompletionExperienceModifier": 1.0,
+	// If a summary should be sent to the player upon quest completion, containing information about the reward and how many quests completed.
+	"sendSummaryToPlayerOnQuestCompletion": true,
+	// Whether a message should be broadcasted whenever a player completes a quest.
+	"broadcastMessageOnCompletion": true,
+	// 0: black, 1: dark_blue, 2: dark_green, 3: dark_aqua, 4: dark_red, 5: dark_purple, 6: gold, 7: gray, 8: dark_gray, 9: blue, 10: green, 11: aqua, 12: red, 13: light_purple, 14: yellow, 15: white
+	// min: 0, max: 15
+	"broadcastMessageColourIndex": 6,
+	// Whether fireworks should be set off at a players location when a quest is completed.
+	"spawnFireworksOnQuestCompletion": true,
+	// If the quest list text displayed should have a shadow drawn below it.
+	"questListDrawTextShadow": true,
+	// The vertical (y) offset of the quest list.
+	// min: 0, max: 3000
+	"questListVerticalOffset": 5,
+	// The horizontal (x) offset of the quest list.
+	// min: -3000, max: 3000
+	"questListHorizontalOffset": 0,
+	// Whether the quest list in the GUI should be lowered when the player has potion effects to prevent overlap.
+	"lowerQuestListWhenPlayerHasEffects": true,
+	// Whether the quests with the type BlockArrow should be randomly chosen.
+	"enableBlockArrowQuests": true,
+	// Whether the quests with the type BreedMob should be randomly chosen.
+	"enableBreedMobQuests": true,
+	// Whether the quests with the type BrewPotion should be randomly chosen.
+	"enableBrewPotionQuests": true,
+	// Whether the quests with the type CatchFish should be randomly chosen.
+	"enableCatchFishQuests": true,
+	// Whether the quests with the type CollectHoney should be randomly chosen.
+	"enableCollectHoneyQuests": true,
+	// Whether the quests with the type CompleteRaid should be randomly chosen.
+	"enableCompleteRaidQuests": true,
+	// Whether the quests with the type CraftItem should be randomly chosen.
+	"enableCraftItemQuests": true,
+	// Whether the quests with the type EnchantItem should be randomly chosen.
+	"enableEnchantItemQuests": true,
+	// Whether the quests with the type ExploreBiome should be randomly chosen.
+	"enableExploreBiomeQuests": true,
+	// Whether the quests with the type GainLevel should be randomly chosen.
+	"enableGainLevelQuests": true,
+	// Whether the quests with the type HarvestBlock should be randomly chosen.
+	"enableHarvestBlockQuests": true,
+	// Whether the quests with the type HarvestCrop should be randomly chosen.
+	"enableHarvestCropQuests": true,
+	// Whether the quests with the type IgniteCreeper should be randomly chosen.
+	"enableIgniteCreeperQuests": true,
+	// Whether the quests with the type ReflectGhast should be randomly chosen.
+	"enableReflectGhastQuests": true,
+	// Whether the quests with the type ShearSheep should be randomly chosen.
+	"enableShearSheepQuests": true,
+	// Whether the quests with the type SlayMob should be randomly chosen.
+	"enableSlayMobQuests": true,
+	// Whether the quests with the type SmeltItem should be randomly chosen.
+	"enableSmeltItemQuests": true,
+	// Whether the quests with the type TameAnimal should be randomly chosen.
+	"enableTameAnimalQuests": true,
+	// Whether the quests with the type TradeVillager should be randomly chosen.
+	"enableTradeVillagerQuests": true,
+	// Whether the quests with the type TravelDistance should be randomly chosen.
+	"enableTravelDistanceQuests": true,
+	// Whether the quests with the type UseItem should be randomly chosen.
+	"enableUseItemQuests": true
+}
