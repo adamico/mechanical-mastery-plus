@@ -1,4 +1,4 @@
-// 1.21.1	2024-09-22T22:39:59.9200657	Loot Tables
+// 1.21.1	2024-10-01T10:22:21.5956122	Loot Tables
 8c7d1d16523de7745a32c402944c31b28e7b747d data/modern_industrialization/loot_table/blocks/advanced_fluid_input_hatch.json
 06b622fd132363a136550c1b17ff15c63f5924bb data/modern_industrialization/loot_table/blocks/advanced_fluid_output_hatch.json
 5ced05c7031a139315bf3450fad0d7acb9b93de3 data/modern_industrialization/loot_table/blocks/advanced_item_input_hatch.json
@@ -144,6 +144,7 @@ af063ee24a26454bc891b99c981061a70b7e7f82 data/modern_industrialization/loot_tabl
 0fbc76258128d09121aa53ae9d207a96f46f6f85 data/modern_industrialization/loot_table/blocks/nuclear_reactor.json
 234d586b51b951660ac86283c0db1431f69ebd13 data/modern_industrialization/loot_table/blocks/nuke.json
 bc29d50b7ecb1b4c00a7017a8e5981a35f243e25 data/modern_industrialization/loot_table/blocks/oil_drilling_rig.json
+e8b34a545989c8829ed05e34aff003473e195299 data/modern_industrialization/loot_table/blocks/ore_processor.json
 beea7e1a73b6a49870eb44abbe43a77b62e69fb4 data/modern_industrialization/loot_table/blocks/plasma_handling_iridium_machine_casing.json
 1187f017c97355b67282d47057d0358ad61d3721 data/modern_industrialization/loot_table/blocks/plasma_turbine.json
 b9da8f49d580edcfa4e98d2b13d84d8627bbbe32 data/modern_industrialization/loot_table/blocks/platinum_block.json

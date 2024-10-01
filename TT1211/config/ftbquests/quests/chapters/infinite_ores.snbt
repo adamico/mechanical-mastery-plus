@@ -1,0 +1,80 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "infinite_ores"
+	group: ""
+	id: "3D750D70B6BEE2D1"
+	order_index: 5
+	quest_links: [ ]
+	quests: [
+		{
+			can_repeat: false
+			id: "049552FAC4F5A768"
+			rewards: [{
+				command: "/locate structure ttcompanion:simple_common_quarry_1"
+				id: "78166290222AEFA9"
+				type: "command"
+			}]
+			tasks: [{
+				count: 32L
+				id: "3D2FA575037E26E6"
+				item: { count: 1, id: "minecraft:iron_ingot" }
+				type: "item"
+			}]
+			x: -3.0d
+			y: -2.0d
+		}
+		{
+			can_repeat: false
+			id: "128E40269AD630B9"
+			rewards: [{
+				command: "/locate structure ttcompanion:simple_common_quarry_3"
+				id: "3D51B5C37030552A"
+				type: "command"
+			}]
+			tasks: [{
+				count: 32L
+				id: "0D6990A29F373319"
+				item: { count: 1, id: "modern_industrialization:lead_ingot" }
+				type: "item"
+			}]
+			x: -2.0d
+			y: -1.0d
+		}
+		{
+			can_repeat: false
+			id: "1B73D779DE2D4ED1"
+			rewards: [{
+				command: "/locate structure ttcompanion:simple_common_quarry_2"
+				id: "311DF7D685F92F06"
+				type: "command"
+			}]
+			tasks: [{
+				count: 32L
+				id: "0B0232B0133F1220"
+				item: { count: 32, id: "modern_industrialization:tin_ingot" }
+				type: "item"
+			}]
+			x: -4.0d
+			y: -1.0d
+		}
+		{
+			can_repeat: false
+			id: "2FF4AB090DDEC062"
+			rewards: [{
+				command: "/locate structure ttcompanion:simple_common_quarry_4"
+				exclude_from_claim_all: true
+				id: "1E7D5F519F96FCDD"
+				type: "command"
+			}]
+			tasks: [{
+				count: 32L
+				id: "5FE2006E745C3EFA"
+				item: { count: 1, id: "occultism:silver_ingot" }
+				type: "item"
+			}]
+			x: -3.0d
+			y: 0.0d
+		}
+	]
+}

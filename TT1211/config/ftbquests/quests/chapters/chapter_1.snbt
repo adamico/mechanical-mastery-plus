@@ -59,10 +59,7 @@
 			y: -3.5d
 		}
 		{
-			dependencies: [
-				"2ED4FA4426F3A551"
-				"58B98EC34CD6CD65"
-			]
+			dependencies: ["2ED4FA4426F3A551"]
 			id: "14DAF8B4C67B2C7C"
 			tasks: [{
 				id: "6A35D3A6332517FF"
@@ -112,42 +109,6 @@
 			y: -2.5d
 		}
 		{
-			dependencies: [
-				"6190F0FEAD7E3134"
-				"4DAC3C5313E4B9E0"
-			]
-			id: "58B98EC34CD6CD65"
-			tasks: [{
-				id: "583775A2517CAEEA"
-				item: { count: 1, id: "enderio:grains_of_infinity" }
-				type: "item"
-			}]
-			x: -6.5d
-			y: -2.0d
-		}
-		{
-			dependencies: ["3D6933329C2E8135"]
-			id: "6190F0FEAD7E3134"
-			tasks: [{
-				id: "675AA61A9CF142E7"
-				item: { count: 1, id: "minecraft:deepslate" }
-				type: "item"
-			}]
-			x: -8.0d
-			y: -2.5d
-		}
-		{
-			dependencies: ["3D6933329C2E8135"]
-			id: "4DAC3C5313E4B9E0"
-			tasks: [{
-				id: "13A48F8A252643DB"
-				item: { count: 1, id: "minecraft:gravel" }
-				type: "item"
-			}]
-			x: -8.0d
-			y: -1.5d
-		}
-		{
 			dependencies: ["06D8591AFD00AE07"]
 			id: "62479FBC67521C62"
 			tasks: [{
@@ -159,6 +120,7 @@
 			y: -2.0d
 		}
 		{
+			dependencies: ["049552FAC4F5A768"]
 			hide_dependent_lines: true
 			id: "3D6933329C2E8135"
 			tasks: [{

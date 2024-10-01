@@ -8,6 +8,8 @@
 	quest_links: [ ]
 	quests: [
 		{
+			hide_dependency_lines: false
+			hide_dependent_lines: true
 			id: "017F7045FB7B9E50"
 			tasks: [{
 				id: "356396FE9D4FAE9E"
@@ -15,15 +17,6 @@
 			}]
 			x: 0.0d
 			y: -2.5d
-		}
-		{
-			id: "2DB88A17961E7772"
-			tasks: [{
-				id: "679BE3E5CC28B774"
-				type: "checkmark"
-			}]
-			x: 0.0d
-			y: 2.0d
 		}
 		{
 			dependencies: ["017F7045FB7B9E50"]
@@ -82,8 +75,55 @@
 				item: { count: 32, id: "minecraft:cobblestone" }
 				type: "item"
 			}]
+			x: 0.0d
+			y: -1.0d
+		}
+		{
+			dependencies: [
+				"6190F0FEAD7E3134"
+				"4DAC3C5313E4B9E0"
+			]
+			id: "58B98EC34CD6CD65"
+			tasks: [{
+				id: "583775A2517CAEEA"
+				item: { count: 1, id: "enderio:grains_of_infinity" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["017F7045FB7B9E50"]
+			id: "6190F0FEAD7E3134"
+			tasks: [{
+				id: "675AA61A9CF142E7"
+				item: { count: 1, id: "minecraft:deepslate" }
+				type: "item"
+			}]
 			x: 1.5d
 			y: -1.0d
+		}
+		{
+			dependencies: ["017F7045FB7B9E50"]
+			id: "4DAC3C5313E4B9E0"
+			tasks: [{
+				id: "13A48F8A252643DB"
+				item: { count: 1, id: "minecraft:gravel" }
+				type: "item"
+			}]
+			x: 3.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["58B98EC34CD6CD65"]
+			id: "331ADAE0BF260E3E"
+			tasks: [{
+				id: "0E90830B7D45679E"
+				item: { count: 1, id: "enderio:primitive_alloy_smelter" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: 1.5d
 		}
 	]
 }
