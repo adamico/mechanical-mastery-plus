@@ -38,4 +38,14 @@ ServerEvents.recipes(event => {
 
 	event.remove({id: 'createchromaticreturn:refined_radiance_recipe'});
 	event.recipes.createMixing(Item.of('createchromaticreturn:refined_radiance'), [Item.of('createchromaticreturn:chromatic_compound', 4), Fluid.of('kubejs:light_essence', 250)]).superheated();
+
+	// A basin fed by funnels or chutes holds at most 16 of one item, so recipes needing 32 can't be automated.
+	event.remove({id: 'createchromaticreturn:polonium_pellet'});
+	event.recipes.createMixing('mekanism:pellet_polonium', Array(16).fill('createchromaticreturn:polonium_nugget')).superheated().id('kubejs:mixing/polonium_pellet');
+
+	event.remove({id: 'createchromaticreturn:polonium_nugget_recipe'});
+	event.recipes.createMixing('createchromaticreturn:polonium_nugget', []
+		.concat(Array(4).fill('createchromaticreturn:shadow_steel'))
+		.concat(Array(16).fill('mekanism:dust_fluorite'))
+		.concat(Array(3).fill('minecraft:diamond_block'))).superheated().id('kubejs:mixing/polonium_nugget');
 });
