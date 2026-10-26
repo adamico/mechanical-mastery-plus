@@ -1,0 +1,13 @@
+name = "Ding (Forge)"
+filename = "Ding-1.19.2-Forge-1.4.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "5ed35363b22c9846413612654f8a76a935680a39"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4618810
+project-id = 231275

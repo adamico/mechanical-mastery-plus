@@ -1,0 +1,13 @@
+name = "MiniCoal"
+filename = "minicoal-1.19-1.0.0.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "53e6693360890cb740d5f805b6ffdc1788169c9b"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 3865700
+project-id = 252291

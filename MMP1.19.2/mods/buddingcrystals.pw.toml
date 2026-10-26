@@ -1,0 +1,13 @@
+name = "BuddingCrystals"
+filename = "BuddingCrystals-2.1.3.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "eee080ca64f46d31097221ede8e27d58a6ee4593"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4442738
+project-id = 628302

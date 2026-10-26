@@ -1,0 +1,13 @@
+name = "Camera Mod"
+filename = "camera-1.19.2-1.0.6.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "f6cfa6bb707f2c68c17adedce5d64852e86e082e"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4814527
+project-id = 289310

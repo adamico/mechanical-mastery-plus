@@ -1,0 +1,13 @@
+name = "Flux Networks"
+filename = "FluxNetworks-1.19.2-7.1.4.13.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "02a0c16c25806840ad1040feb7af6e230839a3a2"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4620438
+project-id = 248020

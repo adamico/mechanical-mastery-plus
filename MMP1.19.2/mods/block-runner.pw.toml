@@ -1,0 +1,13 @@
+name = "Block Runner"
+filename = "BlockRunner-v4.2.2-1.19.2-Forge.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "959f4abf0d1902c4d805227196444265cdc533fa"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4531217
+project-id = 442842

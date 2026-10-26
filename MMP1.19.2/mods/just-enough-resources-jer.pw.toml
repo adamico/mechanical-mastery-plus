@@ -1,0 +1,13 @@
+name = "Just Enough Resources (JER)"
+filename = "JustEnoughResources-1.19.2-1.1.0.179.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "0ff0dc37da99125c3becf621ee5218ce8e444c21"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 3951643
+project-id = 240630

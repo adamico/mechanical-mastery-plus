@@ -1,0 +1,13 @@
+name = "XNet"
+filename = "xnet-1.19-5.1.4.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "e9862214615ee3f4fb56bf26f411d0802d61dbd5"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4462366
+project-id = 260912

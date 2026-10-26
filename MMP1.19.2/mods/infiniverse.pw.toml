@@ -1,0 +1,13 @@
+name = "Infiniverse"
+filename = "infiniverse-1.19-1.0.0.4.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "82f45768f91d5ef066f07afa28efa4eb40cc1448"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 3898056
+project-id = 568341

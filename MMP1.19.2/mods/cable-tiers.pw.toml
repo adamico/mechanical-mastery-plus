@@ -1,0 +1,13 @@
+name = "Cable Tiers"
+filename = "cabletiers-1.19.2-0.6.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "722c370666f36f9381b97cb76a34520916bb399a"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4862241
+project-id = 454382

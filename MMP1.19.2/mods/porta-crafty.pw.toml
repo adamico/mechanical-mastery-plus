@@ -1,0 +1,13 @@
+name = "Porta Crafty"
+filename = "craftingcraft-forge-1.19-13.0.0.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "7e92fbe454132fe054d4c6d6eefe7fc566334fee"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 3833577
+project-id = 237581

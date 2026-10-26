@@ -1,0 +1,13 @@
+name = "NoMo' Portals"
+filename = "nomoportals-1.19.2-3.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "2d3cbcb405d575ca80d17163f357a924153e5f65"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4852073
+project-id = 813483

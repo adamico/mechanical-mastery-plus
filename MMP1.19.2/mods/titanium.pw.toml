@@ -1,0 +1,13 @@
+name = "Titanium"
+filename = "titanium-1.19.2-3.7.4-28.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "10c1873f8b3acc974cfeb5ad29253f4023ee25aa"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4786622
+project-id = 287342

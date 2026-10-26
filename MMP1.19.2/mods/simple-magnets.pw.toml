@@ -1,0 +1,13 @@
+name = "Simple Magnets"
+filename = "simplemagnets-1.1.10-forge-mc1.19.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "40b94c38a78c7a143de713f74f02b83f2043ffbf"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4794184
+project-id = 394140

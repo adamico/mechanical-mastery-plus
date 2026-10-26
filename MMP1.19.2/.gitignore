@@ -21,3 +21,6 @@ skyblock_exports
 soundsMuffled.dat
 TrashSlotSaveState.json
 probe
+# packwiz metadata for the mods; the jars stay ignored
+!/mods/
+__pycache__/

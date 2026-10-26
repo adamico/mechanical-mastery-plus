@@ -1,0 +1,13 @@
+name = "Fuel Goes Here"
+filename = "fuelgoeshere-1.19.2-0.1.0.0.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "e7c4a5a21f1f0195d748806db89d4f3633c0a73d"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 3933961
+project-id = 659090

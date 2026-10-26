@@ -1,0 +1,3 @@
+[tools]
+go = "1.27.1"
+"go:github.com/packwiz/packwiz" = "dfd8b68a4796"

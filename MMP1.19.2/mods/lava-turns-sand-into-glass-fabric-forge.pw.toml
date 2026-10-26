@@ -1,0 +1,13 @@
+name = "Lava Turns Sand into Glass [Fabric/Forge/NeoForge]"
+filename = "lavasand-1.19.2-0-forge.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "0b1f5991fa9702430f242890d00b7e6bcdd85c4c"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4620685
+project-id = 883465

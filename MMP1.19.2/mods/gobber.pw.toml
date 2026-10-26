@@ -1,0 +1,13 @@
+name = "Gobber [NEOFORGE/FORGE]"
+filename = "Gobber2-Forge-1.19.2-2.7.28.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "33ee6367bcefe69523c6d40f0d5c5ebe2d2fcbd8"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4085461
+project-id = 301700

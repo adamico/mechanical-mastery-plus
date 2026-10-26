@@ -1,0 +1,13 @@
+name = "Plonk"
+filename = "plonk-1.19.2-10.0.4.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "d1dd83e33c85f5e8fd9732202ed84fb06ef9f17c"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 4480791
+project-id = 345779
