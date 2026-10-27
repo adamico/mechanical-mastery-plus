@@ -1,6 +1,6 @@
 name = "ImmediatelyFast"
 filename = "ImmediatelyFast-Forge-1.2.8+1.19.2.jar"
-side = "both"
+side = "client"
 
 [download]
 hash-format = "sha1"

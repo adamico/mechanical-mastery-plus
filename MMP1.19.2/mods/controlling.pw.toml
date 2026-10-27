@@ -1,6 +1,6 @@
 name = "Controlling"
 filename = "Controlling-forge-1.19.2-10.0+7.jar"
-side = "both"
+side = "client"
 
 [download]
 hash-format = "sha1"

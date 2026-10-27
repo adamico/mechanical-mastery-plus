@@ -13,7 +13,8 @@
 # byte, so the zip it exported is the release's.
 #
 # publish sends a cut release to its sites, in order: the client zip to CurseForge, the server pack
-# (server_files/ as tagged, pointed at the client zip on CurseForge's CDN) as its child file, and
+# (server_files/ as tagged, pointed at the client zip on CurseForge's CDN, and ignoring the mods the
+# tagged manifest marks side = "client") as its child file, and
 # both zips to the tag's GitHub release, with the version's changelog section as their notes. The
 # release record beside the zip keeps the client zip's file id and the sites reached, so after a
 # failure, publish again does what is left; --site sends to one site whatever the record says, and
@@ -26,6 +27,7 @@
 # CurseForge takes $CURSEFORGE_TOKEN, an upload API token, which is never printed. When it is
 # missing, publish runs itself again through `op run --env-file=tools/publish.env`, which fills it in
 # from 1Password for that run only. GitHub goes through `gh`, and needs the tag pushed first.
+import functools
 import hashlib
 import io
 import json
@@ -227,6 +229,30 @@ def pointed_at(data, url):
     return data
 
 
+IGNORE_PROJECT = re.compile(rb"^( *)ignoreProject:[^\r\n]*((?:\r?\n\1 +-[^\r\n]*)*)", re.MULTILINE)
+
+
+def ignoring(data, client_only):
+    """The ServerStarter config with ignoreProject listing <client_only>, the tagged manifest's side = "client"
+    mods. A release cut before side was their record has its hand-kept list and no client-only mod, and keeps
+    that list; one with both would have two records, and is refused."""
+    found = list(IGNORE_PROJECT.finditer(data))
+    if len(found) != 1:
+        raise Refused(f"{SERVER_CONFIG} has {len(found)} ignoreProject lines; it needs exactly one.")
+    match = found[0]
+    if match.group(2).strip():
+        if client_only:
+            raise Refused(f"{SERVER_CONFIG} lists ignoreProject by hand, and the manifest marks mods side = \"client\"; "
+                          f"side is the only record of them, so the list stays []: each server pack fills it in.")
+        return data
+    indent = match.group(1)
+    lines = [indent + b"ignoreProject:" + (b"" if client_only else b" []")]
+    lines += [indent + f"    - {project} # {name}".encode() for project, name in client_only]
+    # The committed config has CRLF line endings, and the list keeps them.
+    newline = b"\r\n" if b"\r\n" in data else b"\n"
+    return data[:match.start()] + newline.join(lines) + data[match.end():]
+
+
 class Record:
     """The release record: the client zip's CurseForge file id, and the sites the release has reached."""
 
@@ -272,6 +298,10 @@ class CutRelease:
         self.server_zip = f"{pack.slug}-Server-{version}.zip"
         self.record = Record(self.zip.parent / "record.json")
 
+    @functools.cached_property
+    def client_only(self):
+        return client_only(self.pack.manifest_at(self.tag)[1])
+
     def metadata(self, title, **more):
         # Every upload is a release: CurseForge's app only offers a pack that has one.
         return {"changelog": self.notes, "changelogType": "markdown", "displayName": title,
@@ -288,9 +318,22 @@ class CutRelease:
             for path in paths:
                 data = self.pack.git("show", f"{self.tag}:./{path}")
                 if path == SERVER_CONFIG:
-                    data = pointed_at(data, url)
+                    data = ignoring(pointed_at(data, url), self.client_only)
                 out.writestr(path.removeprefix("server_files/"), data)
         return url, buffer.getvalue()
+
+
+def client_only(mods):
+    """The CurseForge project and name of each mod marked side = "client", which servers don't install."""
+    found = []
+    for m in mods:
+        if m.get("side") != "client":
+            continue
+        project = m.get("update", {}).get("curseforge", {}).get("project-id")
+        if project is None:
+            raise Refused(f"{m['name']} is client-only but has no CurseForge project, so the server pack can't ignore it.")
+        found.append((project, m["name"]))
+    return sorted(found)
 
 
 def publish(pack, version, curseforge, github, only=None, dry_run=False, client_file_id=None, out=print):
@@ -351,6 +394,8 @@ def to_server(release, curseforge, dry_run, out):
         raise Published(f"CurseForge already has the {release.version} server pack.")
     metadata = release.metadata(release.server_title, parentFileId=client_file_id or "<the client zip's file id>")
     created = curseforge.upload(metadata, release.server_zip, data)
+    if dry_run:
+        out(f"  ignoreProject {', '.join(name for _, name in release.client_only) or 'as tagged, since no mod is client-only'}")
     out(f"  modpackUrl {url}" if dry_run else
         f"Uploaded {release.server_zip} to CurseForge ({created}), under {client_file_id}, installing {url}.")
 

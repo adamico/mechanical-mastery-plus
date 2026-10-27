@@ -31,6 +31,10 @@ The 1.19.2 pack in `MMP1.19.2/` is a [packwiz](https://packwiz.infra.link) manif
 packwiz (`mise install`). Add or update a mod with `packwiz cf add <slug>` or `packwiz cf update <slug>`
 from `MMP1.19.2/`; `.packwizignore` keeps the repo's own files out of the pack.
 
+A mod servers mustn't install has `side = "client"` in its `.pw.toml`, the only record of which mods
+are client-only. Each server pack's `ignoreProject` list is made from it, so
+`server_files/server-setup-config.yaml` keeps that list empty.
+
 A change a player will notice adds its line under `## Unreleased` in `MMP1.19.2/CHANGELOG.md`; the
 mods added, updated and removed are listed by the release itself (`tools/release.py mods`).
 
@@ -40,9 +44,9 @@ mods added, updated and removed are listed by the release itself (`tools/release
    pushes and publishes nothing, and a failure before the commit puts every file back.
 2. `git push origin HEAD mmp1.19.2-v<version>`.
 3. `tools/release.py publish <version>`: the client zip goes to CurseForge, then the server pack
-   (`server_files/` as tagged, pointed at that zip's download link) as its child file, then both zips
-   to the tag's GitHub release. The release record beside the zip keeps what each site has, so after
-   a failure, fix it and publish again. `--dry-run` shows what it would send, `--site` sends to one
+   (`server_files/` as tagged, pointed at that zip's download link and ignoring the tag's client-only
+   mods) as its child file, then both zips to the tag's GitHub release. The release record beside the
+   zip keeps what each site has, so after a failure, fix it and publish again. `--dry-run` shows what it would send, `--site` sends to one
    site, and `--client-file-id <id>` stands in for a lost record. The CurseForge token comes from
    1Password through `tools/publish.env`.
 
