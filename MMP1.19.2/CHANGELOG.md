@@ -4,6 +4,8 @@ Releases up to 1.1.12 list their mod changes in `changelogs/`.
 
 ## Unreleased
 
+- Servers no longer install Better Advancements, Enchantment Descriptions, Just Zoom, Durability Tooltip and Konkrete, which only players need.
+
 ## 1.1.14
 
 - Plutonium pellets take 16 plutonium nuggets instead of 32, and an antimatter pellet takes 16 refined obsidian blocks instead of 32, so both can be automated in a basin.
