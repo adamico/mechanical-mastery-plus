@@ -18,7 +18,7 @@ The 5thlayer -works mods (Groundworks, Beltworks, Pipeworks, Wireworks, Craftwor
 The FactoryWorks Showcase, the suite's own sandbox pack. A separate pack that this line borrows a base of mods from, and never depends on.
 
 **Companion mod**:
-Mechanical Mastery Reborn's own mod, which holds its own blocks and machines: the lab, C.O.D. and the decomposing machine. The pack consumes it as a released jar, like the suite.
+Mechanical Mastery Reborn's own mod, which holds its own blocks and machines: the lab, C.O.D. and the starter machine. The pack consumes it as a released jar, like the suite.
 _Avoid_: pack mod, core mod
 
 **Decompose**:
@@ -30,7 +30,7 @@ The excess C.O.D. has built up since the current challenge began: essences it ha
 _Avoid_: glut, overflow, timer
 
 **Transmuted Essence**:
-One of the new essences, each made through Theurgy at the end of one challenge, which blocks C.O.D. on the tier the team is on. They are Galvanic (energy), Warding (protection), Vital (life) and Aureate (money). Each belongs to its challenge, not to a tier.
+One of the new essences, each made through Theurgy at the end of one challenge, which stops C.O.D. for the race on the tier the team is decomposing. C.O.D. only ever makes Advanced essence; a race is tied to the tier a team is decomposing (Advanced first, then Improved, Regular, Basic). A Transmuted Essence put into C.O.D. stops it for that race for good. The team's first decompose of the next tier wakes it again, starting the next race. They are Galvanic (energy), Warding (protection), Vital (life) and Aureate (money). Each belongs to its challenge, not to a tier.
 _Avoid_: new essence
 
 **Quintessence**:
