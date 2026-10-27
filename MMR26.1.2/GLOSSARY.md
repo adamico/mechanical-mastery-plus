@@ -26,8 +26,8 @@ To break a Mechanical Essence down into the intermediates it is made of, on the 
 _Avoid_: recycle, break down (Voidworks' word for its own item breakdown)
 
 **Inflation**:
-The count of essences C.O.D. has made since the current challenge began, rising faster as it goes. When it reaches its cap before the challenge is finished, the challenge resets and the handicap stays.
-_Avoid_: excess, glut, overflow
+The excess C.O.D. has built up since the current challenge began: essences it has made minus essences the team has decomposed. C.O.D. makes them ever faster, with no ceiling, so it climbs whenever decomposing falls behind; voiding or storing essence doesn't lower it. When it reaches its cap before the challenge is finished, the challenge resets and the handicap stays.
+_Avoid_: glut, overflow, timer
 
 **Transmuted Essence**:
 One of the new essences, each made through Theurgy at the end of one challenge, which blocks C.O.D. on the tier the team is on. They are Galvanic (energy), Warding (protection), Vital (life) and Aureate (money). Each belongs to its challenge, not to a tier.
