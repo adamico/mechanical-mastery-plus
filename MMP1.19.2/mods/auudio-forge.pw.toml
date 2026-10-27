@@ -1,6 +1,6 @@
 name = "Auudio [Forge]"
 filename = "auudio_forge_1.0.3_MC_1.19.jar"
-side = "both"
+side = "client"
 
 [download]
 hash-format = "sha1"

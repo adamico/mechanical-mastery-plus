@@ -60,43 +60,10 @@ install:
     # Settings which are specific to the format used, might not be needed in some casese
     formatSpecific:
         # optional paramenter used for curse to specify a whole project to ignore (mostly if it is client side only)
-        ignoreProject:
-            - 613067 # audio extension for fancymenu  
-            - 606159 # auudio  
-            - 552324 # barista  
-            - 533942 # bridging mod  
-            - 459701 # catalogue  
-            - 251407 # client tweaks
-            - 888790 # client crafting
-            - 457570 # configured  
-            - 250398 # controlling  
-            - 373014 # default world type  
-            - 231275 # Ding  
-            - 511770 # DrippyLoadingScreen
-            - 908741 # embeddium
-            - 363363 # Extreme Sound Muffler  
-            - 367706 # fancymenu
-            - 882495 # fix gpu memory leak
-            - 280294 # FpsReducer
-            - 686911 # ImmediatelyFast
-            - 232791 # it's the little things
-            - 325492 # light-overlay  
-            - 821790 # Lightspeed  
-            - 60089  # MouseTweaks   
-            - 521714 # PonderJS  
-            - 585406 # probejs
-            - 570368 # Raised
-            - 237701 # ReAuth  
-            - 853424 # Reforgium  
-            - 574856 # rubidium  
-            - 654373 # rubidium-extra  
-            - 670986 # saturn  
-            - 411816 # Simple Discord RPC
-            - 910506 # TexTrue's embeddium options
-            - 663125 # Textrues Rubidium Options  
-            - 282313 # TipTheScales
-            - 271740 # Toast Control
-            - 635427 # Yeetus Experimentus  
+        # Each release's server pack lists here the CurseForge projects its manifest marks side = "client"
+        # (tools/release.py publish). packwiz's side field in mods/*.pw.toml is the only record of the
+        # client-only mods, so this stays [].
+        ignoreProject: []
 
     # The base path where the server should be installed to, ~ for current path
     baseInstallPath: ~
