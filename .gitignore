@@ -92,3 +92,6 @@ emi.json
 supportercache.json
 TrashSlotSaveState.json
 TT1211/config/worldedit/**
+# Agent sessions: their worktrees, and the CurseForge API dumps they fetch for research
+.claude/worktrees/
+/cf_*.json

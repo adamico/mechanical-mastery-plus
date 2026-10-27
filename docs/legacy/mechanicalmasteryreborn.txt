@@ -1,0 +1,833 @@
+# Blurb# Blurb
+
+At the end of MMP you are very rich thanks to the creation of a massive industrial machine abomination called COD. COD has amassed an almost infinite amount of the magenta mechanical essences. The result is a huge economy inflation which has rendered all the basic resources very scarce and expensive.
+
+In order to restore balance in the world you have decided to shutdown COD, in vain… The high processing has rendered COD sentient and it’s now an advance and autonomous AI which you cannot stop with your current level of technical and mechanical knowledge.
+
+You start searching for ancient knowledge in old tomes of alchemy and other occult sciences with the hope of transmuting the abundant magenta essences into basic resources.
+
+COD quickly realizes your efforts and has found a way to increase the productivity of the factory.
+
+Your role is to build new automation lines to thwart the magenta essences production and find the means of stopping COD forever.  
+
+# Main objectives
+
+### Process old essences
+
+- you have an infinite amount of magenta essences
+- magenta essences can be processed into yellow essences and a specific set of basic resources
+- yellow into blue, blue into red
+- each essence can be processed in multiple ways (options increasing with each new tier)
+
+### Synthesize new essences
+
+Once you have finished processing all the old mechanical essences and amassed a high amount of the basic resources you now can start the production of a new (set of ?) essence(s?) using new techniques.
+
+## Progression
+
+Four named quest chapters for each major content mod
+
+Chapters can be undertaken in any order
+
+Once a chapter is started it must be finished (all non optional quests have to be completed) before being able to start another chapter
+
+The chapter can be reset to try another chapter instead  
+
+Last chapter for the final essence(s)
+
+## Vision
+
+- Which is the general theme?
+    - A quest based technologically disappointed alchemy/druid magic skyblock pack
+
+- Which is the style?
+    - high tech vs no tech
+- What does it add that it is new?
+    - inverse automation (from complex to simple)
+    - non-linear questline
+        - Energy Threat
+            - Tier1: no more infinite energy (converts creative battery into finite container)
+            - Tier2: reduces energy production
+            - Tier3: reduces energy production
+            - Tier4: no more energy production
+        - tech degradation
+        - defeat enemy waves
+        - madness
+        - hot or warm climate
+    - Custom interactions
+        - Ender Essence
+            - Mods
+                - Ender IO
+                - Energized Power
+                - Create
+                - Pneumatic Craft
+            - Progressing through the questline increases the effects of the energy threat
+            - Crafting Effect: remove the energy threat
+        - 
+- What does it remove from the vanilla experience?
+    - no ore gen
+    - no dimensions
+    - progression is reversed
+        - start powerful and rich
+        - lose more and more material resources
+        - acquire metaphysical resources and lore
+        - create new resources
+        - get back to power in a new way
+
+# 🛒 Mod Selection
+
+- Core
+    - Base
+        
+        JEI/EMI
+        
+        Jade
+        
+        FTB Backups
+        
+        FTB Chunks
+        
+        FTB Essentials
+        
+        FTB Ranks
+        
+        FTB Teams
+        
+    - Pack utils
+        
+        Better Tag NBT Tips
+        
+        Crafttweaker
+        
+        KubeJS
+        
+        Configured
+        
+        Max Health Fix
+        
+        Yeetus Experimentus
+        
+        Default Options
+        
+        FTB Xmod compat
+        
+        FTB Quests
+        
+        FTB Filter System
+        
+    - QOL
+        
+        FTB Ultimine
+        
+        - Functional storage
+            - good mass storage
+        - Building Gadgets
+        
+        Extreme Sound Muffler
+        
+        Openblocks Elevator
+        
+        Carryon
+        
+        Chipped
+        
+        Inventory Essentials
+        
+        Comforts
+        
+        Trashslot
+        
+        Kleeslabs
+        
+        LeavesBeGone
+        
+        Mouse Tweaks
+        
+        Crafting Tweaks
+        
+        Controlling
+        
+        Catalog
+        
+        Ding
+        
+        AppleSkin
+        
+        - Farming For Blockheads
+        
+        JER
+        
+        Tips
+        
+        Durability Tooltip
+        
+        Modname Tooltip
+        
+        Simple Discord Reach Presence
+        
+        Block Runner
+        
+        Zume
+        
+        Friendly Fire
+        
+        Sophisticated Backpacks
+        
+        AttributeFix
+        
+        - Shrink
+            - getting small is fun
+            - can be used for custom events?
+        - BotanyPots
+        
+    - Performance
+        
+        Clumps
+        
+        Modernfix
+        
+        Client Tweaks
+        
+        Entity Culling
+        
+        Embeddium
+        
+        Spark
+        
+        packet fixer
+        
+    - Content
+        - Applied Energistics 2
+            - hide facades in jei
+            - ME Requester
+            - AE2 Qol recipes
+            - Polymorphic Energistics
+            - AE2 Wireless Terminals
+        - Create
+            - low tech
+            - not many new resources
+            - interesting interactions
+            - lacks interaction with mana (custom mod? creatania is stuck at 1.18)
+        - Dark Utilities
+            - QOL items (no solicitor)
+        - Elemental Craft
+            - elements theme appropriated for the pack theme
+            - automation
+            - new resources must be custom generated
+            - resources processing
+        - Embers Rekindled
+            - is cool
+            - fits with the low tech phase theme
+            - fits with tech/magic hybrid
+            - can be heavily automated
+            - can interact with other mods
+        - EnderIO
+            - many alloy ingots from basic metals
+            - alloy crystals combining alloys and gems
+            - has compat layer with chemlib
+            - massive jei hide
+                - glass/quartz
+                - spawners
+                - soul vials
+            - could be the mod the gels all the others
+                - capacitors tiers could be crafted with other mods resources
+            - 
+        - Farmer’s Delight
+            - interesting recipe types
+            - low tech phase
+            - nice cooking mechanics
+        - Force Craft
+            - not magic not tech
+            - prob duplicated content with elemental craft
+            - item customization and leveling
+        - Integrated Dynamics
+        - Mekanism
+            - it’s part of the lore
+            - maybe disable crafting and just use placed blocks
+            - most of the given items and blocks will be destroyed during custom events
+        - Pedestal
+            - resource generation
+            - low tech item transfer
+        - Pipez
+            - efficient logistics
+            - low resources
+        - Plant Tech 2
+            - a lot of content
+            - interesting vegetal mechanics
+            - time consuming
+            - resource generation
+                - mob loots
+                - metals
+                - gems
+        - Pneumatic Craft
+            - low tech
+            - no energy
+            - interesting mechanics
+            - create interaction
+            - drones
+            - amadron makes duplication with adminshop (remove amadron)
+        - Refined Storage
+            - Refined Storage Addons
+        - Theurgy
+            - cool pedestals
+            - pairs with embers
+            - pairs with alchemistry (alchemical resources)
+    - Trimming
+        - amount of content
+        - mcreator
+        - not fitting the style
+        - duplicated content
+        - no use for the general progression idea
+    - Recursive Trimming
+
+# 🧪 First playtest
+
+- Does it run?
+- Are there duplicated content mods?
+- Are there mods with poor textures quality or bad naming?
+
+# ⚙️ First tinkering
+
+- Mod clash prevents running the pack
+    - 50% test runs
+    - check versions and downgrade
+    - remove mods
+    - replace mods
+- Recipes removals
+- Advancements removals
+- Items hiding
+- Contact mod dev to ask for changes
+
+# 🧰 Toolbox
+
+- Documentation
+    - Patchouli
+    - Modonomicon
+    - PonderJS
+    - JEITweaker
+- Event scripts editors
+    - CraftTweaker / KubeJS
+- Recipe changes
+- Loot tables changes
+- Tooltip changes
+- MobControl
+    - InControl
+- Advancement changes
+- Resource/data pack loading
+    - KubeJS
+    - Openloader
+- Custom content
+    - ContentTweaker
+    - KubeJS
+- Renaming and/or retexturing
+    - resource pack loaders
+- Worldgen changes
+    - Biomes
+        - Terralith
+    - All in one
+        - Skyblock builder
+    - Structures
+        - command structures
+    - Dimensions
+        - FTB Dimensions
+    - Block swap
+        - Block swap mod
+- Options tweaker
+    - Default Options
+    - 
+- Custom Category Tags
+    - JEI
+    - KubeJS
+
+# 🏗️ Development
+
+## Adapting to the vision
+
+- Expert progression
+    - recipe changes
+    - custom content
+- Adventure/exploration
+    - worldgen
+    - custom entities AI
+    - custom entities models
+    - custom entities interactions
+- Quest heavy
+    - lots of writing
+    - questline design
+    - custom quests
+
+## Fixing issues
+
+- Disabling mod features
+- Correct lack of coherence
+    - gui texture
+    - resource names
+    - resource unification
+    - recipe duplication
+    - item/block function duplication
+    - missing features (processing steps, machines not accepting items)
+    - mod being too progression heavy per se
+- Hand taking VS player discovery
+    - Present the outcome
+    - Offer multiple paths to obtain the outcome
+    - Don’t add too many choices
+        - Building mods
+    - Info giving
+        - Tooltips
+        - JEI
+        - Guide Book
+        - Quests
+        - Console message
+        - Toast
+        - Custom structures
+- Protect the player from themselves
+    - reward with fun steps
+    - don’t punish
+    - grind vs afk
+    - help the player create their own progression
+
+# 🏁 Playtesting
+
+- Small trusted player base
+- Collect feedback
+- Interact
+- Play your own pack
+
+# 📢 Advertise
+
+- Create product art
+- Post on social media
+    - discord
+    - forums
+    - youtube
+- Github repo
+
+# 🔃 Updates
+
+- Process feedback
+    - get to the why of a feature change proposal
+- Strike a balance between appealing to the general audience and satisfying the niche fans
+- Adding, Updating, Removing mods
+    - use the same process as the early modpack conception
+
+# RESOURCES
+
+- 
+
+Introduction | Theurgy
+
+At the end of MMP you are very rich thanks to the creation of a massive industrial machine abomination called COD. COD has amassed an almost infinite amount of the magenta mechanical essences. The result is a huge economy inflation which has rendered all the basic resources very scarce and expensive.
+
+In order to restore balance in the world you have decided to shutdown COD, in vain… The high processing has rendered COD sentient and it’s now an advance and autonomous AI which you cannot stop with your current level of technical and mechanical knowledge.
+
+You start searching for ancient knowledge in old tomes of alchemy and other occult sciences with the hope of transmuting the abundant magenta essences into basic resources.
+
+COD quickly realizes your efforts and has found a way to increase the productivity of the factory.
+
+Your role is to build new automation lines to thwart the magenta essences production and find the means of stopping COD forever.  
+
+# Main objectives
+
+### Process old essences
+
+- you have an infinite amount of magenta essences
+- magenta essences can be processed into yellow essences and a specific set of basic resources
+- yellow into blue, blue into red
+- each essence can be processed in multiple ways (options increasing with each new tier)
+
+### Synthesize new essences
+
+Once you have finished processing all the old mechanical essences and amassed a high amount of the basic resources you now can start the production of a new (set of ?) essence(s?) using new techniques.
+
+## Progression
+
+Four named quest chapters for each major content mod
+
+Chapters can be undertaken in any order
+
+Once a chapter is started it must be finished (all non optional quests have to be completed) before being able to start another chapter
+
+The chapter can be reset to try another chapter instead  
+
+Last chapter for the final essence(s)
+
+## Vision
+
+- Which is the general theme?
+    - A quest based technologically disappointed alchemy/druid magic skyblock pack
+
+- Which is the style?
+    - high tech vs no tech
+- What does it add that it is new?
+    - inverse automation (from complex to simple)
+    - non-linear questline
+        - Energy Threat
+            - Tier1: no more infinite energy (converts creative battery into finite container)
+            - Tier2: reduces energy production
+            - Tier3: reduces energy production
+            - Tier4: no more energy production
+        - tech degradation
+        - defeat enemy waves
+        - madness
+        - hot or warm climate
+    - Custom interactions
+        - Ender Essence
+            - Mods
+                - Ender IO
+                - Energized Power
+                - Create
+                - Pneumatic Craft
+            - Progressing through the questline increases the effects of the energy threat
+            - Crafting Effect: remove the energy threat
+        - 
+- What does it remove from the vanilla experience?
+    - no ore gen
+    - no dimensions
+    - progression is reversed
+        - start powerful and rich
+        - lose more and more material resources
+        - acquire metaphysical resources and lore
+        - create new resources
+        - get back to power in a new way
+
+# 🛒 Mod Selection
+
+- Core
+    - Base
+        
+        JEI/EMI
+        
+        Jade
+        
+        FTB Backups
+        
+        FTB Chunks
+        
+        FTB Essentials
+        
+        FTB Ranks
+        
+        FTB Teams
+        
+    - Pack utils
+        
+        Better Tag NBT Tips
+        
+        Crafttweaker
+        
+        KubeJS
+        
+        Configured
+        
+        Max Health Fix
+        
+        Yeetus Experimentus
+        
+        Default Options
+        
+        FTB Xmod compat
+        
+        FTB Quests
+        
+        FTB Filter System
+        
+    - QOL
+        
+        FTB Ultimine
+        
+        - Functional storage
+            - good mass storage
+        - Building Gadgets
+        
+        Extreme Sound Muffler
+        
+        Openblocks Elevator
+        
+        Carryon
+        
+        Chipped
+        
+        Inventory Essentials
+        
+        Comforts
+        
+        Trashslot
+        
+        Kleeslabs
+        
+        LeavesBeGone
+        
+        Mouse Tweaks
+        
+        Crafting Tweaks
+        
+        Controlling
+        
+        Catalog
+        
+        Ding
+        
+        AppleSkin
+        
+        - Farming For Blockheads
+        
+        JER
+        
+        Tips
+        
+        Durability Tooltip
+        
+        Modname Tooltip
+        
+        Simple Discord Reach Presence
+        
+        Block Runner
+        
+        Zume
+        
+        Friendly Fire
+        
+        Sophisticated Backpacks
+        
+        AttributeFix
+        
+        - Shrink
+            - getting small is fun
+            - can be used for custom events?
+        - BotanyPots
+        
+    - Performance
+        
+        Clumps
+        
+        Modernfix
+        
+        Client Tweaks
+        
+        Entity Culling
+        
+        Embeddium
+        
+        Spark
+        
+        packet fixer
+        
+    - Content
+        - Applied Energistics 2
+            - hide facades in jei
+            - ME Requester
+            - AE2 Qol recipes
+            - Polymorphic Energistics
+            - AE2 Wireless Terminals
+        - Create
+            - low tech
+            - not many new resources
+            - interesting interactions
+            - lacks interaction with mana (custom mod? creatania is stuck at 1.18)
+        - Dark Utilities
+            - QOL items (no solicitor)
+        - Elemental Craft
+            - elements theme appropriated for the pack theme
+            - automation
+            - new resources must be custom generated
+            - resources processing
+        - Embers Rekindled
+            - is cool
+            - fits with the low tech phase theme
+            - fits with tech/magic hybrid
+            - can be heavily automated
+            - can interact with other mods
+        - EnderIO
+            - many alloy ingots from basic metals
+            - alloy crystals combining alloys and gems
+            - has compat layer with chemlib
+            - massive jei hide
+                - glass/quartz
+                - spawners
+                - soul vials
+            - could be the mod the gels all the others
+                - capacitors tiers could be crafted with other mods resources
+            - 
+        - Farmer’s Delight
+            - interesting recipe types
+            - low tech phase
+            - nice cooking mechanics
+        - Force Craft
+            - not magic not tech
+            - prob duplicated content with elemental craft
+            - item customization and leveling
+        - Integrated Dynamics
+        - Mekanism
+            - it’s part of the lore
+            - maybe disable crafting and just use placed blocks
+            - most of the given items and blocks will be destroyed during custom events
+        - Pedestal
+            - resource generation
+            - low tech item transfer
+        - Pipez
+            - efficient logistics
+            - low resources
+        - Plant Tech 2
+            - a lot of content
+            - interesting vegetal mechanics
+            - time consuming
+            - resource generation
+                - mob loots
+                - metals
+                - gems
+        - Pneumatic Craft
+            - low tech
+            - no energy
+            - interesting mechanics
+            - create interaction
+            - drones
+            - amadron makes duplication with adminshop (remove amadron)
+        - Refined Storage
+            - Refined Storage Addons
+        - Theurgy
+            - cool pedestals
+            - pairs with embers
+            - pairs with alchemistry (alchemical resources)
+    - Trimming
+        - amount of content
+        - mcreator
+        - not fitting the style
+        - duplicated content
+        - no use for the general progression idea
+    - Recursive Trimming
+
+# 🧪 First playtest
+
+- Does it run?
+- Are there duplicated content mods?
+- Are there mods with poor textures quality or bad naming?
+
+# ⚙️ First tinkering
+
+- Mod clash prevents running the pack
+    - 50% test runs
+    - check versions and downgrade
+    - remove mods
+    - replace mods
+- Recipes removals
+- Advancements removals
+- Items hiding
+- Contact mod dev to ask for changes
+
+# 🧰 Toolbox
+
+- Documentation
+    - Patchouli
+    - Modonomicon
+    - PonderJS
+    - JEITweaker
+- Event scripts editors
+    - CraftTweaker / KubeJS
+- Recipe changes
+- Loot tables changes
+- Tooltip changes
+- MobControl
+    - InControl
+- Advancement changes
+- Resource/data pack loading
+    - KubeJS
+    - Openloader
+- Custom content
+    - ContentTweaker
+    - KubeJS
+- Renaming and/or retexturing
+    - resource pack loaders
+- Worldgen changes
+    - Biomes
+        - Terralith
+    - All in one
+        - Skyblock builder
+    - Structures
+        - command structures
+    - Dimensions
+        - FTB Dimensions
+    - Block swap
+        - Block swap mod
+- Options tweaker
+    - Default Options
+    - 
+- Custom Category Tags
+    - JEI
+    - KubeJS
+
+# 🏗️ Development
+
+## Adapting to the vision
+
+- Expert progression
+    - recipe changes
+    - custom content
+- Adventure/exploration
+    - worldgen
+    - custom entities AI
+    - custom entities models
+    - custom entities interactions
+- Quest heavy
+    - lots of writing
+    - questline design
+    - custom quests
+
+## Fixing issues
+
+- Disabling mod features
+- Correct lack of coherence
+    - gui texture
+    - resource names
+    - resource unification
+    - recipe duplication
+    - item/block function duplication
+    - missing features (processing steps, machines not accepting items)
+    - mod being too progression heavy per se
+- Hand taking VS player discovery
+    - Present the outcome
+    - Offer multiple paths to obtain the outcome
+    - Don’t add too many choices
+        - Building mods
+    - Info giving
+        - Tooltips
+        - JEI
+        - Guide Book
+        - Quests
+        - Console message
+        - Toast
+        - Custom structures
+- Protect the player from themselves
+    - reward with fun steps
+    - don’t punish
+    - grind vs afk
+    - help the player create their own progression
+
+# 🏁 Playtesting
+
+- Small trusted player base
+- Collect feedback
+- Interact
+- Play your own pack
+
+# 📢 Advertise
+
+- Create product art
+- Post on social media
+    - discord
+    - forums
+    - youtube
+- Github repo
+
+# 🔃 Updates
+
+- Process feedback
+    - get to the why of a feature change proposal
+- Strike a balance between appealing to the general audience and satisfying the niche fans
+- Adding, Updating, Removing mods
+    - use the same process as the early modpack conception
+
+# RESOURCES
+
+- 
+
+Introduction | Theurgy
