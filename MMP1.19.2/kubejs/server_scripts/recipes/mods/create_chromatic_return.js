@@ -48,4 +48,14 @@ ServerEvents.recipes(event => {
 		.concat(Array(4).fill('createchromaticreturn:shadow_steel'))
 		.concat(Array(16).fill('mekanism:dust_fluorite'))
 		.concat(Array(3).fill('minecraft:diamond_block'))).superheated().id('kubejs:mixing/polonium_nugget');
+
+	event.remove({id: 'createchromaticreturn:plutonium_pellet_recipe'});
+	event.recipes.createMixing('mekanism:pellet_plutonium', Array(16).fill('createchromaticreturn:plutonium_nugget')).superheated().id('kubejs:mixing/plutonium_pellet');
+
+	event.remove({id: 'createchromaticreturn:antimatter_recipe'});
+	event.recipes.createMixing('mekanism:pellet_antimatter', []
+		.concat(['createchromaticreturn:multiplite_ingot'])
+		.concat(Array(4).fill('mekanism:pellet_polonium'))
+		.concat(Array(4).fill('mekanism:pellet_plutonium'))
+		.concat(Array(16).fill('mekanism:block_refined_obsidian'))).superheated().id('kubejs:mixing/antimatter');
 });

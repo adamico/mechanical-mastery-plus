@@ -1865,6 +1865,10 @@ file = "kubejs/data/industrialforegoing/tags/entity_types/mob_duplicator_blackli
 hash = "8a680503c12fb30f65cf87fbb28d05afb33c4b5dc1b1d79fa52a36fc9dd12f94"
 
 [[files]]
+file = "kubejs/server_scripts/events/basin_limit_check.js"
+hash = "4c268f7ceef685e68bb1c2f8b4eea5114da519834a49874e9d608b16b7fd664f"
+
+[[files]]
 file = "kubejs/server_scripts/events/buddingcrystals.js"
 hash = "b464ac13005075eaa9d8a35e07dab83a0eef212b81482b63674053e3dc5e9d37"
 
@@ -1910,7 +1914,7 @@ hash = "20f40322292981e42c1ed761afca66a9e2769030b58f100d0aa90a68e046f770"
 
 [[files]]
 file = "kubejs/server_scripts/recipes/mods/create_chromatic_return.js"
-hash = "9d593ca10851756402e3a5a89fee6903ff1139a9d7b7fd028e49c4f426aefbb5"
+hash = "6a5e05a496301d48f0585794eb32354e7f46d88e3981375cb9604fa30f142136"
 
 [[files]]
 file = "kubejs/server_scripts/recipes/mods/experienceobelisk.js"
