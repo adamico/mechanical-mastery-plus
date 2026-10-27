@@ -10,7 +10,25 @@ How the engineering skills should consume this repo's domain documentation when 
 
 If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. The `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates them lazily when terms or decisions actually get resolved.
 
-## File structure
+## This repo
+
+Multi-context: one context per pack line, in the line's folder, plus a shared one at the root. `GLOSSARY-MAP.md` lists them.
+
+```
+/
+├── GLOSSARY-MAP.md
+├── GLOSSARY.md                        ← shared: releasing, pack identity, essences, C.O.D.
+├── docs/adr/                          ← decisions every line follows
+├── MMP1.19.2/
+│   └── GLOSSARY.md                    ← Mechanical Mastery Plus
+└── MMR26.1.2/
+    ├── GLOSSARY.md                    ← Mechanical Mastery Reborn
+    └── docs/adr/                      ← Reborn's own decisions
+```
+
+Read the shared glossary and the glossary of the line you're working in. A term defined in both reads as the shared meaning narrowed by the line. ADR numbers are unique across the repo, wherever the ADR lives, so a new ADR takes the next number after the highest anywhere.
+
+## File structure in general
 
 Single-context repo (most repos):
 

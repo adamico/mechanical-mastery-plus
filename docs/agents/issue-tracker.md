@@ -2,6 +2,17 @@
 
 Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all operations.
 
+## Pack lines
+
+This repo holds several pack lines, so every issue carries a pack-line label, named after the line's Minecraft version and applied when it is filed or at triage:
+
+| Label        | Pack line                                     |
+| ------------ | --------------------------------------------- |
+| `1.19.2`     | Mechanical Mastery Plus, `MMP1.19.2/`         |
+| `26.1.2`     | Mechanical Mastery Reborn, `MMR26.1.2/`       |
+
+An issue about what the lines share (the release tooling, the shared glossary or ADRs) takes every line it touches. Issues about Reborn's companion mod go to its own repo in the 5thlayer org, not here. The topic labels (`ae2`, `IF`, `jaopca`, `ore processing`…) predate Reborn and name 1.19.2 mods.
+
 ## Conventions
 
 - **Create an issue**: `gh issue create --title "..." --body "..."`. Use a heredoc for multi-line bodies.
