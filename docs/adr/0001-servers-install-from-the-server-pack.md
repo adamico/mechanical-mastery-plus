@@ -1,0 +1,3 @@
+# Servers install only from the CurseForge server pack
+
+Servers get a release from its server pack on CurseForge, which ServerStarter installs, and never by pulling this repo. So `server_files/` in git is the server pack's source, not a delivery path: its `modpackUrl` is a placeholder that each release's server pack fills in with that release's client zip, and there is no script for updating a server from git. We dropped the git path (`automation/update-server.sh`, and the commit after each tag that pointed `server_files/` at the new zip) because no server used it, and keeping it made every release need a second commit and push.

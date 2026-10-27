@@ -1,3 +1,7 @@
 [tools]
 go = "1.27.1"
 "go:github.com/packwiz/packwiz" = "dfd8b68a4796"
+
+[tasks.test]
+description = "The release tool's tests"
+run = "python3 -m unittest discover -s tools"

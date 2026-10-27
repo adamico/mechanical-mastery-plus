@@ -1,0 +1,6 @@
+# The facts that name this pack wherever it is released, beside what pack.toml says. The repo holds
+# other packs too, so this pack's release tags are <tag-prefix><version>.
+tag-prefix = "mmp1.19.2-v"
+slug = "mechanical-mastery-plus"
+curseforge-project = 914505
+github-repo = "adamico/mechanical-mastery-plus"

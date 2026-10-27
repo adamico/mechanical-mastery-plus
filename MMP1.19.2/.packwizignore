@@ -1,7 +1,7 @@
 # Repo files, not pack content. The pack is mods/, resourcepacks/, buddingcrystals/, config/,
 # defaultconfigs/, kubejs/, scripts/ and servers.dat.
 /.gitignore
-/automation/
+/releases/
 /changelogs/
 /DiscordIntegration-Data/
 /profileImage/

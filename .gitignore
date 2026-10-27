@@ -29,13 +29,9 @@ world
 world_backup
 
 # Automation stuff
-!Cat-Downloader-Legacy.jar
 !server_files/**
 !server_files/server-guide.txt
 .github_changelog_generator
-automation/Cat-Downloader-Legacy-Settings.json5
-automation/CDL-Logs
-automation/game-versions.json
 automation/secrets.ps1
 CHANGELOG-GENERATED.md
 secrets.ps1
