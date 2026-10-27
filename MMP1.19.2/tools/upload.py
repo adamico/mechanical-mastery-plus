@@ -11,7 +11,9 @@
 # The server pack is server_files/ as tagged, with its ServerStarter config pointed at the client
 # zip on CurseForge's CDN, so it is uploaded as a child of the client file once that exists, and
 # attached to the GitHub release beside the client zip. On their own, --site server and --site github
-# need that file's id, which the CurseForge upload prints: --client-file-id.
+# need that file's id, which the CurseForge upload prints: --client-file-id. Servers updated from git
+# copy server_files/ as committed, so once the client file is up, its url is written into the repo's
+# config and committed, to push after the upload.
 #
 # CurseForge takes $CURSEFORGE_TOKEN, an upload API token, which is never printed. When it is
 # missing, the script runs itself again through `op run --env-file=tools/upload.env`, which fills
@@ -96,9 +98,18 @@ def through_op(args):
 
 
 def cdn_url(file_id, file_name):
-    """Where CurseForge's CDN serves a file: its id split after four digits, without leading zeros."""
+    """Where CurseForge's CDN serves a file: its id split after four digits, without leading zeros.
+    The older media.forgecdn.net host refuses every download now; mediafilez serves the same paths."""
     digits = str(file_id)
-    return f"https://media.forgecdn.net/files/{int(digits[:4])}/{int(digits[4:])}/{file_name}"
+    return f"https://mediafilez.forgecdn.net/files/{int(digits[:4])}/{int(digits[4:])}/{file_name}"
+
+
+def pointed_at(data, url):
+    """The ServerStarter config with its modpackUrl set to <url>; refused unless it has exactly one."""
+    data, found = re.subn(rb"(modpackUrl:\s*)\S+", lambda m: m.group(1) + url.encode(), data)
+    if found != 1:
+        raise Refused(f"server_files/{SERVER_CONFIG} has {found} modpackUrl lines; it needs exactly one.")
+    return data
 
 
 class Release:
@@ -165,6 +176,7 @@ class Release:
             print(f"POST {upload}/api/projects/{self.project()}/upload-file")
             print(f"  metadata: {json.dumps({**metadata, 'gameVersions': f'<ids of {self.minecraft}, Forge>'}, indent=2)}")
             print(f"  file: {self.described()}")
+            print(f"Then point server_files/{SERVER_CONFIG} at the client file's CDN url and commit it.")
             self.server()
             return
         headers = self.upload_headers()
@@ -177,6 +189,7 @@ class Release:
         if not self.client_file_id:
             raise Refused(f"CurseForge took the upload but returned no file id: {created}")
         print(f"Uploaded {self.zip.name} to CurseForge as {self.version} ({self.client_file_id}); it shows once reviewed.")
+        self.point_repo_server_config()
         try:
             self.server()
         except Refused as refused:
@@ -194,11 +207,25 @@ class Release:
             for path in paths:
                 data = subprocess.run(["git", "show", f"{self.tag}:./{path}"], cwd=ROOT, capture_output=True, check=True).stdout
                 if path.endswith(SERVER_CONFIG):
-                    data, found = re.subn(rb"(modpackUrl:\s*)\S+", lambda m: m.group(1) + url.encode(), data)
-                    if found != 1:
-                        raise Refused(f"server_files/{SERVER_CONFIG} has {found} modpackUrl lines; it needs exactly one.")
+                    data = pointed_at(data, url)
                 out.writestr(path.removeprefix("server_files/"), data)
         return url, buffer.getvalue()
+
+    def point_repo_server_config(self):
+        """Servers updated from git copy server_files/ as committed, so it names the new zip too."""
+        config = ROOT / "server_files" / SERVER_CONFIG
+        url = cdn_url(self.client_file_id, self.zip.name)
+        relative = f"server_files/{SERVER_CONFIG}"
+        if run("git", "diff", "--quiet", "HEAD", "--", relative).returncode:
+            print(f"upload: {relative} has local changes, so it isn't pointed at {url}; set its modpackUrl by hand.",
+                  file=sys.stderr)
+            return
+        config.write_bytes(pointed_at(config.read_bytes(), url))
+        committed = run("git", "commit", "-q", "-m", f"Server files install {self.name}", "--", relative)
+        if committed.returncode:
+            print(f"upload: couldn't commit {relative}: {committed.stderr.strip()}", file=sys.stderr)
+            return
+        print(f"Committed {relative} pointing at {url}; push it with: git push origin HEAD")
 
     def server(self):
         upload, files = self.urls()

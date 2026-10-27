@@ -42,6 +42,8 @@ mods added, updated and removed are listed by the release itself (`tools/changel
    `--dry-run` shows what it would send; `--site curseforge|server|github` retries one, and
    `--site server` or `--site github` on its own needs `--client-file-id <id>`, which the CurseForge
    upload prints. The CurseForge token comes from 1Password through `tools/upload.env`.
+4. `git push origin HEAD`: once the zip is on CurseForge, the upload points the repo's
+   `server_files/server-setup-config.yaml` at it and commits that, for servers that update from git.
 
 ## Links
 
