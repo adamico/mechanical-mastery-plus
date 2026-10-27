@@ -6,7 +6,7 @@ A monorepo of modpacks, one folder per pack line:
 - `MMR26.1.2/`: Mechanical Mastery Reborn on NeoForge 26.1.2. In development (#163).
 - `MMP1.20.1/`, `TT1211/`: unreleased experiments. Read them for ideas, never change or release them.
 
-A task works inside one pack line's folder. Its own blocks and machines live in Reborn's companion mod, in its own repo in the 5thlayer org, not here.
+A task works inside one pack line's folder. Reborn's companion mod lives inside its line's folder too, in `MMR26.1.2/mod/`: a Gradle build of its own, started from the libworks template and kept out of the pack by `.packwizignore`.
 
 ## Agent skills
 
