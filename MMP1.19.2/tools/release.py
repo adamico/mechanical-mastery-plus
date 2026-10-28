@@ -13,8 +13,8 @@
 # byte, so the zip it exported is the release's.
 #
 # publish sends a cut release to its sites, in order: the client zip to CurseForge, the server pack
-# (server_files/ as tagged, pointed at the client zip on CurseForge's CDN, and ignoring the mods the
-# tagged manifest marks side = "client") as its child file, and
+# (server_files/ as tagged, pointed at the client zip on CurseForge's CDN, with every tagged mod but
+# the side = "client" ones downloaded straight from the CDN) as its child file, and
 # both zips to the tag's GitHub release, with the version's changelog section as their notes. The
 # release record beside the zip keeps the client zip's file id and the sites reached, so after a
 # failure, publish again does what is left; --site sends to one site whatever the record says, and
@@ -38,6 +38,7 @@ import subprocess
 import sys
 import tempfile
 import tomllib
+import urllib.parse
 import zipfile
 from pathlib import Path
 
@@ -83,16 +84,21 @@ class Pack:
 
     def manifest_at(self, ref):
         """pack.toml and every mod's .pw.toml at <ref>, or in the working tree when <ref> is None."""
+        pack, files = self.files_at(ref)
+        return pack, [m for _, m in files]
+
+    def files_at(self, ref):
+        """pack.toml, and the folder and .pw.toml of every mod and resource pack at <ref>, or in the working tree."""
         if ref is None:
             pack = tomllib.loads((self.root / "pack.toml").read_text())
-            mods = [tomllib.loads(p.read_text()) for d in ("mods", "resourcepacks")
-                    for p in sorted((self.root / d).glob("*.pw.toml"))]
-            return pack, mods
+            files = [(d, tomllib.loads(p.read_text())) for d in ("mods", "resourcepacks")
+                     for p in sorted((self.root / d).glob("*.pw.toml"))]
+            return pack, files
         # Paths are this pack folder's, so ./ keeps git show inside it.
         pack = tomllib.loads(self.text("show", f"{ref}:./pack.toml"))
         paths = [p for p in self.text("ls-tree", "-r", "--name-only", ref, "--", "mods/", "resourcepacks/").splitlines()
                  if p.endswith(".pw.toml")]
-        return pack, [tomllib.loads(self.text("show", f"{ref}:./{p}")) for p in paths]
+        return pack, [(p.split("/")[0], tomllib.loads(self.text("show", f"{ref}:./{p}"))) for p in paths]
 
     def mod_changes(self, ref):
         """The changelog lines for what changed between <ref> and the working tree; none when nothing did."""
@@ -215,10 +221,11 @@ def cut(pack, version, packwiz, out=print):
 
 
 def cdn_url(file_id, file_name):
-    """Where CurseForge's CDN serves a file: its id split after four digits, without leading zeros.
-    The older media.forgecdn.net host refuses every download now; mediafilez serves the same paths."""
+    """Where CurseForge's CDN serves a file: its id split after four digits, without leading zeros, and its
+    name percent-encoded, since the CDN refuses a literal + (403). The older media.forgecdn.net host refuses
+    every download now; mediafilez serves the same paths."""
     digits = str(file_id)
-    return f"https://mediafilez.forgecdn.net/files/{int(digits[:4])}/{int(digits[4:])}/{file_name}"
+    return f"https://mediafilez.forgecdn.net/files/{int(digits[:4])}/{int(digits[4:])}/{urllib.parse.quote(file_name)}"
 
 
 def pointed_at(data, url):
@@ -230,26 +237,48 @@ def pointed_at(data, url):
 
 
 IGNORE_PROJECT = re.compile(rb"^( *)ignoreProject:[^\r\n]*((?:\r?\n\1 +-[^\r\n]*)*)", re.MULTILINE)
+# The header and its entries, up to the first commented-out one.
+ADDITIONAL_FILES = re.compile(rb"^( *)additionalFiles:( *\[\])?[ \t]*((?:\r?\n\1 +(?![ #])[^\r\n]*)*)", re.MULTILINE)
 
 
-def ignoring(data, client_only):
-    """The ServerStarter config with ignoreProject listing <client_only>, the tagged manifest's side = "client"
-    mods. A release cut before side was their record has its hand-kept list and no client-only mod, and keeps
-    that list; one with both would have two records, and is refused."""
+def newline_of(data):
+    # The committed config has CRLF line endings, and what a server pack adds keeps them.
+    return b"\r\n" if b"\r\n" in data else b"\n"
+
+
+def ignoring(data, projects):
+    """The ServerStarter config with ignoreProject listing <projects>, every CurseForge project of the tagged
+    manifest, so that ServerStarter never asks cursemeta for one (cursemeta is gone, #177). A config with its
+    own list is refused: the manifest is the only record of the pack's mods, so the list stays []."""
     found = list(IGNORE_PROJECT.finditer(data))
     if len(found) != 1:
         raise Refused(f"{SERVER_CONFIG} has {len(found)} ignoreProject lines; it needs exactly one.")
     match = found[0]
     if match.group(2).strip():
-        if client_only:
-            raise Refused(f"{SERVER_CONFIG} lists ignoreProject by hand, and the manifest marks mods side = \"client\"; "
-                          f"side is the only record of them, so the list stays []: each server pack fills it in.")
-        return data
+        raise Refused(f"{SERVER_CONFIG} lists ignoreProject by hand; the manifest is the only record of the "
+                      f"pack's mods, so the list stays []: each server pack fills it in.")
     indent = match.group(1)
-    lines = [indent + b"ignoreProject:" + (b"" if client_only else b" []")]
-    lines += [indent + f"    - {project} # {name}".encode() for project, name in client_only]
-    # The committed config has CRLF line endings, and the list keeps them.
-    newline = b"\r\n" if b"\r\n" in data else b"\n"
+    lines = [indent + b"ignoreProject:" + (b"" if projects else b" []")]
+    lines += [indent + f"    - {project} # {name}".encode() for project, name in projects]
+    return data[:match.start()] + newline_of(data).join(lines) + data[match.end():]
+
+
+def downloading(data, downloads):
+    """The ServerStarter config with <downloads>, the server's mods as (url, file name), after the
+    additionalFiles it lists by hand; refused unless it has exactly one list, or when it lists a mod by hand."""
+    found = list(ADDITIONAL_FILES.finditer(data))
+    if len(found) != 1:
+        raise Refused(f"{SERVER_CONFIG} has {len(found)} additionalFiles lines; it needs exactly one.")
+    match = found[0]
+    listed = set(re.findall(rb"destination: *(\S+)", match.group(3)))
+    by_hand = sorted(name for _, name in downloads if f"mods/{name}".encode() in listed)
+    if by_hand:
+        raise Refused(f"{SERVER_CONFIG} lists {', '.join(by_hand)} in additionalFiles by hand, and the pack has "
+                      f"it too; each server pack adds the pack's mods itself.")
+    indent, newline = match.group(1), newline_of(data)
+    lines = [indent + b"additionalFiles:" + (b"" if downloads or match.group(3) else b" []") + match.group(3)]
+    for url, name in downloads:
+        lines += [indent + f"    - url: {url}".encode(), indent + f"      destination: mods/{name}".encode()]
     return data[:match.start()] + newline.join(lines) + data[match.end():]
 
 
@@ -299,8 +328,8 @@ class CutRelease:
         self.record = Record(self.zip.parent / "record.json")
 
     @functools.cached_property
-    def client_only(self):
-        return client_only(self.pack.manifest_at(self.tag)[1])
+    def server_mods(self):
+        return server_mods(self.pack.files_at(self.tag)[1])
 
     def metadata(self, title, **more):
         # Every upload is a release: CurseForge's app only offers a pack that has one.
@@ -318,22 +347,26 @@ class CutRelease:
             for path in paths:
                 data = self.pack.git("show", f"{self.tag}:./{path}")
                 if path == SERVER_CONFIG:
-                    data = ignoring(pointed_at(data, url), self.client_only)
+                    projects, downloads = self.server_mods
+                    data = downloading(ignoring(pointed_at(data, url), projects), downloads)
                 out.writestr(path.removeprefix("server_files/"), data)
         return url, buffer.getvalue()
 
 
-def client_only(mods):
-    """The CurseForge project and name of each mod marked side = "client", which servers don't install."""
-    found = []
-    for m in mods:
-        if m.get("side") != "client":
-            continue
-        project = m.get("update", {}).get("curseforge", {}).get("project-id")
-        if project is None:
-            raise Refused(f"{m['name']} is client-only but has no CurseForge project, so the server pack can't ignore it.")
-        found.append((project, m["name"]))
-    return sorted(found)
+def server_mods(files):
+    """What ServerStarter is told about the manifest's files, as (projects, downloads): every CurseForge
+    project with its name, which it ignores, and the CDN url and file name of each mod not marked
+    side = "client", which it downloads instead. Resource packs aren't the server's."""
+    projects, downloads = [], []
+    for folder, m in files:
+        curseforge = m.get("update", {}).get("curseforge", {})
+        # Any other file rides in the client zip's overrides, where neither list reaches it.
+        if not {"project-id", "file-id"} <= curseforge.keys():
+            raise Refused(f"{m['name']} has no CurseForge file, so the server pack can't tell ServerStarter about it.")
+        projects.append((curseforge["project-id"], m["name"]))
+        if folder == "mods" and m.get("side") != "client":
+            downloads.append((cdn_url(curseforge["file-id"], m["filename"]), m["filename"]))
+    return sorted(projects), sorted(downloads, key=lambda d: d[1].casefold())
 
 
 def publish(pack, version, curseforge, github, only=None, dry_run=False, client_file_id=None, out=print):
@@ -395,7 +428,8 @@ def to_server(release, curseforge, dry_run, out):
     metadata = release.metadata(release.server_title, parentFileId=client_file_id or "<the client zip's file id>")
     created = curseforge.upload(metadata, release.server_zip, data)
     if dry_run:
-        out(f"  ignoreProject {', '.join(name for _, name in release.client_only) or 'as tagged, since no mod is client-only'}")
+        projects, downloads = release.server_mods
+        out(f"  ignoreProject {len(projects)} projects; additionalFiles adds {len(downloads)} mods from the CDN")
     out(f"  modpackUrl {url}" if dry_run else
         f"Uploaded {release.server_zip} to CurseForge ({created}), under {client_file_id}, installing {url}.")
 

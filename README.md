@@ -32,8 +32,10 @@ packwiz (`mise install`). Add or update a mod with `packwiz cf add <slug>` or `p
 from `MMP1.19.2/`; `.packwizignore` keeps the repo's own files out of the pack.
 
 A mod servers mustn't install has `side = "client"` in its `.pw.toml`, the only record of which mods
-are client-only. Each server pack's `ignoreProject` list is made from it, so
-`server_files/server-setup-config.yaml` keeps that list empty.
+are client-only. Each server pack tells ServerStarter to ignore every CurseForge project of the
+manifest and to download the other mods straight from CurseForge's CDN, so
+`server_files/server-setup-config.yaml` keeps `ignoreProject` empty and lists in `additionalFiles`
+only files the pack doesn't have.
 
 A change a player will notice adds its line under `## Unreleased` in `MMP1.19.2/CHANGELOG.md`; the
 mods added, updated and removed are listed by the release itself (`tools/release.py mods`).

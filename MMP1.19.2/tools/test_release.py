@@ -23,13 +23,17 @@ FILES = {
     "tools/release.toml": 'tag-prefix = "test-v"\nslug = "test-pack"\ncurseforge-project = 1\n'
                           'github-repo = "example/test-pack"\n',
     "server_files/server-setup-config.yaml": "install:\n    modpackUrl: <the-client-zip-url>\n"
-                                             "    formatSpecific:\n        ignoreProject: []\n",
+                                             "    formatSpecific:\n        ignoreProject: []\n"
+                                             "    additionalFiles:\n        - url: https://example.com/extra.jar\n"
+                                             "          destination: mods/extra.jar\n"
+                                             "        #- url: https://example.com/old.jar\n",
     "server_files/start-server.sh": "#!/bin/bash\njava -jar serverstarter.jar\n",
 }
 
 
 def mod(name, filename, project, side="both"):
-    return f'name = "{name}"\nfilename = "{filename}"\nside = "{side}"\n\n[update.curseforge]\nproject-id = {project}\n'
+    return (f'name = "{name}"\nfilename = "{filename}"\nside = "{side}"\n\n'
+            f'[update.curseforge]\nfile-id = {project}0001\nproject-id = {project}\n')
 
 
 class PackFolder:
@@ -49,6 +53,7 @@ class PackFolder:
             self.write(path, text)
         self.write("mods/a.pw.toml", mod("A", "a-1.0.jar", 11))
         self.write("mods/zoom.pw.toml", mod("Zoom", "zoom-1.0.jar", 13, side="client"))
+        self.write("resourcepacks/look.pw.toml", mod("Look", "look.zip", 15))
         self.commit("Test Pack")
         self.pack = release.Pack(self.root)
         self.out = []
@@ -200,42 +205,52 @@ class Publish(unittest.TestCase):
             self.assertEqual(FILES["server_files/start-server.sh"], server_pack.read("start-server.sh").decode())
             url = release.cdn_url(client_id, "test-pack-1.0.0.zip")
             self.assertEqual(f"install:\n    modpackUrl: {url}\n    formatSpecific:\n        ignoreProject:\n"
-                             f"            - 13 # Zoom\n", server_pack.read("server-setup-config.yaml").decode())
+                             f"            - 11 # A\n            - 13 # Zoom\n            - 15 # Look\n"
+                             f"    additionalFiles:\n        - url: https://example.com/extra.jar\n"
+                             f"          destination: mods/extra.jar\n"
+                             f"        - url: https://mediafilez.forgecdn.net/files/1100/1/a-1.0.jar\n"
+                             f"          destination: mods/a-1.0.jar\n"
+                             f"        #- url: https://example.com/old.jar\n",
+                             server_pack.read("server-setup-config.yaml").decode())
         self.assertEqual("https://mediafilez.forgecdn.net/files/9338/333/test-pack-1.0.0.zip",
                          release.cdn_url(9338333, "test-pack-1.0.0.zip"))
+        self.assertEqual("https://mediafilez.forgecdn.net/files/4153/347/Clumps-forge-1.19.2-9.0.0%2B14.jar",
+                         release.cdn_url(4153347, "Clumps-forge-1.19.2-9.0.0+14.jar"))
 
     def server_config(self):
         _, _, data = self.uploaded("test-pack-Server-1.0.0.zip")
         with zipfile.ZipFile(io.BytesIO(data)) as server_pack:
             return server_pack.read("server-setup-config.yaml").decode()
 
-    def test_the_server_pack_ignores_the_mods_the_tagged_manifest_marks_client_only(self):
+    def test_the_server_pack_downloads_the_mods_of_the_tagged_manifest_but_the_client_only_ones(self):
         # Marking a mod client-only after the tag doesn't change the release's server pack.
         self.folder.write("mods/a.pw.toml", mod("A", "a-1.0.jar", 11, side="client"))
         self.folder.commit("A is client-only")
         self.publish()
-        self.assertIn("ignoreProject:\n            - 13 # Zoom\n", self.server_config())
-        self.assertNotIn("- 11", self.server_config())
+        self.assertIn("destination: mods/a-1.0.jar\n", self.server_config())
+        self.assertNotIn("zoom-1.0.jar", self.server_config())
+        self.assertNotIn("look.zip", self.server_config())
+
+    def test_a_server_config_that_lists_a_mod_of_the_pack_by_hand_is_refused(self):
+        self.folder = PackFolder(self)
+        self.folder.write("server_files/server-setup-config.yaml", FILES["server_files/server-setup-config.yaml"]
+                          .replace("mods/extra.jar", "mods/a-1.0.jar"))
+        self.folder.commit("A by hand")
+        self.folder.cut("1.0.0")
+        with self.assertRaisesRegex(Refused, "server, github failed"):
+            self.publish()
+        self.assertIn("lists a-1.0.jar in additionalFiles by hand", "\n".join(self.folder.out))
 
     def test_a_server_config_that_lists_ignored_projects_by_hand_is_refused(self):
         self.folder = PackFolder(self)
         self.folder.write("server_files/server-setup-config.yaml",
-                          "install:\n    modpackUrl: <url>\n        ignoreProject:\n            - 99 # Old\n")
+                          "install:\n    modpackUrl: <url>\n        ignoreProject:\n            - 99 # Old\n"
+                          "    additionalFiles: []\n")
         self.folder.commit("A hand-kept list")
         self.folder.cut("1.0.0")
         with self.assertRaisesRegex(Refused, "server, github failed"):
             self.publish()
-        self.assertIn("side is the only record of them", "\n".join(self.folder.out))
-
-    def test_a_release_cut_before_side_was_the_record_keeps_its_tagged_list(self):
-        self.folder = PackFolder(self)
-        self.folder.write("mods/zoom.pw.toml", mod("Zoom", "zoom-1.0.jar", 13))
-        self.folder.write("server_files/server-setup-config.yaml",
-                          "install:\n    modpackUrl: <url>\n        ignoreProject:\n            - 13 # Zoom\n")
-        self.folder.commit("Before side")
-        self.folder.cut("1.0.0")
-        self.publish()
-        self.assertIn("ignoreProject:\n            - 13 # Zoom\n", self.server_config())
+        self.assertIn("lists ignoreProject by hand", "\n".join(self.folder.out))
 
     def test_the_ignore_list_keeps_the_server_configs_line_endings(self):
         self.folder.write("server_files/server-setup-config.yaml", FILES["server_files/server-setup-config.yaml"]
@@ -248,10 +263,11 @@ class Publish(unittest.TestCase):
         _, _, data = self.uploaded("test-pack-Server-1.0.1.zip")
         with zipfile.ZipFile(io.BytesIO(data)) as server_pack:
             config = server_pack.read("server-setup-config.yaml")
-        self.assertIn(b"        ignoreProject:\r\n            - 13 # Zoom\r\n", config)
+        self.assertIn(b"        ignoreProject:\r\n            - 11 # A\r\n", config)
+        self.assertIn(b"          destination: mods/a-1.0.jar\r\n        #- url", config)
         self.assertNotIn(b"\n", config.replace(b"\r\n", b""))
 
-    def test_a_client_only_mod_without_a_curseforge_project_is_refused(self):
+    def test_a_mod_without_a_curseforge_file_is_refused(self):
         self.folder.write("mods/zoom.pw.toml", 'name = "Zoom"\nfilename = "zoom-1.0.jar"\nside = "client"\n')
         self.folder.write("CHANGELOG.md", self.folder.read("CHANGELOG.md").replace(
             "## Unreleased\n", "## Unreleased\n\n- More.\n"))
@@ -259,7 +275,7 @@ class Publish(unittest.TestCase):
         self.folder.cut("1.0.1")
         with self.assertRaisesRegex(Refused, "server, github failed"):
             self.folder.publish("1.0.1", self.curseforge, self.github)
-        self.assertIn("Zoom is client-only but has no CurseForge project", "\n".join(self.folder.out))
+        self.assertIn("Zoom has no CurseForge file", "\n".join(self.folder.out))
 
     def test_github_is_refused_until_origin_has_the_tag(self):
         self.github.pushed = False
@@ -286,7 +302,7 @@ class Publish(unittest.TestCase):
         self.folder.publish("1.0.0", DryCurseForge("1", out.append), DryGitHub("example/test-pack", out.append),
                             dry_run=True, client_file_id=9338333)
         self.assertIn("modpackUrl https://mediafilez.forgecdn.net/files/9338/333/test-pack-1.0.0.zip", "\n".join(out))
-        self.assertIn("ignoreProject Zoom", "\n".join(out))
+        self.assertIn("ignoreProject 3 projects; additionalFiles adds 1 mods from the CDN", "\n".join(out))
         self.assertFalse((self.folder.pack.client_zip("1.0.0").parent / "record.json").exists())
 
 

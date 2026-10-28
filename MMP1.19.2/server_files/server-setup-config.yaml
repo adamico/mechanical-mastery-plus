@@ -60,9 +60,9 @@ install:
     # Settings which are specific to the format used, might not be needed in some casese
     formatSpecific:
         # optional paramenter used for curse to specify a whole project to ignore (mostly if it is client side only)
-        # Each release's server pack lists here the CurseForge projects its manifest marks side = "client"
-        # (tools/release.py publish). packwiz's side field in mods/*.pw.toml is the only record of the
-        # client-only mods, so this stays [].
+        # Each release's server pack lists here every CurseForge project of its manifest
+        # (tools/release.py publish), so ServerStarter never asks cursemeta, which is gone (#177), for
+        # a download url. The manifest is the only record of the pack's mods, so this stays [].
         ignoreProject: []
 
     # The base path where the server should be installed to, ~ for current path
@@ -94,9 +94,9 @@ install:
     # often a server needs more files, which are nearly useless on the client, such as tickprofiler
     # This is a list of files, each ' - ' is a new file:
     # url is the directlink to the file, destination is the path to where the file should be copied to
+    # Each release's server pack adds every mod of its manifest not marked side = "client" after these,
+    # from CurseForge's CDN (tools/release.py publish), so this lists only files the pack doesn't have.
     additionalFiles:
-        - url: https://mediafilez.forgecdn.net/files/4285/455/PlayerTrade-1.19.2-1.1.jar
-          destination: mods/PlayerTrade-1.19.2-1.1.jar
         - url: https://mediafilez.forgecdn.net/files/4775/501/dcintegration-forge-3.0.3-1.19.2.jar
           destination: mods/dcintegration-forge-3.0.3-1.19.2.jar
         #- url: https://mediafilez.forgecdn.net/files/2844/278/restrictedportals-1.15-1.0.jar
