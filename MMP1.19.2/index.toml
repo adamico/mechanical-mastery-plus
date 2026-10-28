@@ -142,7 +142,7 @@ hash = "e3cea4d9dc760bfcabcdc50610e6f449f5cadef6eb3af81f7d6ee9f094bc124d"
 
 [[files]]
 file = "config/bcc-common.toml"
-hash = "bcdcb86981710d75b01e973ca73b89b7a0551e820e1747c9f11870a803f17c9c"
+hash = "23a3f7a8ad2ad338c213a8f047667d3843eb91f152edac3489ea580664eb46af"
 
 [[files]]
 file = "config/blockrunner.json"
