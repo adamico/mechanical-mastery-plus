@@ -8,6 +8,7 @@ Releases up to 1.1.12 list their mod changes in `changelogs/`.
 - A Fusion Reactor quest in the endgame chapter points to the reactor and its Compact Crafting frame (#147).
 - A Modular Routers Activator can use the Blaze, Blizz, Blitz and Basalz effigies: the mob spawns in the block in front of the router, if that block is empty (#148).
 - The game starts about 6 seconds faster: ModernFix loads block and item models when they are first needed instead of all at startup (#176).
+- JEI moves from the 11.6.0.1018 beta to the 11.6.0.1019 release.
 - ImmediatelyFast is updated from 1.2.8 to 1.4.0, its last release for 1.19.2 (#160).
 - Servers no longer install Better Advancements, Enchantment Descriptions, Just Zoom, Durability Tooltip and Konkrete, which only players need.
 
