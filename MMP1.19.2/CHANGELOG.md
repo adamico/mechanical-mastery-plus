@@ -5,6 +5,7 @@ Releases up to 1.1.12 list their mod changes in `changelogs/`.
 ## Unreleased
 
 - The final COD quest asks for 2,000,000 B of each fluid instead of about 2 billion, and 2,048 of each Mechanical Essence instead of 64,738, so it can be completed and its progress shows all the way (#161).
+- A Fusion Reactor quest in the endgame chapter points to the reactor and its Compact Crafting frame (#147).
 - Servers no longer install Better Advancements, Enchantment Descriptions, Just Zoom, Durability Tooltip and Konkrete, which only players need.
 
 ## 1.1.14

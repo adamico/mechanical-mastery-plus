@@ -1496,6 +1496,47 @@
 			y: 1.5d
 		}
 		{
+			dependencies: ["2B2DAA2647444F4F"]
+			description: ["The fusion reactor burns D-T fuel into huge amounts of power, the kind antimatter production needs. Its frame is not crafted on a table: it is made in a Compact Crafting field with a Tier 4 Mechanical Essence as catalyst; check JEI for the layers. Light the reactor with a laser aimed at the laser focus matrix."]
+			id: "80625342E3C5EC5F"
+			rewards: [{
+				id: "628CF1BF5765FFDA"
+				type: "xp"
+				xp: 200
+			}]
+			subtitle: "A star in a box"
+			tasks: [
+				{
+					id: "F0BD0D765B6E2A14"
+					item: "mekanismgenerators:fusion_reactor_controller"
+					type: "item"
+				}
+				{
+					id: "9279E09D08FCFA41"
+					item: "mekanismgenerators:fusion_reactor_frame"
+					type: "item"
+				}
+				{
+					id: "2CCC980E380E5C24"
+					item: "mekanismgenerators:fusion_reactor_port"
+					type: "item"
+				}
+				{
+					id: "90D99ED70F7612B8"
+					item: "mekanismgenerators:laser_focus_matrix"
+					type: "item"
+				}
+				{
+					id: "4941D0FE7BFBAE4D"
+					item: "mekanism:laser"
+					type: "item"
+				}
+			]
+			title: "Fusion Reactor"
+			x: -8.5d
+			y: 4.5d
+		}
+		{
 			dependencies: ["07980075BFE4C586"]
 			description: ["All of the required max int fluids for the final quest can be made infinite when put in a 10k block volume and can be drained infinitely using a hose pulley."]
 			hide_dependency_lines: true
