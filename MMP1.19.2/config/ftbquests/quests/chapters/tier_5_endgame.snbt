@@ -296,59 +296,59 @@
 			subtitle: "Certificate of Doneness!"
 			tasks: [
 				{
-					amount: 2147483647000L
+					amount: 2000000000L
 					fluid: "experienceobelisk:cognitium"
 					id: "1658F8FB52CCAB0F"
 					type: "fluid"
 				}
 				{
-					amount: 2147483647000L
+					amount: 2000000000L
 					fluid: "mekanismgenerators:fusion_fuel"
 					id: "5BBE8B51FC4B3D1D"
 					type: "fluid"
 				}
 				{
-					amount: 2147483647000L
+					amount: 2000000000L
 					fluid: "kubejs:light_essence"
 					id: "43F557F5742FC8E9"
 					type: "fluid"
 				}
 				{
-					amount: 2147483647000L
+					amount: 2000000000L
 					fluid: "kubejs:darkness_essence"
 					id: "529F30F9DE3D3546"
 					type: "fluid"
 				}
 				{
-					amount: 2147483647000L
+					amount: 2000000000L
 					fluid: "create:chocolate"
 					id: "350A923A6225CF92"
 					type: "fluid"
 				}
 				{
 					consume_items: true
-					count: 64738L
+					count: 2048L
 					id: "2FB51FA942EE95DF"
 					item: "kubejs:cube1"
 					type: "item"
 				}
 				{
 					consume_items: true
-					count: 64738L
+					count: 2048L
 					id: "557BEB351DBA6F6D"
 					item: "kubejs:cube2"
 					type: "item"
 				}
 				{
 					consume_items: true
-					count: 64738L
+					count: 2048L
 					id: "62C57A6AA94BAF00"
 					item: "kubejs:cube3"
 					type: "item"
 				}
 				{
 					consume_items: true
-					count: 64738L
+					count: 2048L
 					id: "5CD610B1ABD2C443"
 					item: "kubejs:cube4"
 					type: "item"
