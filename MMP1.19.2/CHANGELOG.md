@@ -7,6 +7,7 @@ Releases up to 1.1.12 list their mod changes in `changelogs/`.
 - The final COD quest asks for 2,000,000 B of each fluid instead of about 2 billion, and 2,048 of each Mechanical Essence instead of 64,738, so it can be completed and its progress shows all the way (#161).
 - A Fusion Reactor quest in the endgame chapter points to the reactor and its Compact Crafting frame (#147).
 - A Modular Routers Activator can use the Blaze, Blizz, Blitz and Basalz effigies: the mob spawns in the block in front of the router, if that block is empty (#148).
+- The game starts about 6 seconds faster: ModernFix loads block and item models when they are first needed instead of all at startup (#176).
 - ImmediatelyFast is updated from 1.2.8 to 1.4.0, its last release for 1.19.2 (#160).
 - Servers no longer install Better Advancements, Enchantment Descriptions, Just Zoom, Durability Tooltip and Konkrete, which only players need.
 
