@@ -1878,7 +1878,7 @@ hash = "9cd6a7035204e1bf2d53da1b9555b81312ec9886115353a0a7c1b6f448601493"
 
 [[files]]
 file = "kubejs/server_scripts/events/spawn_effigies.js"
-hash = "e36bba41e1b280e3e286ec1f98e9211ac1a5a0aabef35abb426ea33dd211f221"
+hash = "3b1db3ce300f93a08dff835dc3abf67c4c23a91799a710dfb59393c8eee7635f"
 
 [[files]]
 file = "kubejs/server_scripts/item_interactions/bonemealable_blocks.js"

@@ -20,6 +20,18 @@ mobList.forEach(mob => {
 		if (!event.server) return
 
 		const player = event.player;
+
+		// A fake player (a Modular Routers Activator) ray-traces from eye height and misses
+		// the block in front of it: spawn in the block it stands in, in front of the router.
+		if (player.isFake()) {
+			const pos = player.blockPosition()
+			if (!event.level.isEmptyBlock(pos)) return
+			let mob = event.level.createEntity(mobName)
+			spawnMob(mob, pos.x + 0.5, pos.y, pos.z + 0.5)
+			event.item.count--
+			return
+		}
+
 		const hit = player.rayTrace(8)
 		const x = hit.hitX
 		const y = hit.hitY + 1
