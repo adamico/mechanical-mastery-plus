@@ -1,0 +1,188 @@
+<!doctype html>
+<!-- PROTOTYPE, throwaway (#166): what should the drive's top be, to complete the rings of rails the Recycler's top draws? Three sets, switched with
+     ?variant=A|B|C or the bar below. Built by build_recycler_textures_prototype.py; textures from unused-textures
+     by Malcolm Riley, CC BY 4.0. Drag to orbit, scroll to zoom. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recycler textures</title>
+<style>
+  :root { --bg: #87b5ff; --panel: #1d1f24; --text: #f2f2f2; --accent: #ffd479; }
+  html, body { margin: 0; height: 100%; background: var(--bg); font-family: system-ui, sans-serif; overflow: hidden; }
+  canvas { display: block; }
+  #views { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
+  #views button, #bar button { background: var(--panel); color: var(--text); border: 0; padding: 8px 14px; border-radius: 999px; cursor: pointer; font-size: 14px; }
+  #views button.on { background: var(--accent); color: #000; }
+  #bar { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px;
+         background: var(--panel); color: var(--text); padding: 6px 8px; border-radius: 999px; box-shadow: 0 4px 18px rgba(0,0,0,.4); }
+  #label { min-width: 220px; text-align: center; font-weight: 600; }
+  .tag { position: fixed; color: #000; background: rgba(255,255,255,.85); padding: 2px 6px; border-radius: 4px; font-size: 12px; pointer-events: none; transform: translate(-50%, -50%); }
+</style>
+<script type="importmap">{"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body>
+<div id="views"><button data-view="parts">Single parts</button><button data-view="multiblock">Multiblock</button><button data-view="both">Both</button><button id="top">From above</button><button id="below">From below</button><button id="turn">Turn the drives</button></div>
+<div id="bar"><button id="prev" aria-label="Previous variant">&larr;</button><span id="label"></span><button id="next" aria-label="Next variant">&rarr;</button></div>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+const VARIANTS = {"A": {"name": "Chosen, corner L", "core": {"front": "space-plating-convex-rivets-horizontal", "side": "space-plating-convex-rivets-horizontal", "top": "space-plating-vent", "bottom": "space-plating-vent"}, "input": {"top": "derived:edge", "front": "space_crate_top", "bottom": "derived:edge"}, "output": {"frame": "space_crate_sides", "back": "space_crate_top", "cap": "derived:edge", "niche": "space-plating-plain", "rim": "derived:rim"}, "casing": {"side": "space-plating-convex-rivets-horizontal", "top": "derived:edge", "bottom": "derived:edge"}, "drive": {"side": "space-plating-square", "top": "derived:corner", "bottom": "derived:corner-bottom", "turning": "space-plating-square", "corner": true}}};
+const TEXTURES = {"derived:corner": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAApUlEQVR4nKWSPQ7DIAxGX+1yltz/CB070MswIkMmEIFYqcQ3gX+ebczr9/1UNvQGiDHuAQCO49gDAKSU9gAAtVZUFTMDQFUv/mZvvgXQEubE2e924FXy/AvAzAghICLdlnNeQCGEe4CqUkrpdxHpwc0+wt0RmkbYne0RMG5jfhcReQaMc49nM8PMkDlhnO8f8BKdc7606sldo/eBZrlrnCt40PY3TuCeRXwTEO99AAAAAElFTkSuQmCC", "derived:corner-bottom": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAuElEQVR4nJ2SMRaDMAxDZbuMnIMDcP+hYwe6cw5GXtRO4oUkbVo0RtGPY9uej/trWRZM04Rt2+DuAICUEqSIQCn5t8r5Eso1DEMbIHIPsO87AMBb5F44f6ACkOyGgR96UF6MiKqx7t4H5N8pv0ayD9BYFSjPmlPQiCR1XBWQPCAVICJAsrtIgl5epI9j1MsppVMVuZ97VQVmBpIwMwD1Xuhc3gkwjuPXsls6AOu6/h0+APM8XwoDwBuTVFeGWz3vcwAAAABJRU5ErkJggg==", "derived:edge": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA7klEQVR4nKWTsU4EMQxEn5G3zMegFXRQUO+HUtJcCRJHBShQ72/sFlskkilOibynC4pgqmQ8nthxIl/vrwYQY2QcR3rgtRpjBOD69p74cewy8Fo5Ph8M4OXtk4e7my4Dr5XD06MBhBBY17XLwGtVVQHYtg0zO7mK7NYeZsayLDWmOeca9OLzxBavrTJLBS2zElczYxgGAFJKAHVfUHhvVDQqIuScUdUq8G2pahUXvtzbrgWf5HGJPztAm0Hfq59M2avqfgqX0JqMmZFS4qoQIYRfjTxCCIjIqYqS+NenrPM8AzBNE9+dn8lr5b/f+QeefoG8scnXJAAAAABJRU5ErkJggg==", "derived:rim": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA4klEQVR4nJ2TwU7DMBBEXzfrfE2PvfDfXDihnlClqhIXJK4JBPMLSexysOxuIwdE5mSPd8eeHXl3fnm+tm3LPM8AqCoW4ziWtYgQYyx77z0K0HUdW/DtP5NA0zSbBAD08em4uRlIL3g47AGYpon8ohBCWVtkHuD8+p4E8mBs8ZqtJa/VqsVNNbF8rpDisRacc4VbWstwzt0EYoyISCmwWYtIKc68FS8WbJNFjbfcnYVag02jNhetNVmsJXM3xNPlbVXgL+wup+N1GIZfb64hhJD+gqpu+gslxr7v8V8f/xbI+AG662atesRbvwAAAABJRU5ErkJggg==", "space-plating-convex-rivets-horizontal": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABIElEQVR4nKWTP0sDQRDFfze7GwnGUhDBRvDbWtr4FSxDIKQKqUQIgs2CKVMdBAIHV20yGwvZc++80yKvGt78fTO7xfp1eRqNRhyPRwCsteQIITS2iBBjbPmlLEu890RzyXS+ZL/fs91u8d4TThfMFivquqYsSzabDbgrZosVIQR2ux3FfPpy4gzIOckAVuSnxuFwAMAYg6o2do7EJ5/Nl5IHdxOHeNsb1dNpyG9VFedcS4JzjiFpCSnHGmOIMSIiTUAuS0Sa4MTnxRsJ3QfyF59zrSv0JeTX6O5FRNpX6MPQZVQVVf2eIO3gPzl9hW3acD5et9sQVBUxxlDXNTd3D6w/PplMJhhjqKqK69t73t494/EY4BfnnKN4fno86zN9AX2XllY1ic7cAAAAAElFTkSuQmCC", "space-plating-vent": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABfUlEQVR4nI2TMY4aMRiFv/3NIBkYiRFUDNRbpknPAThGyjS5DzdImYZjbJMGESqY0UoLghUwrGbkPykim5lid3mVbfnZn9+THxa/fv6lJmstHynPc5IkwTkHQMsPAHq9HqvV6l2ztZbxeMx2u6Xf72OMQYwxGGOC+en3H14L5bVQXo5vvBzfwvx5fwHger1ijPlPUL9BRMiyjOVyCUBZlgC0220A4jjm65dHRCR4WvWJqpKmKbPZjCRJKIoCgE6nw+Fw4Hw+h33OOYwxtFS1QZDnOfP5nNPp1CCI4xiAH9+/AdyeICL4Q1SV0Wj0KYGI3Fqoqoooiho1fUagqsHTMsaEBRF5l6AoCvb7fSAIIfpBVVWo6t0Z+Gc3WriXwJtFpNmCqpJl2V0Ezjmcc7cWoijCWkuapkynUwaDAXX5271CjVVVhQx8C4vFgs1m0yCYTCYcj8dA4PVQ/42Xy4XhcMhH2u12lGUZCBt/odvtsl6vG0H5sLystSRJEoj/AZ329azf1LycAAAAAElFTkSuQmCC", "space_crate_top": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB70lEQVR4nHWSv2vbUBDHPzYXOMMTyCCBDTY44EILDcSDB0ML7ejBQ/7WjB0SaMEFDVkM6VjoIIMNMeiB3nDgDE9WnLR9yz2dvvf9cVJnNh0dawOA5WrFYj5nXRT8uL/j/Hz68pXFYsH39Zqf93dUledChM5sOjo++ciQOCXNc3ZlSQixZ8TqVMmHYw67kifvGeYZVeWRk/rlOMdCjXMKiSJ5Dx/q1oECqVPwQpqkpC6JBCeAhRpE2G9LBIFQIwjSOADYbv+gzV1ESBKl209cbGgv1rMhaelfXDS52mexc4TFxAaU5aGRAgHGw6x5LxiGmbGrAlJVPjZCTWgmynLP/OodKoI2Lr4Vj1yOM3ilCJ3RIDt6H3DaGuRq9oH9tsRpr93NZJBzVzy2GBHBzOgsPy+OZoZrpIII++3u5L6pUXY0GEaMGU6Vg/d0rqaTY+UDeZ426d9srtla608EzMjSPttDRVd7egb813DsB+D99QxXv3whweieICr2n+GX83tdMJnPXul0q8qfXPLm8leEQ0/YbB7AQCQ6bx1EViPNxi2J0wtUQCVGyAZDgtH+Yb42uhcizQIFELJBFmvaR9XhXJ/UJQBkaYYCoywnhEBthqSJcqgCAbieL1jd3HCL8Gvz8CrE9OOM1XLJLVAURdt/Bu4twQDdjeihAAAAAElFTkSuQmCC", "space_crate_sides": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB7ElEQVR4nF2Tv2obQRDGfzYjmIMRrOAMVpHCoMJNII0LQwJ24UJlyhR5gBR5qhR5BBcuBJFw/AAuDDJIoIMz5EALOvCCF5RiT3eSv27n7zffzB6Nv1xuaXB5dcW6qhjmjulsRozJLgIX12PKsmQ4HPL37naXgsQY8PUrm03NeVXxvFxiOmK+WNHvGwCbTWD0aU1RFKgq88WCwcDhLOMYQEitXqoXvPcsixc6JF9RFHjvKYoCEWldRxcfR9v1um4CZS9JDgp0kNbWV0O+fv+GacZitUJFqENyiiqSacfjNUAM7fvswxkhbDi6v/+z9b6i8r4Ljkm4fRadLSF3Oc65pEEX+B6R2KxChHYrO5+I0KnRYDq5I+xR3YWoKiEErm/Ge0zjjkHC5O4WEUEtx7lT8vwUl+eYy4kxYs6YtDcguwYdfRFBVVEzpLcn4FvANKcONaLSjpQKxG5lsVEq6ynqBogoMQaIEOo1IcZ2E602+yOoKkhKNnPpDYRQg4C+BYJIJ6bI4QiRiGWKmcPM2gLp8oSNX7edIa3leFcuTWL0gPPRCD+ZJj1UUTXMjMwGiFrbrikuzU7TPGJ9Hn/95vPPH/jmuNJfiThnlHJAGnl4mFH+K8l62l6Du7nm8enpnUSRslgBMH+eMydy4k74D6Ba0TGbG/22AAAAAElFTkSuQmCC", "space-plating-plain": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAqklEQVR4nKVTQQ4DIQicDvj/f/S4lz7OYHtooGgk220nMTEj4MDo7XHcn9jAzGIvIuW55sAKVYyIQHfVr4B/ZQNQ8lOj9w7gLc1lrwrX2egYYyJ2+4yV10raJRdaa1MLrTVUrTk8R0UEYwyQjIDcFskIdj4XjxZyUsaOz9zkwi4hu7HOheTswg6VM2YGMwNdAclY38CLqU94fe9nTzxs/PUvhI1nN1RqXPkLaKxdhZSRlCgAAAAASUVORK5CYII=", "space-plating-square": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB+klEQVR4nH2S/0vbUBTFP4lJqiZVG5up7RA2EeqQuf//l7EfxhhsYxvil7ba2sS+tN2a6qZg8prshyyvVdQDF97jnnvfue8e7cun95llWUgpATAMg3nEcazOuq6Tpqm6h2GIAdDr9Tg5+kGWZuztv+M5HB9+R9M1Gm8OGISX6ABBr0Pt1VtupkuctY7RNO3ROGsdU9854G+ySNDr5KoAbLtMs9nk9PQUp7zy5OtOeUXxbLsMgPbt84dsNBpRcaskScxA9ImiX2xs1nOCpuXzioCNzToVdx2AaPw7HyFNU6SUjIYhk2jMxlYNyyxx0Wmr4u55C8sssbrmMonGTKKxyhkPZU6iMVbJYnFpiXbzSEm3ShbXV5HiZVk2a1CsLkkSANYq68R3Ma7rARAnd9jO/b8xTTNvUHjAMAwlq/CEW80b/LmKME3zUa+oU5EEGA761OrbeJ6nCoahUA3nuXpBKCIUAcvLNp7nIYSg3+9TcatYJYvueYssy9T8SoGUknbzCMMwWbZtnPIqQgi1xtEwxCmvcnt7w0WnjZQJO7t7uQIpJaEI8F42GF1PqdW3Hy5GwXuxRWVzh+hWZxBezkZwnPtOnJc4j4q7PuM5/5348+vHzPd9Xu82WFgwaJ0cPqkAYLexz3Qq6XXaBH4Xw/d9QhEQiuDZwgIPef8AypvyIuZwF9YAAAAASUVORK5CYII=", "item:annealed_copper_cog": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACA0lEQVR4nLWTMWgTYRTHfycqibVgTOPSICWRulgRoaiDkMRB4iQKLoooCpKtbtVOOnSpi1joYhCEDoJFqkjqkFMaOmgPPE0IaWguwUtIm7vEhlyupxnOQXISqkUQ3/T4eP/f9/7vex/8z4iFwnYsFLa3q9n5O1E3n5yKocoS3y3L3u1yATDz7q3wR8CNk6fsriiZWOFzcpFmfROPZx8T96+jyhJrX3T7hZJ2IE4SC4XtPreLqxdGKOXrnL50FkvPOHBxbpV+j5v5VJZGzaALEQAuHz1uT8fHUWWJ9Psy526dd7o4sL+PkRN+fH4Xiccy0ZvH0MoWY3efI2qK4FhQZYlSvt4jllZVAPo9bsBLcPSg00k3dgCYRoeZ2WUALD1DMrHCq1Qa0+hgGh2evfmIz++iWd8E4Mnch17Anr27mJyKMTTsJf+pwZnoYcauhWm22jRbbabj42hlC13RiFw8xL070a2v0LVQKOgEgwMMDXuZfXoF18ARVFlCWsjRtAW0skUpX+8FVKsbvHydo7im8eDRbQdWygNU0BXNGd7DeArL/NZrQdQUQVzK0KgZjng+lWU0MgjAUkVzbm7UDKrVDURNEXosiJoiRAjY0kKOrNkBYFms0Pr6c3Dd82ar7Yi3bKKoKQKLOKusD/rImh2KhXWKhfVfNX8bEV/AjvgC236mf44fWjAQ1+aUsEwAAAAASUVORK5CYII=", "item:annealed_copper_plate": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABnUlEQVR4nK2SzS4DcRTFf9OMaGtBVROVidRHjI+KhURYIGHViKZ9ARuv4BG8gJVVN1Z22IkFkkrYWAiVVKpIJkFq2gjTmUiTv8WYYVJRCXd5c86559x74Y8lNQKsJBICwDAt1g8P6vByI/LibB8AWqHMmzUlMifHHhFfIwehcJCN7VOU/nbm4j0sT06JX0VYTSXF9GQ3A2PtlDSLil51nexf3OA4qYuwmkqKFp/EfEIlqsa4z98SUfwAVPSq7cSGiszJsSQ7WduamwBILgwSVWPIgQ4AoioekbVMlqXUOHPAzfWjkJxFhcJBABcot3S6IjXzyRVx4mzu5sjn7vAZpsWzbrKWyQJQ0iybZDxQM59ssUAHUTVGSbOIKH60QvlzieneUdGnKszEu2gNBxo62ds44qhwTz53x36pKMlbxXMpDQJgJt7lns6ZVjMeAHsPFb3qIXvOmO4dFSPD3UwMdbKTvWQpNU4oHCSi+Lk6K7O5mwPwkOv+4KvIS8V0+85UwEOu+4Ot4rnERxz9tepO/I74rYOvTp5fjB+J/1bvl0XBJQ33TOQAAAAASUVORK5CYII=", "item:ingot_bronze": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABxElEQVR4nNWSv2tTURiGn3PuraUFBUGdLFJCq5vUKg5GbRFBAuKmuEXcOrv6Dzj4Y6iCFEFsdRDFQhWh4NBJBYeUILYlSDQ2NEmJV5Obe+459xyHtMYWbFd9l/PxHZ53eN8P/htlUtJlUtJt3vvbQevz1csXANBT0272sxXre7EVNJa9yLlLRyh+LGO0QamYpU8Vxh9N86bYNhGboYcT19kzOEjS/EZ5qUYYtjDGkCQWpRQ2sbx9P8+z1/PMlawQmZR018ayjGavgDMQFlh8lwNAqXjtVQDcuvMEIQTOOYQQ5MtxO4NjZw/w8u44x9MHCb4HGGPwfZ+uLp8bNx9jdNvodHqYKA6JdYTv7SA/k++EOHBoL8+fzjIyOsztey+QUqJVxMiJo0RRE4AwalCtBhS/rCA9r9PC8kKN3t4edu3czf0HM5w/cxKtNVprWiqkuvqD1UqJWqABkJ5HUyUdg8mpV3R39zDQ3w9APahTWl5Bej4LiwWElICgqRKKtRizFnmuYoUAOLVfuvRQH0liiDT8bEQAOGsJGi0K1fh3zbmK3VC9DzBXsgK+uvRQH76TQMSHQv2v0J/a8HF4X+cetoL+Lf0CqU3TPxUCGVAAAAAASUVORK5CYII="};
+const ITEMS = ["item:annealed_copper_cog", "item:annealed_copper_plate", "item:ingot_bronze"];
+const keys = Object.keys(VARIANTS);
+const params = new URLSearchParams(location.search);
+let variant = keys.includes(params.get('variant')) ? params.get('variant') : 'A';
+let view = params.get('view') || 'both';
+let turning = false;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(devicePixelRatio);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87b5ff);
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
+const controls = new OrbitControls(camera, renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xffffff, 0x666666, 2.2));
+const sun = new THREE.DirectionalLight(0xffffff, 1.4); sun.position.set(4, 10, 6); scene.add(sun);
+
+const loader = new THREE.TextureLoader();
+const cache = {};
+function tex(name) {
+  if (!cache[name]) {
+    const t = loader.load(TEXTURES[name]);
+    t.magFilter = THREE.NearestFilter; t.minFilter = THREE.NearestFilter; t.colorSpace = THREE.SRGBColorSpace;
+    cache[name] = t;
+  }
+  return cache[name];
+}
+const mat = name => new THREE.MeshLambertMaterial({ map: tex(name), transparent: true, alphaTest: 0.1 });
+
+// A box from Minecraft model coordinates (0..16), its faces' UVs cut from the texture the way a block model's are.
+function box(from, to, faces) {
+  const [x0, y0, z0] = from.map(v => v / 16), [x1, y1, z1] = to.map(v => v / 16);
+  const g = new THREE.BoxGeometry(x1 - x0, y1 - y0, z1 - z0);
+  const uv = g.attributes.uv;
+  // BoxGeometry face order: +x, -x, +y, -y, +z, -z; each 4 verts. Map each face to the part of the 16x16 it covers.
+  const spans = [[1 - z1, 1 - z0, y0, y1], [z0, z1, y0, y1], [x0, x1, 1 - z1, 1 - z0], [x0, x1, z0, z1], [x0, x1, y0, y1], [1 - x1, 1 - x0, y0, y1]];
+  for (let f = 0; f < 6; f++) {
+    const [u0, u1, v0, v1] = spans[f];
+    for (let i = 0; i < 4; i++) {
+      const k = f * 4 + i;
+      uv.setXY(k, uv.getX(k) ? u1 : u0, uv.getY(k) ? v1 : v0);
+    }
+  }
+  const order = ['east', 'west', 'up', 'down', 'south', 'north'];
+  const m = new THREE.Mesh(g, order.map(o => faces[o] ? mat(faces[o]) : new THREE.MeshBasicMaterial({ visible: false })));
+  m.position.set((x0 + x1) / 2 - 0.5, (y0 + y1) / 2 - 0.5, (z0 + z1) / 2 - 0.5);
+  return m;
+}
+const cube = (f) => box([0, 0, 0], [16, 16, 16], f);
+
+// Each part as a group centred on its block, its front (the core's, the niche's) toward +z.
+function core(v) { const c = v.core; return cube({ south: c.front, north: c.side, east: c.side, west: c.side, up: c.top, down: c.bottom }); }
+function drive(v) { const c = v.drive, t = turning ? c.turning : c.side; return cube({ south: t, north: t, east: t, west: t, up: c.top, down: c.bottom }); }
+function casing(v) { const c = v.casing; return cube({ south: c.side, north: c.side, east: c.side, west: c.side, up: c.top, down: c.bottom }); }
+// The input's front (+z here) faces outward; its other sides are the casing's.
+function input(v) { const c = v.input, s = v.casing.side; return cube({ south: c.front, north: s, east: s, west: s, up: c.top, down: c.bottom }); }
+// The output's model, open toward +z here (the mod's is open north and turned by its blockstate).
+function output(v) {
+  // The cap is the outer top and bottom; the niche's own floor and ceiling stay the frame's.
+  // Its back and outer sides are the casing's; the front is the frame round the opening.
+  const f = v.casing.side, b = v.output.back, c = v.output.cap, g = new THREE.Group();
+  g.add(box([0, 0, 0], [16, 16, 8], { south: b, north: f, east: f, west: f, up: c, down: c }));
+  // The frame round the opening is the drive's texture, its bevel and bolts on the strips and its X behind the
+  // opening; inside, the niche is plating, with the crate's dark back.
+  const n = v.output.niche, r = v.output.rim;
+  g.add(box([0, 12, 8], [16, 16, 16], { south: r, down: n, up: c, east: f, west: f }));
+  g.add(box([0, 0, 8], [16, 4, 16], { south: r, up: n, down: c, east: f, west: f }));
+  g.add(box([0, 4, 8], [1, 12, 16], { south: r, east: n, west: f }));
+  g.add(box([15, 4, 8], [16, 12, 16], { south: r, west: n, east: f }));
+  // Three results on the shelf, a quarter block behind the front, as the renderer sets them.
+  ITEMS.forEach((name, i) => {
+    const s = new THREE.Mesh(new THREE.PlaneGeometry(0.25, 0.25), new THREE.MeshLambertMaterial({ map: tex(name), transparent: true, alphaTest: 0.1, side: THREE.DoubleSide }));
+    s.position.set((i - 1) * 0.3125, -0.5 + 4 / 16 + 0.125, 0.25);
+    g.add(s);
+  });
+  return g;
+}
+const PARTS = { 'Core (tier 1)': core, 'Drive': drive, 'Input': input, 'Output': output, 'Casing': casing };
+
+// The build: core facing south (+z, toward you), drives on the four corners, the input in the middle of the front,
+// outputs in the middle of the left, back and right; its eight places clockwise from the front-left one.
+const RING = [[-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1], [1, 0], [1, 1], [0, 1]];
+const BUILD = ['Drive', 'Output', 'Drive', 'Output', 'Drive', 'Output', 'Drive', 'Input'];
+
+let world, tags = [];
+function placed(group, x, y, z, rotY = 0) { group.position.set(x, y, z); group.rotation.y = rotY; world.add(group); return group; }
+function tag(text, x, y, z) { const el = document.createElement('div'); el.className = 'tag'; el.textContent = text; document.body.append(el); tags.push({ el, p: new THREE.Vector3(x, y, z) }); }
+
+function build() {
+  if (world) scene.remove(world);
+  tags.forEach(t => t.el.remove()); tags = [];
+  world = new THREE.Group(); scene.add(world);
+  const v = VARIANTS[variant];
+  const showParts = view !== 'multiblock', showMulti = view !== 'parts';
+  if (showParts) {
+    Object.entries(PARTS).forEach(([name, make], i) => {
+      const x = (i - 2) * 1.8, z = showMulti ? -4.5 : 0;
+      placed(make(v), x, 0.5, z);
+      tag(name, x, 1.35, z);
+    });
+  }
+  if (showMulti) {
+    const z0 = showParts ? 1.5 : 0;
+    placed(core(v), 0, 0.5, z0);
+    RING.forEach(([dx, dz], i) => {
+      const name = BUILD[i];
+      // An output faces outward, away from the core: west, north or east.
+      // The input faces outward, as an output does.
+      const rot = name === 'Input' ? { '0,1': 0, '0,-1': Math.PI, '-1,0': -Math.PI / 2, '1,0': Math.PI / 2 }[dx + ',' + dz]
+        : name === 'Output' ? (dx === -1 ? -Math.PI / 2 : dx === 1 ? Math.PI / 2 : Math.PI)
+        : name === 'Drive' && v.drive.corner ? { '-1,-1': 0, '1,-1': -Math.PI / 2, '1,1': Math.PI, '-1,1': Math.PI / 2 }[dx + ',' + dz] : 0;
+      placed(PARTS[name](v), dx, 0.5, z0 + dz, rot);
+    });
+  }
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(14, 14), new THREE.MeshLambertMaterial({ color: 0x6d9b4a }));
+  floor.rotation.x = -Math.PI / 2; world.add(floor);
+  document.getElementById('label').textContent = `${variant} (${v.name})`;
+  document.querySelectorAll('#views button[data-view]').forEach(b => b.classList.toggle('on', b.dataset.view === view));
+}
+
+function go(next) {
+  variant = next;
+  params.set('variant', variant); params.set('view', view);
+  try { history.replaceState(null, '', '?' + params); } catch { /* a data: or sandboxed page has no history to write */ }
+  build();
+}
+const step = d => go(keys[(keys.indexOf(variant) + d + keys.length) % keys.length]);
+document.getElementById('prev').onclick = () => step(-1);
+document.getElementById('next').onclick = () => step(1);
+addEventListener('keydown', e => {
+  if (e.target.closest('input, textarea, [contenteditable]')) return;
+  if (e.key === 'ArrowLeft') step(-1);
+  if (e.key === 'ArrowRight') step(1);
+});
+document.querySelectorAll('#views button[data-view]').forEach(b => b.onclick = () => { view = b.dataset.view; go(variant); });
+// One turn: the drives show their turning face for a drive's cap, 5 ticks.
+document.getElementById('top').onclick = () => { view = 'multiblock'; go(variant); camera.position.set(0, 7, 0.001); controls.target.set(0, 0.5, 0); controls.update(); };
+document.getElementById('below').onclick = () => { view = 'multiblock'; go(variant); camera.position.set(0, -6, 0.001); controls.target.set(0, 0.5, 0); controls.update(); };
+document.getElementById('turn').onclick = () => { turning = true; build(); setTimeout(() => { turning = false; build(); }, 250); };
+
+function resize() { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+camera.position.set(4, 7, 11); controls.target.set(0, 0.5, -1.5); controls.update();
+build();
+renderer.setAnimationLoop(() => {
+  controls.update(); renderer.render(scene, camera);
+  for (const t of tags) {
+    const p = t.p.clone().project(camera);
+    t.el.style.display = p.z < 1 ? '' : 'none';
+    t.el.style.left = (p.x + 1) / 2 * innerWidth + 'px'; t.el.style.top = (1 - p.y) / 2 * innerHeight + 'px';
+  }
+});
+</script>
+</body>
+</html>
