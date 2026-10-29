@@ -1,6 +1,6 @@
 # Mechanical Mastery Reborn, the companion mod
 
-Reborn's own blocks and machines (MMR26.1.2 ADR 0003): C.O.D., the essences, and later the lab, the starter machine and the handicaps. Started from the libworks template (5thlayer/libworks) and built on its convention plugin, but kept in this repo's Reborn folder rather than a repo of its own. The pack consumes it as a released jar, like the suite, and `../.packwizignore` keeps this folder out of the pack. Its terms are the line's, in `../GLOSSARY.md` and the root `GLOSSARY.md`; its issues are Reborn's, labelled `26.1.2`.
+Reborn's own blocks and machines (MMR26.1.2 ADR 0003): C.O.D., the essences, and later the Recycler, the lab and the handicaps. Started from the libworks template (5thlayer/libworks) and built on its convention plugin, but kept in this repo's Reborn folder rather than a repo of its own. The pack consumes it as a released jar, like the suite, and `../.packwizignore` keeps this folder out of the pack. Its terms are the line's, in `../GLOSSARY.md` and the root `GLOSSARY.md`; its issues are Reborn's, labelled `26.1.2`.
 
 It depends on no suite mod at compile time, only on the libworks runtime it nests; the plugin's `checkPlaysAlone` fails a build that ships a suite mod's id.
 
