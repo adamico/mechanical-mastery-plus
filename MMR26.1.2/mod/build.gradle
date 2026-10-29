@@ -38,7 +38,7 @@ def skyblockBuilder = 'curse.maven:skyblock-builder-446691:9048404'
 
 dependencies {
     // Each optional to players, and named only by its own plugin under compat/, which loads only when
-    // the mod is installed: EMI shows the decomposing recipes, Jade a Recycler's progress, and Skyblock
+    // the mod is installed: EMI shows decomposing and recycling, Jade a Recycler's progress, and Skyblock
     // Builder says whose island a Recycler stands on. None is on the dev runs, so the game tests prove the
     // mod plays alone; scripts/launch.py plays the local build in the pack, beside all three.
     compileOnly emi

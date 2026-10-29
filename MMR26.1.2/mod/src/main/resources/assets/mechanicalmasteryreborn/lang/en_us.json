@@ -9,6 +9,7 @@
   "config.jade.plugin_mechanicalmasteryreborn.recycler": "Recycler",
   "container.mechanicalmasteryreborn.cod": "C.O.D.",
   "emi.category.mechanicalmasteryreborn.decomposing": "Decomposing",
+  "emi.category.mechanicalmasteryreborn.recycling": "Recycling",
   "item.mechanicalmasteryreborn.advanced_mechanical_essence": "Advanced Mechanical Essence",
   "item.mechanicalmasteryreborn.aureate_essence": "Aureate Essence",
   "item.mechanicalmasteryreborn.basic_mechanical_essence": "Basic Mechanical Essence",
@@ -18,13 +19,15 @@
   "item.mechanicalmasteryreborn.regular_mechanical_essence": "Regular Mechanical Essence",
   "item.mechanicalmasteryreborn.vital_essence": "Vital Essence",
   "item.mechanicalmasteryreborn.warding_essence": "Warding Essence",
-  "mechanicalmasteryreborn.jade.recycler.empty": "Nothing to decompose",
+  "mechanicalmasteryreborn.jade.recycler.empty": "Nothing to decompose or recycle",
   "mechanicalmasteryreborn.jade.recycler.held": "Holds %s %s",
   "mechanicalmasteryreborn.jade.recycler.incomplete": "Incomplete: needs a drive, an input and an output, and nothing else around its core",
-  "mechanicalmasteryreborn.jade.recycler.no_recipe": "Nothing decomposes what it holds",
+  "mechanicalmasteryreborn.jade.recycler.no_recipe": "Nothing decomposes the essence it holds",
   "mechanicalmasteryreborn.jade.recycler.no_room": "Outputs full",
   "mechanicalmasteryreborn.jade.recycler.ready": "Ready",
   "mechanicalmasteryreborn.jade.recycler.too_few": "Holds too few to decompose",
-  "mechanicalmasteryreborn.jade.recycler.too_few_outputs": "Too few outputs for the whole mix",
-  "mechanicalmasteryreborn.jade.recycler.turns": "%s / %s turns"
+  "mechanicalmasteryreborn.jade.recycler.too_few_outputs": "Too few outputs for every result",
+  "mechanicalmasteryreborn.jade.recycler.turns": "%s / %s turns",
+  "mechanicalmasteryreborn.jade.recycler.work.decomposing": "Decomposing",
+  "mechanicalmasteryreborn.jade.recycler.work.recycling": "Recycling"
 }

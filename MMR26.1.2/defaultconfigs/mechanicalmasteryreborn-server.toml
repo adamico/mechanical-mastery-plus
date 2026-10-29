@@ -1,0 +1,6 @@
+# The companion mod's server config, copied into each new world (#184). Only what the pack sets differs from the
+# mod's defaults; NeoForge fills in the rest.
+
+[recycler]
+	# Craftworks' Assembler recipes are run backwards after smelting and before crafting.
+	assembling_types = ["craftworks:assembling"]

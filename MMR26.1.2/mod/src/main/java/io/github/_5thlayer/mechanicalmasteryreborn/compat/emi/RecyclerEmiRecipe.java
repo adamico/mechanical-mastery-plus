@@ -3,31 +3,31 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.compat.emi;
 
-import dev.emi.emi.api.neoforge.NeoForgeEmiIngredient;
+import java.util.List;
+
 import dev.emi.emi.api.recipe.BasicEmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
+import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import io.github._5thlayer.mechanicalmasteryreborn.recipe.DecomposingRecipe;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerLayout;
-import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.resources.Identifier;
 
 /**
- * One decomposing recipe as EMI draws it: the ingredient, with its count, an arrow, and the mix in rows of three,
- * a row per output in the order a Recycler fills them.
+ * One decompose or recycle as EMI draws it: the ingredient, with its count, an arrow, and the results in rows of
+ * three, a row per output in the order a Recycler fills them.
  */
-final class DecomposingEmiRecipe extends BasicEmiRecipe {
+final class RecyclerEmiRecipe extends BasicEmiRecipe {
 
     private static final int SLOT = 18;
     private static final int ARROW = 24;
     private static final int COLUMNS = RecyclerLayout.POSITIONS_PER_OUTPUT;
 
-    DecomposingEmiRecipe(EmiRecipeCategory category, RecipeHolder<DecomposingRecipe> holder) {
-        super(category, holder.id().identifier(), 0, 0);
-        DecomposingRecipe recipe = holder.value();
-        inputs.add(NeoForgeEmiIngredient.of(recipe.ingredient()));
-        recipe.results().forEach(result -> outputs.add(EmiStack.of(result.create())));
+    RecyclerEmiRecipe(EmiRecipeCategory category, Identifier id, EmiIngredient input, List<EmiStack> results) {
+        super(category, id, 0, 0);
+        inputs.add(input);
+        outputs.addAll(results);
         int rows = (outputs.size() + COLUMNS - 1) / COLUMNS;
         this.width = SLOT + 4 + ARROW + 4 + COLUMNS * SLOT;
         this.height = Math.max(SLOT, rows * SLOT);

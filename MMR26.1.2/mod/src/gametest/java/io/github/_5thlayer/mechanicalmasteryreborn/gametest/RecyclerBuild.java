@@ -110,9 +110,15 @@ final class RecyclerBuild {
 
     /** Feeds {@code count} Advanced essence through the core's input face, as an input passes it on. */
     void feed(int count) {
+        feed(new ItemStack(Essences.item(Essence.ADVANCED), count));
+    }
+
+    /** Feeds {@code stack} through the core's input face, and says how many it took. */
+    int feed(ItemStack stack) {
         try (var transaction = Transaction.openRoot()) {
-            core().inputFace().insert(ItemResource.of(Essences.item(Essence.ADVANCED)), count, transaction);
+            int taken = core().inputFace().insert(ItemResource.of(stack), stack.getCount(), transaction);
             transaction.commit();
+            return taken;
         }
     }
 
@@ -120,6 +126,18 @@ final class RecyclerBuild {
     void turn(int turns) {
         for (int i = 0; i < turns; i++) {
             core().turn();
+        }
+    }
+
+    /** Takes what output position {@code position}, counted across the outputs in order, holds, as a hopper would. */
+    ItemStack take(int position) {
+        var output = outputEntity(position / RecyclerLayout.POSITIONS_PER_OUTPUT);
+        int index = position % RecyclerLayout.POSITIONS_PER_OUTPUT;
+        ItemStack held = output.item(index);
+        try (var transaction = Transaction.openRoot()) {
+            int taken = output.face().extract(index, ItemResource.of(held), held.getCount(), transaction);
+            transaction.commit();
+            return held.copyWithCount(taken);
         }
     }
 
@@ -142,6 +160,19 @@ final class RecyclerBuild {
         ItemStack held = outputEntity(position / RecyclerLayout.POSITIONS_PER_OUTPUT).item(position % RecyclerLayout.POSITIONS_PER_OUTPUT);
         helper.assertTrue(ItemStack.isSameItemSameComponents(held, expected) && held.getCount() == expected.getCount(),
                 "output position " + position + " holds " + held + ", not " + expected);
+    }
+
+    /** Fails unless the outputs hold {@code expected}, result i on position i, and nothing else. */
+    void expectOutputs(ItemStack... expected) {
+        int positions = 0;
+        for (BlockPos pos : places) {
+            if (helper.getBlockState(pos).getBlock() instanceof RecyclerOutputBlock) {
+                positions += RecyclerLayout.POSITIONS_PER_OUTPUT;
+            }
+        }
+        for (int i = 0; i < positions; i++) {
+            expectPosition(i, i < expected.length ? expected[i] : ItemStack.EMPTY);
+        }
     }
 
     /** Fails unless the outputs hold the Advanced mix, result i on position i. */

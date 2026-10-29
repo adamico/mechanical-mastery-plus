@@ -1,0 +1,7 @@
+{
+  "type": "mechanicalmasteryreborn:recycling",
+  "ingredient": {"ingredient": "minecraft:comparator", "count": 1},
+  "results": [
+    {"id": "minecraft:quartz", "count": 3}
+  ]
+}

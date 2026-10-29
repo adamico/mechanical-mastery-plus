@@ -1,4 +1,4 @@
-# Repo files, not pack content. The pack is mods/, config/ and kubejs/.
+# Repo files, not pack content. The pack is mods/, config/, defaultconfigs/ and kubejs/.
 /.gitignore
 /docs/
 /scripts/

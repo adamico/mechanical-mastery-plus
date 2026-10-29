@@ -99,7 +99,7 @@ public final class HandDriveBlock extends Block implements RecyclerPart {
                 level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.4F, 0.7F + 0.6F * progress);
                 level.sendParticles(ParticleTypes.ELECTRIC_SPARK, x, y, z, 3, 0.25, 0.05, 0.25, 0.05);
             }
-            case DECOMPOSED -> {
+            case WORKED -> {
                 BlockPos at = core.get().getBlockPos();
                 level.playSound(null, at, SoundEvents.CRAFTER_CRAFT, SoundSource.BLOCKS, 1.0F, 1.0F);
                 level.sendParticles(ParticleTypes.POOF, at.getX() + 0.5, at.getY() + 1.0, at.getZ() + 0.5, 6, 0.3, 0.05, 0.3, 0.02);

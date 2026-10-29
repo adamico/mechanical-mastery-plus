@@ -4,6 +4,11 @@ Written for the pack and its players: what Mechanical Mastery Reborn adds, or ch
 
 ## Unreleased
 
+- Recycling: the Recycler takes any item that isn't an essence and, in eight turns, breaks one down into what made it, by the recipe that makes it run backwards: smelting first, then the assembling types the server config names (the pack names Craftworks'), then crafting. An uncompressing recipe (an ingot from a block) is never run backwards, an ore loses to any other ingredient, a tag returns its first item, and one of what a recipe makes several of returns its share. An item no recipe makes recycles into itself, so surplus can be thrown away. Damage and enchantments are ignored; an item holding other items, such as a filled shulker box, is refused. Recycling is never recorded and never counts against Inflation (#184).
+- The `mechanicalmasteryreborn:recycling` recipe type, which overrides what an item recycles into, with a KubeJS schema (#184).
+- Yield: a decompose or a recycle returns a share of the full amounts, each part of an item left over as the chance of one more. A tier-1 core's, and decomposing by hand's, is a quarter, set in the server config's `recycler.yield.tier_1` (#184).
+- EMI shows every recycle by a recipe in a Recycling tab, and each decompose's and recycle's results at the tier-1 yield, with their chance. Jade says whether a Recycler is decomposing or recycling (#184).
+
 - Decomposing by hand: a right-click with an essence decomposes one into its mix, straight into the inventory, then rests it for 8 seconds (#166).
 - The Recycler, a multiblock built block by block with no screen and no power: a tier-1 core in the middle of a 3x3, and any mix of hand drives, inputs, outputs and casings around it, with at least one drive, input and output. Each right-click on a hand drive turns it, at most once every 5 ticks, and drives add up; eight turns decompose one essence. Inputs take essence by hand, from a hopper above or from anything beside them. Each output shows three results on a shelf, taken by a right-click or by a hopper below, filled clockwise from the front-left place (#166).
 - Turning a hand drive is heard and seen: a click that rises in pitch as the decompose goes, with sparks; the crafter's sound and a puff when it decomposes; a dull click and smoke when the Recycler can't decompose, so the turn is lost (#166).

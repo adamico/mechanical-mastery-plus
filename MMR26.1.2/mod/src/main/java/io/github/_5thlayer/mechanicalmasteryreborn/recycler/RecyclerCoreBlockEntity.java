@@ -9,7 +9,9 @@ import java.util.List;
 import io.github._5thlayer.libworks.transfer.GuardedResourceHandler;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
-import io.github._5thlayer.mechanicalmasteryreborn.recipe.DecomposingRecipe;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.Recycling;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Share;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.Yield;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
@@ -17,6 +19,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -29,38 +32,50 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * A Recycler's core: its one input buffer, the turns its drives have delivered, and the work. Each turn
- * counts only while the Recycler can decompose what it holds; the {@link #TURNS}th decomposes one recipe's
- * worth into its mix, on the outputs, result <i>i</i> on the <i>i</i>th position ({@link RecyclerLayout}).
- * It needs no power and no ticking: drives turn it.
+ * counts only while the Recycler can work what it holds; the {@link #TURNS}th decomposes one recipe's worth
+ * of an essence into its mix, or recycles one of anything else into what made it ({@link Recycling}), on the
+ * outputs, result <i>i</i> on the <i>i</i>th position ({@link RecyclerLayout}). Either returns the core's
+ * {@link Yield} of the full amounts ({@link RecyclerConfig}). It needs no power and no ticking: drives turn it.
  *
- * <p>Each decompose is recorded, on a Recycler, for the team whose island it stands on ({@link DecomposeLog}).
+ * <p>Each decompose is recorded, on a Recycler, for the team whose island it stands on ({@link DecomposeLog});
+ * a recycle never is.
  */
 public final class RecyclerCoreBlockEntity extends BlockEntity {
 
     /** The first core's tier. */
     public static final int TIER = 1;
-    /** Turns a decompose takes on a tier-1 core. */
+    /** Turns a decompose or a recycle takes on a tier-1 core. */
     public static final int TURNS = 8;
 
     private static final String BUFFER_KEY = "buffer";
     private static final String TURNS_KEY = "turns";
 
-    /** Whether the Recycler can decompose now, and why not. */
+    /** Whether the Recycler can work now, and why not. */
     public enum Status {
-        /** Whole, with enough of a decomposable item and room for its mix. */
+        /** Whole, with enough of what it holds and room for the most its work can return. */
         READY,
         /** Its 3x3 lacks a drive, an input or an output, or holds something else. */
         INCOMPLETE,
         /** It holds nothing. */
         EMPTY,
-        /** It holds what no recipe decomposes, since the recipes changed. */
+        /** It holds an essence no recipe decomposes, since the recipes changed. */
         NO_RECIPE,
         /** It holds fewer than one decompose takes. */
         TOO_FEW,
-        /** The mix has more results than its outputs have positions. */
+        /** The work has more results than its outputs have positions. */
         TOO_FEW_OUTPUTS,
-        /** The whole mix doesn't fit on its outputs. */
+        /** The most the work can return doesn't fit on its outputs. */
         NO_ROOM
+    }
+
+    /** What the Recycler does with what it holds. */
+    public enum Work {
+        /** It holds nothing. */
+        NONE,
+        /** An essence, into its mix. */
+        DECOMPOSING,
+        /** Anything else, into what made it. */
+        RECYCLING
     }
 
     private final Buffer buffer = new Buffer();
@@ -71,7 +86,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         super(Recycler.CORE_ENTITY.get(), pos, state);
     }
 
-    /** The buffer as its inputs reach it: insert only, and only what a recipe decomposes. */
+    /** The buffer as its inputs reach it: insert only, and only an essence a recipe decomposes or what recycles. */
     public ResourceHandler<ItemResource> inputFace() {
         return inputFace;
     }
@@ -90,17 +105,23 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         return plan().status();
     }
 
-    /** What a turn did. */
-    public enum Turn {
-        /** Nothing: the Recycler can't decompose now. */
-        STOPPED,
-        /** It counted toward the decompose under way. */
-        COUNTED,
-        /** It was the last, and decomposed. */
-        DECOMPOSED
+    /** What the Recycler does with what it holds, whether or not it can now. */
+    public Work work() {
+        ItemStack held = held();
+        return held.isEmpty() ? Work.NONE : Essences.of(held.getItem()).isPresent() ? Work.DECOMPOSING : Work.RECYCLING;
     }
 
-    /** One turn from a drive. It counts only while the Recycler can decompose; the last one decomposes. */
+    /** What a turn did. */
+    public enum Turn {
+        /** Nothing: the Recycler can't work now. */
+        STOPPED,
+        /** It counted toward the work under way. */
+        COUNTED,
+        /** It was the last, and decomposed or recycled: the work was done. */
+        WORKED
+    }
+
+    /** One turn from a drive. It counts only while the Recycler can work; the last one decomposes or recycles. */
     public Turn turn() {
         if (!(level instanceof ServerLevel server)) {
             return Turn.STOPPED;
@@ -115,23 +136,29 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
             return Turn.COUNTED;
         }
         turns = 0;
-        decompose(server, plan);
-        return Turn.DECOMPOSED;
+        work(server, plan);
+        return Turn.WORKED;
     }
 
-    private void decompose(ServerLevel server, Plan plan) {
-        int count = plan.recipe().ingredient().count();
+    private void work(ServerLevel server, Plan plan) {
         ItemStack held = held();
-        buffer.set(0, ItemResource.of(held), held.getCount() - count);
-        List<ItemStack> mix = plan.recipe().mix();
-        for (int i = 0; i < mix.size(); i++) {
-            plan.outputs().get(i / RecyclerLayout.POSITIONS_PER_OUTPUT).put(i % RecyclerLayout.POSITIONS_PER_OUTPUT, mix.get(i));
+        buffer.set(0, ItemResource.of(held), held.getCount() - plan.take());
+        double yield = RecyclerConfig.yieldOf(TIER);
+        List<Share<ItemStackTemplate>> full = plan.full();
+        for (int i = 0; i < full.size(); i++) {
+            int count = Yield.roll(full.get(i).amount(), yield, server.getRandom()::nextDouble);
+            if (count > 0) {
+                plan.outputs().get(i / RecyclerLayout.POSITIONS_PER_OUTPUT).put(i % RecyclerLayout.POSITIONS_PER_OUTPUT,
+                        full.get(i).item().create().copyWithCount(count));
+            }
         }
-        Essences.of(held.getItem()).ifPresent(essence -> DecomposeLog.get(server.getServer())
-                .record(Teams.at(server, worldPosition), essence, count, DecomposeLog.Way.RECYCLER));
+        if (plan.work() == Work.DECOMPOSING) {
+            Essences.of(held.getItem()).ifPresent(essence -> DecomposeLog.get(server.getServer())
+                    .record(Teams.at(server, worldPosition), essence, plan.take(), DecomposeLog.Way.RECYCLER));
+        }
     }
 
-    /** What the Recycler would decompose now, onto which outputs, or why it can't. */
+    /** What the Recycler would decompose or recycle now, onto which outputs, or why it can't. */
     private Plan plan() {
         if (!(level instanceof ServerLevel server)) {
             return Plan.stopped(Status.INCOMPLETE);
@@ -144,24 +171,35 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         if (held.isEmpty()) {
             return Plan.stopped(Status.EMPTY);
         }
-        var found = Decomposing.recipeFor(server, held);
-        if (found.isEmpty()) {
-            return Plan.stopped(Status.NO_RECIPE);
+        Work work = work();
+        int take = 1;
+        List<Share<ItemStackTemplate>> full;
+        if (work == Work.DECOMPOSING) {
+            var found = Decomposing.recipeFor(server, held);
+            if (found.isEmpty()) {
+                return Plan.stopped(Status.NO_RECIPE);
+            }
+            take = found.get().value().ingredient().count();
+            if (held.getCount() < take) {
+                return Plan.stopped(Status.TOO_FEW);
+            }
+            full = found.get().value().results().stream().map(result -> new Share<>(result.withCount(1), result.count())).toList();
+        } else {
+            full = Recycling.recyclesInto(server.getServer(), held.getItem()).stream()
+                    .map(share -> new Share<>(new ItemStackTemplate(share.item()), share.amount())).toList();
         }
-        DecomposingRecipe recipe = found.get().value();
-        if (held.getCount() < recipe.ingredient().count()) {
-            return Plan.stopped(Status.TOO_FEW);
-        }
-        List<ItemStack> mix = recipe.mix();
-        if (mix.size() > outputs.size() * RecyclerLayout.POSITIONS_PER_OUTPUT) {
+        if (full.size() > outputs.size() * RecyclerLayout.POSITIONS_PER_OUTPUT) {
             return Plan.stopped(Status.TOO_FEW_OUTPUTS);
         }
-        for (int i = 0; i < mix.size(); i++) {
-            if (!outputs.get(i / RecyclerLayout.POSITIONS_PER_OUTPUT).fits(i % RecyclerLayout.POSITIONS_PER_OUTPUT, mix.get(i))) {
+        double yield = RecyclerConfig.yieldOf(TIER);
+        for (int i = 0; i < full.size(); i++) {
+            int most = Yield.most(full.get(i).amount(), yield);
+            if (most > 0 && !outputs.get(i / RecyclerLayout.POSITIONS_PER_OUTPUT)
+                    .fits(i % RecyclerLayout.POSITIONS_PER_OUTPUT, full.get(i).item().create().copyWithCount(most))) {
                 return Plan.stopped(Status.NO_ROOM);
             }
         }
-        return new Plan(Status.READY, recipe, outputs);
+        return new Plan(Status.READY, work, take, full, outputs);
     }
 
     /**
@@ -217,14 +255,15 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         }
     }
 
-    private record Plan(Status status, @Nullable DecomposingRecipe recipe, List<RecyclerOutputBlockEntity> outputs) {
+    /** The work: how many of what it holds it takes, and the full amounts, before yield, onto which outputs. */
+    private record Plan(Status status, Work work, int take, List<Share<ItemStackTemplate>> full, List<RecyclerOutputBlockEntity> outputs) {
 
         static Plan stopped(Status status) {
-            return new Plan(status, null, List.of());
+            return new Plan(status, Work.NONE, 0, List.of(), List.of());
         }
     }
 
-    /** The one slot, which takes only what a recipe decomposes. */
+    /** The one slot, which takes only an essence a recipe decomposes, or anything else that recycles. */
     private final class Buffer extends ItemStacksResourceHandler {
 
         Buffer() {
@@ -233,7 +272,9 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
 
         @Override
         public boolean isValid(int index, ItemResource resource) {
-            return level instanceof ServerLevel server && Decomposing.recipeFor(server, resource.toStack()).isPresent();
+            ItemStack stack = resource.toStack();
+            return level instanceof ServerLevel server
+                    && (Decomposing.recipeFor(server, stack).isPresent() || Recycling.recyclable(stack));
         }
 
         @Override
