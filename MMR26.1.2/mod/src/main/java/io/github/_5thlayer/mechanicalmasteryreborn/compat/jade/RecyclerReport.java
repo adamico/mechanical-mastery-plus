@@ -9,6 +9,7 @@ import io.github._5thlayer.libworks.machine.jade.MachineReport;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity.Status;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerPart;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -17,7 +18,12 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import org.jspecify.annotations.Nullable;
+import snownee.jade.api.BlockAccessor;
+import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.ITooltip;
+import snownee.jade.api.StreamServerDataProvider;
+import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.BoxStyle;
 import snownee.jade.api.ui.JadeUI;
 import snownee.jade.api.view.ProgressView;
@@ -25,7 +31,8 @@ import snownee.jade.api.view.ProgressView;
 /**
  * What the server tells Jade about a Recycler core: its {@link Status}, the turns done toward the decompose
  * under way, and what it holds. {@link Lines} words it on the client, apart so that a dedicated server never
- * loads Jade's drawing.
+ * loads Jade's drawing. A drive shows its core's report too ({@link #DRIVE}): it has no block entity, so the
+ * server finds its core.
  */
 final class RecyclerReport {
 
@@ -43,7 +50,51 @@ final class RecyclerReport {
     }
 
     static final MachineReport<RecyclerCoreBlockEntity, Data> REPORT = new MachineReport<>(UID, RecyclerCoreBlockEntity.class,
-            core -> new Data(core.status(), core.turns(), core.held()), CODEC);
+            RecyclerReport::read, CODEC);
+
+    /** A drive's report: its core's, or nothing when it is part of no Recycler. */
+    static final DriveReport DRIVE = new DriveReport();
+
+    private static Data read(RecyclerCoreBlockEntity core) {
+        return new Data(core.status(), core.turns(), core.held());
+    }
+
+    static final class DriveReport implements StreamServerDataProvider<BlockAccessor, Data> {
+
+        private static final Identifier DRIVE_UID = Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "drive");
+
+        private DriveReport() {
+        }
+
+        @Override
+        public @Nullable Data streamData(BlockAccessor accessor) {
+            return RecyclerPart.coreOf(accessor.getLevel(), accessor.getPosition()).map(RecyclerReport::read).orElse(null);
+        }
+
+        @Override
+        public StreamCodec<RegistryFriendlyByteBuf, Data> streamCodec() {
+            return CODEC;
+        }
+
+        @Override
+        public Identifier getUid() {
+            return DRIVE_UID;
+        }
+
+        /** Its lines on the client, the core's. */
+        static final class Client implements IBlockComponentProvider {
+
+            @Override
+            public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
+                DRIVE.decodeFromData(accessor).ifPresent(data -> Lines.add(data, tooltip));
+            }
+
+            @Override
+            public Identifier getUid() {
+                return DRIVE_UID;
+            }
+        }
+    }
 
     private RecyclerReport() {
     }

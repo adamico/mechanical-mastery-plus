@@ -5,6 +5,7 @@
   "block.mechanicalmasteryreborn.recycler_core_1": "Recycler Core (Tier 1)",
   "block.mechanicalmasteryreborn.recycler_input": "Recycler Input",
   "block.mechanicalmasteryreborn.recycler_output": "Recycler Output",
+  "config.jade.plugin_mechanicalmasteryreborn.drive": "Recycler drive",
   "config.jade.plugin_mechanicalmasteryreborn.recycler": "Recycler",
   "container.mechanicalmasteryreborn.cod": "C.O.D.",
   "emi.category.mechanicalmasteryreborn.decomposing": "Decomposing",
