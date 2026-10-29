@@ -5,7 +5,8 @@ The 26.1.2 pack line, on NeoForge: a skyblock where each team starts on its own 
 ## What is here
 
 - The pack: a [packwiz](https://packwiz.infra.link) manifest, `pack.toml`, `index.toml` and a `.pw.toml` per mod in `mods/`, with `config/` and `kubejs/`. Every jar comes from CurseForge. `MODS.md` says what each mod is for.
-- The island: Skyblock Builder's config in `config/skyblockbuilder/`, with the team island in `templates/islands/reborn.snbt`. `kubejs/server_scripts/team_of_one.js` gives a player with no team a team, and an island, of their own.
+- The island: Skyblock Builder's config in `config/skyblockbuilder/`, with the team island in `templates/islands/reborn.snbt`: C.O.D. and a tree, and no Recycler, which the team builds from what it decomposes by hand. `kubejs/server_scripts/team_of_one.js` gives a player with no team a team, and an island, of their own.
+- The recipes: `kubejs/server_scripts/decomposing.js` gives each essence its mix and the Recycler's parts their recipes.
 - `mod/`: the companion mod, a Gradle build of its own (see `mod/AGENTS.md`). `.packwizignore` keeps it, and the repo's other files, out of the pack.
 
 ## Working on the pack

@@ -6,7 +6,7 @@ Every mod in `mods/` has a role here (#163, story 49). A content mod with no rol
 
 The suite, taken as released CurseForge jars:
 
-- **Craftworks**: decomposing, on its Assemblers and Refiners, and the Personal Assembler that plans from essence.
+- **Craftworks**: crafting, on its Assemblers and Refiners and the Personal Assembler, in place of grid crafting. Decomposing is the companion mod's Recycler.
 - **Beltworks**, **Pipeworks**: carry the decomposed intermediates and fluids, so the loop runs unattended.
 - **Wireworks**: power. Its generators are what the energy handicap turns off.
 - **Fieldworks**: ore blocks crafted from intermediates, and the Harvester that works them.
@@ -34,7 +34,7 @@ The FactoryWorks Showcase's performance and QoL mods, minus its content: no new 
 
 - Performance: **AI Improvements**, **BadOptimizations**, **Clumps**, **Connectivity**, **Entity Culling**, **FerriteCore**, **fix GPU memory leak**, **ImmediatelyFast**, **ModernFix**, **Particle Core**, **Sodium**, **spark**.
 - Fixes: **AttributeFix**, **Crash Assistant**, **I'm Fast**, **Max Health Fix**, **Neruina**, **NetherPortalFix**.
-- QoL: **AppleSkin**, **BetterF3**, **Block Runner**, **Bridging Mod**, **Clean Swing Through Grass**, **Colorful Hearts**, **Configured**, **Controlling**, **Default Options**, **Double Doors**, **Durability Tooltip**, **Enchantment Descriptions**, **Extreme Sound Muffler**, **FallingTree**, **Freecam**, **Inventory Essentials**, **Inventory Sorter**, **Jade**, **Leaves Be Gone**, **More Overlays Updated**, **Mouse Tweaks**, **RightClickHarvest**, **Simple Discord Rich Presence**, **Sound Physics Remastered**, **Swivel**, **Toast Control**, **TrashSlot**.
+- QoL: **AppleSkin**, **BetterF3**, **Block Runner**, **Bridging Mod**, **Clean Swing Through Grass**, **Colorful Hearts**, **Configured**, **Controlling**, **Default Options**, **Durability Tooltip**, **Enchantment Descriptions**, **Extreme Sound Muffler**, **Freecam**, **Inventory Essentials**, **Inventory Sorter**, **Jade**, **Leaves Be Gone**, **More Overlays Updated**, **Mouse Tweaks**, **RightClickHarvest**, **Sound Physics Remastered**, **Swivel**, **Toast Control**, **TrashSlot**.
 
 Left out of the Showcase's list, as content with no role here: Animal Feeding Trough, Charging Gadgets, Chisel Reborn, Comforts, Connected Glass, Easy Villagers, Energy Meter, Factory Blocks, FTB Chunks, FTB Filter System, FTB Industrial Contraptions, Functional Storage, GraveStone, Just Dire Things, JustHammers, Mining Gadgets, OpenBlocks Elevator, Refined Storage Curios Integration, Sophisticated Backpacks, Starter Kit and XP Tome. JEI and its addons (JER, JEP, JEED) go too, since EMI is the viewer.
 

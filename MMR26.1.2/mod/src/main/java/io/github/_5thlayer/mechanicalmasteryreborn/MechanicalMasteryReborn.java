@@ -5,11 +5,13 @@ package io.github._5thlayer.mechanicalmasteryreborn;
 
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 
 /**
- * The mod's entry point: the essences and C.O.D., and its part of the suite's Works tab. The game tests
+ * The mod's entry point: the essences, C.O.D., the decomposing recipes and the Recycler, and its part of the suite's Works tab. The game tests
  * hook themselves in from the {@code gametest} source set, which never ships (libworks ADR 0011).
  */
 @Mod(MechanicalMasteryReborn.MOD_ID)
@@ -21,6 +23,8 @@ public final class MechanicalMasteryReborn {
     public MechanicalMasteryReborn(IEventBus modBus) {
         Essences.register(modBus);
         Cod.register(modBus);
+        Decomposing.register(modBus);
+        Recycler.register(modBus);
         modBus.addListener(WorksTabContents::add);
     }
 }

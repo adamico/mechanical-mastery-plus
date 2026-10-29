@@ -15,3 +15,22 @@ Source: MMP1.19.2/kubejs/assets/kubejs/textures/item/cube1.png to cube4.png, cop
         four Mechanical Essences and recoloured from cube4.png for the Transmuted Essences and
         Quintessence
 Licence: MIT
+
+Recycler textures
+-----------------
+
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/block/recycler_*.png
+Author: Malcolm Riley
+Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
+        8b85ad732023174d9a9da74e6bf2272d6c0bef17
+        - recycler_plating.png, recycler_vent.png, recycler_casing.png, recycler_drive.png and
+          recycler_crate.png are space-plating-plain, space-plating-vent,
+          space-plating-convex-rivets-horizontal, space-plating-square and space_crate_top, copied
+          unmodified.
+        - recycler_edge.png is space-plating-convex-inset-horizontal with both rails redrawn from one
+          plain stretch of its top rail, the inner mirrored, so they match.
+        - recycler_drive_corner.png and recycler_drive_corner_bottom.png are space-plating-plain with
+          that rail along two edges, mitred at the corner; the bottom one flipped north to south.
+        - recycler_output_front.png is space-plating-plain with space-plating-square's outermost rows
+          and columns, and a 1px lip round the opening in a shade taken from space-plating-square.
+Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)

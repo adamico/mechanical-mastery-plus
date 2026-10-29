@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 
 import com.mojang.serialization.MapCodec;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
+import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -66,6 +67,10 @@ public final class MechanicalMasteryRebornGameTests {
         CreativeTabTests.register(tests);
         EssenceTests.register(tests);
         CodTests.register(tests);
+        HandDecomposeTests.register(tests);
+        RecyclerTests.register(tests);
+        // Each test that records a decompose claims a team of its own.
+        Teams.use(new TestTeams(Teams.installed()));
     }
 
     private static Identifier id(String path) {

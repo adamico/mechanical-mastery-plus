@@ -37,6 +37,15 @@ precedence = "override"
 SPDX-FileCopyrightText = "Andrea D'Amico"
 SPDX-License-Identifier = "MIT"
 
+# The Recycler's textures, from Malcolm Riley's unused-textures, some modified (NOTICE).
+[[annotations]]
+path = [
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/block/recycler_*.png",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "Malcolm Riley"
+SPDX-License-Identifier = "CC-BY-4.0"
+
 # The Gradle wrapper is Gradle's.
 [[annotations]]
 path = ["gradlew", "gradlew.bat", "gradle/wrapper/**"]

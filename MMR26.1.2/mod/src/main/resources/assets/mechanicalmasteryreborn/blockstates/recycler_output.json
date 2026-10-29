@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mechanicalmasteryreborn:block/recycler_output"
+    },
+    "facing=east": {
+      "model": "mechanicalmasteryreborn:block/recycler_output",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "mechanicalmasteryreborn:block/recycler_output",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mechanicalmasteryreborn:block/recycler_output",
+      "y": 270
+    }
+  }
+}

@@ -10,15 +10,19 @@ hash = "942e81b971479152385b4ad9c3471653325f04946c34d9dd2aefc02c744517bc"
 
 [[files]]
 file = "config/skyblockbuilder/templates.json5"
-hash = "9e5746881b978bf07083dc6a1865d3da0ed8e8babe9d9f10781fd7c9242fd13b"
+hash = "10a69812eaec4a419c69f796a30c6c139bcf873ca274625e91f087cce26a8f3b"
 
 [[files]]
 file = "config/skyblockbuilder/templates/islands/reborn.snbt"
-hash = "5b8a575fc44dc3a06f26ff6df6de9a2b8e4113e94cfb60c990769e3f8d1e73aa"
+hash = "e13acc259ba25e3a0eeacaf7d5f14a7153c4e3ff10b8a901660c9bd7d76fa047"
 
 [[files]]
 file = "config/skyblockbuilder/templates/islands/spawn.snbt"
 hash = "c74163f57bae03bbb4229bc3a7e7e294c3d5ee0b83c829f3643fa16481878094"
+
+[[files]]
+file = "kubejs/server_scripts/decomposing.js"
+hash = "0b2e42b9922d0fc68b926001c58d2cf17e4162fb5c41f4e0a4be0093a2d87524"
 
 [[files]]
 file = "kubejs/server_scripts/team_of_one.js"
@@ -145,11 +149,6 @@ hash = "c4ef0a6503dd9511520d47f8c1938e5910cdcc85ded4040525a47f02f3d8869d"
 metafile = true
 
 [[files]]
-file = "mods/double-doors.pw.toml"
-hash = "fbcfac9279a54e2aec976c473abb74b3a1812270e05204642580ba0de5f248d9"
-metafile = true
-
-[[files]]
 file = "mods/durability-tooltip.pw.toml"
 hash = "d1d2ae59cd36377cb182c2e4b4a389a4fd8dd5f8fc5a00dc10292858ccb28392"
 metafile = true
@@ -172,11 +171,6 @@ metafile = true
 [[files]]
 file = "mods/extreme-sound-muffler.pw.toml"
 hash = "7008179a7ed6e27a8ae0ef292d870afd0f8af82277eba6b42ca5a17cfadd5c94"
-metafile = true
-
-[[files]]
-file = "mods/falling-tree.pw.toml"
-hash = "8a80c54004918232dabfa57b7f48b93a698a80a382b5634a9a0e8345bff260c7"
 metafile = true
 
 [[files]]
@@ -377,11 +371,6 @@ metafile = true
 [[files]]
 file = "mods/searchables.pw.toml"
 hash = "82e084e5fe83f87a01bc7f030f5ca0d59274122e6d634bdcb5d4c9cb3385dd71"
-metafile = true
-
-[[files]]
-file = "mods/simple-discord-rich-presence.pw.toml"
-hash = "5a9ee49608c865f487a1b59bbe6394ce85308d2b5426048b741ca51581a078ab"
 metafile = true
 
 [[files]]

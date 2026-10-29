@@ -7,11 +7,12 @@ import io.github._5thlayer.libworks.WorksTab;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 /**
  * Every obtainable item of the mod, in the suite's Works tab and no other (FactoryWorks ADR-0128): C.O.D.,
- * then the Mechanical Essences. One listener, in the order the tab shows them, which
+ * then the Mechanical Essences, then the Recycler's parts. One listener, in the order the tab shows them, which
  * {@code CreativeTabTests} lists too. The essences no player can have yet are in no tab.
  */
 final class WorksTabContents {
@@ -29,5 +30,10 @@ final class WorksTabContents {
                 event.accept(Essences.item(essence));
             }
         }
+        event.accept(Recycler.CORE_ITEM.get());
+        event.accept(Recycler.HAND_DRIVE_ITEM.get());
+        event.accept(Recycler.INPUT_ITEM.get());
+        event.accept(Recycler.OUTPUT_ITEM.get());
+        event.accept(Recycler.CASING_ITEM.get());
     }
 }

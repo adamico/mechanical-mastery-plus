@@ -1,6 +1,14 @@
 {
   "block.mechanicalmasteryreborn.cod": "C.O.D.",
+  "block.mechanicalmasteryreborn.hand_drive": "Hand Drive",
+  "block.mechanicalmasteryreborn.recycler_casing": "Recycler Casing",
+  "block.mechanicalmasteryreborn.recycler_core_1": "Recycler Core (Tier 1)",
+  "block.mechanicalmasteryreborn.recycler_input": "Recycler Input",
+  "block.mechanicalmasteryreborn.recycler_output": "Recycler Output",
+  "config.jade.plugin_mechanicalmasteryreborn.drive": "Recycler drive",
+  "config.jade.plugin_mechanicalmasteryreborn.recycler": "Recycler",
   "container.mechanicalmasteryreborn.cod": "C.O.D.",
+  "emi.category.mechanicalmasteryreborn.decomposing": "Decomposing",
   "item.mechanicalmasteryreborn.advanced_mechanical_essence": "Advanced Mechanical Essence",
   "item.mechanicalmasteryreborn.aureate_essence": "Aureate Essence",
   "item.mechanicalmasteryreborn.basic_mechanical_essence": "Basic Mechanical Essence",
@@ -9,5 +17,14 @@
   "item.mechanicalmasteryreborn.quintessence": "Quintessence",
   "item.mechanicalmasteryreborn.regular_mechanical_essence": "Regular Mechanical Essence",
   "item.mechanicalmasteryreborn.vital_essence": "Vital Essence",
-  "item.mechanicalmasteryreborn.warding_essence": "Warding Essence"
+  "item.mechanicalmasteryreborn.warding_essence": "Warding Essence",
+  "mechanicalmasteryreborn.jade.recycler.empty": "Nothing to decompose",
+  "mechanicalmasteryreborn.jade.recycler.held": "Holds %s %s",
+  "mechanicalmasteryreborn.jade.recycler.incomplete": "Incomplete: needs a drive, an input and an output, and nothing else around its core",
+  "mechanicalmasteryreborn.jade.recycler.no_recipe": "Nothing decomposes what it holds",
+  "mechanicalmasteryreborn.jade.recycler.no_room": "Outputs full",
+  "mechanicalmasteryreborn.jade.recycler.ready": "Ready",
+  "mechanicalmasteryreborn.jade.recycler.too_few": "Holds too few to decompose",
+  "mechanicalmasteryreborn.jade.recycler.too_few_outputs": "Too few outputs for the whole mix",
+  "mechanicalmasteryreborn.jade.recycler.turns": "%s / %s turns"
 }

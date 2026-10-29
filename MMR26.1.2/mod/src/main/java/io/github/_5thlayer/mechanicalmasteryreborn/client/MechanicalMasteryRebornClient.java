@@ -5,20 +5,27 @@ package io.github._5thlayer.mechanicalmasteryreborn.client;
 
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-/** The client's side: C.O.D.'s screen. */
+/** The client's side: C.O.D.'s screen, and the items on a Recycler output's shelf. */
 @Mod(value = MechanicalMasteryReborn.MOD_ID, dist = Dist.CLIENT)
 public final class MechanicalMasteryRebornClient {
 
     public MechanicalMasteryRebornClient(IEventBus modBus) {
         modBus.addListener(MechanicalMasteryRebornClient::registerScreens);
+        modBus.addListener(MechanicalMasteryRebornClient::registerRenderers);
     }
 
     private static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(Cod.MENU.get(), CodScreen::new);
+    }
+
+    private static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(Recycler.OUTPUT_ENTITY.get(), RecyclerOutputRenderer::new);
     }
 }
