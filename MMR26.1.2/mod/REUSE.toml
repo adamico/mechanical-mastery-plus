@@ -25,12 +25,13 @@ path = [
 SPDX-FileCopyrightText = "2026 5thlayer"
 SPDX-License-Identifier = "MIT"
 
-# Mechanical Mastery Plus's own art, by its maintainer, carried over from MMP1.19.2/ (NOTICE): the four Mechanical Essences copied as they are, the Transmuted Essences and Quintessence
-# recoloured from the Advanced one, and C.O.D. scaled down from the 1.19.2 quest book's cod.png.
+# Mechanical Mastery Plus's own art, by its maintainer, carried over from MMP1.19.2/ (NOTICE): the
+# four Mechanical Essences copied as they are, and the Transmuted Essences and Quintessence
+# recoloured from the Advanced one. C.O.D. has no texture of its own: its model draws vanilla's at
+# runtime (libworks ADR 0012).
 [[annotations]]
 path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/item/*.png",
-    "src/main/resources/assets/mechanicalmasteryreborn/textures/block/cod.png",
 ]
 precedence = "override"
 SPDX-FileCopyrightText = "Andrea D'Amico"
