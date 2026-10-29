@@ -2,7 +2,7 @@ hash-format = "sha256"
 
 [[files]]
 file = "config/defaultworldtype/client-config.toml"
-hash = "5b806b4f023b1eb3617a3f50dcc70ba1ee35ba26254527ffa5c2957e9d406f0a"
+hash = "9f26e8c0442c30ae6c37532736f2282d7272beec800cca7431e52f9242dc7f04"
 
 [[files]]
 file = "config/skyblockbuilder/dimensions.json5"
@@ -286,7 +286,7 @@ metafile = true
 
 [[files]]
 file = "mods/kubejs.pw.toml"
-hash = "e25f3d8cd0a341c2a59ed73b820b21d159d997f5629957510c55e8e17d41b727"
+hash = "24fbef7b816e9f90e0dd956308d5e722f4145af44b1b09eab186334a06f080fa"
 metafile = true
 
 [[files]]
