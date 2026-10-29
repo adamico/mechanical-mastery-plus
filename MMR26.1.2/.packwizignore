@@ -1,0 +1,3 @@
+# Repo files, not pack content.
+# The companion mod's source: the pack takes the mod as a released jar, like any other (ADR 0003).
+/mod/

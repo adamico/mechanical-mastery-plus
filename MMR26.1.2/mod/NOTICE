@@ -1,0 +1,19 @@
+Third-party material committed to this repository
+==================================================
+
+Each entry names the files, their author, where they came from and the licence they are under. A
+file listed here is NOT covered by the licence this repository states for its own work; its own
+licence governs it. Which licence covers which file is REUSE.toml's to say; this list is the
+credits for what was copied in.
+
+Mechanical Mastery Plus textures
+--------------------------------
+
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/item/*.png,
+       src/main/resources/assets/mechanicalmasteryreborn/textures/block/cod.png
+Author: Andrea D'Amico, for Mechanical Mastery Plus (MMP1.19.2/ in this repository)
+Source: MMP1.19.2/kubejs/assets/kubejs/textures/item/cube1.png to cube4.png, copied unmodified as the
+        four Mechanical Essences and recoloured from cube4.png for the Transmuted Essences and
+        Quintessence; MMP1.19.2/config/openloader/resources/mechanical_mastery_plus/assets/ftbquests/
+        textures/gui/cod.png, scaled from 1024 to 64 pixels square for C.O.D.
+Licence: MIT

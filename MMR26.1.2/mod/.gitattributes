@@ -1,0 +1,2 @@
+# Each change adds its own line under Unreleased; keep both sides of a merge.
+CHANGELOG.md merge=union
