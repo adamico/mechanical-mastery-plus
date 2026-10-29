@@ -1,0 +1,45 @@
+version = 1
+
+# Java files carry their own SPDX headers. This file marks everything that
+# can't hold one.
+
+[[annotations]]
+path = [
+    "**/*.gradle",
+    "**/gradle.properties",
+    ".gitignore",
+    ".gitattributes",
+    "**/*.mods.toml",
+    "**/*.md",
+    "**/src/main/resources/**/*.json",
+    "**/src/gametest/resources/**/*.json",
+    "**/src/main/resources/**/*.mcmeta",
+    "**/src/main/resources/**/*.mcfunction",
+    "**/src/gametest/resources/**/*.mcmeta",
+    "**/src/gametest/resources/**/*.mcfunction",
+    "**/src/gametest/resources/**/*.nbt",
+    "**/src/main/resources/**/*.nbt",
+    "LICENSE",
+    "NOTICE",
+]
+SPDX-FileCopyrightText = "2026 5thlayer"
+SPDX-License-Identifier = "MIT"
+
+# Mechanical Mastery Plus's own art, by its maintainer, carried over from MMP1.19.2/ (NOTICE): the
+# four Mechanical Essences copied as they are, and the Transmuted Essences and Quintessence
+# recoloured from the Advanced one. C.O.D. has no texture of its own: its model draws vanilla's at
+# runtime (libworks ADR 0012).
+[[annotations]]
+path = [
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/*.png",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "Andrea D'Amico"
+SPDX-License-Identifier = "MIT"
+
+# The Gradle wrapper is Gradle's.
+[[annotations]]
+path = ["gradlew", "gradlew.bat", "gradle/wrapper/**"]
+precedence = "override"
+SPDX-FileCopyrightText = "Gradle"
+SPDX-License-Identifier = "Apache-2.0"

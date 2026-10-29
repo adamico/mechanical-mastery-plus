@@ -1,0 +1,7 @@
+# SPDX-FileCopyrightText: 2026 5thlayer
+# SPDX-License-Identifier: MIT
+#
+# The JDK that runs Gradle here, matching the toolchain build.gradle asks for.
+
+[tools]
+java = "temurin-25"

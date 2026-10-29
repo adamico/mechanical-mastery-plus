@@ -1,0 +1,21 @@
+// The Module build, every piece of it from the libworks convention plugin (libworks ADR 0003):
+// ModDevGradle on Java 25, the game test server that names each test, the jar's licensing, ~/.m2-only
+// publishing, and the release, upload and buildGametestStructures tasks.
+plugins {
+    id 'io.github.5thlayer.libworks.module' version '0.4.5'
+}
+
+// What the Module requires of other Modules, each as a range (libworks ADR 0003):
+libworks {
+    // upstream('groundworks') { range = '[0.4.0,0.5)' }
+    // Nested by jar-in-jar: the Works tab the whole suite shares, and from 0.1.8 libworks-gametest on
+    // the game tests' classpath (5thlayer/libworks ADR 0008).
+    runtime = '0.1.8'
+    // Spelled out, since the repo holds the pack's tags too (mmp1.19.2-v*, mmr-v*): a release of the
+    // mod can never take one of them (AGENTS.md).
+    tagPrefix = 'mechanicalmasteryreborn-v'
+}
+
+// libworks-runtime and libworks-gametest come from ~/.m2, the one repository the plugin gives every
+// io.github.5thlayer module (libworks#18). CI builds the runtime's tag there first.
+

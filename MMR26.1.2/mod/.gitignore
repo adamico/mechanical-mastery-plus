@@ -1,0 +1,14 @@
+# Project exclude paths, at any depth so a subproject's output is covered too
+.gradle/
+build/
+run/
+logs/
+/.idea/
+.DS_Store
+__pycache__/
+
+# The wrapper is committed, though the repo ignores jars
+!gradle/wrapper/gradle-wrapper.jar
+# CI checks the libworks plugin out here
+.libworks/
+.upstreams/

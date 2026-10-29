@@ -1,0 +1,85 @@
+# Builds and tests Mechanical Mastery Reborn's companion mod, MMR26.1.2/mod/, on each change to it.
+# It follows libworks' module-ci.yml at the plugin's tag, which assumes the Module is the whole repo:
+# here it runs from the mod's folder instead (MMR26.1.2 ADR 0003). The plugin version below must be
+# the one MMR26.1.2/mod/build.gradle applies, and moves with it. It never publishes.
+name: MMR mod CI
+
+on:
+  push:
+    paths:
+      - 'MMR26.1.2/mod/**'
+      - '.github/workflows/mmr-mod-ci.yml'
+  pull_request:
+    paths:
+      - 'MMR26.1.2/mod/**'
+      - '.github/workflows/mmr-mod-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  LIBWORKS_PLUGIN: '0.4.5'
+
+defaults:
+  run:
+    working-directory: MMR26.1.2/mod
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: The plugin version is the one build.gradle applies
+        run: |
+          applied=$(sed -n "s/^ *id 'io\.github\.5thlayer\.libworks\.module' version '\([^']*\)'.*/\1/p" build.gradle)
+          if [ "$LIBWORKS_PLUGIN" != "$applied" ]; then
+            echo "::error::this workflow builds the libworks plugin $LIBWORKS_PLUGIN, but build.gradle applies ${applied:-<none>}: move them together"
+            exit 1
+          fi
+
+      # The plugin is taken from ~/.m2, which a runner starts without, so it is built from its tag.
+      - uses: actions/checkout@v7
+        with:
+          repository: 5thlayer/libworks
+          ref: plugin-v${{ env.LIBWORKS_PLUGIN }}
+          path: MMR26.1.2/mod/.libworks
+
+      - run: ./gradlew -p plugin publishToMavenLocal
+        working-directory: MMR26.1.2/mod/.libworks
+
+      # Each upstream the mod declares, the libworks runtime among them, from its tag.
+      - run: ./gradlew -q libworksUpstreams | sh .libworks/.github/scripts/build-upstreams.sh
+
+      # The build, with the JUnit tests.
+      - run: ./gradlew build
+
+      # A headless server that runs the game tests and names each one; it fails if it ran none.
+      - run: ./gradlew runGameTestServer
+
+      - if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: gametest-report
+          path: |
+            MMR26.1.2/mod/build/reports/gametest.xml
+            MMR26.1.2/mod/build/reports/tests/
+            MMR26.1.2/mod/run/gametest/logs/
+          if-no-files-found: ignore
+
+  reuse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: fsfe/reuse-action@v6
+        with:
+          args: --root MMR26.1.2/mod lint

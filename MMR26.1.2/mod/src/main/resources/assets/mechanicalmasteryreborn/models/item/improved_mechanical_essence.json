@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mechanicalmasteryreborn:item/improved_mechanical_essence"
+  }
+}

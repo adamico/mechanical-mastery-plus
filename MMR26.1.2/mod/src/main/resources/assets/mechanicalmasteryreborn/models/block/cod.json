@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "minecraft:block/blast_furnace_side",
+    "side": "minecraft:block/blast_furnace_side",
+    "end": "minecraft:block/blast_furnace_top",
+    "fish": "minecraft:item/cod"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "down": {"texture": "#end", "cullface": "down"},
+        "up": {"texture": "#end", "cullface": "up"},
+        "north": {"texture": "#side", "cullface": "north"},
+        "south": {"texture": "#side", "cullface": "south"},
+        "west": {"texture": "#side", "cullface": "west"},
+        "east": {"texture": "#side", "cullface": "east"}
+      }
+    },
+    {
+      "from": [-0.01, 0, -0.01],
+      "to": [16.01, 16, 16.01],
+      "faces": {
+        "north": {"texture": "#fish", "uv": [0, 0, 16, 16], "cullface": "north"},
+        "south": {"texture": "#fish", "uv": [0, 0, 16, 16], "cullface": "south"},
+        "west": {"texture": "#fish", "uv": [0, 0, 16, 16], "cullface": "west"},
+        "east": {"texture": "#fish", "uv": [0, 0, 16, 16], "cullface": "east"}
+      }
+    }
+  ]
+}
