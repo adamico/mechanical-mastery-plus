@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "corner=north_west": {
       "model": "mechanicalmasteryreborn:block/hand_drive"
+    },
+    "corner=north_east": {
+      "model": "mechanicalmasteryreborn:block/hand_drive",
+      "y": 90
+    },
+    "corner=south_east": {
+      "model": "mechanicalmasteryreborn:block/hand_drive",
+      "y": 180
+    },
+    "corner=south_west": {
+      "model": "mechanicalmasteryreborn:block/hand_drive",
+      "y": 270
     }
   }
 }

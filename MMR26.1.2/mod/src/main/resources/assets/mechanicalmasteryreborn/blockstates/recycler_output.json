@@ -1,74 +1,19 @@
 {
-  "multipart": [
-    {
-      "when": {
-        "facing": "north"
-      },
-      "apply": {
-        "model": "minecraft:block/spruce_shelf"
-      }
+  "variants": {
+    "facing=north": {
+      "model": "mechanicalmasteryreborn:block/recycler_output"
     },
-    {
-      "when": {
-        "facing": "east"
-      },
-      "apply": {
-        "model": "minecraft:block/spruce_shelf",
-        "y": 90
-      }
+    "facing=east": {
+      "model": "mechanicalmasteryreborn:block/recycler_output",
+      "y": 90
     },
-    {
-      "when": {
-        "facing": "south"
-      },
-      "apply": {
-        "model": "minecraft:block/spruce_shelf",
-        "y": 180
-      }
+    "facing=south": {
+      "model": "mechanicalmasteryreborn:block/recycler_output",
+      "y": 180
     },
-    {
-      "when": {
-        "facing": "west"
-      },
-      "apply": {
-        "model": "minecraft:block/spruce_shelf",
-        "y": 270
-      }
-    },
-    {
-      "when": {
-        "facing": "north"
-      },
-      "apply": {
-        "model": "minecraft:block/spruce_shelf_unpowered"
-      }
-    },
-    {
-      "when": {
-        "facing": "east"
-      },
-      "apply": {
-        "model": "minecraft:block/spruce_shelf_unpowered",
-        "y": 90
-      }
-    },
-    {
-      "when": {
-        "facing": "south"
-      },
-      "apply": {
-        "model": "minecraft:block/spruce_shelf_unpowered",
-        "y": 180
-      }
-    },
-    {
-      "when": {
-        "facing": "west"
-      },
-      "apply": {
-        "model": "minecraft:block/spruce_shelf_unpowered",
-        "y": 270
-      }
+    "facing=west": {
+      "model": "mechanicalmasteryreborn:block/recycler_output",
+      "y": 270
     }
-  ]
+  }
 }

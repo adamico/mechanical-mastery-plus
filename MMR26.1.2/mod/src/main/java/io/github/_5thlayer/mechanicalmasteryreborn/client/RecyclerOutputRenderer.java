@@ -9,6 +9,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerLayout;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerOutputBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerOutputBlockEntity;
 import it.unimi.dsi.fastutil.HashCommon;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -24,7 +25,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
-/** An output's three positions, drawn as vanilla's shelf draws its items, into vanilla's shelf render state. */
+/** An output's three positions, drawn in its niche as vanilla's shelf draws its items, into vanilla's shelf render state. */
 final class RecyclerOutputRenderer implements BlockEntityRenderer<RecyclerOutputBlockEntity, ShelfRenderState> {
 
     private final ItemModelResolver itemModelResolver;
@@ -43,6 +44,10 @@ final class RecyclerOutputRenderer implements BlockEntityRenderer<RecyclerOutput
             ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
         BlockEntityRenderer.super.extractRenderState(output, state, partialTicks, cameraPosition, breakProgress);
         state.facing = output.getBlockState().getValue(RecyclerOutputBlock.FACING);
+        // Lit by the block in front of the niche: the output is a full block, so its own position is dark.
+        if (output.getLevel() != null) {
+            state.lightCoords = LevelRenderer.getLightCoords(output.getLevel(), output.getBlockPos().relative(state.facing));
+        }
         int seed = HashCommon.long2int(output.getBlockPos().asLong());
         for (int position = 0; position < RecyclerLayout.POSITIONS_PER_OUTPUT; position++) {
             ItemStack stack = output.item(position);
@@ -67,7 +72,9 @@ final class RecyclerOutputRenderer implements BlockEntityRenderer<RecyclerOutput
             poseStack.pushPose();
             poseStack.translate(0.5F, 0.5F, 0.5F);
             poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
-            poseStack.translate(new Vec3((position - 1) * 0.3125F, 0.0, -0.25));
+            // In the middle of the niche, a quarter block behind the front face; vanilla's shelf, being shallow,
+            // sets its items a quarter block from the back.
+            poseStack.translate(new Vec3((position - 1) * 0.3125F, 0.0, 0.25));
             poseStack.scale(0.25F, 0.25F, 0.25F);
             AABB box = item.getModelBoundingBox();
             poseStack.translate(0.0, -box.minY - (box.maxY - box.minY) / 2.0, 0.0);

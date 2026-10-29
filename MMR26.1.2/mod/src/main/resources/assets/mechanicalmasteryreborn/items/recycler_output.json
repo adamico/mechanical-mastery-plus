@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:block/spruce_shelf_inventory"
+    "model": "mechanicalmasteryreborn:block/recycler_output"
   }
 }

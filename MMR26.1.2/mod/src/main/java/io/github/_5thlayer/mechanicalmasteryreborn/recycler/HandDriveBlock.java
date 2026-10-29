@@ -8,11 +8,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 /**
@@ -20,6 +22,9 @@ import net.minecraft.world.phys.BlockHitResult;
  * to its Recycler's core. It turns at most once every {@link #CAP} ticks, as fast as a player and never faster:
  * a click while it still turns is kept, one at most, and turns it when the cap allows. Drives add up, so
  * players on more drives run a Recycler faster.
+ *
+ * <p>Its {@link #CORNER} is the corner of its core it stands at, taken when it is placed and set again when a core
+ * is placed beside it, so its rails run along the Recycler's outer edges.
  */
 public final class HandDriveBlock extends Block implements RecyclerPart {
 
@@ -30,15 +35,21 @@ public final class HandDriveBlock extends Block implements RecyclerPart {
     public static final BooleanProperty TURNING = BooleanProperty.create("turning");
     /** Clicked while turning, so it turns again when the cap allows. */
     public static final BooleanProperty QUEUED = BooleanProperty.create("queued");
+    public static final EnumProperty<DriveCorner> CORNER = EnumProperty.create("corner", DriveCorner.class);
 
     public HandDriveBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(TURNING, false).setValue(QUEUED, false));
+        registerDefaultState(stateDefinition.any().setValue(TURNING, false).setValue(QUEUED, false).setValue(CORNER, DriveCorner.NORTH_WEST));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(TURNING, QUEUED);
+        builder.add(TURNING, QUEUED, CORNER);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return defaultBlockState().setValue(CORNER, DriveCorner.at(context.getLevel(), context.getClickedPos()));
     }
 
     @Override

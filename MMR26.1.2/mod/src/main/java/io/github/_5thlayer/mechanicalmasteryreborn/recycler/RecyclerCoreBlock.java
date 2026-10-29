@@ -7,6 +7,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
@@ -21,7 +22,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 /**
  * A Recycler's core, in the middle of its 3x3 (the line's glossary: Core). Its front faces the player who
  * placed it, and the order its outputs are read in starts from there ({@link RecyclerLayout}). Tier 1, the
- * first core; its tier sets how many turns a decompose takes.
+ * first core; its tier sets how many turns a decompose takes. Placed, it turns the drives at its corners to them.
  */
 public final class RecyclerCoreBlock extends BaseEntityBlock {
 
@@ -47,6 +48,21 @@ public final class RecyclerCoreBlock extends BaseEntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(state, level, pos, oldState, movedByPiston);
+        if (oldState.is(this)) {
+            return;
+        }
+        for (DriveCorner corner : DriveCorner.values()) {
+            BlockPos drive = corner.of(pos);
+            BlockState at = level.getBlockState(drive);
+            if (at.getBlock() instanceof HandDriveBlock && at.getValue(HandDriveBlock.CORNER) != corner) {
+                level.setBlock(drive, at.setValue(HandDriveBlock.CORNER, corner), UPDATE_CLIENTS);
+            }
+        }
     }
 
     @Override

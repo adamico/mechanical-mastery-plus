@@ -6,16 +6,20 @@ package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.DriveCorner;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.HandDriveBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity.Status;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerInputBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerOutputBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -57,6 +61,9 @@ final class RecyclerTests {
         tests.test("recycler_two_drives_decompose_twice_as_fast", 60, helper -> drivesTurned(helper, 2));
         tests.test("recycler_drive_turns_no_faster_than_its_cap", 20, RecyclerTests::driveCap);
         tests.test("recycler_decompose_is_recorded_for_its_island_team", 1, RecyclerTests::recorded);
+        tests.test("recycler_core_placed_turns_its_corner_drives", 1, RecyclerTests::coreTurnsDrives);
+        tests.test("recycler_drive_placed_takes_its_corner", 1, RecyclerTests::drivePlacedTakesCorner);
+        tests.test("recycler_input_placed_faces_its_player", 1, RecyclerTests::inputFacesPlayer);
     }
 
     private static void decomposes(GameTestHelper helper) {
@@ -266,5 +273,45 @@ final class RecyclerTests {
         helper.assertValueEqual(log.count(team, Essence.ADVANCED, DecomposeLog.Way.HAND), 0L,
                 "the Advanced essence the island's team decomposed by hand");
         helper.succeed();
+    }
+
+    private static void coreTurnsDrives(GameTestHelper helper) {
+        for (DriveCorner corner : DriveCorner.values()) {
+            helper.setBlock(corner.of(RecyclerBuild.CORE), Recycler.HAND_DRIVE.get());
+        }
+        helper.setBlock(RecyclerBuild.CORE, Recycler.CORE.get());
+        for (DriveCorner corner : DriveCorner.values()) {
+            helper.assertValueEqual(helper.getBlockState(corner.of(RecyclerBuild.CORE)).getValue(HandDriveBlock.CORNER), corner,
+                    "the corner of the drive placed before its core at " + corner.getSerializedName());
+        }
+        helper.succeed();
+    }
+
+    private static void drivePlacedTakesCorner(GameTestHelper helper) {
+        BlockPos core = new BlockPos(4, 1, 4);
+        helper.setBlock(core, Recycler.CORE.get());
+        BlockPos drive = core.south().east();
+        placeOnTheFloor(helper, Recycler.HAND_DRIVE_ITEM.get(), drive);
+        helper.assertValueEqual(helper.getBlockState(drive).getValue(HandDriveBlock.CORNER), DriveCorner.SOUTH_EAST,
+                "the corner of a drive placed south-east of a core");
+        helper.succeed();
+    }
+
+    private static void inputFacesPlayer(GameTestHelper helper) {
+        BlockPos input = new BlockPos(4, 1, 4);
+        // A mock player looks south, so the input's front faces back north, toward them.
+        placeOnTheFloor(helper, Recycler.INPUT_ITEM.get(), input);
+        helper.assertValueEqual(helper.getBlockState(input).getValue(RecyclerInputBlock.FACING), Direction.NORTH,
+                "the front of an input a player looking south placed");
+        helper.succeed();
+    }
+
+    /** A player places {@code item} at {@code pos}, clicking the top of the block below it. */
+    private static void placeOnTheFloor(GameTestHelper helper, Item item, BlockPos pos) {
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(item));
+        BlockPos floor = helper.absolutePos(pos.below());
+        var hit = new BlockHitResult(Vec3.atCenterOf(floor).relative(Direction.UP, 0.5), Direction.UP, floor, false);
+        player.getMainHandItem().useOn(new UseOnContext(player, InteractionHand.MAIN_HAND, hit));
     }
 }
