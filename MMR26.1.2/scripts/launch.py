@@ -3,9 +3,8 @@
 #
 #   scripts/launch.py [--dry-run] [--released] [save]
 #
-# It is skillworks' quicklaunch pack launcher, launch_pack.py, with one change: the companion mod is
-# found in mod/build/libs, inside this pack line's folder, rather than in a checkout beside the repo.
-# Each run copies the pack's configs and kubejs/ into the profile and puts the newest local build of
+# It is skillworks' quicklaunch pack launcher, launch_pack.py (skillworks 0.11.7 or later), taking mod
+# builds from this pack line's folder only, so the companion mod in mod/ is the one local build. Each run copies the pack's configs and kubejs/ into the profile and puts the newest local build of
 # the companion mod in mods/, in place of the pack's jar when the pack carries one, or beside the
 # pack's mods while the mod is not yet on CurseForge. The next run takes it out again, so --released
 # plays the pack's own jars. The suite is always the pack's released jars.
@@ -41,9 +40,13 @@ def launcher():
             fail(f"no skillworks quicklaunch in {PLUGIN}; install skillworks, or set QUICKLAUNCH_LAUNCHER "
                  "to its launch_pack.py.")
         found = versions[-1]
+    # launch_pack imports its sibling modules (targets.py) from its own folder.
+    sys.path.insert(0, str(found.parent))
     spec = importlib.util.spec_from_file_location("launch_pack", found)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
+    if not hasattr(module, "repo_builds"):
+        fail(f"{found} is older than skillworks 0.11.7, which this script needs; update skillworks.")
     return module
 
 
@@ -68,17 +71,17 @@ def main():
         latest = sorted(saves.glob("*/level.dat"), key=lambda p: p.stat().st_mtime)
         save = latest[-1].parent.name if latest else None
 
-    # launch_pack looks for a mod's build in <beside>/<mod id>/build/libs: a folder holding only the
-    # companion mod, by its id, swaps in that one and leaves the suite as the pack has it.
+    # launch_pack takes mod builds from the repo it is given and from <beside>/<mod id>: this folder as
+    # the repo and an empty folder beside swap in the companion mod alone, and leave the suite as the
+    # pack has it, even with the suite's checkouts beside the repo.
     with tempfile.TemporaryDirectory(prefix="reborn-launch-") as beside:
         beside = Path(beside)
-        (beside / MOD_ID).symlink_to(PACK / "mod")
-        built = None if args.released else lp.local_build(beside, MOD_ID)
+        built = None if args.released else lp.local_build(beside, lp.repo_builds(PACK), MOD_ID)
         if not args.released and not built:
             fail(f"no build of the companion mod in {PACK / 'mod/build/libs'}: build it first, "
                  f"(cd {PACK / 'mod'} && sh ./gradlew build).")
         jar, version = (built[0].resolve(), built[1]) if built else (None, None)
-        lp.sync(PACK, pack, game, beside, args.released, args.dry_run)
+        lp.sync(PACK, pack, game, beside, PACK, args.released, args.dry_run)
 
     if jar:
         aside = game / lp.SET_ASIDE
