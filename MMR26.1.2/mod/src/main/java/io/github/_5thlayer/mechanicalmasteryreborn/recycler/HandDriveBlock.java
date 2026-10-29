@@ -4,7 +4,10 @@
 package io.github._5thlayer.mechanicalmasteryreborn.recycler;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +25,10 @@ import net.minecraft.world.phys.BlockHitResult;
  * to its Recycler's core. It turns at most once every {@link #CAP} ticks, as fast as a player and never faster:
  * a click while it still turns is kept, one at most, and turns it when the cap allows. Drives add up, so
  * players on more drives run a Recycler faster.
+ *
+ * <p>Each turn is heard and seen: a click whose pitch rises with the decompose's progress, and sparks, when it
+ * counts; the crafter's sound and a puff over the core when it decomposes; a dull click and smoke when the Recycler
+ * can't decompose, so the turn is lost.
  *
  * <p>Its {@link #CORNER} is the corner of its core it stands at, taken when it is placed and set again when a core
  * is placed beside it, so its rails run along the Recycler's outer edges.
@@ -81,6 +88,26 @@ public final class HandDriveBlock extends Block implements RecyclerPart {
     private void turn(ServerLevel level, BlockPos pos, BlockState state) {
         level.setBlock(pos, state.setValue(TURNING, true).setValue(QUEUED, false), UPDATE_CLIENTS);
         level.scheduleTick(pos, this, CAP);
-        RecyclerPart.coreOf(level, pos).ifPresent(RecyclerCoreBlockEntity::turn);
+        var core = RecyclerPart.coreOf(level, pos);
+        var turn = core.map(RecyclerCoreBlockEntity::turn).orElse(RecyclerCoreBlockEntity.Turn.STOPPED);
+        double x = pos.getX() + 0.5;
+        double y = pos.getY() + 1.0;
+        double z = pos.getZ() + 0.5;
+        switch (turn) {
+            case COUNTED -> {
+                float progress = (float) core.get().turns() / RecyclerCoreBlockEntity.TURNS;
+                level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.4F, 0.7F + 0.6F * progress);
+                level.sendParticles(ParticleTypes.ELECTRIC_SPARK, x, y, z, 3, 0.25, 0.05, 0.25, 0.05);
+            }
+            case DECOMPOSED -> {
+                BlockPos at = core.get().getBlockPos();
+                level.playSound(null, at, SoundEvents.CRAFTER_CRAFT, SoundSource.BLOCKS, 1.0F, 1.0F);
+                level.sendParticles(ParticleTypes.POOF, at.getX() + 0.5, at.getY() + 1.0, at.getZ() + 0.5, 6, 0.3, 0.05, 0.3, 0.02);
+            }
+            case STOPPED -> {
+                level.playSound(null, pos, SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 0.5F, 1.0F);
+                level.sendParticles(ParticleTypes.SMOKE, x, y, z, 2, 0.2, 0.05, 0.2, 0.01);
+            }
+        }
     }
 }

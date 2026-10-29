@@ -90,26 +90,33 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         return plan().status();
     }
 
-    /**
-     * One turn from a drive. It counts only while the Recycler can decompose; the last one decomposes.
-     *
-     * @return whether it counted
-     */
-    public boolean turn() {
+    /** What a turn did. */
+    public enum Turn {
+        /** Nothing: the Recycler can't decompose now. */
+        STOPPED,
+        /** It counted toward the decompose under way. */
+        COUNTED,
+        /** It was the last, and decomposed. */
+        DECOMPOSED
+    }
+
+    /** One turn from a drive. It counts only while the Recycler can decompose; the last one decomposes. */
+    public Turn turn() {
         if (!(level instanceof ServerLevel server)) {
-            return false;
+            return Turn.STOPPED;
         }
         Plan plan = plan();
         if (plan.status() != Status.READY) {
-            return false;
+            return Turn.STOPPED;
         }
         turns++;
-        if (turns >= TURNS) {
-            turns = 0;
-            decompose(server, plan);
-        }
         setChanged();
-        return true;
+        if (turns < TURNS) {
+            return Turn.COUNTED;
+        }
+        turns = 0;
+        decompose(server, plan);
+        return Turn.DECOMPOSED;
     }
 
     private void decompose(ServerLevel server, Plan plan) {

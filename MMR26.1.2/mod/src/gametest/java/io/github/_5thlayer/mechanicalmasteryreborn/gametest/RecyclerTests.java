@@ -42,6 +42,7 @@ final class RecyclerTests {
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("recycler_whole_decomposes_with_no_power", 1, RecyclerTests::decomposes);
         tests.test("recycler_counts_no_turn_short_of_a_decompose", 1, RecyclerTests::partTurned);
+        tests.test("recycler_turn_says_what_it_did", 1, RecyclerTests::turnSaysWhatItDid);
         tests.test("recycler_without_a_core_takes_nothing_in", 1, RecyclerTests::withoutCore);
         tests.test("recycler_without_a_drive_does_not_run", 1, helper -> incomplete(helper, 5, Recycler.CASING.get(), 7, Recycler.CASING.get()));
         tests.test("recycler_without_an_input_does_not_run", 1, helper -> incomplete(helper, 3, Recycler.CASING.get()));
@@ -81,6 +82,18 @@ final class RecyclerTests {
         build.turn(RecyclerCoreBlockEntity.TURNS - 1);
         helper.assertTrue(build.outputsEmpty(), "a Recycler decomposed one turn short");
         helper.assertValueEqual(build.core().turns(), RecyclerCoreBlockEntity.TURNS - 1, "the turns done");
+        helper.succeed();
+    }
+
+    /** What a drive's feedback reads: lost while empty, counted, then decomposed on the last turn. */
+    private static void turnSaysWhatItDid(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        helper.assertValueEqual(build.core().turn(), RecyclerCoreBlockEntity.Turn.STOPPED, "a turn of an empty Recycler");
+        build.feed(1);
+        for (int i = 1; i < RecyclerCoreBlockEntity.TURNS; i++) {
+            helper.assertValueEqual(build.core().turn(), RecyclerCoreBlockEntity.Turn.COUNTED, "turn " + i);
+        }
+        helper.assertValueEqual(build.core().turn(), RecyclerCoreBlockEntity.Turn.DECOMPOSED, "the last turn");
         helper.succeed();
     }
 
