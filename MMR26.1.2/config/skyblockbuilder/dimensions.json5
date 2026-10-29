@@ -1,0 +1,16 @@
+{
+  // Every dimension is void around its islands: the Nether and the End are reachable, and empty.
+  "Overworld": {
+    "isCustom": true
+  },
+
+  "Nether": {
+    "isCustom": true
+  },
+
+  // The End keeps its main island, so the dragon and the way home are there.
+  "End": {
+    "isCustom": true,
+    "keepMainIsland": true
+  }
+}

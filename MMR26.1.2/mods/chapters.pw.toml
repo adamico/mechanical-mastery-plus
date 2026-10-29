@@ -1,0 +1,13 @@
+name = "Chapters"
+filename = "chapters-2.2.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "13064ab593624d1634a423d00d2fa5e23f41d864"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 9306837
+project-id = 1538047

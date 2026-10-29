@@ -1,0 +1,13 @@
+name = "Freecam"
+filename = "freecam-neoforge-1.5.1+mc26.1.2.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "7f21568e3c401fc5404927d015ed3f6d0c550842"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 9271288
+project-id = 557076

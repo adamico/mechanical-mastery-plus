@@ -1,0 +1,13 @@
+name = "emi-unofficial-port-unstable"
+filename = "emi-1.1.24-63e8aef+26.1.2+neoforge.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "961f63678c5cf0a4a439d12628fa7a80b5a7a950"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 8630349
+project-id = 1544558

@@ -1,0 +1,13 @@
+name = "More Overlays Updated"
+filename = "moreoverlays-1.24.4-mc26.1.2-neoforge.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "e8ebefc63a2013b3f954efb850f77880daefcb16"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 7951520
+project-id = 391382

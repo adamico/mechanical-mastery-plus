@@ -1,0 +1,34 @@
+{
+  // The shared spawn, where Skyblock Builder puts a player with no team. The pack gives every such
+  // player a team of one at once (kubejs/server_scripts/team_of_one.js), so nobody stays here.
+  "mainSpawnIsland": {
+    "name": "Spawn",
+    "file": "spawn.snbt",
+    "spawns": {
+      "south": [ [ 1, 1, 1 ] ],
+      "west": [],
+      "north": [],
+      "east": []
+    }
+  },
+
+  // Every team's island: the first entry is the one each new team gets.
+  "templateList": [
+    {
+      "name": "Reborn",
+      "desc": "A lone island and a dormant C.O.D.",
+      "file": "reborn.snbt",
+      "spawns": "reborn"
+    }
+  ],
+
+  // Where a team's players appear: on the grass, facing C.O.D.
+  "spawnPointReferences": {
+    "reborn": {
+      "south": [],
+      "west": [],
+      "north": [ [ 4, 4, 6 ] ],
+      "east": []
+    }
+  }
+}

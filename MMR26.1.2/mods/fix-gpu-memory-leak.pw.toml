@@ -1,0 +1,13 @@
+name = "fix GPU memory leak"
+filename = "gpumemleakfix-26.1-1.9.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "588f7ba505846f30394dd6c1038348c87571a26e"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 7889666
+project-id = 882495

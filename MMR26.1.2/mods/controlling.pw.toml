@@ -1,0 +1,13 @@
+name = "Controlling"
+filename = "Controlling-neoforge-26.1.2-26.1.2.7.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "d63391a9343d7e7d1fe7448830197bff6faa37de"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 8925599
+project-id = 250398
