@@ -41,4 +41,4 @@ A version in `~/.m2` never changes. A fix is the next patch version. `publishToM
 
 ## Tags
 
-A release is tagged `<archives_name>-v<version>` (the plugin's `tagPrefix`), annotated with its jar's sha256. `git tag -l '*v*' -n9` lists them.
+A release is tagged `mechanicalmasteryreborn-v<version>`, set as `libworks { tagPrefix }` in `build.gradle` and annotated with its jar's sha256. This repo holds the pack's tags too, `mmp1.19.2-v*` and Reborn's `mmr-v*`, and the prefix matches neither, so a release of the mod never takes one of theirs. `git tag -l 'mechanicalmasteryreborn-v*' -n9` lists the mod's.
