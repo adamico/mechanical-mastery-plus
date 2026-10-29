@@ -1,0 +1,13 @@
+name = "Default World Type [Forge]"
+filename = "DefaultWorldType-26.1.0.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "fd03c3ffb0a352c72a31212ace7bfbb29ba5d8de"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 7828578
+project-id = 373014

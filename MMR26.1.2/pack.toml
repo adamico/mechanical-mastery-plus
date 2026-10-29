@@ -1,0 +1,13 @@
+name = "Mechanical Mastery Reborn"
+author = "kc00l"
+version = "0.0.1"
+pack-format = "packwiz:1.1.0"
+
+[index]
+file = "index.toml"
+hash-format = "sha256"
+hash = "7b6aa5b097bcd5934f92a602947a4b10ece1e413f5b79613c70eba4f346af628"
+
+[versions]
+minecraft = "26.1.2"
+neoforge = "26.1.2.109"

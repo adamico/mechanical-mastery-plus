@@ -1,0 +1,13 @@
+name = "Colorful Hearts"
+filename = "colorfulhearts-neoforge-26.1.2-26.1.2.0.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "4fe93422510958b1bca27e0537d4ab63e903bed2"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 8240566
+project-id = 854213

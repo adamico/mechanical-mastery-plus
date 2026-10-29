@@ -1,0 +1,13 @@
+name = "Swivel - Better 3rd Person / Third Person Camera, Free Look & Orbit Camera (Controller Support)"
+filename = "swivel-neoforge-1.2.0+mc26.1-26.1.2.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "58da156a42af1f4393420779a1c39d36fcb1cf87"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 9146641
+project-id = 1711881

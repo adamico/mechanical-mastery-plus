@@ -1,3 +1,19 @@
-# Repo files, not pack content.
+# Repo files, not pack content. The pack is mods/, config/ and kubejs/.
+/.gitignore
+/docs/
+/scripts/
+/GLOSSARY.md
+/PLAYTEST.md
+/MODS.md
+/README.md
+/mise.toml
+*.zip
+*.bak
+
+# KubeJS writes its editor files and probe on first launch
+/kubejs/README.txt
+/kubejs/jsconfig.json
+/kubejs/probe/
+
 # The companion mod's source: the pack takes the mod as a released jar, like any other (ADR 0003).
 /mod/

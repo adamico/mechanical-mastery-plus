@@ -1,0 +1,13 @@
+name = "SuperMartijn642's Config Lib"
+filename = "supermartijn642configlib-1.1.8-neoforge-mc26.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "1348561a0143b41e6737dd0ca8a7cf4f4be14fa2"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 8306682
+project-id = 438332

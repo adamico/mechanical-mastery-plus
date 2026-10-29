@@ -1,0 +1,3 @@
+# packwiz metadata for the mods; the jars stay ignored
+!/mods/
+__pycache__/

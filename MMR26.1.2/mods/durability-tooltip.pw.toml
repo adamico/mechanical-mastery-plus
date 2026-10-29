@@ -1,0 +1,13 @@
+name = "Durability Tooltip"
+filename = "durabilitytooltip-1.2.0-neoforge-mc26.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "63e82519c6f5c00fd9a3d9d4bee18a048d3e7627"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 8830225
+project-id = 511040
