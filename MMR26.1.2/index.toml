@@ -10,15 +10,19 @@ hash = "942e81b971479152385b4ad9c3471653325f04946c34d9dd2aefc02c744517bc"
 
 [[files]]
 file = "config/skyblockbuilder/templates.json5"
-hash = "9e5746881b978bf07083dc6a1865d3da0ed8e8babe9d9f10781fd7c9242fd13b"
+hash = "10a69812eaec4a419c69f796a30c6c139bcf873ca274625e91f087cce26a8f3b"
 
 [[files]]
 file = "config/skyblockbuilder/templates/islands/reborn.snbt"
-hash = "5b8a575fc44dc3a06f26ff6df6de9a2b8e4113e94cfb60c990769e3f8d1e73aa"
+hash = "ec5e87970ec416b9d90354b297e5e4dd789f9dcdf89fa6e36e0ac58c179013cc"
 
 [[files]]
 file = "config/skyblockbuilder/templates/islands/spawn.snbt"
 hash = "c74163f57bae03bbb4229bc3a7e7e294c3d5ee0b83c829f3643fa16481878094"
+
+[[files]]
+file = "kubejs/server_scripts/decomposing.js"
+hash = "9e64fe72818207d1f593929cd7f31152d0ad8c2bce9f58cd8401827e97a90e60"
 
 [[files]]
 file = "kubejs/server_scripts/team_of_one.js"

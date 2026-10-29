@@ -6,7 +6,7 @@ Every mod in `mods/` has a role here (#163, story 49). A content mod with no rol
 
 The suite, taken as released CurseForge jars:
 
-- **Craftworks**: decomposing, on its Assemblers and Refiners, and the Personal Assembler that plans from essence.
+- **Craftworks**: crafting, on its Assemblers and Refiners and the Personal Assembler, in place of grid crafting. Decomposing is the companion mod's Recycler.
 - **Beltworks**, **Pipeworks**: carry the decomposed intermediates and fluids, so the loop runs unattended.
 - **Wireworks**: power. Its generators are what the energy handicap turns off.
 - **Fieldworks**: ore blocks crafted from intermediates, and the Harvester that works them.

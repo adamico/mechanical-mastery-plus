@@ -19,3 +19,29 @@ libworks {
 // libworks-runtime and libworks-gametest come from ~/.m2, the one repository the plugin gives every
 // io.github.5thlayer module (libworks#18). CI builds the runtime's tag there first.
 
+
+repositories {
+    // EMI for 26.1 is an unofficial port, and Skyblock Builder's 26.1 build is on CurseForge only.
+    maven { url = 'https://cursemaven.com' }
+    // Jade.
+    maven {
+        url = 'https://api.modrinth.com/maven'
+        content { includeGroup 'maven.modrinth' }
+    }
+}
+
+// The pack's versions: EMI's unofficial port, the Jade Craftworks builds against (built on NeoForge
+// 26.1.2.76, so it runs on our .77), and Skyblock Builder 26.1.4.
+def emi = 'curse.maven:emi-unofficial-port-1544558:8630349'
+def jade = 'maven.modrinth:jade:26.1.11+neoforge'
+def skyblockBuilder = 'curse.maven:skyblock-builder-446691:9048404'
+
+dependencies {
+    // Each optional to players, and named only by its own plugin under compat/, which loads only when
+    // the mod is installed: EMI shows the decomposing recipes, Jade a Recycler's progress, and Skyblock
+    // Builder says whose island a Recycler stands on. None is on the dev runs, so the game tests prove the
+    // mod plays alone; scripts/launch.py plays the local build in the pack, beside all three.
+    compileOnly emi
+    compileOnly jade
+    compileOnly(skyblockBuilder) { transitive = false }
+}

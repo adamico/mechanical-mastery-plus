@@ -1,0 +1,11 @@
+{
+  "type": "mechanicalmasteryreborn:decomposing",
+  "ingredient": {"ingredient": "mechanicalmasteryreborn:advanced_mechanical_essence", "count": 1},
+  "results": [
+    {"id": "minecraft:piston"},
+    {"id": "minecraft:hopper"},
+    {"id": "minecraft:comparator"},
+    {"id": "minecraft:water_bucket"},
+    {"id": "minecraft:lava_bucket"}
+  ]
+}

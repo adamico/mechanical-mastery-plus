@@ -3,6 +3,8 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.essence;
 
+import java.util.Optional;
+
 /**
  * Every essence the mod registers, under the id a world saves it by, which never changes once shipped
  * (#163): the four Mechanical Essences, the four Transmuted Essences and Quintessence, as the line's
@@ -57,5 +59,15 @@ public enum Essence {
      */
     public boolean obtainable() {
         return kind == Kind.MECHANICAL;
+    }
+
+    /** The essence saved under {@code path}, if any. */
+    public static Optional<Essence> byPath(String path) {
+        for (Essence essence : values()) {
+            if (essence.path.equals(path)) {
+                return Optional.of(essence);
+            }
+        }
+        return Optional.empty();
     }
 }
