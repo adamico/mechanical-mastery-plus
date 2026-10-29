@@ -41,6 +41,8 @@ def launcher():
             fail(f"no skillworks quicklaunch in {PLUGIN}; install skillworks, or set QUICKLAUNCH_LAUNCHER "
                  "to its launch_pack.py.")
         found = versions[-1]
+    # launch_pack imports its sibling modules (targets.py), as a script run from its folder would.
+    sys.path.insert(0, str(found.parent))
     spec = importlib.util.spec_from_file_location("launch_pack", found)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -73,12 +75,12 @@ def main():
     with tempfile.TemporaryDirectory(prefix="reborn-launch-") as beside:
         beside = Path(beside)
         (beside / MOD_ID).symlink_to(PACK / "mod")
-        built = None if args.released else lp.local_build(beside, MOD_ID)
+        built = None if args.released else lp.local_build(beside, {}, MOD_ID)
         if not args.released and not built:
             fail(f"no build of the companion mod in {PACK / 'mod/build/libs'}: build it first, "
                  f"(cd {PACK / 'mod'} && sh ./gradlew build).")
         jar, version = (built[0].resolve(), built[1]) if built else (None, None)
-        lp.sync(PACK, pack, game, beside, args.released, args.dry_run)
+        lp.sync(PACK, pack, game, beside, PACK / "mod", args.released, args.dry_run)
 
     if jar:
         aside = game / lp.SET_ASIDE
