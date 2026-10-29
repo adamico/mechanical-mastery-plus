@@ -7,7 +7,6 @@ The 26.1.2 pack line, on NeoForge: a skyblock where each team starts on its own 
 - The pack: a [packwiz](https://packwiz.infra.link) manifest, `pack.toml`, `index.toml` and a `.pw.toml` per mod in `mods/`, with `config/` and `kubejs/`. Every jar comes from CurseForge. `MODS.md` says what each mod is for.
 - The island: Skyblock Builder's config in `config/skyblockbuilder/`, with the team island in `templates/islands/reborn.snbt`. `kubejs/server_scripts/team_of_one.js` gives a player with no team a team, and an island, of their own.
 - `mod/`: the companion mod, a Gradle build of its own (see `mod/AGENTS.md`). `.packwizignore` keeps it, and the repo's other files, out of the pack.
-- `PLAYTEST.md`: the checks to play through before a release.
 
 ## Working on the pack
 
