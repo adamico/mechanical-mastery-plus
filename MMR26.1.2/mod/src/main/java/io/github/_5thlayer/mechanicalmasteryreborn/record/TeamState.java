@@ -4,6 +4,7 @@
 package io.github._5thlayer.mechanicalmasteryreborn.record;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -23,8 +24,8 @@ import net.minecraft.world.level.saveddata.SavedDataType;
 /**
  * Each team's state, keyed on its id ({@link Teams}): whether its C.O.D. is awake, how much essence an awake
  * C.O.D. has made for it, spawned or not, the handicap it chose at the lab, which says which challenge it plays, and
- * its {@link Inflation} while it plays one. Its members share it, and a player who joins
- * a team shares it from then on. Saved with the world, in the overworld's data.
+ * its {@link Inflation} while it plays one, with whether it was warned that Inflation nears its cap. Its members share
+ * it, and a player who joins a team shares it from then on. Saved with the world, in the overworld's data.
  */
 public final class TeamState extends SavedData {
 
@@ -40,7 +41,8 @@ public final class TeamState extends SavedData {
                 Codec.BOOL.optionalFieldOf("awake", false).forGetter(entry -> entry.awake),
                 Codec.LONG.optionalFieldOf("made", 0L).forGetter(entry -> entry.made),
                 HANDICAP_CODEC.optionalFieldOf("handicap").forGetter(entry -> entry.handicap),
-                Inflation.CODEC.optionalFieldOf("inflation").forGetter(entry -> entry.inflation))
+                Inflation.CODEC.optionalFieldOf("inflation").forGetter(entry -> entry.inflation),
+                Codec.BOOL.optionalFieldOf("warned", false).forGetter(entry -> entry.warned))
                 .apply(instance, Entry::new));
 
         boolean awake;
@@ -48,13 +50,16 @@ public final class TeamState extends SavedData {
         Optional<Handicap> handicap;
         /** Present exactly while {@link #handicap} is. */
         Optional<Inflation> inflation;
+        /** Whether the team was warned that its Inflation nears its cap, since it last fell back below; only while it plays a challenge. */
+        boolean warned;
 
-        Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation) {
+        Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation, boolean warned) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
             // A challenge saved before Inflation was counted counts from the world's start.
             this.inflation = handicap.isPresent() ? inflation.or(() -> Optional.of(Inflation.startingAt(0))) : Optional.empty();
+            this.warned = handicap.isPresent() && warned;
         }
     }
 
@@ -160,6 +165,48 @@ public final class TeamState extends SavedData {
         }
         entry.handicap = Optional.empty();
         entry.inflation = Optional.empty();
+        entry.warned = false;
+        setDirty();
+        return true;
+    }
+
+    /**
+     * Resets the challenge {@code team} plays at {@code gameTime}, as though it had just begun: its Inflation from
+     * nothing, and so C.O.D. back to its waking pace, and no warning given. Its handicap stays. Says whether it played
+     * one.
+     */
+    public boolean resetChallenge(UUID team, long gameTime) {
+        Entry entry = teams.get(team);
+        if (entry == null || entry.handicap.isEmpty()) {
+            return false;
+        }
+        entry.inflation = Optional.of(Inflation.startingAt(gameTime));
+        entry.warned = false;
+        setDirty();
+        return true;
+    }
+
+    /** The teams that play a challenge. */
+    public List<UUID> playing() {
+        return teams.entrySet().stream().filter(entry -> entry.getValue().handicap.isPresent()).map(Map.Entry::getKey).toList();
+    }
+
+    /** Whether {@code team} was warned that its Inflation nears its cap, since it last fell back below. */
+    public boolean warned(UUID team) {
+        Entry entry = teams.get(team);
+        return entry != null && entry.warned;
+    }
+
+    /**
+     * Notes whether {@code team} was warned that its Inflation nears its cap, while it plays a challenge, and says
+     * whether that changed.
+     */
+    public boolean setWarned(UUID team, boolean warned) {
+        Entry entry = teams.get(team);
+        if (entry == null || entry.handicap.isEmpty() || entry.warned == warned) {
+            return false;
+        }
+        entry.warned = warned;
         setDirty();
         return true;
     }
@@ -198,6 +245,6 @@ public final class TeamState extends SavedData {
     }
 
     private Entry entry(UUID team) {
-        return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty()));
+        return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false));
     }
 }

@@ -42,8 +42,6 @@ final class InflationTests {
     private static final BlockPos COD = new BlockPos(1, 2, 1);
     /** Another team's C.O.D., on an island of its own in a corner of the test's. */
     private static final BlockPos OTHER_COD = new BlockPos(7, 2, 7);
-    /** The cap the bar tests play at, which only the bar reads. */
-    private static final int BAR_CAP = 4;
     /** Ticks past an interval's end, so a check never lands on the tick the essence is made. */
     private static final int MARGIN = 2;
 
@@ -175,7 +173,6 @@ final class InflationTests {
 
     /** Its team's player sees the bar fill toward the cap; another team's player, playing no challenge, sees none. */
     private static void barShowsTheExcess(GameTestHelper helper) {
-        ServerConfig.COD_INFLATION_CAP.set(BAR_CAP);
         UUID team = TestTeams.claim(helper);
         UUID other = TestTeams.claim(helper, OTHER_COD, OTHER_COD);
         ServerPlayer player = onlinePlayer(helper, team);
@@ -186,10 +183,10 @@ final class InflationTests {
         helper.runAtTickTime(waking() + MARGIN, () -> {
             var bar = InflationBar.of(team);
             helper.assertTrue(bar.isPresent(), "a team that plays a challenge has no bar");
-            helper.assertValueEqual(bar.get().getProgress(), 0.25F, "the bar's fill, one made of a cap of four");
+            helper.assertValueEqual(bar.get().getProgress(), 1.0F / ServerConfig.inflationCap(), "the bar's fill, one made");
             helper.assertValueEqual(bar.get().getName(), Component.translatable("mechanicalmasteryreborn.bar.challenge",
                     Component.translatable("mechanicalmasteryreborn.challenge.title", Component.translatable("mechanicalmasteryreborn.handicap.energy")),
-                    Component.translatable("mechanicalmasteryreborn.bar.inflation", 1L, BAR_CAP)), "the bar's title");
+                    Component.translatable("mechanicalmasteryreborn.bar.inflation", 1L, ServerConfig.inflationCap())), "the bar's title");
             helper.assertTrue(bar.get().getPlayers().contains(player), "the team's player doesn't see its bar");
             helper.assertFalse(bar.get().getPlayers().contains(stranger), "another team's player sees the bar");
             helper.assertTrue(InflationBar.of(other).isEmpty(), "a team that plays no challenge has a bar");

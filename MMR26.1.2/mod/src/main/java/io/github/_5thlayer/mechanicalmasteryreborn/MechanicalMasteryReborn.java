@@ -5,6 +5,7 @@ package io.github._5thlayer.mechanicalmasteryreborn;
 
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Generators;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationCap;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
@@ -30,6 +31,7 @@ public final class MechanicalMasteryReborn {
         Cod.register(modBus);
         Lab.register(modBus);
         Generators.register(modBus);
+        InflationCap.register();
         InflationBar.register();
         Decomposing.register(modBus);
         Recycling.register(modBus);
