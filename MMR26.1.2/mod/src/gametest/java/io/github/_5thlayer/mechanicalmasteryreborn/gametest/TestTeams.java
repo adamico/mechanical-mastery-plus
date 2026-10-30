@@ -16,8 +16,8 @@ import net.minecraft.world.phys.AABB;
 
 /**
  * Skyblock Builder's part, for the game tests: a test claims a team of its own, whose island is the test's
- * structure, and can put a player in it. Anything else is the installed lookup's, so the tests that run
- * together never share a team.
+ * structure, or a part of it, and can put a player in it. A block on several islands is on the smallest.
+ * Anything else is the installed lookup's, so the tests that run together never share a team.
  */
 final class TestTeams implements Teams.Lookup {
 
@@ -37,18 +37,30 @@ final class TestTeams implements Teams.Lookup {
         return team;
     }
 
+    /** A new team, whose island is the part of the test's structure from {@code from} to {@code to}, inclusive. */
+    static UUID claim(GameTestHelper helper, BlockPos from, BlockPos to) {
+        UUID team = UUID.randomUUID();
+        ISLANDS.put(AABB.encapsulatingFullBlocks(helper.absolutePos(from), helper.absolutePos(to)), team);
+        return team;
+    }
+
     static void join(Player player, UUID team) {
         PLAYERS.put(player.getUUID(), team);
     }
 
     @Override
     public UUID at(ServerLevel level, BlockPos pos) {
+        UUID smallest = null;
+        double smallestSize = Double.MAX_VALUE;
         for (var island : ISLANDS.entrySet()) {
-            if (island.getKey().contains(pos.getCenter())) {
-                return island.getValue();
+            AABB box = island.getKey();
+            double size = box.getXsize() * box.getYsize() * box.getZsize();
+            if (box.contains(pos.getCenter()) && size < smallestSize) {
+                smallest = island.getValue();
+                smallestSize = size;
             }
         }
-        return installed.at(level, pos);
+        return smallest != null ? smallest : installed.at(level, pos);
     }
 
     @Override

@@ -21,8 +21,8 @@ import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 
 /**
- * How much essence each team has decomposed, by tier, and how: on a Recycler or by hand. A decompose on a
- * Recycler is what wakes C.O.D. (#167), and both count against Inflation (#168), which read it from here.
+ * How much essence each team has decomposed, by tier, and how: on a Recycler or by hand. Both count against
+ * Inflation (#168), which reads it from here; only a decompose on a Recycler wakes C.O.D. ({@link TeamState}).
  * Saved with the world, in the overworld's data.
  */
 public final class DecomposeLog extends SavedData {

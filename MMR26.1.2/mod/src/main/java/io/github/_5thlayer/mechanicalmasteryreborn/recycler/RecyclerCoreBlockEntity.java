@@ -5,6 +5,7 @@ package io.github._5thlayer.mechanicalmasteryreborn.recycler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import io.github._5thlayer.libworks.transfer.GuardedResourceHandler;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
@@ -14,6 +15,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.recipe.Recycling;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Share;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Yield;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
+import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -42,8 +44,8 @@ import org.jspecify.annotations.Nullable;
  * outputs, result <i>i</i> on the <i>i</i>th position ({@link RecyclerLayout}). Either returns the core's
  * {@link Yield} of the full amounts ({@link ServerConfig}). It needs no power and no ticking: drives turn it.
  *
- * <p>Each decompose is recorded, on a Recycler, for the team whose island it stands on ({@link DecomposeLog});
- * a recycle never is.
+ * <p>Each decompose is recorded, on a Recycler, for the team whose island it stands on ({@link DecomposeLog}),
+ * and wakes that team's C.O.D. ({@link TeamState}); a recycle never is, and never does.
  *
  * <p>Only a player's hand takes back what it holds ({@link #takeBack()}), giving up the work under way. Every
  * client is sent what it holds, so a click on an empty core can pass there too.
@@ -176,8 +178,10 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
             }
         }
         if (plan.work() == Work.DECOMPOSING) {
+            UUID team = Teams.at(server, worldPosition);
             Essences.of(held.getItem()).ifPresent(essence -> DecomposeLog.get(server.getServer())
-                    .record(Teams.at(server, worldPosition), essence, plan.take(), DecomposeLog.Way.RECYCLER));
+                    .record(team, essence, plan.take(), DecomposeLog.Way.RECYCLER));
+            TeamState.get(server.getServer()).wake(team);
         }
     }
 

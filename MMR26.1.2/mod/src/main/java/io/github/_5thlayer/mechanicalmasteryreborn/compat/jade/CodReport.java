@@ -5,7 +5,6 @@ package io.github._5thlayer.mechanicalmasteryreborn.compat.jade;
 
 import io.github._5thlayer.libworks.machine.jade.MachineReport;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
-import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlockEntity;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -20,8 +19,8 @@ import snownee.jade.api.view.ProgressView;
 
 /**
  * What the server tells Jade about a C.O.D.: whether it is making essence, and the ticks done toward the next out
- * of its interval, which the server's config sets. {@link Lines} words it on the client, apart so that a dedicated
- * server never loads Jade's drawing.
+ * of its interval, which the server's config sets and which is shorter once it is awake. {@link Lines} words it on
+ * the client, apart so that a dedicated server never loads Jade's drawing.
  */
 final class CodReport {
 
@@ -39,7 +38,7 @@ final class CodReport {
     static final MachineReport<CodBlockEntity, Data> REPORT = new MachineReport<>(UID, CodBlockEntity.class, CodReport::read, CODEC);
 
     private static Data read(CodBlockEntity cod) {
-        return new Data(cod.isMaking(), cod.ticksTowardNext(), ServerConfig.codDormantInterval());
+        return new Data(cod.isMaking(), cod.ticksTowardNext(), cod.interval());
     }
 
     private CodReport() {

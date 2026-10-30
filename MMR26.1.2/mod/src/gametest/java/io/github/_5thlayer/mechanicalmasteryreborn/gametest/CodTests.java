@@ -24,7 +24,8 @@ import net.neoforged.neoforge.transfer.item.ItemResource;
 /**
  * A dormant C.O.D. (#164, #196): a newly placed one holds a full stack of Advanced essence; emptied, by a
  * player or by automation, it makes one more each configured interval until the slot holds a stack again,
- * and puts nothing out of itself. Each test places its C.O.D. at {@link #COD} with a chest east of it.
+ * and puts nothing out of itself. Each test places its C.O.D. at {@link #COD} with a chest east of it, on an
+ * island of its own, so no other test's Recycler wakes it.
  */
 final class CodTests {
 
@@ -158,6 +159,7 @@ final class CodTests {
     }
 
     private static CodBlockEntity place(GameTestHelper helper) {
+        TestTeams.claim(helper);
         helper.setBlock(COD, Cod.BLOCK.get());
         helper.setBlock(CHEST, Blocks.CHEST);
         return helper.getBlockEntity(COD, CodBlockEntity.class);

@@ -68,6 +68,7 @@ public final class MechanicalMasteryRebornGameTests {
         CreativeTabTests.register(tests);
         EssenceTests.register(tests);
         CodTests.register(tests);
+        CodWakeTests.register(tests);
         HandDecomposeTests.register(tests);
         RecyclerTests.register(tests);
         RecyclingTests.register(tests);

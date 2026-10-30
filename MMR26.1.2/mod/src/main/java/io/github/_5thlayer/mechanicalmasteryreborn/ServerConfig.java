@@ -19,7 +19,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  * Craftworks' assembling type there.
  * NeoForge sends a server config to each client, so EMI shows the yield a server plays with.
  *
- * <p>And C.O.D.'s pace while dormant.
+ * <p>And C.O.D.'s pace while dormant, and once awake.
  */
 public final class ServerConfig {
 
@@ -44,6 +44,12 @@ public final class ServerConfig {
                     "120 is 6 seconds, a little faster than decomposing by hand (8 seconds an essence).")
             .defineInRange("cod.dormant_interval", 120, 1, 72000);
 
+    /** How often an awake C.O.D. makes one Advanced essence between challenges: about one hand drive's throughput. */
+    public static final ModConfigSpec.IntValue COD_WAKING_INTERVAL = BUILDER
+            .comment("The ticks an awake C.O.D. takes to make one Advanced essence while no challenge is played.",
+                    "40 is 2 seconds, about what one hand drive turned without a pause decomposes (8 turns, 5 ticks apart).")
+            .defineInRange("cod.waking_interval", 40, 1, 72000);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 
     private ServerConfig() {
@@ -66,6 +72,11 @@ public final class ServerConfig {
     /** The ticks a dormant C.O.D. takes to make one essence. */
     public static int codDormantInterval() {
         return SPEC.isLoaded() ? COD_DORMANT_INTERVAL.getAsInt() : COD_DORMANT_INTERVAL.getDefault();
+    }
+
+    /** The ticks an awake C.O.D. takes to make one essence. */
+    public static int codWakingInterval() {
+        return SPEC.isLoaded() ? COD_WAKING_INTERVAL.getAsInt() : COD_WAKING_INTERVAL.getDefault();
     }
 
     /** Decomposing by hand's yield: the lowest core's, so a Recycler never does worse. */

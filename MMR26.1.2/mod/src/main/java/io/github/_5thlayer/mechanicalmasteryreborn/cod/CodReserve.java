@@ -33,6 +33,10 @@ final class CodReserve extends ItemStacksResourceHandler {
         set(0, ItemResource.of(full), full.getMaxStackSize());
     }
 
+    boolean isEmpty() {
+        return stacks.get(0).isEmpty();
+    }
+
     boolean isFull() {
         ItemStack stack = stacks.get(0);
         return !stack.isEmpty() && stack.getCount() >= stack.getMaxStackSize();
