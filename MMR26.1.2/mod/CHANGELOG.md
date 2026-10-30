@@ -12,6 +12,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn adds, or ch
 - `/cod status` and `/cod dormant`, for operators: which team a player is in and which team's island they stand on, with whether its C.O.D. is awake; and putting that island's C.O.D. back to dormant (#167).
 - A C.O.D. or a Recycler now belongs to the team whose island it stands on in Skyblock Builder's single-world mode, as the pack plays; before, every island fell back to one team for the whole world (#167).
 - C.O.D., dormant, makes Advanced essence at a pace instead of refilling its slot the moment it is emptied: one every 6 seconds, a little faster than decomposing by hand, while its slot holds less than a stack. A newly placed C.O.D. still holds a full stack. The pace is the server config's `cod.dormant_interval`, in ticks. Jade shows a bar toward the next essence, with the seconds left, or that the slot is full (#196).
+- An essence left on the ground fizzles when it expires, with a puff of smoke and a soft hiss, instead of vanishing silently, so the pile an awake C.O.D. spills looks like waste. It is only for show: the essence is gone as before and nothing takes its place (#199).
 - EMI shows every recycle by a recipe in a Recycling tab, and each decompose's and recycle's results at the tier-1 yield, with their chance. Jade says whether a Recycler is decomposing or recycling (#184).
 
 - Decomposing by hand: a right-click with an essence decomposes one into its mix, straight into the inventory, then rests it for 8 seconds (#166).
