@@ -18,9 +18,9 @@ import snownee.jade.api.ui.JadeUI;
 import snownee.jade.api.view.ProgressView;
 
 /**
- * What the server tells Jade about a C.O.D.: whether it is making essence, and the ticks done toward the next out
- * of its interval, which the server's config sets and which is shorter once it is awake. {@link Lines} words it on
- * the client, apart so that a dedicated server never loads Jade's drawing.
+ * What the server tells Jade about a C.O.D.: whether it is making essence, whether it is blocked, and the ticks done
+ * toward the next out of its interval, which the server's config sets and which is shorter once it is awake.
+ * {@link Lines} words it on the client, apart so that a dedicated server never loads Jade's drawing.
  */
 final class CodReport {
 
@@ -28,23 +28,27 @@ final class CodReport {
 
     private static final StreamCodec<RegistryFriendlyByteBuf, Data> CODEC = StreamCodec.composite(
             ByteBufCodecs.BOOL, Data::making,
+            ByteBufCodecs.BOOL, Data::blocked,
             ByteBufCodecs.VAR_INT, Data::ticks,
             ByteBufCodecs.VAR_INT, Data::interval,
             Data::new);
 
-    record Data(boolean making, int ticks, int interval) {
+    record Data(boolean making, boolean blocked, int ticks, int interval) {
     }
 
     static final MachineReport<CodBlockEntity, Data> REPORT = new MachineReport<>(UID, CodBlockEntity.class, CodReport::read, CODEC);
 
     private static Data read(CodBlockEntity cod) {
-        return new Data(cod.isMaking(), cod.ticksTowardNext(), cod.interval());
+        return new Data(cod.isMaking(), cod.isBlocked(), cod.ticksTowardNext(), cod.interval());
     }
 
     private CodReport() {
     }
 
-    /** Words the report: the next essence as a bar with the seconds left while it is making, or that its slot is full. */
+    /**
+     * Words the report: the next essence as a bar with the seconds left while it is making, that it is blocked
+     * while what it makes has nowhere to go, or that its slot is full.
+     */
     static final class Lines {
 
         private Lines() {
@@ -53,6 +57,10 @@ final class CodReport {
         static void add(Data report, ITooltip tooltip) {
             if (!report.making()) {
                 tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.full"));
+                return;
+            }
+            if (report.blocked()) {
+                tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.blocked"));
                 return;
             }
             int seconds = Mth.positiveCeilDiv(report.interval() - report.ticks(), 20);

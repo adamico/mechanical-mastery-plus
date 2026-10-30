@@ -85,6 +85,14 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         return awake || !reserve.isFull();
     }
 
+    /**
+     * Whether C.O.D. is awake but has nowhere to put what it makes: its reserve is full, after pushing into what is
+     * beside it, and its top is covered or its pile holds a stack. It still counts each one as made.
+     */
+    public boolean isBlocked() {
+        return awake && reserve.isFull() && !canSpill();
+    }
+
     /** The ticks it takes to make one essence, at its waking pace once awake. */
     public int interval() {
         return awake ? ServerConfig.codWakingInterval() : ServerConfig.codDormantInterval();
@@ -145,21 +153,26 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
-    /** Drops one essence onto the pile on top, unless the pile already holds a stack or a block stands there. */
+    /** Drops one essence onto the pile on top, if it {@link #canSpill can}. */
     private void spill() {
+        if (level != null && canSpill()) {
+            level.addFreshEntity(new ItemEntity(level, worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5,
+                    new ItemStack(Essences.item(Essence.ADVANCED)), 0, 0, 0));
+        }
+    }
+
+    /** Whether an essence can drop onto the pile on top: no block stands there, and the pile holds less than a stack. */
+    private boolean canSpill() {
         BlockPos top = worldPosition.above();
         if (level == null || !level.getBlockState(top).getCollisionShape(level, top).isEmpty()) {
-            return;
+            return false;
         }
         Item essence = Essences.item(Essence.ADVANCED);
         int piled = 0;
         for (ItemEntity item : level.getEntitiesOfClass(ItemEntity.class, new AABB(top).inflate(1, 0.5, 1))) {
             piled += item.getItem().is(essence) ? item.getItem().getCount() : 0;
         }
-        if (piled < essence.getDefaultMaxStackSize()) {
-            level.addFreshEntity(new ItemEntity(level, worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5,
-                    new ItemStack(essence), 0, 0, 0));
-        }
+        return piled < essence.getDefaultMaxStackSize();
     }
 
     @Override

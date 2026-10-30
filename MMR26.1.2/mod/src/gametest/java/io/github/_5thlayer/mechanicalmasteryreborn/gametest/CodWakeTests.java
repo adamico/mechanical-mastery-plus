@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
+import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
@@ -56,6 +57,7 @@ final class CodWakeTests {
         tests.test("cod_awake_pushes_into_an_adjacent_inventory", waking() + 10, CodWakeTests::pushesIntoAnAdjacentInventory);
         tests.test("cod_awake_spills_out_of_its_top_once_full", 2 * waking() + 10, CodWakeTests::spillsOnceFull);
         tests.test("cod_awake_pile_stops_at_a_stack_but_still_counts", 2 * waking() + 10, CodWakeTests::pileStopsAtAStack);
+        tests.test("cod_awake_is_blocked_only_with_nowhere_to_spill", 10, CodWakeTests::blockedOnlyWithNowhereToSpill);
         tests.test("cod_team_state_survives_a_save_and_load", waking() + 10, CodWakeTests::survivesASaveAndLoad);
         tests.test("cod_team_state_is_shared_by_a_joining_player", 1, CodWakeTests::sharedByAJoiningPlayer);
         tests.test("cod_awake_feeds_a_hopper_below_only_what_it_makes", 3 * waking() + 20, CodWakeTests::feedsAHopperOnlyWhatItMakes);
@@ -165,6 +167,28 @@ final class CodWakeTests {
         });
     }
 
+    /** Three C.O.D.s, full and awake: one under a stack's pile, one under a block, and one with a clear top. */
+    private static void blockedOnlyWithNowhereToSpill(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        BlockPos piled = COD;
+        BlockPos covered = new BlockPos(1, 2, 5);
+        BlockPos clear = new BlockPos(5, 2, 1);
+        place(helper, piled);
+        place(helper, covered);
+        place(helper, clear);
+        BlockPos top = helper.absolutePos(piled.above());
+        helper.getLevel().addFreshEntity(new ItemEntity(helper.getLevel(), top.getX() + 0.5, top.getY(), top.getZ() + 0.5,
+                new ItemStack(Essences.item(Essence.ADVANCED), STACK), 0, 0, 0));
+        helper.setBlock(covered.above(), Blocks.STONE);
+        state(helper).wake(team);
+        helper.runAtTickTime(MARGIN, () -> {
+            helper.assertTrue(cod(helper, piled).isBlocked(), "a full C.O.D. under a stack's pile isn't blocked");
+            helper.assertTrue(cod(helper, covered).isBlocked(), "a full C.O.D. under a block isn't blocked");
+            helper.assertFalse(cod(helper, clear).isBlocked(), "a full C.O.D. with a clear top is blocked");
+            helper.succeed();
+        });
+    }
+
     private static void feedsAHopperOnlyWhatItMakes(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         place(helper, COD);
@@ -246,6 +270,10 @@ final class CodWakeTests {
         ItemStack held = face.getResource(0).toStack(face.getAmountAsInt(0));
         helper.assertTrue(held.is(Essences.item(Essence.ADVANCED)), what + " holds " + held + ", not Advanced essence");
         helper.assertValueEqual(held.getCount(), count, what + "'s count");
+    }
+
+    private static CodBlockEntity cod(GameTestHelper helper, BlockPos pos) {
+        return helper.getBlockEntity(pos, CodBlockEntity.class);
     }
 
     private static ResourceHandler<ItemResource> face(GameTestHelper helper, BlockPos pos) {

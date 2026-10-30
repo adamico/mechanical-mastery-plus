@@ -26,6 +26,7 @@
   "mechanicalmasteryreborn.command.cod.made_dormant": "The C.O.D. of this island is dormant again.",
   "mechanicalmasteryreborn.command.cod.status": "Your team: %s. This island's team: %s. Its C.O.D. is %s, and has made %s essence awake.",
   "mechanicalmasteryreborn.cod.woke": "%s has woken. It now makes Advanced Mechanical Essence every %s seconds, without stopping, and pushes it into anything beside it.",
+  "mechanicalmasteryreborn.jade.cod.blocked": "Blocked: its slot is full, and its top takes no more",
   "mechanicalmasteryreborn.jade.cod.full": "Full stack",
   "mechanicalmasteryreborn.jade.cod.next": "Next essence in %s s",
   "mechanicalmasteryreborn.jade.recycler.empty": "Nothing to decompose or recycle",
