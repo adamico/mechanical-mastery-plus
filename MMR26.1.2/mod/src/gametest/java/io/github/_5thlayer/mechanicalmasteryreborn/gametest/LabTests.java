@@ -21,7 +21,8 @@ import net.minecraft.world.level.GameType;
 /**
  * The lab (#201): a team chooses a handicap at the lab on its island, which starts that handicap's challenge. Only
  * energy can be chosen yet. The handicap is the team's alone, is chosen once while its challenge is played, and is
- * saved with the team's state. Each test is an island of its own, with another team's in a corner.
+ * saved with the team's state. An op starts and ends the challenge of the island they stand on. Each test is an island
+ * of its own, with another team's in a corner.
  */
 final class LabTests {
 
@@ -38,6 +39,7 @@ final class LabTests {
         tests.test("lab_chooses_nothing_for_a_player_of_another_team", 1, LabTests::choosesNothingForAnotherTeam);
         tests.test("lab_chooses_once_while_a_challenge_is_played", 1, LabTests::choosesOnce);
         tests.test("lab_shows_its_team_s_handicap", 1, LabTests::showsItsTeamsHandicap);
+        tests.test("lab_op_starts_and_ends_the_challenge_of_the_island_stood_on", 1, LabTests::opStartsAndEnds);
     }
 
     private static void offersOnlyEnergy(GameTestHelper helper) {
@@ -104,6 +106,26 @@ final class LabTests {
         menu.clickMenuButton(player, Handicap.ENERGY.ordinal());
         helper.assertValueEqual(menu.chosen(), Optional.of(Handicap.ENERGY), "the handicap the lab shows after choosing");
         helper.assertValueEqual(open(helper, player).chosen(), Optional.of(Handicap.ENERGY), "the handicap the lab shows on opening again");
+        helper.succeed();
+    }
+
+    private static void opStartsAndEnds(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        UUID other = TestTeams.claim(helper, OTHER_ISLAND, OTHER_ISLAND);
+        var server = helper.getLevel().getServer();
+        var op = server.createCommandSourceStack().withLevel(helper.getLevel())
+                .withPosition(helper.absolutePos(LAB).getCenter()).withSuppressedOutput();
+        server.getCommands().performPrefixedCommand(op, "cod challenge start money");
+        helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after an op started money");
+        server.getCommands().performPrefixedCommand(op, "cod challenge start energy");
+        helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.ENERGY), "the team's handicap after an op started energy");
+        helper.assertValueEqual(state(helper).handicap(other), Optional.<Handicap>empty(), "another team's handicap");
+        state(helper).wake(team);
+        server.getCommands().performPrefixedCommand(op, "cod challenge end");
+        helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after an op ended it");
+        helper.assertTrue(state(helper).isAwake(team), "ending the challenge put the team's C.O.D. back to dormant");
+        server.getCommands().performPrefixedCommand(op, "cod challenge start energy");
+        helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.ENERGY), "the team's handicap, started again");
         helper.succeed();
     }
 

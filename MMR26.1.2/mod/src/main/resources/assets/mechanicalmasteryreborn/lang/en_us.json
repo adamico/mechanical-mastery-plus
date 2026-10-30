@@ -26,6 +26,11 @@
   "mechanicalmasteryreborn.cod.woke": "%s has woken. It now makes Advanced Mechanical Essence every %s seconds, without stopping, and pushes it into anything beside it.",
   "mechanicalmasteryreborn.command.cod.awake": "awake",
   "mechanicalmasteryreborn.command.cod.challenge": "This island's team plays the %s challenge.",
+  "mechanicalmasteryreborn.command.cod.challenge.ended": "This island's team no longer plays a challenge.",
+  "mechanicalmasteryreborn.command.cod.challenge.later": "The %s handicap can't be chosen yet.",
+  "mechanicalmasteryreborn.command.cod.challenge.playing": "This island's team already plays the %s challenge: end it first.",
+  "mechanicalmasteryreborn.command.cod.challenge.started": "This island's team now plays the %s challenge.",
+  "mechanicalmasteryreborn.command.cod.challenge.unknown": "No handicap %s: it is protection, life, energy or money.",
   "mechanicalmasteryreborn.command.cod.dormant": "dormant",
   "mechanicalmasteryreborn.command.cod.elsewhere": "You stand on another team's island: its C.O.D. waking doesn't reach you.",
   "mechanicalmasteryreborn.command.cod.made_dormant": "The C.O.D. of this island is dormant again.",
@@ -56,6 +61,7 @@
   "mechanicalmasteryreborn.lab.choose": "Choose",
   "mechanicalmasteryreborn.lab.intro": "Choose a handicap to start its challenge. It costs your team only while the challenge is played.",
   "mechanicalmasteryreborn.lab.later": "Coming later",
-  "mechanicalmasteryreborn.lab.not_member": "Only the team whose island this is can choose here.",
+  "mechanicalmasteryreborn.lab.not_member": "Not yours",
+  "mechanicalmasteryreborn.lab.not_member.tooltip": "Only the team whose island this lab stands on can choose here.",
   "mechanicalmasteryreborn.lab.played": "Played"
 }

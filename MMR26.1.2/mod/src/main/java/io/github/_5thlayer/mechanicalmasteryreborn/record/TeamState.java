@@ -128,6 +128,17 @@ public final class TeamState extends SavedData {
         return true;
     }
 
+    /** Ends the challenge {@code team} plays, its handicap with it, and says whether it played one. */
+    public boolean endChallenge(UUID team) {
+        Entry entry = teams.get(team);
+        if (entry == null || entry.handicap.isEmpty()) {
+            return false;
+        }
+        entry.handicap = Optional.empty();
+        setDirty();
+        return true;
+    }
+
     /** How much essence an awake C.O.D. has made for {@code team}, whether it spawned or not. */
     public long made(UUID team) {
         Entry entry = teams.get(team);
