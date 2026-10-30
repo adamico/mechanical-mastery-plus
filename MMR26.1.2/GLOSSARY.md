@@ -34,7 +34,7 @@ The companion mod's machine, after Factorio's, and much faster than decomposing 
 _Avoid_: starter machine, decomposer, crank recycler
 
 **Core**:
-The middle block of a Recycler, which holds its work and whose tier sets how fast it runs and how well: its yield, and how many it processes at once.
+The middle block of a Recycler, which holds its work and whose tier sets how fast it runs and how well: its yield, and how many it processes at once. A player takes back what it holds by hand, giving up the work under way; nothing else can.
 
 **Drive**:
 A part of a Recycler that turns it: by a player's right-click, a redstone signal, FE, a pack mod's magic or other means. A Recycler's drives add up; a hand-worked drive never turns faster than a player, and FE drives stop under the energy handicap.
