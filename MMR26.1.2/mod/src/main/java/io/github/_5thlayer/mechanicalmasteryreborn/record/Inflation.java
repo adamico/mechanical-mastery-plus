@@ -35,7 +35,11 @@ public record Inflation(long began, long made, long decomposed) {
         return new Inflation(gameTime, 0, 0);
     }
 
-    /** What C.O.D. has made since the challenge began beyond what the team has decomposed, never below zero. */
+    /**
+     * What C.O.D. has made since the challenge began beyond what the team has decomposed, never below zero. The floor
+     * is on the totals, not on each step, as the maintainer chose: what the team decomposes beyond what C.O.D. has
+     * made, a stockpile from before the challenge, say, is credit against what C.O.D. makes next.
+     */
     public long excess() {
         return Math.max(0, made - decomposed);
     }

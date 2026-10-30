@@ -47,7 +47,7 @@ final class InflationTests {
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("inflation_counts_nothing_with_no_challenge", waking() + 10, InflationTests::nothingWithNoChallenge);
-        tests.test("inflation_rises_with_each_made_and_falls_with_each_decompose", 2 * waking() + 10, InflationTests::risesAndFalls);
+        tests.test("inflation_rises_with_each_made_and_falls_with_each_decompose", 3 * waking() + 10, InflationTests::risesAndFalls);
         tests.test("inflation_is_unchanged_by_voiding_essence", waking() + 10, InflationTests::unchangedByVoiding);
         tests.test("inflation_counts_a_hand_decompose_as_a_recycler_one", 10, InflationTests::handCountsAsRecycler);
         tests.test("inflation_is_untouched_by_another_team_s_cod", waking() + 10, InflationTests::untouchedByAnotherTeam);
@@ -86,6 +86,10 @@ final class InflationTests {
             decomposeByHand(helper, team);
             decomposeByHand(helper, team);
             expect(helper, team, 2, 3, 0, "after decomposing more than was made");
+        });
+        // The clamp is on the totals: the one decomposed beyond what was made is credit the next one made uses up.
+        helper.runAtTickTime(3 * waking() + MARGIN, () -> {
+            expect(helper, team, 3, 3, 0, "after one more made");
             helper.succeed();
         });
     }
