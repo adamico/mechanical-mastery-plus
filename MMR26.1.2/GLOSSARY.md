@@ -9,7 +9,7 @@ The suite.
 On this line the loop runs backwards. The world has been reduced to essence: each one holds the idea of every other resource, which has to be decomposed out of it.
 
 **C.O.D.**:
-The line's adversary, a sentient AI that cannot be shut down. Dormant until a team first decomposes on a Recycler (decomposing by hand never wakes it), it then makes endless essence of the highest tier not yet blocked, and nothing else: Advanced first, then one tier lower each time a challenge is won, until all four are blocked.
+The line's adversary, a sentient AI that cannot be shut down. It makes essence of the highest tier not yet blocked, and nothing else: Advanced first, then one tier lower each time a challenge is won, until all four are blocked. Dormant, it makes it at a steady pace a little faster than decomposing by hand, and only until it holds a stack, so it never runs dry and never piles up. A team's first decompose on a Recycler (decomposing by hand never does) wakes it, and from then on it makes essence much faster, steadily between challenges and ever faster, without end, while one is played.
 
 **Suite**:
 The 5thlayer -works mods (Groundworks, Beltworks, Pipeworks, Wireworks, Craftworks, Fieldworks, Voidworks, Gearworks), which the pack consumes as released jars, as any player would. What the pack needs from them it scripts itself; a change goes to the mod only for a bug or a workaround worth sharing.
@@ -58,7 +58,7 @@ An ascending recipe a challenge's research unlocks, often on one machine of the 
 How processed an item is, from the top: intermediate 2, intermediate 1, refined, raw. Each essence tier decomposes into one band, Advanced into intermediate 2 down to Basic into raw.
 
 **Inflation**:
-The excess C.O.D. has built up since the current challenge began: essences it has made minus essences the team has decomposed. C.O.D. makes them ever faster, with no ceiling, so it climbs whenever decomposing falls behind; voiding or storing essence doesn't lower it. When it reaches its cap before the challenge is finished, the challenge resets.
+The excess C.O.D. has built up since the current challenge began: essences it has made minus essences the team has decomposed. Only while a challenge is played does C.O.D. make them ever faster, with no ceiling, so it climbs whenever decomposing falls behind; voiding or storing essence doesn't lower it. When it reaches its cap before the challenge is finished, the challenge resets, and C.O.D. falls back to the pace it woke at.
 _Avoid_: glut, overflow, timer
 
 **Transmuted Essence**:
