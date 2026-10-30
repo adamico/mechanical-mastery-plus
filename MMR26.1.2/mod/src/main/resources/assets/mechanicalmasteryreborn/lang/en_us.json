@@ -24,6 +24,7 @@
   "item.mechanicalmasteryreborn.vital_essence": "Vital Essence",
   "item.mechanicalmasteryreborn.warding_essence": "Warding Essence",
   "mechanicalmasteryreborn.challenge.started": "Your team now plays the %s challenge. While it is played: %s.",
+  "mechanicalmasteryreborn.challenge.title": "%s Challenge",
   "mechanicalmasteryreborn.cod.woke": "%s has woken. It now makes Advanced Mechanical Essence every %s seconds, without stopping, and pushes it into anything beside it.",
   "mechanicalmasteryreborn.command.cod.awake": "awake",
   "mechanicalmasteryreborn.command.cod.challenge": "This island's team plays the %s challenge.",
