@@ -48,8 +48,8 @@ import org.jspecify.annotations.Nullable;
  * interval} without stop, every one counted for the team as made. Each goes into the reserve, which pushes into
  * whatever takes items beside it; once the reserve is full, onto a pile on its top, of up to a stack, unless a
  * block stands there; past that, nowhere, so the pile shows the team it is falling behind and lag stays bounded.
- * While the team plays a challenge, each one it makes counts toward its {@link Inflation}. A challenge's faster pace
- * is #205's.
+ * While the team plays a challenge, each one it makes counts toward its {@link Inflation}, and it makes them ever faster
+ * with the time since the challenge began ({@link CodPace}), back at its waking pace once the challenge ends.
  */
 public final class CodBlockEntity extends BlockEntity implements MenuProvider {
 
@@ -96,9 +96,22 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         return awake && reserve.isFull() && !canSpill();
     }
 
-    /** The ticks it takes to make one essence, at its waking pace once awake. */
+    /**
+     * The ticks it takes to make one essence: at its waking pace once awake, and faster with the time since its team's
+     * challenge began while it plays one; on the server only, so a client sees the waking pace.
+     */
     public int interval() {
-        return awake ? ServerConfig.codWakingInterval() : ServerConfig.codDormantInterval();
+        if (!awake) {
+            return ServerConfig.codDormantInterval();
+        }
+        int waking = ServerConfig.codWakingInterval();
+        if (!(level instanceof ServerLevel server)) {
+            return waking;
+        }
+        long now = server.getServer().overworld().getGameTime();
+        return inflation()
+                .map(played -> CodPace.interval(waking, ServerConfig.codPaceGrowth(), now - played.began()))
+                .orElse(waking);
     }
 
     /** Its team's Inflation, while the team plays a challenge; on the server only. */

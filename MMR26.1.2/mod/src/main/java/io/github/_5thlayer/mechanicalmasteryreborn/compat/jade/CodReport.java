@@ -46,8 +46,11 @@ final class CodReport {
 
     static final MachineReport<CodBlockEntity, Data> REPORT = new MachineReport<>(UID, CodBlockEntity.class, CodReport::read, CODEC);
 
+    /** The ticks done are held to the interval, which may have shrunk by a tick since C.O.D. last counted one. */
     private static Data read(CodBlockEntity cod) {
-        return new Data(cod.isMaking(), cod.isBlocked(), cod.ticksTowardNext(), cod.interval(), cod.inflation(), ServerConfig.inflationCap());
+        int interval = cod.interval();
+        return new Data(cod.isMaking(), cod.isBlocked(), Math.min(cod.ticksTowardNext(), interval), interval, cod.inflation(),
+                ServerConfig.inflationCap());
     }
 
     private CodReport() {

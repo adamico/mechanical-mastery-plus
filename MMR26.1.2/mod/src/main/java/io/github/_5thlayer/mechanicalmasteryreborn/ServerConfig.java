@@ -19,7 +19,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  * Craftworks' assembling type there.
  * NeoForge sends a server config to each client, so EMI shows the yield a server plays with.
  *
- * <p>And C.O.D.'s pace while dormant, and once awake, and the cap of a team's Inflation.
+ * <p>And C.O.D.'s pace while dormant, once awake, and how it grows while a challenge is played, and the cap of a team's Inflation.
  */
 public final class ServerConfig {
 
@@ -49,6 +49,13 @@ public final class ServerConfig {
             .comment("The ticks an awake C.O.D. takes to make one Advanced essence while no challenge is played.",
                     "40 is 2 seconds, about what one hand drive turned without a pause decomposes (8 turns, 5 ticks apart).")
             .defineInRange("cod.waking_interval", 40, 1, 72000);
+
+    /** How much faster an awake C.O.D. grows each minute of a challenge, from its waking pace: a placeholder until the balance pass (#207). */
+    public static final ModConfigSpec.DoubleValue COD_PACE_GROWTH = BUILDER
+            .comment("The share of its waking pace an awake C.O.D.'s pace grows by each minute since its team's challenge began,",
+                    "without end: 0.1 is twice the waking pace ten minutes in, three times twenty minutes in. 0 keeps the waking pace.",
+                    "It never makes more than one essence a tick.")
+            .defineInRange("cod.pace_growth", 0.1, 0.0, 100.0);
 
     /** The excess Inflation may reach while a challenge is played: a placeholder until the balance pass (#207). */
     public static final ModConfigSpec.IntValue COD_INFLATION_CAP = BUILDER
@@ -83,6 +90,11 @@ public final class ServerConfig {
     /** The ticks an awake C.O.D. takes to make one essence. */
     public static int codWakingInterval() {
         return SPEC.isLoaded() ? COD_WAKING_INTERVAL.getAsInt() : COD_WAKING_INTERVAL.getDefault();
+    }
+
+    /** The share of its waking pace an awake C.O.D.'s pace grows by each minute of a challenge. */
+    public static double codPaceGrowth() {
+        return SPEC.isLoaded() ? COD_PACE_GROWTH.getAsDouble() : COD_PACE_GROWTH.getDefault();
     }
 
     /** The excess Inflation may reach while a challenge is played. */
