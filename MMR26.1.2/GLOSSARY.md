@@ -77,7 +77,7 @@ The path a challenge's mods take a team from raw and refined items up to the cha
 _Avoid_: processing chain, path
 
 **Handicap**:
-What a challenge costs the team while it plays it, and only then: protection (more, stronger and special mobs), life (less max health), energy (its generators give it no energy, and its FE drives stop) or money (less money).
+What a challenge costs the team while it plays it, and only then: protection (more, stronger and special mobs), life (less max health), energy (its generators give it no energy, and its FE drives stop) or money (less money). Whatever a handicap acts on can't be stockpiled ahead: a team's money and FE are set aside while the challenge is played, and given back when it ends.
 _Avoid_: threat, debuff
 
 **Generator**:

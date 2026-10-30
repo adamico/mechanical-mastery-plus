@@ -10,3 +10,4 @@ We could have left a challenge's mods free from the start, as Theurgy and Neo Vi
 - A reset keeps the chain unlocked: the factory a failed attempt built is what it earned, and a second attempt starts with it.
 - A chain unlocked by one challenge stays open for the team's later challenges.
 - Gearworks is no challenge's mod, since locking it would lock the suite's own gear; it stays free, as the gear that protection makes worth having.
+- A lock stops a chain being built ahead, not a stock being saved up. What a handicap acts on, a team's money and FE, is set aside while the challenge is played (glossary **Handicap**), so the money challenge's chain is paid only with money earned during it.

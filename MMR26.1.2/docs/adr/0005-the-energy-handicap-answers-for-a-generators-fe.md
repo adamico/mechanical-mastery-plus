@@ -10,3 +10,4 @@ We could have asked the suite for a hook, a check every generator makes before i
 - The face changes when a challenge starts or ends, and nothing tells NeoForge's capability caches. The suite asks afresh every tick, but a mod that keeps a `BlockCapabilityCache` on a generator keeps its old answer until the block changes.
 - A stopped generator still burns fuel for the few seconds its buffer takes to fill.
 - The generator's own mod still reports itself as a generator with a full buffer. The companion mod's Jade line says why it is stopped.
+- Stopping generators leaves the FE a team banked before the challenge, in batteries, storage and gear, free to flow. That FE is set aside too while the challenge is played (glossary **Handicap**), in a ticket of its own.
