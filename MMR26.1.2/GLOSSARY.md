@@ -69,8 +69,12 @@ _Avoid_: new essence
 The final essence, made in the last chapter from the four Transmuted Essences, which shuts C.O.D. down for good.
 
 **Challenge**:
-One of four questlines, each bound to a fixed mod or set of mods, started at the lab. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. Finishing it makes a Transmuted Essence that blocks the tier C.O.D. is making.
+One of four questlines, each bound to a fixed mod or set of mods, started at the lab. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. Finishing it makes a Transmuted Essence that blocks the tier C.O.D. is making. Its mods take only raw and refined items, never intermediates.
 _Avoid_: chapter (a quest-book page), stage
+
+**Chain**:
+The path a challenge's mods take a team from raw and refined items up to the challenge's Transmuted Essence. It starts where recycling leaves off: the Recycler brings what an essence decomposes into down to those bands, and that recycling is no part of the challenge.
+_Avoid_: processing chain, path
 
 **Handicap**:
 What a challenge costs the team while it plays it, and only then: protection (more, stronger and special mobs), life (less max health), energy (its generators give it no energy, and its FE drives stop) or money (less money).

@@ -1,0 +1,1415 @@
+{
+  "version": "theurgy 1.116.1",
+  "rule": "The energy challenge's Chain takes only raw and refined items into Theurgy's own, unchanged recipes, and the pack adds one recipe, the last step, which makes the Galvanic Essence from Theurgy's products (ADR 0006).",
+  "items": {
+    "minecraft:water": {
+      "name": "Water (fluid, mB)",
+      "band": "raw",
+      "source": "The island's water source. Counts are mB."
+    },
+    "minecraft:oak_log": {
+      "name": "Log (any #minecraft:logs)",
+      "band": "raw",
+      "source": "The island tree. Distils 2 to a Mercury Shard (theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/distillation/logs.json); also Pyromantic Brazier fuel (theurgy-26.1.2-neoforge-1.116.1.jar!/assets/theurgy/lang/en_us.json book.theurgy.the_hermetica.apparatus.pyromantic_brazier.intro.text)."
+    },
+    "minecraft:cobblestone": {
+      "name": "Cobblestone (any #c:cobblestones)",
+      "band": "raw",
+      "source": "Cobblegen Galore. Calcines to Strata Salt (theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/calcination/alchemical_salt_strata_from_cobblestone.json), distils 10 to a Mercury Shard (theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/distillation/cobblestones.json)."
+    },
+    "minecraft:raw_copper": {
+      "name": "Raw Copper",
+      "band": "raw",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_copper_from_raw_materials_copper.json (3 sulfur)"
+    },
+    "minecraft:raw_iron": {
+      "name": "Raw Iron",
+      "band": "raw",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_iron_from_raw_materials_iron.json (3 sulfur)"
+    },
+    "minecraft:raw_gold": {
+      "name": "Raw Gold",
+      "band": "raw",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_gold_from_raw_materials_gold.json (3 sulfur)"
+    },
+    "minecraft:copper_ore": {
+      "name": "Copper Ore (any #c:ores/copper)",
+      "band": "raw",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_copper_from_ores_copper.json (5 sulfur)"
+    },
+    "minecraft:iron_ore": {
+      "name": "Iron Ore (any #c:ores/iron)",
+      "band": "raw",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_iron_from_ores_iron.json (5 sulfur)"
+    },
+    "minecraft:gold_ore": {
+      "name": "Gold Ore (any #c:ores/gold)",
+      "band": "raw",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_gold_from_ores_gold.json (5 sulfur)"
+    },
+    "minecraft:redstone_ore": {
+      "name": "Redstone Ore (any #c:ores/redstone)",
+      "band": "raw",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_redstone_from_ores_redstone.json (9 sulfur)"
+    },
+    "minecraft:copper_ingot": {
+      "name": "Copper Ingot (any #c:ingots/copper)",
+      "band": "refined",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_copper_from_ingots_copper.json"
+    },
+    "minecraft:iron_ingot": {
+      "name": "Iron Ingot (any #c:ingots/iron)",
+      "band": "refined",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_iron_from_ingots_iron.json"
+    },
+    "minecraft:gold_ingot": {
+      "name": "Gold Ingot (any #c:ingots/gold)",
+      "band": "refined",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_gold_from_ingots_gold.json; also the output of theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/incubation/ingots_gold_from_alchemical_sulfur_gold.json"
+    },
+    "minecraft:redstone": {
+      "name": "Redstone Dust (any #c:dusts/redstone)",
+      "band": "refined",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_redstone_from_dusts_redstone.json"
+    },
+    "minecraft:oak_planks": {
+      "name": "Planks (any #minecraft:planks)",
+      "band": "refined",
+      "source": "The island tree, sawn. Fermentation's sugar (theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/fermentation/alchemical_niter_metals_abundant_using_planks.json); logs work in the same place (..._using_logs.json)."
+    },
+    "theurgy:sal_ammoniac": {
+      "name": "Sal Ammoniac (fluid, mB)",
+      "band": "theurgy",
+      "source": "The solvent. theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/accumulation/sal_ammoniac_from_water.json. Counts are mB."
+    },
+    "theurgy:mercury_shard": {
+      "name": "Mercury Shard",
+      "band": "theurgy",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/distillation/*.json"
+    },
+    "theurgy:mercury_flux": {
+      "name": "Mercury Flux (energy, not an item)",
+      "band": "theurgy",
+      "source": "Theurgy's own energy, a capability of its own (theurgy:mercury_flux_handler), never FE: https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/registry/CapabilityRegistry.java. Counted here as units, like an item. theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/catalysation/mercury_flux_from_mercury_shard.json"
+    },
+    "theurgy:alchemical_salt_strata": {
+      "name": "Alchemical Salt: Strata",
+      "band": "theurgy",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/calcination/alchemical_salt_strata_from_cobblestone.json"
+    },
+    "theurgy:alchemical_salt_mineral": {
+      "name": "Alchemical Salt: Mineral",
+      "band": "theurgy",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/calcination/alchemical_salt_mineral_from_strata_salt.json; the salt every metal incubation takes (theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/incubation/ingots_gold_from_alchemical_sulfur_gold.json)"
+    },
+    "theurgy:alchemical_sulfur_copper": {
+      "name": "Alchemical Sulfur: Copper (metals, abundant)",
+      "band": "theurgy",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/tags/item/alchemical_sulfurs/metals/abundant.json"
+    },
+    "theurgy:alchemical_sulfur_iron": {
+      "name": "Alchemical Sulfur: Iron (metals, common)",
+      "band": "theurgy",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/tags/item/alchemical_sulfurs/metals/common.json"
+    },
+    "theurgy:alchemical_sulfur_gold": {
+      "name": "Alchemical Sulfur: Gold (metals, rare)",
+      "band": "theurgy",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/tags/item/alchemical_sulfurs/metals/rare.json"
+    },
+    "theurgy:alchemical_sulfur_redstone": {
+      "name": "Alchemical Sulfur: Redstone (other minerals, common)",
+      "band": "theurgy",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/tags/item/alchemical_sulfurs/other_minerals/common.json"
+    },
+    "theurgy:alchemical_niter_metals_abundant": {
+      "name": "Alchemical Niter: Abundant Metals",
+      "band": "theurgy",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/fermentation/alchemical_niter_metals_abundant_using_planks.json"
+    },
+    "theurgy:alchemical_niter_metals_common": {
+      "name": "Alchemical Niter: Common Metals",
+      "band": "theurgy",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/fermentation/alchemical_niter_metals_common_using_planks.json"
+    },
+    "theurgy:alchemical_niter_metals_rare": {
+      "name": "Alchemical Niter: Rare Metals",
+      "band": "theurgy",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/digestion/alchemical_niter_metals_rare_from_common.json"
+    },
+    "theurgy:purified_gold": {
+      "name": "Purified Gold",
+      "band": "theurgy",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/digestion/purified_gold.json"
+    },
+    "mechanicalmasteryreborn:galvanic_essence": {
+      "name": "Galvanic Essence",
+      "band": "essence",
+      "source": "The companion mod's item (MMR26.1.2/mod/); no recipe yet (#173). Its recipe is the one the pack adds to Theurgy (ADR 0006)."
+    }
+  },
+  "machines": {
+    "theurgy:sal_ammoniac_accumulator": {
+      "name": "Sal Ammoniac Accumulator (on a Sal Ammoniac Tank)",
+      "driver": "none",
+      "needsFe": false,
+      "main": true,
+      "automation": "Water piped in, Sal Ammoniac piped out of the tank below. No heat, no hand.",
+      "source": "https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/salammoniacaccumulator/SalAmmoniacAccumulatorCraftingBehaviour.java; theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/accumulation/sal_ammoniac_from_water.json"
+    },
+    "theurgy:liquefaction_cauldron": {
+      "name": "Liquefaction Cauldron (on a heat source)",
+      "driver": "heat",
+      "needsFe": false,
+      "main": true,
+      "automation": "Item by belt or pipe, Sal Ammoniac by pipe, sulfur out. No hand.",
+      "source": "https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/registry/CapabilityRegistry.java; theurgy-26.1.2-neoforge-1.116.1.jar!/assets/theurgy/lang/en_us.json book.theurgy.the_hermetica.apparatus.liquefaction_cauldron.usage.text"
+    },
+    "theurgy:distiller": {
+      "name": "Mercury Distiller (on a heat source)",
+      "driver": "heat",
+      "needsFe": false,
+      "main": true,
+      "automation": "Item in, shards out by belt or pipe. No hand.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/assets/theurgy/lang/en_us.json book.theurgy.the_hermetica.apparatus.distiller.usage.text; theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/distillation/*.json"
+    },
+    "theurgy:mercury_catalyst": {
+      "name": "Mercury Catalyst",
+      "driver": "none",
+      "needsFe": false,
+      "main": true,
+      "automation": "Shards in by belt or pipe. Turns a shard into 800 flux at 20 a tick, holds 50,000, pushes 2 a tick per side to the flux blocks touching it; the Sulfuric and Caloric Flux Emitters sit on it. Redstone stops its output.",
+      "source": "https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/mercurycatalyst/MercuryCatalystBlockEntity.java; theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/catalysation/mercury_flux_from_mercury_shard.json"
+    },
+    "theurgy:calcination_oven": {
+      "name": "Calcination Oven (on a heat source)",
+      "driver": "heat",
+      "needsFe": false,
+      "main": true,
+      "automation": "Item in, salt out by belt or pipe. No hand.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/assets/theurgy/lang/en_us.json book.theurgy.the_hermetica.apparatus.calcination_oven.intro.text; theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/calcination/*.json"
+    },
+    "theurgy:incubator": {
+      "name": "Incubator (Incubator + Salt, Sulfur and Mercury Vessels, on a heat source)",
+      "driver": "heat",
+      "needsFe": false,
+      "main": true,
+      "automation": "One belt or pipe into each vessel; the vessels take only #theurgy:alchemical_salts, _sulfurs and _mercuries. One of each per craft. No hand.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/com/klikli_dev/theurgy/content/apparatus/incubator/Incubator*VesselBlockEntity$InputInventory.class; https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/recipe/IncubationRecipe.java; theurgy-26.1.2-neoforge-1.116.1.jar!/assets/theurgy/lang/en_us.json book.theurgy.the_hermetica.apparatus.incubator.intro.text"
+    },
+    "theurgy:fermentation_vat": {
+      "name": "Fermentation Vat",
+      "driver": "none",
+      "needsFe": false,
+      "main": true,
+      "automation": "Items and water piped in and out while the lid is open; it works closed. A redstone signal on its back closes it once a valid recipe is loaded, and losing it opens it; it emits a has-output signal. A redstone loop, no hand.",
+      "source": "https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/behaviour/redstone/VatRedstoneChangeOpenCloseLidBehaviour.java; https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/behaviour/redstone/VatRedstoneAutoCloseBehaviour.java; theurgy-26.1.2-neoforge-1.116.1.jar!/assets/theurgy/lang/en_us.json book.theurgy.the_hermetica.apparatus.fermentation_vat.process.text"
+    },
+    "theurgy:digestion_vat": {
+      "name": "Digestion Vat",
+      "driver": "none",
+      "needsFe": false,
+      "main": true,
+      "automation": "As the Fermentation Vat. Three input slots, each a different item, accepted only if some digestion recipe can use it; one output slot; a 10-bucket tank.",
+      "source": "https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/digestionvat/DigestionStorageBehaviour.java; theurgy-26.1.2-neoforge-1.116.1.jar!/assets/theurgy/lang/en_us.json book.theurgy.the_hermetica.apparatus.digestion_vat.intro.text"
+    },
+    "theurgy:sulfuric_flux_emitter": {
+      "name": "Reformation Array (Sulfuric Flux Emitter + Source, Target and Result Pedestals)",
+      "driver": "mercury_flux",
+      "needsFe": false,
+      "main": true,
+      "automation": "Pipe into the Source Pedestals (one slot each, sulfurs and niters only), out of the Result Pedestal (one slot; a full one stalls the array). By hand, once: linking the pedestals and placing the target sulfur, which isn't consumed. One target per array, so each target is its own array or a hand swap. The emitter holds 1000 flux and takes a recipe's whole cost at once.",
+      "source": "https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/reformationarray/SulfuricFluxEmitterBlockEntity.java; https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/reformationarray/ReformationArrayCraftingBehaviour.java; https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/reformationarray/ReformationSourcePedestalBlockEntity.java; https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/reformationarray/ReformationResultPedestalBlockEntity.java; theurgy-26.1.2-neoforge-1.116.1.jar!/assets/theurgy/lang/en_us.json book.theurgy.the_hermetica.apparatus.target_pedestal.intro.text"
+    },
+    "theurgy:pyromantic_brazier": {
+      "name": "Pyromantic Brazier",
+      "driver": "heat",
+      "needsFe": false,
+      "main": false,
+      "automation": "Heats the apparatus above it by burning furnace fuel (logs, coal, charcoal); fuel by belt or pipe.",
+      "source": "https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/pyromanticbrazier/PyromanticBrazierBlockEntity.java; theurgy-26.1.2-neoforge-1.116.1.jar!/assets/theurgy/lang/en_us.json book.theurgy.the_hermetica.apparatus.pyromantic_brazier.intro.text"
+    },
+    "theurgy:caloric_flux_emitter": {
+      "name": "Caloric Flux Emitter",
+      "driver": "mercury_flux",
+      "needsFe": false,
+      "main": false,
+      "automation": "Fuel-free heat: sits on a flux source and heats one linked apparatus up to 8 blocks away, 100 flux per 120 ticks for as long as it is fed. Linked once by hand.",
+      "source": "https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/caloricfluxemitter/CaloricFluxEmitterBlockEntity.java; theurgy-26.1.2-neoforge-1.116.1.jar!/assets/theurgy/lang/en_us.json book.theurgy.the_hermetica.apparatus.caloric_flux_emitter.usage.text"
+    },
+    "theurgy:mercury_capacitor": {
+      "name": "Mercury Capacitor",
+      "driver": "mercury_flux",
+      "needsFe": false,
+      "main": false,
+      "automation": "Flux store, ten times a Catalyst, with per-side input and output: a buffer between Catalysts and emitters.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/assets/theurgy/lang/en_us.json book.theurgy.the_hermetica.apparatus.mercury_capacitor.intro.text"
+    },
+    "craftworks:assembler_1": {
+      "name": "Craftworks Assembler",
+      "driver": "fe",
+      "needsFe": true,
+      "main": false,
+      "automation": "Stops under the energy handicap, so no chain uses it. Building the apparatus beforehand, or by hand on the Personal Assembler, is outside the chain.",
+      "source": "craftworks-26.1.2-0.11.0-local.jar!/assets/craftworks/lang/en_us.json (craftworks.machine.energy, craftworks.jade.state.needs_power); craftworks-26.1.2-0.11.0-local.jar!/io/github/_5thlayer/craftworks/machine/AssemblerBlockEntity.class (EnergyBuffer)"
+    }
+  },
+  "steps": [
+    {
+      "id": "accumulate_sal_ammoniac",
+      "machine": "theurgy:sal_ammoniac_accumulator",
+      "inputs": [
+        {
+          "item": "minecraft:water",
+          "count": 1000
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 100
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "A",
+        "B",
+        "C"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "The solvent for every liquefaction and digestion. Theurgy's richer recipe (1000 mB from the same water) consumes a Sal Ammoniac Crystal, which is a grid craft from a Sal Ammoniac Bucket, so it is left out.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/accumulation/sal_ammoniac_from_water.json; theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/accumulation/sal_ammoniac_from_water_and_sal_ammoniac_crystal.json"
+    },
+    {
+      "id": "distill_logs",
+      "machine": "theurgy:distiller",
+      "inputs": [
+        {
+          "item": "minecraft:oak_log",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:mercury_shard",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "A",
+        "B"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Mercury from the island tree.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/distillation/logs.json"
+    },
+    {
+      "id": "distill_cobblestone",
+      "machine": "theurgy:distiller",
+      "inputs": [
+        {
+          "item": "minecraft:cobblestone",
+          "count": 10
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:mercury_shard",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "C"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Mercury from the cobblestone generator: slow per shard, but it spends nothing else.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/distillation/cobblestones.json"
+    },
+    {
+      "id": "distill_planks",
+      "machine": "theurgy:distiller",
+      "inputs": [
+        {
+          "item": "minecraft:oak_planks",
+          "count": 8
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:mercury_shard",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Alternative: worse than logs (8 planks are 2 logs).",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/distillation/planks.json"
+    },
+    {
+      "id": "distill_raw_gold",
+      "machine": "theurgy:distiller",
+      "inputs": [
+        {
+          "item": "minecraft:raw_gold",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:mercury_shard",
+          "count": 5
+        }
+      ],
+      "ticks": 100,
+      "chains": [],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Alternative: rich, but spends gold. A gold ingot gives 5 too; copper and iron ingots, raw copper and iron, redstone and coal give 1.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/distillation/raw_materials.mercury.medium.json; theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/tags/item/raw_materials/mercury/medium.json; theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/distillation/metals.mercury.medium.json"
+    },
+    {
+      "id": "catalyse_shard",
+      "machine": "theurgy:mercury_catalyst",
+      "inputs": [
+        {
+          "item": "theurgy:mercury_shard",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:mercury_flux",
+          "count": 800
+        }
+      ],
+      "ticks": 40,
+      "chains": [
+        "A",
+        "B",
+        "C"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "800 flux at 20 a tick. It leaves the Catalyst at 2 a tick per side, so the emitters sit on it: filling a Sulfuric Flux Emitter's 1000 takes about 500 ticks.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/catalysation/mercury_flux_from_mercury_shard.json; https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/mercurycatalyst/MercuryCatalystBlockEntity.java"
+    },
+    {
+      "id": "liquefy_copper_ingot",
+      "machine": "theurgy:liquefaction_cauldron",
+      "inputs": [
+        {
+          "item": "minecraft:copper_ingot",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 10
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_copper",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "A"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "One sulfur per ingot.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_copper_from_ingots_copper.json"
+    },
+    {
+      "id": "liquefy_raw_copper",
+      "machine": "theurgy:liquefaction_cauldron",
+      "inputs": [
+        {
+          "item": "minecraft:raw_copper",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 10
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_copper",
+          "count": 3
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "B"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Three sulfurs per raw ore, where smelting gives one ingot: Theurgy's ore tripling. Chain B's main input.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_copper_from_raw_materials_copper.json"
+    },
+    {
+      "id": "liquefy_copper_ore",
+      "machine": "theurgy:liquefaction_cauldron",
+      "inputs": [
+        {
+          "item": "minecraft:copper_ore",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 10
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_copper",
+          "count": 5
+        }
+      ],
+      "ticks": 100,
+      "chains": [],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Alternative: five sulfurs per ore block.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_copper_from_ores_copper.json"
+    },
+    {
+      "id": "liquefy_iron_ingot",
+      "machine": "theurgy:liquefaction_cauldron",
+      "inputs": [
+        {
+          "item": "minecraft:iron_ingot",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 10
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_iron",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "A",
+        "C"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "One sulfur per ingot.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_iron_from_ingots_iron.json"
+    },
+    {
+      "id": "liquefy_raw_iron",
+      "machine": "theurgy:liquefaction_cauldron",
+      "inputs": [
+        {
+          "item": "minecraft:raw_iron",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 10
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_iron",
+          "count": 3
+        }
+      ],
+      "ticks": 100,
+      "chains": [],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Three sulfurs per raw ore, where smelting gives one ingot: Theurgy's ore tripling. Alternative to the ingot.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_iron_from_raw_materials_iron.json"
+    },
+    {
+      "id": "liquefy_iron_ore",
+      "machine": "theurgy:liquefaction_cauldron",
+      "inputs": [
+        {
+          "item": "minecraft:iron_ore",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 10
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_iron",
+          "count": 5
+        }
+      ],
+      "ticks": 100,
+      "chains": [],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Alternative: five sulfurs per ore block.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_iron_from_ores_iron.json"
+    },
+    {
+      "id": "liquefy_gold_ingot",
+      "machine": "theurgy:liquefaction_cauldron",
+      "inputs": [
+        {
+          "item": "minecraft:gold_ingot",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 15
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_gold",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "A"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "One sulfur per ingot.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_gold_from_ingots_gold.json"
+    },
+    {
+      "id": "liquefy_raw_gold",
+      "machine": "theurgy:liquefaction_cauldron",
+      "inputs": [
+        {
+          "item": "minecraft:raw_gold",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 15
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_gold",
+          "count": 3
+        }
+      ],
+      "ticks": 100,
+      "chains": [],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Three sulfurs per raw ore, where smelting gives one ingot: Theurgy's ore tripling. Alternative to the ingot.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_gold_from_raw_materials_gold.json"
+    },
+    {
+      "id": "liquefy_gold_ore",
+      "machine": "theurgy:liquefaction_cauldron",
+      "inputs": [
+        {
+          "item": "minecraft:gold_ore",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 15
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_gold",
+          "count": 5
+        }
+      ],
+      "ticks": 100,
+      "chains": [],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Alternative: five sulfurs per ore block.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_gold_from_ores_gold.json"
+    },
+    {
+      "id": "liquefy_redstone_dust",
+      "machine": "theurgy:liquefaction_cauldron",
+      "inputs": [
+        {
+          "item": "minecraft:redstone",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 10
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_redstone",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "A",
+        "B",
+        "C"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Once per array, not per Galvanic: the Redstone Sulfur that sits on the Galvanic array's Target Pedestal.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_redstone_from_dusts_redstone.json"
+    },
+    {
+      "id": "liquefy_redstone_ore",
+      "machine": "theurgy:liquefaction_cauldron",
+      "inputs": [
+        {
+          "item": "minecraft:redstone_ore",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 10
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_redstone",
+          "count": 9
+        }
+      ],
+      "ticks": 100,
+      "chains": [],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Alternative seed source.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_redstone_from_ores_redstone.json"
+    },
+    {
+      "id": "calcine_cobblestone",
+      "machine": "theurgy:calcination_oven",
+      "inputs": [
+        {
+          "item": "minecraft:cobblestone",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_salt_strata",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "B",
+        "C"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Strata Salt: any salt serves Purified Gold.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/calcination/alchemical_salt_strata_from_cobblestone.json"
+    },
+    {
+      "id": "calcine_strata_salt",
+      "machine": "theurgy:calcination_oven",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_salt_strata",
+          "count": 5
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_salt_mineral",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "B",
+        "C"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Mineral Salt, the salt a metal's incubation takes.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/calcination/alchemical_salt_mineral_from_strata_salt.json"
+    },
+    {
+      "id": "calcine_copper_ingot",
+      "machine": "theurgy:calcination_oven",
+      "inputs": [
+        {
+          "item": "minecraft:copper_ingot",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_salt_mineral",
+          "count": 2
+        }
+      ],
+      "ticks": 100,
+      "chains": [],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Alternative: two Mineral Salt from any ingot, for a chain short of cobblestone.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/calcination/alchemical_salt_mineral_from_ingots.json"
+    },
+    {
+      "id": "incubate_gold_ingot",
+      "machine": "theurgy:incubator",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_gold",
+          "count": 1
+        },
+        {
+          "item": "theurgy:alchemical_salt_mineral",
+          "count": 1
+        },
+        {
+          "item": "theurgy:mercury_shard",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "minecraft:gold_ingot",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "B",
+        "C"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "The gold loop's return: a Gold Sulfur back to an ingot, for Purified Gold.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/incubation/ingots_gold_from_alchemical_sulfur_gold.json"
+    },
+    {
+      "id": "digest_purified_gold",
+      "machine": "theurgy:digestion_vat",
+      "inputs": [
+        {
+          "item": "minecraft:gold_ingot",
+          "count": 1
+        },
+        {
+          "item": "theurgy:alchemical_salt_strata",
+          "count": 1
+        },
+        {
+          "item": "minecraft:water",
+          "count": 1000
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:purified_gold",
+          "count": 20
+        }
+      ],
+      "ticks": 400,
+      "chains": [
+        "B",
+        "C"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Twenty Purified Gold, the price of every climb by digestion. Any salt works.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/digestion/purified_gold.json"
+    },
+    {
+      "id": "ferment_copper_sulfur",
+      "machine": "theurgy:fermentation_vat",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_copper",
+          "count": 1
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "count": 1
+        },
+        {
+          "item": "minecraft:water",
+          "count": 125
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_niter_metals_abundant",
+          "count": 1
+        }
+      ],
+      "ticks": 200,
+      "chains": [
+        "B"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Copper becomes a metal niter, the form that digestion moves between tiers. A log works as well as a plank.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/fermentation/alchemical_niter_metals_abundant_using_planks.json; theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/fermentation/alchemical_niter_metals_abundant_using_logs.json"
+    },
+    {
+      "id": "ferment_iron_sulfur",
+      "machine": "theurgy:fermentation_vat",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_iron",
+          "count": 1
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "count": 1
+        },
+        {
+          "item": "minecraft:water",
+          "count": 250
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_niter_metals_common",
+          "count": 1
+        }
+      ],
+      "ticks": 200,
+      "chains": [
+        "C"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Iron becomes a common metal niter.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/fermentation/alchemical_niter_metals_common_using_planks.json"
+    },
+    {
+      "id": "digest_abundant_to_common",
+      "machine": "theurgy:digestion_vat",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_niter_metals_abundant",
+          "count": 4
+        },
+        {
+          "item": "theurgy:purified_gold",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 10
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_niter_metals_common",
+          "count": 1
+        }
+      ],
+      "ticks": 400,
+      "chains": [
+        "B"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Exaltation, up a tier: four for one, and a Purified Gold.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/digestion/alchemical_niter_metals_common_from_abundant.json"
+    },
+    {
+      "id": "digest_common_to_rare",
+      "machine": "theurgy:digestion_vat",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_niter_metals_common",
+          "count": 4
+        },
+        {
+          "item": "theurgy:purified_gold",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 15
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_niter_metals_rare",
+          "count": 1
+        }
+      ],
+      "ticks": 400,
+      "chains": [
+        "B",
+        "C"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Exaltation, up a tier: four for one, and a Purified Gold.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/digestion/alchemical_niter_metals_rare_from_common.json"
+    },
+    {
+      "id": "digest_common_to_abundant",
+      "machine": "theurgy:digestion_vat",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_niter_metals_common",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 10
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_niter_metals_abundant",
+          "count": 4
+        }
+      ],
+      "ticks": 200,
+      "chains": [
+        "C"
+      ],
+      "seed": null,
+      "flags": [
+        "existing"
+      ],
+      "notes": "Down a tier: one for four, and no gold.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/digestion/alchemical_niter_metals_abundant_from_common.json"
+    },
+    {
+      "id": "reform_copper_from_niter",
+      "machine": "theurgy:sulfuric_flux_emitter",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_niter_metals_abundant",
+          "count": 1
+        },
+        {
+          "item": "theurgy:mercury_flux",
+          "count": 50
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_copper",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "C"
+      ],
+      "seed": "theurgy:alchemical_sulfur_copper",
+      "flags": [
+        "existing"
+      ],
+      "notes": "A niter back to a sulfur. The array holds a Copper Sulfur on its target.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/reformation/alchemical_sulfur_copper_from_alchemical_niter_metals_abundant.json"
+    },
+    {
+      "id": "reform_iron_from_niter",
+      "machine": "theurgy:sulfuric_flux_emitter",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_niter_metals_common",
+          "count": 1
+        },
+        {
+          "item": "theurgy:mercury_flux",
+          "count": 100
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_iron",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "B"
+      ],
+      "seed": "theurgy:alchemical_sulfur_iron",
+      "flags": [
+        "existing"
+      ],
+      "notes": "Any common metal niter becomes Iron Sulfur on an array that holds one.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/reformation/alchemical_sulfur_iron_from_alchemical_niter_metals_common.json"
+    },
+    {
+      "id": "reform_gold_from_niter",
+      "machine": "theurgy:sulfuric_flux_emitter",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_niter_metals_rare",
+          "count": 1
+        },
+        {
+          "item": "theurgy:mercury_flux",
+          "count": 150
+        }
+      ],
+      "outputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_gold",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "chains": [
+        "B",
+        "C"
+      ],
+      "seed": "theurgy:alchemical_sulfur_gold",
+      "flags": [
+        "existing"
+      ],
+      "notes": "The end of exaltation: a rare metal niter becomes Gold Sulfur on an array that holds one.",
+      "source": "theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/reformation/alchemical_sulfur_gold_from_alchemical_niter_metals_rare.json"
+    },
+    {
+      "id": "galvanic_reformation",
+      "machine": "theurgy:sulfuric_flux_emitter",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_copper",
+          "count": 16
+        },
+        {
+          "item": "theurgy:alchemical_sulfur_iron",
+          "count": 4
+        },
+        {
+          "item": "theurgy:alchemical_sulfur_gold",
+          "count": 2
+        },
+        {
+          "item": "theurgy:mercury_flux",
+          "count": 1000
+        }
+      ],
+      "outputs": [
+        {
+          "item": "mechanicalmasteryreborn:galvanic_essence",
+          "count": 1
+        }
+      ],
+      "ticks": 400,
+      "chains": [
+        "A",
+        "B",
+        "C"
+      ],
+      "seed": "theurgy:alchemical_sulfur_redstone",
+      "flags": [
+        "new_recipe",
+        "proposal_173"
+      ],
+      "notes": "Proposed for #173. The dynamo: a copper coil, an iron core, gold contacts, shaped by the redstone signal on the target and charged with the emitter's whole 1000 flux. Three Source Pedestals. No Theurgy recipe with a Redstone Sulfur target takes copper, iron or gold, so it collides with none. Amounts are placeholders for the balance pass.",
+      "source": "https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/recipe/ReformationRecipe.java (sources, target, result, mercuryFlux, time; matches() needs every source found on a distinct pedestal and the target to match, leftover pedestals allowed); https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/reformationarray/ReformationResultPedestalBlockEntity.java (no check on what the result is); https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/reformationarray/SulfuricFluxEmitterBlockEntity.java (CAPACITY = 1000)"
+    },
+    {
+      "id": "galvanic_reformation_lean",
+      "machine": "theurgy:sulfuric_flux_emitter",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_sulfur_copper",
+          "count": 16
+        },
+        {
+          "item": "theurgy:alchemical_sulfur_gold",
+          "count": 4
+        },
+        {
+          "item": "theurgy:mercury_flux",
+          "count": 1000
+        }
+      ],
+      "outputs": [
+        {
+          "item": "mechanicalmasteryreborn:galvanic_essence",
+          "count": 1
+        }
+      ],
+      "ticks": 400,
+      "chains": [],
+      "seed": "theurgy:alchemical_sulfur_redstone",
+      "flags": [
+        "new_recipe",
+        "proposal_173"
+      ],
+      "notes": "Alternative: the first research's proposal, kept as is. Two Source Pedestals. Register this or the dynamo, never both: with leftover pedestals allowed, an array loaded for the dynamo would also match this one.",
+      "source": "https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/recipe/ReformationRecipe.java (sources, target, result, mercuryFlux, time; matches() needs every source found on a distinct pedestal and the target to match, leftover pedestals allowed); https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/reformationarray/ReformationResultPedestalBlockEntity.java (no check on what the result is); https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/reformationarray/SulfuricFluxEmitterBlockEntity.java (CAPACITY = 1000)"
+    },
+    {
+      "id": "galvanic_digestion",
+      "machine": "theurgy:digestion_vat",
+      "inputs": [
+        {
+          "item": "theurgy:alchemical_niter_metals_abundant",
+          "count": 16
+        },
+        {
+          "item": "theurgy:alchemical_niter_metals_common",
+          "count": 4
+        },
+        {
+          "item": "theurgy:alchemical_niter_metals_rare",
+          "count": 1
+        },
+        {
+          "item": "theurgy:sal_ammoniac",
+          "count": 1000
+        }
+      ],
+      "outputs": [
+        {
+          "item": "mechanicalmasteryreborn:galvanic_essence",
+          "count": 1
+        }
+      ],
+      "ticks": 1200,
+      "chains": [],
+      "seed": null,
+      "flags": [
+        "new_recipe",
+        "proposal_173"
+      ],
+      "notes": "Alternative: Exaltation of the current. All three metal tiers as niters in the vat's three slots, in a full bucket of Sal Ammoniac. No flux and no template, so no 'charge'; and a chain must ferment its copper and iron to make it.",
+      "source": "https://github.com/klikli-dev/theurgy/blob/498b72e0c66ec4d3a07c605ccdb9ef6ac00d2e8e/src/main/java/com/klikli_dev/theurgy/content/apparatus/digestionvat/DigestionStorageBehaviour.java (three distinct input slots, accepted if a recipe can use them; 10-bucket tank); theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/digestion/alchemical_niter_metals_common_from_abundant.json (recipe shape)"
+    }
+  ],
+  "chains": [
+    {
+      "id": "A",
+      "name": "Spagyric breakdown",
+      "summary": "Liquefy copper, iron and gold straight into their sulfurs and reform them into the Galvanic Essence. The shortest chain: the metals go in as they are.",
+      "steps": [
+        "accumulate_sal_ammoniac",
+        "distill_logs",
+        "catalyse_shard",
+        "liquefy_copper_ingot",
+        "liquefy_iron_ingot",
+        "liquefy_gold_ingot",
+        "liquefy_redstone_dust",
+        "galvanic_reformation"
+      ],
+      "starts": [
+        {
+          "item": "minecraft:copper_ingot",
+          "count": 16
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "count": 4
+        },
+        {
+          "item": "minecraft:gold_ingot",
+          "count": 2
+        },
+        {
+          "item": "minecraft:water",
+          "count": 2300
+        },
+        {
+          "item": "minecraft:oak_log",
+          "count": 3
+        }
+      ],
+      "criteria": {
+        "mainBlocksUsed": 5,
+        "loop": "Weak. Mercury heats its own apparatus through Caloric Flux Emitters on the Catalyst. On raw ores (3 sulfurs each) the leftover sulfurs carry over to the next run.",
+        "alternateRecipeSpots": "Theurgy's own richer recipes are the shortcuts research could gate: raw ore 3 sulfurs, ore block 5, the Sal Ammoniac Crystal's 1000 mB. A new alternate recipe could liquefy two metals at once (copper with iron) into one step.",
+        "automation": "Fully on belts and pipes. By hand, once: linking the array and placing the Redstone Sulfur.",
+        "timePerGalvanic": "About 2,600 ticks (2.2 min) with one Cauldron: 22 liquefactions at 100 ticks, then 400 ticks of reformation; filling 1000 flux (500 ticks) overlaps. About 1,300 ticks on raw ores.",
+        "basicsPerGalvanic": "16 copper, 4 iron and 2 gold ingots (or about 5.3 raw copper, 1.3 raw iron and 0.7 raw gold), 2.3 B water, about 3 logs for 1.25 shards of flux, plus heat (Brazier fuel, or about 2,000 flux, 5 more logs, by Caloric Flux Emitters)."
+      }
+    },
+    {
+      "id": "B",
+      "name": "Exaltation of copper",
+      "summary": "Copper is the only metal that goes in. Digestion climbs it a tier at a time to iron and gold, paid in Purified Gold, and a quarter of the gold made goes back to buy more. The grind.",
+      "steps": [
+        "accumulate_sal_ammoniac",
+        "distill_logs",
+        "catalyse_shard",
+        "liquefy_raw_copper",
+        "ferment_copper_sulfur",
+        "calcine_cobblestone",
+        "calcine_strata_salt",
+        "incubate_gold_ingot",
+        "digest_purified_gold",
+        "digest_abundant_to_common",
+        "digest_common_to_rare",
+        "reform_iron_from_niter",
+        "reform_gold_from_niter",
+        "liquefy_redstone_dust",
+        "galvanic_reformation"
+      ],
+      "starts": [
+        {
+          "item": "minecraft:raw_copper",
+          "count": 26.3
+        },
+        {
+          "item": "minecraft:water",
+          "count": 18700
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "count": 63
+        },
+        {
+          "item": "minecraft:oak_log",
+          "count": 7
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "count": 5.6
+        }
+      ],
+      "criteria": {
+        "mainBlocksUsed": 9,
+        "loop": "The gold loop: each climb costs a Purified Gold, so about 0.93 of the 2.93 Gold Sulfur made per Galvanic goes back through the Incubator to an ingot and the Digestion Vat to 20 Purified Gold.",
+        "alternateRecipeSpots": "Digest abundant straight to rare (skips a band); ferment two niters per sulfur; 40 Purified Gold per ingot; reform Copper Sulfur straight to Iron Sulfur (mixes copper with iron).",
+        "automation": "Fully, with a redstone loop on each vat's lid. By hand, once: three arrays (Iron, Gold, Redstone targets) or one swapped by hand, and the bootstrap seeds.",
+        "timePerGalvanic": "About 12,600 ticks (10.5 min) with one of each: 63 fermentations at 200 ticks are the bottleneck, then about 7,800 ticks of digestion. About 3.5 min with three Fermentation Vats and two Digestion Vats.",
+        "basicsPerGalvanic": "About 26.3 raw copper (79 Copper Sulfur, or 79 ingots), 63 planks, 18.7 B water, about 6.5 logs for 3.2 shards, 5.6 cobblestone, plus heat."
+      }
+    },
+    {
+      "id": "C",
+      "name": "Transmutation of iron",
+      "summary": "Iron is the only metal that goes in. It digests down to copper, four for one and free, and up to gold, paid in Purified Gold: Theurgy's three moves, within a tier, between tiers both ways, and back to a sulfur.",
+      "steps": [
+        "accumulate_sal_ammoniac",
+        "distill_cobblestone",
+        "catalyse_shard",
+        "liquefy_iron_ingot",
+        "ferment_iron_sulfur",
+        "digest_common_to_abundant",
+        "reform_copper_from_niter",
+        "calcine_cobblestone",
+        "calcine_strata_salt",
+        "incubate_gold_ingot",
+        "digest_purified_gold",
+        "digest_common_to_rare",
+        "reform_gold_from_niter",
+        "liquefy_redstone_dust",
+        "galvanic_reformation"
+      ],
+      "starts": [
+        {
+          "item": "minecraft:iron_ingot",
+          "count": 16.4
+        },
+        {
+          "item": "minecraft:water",
+          "count": 5600
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "count": 12.4
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "count": 28.2
+        }
+      ],
+      "criteria": {
+        "mainBlocksUsed": 9,
+        "loop": "Digestion both ways: down multiplies by four for nothing, up costs gold. A light gold loop: about 0.1 of the 2.1 Gold Sulfur made per Galvanic goes back to an ingot for 20 Purified Gold.",
+        "alternateRecipeSpots": "Reform Iron Sulfur straight to Copper Sulfur (mixes iron with copper, skips fermentation and digestion); common straight to rare without gold; ferment two niters per sulfur.",
+        "automation": "Fully, as B. By hand, once: three arrays (Copper, Gold, Redstone targets) and their seeds.",
+        "timePerGalvanic": "About 2,500 ticks (2.1 min) steady with one of each: 12.4 fermentations are the bottleneck; the Copper array's 16 reformations take 1,600. About 6 min for the first, through the whole line.",
+        "basicsPerGalvanic": "About 16.4 iron ingots (or 5.5 raw iron), 12.4 planks, 5.6 B water, about 28 cobblestone (27.5 for 2.75 shards of flux, the rest for salt), plus heat."
+      }
+    }
+  ],
+  "galvanic": {
+    "step": "galvanic_reformation"
+  },
+  "openQuestions": [
+    "Seeds and the mix: every Reformation Array needs one of its target sulfur first, and every seed is one raw or refined item liquefied (a redstone dust, a copper ingot, a raw gold). B and C need gold, and every chain redstone, that their per-Galvanic inputs don't hold: does the Basic or Refined mix carry them, or a quest reward?",
+    "Alternate recipes and ADR 0006: the glossary's alternate recipes are pack recipes on the challenge's machines, but the ADR says the one recipe the pack adds to a challenge's mods is the last step. Do alternate recipes count as an exception, or should research only gate Theurgy's own richer recipes (raw ore 3, ore 5, the Sal Ammoniac Crystal)?",
+    "Bands: logs, cobblestone, raw ores and ores are counted raw here, and ingots, dusts and planks refined. Is that the line the mixes use?",
+    "Pedestal stacks: the dynamo takes 16 Copper Sulfur from one Source Pedestal. The pedestal has one slot and no limit of its own (ReformationSourcePedestalBlockEntity.java); that it holds 64 is assumed, not seen in game.",
+    "One final recipe: register the dynamo or the lean recipe, not both, since an array loaded for one matches the other.",
+    "Heat: braziers burn fuel, Caloric Flux Emitters burn flux all the time they are fed, not only while a recipe runs. The heat figures count only working time.",
+    "Rates read from source, not seen in game: the Catalyst's 2 flux a tick per side, the Caloric Flux Emitter's 100 per 120 ticks, the Sulfuric Flux Emitter filling at the Catalyst's rate.",
+    "Belts and pipes into Theurgy's apparatus are expected through NeoForge's standard item and fluid capabilities, but untested with Beltworks and Pipeworks.",
+    "Should the Mercury Catalyst count as a generator under the energy handicap? Its flux isn't FE, so today it doesn't, and every chain relies on it."
+  ]
+}

@@ -1,0 +1,4141 @@
+{
+  "yield": 0.25,
+  "rule": "Advanced Mechanical Essence decomposes into intermediate 2. A true intermediate-2 item is one whose copper, iron, gold and redstone all reach refined items (ingots, dust, nuggets) in exactly two recycles. Depth is counted on those metals; stone, quartz, plastic and the like that come out earlier don't fail an item.",
+  "recyclingSource": [
+    "MMR26.1.2/mod/src/main/java/io/github/_5thlayer/mechanicalmasteryreborn/recipe/RecyclingRules.java",
+    "MMR26.1.2/mod/src/main/java/io/github/_5thlayer/mechanicalmasteryreborn/recipe/Recycling.java",
+    "MMR26.1.2/mod/src/main/java/io/github/_5thlayer/mechanicalmasteryreborn/recipe/Yield.java",
+    "MMR26.1.2/mod/src/main/java/io/github/_5thlayer/mechanicalmasteryreborn/ServerConfig.java (recycler.yield.tier_1 = 0.25)",
+    "MMR26.1.2/defaultconfigs/mechanicalmasteryreborn-server.toml (assembling_types = craftworks:assembling)"
+  ],
+  "method": "The recycle trees were derived by a script that applies RecyclingRules to every recipe JSON in the vanilla 26.1.2 client jar, the NeoForge 26.1.2.109 universal jar (whose recipes replace vanilla's of the same id) and every jar in the instance's mods/ folder. Tag ingredients take their first item, NeoForge difference ingredients their first item left. perItemTier1 multiplies each branch by 0.25 per recycle. perItemTier1Craft (only where it differs) lets the player craft a copper, iron or redstone block back to 9 at full yield instead of recycling it. The packing amendment re-ran the same model over every item, kept the true intermediate-2 ones, and marked each whose tree has a storage block as a node (an item whose recipe takes one ingredient that a recipe makes back from it). Mix figures sum each item's perItemTier1 and apply the decompose's quarter.",
+  "needsPerGalvanic": {
+    "A": {
+      "items": {
+        "minecraft:copper_ingot": 16,
+        "minecraft:iron_ingot": 4,
+        "minecraft:gold_ingot": 2
+      },
+      "once": {
+        "minecraft:redstone": 1
+      }
+    },
+    "B": {
+      "items": {
+        "minecraft:copper_ingot": 79
+      },
+      "once": {
+        "minecraft:iron_ingot": 1,
+        "minecraft:raw_gold": 1,
+        "minecraft:redstone": 1
+      },
+      "note": "79 Copper Sulfur; theurgy-chain.md counts 26.3 raw copper at 3 sulfur each, but recycled copper arrives as ingots, 1 sulfur each."
+    },
+    "C": {
+      "items": {
+        "minecraft:iron_ingot": 16.4
+      },
+      "once": {
+        "minecraft:copper_ingot": 1,
+        "minecraft:raw_gold": 1,
+        "minecraft:redstone": 1
+      }
+    },
+    "source": "MMR26.1.2/docs/research/theurgy-chain.json chains[].starts and section 4 of theurgy-chain.md; theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_copper_from_ingots_copper.json (1 sulfur) and ..._from_raw_materials_copper.json (3)"
+  },
+  "candidates": [
+    {
+      "item": "minecraft:piston",
+      "name": "Piston",
+      "mod": "vanilla",
+      "depth": 1,
+      "metalDepths": {
+        "iron": [
+          1
+        ],
+        "redstone": [
+          1
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:piston",
+          "recipe": "minecraft:piston",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.75
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.25
+        }
+      ],
+      "covers": [
+        "iron",
+        "redstone"
+      ],
+      "source": "neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/piston.json",
+      "passes": false,
+      "note": "Fails: its iron and redstone come out at the first recycle. Intermediate 1."
+    },
+    {
+      "item": "minecraft:hopper",
+      "name": "Hopper",
+      "mod": "vanilla",
+      "depth": 1,
+      "metalDepths": {
+        "iron": [
+          1
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:hopper",
+          "recipe": "minecraft:hopper",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 5.0
+            },
+            {
+              "item": "minecraft:chest",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:chest",
+          "recipe": "minecraft:chest",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 8.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 5.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 8.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 1.25
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.5
+        }
+      ],
+      "covers": [
+        "iron"
+      ],
+      "source": "neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/hopper.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/chest.json",
+      "passes": false,
+      "note": "Fails: 5 iron ingots come out at the first recycle; only the chest's planks need a second. Intermediate 1."
+    },
+    {
+      "item": "minecraft:comparator",
+      "name": "Redstone Comparator",
+      "mod": "vanilla",
+      "depth": 2,
+      "metalDepths": {
+        "redstone": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:comparator",
+          "recipe": "minecraft:comparator",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:redstone_torch",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:quartz",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:stone",
+              "amount": 3.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:redstone_torch",
+          "recipe": "minecraft:redstone_torch",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:stick",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:stick",
+          "recipe": "minecraft:stick",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 0.5
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:redstone",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 1.5
+        },
+        {
+          "item": "minecraft:quartz",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:stone",
+          "amount": 3.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.1875
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.0234
+        },
+        {
+          "item": "minecraft:quartz",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:stone",
+          "amount": 0.75
+        }
+      ],
+      "covers": [
+        "redstone"
+      ],
+      "source": "minecraft_26.1.2_client.jar!/data/minecraft/recipe/comparator.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/redstone_torch.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/stick.json",
+      "passes": true,
+      "note": "Passes: its redstone needs two recycles (comparator, then the torches). Its stone and quartz, both refined, come out at the first."
+    },
+    {
+      "item": "minecraft:bucket",
+      "name": "Bucket",
+      "mod": "vanilla",
+      "depth": 1,
+      "metalDepths": {
+        "iron": [
+          1
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:bucket",
+          "recipe": "minecraft:bucket",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 3.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 3.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.75
+        }
+      ],
+      "covers": [
+        "iron"
+      ],
+      "source": "neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/bucket.json",
+      "passes": false,
+      "note": "Fails: 3 iron ingots at the first recycle. Intermediate 1."
+    },
+    {
+      "item": "minecraft:cut_copper",
+      "name": "Cut Copper",
+      "mod": "vanilla",
+      "depth": 2,
+      "metalDepths": {
+        "copper": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:cut_copper",
+          "recipe": "minecraft:cut_copper",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_block",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:copper_block",
+          "recipe": "minecraft:copper_block",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 9.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 9.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.5625
+        }
+      ],
+      "perItemTier1Craft": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 2.25
+        }
+      ],
+      "covers": [
+        "copper"
+      ],
+      "source": "minecraft_26.1.2_client.jar!/data/minecraft/recipe/cut_copper.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_block.json",
+      "passes": true,
+      "note": "Passes the Recycler's rule, but the copper block it returns crafts back into 9 ingots at full yield (minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_ingot.json), so its second step needs no Recycler.",
+      "excluded": "packing",
+      "excludedReason": "Its copper is a copper block, which a player crafts back to 9 ingots (minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_ingot.json). Its depth 2 is the block's recycle."
+    },
+    {
+      "item": "minecraft:copper_grate",
+      "name": "Copper Grate",
+      "mod": "vanilla",
+      "depth": 2,
+      "metalDepths": {
+        "copper": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:copper_grate",
+          "recipe": "minecraft:copper_grate",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_block",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:copper_block",
+          "recipe": "minecraft:copper_block",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 9.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 9.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.5625
+        }
+      ],
+      "perItemTier1Craft": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 2.25
+        }
+      ],
+      "covers": [
+        "copper"
+      ],
+      "source": "minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_grate.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_block.json",
+      "passes": true,
+      "note": "As Cut Copper: passes the rule, but the copper block crafts back to 9 ingots at full yield (minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_ingot.json).",
+      "excluded": "packing",
+      "excludedReason": "Its copper is a copper block, crafted back to 9 ingots. Its depth 2 is the block's recycle."
+    },
+    {
+      "item": "minecraft:waxed_copper_block",
+      "name": "Waxed Block of Copper",
+      "mod": "vanilla",
+      "depth": 2,
+      "metalDepths": {
+        "copper": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:waxed_copper_block",
+          "recipe": "minecraft:waxed_copper_block_from_honeycomb",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_block",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:honeycomb",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:copper_block",
+          "recipe": "minecraft:copper_block",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 9.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 9.0
+        },
+        {
+          "item": "minecraft:honeycomb",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.5625
+        },
+        {
+          "item": "minecraft:honeycomb",
+          "amount": 0.25
+        }
+      ],
+      "perItemTier1Craft": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 9.0
+        }
+      ],
+      "covers": [
+        "copper"
+      ],
+      "source": "minecraft_26.1.2_client.jar!/data/minecraft/recipe/waxed_copper_block_from_honeycomb.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_block.json",
+      "passes": false,
+      "note": "Passes the Recycler's rule on paper, but crafts straight into 9 copper ingots at full yield with no Recycler at all (minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_ingot_from_waxed_copper_block.json). Refined in effect: fails.",
+      "excluded": "packing",
+      "excludedReason": "A copper block with wax; it crafts straight to 9 ingots (minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_ingot_from_waxed_copper_block.json). Already failed."
+    },
+    {
+      "item": "minecraft:sticky_piston",
+      "name": "Sticky Piston",
+      "mod": "vanilla",
+      "depth": 2,
+      "metalDepths": {
+        "iron": [
+          2
+        ],
+        "redstone": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:sticky_piston",
+          "recipe": "minecraft:sticky_piston",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:slime_ball",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:piston",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:piston",
+          "recipe": "minecraft:piston",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:slime_ball",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:slime_ball",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.1875
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.0625
+        }
+      ],
+      "covers": [
+        "iron",
+        "redstone"
+      ],
+      "source": "minecraft_26.1.2_client.jar!/data/minecraft/recipe/sticky_piston.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/piston.json",
+      "passes": true,
+      "note": "Passes: the first recycle returns a slime ball and a piston, the second the piston's iron and redstone."
+    },
+    {
+      "item": "minecraft:hopper_minecart",
+      "name": "Minecart with Hopper",
+      "mod": "vanilla",
+      "depth": 2,
+      "metalDepths": {
+        "iron": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:hopper_minecart",
+          "recipe": "minecraft:hopper_minecart",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:hopper",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:minecart",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:hopper",
+          "recipe": "minecraft:hopper",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 5.0
+            },
+            {
+              "item": "minecraft:chest",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:chest",
+          "recipe": "minecraft:chest",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 8.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:minecart",
+          "recipe": "minecraft:minecart",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 5.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 10.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 8.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.625
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.125
+        }
+      ],
+      "covers": [
+        "iron"
+      ],
+      "source": "minecraft_26.1.2_client.jar!/data/minecraft/recipe/hopper_minecart.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/hopper.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/chest.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/minecart.json",
+      "passes": true,
+      "note": "Passes: hopper and minecart, then 10 iron. Iron only."
+    },
+    {
+      "item": "minecraft:map",
+      "name": "Empty Map",
+      "mod": "vanilla",
+      "depth": 2,
+      "metalDepths": {
+        "iron": [
+          2
+        ],
+        "redstone": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:map",
+          "recipe": "minecraft:map",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:paper",
+              "amount": 8.0
+            },
+            {
+              "item": "minecraft:compass",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:paper",
+          "recipe": "minecraft:paper",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:sugar_cane",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:compass",
+          "recipe": "minecraft:compass",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:sugar_cane",
+          "amount": 8.0
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:sugar_cane",
+          "amount": 0.5
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.0625
+        }
+      ],
+      "covers": [
+        "iron",
+        "redstone"
+      ],
+      "source": "minecraft_26.1.2_client.jar!/data/minecraft/recipe/map.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/paper.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/compass.json",
+      "passes": true,
+      "note": "Passes: paper and a compass, then iron and redstone. Mostly sugar cane by count."
+    },
+    {
+      "item": "minecraft:copper_bulb",
+      "name": "Copper Bulb",
+      "mod": "vanilla",
+      "depth": "mixed 1/2",
+      "metalDepths": {
+        "copper": [
+          2
+        ],
+        "redstone": [
+          1
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:copper_bulb",
+          "recipe": "minecraft:copper_bulb",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_block",
+              "amount": 0.75
+            },
+            {
+              "item": "minecraft:blaze_rod",
+              "amount": 0.25
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 0.25
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:copper_block",
+          "recipe": "minecraft:copper_block",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 9.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 6.75
+        },
+        {
+          "item": "minecraft:blaze_rod",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.25
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.4219
+        },
+        {
+          "item": "minecraft:blaze_rod",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.0625
+        }
+      ],
+      "perItemTier1Craft": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 1.6875
+        },
+        {
+          "item": "minecraft:blaze_rod",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.0625
+        }
+      ],
+      "covers": [
+        "copper",
+        "redstone"
+      ],
+      "source": "minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_bulb.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_block.json",
+      "passes": false,
+      "note": "Mixed: its redstone comes out at the first recycle, its copper (through copper blocks) at the second.",
+      "excluded": "packing",
+      "excludedReason": "Its copper is three quarters of a copper block. Already failed (mixed depth)."
+    },
+    {
+      "item": "minecraft:repeater",
+      "name": "Redstone Repeater",
+      "mod": "vanilla",
+      "depth": "mixed 1/2",
+      "metalDepths": {
+        "redstone": [
+          1,
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:repeater",
+          "recipe": "minecraft:repeater",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:redstone_torch",
+              "amount": 2.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:stone",
+              "amount": 3.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:redstone_torch",
+          "recipe": "minecraft:redstone_torch",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:stick",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:stick",
+          "recipe": "minecraft:stick",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 0.5
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:redstone",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:stone",
+          "amount": 3.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.375
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.0156
+        },
+        {
+          "item": "minecraft:stone",
+          "amount": 0.75
+        }
+      ],
+      "covers": [
+        "redstone"
+      ],
+      "source": "minecraft_26.1.2_client.jar!/data/minecraft/recipe/repeater.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/redstone_torch.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/stick.json",
+      "passes": false,
+      "note": "Mixed: one redstone at the first recycle, two through torches at the second."
+    },
+    {
+      "item": "minecraft:lightning_rod",
+      "name": "Lightning Rod",
+      "mod": "vanilla",
+      "depth": 1,
+      "metalDepths": {
+        "copper": [
+          1
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:lightning_rod",
+          "recipe": "minecraft:lightning_rod",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 3.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 3.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.75
+        }
+      ],
+      "covers": [
+        "copper"
+      ],
+      "source": "neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/lightning_rod.json",
+      "passes": false,
+      "note": "Fails: 3 copper ingots at the first recycle."
+    },
+    {
+      "item": "minecraft:crafter",
+      "name": "Crafter",
+      "mod": "vanilla",
+      "depth": "mixed 1/2",
+      "metalDepths": {
+        "iron": [
+          1
+        ],
+        "redstone": [
+          1,
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:crafter",
+          "recipe": "minecraft:crafter",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 5.0
+            },
+            {
+              "item": "minecraft:crafting_table",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 2.0
+            },
+            {
+              "item": "minecraft:dropper",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:crafting_table",
+          "recipe": "minecraft:crafting_table",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 4.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:dropper",
+          "recipe": "minecraft:dropper",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 7.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 5.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 7.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 1.25
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.5625
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.4375
+        }
+      ],
+      "covers": [
+        "iron",
+        "redstone"
+      ],
+      "source": "neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/crafter.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/crafting_table.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/dropper.json",
+      "passes": false,
+      "note": "Mixed: iron and redstone at the first recycle."
+    },
+    {
+      "item": "minecraft:copper_chest",
+      "name": "Copper Chest",
+      "mod": "vanilla",
+      "depth": 1,
+      "metalDepths": {
+        "copper": [
+          1
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:copper_chest",
+          "recipe": "minecraft:copper_chest",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 8.0
+            },
+            {
+              "item": "minecraft:chest",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:chest",
+          "recipe": "minecraft:chest",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 8.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 8.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 8.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 2.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.5
+        }
+      ],
+      "covers": [
+        "copper"
+      ],
+      "source": "neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/copper_chest.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/chest.json",
+      "passes": false,
+      "note": "Fails: 8 copper ingots at the first recycle."
+    },
+    {
+      "item": "wireworks:steam_turbine",
+      "name": "Steam Turbine",
+      "mod": "Wireworks",
+      "depth": 2,
+      "metalDepths": {
+        "copper": [
+          2
+        ],
+        "iron": [
+          2
+        ],
+        "redstone": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "wireworks:steam_turbine",
+          "recipe": "wireworks:steam_turbine",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_block",
+              "amount": 4.0
+            },
+            {
+              "item": "wireworks:plastic",
+              "amount": 2.0
+            },
+            {
+              "item": "minecraft:piston",
+              "amount": 2.0
+            },
+            {
+              "item": "minecraft:iron_block",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:copper_block",
+          "recipe": "minecraft:copper_block",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 9.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:piston",
+          "recipe": "minecraft:piston",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:iron_block",
+          "recipe": "minecraft:iron_block",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 9.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 36.0
+        },
+        {
+          "item": "wireworks:plastic",
+          "amount": 2.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 6.0
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 8.0
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 11.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 2.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 2.25
+        },
+        {
+          "item": "wireworks:plastic",
+          "amount": 0.5
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.375
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.5
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.6875
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.125
+        }
+      ],
+      "perItemTier1Craft": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 9.0
+        },
+        {
+          "item": "wireworks:plastic",
+          "amount": 0.5
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.375
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.5
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 2.375
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.125
+        }
+      ],
+      "covers": [
+        "copper",
+        "iron",
+        "redstone"
+      ],
+      "source": "wireworks-26.1.2-0.6.7-local.jar!/data/wireworks/recipe/steam_turbine.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_block.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/piston.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/iron_block.json",
+      "passes": true,
+      "note": "Passes: copper blocks, pistons, plastic and an iron block, then their ingots and redstone. The richest copper carrier found (36). The copper and iron blocks craft back to ingots at full yield (minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_ingot.json, minecraft_26.1.2_client.jar!/data/minecraft/recipe/iron_ingot_from_iron_block.json). It is a working Wireworks generator as decomposed.",
+      "excluded": "packing",
+      "excludedReason": "Four copper blocks and an iron block: 45 of its 47 copper and iron are in storage blocks."
+    },
+    {
+      "item": "pipeworks:pump",
+      "name": "Pump",
+      "mod": "Pipeworks",
+      "depth": 2,
+      "metalDepths": {
+        "copper": [
+          2
+        ],
+        "iron": [
+          2
+        ],
+        "redstone": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "pipeworks:pump",
+          "recipe": "pipeworks:pump",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "pipeworks:pipe",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:piston",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:bucket",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "pipeworks:pipe",
+          "recipe": "pipeworks:pipe",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:piston",
+          "recipe": "minecraft:piston",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:bucket",
+          "recipe": "minecraft:bucket",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 3.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.1875
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.1875
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.0625
+        }
+      ],
+      "covers": [
+        "copper",
+        "iron",
+        "redstone"
+      ],
+      "source": "pipeworks-26.1.2-0.4.1-local.jar!/data/pipeworks/recipe/pump.json; pipeworks-26.1.2-0.4.1-local.jar!/data/pipeworks/recipe/pipe.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/piston.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/bucket.json",
+      "passes": true,
+      "note": "Passes: pipes, a piston and a bucket, then copper, iron and redstone. All three needs in one item, none through a storage block."
+    },
+    {
+      "item": "pipeworks:outlet",
+      "name": "Outlet",
+      "mod": "Pipeworks",
+      "depth": 2,
+      "metalDepths": {
+        "copper": [
+          2
+        ],
+        "redstone": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "pipeworks:outlet",
+          "recipe": "pipeworks:outlet",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "pipeworks:pipe",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:dispenser",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "pipeworks:pipe",
+          "recipe": "pipeworks:pipe",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:dispenser",
+          "recipe": "minecraft:dispenser",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 7.0
+            },
+            {
+              "item": "minecraft:bow",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:bow",
+          "recipe": "minecraft:bow",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:stick",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:string",
+              "amount": 3.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:stick",
+          "recipe": "minecraft:stick",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 0.5
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 7.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 1.5
+        },
+        {
+          "item": "minecraft:string",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.4375
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.0059
+        },
+        {
+          "item": "minecraft:string",
+          "amount": 0.0469
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.0625
+        }
+      ],
+      "covers": [
+        "copper",
+        "redstone"
+      ],
+      "source": "pipeworks-26.1.2-0.4.1-local.jar!/data/pipeworks/recipe/outlet.json; pipeworks-26.1.2-0.4.1-local.jar!/data/pipeworks/recipe/pipe.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/dispenser.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/bow.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/stick.json",
+      "passes": true,
+      "note": "Passes: pipes and a dispenser, then copper and redstone. No storage block."
+    },
+    {
+      "item": "gearworks:railgun",
+      "name": "Railgun",
+      "mod": "Gearworks",
+      "depth": 2,
+      "metalDepths": {
+        "copper": [
+          2
+        ],
+        "redstone": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "gearworks:railgun",
+          "recipe": "gearworks:railgun",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:lightning_rod",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:copper_block",
+              "amount": 2.0
+            },
+            {
+              "item": "minecraft:redstone_block",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:netherite_ingot",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:lightning_rod",
+          "recipe": "minecraft:lightning_rod",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 3.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:copper_block",
+          "recipe": "minecraft:copper_block",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 9.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:redstone_block",
+          "recipe": "minecraft:redstone_block",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:redstone",
+              "amount": 9.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 21.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 9.0
+        },
+        {
+          "item": "minecraft:netherite_ingot",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 1.3125
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.5625
+        },
+        {
+          "item": "minecraft:netherite_ingot",
+          "amount": 0.25
+        }
+      ],
+      "perItemTier1Craft": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 4.6875
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 2.25
+        },
+        {
+          "item": "minecraft:netherite_ingot",
+          "amount": 0.25
+        }
+      ],
+      "covers": [
+        "copper",
+        "redstone"
+      ],
+      "source": "gearworks-26.1.2-0.2.1-local.jar!/data/gearworks/recipe/railgun.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/lightning_rod.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/copper_block.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/redstone_block.json",
+      "passes": true,
+      "note": "Passes, but needs a netherite ingot (refined, but from the Nether) and its copper and redstone blocks craft back at full yield. A weapon; listed for completeness.",
+      "excluded": "packing",
+      "excludedReason": "Two copper blocks and a redstone block, plus a netherite ingot, which is itself a compress of scrap and gold."
+    },
+    {
+      "item": "wireworks:steam_engine",
+      "name": "Steam Engine",
+      "mod": "Wireworks",
+      "depth": "mixed 1/2",
+      "metalDepths": {
+        "iron": [
+          1,
+          2
+        ],
+        "redstone": [
+          2
+        ],
+        "copper": [
+          1
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "wireworks:steam_engine",
+          "recipe": "wireworks:steam_engine",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 5.0
+            },
+            {
+              "item": "minecraft:piston",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 2.0
+            },
+            {
+              "item": "minecraft:iron_block",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:piston",
+          "recipe": "minecraft:piston",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:iron_block",
+          "recipe": "minecraft:iron_block",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 9.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 15.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 2.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 1.875
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.1875
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.5
+        }
+      ],
+      "perItemTier1Craft": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 3.5625
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.1875
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.5
+        }
+      ],
+      "covers": [
+        "copper",
+        "iron",
+        "redstone"
+      ],
+      "source": "wireworks-26.1.2-0.6.7-local.jar!/data/wireworks/recipe/steam_engine.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/piston.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/iron_block.json",
+      "passes": false,
+      "note": "Mixed: 5 iron and 2 copper at the first recycle.",
+      "excluded": "packing",
+      "excludedReason": "Its iron block is 9 of its 15 iron. Already failed (mixed depth)."
+    },
+    {
+      "item": "wireworks:solar_panel",
+      "name": "Solar Panel",
+      "mod": "Wireworks",
+      "depth": "mixed 1/2",
+      "metalDepths": {
+        "copper": [
+          1
+        ],
+        "iron": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "wireworks:solar_panel",
+          "recipe": "wireworks:solar_panel",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:glass",
+              "amount": 2.0
+            },
+            {
+              "item": "minecraft:daylight_detector",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 2.0
+            },
+            {
+              "item": "wireworks:plastic",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:iron_block",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:daylight_detector",
+          "recipe": "minecraft:daylight_detector",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:glass",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:quartz",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:oak_slab",
+              "amount": 3.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:oak_slab",
+          "recipe": "minecraft:oak_slab",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 0.5
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:iron_block",
+          "recipe": "minecraft:iron_block",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 9.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:glass",
+          "amount": 5.0
+        },
+        {
+          "item": "minecraft:quartz",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 1.5
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 2.0
+        },
+        {
+          "item": "wireworks:plastic",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 9.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:glass",
+          "amount": 0.6875
+        },
+        {
+          "item": "minecraft:quartz",
+          "amount": 0.1875
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.0234
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.5
+        },
+        {
+          "item": "wireworks:plastic",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.5625
+        }
+      ],
+      "perItemTier1Craft": [
+        {
+          "item": "minecraft:glass",
+          "amount": 0.6875
+        },
+        {
+          "item": "minecraft:quartz",
+          "amount": 0.1875
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.0234
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.5
+        },
+        {
+          "item": "wireworks:plastic",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 2.25
+        }
+      ],
+      "covers": [
+        "copper",
+        "iron"
+      ],
+      "source": "wireworks-26.1.2-0.6.7-local.jar!/data/wireworks/recipe/solar_panel.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/daylight_detector.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/oak_slab.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/iron_block.json",
+      "passes": false,
+      "note": "Mixed: 2 copper at the first recycle.",
+      "excluded": "packing",
+      "excludedReason": "Its iron block is all its iron. Already failed (mixed depth)."
+    },
+    {
+      "item": "beltworks:splitter",
+      "name": "Splitter",
+      "mod": "Beltworks",
+      "depth": "mixed 1/2/3",
+      "metalDepths": {
+        "copper": [
+          1,
+          2
+        ],
+        "redstone": [
+          3
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "beltworks:splitter",
+          "recipe": "beltworks:splitter",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "beltworks:belt_tile",
+              "amount": 2.0
+            },
+            {
+              "item": "minecraft:comparator",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "beltworks:belt_tile",
+          "recipe": "beltworks:belt_tile_from_dried_kelp",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:dried_kelp",
+              "amount": 0.1875
+            },
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 0.1875
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:comparator",
+          "recipe": "minecraft:comparator",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:redstone_torch",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:quartz",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:stone",
+              "amount": 3.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:redstone_torch",
+          "recipe": "minecraft:redstone_torch",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:stick",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:stick",
+          "recipe": "minecraft:stick",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 0.5
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:dried_kelp",
+          "amount": 0.375
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 1.375
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 1.5
+        },
+        {
+          "item": "minecraft:quartz",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:stone",
+          "amount": 3.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:dried_kelp",
+          "amount": 0.0234
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.2734
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.0469
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.0059
+        },
+        {
+          "item": "minecraft:quartz",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:stone",
+          "amount": 0.1875
+        }
+      ],
+      "covers": [
+        "copper",
+        "redstone"
+      ],
+      "source": "beltworks-26.1.2-0.5.6-local.jar!/data/beltworks/recipe/splitter.json; beltworks-26.1.2-0.5.6-local.jar!/data/beltworks/recipe/belt_tile_from_dried_kelp.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/comparator.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/redstone_torch.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/stick.json",
+      "passes": false,
+      "note": "Mixed: a copper ingot at the first recycle, the comparator's redstone at the third."
+    },
+    {
+      "item": "beltworks:loader",
+      "name": "Loader",
+      "mod": "Beltworks",
+      "depth": "mixed 1/2",
+      "metalDepths": {
+        "iron": [
+          2
+        ],
+        "copper": [
+          1,
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "beltworks:loader",
+          "recipe": "beltworks:loader",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:hopper",
+              "amount": 0.5
+            },
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 0.5
+            },
+            {
+              "item": "beltworks:belt_tile",
+              "amount": 0.5
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:hopper",
+          "recipe": "minecraft:hopper",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 5.0
+            },
+            {
+              "item": "minecraft:chest",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:chest",
+          "recipe": "minecraft:chest",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 8.0
+            }
+          ]
+        },
+        {
+          "recycle": "beltworks:belt_tile",
+          "recipe": "beltworks:belt_tile_from_dried_kelp",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:dried_kelp",
+              "amount": 0.1875
+            },
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 0.1875
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 2.5
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.5938
+        },
+        {
+          "item": "minecraft:dried_kelp",
+          "amount": 0.0938
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.1562
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.1309
+        },
+        {
+          "item": "minecraft:dried_kelp",
+          "amount": 0.0059
+        }
+      ],
+      "covers": [
+        "copper",
+        "iron"
+      ],
+      "source": "beltworks-26.1.2-0.5.6-local.jar!/data/beltworks/recipe/loader.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/hopper.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/chest.json; beltworks-26.1.2-0.5.6-local.jar!/data/beltworks/recipe/belt_tile_from_dried_kelp.json",
+      "passes": false,
+      "note": "Mixed: half a copper ingot at the first recycle."
+    },
+    {
+      "item": "beltworks:feeder",
+      "name": "Feeder",
+      "mod": "Beltworks",
+      "depth": "mixed 2/3",
+      "metalDepths": {
+        "iron": [
+          3
+        ],
+        "copper": [
+          2,
+          3
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "beltworks:feeder",
+          "recipe": "beltworks:feeder",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "beltworks:loader",
+              "amount": 1.0
+            },
+            {
+              "item": "beltworks:belt_tile",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "beltworks:loader",
+          "recipe": "beltworks:loader",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:hopper",
+              "amount": 0.5
+            },
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 0.5
+            },
+            {
+              "item": "beltworks:belt_tile",
+              "amount": 0.5
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:hopper",
+          "recipe": "minecraft:hopper",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 5.0
+            },
+            {
+              "item": "minecraft:chest",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:chest",
+          "recipe": "minecraft:chest",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 8.0
+            }
+          ]
+        },
+        {
+          "recycle": "beltworks:belt_tile",
+          "recipe": "beltworks:belt_tile_from_dried_kelp",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:dried_kelp",
+              "amount": 0.1875
+            },
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 0.1875
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 2.5
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.7812
+        },
+        {
+          "item": "minecraft:dried_kelp",
+          "amount": 0.2812
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.0391
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.0156
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.0444
+        },
+        {
+          "item": "minecraft:dried_kelp",
+          "amount": 0.0132
+        }
+      ],
+      "covers": [
+        "copper",
+        "iron"
+      ],
+      "source": "beltworks-26.1.2-0.5.6-local.jar!/data/beltworks/recipe/feeder.json; beltworks-26.1.2-0.5.6-local.jar!/data/beltworks/recipe/loader.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/hopper.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/chest.json; beltworks-26.1.2-0.5.6-local.jar!/data/beltworks/recipe/belt_tile_from_dried_kelp.json",
+      "passes": false,
+      "note": "Mixed: copper at two recycles, the loader's hopper iron at three. Too deep."
+    },
+    {
+      "item": "pipeworks:storage_tank",
+      "name": "Storage Tank",
+      "mod": "Pipeworks",
+      "depth": 1,
+      "metalDepths": {
+        "iron": [
+          1
+        ],
+        "copper": [
+          1
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "pipeworks:storage_tank",
+          "recipe": "pipeworks:storage_tank",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:glass",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 1.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:glass",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:glass",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.25
+        }
+      ],
+      "covers": [
+        "copper",
+        "iron"
+      ],
+      "source": "pipeworks-26.1.2-0.4.1-local.jar!/data/pipeworks/recipe/storage_tank.json",
+      "passes": false,
+      "note": "Fails: iron and copper ingots at the first recycle."
+    },
+    {
+      "item": "craftworks:assembler_1",
+      "name": "Assembler 1",
+      "mod": "Craftworks",
+      "depth": "mixed 1/2/3",
+      "metalDepths": {
+        "iron": [
+          1,
+          2
+        ],
+        "redstone": [
+          1,
+          2,
+          3
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "craftworks:assembler_1",
+          "recipe": "craftworks:assembler_1",
+          "kind": "assembling",
+          "into": [
+            {
+              "item": "minecraft:crafter",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 9.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 5.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:crafter",
+          "recipe": "minecraft:crafter",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 5.0
+            },
+            {
+              "item": "minecraft:crafting_table",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 2.0
+            },
+            {
+              "item": "minecraft:dropper",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:crafting_table",
+          "recipe": "minecraft:crafting_table",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 4.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:dropper",
+          "recipe": "minecraft:dropper",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 7.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 14.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 8.0
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 7.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 2.5625
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 1.3906
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.1094
+        }
+      ],
+      "covers": [
+        "iron",
+        "redstone"
+      ],
+      "source": "craftworks-26.1.2-0.11.0-local.jar!/data/craftworks/recipe/assembler_1.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/crafter.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/crafting_table.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/dropper.json",
+      "passes": false,
+      "note": "Mixed: 9 iron and 5 redstone at the first recycle (Craftworks' assembling recipe, which the Recycler runs before crafting)."
+    },
+    {
+      "item": "craftworks:refiner",
+      "name": "Refiner",
+      "mod": "Craftworks",
+      "depth": "mixed 1/2",
+      "metalDepths": {
+        "iron": [
+          1,
+          2
+        ],
+        "redstone": [
+          1
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "craftworks:refiner",
+          "recipe": "craftworks:refiner",
+          "kind": "assembling",
+          "into": [
+            {
+              "item": "minecraft:blast_furnace",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 5.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:blast_furnace",
+          "recipe": "minecraft:blast_furnace",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 5.0
+            },
+            {
+              "item": "minecraft:furnace",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:smooth_stone",
+              "amount": 3.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:furnace",
+          "recipe": "minecraft:furnace",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 8.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 9.0
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 8.0
+        },
+        {
+          "item": "minecraft:smooth_stone",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 5.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 1.3125
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.125
+        },
+        {
+          "item": "minecraft:smooth_stone",
+          "amount": 0.1875
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 1.25
+        }
+      ],
+      "covers": [
+        "iron",
+        "redstone"
+      ],
+      "source": "craftworks-26.1.2-0.11.0-local.jar!/data/craftworks/recipe/refiner.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/blast_furnace.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/furnace.json",
+      "passes": false,
+      "note": "Mixed: 4 iron and 5 redstone at the first recycle (assembling)."
+    },
+    {
+      "item": "gearworks:kinetic_upgrade",
+      "name": "Kinetic Upgrade",
+      "mod": "Gearworks",
+      "depth": "mixed 1/2",
+      "metalDepths": {
+        "copper": [
+          1
+        ],
+        "iron": [
+          2
+        ],
+        "redstone": [
+          1,
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "gearworks:kinetic_upgrade",
+          "recipe": "gearworks:kinetic_upgrade",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:piston",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:piston",
+          "recipe": "minecraft:piston",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:redstone",
+              "amount": 1.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 2.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.1875
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.3125
+        }
+      ],
+      "covers": [
+        "copper",
+        "iron",
+        "redstone"
+      ],
+      "source": "gearworks-26.1.2-0.2.1-local.jar!/data/gearworks/recipe/kinetic_upgrade.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/piston.json",
+      "passes": false,
+      "note": "Mixed: 4 copper and a redstone at the first recycle."
+    },
+    {
+      "item": "fieldworks:harvester_1",
+      "name": "Burner Harvester",
+      "mod": "Fieldworks",
+      "depth": "mixed 1/2",
+      "metalDepths": {
+        "iron": [
+          1,
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "fieldworks:harvester_1",
+          "recipe": "fieldworks:harvester_1",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 4.0
+            },
+            {
+              "item": "minecraft:furnace",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:iron_pickaxe",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:furnace",
+          "recipe": "minecraft:furnace",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 8.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:iron_pickaxe",
+          "recipe": "minecraft:iron_pickaxe",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 3.0
+            },
+            {
+              "item": "minecraft:stick",
+              "amount": 2.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:stick",
+          "recipe": "minecraft:stick",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 0.5
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 6.0
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 12.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.9375
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 1.5
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.0156
+        }
+      ],
+      "covers": [
+        "iron"
+      ],
+      "source": "fieldworks-26.1.2-0.6.0-local.jar!/data/fieldworks/recipe/harvester_1.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/furnace.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/iron_pickaxe.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/stick.json",
+      "passes": false,
+      "note": "Mixed: 3 iron at the first recycle."
+    },
+    {
+      "item": "refinedstorage:machine_casing",
+      "name": "Machine Casing",
+      "mod": "Refined Storage",
+      "depth": 2,
+      "metalDepths": {
+        "iron": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "refinedstorage:machine_casing",
+          "recipe": "refinedstorage:machine_casing",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "refinedstorage:quartz_enriched_iron",
+              "amount": 8.0
+            },
+            {
+              "item": "minecraft:andesite",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "refinedstorage:quartz_enriched_iron",
+          "recipe": "refinedstorage:quartz_enriched_iron",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 0.75
+            },
+            {
+              "item": "minecraft:quartz",
+              "amount": 0.25
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:andesite",
+          "recipe": "minecraft:andesite",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:diorite",
+              "amount": 0.5
+            },
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 0.5
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:diorite",
+          "recipe": "minecraft:diorite",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:quartz",
+              "amount": 1.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 6.0
+        },
+        {
+          "item": "minecraft:quartz",
+          "amount": 2.5
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.375
+        },
+        {
+          "item": "minecraft:quartz",
+          "amount": 0.1328
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.0391
+        }
+      ],
+      "covers": [
+        "iron"
+      ],
+      "source": "refinedstorage-neoforge-3.2.1.jar!/data/refinedstorage/recipe/machine_casing.json; refinedstorage-neoforge-3.2.1.jar!/data/refinedstorage/recipe/quartz_enriched_iron.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/andesite.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/diorite.json",
+      "passes": true,
+      "note": "Passes: Quartz Enriched Iron and andesite, then iron, quartz and cobblestone. Iron only."
+    },
+    {
+      "item": "modularrouters:vacuum_module",
+      "name": "Vacuum Module",
+      "mod": "Modular Routers",
+      "depth": 2,
+      "metalDepths": {
+        "redstone": [
+          2
+        ],
+        "gold": [
+          2
+        ],
+        "iron": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "modularrouters:vacuum_module",
+          "recipe": "modularrouters:vacuum_module",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "modularrouters:blank_module",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:hopper",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:ender_eye",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "modularrouters:blank_module",
+          "recipe": "modularrouters:blank_module",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:redstone",
+              "amount": 0.1667
+            },
+            {
+              "item": "minecraft:paper",
+              "amount": 0.5
+            },
+            {
+              "item": "minecraft:gold_nugget",
+              "amount": 0.5
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:paper",
+          "recipe": "minecraft:paper",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:sugar_cane",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:hopper",
+          "recipe": "minecraft:hopper",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:iron_ingot",
+              "amount": 5.0
+            },
+            {
+              "item": "minecraft:chest",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:chest",
+          "recipe": "minecraft:chest",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 8.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:ender_eye",
+          "recipe": "minecraft:ender_eye",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:ender_pearl",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:blaze_powder",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:blaze_powder",
+          "recipe": "minecraft:blaze_powder",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:blaze_rod",
+              "amount": 0.5
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.1667
+        },
+        {
+          "item": "minecraft:sugar_cane",
+          "amount": 0.5
+        },
+        {
+          "item": "minecraft:gold_nugget",
+          "amount": 0.5
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 5.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 8.0
+        },
+        {
+          "item": "minecraft:ender_pearl",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:blaze_rod",
+          "amount": 0.5
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.0104
+        },
+        {
+          "item": "minecraft:sugar_cane",
+          "amount": 0.0078
+        },
+        {
+          "item": "minecraft:gold_nugget",
+          "amount": 0.0312
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.3125
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.125
+        },
+        {
+          "item": "minecraft:ender_pearl",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:blaze_rod",
+          "amount": 0.0078
+        }
+      ],
+      "covers": [
+        "iron",
+        "gold",
+        "redstone"
+      ],
+      "source": "modular-routers-26.1.2.2.jar!/data/modularrouters/recipe/vacuum_module.json; modular-routers-26.1.2.2.jar!/data/modularrouters/recipe/blank_module.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/paper.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/hopper.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/chest.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/ender_eye.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/blaze_powder.json",
+      "passes": true,
+      "note": "Passes, and the only pure depth-2 gold carrier found, but its gold is half a nugget.",
+      "goldNote": "Its gold comes out as nuggets. Theurgy liquefies gold ingots, raw gold and gold ores but no nugget (theurgy-26.1.2-neoforge-1.116.1.jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_gold_from_{ingots,raw_materials,ores}_gold.json), so the nuggets reach Theurgy only through 9 nuggets -> 1 ingot (minecraft_26.1.2_client.jar!/data/minecraft/recipe/gold_ingot_from_nuggets.json), a compress recipe. Under the packing rule its gold does not count; its iron and redstone do. Trace anyway: 1/32 nugget per item at tier 1."
+    },
+    {
+      "item": "minecraft:waxed_copper_chest",
+      "name": "Waxed Copper Chest",
+      "mod": "vanilla",
+      "depth": 2,
+      "metalDepths": {
+        "copper": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:waxed_copper_chest",
+          "recipe": "minecraft:waxed_copper_chest_from_honeycomb",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_chest",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:honeycomb",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:copper_chest",
+          "recipe": "minecraft:copper_chest",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 8.0
+            },
+            {
+              "item": "minecraft:chest",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:chest",
+          "recipe": "minecraft:chest",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:oak_planks",
+              "amount": 8.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 8.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 8.0
+        },
+        {
+          "item": "minecraft:honeycomb",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.5
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.125
+        },
+        {
+          "item": "minecraft:honeycomb",
+          "amount": 0.25
+        }
+      ],
+      "covers": [
+        "copper"
+      ],
+      "source": "minecraft_26.1.2_client.jar!/data/minecraft/recipe/waxed_copper_chest_from_honeycomb.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/copper_chest.json; minecraft_26.1.2_client.jar!/data/minecraft/recipe/chest.json",
+      "passes": true,
+      "addedIn": "packing amendment",
+      "flagged": "axe",
+      "note": "Passes the Recycler's rule with no block: the wax recycles off first, then the unwaxed item gives its copper. But an axe scrapes the wax off a placed block for free (the waxed/unwaxed pairs are in HoneycombItem's waxables map, minecraft_26.1.2_client.jar!/net/minecraft/world/item/HoneycombItem.class, which AxeItem reverses), so a player turns it into its intermediate-1 form without a recycle, as the Waxed Block of Copper is refined in effect. Flagged, not excluded: not a packing recipe, but left out of the proposed mixes until the maintainer rules on it."
+    },
+    {
+      "item": "minecraft:waxed_copper_trapdoor",
+      "name": "Waxed Copper Trapdoor",
+      "mod": "vanilla",
+      "depth": 2,
+      "metalDepths": {
+        "copper": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:waxed_copper_trapdoor",
+          "recipe": "minecraft:waxed_copper_trapdoor_from_honeycomb",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_trapdoor",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:honeycomb",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:copper_trapdoor",
+          "recipe": "minecraft:copper_trapdoor",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 4.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 4.0
+        },
+        {
+          "item": "minecraft:honeycomb",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:honeycomb",
+          "amount": 0.25
+        }
+      ],
+      "covers": [
+        "copper"
+      ],
+      "source": "minecraft_26.1.2_client.jar!/data/minecraft/recipe/waxed_copper_trapdoor_from_honeycomb.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/copper_trapdoor.json",
+      "passes": true,
+      "addedIn": "packing amendment",
+      "flagged": "axe",
+      "note": "Passes the Recycler's rule with no block: the wax recycles off first, then the unwaxed item gives its copper. But an axe scrapes the wax off a placed block for free (the waxed/unwaxed pairs are in HoneycombItem's waxables map, minecraft_26.1.2_client.jar!/net/minecraft/world/item/HoneycombItem.class, which AxeItem reverses), so a player turns it into its intermediate-1 form without a recycle, as the Waxed Block of Copper is refined in effect. Flagged, not excluded: not a packing recipe, but left out of the proposed mixes until the maintainer rules on it."
+    },
+    {
+      "item": "minecraft:waxed_lightning_rod",
+      "name": "Waxed Lightning Rod",
+      "mod": "vanilla",
+      "depth": 2,
+      "metalDepths": {
+        "copper": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "minecraft:waxed_lightning_rod",
+          "recipe": "minecraft:waxed_lightning_rod_from_honeycomb",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:lightning_rod",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:honeycomb",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "minecraft:lightning_rod",
+          "recipe": "minecraft:lightning_rod",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:copper_ingot",
+              "amount": 3.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:honeycomb",
+          "amount": 1.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.1875
+        },
+        {
+          "item": "minecraft:honeycomb",
+          "amount": 0.25
+        }
+      ],
+      "covers": [
+        "copper"
+      ],
+      "source": "minecraft_26.1.2_client.jar!/data/minecraft/recipe/waxed_lightning_rod_from_honeycomb.json; neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/lightning_rod.json",
+      "passes": true,
+      "addedIn": "packing amendment",
+      "flagged": "axe",
+      "note": "Passes the Recycler's rule with no block: the wax recycles off first, then the unwaxed item gives its copper. But an axe scrapes the wax off a placed block for free (the waxed/unwaxed pairs are in HoneycombItem's waxables map, minecraft_26.1.2_client.jar!/net/minecraft/world/item/HoneycombItem.class, which AxeItem reverses), so a player turns it into its intermediate-1 form without a recycle, as the Waxed Block of Copper is refined in effect. Flagged, not excluded: not a packing recipe, but left out of the proposed mixes until the maintainer rules on it."
+    },
+    {
+      "item": "neovitae:rune_2_sacrifice",
+      "name": "Rune of Sacrifice II",
+      "mod": "Neo Vitae",
+      "depth": 2,
+      "metalDepths": {
+        "gold": [
+          2
+        ]
+      },
+      "tree": [
+        {
+          "recycle": "neovitae:rune_2_sacrifice",
+          "recipe": "neovitae:rune_2_sacrifice",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:netherite_scrap",
+              "amount": 4.0
+            },
+            {
+              "item": "neovitae:hellforged_parts",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:cobblestone",
+              "amount": 3.0
+            },
+            {
+              "item": "neovitae:rune_sacrifice",
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "neovitae:rune_sacrifice",
+          "recipe": "neovitae:rune_sacrifice",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:deepslate",
+              "amount": 4.0
+            },
+            {
+              "item": "neovitae:tabula_robur",
+              "amount": 1.0
+            },
+            {
+              "item": "minecraft:gold_ingot",
+              "amount": 2.0
+            },
+            {
+              "item": "neovitae:rune_blank",
+              "amount": 1.0
+            },
+            {
+              "item": null,
+              "amount": 1.0
+            }
+          ]
+        },
+        {
+          "recycle": "neovitae:rune_blank",
+          "recipe": "neovitae:rune_blank",
+          "kind": "crafting",
+          "into": [
+            {
+              "item": "minecraft:deepslate",
+              "amount": 7.0
+            },
+            {
+              "item": "neovitae:tabula_rasa",
+              "amount": 1.0
+            },
+            {
+              "item": null,
+              "amount": 1.0
+            }
+          ]
+        }
+      ],
+      "perItemFull": [
+        {
+          "item": "minecraft:netherite_scrap",
+          "amount": 4.0
+        },
+        {
+          "item": "neovitae:hellforged_parts",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:deepslate",
+          "amount": 11.0
+        },
+        {
+          "item": "neovitae:tabula_robur",
+          "amount": 1.0
+        },
+        {
+          "item": "minecraft:gold_ingot",
+          "amount": 2.0
+        },
+        {
+          "item": "neovitae:tabula_rasa",
+          "amount": 1.0
+        },
+        {
+          "item": "neovitae:blood_orb",
+          "amount": 2.0
+        }
+      ],
+      "perItemTier1": [
+        {
+          "item": "minecraft:netherite_scrap",
+          "amount": 1.0
+        },
+        {
+          "item": "neovitae:hellforged_parts",
+          "amount": 0.25
+        },
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.75
+        },
+        {
+          "item": "minecraft:deepslate",
+          "amount": 0.3594
+        },
+        {
+          "item": "neovitae:tabula_robur",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:gold_ingot",
+          "amount": 0.125
+        },
+        {
+          "item": "neovitae:tabula_rasa",
+          "amount": 0.0156
+        },
+        {
+          "item": "neovitae:blood_orb",
+          "amount": 0.0781
+        }
+      ],
+      "covers": [
+        "gold"
+      ],
+      "source": "neovitae-26.1.2-1.1.49.jar!/data/neovitae/recipe/rune_2_sacrifice.json; neovitae-26.1.2-1.1.49.jar!/data/neovitae/recipe/rune_sacrifice.json; neovitae-26.1.2-1.1.49.jar!/data/neovitae/recipe/rune_blank.json",
+      "passes": true,
+      "addedIn": "packing amendment",
+      "note": "The only true intermediate-2 item found that carries whole gold ingots with no packing: 2 per rune, from the Rune of Sacrifice inside it. Its first recycle also returns 4 netherite scrap, hellforged parts and cobblestone, so a mix with runes hands out netherite scrap at 8 times the rate of gold (0.25 scrap and 0.03 gold per rune per essence at tier 1). The Rune of Sacrifice's blood-orb ingredient (neovitae:orb_tier, tier 1) comes back as that ingredient's first item, which the script could not resolve; it is listed as an orb. If Neo Vitae becomes a challenge's mod, its items in Advanced's mix need a second look under ADR 0006."
+    }
+  ],
+  "mixes": [
+    {
+      "id": "pipeworks",
+      "name": "Pipeworks",
+      "items": [
+        {
+          "item": "pipeworks:outlet",
+          "count": 4
+        },
+        {
+          "item": "pipeworks:pump",
+          "count": 2
+        },
+        {
+          "item": "minecraft:hopper_minecart",
+          "count": 1
+        },
+        {
+          "item": "minecraft:comparator",
+          "count": 1
+        }
+      ],
+      "perEssenceTier1": [
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.5625
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.3438
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.2812
+        },
+        {
+          "item": "minecraft:stone",
+          "amount": 0.1875
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.1406
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.1367
+        },
+        {
+          "item": "minecraft:quartz",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:string",
+          "amount": 0.0469
+        }
+      ],
+      "essencePerGalvanic": {
+        "A": 46.5,
+        "B": 229.8,
+        "C": 58.3
+      },
+      "uncovered": {
+        "A": [
+          "minecraft:gold_ingot"
+        ],
+        "B": [],
+        "C": []
+      },
+      "mixFullTree": [
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 36.0
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 22.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 21.5
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 18.0
+        },
+        {
+          "item": "minecraft:string",
+          "amount": 12.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 9.0
+        },
+        {
+          "item": "minecraft:stone",
+          "amount": 3.0
+        },
+        {
+          "item": "minecraft:quartz",
+          "amount": 1.0
+        }
+      ],
+      "notes": "Unchanged by the exclusion: no storage blocks, so every figure is what the Recycler really returns. The balanced pick: the best route C of the three. Byproducts: 36 cobblestone, 21.5 planks and 12 string in its full tree; the pumps' first recycle returns pistons and buckets, the outlets' dispensers. Pulls in Pipeworks, usable as decomposed."
+    },
+    {
+      "id": "outlets",
+      "name": "Outlets",
+      "items": [
+        {
+          "item": "pipeworks:outlet",
+          "count": 6
+        },
+        {
+          "item": "pipeworks:pump",
+          "count": 2
+        }
+      ],
+      "perEssenceTier1": [
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.7812
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.4688
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.125
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.125
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.1025
+        },
+        {
+          "item": "minecraft:string",
+          "amount": 0.0703
+        }
+      ],
+      "essencePerGalvanic": {
+        "A": 34.1,
+        "B": 168.5,
+        "C": 131.2
+      },
+      "uncovered": {
+        "A": [
+          "minecraft:gold_ingot"
+        ],
+        "B": [],
+        "C": []
+      },
+      "mixFullTree": [
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 50.0
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 30.0
+        },
+        {
+          "item": "minecraft:string",
+          "amount": 18.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 15.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 8.0
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 8.0
+        }
+      ],
+      "notes": "The most copper a clean mix carries: the Outlet's 4 copper is the best of any true intermediate-2 item without blocks or wax. Iron comes only from the two Pumps, which makes route A iron-bound almost as soon as copper (32 against 34) and route C slow. Byproducts: cobblestone (50 in the full tree), string from the dispensers' bows, planks."
+    },
+    {
+      "id": "runes",
+      "name": "Runes (gold)",
+      "items": [
+        {
+          "item": "pipeworks:outlet",
+          "count": 4
+        },
+        {
+          "item": "pipeworks:pump",
+          "count": 2
+        },
+        {
+          "item": "neovitae:rune_2_sacrifice",
+          "count": 2
+        }
+      ],
+      "perEssenceTier1": [
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 0.9375
+        },
+        {
+          "item": "minecraft:netherite_scrap",
+          "amount": 0.5
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 0.3438
+        },
+        {
+          "item": "minecraft:deepslate",
+          "amount": 0.1797
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 0.125
+        },
+        {
+          "item": "neovitae:hellforged_parts",
+          "amount": 0.125
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 0.0996
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 0.0938
+        },
+        {
+          "item": "minecraft:gold_ingot",
+          "amount": 0.0625
+        },
+        {
+          "item": "minecraft:string",
+          "amount": 0.0469
+        },
+        {
+          "item": "neovitae:orb_tier ingredient",
+          "amount": 0.0391
+        },
+        {
+          "item": "neovitae:tabula_robur",
+          "amount": 0.0312
+        },
+        {
+          "item": "neovitae:tabula_rasa",
+          "amount": 0.0078
+        }
+      ],
+      "essencePerGalvanic": {
+        "A": 46.5,
+        "B": 229.8,
+        "C": 131.2
+      },
+      "uncovered": {
+        "A": [],
+        "B": [],
+        "C": []
+      },
+      "mixFullTree": [
+        {
+          "item": "minecraft:cobblestone",
+          "amount": 42.0
+        },
+        {
+          "item": "minecraft:copper_ingot",
+          "amount": 22.0
+        },
+        {
+          "item": "minecraft:deepslate",
+          "amount": 22.0
+        },
+        {
+          "item": "minecraft:oak_planks",
+          "amount": 12.0
+        },
+        {
+          "item": "minecraft:string",
+          "amount": 12.0
+        },
+        {
+          "item": "minecraft:iron_ingot",
+          "amount": 8.0
+        },
+        {
+          "item": "minecraft:netherite_scrap",
+          "amount": 8.0
+        },
+        {
+          "item": "minecraft:redstone",
+          "amount": 6.0
+        },
+        {
+          "item": "minecraft:gold_ingot",
+          "amount": 4.0
+        },
+        {
+          "item": "neovitae:orb_tier ingredient",
+          "amount": 4.0
+        },
+        {
+          "item": "neovitae:hellforged_parts",
+          "amount": 2.0
+        },
+        {
+          "item": "neovitae:tabula_robur",
+          "amount": 2.0
+        },
+        {
+          "item": "neovitae:tabula_rasa",
+          "amount": 2.0
+        }
+      ],
+      "notes": "The Pipeworks mix with its Minecart with Hopper and Comparator traded for two Runes of Sacrifice II: the only clean mix that covers route A's gold. Gold is no longer the bound: 2 gold per Galvanic takes 32 essences, under copper's 46.5. The cost is iron (route C 131) and 0.5 netherite scrap per essence, plus hellforged parts, deepslate and Neo Vitae's tabulae and an orb. One rune instead of two, with the Minecart back, keeps route C at 58.3 but makes route A gold-bound at 64."
+    }
+  ],
+  "openQuestions": [
+    "Storage blocks: decided. An item that relies on a packing recipe is excluded from the mix (packingRule). Waxed copper items are a new edge: no packing, but an axe unwaxes a placed one for free, a step the Recycler never sees. Are they excluded like blocks (flagged: axe)?",
+    "Gold: the mix may carry it only from Neo Vitae's Rune of Sacrifice II (the runes mix), at the price of netherite scrap. Modular Routers' trace gold comes as nuggets and needs a compress recipe to reach Theurgy. Gold from outside the challenge mods is surveyed in gold-sources.md. Does the mix carry gold (runes) or leave it to a source outside the mix?",
+    "Full yield or tier 1: at full yield every figure is 64 times the tier-1 one (16 times where blocks are crafted). Tier 1 makes route B cost 110 to 230 essences per Galvanic. Should a balance pass size the mix on tier 1 and let higher-tier cores (#189) make it comfortable, or on a higher core's yield?",
+    "Bootstrap: the Recycler's parts (kubejs/server_scripts/decomposing.js) are assembled from pistons, hoppers and a comparator that decomposing by hand gives today. Recycling needs a Recycler, so a mix of Pumps and Outlets gives no piston until one is built. The parts' recipes would have to take the new mix's items as they are (a Pump, an Outlet, a Comparator).",
+    "Usable as decomposed: a mix item works as is. Pumps and Outlets are Pipeworks' fluid blocks, a Hopper Minecart a hopper. Is that a reward or a cost? The inert alternative, Cut Copper, is now excluded (packing).",
+    "Mix size: today's mix holds four items. Every essence-per-Galvanic figure scales inversely with the mix's count; the three proposals are all 8 items.",
+    "FTB Materials: its smelting recipes from dust to vanilla ingots (ftb-materials-26.1.2.6.jar!/data/ftbmaterials/recipe/copper_ingot_from_smelting_copper_dust.json) carry an ftbmaterials:components_available condition. If they load, a copper ingot recycles into FTB's copper dust (smelting first, then id order puts ftbmaterials before minecraft), not raw copper. It changes nothing above refined, but matters if route B wants raw copper from recycled ingots (at a quarter, 0.75 sulfur per ingot, worse than liquefying the ingot).",
+    "Tag order: a tag ingredient returns its first item. The script took NeoForge's and vanilla's order (minecraft:copper_ingot first in #c:ingots/copper, oak planks first in #minecraft:planks). A mod adding to a tag first would change what comes back. To check in game with EMI's recycling view.",
+    "Craftworks: the Assembler runs grid recipes as they are, so they stay crafting to the Recycler. Only Craftworks' own five recipes are assembling, and of the candidates only the Assembler and Refiner are made that way.",
+    "Netherite: a rune mix hands out 0.5 netherite scrap per essence at tier 1, and a recycled rune is the only way the pack has to get scrap before the Nether. Is that acceptable, or does it rule the runes out?",
+    "Neo Vitae's role: if it becomes the life challenge's mod, can a Neo Vitae item sit in Advanced's mix, when recycling it returns Neo Vitae intermediates (tabulae, a blood orb)?"
+  ],
+  "packingRule": "Maintainer's decision for #209: a candidate whose depth or yield relies on a packing recipe, a storage block (9 ingots <-> 1 block) or any other compress/uncompress pair, is excluded from the mix. Blocks are not a band step. The Recycler's code does not change; this only decides which items may be in the mix. The mix stays true intermediate 2: exactly two recycles to refined. A candidate is marked excluded: \"packing\" when a storage block (copper, iron, redstone or netherite) is a node of its recycle tree; one that already failed keeps passes: false and is marked too, so no figure of it is used.",
+  "droppedMixes": [
+    {
+      "id": "steam_turbine",
+      "items": [
+        {
+          "item": "wireworks:steam_turbine",
+          "count": 1
+        },
+        {
+          "item": "pipeworks:pump",
+          "count": 2
+        },
+        {
+          "item": "pipeworks:outlet",
+          "count": 1
+        },
+        {
+          "item": "minecraft:comparator",
+          "count": 1
+        }
+      ],
+      "reason": "Excluded: the Steam Turbine's copper and iron are storage blocks.",
+      "wasEssencePerGalvanic": {
+        "A": 22.3,
+        "B": 109.9,
+        "C": 55.2
+      },
+      "wasEssencePerGalvanicCraft": {
+        "A": 6.6,
+        "B": 32.8,
+        "C": 22.8
+      }
+    },
+    {
+      "id": "cut_copper",
+      "items": [
+        {
+          "item": "minecraft:cut_copper",
+          "count": 4
+        },
+        {
+          "item": "minecraft:hopper_minecart",
+          "count": 1
+        },
+        {
+          "item": "minecraft:sticky_piston",
+          "count": 1
+        },
+        {
+          "item": "minecraft:comparator",
+          "count": 1
+        }
+      ],
+      "reason": "Excluded: Cut Copper is a copper block.",
+      "wasEssencePerGalvanic": {
+        "A": 28.4,
+        "B": 140.4,
+        "C": 95.4
+      },
+      "wasEssencePerGalvanicCraft": {
+        "A": 23.3,
+        "B": 35.1,
+        "C": 95.4
+      }
+    }
+  ],
+  "exclusionCost": "Only two copper carriers survive: the Outlet (4 copper) and the Pump (3 copper, 4 iron). Before, the Steam Turbine carried 36 and Cut Copper 9. The best essences per Galvanic go from A 22.3 / B 109.9 / C 55.2 (recycled blocks) or A 6.6 / B 32.8 / C 22.8 (crafted blocks, what a player would really have done) to A 34.1 / B 168.5 (Outlets) and C 58.3 (Pipeworks). Against the crafted-block figures that is about 5 times the essence for routes A and B and 2.6 times for C. Route B, the copper grind, is the one that hurts: 168 essences per Galvanic at tier 1 at best. The waxed copper items would win some of it back (a Waxed Copper Chest carries 8 copper) if the axe is ruled no shortcut: 6 Waxed Copper Chests and 2 Pumps give A 32 (iron-bound) / B 93.6."
+}
