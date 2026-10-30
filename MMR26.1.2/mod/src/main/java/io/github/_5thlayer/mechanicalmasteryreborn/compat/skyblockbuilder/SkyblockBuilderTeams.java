@@ -25,7 +25,10 @@ public final class SkyblockBuilderTeams implements Teams.Lookup {
         Team nearest = null;
         long nearestDistance = Long.MAX_VALUE;
         for (Team team : data.getTeams()) {
-            if (team.isSpawn() || !team.getTeamLevelKey().equals(level.dimension())) {
+            // The level the team's island is in, as Skyblock Builder resolves it: the one shared level in single-world
+            // mode, as the pack plays, where getTeamLevelKey() names a per-team dimension that doesn't exist.
+            ServerLevel island = team.getLevel();
+            if (team.isSpawn() || island == null || !island.dimension().equals(level.dimension())) {
                 continue;
             }
             BlockPos center = team.getIsland().getCenter();

@@ -15,13 +15,14 @@ import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-/** C.O.D.'s block, item, block entity and menu, and its reserve as an item face on every side. */
+/** C.O.D.'s block, item, block entity and menu, its reserve as an item face on every side, and the {@code /cod} command. */
 public final class Cod {
 
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MechanicalMasteryReborn.MOD_ID);
@@ -49,6 +50,7 @@ public final class Cod {
         BLOCK_ENTITIES.register(modBus);
         MENUS.register(modBus);
         modBus.addListener(Cod::registerCapabilities);
+        NeoForge.EVENT_BUS.addListener(CodCommand::register);
     }
 
     private static void registerCapabilities(RegisterCapabilitiesEvent event) {

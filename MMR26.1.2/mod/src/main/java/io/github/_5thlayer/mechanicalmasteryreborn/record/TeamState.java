@@ -68,11 +68,20 @@ public final class TeamState extends SavedData {
         return entry != null && entry.awake;
     }
 
-    /** Wakes {@code team}'s C.O.D., for good. */
-    public void wake(UUID team) {
+    /** Wakes {@code team}'s C.O.D., for good, and says whether it was dormant until now. */
+    public boolean wake(UUID team) {
         Entry entry = entry(team);
-        if (!entry.awake) {
-            entry.awake = true;
+        if (entry.awake) {
+            return false;
+        }
+        entry.awake = true;
+        setDirty();
+        return true;
+    }
+
+    /** Puts {@code team}'s C.O.D. back to dormant, as a new island's is, its count of what it made forgotten. */
+    public void makeDormant(UUID team) {
+        if (teams.remove(team) != null) {
             setDirty();
         }
     }
