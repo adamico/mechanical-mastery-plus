@@ -55,9 +55,9 @@ The FactoryWorks Showcase's performance and QoL mods, minus its content: no new 
 
 - Performance: **AI Improvements**, **BadOptimizations**, **Clumps**, **Connectivity**, **Entity Culling**, **FerriteCore**, **fix GPU memory leak**, **ImmediatelyFast**, **ModernFix**, **Particle Core**, **Sodium**, **spark**.
 - Fixes: **AttributeFix**, **Crash Assistant**, **I'm Fast**, **Max Health Fix**, **Neruina**, **NetherPortalFix**.
-- QoL: **AppleSkin**, **BetterF3**, **Block Runner**, **Bridging Mod**, **Clean Swing Through Grass**, **Colorful Hearts**, **Configured**, **Controlling**, **Default Options**, **Durability Tooltip**, **Enchantment Descriptions**, **Extreme Sound Muffler**, **Freecam**, **Inventory Essentials**, **Inventory Sorter**, **Jade**, **Leaves Be Gone**, **More Overlays Updated**, **Mouse Tweaks**, **RightClickHarvest**, **Sound Physics Remastered**, **Swivel**, **Toast Control**, **TrashSlot**.
+- QoL: **AppleSkin**, **BetterF3**, **Block Runner**, **Bridging Mod**, **Clean Swing Through Grass**, **Colorful Hearts**, **Configured**, **Controlling**, **Default Options**, **Durability Tooltip**, **Enchantment Descriptions**, **Extreme Sound Muffler**, **Freecam**, **Inventory Essentials**, **Inventory Sorter**, **Jade**, **Leaves Be Gone**, **More Overlays Updated**, **Mouse Tweaks**, **RightClickHarvest**, **Sound Physics Remastered**, **Swivel**, **Toast Control**.
 
-Left out of the Showcase's list, as content with no role here: Animal Feeding Trough, Charging Gadgets, Chisel Reborn, Comforts, Easy Villagers, Energy Meter, Factory Blocks, FTB Industrial Contraptions, Just Dire Things, JustHammers, Mining Gadgets, Refined Storage Curios Integration, Sophisticated Backpacks, Starter Kit and XP Tome. JEI and its addons (JER, JEP, JEED) go too, since EMI is the viewer.
+Left out of the Showcase's list, as content with no role here: Animal Feeding Trough, Charging Gadgets, Chisel Reborn, Comforts, Easy Villagers, Energy Meter, Factory Blocks, FTB Industrial Contraptions, Just Dire Things, JustHammers, Mining Gadgets, Refined Storage Curios Integration, Sophisticated Backpacks, Starter Kit and XP Tome. JEI and its addons (JER, JEP, JEED) go too, since EMI is the viewer. TrashSlot goes as well: recycling on a Recycler is how surplus is thrown away.
 
 ## Libraries
 
