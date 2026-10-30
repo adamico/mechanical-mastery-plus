@@ -8,7 +8,6 @@ import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Recycling;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
-import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerConfig;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -29,7 +28,7 @@ public final class MechanicalMasteryReborn {
         Decomposing.register(modBus);
         Recycling.register(modBus);
         Recycler.register(modBus);
-        RecyclerConfig.register(container);
+        ServerConfig.register(container);
         modBus.addListener(WorksTabContents::add);
     }
 }

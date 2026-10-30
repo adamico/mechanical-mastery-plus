@@ -3,11 +3,11 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.essence;
 
+import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Yield;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
-import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerConfig;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -19,7 +19,7 @@ import net.minecraft.world.level.Level;
 
 /**
  * An essence, which a right-click decomposes by hand (the line's glossary: Decompose): one recipe's worth
- * of it becomes the lowest core's yield of its mix ({@link RecyclerConfig#byHand}), straight into the inventory,
+ * of it becomes the lowest core's yield of its mix ({@link ServerConfig#byHand}), straight into the inventory,
  * and whatever doesn't fit drops. The essence then rests for {@link #HAND_COOLDOWN} ticks, shown on the hotbar,
  * so a Recycler is much the faster way. A decompose by hand is recorded as one, and never wakes C.O.D. (#167).
  */
@@ -57,7 +57,7 @@ public final class EssenceItem extends Item {
         }
         ItemStack decomposed = stack.copyWithCount(count);
         stack.shrink(count);
-        double yield = RecyclerConfig.byHand();
+        double yield = ServerConfig.byHand();
         for (ItemStackTemplate result : recipe.results()) {
             int returned = Yield.roll(result.count(), yield, server.getRandom()::nextDouble);
             if (returned > 0) {

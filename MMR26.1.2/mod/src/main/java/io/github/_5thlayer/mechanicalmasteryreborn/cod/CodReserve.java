@@ -12,11 +12,9 @@ import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 
 /**
- * C.O.D.'s one slot: a stack of Advanced essence that is full again the moment it is emptied. Taking part
- * of it leaves the rest; taking the last of it, by a player's click or by automation's extraction, refills
- * it to a full stack when that change lands, at the end of the extraction's transaction, so the next
- * extraction finds it full. Nothing goes in. Refilling makes nothing new as far as Inflation goes: a
- * dormant C.O.D. only keeps its stack.
+ * C.O.D.'s one slot of Advanced essence, at most a stack. Taking from it, by a player's click or by
+ * automation's extraction, leaves the rest, or nothing; only C.O.D. puts essence back, one at a time.
+ * Nothing goes in from outside.
  */
 final class CodReserve extends ItemStacksResourceHandler {
 
@@ -35,6 +33,17 @@ final class CodReserve extends ItemStacksResourceHandler {
         set(0, ItemResource.of(full), full.getMaxStackSize());
     }
 
+    boolean isFull() {
+        ItemStack stack = stacks.get(0);
+        return !stack.isEmpty() && stack.getCount() >= stack.getMaxStackSize();
+    }
+
+    /** Adds one essence to what the slot holds. */
+    void makeOne() {
+        ItemStack stack = stacks.get(0);
+        set(0, ItemResource.of(essence.get()), stack.isEmpty() ? 1 : stack.getCount() + 1);
+    }
+
     /** Nothing goes in; the slot still reports what it holds as valid, so its capacity reads as a stack's. */
     @Override
     public int insert(int index, ItemResource resource, int amount, TransactionContext transaction) {
@@ -43,11 +52,6 @@ final class CodReserve extends ItemStacksResourceHandler {
 
     @Override
     protected void onContentsChanged(int index, ItemStack previousContents) {
-        if (stacks.get(index).isEmpty()) {
-            // set() calls back here once more, with the slot full, which ends it.
-            fill();
-            return;
-        }
         changed.run();
     }
 }

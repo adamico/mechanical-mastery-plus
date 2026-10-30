@@ -15,11 +15,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
+import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Kind;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Made;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Share;
-import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerConfig;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -54,7 +54,7 @@ import org.jspecify.annotations.Nullable;
  * backwards by {@link RecyclingRules}. The mod derives it, since the pack could never write one for every item
  * (ADR 0003, amended for #184).
  *
- * <p>Smelting, the assembling types the config names ({@link RecyclerConfig#assemblingTypes}, Craftworks' in the
+ * <p>Smelting, the assembling types the config names ({@link ServerConfig#assemblingTypes}, Craftworks' in the
  * pack), vanilla crafting, and blasting, smoking and campfire cooking are read. An assembling recipe is read through
  * its own codec, so the mod names no suite mod and still plays alone. A tag ingredient returns its first item, and an
  * ore ({@code #c:ores}) loses to anything else. The recipes are read again after a reload or a config change.
@@ -126,7 +126,7 @@ public final class Recycling {
 
     private static Index indexOf(MinecraftServer server) {
         RecipeMap recipes = server.getRecipeManager().recipeMap();
-        List<Identifier> assembling = RecyclerConfig.assemblingTypes();
+        List<Identifier> assembling = ServerConfig.assemblingTypes();
         Index read = index;
         if (read == null || read.recipes() != recipes || !read.assembling().equals(assembling)) {
             read = Index.read(recipes, assembling, server.registryAccess().createSerializationContext(JsonOps.INSTANCE));

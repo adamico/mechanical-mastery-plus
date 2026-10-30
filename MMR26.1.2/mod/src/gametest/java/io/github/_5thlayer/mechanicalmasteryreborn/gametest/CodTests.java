@@ -3,6 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
+import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
@@ -21,24 +22,29 @@ import net.neoforged.neoforge.transfer.ResourceHandlerUtil;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 
 /**
- * A dormant C.O.D. (#164): its one slot holds a full stack of Advanced essence, refills the moment a
- * player or automation empties it, and makes nothing beyond that. Each test places its C.O.D. at
- * {@link #COD} with a chest east of it.
+ * A dormant C.O.D. (#164, #196): a newly placed one holds a full stack of Advanced essence; emptied, by a
+ * player or by automation, it makes one more each configured interval until the slot holds a stack again,
+ * and puts nothing out of itself. Each test places its C.O.D. at {@link #COD} with a chest east of it.
  */
 final class CodTests {
 
-    private static final BlockPos COD = new BlockPos(4, 1, 4);
+    private static final BlockPos COD = new BlockPos(4, 2, 4);
     private static final BlockPos CHEST = COD.east();
+    private static final BlockPos HOPPER = COD.below();
     private static final int STACK = 64;
+    /** Ticks either side of an interval's end, so a check never lands on the tick the essence is made. */
+    private static final int MARGIN = 2;
 
     private CodTests() {
     }
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("cod_placed_holds_a_full_stack_of_advanced_essence", 1, CodTests::placedHoldsAFullStack);
-        tests.test("cod_taken_by_hand_refills_at_once", 1, CodTests::takenByHandRefills);
-        tests.test("cod_shift_clicked_gives_one_stack_and_refills", 1, CodTests::shiftClickedGivesOneStack);
-        tests.test("cod_extracted_into_an_adjacent_inventory_refills_at_once", 1, CodTests::extractedRefills);
+        tests.test("cod_taken_by_hand_is_left_empty", 1, CodTests::takenByHandIsLeftEmpty);
+        tests.test("cod_shift_clicked_gives_one_stack_and_is_left_empty", 1, CodTests::shiftClickedGivesOneStack);
+        tests.test("cod_emptied_by_automation_makes_one_essence_an_interval", 2 * interval() + 10, CodTests::makesOneAnInterval);
+        tests.test("cod_stops_making_at_a_full_stack", 3 * interval() + 10, CodTests::stopsAtAFullStack);
+        tests.test("cod_feeds_a_hopper_below_at_its_pace", 3 * interval() + 20, CodTests::feedsAHopperAtItsPace);
         tests.test("cod_partly_extracted_keeps_the_rest", 1, CodTests::partlyExtractedKeepsTheRest);
         tests.test("cod_takes_nothing_in", 1, CodTests::takesNothingIn);
         tests.test("cod_dormant_puts_nothing_out", 40, CodTests::dormantPutsNothingOut);
@@ -50,13 +56,13 @@ final class CodTests {
         helper.succeed();
     }
 
-    private static void takenByHandRefills(GameTestHelper helper) {
+    private static void takenByHandIsLeftEmpty(GameTestHelper helper) {
         var cod = place(helper);
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
         AbstractContainerMenu menu = cod.createMenu(0, player.getInventory(), player);
         menu.clicked(0, 0, ContainerInput.PICKUP, player);
         expectAdvanced(helper, menu.getCarried(), STACK, "the stack a player picked up");
-        expectFull(helper, "C.O.D. after a player took its stack");
+        expectHolds(helper, 0, "C.O.D. after a player took its stack");
         helper.succeed();
     }
 
@@ -67,16 +73,51 @@ final class CodTests {
         menu.clicked(0, 0, ContainerInput.QUICK_MOVE, player);
         int moved = player.getInventory().countItem(Essences.item(Essence.ADVANCED));
         helper.assertValueEqual(moved, STACK, "the Advanced essence a shift-click put in the player's inventory");
-        expectFull(helper, "C.O.D. after a shift-click");
+        expectHolds(helper, 0, "C.O.D. after a shift-click");
         helper.succeed();
     }
 
-    private static void extractedRefills(GameTestHelper helper) {
+    private static void makesOneAnInterval(GameTestHelper helper) {
         place(helper);
         int moved = ResourceHandlerUtil.move(codFace(helper), chestFace(helper), resource -> true, STACK, null);
         helper.assertValueEqual(moved, STACK, "the essence moved into the chest");
-        expectFull(helper, "C.O.D. after automation emptied it");
-        helper.succeed();
+        expectHolds(helper, 0, "C.O.D. after automation emptied it");
+        int interval = interval();
+        helper.runAtTickTime(interval - MARGIN, () -> expectHolds(helper, 0, "C.O.D. just before an interval"));
+        helper.runAtTickTime(interval + MARGIN, () -> expectHolds(helper, 1, "C.O.D. just after an interval"));
+        helper.runAtTickTime(2 * interval - MARGIN, () -> expectHolds(helper, 1, "C.O.D. just before two intervals"));
+        helper.runAtTickTime(2 * interval + MARGIN, () -> {
+            expectHolds(helper, 2, "C.O.D. just after two intervals");
+            helper.succeed();
+        });
+    }
+
+    private static void stopsAtAFullStack(GameTestHelper helper) {
+        place(helper);
+        ResourceHandlerUtil.move(codFace(helper), chestFace(helper), resource -> true, 1, null);
+        int interval = interval();
+        helper.runAtTickTime(interval + MARGIN, () -> expectFull(helper, "C.O.D. an interval after one was taken"));
+        helper.runAtTickTime(3 * interval + MARGIN, () -> {
+            expectFull(helper, "C.O.D. three intervals after one was taken");
+            helper.succeed();
+        });
+    }
+
+    private static void feedsAHopperAtItsPace(GameTestHelper helper) {
+        place(helper);
+        ResourceHandlerUtil.move(codFace(helper), chestFace(helper), resource -> true, STACK, null);
+        helper.setBlock(HOPPER, Blocks.HOPPER);
+        int interval = interval();
+        for (int made = 0; made < 3; made++) {
+            int before = made;
+            helper.runAtTickTime((made + 1) * interval - MARGIN,
+                    () -> helper.assertValueEqual(inHopper(helper), before, "the essence in the hopper just before interval " + (before + 1)));
+        }
+        helper.runAtTickTime(3 * interval + 10 + MARGIN, () -> {
+            helper.assertValueEqual(inHopper(helper), 3, "the essence in the hopper after three intervals");
+            expectHolds(helper, 0, "C.O.D. over a hopper");
+            helper.succeed();
+        });
     }
 
     private static void partlyExtractedKeepsTheRest(GameTestHelper helper) {
@@ -111,8 +152,30 @@ final class CodTests {
     }
 
     private static void expectFull(GameTestHelper helper, String what) {
-        var reserve = codFace(helper);
-        expectAdvanced(helper, reserve.getResource(0).toStack(reserve.getAmountAsInt(0)), STACK, what);
+        expectHolds(helper, STACK, what);
+    }
+
+    private static void expectHolds(GameTestHelper helper, int count, String what) {
+        if (count == 0) {
+            helper.assertTrue(ResourceHandlerUtil.isEmpty(codFace(helper)), what + " isn't empty");
+        } else {
+            var reserve = codFace(helper);
+            expectAdvanced(helper, reserve.getResource(0).toStack(reserve.getAmountAsInt(0)), count, what);
+        }
+    }
+
+    private static int inHopper(GameTestHelper helper) {
+        var hopper = helper.getLevel().getCapability(Capabilities.Item.BLOCK, helper.absolutePos(HOPPER), Direction.UP);
+        helper.assertTrue(hopper != null, "the hopper has no item face");
+        int count = 0;
+        for (int slot = 0; slot < hopper.size(); slot++) {
+            count += hopper.getAmountAsInt(slot);
+        }
+        return count;
+    }
+
+    private static int interval() {
+        return ServerConfig.codDormantInterval();
     }
 
     private static void expectAdvanced(GameTestHelper helper, ItemStack stack, int count, String what) {

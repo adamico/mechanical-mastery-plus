@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github._5thlayer.libworks.transfer.GuardedResourceHandler;
+import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Recycling;
@@ -39,7 +40,7 @@ import org.jspecify.annotations.Nullable;
  * counts only while the Recycler can work what it holds; the {@link #TURNS}th decomposes one recipe's worth
  * of an essence into its mix, or recycles one of anything else into what made it ({@link Recycling}), on the
  * outputs, result <i>i</i> on the <i>i</i>th position ({@link RecyclerLayout}). Either returns the core's
- * {@link Yield} of the full amounts ({@link RecyclerConfig}). It needs no power and no ticking: drives turn it.
+ * {@link Yield} of the full amounts ({@link ServerConfig}). It needs no power and no ticking: drives turn it.
  *
  * <p>Each decompose is recorded, on a Recycler, for the team whose island it stands on ({@link DecomposeLog});
  * a recycle never is.
@@ -165,7 +166,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
     private void work(ServerLevel server, Plan plan) {
         ItemStack held = held();
         buffer.set(0, ItemResource.of(held), held.getCount() - plan.take());
-        double yield = RecyclerConfig.yieldOf(TIER);
+        double yield = ServerConfig.yieldOf(TIER);
         List<Share<ItemStackTemplate>> full = plan.full();
         for (int i = 0; i < full.size(); i++) {
             int count = Yield.roll(full.get(i).amount(), yield, server.getRandom()::nextDouble);
@@ -213,7 +214,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         if (full.size() > outputs.size() * RecyclerLayout.POSITIONS_PER_OUTPUT) {
             return Plan.stopped(Status.TOO_FEW_OUTPUTS);
         }
-        double yield = RecyclerConfig.yieldOf(TIER);
+        double yield = ServerConfig.yieldOf(TIER);
         for (int i = 0; i < full.size(); i++) {
             int most = Yield.most(full.get(i).amount(), yield);
             if (most > 0 && !outputs.get(i / RecyclerLayout.POSITIONS_PER_OUTPUT)

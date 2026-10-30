@@ -3,7 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
-import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerConfig;
+import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 
@@ -22,16 +22,16 @@ final class TestYield {
 
     /** From the server's start, a tier-1 core and decomposing by hand return everything. */
     static void useFull() {
-        NeoForge.EVENT_BUS.addListener((ServerStartedEvent event) -> RecyclerConfig.TIER_1_YIELD.set(FULL));
+        NeoForge.EVENT_BUS.addListener((ServerStartedEvent event) -> ServerConfig.TIER_1_YIELD.set(FULL));
     }
 
     /** Runs {@code body} at a tier-1 yield of {@code yield}, then puts the full one back. */
     static void at(double yield, Runnable body) {
-        RecyclerConfig.TIER_1_YIELD.set(yield);
+        ServerConfig.TIER_1_YIELD.set(yield);
         try {
             body.run();
         } finally {
-            RecyclerConfig.TIER_1_YIELD.set(FULL);
+            ServerConfig.TIER_1_YIELD.set(FULL);
         }
     }
 }

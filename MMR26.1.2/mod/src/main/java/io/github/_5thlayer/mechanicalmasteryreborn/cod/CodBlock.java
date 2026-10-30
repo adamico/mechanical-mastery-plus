@@ -11,10 +11,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jspecify.annotations.Nullable;
 
-/** C.O.D., the Conscious Overproduction Device. A click opens its one slot. */
+/** C.O.D., the Conscious Overproduction Device. A click opens its one slot; on the server it ticks, to make essence. */
 public final class CodBlock extends BaseEntityBlock {
 
     private static final MapCodec<CodBlock> CODEC = simpleCodec(CodBlock::new);
@@ -36,6 +39,11 @@ public final class CodBlock extends BaseEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CodBlockEntity(pos, state);
+    }
+
+    @Override
+    public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return level.isClientSide() ? null : createTickerHelper(type, Cod.BLOCK_ENTITY.get(), CodBlockEntity::serverTick);
     }
 
     @Override

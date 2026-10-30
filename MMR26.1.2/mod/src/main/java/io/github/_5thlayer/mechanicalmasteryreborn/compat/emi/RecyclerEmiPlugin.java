@@ -10,11 +10,11 @@ import dev.emi.emi.api.neoforge.NeoForgeEmiIngredient;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiStack;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
+import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingTable;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Yield;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
-import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -25,7 +25,7 @@ import net.minecraft.world.item.ItemStack;
  * Puts the Recycler's work in EMI, in two tabs whose workstation is its core: {@code mechanicalmasteryreborn:decomposing}
  * recipes, and what every item a recipe makes recycles into, from the table the server sent ({@link RecyclingTable}).
  * An item that recycles into itself has no entry. Each result shows its full amount, with the chance the tier-1
- * yield gives of it ({@link RecyclerConfig}): a full amount of four at a quarter is four at 25%. EMI has never heard of either, so
+ * yield gives of it ({@link ServerConfig}): a full amount of four at a quarter is four at 25%. EMI has never heard of either, so
  * without a category they are in no viewer at all.
  *
  * <p>EMI finds this by its annotation and loads it only when EMI is installed; nothing else in the mod names
@@ -43,7 +43,7 @@ public final class RecyclerEmiPlugin implements EmiPlugin {
         registry.addCategory(recycling);
         registry.addWorkstation(decomposing, core);
         registry.addWorkstation(recycling, core);
-        double yield = RecyclerConfig.yieldOf(RecyclerCoreBlockEntity.TIER);
+        double yield = ServerConfig.yieldOf(RecyclerCoreBlockEntity.TIER);
         for (var holder : registry.getRecipeMap().byType(Decomposing.TYPE.get())) {
             var recipe = holder.value();
             registry.addRecipe(new RecyclerEmiRecipe(decomposing, holder.id().identifier(), NeoForgeEmiIngredient.of(recipe.ingredient()),

@@ -56,8 +56,8 @@ public final class CodMenu extends AbstractContainerMenu {
         if (!moveItemStackTo(stack, FIRST_PLAYER_SLOT, slots.size(), true)) {
             return ItemStack.EMPTY;
         }
-        // The slot gives what was moved; emptied, the reserve refills itself. One stack a click: vanilla
-        // repeats a quick move while it returns the slot's item, which a reserve that refills always is.
+        // The slot gives what was moved and keeps the rest. Returning nothing ends vanilla's repeat, so a
+        // click moves what the slot held then, and none that C.O.D. makes after.
         slot.set(stack);
         return ItemStack.EMPTY;
     }
