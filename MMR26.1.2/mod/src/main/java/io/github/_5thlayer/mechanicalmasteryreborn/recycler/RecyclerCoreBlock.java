@@ -25,9 +25,10 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 /**
- * A Recycler's core, in the middle of its 3x3 (the line's glossary: Core). Its front faces the player who
- * placed it, and the order its outputs are read in starts from there ({@link RecyclerLayout}). Tier 1, the
- * first core; its tier sets how many turns a decompose takes. Placed, it turns the drives at its corners to them.
+ * A Recycler's core, in the middle of its 3x3's front edge (the line's glossary: Core). Its front faces the player
+ * who placed it, out of the Recycler, whose 3x3 lies behind it, and the order its outputs are read in starts from
+ * there ({@link RecyclerLayout}). Tier 1, the first core; its tier sets how many turns a decompose takes. Placed,
+ * it turns the drives at its 3x3's corners to them.
  * An empty-hand right-click takes back the whole stack it holds, into the player's inventory, and gives up the
  * work under way; a click on an empty core, or with an item in hand, passes.
  */
@@ -52,6 +53,11 @@ public final class RecyclerCoreBlock extends BaseEntityBlock {
         builder.add(FACING);
     }
 
+    /** The centre of the 3x3 a core at {@code pos} fronts: the place right behind it. */
+    public static BlockPos centre(BlockPos pos, BlockState state) {
+        return pos.relative(state.getValue(FACING).getOpposite());
+    }
+
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
@@ -63,8 +69,9 @@ public final class RecyclerCoreBlock extends BaseEntityBlock {
         if (oldState.is(this)) {
             return;
         }
+        BlockPos centre = centre(pos, state);
         for (DriveCorner corner : DriveCorner.values()) {
-            BlockPos drive = corner.of(pos);
+            BlockPos drive = corner.of(centre);
             BlockState at = level.getBlockState(drive);
             if (at.getBlock() instanceof HandDriveBlock && at.getValue(HandDriveBlock.CORNER) != corner) {
                 level.setBlock(drive, at.setValue(HandDriveBlock.CORNER, corner), UPDATE_CLIENTS);

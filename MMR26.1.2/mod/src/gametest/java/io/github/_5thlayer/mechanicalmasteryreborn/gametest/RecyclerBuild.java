@@ -24,8 +24,9 @@ import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 /**
- * A Recycler a game test builds, at {@link #CORE} on the platform, its eight places given clockwise from the
- * front-left one as {@link RecyclerLayout} reads them. Each output faces outward, away from the core.
+ * A Recycler a game test builds, its core at {@link #CORE} on the platform, its eight places given in the order
+ * {@link RecyclerLayout} reads them: clockwise around the centre from the front-left one, then the centre. Each
+ * output faces outward, away from the centre, and one in the centre faces the core's front.
  */
 final class RecyclerBuild {
 
@@ -35,20 +36,26 @@ final class RecyclerBuild {
     static final List<ItemStack> ADVANCED_MIX = List.of(new ItemStack(Items.PISTON), new ItemStack(Items.HOPPER),
             new ItemStack(Items.COMPARATOR), new ItemStack(Items.WATER_BUCKET), new ItemStack(Items.LAVA_BUCKET));
 
-    /** Two outputs first, then a casing, the input, a casing, a drive, a casing and a second drive. */
-    static final Block[] STANDARD = {Recycler.OUTPUT.get(), Recycler.OUTPUT.get(), Recycler.CASING.get(), Recycler.INPUT.get(),
-            Recycler.CASING.get(), Recycler.HAND_DRIVE.get(), Recycler.CASING.get(), Recycler.HAND_DRIVE.get()};
+    /** Two outputs first, then a casing, a drive, a casing, a second drive, a casing, and the input in the centre. */
+    static final Block[] STANDARD = {Recycler.OUTPUT.get(), Recycler.OUTPUT.get(), Recycler.CASING.get(), Recycler.HAND_DRIVE.get(),
+            Recycler.CASING.get(), Recycler.HAND_DRIVE.get(), Recycler.CASING.get(), Recycler.INPUT.get()};
+
+    /** The place in the 3x3's centre. */
+    static final int CENTRE = 7;
+
+    final BlockPos core;
 
     final GameTestHelper helper;
     final Direction front;
-    /** The places' positions, clockwise from the front-left one. */
+    /** The places' positions, clockwise around the centre from the front-left one, then the centre. */
     final List<BlockPos> places = new ArrayList<>();
 
-    private RecyclerBuild(GameTestHelper helper, Direction front) {
+    private RecyclerBuild(GameTestHelper helper, BlockPos core, Direction front) {
         this.helper = helper;
+        this.core = core;
         this.front = front;
-        for (int[] place : RecyclerLayout.clockwiseFromFrontLeft(front.getStepX(), front.getStepZ())) {
-            places.add(CORE.offset(place[0], 0, place[1]));
+        for (int[] place : RecyclerLayout.places(front.getStepX(), front.getStepZ())) {
+            places.add(core.offset(place[0], 0, place[1]));
         }
     }
 
@@ -57,17 +64,22 @@ final class RecyclerBuild {
         return build(helper, Direction.SOUTH, STANDARD);
     }
 
-    /** A core facing {@code front}, and {@code parts} in its eight places, null for none. */
+    /** A core at {@link #CORE} facing {@code front}, and {@code parts} in its eight places, null for none. */
     static RecyclerBuild build(GameTestHelper helper, Direction front, Block[] parts) {
-        var build = new RecyclerBuild(helper, front);
-        helper.setBlock(CORE, Recycler.CORE.get().defaultBlockState().setValue(RecyclerCoreBlock.FACING, front));
+        return build(helper, CORE, front, parts);
+    }
+
+    /** A core at {@code core} facing {@code front}, and {@code parts} in its eight places, null for none. */
+    static RecyclerBuild build(GameTestHelper helper, BlockPos core, Direction front, Block[] parts) {
+        var build = new RecyclerBuild(helper, core, front);
+        helper.setBlock(core, Recycler.CORE.get().defaultBlockState().setValue(RecyclerCoreBlock.FACING, front));
         for (int i = 0; i < parts.length; i++) {
             build.place(i, parts[i]);
         }
         return build;
     }
 
-    /** Puts {@code block} in place {@code i}, an output facing away from the core. */
+    /** Puts {@code block} in place {@code i}, an output facing away from the centre. */
     void place(int i, Block block) {
         BlockPos pos = places.get(i);
         if (block == null) {
@@ -75,14 +87,16 @@ final class RecyclerBuild {
         }
         var state = block.defaultBlockState();
         if (block instanceof RecyclerOutputBlock) {
-            Direction outward = Direction.getApproximateNearest(pos.getX() - CORE.getX(), 0, pos.getZ() - CORE.getZ());
+            BlockPos centre = places.get(CENTRE);
+            Direction outward = pos.equals(centre) ? front
+                    : Direction.getApproximateNearest(pos.getX() - centre.getX(), 0, pos.getZ() - centre.getZ());
             state = state.setValue(RecyclerOutputBlock.FACING, outward);
         }
         helper.setBlock(pos, state);
     }
 
     RecyclerCoreBlockEntity core() {
-        return helper.getBlockEntity(CORE, RecyclerCoreBlockEntity.class);
+        return helper.getBlockEntity(core, RecyclerCoreBlockEntity.class);
     }
 
     /** The place of the {@code n}th output, counting from 0 in the order the mix fills them. */
