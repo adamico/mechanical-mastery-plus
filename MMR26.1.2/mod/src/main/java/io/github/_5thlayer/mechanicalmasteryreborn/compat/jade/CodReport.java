@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import io.github._5thlayer.libworks.machine.jade.MachineReport;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
+import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
 import net.minecraft.ChatFormatting;
@@ -24,7 +25,7 @@ import snownee.jade.api.view.ProgressView;
 /**
  * What the server tells Jade about a C.O.D.: whether it is making essence, whether it is blocked, the ticks done
  * toward the next out of its interval, which the server's config sets and which is shorter once it is awake, and its
- * team's Inflation while the team plays a challenge.
+ * team's Inflation and its cap while the team plays a challenge.
  * {@link Lines} words it on the client, apart so that a dedicated server never loads Jade's drawing.
  */
 final class CodReport {
@@ -37,15 +38,16 @@ final class CodReport {
             ByteBufCodecs.VAR_INT, Data::ticks,
             ByteBufCodecs.VAR_INT, Data::interval,
             ByteBufCodecs.optional(Inflation.STREAM_CODEC), Data::inflation,
+            ByteBufCodecs.VAR_INT, Data::cap,
             Data::new);
 
-    record Data(boolean making, boolean blocked, int ticks, int interval, Optional<Inflation> inflation) {
+    record Data(boolean making, boolean blocked, int ticks, int interval, Optional<Inflation> inflation, int cap) {
     }
 
     static final MachineReport<CodBlockEntity, Data> REPORT = new MachineReport<>(UID, CodBlockEntity.class, CodReport::read, CODEC);
 
     private static Data read(CodBlockEntity cod) {
-        return new Data(cod.isMaking(), cod.isBlocked(), cod.ticksTowardNext(), cod.interval(), cod.inflation());
+        return new Data(cod.isMaking(), cod.isBlocked(), cod.ticksTowardNext(), cod.interval(), cod.inflation(), ServerConfig.inflationCap());
     }
 
     private CodReport() {
@@ -54,7 +56,7 @@ final class CodReport {
     /**
      * Words the report: the next essence as a bar with the seconds left while it is making, that it is blocked
      * while what it makes has nowhere to go, or that its slot is full; then, while its team plays a challenge, its
-     * Inflation's excess, with what C.O.D. has made and the team has decomposed since the challenge began.
+     * Inflation's excess against its cap, as its bar words it, with what C.O.D. has made and the team has decomposed since the challenge began.
      */
     static final class Lines {
 
@@ -73,7 +75,7 @@ final class CodReport {
                         JadeUI.progressStyle(), BoxStyle.nestedBox())));
             }
             report.inflation().ifPresent(inflation -> {
-                tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.inflation", inflation.excess()));
+                tooltip.add(Component.translatable("mechanicalmasteryreborn.bar.inflation", inflation.excess(), report.cap()));
                 tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.made_decomposed", inflation.made(),
                         inflation.decomposed()).withStyle(ChatFormatting.GRAY));
             });

@@ -87,10 +87,15 @@ public final class Recycling {
         NeoForge.EVENT_BUS.addListener(Recycling::onDatapackSync);
     }
 
-    /** Sends each player what every item recycles into, before the recipes, so EMI has it when they arrive. */
+    /**
+     * Sends each player what every item recycles into, before the recipes, so EMI has it when they arrive. A client
+     * always has the channel, since NeoForge turns one away without it; a game test's mock player, whose connection
+     * agreed on none, is skipped.
+     */
     private static void onDatapackSync(OnDatapackSyncEvent event) {
         var table = new RecyclingTable(byRecipe(event.getPlayerList().getServer()));
-        event.getRelevantPlayers().forEach(player -> PacketDistributor.sendToPlayer(player, table));
+        event.getRelevantPlayers().filter(player -> player.connection.hasChannel(RecyclingTable.TYPE))
+                .forEach(player -> PacketDistributor.sendToPlayer(player, table));
     }
 
     /**

@@ -9,6 +9,7 @@ import java.util.UUID;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
@@ -58,7 +59,8 @@ final class CodCommand {
                 .map(handicap -> Component.translatable("mechanicalmasteryreborn.command.cod.challenge", Challenges.name(handicap)))
                 .orElseGet(() -> Component.translatable("mechanicalmasteryreborn.command.cod.no_challenge")), false);
         state.inflation(island).ifPresent(inflation -> source.sendSuccess(() -> Component.translatable(
-                "mechanicalmasteryreborn.command.cod.inflation", inflation.made(), inflation.decomposed(), inflation.excess()), false));
+                "mechanicalmasteryreborn.command.cod.inflation", inflation.made(), inflation.decomposed(), inflation.excess(),
+                ServerConfig.inflationCap()), false));
         if (!own.equals(island)) {
             source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.elsewhere"), false);
         }

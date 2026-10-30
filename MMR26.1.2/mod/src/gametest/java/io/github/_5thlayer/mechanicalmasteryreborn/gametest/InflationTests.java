@@ -9,6 +9,7 @@ import java.util.UUID;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
@@ -20,6 +21,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -39,6 +41,8 @@ final class InflationTests {
     private static final BlockPos COD = new BlockPos(1, 2, 1);
     /** Another team's C.O.D., on an island of its own in a corner of the test's. */
     private static final BlockPos OTHER_COD = new BlockPos(7, 2, 7);
+    /** The cap the bar tests play at, which only the bar reads. */
+    private static final int BAR_CAP = 4;
     /** Ticks past an interval's end, so a check never lands on the tick the essence is made. */
     private static final int MARGIN = 2;
 
@@ -52,6 +56,8 @@ final class InflationTests {
         tests.test("inflation_counts_a_hand_decompose_as_a_recycler_one", 10, InflationTests::handCountsAsRecycler);
         tests.test("inflation_is_untouched_by_another_team_s_cod", waking() + 10, InflationTests::untouchedByAnotherTeam);
         tests.test("inflation_survives_a_save_and_load", waking() + 10, InflationTests::survivesASaveAndLoad);
+        tests.test("inflation_bar_shows_the_excess_against_the_cap_to_its_team", waking() + 10, InflationTests::barShowsTheExcess);
+        tests.test("inflation_bar_shows_only_while_a_challenge_is_played", 10, InflationTests::barOnlyWhilePlayed);
     }
 
     private static void nothingWithNoChallenge(GameTestHelper helper) {
@@ -164,6 +170,64 @@ final class InflationTests {
             helper.assertTrue(loaded.inflation(UUID.randomUUID()).isEmpty(), "a team that plays no challenge has Inflation after a load");
             helper.succeed();
         });
+    }
+
+    /** Its team's player sees the bar fill toward the cap; another team's player, playing no challenge, sees none. */
+    private static void barShowsTheExcess(GameTestHelper helper) {
+        ServerConfig.COD_INFLATION_CAP.set(BAR_CAP);
+        UUID team = TestTeams.claim(helper);
+        UUID other = TestTeams.claim(helper, OTHER_COD, OTHER_COD);
+        ServerPlayer player = onlinePlayer(helper, team);
+        ServerPlayer stranger = onlinePlayer(helper, other);
+        helper.setBlock(COD, Cod.BLOCK.get());
+        start(helper, team);
+        state(helper).wake(team);
+        helper.runAtTickTime(waking() + MARGIN, () -> {
+            var bar = InflationBar.of(team);
+            helper.assertTrue(bar.isPresent(), "a team that plays a challenge has no bar");
+            helper.assertValueEqual(bar.get().getProgress(), 0.25F, "the bar's fill, one made of a cap of four");
+            helper.assertTrue(bar.get().getPlayers().contains(player), "the team's player doesn't see its bar");
+            helper.assertFalse(bar.get().getPlayers().contains(stranger), "another team's player sees the bar");
+            helper.assertTrue(InflationBar.of(other).isEmpty(), "a team that plays no challenge has a bar");
+            decomposeByHand(helper, team);
+        });
+        helper.runAtTickTime(waking() + MARGIN + 1, () -> {
+            helper.assertValueEqual(InflationBar.of(team).orElseThrow().getProgress(), 0.0F, "the bar's fill after a decompose");
+            leave(helper, player, stranger);
+            helper.succeed();
+        });
+    }
+
+    private static void barOnlyWhilePlayed(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        ServerPlayer player = onlinePlayer(helper, team);
+        helper.runAtTickTime(1, () -> {
+            helper.assertTrue(InflationBar.of(team).isEmpty(), "a team that plays no challenge has a bar");
+            start(helper, team);
+        });
+        helper.runAtTickTime(2, () -> {
+            helper.assertTrue(InflationBar.of(team).orElseThrow().getPlayers().contains(player), "the bar didn't show as the challenge began");
+            helper.assertTrue(state(helper).endChallenge(team), "the challenge didn't end");
+        });
+        helper.runAtTickTime(3, () -> {
+            helper.assertTrue(InflationBar.of(team).isEmpty(), "the bar stayed after the challenge ended");
+            leave(helper, player);
+            helper.succeed();
+        });
+    }
+
+    /** A player of {@code team}, online, as the bar finds its players. */
+    @SuppressWarnings("removal")
+    private static ServerPlayer onlinePlayer(GameTestHelper helper, UUID team) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        TestTeams.join(player, team);
+        return player;
+    }
+
+    private static void leave(GameTestHelper helper, ServerPlayer... players) {
+        for (ServerPlayer player : players) {
+            helper.getLevel().getServer().getPlayerList().remove(player);
+        }
     }
 
     private static void start(GameTestHelper helper, UUID team) {

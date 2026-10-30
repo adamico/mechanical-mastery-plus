@@ -19,7 +19,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  * Craftworks' assembling type there.
  * NeoForge sends a server config to each client, so EMI shows the yield a server plays with.
  *
- * <p>And C.O.D.'s pace while dormant, and once awake.
+ * <p>And C.O.D.'s pace while dormant, and once awake, and the cap of a team's Inflation.
  */
 public final class ServerConfig {
 
@@ -50,6 +50,12 @@ public final class ServerConfig {
                     "40 is 2 seconds, about what one hand drive turned without a pause decomposes (8 turns, 5 ticks apart).")
             .defineInRange("cod.waking_interval", 40, 1, 72000);
 
+    /** The excess Inflation may reach while a challenge is played: a placeholder until the balance pass (#207). */
+    public static final ModConfigSpec.IntValue COD_INFLATION_CAP = BUILDER
+            .comment("The excess of Advanced essence C.O.D. may make beyond what a team decomposes while it plays a challenge:",
+                    "its Inflation's cap, which the team's bar fills toward. 256 is four stacks, a placeholder.")
+            .defineInRange("cod.inflation_cap", 256, 1, 1_000_000);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 
     private ServerConfig() {
@@ -77,6 +83,11 @@ public final class ServerConfig {
     /** The ticks an awake C.O.D. takes to make one essence. */
     public static int codWakingInterval() {
         return SPEC.isLoaded() ? COD_WAKING_INTERVAL.getAsInt() : COD_WAKING_INTERVAL.getDefault();
+    }
+
+    /** The excess Inflation may reach while a challenge is played. */
+    public static int inflationCap() {
+        return SPEC.isLoaded() ? COD_INFLATION_CAP.getAsInt() : COD_INFLATION_CAP.getDefault();
     }
 
     /** Decomposing by hand's yield: the lowest core's, so a Recycler never does worse. */
