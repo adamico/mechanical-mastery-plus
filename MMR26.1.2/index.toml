@@ -42,6 +42,11 @@ hash = "9ace9c9b5de9f6faebfc7a53e62c6698aac372de5dbe9fc71c3d74b94857e3b3"
 metafile = true
 
 [[files]]
+file = "mods/apothic-attributes.pw.toml"
+hash = "5556b128d5ef06c28784f2a894898ae779ea56bcaf3cc8c13caedcf371844fc3"
+metafile = true
+
+[[files]]
 file = "mods/appleskin.pw.toml"
 hash = "de7c7b5b18ca4d989b40dc3a2d2f6508af2af418558ae4f08af2c2b4635648b1"
 metafile = true
@@ -284,6 +289,11 @@ metafile = true
 [[files]]
 file = "mods/fzzy-config.pw.toml"
 hash = "46c174dc2a414d3c85da83887968f2a21b18a35dc9b3e0e8909734b5b5a8b669"
+metafile = true
+
+[[files]]
+file = "mods/gateways-to-eternity.pw.toml"
+hash = "2c19b93545dda651c6b09070c298386c11a472d9dfdce2c6913217c1326f2a2e"
 metafile = true
 
 [[files]]

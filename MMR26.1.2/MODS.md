@@ -12,7 +12,7 @@ The suite, taken as released CurseForge jars:
 - **Fieldworks**: ore blocks crafted from intermediates, and the Harvester that works them.
 - **Groundworks**: line placement, and the base every other suite mod needs.
 - **Voidworks**: void harvested from the world and carried between dimensions, the reason the void Nether and End are reachable.
-- **Gearworks**: the FE suit and lance. In the pack with the rest of the suite (ADR 0002); its challenge, protection, comes after 0.0.1.
+- **Gearworks**: the FE suit and lance, the team's gear, which the protection challenge makes worth having. In the pack with the rest of the suite (ADR 0002), and no challenge's mod (ADR 0007).
 
 The rest of 0.0.1:
 
@@ -26,9 +26,14 @@ The rest of 0.0.1:
 - **Refined Storage**: storage.
 - **KubeJS**, **Rhino**: the pack's scripts: recipes, balance, and giving a player with no team a team of one.
 
+The challenges after 0.0.1 (#210), each one's chain locked until a team starts it (ADR 0007):
+
+- **Gateways to Eternity**: the protection challenge. Portals the pack writes, whose waves of mobs drop what its chain needs.
+- **Neo Vitae**: the life challenge. Blood magic, paid for in the player's own health.
+- **AdminShop**: the money challenge, and the Shop, which is never locked. Not in `mods/` until its 26.1.2 port is on CurseForge.
+
 Added from the pack's CurseForge profile:
 
-- **Neo Vitae**: blood magic, another path to make from decomposed resources.
 - **Functional Storage**: drawers, for the stacks of intermediates decomposing makes.
 - **Pipez**, **LaserIO**, **Modular Routers**: item, fluid and energy transport beside the suite's, from simple pipes to filtered, wireless routing.
 - **Cobblegen Galore**: cobblestone generators, the skyblock's first stone.
@@ -61,4 +66,4 @@ Left out of the Showcase's list, as content with no role here: Animal Feeding Tr
 
 ## Libraries
 
-In the pack only because a mod above needs them: Balm (Forgiving Void, KleeSlabs), Better Advanced Tooltips (KubeJS), Cloth Config, Collective, Configurable, Cupboard, Fusion (Connected Glass), Fzzy Config, GeckoLib (Theurgy, Neo Vitae), JamLib, Kotlin for Forge, LibX (Skyblock Builder), Modonomicon (Theurgy, Neo Vitae), Nanite Library, Placebo, PolyLib (Shrink), Prickle, Puzzles Lib, Searchables, SuperMartijn642's Config Lib (Durability Tooltip), SuperMartijn642's Core Lib (Connected Glass), Titanium (Functional Storage) and YetAnotherConfigLib. A library no mod needs any more comes out with the mod.
+In the pack only because a mod above needs them: Apothic Attributes (Gateways to Eternity), Balm (Forgiving Void, KleeSlabs), Better Advanced Tooltips (KubeJS), Cloth Config, Collective, Configurable, Cupboard, Fusion (Connected Glass), Fzzy Config, GeckoLib (Theurgy, Neo Vitae), JamLib, Kotlin for Forge, LibX (Skyblock Builder), Modonomicon (Theurgy, Neo Vitae), Nanite Library, Placebo (Gateways to Eternity), PolyLib (Shrink), Prickle, Puzzles Lib, Searchables, SuperMartijn642's Config Lib (Durability Tooltip), SuperMartijn642's Core Lib (Connected Glass), Titanium (Functional Storage) and YetAnotherConfigLib. A library no mod needs any more comes out with the mod.

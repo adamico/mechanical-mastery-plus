@@ -69,7 +69,7 @@ _Avoid_: new essence
 The final essence, made in the last chapter from the four Transmuted Essences, which shuts C.O.D. down for good.
 
 **Challenge**:
-One of four questlines, each bound to a fixed mod or set of mods, started at the lab. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. Finishing it makes a Transmuted Essence that blocks the tier C.O.D. is making. Its mods take only raw and refined items, never intermediates.
+One of four questlines, each bound to a fixed mod or set of mods, started at the lab. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. Finishing it makes a Transmuted Essence that blocks the tier C.O.D. is making. Its mods take only raw and refined items, never intermediates. Its chain stays locked for a team until it starts the challenge, so nothing of it can be built ahead, and stays unlocked from then on, past a win or a reset. What its mods offer outside the chain, as the Shop, is never locked, and their items can still come from a mix, to be recycled.
 _Avoid_: chapter (a quest-book page), stage
 
 **Chain**:
