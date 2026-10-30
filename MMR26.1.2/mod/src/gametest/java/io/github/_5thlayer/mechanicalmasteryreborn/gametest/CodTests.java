@@ -44,6 +44,7 @@ final class CodTests {
         tests.test("cod_shift_clicked_gives_one_stack_and_is_left_empty", 1, CodTests::shiftClickedGivesOneStack);
         tests.test("cod_emptied_by_automation_makes_one_essence_an_interval", 2 * interval() + 10, CodTests::makesOneAnInterval);
         tests.test("cod_stops_making_at_a_full_stack", 3 * interval() + 10, CodTests::stopsAtAFullStack);
+        tests.test("cod_counts_ticks_toward_the_next_essence_only_while_short", 20, CodTests::countsTicksTowardTheNext);
         tests.test("cod_feeds_a_hopper_below_at_its_pace", 3 * interval() + 20, CodTests::feedsAHopperAtItsPace);
         tests.test("cod_partly_extracted_keeps_the_rest", 1, CodTests::partlyExtractedKeepsTheRest);
         tests.test("cod_takes_nothing_in", 1, CodTests::takesNothingIn);
@@ -99,6 +100,17 @@ final class CodTests {
         helper.runAtTickTime(interval + MARGIN, () -> expectFull(helper, "C.O.D. an interval after one was taken"));
         helper.runAtTickTime(3 * interval + MARGIN, () -> {
             expectFull(helper, "C.O.D. three intervals after one was taken");
+            helper.succeed();
+        });
+    }
+
+    private static void countsTicksTowardTheNext(GameTestHelper helper) {
+        var cod = place(helper);
+        helper.runAtTickTime(10, () -> helper.assertValueEqual(cod.ticksTowardNext(), 0, "a full C.O.D.'s ticks toward the next essence"));
+        helper.runAtTickTime(10, () -> ResourceHandlerUtil.move(codFace(helper), chestFace(helper), resource -> true, 1, null));
+        helper.runAtTickTime(15, () -> {
+            int ticks = cod.ticksTowardNext();
+            helper.assertTrue(ticks >= 5 - MARGIN && ticks <= 5 + MARGIN, "C.O.D. counted " + ticks + " ticks toward the next essence in 5");
             helper.succeed();
         });
     }

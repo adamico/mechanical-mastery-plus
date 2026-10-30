@@ -53,6 +53,16 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         return reserve;
     }
 
+    /** Whether C.O.D. is making essence: while its reserve holds less than a stack. */
+    public boolean isMaking() {
+        return !reserve.isFull();
+    }
+
+    /** The ticks done toward the next essence, out of {@link ServerConfig#codDormantInterval}; none while it isn't making. */
+    public int ticksTowardNext() {
+        return ticksTowardNext;
+    }
+
     static void serverTick(Level level, BlockPos pos, BlockState state, CodBlockEntity cod) {
         cod.tick(ServerConfig.codDormantInterval());
     }
