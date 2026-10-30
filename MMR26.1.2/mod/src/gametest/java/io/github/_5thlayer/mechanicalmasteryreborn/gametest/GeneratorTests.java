@@ -65,7 +65,7 @@ final class GeneratorTests {
         UUID team = TestTeams.claim(helper);
         helper.setBlock(AT, GENERATOR);
         helper.assertValueEqual(draw(helper, AT), DRAW, "FE drawn before the challenge");
-        state(helper).choose(team, Handicap.ENERGY);
+        state(helper).choose(team, Handicap.ENERGY, 0);
         helper.assertValueEqual(draw(helper, AT), 0, "FE drawn while the team plays energy");
         helper.succeed();
     }
@@ -74,7 +74,7 @@ final class GeneratorTests {
     private static void showsItsBuffer(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         helper.setBlock(AT, GENERATOR);
-        state(helper).choose(team, Handicap.ENERGY);
+        state(helper).choose(team, Handicap.ENERGY, 0);
         EnergyHandler handler = face(helper, AT);
         helper.assertValueEqual(handler.getAmountAsLong(), (long) HELD, "the FE a stopped generator shows it holds");
         helper.assertValueEqual(handler.getCapacityAsLong(), (long) BUFFER, "the FE a stopped generator shows it can hold");
@@ -89,7 +89,7 @@ final class GeneratorTests {
         TestTeams.claim(helper, OTHER_ISLAND, OTHER_ISLAND);
         helper.setBlock(AT, GENERATOR);
         helper.setBlock(OTHER_ISLAND, GENERATOR);
-        state(helper).choose(team, Handicap.ENERGY);
+        state(helper).choose(team, Handicap.ENERGY, 0);
         helper.assertValueEqual(draw(helper, AT), 0, "FE drawn from the team's generator");
         helper.assertValueEqual(draw(helper, OTHER_ISLAND), DRAW, "FE drawn from another team's generator");
         helper.succeed();
@@ -98,7 +98,7 @@ final class GeneratorTests {
     private static void givesFeAgain(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         helper.setBlock(AT, GENERATOR);
-        state(helper).choose(team, Handicap.ENERGY);
+        state(helper).choose(team, Handicap.ENERGY, 0);
         helper.assertValueEqual(draw(helper, AT), 0, "FE drawn while the team plays energy");
         state(helper).endChallenge(team);
         helper.assertValueEqual(draw(helper, AT), DRAW, "FE drawn once the challenge ended");
@@ -108,7 +108,7 @@ final class GeneratorTests {
     private static void leavesOtherBlocks(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         helper.setBlock(AT, MACHINE);
-        state(helper).choose(team, Handicap.ENERGY);
+        state(helper).choose(team, Handicap.ENERGY, 0);
         helper.assertValueEqual(draw(helper, AT), DRAW, "FE drawn from a block not in the tag");
         helper.succeed();
     }

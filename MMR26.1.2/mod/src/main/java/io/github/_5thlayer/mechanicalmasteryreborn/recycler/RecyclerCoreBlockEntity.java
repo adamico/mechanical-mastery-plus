@@ -179,8 +179,8 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         }
         if (plan.work() == Work.DECOMPOSING) {
             UUID team = Teams.at(server, worldPosition);
-            Essences.of(held.getItem()).ifPresent(essence -> DecomposeLog.get(server.getServer())
-                    .record(team, essence, plan.take(), DecomposeLog.Way.RECYCLER));
+            Essences.of(held.getItem()).ifPresent(essence -> DecomposeLog.record(server.getServer(), team, essence, plan.take(),
+                    DecomposeLog.Way.RECYCLER));
             CodWaking.wake(server.getServer(), team);
         }
     }

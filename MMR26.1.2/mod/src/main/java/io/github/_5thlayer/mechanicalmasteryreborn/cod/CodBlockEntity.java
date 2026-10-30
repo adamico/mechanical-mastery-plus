@@ -5,11 +5,13 @@ package io.github._5thlayer.mechanicalmasteryreborn.cod;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
+import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
@@ -46,7 +48,8 @@ import org.jspecify.annotations.Nullable;
  * interval} without stop, every one counted for the team as made. Each goes into the reserve, which pushes into
  * whatever takes items beside it; once the reserve is full, onto a pile on its top, of up to a stack, unless a
  * block stands there; past that, nowhere, so the pile shows the team it is falling behind and lag stays bounded.
- * A challenge's faster pace is #168's.
+ * While the team plays a challenge, each one it makes counts toward its {@link Inflation}. A challenge's faster pace
+ * is #205's.
  */
 public final class CodBlockEntity extends BlockEntity implements MenuProvider {
 
@@ -96,6 +99,15 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
     /** The ticks it takes to make one essence, at its waking pace once awake. */
     public int interval() {
         return awake ? ServerConfig.codWakingInterval() : ServerConfig.codDormantInterval();
+    }
+
+    /** Its team's Inflation, while the team plays a challenge; on the server only. */
+    public Optional<Inflation> inflation() {
+        if (!(level instanceof ServerLevel server)) {
+            return Optional.empty();
+        }
+        UUID owner = team != null ? team : Teams.at(server, worldPosition);
+        return TeamState.get(server.getServer()).inflation(owner);
     }
 
     /** The ticks done toward the next essence, out of {@link #interval}; none while it isn't making. */

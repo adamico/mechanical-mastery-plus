@@ -65,8 +65,8 @@ public final class EssenceItem extends Item {
             }
         }
         player.getCooldowns().addCooldown(decomposed, HAND_COOLDOWN);
-        Essences.of(decomposed.getItem()).ifPresent(essence -> DecomposeLog.get(server.getServer())
-                .record(Teams.of(player), essence, count, DecomposeLog.Way.HAND));
+        Essences.of(decomposed.getItem()).ifPresent(essence -> DecomposeLog.record(server.getServer(), Teams.of(player), essence, count,
+                DecomposeLog.Way.HAND));
         return InteractionResult.SUCCESS_SERVER;
     }
 }

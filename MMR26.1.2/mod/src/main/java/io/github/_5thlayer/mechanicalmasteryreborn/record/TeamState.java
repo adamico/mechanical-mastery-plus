@@ -13,6 +13,7 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
@@ -21,8 +22,8 @@ import net.minecraft.world.level.saveddata.SavedDataType;
 
 /**
  * Each team's state, keyed on its id ({@link Teams}): whether its C.O.D. is awake, how much essence an awake
- * C.O.D. has made for it, spawned or not, which Inflation (#168) reads, and the handicap it chose at the lab, which
- * says which challenge it plays. Its members share it, and a player who joins
+ * C.O.D. has made for it, spawned or not, the handicap it chose at the lab, which says which challenge it plays, and
+ * its {@link Inflation} while it plays one. Its members share it, and a player who joins
  * a team shares it from then on. Saved with the world, in the overworld's data.
  */
 public final class TeamState extends SavedData {
@@ -38,17 +39,22 @@ public final class TeamState extends SavedData {
         static final Codec<Entry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.BOOL.optionalFieldOf("awake", false).forGetter(entry -> entry.awake),
                 Codec.LONG.optionalFieldOf("made", 0L).forGetter(entry -> entry.made),
-                HANDICAP_CODEC.optionalFieldOf("handicap").forGetter(entry -> entry.handicap))
+                HANDICAP_CODEC.optionalFieldOf("handicap").forGetter(entry -> entry.handicap),
+                Inflation.CODEC.optionalFieldOf("inflation").forGetter(entry -> entry.inflation))
                 .apply(instance, Entry::new));
 
         boolean awake;
         long made;
         Optional<Handicap> handicap;
+        /** Present exactly while {@link #handicap} is. */
+        Optional<Inflation> inflation;
 
-        Entry(boolean awake, long made, Optional<Handicap> handicap) {
+        Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
+            // A challenge saved before Inflation was counted counts from the world's start.
+            this.inflation = handicap.isPresent() ? inflation.or(() -> Optional.of(Inflation.began(0))) : Optional.empty();
         }
     }
 
@@ -131,27 +137,37 @@ public final class TeamState extends SavedData {
     }
 
     /**
-     * Starts {@code handicap}'s challenge for {@code team}, and says whether it did: not while the team plays one
-     * already, and not for a handicap the lab doesn't offer yet.
+     * Starts {@code handicap}'s challenge for {@code team} at {@code gameTime}, the overworld's, its Inflation from
+     * nothing, and says whether it did: not while the team plays one already, and not for a handicap the lab doesn't
+     * offer yet.
      */
-    public boolean choose(UUID team, Handicap handicap) {
+    public boolean choose(UUID team, Handicap handicap, long gameTime) {
         if (!handicap.choosable() || handicap(team).isPresent()) {
             return false;
         }
-        entry(team).handicap = Optional.of(handicap);
+        Entry entry = entry(team);
+        entry.handicap = Optional.of(handicap);
+        entry.inflation = Optional.of(Inflation.began(gameTime));
         setDirty();
         return true;
     }
 
-    /** Ends the challenge {@code team} plays, its handicap with it, and says whether it played one. */
+    /** Ends the challenge {@code team} plays, its handicap and Inflation with it, and says whether it played one. */
     public boolean endChallenge(UUID team) {
         Entry entry = teams.get(team);
         if (entry == null || entry.handicap.isEmpty()) {
             return false;
         }
         entry.handicap = Optional.empty();
+        entry.inflation = Optional.empty();
         setDirty();
         return true;
+    }
+
+    /** {@code team}'s Inflation, while it plays a challenge. */
+    public Optional<Inflation> inflation(UUID team) {
+        Entry entry = teams.get(team);
+        return entry == null ? Optional.empty() : entry.inflation;
     }
 
     /** How much essence an awake C.O.D. has made for {@code team}, whether it spawned or not. */
@@ -160,13 +176,28 @@ public final class TeamState extends SavedData {
         return entry == null ? 0 : entry.made;
     }
 
-    /** Counts one essence an awake C.O.D. made for {@code team}. */
+    /** Counts one essence an awake C.O.D. made for {@code team}, and toward its Inflation while it plays a challenge. */
     public void countMade(UUID team) {
-        entry(team).made++;
+        Entry entry = entry(team);
+        entry.made++;
+        entry.inflation = entry.inflation.map(Inflation::madeOne);
+        setDirty();
+    }
+
+    /**
+     * Counts {@code count} of {@code essence} {@code team} decomposed, by hand or on a Recycler, against its Inflation
+     * while it plays a challenge: only Advanced essence, the tier C.O.D. makes.
+     */
+    void countDecomposed(UUID team, Essence essence, long count) {
+        Entry entry = teams.get(team);
+        if (entry == null || entry.inflation.isEmpty() || essence != Essence.ADVANCED) {
+            return;
+        }
+        entry.inflation = entry.inflation.map(inflation -> inflation.decomposed(count));
         setDirty();
     }
 
     private Entry entry(UUID team) {
-        return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty()));
+        return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty()));
     }
 }

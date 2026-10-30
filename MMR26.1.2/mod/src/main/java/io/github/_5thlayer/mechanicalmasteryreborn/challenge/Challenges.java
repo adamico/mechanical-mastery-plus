@@ -32,9 +32,9 @@ public final class Challenges {
     private Challenges() {
     }
 
-    /** Starts {@code handicap}'s challenge for {@code team}, as {@link TeamState#choose} does, and tells the team. */
+    /** Starts {@code handicap}'s challenge for {@code team}, as {@link TeamState#choose} does from now, and tells the team. */
     public static boolean start(MinecraftServer server, UUID team, Handicap handicap) {
-        if (!TeamState.get(server).choose(team, handicap)) {
+        if (!TeamState.get(server).choose(team, handicap, server.overworld().getGameTime())) {
             return false;
         }
         Component message = Component.translatable("mechanicalmasteryreborn.challenge.started",
