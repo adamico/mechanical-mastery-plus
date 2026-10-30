@@ -548,11 +548,6 @@ hash = "0ea5e6f4152b6cc6556bf25f02e1cbb9d5348a58410c6fc70a77b303577e4890"
 metafile = true
 
 [[files]]
-file = "mods/trashslot.pw.toml"
-hash = "71c920bbbf7464754a2e7beb48e8dae545795cc6c36206623a45188a8072e03b"
-metafile = true
-
-[[files]]
 file = "mods/voidworks.pw.toml"
 hash = "5e5e32ec7e63e58c162b269b0191df8962e1efb68ff33a8cc2939828c45ed1b2"
 metafile = true
