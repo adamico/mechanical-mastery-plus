@@ -36,11 +36,7 @@ final class CodReport {
             ByteBufCodecs.BOOL, Data::blocked,
             ByteBufCodecs.VAR_INT, Data::ticks,
             ByteBufCodecs.VAR_INT, Data::interval,
-            ByteBufCodecs.optional(StreamCodec.composite(
-                    ByteBufCodecs.VAR_LONG, Inflation::began,
-                    ByteBufCodecs.VAR_LONG, Inflation::made,
-                    ByteBufCodecs.VAR_LONG, Inflation::decomposed,
-                    Inflation::new)), Data::inflation,
+            ByteBufCodecs.optional(Inflation.STREAM_CODEC), Data::inflation,
             Data::new);
 
     record Data(boolean making, boolean blocked, int ticks, int interval, Optional<Inflation> inflation) {

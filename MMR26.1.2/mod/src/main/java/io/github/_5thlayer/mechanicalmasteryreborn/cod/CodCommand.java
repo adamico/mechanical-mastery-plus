@@ -22,10 +22,10 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 /**
  * {@code /cod}, for operators: {@code status} says which team the player is in, which team's island they stand on,
- * whether its C.O.D. is awake, which challenge that team plays and its Inflation; {@code dormant} puts that island's C.O.D. back to
- * dormant, as a new island's is, so waking can be seen again, and leaves its challenge as it is; {@code challenge start
- * <handicap>} starts that island's team's challenge as its lab would, and {@code challenge end} ends it, its handicap
- * with it, so choosing can be seen again.
+ * whether its C.O.D. is awake, which challenge that team plays and its Inflation; {@code dormant} puts that island's
+ * C.O.D. back to dormant, as a new island's is, so waking can be seen again, and leaves its challenge as it is;
+ * {@code challenge start <handicap>} starts that island's team's challenge as its lab would, and {@code challenge end}
+ * ends it, its handicap with it, so choosing can be seen again.
  */
 final class CodCommand {
 

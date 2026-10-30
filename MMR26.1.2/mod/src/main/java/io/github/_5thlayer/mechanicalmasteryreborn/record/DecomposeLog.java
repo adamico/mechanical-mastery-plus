@@ -85,11 +85,11 @@ public final class DecomposeLog extends SavedData {
 
     /** Records {@code count} of {@code essence} decomposed by {@code team}, one way, and counts it against its Inflation. */
     public static void record(MinecraftServer server, UUID team, Essence essence, int count, Way way) {
-        get(server).record(team, essence, count, way);
+        get(server).add(team, essence, count, way);
         TeamState.get(server).countDecomposed(team, essence, count);
     }
 
-    private void record(UUID team, Essence essence, int count, Way way) {
+    private void add(UUID team, Essence essence, int count, Way way) {
         teams.computeIfAbsent(team, ignored -> new Tally(new EnumMap<>(Essence.class))).counts
                 .computeIfAbsent(essence, ignored -> new EnumMap<>(Way.class))
                 .merge(way, (long) count, Long::sum);

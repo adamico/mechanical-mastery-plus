@@ -21,7 +21,7 @@ A registry id is saved in players' worlds, so once released it never changes. Th
 
 - `sh ./gradlew build` runs the JUnit tests, on a plain JVM with no Minecraft.
 - `sh ./gradlew runGameTestServer` runs the game tests headless and names each one it ran; it fails if it ran none.
-- The `skillworks:gametest-loop` skill runs a subset, `--tests 'mechanicalmasteryreborn:<glob>' 1`, so a ticket's game tests share a name prefix (`cod_`, `essence_`, `generator_`, `hand_`, `lab_`, `recycler_`, `recycling_`, `yield_`).
+- The `skillworks:gametest-loop` skill runs a subset, `--tests 'mechanicalmasteryreborn:<glob>' 1`, so a ticket's game tests share a name prefix (`cod_`, `essence_`, `generator_`, `hand_`, `inflation_`, `lab_`, `recycler_`, `recycling_`, `yield_`).
 - The game tests play at a full yield, so amounts are exact; a test that needs another sets it for its body with `TestYield.at`.
 - Game-test code lives in the `gametest` source set, which never ships (libworks ADRs 0004 and 0011). A new test class is registered by a line in `MechanicalMasteryRebornGameTests.registerTests`, and its tests stand on the `gametest/platform` structure.
 - Neither run loads a client, so a change to a screen, a model or a texture isn't done when the tests pass: list it for the user to check in the dev client (`skillworks:quicklaunch`).

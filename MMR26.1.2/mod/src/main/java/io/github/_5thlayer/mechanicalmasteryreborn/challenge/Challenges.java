@@ -32,7 +32,7 @@ public final class Challenges {
     private Challenges() {
     }
 
-    /** Starts {@code handicap}'s challenge for {@code team}, as {@link TeamState#choose} does from now, and tells the team. */
+    /** Starts {@code handicap}'s challenge for {@code team}, as {@link TeamState#choose} does at the current game time, and tells the team. */
     public static boolean start(MinecraftServer server, UUID team, Handicap handicap) {
         if (!TeamState.get(server).choose(team, handicap, server.overworld().getGameTime())) {
             return false;

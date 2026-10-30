@@ -54,7 +54,7 @@ public final class TeamState extends SavedData {
             this.made = made;
             this.handicap = handicap;
             // A challenge saved before Inflation was counted counts from the world's start.
-            this.inflation = handicap.isPresent() ? inflation.or(() -> Optional.of(Inflation.began(0))) : Optional.empty();
+            this.inflation = handicap.isPresent() ? inflation.or(() -> Optional.of(Inflation.startingAt(0))) : Optional.empty();
         }
     }
 
@@ -147,7 +147,7 @@ public final class TeamState extends SavedData {
         }
         Entry entry = entry(team);
         entry.handicap = Optional.of(handicap);
-        entry.inflation = Optional.of(Inflation.began(gameTime));
+        entry.inflation = Optional.of(Inflation.startingAt(gameTime));
         setDirty();
         return true;
     }
@@ -180,7 +180,7 @@ public final class TeamState extends SavedData {
     public void countMade(UUID team) {
         Entry entry = entry(team);
         entry.made++;
-        entry.inflation = entry.inflation.map(Inflation::madeOne);
+        entry.inflation = entry.inflation.map(Inflation::plusOneMade);
         setDirty();
     }
 
@@ -193,7 +193,7 @@ public final class TeamState extends SavedData {
         if (entry == null || entry.inflation.isEmpty() || essence != Essence.ADVANCED) {
             return;
         }
-        entry.inflation = entry.inflation.map(inflation -> inflation.decomposed(count));
+        entry.inflation = entry.inflation.map(inflation -> inflation.plusDecomposed(count));
         setDirty();
     }
 

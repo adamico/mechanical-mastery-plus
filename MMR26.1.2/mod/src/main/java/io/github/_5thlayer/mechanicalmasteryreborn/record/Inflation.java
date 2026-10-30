@@ -5,12 +5,15 @@ package io.github._5thlayer.mechanicalmasteryreborn.record;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 /**
  * A team's Inflation while it plays a challenge: when the challenge began, in the overworld's game time, and the
  * Advanced essence its awake C.O.D. has made and the team has decomposed, by hand or on a Recycler, since then. The
  * excess is the one less the other, never below zero. {@link TeamState} keeps one per team that plays a challenge
- * and none otherwise; taking a fresh one, {@link #began(long)}, starts the count again.
+ * and none otherwise; taking a fresh one, {@link #startingAt(long)}, starts the count again.
  */
 public record Inflation(long began, long made, long decomposed) {
 
@@ -20,8 +23,15 @@ public record Inflation(long began, long made, long decomposed) {
             Codec.LONG.optionalFieldOf("decomposed", 0L).forGetter(Inflation::decomposed))
             .apply(instance, Inflation::new));
 
+    /** How the server sends it to a client, for Jade. */
+    public static final StreamCodec<ByteBuf, Inflation> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.VAR_LONG, Inflation::began,
+            ByteBufCodecs.VAR_LONG, Inflation::made,
+            ByteBufCodecs.VAR_LONG, Inflation::decomposed,
+            Inflation::new);
+
     /** Inflation as a challenge begins at {@code gameTime}: nothing made or decomposed yet. */
-    public static Inflation began(long gameTime) {
+    public static Inflation startingAt(long gameTime) {
         return new Inflation(gameTime, 0, 0);
     }
 
@@ -31,12 +41,12 @@ public record Inflation(long began, long made, long decomposed) {
     }
 
     /** This, with one more essence made. */
-    Inflation madeOne() {
+    Inflation plusOneMade() {
         return new Inflation(began, made + 1, decomposed);
     }
 
     /** This, with {@code count} more essence decomposed. */
-    Inflation decomposed(long count) {
+    Inflation plusDecomposed(long count) {
         return new Inflation(began, made, decomposed + count);
     }
 }
