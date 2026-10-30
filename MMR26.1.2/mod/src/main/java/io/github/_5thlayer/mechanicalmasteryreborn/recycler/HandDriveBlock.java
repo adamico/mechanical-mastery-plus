@@ -30,8 +30,8 @@ import net.minecraft.world.phys.BlockHitResult;
  * counts; the crafter's sound and a puff over the core when it decomposes; a dull click and smoke when the Recycler
  * can't decompose, so the turn is lost.
  *
- * <p>Its {@link #CORNER} is the corner of its core it stands at, taken when it is placed and set again when a core
- * is placed beside it, so its rails run along the Recycler's outer edges.
+ * <p>Its {@link #CORNER} is the corner of its Recycler's 3x3 it stands at, taken when it is placed and set again when
+ * a core is placed in front of it, so its rails run along the Recycler's outer edges.
  */
 public final class HandDriveBlock extends Block implements RecyclerPart {
 

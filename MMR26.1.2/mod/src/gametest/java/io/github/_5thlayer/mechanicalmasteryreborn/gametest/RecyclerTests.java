@@ -3,12 +3,15 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
+import java.util.List;
+
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.DriveCorner;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.HandDriveBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity.Status;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerInputBlock;
@@ -33,7 +36,8 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 /**
  * The Recycler (#166): a whole one decomposes, by the game-test pack's recipe, with no power, its mix on its
- * outputs clockwise from the front-left place; an incomplete one doesn't run; hoppers feed and empty it; its
+ * outputs clockwise around the centre from the front-left place, then the centre (#194); an incomplete one, or one
+ * whose 3x3 overlaps another's, doesn't run, while two that only touch both do; hoppers feed and empty it; its
  * drives add up and are capped; each decompose is recorded for the team whose island it stands on; and only a
  * player's empty hand takes back what its core holds, giving up the work under way (#191). Each
  * test builds its Recycler with {@link RecyclerBuild}.
@@ -48,16 +52,19 @@ final class RecyclerTests {
         tests.test("recycler_counts_no_turn_short_of_a_decompose", 1, RecyclerTests::partTurned);
         tests.test("recycler_turn_says_what_it_did", 1, RecyclerTests::turnSaysWhatItDid);
         tests.test("recycler_without_a_core_takes_nothing_in", 1, RecyclerTests::withoutCore);
-        tests.test("recycler_without_a_drive_does_not_run", 1, helper -> incomplete(helper, 5, Recycler.CASING.get(), 7, Recycler.CASING.get()));
-        tests.test("recycler_without_an_input_does_not_run", 1, helper -> incomplete(helper, 3, Recycler.CASING.get()));
+        tests.test("recycler_without_a_drive_does_not_run", 1, helper -> incomplete(helper, 3, Recycler.CASING.get(), 5, Recycler.CASING.get()));
+        tests.test("recycler_without_an_input_does_not_run", 1,
+                helper -> incomplete(helper, RecyclerBuild.CENTRE, Recycler.CASING.get()));
         tests.test("recycler_without_an_output_does_not_run", 1,
                 helper -> incomplete(helper, 0, Recycler.CASING.get(), 1, Recycler.CASING.get()));
         tests.test("recycler_with_a_foreign_block_does_not_run", 1, helper -> incomplete(helper, 2, Blocks.STONE));
         tests.test("recycler_with_an_empty_place_does_not_run", 1, helper -> incomplete(helper, 4, Blocks.AIR));
         tests.test("recycler_with_a_part_shared_by_two_cores_does_not_run", 1, RecyclerTests::sharedPart);
+        tests.test("recycler_beside_another_both_run", 1, RecyclerTests::sideBySide);
         tests.test("recycler_hopper_feeds_an_input_and_hoppers_empty_the_outputs", 100, RecyclerTests::hoppers);
         tests.test("recycler_results_land_clockwise_from_the_front_left_place", 1, RecyclerTests::clockwiseFacingSouth);
         tests.test("recycler_results_follow_the_core_facing_east", 1, RecyclerTests::clockwiseFacingEast);
+        tests.test("recycler_output_in_the_centre_is_read_last", 1, RecyclerTests::centreOutputLast);
         tests.test("recycler_will_not_start_when_the_mix_does_not_fit", 1, RecyclerTests::noRoom);
         tests.test("recycler_will_not_run_a_mix_longer_than_its_outputs", 1, RecyclerTests::tooFewOutputs);
         tests.test("recycler_right_click_takes_a_position_stack", 1, RecyclerTests::rightClickTakes);
@@ -134,9 +141,20 @@ final class RecyclerTests {
     private static void sharedPart(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.feed(1);
-        // A second core two places east: the east drive is in both 3x3s.
-        helper.setBlock(RecyclerBuild.CORE.east(2), Recycler.CORE.get());
+        // A second core two east, facing the same way: the east column of the first 3x3 is in both.
+        helper.setBlock(RecyclerBuild.CORE.east(2), Recycler.CORE.get().defaultBlockState().setValue(RecyclerCoreBlock.FACING, Direction.SOUTH));
         helper.assertValueEqual(build.core().status(), Status.INCOMPLETE, "the status of a Recycler sharing a drive");
+        helper.succeed();
+    }
+
+    private static void sideBySide(GameTestHelper helper) {
+        var west = RecyclerBuild.standard(helper);
+        var east = RecyclerBuild.build(helper, RecyclerBuild.CORE.east(3), Direction.SOUTH, RecyclerBuild.STANDARD);
+        for (var build : List.of(west, east)) {
+            build.feed(1);
+            build.turn(RecyclerCoreBlockEntity.TURNS);
+            build.expectAdvancedMix();
+        }
         helper.succeed();
     }
 
@@ -163,11 +181,11 @@ final class RecyclerTests {
     }
 
     private static void clockwiseFacingSouth(GameTestHelper helper) {
-        // Outputs on the left (place 1) and front-right (place 6) of a core facing south.
+        // Outputs west of the centre (place 1) and on the core's right (place 6), the core facing south.
         var build = RecyclerBuild.build(helper, Direction.SOUTH, new Block[] {Recycler.CASING.get(), Recycler.OUTPUT.get(), Recycler.CASING.get(),
                 Recycler.INPUT.get(), Recycler.CASING.get(), Recycler.HAND_DRIVE.get(), Recycler.OUTPUT.get(), Recycler.CASING.get()});
-        helper.assertValueEqual(build.output(0), RecyclerBuild.CORE.west(), "the first output of a core facing south");
-        helper.assertValueEqual(build.output(1), RecyclerBuild.CORE.south().east(), "the second output of a core facing south");
+        helper.assertValueEqual(build.output(0), RecyclerBuild.CORE.north().west(), "the first output of a core facing south");
+        helper.assertValueEqual(build.output(1), RecyclerBuild.CORE.east(), "the second output of a core facing south");
         build.feed(1);
         build.turn(RecyclerCoreBlockEntity.TURNS);
         build.expectAdvancedMix();
@@ -175,11 +193,23 @@ final class RecyclerTests {
     }
 
     private static void clockwiseFacingEast(GameTestHelper helper) {
-        // Facing east, the front-left place is south-east, and the place after it south.
+        // Facing east, the 3x3 lies west of the core: the front-left place is south of the core, the next one west of that.
         var build = RecyclerBuild.build(helper, Direction.EAST, new Block[] {Recycler.OUTPUT.get(), Recycler.OUTPUT.get(), Recycler.CASING.get(),
                 Recycler.INPUT.get(), Recycler.CASING.get(), Recycler.HAND_DRIVE.get(), Recycler.CASING.get(), Recycler.CASING.get()});
-        helper.assertValueEqual(build.output(0), RecyclerBuild.CORE.south().east(), "the first output of a core facing east");
-        helper.assertValueEqual(build.output(1), RecyclerBuild.CORE.south(), "the second output of a core facing east");
+        helper.assertValueEqual(build.output(0), RecyclerBuild.CORE.south(), "the first output of a core facing east");
+        helper.assertValueEqual(build.output(1), RecyclerBuild.CORE.south().west(), "the second output of a core facing east");
+        build.feed(1);
+        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.expectAdvancedMix();
+        helper.succeed();
+    }
+
+    private static void centreOutputLast(GameTestHelper helper) {
+        // Outputs on the front-left place and in the centre, the core facing south.
+        var build = RecyclerBuild.build(helper, Direction.SOUTH, new Block[] {Recycler.OUTPUT.get(), Recycler.CASING.get(), Recycler.CASING.get(),
+                Recycler.INPUT.get(), Recycler.CASING.get(), Recycler.HAND_DRIVE.get(), Recycler.CASING.get(), Recycler.OUTPUT.get()});
+        helper.assertValueEqual(build.output(0), RecyclerBuild.CORE.west(), "the first output of a core facing south");
+        helper.assertValueEqual(build.output(1), RecyclerBuild.CORE.north(), "the output in the centre");
         build.feed(1);
         build.turn(RecyclerCoreBlockEntity.TURNS);
         build.expectAdvancedMix();
@@ -265,8 +295,8 @@ final class RecyclerTests {
     private static void takeBackIncomplete(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.feed(2);
+        build.place(3, Blocks.AIR);
         build.place(5, Blocks.AIR);
-        build.place(7, Blocks.AIR);
         helper.assertValueEqual(build.core().status(), Status.INCOMPLETE, "the Recycler's status");
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
         helper.useBlock(RecyclerBuild.CORE, player);
@@ -318,8 +348,8 @@ final class RecyclerTests {
     private static void drivesTurned(GameTestHelper helper, int drives) {
         var build = RecyclerBuild.standard(helper);
         if (drives == 1) {
-            build.place(7, Blocks.AIR);
-            build.place(7, Recycler.CASING.get());
+            build.place(5, Blocks.AIR);
+            build.place(5, Recycler.CASING.get());
         }
         build.feed(1);
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
@@ -373,24 +403,31 @@ final class RecyclerTests {
     }
 
     private static void coreTurnsDrives(GameTestHelper helper) {
+        // A core placed facing north fronts the 3x3 south of it.
+        BlockPos centre = RecyclerBuild.CORE.south();
         for (DriveCorner corner : DriveCorner.values()) {
-            helper.setBlock(corner.of(RecyclerBuild.CORE), Recycler.HAND_DRIVE.get());
+            helper.setBlock(corner.of(centre), Recycler.HAND_DRIVE.get());
         }
         helper.setBlock(RecyclerBuild.CORE, Recycler.CORE.get());
         for (DriveCorner corner : DriveCorner.values()) {
-            helper.assertValueEqual(helper.getBlockState(corner.of(RecyclerBuild.CORE)).getValue(HandDriveBlock.CORNER), corner,
+            helper.assertValueEqual(helper.getBlockState(corner.of(centre)).getValue(HandDriveBlock.CORNER), corner,
                     "the corner of the drive placed before its core at " + corner.getSerializedName());
         }
         helper.succeed();
     }
 
     private static void drivePlacedTakesCorner(GameTestHelper helper) {
+        // A core facing north: its 3x3 lies south of it, and the place east of it is the 3x3's north-east corner.
         BlockPos core = new BlockPos(4, 1, 4);
         helper.setBlock(core, Recycler.CORE.get());
-        BlockPos drive = core.south().east();
-        placeOnTheFloor(helper, Recycler.HAND_DRIVE_ITEM.get(), drive);
-        helper.assertValueEqual(helper.getBlockState(drive).getValue(HandDriveBlock.CORNER), DriveCorner.SOUTH_EAST,
-                "the corner of a drive placed south-east of a core");
+        BlockPos front = core.east();
+        BlockPos back = core.south(2).east();
+        placeOnTheFloor(helper, Recycler.HAND_DRIVE_ITEM.get(), front);
+        placeOnTheFloor(helper, Recycler.HAND_DRIVE_ITEM.get(), back);
+        helper.assertValueEqual(helper.getBlockState(front).getValue(HandDriveBlock.CORNER), DriveCorner.NORTH_EAST,
+                "the corner of a drive placed beside a core facing north");
+        helper.assertValueEqual(helper.getBlockState(back).getValue(HandDriveBlock.CORNER), DriveCorner.SOUTH_EAST,
+                "the corner of a drive placed at the back of a core facing north");
         helper.succeed();
     }
 

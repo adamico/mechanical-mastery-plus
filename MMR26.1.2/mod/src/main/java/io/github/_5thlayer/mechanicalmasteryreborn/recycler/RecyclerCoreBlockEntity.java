@@ -120,6 +120,13 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         return plan().status();
     }
 
+    /** Whether {@code pos} is one of the eight places of this core's 3x3. */
+    boolean holdsPlace(BlockPos pos) {
+        Direction front = getBlockState().getValue(RecyclerCoreBlock.FACING);
+        return pos.getY() == worldPosition.getY() && RecyclerLayout.isPlace(front.getStepX(), front.getStepZ(),
+                pos.getX() - worldPosition.getX(), pos.getZ() - worldPosition.getZ());
+    }
+
     /** What the Recycler does with what it holds, whether or not it can now. */
     public Work work() {
         ItemStack held = held();
@@ -226,7 +233,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         var outputs = new ArrayList<RecyclerOutputBlockEntity>();
         boolean drive = false;
         boolean input = false;
-        for (int[] place : RecyclerLayout.clockwiseFromFrontLeft(front.getStepX(), front.getStepZ())) {
+        for (int[] place : RecyclerLayout.places(front.getStepX(), front.getStepZ())) {
             BlockPos pos = worldPosition.offset(place[0], 0, place[1]);
             if (!(level.getBlockState(pos).getBlock() instanceof RecyclerPart part)
                     || RecyclerPart.coreOf(level, pos).filter(core -> core == this).isEmpty()) {
