@@ -115,6 +115,21 @@ public final class TeamState extends SavedData {
         return entry == null ? Optional.empty() : entry.handicap;
     }
 
+    /** Whether {@code team} plays {@code handicap}'s challenge. */
+    public boolean plays(UUID team, Handicap handicap) {
+        return handicap(team).filter(handicap::equals).isPresent();
+    }
+
+    /** Whether any team plays {@code handicap}'s challenge, which is cheaper to ask than which team a block is on. */
+    public boolean anyPlays(Handicap handicap) {
+        for (Entry entry : teams.values()) {
+            if (entry.handicap.filter(handicap::equals).isPresent()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Starts {@code handicap}'s challenge for {@code team}, and says whether it did: not while the team plays one
      * already, and not for a handicap the lab doesn't offer yet.

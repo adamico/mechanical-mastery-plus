@@ -29,6 +29,10 @@ file = "kubejs/server_scripts/decomposing.js"
 hash = "1f1eabe247ce04da7991369b6c41d52d2d77072972b58628ce5d097f6170bee8"
 
 [[files]]
+file = "kubejs/server_scripts/generators.js"
+hash = "bf0996fea7540b2c0a3a747fac2747d3f16646789c456770bb00db7cd422552b"
+
+[[files]]
 file = "kubejs/server_scripts/team_of_one.js"
 hash = "4dea0d5af163d81290306bac10bf92fe2d1baabe495c543593b7344fe2ced57e"
 

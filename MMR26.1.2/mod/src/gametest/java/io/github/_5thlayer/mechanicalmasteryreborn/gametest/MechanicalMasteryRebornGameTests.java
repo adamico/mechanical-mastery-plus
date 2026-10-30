@@ -56,6 +56,7 @@ public final class MechanicalMasteryRebornGameTests {
         TEST_TYPES.register(modBus);
         // Posted only when game tests are enabled, which a production game never is.
         modBus.addListener(MechanicalMasteryRebornGameTests::registerTests);
+        GeneratorTests.registerCapabilities(modBus);
         TestYield.useFull();
     }
 
@@ -70,6 +71,7 @@ public final class MechanicalMasteryRebornGameTests {
         CodTests.register(tests);
         CodWakeTests.register(tests);
         LabTests.register(tests);
+        GeneratorTests.register(tests);
         HandDecomposeTests.register(tests);
         RecyclerTests.register(tests);
         RecyclingTests.register(tests);

@@ -73,8 +73,12 @@ One of four questlines, each bound to a fixed mod or set of mods, started at the
 _Avoid_: chapter (a quest-book page), stage
 
 **Handicap**:
-What a challenge costs the team while it plays it, and only then: protection (more, stronger and special mobs), life (less max health), energy (generator blocks disabled) or money (less money).
+What a challenge costs the team while it plays it, and only then: protection (more, stronger and special mobs), life (less max health), energy (its generators give it no energy, and its FE drives stop) or money (less money).
 _Avoid_: threat, debuff
+
+**Generator**:
+A block the pack names as making energy, as Wireworks' engines, turbines and solar panels are. It belongs to the team whose island it stands on, and while that team plays the energy challenge it gives the team no energy, saying why, and goes on for every other team.
+_Avoid_: power source
 
 **Lab**:
 The special block where a team chooses a handicap to start a challenge, and feeds science items to research what the challenge unlocks.
