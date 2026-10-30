@@ -15,7 +15,7 @@ import io.github._5thlayer.libworks.testkit.WorksTabCheck;
 final class CreativeTabTests {
 
     /** The paths of the Module's items, as the Works tab shows them. */
-    private static final List<String> WORKS_TAB_ORDER = List.of("cod", "basic_mechanical_essence", "regular_mechanical_essence",
+    private static final List<String> WORKS_TAB_ORDER = List.of("cod", "lab", "basic_mechanical_essence", "regular_mechanical_essence",
             "improved_mechanical_essence", "advanced_mechanical_essence", "recycler_core_1", "hand_drive", "recycler_input", "recycler_output",
             "recycler_casing");
 

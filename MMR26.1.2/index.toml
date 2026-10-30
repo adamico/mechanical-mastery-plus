@@ -10,11 +10,11 @@ hash = "942e81b971479152385b4ad9c3471653325f04946c34d9dd2aefc02c744517bc"
 
 [[files]]
 file = "config/skyblockbuilder/templates.json5"
-hash = "10a69812eaec4a419c69f796a30c6c139bcf873ca274625e91f087cce26a8f3b"
+hash = "0885ad982a8d639f03411ecef016ca88e9fbe67cb08ba38addc495ad4a6758b0"
 
 [[files]]
 file = "config/skyblockbuilder/templates/islands/reborn.snbt"
-hash = "e13acc259ba25e3a0eeacaf7d5f14a7153c4e3ff10b8a901660c9bd7d76fa047"
+hash = "c3ee18100fdca4998bf6f6217cad9e99c7cd4683fdc65d2f9c8daa47cee238b8"
 
 [[files]]
 file = "config/skyblockbuilder/templates/islands/spawn.snbt"

@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.commands.CommandSourceStack;
@@ -16,9 +17,9 @@ import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 /**
- * {@code /cod}, for operators: {@code status} says which team the player is in, which team's island they stand on and
- * whether its C.O.D. is awake; {@code dormant} puts that island's C.O.D. back to dormant, as a new island's is, so
- * waking can be seen again.
+ * {@code /cod}, for operators: {@code status} says which team the player is in, which team's island they stand on,
+ * whether its C.O.D. is awake and which challenge that team plays; {@code dormant} puts that island's C.O.D. back to
+ * dormant, as a new island's is, so waking can be seen again, and leaves its challenge as it is.
  */
 final class CodCommand {
 
@@ -41,6 +42,9 @@ final class CodCommand {
         source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.status", own.toString(), island.toString(),
                 Component.translatable(state.isAwake(island) ? "mechanicalmasteryreborn.command.cod.awake" : "mechanicalmasteryreborn.command.cod.dormant"),
                 state.made(island)), false);
+        source.sendSuccess(() -> state.handicap(island)
+                .map(handicap -> Component.translatable("mechanicalmasteryreborn.command.cod.challenge", Challenges.name(handicap)))
+                .orElseGet(() -> Component.translatable("mechanicalmasteryreborn.command.cod.no_challenge")), false);
         if (!own.equals(island)) {
             source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.elsewhere"), false);
         }

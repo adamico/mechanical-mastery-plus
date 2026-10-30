@@ -16,7 +16,7 @@
   "templateList": [
     {
       "name": "Reborn",
-      "desc": "A lone island, a tree and a dormant C.O.D.",
+      "desc": "A lone island, a tree, a dormant C.O.D. and a lab.",
       "file": "reborn.snbt",
       "spawns": "reborn"
     }
