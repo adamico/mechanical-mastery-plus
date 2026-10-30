@@ -30,8 +30,8 @@ import org.jspecify.annotations.Nullable;
  * The energy handicap's cost: a generator, a block in the pack's {@link #TAG}, gives no FE while the team whose island
  * it stands on plays the energy challenge (MMR26.1.2 ADR 0005). This answers for its FE ahead of every other mod, on
  * every block, with a face that shows the generator's own buffer but gives and takes nothing; anywhere else it answers
- * nothing, and the block's own mod answers as before. The suite's networks draw a generator's FE through that face every tick, so the generator fills its own
- * buffer and idles until the challenge ends. The pack fills the tag, so this names no suite mod.
+ * nothing, and the block's own mod answers as before. The suite's networks draw a generator's FE through that face
+ * every tick, so the generator fills its own buffer and idles until the challenge ends. The pack fills the tag, so this names no suite mod.
  */
 public final class Generators {
 
@@ -60,12 +60,13 @@ public final class Generators {
 
     /** The face the generator's own mod answers with, which the next provider in turn gives, or an empty one. */
     private static EnergyHandler own(Level level, BlockPos pos, @Nullable Direction side) {
+        boolean asking = ASKING_OWN.get();
         ASKING_OWN.set(true);
         try {
             EnergyHandler own = level.getCapability(Capabilities.Energy.BLOCK, pos, side);
             return own != null ? own : EmptyEnergyHandler.INSTANCE;
         } finally {
-            ASKING_OWN.set(false);
+            ASKING_OWN.set(asking);
         }
     }
 

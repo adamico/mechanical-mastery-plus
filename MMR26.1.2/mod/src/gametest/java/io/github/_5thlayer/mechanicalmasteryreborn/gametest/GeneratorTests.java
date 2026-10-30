@@ -33,6 +33,8 @@ final class GeneratorTests {
     /** Not in the tag. */
     private static final Block MACHINE = Blocks.TARGET;
     private static final int BUFFER = 1000;
+    /** What each buffer holds, short of full, so that what it holds and what it can hold differ. */
+    private static final int HELD = 600;
     private static final int DRAW = 100;
 
     private static final BlockPos AT = new BlockPos(2, 2, 2);
@@ -48,7 +50,7 @@ final class GeneratorTests {
 
     private static void fullBuffers(RegisterCapabilitiesEvent event) {
         event.registerBlock(Capabilities.Energy.BLOCK,
-                (level, pos, state, entity, side) -> new SimpleEnergyHandler(BUFFER, BUFFER, BUFFER, BUFFER), GENERATOR, MACHINE);
+                (level, pos, state, entity, side) -> new SimpleEnergyHandler(BUFFER, BUFFER, BUFFER, HELD), GENERATOR, MACHINE);
     }
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
@@ -74,7 +76,7 @@ final class GeneratorTests {
         helper.setBlock(AT, GENERATOR);
         state(helper).choose(team, Handicap.ENERGY);
         EnergyHandler handler = face(helper, AT);
-        helper.assertValueEqual(handler.getAmountAsLong(), (long) BUFFER, "the FE a stopped generator shows it holds");
+        helper.assertValueEqual(handler.getAmountAsLong(), (long) HELD, "the FE a stopped generator shows it holds");
         helper.assertValueEqual(handler.getCapacityAsLong(), (long) BUFFER, "the FE a stopped generator shows it can hold");
         try (Transaction transaction = Transaction.openRoot()) {
             helper.assertValueEqual(handler.insert(DRAW, transaction), 0, "FE a stopped generator took in");
