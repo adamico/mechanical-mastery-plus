@@ -21,6 +21,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -186,6 +187,9 @@ final class InflationTests {
             var bar = InflationBar.of(team);
             helper.assertTrue(bar.isPresent(), "a team that plays a challenge has no bar");
             helper.assertValueEqual(bar.get().getProgress(), 0.25F, "the bar's fill, one made of a cap of four");
+            helper.assertValueEqual(bar.get().getName(), Component.translatable("mechanicalmasteryreborn.bar.challenge",
+                    Component.translatable("mechanicalmasteryreborn.challenge.title", Component.translatable("mechanicalmasteryreborn.handicap.energy")),
+                    Component.translatable("mechanicalmasteryreborn.bar.inflation", 1L, BAR_CAP)), "the bar's title");
             helper.assertTrue(bar.get().getPlayers().contains(player), "the team's player doesn't see its bar");
             helper.assertFalse(bar.get().getPlayers().contains(stranger), "another team's player sees the bar");
             helper.assertTrue(InflationBar.of(other).isEmpty(), "a team that plays no challenge has a bar");

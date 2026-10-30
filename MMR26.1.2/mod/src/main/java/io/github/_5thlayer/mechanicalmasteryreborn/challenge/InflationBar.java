@@ -24,9 +24,10 @@ import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 /**
- * Each team's Inflation as a boss bar, filling toward the {@link ServerConfig#inflationCap cap}, with the excess and
- * the cap in its title. Every one of the team's players online sees it, wherever they stand, from the moment the team
- * chooses a handicap until its challenge ends, and a player who logs in or joins the team mid-challenge sees it too.
+ * Each team's Inflation as a boss bar, filling toward the {@link ServerConfig#inflationCap cap}, titled with the
+ * challenge the team plays, as its start's title names it, then the excess and the cap. Every one of the team's
+ * players online sees it, wherever they stand, from the moment the team chooses a handicap until its challenge ends,
+ * and a player who logs in or joins the team mid-challenge sees it too.
  * Kept in step with the team's state each tick, so nothing that changes Inflation has to tell it; a bar sends its
  * players anything only when it changes. Never saved: the server makes them afresh from the teams' state.
  */
@@ -55,7 +56,7 @@ public final class InflationBar {
                 entry.getValue().removeAllPlayers();
                 return true;
             }
-            show(entry.getValue(), inflation.get());
+            show(entry.getValue(), state.handicap(entry.getKey()).orElseThrow(), inflation.get());
             for (ServerPlayer player : new ArrayList<>(entry.getValue().getPlayers())) {
                 if (player.hasDisconnected() || !Teams.of(player).equals(entry.getKey())) {
                     entry.getValue().removePlayer(player);
@@ -68,15 +69,17 @@ public final class InflationBar {
             state.inflation(team).ifPresent(inflation -> BARS.computeIfAbsent(team, ignored -> {
                 var bar = new ServerBossEvent(UUID.randomUUID(), Component.empty(), BossEvent.BossBarColor.RED,
                         BossEvent.BossBarOverlay.NOTCHED_10);
-                show(bar, inflation);
+                show(bar, state.handicap(team).orElseThrow(), inflation);
                 return bar;
             }).addPlayer(player));
         }
     }
 
-    private static void show(ServerBossEvent bar, Inflation inflation) {
+    /** Words the bar, such as "Energy Challenge - Inflation: 12 of 256", and fills it. */
+    private static void show(ServerBossEvent bar, Handicap handicap, Inflation inflation) {
         int cap = ServerConfig.inflationCap();
-        bar.setName(Component.translatable(MechanicalMasteryReborn.MOD_ID + ".bar.inflation", inflation.excess(), cap));
+        bar.setName(Component.translatable(MechanicalMasteryReborn.MOD_ID + ".bar.challenge", Challenges.title(handicap),
+                Component.translatable(MechanicalMasteryReborn.MOD_ID + ".bar.inflation", inflation.excess(), cap)));
         bar.setProgress(Math.min(1.0F, (float) inflation.excess() / cap));
     }
 }

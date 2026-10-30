@@ -23,6 +23,7 @@
   "item.mechanicalmasteryreborn.regular_mechanical_essence": "Regular Mechanical Essence",
   "item.mechanicalmasteryreborn.vital_essence": "Vital Essence",
   "item.mechanicalmasteryreborn.warding_essence": "Warding Essence",
+  "mechanicalmasteryreborn.bar.challenge": "%s - %s",
   "mechanicalmasteryreborn.bar.inflation": "Inflation: %s of %s",
   "mechanicalmasteryreborn.challenge.started": "Your team now plays the %s challenge. While it is played: %s.",
   "mechanicalmasteryreborn.challenge.title": "%s Challenge",

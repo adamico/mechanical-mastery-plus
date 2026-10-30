@@ -39,8 +39,7 @@ public final class Challenges {
         }
         Component message = Component.translatable("mechanicalmasteryreborn.challenge.started",
                 name(handicap).withStyle(ChatFormatting.GOLD), cost(handicap)).withStyle(ChatFormatting.GRAY);
-        Component title = Component.translatable("mechanicalmasteryreborn.challenge.title", name(handicap))
-                .withStyle(ChatFormatting.GOLD);
+        Component title = title(handicap).withStyle(ChatFormatting.GOLD);
         Component subtitle = cost(handicap);
         var sound = BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE);
         int told = 0;
@@ -61,6 +60,11 @@ public final class Challenges {
     /** The handicap's name, as the lab shows it. */
     public static MutableComponent name(Handicap handicap) {
         return Component.translatable("mechanicalmasteryreborn.handicap." + handicap.id());
+    }
+
+    /** The challenge's name, such as "Energy Challenge", as its start's title and its Inflation's bar show it. */
+    public static MutableComponent title(Handicap handicap) {
+        return Component.translatable("mechanicalmasteryreborn.challenge.title", name(handicap));
     }
 
     /** What the handicap costs the team while it plays its challenge, as the lab shows it before choosing. */
