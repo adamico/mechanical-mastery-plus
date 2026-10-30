@@ -16,10 +16,14 @@ import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -39,6 +43,9 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>Each decompose is recorded, on a Recycler, for the team whose island it stands on ({@link DecomposeLog});
  * a recycle never is.
+ *
+ * <p>Only a player's hand takes back what it holds ({@link #takeBack()}), giving up the work under way. Every
+ * client is sent what it holds, so a click on an empty core can pass there too.
  */
 public final class RecyclerCoreBlockEntity extends BlockEntity {
 
@@ -94,6 +101,14 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
     /** What the buffer holds. */
     public ItemStack held() {
         return buffer.getResource(0).toStack(buffer.getAmountAsInt(0));
+    }
+
+    /** Empties the buffer and gives up the work under way: what it held, for the player who takes it back. */
+    public ItemStack takeBack() {
+        ItemStack held = held();
+        turns = 0;
+        buffer.set(0, ItemResource.EMPTY, 0);
+        return held;
     }
 
     /** Turns delivered toward the decompose under way. */
@@ -248,6 +263,16 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
     }
 
     @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return saveWithoutMetadata(registries);
+    }
+
+    @Override
     public void preRemoveSideEffects(BlockPos pos, BlockState state) {
         super.preRemoveSideEffects(pos, state);
         if (level != null) {
@@ -280,6 +305,9 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
             setChanged();
+            if (level != null) {
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+            }
         }
     }
 

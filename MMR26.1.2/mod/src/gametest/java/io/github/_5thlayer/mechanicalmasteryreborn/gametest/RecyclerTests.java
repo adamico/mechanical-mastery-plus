@@ -19,6 +19,7 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
@@ -27,11 +28,14 @@ import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 /**
  * The Recycler (#166): a whole one decomposes, by the game-test pack's recipe, with no power, its mix on its
  * outputs clockwise from the front-left place; an incomplete one doesn't run; hoppers feed and empty it; its
- * drives add up and are capped; and each decompose is recorded for the team whose island it stands on. Each
+ * drives add up and are capped; each decompose is recorded for the team whose island it stands on; and only a
+ * player's empty hand takes back what its core holds, giving up the work under way (#191). Each
  * test builds its Recycler with {@link RecyclerBuild}.
  */
 final class RecyclerTests {
@@ -58,6 +62,12 @@ final class RecyclerTests {
         tests.test("recycler_will_not_run_a_mix_longer_than_its_outputs", 1, RecyclerTests::tooFewOutputs);
         tests.test("recycler_right_click_takes_a_position_stack", 1, RecyclerTests::rightClickTakes);
         tests.test("recycler_right_click_feeds_an_input", 1, RecyclerTests::rightClickFeeds);
+        tests.test("recycler_take_back_gives_the_whole_stack_and_drops_the_turns", 1, RecyclerTests::takeBack);
+        tests.test("recycler_take_back_leaves_the_next_item_every_turn_to_go", 1, RecyclerTests::takeBackRestarts);
+        tests.test("recycler_take_back_works_on_an_incomplete_recycler", 1, RecyclerTests::takeBackIncomplete);
+        tests.test("recycler_empty_hand_on_an_empty_core_does_nothing", 1, RecyclerTests::emptyCoreClicked);
+        tests.test("recycler_core_clicked_with_an_item_keeps_what_it_holds", 1, RecyclerTests::coreClickedWithItem);
+        tests.test("recycler_input_gives_nothing_back_to_automation", 1, RecyclerTests::inputExtractsNothing);
         tests.test("recycler_one_drive_decomposes_in_eight_turns_of_its_cap", 60, helper -> drivesTurned(helper, 1));
         tests.test("recycler_two_drives_decompose_twice_as_fast", 60, helper -> drivesTurned(helper, 2));
         tests.test("recycler_drive_turns_no_faster_than_its_cap", 20, RecyclerTests::driveCap);
@@ -224,6 +234,80 @@ final class RecyclerTests {
         helper.useBlock(build.firstOf(Recycler.INPUT.get()), player);
         helper.assertValueEqual(build.core().held().getCount(), 3, "the essence the core took from the player's click");
         helper.assertTrue(player.getMainHandItem().isEmpty(), "the player still holds " + player.getMainHandItem());
+        helper.succeed();
+    }
+
+    private static void takeBack(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        build.feed(3);
+        build.turn(RecyclerCoreBlockEntity.TURNS - 1);
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        helper.useBlock(RecyclerBuild.CORE, player);
+        helper.assertValueEqual(player.getInventory().countItem(Essences.item(Essence.ADVANCED)), 3, "the essence taken back");
+        helper.assertTrue(build.core().held().isEmpty(), "the core still holds " + build.core().held());
+        helper.assertValueEqual(build.core().turns(), 0, "the turns left after a take-back");
+        helper.succeed();
+    }
+
+    private static void takeBackRestarts(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        build.feed(1);
+        build.turn(RecyclerCoreBlockEntity.TURNS - 1);
+        helper.useBlock(RecyclerBuild.CORE, helper.makeMockPlayer(GameType.SURVIVAL));
+        build.feed(1);
+        build.turn(RecyclerCoreBlockEntity.TURNS - 1);
+        helper.assertTrue(build.outputsEmpty(), "a Recycler decomposed with turns given up by a take-back");
+        build.turn(1);
+        build.expectAdvancedMix();
+        helper.succeed();
+    }
+
+    private static void takeBackIncomplete(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        build.feed(2);
+        build.place(5, Blocks.AIR);
+        build.place(7, Blocks.AIR);
+        helper.assertValueEqual(build.core().status(), Status.INCOMPLETE, "the Recycler's status");
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        helper.useBlock(RecyclerBuild.CORE, player);
+        helper.assertValueEqual(player.getInventory().countItem(Essences.item(Essence.ADVANCED)), 2, "the essence taken back");
+        helper.assertTrue(build.core().held().isEmpty(), "the core still holds " + build.core().held());
+        helper.succeed();
+    }
+
+    private static void emptyCoreClicked(GameTestHelper helper) {
+        RecyclerBuild.standard(helper);
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        BlockPos core = helper.absolutePos(RecyclerBuild.CORE);
+        var hit = new BlockHitResult(Vec3.atCenterOf(core), Direction.UP, core, false);
+        helper.assertFalse(helper.getBlockState(RecyclerBuild.CORE).useWithoutItem(helper.getLevel(), player, hit).consumesAction(),
+                "an empty core took the click");
+        helper.succeed();
+    }
+
+    private static void coreClickedWithItem(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        build.feed(2);
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK));
+        helper.useBlock(RecyclerBuild.CORE, player);
+        helper.assertValueEqual(build.core().held().getCount(), 2, "the essence the core holds after a click with a stick");
+        helper.assertValueEqual(player.getInventory().countItem(Essences.item(Essence.ADVANCED)), 0, "the essence taken back");
+        helper.succeed();
+    }
+
+    private static void inputExtractsNothing(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        build.feed(2);
+        BlockPos input = build.firstOf(Recycler.INPUT.get());
+        var face = helper.getLevel().getCapability(Capabilities.Item.BLOCK, helper.absolutePos(input), Direction.DOWN);
+        helper.assertTrue(face != null, "an input has no item face");
+        try (var transaction = Transaction.openRoot()) {
+            int extracted = face.extract(0, ItemResource.of(Essences.item(Essence.ADVANCED)), 2, transaction);
+            transaction.commit();
+            helper.assertValueEqual(extracted, 0, "the essence extracted through an input");
+        }
+        helper.assertValueEqual(build.core().held().getCount(), 2, "the essence the core holds");
         helper.succeed();
     }
 
