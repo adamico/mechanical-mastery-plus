@@ -54,6 +54,7 @@ final class GeneratorTests {
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("generator_gives_no_fe_while_its_team_plays_energy", 1, GeneratorTests::givesNoFe);
         tests.test("generator_of_another_team_gives_fe", 1, GeneratorTests::anotherTeamsGivesFe);
+        tests.test("generator_stopped_still_shows_its_buffer", 1, GeneratorTests::showsItsBuffer);
         tests.test("generator_gives_fe_again_once_the_challenge_ends", 1, GeneratorTests::givesFeAgain);
         tests.test("generator_tag_leaves_other_blocks_as_they_were", 1, GeneratorTests::leavesOtherBlocks);
     }
@@ -64,6 +65,20 @@ final class GeneratorTests {
         helper.assertValueEqual(draw(helper, AT), DRAW, "FE drawn before the challenge");
         state(helper).choose(team, Handicap.ENERGY);
         helper.assertValueEqual(draw(helper, AT), 0, "FE drawn while the team plays energy");
+        helper.succeed();
+    }
+
+    /** Jade and anything else reading the FE face still see the generator's own buffer, which only can't be drawn. */
+    private static void showsItsBuffer(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        helper.setBlock(AT, GENERATOR);
+        state(helper).choose(team, Handicap.ENERGY);
+        EnergyHandler handler = face(helper, AT);
+        helper.assertValueEqual(handler.getAmountAsLong(), (long) BUFFER, "the FE a stopped generator shows it holds");
+        helper.assertValueEqual(handler.getCapacityAsLong(), (long) BUFFER, "the FE a stopped generator shows it can hold");
+        try (Transaction transaction = Transaction.openRoot()) {
+            helper.assertValueEqual(handler.insert(DRAW, transaction), 0, "FE a stopped generator took in");
+        }
         helper.succeed();
     }
 
@@ -96,16 +111,20 @@ final class GeneratorTests {
         helper.succeed();
     }
 
-    /** What a network drawing {@link #DRAW} FE from {@code pos} would get, as Wireworks asks: on no side. */
+    /** What a network drawing {@link #DRAW} FE from {@code pos} would get. */
     private static int draw(GameTestHelper helper, BlockPos pos) {
+        try (Transaction transaction = Transaction.openRoot()) {
+            return face(helper, pos).extract(DRAW, transaction);
+        }
+    }
+
+    /** The FE face at {@code pos}, as Wireworks asks for it: on no side. */
+    private static EnergyHandler face(GameTestHelper helper, BlockPos pos) {
         EnergyHandler handler = helper.getLevel().getCapability(Capabilities.Energy.BLOCK, helper.absolutePos(pos), null);
         if (handler == null) {
             helper.fail("nothing answers for FE", pos);
-            return -1;
         }
-        try (Transaction transaction = Transaction.openRoot()) {
-            return handler.extract(DRAW, transaction);
-        }
+        return handler;
     }
 
     private static TeamState state(GameTestHelper helper) {
