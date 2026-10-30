@@ -5,3 +5,5 @@ The 26.1.2 line's own blocks and machines live in a companion mod from the first
 KubeJS 8 can make ticking machines with inventories and FE, and starting there would have been quicker. We chose a mod anyway because the loop rests on these machines: per-team state, the race against C.O.D. and the lab's choices are much easier to test in Java game tests than in scripts. Moving them out of KubeJS later would also have meant rewriting them while players' worlds already held them.
 
 Amended for #166: the decomposing machine is the Recycler, a tiered machine from a hand-cranked tier up, much faster than decomposing by hand. Reborn is a modpack first, so the companion mod ships the machine and no recipes: what each essence and item decomposes into is the pack's KubeJS.
+
+Amended for #184: what an item recycles into is derived by the companion mod, from the recipes that make it run backwards, since writing one for every item would never keep up with the pack's mods. The pack writes only overrides, as `recycling` recipes. What essences decompose into is still the pack's alone.

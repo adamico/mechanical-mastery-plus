@@ -21,8 +21,12 @@ file = "config/skyblockbuilder/templates/islands/spawn.snbt"
 hash = "c74163f57bae03bbb4229bc3a7e7e294c3d5ee0b83c829f3643fa16481878094"
 
 [[files]]
+file = "defaultconfigs/mechanicalmasteryreborn-server.toml"
+hash = "ba9a93fd7ff504848df2ce218cd28682b6aa1671f0f593f07a972c47785d3086"
+
+[[files]]
 file = "kubejs/server_scripts/decomposing.js"
-hash = "0b2e42b9922d0fc68b926001c58d2cf17e4162fb5c41f4e0a4be0093a2d87524"
+hash = "1f1eabe247ce04da7991369b6c41d52d2d77072972b58628ce5d097f6170bee8"
 
 [[files]]
 file = "kubejs/server_scripts/team_of_one.js"
@@ -99,6 +103,11 @@ hash = "430d0ebb018edf74670f7a2aafb5c02b9907cddfd726dd47ec406b534618c955"
 metafile = true
 
 [[files]]
+file = "mods/cobblegen-galore.pw.toml"
+hash = "bbf3d6756358274a8e017c45f1f780ef7f1fcef3b040b6bfd1ca3043b87af52a"
+metafile = true
+
+[[files]]
 file = "mods/collective.pw.toml"
 hash = "62d95ead5ed5daf06a2c19e33df7b4d2d0ba6c48a23b15f81cf948efe3a99b53"
 metafile = true
@@ -119,8 +128,18 @@ hash = "1dc23e6188ac7cb4282a418c39dd6d69446172fc12fe3583f46d078dcc4d497e"
 metafile = true
 
 [[files]]
+file = "mods/connected-glass.pw.toml"
+hash = "a8112ecfb8e5b1044650a67c026ea2dc207b35d1a27d118d20b92c236443af88"
+metafile = true
+
+[[files]]
 file = "mods/connectivity.pw.toml"
 hash = "75b293191f5cf2c59c8160ef21a2c099f6f5d05c10b2d1c4789381a7971da5ed"
+metafile = true
+
+[[files]]
+file = "mods/construction-sticks.pw.toml"
+hash = "8ce2fae727b974b82cf1128d488dad14aaf5666a64af2d303a295f1c92a4e3cd"
 metafile = true
 
 [[files]]
@@ -151,6 +170,11 @@ metafile = true
 [[files]]
 file = "mods/durability-tooltip.pw.toml"
 hash = "d1d2ae59cd36377cb182c2e4b4a389a4fd8dd5f8fc5a00dc10292858ccb28392"
+metafile = true
+
+[[files]]
+file = "mods/eccentric-tome.pw.toml"
+hash = "fc6fa9626d8dfb448ebf38f30e8a82fdf09e49c06b47a90a9f0361193c2b5e43"
 metafile = true
 
 [[files]]
@@ -189,13 +213,38 @@ hash = "285a8629fe612880fc593b940a13345d0b042cb16d8d3a00559fa75a0de98dbf"
 metafile = true
 
 [[files]]
+file = "mods/forgiving-void.pw.toml"
+hash = "cc3f86253847b0e74731b4000ca282701a5abc2c5e734f7af451c960bdf8488b"
+metafile = true
+
+[[files]]
 file = "mods/free-cam.pw.toml"
 hash = "5d816da0efe67d892fdfc2baebb692c652aa285c09e3ae58e13ec16d63bb3ce9"
 metafile = true
 
 [[files]]
+file = "mods/ftb-backups-3.pw.toml"
+hash = "c684c61b6dd0393aac6a746a1ed595bfdb2ebc20eba9d5ca26f5ccfe1e6672ec"
+metafile = true
+
+[[files]]
+file = "mods/ftb-chunks-forge.pw.toml"
+hash = "5819b227140768306636a76607df189439d03ce6e420c680ba8a63a4312e9cd7"
+metafile = true
+
+[[files]]
+file = "mods/ftb-filter-system.pw.toml"
+hash = "2cd5926055dac25058dae654a9a17bdb6183491f456fe4dab5b38d5999c98955"
+metafile = true
+
+[[files]]
 file = "mods/ftb-library-forge.pw.toml"
 hash = "e52886e60c70a18a8a70f3e7781c1716498f4b4847df41b293d06de2cd53291d"
+metafile = true
+
+[[files]]
+file = "mods/ftb-materials.pw.toml"
+hash = "d95a7ae35dadf878eb2ba7bbfa31e873a4c585f3eb15a9460da7c43ae106fd6f"
 metafile = true
 
 [[files]]
@@ -209,8 +258,23 @@ hash = "cb69112ea7c492ee73426fb503af2d834c8bafcd8341188c99ea6dc56d38de6f"
 metafile = true
 
 [[files]]
+file = "mods/ftb-ultimine-forge.pw.toml"
+hash = "2607e2c07c06c9b4bbe5373fc685dab5b463c1b1564a1b56cd51305b224f3f23"
+metafile = true
+
+[[files]]
 file = "mods/ftb-xmod-compat.pw.toml"
 hash = "75a9bedf22af8ff4cd54149a67f3cb91359d583068b4177fff03b58e7e6db401"
+metafile = true
+
+[[files]]
+file = "mods/functional-storage.pw.toml"
+hash = "3096575602b0aedc8d6368f281b457e841a8d8d11e30d310cda78dbf0ec5faee"
+metafile = true
+
+[[files]]
+file = "mods/fusion-connected-textures.pw.toml"
+hash = "3c4e0976d563013d5ba249889e87e029c25595dacec2b04fb375f378f9e7abb3"
 metafile = true
 
 [[files]]
@@ -224,8 +288,18 @@ hash = "3e3a9c123414630fc001e4301388a328dd2f08c1af793fc954fa07acb49f048b"
 metafile = true
 
 [[files]]
+file = "mods/global-xp.pw.toml"
+hash = "daac441fdff999f396581c7193d6b641b40fa5b62d40853e5b564f772edb60c8"
+metafile = true
+
+[[files]]
+file = "mods/gravestone-mod.pw.toml"
+hash = "a3282e349978810d09c1157a24415b862c5534de1ecfa713d867a5b96072b1bb"
+metafile = true
+
+[[files]]
 file = "mods/groundworks.pw.toml"
-hash = "7a57b789b7d9cb5d41e6285d8e0b136c02f538fb2fd7da15b4c3d3d7cfe8e73c"
+hash = "e2c150e06552ee2262a6303180c0b59bccba37de7c833b201772faf8adb76929"
 metafile = true
 
 [[files]]
@@ -274,6 +348,11 @@ hash = "a1dfa3b64933b64978c790beba1fcdce7f2643b1f8149eb61ee7fa3617658422"
 metafile = true
 
 [[files]]
+file = "mods/kleeslabs.pw.toml"
+hash = "928b184b2cca22c30b702a444a09b8c030d57cf6de58d8f7b145d301c8a83bf0"
+metafile = true
+
+[[files]]
 file = "mods/kotlin-for-forge.pw.toml"
 hash = "205974de9e49d9afc2bda55ca8b0400ad1196ef0fae7899c9344af3c122a3aee"
 metafile = true
@@ -281,6 +360,11 @@ metafile = true
 [[files]]
 file = "mods/kubejs.pw.toml"
 hash = "24fbef7b816e9f90e0dd956308d5e722f4145af44b1b09eab186334a06f080fa"
+metafile = true
+
+[[files]]
+file = "mods/laserio.pw.toml"
+hash = "7b10b2f9479245472877fb03f6ced88c08fc08b7fb13ae6eab2ad56dabba2a69"
 metafile = true
 
 [[files]]
@@ -309,6 +393,11 @@ hash = "694ab9f9f5de0fba1369a8c1da7ff266bb3108285bcfacb08caa51334f7e1105"
 metafile = true
 
 [[files]]
+file = "mods/modular-routers.pw.toml"
+hash = "0599e58b61792ebd63dc077da3ef5bb118406f45c5d733bcf66ce19edb102041"
+metafile = true
+
+[[files]]
 file = "mods/more-overlays-updated.pw.toml"
 hash = "209e9f283403e70a2da2f9b50a4640cf5570cda6a6dfb6b1d6f2b4ce69967ffa"
 metafile = true
@@ -324,6 +413,11 @@ hash = "e8896f2b6d31219313e3fe795490959d3aed95da6c1922b5472e2357a123bd8d"
 metafile = true
 
 [[files]]
+file = "mods/neovitae.pw.toml"
+hash = "a0cc6dde0f3aea5a23c7168bf80580d6bffa236af282f921273804c2d0bfa9dc"
+metafile = true
+
+[[files]]
 file = "mods/neruina.pw.toml"
 hash = "22555af3fcd31fc296f8f07d479046d7be4818035e5ded15163c7c674498421e"
 metafile = true
@@ -334,13 +428,28 @@ hash = "0c5635c6d8dbcc7a01087dd439c3262dd77bb5eeb4d5ef90c451bc7bd841a134"
 metafile = true
 
 [[files]]
+file = "mods/openblocks-elevator.pw.toml"
+hash = "a525007d8aff0c5ce3fb486b58406a9d33a7aac674afd0ce6de40ec33eace917"
+metafile = true
+
+[[files]]
 file = "mods/particle-core.pw.toml"
 hash = "eb14ed576f8242bdadc264b317a2cc51703e3505f54845b43bb64a2586b4c7e8"
 metafile = true
 
 [[files]]
+file = "mods/pipez.pw.toml"
+hash = "f0419946c97099f88c5d78523915a02859e4f7bcf91cfaa69c4611ce3b72ea48"
+metafile = true
+
+[[files]]
 file = "mods/placebo.pw.toml"
 hash = "7f58f69079e947900d188726ed7c6b347d8b6c43082930e4aa2fea3f48102f97"
+metafile = true
+
+[[files]]
+file = "mods/polylib.pw.toml"
+hash = "e66b78399d401ca18b0e60e813d503527d34b02a42125dec688690943a38e36f"
 metafile = true
 
 [[files]]
@@ -374,6 +483,11 @@ hash = "82e084e5fe83f87a01bc7f030f5ca0d59274122e6d634bdcb5d4c9cb3385dd71"
 metafile = true
 
 [[files]]
+file = "mods/shrink_.pw.toml"
+hash = "3db64223746b3f8cf316e4efa28acd3506c2146a4483a955ed4a43165cb36570"
+metafile = true
+
+[[files]]
 file = "mods/skyblock-builder.pw.toml"
 hash = "f37b139daeb029c5aec76b3ecd4caffd610e82a7373953313bf52a77650aa11d"
 metafile = true
@@ -394,8 +508,18 @@ hash = "d65ad29b9e9d012fea220ae2cf269441310ae71126ad0466bef347d299de5f94"
 metafile = true
 
 [[files]]
+file = "mods/squat-grow.pw.toml"
+hash = "5ffba890c7f34c0c5abe8bd170ee736d3d4a40ca11ed3becc3951ea51576f9a2"
+metafile = true
+
+[[files]]
 file = "mods/supermartijn642s-config-lib.pw.toml"
 hash = "52da0337280b1cbb949d3d54676f7250d075004a0304f562ebbc32870a21f2bd"
+metafile = true
+
+[[files]]
+file = "mods/supermartijn642s-core-lib.pw.toml"
+hash = "b0ad232c32758bf191ea2176baa4fde15424974811a212f6ab17918378add9ff"
 metafile = true
 
 [[files]]
@@ -406,6 +530,16 @@ metafile = true
 [[files]]
 file = "mods/theurgy.pw.toml"
 hash = "ebaa28b2e0aa21a92fbdf9263d1da594767715f6e75e3f2ad517c6d847a723a4"
+metafile = true
+
+[[files]]
+file = "mods/time-in-a-bottle.pw.toml"
+hash = "cb3466babb4df1861a4fb29b97e8ca263c32526d3cc46545cc9fcf4807e657a3"
+metafile = true
+
+[[files]]
+file = "mods/titanium.pw.toml"
+hash = "949591d522df25b06232af5a189c8070c03d6ffc6a42f5a80b337a591e07ddef"
 metafile = true
 
 [[files]]

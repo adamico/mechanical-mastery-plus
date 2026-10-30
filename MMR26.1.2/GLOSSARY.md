@@ -25,12 +25,16 @@ _Avoid_: pack mod, core mod
 To break a Mechanical Essence down into its mix, on a Recycler or, much more slowly, by hand, as Factorio's scrap is. It is how resources enter this line. The higher the tier, the more processed what it decomposes into: Advanced into the most refined intermediates, Basic into raw resources. A lower tier's outputs need more stages to become what the tier above yielded, so the factory built for one tier becomes the last stages of the next one's and grows upstream rather than being replaced. Each lower tier is harder and longer to decompose, with more loops and more mods: Advanced, the first, is the easiest, and Basic, the last, the hardest.
 _Avoid_: break down (Voidworks' word for its own item breakdown)
 
+**Recycle**:
+To break any item that isn't an essence down one band, on a Recycler only, for part of what made it, as Factorio's recycler does. It is how a team gets below the band its essence decomposes into, and how it throws surplus away. Recycling never wakes C.O.D. and never counts against Inflation.
+_Avoid_: decompose (for an item that isn't an essence), scrap, void
+
 **Recycler**:
 The companion mod's machine, after Factorio's, and much faster than decomposing by hand. It decomposes an essence into its mix, and recycles any item one band down for part of what made it, so a team can always rebuild from raw resources and recycling is also how surplus is thrown away. It is a multiblock built block by block: a core in the middle of a 3x3, and any mix of drives, inputs, outputs and casings in the other eight places, with at least one drive, input and output. Every Recycler processes anything; its core's tier decides how well.
 _Avoid_: starter machine, decomposer, crank recycler
 
 **Core**:
-The middle block of a Recycler, which holds its work and whose tier sets how fast it runs and how well, such as how much recycling returns or how many it processes at once.
+The middle block of a Recycler, which holds its work and whose tier sets how fast it runs and how well: its yield, and how many it processes at once.
 
 **Drive**:
 A part of a Recycler that turns it: by a player's right-click, a redstone signal, FE, a pack mod's magic or other means. A Recycler's drives add up; a hand-worked drive never turns faster than a player, and FE drives stop under the energy handicap.
@@ -40,8 +44,12 @@ _Avoid_: crank (what a hand-worked drive is turned by), handle
 A neutral part of a Recycler that does nothing but fill a place in its 3x3.
 
 **Mix**:
-What one decompose of an essence yields: several items of its tier's band in fixed amounts. Each essence has one mix, never changed by research.
+The full amounts an essence breaks down into: several items of its tier's band, in fixed amounts. A decompose returns its yield of them, so each essence's mix holds on average, not on every decompose. Each essence has one mix, never changed by research.
 _Avoid_: output, loot
+
+**Yield**:
+The share of a mix, or of what made an item, that one decompose or recycle returns, each part of an item left over as a chance of one. The core's tier sets it; by hand is always the lowest core's.
+_Avoid_: fraction, return rate, efficiency
 
 **Alternate recipe**:
 An ascending recipe a challenge's research unlocks, often on one machine of the challenge's mods: a shortcut that skips a band, a step that mixes materials (copper with iron), or a more efficient step, as Satisfactory's are.

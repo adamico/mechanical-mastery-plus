@@ -56,6 +56,7 @@ public final class MechanicalMasteryRebornGameTests {
         TEST_TYPES.register(modBus);
         // Posted only when game tests are enabled, which a production game never is.
         modBus.addListener(MechanicalMasteryRebornGameTests::registerTests);
+        TestYield.useFull();
     }
 
     private static void registerTests(RegisterGameTestsEvent event) {
@@ -69,6 +70,8 @@ public final class MechanicalMasteryRebornGameTests {
         CodTests.register(tests);
         HandDecomposeTests.register(tests);
         RecyclerTests.register(tests);
+        RecyclingTests.register(tests);
+        YieldTests.register(tests);
         // Each test that records a decompose claims a team of its own.
         Teams.use(new TestTeams(Teams.installed()));
     }

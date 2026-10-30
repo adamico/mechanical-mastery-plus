@@ -1,0 +1,20 @@
+{
+  "keys": [
+    {
+      "name": "results",
+      "role": "output",
+      "type": {
+        "type": "list",
+        "component": "item_stack"
+      }
+    },
+    {
+      "name": "ingredient",
+      "role": "input",
+      "type": "sized_ingredient"
+    }
+  ],
+  "unique": [
+    "ingredient"
+  ]
+}

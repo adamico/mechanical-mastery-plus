@@ -1,0 +1,13 @@
+name = "Cobblegen Galore"
+filename = "cobblegengalore-26.1.2-0.2.9.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "40f14d6e0be12f4ed894dc8eee0b9c9910cf014e"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 8223486
+project-id = 1108467

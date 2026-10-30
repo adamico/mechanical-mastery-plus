@@ -93,7 +93,7 @@ final class RecyclerTests {
         for (int i = 1; i < RecyclerCoreBlockEntity.TURNS; i++) {
             helper.assertValueEqual(build.core().turn(), RecyclerCoreBlockEntity.Turn.COUNTED, "turn " + i);
         }
-        helper.assertValueEqual(build.core().turn(), RecyclerCoreBlockEntity.Turn.DECOMPOSED, "the last turn");
+        helper.assertValueEqual(build.core().turn(), RecyclerCoreBlockEntity.Turn.WORKED, "the last turn");
         helper.succeed();
     }
 

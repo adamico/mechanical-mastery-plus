@@ -1,0 +1,8 @@
+{
+  "type": "mechanicalmasteryreborn:decomposing",
+  "ingredient": {"ingredient": "mechanicalmasteryreborn:regular_mechanical_essence", "count": 1},
+  "results": [
+    {"id": "minecraft:cobblestone", "count": 4},
+    {"id": "minecraft:oak_planks", "count": 8}
+  ]
+}
