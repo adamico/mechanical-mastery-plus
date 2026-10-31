@@ -4,6 +4,8 @@ Written for the pack and its players: what Mechanical Mastery Reborn adds, or ch
 
 ## Unreleased
 
+- The Recycler's core now shows its vent on its front, turned the way it faces, with casing on every other side. An input now shows its opening on top, with casing on its sides, and looks the same whichever way it was placed.
+
 ## 0.1.0
 
 - A decomposing or recycling recipe may now hold any number of results, not nine at most, so the pack's Advanced mix of twenty kinds loads; one with no results, or naming an item twice, is still refused (#209).

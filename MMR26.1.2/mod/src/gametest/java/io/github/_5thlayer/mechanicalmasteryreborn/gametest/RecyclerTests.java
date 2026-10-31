@@ -14,7 +14,6 @@ import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity.Status;
-import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerInputBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerLayout;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerOutputBlock;
 import net.minecraft.core.BlockPos;
@@ -86,7 +85,6 @@ final class RecyclerTests {
         tests.test("recycler_decompose_is_recorded_for_its_island_team", 1, RecyclerTests::recorded);
         tests.test("recycler_core_placed_turns_its_corner_drives", 1, RecyclerTests::coreTurnsDrives);
         tests.test("recycler_drive_placed_takes_its_corner", 1, RecyclerTests::drivePlacedTakesCorner);
-        tests.test("recycler_input_placed_faces_its_player", 1, RecyclerTests::inputFacesPlayer);
     }
 
     private static void decomposes(GameTestHelper helper) {
@@ -500,15 +498,6 @@ final class RecyclerTests {
                 "the corner of a drive placed beside a core facing north");
         helper.assertValueEqual(helper.getBlockState(back).getValue(HandDriveBlock.CORNER), DriveCorner.SOUTH_EAST,
                 "the corner of a drive placed at the back of a core facing north");
-        helper.succeed();
-    }
-
-    private static void inputFacesPlayer(GameTestHelper helper) {
-        BlockPos input = new BlockPos(4, 1, 4);
-        // A mock player looks south, so the input's front faces back north, toward them.
-        placeOnTheFloor(helper, Recycler.INPUT_ITEM.get(), input);
-        helper.assertValueEqual(helper.getBlockState(input).getValue(RecyclerInputBlock.FACING), Direction.NORTH,
-                "the front of an input a player looking south placed");
         helper.succeed();
     }
 
