@@ -43,7 +43,8 @@ final class RecyclingTests {
         tests.test("recycling_input_refuses_what_is_refined_or_uncrafted_for_free", 1, RecyclingTests::refused);
         tests.test("recycling_input_takes_what_only_uncrafting_makes", 1, RecyclingTests::uncrafted);
         tests.test("recycling_emi_leaves_out_what_is_refused", 1, RecyclingTests::table);
-        tests.test("recycling_one_of_what_a_recipe_makes_several_of_returns_its_share", 1, RecyclingTests::paper);
+        tests.test("recycling_one_of_what_a_recipe_makes_several_of_returns_its_share", 1, RecyclingTests::stoneBricks);
+        tests.test("recycling_a_furnace_made_of_one_raw_kind_returns_it", 1, RecyclingTests::furnace);
         tests.test("recycling_is_never_recorded", 1, RecyclingTests::neverRecorded);
         tests.test("recycling_input_refuses_a_filled_shulker_box", 1, RecyclingTests::shulkerBoxes);
         tests.test("recycling_input_refuses_an_essence_nothing_decomposes", 1, RecyclingTests::essenceWithNoRecipe);
@@ -125,9 +126,12 @@ final class RecyclingTests {
         helper.succeed();
     }
 
-    /** What is refined (cooked, or the planks) and what a player uncrafts for free (a block of ingots, of raw iron, of wheat). */
+    /**
+     * What is refined (cooked, the planks, or cut from one raw kind alone) and what a player uncrafts for free (a block
+     * of ingots, of raw iron, of wheat).
+     */
     private static final List<Item> REFUSED = List.of(Items.IRON_INGOT, Items.OAK_PLANKS, Items.STONE, Items.GLASS, Items.COOKED_BEEF,
-            Items.IRON_BLOCK, Items.RAW_IRON_BLOCK, Items.HAY_BLOCK);
+            Items.SANDSTONE, Items.PAPER, Items.BONE_MEAL, Items.RED_DYE, Items.IRON_BLOCK, Items.RAW_IRON_BLOCK, Items.HAY_BLOCK);
 
     private static void refused(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
@@ -159,12 +163,21 @@ final class RecyclingTests {
         helper.succeed();
     }
 
-    /** Three sugar cane make three paper, so one paper recycles into one cane, not three. */
-    private static void paper(GameTestHelper helper) {
+    /** Four stone make four stone bricks, so one stone brick recycles into one stone, not four. */
+    private static void stoneBricks(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
-        build.feed(new ItemStack(Items.PAPER));
+        build.feed(new ItemStack(Items.STONE_BRICKS));
         build.turn(RecyclerCoreBlockEntity.TURNS);
-        build.expectOutputs(new ItemStack(Items.SUGAR_CANE));
+        build.expectOutputs(new ItemStack(Items.STONE));
+        helper.succeed();
+    }
+
+    /** A furnace is cut from cobblestone alone, but it is a thing, not a material, so it recycles. */
+    private static void furnace(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        build.feed(new ItemStack(Items.FURNACE));
+        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.expectOutputs(new ItemStack(Items.COBBLESTONE, 8));
         helper.succeed();
     }
 

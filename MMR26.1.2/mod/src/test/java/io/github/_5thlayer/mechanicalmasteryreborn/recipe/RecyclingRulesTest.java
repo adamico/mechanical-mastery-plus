@@ -18,6 +18,8 @@ import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Outcome
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Refusal;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Refused;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Share;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Traits;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /** What an item recycles into, at full cost, from the recipes that make it run backwards. */
@@ -34,14 +36,21 @@ class RecyclingRulesTest {
         makers.computeIfAbsent(result, key -> new ArrayList<>()).add(new Made<>(kind, id, shares, count));
     }
 
+    /** Ingots are smelted, so refined, as in the game. */
+    @BeforeEach
+    void smeltIngots() {
+        recipe("iron_ingot", 1, Kind.COOKING, "minecraft:iron_ingot", "raw_iron");
+        recipe("copper_ingot", 1, Kind.COOKING, "minecraft:copper_ingot", "raw_copper");
+    }
+
     private Outcome<String> recycle(String item) {
         return recycle(item, Optional.empty());
     }
 
-    /** Ores end in {@code _ore}; the refined tag holds the planks. */
+    /** Ores end in {@code _ore}; the refined tag holds the planks; a furnace holds things, and a helmet is worn. */
     private Outcome<String> recycle(String item, Optional<List<Share<String>>> override) {
-        return RecyclingRules.recycle(item, override, key -> makers.getOrDefault(key, List.of()), key -> key.endsWith("_ore"),
-                key -> key.endsWith("_planks"));
+        return RecyclingRules.recycle(item, override, key -> makers.getOrDefault(key, List.of()),
+                new Traits<>(key -> key.endsWith("_ore"), key -> key.endsWith("_planks"), key -> key.equals("furnace") || key.endsWith("_helmet")));
     }
 
     private static Outcome<String> into(Object... itemsAndAmounts) {
@@ -143,23 +152,41 @@ class RecyclingRulesTest {
     }
 
     @Test
-    void anItemAlsoUncraftedFromABlockRecyclesByItsOtherRecipe() {
+    void whatEveryRecipeMakesFromOneRawKindAloneIsRefined() {
+        recipe("sandstone", 1, Kind.CRAFTING, "minecraft:sandstone", "4 sand");
+        recipe("paper", 3, Kind.CRAFTING, "minecraft:paper", "3 sugar_cane");
+        assertEquals(new Refused<>(Refusal.REFINED), recycle("sandstone"));
+        assertEquals(new Refused<>(Refusal.REFINED), recycle("paper"));
+    }
+
+    @Test
+    void anItemAlsoUncraftedFromABlockIsRefinedWhenItsOtherRecipeCutsIt() {
         recipe("bone_meal", 3, Kind.CRAFTING, "minecraft:bone_meal", "bone");
         recipe("bone_meal", 9, Kind.CRAFTING, "minecraft:bone_meal_from_bone_block", "bone_block");
         recipe("bone_block", 1, Kind.CRAFTING, "minecraft:bone_block", "9 bone_meal");
-        assertEquals(into("bone", 1.0 / 3), recycle("bone_meal"));
+        assertEquals(new Refused<>(Refusal.REFINED), recycle("bone_meal"));
     }
 
     @Test
-    void aBlockNothingTurnsBackIsRecycled() {
-        recipe("snow_block", 1, Kind.CRAFTING, "minecraft:snow_block", "4 snowball");
-        assertEquals(into("snowball", 4), recycle("snow_block"));
+    void aThingMadeFromOneRawKindIsNotRefined() {
+        recipe("furnace", 1, Kind.CRAFTING, "minecraft:furnace", "8 cobblestone");
+        recipe("turtle_helmet", 1, Kind.CRAFTING, "minecraft:turtle_helmet", "5 turtle_scute");
+        assertEquals(into("cobblestone", 8), recycle("furnace"));
+        assertEquals(into("turtle_scute", 5), recycle("turtle_helmet"));
     }
 
     @Test
-    void makingSeveralFromOneIsRunBackwardsWhenNothingMakesItBack() {
-        recipe("stick", 4, Kind.CRAFTING, "minecraft:stick_from_bamboo", "bamboo");
-        assertEquals(into("bamboo", 0.25), recycle("stick"));
+    void anItemCutFromARefinedOneRecycles() {
+        recipe("stone", 1, Kind.COOKING, "minecraft:stone", "cobblestone");
+        recipe("stone_slab", 6, Kind.CRAFTING, "minecraft:stone_slab", "3 stone");
+        assertEquals(into("stone", 0.5), recycle("stone_slab"));
+    }
+
+    @Test
+    void anItemOnlySomeRecipesCutFromRawRecyclesByTheFirst() {
+        recipe("stick", 4, Kind.CRAFTING, "minecraft:stick", "2 oak_planks");
+        recipe("stick", 1, Kind.CRAFTING, "minecraft:stick_from_bamboo_item", "2 bamboo");
+        assertEquals(into("oak_planks", 0.5), recycle("stick"));
     }
 
     @Test

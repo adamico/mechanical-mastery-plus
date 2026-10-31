@@ -30,7 +30,10 @@ public final class RecyclingRules {
 
     /** Why an item can't be recycled. */
     public enum Refusal {
-        /** It is refined: a cooking recipe makes it, or the pack names it refined. Recycling stops at refined (ADR 0008). */
+        /**
+         * It is refined: a cooking recipe makes it, every recipe that makes it cuts it from one raw kind alone, or the
+         * pack names it refined. Recycling stops at refined (ADR 0008).
+         */
         REFINED,
         /** A player uncrafts it for free: a block of what it is made of nine of. */
         UNCRAFT_INSTEAD
@@ -42,6 +45,14 @@ public final class RecyclingRules {
 
     /** A recipe that makes {@code count} of an item from {@code ingredients}, one share per slot or sized ingredient. */
     public record Made<I>(Kind kind, String id, List<Share<I>> ingredients, int count) {
+    }
+
+    /**
+     * What the rules ask of an item beyond its recipes: whether it is an {@code ore}, which loses to any other
+     * ingredient; whether the pack names it {@code refined}; and whether it is a {@code thing}, worn or holding other
+     * items, which is never refined however it is made.
+     */
+    public record Traits<I>(Predicate<I> ore, Predicate<I> refined, Predicate<I> thing) {
     }
 
     /** What recycling an item comes to: what it recycles into, or why it can't be. */
@@ -58,27 +69,43 @@ public final class RecyclingRules {
 
     /**
      * What recycling one {@code item} comes to: {@code override} when the pack wrote one, whatever the item is; else
-     * refused when it is refined ({@code refined}, or cooked) or uncrafted for free; else the cost of the crafting or
-     * assembling recipe {@code makers} names for it, but one that uncrafts it from a block; else itself, which is how
-     * a raw item, a nugget among them, is thrown away.
+     * refused when it is cooked or named refined, or uncrafted for free, or, but for a thing, cut from one raw kind
+     * by every recipe that makes it; else the cost of the crafting or assembling recipe {@code makers} names for it,
+     * but one that uncrafts it from a block; else itself, which is how a raw item, a nugget among them, is thrown away.
      */
-    public static <I> Outcome<I> recycle(I item, Optional<List<Share<I>>> override, Function<I, List<Made<I>>> makers,
-            Predicate<I> ore, Predicate<I> refined) {
+    public static <I> Outcome<I> recycle(I item, Optional<List<Share<I>>> override, Function<I, List<Made<I>>> makers, Traits<I> traits) {
         if (override.isPresent()) {
             return new Into<>(override.get());
         }
-        List<Made<I>> made = makers.apply(item);
-        if (refined.test(item) || made.stream().anyMatch(recipe -> recipe.kind() == Kind.COOKING)) {
+        if (cookedOrNamed(item, makers, traits)) {
             return new Refused<>(Refusal.REFINED);
         }
-        if (made.stream().anyMatch(recipe -> compresses(item, recipe, makers))) {
+        if (makers.apply(item).stream().anyMatch(recipe -> compresses(item, recipe, makers))) {
             return new Refused<>(Refusal.UNCRAFT_INSTEAD);
         }
-        made = made.stream().filter(recipe -> !uncompresses(item, recipe, makers)).toList();
+        List<Made<I>> made = runBackwards(item, makers);
+        if (!made.isEmpty() && !traits.thing().test(item)
+                && made.stream().allMatch(recipe -> cost(recipe).size() == 1 && raw(cost(recipe).getFirst().item(), makers, traits))) {
+            return new Refused<>(Refusal.REFINED);
+        }
         Comparator<Made<I>> order = Comparator.<Made<I>>comparingInt(recipe -> recipe.kind() == Kind.ASSEMBLING ? 0 : 1)
-                .thenComparing(recipe -> recipe.ingredients().stream().anyMatch(ingredient -> ore.test(ingredient.item())))
+                .thenComparing(recipe -> recipe.ingredients().stream().anyMatch(ingredient -> traits.ore().test(ingredient.item())))
                 .thenComparing(Made::id);
         return new Into<>(made.stream().min(order).map(RecyclingRules::cost).orElseGet(() -> List.of(new Share<>(item, 1))));
+    }
+
+    private static <I> boolean cookedOrNamed(I item, Function<I, List<Made<I>>> makers, Traits<I> traits) {
+        return traits.refined().test(item) || makers.apply(item).stream().anyMatch(recipe -> recipe.kind() == Kind.COOKING);
+    }
+
+    /** The recipes that make {@code item} which recycling may run backwards: all but one that uncrafts it from a block. */
+    private static <I> List<Made<I>> runBackwards(I item, Function<I, List<Made<I>>> makers) {
+        return makers.apply(item).stream().filter(recipe -> !uncompresses(item, recipe, makers)).toList();
+    }
+
+    /** Whether {@code item} is raw: nothing cooks it, the pack doesn't name it refined, and no recipe recycling runs backwards makes it. */
+    private static <I> boolean raw(I item, Function<I, List<Made<I>>> makers, Traits<I> traits) {
+        return !cookedOrNamed(item, makers, traits) && runBackwards(item, makers).isEmpty();
     }
 
     /** Whether {@code recipe} makes one {@code item} from several of one kind, which a recipe uncrafts it back into: a block from ingots. */

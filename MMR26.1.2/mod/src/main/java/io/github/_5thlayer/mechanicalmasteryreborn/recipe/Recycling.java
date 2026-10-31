@@ -29,6 +29,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
@@ -40,6 +41,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeMap;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.EntityBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.Tags;
@@ -59,7 +61,8 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>Vanilla crafting and the assembling types the config names ({@link ServerConfig#assemblingTypes}, Craftworks'
  * in the pack) are run backwards. Smelting, blasting, smoking and campfire cooking never are: what they make is
- * refined, as is what {@link #REFINED} names, and can't be recycled (ADR 0008). An assembling recipe is read through
+ * refined, as is what {@link #REFINED} names and a material every recipe cuts from one raw kind, and can't be
+ * recycled (ADR 0008). An assembling recipe is read through
  * its own codec, so the mod names no suite mod and still plays alone. A tag ingredient returns its first item, and an
  * ore ({@code #c:ores}) loses to anything else. The recipes are read again after a reload or a config change.
  */
@@ -76,7 +79,7 @@ public final class Recycling {
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<RecyclingRecipe>> SERIALIZER =
             SERIALIZERS.register(NAME, RecyclingRecipe::serializer);
 
-    /** The items the pack names refined, beside what cooking makes: the planks, which a crafting recipe cuts from a log. */
+    /** The items the pack names refined, beside what the rules find: the planks, as bamboo's, cut from a crafted block. */
     public static final TagKey<Item> REFINED = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "refined"));
 
     /** The recipes last read, and the server's recipes they were read from: a reload makes a new map. */
@@ -181,12 +184,14 @@ public final class Recycling {
 
         Outcome<Item> recycle(Item item) {
             return outcomes.computeIfAbsent(item, key -> RecyclingRules.recycle(key, Optional.ofNullable(overrides.get(key)),
-                    made -> makers.getOrDefault(made, List.of()), Recycling::ore, Recycling::refined));
+                    made -> makers.getOrDefault(made, List.of()), TRAITS));
         }
     }
 
     private record Read(Item result, Made<Item> made) {
     }
+
+    private static final RecyclingRules.Traits<Item> TRAITS = new RecyclingRules.Traits<>(Recycling::ore, Recycling::refined, Recycling::thing);
 
     private static boolean ore(Item item) {
         return BuiltInRegistries.ITEM.wrapAsHolder(item).is(Tags.Items.ORES);
@@ -249,6 +254,11 @@ public final class Recycling {
         ItemStackTemplate made = product.get();
         return Optional.of(new Read(made.item().value(),
                 new Made<>(kind, holder.id().identifier().toString(), shares, made.count())));
+    }
+
+    /** Whether {@code item} is a thing rather than a material: worn, or a block that holds something, as a furnace. */
+    private static boolean thing(Item item) {
+        return worn(item.builtInRegistryHolder()) || item instanceof BlockItem block && block.getBlock() instanceof EntityBlock;
     }
 
     /** Whether {@code item} wears out or is worn: a tool, a weapon, or armour. */

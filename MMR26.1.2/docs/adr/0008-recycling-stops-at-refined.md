@@ -9,4 +9,5 @@ We could have let the Recycler run smelting backwards, as it first did, so that 
 - A team's surplus refined items can't be thrown away on a Recycler; they go to the Shop.
 - Theurgy's routes are counted in ingots; one that takes raw ore needs the Shop.
 - The Recycler's code changes: smelting no longer recycles anything, and a refined item is refused.
+- What is refined is what Regular's mix is drawn from, and what it is cut or smelted from is what Basic's must give: refusing a refined item strands nothing past those tiers. A material cut from one raw kind alone, as sandstone, paper or bone meal, is refined; a thing worn or holding something, as armour or a furnace, never is.
 - Raw surplus, ores among them, can still be thrown away on a Recycler, and so can anything made only by a recipe the Recycler doesn't read.
