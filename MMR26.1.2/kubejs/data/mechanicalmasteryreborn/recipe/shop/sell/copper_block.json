@@ -1,0 +1,8 @@
+{
+  "type": "adminshop:item_selling",
+  "price": 1200,
+  "item": {
+    "id": "minecraft:copper_block",
+    "count": 1
+  }
+}

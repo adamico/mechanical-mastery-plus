@@ -1,0 +1,8 @@
+{
+  "type": "adminshop:item_buying",
+  "price": 400,
+  "result": {
+    "id": "minecraft:raw_iron",
+    "count": 1
+  }
+}

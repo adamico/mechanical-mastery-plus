@@ -1,0 +1,9 @@
+{
+  "type": "adminshop:item_selling",
+  "price": 250000,
+  "permit": "reborn_essence_sell",
+  "item": {
+    "id": "mechanicalmasteryreborn:galvanic_essence",
+    "count": 1
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "adminshop:item_buying",
+  "price": 1000000,
+  "permit": "reborn_money",
+  "result": {
+    "id": "adminshop:permit",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {
+        "key": "reborn_essence_sell"
+      }
+    }
+  }
+}

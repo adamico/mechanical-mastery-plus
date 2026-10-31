@@ -1,0 +1,9 @@
+{
+  "type": "adminshop:item_selling",
+  "price": 400,
+  "permit": "reborn_money",
+  "item": {
+    "id": "minecraft:dried_kelp_block",
+    "count": 1
+  }
+}

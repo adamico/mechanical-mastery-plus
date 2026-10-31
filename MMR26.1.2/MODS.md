@@ -29,7 +29,7 @@ The challenges after 0.0.1 (#210), each one's chain locked until a team starts i
 
 - **Gateways to Eternity**: the protection challenge. Portals the pack writes, whose waves of mobs drop what its chain needs.
 - **Neo Vitae**: the life challenge. Blood magic, paid for in the player's own health.
-- **AdminShop**: the money challenge, and the Shop, which is never locked. Not in `mods/` until its 26.1.2 port is on CurseForge.
+- **AdminShop**: the money challenge, and the Shop, which is never locked: the skyblock's store for seeds, spawn eggs, saplings, raw ores, water and lava, and where metal blocks sell. Its Offers are the pack's own, in `kubejs/data/mechanicalmasteryreborn/recipe/shop/`, checked by `scripts/check_offers.py`. Not in `mods/` until its 26.1.2 port is on CurseForge; until then `scripts/launch.py` adds its local build.
 
 Added from the pack's CurseForge profile:
 

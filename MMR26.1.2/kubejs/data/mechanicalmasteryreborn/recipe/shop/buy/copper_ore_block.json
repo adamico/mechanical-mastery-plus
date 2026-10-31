@@ -1,0 +1,9 @@
+{
+  "type": "adminshop:item_buying",
+  "price": 40000,
+  "permit": "reborn_ore_buy",
+  "result": {
+    "id": "fieldworks:copper_ore",
+    "count": 1
+  }
+}
