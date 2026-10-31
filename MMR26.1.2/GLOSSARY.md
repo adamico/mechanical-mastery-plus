@@ -26,11 +26,11 @@ To break a Mechanical Essence down into its mix, on a Recycler or, much more slo
 _Avoid_: break down (Voidworks' word for its own item breakdown)
 
 **Recycle**:
-To break any item that isn't an essence down one band, on a Recycler only, for part of what made it, as Factorio's recycler does. It is how a team gets below the band its essence decomposes into, and how it throws surplus away. Recycling never wakes C.O.D. and never counts against Inflation.
+To break any item that isn't an essence down one band, on a Recycler only, for part of what made it, as Factorio's recycler does. It undoes only the crafting that made an item, never smelting, so it stops at refined: a refined or raw item can't be recycled. It is how a team gets below the band its essence decomposes into, and how it throws surplus away. Recycling never wakes C.O.D. and never counts against Inflation.
 _Avoid_: decompose (for an item that isn't an essence), scrap, void
 
 **Recycler**:
-The companion mod's machine, after Factorio's, and much faster than decomposing by hand. It decomposes an essence into its mix, and recycles any item one band down for part of what made it, so a team can always rebuild from raw resources and recycling is also how surplus is thrown away. It is a multiblock built block by block: a core in the middle of one edge of a 3x3, its front facing out, and any mix of drives, inputs, outputs and casings in the other eight places, the centre among them, with at least one drive, input and output. Every Recycler processes anything; its core's tier decides how well.
+The companion mod's machine, after Factorio's, and much faster than decomposing by hand. It decomposes an essence into its mix, and recycles any item one band down for part of what made it, so a team can always rebuild from refined resources and recycling is also how surplus is thrown away. It is a multiblock built block by block: a core in the middle of one edge of a 3x3, its front facing out, and any mix of drives, inputs, outputs and casings in the other eight places, the centre among them, with at least one drive, input and output. Above that first floor it may have more, each a full 3x3 of any parts, as many floors in all as its core's tier, the minimums counted across them all. Every Recycler processes anything; its core's tier decides how well. Each output holds three kinds of item; when a decompose or recycle gives more kinds than its outputs hold, it returns as many as fit, picked at random, and the rest are lost, so more outputs return more of a mix.
 _Avoid_: starter machine, decomposer, crank recycler
 
 **Core**:
@@ -44,7 +44,7 @@ _Avoid_: crank (what a hand-worked drive is turned by), handle
 A neutral part of a Recycler that does nothing but fill a place in its 3x3.
 
 **Mix**:
-The full amounts an essence breaks down into: several items of its tier's band, in fixed amounts. A decompose returns its yield of them, so each essence's mix holds on average, not on every decompose. Each essence has one mix, never changed by research.
+The full amounts an essence breaks down into: several items of its tier's band, in fixed amounts. A decompose returns its yield of them, so each essence's mix holds on average, not on every decompose, and only on a Recycler with room for every kind. A mix may hold any number of kinds, in any amounts. Each essence has one mix, never changed by research.
 _Avoid_: output, loot
 
 **Yield**:
@@ -55,7 +55,7 @@ _Avoid_: fraction, return rate, efficiency
 An ascending recipe a challenge's research unlocks, often on one machine of the challenge's mods: a shortcut that skips a band, a step that mixes materials (copper with iron), or a more efficient step, as Satisfactory's are.
 
 **Band**:
-How processed an item is, from the top: intermediate 2, intermediate 1, refined, raw. Each essence tier decomposes into one band, Advanced into intermediate 2 down to Basic into raw.
+How processed an item is, from the top: intermediate 2, intermediate 1, refined, raw. A refined item is only smelted or cut from raw, however many times: ingots, planks, glass, stone and smooth stone. An intermediate 1 is the first crafted thing, and recycles completely into refined and raw items in one step, as a piston or a stick does; an intermediate 2 is anything that takes two steps or more, as an Assembler made from a Crafter does, or a Hopper from a Chest. Wood and stone count as much as metal. Each essence tier decomposes into one band, Advanced into intermediate 2 down to Basic into raw.
 
 **Inflation**:
 The excess C.O.D. has built up since the current challenge began: essences it has made minus essences the team has decomposed. Only while a challenge is played does C.O.D. make them ever faster, with no ceiling, so it climbs whenever decomposing falls behind; voiding or storing essence doesn't lower it. When it reaches its cap before the challenge is finished, the challenge resets, and C.O.D. falls back to the pace it woke at.
@@ -69,7 +69,7 @@ _Avoid_: new essence
 The final essence, made in the last chapter from the four Transmuted Essences, which shuts C.O.D. down for good.
 
 **Challenge**:
-One of four questlines, each bound to a fixed mod or set of mods, started at the lab. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. Finishing it makes a Transmuted Essence that blocks the tier C.O.D. is making. Its mods take only raw and refined items, never intermediates. Its chain stays locked for a team until it starts the challenge, so nothing of it can be built ahead, and stays unlocked from then on, past a win or a reset. What its mods offer outside the chain, as the Shop, is never locked, and their items can still come from a mix, to be recycled.
+One of four questlines, each bound to a fixed mod or set of mods, started at the lab. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. Finishing it makes a Transmuted Essence that blocks the tier C.O.D. is making. Its mods take only raw and refined items, never intermediates. Its chain stays locked for a team until it starts the challenge, so nothing of it can be built ahead, and a chain machine that comes from a mix does no work until then, and stays unlocked from then on, past a win or a reset. What its mods offer outside the chain, as the Shop, is never locked, and their items can still come from a mix, to be recycled.
 _Avoid_: chapter (a quest-book page), stage
 
 **Chain**:
@@ -92,4 +92,4 @@ Consuming science items in the lab to unlock a challenge's alternate recipes for
 _Avoid_: stage, unlock (as a noun)
 
 **Shop**:
-Where essences and goods are traded for money. On this line it is a side path, and the money handicap is what makes it matter.
+Where essences and goods are traded for money: a second way to resources beside decomposing, selling what a team has too much of and buying what it lacks. Until Basic, whose mix holds them, it is the only source of ores. Money was the heart of Mechanical Mastery Plus and stays a big part of its sequel. It is never locked, and the money handicap is what makes it costly.

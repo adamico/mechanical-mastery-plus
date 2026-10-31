@@ -1,142 +1,268 @@
-# The Advanced mix: intermediate-2 items for the energy challenge (#209)
+# The Advanced mix: what Advanced Mechanical Essence decomposes into (#209)
 
-Research for Advanced Mechanical Essence's mix. Advanced decomposes into the band intermediate 2, and the Recycler brings that down to the refined copper, iron, gold and redstone the energy challenge's Chain takes into Theurgy ([ADR 0006](../adr/0006-a-challenges-mods-take-only-raw-and-refined-items.md), [theurgy-chain.md](theurgy-chain.md)). `advanced-mix.json` holds the same content as data, with every candidate's full tree.
+Research for Advanced Mechanical Essence's mix, redone against the frozen mod list (#210). `advanced-mix.json` holds the chosen mix and, for every item at intermediate 2 or deeper that carries copper, iron, gold or redstone, its recycle tree, level and yields.
 
-**Amended for packing.** The maintainer has since ruled that packing recipes are excluded: a candidate whose depth or yield relies on a storage block (9 ingots ↔ 1 block) or any other compress/uncompress pair is dropped from the mix, and blocks are not a band step. The Recycler's code does not change. The mix stays true intermediate 2, exactly two recycles to refined. This amendment marks the candidates that relied on blocks as excluded, adds four candidates a full rescan found, and recomputes the mixes. What the exclusion costs is in section 4. Gold from outside the challenge mods is in [gold-sources.md](gold-sources.md).
+## Decided
 
-Sources, all primary:
+- **Advanced's mix is M5** (section 3): 20 kinds, 22 items, all stacking to 64. #207 tunes the amounts and the yield, and may scale them down; the kinds stay.
+- **Intermediate 2** is any item that doesn't recycle completely into refined and raw items in one step. Every ingredient counts, wood and stone as much as metal: a Hopper (iron and a Chest) is intermediate 2, a Piston, a Chest or a Stick intermediate 1. Deeper items, as Beltworks' Feeder, are in. **Refined** is anything only smelted or cut from raw, however many times: ingots, planks, glass, stone, smooth stone (glossary **Band**).
+- **Recycling undoes only crafting and Craftworks' assembling**, never smelting, and refuses refined and raw items. Ores come only from the Shop until Basic ([ADR 0008](../adr/0008-recycling-stops-at-refined.md)).
+- **Packing is allowed**: an item built on storage blocks qualifies, and the extra metal a team gets by crafting the blocks back to ingots is accepted.
+- **Out of every mix**: waxed items, and armor, weapons and tools (Gearworks' suits and lances among them). Gearworks' upgrades are in.
+- **Challenge mods' items are in.** A chain's recipes, the machines' own processing recipes among them, stay locked until the challenge starts (ADR 0007), so a chain machine from a mix does no work before then.
+- **Gold comes from the mix**: M5 carries 0.64 per essence, enough for route A. The Void Crucible's own recipe is left alone, and the Fieldworks Gold Ore Patch (#170) has no gold duty.
+- **The Recycler's parts** are made from wood and stone only (planks, sticks, cobblestone, smooth stone, chests) and are no part of a mix.
+- **A mix may hold any number of kinds.** A Recycler whose outputs hold fewer kinds than a decompose gives returns as many as fit, picked at random, and loses the rest. M5's 20 kinds don't fit a tier-1 Recycler's 6 outputs (18 kinds) today, so #209 waits on that change.
 
-- **Code**: `mod/src/main/java/io/github/_5thlayer/mechanicalmasteryreborn/recipe/RecyclingRules.java`, `Recycling.java` and `Yield.java`, `ServerConfig.java` (`recycler.yield.tier_1`, 0.25), and `defaultconfigs/mechanicalmasteryreborn-server.toml` (`assembling_types = ["craftworks:assembling"]`).
-- **Recipes**: the vanilla 26.1.2 client jar (`~/.gradle/caches/neoformruntime/artifacts/minecraft_26.1.2_client.jar`), the NeoForge 26.1.2.109 universal jar from the CurseForge install (its `data/minecraft/recipe/` replaces vanilla's piston, hopper, bucket and others by id), and every jar in the instance's `mods/` folder. All were unzipped and read as data. Short prefixes below:
-  - `V/` = `minecraft_26.1.2_client.jar!/data/minecraft/recipe/`
-  - `NF/` = `neoforge-26.1.2.109-universal.jar!/data/minecraft/recipe/`
-  - `PW/` = `pipeworks-26.1.2-0.4.1-local.jar!/data/pipeworks/recipe/`
-  - `WW/` = `wireworks-26.1.2-0.6.7-local.jar!/data/wireworks/recipe/`
-  - `BW/` = `beltworks-26.1.2-0.5.6-local.jar!/data/beltworks/recipe/`
-  - `CW/` = `craftworks-26.1.2-0.11.0-local.jar!/data/craftworks/recipe/`
-  - `GW/` = `gearworks-26.1.2-0.2.1-local.jar!/data/gearworks/recipe/`
-  - `FW/` = `fieldworks-26.1.2-0.6.0-local.jar!/data/fieldworks/recipe/`
-  - `RS/` = `refinedstorage-neoforge-3.2.1.jar!/data/refinedstorage/recipe/`
-  - `MR/` = `modular-routers-26.1.2.2.jar!/data/modularrouters/recipe/`
-  - `NV/` = `neovitae-26.1.2-1.1.49.jar!/data/neovitae/recipe/`
-- **Pack scripts**: `kubejs/server_scripts/decomposing.js` only adds the decompose and the Recycler's parts. No pack script adds or replaces a recipe any candidate uses.
+This replaces the earlier research's rules (true intermediate 2 only, no packing, no whole machines), under which the best mix cost 34 to 230 essences per Galvanic Essence.
 
-The trees were worked out by applying `RecyclingRules` to those recipe files with a script. Tag ingredients took their first item, in NeoForge's and vanilla's tag order.
+Sources, all primary: the vanilla 26.1.2 client jar, the NeoForge 26.1.2.109 universal jar (its `data/minecraft/recipe/` replaces vanilla's piston, hopper, bucket and others by id), and all 110 jars in the CurseForge instance's `mods/` folder, unzipped and read as data; the companion mod's `RecyclingRules.java`, `Recycling.java` and `Yield.java` for the rules; `ServerConfig.java` for the tier-1 yield, 0.25. Gateways to Eternity, Apothic Attributes and Placebo add no candidate: the Gate Pearl carries no metal, and the other two have no items. The trees were worked out with a script.
 
-## 1. How recycling works
+## Rule as applied
 
-1. A recycle runs one recipe that makes the item backwards: smelting first, then Craftworks' assembling, then crafting (blasting, smoking and campfire only when nothing else makes it). Uncompressing recipes never run backwards, an ore ingredient loses to any other, and ties go to the recipe id. A `mechanicalmasteryreborn:recycling` recipe overrides all of it (`RecyclingRules.recyclesInto`).
-2. A tag ingredient returns its first item. A recipe that makes several returns each one's share: 3 copper make 3 Pipes, so a Pipe returns 1 copper (`Recycling.read`, `RecyclingRules.cost`).
-3. Each decompose and each recycle returns its yield of the full amounts. Each leftover part is a chance of one more, so the average is exact (`Yield.roll`). A tier-1 core, and decomposing by hand, yields 0.25.
-4. An intermediate-2 item reaches refined in two recycles, so one item returns 0.25 × 0.25 = **1/16** of the metal in its tree. The decompose's own quarter comes on top: one Advanced essence returns **1/64** of its mix's metal.
-5. **The block shortcut.** A copper, iron or redstone block recycles into 9 at a quarter, but crafts into 9 at full yield (`V/copper_ingot.json`, `V/iron_ingot_from_iron_block.json`, `V/redstone.json`). An item built on blocks then returns 1/4 of its tree, not 1/16. The figures marked "craft" below count that. **Under the packing rule, every such item is now excluded**, so the "craft" figures are kept only to show what was lost.
-6. **The wax shortcut.** A waxed copper item recycles to its unwaxed form and honeycomb, then to copper, so it passes at depth 2 with no block. But an axe scrapes the wax off a placed block for free: the waxed and unwaxed pairs are in vanilla's waxables map (`minecraft_26.1.2_client.jar!/net/minecraft/world/item/HoneycombItem.class`, which `AxeItem` reverses), so a player skips a recycle, as with the Waxed Block of Copper. It is not a packing recipe, so these items are flagged, not excluded, and left out of the mixes.
+- **Recycling reverses crafting only** (grid crafting and Craftworks assembling; assembling ranks first, an ore ingredient loses, ties by recipe id; uncompress recipes never run). Smelting, blasting, smoking and campfire are never reversed: an item with any of those recipes is **refined** and a leaf (glass, stone, smooth stone, ingots, netherite ingot via FTB Materials' dust smelting).
+- **Raw/refined (level 0)**: no crafting recipe the Recycler runs; anything smelted; planks; anything stonecut from raw/refined (stone bricks, polished stones, etc.; copper cut blocks excluded since they are cut from a block); andesite/diorite/granite (mined, though vanilla has crafting recipes for them); the four metals and their nuggets (nuggets reach ingots by 9 → 1, packing, now allowed; counted as 1/9 ingot below).
+- **Level** = 1 + the deepest ingredient, over every ingredient (wood and stone count like metal). Stick, chest, furnace, crafting table, piston, bucket, minecart, cauldron, dropper, observer, storage blocks (9 ingots → block) are intermediate 1. Hopper, Blast Furnace, Redstone Torch, Crafter, Rail are 2; Comparator, Repeater, Dispenser (via the bow, which is 2) are 3. Level ≥ 2 qualifies.
+- Out: waxed items (32 in vanilla), armor/weapons/tools (67, by name, plus Gearworks suits/lances/railgun), the Recycler's own parts.
+- **Tier 1**: each recycle 0.25, repeated until everything is refined ("all the way"; leaves at depth d count 0.25^d). "Crafted" = a storage block that comes out is crafted back to 9 at full yield, as a player would do (packing allowed). Per essence = 0.25 (decompose) × Σ over the whole mix.
+- Model caveat: one recipe the model can't read, Functional Storage's drawer ingredient (`functionalstorage:tag_without_component`, a drawer tag), shows as "(planks tag)"; it carries no metal.
 
-## 2. What Theurgy needs per Galvanic Essence
+Reference levels: piston 1, chest 1, furnace 1, stick 1, bucket 1, minecart 1, cauldron 1, observer 1, dropper 1, smithing table 1, copper/iron/redstone block 1, lightning rod 1, iron bars 1; hopper 2, blast furnace 2, redstone torch 2, crafter 2, rail 2, barrel 2 (wooden slab), daylight detector 2, lever 2; comparator 3, repeater 3, dispenser 3; glass pane 3 (it recycles into Connected Glass's scratched pane by id order, an artefact the research already flagged).
 
-From `theurgy-chain.json` (`chains[].starts`) and theurgy-chain.md section 4. A liquefied ingot makes 1 sulfur and a raw ore 3 (`theurgy-…jar!/data/theurgy/recipe/liquefaction/alchemical_sulfur_copper_from_ingots_copper.json`, `…_from_raw_materials_copper.json`). Recycling delivers ingots, so route B is counted in ingots.
+## 1. Suite items re-levelled
 
-| Route | Per Galvanic | Once, to seed the arrays |
-|---|---|---|
-| A, Spagyric breakdown | 16 copper, 4 iron, 2 gold ingots | 1 redstone dust |
-| B, Exaltation of copper | 79 copper ingots (79 Copper Sulfur; theurgy-chain counts 26.3 raw copper at 3 each) | 1 iron ingot, 1 raw gold, 1 redstone dust |
-| C, Transmutation of iron | 16.4 iron ingots | 1 copper ingot, 1 raw gold, 1 redstone dust |
+Old = the level under the earlier rule, which counted only ingredients that carry metal. Sub-amounts in brackets are per one of the parent ingredient. Every row qualifies (level ≥ 2) unless noted. Stack: every row is 64 except Drilling Mud / Magma Slurry buckets (1) and Gearworks' suits, lances and Railgun (1; tools/weapons, out, kept for reference). Gold/iron nuggets are shown as ingot-equivalents (÷9) in the tier-1 column.
 
-Redstone is never a per-Galvanic cost: one dust seeds the Galvanic array once. Gold matters only to route A.
+| Item | Lvl old→new | Recycle tree (level 1 [level 2]) | Full | Tier 1 per item, recycled all the way | Stack | Packing / notable |
+|---|---|---|---|---|---|---|
+| beltworks:express_belt_tile | 3→3 | 1 beltworks:improved_belt_tile [1 beltworks:belt_tile, 0.125 iron_ingot]; 0.125 gold_ingot | Cu 0.188, Fe 0.125, Au 0.125 | Cu 0.00293, Fe 0.00781, Au 0.0312 | 64 |  |
+| beltworks:express_feeder | 5→6 | 1 beltworks:express_loader [1 beltworks:improved_loader, 0.5 gold_ingot]; 1 beltworks:express_belt_tile [1 beltworks:improved_belt_tile, 0.125 gold_ingot] | Cu 0.781, Fe 3.12, Au 0.625 | Cu 0.00278, Fe 0.0122, Au 0.0391 | 64 |  |
+| beltworks:express_loader | 4→5 | 1 beltworks:improved_loader [1 beltworks:loader, 0.5 iron_ingot]; 0.5 gold_ingot | Cu 0.594, Fe 3, Au 0.5 | Cu 0.00818, Fe 0.041, Au 0.125 | 64 |  |
+| beltworks:express_splitter | 5→6 | 1 beltworks:improved_splitter [1 beltworks:splitter, 2 iron_ingot]; 2 gold_ingot | Cu 1.38, Fe 2, Au 2, Rs 3 | Cu 0.0171, Fe 0.125, Au 0.5, Rs 0.00293 | 64 |  |
+| beltworks:feeder | 3→4 | 1 beltworks:loader [0.5 hopper, 0.5 copper_ingot, 0.5 beltworks:belt_tile]; 1 beltworks:belt_tile [0.1875 dried_kelp, 0.1875 copper_ingot] | Cu 0.781, Fe 2.5 | Cu 0.0444, Fe 0.0391 | 64 |  |
+| beltworks:improved_belt_tile | 2→2 | 1 beltworks:belt_tile [0.1875 dried_kelp, 0.1875 copper_ingot]; 0.125 iron_ingot | Cu 0.188, Fe 0.125 | Cu 0.0117, Fe 0.0312 | 64 |  |
+| beltworks:improved_feeder | 4→5 | 1 beltworks:improved_loader [1 beltworks:loader, 0.5 iron_ingot]; 1 beltworks:improved_belt_tile [1 beltworks:belt_tile, 0.125 iron_ingot] | Cu 0.781, Fe 3.12 | Cu 0.0111, Fe 0.0488 | 64 |  |
+| beltworks:improved_loader | 3→4 | 1 beltworks:loader [0.5 hopper, 0.5 copper_ingot, 0.5 beltworks:belt_tile]; 0.5 iron_ingot | Cu 0.594, Fe 3 | Cu 0.0327, Fe 0.164 | 64 |  |
+| beltworks:improved_splitter | 4→5 | 1 beltworks:splitter [2 beltworks:belt_tile, 1 comparator, 1 copper_ingot]; 2 iron_ingot | Cu 1.38, Fe 2, Rs 3 | Cu 0.0684, Fe 0.5, Rs 0.0117 | 64 |  |
+| beltworks:loader | 2→3 | 0.5 hopper [5 iron_ingot, 1 chest]; 0.5 copper_ingot; 0.5 beltworks:belt_tile [0.1875 dried_kelp, 0.1875 copper_ingot] | Cu 0.594, Fe 2.5 | Cu 0.131, Fe 0.156 | 64 |  |
+| beltworks:splitter | 3→4 | 2 beltworks:belt_tile [0.1875 dried_kelp, 0.1875 copper_ingot]; 1 comparator [3 redstone_torch, 1 quartz, 3 stone]; 1 copper_ingot | Cu 1.38, Rs 3 | Cu 0.273, Rs 0.0469 | 64 |  |
+| beltworks:turbo_belt_tile | 4→4 | 1 beltworks:express_belt_tile [1 beltworks:improved_belt_tile, 0.125 gold_ingot]; 0.125 diamond | Cu 0.188, Fe 0.125, Au 0.125 | Cu 0.00073, Fe 0.00195, Au 0.00781 | 64 | diamond |
+| beltworks:turbo_feeder | 6→7 | 1 beltworks:turbo_loader [1 beltworks:express_loader, 0.5 diamond]; 1 beltworks:turbo_belt_tile [1 beltworks:express_belt_tile, 0.125 diamond] | Cu 0.781, Fe 3.12, Au 0.625 | Cu 0.00069, Fe 0.00305, Au 0.00977 | 64 | diamond |
+| beltworks:turbo_loader | 5→6 | 1 beltworks:express_loader [1 beltworks:improved_loader, 0.5 gold_ingot]; 0.5 diamond | Cu 0.594, Fe 3, Au 0.5 | Cu 0.00204, Fe 0.0103, Au 0.0312 | 64 | diamond |
+| beltworks:turbo_splitter | 6→7 | 1 beltworks:express_splitter [1 beltworks:improved_splitter, 2 gold_ingot]; 2 diamond | Cu 1.38, Fe 2, Au 2, Rs 3 | Cu 0.00427, Fe 0.0312, Au 0.125, Rs 0.00073 | 64 | diamond |
+| craftworks:assembler_1 | 3→3 | 1 crafter [5 iron_ingot, 1 crafting_table, 2 redstone, 1 dropper]; 9 iron_ingot; 5 redstone | Fe 14, Rs 8 | Fe 2.56, Rs 1.39 | 64 |  |
+| craftworks:assembler_2 | 4→4 | 1 craftworks:assembler_1 [1 crafter, 9 iron_ingot, 5 redstone]; 6 gold_ingot; 10 redstone | Fe 14, Au 6, Rs 18 | Fe 0.641, Au 1.5, Rs 2.85 | 64 |  |
+| craftworks:assembler_3 | 5→5 | 1 craftworks:assembler_2 [1 craftworks:assembler_1, 6 gold_ingot, 10 redstone]; 4 diamond; 2 redstone_block [9 redstone] | Fe 14, Au 6, Rs 36 | Fe 0.16, Au 0.375, Rs 1.84 (crafted: Fe 0.16, Au 0.375, Rs 5.21) | 64 | packing: redstone_block; diamond |
+| craftworks:refiner | 2→3 | 1 blast_furnace [5 iron_ingot, 1 furnace, 3 smooth_stone]; 4 iron_ingot; 5 redstone | Fe 9, Rs 5 | Fe 1.31, Rs 1.25 | 64 |  |
+| fieldworks:drilling_mud_bucket | 3→3 | 1 water_bucket [1 theurgy:crystallized_water, 1 bucket]; 1 clay_ball | Fe 12 | Fe 0.05 | 1 | water_bucket |
+| fieldworks:harvester_1 | 2→3 | 3 iron_ingot; 4 cobblestone; 1 furnace [8 cobblestone]; 1 iron_pickaxe [3 iron_ingot, 2 stick] | Fe 6 | Fe 0.938 | 64 |  |
+| fieldworks:harvester_2 | 3→4 | 4 copper_ingot; 2 redstone; 2 iron_ingot; 1 fieldworks:harvester_1 [3 iron_ingot, 4 cobblestone, 1 furnace, 1 iron_pickaxe] | Cu 4, Fe 8, Rs 2 | Cu 1, Fe 0.734, Rs 0.5 | 64 |  |
+| fieldworks:magma_slurry_bucket | 3→3 | 1 lava_bucket [1 theurgy:crystallized_lava, 1 bucket]; 1 soul_soil | Fe 12 | Fe 0.05 | 1 | lava_bucket |
+| gearworks:boost_upgrade | 2→4 | 4 gold_ingot; 4 firework_rocket [0.3333 gunpowder, 0.3333 paper]; 1 dispenser [7 cobblestone, 1 bow, 1 redstone] | Au 4, Rs 1 | Au 1, Rs 0.0625 | 64 |  |
+| gearworks:combustion_upgrade | 2→3 | 4 iron_ingot; 1 blast_furnace [5 iron_ingot, 1 furnace, 3 smooth_stone]; 1 redstone | Fe 9, Rs 1 | Fe 1.31, Rs 0.25 | 64 |  |
+| gearworks:diamond_bore_lance | 3→4 | 1 gearworks:iron_bore_lance [6 copper_ingot, 2 redstone, 1 iron_spear]; 3 diamond | Cu 6, Fe 1, Rs 2 | Cu 0.375, Fe 0.0156, Rs 0.125 | 1 (out: tool/weapon) | diamond |
+| gearworks:diamond_gear | 3→3 | 1 gearworks:iron_gear [6 copper_ingot, 2 redstone, 1 iron_chestplate]; 8 diamond | Cu 6, Fe 8, Rs 2 | Cu 0.375, Fe 0.125, Rs 0.125 | 1 (out: tool/weapon) | diamond |
+| gearworks:gear_bench | 2→2 | 6 iron_ingot; 2 redstone; 1 smithing_table [2 iron_ingot, 4 oak_planks] | Fe 8, Rs 2 | Fe 1.62, Rs 0.5 | 64 |  |
+| gearworks:iron_bore_lance | 2→3 | 6 copper_ingot; 2 redstone; 1 iron_spear [1 iron_ingot, 2 stick] | Cu 6, Fe 1, Rs 2 | Cu 1.5, Fe 0.0625, Rs 0.5 | 1 (out: tool/weapon) |  |
+| gearworks:iron_gear | 2→2 | 6 copper_ingot; 2 redstone; 1 iron_chestplate [8 iron_ingot] | Cu 6, Fe 8, Rs 2 | Cu 1.5, Fe 0.5, Rs 0.5 | 1 (out: tool/weapon) |  |
+| gearworks:jump_upgrade | 2→2 | 4 iron_ingot; 3 slime_ball; 1 piston [3 oak_planks, 4 cobblestone, 1 iron_ingot, 1 redstone]; 1 redstone | Fe 5, Rs 2 | Fe 1.06, Rs 0.312 | 64 | slime_ball |
+| gearworks:kinetic_upgrade | 2→2 | 4 copper_ingot; 1 piston [3 oak_planks, 4 cobblestone, 1 iron_ingot, 1 redstone]; 1 redstone | Cu 4, Fe 1, Rs 2 | Cu 1, Fe 0.0625, Rs 0.312 | 64 |  |
+| gearworks:metabolic_upgrade | 2→2 | 4 copper_ingot; 1 golden_carrot [8 gold_nugget, 1 carrot]; 1 redstone | Cu 4, Au 0.889, Rs 1 | Cu 1, Au 0.0556, Rs 0.25 | 64 |  |
+| gearworks:night_vision_upgrade | 2→4 | 4 iron_ingot; 3 glass_pane [1 connectedglass:scratched_glass_pane]; 1 golden_carrot [8 gold_nugget, 1 carrot]; 1 redstone | Fe 4, Au 0.889, Rs 1 | Fe 1, Au 0.0556, Rs 0.25 | 64 |  |
+| gearworks:nuclear_upgrade | 2→2 | 5 iron_ingot; 1 redstone_block [9 redstone]; 2 netherite_ingot; 1 nether_star | Fe 5, Rs 9 | Fe 1.25, Rs 0.562 (crafted: Fe 1.25, Rs 2.25) | 64 | packing: redstone_block; nether_star, netherite_ingot |
+| gearworks:railgun | 2→2 | 1 lightning_rod [3 copper_ingot]; 2 copper_block [9 copper_ingot]; 1 redstone_block [9 redstone]; 1 netherite_ingot | Cu 21, Rs 9 | Cu 1.31, Rs 0.562 (crafted: Cu 4.69, Rs 2.25) | 1 (out: tool/weapon) | packing: copper_block, redstone_block; netherite_ingot |
+| gearworks:reach_upgrade | 2→2 | 4 iron_ingot; 3 ender_pearl; 1 piston [3 oak_planks, 4 cobblestone, 1 iron_ingot, 1 redstone]; 1 redstone | Fe 5, Rs 2 | Fe 1.06, Rs 0.312 | 64 | ender_pearl |
+| gearworks:shield_upgrade | 2→2 | 4 iron_ingot; 2 redstone; 2 obsidian; 1 shield [6 oak_planks, 1 iron_ingot] | Fe 5, Rs 2 | Fe 1.06, Rs 0.5 | 64 | obsidian |
+| gearworks:solar_upgrade | 1→4 | 3 glass_pane [1 connectedglass:scratched_glass_pane]; 4 copper_ingot; 1 daylight_detector [3 glass, 3 quartz, 3 oak_slab]; 1 redstone | Cu 4, Rs 1 | Cu 1, Rs 0.25 | 64 |  |
+| gearworks:speed_upgrade | 2→4 | 4 iron_ingot; 1 sugar [0.3333 honey_bottle]; 2 piston [3 oak_planks, 4 cobblestone, 1 iron_ingot, 1 redstone]; 1 redstone | Fe 6, Rs 3 | Fe 1.12, Rs 0.375 | 64 | honey_block, honey_bottle |
+| pipeworks:outlet | 2→4 | 4 pipeworks:pipe [1 copper_ingot]; 1 dispenser [7 cobblestone, 1 bow, 1 redstone] | Cu 4, Rs 1 | Cu 0.25, Rs 0.0625 | 64 |  |
+| pipeworks:pump | 2→2 | 3 pipeworks:pipe [1 copper_ingot]; 1 piston [3 oak_planks, 4 cobblestone, 1 iron_ingot, 1 redstone]; 1 bucket [3 iron_ingot] | Cu 3, Fe 4, Rs 1 | Cu 0.188, Fe 0.25, Rs 0.0625 | 64 |  |
+| voidworks:end_void_displacer | 3→3 | 4 end_stone_bricks [1 end_stone]; 2 popped_chorus_fruit; 2 end_rod [0.25 blaze_rod, 0.25 popped_chorus_fruit]; 1 sticky_piston [1 slime_ball, 1 piston] | Fe 1, Rs 1 | Fe 0.0156, Rs 0.0156 | 64 | blaze_rod, slime_ball |
+| voidworks:mutation_chamber | 2→2 | 6 amethyst_shard; 2 crying_obsidian; 1 smithing_table [2 iron_ingot, 4 oak_planks] | Fe 2 | Fe 0.125 | 64 | amethyst_shard, crying_obsidian |
+| voidworks:nether_void_displacer | 3→3 | 4 polished_blackstone_bricks [1 polished_blackstone]; 2 magma_cream [1 blaze_powder, 1 slime_ball]; 2 blaze_rod; 1 sticky_piston [1 slime_ball, 1 piston] | Fe 1, Rs 1 | Fe 0.0156, Rs 0.0156 | 64 | blaze_powder, blaze_rod, slime_ball |
+| voidworks:overworld_void_displacer | 3→3 | 4 crying_obsidian; 4 ender_pearl; 1 sticky_piston [1 slime_ball, 1 piston] | Fe 1, Rs 1 | Fe 0.0156, Rs 0.0156 | 64 | crying_obsidian, ender_pearl, slime_ball |
+| voidworks:void_crucible | 2→2 | 6 amethyst_shard; 2 crying_obsidian; 1 cauldron [7 iron_ingot] | Fe 7 | Fe 0.438 | 64 | amethyst_shard, crying_obsidian |
+| wireworks:accumulator | 2→2 | 4 iron_block [9 iron_ingot]; 4 wireworks:battery [1 copper_ingot, 1 iron_ingot, 1 redstone]; 1 copper_ingot | Cu 5, Fe 40, Rs 4 | Cu 0.5, Fe 2.5, Rs 0.25 (crafted: Cu 0.5, Fe 9.25, Rs 0.25) | 64 | packing: iron_block |
+| wireworks:boiler | 2→2 | 7 iron_ingot; 1 bucket [3 iron_ingot]; 1 furnace [8 cobblestone] | Fe 10 | Fe 1.94 | 64 |  |
+| wireworks:reactor | 2→3 | 4 iron_block [9 iron_ingot]; 2 wireworks:plastic; 2 netherite_block [9 netherite_ingot]; 1 blast_furnace [5 iron_ingot, 1 furnace, 3 smooth_stone] | Fe 41 | Fe 2.56 (crafted: Fe 9.31) | 64 | packing: iron_block, netherite_block; netherite_block, netherite_ingot |
+| wireworks:small_pole | 1→2 | 0.5 stick [0.5 oak_planks]; 1 copper_ingot | Cu 1 | Cu 0.25 | 64 |  |
+| wireworks:solar_panel | 2→3 | 2 glass; 1 daylight_detector [3 glass, 3 quartz, 3 oak_slab]; 2 copper_ingot; 1 wireworks:plastic; 1 iron_block [9 iron_ingot] | Cu 2, Fe 9 | Cu 0.5, Fe 0.562 (crafted: Cu 0.5, Fe 2.25) | 64 | packing: iron_block |
+| wireworks:steam_engine | 2→2 | 5 iron_ingot; 1 piston [3 oak_planks, 4 cobblestone, 1 iron_ingot, 1 redstone]; 2 copper_ingot; 1 iron_block [9 iron_ingot] | Cu 2, Fe 15, Rs 1 | Cu 0.5, Fe 1.88, Rs 0.0625 (crafted: Cu 0.5, Fe 3.56, Rs 0.0625) | 64 | packing: iron_block |
+| wireworks:steam_turbine | 2→2 | 4 copper_block [9 copper_ingot]; 2 wireworks:plastic; 2 piston [3 oak_planks, 4 cobblestone, 1 iron_ingot, 1 redstone]; 1 iron_block [9 iron_ingot] | Cu 36, Fe 11, Rs 2 | Cu 2.25, Fe 0.688, Rs 0.125 (crafted: Cu 9, Fe 2.38, Rs 0.125) | 64 | packing: copper_block, iron_block |
+| wireworks:transformer | 2→2 | 4 iron_ingot; 3 copper_ingot; 1 iron_block [9 iron_ingot]; 1 wireworks:plastic | Cu 3, Fe 13 | Cu 0.75, Fe 1.56 (crafted: Cu 0.75, Fe 3.25) | 64 | packing: iron_block |
+| wireworks:transmission_pole | 2→2 | 2 copper_ingot; 1 iron_bars [0.375 iron_ingot]; 2 wireworks:plastic; 2 iron_ingot | Cu 2, Fe 2.38 | Cu 0.5, Fe 0.523 | 64 |  |
 
-## 3. Candidates
+Changes against the old metal-only levels:
+- **New at level 2+**: Small Pole (2, its stick), Solar Upgrade (4, its daylight detector and glass pane). Still intermediate 1: Pipe, Storage Tank, Belt Tile, Medium and Large Pole, Battery, Fuel Cell, Battery Upgrade.
+- **Deeper**: Outlet 2→4 and Splitter 3→4 (dispenser's bow, comparator's torches), Harvester 1/2 and Refiner up one (furnace), Loader/Feeder chain up one (hopper's chest). Nothing drops out.
+- Voidworks' Void Well, Rim, Casing, Hatch and Unmaking Chamber are now level 2–4 but carry no Cu/Fe/Au/Rs, so they are not in the table.
+- Every M4 member qualifies: Steam Turbine, Transformer, Steam Engine, Accumulator, Pump, Transmission Pole, Kinetic and Metabolic Upgrades at 2; Harvester 2, Assembler 2, Splitter, Outlet at 4.
 
-**Depth** is how many recycles an item's copper, iron, gold and redstone take to reach ingots, dust or nuggets. "Mixed 1/2" means some of it comes out at the first recycle. Stone, quartz, plastic and the like that come out earlier don't count against an item. **Passes** means a true intermediate 2.
+## 2. Vanilla and the other mods
 
-**Passes** now also says **excluded, packing** for an item whose tree has a storage block, and **flagged, axe** for a waxed item. Metals are given as Cu, Fe, Au and Rs. "Full" is per item at full yield. "Tier 1" is per item after its recycles at a quarter each (the decompose not included).
+All 306 non-suite, non-waxed, non-tool items at level 2+ that carry copper, iron, gold or redstone were scanned. The table lists the ones worth at least 0.5 ingot-or-dust per item at tier 1 (crafted), richest first; decorative families are summarised after it. Stack 1 is from the item class (`stacksTo(1)` in Refined Storage's disks, storage blocks, controller, cards, wireless items; Functional Storage's and Pipez' tools; LaserIO's holder/cloner); "64?" means no `stacksTo`/`durability` was found in the class but the item is a held tool, so check in game.
 
-| Item | Mod | Recycle tree (recipe) | Depth | Full | Tier 1 (craft) | Covers | Passes |
-|---|---|---|---|---|---|---|---|
-| Piston | vanilla | piston → 3 planks, 4 cobblestone, 1 iron, 1 redstone (`NF/piston.json`) | 1 | Fe 1, Rs 1 | Fe 0.25, Rs 0.25 | iron, redstone | **no** |
-| Hopper | vanilla | hopper → 5 iron + chest (`NF/hopper.json`); chest → 8 planks (`V/chest.json`) | 1 | Fe 5 | Fe 1.25 | iron | **no** |
-| Redstone Comparator | vanilla | comparator → 3 redstone torches, quartz, 3 stone (`V/comparator.json`); torch → redstone + stick (`NF/redstone_torch.json`) | 2 | Rs 3 | Rs 0.19 | redstone | **yes** |
-| Bucket | vanilla | bucket → 3 iron (`NF/bucket.json`) | 1 | Fe 3 | Fe 0.75 | iron | **no** |
-| Cut Copper | vanilla | cut copper → 1 copper block (`V/cut_copper.json`, 4 → 4); block → 9 copper (`V/copper_block.json`) | 2 | Cu 9 | Cu 0.56 (2.25) | copper | **excluded, packing** |
-| Copper Grate | vanilla | grate → 1 copper block (`V/copper_grate.json`); block → 9 copper | 2 | Cu 9 | Cu 0.56 (2.25) | copper | **excluded, packing** |
-| Waxed Block of Copper | vanilla | → copper block + honeycomb (`V/waxed_copper_block_from_honeycomb.json`); block → 9 copper. But it crafts straight to 9 copper (`V/copper_ingot_from_waxed_copper_block.json`) | 2 on paper | Cu 9 | Cu 0.56 (9, by crafting) | copper | **no**, refined in effect; excluded, packing |
-| Sticky Piston | vanilla | → slime ball + piston (`V/sticky_piston.json`); piston → iron, redstone | 2 | Fe 1, Rs 1 | Fe 0.06, Rs 0.06 | iron, redstone | **yes** |
-| Minecart with Hopper | vanilla | → hopper + minecart (`V/hopper_minecart.json`); hopper → 5 iron + chest; minecart → 5 iron (`NF/minecart.json`) | 2 | Fe 10 | Fe 0.63 | iron | **yes** |
-| Empty Map | vanilla | → 8 paper + compass (`V/map.json`); compass → 4 iron + redstone (`NF/compass.json`); paper → sugar cane (`V/paper.json`) | 2 | Fe 4, Rs 1 | Fe 0.25, Rs 0.06 | iron, redstone | **yes** |
-| Copper Bulb | vanilla | → ¾ copper block, ¼ blaze rod, ¼ redstone (`V/copper_bulb.json`, 3 + 1 + 1 → 4); block → 9 copper | mixed 1/2 | Cu 6.75, Rs 0.25 | Cu 0.42 (1.69), Rs 0.06 | copper, redstone | **no**; excluded, packing |
-| Redstone Repeater | vanilla | → 2 torches, redstone, 3 stone (`V/repeater.json`); torch → redstone + stick | mixed 1/2 | Rs 3 | Rs 0.38 | redstone | **no** |
-| Lightning Rod | vanilla | → 3 copper (`NF/lightning_rod.json`) | 1 | Cu 3 | Cu 0.75 | copper | **no** |
-| Crafter | vanilla | → 5 iron, crafting table, 2 redstone, dropper (`NF/crafter.json`); dropper → 7 cobblestone + redstone (`NF/dropper.json`) | mixed 1/2 | Fe 5, Rs 3 | Fe 1.25, Rs 0.56 | iron, redstone | **no** |
-| Copper Chest | vanilla | → 8 copper + chest (`NF/copper_chest.json`) | 1 | Cu 8 | Cu 2 | copper | **no** |
-| Steam Turbine | Wireworks | → 4 copper blocks, 2 plastic, 2 pistons, 1 iron block (`WW/steam_turbine.json`); blocks → 9 ingots (`V/copper_block.json`, `V/iron_block.json`); piston → iron, redstone | 2 | Cu 36, Fe 11, Rs 2 | Cu 2.25 (9), Fe 0.69 (2.38), Rs 0.13 | copper, iron, redstone | **excluded, packing** |
-| Pump | Pipeworks | → 3 pipes, piston, bucket (`PW/pump.json`); pipe → 1 copper (`PW/pipe.json`, 3 → 3); piston → iron, redstone; bucket → 3 iron | 2 | Cu 3, Fe 4, Rs 1 | Cu 0.19, Fe 0.25, Rs 0.06 | copper, iron, redstone | **yes** |
-| Outlet | Pipeworks | → 4 pipes + dispenser (`PW/outlet.json`); pipe → copper; dispenser → 7 cobblestone, bow, redstone (`NF/dispenser.json`) | 2 | Cu 4, Rs 1 | Cu 0.25, Rs 0.06 | copper, redstone | **yes** |
-| Railgun | Gearworks | → lightning rod, 2 copper blocks, redstone block, netherite ingot (`GW/railgun.json`); rod → 3 copper; blocks → 9 | 2 | Cu 21, Rs 9 | Cu 1.31 (4.69), Rs 0.56 (2.25) | copper, redstone | **excluded, packing** (blocks and netherite) |
-| Steam Engine | Wireworks | → 5 iron, piston, 2 copper, iron block (`WW/steam_engine.json`) | mixed 1/2 | Cu 2, Fe 15, Rs 1 | Cu 0.5, Fe 1.88 (3.56), Rs 0.06 | copper, iron, redstone | **no**; excluded, packing |
-| Solar Panel | Wireworks | → 2 glass, daylight detector, 2 copper, plastic, iron block (`WW/solar_panel.json`) | mixed 1/2 | Cu 2, Fe 9 | Cu 0.5, Fe 0.56 (2.25) | copper, iron | **no**; excluded, packing |
-| Splitter | Beltworks | → 2 belt tiles, comparator, copper (`BW/splitter.json`); belt tile → 3/16 dried kelp, 3/16 copper (`BW/belt_tile_from_dried_kelp.json`, first by id) | mixed 1/2/3 | Cu 1.38, Rs 3 | Cu 0.27, Rs 0.05 | copper, redstone | **no** |
-| Loader | Beltworks | → ½ hopper, ½ copper, ½ belt tile (`BW/loader.json`, makes 2) | mixed 1/2 | Cu 0.59, Fe 2.5 | Cu 0.13, Fe 0.16 | copper, iron | **no** |
-| Feeder | Beltworks | → loader + belt tile (`BW/feeder.json`); loader → hopper … | mixed 2/3 | Cu 0.78, Fe 2.5 | Cu 0.04, Fe 0.04 | copper, iron | **no** |
-| Storage Tank | Pipeworks | → 4 iron, 4 glass, 1 copper (`PW/storage_tank.json`) | 1 | Cu 1, Fe 4 | Cu 0.25, Fe 1 | copper, iron | **no** |
-| Assembler 1 | Craftworks | → crafter, 9 iron, 5 redstone (`CW/assembler_1.json`, assembling) | mixed 1/2/3 | Fe 14, Rs 8 | Fe 2.56, Rs 1.39 | iron, redstone | **no** |
-| Refiner | Craftworks | → blast furnace, 4 iron, 5 redstone (`CW/refiner.json`, assembling); blast furnace → 5 iron, furnace, 3 smooth stone (`NF/blast_furnace.json`) | mixed 1/2 | Fe 9, Rs 5 | Fe 1.31, Rs 1.25 | iron, redstone | **no** |
-| Kinetic Upgrade | Gearworks | → 4 copper, piston, redstone (`GW/kinetic_upgrade.json`) | mixed 1/2 | Cu 4, Fe 1, Rs 2 | Cu 1, Fe 0.06, Rs 0.31 | copper, iron, redstone | **no** |
-| Burner Harvester | Fieldworks | → 3 iron, 4 cobblestone, furnace, iron pickaxe (`FW/harvester_1.json`); pickaxe → 3 iron + 2 sticks (`NF/iron_pickaxe.json`) | mixed 1/2 | Fe 6 | Fe 0.94 | iron | **no** |
-| Machine Casing | Refined Storage | → 8 Quartz Enriched Iron + andesite (`RS/machine_casing.json`); QEI → ¾ iron, ¼ quartz (`RS/quartz_enriched_iron.json`) | 2 | Fe 6 | Fe 0.38 | iron | **yes** |
-| Vacuum Module | Modular Routers | → blank module, hopper, eye of ender (`MR/vacuum_module.json`); blank module → ⅙ redstone, ½ paper, ½ gold nugget (`MR/blank_module.json`); hopper → 5 iron | 2 | Fe 5, Au ½ nugget, Rs 0.17 | Fe 0.31, Au 0.03 nugget, Rs 0.01 | iron, gold (trace), redstone | **yes**; its gold needs packing |
-| Waxed Copper Chest | vanilla | → copper chest + honeycomb (`V/waxed_copper_chest_from_honeycomb.json`); copper chest → 8 copper + chest (`NF/copper_chest.json`) | 2 | Cu 8 | Cu 0.5 | copper | yes; **flagged, axe** |
-| Waxed Copper Trapdoor | vanilla | → copper trapdoor + honeycomb (`V/waxed_copper_trapdoor_from_honeycomb.json`); trapdoor → 4 copper (`NF/copper_trapdoor.json`) | 2 | Cu 4 | Cu 0.25 | copper | yes; **flagged, axe** |
-| Waxed Lightning Rod | vanilla | → lightning rod + honeycomb (`V/waxed_lightning_rod_from_honeycomb.json`); rod → 3 copper (`NF/lightning_rod.json`) | 2 | Cu 3 | Cu 0.19 | copper | yes; **flagged, axe** |
-| Rune of Sacrifice II | Neo Vitae | → 4 netherite scrap, hellforged parts, 3 cobblestone, Rune of Sacrifice (`NV/rune_2_sacrifice.json`); Rune of Sacrifice → 4 deepslate, tabula robur, 2 gold, blank rune, a tier-1 blood orb (`NV/rune_sacrifice.json`) | 2 | Au 2 | Au 0.13 | gold | **yes** |
+| Item | Lvl | Recycle tree (level 1 [level 2]) | Full | Tier 1 per item, recycled all the way | Stack | Packing / notable |
+|---|---|---|---|---|---|---|
+| pipez:ultimate_upgrade | 4 | 4 netherite_ingot; 4 redstone_block [9 redstone]; 1 pipez:advanced_upgrade [4 diamond, 4 redstone_block, 1 pipez:improved_upgrade] | Fe 4.44, Au 4, Rs 77 | Fe 0.0174, Au 0.0625, Rs 2.88 (crafted: Fe 0.0174, Au 0.0625, Rs 11.3) | 64 | packing: redstone_block; diamond, netherite_ingot |
+| pipez:advanced_upgrade | 3 | 4 diamond; 4 redstone_block [9 redstone]; 1 pipez:improved_upgrade [4 gold_ingot, 4 redstone, 1 pipez:basic_upgrade] | Fe 4.44, Au 4, Rs 41 | Fe 0.0694, Au 0.25, Rs 2.52 (crafted: Fe 0.0694, Au 0.25, Rs 9.27) | 64 | packing: redstone_block; diamond |
+| functionalstorage:gold_upgrade | 4 | 3 gold_ingot; 3 gold_block [9 gold_ingot]; 2 chest [8 oak_planks]; 1 functionalstorage:copper_upgrade [4 copper_ingot, 2 copper_block, 2 chest, 1 functionalstorage:oak_2] | Cu 22, Au 30 | Cu 0.531, Au 2.44 (crafted: Cu 1.38, Au 7.5) | 64 | packing: copper_block, gold_block |
+| minecraft:anvil | 2 | 3 iron_block [9 iron_ingot]; 4 iron_ingot | Fe 31 | Fe 2.69 (crafted: Fe 7.75) | 64 | packing: iron_block |
+| functionalstorage:redstone_upgrade | 4 | 4 redstone; 2 redstone_block [9 redstone]; 2 comparator [3 redstone_torch, 1 quartz, 3 stone]; 1 functionalstorage:oak_2 [3.5 (planks tag), 1 chest] | Rs 28 | Rs 2.22 (crafted: Rs 5.59) | 64 | packing: redstone_block |
+| functionalstorage:copper_upgrade | 3 | 4 copper_ingot; 2 copper_block [9 copper_ingot]; 2 chest [8 oak_planks]; 1 functionalstorage:oak_2 [3.5 (planks tag), 1 chest] | Cu 22 | Cu 2.12 (crafted: Cu 5.5) | 64 | packing: copper_block |
+| theurgy:fermentation_vat | 3 | 6 copper_ingot; 1 theurgy:alchemical_sulfur_rotten_flesh; 1 barrel [6 oak_planks, 2 oak_slab]; 1 copper_block [9 copper_ingot] | Cu 15 | Cu 2.06 (crafted: Cu 3.75) | 64 | packing: copper_block |
+| theurgy:calcination_oven | 2 | 4 iron_ingot; 1 copper_block [9 copper_ingot] | Cu 9, Fe 4 | Cu 0.562, Fe 1 (crafted: Cu 2.25, Fe 1) | 64 | packing: copper_block |
+| theurgy:distiller | 2 | 3 iron_ingot; 1 copper_block [9 copper_ingot]; 3 andesite | Cu 9, Fe 3 | Cu 0.562, Fe 0.75 (crafted: Cu 2.25, Fe 0.75) | 64 | packing: copper_block |
+| laserio:card_energy | 2 | 2 redstone; 1 redstone_block [9 redstone]; 2 quartz; 1 laserio:logic_chip; 3 gold_nugget | Au 0.333, Rs 11 | Au 0.0833, Rs 1.06 (crafted: Au 0.0833, Rs 2.75) | 64 | packing: redstone_block |
+| modularrouters:energy_output_module | 3 | 1 redstone_block [9 redstone]; 2 gold_ingot; 1 modularrouters:blank_module [0.1667 redstone, 0.5 paper, 0.5 gold_nugget]; 1 quartz | Au 2.06, Rs 9.17 | Au 0.503, Rs 0.573 (crafted: Au 0.503, Rs 2.26) | 64 | packing: redstone_block |
+| neovitae:hellfire_forge | 2 | 2 iron_ingot; 4 deepslate; 1 neovitae:tabula_rasa; 1 iron_block [9 iron_ingot] | Fe 11 | Fe 1.06 (crafted: Fe 2.75) | 64 | packing: iron_block |
+| modularrouters:energy_upgrade | 3 | 4 quartz; 1 redstone_block [9 redstone]; 1 modularrouters:blank_upgrade [1 paper, 0.75 gold_nugget, 0.25 lapis_lazuli]; 1 gold_ingot | Au 1.08, Rs 9 | Au 0.255, Rs 0.562 (crafted: Au 0.255, Rs 2.25) | 64 | packing: redstone_block |
+| pipez:improved_upgrade | 2 | 4 gold_ingot; 4 redstone; 1 pipez:basic_upgrade [4 iron_ingot, 4 iron_nugget, 1 redstone] | Fe 4.44, Au 4, Rs 5 | Fe 0.278, Au 1, Rs 1.06 | 64 |  |
+| functionalstorage:diamond_upgrade | 5 | 4 diamond; 2 diamond_block [9 diamond]; 2 chest [8 oak_planks]; 1 functionalstorage:gold_upgrade [3 gold_ingot, 3 gold_block, 2 chest, 1 functionalstorage:copper_upgrade] | Cu 22, Au 30 | Cu 0.133, Au 0.609 (crafted: Cu 0.344, Au 1.88) | 64 | packing: copper_block, diamond_block, gold_block; diamond, diamond_block |
+| functionalstorage:iron_downgrade | 3 | 8 iron_ingot; 1 functionalstorage:oak_2 [3.5 (planks tag), 1 chest] | Fe 8 | Fe 2 | 64 |  |
+| laserio:card_holder | 3 | 4 iron_ingot; 2 copper_chest [8 copper_ingot, 1 chest]; 1 laserio:logic_chip | Cu 16, Fe 4 | Cu 1, Fe 1 | 1 |  |
+| minecraft:copper_chest | 2 | 8 copper_ingot; 1 chest [8 oak_planks] | Cu 8 | Cu 2 | 64 |  |
+| minecraft:crafter | 2 | 5 iron_ingot; 1 crafting_table [4 oak_planks]; 2 redstone; 1 dropper [7 cobblestone, 1 redstone] | Fe 5, Rs 3 | Fe 1.25, Rs 0.562 | 64 |  |
+| pipez:filter_destination_tool | 4 | 5 iron_ingot; 2 redstone; 1 glass_pane [1 connectedglass:scratched_glass_pane]; 1 oak_button [1 oak_planks] | Fe 5, Rs 2 | Fe 1.25, Rs 0.5 | 1 |  |
+| theurgy:mercury_catalyst | 2 | 4 iron_ingot; 1 theurgy:mercury_shard; 3 gold_ingot; 1 quartz_block [4 quartz] | Fe 4, Au 3 | Fe 1, Au 0.75 | 64 |  |
+| theurgy:sal_ammoniac_tank | 2 | 4 iron_ingot; 3 copper_ingot; 2 stick [0.5 oak_planks] | Cu 3, Fe 4 | Cu 0.75, Fe 1 | 64 |  |
+| theurgy:liquefaction_cauldron | 2 | 5 copper_ingot; 1 cauldron [7 iron_ingot]; 3 andesite | Cu 5, Fe 7 | Cu 1.25, Fe 0.438 | 64 |  |
+| laserio:laser_connector_advanced | 2 | 2 ender_pearl; 1 diamond; 2 redstone; 1 laserio:laser_connector [1 glass, 2 redstone, 1 laserio:logic_chip, 3 iron_ingot]; 3 gold_ingot | Fe 3, Au 3, Rs 4 | Fe 0.188, Au 0.75, Rs 0.625 | 64 | diamond, ender_pearl |
+| shrink:shrinking_device | 2 | 6 iron_ingot; 1 ender_pearl; 1 glass; 1 stone_button [1 stone] | Fe 6 | Fe 1.5 | 64? | ender_pearl |
+| theurgy:mercury_capacitor | 3 | 4 gold_ingot; 2 theurgy:mercury_shard; 2 quartz_block [4 quartz]; 1 theurgy:mercury_catalyst [4 iron_ingot, 1 theurgy:mercury_shard, 3 gold_ingot, 1 quartz_block] | Fe 4, Au 7 | Fe 0.25, Au 1.19 | 64 |  |
+| laserio:laser_node | 4 | 4 iron_ingot; 4 glass_pane [1 connectedglass:scratched_glass_pane]; 1 laserio:laser_connector [1 glass, 2 redstone, 1 laserio:logic_chip, 3 iron_ingot] | Fe 7, Rs 2 | Fe 1.19, Rs 0.125 | 64 |  |
+| minecraft:blast_furnace | 2 | 5 iron_ingot; 1 furnace [8 cobblestone]; 3 smooth_stone | Fe 5 | Fe 1.25 | 64 |  |
+| minecraft:hopper | 2 | 5 iron_ingot; 1 chest [8 oak_planks] | Fe 5 | Fe 1.25 | 64 |  |
+| refinedstorage:external_storage | 3 | 1 refinedstorage:construction_core [1 refinedstorage:basic_processor, 1 glowstone_dust]; 3 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 refinedstorage:destruction_core [1 refinedstorage:basic_processor, 1 quartz]; 2 copper_chest [8 copper_ingot, 1 chest]; 1 refinedstorage:cable [0.5 refinedstorage:quartz_enriched_copper, 0.1667 glass, 0.0833 redstone]; 1 refinedstorage:improved_processor | Cu 16.4, Fe 2.25, Rs 0.0833 | Cu 1.01, Fe 0.141, Rs 0.00521 | 64 |  |
+| modularrouters:activator_module | 4 | 4 redstone; 1 lever [1 stick, 1 cobblestone]; 2 dispenser [7 cobblestone, 1 bow, 1 redstone]; 1 modularrouters:blank_module [0.1667 redstone, 0.5 paper, 0.5 gold_nugget]; 1 quartz | Au 0.0556, Rs 6.17 | Au 0.00347, Rs 1.14 | 64 |  |
+| functionalstorage:collector_upgrade | 3 | 4 andesite; 2 hopper [5 iron_ingot, 1 chest]; 2 redstone; 1 functionalstorage:oak_2 [3.5 (planks tag), 1 chest] | Fe 10, Rs 2 | Fe 0.625, Rs 0.5 | 64 |  |
+| refinedstorage:64k_storage_disk | 6 | 2 glass; 3 redstone; 1 refinedstorage:64k_storage_part [4 refinedstorage:advanced_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:16k_storage_part, 1 redstone]; 3 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz] | Fe 32.2, Rs 43 | Fe 0.173, Rs 0.921 | 1 |  |
+| tiab:time_in_a_bottle | 2 | 3 gold_ingot; 2 diamond; 1 clock [4 gold_ingot, 1 redstone]; 2 lapis_lazuli; 1 glass_bottle [1 glass] | Au 7, Rs 1 | Au 1, Rs 0.0625 | 64? | diamond |
+| refinedstorage:16k_storage_disk | 5 | 2 glass; 3 redstone; 1 refinedstorage:16k_storage_part [4 refinedstorage:improved_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:4k_storage_part, 1 redstone]; 3 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz] | Fe 12, Rs 16 | Fe 0.168, Rs 0.895 | 1 |  |
+| refinedstorage:4096b_fluid_storage_disk | 6 | 2 glass; 3 redstone; 1 refinedstorage:4096b_fluid_storage_part [4 refinedstorage:advanced_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:1024b_fluid_storage_part, 1 bucket]; 3 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz] | Fe 152, Rs 3 | Fe 0.301, Rs 0.75 | 1 |  |
+| modularrouters:bulk_item_filter | 3 | 4 iron_ingot; 2 glass; 2 modularrouters:blank_module [0.1667 redstone, 0.5 paper, 0.5 gold_nugget]; 1 diamond | Fe 4, Au 0.111, Rs 0.333 | Fe 1, Au 0.00694, Rs 0.0208 | 64 | diamond |
+| refinedstorage:1024b_fluid_storage_disk | 5 | 2 glass; 3 redstone; 1 refinedstorage:1024b_fluid_storage_part [4 refinedstorage:improved_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:256b_fluid_storage_part, 1 bucket]; 3 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz] | Fe 51, Rs 3 | Fe 0.276, Rs 0.75 | 1 |  |
+| refinedstorage:4k_storage_disk | 4 | 2 glass; 3 redstone; 1 refinedstorage:4k_storage_part [4 refinedstorage:basic_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:1k_storage_part, 1 redstone]; 3 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz] | Fe 5.25, Rs 7 | Fe 0.161, Rs 0.859 | 1 |  |
+| refinedstorage:security_manager | 5 | 4 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 copper_chest [8 copper_ingot, 1 chest]; 2 refinedstorage:security_card [6 refinedstorage:quartz_enriched_iron, 2 refinedstorage:network_card, 1 refinedstorage:advanced_processor]; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite]; 1 refinedstorage:fallback_security_card [1 refinedstorage:security_card, 1 paper] | Cu 8, Fe 49.5 | Cu 0.5, Fe 0.519 | 64 |  |
+| laserio:card_cloner | 2 | 4 iron_ingot; 2 paper [1 sugar_cane]; 1 laserio:logic_chip | Fe 4 | Fe 1 | 1 |  |
+| minecraft:redstone_lamp | 2 | 4 redstone; 1 glowstone [4 glowstone_dust] | Rs 4 | Rs 1 | 64 |  |
+| minecraft:target | 2 | 4 redstone; 1 hay_block [9 wheat] | Rs 4 | Rs 1 | 64 | packing: hay_block |
+| neovitae:guide_book | 3 | 4 redstone; 1 book [3 paper, 1 leather] | Rs 4 | Rs 1 | 1 |  |
+| refinedstorage:256b_fluid_storage_disk | 4 | 2 glass; 3 redstone; 1 refinedstorage:256b_fluid_storage_part [4 refinedstorage:basic_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:64b_fluid_storage_part, 1 bucket]; 3 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz] | Fe 17.2, Rs 3 | Fe 0.243, Rs 0.75 | 1 |  |
+| refinedstorage:1k_storage_disk | 3 | 2 glass; 3 redstone; 1 refinedstorage:1k_storage_part [4 ftbmaterials:silicon_gem, 1 refinedstorage:quartz_enriched_iron, 3 glass, 1 redstone]; 3 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz] | Fe 3, Rs 4 | Fe 0.152, Rs 0.812 | 1 |  |
+| refinedstorage:64b_fluid_storage_disk | 3 | 2 glass; 3 redstone; 1 refinedstorage:64b_fluid_storage_part [4 ftbmaterials:silicon_gem, 1 refinedstorage:quartz_enriched_iron, 3 glass, 1 bucket]; 3 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz] | Fe 6, Rs 3 | Fe 0.199, Rs 0.75 | 1 |  |
+| refinedstorage:pattern | 2 | 3 glass; 3 redstone; 3 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz] | Fe 2.25, Rs 3 | Fe 0.141, Rs 0.75 | 64 |  |
+| refinedstorage:storage_housing | 2 | 2 glass; 3 redstone; 3 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz] | Fe 2.25, Rs 3 | Fe 0.141, Rs 0.75 | 64 |  |
+| refinedstorage:disk_drive | 3 | 6 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 copper_chest [8 copper_ingot, 1 chest]; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite]; 1 refinedstorage:advanced_processor | Cu 8, Fe 10.5 | Cu 0.5, Fe 0.375 | 64 |  |
+| refinedstorage:regulator_upgrade | 4 | 5 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 comparator [3 redstone_torch, 1 quartz, 3 stone]; 2 redstone; 1 refinedstorage:upgrade [6 refinedstorage:quartz_enriched_iron, 2 glass, 1 refinedstorage:improved_processor] | Fe 8.25, Rs 5 | Fe 0.305, Rs 0.547 | 64 |  |
+| refinedstorage:64k_storage_block | 6 | 6 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 refinedstorage:64k_storage_part [4 refinedstorage:advanced_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:16k_storage_part, 1 redstone]; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite]; 1 redstone | Fe 40.5, Rs 41 | Fe 0.407, Rs 0.421 | 1 |  |
+| refinedstorage:64k_storage_part | 5 | 4 refinedstorage:advanced_processor; 1 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 3 refinedstorage:16k_storage_part [4 refinedstorage:improved_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:4k_storage_part, 1 redstone]; 1 redstone | Fe 30, Rs 40 | Fe 0.128, Rs 0.684 | 64 |  |
+| refinedstorage:16k_storage_block | 5 | 6 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 refinedstorage:16k_storage_part [4 refinedstorage:improved_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:4k_storage_part, 1 redstone]; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite]; 1 redstone | Fe 20.2, Rs 14 | Fe 0.402, Rs 0.395 | 1 |  |
+| refinedstorage:interface | 4 | 4 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 refinedstorage:importer [1 refinedstorage:cable, 1 refinedstorage:destruction_core, 1 refinedstorage:improved_processor]; 2 redstone; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite]; 1 refinedstorage:exporter [1 refinedstorage:cable, 1 refinedstorage:construction_core, 1 refinedstorage:improved_processor] | Cu 0.75, Fe 9, Rs 2.17 | Cu 0.00293, Fe 0.281, Rs 0.503 | 64 |  |
+| refinedstorage:4096b_fluid_storage_block | 6 | 6 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 refinedstorage:4096b_fluid_storage_part [4 refinedstorage:advanced_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:1024b_fluid_storage_part, 1 bucket]; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite]; 1 redstone | Fe 160, Rs 1 | Fe 0.535, Rs 0.25 | 1 |  |
+| neovitae:sanguine_crafter | 3 | 7 neovitae:sanguine_casing [1 neovitae:bloodstone, 0.25 diamond, 0.75 iron_ingot, 0.25 neovitae:tabula_animata]; 1 neovitae:tabula_spiritus; 1 crafter [5 iron_ingot, 1 crafting_table, 2 redstone, 1 dropper] | Fe 10.2, Rs 3 | Fe 0.641, Rs 0.141 | 64 | diamond, neovitae:essentia_vitae_bucket |
+| laserio:card_fluid | 2 | 2 redstone; 1 bucket [3 iron_ingot]; 2 quartz; 1 laserio:logic_chip; 3 gold_nugget | Fe 3, Au 0.333, Rs 2 | Fe 0.188, Au 0.0833, Rs 0.5 | 64 |  |
+| refinedstorage:1024b_fluid_storage_block | 5 | 6 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 refinedstorage:1024b_fluid_storage_part [4 refinedstorage:improved_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:256b_fluid_storage_part, 1 bucket]; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite]; 1 redstone | Fe 59.2, Rs 1 | Fe 0.51, Rs 0.25 | 1 |  |
+| refinedstorage:4k_storage_block | 4 | 6 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 refinedstorage:4k_storage_part [4 refinedstorage:basic_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:1k_storage_part, 1 redstone]; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite]; 1 redstone | Fe 13.5, Rs 5 | Fe 0.396, Rs 0.359 | 1 |  |
+| neovitae:ara_vitae | 2 | 4 deepslate; 1 furnace [8 cobblestone]; 3 gold_ingot | Au 3 | Au 0.75 | 64 |  |
+| theurgy:sal_ammoniac_accumulator | 2 | 3 andesite; 3 iron_ingot; 2 stick [0.5 oak_planks] | Fe 3 | Fe 0.75 | 64 |  |
+| refinedstorage:256b_fluid_storage_block | 4 | 6 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 refinedstorage:256b_fluid_storage_part [4 refinedstorage:basic_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:64b_fluid_storage_part, 1 bucket]; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite]; 1 redstone | Fe 25.5, Rs 1 | Fe 0.478, Rs 0.25 | 1 |  |
+| refinedstorage:disk_interface | 3 | 4 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 2 refinedstorage:storage_housing [2 glass, 3 redstone, 3 refinedstorage:quartz_enriched_iron]; 1 refinedstorage:construction_core [1 refinedstorage:basic_processor, 1 glowstone_dust]; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite]; 1 refinedstorage:destruction_core [1 refinedstorage:basic_processor, 1 quartz] | Fe 13.5, Rs 6 | Fe 0.352, Rs 0.375 | 64 |  |
+| refinedstorage:1k_storage_block | 3 | 6 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 refinedstorage:1k_storage_part [4 ftbmaterials:silicon_gem, 1 refinedstorage:quartz_enriched_iron, 3 glass, 1 redstone]; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite]; 1 redstone | Fe 11.2, Rs 2 | Fe 0.387, Rs 0.312 | 1 |  |
+| modularrouters:energy_distributor_module | 6 | 1 modularrouters:energy_output_module [1 redstone_block, 2 gold_ingot, 1 modularrouters:blank_module, 1 quartz]; 1 modularrouters:distributor_module [3 modularrouters:sender_module_2, 1 modularrouters:blank_module] | Au 2.28, Rs 9.83 | Au 0.127, Rs 0.146 (crafted: Au 0.127, Rs 0.568) | 64 | packing: redstone_block; ender_pearl |
+| refinedstorage:16k_storage_part | 4 | 4 refinedstorage:improved_processor; 1 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 3 refinedstorage:4k_storage_part [4 refinedstorage:basic_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:1k_storage_part, 1 redstone]; 1 redstone | Fe 9.75, Rs 13 | Fe 0.108, Rs 0.578 | 64 |  |
+| refinedstorage:64b_fluid_storage_block | 3 | 6 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 refinedstorage:64b_fluid_storage_part [4 ftbmaterials:silicon_gem, 1 refinedstorage:quartz_enriched_iron, 3 glass, 1 bucket]; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite]; 1 redstone | Fe 14.2, Rs 1 | Fe 0.434, Rs 0.25 | 1 |  |
+| refinedstorage:4096b_fluid_storage_part | 5 | 4 refinedstorage:advanced_processor; 1 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 3 refinedstorage:1024b_fluid_storage_part [4 refinedstorage:improved_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:256b_fluid_storage_part, 1 bucket]; 1 bucket [3 iron_ingot] | Fe 150 | Fe 0.641 | 64 |  |
+| functionalstorage:compacting_framed_drawer | 3 | 5 iron_nugget; 2 piston [3 oak_planks, 4 cobblestone, 1 iron_ingot, 1 redstone]; 1 functionalstorage:oak_2 [3.5 (planks tag), 1 chest]; 1 iron_ingot | Fe 3.56, Rs 2 | Fe 0.514, Rs 0.125 | 64 |  |
+| modularrouters:redstone_augment | 4 | 2 redstone_torch [1 redstone, 1 stick]; 2 redstone; 1 modularrouters:augment_core [0.25 modularrouters:blank_module, 0.25 modularrouters:blank_upgrade] | Au 0.0347, Rs 4.04 | Au 0.000542, Rs 0.626 | 64 |  |
+| minecraft:hopper_minecart | 3 | 1 hopper [5 iron_ingot, 1 chest]; 1 minecart [5 iron_ingot] | Fe 10 | Fe 0.625 | 1 |  |
+| refinedstorage:autocrafting_monitor | 3 | 2 refinedstorage:improved_processor; 2 refinedstorage:pattern [3 glass, 3 redstone, 3 refinedstorage:quartz_enriched_iron]; 3 glass; 1 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 1 refinedstorage:machine_casing [8 refinedstorage:quartz_enriched_iron, 1 andesite] | Fe 11.2, Rs 6 | Fe 0.211, Rs 0.375 | 64 |  |
+| functionalstorage:puller_upgrade | 3 | 6 andesite; 1 hopper [5 iron_ingot, 1 chest]; 1 functionalstorage:oak_2 [3.5 (planks tag), 1 chest]; 1 redstone | Fe 5, Rs 1 | Fe 0.312, Rs 0.25 | 64 |  |
+| functionalstorage:pusher_upgrade | 3 | 6 andesite; 1 redstone; 1 functionalstorage:oak_2 [3.5 (planks tag), 1 chest]; 1 hopper [5 iron_ingot, 1 chest] | Fe 5, Rs 1 | Fe 0.312, Rs 0.25 | 64 |  |
+| neovitae:rune_capacity | 2 | 4 deepslate; 3 bucket [3 iron_ingot]; 1 neovitae:rune_blank [7 deepslate, 1 neovitae:tabula_rasa, 1 (planks tag)]; 1 neovitae:tabula_animata | Fe 9 | Fe 0.562 | 64 |  |
+| functionalstorage:obsidian_upgrade | 4 | 4 functionalstorage:dripping_upgrade [6 andesite, 1 pointed_dripstone, 1 cauldron, 1 lava_bucket]; 1 functionalstorage:water_generator_upgrade [6 andesite, 2 water_bucket, 1 bucket] | Fe 85 | Fe 0.559 | 64 | lava_bucket, water_bucket |
+| refinedstorage:1024b_fluid_storage_part | 4 | 4 refinedstorage:improved_processor; 1 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 3 refinedstorage:256b_fluid_storage_part [4 refinedstorage:basic_processor, 1 refinedstorage:quartz_enriched_iron, 3 refinedstorage:64b_fluid_storage_part, 1 bucket]; 1 bucket [3 iron_ingot] | Fe 48.8 | Fe 0.542 | 64 |  |
+| functionalstorage:framed_simple_compacting_drawer | 3 | 6 iron_nugget; 1 functionalstorage:oak_2 [3.5 (planks tag), 1 chest]; 1 piston [3 oak_planks, 4 cobblestone, 1 iron_ingot, 1 redstone]; 1 iron_ingot | Fe 2.67, Rs 1 | Fe 0.479, Rs 0.0625 | 64 |  |
+| refinedstorage:4k_storage_part | 3 | 4 refinedstorage:basic_processor; 1 refinedstorage:quartz_enriched_iron [0.75 iron_ingot, 0.25 quartz]; 3 refinedstorage:1k_storage_part [4 ftbmaterials:silicon_gem, 1 refinedstorage:quartz_enriched_iron, 3 glass, 1 redstone]; 1 redstone | Fe 3, Rs 4 | Fe 0.082, Rs 0.438 | 64 |  |
+| pipez:universal_pipe | 3 | 0.3333 pipez:item_pipe [0.375 iron_ingot, 0.125 dropper, 0.0625 redstone]; 0.3333 pipez:energy_pipe [0.375 iron_ingot, 0.125 redstone_block, 0.0625 redstone]; 0.3333 pipez:fluid_pipe [0.375 iron_ingot, 0.125 bucket, 0.0625 redstone]; 0.3333 iron_ingot; 0.1667 redstone_block [9 redstone] | Fe 0.833, Rs 1.98 | Fe 0.109, Rs 0.104 (crafted: Fe 0.109, Rs 0.403) | 64 | packing: redstone_block |
+| functionalstorage:compacting_drawer | 3 | 5 andesite; 2 piston [3 oak_planks, 4 cobblestone, 1 iron_ingot, 1 redstone]; 1 functionalstorage:oak_2 [3.5 (planks tag), 1 chest]; 1 iron_ingot | Fe 3, Rs 2 | Fe 0.375, Rs 0.125 | 64 |  |
+| functionalstorage:configuration_tool | 3 | 5 paper [1 sugar_cane]; 2 gold_ingot; 1 functionalstorage:oak_2 [3.5 (planks tag), 1 chest]; 1 emerald | Au 2 | Au 0.5 | 1 | emerald |
+| functionalstorage:linking_tool | 3 | 5 paper [1 sugar_cane]; 2 gold_ingot; 1 functionalstorage:oak_2 [3.5 (planks tag), 1 chest]; 1 diamond | Au 2 | Au 0.5 | 1 | diamond |
+| neovitae:rune_2_efficiency | 3 | 6 netherite_scrap; 2 neovitae:rune_efficiency [4 redstone, 1 neovitae:tabula_aetherea, 2 neovitae:hellforged_parts, 1 neovitae:rune_blank, 1 (planks tag)]; 1 cobblestone | Rs 8 | Rs 0.5 | 64 | netherite_scrap, neovitae:hellforged_parts |
+| refinedstorage:raw_basic_processor | 2 | 1 refinedstorage:processor_binding [0.25 string, 0.125 slime_ball]; 1 iron_ingot; 1 ftbmaterials:silicon_gem; 1 redstone | Fe 1, Rs 1 | Fe 0.25, Rs 0.25 | 64 | slime_ball |
+| refinedstorage:raw_improved_processor | 2 | 1 refinedstorage:processor_binding [0.25 string, 0.125 slime_ball]; 1 gold_ingot; 1 ftbmaterials:silicon_gem; 1 redstone | Au 1, Rs 1 | Au 0.25, Rs 0.25 | 64 | slime_ball |
+| theurgy:caloric_flux_emitter | 3 | 1 campfire [3 stick, 1 coal, 3 dark_oak_log]; 2 gold_ingot; 1 theurgy:mercury_shard; 3 andesite | Au 2 | Au 0.5 | 64 |  |
+| theurgy:digestion_vat | 2 | 1 theurgy:sal_ammoniac_crystal [1 theurgy:sal_ammoniac_bucket]; 2 gold_ingot; 1 decorated_pot [4 brick]; 3 red_sandstone [4 red_sand] | Au 2 | Au 0.5 | 64 | theurgy:sal_ammoniac_bucket |
+| theurgy:sulfuric_flux_emitter | 2 | 1 theurgy:sal_ammoniac_crystal [1 theurgy:sal_ammoniac_bucket]; 2 gold_ingot; 1 theurgy:alchemical_sulfur_rotten_flesh; 3 andesite | Au 2 | Au 0.5 | 64 | theurgy:sal_ammoniac_bucket |
 
-**Today's placeholders.** Piston, Hopper and Bucket **fail**: each gives its iron (and the piston its redstone) at the first recycle, so they are intermediate 1. Only the **Comparator passes**, and only for redstone.
+### What is worth knowing from the table
 
-**What passes with no packing:** Comparator, Sticky Piston, Minecart with Hopper, Empty Map, Pump, Outlet, Machine Casing, Vacuum Module and Rune of Sacrifice II, plus the three waxed items flagged for the axe. Of the unflagged ones, only the Pump and the Outlet carry copper, at 3 and 4. Every richer copper carrier (Cut Copper, Copper Grate, Steam Turbine, Railgun) is excluded: it passed the Recycler's rule only through copper blocks. A rescan of every item in the pack found no other clean copper carrier; the clean iron carriers beyond those above (Chest and TNT Minecarts, Refined Storage's cards, Voidworks' Void Crucible at 7) add nothing a Minecart with Hopper doesn't.
+- **Copper**: Copper Chest (8 Cu + chest, level 2 now that the chest counts; Cu 2.0 per item, no packing) is the best clean vanilla copper carrier. Theurgy's Fermentation Vat (Cu 15, 3.75 crafted) and Functional Storage's Copper Upgrade (Cu 22, 5.5 crafted) are richer through copper blocks; the Vat also returns 1 Theurgy rotten-flesh sulfur. LaserIO's Card Holder and Refined Storage's External Storage carry copper only through copper chests and are stack 1 / heavy with processors. Theurgy's Liquefaction Cauldron (Cu 5, Fe 7 via a cauldron) is a clean 1.25 Cu.
+- **Iron**: Anvil (3 iron blocks + 4 iron; Fe 2.69, **7.75 crafted**, stack 64) is the richest clean iron block. Then Accumulator/Reactor (suite), Functional Storage's Iron Downgrade (Fe 2.0), Boiler 1.94, Gear Bench 1.63, Shrinking Device 1.5 (stack unconfirmed, returns an ender pearl), Blast Furnace and Hopper 1.25, Crafter 1.25 + Rs 0.56.
+- **Gold**: Assembler 2 (1.5), Functional Storage's Gold Upgrade (2.44, **7.5 crafted** through 3 gold blocks; level 4, contains a Copper Upgrade), Pipez Improved Upgrade (Au 1, Rs 1.06, clean, level 2), Time in a Bottle (Au 1; stack unconfirmed), Theurgy's Mercury Catalyst/Capacitor (0.75/1.19, return Theurgy mercury shards), LaserIO Advanced Connector (0.75), Neo Vitae's Ara Vitae (0.75), Powered Rail (0.25).
+- **Redstone**: Pipez Advanced/Ultimate Upgrades (Rs 9.3/11.3 crafted, but diamonds / netherite), Functional Storage's Redstone Upgrade (2.2, 5.6 crafted), Assembler 2 (2.85), Redstone Lamp and Target (1.0).
+- **Byproducts to avoid**: Pipez Advanced (4 diamonds) and Ultimate (4 netherite ingots + diamonds); Functional Storage's Diamond and Netherite upgrades; Gearworks' Nuclear Upgrade (2 netherite, nether star), Reactor (2 netherite blocks), Assembler 3 (4 diamonds); Shrinking Device and Gearworks' Reach Upgrade (ender pearls); Void Crucible and Mutation Chamber (amethyst, crying obsidian); Theurgy machines (mercury shards, sulfur).
+- **Below the cut-off** (all < 0.5 per item): Refined Storage's cables, importers/exporters, grids, processors (raw processors ≤ 0.5), most Modular Routers modules and augments (redstone and gold nuggets in traces), Pipez pipes, LaserIO filters/cards, Neo Vitae runes and casings, Functional Storage drawers and fluid drawers, vanilla rails, minecarts (stack 1), maps, sticky piston, tripwire hook, trapped chest. All in `advanced-mix.json`.
 
-**Gold.** One true intermediate-2 item carries whole gold ingots with no packing: Neo Vitae's **Rune of Sacrifice II**, 2 gold from the Rune of Sacrifice inside it. Its first recycle also returns 4 netherite scrap. Modular Routers' modules and upgrades (Vacuum Module ½ nugget, Camouflage and Stack Upgrades ¾) carry gold only as nuggets, and Theurgy liquefies no nugget (`theurgy-…jar!/data/theurgy/recipe/liquefaction/` has gold `from_ingots`, `from_raw_materials` and `from_ores` only), so their gold reaches it only through 9 nuggets → 1 ingot (`V/gold_ingot_from_nuggets.json`), a compress recipe. Every other gold carrier gives its gold at the first recycle (Beltworks' express and turbo tiers, Functional Storage's upgrades, Craftworks' Assembler 3, Pipez' upgrades, Time in a Bottle) or at depth 3 and more.
+### Decorative and other families (level 2+, summarised)
 
-## 4. Proposed mixes
+- **No Cu/Fe/Au/Rs at all** (582 items): vanilla glass panes and stained glass (33), slabs/stairs/walls of crafted blocks (68), fences and gates (25), banners (22), shulker boxes (17), beds, bundles, candles, carpets, dyed wool (16 each), concrete powder, terracotta (14 each), signs, boats, bricks, books, foods; Connected Glass (85); Neo Vitae (52, mostly blood-tech and decorative blocks); Functional Storage wooden drawers (32); OpenBlocks Elevators (16, wool + ender pearl); FTB Quests screens (6); Construction Sticks templates; Eccentric Tome; FTB Filter System; the Gateways pearl. None carries metal.
+- **Copper decoration** (packing, unwaxed): Cut Copper and Copper Grate (Cu 9; 0.56 recycled, 2.25 crafted), Cut Copper Stairs/Slab, Chiseled Copper, Copper Bulb; Copper Lantern (8 copper nuggets + torch, about 0.22 Cu ingot). The exposed/weathered/oxidised variants bottom out at their oxidised copper block (no recipe), so they carry no metal. Hanging signs (iron chain, 0.03 Fe, stack 16). Lanterns (iron nuggets). Armor-trim templates: the Bolt template (duplication recipe: diamonds + copper block) returns about 7 diamonds per item in full; out.
 
-Each proposal is a Mix: fixed full amounts. The tier-1 figures apply the decompose's quarter, then two recycles at a quarter each. Essences per Galvanic is the largest of the route's needs divided by what one essence gives. All three are 8 items, so they compare as they stand, and none relies on a packing recipe or a waxed item.
+## 3. Mix M5
 
-### Pipeworks: 4 Outlets, 2 Pumps, 1 Minecart with Hopper, 1 Comparator (unchanged)
+**M4** (2 Steam Turbine, Transformer, Steam Engine, Accumulator, Harvester 2, Assembler 2, Splitter, Pump, Outlet, Transmission Pole, Kinetic Upgrade, Metabolic Upgrade) **+ Void Crucible, Hopper, Comparator + 2 Copper Chests, Anvil, Blast Furnace, Pipez Improved Upgrade, Theurgy Liquefaction Cauldron**: 20 kinds, 22 items, all level 2+, all stack 64, no waxed item, no tool.
 
-- **Per essence, tier 1**: 0.34 copper, 0.28 iron, 0.14 redstone, no gold. Also 0.56 cobblestone, 0.19 stone, 0.14 planks, 0.06 quartz and 0.05 string.
-- **Essences per Galvanic**: A 46.5 (copper-bound, gold not covered), B 230, C 58.
-- **Byproducts**: the most cobblestone (36 in the full tree), plus planks and string. The first recycle returns pistons, buckets and dispensers.
-- **Suite**: pulls in Pipeworks. Pumps and Outlets are its fluid blocks, usable as decomposed.
-- The balanced pick, and the best for route C.
+| Count | Item | Lvl | Tier 1 per item, recycled: Cu / Fe / Au / Rs | Blocks crafted: Cu / Fe / Au / Rs | Stack |
+|---|---|---|---|---|---|
+| 2 | wireworks:steam_turbine | 2 | 2.25 / 0.688 / 0 / 0.125 | 9 / 2.38 / 0 / 0.125 | 64 |
+| 1 | wireworks:transformer | 2 | 0.75 / 1.56 / 0 / 0 | 0.75 / 3.25 / 0 / 0 | 64 |
+| 1 | wireworks:steam_engine | 2 | 0.5 / 1.88 / 0 / 0.0625 | 0.5 / 3.56 / 0 / 0.0625 | 64 |
+| 1 | wireworks:accumulator | 2 | 0.5 / 2.5 / 0 / 0.25 | 0.5 / 9.25 / 0 / 0.25 | 64 |
+| 1 | fieldworks:harvester_2 | 4 | 1 / 0.734 / 0 / 0.5 | 1 / 0.734 / 0 / 0.5 | 64 |
+| 1 | craftworks:assembler_2 | 4 | 0 / 0.641 / 1.5 / 2.85 | 0 / 0.641 / 1.5 / 2.85 | 64 |
+| 1 | beltworks:splitter | 4 | 0.273 / 0 / 0 / 0.0469 | 0.273 / 0 / 0 / 0.0469 | 64 |
+| 1 | pipeworks:pump | 2 | 0.188 / 0.25 / 0 / 0.0625 | 0.188 / 0.25 / 0 / 0.0625 | 64 |
+| 1 | pipeworks:outlet | 4 | 0.25 / 0 / 0 / 0.0625 | 0.25 / 0 / 0 / 0.0625 | 64 |
+| 1 | wireworks:transmission_pole | 2 | 0.5 / 0.523 / 0 / 0 | 0.5 / 0.523 / 0 / 0 | 64 |
+| 1 | gearworks:kinetic_upgrade | 2 | 1 / 0.0625 / 0 / 0.312 | 1 / 0.0625 / 0 / 0.312 | 64 |
+| 1 | gearworks:metabolic_upgrade | 2 | 1 / 0 / 0.0556 / 0.25 | 1 / 0 / 0.0556 / 0.25 | 64 |
+| 1 | voidworks:void_crucible | 2 | 0 / 0.438 / 0 / 0 | 0 / 0.438 / 0 / 0 | 64 |
+| 1 | minecraft:hopper | 2 | 0 / 1.25 / 0 / 0 | 0 / 1.25 / 0 / 0 | 64 |
+| 1 | minecraft:comparator | 3 | 0 / 0 / 0 / 0.188 | 0 / 0 / 0 / 0.188 | 64 |
+| 2 | minecraft:copper_chest | 2 | 2 / 0 / 0 / 0 | 2 / 0 / 0 / 0 | 64 |
+| 1 | minecraft:anvil | 2 | 0 / 2.69 / 0 / 0 | 0 / 7.75 / 0 / 0 | 64 |
+| 1 | minecraft:blast_furnace | 2 | 0 / 1.25 / 0 / 0 | 0 / 1.25 / 0 / 0 | 64 |
+| 1 | pipez:improved_upgrade | 2 | 0 / 0.278 / 1 / 1.06 | 0 / 0.278 / 1 / 1.06 | 64 |
+| 1 | theurgy:liquefaction_cauldron | 2 | 1.25 / 0.438 / 0 / 0 | 1.25 / 0.438 / 0 / 0 | 64 |
 
-### Outlets: 6 Outlets, 2 Pumps
+Why these additions: the Copper Chest is the best clean copper per item (2.0) in vanilla; the Anvil is the best iron block (7.75 crafted); Blast Furnace and Hopper add iron and are the decided machines; the Pipez Improved Upgrade adds whole gold and redstone with no packing and no byproduct; the Liquefaction Cauldron adds 1.25 Cu with only andesite as byproduct. The Comparator stays for its redstone and for the Recycler's parts.
 
-- **Per essence, tier 1**: 0.47 copper, 0.13 iron, 0.13 redstone, no gold. Also 0.78 cobblestone, 0.10 planks and 0.07 string.
-- **Essences per Galvanic**: A 34.1 (copper-bound; iron binds at 32 right behind it), B 169, C 131. Gold not covered.
-- **Byproducts**: cobblestone (50 in the full tree), the dispensers' string, planks.
-- The most copper a clean mix can carry. Route C suffers: the Pumps are its only iron.
+### Per essence, tier 1 (decompose 0.25 × the whole mix)
 
-### Runes: 4 Outlets, 2 Pumps, 2 Runes of Sacrifice II
+Routes per Galvanic Essence ([theurgy-chain.md](theurgy-chain.md)): **A** 16 Cu, 4 Fe, 2 Au ingots (+1 Rs once); **B** 79 copper ingots, 1 sulfur each (+1 Fe, 1 raw gold, 1 Rs once); **C** 16.4 Fe ingots (+1 Cu, 1 raw gold, 1 Rs once). A = max(16/Cu, 4/Fe, 2/Au), B = 79/Cu, C = 16.4/Fe, seed = 1/Rs. Each cell: blocks crafted / blocks recycled.
 
-- **Per essence, tier 1**: 0.34 copper, 0.13 iron, 0.09 redstone, **0.06 gold**. Also 0.94 cobblestone, **0.5 netherite scrap**, 0.18 deepslate, 0.13 hellforged parts, and Neo Vitae's tabulae and a blood orb in small amounts.
-- **Essences per Galvanic**: A 46.5 (copper-bound; gold binds at 32), B 230, C 131. Every route covered, gold included.
-- With one rune and the Minecart with Hopper back, route C returns to 58.3 but A becomes gold-bound at 64.
-- **The catch**: netherite scrap at eight times the rate of gold, from the rune's first recycle, before a team has seen the Nether. And Neo Vitae may become a challenge's mod.
+| Mix | Kinds / items | Cu | Fe | Au | Rs | A (binding) | B | C | Rs seed |
+|---|---|---|---|---|---|---|---|---|---|
+| M4 (reference) | 12 / 13 | 5.99 / 2.62 | 5.76 / 2.38 | 0.39 | 1.16 | 5.1 (Au) / 6.1 (Cu) | 13.2 / 30.2 | 2.8 / 6.9 | 0.86 |
+| **M5** | 20 / 22 | **7.30 / 3.93** | **8.61 / 3.97** | **0.64** | **1.47** | **3.1 (Au) / 4.1 (Cu)** | **10.8 / 20.1** | **1.9 / 4.1** | **0.68** |
+| M5, 1 of each | 20 / 20 | 4.55 / 2.87 | 8.01 / 3.79 | 0.64 | 1.44 | 3.5 (Cu) / 5.6 (Cu) | 17.4 / 27.6 | 2.0 / 4.3 | 0.69 |
+| M5, 4 Copper Chests | 20 / 24 | 8.30 / 4.93 | 8.61 / 3.97 | 0.64 | 1.47 | 3.1 (Au) / 3.2 (Cu) | 9.5 / 16.0 | 1.9 / 4.1 | 0.68 |
+| M5 + FS Gold Upgrade | 21 / 23 | 7.65 / 4.06 | 8.61 / 3.97 | 2.51 / 1.25 | 1.47 | 2.1 (Cu) / 3.9 (Cu) | 10.3 / 19.5 | 1.9 / 4.1 | 0.68 |
+| M5 + FS Copper Upgrade + Fermentation Vat | 22 / 24 | 9.62 / 4.98 | 8.61 / 3.97 | 0.64 | 1.47 | 3.1 (Au) / 3.2 (Cu) | 8.2 / 15.9 | 1.9 / 4.1 | 0.68 |
 
-### What the exclusion costs
+Gold: M5's 0.64 = Assembler 2 (0.375) + Pipez Improved (0.25) + Metabolic's 8 gold nuggets (0.014). Route A is gold-bound with blocks crafted; one Functional Storage Gold Upgrade fixes that (A 2.1) at the cost of a level-4 item built on gold and copper blocks.
 
-Before, the best figures were A 22.3 / B 110 / C 55 with the blocks recycled, or A 6.6 / B 33 / C 23 with the blocks crafted back to ingots, which is what a player would have done. Now the best are A 34.1 and B 169 (Outlets) and C 58.3 (Pipeworks). Against the crafted figures, that is **about five times the essence for routes A and B and 2.6 times for C**. The cause is copper: the best clean carrier holds 4 (the Outlet), where the Steam Turbine held 36. Route B, the copper grind, is hit hardest, at 169 essences per Galvanic at tier 1.
+**Byproducts per essence (tier 1, all the way)**: 0.77 cobblestone, 0.72 oak planks, 0.44 plastic, 0.38 amethyst shard, 0.23 stone, 0.19 smooth stone, 0.19 andesite, 0.13 crying obsidian, 0.08 quartz, traces of carrot, string, dried kelp. **No netherite, diamond, nether star or ender item.** The amethyst and crying obsidian come from the Void Crucible only.
 
-Two things would win some of it back. The waxed copper items, if the axe is ruled no shortcut: 6 Waxed Copper Chests and 2 Pumps give A 32 (iron-bound) and B 94. And higher-tier cores (#189), which multiply every figure. Neither changes the packing rule.
+**Notes**
+- Bootstrap: the Recycler's parts are made from wood and stone only, so a team's first Recycler needs nothing from the mix.
+- Usable as decomposed: Hopper, Blast Furnace, Anvil, Copper Chest and the suite machines. The Liquefaction Cauldron, Theurgy's first machine in the Chain, stays in: its recipes are locked until the energy challenge starts (ADR 0007, #214), so a decomposed one does no work before then.
+- Route B now counts copper ingots (79 per Galvanic); raw copper is Shop-only and is not needed.
+- The Anvil and the Wireworks blocks carry most of the iron through iron blocks; recycled rather than crafted, route C rises from 1.9 to 4.1.
 
-Every mix covers the one redstone seed within 16 essences.
+## Caveats
 
-## 5. Open questions
-
-- **Storage blocks.** Decided: excluded (packing). **Waxed copper** is the new edge. A Waxed Copper Chest passes with no block, but an axe unwaxes a placed one for free. Is it excluded like a block?
-- **Gold for route A.** The mix can carry gold only through the Rune of Sacrifice II, with its netherite scrap. Does the mix carry gold (the Runes mix), or does gold come from outside the mix ([gold-sources.md](gold-sources.md))?
-- **Netherite.** The Runes mix hands out 0.5 netherite scrap per essence. Is that acceptable, before the Nether?
-- **Neo Vitae's role.** If Neo Vitae becomes the life challenge's mod, may a Neo Vitae item sit in Advanced's mix, when recycling it returns Neo Vitae intermediates?
-- **Full yield or tier 1.** At full yield every figure is 64 times larger (16 times with crafted blocks). At tier 1, route B costs 110 to 230 essences per Galvanic. Should the mix be sized at tier 1, with higher-tier cores (#189) bringing the cost down, or at a higher core's yield?
-- **Bootstrap.** The Recycler's parts (`decomposing.js`) are assembled from pistons, hoppers and a comparator that decomposing by hand gives today. A Recycler is needed before anything can be recycled, so a mix of Pumps and Outlets yields no piston until one is built. The parts' recipes would have to take the new mix's items whole: a Pump, an Outlet, a Comparator.
-- **Usable as decomposed.** A Pump, an Outlet or a Minecart with Hopper works as soon as it is decomposed. Is that a reward or a cost? The inert alternative, Cut Copper, is now excluded.
-- **Mix size.** Today's mix holds four items. Essences per Galvanic scales inversely with the mix's count; the three proposals are all 8 items.
-- **FTB Materials.** Its dust-to-ingot smelting recipes carry an `ftbmaterials:components_available` condition (`ftb-materials-26.1.2.6.jar!/data/ftbmaterials/recipe/copper_ingot_from_smelting_copper_dust.json`). If they load, a copper ingot recycles into FTB's copper dust, not raw copper, because smelting comes first and its id sorts first. That changes nothing above refined. It does make route B's raw copper unreachable from recycled ingots, and recycling ingots is worse anyway: 0.75 sulfur against 1.
-- **Checks in game.** The tag order, the NeoForge recipe overrides and whether FTB Materials' recipes load were read from data, not seen in EMI's recycling view.
+- Data read from jars, not seen in EMI's recycling view: tag first-items, NeoForge recipe overrides, Connected Glass's pane recipes, FTB Materials' conditional recipes.
+- Stack sizes: vanilla from knowledge of vanilla items; mods from `stacksTo`/`durability` calls in the item classes (javap). LaserIO's seven `stacksTo(1)` lambdas were not mapped item by item; Time in a Bottle and the Shrinking Device unconfirmed.
+- Stonecut-as-refined and andesite/diorite/granite-as-raw are interpretations of "cut from raw" and "raw"; neither touches a mix member's metal.
