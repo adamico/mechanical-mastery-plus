@@ -7,6 +7,7 @@ import java.util.List;
 
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.Recycling;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
@@ -22,9 +23,10 @@ import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.Blocks;
 
 /**
- * Recycling on the Recycler (#184): any item that isn't an essence recycles one band down, by the recipe that
- * makes it run backwards or by the game-test pack's override, and an item no recipe makes into itself. The game
- * tests play at a full yield ({@link TestYield}) unless a test says otherwise, so the amounts are exact.
+ * Recycling on the Recycler (#184, #218): any item that isn't an essence recycles one band down, by the crafting
+ * recipe that makes it run backwards or by the game-test pack's override, and an item no recipe makes into itself;
+ * a refined item, or one a player uncrafts for free, is refused. The game tests play at a full yield
+ * ({@link TestYield}) unless a test says otherwise, so the amounts are exact.
  */
 final class RecyclingTests {
 
@@ -37,8 +39,10 @@ final class RecyclingTests {
         tests.test("recycling_a_piston_on_one_output_returns_a_random_choice_of_its_recipe", 1, RecyclingTests::pistonShortOnOutputs);
         tests.test("recycling_an_override_replaces_what_the_recipe_returns", 1, RecyclingTests::override);
         tests.test("recycling_an_item_no_recipe_makes_shrinks_to_nothing", 1, RecyclingTests::shrinks);
-        tests.test("recycling_an_iron_ingot_returns_raw_iron", 1, RecyclingTests::ingot);
-        tests.test("recycling_an_iron_nugget_returns_itself_not_the_tools_smelted_into_it", 1, RecyclingTests::nugget);
+        tests.test("recycling_a_hopper_returns_its_iron_and_its_chest", 1, RecyclingTests::hopper);
+        tests.test("recycling_input_refuses_what_is_refined_or_uncrafted_for_free", 1, RecyclingTests::refused);
+        tests.test("recycling_input_takes_what_only_uncrafting_makes", 1, RecyclingTests::uncrafted);
+        tests.test("recycling_emi_leaves_out_what_is_refused", 1, RecyclingTests::table);
         tests.test("recycling_one_of_what_a_recipe_makes_several_of_returns_its_share", 1, RecyclingTests::paper);
         tests.test("recycling_is_never_recorded", 1, RecyclingTests::neverRecorded);
         tests.test("recycling_input_refuses_a_filled_shulker_box", 1, RecyclingTests::shulkerBoxes);
@@ -113,23 +117,45 @@ final class RecyclingTests {
         helper.succeed();
     }
 
-    private static void ingot(GameTestHelper helper) {
+    private static void hopper(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
-        build.feed(new ItemStack(Items.IRON_INGOT));
+        build.feed(new ItemStack(Items.HOPPER));
         build.turn(RecyclerCoreBlockEntity.TURNS);
-        build.expectOutputs(new ItemStack(Items.RAW_IRON));
+        build.expectOutputs(new ItemStack(Items.IRON_INGOT, 5), new ItemStack(Items.CHEST));
         helper.succeed();
     }
 
-    /**
-     * Nuggets are made from an ingot, which uncompresses, and by smelting tools and armour down, which is recycling
-     * already: neither runs backwards, so a nugget recycles into itself, and never up into a pickaxe.
-     */
-    private static void nugget(GameTestHelper helper) {
+    /** What is refined (cooked, or the planks) and what a player uncrafts for free (a block of ingots, of raw iron, of wheat). */
+    private static final List<Item> REFUSED = List.of(Items.IRON_INGOT, Items.OAK_PLANKS, Items.STONE, Items.GLASS, Items.COOKED_BEEF,
+            Items.IRON_BLOCK, Items.RAW_IRON_BLOCK, Items.HAY_BLOCK);
+
+    private static void refused(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
-        build.feed(new ItemStack(Items.IRON_NUGGET));
-        build.turn(RecyclerCoreBlockEntity.TURNS);
-        build.expectOutputs(new ItemStack(Items.IRON_NUGGET));
+        for (Item item : REFUSED) {
+            helper.assertValueEqual(build.feed(new ItemStack(item)), 0, "the " + item + " an input took");
+        }
+        helper.assertValueEqual(build.core().status(), Status.EMPTY, "the status after the input refused them");
+        helper.succeed();
+    }
+
+    /** A nugget, raw iron and wheat are raw: only uncrafting a block makes them, so each recycles into less of itself. */
+    private static void uncrafted(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        for (Item item : List.of(Items.IRON_NUGGET, Items.RAW_IRON, Items.WHEAT)) {
+            helper.assertValueEqual(build.feed(new ItemStack(item)), 1, "the " + item + " an input took");
+            build.turn(RecyclerCoreBlockEntity.TURNS);
+            build.expectOutputs(new ItemStack(item));
+            build.take(0);
+        }
+        helper.succeed();
+    }
+
+    private static void table(GameTestHelper helper) {
+        var table = Recycling.byRecipe(helper.getLevel().getServer());
+        for (Item item : REFUSED) {
+            helper.assertFalse(table.containsKey(item), "EMI is sent what " + item + " recycles into: " + table.get(item));
+        }
+        helper.assertTrue(table.containsKey(Items.HOPPER), "EMI is sent nothing for a hopper");
         helper.succeed();
     }
 

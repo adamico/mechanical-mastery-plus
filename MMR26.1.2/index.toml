@@ -38,7 +38,7 @@ hash = "4c90671147bdc2b21ed53073c2df1d8c3d93a552394c70acb96564c90d736651"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/decomposing.md"
-hash = "9c7a1f524f20f98a53c0971f9ee53865460e49b39c7dce1fac525a760b954ab0"
+hash = "3af202e37af95754b4f50fec727811ac30c44cd7f30cfe35043d8df2c8283b3b"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/index.md"
@@ -62,11 +62,11 @@ hash = "e6b18971e61c664dc5e98125ebddacfc64486ebf3d59ce87099c71afa17fdefe"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/index.md"
-hash = "b2e83973c07728676205145bbdb90773a60bcad912d990ff1bffef75b233a335"
+hash = "eefdbb5fd3a25da76acccedae96c3c568c5896ef84f74753350c0c534162d826"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/input.md"
-hash = "a251b8faeceff6e55b62a48bee25648d7701696841c1f6418cdb77ae79b3c7fc"
+hash = "8660935a8b01ac15577cdd0684f0cab18ab9ffaa56e76e606229ed7bff27f798"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/output.md"

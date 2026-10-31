@@ -33,5 +33,11 @@ Your team's first decompose on a Recycler wakes [C.O.D.](cod.md). Decomposing by
 ## Recycling
 
 To **recycle** is to take an item that isn't an essence apart, on a Recycler only, for part of what made it.
-It is how you get further down than what your essence decomposes into, and how you throw surplus away.
+It goes one band down, undoing only the crafting or assembling that made the item, never smelting or other
+cooking. It is how you get further down than what your essence decomposes into, and how you throw surplus away.
 EMI's Recycling category shows what an item recycles into. Recycling never wakes C.O.D.
+
+It stops at **refined**: anything smelted or cooked, such as ingots, glass, stone and food, and planks, which are
+cut from logs, can't be recycled. Sell refined surplus at the Shop instead. A block of ingots can't be recycled
+either: uncraft it instead, which loses nothing. A **raw** item, one nothing crafts, such as dirt, cobblestone, an
+ore or a nugget, recycles into less of itself, so feeding it back is how you throw raw surplus away.

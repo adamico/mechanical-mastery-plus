@@ -7,7 +7,7 @@ navigation:
 
 # The Recycler
 
-The Recycler [decomposes](../decomposing.md) essence and recycles everything else, much faster than decomposing
+The Recycler [decomposes](../decomposing.md) essence and recycles what crafting made, much faster than decomposing
 by hand. You build it block by block, from parts made on a Craftworks Assembler.
 
 <GameScene zoom={4} interactive={true}>

@@ -12,7 +12,11 @@ import java.util.Map;
 import java.util.Optional;
 
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Kind;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Into;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Made;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Outcome;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Refusal;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Refused;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Share;
 import org.junit.jupiter.api.Test;
 
@@ -30,8 +34,18 @@ class RecyclingRulesTest {
         makers.computeIfAbsent(result, key -> new ArrayList<>()).add(new Made<>(kind, id, shares, count));
     }
 
-    private List<Share<String>> recycle(String item) {
-        return RecyclingRules.recyclesInto(item, Optional.empty(), key -> makers.getOrDefault(key, List.of()), key -> key.endsWith("_ore"));
+    private Outcome<String> recycle(String item) {
+        return recycle(item, Optional.empty());
+    }
+
+    /** Ores end in {@code _ore}; the refined tag holds the planks. */
+    private Outcome<String> recycle(String item, Optional<List<Share<String>>> override) {
+        return RecyclingRules.recycle(item, override, key -> makers.getOrDefault(key, List.of()), key -> key.endsWith("_ore"),
+                key -> key.endsWith("_planks"));
+    }
+
+    private static Outcome<String> into(Object... itemsAndAmounts) {
+        return new Into<>(shares(itemsAndAmounts));
     }
 
     private static List<Share<String>> shares(Object... itemsAndAmounts) {
@@ -44,7 +58,7 @@ class RecyclingRulesTest {
 
     @Test
     void anItemNoRecipeMakesRecyclesIntoItself() {
-        assertEquals(shares("dirt", 1), recycle("dirt"));
+        assertEquals(into("dirt", 1), recycle("dirt"));
     }
 
     @Test
@@ -52,70 +66,109 @@ class RecyclingRulesTest {
         // The piston's pattern, row by row: TTT, #X#, #R#.
         recipe("piston", 1, Kind.CRAFTING, "minecraft:piston", "oak_planks", "oak_planks", "oak_planks", "cobblestone", "iron_ingot",
                 "cobblestone", "cobblestone", "redstone", "cobblestone");
-        assertEquals(shares("oak_planks", 3, "cobblestone", 4, "iron_ingot", 1, "redstone", 1), recycle("piston"));
+        assertEquals(into("oak_planks", 3, "cobblestone", 4, "iron_ingot", 1, "redstone", 1), recycle("piston"));
     }
 
     @Test
     void oneOfWhatARecipeMakesSeveralOfTakesItsShare() {
         recipe("stick", 4, Kind.CRAFTING, "minecraft:stick", "oak_planks", "oak_planks");
-        assertEquals(shares("oak_planks", 0.5), recycle("stick"));
+        assertEquals(into("oak_planks", 0.5), recycle("stick"));
     }
 
     @Test
     void anOverrideReplacesTheDerivedCost() {
         recipe("piston", 1, Kind.CRAFTING, "minecraft:piston", "oak_planks", "cobblestone");
-        var override = shares("iron_ingot", 2);
-        assertEquals(override, RecyclingRules.recyclesInto("piston", Optional.of(override), key -> makers.getOrDefault(key, List.of()),
-                key -> false));
+        assertEquals(into("iron_ingot", 2), recycle("piston", Optional.of(shares("iron_ingot", 2))));
     }
 
     @Test
-    void smeltingComesBeforeAssemblingAndAssemblingBeforeCrafting() {
-        recipe("iron_ingot", 1, Kind.CRAFTING, "a:crafted", "iron_nugget_pile");
-        recipe("iron_ingot", 1, Kind.ASSEMBLING, "b:assembled", "iron_dust");
-        assertEquals(shares("iron_dust", 1), recycle("iron_ingot"));
-        recipe("iron_ingot", 1, Kind.SMELTING, "c:smelted", "raw_iron");
-        assertEquals(shares("raw_iron", 1), recycle("iron_ingot"));
-    }
-
-    @Test
-    void otherCookingCountsOnlyWhenNothingElseMakesTheItem() {
-        recipe("charcoal", 1, Kind.OTHER_COOKING, "a:charcoal_from_blasting", "oak_log");
-        assertEquals(shares("oak_log", 1), recycle("charcoal"));
-        recipe("charcoal", 1, Kind.CRAFTING, "b:charcoal_from_crafting", "coal");
-        assertEquals(shares("coal", 1), recycle("charcoal"));
+    void assemblingComesBeforeCrafting() {
+        recipe("gear", 1, Kind.CRAFTING, "a:crafted", "iron_ingot", "iron_ingot", "iron_ingot", "iron_ingot");
+        recipe("gear", 1, Kind.ASSEMBLING, "b:assembled", "2 iron_ingot");
+        assertEquals(into("iron_ingot", 2), recycle("gear"));
     }
 
     @Test
     void withinAKindTheFirstRecipeByIdWins() {
-        recipe("glass", 1, Kind.SMELTING, "minecraft:glass_from_sand", "sand");
-        recipe("glass", 1, Kind.SMELTING, "minecraft:glass_from_red_sand", "red_sand");
-        assertEquals(shares("red_sand", 1), recycle("glass"));
+        recipe("gear", 1, Kind.CRAFTING, "minecraft:gear_from_iron", "4 iron_ingot");
+        recipe("gear", 1, Kind.CRAFTING, "minecraft:gear_from_copper", "4 copper_ingot");
+        assertEquals(into("copper_ingot", 4), recycle("gear"));
     }
 
     @Test
     void aRecipeFromAnOreLosesToOneThatIsNot() {
-        recipe("iron_ingot", 1, Kind.SMELTING, "minecraft:iron_ingot_from_smelting_deepslate_iron_ore", "deepslate_iron_ore");
-        recipe("iron_ingot", 1, Kind.SMELTING, "minecraft:iron_ingot_from_smelting_iron_ore", "iron_ore");
-        assertEquals(shares("deepslate_iron_ore", 1), recycle("iron_ingot"));
-        recipe("iron_ingot", 1, Kind.SMELTING, "minecraft:iron_ingot_from_smelting_raw_iron", "raw_iron");
-        assertEquals(shares("raw_iron", 1), recycle("iron_ingot"));
+        recipe("gear", 1, Kind.CRAFTING, "a:gear_from_ore", "iron_ore");
+        recipe("gear", 1, Kind.CRAFTING, "b:gear_from_ingots", "4 iron_ingot");
+        assertEquals(into("iron_ingot", 4), recycle("gear"));
     }
 
     @Test
-    void anUncompressingRecipeIsNeverRunBackwards() {
-        recipe("iron_block", 1, Kind.CRAFTING, "minecraft:iron_block", "9 iron_ingot");
-        recipe("iron_ingot", 9, Kind.CRAFTING, "minecraft:iron_ingot_from_iron_block", "iron_block");
+    void anItemACookingRecipeMakesIsRefusedAsRefined() {
+        recipe("glass", 1, Kind.COOKING, "minecraft:glass", "sand");
+        assertEquals(new Refused<>(Refusal.REFINED), recycle("glass"));
+    }
+
+    @Test
+    void aCookedItemIsRefusedEvenWhenACraftingRecipeAlsoMakesIt() {
+        recipe("iron_ingot", 1, Kind.COOKING, "minecraft:iron_ingot_from_smelting_raw_iron", "raw_iron");
         recipe("iron_ingot", 1, Kind.CRAFTING, "minecraft:iron_ingot_from_nuggets", "9 iron_nugget");
         recipe("iron_nugget", 9, Kind.CRAFTING, "minecraft:iron_nugget", "iron_ingot");
-        assertEquals(shares("iron_ingot", 9), recycle("iron_block"));
-        assertEquals(shares("iron_nugget", 9), recycle("iron_ingot"));
-        assertEquals(shares("iron_nugget", 1), recycle("iron_nugget"));
+        assertEquals(new Refused<>(Refusal.REFINED), recycle("iron_ingot"));
+    }
+
+    @Test
+    void anItemInTheRefinedTagIsRefusedThoughCraftingMakesIt() {
+        recipe("oak_planks", 4, Kind.CRAFTING, "minecraft:oak_planks", "oak_log");
+        assertEquals(new Refused<>(Refusal.REFINED), recycle("oak_planks"));
+    }
+
+    @Test
+    void aStorageBlockIsRefusedToBeUncraftedInstead() {
+        recipe("iron_block", 1, Kind.CRAFTING, "minecraft:iron_block", "9 iron_ingot");
+        recipe("iron_ingot", 9, Kind.CRAFTING, "minecraft:iron_ingot_from_iron_block", "iron_block");
+        assertEquals(new Refused<>(Refusal.UNCRAFT_INSTEAD), recycle("iron_block"));
+    }
+
+    @Test
+    void whatOnlyUncraftingMakesRecyclesIntoItself() {
+        recipe("raw_iron_block", 1, Kind.CRAFTING, "minecraft:raw_iron_block", "9 raw_iron");
+        recipe("raw_iron", 9, Kind.CRAFTING, "minecraft:raw_iron", "raw_iron_block");
+        recipe("iron_nugget", 9, Kind.CRAFTING, "minecraft:iron_nugget", "iron_ingot");
+        recipe("iron_ingot", 1, Kind.CRAFTING, "minecraft:iron_ingot_from_nuggets", "9 iron_nugget");
+        recipe("hay_block", 1, Kind.CRAFTING, "minecraft:hay_block", "9 wheat");
+        recipe("wheat", 9, Kind.CRAFTING, "minecraft:wheat", "hay_block");
+        assertEquals(into("raw_iron", 1), recycle("raw_iron"));
+        assertEquals(into("iron_nugget", 1), recycle("iron_nugget"));
+        assertEquals(into("wheat", 1), recycle("wheat"));
+    }
+
+    @Test
+    void anItemAlsoUncraftedFromABlockRecyclesByItsOtherRecipe() {
+        recipe("bone_meal", 3, Kind.CRAFTING, "minecraft:bone_meal", "bone");
+        recipe("bone_meal", 9, Kind.CRAFTING, "minecraft:bone_meal_from_bone_block", "bone_block");
+        recipe("bone_block", 1, Kind.CRAFTING, "minecraft:bone_block", "9 bone_meal");
+        assertEquals(into("bone", 1.0 / 3), recycle("bone_meal"));
+    }
+
+    @Test
+    void aBlockNothingTurnsBackIsRecycled() {
+        recipe("snow_block", 1, Kind.CRAFTING, "minecraft:snow_block", "4 snowball");
+        assertEquals(into("snowball", 4), recycle("snow_block"));
     }
 
     @Test
     void makingSeveralFromOneIsRunBackwardsWhenNothingMakesItBack() {
-        recipe("oak_planks", 4, Kind.CRAFTING, "minecraft:oak_planks", "oak_log");
-        assertEquals(shares("oak_log", 0.25), recycle("oak_planks"));
+        recipe("stick", 4, Kind.CRAFTING, "minecraft:stick_from_bamboo", "bamboo");
+        assertEquals(into("bamboo", 0.25), recycle("stick"));
+    }
+
+    @Test
+    void anOverrideWinsOverARefusal() {
+        recipe("glass", 1, Kind.COOKING, "minecraft:glass", "sand");
+        recipe("iron_block", 1, Kind.CRAFTING, "minecraft:iron_block", "9 iron_ingot");
+        recipe("iron_ingot", 9, Kind.CRAFTING, "minecraft:iron_ingot_from_iron_block", "iron_block");
+        assertEquals(into("sand", 1), recycle("glass", Optional.of(shares("sand", 1))));
+        assertEquals(into("iron_ingot", 8), recycle("iron_block", Optional.of(shares("iron_ingot", 8))));
+        assertEquals(into("oak_log", 1), recycle("oak_planks", Optional.of(shares("oak_log", 1))));
     }
 }

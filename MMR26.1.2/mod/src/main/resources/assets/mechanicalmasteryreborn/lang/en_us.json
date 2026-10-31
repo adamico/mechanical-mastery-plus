@@ -60,7 +60,7 @@
   "mechanicalmasteryreborn.jade.recycler.empty": "Nothing to decompose or recycle",
   "mechanicalmasteryreborn.jade.recycler.held": "Holds %s %s",
   "mechanicalmasteryreborn.jade.recycler.incomplete": "Incomplete: needs a drive, an input and an output, and nothing else around its core",
-  "mechanicalmasteryreborn.jade.recycler.no_recipe": "Nothing decomposes the essence it holds",
+  "mechanicalmasteryreborn.jade.recycler.no_recipe": "Nothing decomposes or recycles what it holds",
   "mechanicalmasteryreborn.jade.recycler.no_room": "Outputs full",
   "mechanicalmasteryreborn.jade.recycler.ready": "Ready",
   "mechanicalmasteryreborn.jade.recycler.too_few": "Holds too few to decompose",
@@ -72,5 +72,11 @@
   "mechanicalmasteryreborn.lab.later": "Coming later",
   "mechanicalmasteryreborn.lab.not_member": "Not yours",
   "mechanicalmasteryreborn.lab.not_member.tooltip": "Only the team whose island this lab stands on can choose here.",
-  "mechanicalmasteryreborn.lab.played": "Played"
+  "mechanicalmasteryreborn.lab.played": "Played",
+  "mechanicalmasteryreborn.recycler.input.full": "The Recycler is full",
+  "mechanicalmasteryreborn.recycler.input.holds_another": "The Recycler is holding something else",
+  "mechanicalmasteryreborn.recycler.input.no_recycler": "This input isn't part of a Recycler",
+  "mechanicalmasteryreborn.recycler.input.not_taken": "The Recycler can't take this",
+  "mechanicalmasteryreborn.recycler.input.refined": "Refined items can't be recycled",
+  "mechanicalmasteryreborn.recycler.input.uncraft_instead": "Uncraft this instead"
 }
