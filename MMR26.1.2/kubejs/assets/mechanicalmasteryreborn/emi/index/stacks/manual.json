@@ -1,0 +1,10 @@
+{
+  "removed": [
+    "item:guideme:guide"
+  ],
+  "added": [
+    {
+      "stack": "item:guideme:guide{\"guideme:guide_id\":\"mechanicalmasteryreborn:manual\"}"
+    }
+  ]
+}

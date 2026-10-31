@@ -25,6 +25,10 @@ file = "defaultconfigs/mechanicalmasteryreborn-server.toml"
 hash = "ba9a93fd7ff504848df2ce218cd28682b6aa1671f0f593f07a972c47785d3086"
 
 [[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/emi/index/stacks/manual.json"
+hash = "55cd92783501279d63fa7851b6dc15d8c26e2850809f8852e9a24aa573fe52bd"
+
+[[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guideme_guides/manual.json"
 hash = "26f43add76e35fa7883a60cf864740b3c5225d1ab7cf91c8f5a476aa0494c666"
 
@@ -78,7 +82,7 @@ hash = "bf0996fea7540b2c0a3a747fac2747d3f16646789c456770bb00db7cd422552b"
 
 [[files]]
 file = "kubejs/server_scripts/manual.js"
-hash = "96c0216476e462b2dd5183c3a91ccae92b2fe5a3646ef633d059695dba110e59"
+hash = "e0556fffc7e0e17b94d46b71359ee3e064e19de70ec2240ff67c2c15bb9eb870"
 
 [[files]]
 file = "kubejs/server_scripts/team_of_one.js"
@@ -287,11 +291,6 @@ metafile = true
 [[files]]
 file = "mods/ftb-chunks-forge.pw.toml"
 hash = "5819b227140768306636a76607df189439d03ce6e420c680ba8a63a4312e9cd7"
-metafile = true
-
-[[files]]
-file = "mods/ftb-filter-system.pw.toml"
-hash = "2cd5926055dac25058dae654a9a17bdb6183491f456fe4dab5b38d5999c98955"
 metafile = true
 
 [[files]]
