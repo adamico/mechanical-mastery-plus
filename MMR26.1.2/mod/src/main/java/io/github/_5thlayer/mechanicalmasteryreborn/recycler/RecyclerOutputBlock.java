@@ -67,8 +67,7 @@ public final class RecyclerOutputBlock extends BaseEntityBlock implements Recycl
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite())
-                .setValue(PLACE, RecyclerPlace.at(context.getLevel(), context.getClickedPos()));
+        return RecyclerPart.placed(defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()), context);
     }
 
     @Override

@@ -81,10 +81,7 @@ public final class RecyclerCoreBlock extends BaseEntityBlock {
 
     /** Sets every part in the 3x3 centred on {@code centre} to the place it now stands at, after a core came or went. */
     private static void setPlaces(Level level, BlockPos centre) {
-        for (RecyclerPlace place : RecyclerPlace.values()) {
-            if (place == RecyclerPlace.NONE) {
-                continue;
-            }
+        for (RecyclerPlace place : RecyclerPlace.IN_3X3) {
             BlockPos part = place.of(centre);
             BlockState at = level.getBlockState(part);
             if (at.getBlock() instanceof RecyclerPart) {

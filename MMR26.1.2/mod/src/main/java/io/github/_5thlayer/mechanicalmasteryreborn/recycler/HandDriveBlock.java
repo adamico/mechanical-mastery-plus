@@ -50,7 +50,7 @@ public final class HandDriveBlock extends Block implements RecyclerPart {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState().setValue(PLACE, RecyclerPlace.at(context.getLevel(), context.getClickedPos()));
+        return RecyclerPart.placed(defaultBlockState(), context);
     }
 
     @Override

@@ -6,7 +6,9 @@ package io.github._5thlayer.mechanicalmasteryreborn.recycler;
 import java.util.Optional;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 /**
@@ -24,6 +26,11 @@ public interface RecyclerPart {
     }
 
     Role role();
+
+    /** {@code state} at the place a part placed by {@code context} stands at. */
+    static BlockState placed(BlockState state, BlockPlaceContext context) {
+        return state.setValue(PLACE, RecyclerPlace.at(context.getLevel(), context.getClickedPos()));
+    }
 
     /** The one core whose 3x3 holds {@code pos} as a place, the Recycler a part there belongs to; none if two do. */
     static Optional<RecyclerCoreBlockEntity> coreOf(Level level, BlockPos pos) {

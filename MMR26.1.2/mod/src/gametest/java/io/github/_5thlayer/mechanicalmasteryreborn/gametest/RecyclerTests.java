@@ -3,7 +3,6 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
-import java.util.Arrays;
 import java.util.List;
 
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
@@ -483,11 +482,7 @@ final class RecyclerTests {
     private static void corePlacedSetsPlaces(GameTestHelper helper) {
         // A core placed facing north fronts the 3x3 south of it, standing at the 3x3's north place itself.
         BlockPos centre = RecyclerBuild.CORE.south();
-        List<Block> parts = List.of(Recycler.HAND_DRIVE.get(), Recycler.INPUT.get(), Recycler.OUTPUT.get(), Recycler.CASING.get());
-        List<RecyclerPlace> places = placesAround(RecyclerPlace.NORTH);
-        for (int i = 0; i < places.size(); i++) {
-            helper.setBlock(places.get(i).of(centre), parts.get(i % parts.size()));
-        }
+        List<RecyclerPlace> places = partsAround(helper, centre, RecyclerBuild.CORE);
         helper.setBlock(RecyclerBuild.CORE, Recycler.CORE.get());
         for (RecyclerPlace place : places) {
             helper.assertValueEqual(helper.getBlockState(place.of(centre)).getValue(RecyclerPart.PLACE), place,
@@ -499,11 +494,7 @@ final class RecyclerTests {
 
     private static void coreBrokenClearsPlaces(GameTestHelper helper) {
         BlockPos centre = RecyclerBuild.CORE.south();
-        List<Block> parts = List.of(Recycler.HAND_DRIVE.get(), Recycler.INPUT.get(), Recycler.OUTPUT.get(), Recycler.CASING.get());
-        List<RecyclerPlace> places = placesAround(RecyclerPlace.NORTH);
-        for (int i = 0; i < places.size(); i++) {
-            helper.setBlock(places.get(i).of(centre), parts.get(i % parts.size()));
-        }
+        List<RecyclerPlace> places = partsAround(helper, centre, RecyclerBuild.CORE);
         helper.setBlock(RecyclerBuild.CORE, Recycler.CORE.get());
         helper.destroyBlock(RecyclerBuild.CORE);
         for (RecyclerPlace place : places) {
@@ -522,7 +513,7 @@ final class RecyclerTests {
         BlockPos centre = core.relative(front.getOpposite());
         List<Item> parts = List.of(Recycler.HAND_DRIVE_ITEM.get(), Recycler.INPUT_ITEM.get(), Recycler.OUTPUT_ITEM.get(), Recycler.CASING_ITEM.get());
         int n = 0;
-        for (RecyclerPlace place : placesAround(front == Direction.NORTH ? RecyclerPlace.NORTH : RecyclerPlace.EAST)) {
+        for (RecyclerPlace place : placesAround(centre, core)) {
             Item part = parts.get(n++ % parts.size());
             placeOnTheFloor(helper, part, place.of(centre));
             helper.assertValueEqual(helper.getBlockState(place.of(centre)).getValue(RecyclerPart.PLACE), place,
@@ -555,9 +546,19 @@ final class RecyclerTests {
         helper.succeed();
     }
 
-    /** A 3x3's eight places, all but none and {@code core}'s, where its core stands. */
-    private static List<RecyclerPlace> placesAround(RecyclerPlace core) {
-        return Arrays.stream(RecyclerPlace.values()).filter(place -> place != RecyclerPlace.NONE && place != core).toList();
+    /** The eight places of the 3x3 centred on {@code centre}, all but the one its core at {@code core} stands at. */
+    private static List<RecyclerPlace> placesAround(BlockPos centre, BlockPos core) {
+        return RecyclerPlace.IN_3X3.stream().filter(place -> !place.of(centre).equals(core)).toList();
+    }
+
+    /** Sets every kind of part in turn in the eight places around {@code centre}, with no core yet; returns those places. */
+    private static List<RecyclerPlace> partsAround(GameTestHelper helper, BlockPos centre, BlockPos core) {
+        List<Block> parts = List.of(Recycler.HAND_DRIVE.get(), Recycler.INPUT.get(), Recycler.OUTPUT.get(), Recycler.CASING.get());
+        List<RecyclerPlace> places = placesAround(centre, core);
+        for (int i = 0; i < places.size(); i++) {
+            helper.setBlock(places.get(i).of(centre), parts.get(i % parts.size()));
+        }
+        return places;
     }
 
     /** A player places {@code item} at {@code pos}, clicking the top of the block below it. */
