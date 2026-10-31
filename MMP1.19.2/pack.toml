@@ -1,12 +1,12 @@
 name = "Mechanical Mastery Plus"
 author = "kc00l"
-version = "1.1.15"
+version = "1.1.16"
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "9a766f85ec265de016d0506f365afe2d30cd90b5043869749e7f6379abd81e91"
+hash = "dfa8fd53d9250fff6a788dc2d5814d8a6f11ecdcdc51ec7988d357eb6f64461e"
 
 [versions]
 forge = "43.2.23"

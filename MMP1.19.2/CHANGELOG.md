@@ -4,6 +4,8 @@ Releases up to 1.1.12 list their mod changes in `changelogs/`.
 
 ## Unreleased
 
+## 1.1.16
+
 - New players start with $10,000 in AdminShop again, not $100: the pack set the starting money in a config file AdminShop 1.17.3 no longer reads. On an existing world, an op can top a player up with `/adminshop give <player> 1 9900`.
 
 ## 1.1.15
