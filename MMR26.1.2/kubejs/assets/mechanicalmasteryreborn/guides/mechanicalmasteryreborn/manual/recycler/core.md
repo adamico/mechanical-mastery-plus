@@ -19,7 +19,7 @@ it.
 It holds the essence, or the item to recycle, that its [inputs](input.md) take in, and the work under way. Its
 tier sets how fast the Recycler runs and how well: its **yield**, the share of a mix a decompose returns. A
 Recycler with too few [outputs](output.md) for every kind still runs, returning only the kinds that fit, picked at
-random.
+random, and the rest are lost.
 
 Right-click it with an empty hand to take back the whole stack it holds. That gives up the work under way. Nothing
 else can take it out.

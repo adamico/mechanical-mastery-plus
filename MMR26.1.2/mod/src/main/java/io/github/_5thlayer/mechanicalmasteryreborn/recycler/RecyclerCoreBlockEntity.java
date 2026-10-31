@@ -72,7 +72,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
 
     /** Whether the Recycler can work now, and why not. */
     public enum Status {
-        /** Whole, with enough of what it holds and room for the most each kind its work returns can return. */
+        /** Whole, with enough of what it holds, and a position for each kind it will return, with room for the most of it. */
         READY,
         /** Its 3x3 lacks a drive, an input or an output, or holds something else. */
         INCOMPLETE,
@@ -82,7 +82,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         NO_RECIPE,
         /** It holds fewer than one decompose takes. */
         TOO_FEW,
-        /** The most one of the kinds the work returns can return fits on none of its outputs' positions. */
+        /** A kind it will return has no position with room for the most of it. */
         NO_ROOM
     }
 
@@ -246,8 +246,8 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
     }
 
     /**
-     * The kinds of a work of {@code kinds} the outputs' {@code positions} return, by their place in the work, in its
-     * order: every one when they all have a position, or else the core's pick, drawn now if it has none for this work.
+     * Which of the work's {@code kinds} kinds it returns, by their place in the work and in its order: all of them when
+     * the outputs have {@code positions} enough, or else the core's pick, drawn now if it has none for this work.
      */
     private int[] picked(ServerLevel server, int kinds, int positions) {
         if (kinds <= positions) {
@@ -283,7 +283,6 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         }
         return empty;
     }
-
 
     /**
      * The outputs in the order a mix fills them, or null when the 3x3 isn't a whole Recycler: every one of the
