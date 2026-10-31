@@ -1,0 +1,13 @@
+{
+  "item_settings": {
+    "display_name": {
+      "text": "Manual"
+    },
+    "tooltip_lines": [
+      {
+        "text": "How to build and work the Recycler, the lab and C.O.D.",
+        "color": "dark_gray"
+      }
+    ]
+  }
+}

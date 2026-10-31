@@ -1,0 +1,13 @@
+name = "GuideME"
+filename = "guideme-26.1.17-beta.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "856a13f4373cfb6edd97a1c5959f5a0010e4eec5"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 9366331
+project-id = 1173950

@@ -25,12 +25,60 @@ file = "defaultconfigs/mechanicalmasteryreborn-server.toml"
 hash = "ba9a93fd7ff504848df2ce218cd28682b6aa1671f0f593f07a972c47785d3086"
 
 [[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guideme_guides/manual.json"
+hash = "26f43add76e35fa7883a60cf864740b3c5225d1ab7cf91c8f5a476aa0494c666"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/cod.md"
+hash = "4c90671147bdc2b21ed53073c2df1d8c3d93a552394c70acb96564c90d736651"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/decomposing.md"
+hash = "9c7a1f524f20f98a53c0971f9ee53865460e49b39c7dce1fac525a760b954ab0"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/index.md"
+hash = "fbc40ee821346b43aaf62873fb2c0da83ae93a6780fbf92ada2942ad01fa57a6"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/lab.md"
+hash = "657df676f86fe23e0037838e296e2de4a19a97282dc7b93ac3d6c47c8cba57e4"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/casing.md"
+hash = "cccd5e9854f6afce5e563ce361076168d08c65c18eecac7edbbbd1bc2d10ce7f"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/core.md"
+hash = "b2835a9976a22d99ec5e41d0534788d5686e97ab2186725c33285f7f48a38efa"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/hand_drive.md"
+hash = "e6b18971e61c664dc5e98125ebddacfc64486ebf3d59ce87099c71afa17fdefe"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/index.md"
+hash = "8d285c2124af4724ef11867030a57fd0419c202c870df4cbe775c87460c51a06"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/input.md"
+hash = "a251b8faeceff6e55b62a48bee25648d7701696841c1f6418cdb77ae79b3c7fc"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/output.md"
+hash = "89c4aeec7a1fa84f2c380346b28b4892c25598d3bc93c55137c5773d4529eee2"
+
+[[files]]
 file = "kubejs/server_scripts/decomposing.js"
-hash = "1f1eabe247ce04da7991369b6c41d52d2d77072972b58628ce5d097f6170bee8"
+hash = "1d1b8bbe1a3338392d2f18e88799db4f2a757e94ef50c74d0fb081238f0c421f"
 
 [[files]]
 file = "kubejs/server_scripts/generators.js"
 hash = "bf0996fea7540b2c0a3a747fac2747d3f16646789c456770bb00db7cd422552b"
+
+[[files]]
+file = "kubejs/server_scripts/manual.js"
+hash = "96c0216476e462b2dd5183c3a91ccae92b2fe5a3646ef633d059695dba110e59"
 
 [[files]]
 file = "kubejs/server_scripts/team_of_one.js"
@@ -304,6 +352,11 @@ metafile = true
 [[files]]
 file = "mods/groundworks.pw.toml"
 hash = "e2c150e06552ee2262a6303180c0b59bccba37de7c833b201772faf8adb76929"
+metafile = true
+
+[[files]]
+file = "mods/guideme.pw.toml"
+hash = "98ab44d98234279f1b054067ea3ea7dc665658f3945c8c2174a7f178e9f2f0c3"
 metafile = true
 
 [[files]]

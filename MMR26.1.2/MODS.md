@@ -20,9 +20,10 @@ The rest of 0.0.1:
 - **Chapters**: research locks. A team's finished research is a stage, and recipes wait on it.
 - **Skyblock Builder**: the island start, an island per team, and the void Nether and End.
 - **Default World Type**: makes Skyblock Builder's world type the one a new world picks.
+- **GuideME**: the Manual, the pack's in-game book on how to build and work the companion mod's blocks, with 3D scenes. Holding G on a part's tooltip opens its page.
 - **EMI**: the recipe viewer. Locked recipes stay visible in it. EMI's own project has no file for NeoForge 26.1.2, so this is the port the Showcase plays, `emi-unofficial-port-unstable`.
 - **Refined Storage**: storage.
-- **KubeJS**, **Rhino**: the pack's scripts: recipes, balance, and giving a player with no team a team of one.
+- **KubeJS**, **Rhino**: the pack's scripts: recipes, balance, giving a player with no team a team of one, and the Manual: its pages and giving it to each player once.
 
 The challenges after 0.0.1 (#210), each one's chain locked until a team starts it (ADR 0007):
 
