@@ -41,7 +41,7 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
  * whose 3x3 overlaps another's, doesn't run, while two that only touch both do; hoppers feed and empty it; its
  * drives add up and are capped; each decompose is recorded for the team whose island it stands on; and only a
  * player's empty hand takes back what its core holds, giving up the work under way (#191); one short on outputs
- * returns a random choice of kinds, kept until the work is done, each kind on its own item first, then an empty
+ * returns a random choice of the kinds that fit, kept until the work is done, each kind on its own item first, then an empty
  * position (#216). Each test builds its Recycler with {@link RecyclerBuild}.
  */
 final class RecyclerTests {
@@ -69,6 +69,7 @@ final class RecyclerTests {
         tests.test("recycler_output_in_the_centre_is_read_last", 1, RecyclerTests::centreOutputLast);
         tests.test("recycler_will_not_start_when_the_mix_does_not_fit", 1, RecyclerTests::noRoom);
         tests.test("recycler_short_on_outputs_returns_a_random_choice_of_the_mix", 1, RecyclerTests::shortOnOutputs);
+        tests.test("recycler_short_on_outputs_runs_while_any_kind_fits", 1, RecyclerTests::runsWhileAnyKindFits);
         tests.test("recycler_short_on_outputs_keeps_its_pick_until_the_work_is_done", 1, RecyclerTests::pickHolds);
         tests.test("recycler_kind_lands_on_its_own_item_first_then_an_empty_position", 1, RecyclerTests::landsOnItsOwnItem);
         tests.test("recycler_right_click_takes_a_position_stack", 1, RecyclerTests::rightClickTakes);
@@ -247,8 +248,32 @@ final class RecyclerTests {
     }
 
     /**
-     * A one-output Recycler that has returned three kinds of Advanced's mix, one position then emptied: whether the next
-     * pick fits depends on which kinds it holds, and what the core says it can do stays the same until it does it.
+     * A one-output Recycler, one position emptied after each decompose: each next decompose picks among the kinds that
+     * fit, so it runs every time, whichever kinds the outputs still hold.
+     */
+    private static void runsWhileAnyKindFits(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        build.place(1, Blocks.AIR);
+        build.place(1, Recycler.CASING.get());
+        build.feed(11);
+        build.turn(RecyclerCoreBlockEntity.TURNS);
+        for (int i = 0; i < 10; i++) {
+            int held = i % RecyclerLayout.POSITIONS_PER_OUTPUT;
+            while (build.outputEntity(0).item(held).isEmpty()) {
+                held = (held + 1) % RecyclerLayout.POSITIONS_PER_OUTPUT;
+            }
+            build.take(held);
+            helper.assertValueEqual(build.core().status(), Status.READY, "the status with a position emptied, " + i);
+            build.turn(RecyclerCoreBlockEntity.TURNS);
+        }
+        helper.assertTrue(build.core().held().isEmpty(), "the core still holds " + build.core().held());
+        helper.succeed();
+    }
+
+    /**
+     * A one-output Recycler that has returned three kinds of Advanced's mix, one position then emptied: which kinds the
+     * next decompose returns depends on which the outputs hold, and what the core says it can do stays the same until
+     * it does it.
      */
     private static void pickHolds(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);

@@ -79,6 +79,7 @@ public final class MechanicalMasteryRebornGameTests {
         RecyclerTests.register(tests);
         RecyclingTests.register(tests);
         YieldTests.register(tests);
+        RecipeTests.register(tests);
         // Each test that records a decompose claims a team of its own.
         Teams.use(new TestTeams(Teams.installed()));
     }

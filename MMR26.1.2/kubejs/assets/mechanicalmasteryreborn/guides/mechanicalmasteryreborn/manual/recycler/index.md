@@ -57,8 +57,9 @@ at random, and the rest are lost: more outputs return more of a mix. The two abo
 
 Its outputs are read in order, from the one at the front-left, on the left as you face the core, clockwise seen
 from above, with the centre last. Each kind goes on the first position already holding that item, or else on the
-first empty one, so on empty outputs a mix lands in the order EMI shows it. When a kind fits nowhere, the Recycler
-stops until its outputs are emptied, and Jade says so.
+first empty one, so on empty outputs a mix lands in the order EMI shows it. With outputs for every kind, the Recycler
+stops while any kind fits nowhere; with too few, it picks among the kinds that fit, and stops only when none does.
+Jade says when it stops, until its outputs are emptied.
 
 ## Running it
 

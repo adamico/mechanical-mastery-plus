@@ -25,17 +25,14 @@ import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 /**
  * A recipe the Recycler works, of the pack's two types, {@code decomposing} and {@code recycling}: one ingredient with
- * a count, and up to {@link #MAX_RESULTS} results at full amounts in a fixed order, each item once, so a Recycler puts
- * result <i>i</i> on its <i>i</i>th output position. No fluids and no chances: a core's {@link Yield} adds those. No
- * recipe book shows one.
+ * a count, and one or more results at full amounts in a fixed order, each item once. A Recycler short on outputs
+ * returns a random choice of them (#216), so no count of outputs caps a recipe. No fluids and no chances: a core's
+ * {@link Yield} adds those. No recipe book shows one.
  *
  * <p>A result is a template, not a stack: {@code ItemStack.CODEC} refuses an item whose components are not
  * bound yet, which they are not during the datapack load that reads recipes.
  */
 public interface RecyclerRecipe extends Recipe<SingleRecipeInput> {
-
-    /** As many as a Recycler's eight places can ever show: three outputs of three positions. */
-    int MAX_RESULTS = 9;
 
     SizedIngredient ingredient();
 
@@ -74,7 +71,7 @@ public interface RecyclerRecipe extends Recipe<SingleRecipeInput> {
         return RecipeBookCategories.CRAFTING_MISC;
     }
 
-    /** The codec of a {@code type} recipe made by {@code make}, which has one to nine results and names each item once. */
+    /** The codec of a {@code type} recipe made by {@code make}, which has a result or more and names each item once. */
     static <R extends RecyclerRecipe> MapCodec<R> codec(String type, BiFunction<SizedIngredient, List<ItemStackTemplate>, R> make) {
         return RecordCodecBuilder.<R>mapCodec(instance -> instance.group(
                 SizedIngredient.NESTED_CODEC.fieldOf("ingredient").forGetter(RecyclerRecipe::ingredient),
@@ -86,14 +83,13 @@ public interface RecyclerRecipe extends Recipe<SingleRecipeInput> {
     static <R extends RecyclerRecipe> StreamCodec<RegistryFriendlyByteBuf, R> streamCodec(BiFunction<SizedIngredient, List<ItemStackTemplate>, R> make) {
         return StreamCodec.composite(
                 SizedIngredient.STREAM_CODEC, RecyclerRecipe::ingredient,
-                ItemStackTemplate.STREAM_CODEC.apply(ByteBufCodecs.list(MAX_RESULTS)), RecyclerRecipe::results,
+                ItemStackTemplate.STREAM_CODEC.apply(ByteBufCodecs.list()), RecyclerRecipe::results,
                 make);
     }
 
     private static <R extends RecyclerRecipe> DataResult<R> valid(String type, R recipe) {
-        int count = recipe.results().size();
-        if (count == 0 || count > MAX_RESULTS) {
-            return DataResult.error(() -> "a " + type + " recipe has 1 to " + MAX_RESULTS + " results, not " + count);
+        if (recipe.results().isEmpty()) {
+            return DataResult.error(() -> "a " + type + " recipe has no results");
         }
         var items = new HashSet<>();
         for (ItemStackTemplate result : recipe.results()) {
