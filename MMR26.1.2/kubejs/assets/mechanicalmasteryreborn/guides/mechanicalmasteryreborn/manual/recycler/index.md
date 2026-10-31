@@ -21,8 +21,8 @@ by hand. You build it block by block, from parts made on a Craftworks Assembler.
   <Block id="recycler_casing" x="1" z="2" />
   <Block id="recycler_casing" x="1" z="1" />
   <BlockAnnotation x="1" z="0" color="#ffd84a">**Core**, facing out: it holds the work, and its tier sets how well the Recycler runs.</BlockAnnotation>
-  <BlockAnnotation x="2" z="0" color="#4ad8ff">**Output**: the first, so it gets the first three kinds of a mix.</BlockAnnotation>
-  <BlockAnnotation x="0" z="0" color="#4ad8ff">**Output**: the second, for the fourth kind on.</BlockAnnotation>
+  <BlockAnnotation x="2" z="0" color="#4ad8ff">**Output**: the first, read before the other.</BlockAnnotation>
+  <BlockAnnotation x="0" z="0" color="#4ad8ff">**Output**: the second. Each output holds three kinds of item.</BlockAnnotation>
   <BlockAnnotation x="2" z="1" color="#7cff4a">**Input**: essence, or an item to recycle, goes in here.</BlockAnnotation>
   <BlockAnnotation x="2" z="2" color="#ff7c4a">**Hand drive**: right-click it to turn the Recycler.</BlockAnnotation>
   <BlockAnnotationTemplate id="recycler_casing">
@@ -30,7 +30,7 @@ by hand. You build it block by block, from parts made on a Craftworks Assembler.
   </BlockAnnotationTemplate>
 </GameScene>
 
-A tier-1 Recycler that decomposes Advanced Mechanical Essence: drag to turn it, and hover over a part to see what
+A tier-1 Recycler with two outputs: drag to turn it, and hover over a part to see what
 it does.
 
 ## Building one
@@ -52,8 +52,8 @@ tier-1 core has one.
 ## Outputs
 
 Each [output](output.md) holds three kinds of item, so a Recycler returns every kind in what it decomposes or
-recycles only with enough outputs for them all: two for Advanced's mix of four, as above. With too few, it still
-runs, but returns as many kinds as fit, picked at random, and the rest are lost: more outputs return more of a mix.
+recycles only with enough outputs for them all. With too few it still runs, but returns as many kinds as fit, picked
+at random, and the rest are lost: more outputs return more of a mix. The two above return six of Advanced's twenty.
 
 Its outputs are read in order, from the one at the front-left, on the left as you face the core, clockwise seen
 from above, with the centre last. Each kind goes on the first position already holding that item, or else on the
