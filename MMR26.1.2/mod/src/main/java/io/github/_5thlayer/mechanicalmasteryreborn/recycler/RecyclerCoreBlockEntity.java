@@ -4,7 +4,9 @@
 package io.github._5thlayer.mechanicalmasteryreborn.recycler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.UUID;
 
 import io.github._5thlayer.libworks.transfer.GuardedResourceHandler;
@@ -23,6 +25,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Util;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
@@ -40,9 +43,15 @@ import org.jspecify.annotations.Nullable;
 /**
  * A Recycler's core: its one input buffer, the turns its drives have delivered, and the work. Each turn
  * counts only while the Recycler can work what it holds; the {@link #TURNS}th decomposes one recipe's worth
- * of an essence into its mix, or recycles one of anything else into what made it ({@link Recycling}), on the
- * outputs, result <i>i</i> on the <i>i</i>th position ({@link RecyclerLayout}). Either returns the core's
- * {@link Yield} of the full amounts ({@link ServerConfig}). It needs no power and no ticking: drives turn it.
+ * of an essence into its mix, or recycles one of anything else into what made it ({@link Recycling}), onto the
+ * outputs. Either returns the core's {@link Yield} of the full amounts ({@link ServerConfig}). It needs no power
+ * and no ticking: drives turn it.
+ *
+ * <p>When the work gives more kinds than the outputs have positions, the core picks at random as many kinds as
+ * there are positions, and the rest are lost. It keeps that pick until the work is done, or what it holds changes,
+ * so what it says it can do is what it does. Each kind, in the order the work names them, lands on the first
+ * position already holding its item with room for the most it can return, or else on the first empty one, read in
+ * {@link RecyclerLayout}'s order; the work stops only when a kind fits nowhere.
  *
  * <p>Each decompose is recorded, on a Recycler, for the team whose island it stands on ({@link DecomposeLog}),
  * and wakes that team's C.O.D. ({@link CodWaking}); a recycle never is, and never does.
@@ -59,10 +68,11 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
 
     private static final String BUFFER_KEY = "buffer";
     private static final String TURNS_KEY = "turns";
+    private static final String PICK_KEY = "pick";
 
     /** Whether the Recycler can work now, and why not. */
     public enum Status {
-        /** Whole, with enough of what it holds and room for the most its work can return. */
+        /** Whole, with enough of what it holds and room for the most each kind its work returns can return. */
         READY,
         /** Its 3x3 lacks a drive, an input or an output, or holds something else. */
         INCOMPLETE,
@@ -72,9 +82,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         NO_RECIPE,
         /** It holds fewer than one decompose takes. */
         TOO_FEW,
-        /** The work has more results than its outputs have positions. */
-        TOO_FEW_OUTPUTS,
-        /** The most the work can return doesn't fit on its outputs. */
+        /** The most one of the kinds the work returns can return fits on none of its outputs' positions. */
         NO_ROOM
     }
 
@@ -91,6 +99,8 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
     private final Buffer buffer = new Buffer();
     private final ResourceHandler<ItemResource> inputFace = new InputFace(buffer);
     private int turns;
+    /** The kinds of the work under way the core picked, by their place in the work, when it has more than positions. */
+    private int @Nullable [] pick;
 
     public RecyclerCoreBlockEntity(BlockPos pos, BlockState state) {
         super(Recycler.CORE_ENTITY.get(), pos, state);
@@ -110,6 +120,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
     public ItemStack takeBack() {
         ItemStack held = held();
         turns = 0;
+        pick = null;
         buffer.set(0, ItemResource.EMPTY, 0);
         return held;
     }
@@ -161,6 +172,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
             return Turn.COUNTED;
         }
         turns = 0;
+        pick = null;
         work(server, plan);
         return Turn.WORKED;
     }
@@ -169,12 +181,10 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         ItemStack held = held();
         buffer.set(0, ItemResource.of(held), held.getCount() - plan.take());
         double yield = ServerConfig.yieldOf(TIER);
-        List<Share<ItemStackTemplate>> full = plan.full();
-        for (int i = 0; i < full.size(); i++) {
-            int count = Yield.roll(full.get(i).amount(), yield, server.getRandom()::nextDouble);
+        for (Landing landing : plan.landings()) {
+            int count = Yield.roll(landing.kind().amount(), yield, server.getRandom()::nextDouble);
             if (count > 0) {
-                plan.outputs().get(i / RecyclerLayout.POSITIONS_PER_OUTPUT).put(i % RecyclerLayout.POSITIONS_PER_OUTPUT,
-                        full.get(i).item().create().copyWithCount(count));
+                landing.output().put(landing.position(), landing.kind().item().create().copyWithCount(count));
             }
         }
         if (plan.work() == Work.DECOMPOSING) {
@@ -215,19 +225,65 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
             full = Recycling.recyclesInto(server.getServer(), held.getItem()).stream()
                     .map(share -> new Share<>(new ItemStackTemplate(share.item()), share.amount())).toList();
         }
-        if (full.size() > outputs.size() * RecyclerLayout.POSITIONS_PER_OUTPUT) {
-            return Plan.stopped(Status.TOO_FEW_OUTPUTS);
-        }
         double yield = ServerConfig.yieldOf(TIER);
-        for (int i = 0; i < full.size(); i++) {
-            int most = Yield.most(full.get(i).amount(), yield);
-            if (most > 0 && !outputs.get(i / RecyclerLayout.POSITIONS_PER_OUTPUT)
-                    .fits(i % RecyclerLayout.POSITIONS_PER_OUTPUT, full.get(i).item().create().copyWithCount(most))) {
+        var claimed = new boolean[outputs.size() * RecyclerLayout.POSITIONS_PER_OUTPUT];
+        var landings = new ArrayList<Landing>();
+        for (int kind : picked(server, full.size(), claimed.length)) {
+            Share<ItemStackTemplate> share = full.get(kind);
+            ItemStack most = share.item().create().copyWithCount(Yield.most(share.amount(), yield));
+            if (most.isEmpty()) {
+                continue;
+            }
+            int position = landing(outputs, claimed, most);
+            if (position < 0) {
                 return Plan.stopped(Status.NO_ROOM);
             }
+            claimed[position] = true;
+            landings.add(new Landing(share, outputs.get(position / RecyclerLayout.POSITIONS_PER_OUTPUT),
+                    position % RecyclerLayout.POSITIONS_PER_OUTPUT));
         }
-        return new Plan(Status.READY, work, take, full, outputs);
+        return new Plan(Status.READY, work, take, landings);
     }
+
+    /**
+     * The kinds of a work of {@code kinds} the outputs' {@code positions} return, by their place in the work, in its
+     * order: every one when they all have a position, or else the core's pick, drawn now if it has none for this work.
+     */
+    private int[] picked(ServerLevel server, int kinds, int positions) {
+        if (kinds <= positions) {
+            pick = null;
+            return IntStream.range(0, kinds).toArray();
+        }
+        if (pick == null || pick.length != positions || Arrays.stream(pick).anyMatch(kind -> kind >= kinds)) {
+            List<Integer> all = new ArrayList<>(IntStream.range(0, kinds).boxed().toList());
+            Util.shuffle(all, server.getRandom());
+            pick = all.subList(0, positions).stream().mapToInt(Integer::intValue).sorted().toArray();
+            setChanged();
+        }
+        return pick;
+    }
+
+    /**
+     * The position, counted across {@code outputs} in order, that takes all of {@code most} and no other kind of this
+     * work has {@code claimed}: the first already holding its item, or else the first empty one; -1 for none.
+     */
+    private static int landing(List<RecyclerOutputBlockEntity> outputs, boolean[] claimed, ItemStack most) {
+        int empty = -1;
+        for (int position = 0; position < claimed.length; position++) {
+            if (claimed[position]) {
+                continue;
+            }
+            RecyclerOutputBlockEntity output = outputs.get(position / RecyclerLayout.POSITIONS_PER_OUTPUT);
+            int index = position % RecyclerLayout.POSITIONS_PER_OUTPUT;
+            if (output.item(index).isEmpty()) {
+                empty = empty < 0 ? position : empty;
+            } else if (output.fits(index, most)) {
+                return position;
+            }
+        }
+        return empty;
+    }
+
 
     /**
      * The outputs in the order a mix fills them, or null when the 3x3 isn't a whole Recycler: every one of the
@@ -265,6 +321,9 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         super.saveAdditional(output);
         buffer.serialize(output.child(BUFFER_KEY));
         output.putInt(TURNS_KEY, turns);
+        if (pick != null) {
+            output.putIntArray(PICK_KEY, pick);
+        }
     }
 
     @Override
@@ -272,6 +331,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         super.loadAdditional(input);
         buffer.deserialize(input.childOrEmpty(BUFFER_KEY));
         turns = input.getIntOr(TURNS_KEY, 0);
+        pick = input.getIntArray(PICK_KEY).orElse(null);
     }
 
     @Override
@@ -292,12 +352,16 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         }
     }
 
-    /** The work: how many of what it holds it takes, and the full amounts, before yield, onto which outputs. */
-    private record Plan(Status status, Work work, int take, List<Share<ItemStackTemplate>> full, List<RecyclerOutputBlockEntity> outputs) {
+    /** The work: how many of what it holds it takes, and where each kind it returns lands. */
+    private record Plan(Status status, Work work, int take, List<Landing> landings) {
 
         static Plan stopped(Status status) {
-            return new Plan(status, Work.NONE, 0, List.of(), List.of());
+            return new Plan(status, Work.NONE, 0, List.of());
         }
+    }
+
+    /** A kind the work returns, its full amount before yield, and the output position it lands on. */
+    private record Landing(Share<ItemStackTemplate> kind, RecyclerOutputBlockEntity output, int position) {
     }
 
     /** The one slot, which takes only an essence a recipe decomposes, or anything else that recycles. */
@@ -316,6 +380,9 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
 
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
+            if (!ItemStack.isSameItemSameComponents(previousContents, getResource(index).toStack())) {
+                pick = null;
+            }
             setChanged();
             if (level != null) {
                 level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);

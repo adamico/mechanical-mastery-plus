@@ -51,10 +51,14 @@ tier-1 core has one.
 
 ## Outputs
 
-Each [output](output.md) holds three kinds of item, so a Recycler needs enough outputs for every kind in what it
-decomposes or recycles: two for Advanced's mix of four, as above. With too few, it doesn't run, and Jade says so.
-Its outputs are filled in order, from the one at the front-left, on the left as you face the core, clockwise
-seen from above, with the centre last. EMI shows a mix in that order.
+Each [output](output.md) holds three kinds of item, so a Recycler returns every kind in what it decomposes or
+recycles only with enough outputs for them all: two for Advanced's mix of four, as above. With too few, it still
+runs, but returns as many kinds as fit, picked at random, and the rest are lost: more outputs return more of a mix.
+
+Its outputs are read in order, from the one at the front-left, on the left as you face the core, clockwise seen
+from above, with the centre last. Each kind goes on the first position already holding that item, or else on the
+first empty one, so on empty outputs a mix lands in the order EMI shows it. When a kind fits nowhere, the Recycler
+stops until its outputs are emptied, and Jade says so.
 
 ## Running it
 

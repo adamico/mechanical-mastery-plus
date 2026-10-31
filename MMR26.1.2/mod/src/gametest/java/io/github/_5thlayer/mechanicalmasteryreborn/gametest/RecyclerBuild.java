@@ -195,4 +195,26 @@ final class RecyclerBuild {
             expectPosition(i, ADVANCED_MIX.get(i));
         }
     }
+
+    /**
+     * Fails unless the outputs hold {@code kinds} different kinds of {@code mix}, each at its full amount on a position of
+     * its own, and nothing else: what a Recycler short on positions returns from an empty start.
+     */
+    void expectSomeOfTheMix(List<ItemStack> mix, int kinds) {
+        var seen = new ArrayList<ItemStack>();
+        for (BlockPos pos : places) {
+            if (helper.getLevel().getBlockEntity(helper.absolutePos(pos)) instanceof RecyclerOutputBlockEntity output) {
+                for (int p = 0; p < RecyclerLayout.POSITIONS_PER_OUTPUT; p++) {
+                    ItemStack held = output.item(p);
+                    if (held.isEmpty()) {
+                        continue;
+                    }
+                    helper.assertTrue(mix.stream().anyMatch(kind -> ItemStack.matches(kind, held)), held + " isn't a kind of the mix at its full amount");
+                    helper.assertTrue(seen.stream().noneMatch(kind -> ItemStack.isSameItemSameComponents(kind, held)), held + " came back on two positions");
+                    seen.add(held);
+                }
+            }
+        }
+        helper.assertValueEqual(seen.size(), kinds, "the kinds of the mix that came back");
+    }
 }

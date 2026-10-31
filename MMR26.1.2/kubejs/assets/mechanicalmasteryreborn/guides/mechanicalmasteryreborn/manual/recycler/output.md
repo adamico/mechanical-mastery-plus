@@ -16,5 +16,6 @@ Where a [Recycler](index.md) puts what it decomposes or recycles. Its front, whi
 shelf of three positions, one kind of item each. Right-click a position to take its stack, or put a hopper below
 to empty the output.
 
-A Recycler needs enough outputs for every kind in what it makes: with too few, it doesn't run. Each output takes
-the next three kinds, in the order the [Recycler's page](index.md#outputs) gives.
+A Recycler returns every kind in what it makes only with enough outputs for them all. With too few, it returns as
+many kinds as fit, picked at random, and loses the rest. Each kind goes on a position already holding that item,
+or else on an empty one, in the order the [Recycler's page](index.md#outputs) gives.

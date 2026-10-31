@@ -8,15 +8,18 @@ import java.util.List;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity.Status;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity.Work;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerLayout;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.level.block.Blocks;
 
 /**
  * Recycling on the Recycler (#184): any item that isn't an essence recycles one band down, by the recipe that
@@ -31,6 +34,7 @@ final class RecyclingTests {
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("recycling_a_piston_returns_its_recipe_in_the_order_it_names_them", 1, RecyclingTests::piston);
         tests.test("recycling_a_piston_returns_its_yield_of_its_recipe", 1, RecyclingTests::pistonAtAQuarter);
+        tests.test("recycling_a_piston_on_one_output_returns_a_random_choice_of_its_recipe", 1, RecyclingTests::pistonShortOnOutputs);
         tests.test("recycling_an_override_replaces_what_the_recipe_returns", 1, RecyclingTests::override);
         tests.test("recycling_an_item_no_recipe_makes_shrinks_to_nothing", 1, RecyclingTests::shrinks);
         tests.test("recycling_an_iron_ingot_returns_raw_iron", 1, RecyclingTests::ingot);
@@ -50,6 +54,19 @@ final class RecyclingTests {
         build.expectOutputs(new ItemStack(Items.OAK_PLANKS, 3), new ItemStack(Items.COBBLESTONE, 4), new ItemStack(Items.IRON_INGOT),
                 new ItemStack(Items.REDSTONE));
         helper.assertTrue(build.core().held().isEmpty(), "the core still holds " + build.core().held());
+        helper.succeed();
+    }
+
+    /** One output, three positions, for a piston's four kinds: three of them come back, and the fourth is lost. */
+    private static void pistonShortOnOutputs(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        build.place(1, Blocks.AIR);
+        build.place(1, Recycler.CASING.get());
+        build.feed(new ItemStack(Items.PISTON));
+        build.turn(RecyclerCoreBlockEntity.TURNS);
+        helper.assertTrue(build.core().held().isEmpty(), "the core still holds " + build.core().held());
+        build.expectSomeOfTheMix(List.of(new ItemStack(Items.OAK_PLANKS, 3), new ItemStack(Items.COBBLESTONE, 4), new ItemStack(Items.IRON_INGOT),
+                new ItemStack(Items.REDSTONE)), RecyclerLayout.POSITIONS_PER_OUTPUT);
         helper.succeed();
     }
 

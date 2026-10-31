@@ -15,6 +15,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity.Status;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerInputBlock;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerLayout;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerOutputBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -39,8 +40,9 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
  * outputs clockwise around the centre from the front-left place, then the centre (#194); an incomplete one, or one
  * whose 3x3 overlaps another's, doesn't run, while two that only touch both do; hoppers feed and empty it; its
  * drives add up and are capped; each decompose is recorded for the team whose island it stands on; and only a
- * player's empty hand takes back what its core holds, giving up the work under way (#191). Each
- * test builds its Recycler with {@link RecyclerBuild}.
+ * player's empty hand takes back what its core holds, giving up the work under way (#191); one short on outputs
+ * returns a random choice of kinds, kept until the work is done, each kind on its own item first, then an empty
+ * position (#216). Each test builds its Recycler with {@link RecyclerBuild}.
  */
 final class RecyclerTests {
 
@@ -66,7 +68,9 @@ final class RecyclerTests {
         tests.test("recycler_results_follow_the_core_facing_east", 1, RecyclerTests::clockwiseFacingEast);
         tests.test("recycler_output_in_the_centre_is_read_last", 1, RecyclerTests::centreOutputLast);
         tests.test("recycler_will_not_start_when_the_mix_does_not_fit", 1, RecyclerTests::noRoom);
-        tests.test("recycler_will_not_run_a_mix_longer_than_its_outputs", 1, RecyclerTests::tooFewOutputs);
+        tests.test("recycler_short_on_outputs_returns_a_random_choice_of_the_mix", 1, RecyclerTests::shortOnOutputs);
+        tests.test("recycler_short_on_outputs_keeps_its_pick_until_the_work_is_done", 1, RecyclerTests::pickHolds);
+        tests.test("recycler_kind_lands_on_its_own_item_first_then_an_empty_position", 1, RecyclerTests::landsOnItsOwnItem);
         tests.test("recycler_right_click_takes_a_position_stack", 1, RecyclerTests::rightClickTakes);
         tests.test("recycler_right_click_feeds_an_input", 1, RecyclerTests::rightClickFeeds);
         tests.test("recycler_take_back_gives_the_whole_stack_and_drops_the_turns", 1, RecyclerTests::takeBack);
@@ -229,14 +233,57 @@ final class RecyclerTests {
         helper.succeed();
     }
 
-    private static void tooFewOutputs(GameTestHelper helper) {
+    /** One output, three positions, for Advanced's mix of five: three kinds of it come back, one each, and the rest are lost. */
+    private static void shortOnOutputs(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.place(1, Blocks.AIR);
         build.place(1, Recycler.CASING.get());
         build.feed(1);
-        helper.assertValueEqual(build.core().status(), Status.TOO_FEW_OUTPUTS, "the status with three positions for a mix of five");
+        helper.assertValueEqual(build.core().status(), Status.READY, "the status with three positions for a mix of five");
         build.turn(RecyclerCoreBlockEntity.TURNS);
-        helper.assertTrue(build.outputsEmpty(), "a Recycler with too few outputs decomposed");
+        helper.assertTrue(build.core().held().isEmpty(), "the core still holds " + build.core().held());
+        build.expectSomeOfTheMix(RecyclerBuild.ADVANCED_MIX, RecyclerLayout.POSITIONS_PER_OUTPUT);
+        helper.succeed();
+    }
+
+    /**
+     * A one-output Recycler that has returned three kinds of Advanced's mix, one position then emptied: whether the next
+     * pick fits depends on which kinds it holds, and what the core says it can do stays the same until it does it.
+     */
+    private static void pickHolds(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        build.place(1, Blocks.AIR);
+        build.place(1, Recycler.CASING.get());
+        build.feed(2);
+        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.take(2);
+        Status first = build.core().status();
+        for (int i = 0; i < 20; i++) {
+            helper.assertValueEqual(build.core().status(), first, "the status asked again, " + i);
+        }
+        build.turn(RecyclerCoreBlockEntity.TURNS);
+        helper.assertValueEqual(build.core().held().isEmpty(), first == Status.READY, "the second essence used, the status having been " + first);
+        helper.succeed();
+    }
+
+    /**
+     * Three outputs. Regular's mix, its cobblestone then taken; Advanced's, its piston on that emptied first position and
+     * the rest after the planks; then Regular's again: its planks onto the planks, its cobblestone on the first empty one.
+     */
+    private static void landsOnItsOwnItem(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        build.place(2, Recycler.OUTPUT.get());
+        var regular = new ItemStack(Essences.item(Essence.REGULAR));
+        build.feed(regular.copy());
+        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.take(0);
+        build.feed(1);
+        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.feed(regular.copy());
+        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.expectOutputs(new ItemStack(Items.PISTON), new ItemStack(Items.OAK_PLANKS, 16), new ItemStack(Items.HOPPER),
+                new ItemStack(Items.COMPARATOR), new ItemStack(Items.WATER_BUCKET), new ItemStack(Items.LAVA_BUCKET),
+                new ItemStack(Items.COBBLESTONE, 4));
         helper.succeed();
     }
 
