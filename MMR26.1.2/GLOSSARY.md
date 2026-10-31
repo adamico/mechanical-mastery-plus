@@ -87,6 +87,10 @@ _Avoid_: power source
 **Lab**:
 The special block where a team chooses a handicap to start a challenge, and feeds science items to research what the challenge unlocks.
 
+**Manual**:
+The pack's in-game book on how to build and work the companion mod's blocks, with 3D scenes, which every player is given once. It holds neither lore nor recipes, which are EMI's.
+_Avoid_: guide, quest book, wiki
+
 **Research**:
 Consuming science items in the lab to unlock a challenge's alternate recipes for the whole team.
 _Avoid_: stage, unlock (as a noun)
