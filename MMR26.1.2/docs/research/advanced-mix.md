@@ -240,7 +240,7 @@ Why these additions: the Copper Chest is the best clean copper per item (2.0) in
 
 ### Per essence, tier 1 (decompose 0.25 × the whole mix)
 
-Routes per Galvanic Essence ([theurgy-chain.md](theurgy-chain.md)): **A** 16 Cu, 4 Fe, 2 Au ingots (+1 Rs once); **B** 79 copper ingots, 1 sulfur each (+1 Fe, 1 raw gold, 1 Rs once); **C** 16.4 Fe ingots (+1 Cu, 1 raw gold, 1 Rs once). A = max(16/Cu, 4/Fe, 2/Au), B = 79/Cu, C = 16.4/Fe, seed = 1/Rs. Each cell: blocks crafted / blocks recycled.
+Routes per Galvanic Essence, through Theurgy's own recipes: **A** 16 Cu, 4 Fe, 2 Au ingots (+1 Rs once); **B** 79 copper ingots, 1 sulfur each (+1 Fe, 1 raw gold, 1 Rs once); **C** 16.4 Fe ingots (+1 Cu, 1 raw gold, 1 Rs once). A = max(16/Cu, 4/Fe, 2/Au), B = 79/Cu, C = 16.4/Fe, seed = 1/Rs. Each cell: blocks crafted / blocks recycled.
 
 | Mix | Kinds / items | Cu | Fe | Au | Rs | A (binding) | B | C | Rs seed |
 |---|---|---|---|---|---|---|---|---|---|
