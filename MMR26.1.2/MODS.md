@@ -45,7 +45,6 @@ Added from the pack's CurseForge profile:
 - **Squat Grow**: crouching grows the plants around you.
 - **Shrink**: a device that shrinks the player.
 - **FTB Chunks**: claims a team's island, and keeps its chunks loaded.
-- **FTB Filter System**: the item filters FTB's mods share.
 - **FTB Materials**: common metals and materials other mods' recipes can share.
 - **FTB Backups 3**: world backups.
 - **Eccentric Tome**: every mod's guide book in one.
