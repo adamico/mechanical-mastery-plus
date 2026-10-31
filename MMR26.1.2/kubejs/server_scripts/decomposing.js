@@ -7,8 +7,7 @@
 // What other items recycle into the mod derives from their recipes; a mechanicalmasteryreborn:recycling recipe
 // here would override one.
 ServerEvents.recipes(event => {
-  // An empty bucket, not water and lava: the island has a source of each, and the quest book's emergency items
-  // a bucket of each, as Mechanical Mastery Plus did.
+  // An empty bucket, not water and lava: the island has a source of each.
   event.recipes.mechanicalmasteryreborn.decomposing([
     'minecraft:piston',
     'minecraft:hopper',

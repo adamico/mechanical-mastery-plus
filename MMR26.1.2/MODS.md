@@ -18,8 +18,6 @@ The rest of 0.0.1:
 
 - **Theurgy**: alchemy, the path to the Galvanic Essence.
 - **Chapters**: research locks. A team's finished research is a stage, and recipes wait on it.
-- **FTB Quests**: the quest book, which tells C.O.D.'s story and mirrors each research.
-- **FTB Teams**, **FTB Library**, **FTB XMod Compat**: what FTB Quests needs for teams, and its bridge to the other mods.
 - **Skyblock Builder**: the island start, an island per team, and the void Nether and End.
 - **Default World Type**: makes Skyblock Builder's world type the one a new world picks.
 - **EMI**: the recipe viewer. Locked recipes stay visible in it. EMI's own project has no file for NeoForge 26.1.2, so this is the port the Showcase plays, `emi-unofficial-port-unstable`.
@@ -66,4 +64,4 @@ Left out of the Showcase's list, as content with no role here: Animal Feeding Tr
 
 ## Libraries
 
-In the pack only because a mod above needs them: Apothic Attributes (Gateways to Eternity), Balm (Forgiving Void, KleeSlabs), Better Advanced Tooltips (KubeJS), Cloth Config, Collective, Configurable, Cupboard, Fusion (Connected Glass), Fzzy Config, GeckoLib (Theurgy, Neo Vitae), JamLib, Kotlin for Forge, LibX (Skyblock Builder), Modonomicon (Theurgy, Neo Vitae), Nanite Library, Placebo (Gateways to Eternity), PolyLib (Shrink), Prickle, Puzzles Lib, Searchables, SuperMartijn642's Config Lib (Durability Tooltip), SuperMartijn642's Core Lib (Connected Glass), Titanium (Functional Storage) and YetAnotherConfigLib. A library no mod needs any more comes out with the mod.
+In the pack only because a mod above needs them: Apothic Attributes (Gateways to Eternity), Balm (Forgiving Void, KleeSlabs), Better Advanced Tooltips (KubeJS), Cloth Config, Collective, Configurable, Cupboard, FTB Library (FTB Chunks, FTB Teams, FTB Ultimine), FTB Teams (FTB Chunks), Fusion (Connected Glass), Fzzy Config, GeckoLib (Theurgy, Neo Vitae), JamLib, Kotlin for Forge, LibX (Skyblock Builder), Modonomicon (Theurgy, Neo Vitae), Nanite Library, Placebo (Gateways to Eternity), PolyLib (Shrink), Prickle, Puzzles Lib, Searchables, SuperMartijn642's Config Lib (Durability Tooltip), SuperMartijn642's Core Lib (Connected Glass), Titanium (Functional Storage) and YetAnotherConfigLib. A library no mod needs any more comes out with the mod.
