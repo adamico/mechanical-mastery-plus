@@ -1,8 +1,39 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/block",
   "textures": {
-    "side": "mechanicalmasteryreborn:block/recycler_casing",
-    "top": "mechanicalmasteryreborn:block/recycler_edge",
-    "bottom": "mechanicalmasteryreborn:block/recycler_edge"
-  }
+    "particle": "mechanicalmasteryreborn:block/recycler_casing",
+    "side": "mechanicalmasteryreborn:block/recycler_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "north": {
+          "texture": "#side",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#side",
+          "cullface": "south"
+        },
+        "east": {
+          "texture": "#side",
+          "cullface": "east"
+        },
+        "west": {
+          "texture": "#side",
+          "cullface": "west"
+        }
+      }
+    }
+  ]
 }

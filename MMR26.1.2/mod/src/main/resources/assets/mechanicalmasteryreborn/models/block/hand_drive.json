@@ -2,9 +2,7 @@
   "parent": "minecraft:block/block",
   "textures": {
     "particle": "mechanicalmasteryreborn:block/recycler_drive",
-    "side": "mechanicalmasteryreborn:block/recycler_drive",
-    "top": "mechanicalmasteryreborn:block/recycler_drive_corner",
-    "bottom": "mechanicalmasteryreborn:block/recycler_drive_corner_bottom"
+    "side": "mechanicalmasteryreborn:block/recycler_drive"
   },
   "elements": [
     {
@@ -34,14 +32,6 @@
         "west": {
           "texture": "#side",
           "cullface": "west"
-        },
-        "up": {
-          "texture": "#top",
-          "cullface": "up"
-        },
-        "down": {
-          "texture": "#bottom",
-          "cullface": "down"
         }
       }
     }

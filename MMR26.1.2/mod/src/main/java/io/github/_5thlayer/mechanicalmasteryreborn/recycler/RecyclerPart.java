@@ -7,9 +7,16 @@ import java.util.Optional;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-/** A block that can stand in one of a Recycler's eight places, the rest of the 3x3 its core fronts, in one role. */
+/**
+ * A block that can stand in one of a Recycler's eight places, the rest of the 3x3 its core fronts, in one role. Its
+ * {@link #PLACE} is where in the 3x3 it stands, taken when it is placed and set again when a core is placed or
+ * removed nearby, so its top and bottom draw the Recycler's frame.
+ */
 public interface RecyclerPart {
+
+    EnumProperty<RecyclerPlace> PLACE = EnumProperty.create("place", RecyclerPlace.class);
 
     /** What a part does in its Recycler (the line's glossary: Drive, Casing). */
     enum Role {

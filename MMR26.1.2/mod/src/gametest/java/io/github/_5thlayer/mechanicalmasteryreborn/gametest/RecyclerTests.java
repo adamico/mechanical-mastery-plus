@@ -3,12 +3,12 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
+import java.util.Arrays;
 import java.util.List;
 
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
-import io.github._5thlayer.mechanicalmasteryreborn.recycler.DriveCorner;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.HandDriveBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlock;
@@ -16,6 +16,8 @@ import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEnt
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity.Status;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerLayout;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerOutputBlock;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerPart;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerPlace;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -41,7 +43,9 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
  * drives add up and are capped; each decompose is recorded for the team whose island it stands on; and only a
  * player's empty hand takes back what its core holds, giving up the work under way (#191); one short on outputs
  * returns a random choice of the kinds that fit, kept until the work is done, each kind on its own item first, then
- * an empty position, and stops only when none fits (#216). Each test builds its Recycler with {@link RecyclerBuild}.
+ * an empty position, and stops only when none fits (#216); each part stands at its place in the 3x3, set when it or a
+ * core is placed and cleared when the core goes, none where two cores' 3x3s overlap (#223). Each test builds its
+ * Recycler with {@link RecyclerBuild}.
  */
 final class RecyclerTests {
 
@@ -83,8 +87,12 @@ final class RecyclerTests {
         tests.test("recycler_two_drives_decompose_twice_as_fast", 60, helper -> drivesTurned(helper, 2));
         tests.test("recycler_drive_turns_no_faster_than_its_cap", 20, RecyclerTests::driveCap);
         tests.test("recycler_decompose_is_recorded_for_its_island_team", 1, RecyclerTests::recorded);
-        tests.test("recycler_core_placed_turns_its_corner_drives", 1, RecyclerTests::coreTurnsDrives);
-        tests.test("recycler_drive_placed_takes_its_corner", 1, RecyclerTests::drivePlacedTakesCorner);
+        tests.test("recycler_core_placed_sets_the_places_of_its_parts", 1, RecyclerTests::corePlacedSetsPlaces);
+        tests.test("recycler_core_broken_leaves_its_parts_at_no_place", 1, RecyclerTests::coreBrokenClearsPlaces);
+        tests.test("recycler_part_placed_takes_its_place", 1, helper -> partPlacedTakesPlace(helper, Direction.NORTH));
+        tests.test("recycler_part_place_follows_the_core_facing_east", 1, helper -> partPlacedTakesPlace(helper, Direction.EAST));
+        tests.test("recycler_part_placed_with_no_core_takes_no_place", 1, RecyclerTests::partPlacedAlone);
+        tests.test("recycler_part_shared_by_two_cores_takes_no_place", 1, RecyclerTests::sharedPartPlace);
     }
 
     private static void decomposes(GameTestHelper helper) {
@@ -472,33 +480,84 @@ final class RecyclerTests {
         helper.succeed();
     }
 
-    private static void coreTurnsDrives(GameTestHelper helper) {
-        // A core placed facing north fronts the 3x3 south of it.
+    private static void corePlacedSetsPlaces(GameTestHelper helper) {
+        // A core placed facing north fronts the 3x3 south of it, standing at the 3x3's north place itself.
         BlockPos centre = RecyclerBuild.CORE.south();
-        for (DriveCorner corner : DriveCorner.values()) {
-            helper.setBlock(corner.of(centre), Recycler.HAND_DRIVE.get());
+        List<Block> parts = List.of(Recycler.HAND_DRIVE.get(), Recycler.INPUT.get(), Recycler.OUTPUT.get(), Recycler.CASING.get());
+        List<RecyclerPlace> places = placesAround(RecyclerPlace.NORTH);
+        for (int i = 0; i < places.size(); i++) {
+            helper.setBlock(places.get(i).of(centre), parts.get(i % parts.size()));
         }
         helper.setBlock(RecyclerBuild.CORE, Recycler.CORE.get());
-        for (DriveCorner corner : DriveCorner.values()) {
-            helper.assertValueEqual(helper.getBlockState(corner.of(centre)).getValue(HandDriveBlock.CORNER), corner,
-                    "the corner of the drive placed before its core at " + corner.getSerializedName());
+        for (RecyclerPlace place : places) {
+            helper.assertValueEqual(helper.getBlockState(place.of(centre)).getValue(RecyclerPart.PLACE), place,
+                    "the place of the " + helper.getBlockState(place.of(centre)).getBlock() + " placed before its core at "
+                            + place.getSerializedName());
         }
         helper.succeed();
     }
 
-    private static void drivePlacedTakesCorner(GameTestHelper helper) {
-        // A core facing north: its 3x3 lies south of it, and the place east of it is the 3x3's north-east corner.
-        BlockPos core = new BlockPos(4, 1, 4);
-        helper.setBlock(core, Recycler.CORE.get());
-        BlockPos front = core.east();
-        BlockPos back = core.south(2).east();
-        placeOnTheFloor(helper, Recycler.HAND_DRIVE_ITEM.get(), front);
-        placeOnTheFloor(helper, Recycler.HAND_DRIVE_ITEM.get(), back);
-        helper.assertValueEqual(helper.getBlockState(front).getValue(HandDriveBlock.CORNER), DriveCorner.NORTH_EAST,
-                "the corner of a drive placed beside a core facing north");
-        helper.assertValueEqual(helper.getBlockState(back).getValue(HandDriveBlock.CORNER), DriveCorner.SOUTH_EAST,
-                "the corner of a drive placed at the back of a core facing north");
+    private static void coreBrokenClearsPlaces(GameTestHelper helper) {
+        BlockPos centre = RecyclerBuild.CORE.south();
+        List<Block> parts = List.of(Recycler.HAND_DRIVE.get(), Recycler.INPUT.get(), Recycler.OUTPUT.get(), Recycler.CASING.get());
+        List<RecyclerPlace> places = placesAround(RecyclerPlace.NORTH);
+        for (int i = 0; i < places.size(); i++) {
+            helper.setBlock(places.get(i).of(centre), parts.get(i % parts.size()));
+        }
+        helper.setBlock(RecyclerBuild.CORE, Recycler.CORE.get());
+        helper.destroyBlock(RecyclerBuild.CORE);
+        for (RecyclerPlace place : places) {
+            helper.assertValueEqual(helper.getBlockState(place.of(centre)).getValue(RecyclerPart.PLACE), RecyclerPlace.NONE,
+                    "the place of the " + helper.getBlockState(place.of(centre)).getBlock() + " at " + place.getSerializedName()
+                            + " once its core is broken");
+        }
         helper.succeed();
+    }
+
+    /** A player places every kind of part around a core facing {@code front}, at the place each stands at. */
+    private static void partPlacedTakesPlace(GameTestHelper helper, Direction front) {
+        // The core stands at its 3x3's place in the direction it faces, the centre right behind it.
+        BlockPos core = new BlockPos(4, 1, 4);
+        helper.setBlock(core, Recycler.CORE.get().defaultBlockState().setValue(RecyclerCoreBlock.FACING, front));
+        BlockPos centre = core.relative(front.getOpposite());
+        List<Item> parts = List.of(Recycler.HAND_DRIVE_ITEM.get(), Recycler.INPUT_ITEM.get(), Recycler.OUTPUT_ITEM.get(), Recycler.CASING_ITEM.get());
+        int n = 0;
+        for (RecyclerPlace place : placesAround(front == Direction.NORTH ? RecyclerPlace.NORTH : RecyclerPlace.EAST)) {
+            Item part = parts.get(n++ % parts.size());
+            placeOnTheFloor(helper, part, place.of(centre));
+            helper.assertValueEqual(helper.getBlockState(place.of(centre)).getValue(RecyclerPart.PLACE), place,
+                    "the place of a " + part + " placed at " + place.getSerializedName() + " of a core facing " + front);
+        }
+        helper.succeed();
+    }
+
+    private static void partPlacedAlone(GameTestHelper helper) {
+        BlockPos casing = new BlockPos(4, 1, 4);
+        placeOnTheFloor(helper, Recycler.CASING_ITEM.get(), casing);
+        helper.assertValueEqual(helper.getBlockState(casing).getValue(RecyclerPart.PLACE), RecyclerPlace.NONE,
+                "the place of a casing placed with no core near it");
+        helper.succeed();
+    }
+
+    /** A casing in the 3x3 of two cores facing north stands at no place, and back at its first core's once the second goes. */
+    private static void sharedPartPlace(GameTestHelper helper) {
+        // The first core's 3x3 runs from one west of it to one east; the second's, two east, shares that east column.
+        BlockPos second = RecyclerBuild.CORE.east(2);
+        BlockPos casing = RecyclerBuild.CORE.south().east();
+        helper.setBlock(casing, Recycler.CASING.get());
+        helper.setBlock(RecyclerBuild.CORE, Recycler.CORE.get());
+        helper.setBlock(second, Recycler.CORE.get());
+        helper.assertValueEqual(helper.getBlockState(casing).getValue(RecyclerPart.PLACE), RecyclerPlace.NONE,
+                "the place of a casing in two cores' 3x3s");
+        helper.destroyBlock(second);
+        helper.assertValueEqual(helper.getBlockState(casing).getValue(RecyclerPart.PLACE), RecyclerPlace.EAST,
+                "the place of a casing once the second core is broken");
+        helper.succeed();
+    }
+
+    /** A 3x3's eight places, all but none and {@code core}'s, where its core stands. */
+    private static List<RecyclerPlace> placesAround(RecyclerPlace core) {
+        return Arrays.stream(RecyclerPlace.values()).filter(place -> place != RecyclerPlace.NONE && place != core).toList();
     }
 
     /** A player places {@code item} at {@code pos}, clicking the top of the block below it. */

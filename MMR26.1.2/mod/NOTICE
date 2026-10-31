@@ -27,10 +27,11 @@ Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
           recycler_crate.png are space-plating-plain, space-plating-vent,
           space-plating-convex-rivets-horizontal, space-plating-square and space_crate_top, copied
           unmodified.
-        - recycler_edge.png is space-plating-convex-inset-horizontal with both rails redrawn from one
-          plain stretch of its top rail, the inner mirrored, so they match.
-        - recycler_drive_corner.png and recycler_drive_corner_bottom.png are space-plating-plain with
-          that rail along two edges, mitred at the corner; the bottom one flipped north to south.
+        - recycler_frame_corner.png and recycler_frame_corner_bottom.png are space-plating-plain with
+          a plain stretch of space-plating-convex-inset-horizontal's top rail along two edges, mitred
+          at the corner; the bottom one flipped north to south.
+        - recycler_frame_side.png and recycler_frame_side_bottom.png are space-plating-plain with that
+          rail along one edge; the bottom one flipped north to south.
         - recycler_output_front.png is space-plating-plain with space-plating-square's outermost rows
           and columns, and a 1px lip round the opening in a shade taken from space-plating-square.
 Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)

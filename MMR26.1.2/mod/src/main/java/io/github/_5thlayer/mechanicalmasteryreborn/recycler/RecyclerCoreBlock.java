@@ -6,6 +6,7 @@ package io.github._5thlayer.mechanicalmasteryreborn.recycler;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -27,8 +28,8 @@ import net.minecraft.world.phys.BlockHitResult;
 /**
  * A Recycler's core, in the middle of its 3x3's front edge (the line's glossary: Core). Its front faces the player
  * who placed it, out of the Recycler, whose 3x3 lies behind it, and the order its outputs are read in starts from
- * there ({@link RecyclerLayout}). Tier 1, the first core; its tier sets how many turns a decompose takes. Placed,
- * it turns the drives at its 3x3's corners to them.
+ * there ({@link RecyclerLayout}). Tier 1, the first core; its tier sets how many turns a decompose takes. Placed or
+ * removed, it sets the place of every part in its 3x3.
  * An empty-hand right-click takes back the whole stack it holds, into the player's inventory, and gives up the
  * work under way; a click on an empty core, or with an item in hand, passes.
  */
@@ -69,12 +70,28 @@ public final class RecyclerCoreBlock extends BaseEntityBlock {
         if (oldState.is(this)) {
             return;
         }
-        BlockPos centre = centre(pos, state);
-        for (DriveCorner corner : DriveCorner.values()) {
-            BlockPos drive = corner.of(centre);
-            BlockState at = level.getBlockState(drive);
-            if (at.getBlock() instanceof HandDriveBlock && at.getValue(HandDriveBlock.CORNER) != corner) {
-                level.setBlock(drive, at.setValue(HandDriveBlock.CORNER, corner), UPDATE_CLIENTS);
+        setPlaces(level, centre(pos, state));
+    }
+
+    @Override
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
+        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+        setPlaces(level, centre(pos, state));
+    }
+
+    /** Sets every part in the 3x3 centred on {@code centre} to the place it now stands at, after a core came or went. */
+    private static void setPlaces(Level level, BlockPos centre) {
+        for (RecyclerPlace place : RecyclerPlace.values()) {
+            if (place == RecyclerPlace.NONE) {
+                continue;
+            }
+            BlockPos part = place.of(centre);
+            BlockState at = level.getBlockState(part);
+            if (at.getBlock() instanceof RecyclerPart) {
+                RecyclerPlace now = RecyclerPlace.at(level, part);
+                if (at.getValue(RecyclerPart.PLACE) != now) {
+                    level.setBlock(part, at.setValue(RecyclerPart.PLACE, now), UPDATE_CLIENTS);
+                }
             }
         }
     }

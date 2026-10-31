@@ -5,7 +5,6 @@
     "back": "mechanicalmasteryreborn:block/recycler_crate",
     "niche": "mechanicalmasteryreborn:block/recycler_plating",
     "side": "mechanicalmasteryreborn:block/recycler_casing",
-    "edge": "mechanicalmasteryreborn:block/recycler_edge",
     "particle": "mechanicalmasteryreborn:block/recycler_casing"
   },
   "elements": [
@@ -36,14 +35,6 @@
         "west": {
           "texture": "#side",
           "cullface": "west"
-        },
-        "up": {
-          "texture": "#edge",
-          "cullface": "up"
-        },
-        "down": {
-          "texture": "#edge",
-          "cullface": "down"
         }
       }
     },
@@ -66,10 +57,6 @@
         },
         "down": {
           "texture": "#niche"
-        },
-        "up": {
-          "texture": "#edge",
-          "cullface": "up"
         },
         "east": {
           "texture": "#side",
@@ -100,10 +87,6 @@
         },
         "up": {
           "texture": "#niche"
-        },
-        "down": {
-          "texture": "#edge",
-          "cullface": "down"
         },
         "east": {
           "texture": "#side",

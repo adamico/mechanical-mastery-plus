@@ -4,7 +4,7 @@
     "particle": "mechanicalmasteryreborn:block/recycler_casing",
     "front": "mechanicalmasteryreborn:block/recycler_vent",
     "side": "mechanicalmasteryreborn:block/recycler_casing",
-    "top": "mechanicalmasteryreborn:block/recycler_casing",
-    "bottom": "mechanicalmasteryreborn:block/recycler_casing"
+    "top": "mechanicalmasteryreborn:block/recycler_frame_side",
+    "bottom": "mechanicalmasteryreborn:block/recycler_frame_side_bottom"
   }
 }

@@ -37,7 +37,7 @@ public final class RecyclerOutputBlock extends BaseEntityBlock implements Recycl
 
     public RecyclerOutputBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PLACE, RecyclerPlace.NONE));
     }
 
     @Override
@@ -62,12 +62,13 @@ public final class RecyclerOutputBlock extends BaseEntityBlock implements Recycl
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, PLACE);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite())
+                .setValue(PLACE, RecyclerPlace.at(context.getLevel(), context.getClickedPos()));
     }
 
     @Override

@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 /**
@@ -29,9 +28,6 @@ import net.minecraft.world.phys.BlockHitResult;
  * <p>Each turn is heard and seen: a click whose pitch rises with the decompose's progress, and sparks, when it
  * counts; the crafter's sound and a puff over the core when it decomposes; a dull click and smoke when the Recycler
  * can't decompose, so the turn is lost.
- *
- * <p>Its {@link #CORNER} is the corner of its Recycler's 3x3 it stands at, taken when it is placed and set again when
- * a core is placed in front of it, so its rails run along the Recycler's outer edges.
  */
 public final class HandDriveBlock extends Block implements RecyclerPart {
 
@@ -42,21 +38,19 @@ public final class HandDriveBlock extends Block implements RecyclerPart {
     public static final BooleanProperty TURNING = BooleanProperty.create("turning");
     /** Clicked while turning, so it turns again when the cap allows. */
     public static final BooleanProperty QUEUED = BooleanProperty.create("queued");
-    public static final EnumProperty<DriveCorner> CORNER = EnumProperty.create("corner", DriveCorner.class);
-
     public HandDriveBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(TURNING, false).setValue(QUEUED, false).setValue(CORNER, DriveCorner.NORTH_WEST));
+        registerDefaultState(stateDefinition.any().setValue(TURNING, false).setValue(QUEUED, false).setValue(PLACE, RecyclerPlace.NONE));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(TURNING, QUEUED, CORNER);
+        builder.add(TURNING, QUEUED, PLACE);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState().setValue(CORNER, DriveCorner.at(context.getLevel(), context.getClickedPos()));
+        return defaultBlockState().setValue(PLACE, RecyclerPlace.at(context.getLevel(), context.getClickedPos()));
     }
 
     @Override
