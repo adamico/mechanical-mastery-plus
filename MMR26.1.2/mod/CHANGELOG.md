@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn adds, or ch
 
 ## Unreleased
 
+- With Skyblock Builder and FTB Teams installed, as the pack plays, an island's players are kept in one FTB party of their own, named after their team and renamed with it, so AdminShop's money and FTB Chunks' claims are shared by everyone on the island. A player's team of one gets its party within a second of their first login; one who joins or leaves an island, by invitation, request or command, moves within a second, or on their next login if they were offline. Players can no longer make FTB parties of their own (#225).
 - A Recycler's top and bottom now show one seamless frame around its 3x3, whatever parts stand in its places: a rail along the outer edges, turning at the corners, and plain plating in the centre. Only an input's crate breaks it, on top. A part outside a Recycler, or where two Recyclers' 3x3s overlap, shows plain plating, and so do the parts' item icons. In a world from 0.1.0, a Recycler shows its frame once its core is broken and placed again (#223).
 - The Recycler's core now shows its vent on its front, turned the way it faces, with casing on every other side. An input now shows its opening on top, with casing on its sides, and looks the same whichever way it was placed (#223).
 

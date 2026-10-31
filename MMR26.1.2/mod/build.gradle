@@ -23,6 +23,11 @@ libworks {
 repositories {
     // EMI for 26.1 is an unofficial port, and Skyblock Builder's 26.1 build is on CurseForge only.
     maven { url = 'https://cursemaven.com' }
+    // FTB Teams and the FTB Library it needs.
+    maven {
+        url = 'https://maven.ftb.dev/releases'
+        content { includeGroup 'dev.ftb.mods' }
+    }
     // Jade.
     maven {
         url = 'https://api.modrinth.com/maven'
@@ -35,13 +40,19 @@ repositories {
 def emi = 'curse.maven:emi-unofficial-port-1544558:8630349'
 def jade = 'maven.modrinth:jade:26.1.11+neoforge'
 def skyblockBuilder = 'curse.maven:skyblock-builder-446691:9048404'
+def ftbTeams = 'dev.ftb.mods:ftb-teams-neoforge:26.1.2.4'
+def ftbLibrary = 'dev.ftb.mods:ftb-library-neoforge:26.1.2.11'
 
 dependencies {
     // Each optional to players, and named only by its own plugin under compat/, which loads only when
-    // the mod is installed: EMI shows decomposing and recycling, Jade a Recycler's progress, and Skyblock
-    // Builder says whose island a Recycler stands on. None is on the dev runs, so the game tests prove the
-    // mod plays alone; scripts/launch.py plays the local build in the pack, beside all three.
+    // the mod is installed: EMI shows decomposing and recycling, Jade a Recycler's progress, Skyblock
+    // Builder says whose island a Recycler stands on, and with FTB Teams keeps an island's players in one
+    // party. None is on the dev runs, so the game tests prove the mod plays alone; scripts/launch.py plays
+    // the local build in the pack, beside them all.
     compileOnly emi
     compileOnly jade
     compileOnly(skyblockBuilder) { transitive = false }
+    // FTB Teams, with Skyblock Builder, keeps each island's players in one FTB party (#225).
+    compileOnly(ftbTeams) { transitive = false }
+    compileOnly(ftbLibrary) { transitive = false }
 }
