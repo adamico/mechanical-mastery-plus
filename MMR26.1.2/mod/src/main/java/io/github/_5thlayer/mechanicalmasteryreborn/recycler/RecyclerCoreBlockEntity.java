@@ -83,7 +83,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         NO_RECIPE,
         /** It holds fewer than one decompose takes. */
         TOO_FEW,
-        /** A kind it must return, or with more kinds than positions every kind, has no position with room for the most of it. */
+        /** No room: a kind fits nowhere, or with more kinds than positions, none fits. */
         NO_ROOM
     }
 
@@ -230,7 +230,13 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         List<ItemStack> most = full.stream()
                 .map(share -> share.item().create().copyWithCount(Yield.most(share.amount(), yield))).toList();
         int positions = outputs.size() * RecyclerLayout.POSITIONS_PER_OUTPUT;
-        int[] kinds = full.size() <= positions ? IntStream.range(0, full.size()).toArray() : picked(server, outputs, most, positions);
+        int[] kinds;
+        if (most.stream().filter(stack -> !stack.isEmpty()).count() <= positions) {
+            order = null;
+            kinds = IntStream.range(0, full.size()).toArray();
+        } else {
+            kinds = picked(server, outputs, most, positions);
+        }
         if (kinds == null) {
             return Plan.stopped(Status.NO_ROOM);
         }
@@ -252,14 +258,15 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
     }
 
     /**
-     * Which of the work's kinds it returns when they outnumber the outputs' {@code positions}, by their place in the work
-     * and in its order: in the core's order, drawn now if it has none for this work, each that fits beside those before
-     * it, up to as many as there are positions; null when none fits. A kind that returns nothing at this yield needs no
-     * position, and is left out.
+     * Which of the work's kinds it returns when those that return anything outnumber the outputs' {@code positions}, by
+     * their place in the work and in its order: in the core's order, drawn now if it has none for this work, each that
+     * fits beside those before it, up to as many as there are positions; null when none fits. A kind that returns
+     * nothing at this yield needs no position, and is left out.
      */
-    private int @Nullable [] picked(ServerLevel server, List<RecyclerOutputBlockEntity> outputs, List<ItemStack> most, int positions) {
+    private int @Nullable [] picked(ServerLevel server, List<RecyclerOutputBlockEntity> outputs, List<ItemStack> most,
+            int positions) {
         int kinds = most.size();
-        if (order == null || order.length != kinds || Arrays.stream(order).anyMatch(kind -> kind >= kinds)) {
+        if (order == null || !Arrays.equals(Arrays.stream(order).sorted().toArray(), IntStream.range(0, kinds).toArray())) {
             List<Integer> all = new ArrayList<>(IntStream.range(0, kinds).boxed().toList());
             Util.shuffle(all, server.getRandom());
             order = all.stream().mapToInt(Integer::intValue).toArray();
@@ -267,22 +274,17 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         }
         var claimed = new boolean[positions];
         var picked = new ArrayList<Integer>();
-        boolean returnsAny = false;
         for (int kind : order) {
             if (picked.size() == positions) {
                 break;
             }
-            if (most.get(kind).isEmpty()) {
-                continue;
-            }
-            returnsAny = true;
-            int position = landing(outputs, claimed, most.get(kind));
+            int position = most.get(kind).isEmpty() ? -1 : landing(outputs, claimed, most.get(kind));
             if (position >= 0) {
                 claimed[position] = true;
                 picked.add(kind);
             }
         }
-        return picked.isEmpty() && returnsAny ? null : picked.stream().mapToInt(Integer::intValue).sorted().toArray();
+        return picked.isEmpty() ? null : picked.stream().mapToInt(Integer::intValue).sorted().toArray();
     }
 
     /**

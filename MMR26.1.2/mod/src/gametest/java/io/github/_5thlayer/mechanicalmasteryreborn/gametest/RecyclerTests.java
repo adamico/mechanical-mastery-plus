@@ -41,8 +41,8 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
  * whose 3x3 overlaps another's, doesn't run, while two that only touch both do; hoppers feed and empty it; its
  * drives add up and are capped; each decompose is recorded for the team whose island it stands on; and only a
  * player's empty hand takes back what its core holds, giving up the work under way (#191); one short on outputs
- * returns a random choice of the kinds that fit, kept until the work is done, each kind on its own item first, then an empty
- * position (#216). Each test builds its Recycler with {@link RecyclerBuild}.
+ * returns a random choice of the kinds that fit, kept until the work is done, each kind on its own item first, then
+ * an empty position, and stops only when none fits (#216). Each test builds its Recycler with {@link RecyclerBuild}.
  */
 final class RecyclerTests {
 

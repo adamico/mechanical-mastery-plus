@@ -6,7 +6,7 @@ other marketing. Notes, not copy: the description is written from them when the 
 ## Shiny machines from essence
 
 - Advanced essence decomposes into whole machines: steam turbines, transformers, accumulators, harvesters,
-  assemblers, pumps, anvils, blast furnaces (#209). Opening one is a small loot drop of the suite's best kit.
+  assemblers, pumps, anvils, blast furnaces (#209). Each one is a handful of the suite's best kit.
 - Every machine is a choice: keep it and build with it, or recycle it for a low chance of getting its ingredients
   back. Kept whole it is worth far more than broken down at a quarter yield.
 - A Recycler short on outputs returns only a random part of a mix, so more outputs return more, and a small
