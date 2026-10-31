@@ -25,7 +25,7 @@ file = "defaultconfigs/mechanicalmasteryreborn-server.toml"
 hash = "ba9a93fd7ff504848df2ce218cd28682b6aa1671f0f593f07a972c47785d3086"
 
 [[files]]
-file = "kubejs/assets/mechanicalmasteryreborn/emi/index/stacks/manual.json"
+file = "kubejs/assets/emi/index/stacks/mechanicalmasteryreborn_manual.json"
 hash = "55cd92783501279d63fa7851b6dc15d8c26e2850809f8852e9a24aa573fe52bd"
 
 [[files]]
