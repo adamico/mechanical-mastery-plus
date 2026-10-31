@@ -4,6 +4,8 @@ Releases up to 1.1.12 list their mod changes in `changelogs/`.
 
 ## Unreleased
 
+- New players start with $10,000 in AdminShop again, not $100: the pack set the starting money in a config file AdminShop 1.17.3 no longer reads. On an existing world, an op can top a player up with `/adminshop give <player> 1 9900`.
+
 ## 1.1.15
 
 - The final COD quest asks for 2,000,000 B of each fluid instead of about 2 billion, and 2,048 of each Mechanical Essence instead of 64,738, so it can be completed and its progress shows all the way (#161).

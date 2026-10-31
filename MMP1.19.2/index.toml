@@ -109,10 +109,6 @@ file = "config/NoChatReports/README.md"
 hash = "c52b76ccad2bd1063a22c7f6bb9e7c5db6b00fb53a6fd605585972ee0e5fc01f"
 
 [[files]]
-file = "config/adminshop-common.toml"
-hash = "a22544b030ccdcaac69b3a557a1c2dbd46091a98aea65b441249389dc456722e"
-
-[[files]]
 file = "config/adminshop/shop.csv"
 hash = "0f033f5a92f00db29154b15cf8b1d6d86bae6e73fca0fec00e3bfd724205b1b7"
 
@@ -1623,6 +1619,10 @@ hash = "3dcd1617f3cba0e6b4b6bbaed213260fa8a01b5c498597ee9e7752858af984df"
 [[files]]
 file = "config/voicechat/voicechat-volumes.properties"
 hash = "58242ef3075b166845e0081281b01113a55b9d095104a68b167e7b4bc08b87c5"
+
+[[files]]
+file = "defaultconfigs/adminshop-server.toml"
+hash = "4569fbbb0614dfe82a94ff917b5eb16339a91eb53d60cc0e23df18d1a2d32b36"
 
 [[files]]
 file = "defaultconfigs/fluxnetworks-server.toml"
