@@ -22,8 +22,9 @@ import net.minecraft.sounds.SoundSource;
 import org.slf4j.Logger;
 
 /**
- * Starting a team's challenge, by the handicap it chose at the lab. Each of the team's players online hears vanilla's
- * challenge fanfare, sees the challenge's name as a title with its cost below, and reads both in chat.
+ * Starting a team's challenge, by the handicap it chose at the lab, and ending or resetting it. Each of the team's
+ * players online hears vanilla's challenge fanfare when it starts, sees the challenge's name as a title with its cost
+ * below, and reads both in chat. The money handicap acts on the team's Account as it starts, resets and ends.
  */
 public final class Challenges {
 
@@ -36,6 +37,9 @@ public final class Challenges {
     public static boolean start(MinecraftServer server, UUID team, Handicap handicap) {
         if (!TeamState.get(server).choose(team, handicap, server.overworld().getGameTime())) {
             return false;
+        }
+        if (handicap == Handicap.MONEY) {
+            MoneyHandicap.start(server, team);
         }
         Component message = Component.translatable("mechanicalmasteryreborn.challenge.started",
                 name(handicap).withStyle(ChatFormatting.GOLD), cost(handicap)).withStyle(ChatFormatting.GRAY);
@@ -54,6 +58,31 @@ public final class Challenges {
             }
         }
         LOGGER.info("Team {} started the {} challenge; told {} of its players online", team, handicap.id(), told);
+        return true;
+    }
+
+    /** Ends the challenge {@code team} plays, as {@link TeamState#endChallenge} does, giving back what its handicap set aside, and says whether it played one. */
+    public static boolean end(MinecraftServer server, UUID team) {
+        TeamState state = TeamState.get(server);
+        boolean money = state.plays(team, Handicap.MONEY);
+        if (!state.endChallenge(team)) {
+            return false;
+        }
+        if (money) {
+            MoneyHandicap.end(server, team);
+        }
+        return true;
+    }
+
+    /** Resets the challenge {@code team} plays, as {@link TeamState#resetChallenge} does at the current game time, and its handicap with it, and says whether it played one. */
+    public static boolean reset(MinecraftServer server, UUID team) {
+        TeamState state = TeamState.get(server);
+        if (!state.resetChallenge(team, server.overworld().getGameTime())) {
+            return false;
+        }
+        if (state.plays(team, Handicap.MONEY)) {
+            MoneyHandicap.reset(server, team);
+        }
         return true;
     }
 

@@ -20,6 +20,8 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  * NeoForge sends a server config to each client, so EMI shows the yield a server plays with.
  *
  * <p>And C.O.D.'s pace while dormant, once awake, and how it grows while a challenge is played, and the cap of a team's Inflation.
+ *
+ * <p>And the share of a sale a team is paid while it plays the money challenge.
  */
 public final class ServerConfig {
 
@@ -63,6 +65,12 @@ public final class ServerConfig {
                     "its Inflation's cap, which the team's bar fills toward. 256 is four stacks, a placeholder.")
             .defineInRange("cod.inflation_cap", 256, 1, 1_000_000);
 
+    /** The share of a sale the money handicap pays (#213). */
+    public static final ModConfigSpec.DoubleValue MONEY_SALE_SHARE = BUILDER
+            .comment("The share of a sale's price AdminShop pays a team while it plays the money challenge, by hand or by a Seller,",
+                    "rounded down to the cent. 0.5 is half. Buying is unaffected.")
+            .defineInRange("money.sale_share", 0.5, 0.0, 1.0);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 
     private ServerConfig() {
@@ -100,6 +108,11 @@ public final class ServerConfig {
     /** The excess Inflation may reach while a challenge is played. */
     public static int inflationCap() {
         return SPEC.isLoaded() ? COD_INFLATION_CAP.getAsInt() : COD_INFLATION_CAP.getDefault();
+    }
+
+    /** The share of a sale the money handicap pays. */
+    public static double moneySaleShare() {
+        return SPEC.isLoaded() ? MONEY_SALE_SHARE.getAsDouble() : MONEY_SALE_SHARE.getDefault();
     }
 
     /** Decomposing by hand's yield: the lowest core's, so a Recycler never does worse. */

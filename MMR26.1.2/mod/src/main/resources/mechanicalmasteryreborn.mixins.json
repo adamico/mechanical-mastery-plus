@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github._5thlayer.mechanicalmasteryreborn.compat.adminshop.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ShopTradesMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

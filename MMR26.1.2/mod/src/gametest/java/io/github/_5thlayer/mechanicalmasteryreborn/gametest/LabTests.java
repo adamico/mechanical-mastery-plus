@@ -20,7 +20,7 @@ import net.minecraft.world.level.GameType;
 
 /**
  * The lab (#201): a team chooses a handicap at the lab on its island, which starts that handicap's challenge. Only
- * energy can be chosen yet. The handicap is the team's alone, is chosen once while its challenge is played, and is
+ * energy and money can be chosen yet (#213). The handicap is the team's alone, is chosen once while its challenge is played, and is
  * saved with the team's state. An op starts and ends the challenge of the island they stand on. Each test is an island
  * of its own, with another team's in a corner.
  */
@@ -34,7 +34,7 @@ final class LabTests {
     }
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
-        tests.test("lab_offers_only_energy_and_records_it_for_its_team_only", 1, LabTests::offersOnlyEnergy);
+        tests.test("lab_offers_only_energy_and_money_and_records_it_for_its_team_only", 1, LabTests::offersOnlyEnergyAndMoney);
         tests.test("lab_handicap_survives_a_save_and_load", 1, LabTests::survivesASaveAndLoad);
         tests.test("lab_chooses_nothing_for_a_player_of_another_team", 1, LabTests::choosesNothingForAnotherTeam);
         tests.test("lab_chooses_once_while_a_challenge_is_played", 1, LabTests::choosesOnce);
@@ -42,15 +42,16 @@ final class LabTests {
         tests.test("lab_op_starts_and_ends_the_challenge_of_the_island_stood_on", 1, LabTests::opStartsAndEnds);
     }
 
-    private static void offersOnlyEnergy(GameTestHelper helper) {
+    private static void offersOnlyEnergyAndMoney(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         UUID other = TestTeams.claim(helper, OTHER_ISLAND, OTHER_ISLAND);
         var player = member(helper, team);
         var menu = open(helper, player);
         for (Handicap handicap : Handicap.values()) {
-            helper.assertValueEqual(handicap.choosable(), handicap == Handicap.ENERGY, "whether the lab offers " + handicap);
+            helper.assertValueEqual(handicap.choosable(), handicap == Handicap.ENERGY || handicap == Handicap.MONEY,
+                    "whether the lab offers " + handicap);
         }
-        for (Handicap handicap : new Handicap[] {Handicap.PROTECTION, Handicap.LIFE, Handicap.MONEY}) {
+        for (Handicap handicap : new Handicap[] {Handicap.PROTECTION, Handicap.LIFE}) {
             helper.assertFalse(menu.clickMenuButton(player, handicap.ordinal()), "the lab let the team choose " + handicap);
             helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after choosing " + handicap);
         }
@@ -115,8 +116,8 @@ final class LabTests {
         var server = helper.getLevel().getServer();
         var op = server.createCommandSourceStack().withLevel(helper.getLevel())
                 .withPosition(helper.absolutePos(LAB).getCenter()).withSuppressedOutput();
-        server.getCommands().performPrefixedCommand(op, "cod challenge start money");
-        helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after an op started money");
+        server.getCommands().performPrefixedCommand(op, "cod challenge start life");
+        helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after an op started life");
         server.getCommands().performPrefixedCommand(op, "cod challenge start energy");
         helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.ENERGY), "the team's handicap after an op started energy");
         helper.assertValueEqual(state(helper).handicap(other), Optional.<Handicap>empty(), "another team's handicap");

@@ -42,6 +42,9 @@ def jade = 'maven.modrinth:jade:26.1.11+neoforge'
 def skyblockBuilder = 'curse.maven:skyblock-builder-446691:9048404'
 def ftbTeams = 'dev.ftb.mods:ftb-teams-neoforge:26.1.2.4'
 def ftbLibrary = 'dev.ftb.mods:ftb-library-neoforge:26.1.2.11'
+// AdminShop's 26.1.2 port isn't published anywhere a build can fetch it yet, so its jar is in libs/ until
+// it is; a coordinate replaces it then.
+def adminShop = files('libs/adminshop-26.1.2-2.3.2.jar')
 
 dependencies {
     // Each optional to players, and named only by its own plugin under compat/, which loads only when
@@ -55,4 +58,6 @@ dependencies {
     // FTB Teams, with Skyblock Builder, keeps each island's players in one FTB party (#225).
     compileOnly(ftbTeams) { transitive = false }
     compileOnly(ftbLibrary) { transitive = false }
+    // AdminShop, the money challenge's mod: the money handicap acts on its Accounts and halves its sales (#213).
+    compileOnly adminShop
 }

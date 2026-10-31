@@ -24,8 +24,9 @@ import net.minecraft.world.level.saveddata.SavedDataType;
 /**
  * Each team's state, keyed on its id ({@link Teams}): whether its C.O.D. is awake, how much essence an awake
  * C.O.D. has made for it, spawned or not, the handicap it chose at the lab, which says which challenge it plays, and
- * its {@link Inflation} while it plays one, with whether it was warned that Inflation nears its cap. Its members share
- * it, and a player who joins a team shares it from then on. Saved with the world, in the overworld's data.
+ * its {@link Inflation} while it plays one, with whether it was warned that Inflation nears its cap, and the money set
+ * aside from its Account while it plays the money challenge. Its members share it, and a player who joins a team
+ * shares it from then on. Saved with the world, in the overworld's data.
  */
 public final class TeamState extends SavedData {
 
@@ -42,7 +43,8 @@ public final class TeamState extends SavedData {
                 Codec.LONG.optionalFieldOf("made", 0L).forGetter(entry -> entry.made),
                 HANDICAP_CODEC.optionalFieldOf("handicap").forGetter(entry -> entry.handicap),
                 Inflation.CODEC.optionalFieldOf("inflation").forGetter(entry -> entry.inflation),
-                Codec.BOOL.optionalFieldOf("warned", false).forGetter(entry -> entry.warned))
+                Codec.BOOL.optionalFieldOf("warned", false).forGetter(entry -> entry.warned),
+                Codec.LONG.optionalFieldOf("set_aside", 0L).forGetter(entry -> entry.setAside))
                 .apply(instance, Entry::new));
 
         boolean awake;
@@ -52,14 +54,17 @@ public final class TeamState extends SavedData {
         Optional<Inflation> inflation;
         /** Whether the team was warned that its Inflation nears its cap, since it last fell back below; only while it plays a challenge. */
         boolean warned;
+        /** The money set aside from the team's Account while it plays the money challenge, in AdminShop's cents. */
+        long setAside;
 
-        Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation, boolean warned) {
+        Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation, boolean warned, long setAside) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
             // A challenge saved before Inflation was counted counts from the world's start.
             this.inflation = handicap.isPresent() ? inflation.or(() -> Optional.of(Inflation.startingAt(0))) : Optional.empty();
             this.warned = handicap.isPresent() && warned;
+            this.setAside = setAside;
         }
     }
 
@@ -186,6 +191,32 @@ public final class TeamState extends SavedData {
         return true;
     }
 
+    /** The money set aside from {@code team}'s Account while it plays the money challenge. */
+    public long setAside(UUID team) {
+        Entry entry = teams.get(team);
+        return entry == null ? 0 : entry.setAside;
+    }
+
+    /** Sets {@code amount} more of {@code team}'s money aside. */
+    public void setAside(UUID team, long amount) {
+        if (amount != 0) {
+            entry(team).setAside += amount;
+            setDirty();
+        }
+    }
+
+    /** Takes back everything set aside of {@code team}'s money, and says how much. */
+    public long takeBackSetAside(UUID team) {
+        Entry entry = teams.get(team);
+        if (entry == null || entry.setAside == 0) {
+            return 0;
+        }
+        long amount = entry.setAside;
+        entry.setAside = 0;
+        setDirty();
+        return amount;
+    }
+
     /** The teams that play a challenge. */
     public List<UUID> playing() {
         return teams.entrySet().stream().filter(entry -> entry.getValue().handicap.isPresent()).map(Map.Entry::getKey).toList();
@@ -245,6 +276,6 @@ public final class TeamState extends SavedData {
     }
 
     private Entry entry(UUID team) {
-        return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false));
+        return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false, 0));
     }
 }

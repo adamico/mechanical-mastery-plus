@@ -35,3 +35,7 @@ type = "required"
 versionRange = "${libworks_runtime_range}"
 ordering = "NONE"
 side = "BOTH"
+
+# The money handicap's halved sales, applied only with AdminShop installed (ShopTradesMixin).
+[[mixins]]
+config = "${mod_id}.mixins.json"
