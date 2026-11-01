@@ -256,7 +256,7 @@ public final class Recycling {
                 new Made<>(kind, holder.id().identifier().toString(), shares, made.count())));
     }
 
-    /** Whether {@code item} is a thing rather than a material: worn, or a block that holds something, as a furnace. */
+    /** Whether {@code item} is a thing rather than a material: worn, or a block with a state of its own, as a furnace or a sign. */
     private static boolean thing(Item item) {
         return worn(item.builtInRegistryHolder()) || item instanceof BlockItem block && block.getBlock() instanceof EntityBlock;
     }

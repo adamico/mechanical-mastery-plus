@@ -49,8 +49,8 @@ public final class RecyclingRules {
 
     /**
      * What the rules ask of an item beyond its recipes: whether it is an {@code ore}, which loses to any other
-     * ingredient; whether the pack names it {@code refined}; and whether it is a {@code thing}, worn or holding other
-     * items, which is never refined however it is made.
+     * ingredient; whether the pack names it {@code refined}; and whether it is a {@code thing}, worn or a block with a
+     * state of its own, as a furnace or a sign, which is never refined however it is made.
      */
     public record Traits<I>(Predicate<I> ore, Predicate<I> refined, Predicate<I> thing) {
     }
@@ -85,7 +85,7 @@ public final class RecyclingRules {
         }
         List<Made<I>> made = runBackwards(item, makers);
         if (!made.isEmpty() && !traits.thing().test(item)
-                && made.stream().allMatch(recipe -> cost(recipe).size() == 1 && raw(cost(recipe).getFirst().item(), makers, traits))) {
+                && made.stream().map(RecyclingRules::cost).allMatch(cost -> cost.size() == 1 && raw(cost.getFirst().item(), makers, traits))) {
             return new Refused<>(Refusal.REFINED);
         }
         Comparator<Made<I>> order = Comparator.<Made<I>>comparingInt(recipe -> recipe.kind() == Kind.ASSEMBLING ? 0 : 1)
