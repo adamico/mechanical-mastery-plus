@@ -10,7 +10,7 @@ item_ids:
 
 # Input
 
-<BlockImage id="recycler_input" scale="4" p:facing="north" />
+<BlockImage id="recycler_input" scale="4" />
 
 Where essence, or an item to recycle, goes into a [Recycler](index.md). Right-click it with what you hold, let a
 hopper above drop into it, or push into it from any side with a pipe or a belt. Everything goes into the

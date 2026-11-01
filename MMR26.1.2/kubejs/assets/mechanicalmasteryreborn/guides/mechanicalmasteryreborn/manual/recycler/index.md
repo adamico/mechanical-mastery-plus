@@ -12,18 +12,18 @@ by hand. You build it block by block, from parts made on a Craftworks Assembler.
 
 <GameScene zoom={4} interactive={true}>
   <Block id="recycler_core_1" x="1" z="0" p:facing="north" />
-  <Block id="recycler_output" x="2" z="0" p:facing="north" />
-  <Block id="recycler_output" x="0" z="0" p:facing="north" />
-  <Block id="recycler_input" x="2" z="1" p:facing="east" />
-  <Block id="hand_drive" x="2" z="2" p:corner="south_east" />
-  <Block id="recycler_casing" x="0" z="1" />
-  <Block id="recycler_casing" x="0" z="2" />
-  <Block id="recycler_casing" x="1" z="2" />
-  <Block id="recycler_casing" x="1" z="1" />
+  <Block id="recycler_output" x="2" z="0" p:facing="north" p:place="north_east" />
+  <Block id="recycler_output" x="0" z="0" p:facing="north" p:place="north_west" />
+  <Block id="recycler_input" x="1" z="1" p:place="centre" />
+  <Block id="hand_drive" x="2" z="2" p:place="south_east" />
+  <Block id="recycler_casing" x="0" z="1" p:place="west" />
+  <Block id="recycler_casing" x="0" z="2" p:place="south_west" />
+  <Block id="recycler_casing" x="1" z="2" p:place="south" />
+  <Block id="recycler_casing" x="2" z="1" p:place="east" />
   <BlockAnnotation x="1" z="0" color="#ffd84a">**Core**, facing out: it holds the work, and its tier sets how well the Recycler runs.</BlockAnnotation>
   <BlockAnnotation x="2" z="0" color="#4ad8ff">**Output**: the first, read before the other.</BlockAnnotation>
   <BlockAnnotation x="0" z="0" color="#4ad8ff">**Output**: the second. Each output holds three kinds of item.</BlockAnnotation>
-  <BlockAnnotation x="2" z="1" color="#7cff4a">**Input**: essence, or an item to recycle, goes in here.</BlockAnnotation>
+  <BlockAnnotation x="1" z="1" color="#7cff4a">**Input**: essence, or an item to recycle, goes in here.</BlockAnnotation>
   <BlockAnnotation x="2" z="2" color="#ff7c4a">**Hand drive**: right-click it to turn the Recycler.</BlockAnnotation>
   <BlockAnnotationTemplate id="recycler_casing">
     <BlockAnnotation color="#aaaaaa">**Casing**: fills a place, and does nothing else.</BlockAnnotation>
