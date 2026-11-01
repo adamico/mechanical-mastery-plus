@@ -37,7 +37,7 @@ _Avoid_: starter machine, decomposer, crank recycler
 The block in the middle of a Recycler's front edge, facing out, which holds its work and whose tier sets how fast it runs and how well: its yield, and how many it processes at once. A player takes back what it holds by hand, giving up the work under way; nothing else can.
 
 **Drive**:
-A part of a Recycler that turns it: by a player's right-click, a redstone signal, FE, a pack mod's magic or other means. A Recycler's drives add up; a hand-worked drive never turns faster than a player, and every turn that counts tires the player turning it, as sprinting does, so it costs food: it is how a team starts, or gets by when short of everything else, not how it runs. Decomposing by hand costs no food. FE drives stop under the energy handicap.
+A part of a Recycler that turns it: by a player's right-click, a redstone signal, FE, a pack mod's magic or other means. A Recycler's drives add up; a hand-worked drive never turns faster than a player, and every turn that counts tires the player turning it, as sprinting does, so it costs food: it is how a team starts, or gets by when short of everything else, not how it runs. Decomposing by hand costs no food. An FE drive spends FE from its own store, so under the energy handicap it runs on what is stored until that is spent.
 _Avoid_: crank (what a hand-worked drive is turned by), handle
 
 **Casing**:
@@ -62,26 +62,30 @@ The excess C.O.D. has built up since the current challenge began: essences it ha
 _Avoid_: glut, overflow, timer
 
 **Transmuted Essence**:
-One of the four new essences, each made at the end of one challenge by that challenge's own way of processing essence. Once a team has put its challenge's quota of them into C.O.D., the tier C.O.D. is making is blocked for good, and C.O.D. drops to the tier below; a reset loses what was put in toward the quota. A won chain goes on making them, and the Shop buys every one but the Aureate, which it only sells. They are Galvanic (energy), Warding (protection), Vital (life) and Aureate (money). Each belongs to its challenge, not to a tier.
+One of the four new essences, each made at the end of one challenge by that challenge's own way of processing essence. Once a team has put its challenge's quota of them into its Port on C.O.D., the tier C.O.D. is making is blocked for good, and C.O.D. drops to the tier below; a reset loses what was put in toward the quota. A won chain goes on making them, and the Shop buys every one but the Aureate, which it only sells. They are Galvanic (energy), Warding (protection), Vital (life) and Aureate (money). Each belongs to its challenge, not to a tier.
 _Avoid_: new essence
 
 **Quintessence**:
 The final essence, made in the last chapter from the four Transmuted Essences, which shuts C.O.D. down for good.
 
 **Challenge**:
-One of four goals, each bound to a fixed mod or set of mods, started and researched at the lab and followed through EMI, as Factorio's progression is, with no quest book. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. It is won by putting its quota of Transmuted Essence into C.O.D., which blocks the tier C.O.D. is making. Its mods keep their own recipes. Its chain stays locked for a team until it starts the challenge, so nothing of it can be built ahead, and a chain machine that comes from a mix does no work until then, and stays unlocked from then on, past a win or a reset. What its mods offer outside the chain, as the Shop, is never locked, and their items can still come from a mix, to be recycled.
+One of four goals, each bound to a fixed mod or set of mods, started and researched at the lab and followed through EMI, as Factorio's progression is, with no quest book. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. It is won by putting its quota of Transmuted Essence into its Port on C.O.D., which blocks the tier C.O.D. is making. Its mods keep their own recipes. Its chain stays locked for a team until it starts the challenge, so nothing of it can be built ahead, and a chain machine that comes from a mix does no work until then, and stays unlocked from then on, past a win or a reset. What its mods offer outside the chain, as the Shop, is never locked, and their items can still come from a mix, to be recycled.
 _Avoid_: questline, chapter, stage
 
 **Quota**:
 How many of its Transmuted Essence a challenge takes to win, against the tier C.O.D. is making.
 _Avoid_: target, goal
 
+**Port**:
+One of the four blocks of the island, one for each Transmuted Essence, set on C.O.D.'s four corners in an x, as part of it and as unbreakable, and counting for the team whose island it stands on. A Port opens only while its challenge is played, and then takes its Transmuted Essence from a hand or any automation, using each one up toward the quota. Once its challenge is won it shuts for good and shows it, so the island shows how far the team has got.
+_Avoid_: input (a Recycler's part), socket, slot
+
 **Chain**:
 The path a challenge's mods take a team up to the challenge's Transmuted Essence, from whatever their own recipes take. What an essence decomposes into is recycled or crafted into that, and that recycling is no part of the challenge.
 _Avoid_: processing chain, path
 
 **Handicap**:
-What a challenge costs the team while it plays it, and only then: protection (more, stronger and special mobs), life (less max health), energy (its generators give it no energy, and its FE drives stop) or money (less money). Whatever a handicap acts on can't be stockpiled ahead: a team's money and FE are set aside while the challenge is played, and given back when it ends.
+What a challenge costs the team while it plays it, and only then: protection (more, stronger and special mobs), life (less max health), energy (its generators give it no energy, though FE it banked ahead is still spent) or money (less money). A team's money can't be stockpiled ahead: it is set aside while the challenge is played, and given back when it ends. Its FE can, and banking it is part of the energy challenge's strategy.
 _Avoid_: threat, debuff
 
 **Generator**:
