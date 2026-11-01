@@ -70,7 +70,7 @@ hash = "e6b18971e61c664dc5e98125ebddacfc64486ebf3d59ce87099c71afa17fdefe"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/index.md"
-hash = "64d2b7a845c6d4a9e86294155733c9fefcb5bbc0a0abf37161f689d3083701ae"
+hash = "c15c445979b60f81decc1a07ab041aca9228ed3dd450666cc99c7519baf00059"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/input.md"
@@ -221,6 +221,10 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/redstone_ore_block.j
 hash = "1dad8004152741d4d891959b692a1da9f2d89dd2078db85d97d4e7fb293e57eb"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/sand.json"
+hash = "48c74798ae59fb2864e8e7b60222f1b8adb803a9902531c317c8c71469b55171"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/sheep_spawn_egg.json"
 hash = "481fd3477fcac28398f0f4d978058d7a71cb514ba94599d29cc38c0a9928e9ad"
 
@@ -306,7 +310,7 @@ hash = "ede53ea642664e7ab70d559257b0462cb58d7ba1388a8053b323959f8f77a70a"
 
 [[files]]
 file = "kubejs/server_scripts/decomposing.js"
-hash = "5df83ece9f22f262cb5ddee8ff90ce83fc41469cba289b3ba265386aa3b6450d"
+hash = "c5b8c6164f01bfef463ac91831c236cddd62395919e2f21d794edc771b3d6d88"
 
 [[files]]
 file = "kubejs/server_scripts/generators.js"
