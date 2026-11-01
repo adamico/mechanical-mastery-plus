@@ -5,6 +5,7 @@ package io.github._5thlayer.mechanicalmasteryreborn;
 
 import java.util.List;
 
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.HandDriveBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
 import net.minecraft.resources.Identifier;
 import net.neoforged.fml.ModContainer;
@@ -13,7 +14,8 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 
 /**
  * The mod's server config. The Recycler's settings: each core tier's yield (the line's glossary: Yield), the share of a mix,
- * or of what made an item, that one decompose or recycle returns, and decomposing by hand the lowest core's.
+ * or of what made an item, that one decompose or recycle returns, and decomposing by hand the lowest core's; and the FE
+ * drive's pace, cost and store.
  *
  * <p>And the recipe types recycling reads as assembling. The mod names no suite mod (libworks ADR 0013), so the pack names
  * Craftworks' assembling type there.
@@ -32,6 +34,21 @@ public final class ServerConfig {
             .comment("The share of a mix, or of what made an item, that a tier-1 core returns per decompose or recycle,",
                     "each part of an item left over as the chance of one more. Decomposing by hand returns the same.")
             .defineInRange("recycler.yield.tier_1", 0.25, 0.0, 1.0);
+
+    /** How often an FE drive turns: the hand drive's cap, so one matches one player cranking without a pause. */
+    public static final ModConfigSpec.IntValue FE_DRIVE_INTERVAL = BUILDER
+            .comment("The ticks between two turns of one FE drive. 5 is as fast as a hand drive turns, one player cranking without a pause.")
+            .defineInRange("recycler.fe_drive.interval", HandDriveBlock.CAP, 1, 72000);
+
+    /** What an FE drive spends on a turn that counts: cheap enough for an early engine. */
+    public static final ModConfigSpec.IntValue FE_DRIVE_FE_PER_TURN = BUILDER
+            .comment("The FE an FE drive spends on each turn that counts. It spends nothing on a turn its Recycler can't use.")
+            .defineInRange("recycler.fe_drive.fe_per_turn", 40, 1, 1_000_000);
+
+    /** How much an FE drive stores, in turns. */
+    public static final ModConfigSpec.IntValue FE_DRIVE_STORE_TURNS = BUILDER
+            .comment("How many turns' worth of FE an FE drive stores. Full, it takes no more until it spends some.")
+            .defineInRange("recycler.fe_drive.store_turns", 10, 1, 1_000_000);
 
     /** Recipe types of sized ingredients and results, run backwards after smelting and before crafting. */
     public static final ModConfigSpec.ConfigValue<List<? extends String>> ASSEMBLING_TYPES = BUILDER
@@ -113,6 +130,21 @@ public final class ServerConfig {
     /** The share of a sale the money handicap pays. */
     public static double moneySaleShare() {
         return SPEC.isLoaded() ? MONEY_SALE_SHARE.getAsDouble() : MONEY_SALE_SHARE.getDefault();
+    }
+
+    /** The ticks between two turns of one FE drive. */
+    public static int feDriveInterval() {
+        return SPEC.isLoaded() ? FE_DRIVE_INTERVAL.getAsInt() : FE_DRIVE_INTERVAL.getDefault();
+    }
+
+    /** The FE an FE drive spends on a turn that counts. */
+    public static int feDriveFePerTurn() {
+        return SPEC.isLoaded() ? FE_DRIVE_FE_PER_TURN.getAsInt() : FE_DRIVE_FE_PER_TURN.getDefault();
+    }
+
+    /** How many turns' worth of FE an FE drive stores. */
+    public static int feDriveStoreTurns() {
+        return SPEC.isLoaded() ? FE_DRIVE_STORE_TURNS.getAsInt() : FE_DRIVE_STORE_TURNS.getDefault();
     }
 
     /** Decomposing by hand's yield: the lowest core's, so a Recycler never does worse. */

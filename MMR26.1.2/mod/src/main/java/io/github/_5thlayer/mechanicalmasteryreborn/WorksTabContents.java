@@ -34,6 +34,7 @@ final class WorksTabContents {
         }
         event.accept(Recycler.CORE_ITEM.get());
         event.accept(Recycler.HAND_DRIVE_ITEM.get());
+        event.accept(Recycler.FE_DRIVE_ITEM.get());
         event.accept(Recycler.INPUT_ITEM.get());
         event.accept(Recycler.OUTPUT_ITEM.get());
         event.accept(Recycler.CASING_ITEM.get());

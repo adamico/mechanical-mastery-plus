@@ -3,7 +3,7 @@ navigation:
   title: Input
   parent: recycler/index.md
   icon: recycler_input
-  position: 2
+  position: 3
 item_ids:
   - mechanicalmasteryreborn:recycler_input
 ---

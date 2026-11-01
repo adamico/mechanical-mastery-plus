@@ -3,7 +3,7 @@ navigation:
   title: Casing
   parent: recycler/index.md
   icon: recycler_casing
-  position: 4
+  position: 5
 item_ids:
   - mechanicalmasteryreborn:recycler_casing
 ---

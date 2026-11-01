@@ -3,7 +3,7 @@ navigation:
   title: Output
   parent: recycler/index.md
   icon: recycler_output
-  position: 3
+  position: 4
 item_ids:
   - mechanicalmasteryreborn:recycler_output
 ---

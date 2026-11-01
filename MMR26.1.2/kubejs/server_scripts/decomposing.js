@@ -50,6 +50,7 @@ ServerEvents.recipes(event => {
     .id(`mechanicalmasteryreborn:assembling/${result.split(':')[1]}`)
   part('mechanicalmasteryreborn:recycler_core_1', ['4x minecraft:smooth_stone', '4x #minecraft:planks'])
   part('mechanicalmasteryreborn:hand_drive', ['2x minecraft:stick', '2x #minecraft:planks', 'minecraft:cobblestone'])
+  part('mechanicalmasteryreborn:fe_drive', ['mechanicalmasteryreborn:hand_drive', '4x minecraft:redstone', '2x minecraft:iron_ingot'])
   part('mechanicalmasteryreborn:recycler_input', ['minecraft:chest', '2x #minecraft:planks'])
   part('mechanicalmasteryreborn:recycler_output', ['minecraft:chest', '2x #minecraft:planks'])
   part('mechanicalmasteryreborn:recycler_casing', ['4x #minecraft:planks'])

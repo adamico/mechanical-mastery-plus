@@ -20,9 +20,9 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
- * The Recycler's parts (the line's glossary: Recycler): its tier-1 core, the hand drive, the input, the
- * output and the casing, their items and block entities, and their item faces: an input's is its core's
- * buffer, insert only, and an output's its shelf, extract only, on every side.
+ * The Recycler's parts (the line's glossary: Recycler): its tier-1 core, the hand and FE drives, the input, the
+ * output and the casing, their items and block entities, and their faces: an input's is its core's
+ * buffer, insert only, an output's its shelf, extract only, and an FE drive's its store, FE in only, on every side.
  */
 public final class Recycler {
 
@@ -35,6 +35,8 @@ public final class Recycler {
             props -> props.mapColor(MapColor.METAL).strength(3.0F, 6.0F).sound(SoundType.METAL).requiresCorrectToolForDrops());
     public static final DeferredBlock<HandDriveBlock> HAND_DRIVE = BLOCKS.registerBlock("hand_drive", HandDriveBlock::new,
             props -> props.mapColor(MapColor.WOOD).strength(2.0F).sound(SoundType.WOOD));
+    public static final DeferredBlock<FeDriveBlock> FE_DRIVE = BLOCKS.registerBlock("fe_drive", FeDriveBlock::new,
+            props -> props.mapColor(MapColor.METAL).strength(2.0F).sound(SoundType.METAL));
     public static final DeferredBlock<RecyclerInputBlock> INPUT = BLOCKS.registerBlock("recycler_input", RecyclerInputBlock::new,
             props -> props.mapColor(MapColor.WOOD).strength(2.0F).sound(SoundType.WOOD));
     public static final DeferredBlock<RecyclerOutputBlock> OUTPUT = BLOCKS.registerBlock("recycler_output", RecyclerOutputBlock::new,
@@ -44,12 +46,15 @@ public final class Recycler {
 
     public static final DeferredItem<BlockItem> CORE_ITEM = ITEMS.registerSimpleBlockItem("recycler_core_1", CORE);
     public static final DeferredItem<BlockItem> HAND_DRIVE_ITEM = ITEMS.registerSimpleBlockItem("hand_drive", HAND_DRIVE);
+    public static final DeferredItem<BlockItem> FE_DRIVE_ITEM = ITEMS.registerSimpleBlockItem("fe_drive", FE_DRIVE);
     public static final DeferredItem<BlockItem> INPUT_ITEM = ITEMS.registerSimpleBlockItem("recycler_input", INPUT);
     public static final DeferredItem<BlockItem> OUTPUT_ITEM = ITEMS.registerSimpleBlockItem("recycler_output", OUTPUT);
     public static final DeferredItem<BlockItem> CASING_ITEM = ITEMS.registerSimpleBlockItem("recycler_casing", CASING);
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RecyclerCoreBlockEntity>> CORE_ENTITY =
             BLOCK_ENTITIES.register("recycler_core_1", () -> new BlockEntityType<>(RecyclerCoreBlockEntity::new, Set.of(CORE.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FeDriveBlockEntity>> FE_DRIVE_ENTITY =
+            BLOCK_ENTITIES.register("fe_drive", () -> new BlockEntityType<>(FeDriveBlockEntity::new, Set.of(FE_DRIVE.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RecyclerOutputBlockEntity>> OUTPUT_ENTITY =
             BLOCK_ENTITIES.register("recycler_output", () -> new BlockEntityType<>(RecyclerOutputBlockEntity::new, Set.of(OUTPUT.get())));
 
@@ -68,5 +73,6 @@ public final class Recycler {
                 (level, pos, state, entity, side) -> RecyclerPart.coreOf(level, pos).map(RecyclerCoreBlockEntity::inputFace).orElse(null),
                 INPUT.get());
         event.registerBlockEntity(Capabilities.Item.BLOCK, OUTPUT_ENTITY.get(), (output, side) -> output.face());
+        event.registerBlockEntity(Capabilities.Energy.BLOCK, FE_DRIVE_ENTITY.get(), (drive, side) -> drive.face());
     }
 }

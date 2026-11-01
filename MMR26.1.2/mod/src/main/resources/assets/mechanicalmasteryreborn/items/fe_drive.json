@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "mechanicalmasteryreborn:block/fe_drive"
+      },
+      {
+        "type": "minecraft:model",
+        "model": "mechanicalmasteryreborn:block/recycler_frame_top_plain"
+      },
+      {
+        "type": "minecraft:model",
+        "model": "mechanicalmasteryreborn:block/recycler_frame_bottom_plain"
+      }
+    ]
+  }
+}

@@ -4,6 +4,7 @@
 package io.github._5thlayer.mechanicalmasteryreborn.compat.jade;
 
 import io.github._5thlayer.libworks.machine.jade.MachineReport;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.FeDriveBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.HandDriveBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
@@ -23,13 +24,15 @@ public final class RecyclerJadePlugin implements IWailaPlugin {
     @Override
     public void register(IWailaCommonRegistration registration) {
         registration.registerBlockDataProvider(RecyclerReport.REPORT, RecyclerCoreBlockEntity.class);
-        // A drive has no block entity; Jade keys its data by the block.
+        // Jade keys a drive's data by the block: a hand drive has no block entity, and an FE drive's holds no report.
         registration.registerBlockDataProvider(RecyclerReport.DRIVE, HandDriveBlock.class);
+        registration.registerBlockDataProvider(RecyclerReport.DRIVE, FeDriveBlock.class);
     }
 
     @Override
     public void registerClient(IWailaClientRegistration registration) {
         registration.registerBlockComponent(new MachineReport.Client<>(RecyclerReport.REPORT, RecyclerReport.Lines::add), RecyclerCoreBlock.class);
         registration.registerBlockComponent(new RecyclerReport.DriveReport.Client(), HandDriveBlock.class);
+        registration.registerBlockComponent(new RecyclerReport.DriveReport.Client(), FeDriveBlock.class);
     }
 }

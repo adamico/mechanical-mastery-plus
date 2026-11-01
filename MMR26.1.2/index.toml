@@ -58,11 +58,15 @@ hash = "89384d62a2ff15bd504ba7d533b91ee502a7eb61c54b665481ff51d40abf8c0a"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/casing.md"
-hash = "cccd5e9854f6afce5e563ce361076168d08c65c18eecac7edbbbd1bc2d10ce7f"
+hash = "fabbec9760f81a428c31df3684524bc382890e5008ca87447d2f6e0077305be3"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/core.md"
 hash = "3d893592ceec814abf3cfb50b6a89a4618607033037c8c583658d003af9a859c"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/fe_drive.md"
+hash = "cb54a7a0064460d25216780e76b08430bebc6f0bf01bf3e9a2a91935d52872f0"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/hand_drive.md"
@@ -74,11 +78,11 @@ hash = "c15c445979b60f81decc1a07ab041aca9228ed3dd450666cc99c7519baf00059"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/input.md"
-hash = "d342febcb0aaea4563f24b41eca031b6645816aea8cbbc977811161fa4b5d6d9"
+hash = "6a39375259b6adbb16514706e3a66848d84d4fdaee924963fabf92755993ab62"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/output.md"
-hash = "43fbcbe9b97bd5e9a86146a03bb48c1af3807e29b2b63f7b72832193e5309d27"
+hash = "66a7f2c1fd8ec56188dc922483b9ce6628a79778fae96a7721a15735f0fb738d"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/acacia_sapling.json"
@@ -182,11 +186,11 @@ hash = "581906775dcfafc8437a1f295770be16ca60f65116dfd68feaa4eac930a7348a"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/permit_reborn_essence_sell.json"
-hash = "df9b6e57ba75f6c447b974d9fc840eddace878e18271ebbce11ad1233150af2f"
+hash = "07644fd45e21a074134f713519b0f324eec79faf6e31bcee5c2c46bc18402ba0"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/permit_reborn_ore_buy.json"
-hash = "cf95f5f2b2a7555be7559a9fbb735328f15c93fdd89cb93ae09fe47d2e0d44cd"
+hash = "f8877ad3d26f782e38628e2dd2b9cd11efae8074df82487529ce705af8c1bcc5"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/pig_spawn_egg.json"
@@ -310,7 +314,7 @@ hash = "ede53ea642664e7ab70d559257b0462cb58d7ba1388a8053b323959f8f77a70a"
 
 [[files]]
 file = "kubejs/server_scripts/decomposing.js"
-hash = "c5b8c6164f01bfef463ac91831c236cddd62395919e2f21d794edc771b3d6d88"
+hash = "c8f39490b20143666d8bc65fb5e9172fa9dcae863bdb519c24860105fb295589"
 
 [[files]]
 file = "kubejs/server_scripts/generators.js"
