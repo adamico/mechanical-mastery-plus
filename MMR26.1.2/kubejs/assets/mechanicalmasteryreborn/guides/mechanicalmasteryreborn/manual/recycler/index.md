@@ -53,7 +53,7 @@ tier-1 core has one.
 
 Each [output](output.md) holds three kinds of item, so a Recycler returns every kind in what it decomposes or
 recycles only with enough outputs for them all. With too few it still runs, but returns as many kinds as fit, picked
-at random, and the rest are lost: more outputs return more of a mix. The two above return six of Advanced's twenty.
+at random, and the rest are lost: more outputs return more of a mix. The two above return six of Advanced's thirty.
 
 Its outputs are read in order, from the one at the front-left, on the left as you face the core, clockwise seen
 from above, with the centre last. Each kind goes on the first position already holding that item, or else on the

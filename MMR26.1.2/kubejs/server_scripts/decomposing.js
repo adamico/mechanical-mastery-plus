@@ -9,8 +9,8 @@
 // here would override one.
 ServerEvents.recipes(event => {
   // Advanced's mix, M5 (#209): machines of the suite and vanilla that recycle down into the copper, iron, gold and
-  // redstone Theurgy takes, and into wood and stone. Twenty kinds, more than a tier-1 Recycler's outputs hold, so
-  // it returns a random choice of them (#216).
+  // redstone Theurgy takes, and into wood and stone, and AdminShop's machines, the money challenge's own. Thirty
+  // kinds, more than a tier-1 Recycler's outputs hold, so it returns a random choice of them (#216).
   event.recipes.mechanicalmasteryreborn.decomposing([
     '2x wireworks:steam_turbine',
     'wireworks:transformer',
@@ -31,7 +31,17 @@ ServerEvents.recipes(event => {
     'minecraft:blast_furnace',
     'pipez:improved_upgrade',
     'theurgy:liquefaction_cauldron',
-    '2x minecraft:copper_chest'
+    '2x minecraft:copper_chest',
+    'adminshop:seller',
+    'adminshop:fluid_seller',
+    'adminshop:buyer_1',
+    'adminshop:buyer_2',
+    'adminshop:buyer_3',
+    'adminshop:fluid_buyer',
+    'adminshop:detector',
+    'adminshop:adv_detector',
+    'adminshop:shop',
+    'adminshop:tablet'
   ], '1x mechanicalmasteryreborn:advanced_mechanical_essence')
     .id('mechanicalmasteryreborn:decomposing/advanced_mechanical_essence')
 
