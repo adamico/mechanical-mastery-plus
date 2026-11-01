@@ -39,6 +39,13 @@ public final class MoneyHandicap {
         setAside(server, team);
     }
 
+    /** Gives {@code team}'s Account {@link #PERMIT} again if it ever started the money challenge, as a new Account of its needs. */
+    public static void regrant(MinecraftServer server, UUID team) {
+        if (TeamState.get(server).unlocked(team, Handicap.MONEY)) {
+            Accounts.get().grant(server, team, PERMIT);
+        }
+    }
+
     /** Gives {@code team} back everything set aside, as its money challenge ends. */
     static void end(MinecraftServer server, UUID team) {
         long amount = TeamState.get(server).takeBackSetAside(team);
@@ -66,7 +73,7 @@ public final class MoneyHandicap {
         Accounts accounts = Accounts.get();
         long balance = accounts.balance(server, team);
         if (balance > 0 && accounts.take(server, team, balance)) {
-            TeamState.get(server).setAside(team, balance);
+            TeamState.get(server).putAside(team, balance);
             LOGGER.info("Set aside team {}'s {} cents", team, balance);
         }
     }

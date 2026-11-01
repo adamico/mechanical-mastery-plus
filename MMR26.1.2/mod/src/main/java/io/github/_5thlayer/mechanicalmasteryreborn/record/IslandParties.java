@@ -50,6 +50,11 @@ public final class IslandParties extends SavedData {
         return Optional.ofNullable(parties.get(island));
     }
 
+    /** The island that owns {@code party}, if any. */
+    public Optional<UUID> islandOf(UUID party) {
+        return parties.entrySet().stream().filter(link -> link.getValue().equals(party)).map(Map.Entry::getKey).findFirst();
+    }
+
     /** Every island's party, by the island's team id. */
     public Map<UUID, UUID> all() {
         return Map.copyOf(parties);

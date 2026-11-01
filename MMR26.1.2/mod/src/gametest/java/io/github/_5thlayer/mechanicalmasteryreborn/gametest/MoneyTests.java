@@ -3,6 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
@@ -26,6 +27,8 @@ final class MoneyTests {
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("money_start_sets_the_balance_aside_and_grants_its_permit", 1, MoneyTests::startSetsAside);
+        tests.test("money_start_is_refused_without_an_account", 1, MoneyTests::refusedWithoutAnAccount);
+        tests.test("money_challenge_stays_unlocked_after_its_end", 1, MoneyTests::staysUnlocked);
         tests.test("money_end_gives_the_balance_back_with_what_was_earned", 1, MoneyTests::endGivesBack);
         tests.test("money_reset_sets_what_was_earned_aside_too", 1, MoneyTests::resetSetsAside);
         tests.test("money_sale_pays_half_only_while_the_challenge_is_played", 1, MoneyTests::salePaysHalf);
@@ -39,6 +42,24 @@ final class MoneyTests {
         helper.assertValueEqual(TestAccounts.balanceOf(team), 0L, "the Balance while the challenge is played");
         helper.assertValueEqual(state(helper).setAside(team), 500L, "what was set aside");
         helper.assertTrue(TestAccounts.holds(team, MoneyHandicap.PERMIT), "the team wasn't given " + MoneyHandicap.PERMIT);
+        helper.succeed();
+    }
+
+    /** A team whose island has no FTB party yet has no Account, so nothing could be set aside or granted. */
+    private static void refusedWithoutAnAccount(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        helper.assertFalse(Challenges.start(server(helper), team, Handicap.MONEY), "the money challenge started with no Account");
+        helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap");
+        helper.succeed();
+    }
+
+    /** What lets a recreated party be given {@link MoneyHandicap#PERMIT} again (ADR 0007). */
+    private static void staysUnlocked(GameTestHelper helper) {
+        UUID team = account(helper, 0);
+        helper.assertFalse(state(helper).unlocked(team, Handicap.MONEY), "the money challenge was unlocked before it started");
+        Challenges.start(server(helper), team, Handicap.MONEY);
+        Challenges.end(server(helper), team);
+        helper.assertTrue(state(helper).unlocked(team, Handicap.MONEY), "the money challenge was locked again after its end");
         helper.succeed();
     }
 

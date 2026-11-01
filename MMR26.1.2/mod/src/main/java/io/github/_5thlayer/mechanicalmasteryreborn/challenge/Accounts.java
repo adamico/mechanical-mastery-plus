@@ -18,6 +18,9 @@ import net.neoforged.fml.ModList;
  */
 public interface Accounts {
 
+    /** Whether {@code team} has an Account yet, so the money handicap has something to act on. */
+    boolean opened(MinecraftServer server, UUID team);
+
     /** {@code team}'s Balance. */
     long balance(MinecraftServer server, UUID team);
 
@@ -35,6 +38,11 @@ public interface Accounts {
 
     /** No money at all, as a world without AdminShop has. */
     Accounts NONE = new Accounts() {
+        @Override
+        public boolean opened(MinecraftServer server, UUID team) {
+            return true;
+        }
+
         @Override
         public long balance(MinecraftServer server, UUID team) {
             return 0;

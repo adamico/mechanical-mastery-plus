@@ -19,6 +19,7 @@ import dev.ftb.mods.ftbteams.api.Team;
 import dev.ftb.mods.ftbteams.api.TeamManager;
 import dev.ftb.mods.ftbteams.api.property.TeamProperties;
 import dev.ftb.mods.ftbteams.data.PartyTeam;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.MoneyHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.record.IslandParties;
 import io.github._5thlayer.mechanicalmasteryreborn.record.PartySync;
 import io.github._5thlayer.mechanicalmasteryreborn.record.PartySync.Island;
@@ -35,8 +36,9 @@ import org.slf4j.Logger;
  * Keeps each Skyblock Builder island's players in one FTB party of its own (#225), by {@link PartySync}'s moves, once
  * a second. Skyblock Builder's invitations, join requests and admin commands don't all fire events, so it checks
  * rather than listens, and catches a player's new team of one within a second of their first login. Players can't
- * make parties of their own, which it would only undo. Loaded only when both mods are installed, and nothing else in
- * the mod names an FTB Teams type.
+ * make parties of their own, which it would only undo. A new party of a team that has started the money challenge is
+ * given its Permit again, since a new Account starts without it. Loaded only when both mods are installed; FTB Teams'
+ * types are named only here and in {@link FtbTeams}.
  */
 public final class FtbPartySync {
 
@@ -83,6 +85,7 @@ public final class FtbPartySync {
                 ServerPlayer owner = server.getPlayerList().getPlayer(create.owner());
                 Team party = manager.createPartyTeam(owner, create.name(), "", Color4I.WHITE);
                 links.link(create.island(), party.getId());
+                MoneyHandicap.regrant(server, create.island());
                 LOGGER.info("Island {} has FTB party {}, owned by {}", create.island(), party.getId(), owner.getGameProfile().name());
             }
             case Move.Join join -> {

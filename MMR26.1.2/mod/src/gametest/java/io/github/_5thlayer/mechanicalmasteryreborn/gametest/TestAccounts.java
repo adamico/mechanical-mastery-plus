@@ -27,6 +27,11 @@ final class TestAccounts implements Accounts {
         PERMITS.put(team, ConcurrentHashMap.newKeySet());
     }
 
+    @Override
+    public boolean opened(MinecraftServer server, UUID team) {
+        return BALANCES.containsKey(team);
+    }
+
     static long balanceOf(UUID team) {
         return BALANCES.getOrDefault(team, 0L);
     }

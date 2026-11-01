@@ -35,6 +35,14 @@ public final class Challenges {
 
     /** Starts {@code handicap}'s challenge for {@code team}, as {@link TeamState#choose} does at the current game time, and tells the team. */
     public static boolean start(MinecraftServer server, UUID team, Handicap handicap) {
+        if (handicap == Handicap.MONEY && !Accounts.get().opened(server, team)) {
+            // Nothing could be set aside or granted: the team's island has no FTB party yet (#225).
+            Component noAccount = Component.translatable("mechanicalmasteryreborn.challenge.no_account").withStyle(ChatFormatting.RED);
+            server.getPlayerList().getPlayers().stream().filter(player -> Teams.of(player).equals(team))
+                    .forEach(player -> player.sendSystemMessage(noAccount));
+            LOGGER.info("Team {} has no Account yet, so its money challenge didn't start", team);
+            return false;
+        }
         if (!TeamState.get(server).choose(team, handicap, server.overworld().getGameTime())) {
             return false;
         }
