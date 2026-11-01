@@ -3,6 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.record;
 
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -36,8 +37,7 @@ public final class TeamState extends SavedData {
     private static final Codec<Handicap> HANDICAP_CODEC = Codec.STRING.comapFlatMap(
             id -> Handicap.byId(id).map(DataResult::success).orElseGet(() -> DataResult.error(() -> "No handicap " + id)),
             Handicap::id);
-    private static final Codec<Set<Handicap>> HANDICAPS_CODEC = HANDICAP_CODEC.listOf().xmap(
-            list -> list.isEmpty() ? EnumSet.noneOf(Handicap.class) : EnumSet.copyOf(list), List::copyOf);
+    private static final Codec<Set<Handicap>> HANDICAPS_CODEC = HANDICAP_CODEC.listOf().xmap(TeamState::handicaps, List::copyOf);
 
     /** One team's state. */
     private static final class Entry {
@@ -73,7 +73,7 @@ public final class TeamState extends SavedData {
             this.inflation = handicap.isPresent() ? inflation.or(() -> Optional.of(Inflation.startingAt(0))) : Optional.empty();
             this.warned = handicap.isPresent() && warned;
             this.setAside = setAside;
-            this.unlocked = unlocked.isEmpty() ? EnumSet.noneOf(Handicap.class) : EnumSet.copyOf(unlocked);
+            this.unlocked = handicaps(unlocked);
             handicap.ifPresent(this.unlocked::add);
         }
     }
@@ -290,6 +290,11 @@ public final class TeamState extends SavedData {
         }
         entry.inflation = entry.inflation.map(inflation -> inflation.plusDecomposed(count));
         setDirty();
+    }
+
+    /** A set of its own of {@code handicaps}, which may be empty, as {@link EnumSet#copyOf} can't take. */
+    private static EnumSet<Handicap> handicaps(Collection<Handicap> handicaps) {
+        return handicaps.isEmpty() ? EnumSet.noneOf(Handicap.class) : EnumSet.copyOf(handicaps);
     }
 
     private Entry entry(UUID team) {

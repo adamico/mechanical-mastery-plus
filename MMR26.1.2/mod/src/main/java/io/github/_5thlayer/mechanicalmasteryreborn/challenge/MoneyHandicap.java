@@ -8,6 +8,9 @@ import java.util.UUID;
 import com.mojang.logging.LogUtils;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
+import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import org.slf4j.Logger;
 
@@ -28,6 +31,21 @@ public final class MoneyHandicap {
     private MoneyHandicap() {
     }
 
+    /**
+     * Whether {@code team}'s money challenge can start: only once it has an Account to act on, which it has from its
+     * island's first FTB party (#225). If not, its players online read why.
+     */
+    static boolean canStart(MinecraftServer server, UUID team) {
+        if (Accounts.get().opened(server, team)) {
+            return true;
+        }
+        Component noAccount = Component.translatable("mechanicalmasteryreborn.challenge.no_account").withStyle(ChatFormatting.RED);
+        server.getPlayerList().getPlayers().stream().filter(player -> Teams.of(player).equals(team))
+                .forEach(player -> player.sendSystemMessage(noAccount));
+        LOGGER.info("Team {} has no Account yet, so its money challenge didn't start", team);
+        return false;
+    }
+
     /** Sets {@code team}'s Balance aside and gives it {@link #PERMIT}, as its money challenge starts. */
     static void start(MinecraftServer server, UUID team) {
         setAside(server, team);
@@ -39,7 +57,7 @@ public final class MoneyHandicap {
         setAside(server, team);
     }
 
-    /** Gives {@code team}'s Account {@link #PERMIT} again if it ever started the money challenge, as a new Account of its needs. */
+    /** Gives {@code team}'s Account {@link #PERMIT} again if it ever started the money challenge, since a new Account starts without it. */
     public static void regrant(MinecraftServer server, UUID team) {
         if (TeamState.get(server).unlocked(team, Handicap.MONEY)) {
             Accounts.get().grant(server, team, PERMIT);

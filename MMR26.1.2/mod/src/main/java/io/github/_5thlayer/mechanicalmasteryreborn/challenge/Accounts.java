@@ -18,7 +18,10 @@ import net.neoforged.fml.ModList;
  */
 public interface Accounts {
 
-    /** Whether {@code team} has an Account yet, so the money handicap has something to act on. */
+    /**
+     * Whether nothing stops the money handicap acting on {@code team}: with AdminShop, that the team has an Account
+     * yet; without it, always, since there is no money to act on.
+     */
     boolean opened(MinecraftServer server, UUID team);
 
     /** {@code team}'s Balance. */
