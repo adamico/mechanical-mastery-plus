@@ -3,6 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.recycler;
 
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity.Rejection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -21,6 +22,10 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
  * An input: what a player right-clicks into it, a hopper above drops in or anything against it pushes goes
  * into its Recycler's core, all into the core's one buffer (its item face is the core's, see {@link Recycler}).
  * Nothing comes back out of it. It looks open on top, but takes in from every side all the same.
+ *
+ * <p>A player's right-click with anything in hand is always the input's: it goes in, or the input refuses it and
+ * says why on the action bar, and never falls through to placing a block against it. A sneaking right-click
+ * places one, since vanilla then skips the block's use.
  */
 public final class RecyclerInputBlock extends Block implements RecyclerPart {
 
@@ -55,7 +60,7 @@ public final class RecyclerInputBlock extends Block implements RecyclerPart {
         }
         var core = RecyclerPart.coreOf(level, pos);
         if (core.isEmpty()) {
-            return InteractionResult.TRY_WITH_EMPTY_HAND;
+            return refuse(player, Rejection.NO_RECYCLER);
         }
         int inserted;
         try (var transaction = Transaction.openRoot()) {
@@ -63,9 +68,15 @@ public final class RecyclerInputBlock extends Block implements RecyclerPart {
             transaction.commit();
         }
         if (inserted == 0) {
-            return InteractionResult.TRY_WITH_EMPTY_HAND;
+            return refuse(player, core.get().rejectionOf(stack));
         }
         stack.shrink(inserted);
         return InteractionResult.SUCCESS_SERVER;
+    }
+
+    /** Takes the click, so nothing is placed, and tells {@code player} why on the action bar. */
+    private static InteractionResult refuse(Player player, Rejection why) {
+        player.sendOverlayMessage(why.message());
+        return InteractionResult.CONSUME;
     }
 }

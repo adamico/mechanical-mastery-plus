@@ -18,7 +18,9 @@ import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Kind;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Into;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Made;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Outcome;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Share;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -26,6 +28,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
@@ -37,6 +41,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeMap;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.EntityBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.Tags;
@@ -54,8 +59,10 @@ import org.jspecify.annotations.Nullable;
  * backwards by {@link RecyclingRules}. The mod derives it, since the pack could never write one for every item
  * (ADR 0003, amended for #184).
  *
- * <p>Smelting, the assembling types the config names ({@link ServerConfig#assemblingTypes}, Craftworks' in the
- * pack), vanilla crafting, and blasting, smoking and campfire cooking are read. An assembling recipe is read through
+ * <p>Vanilla crafting and the assembling types the config names ({@link ServerConfig#assemblingTypes}, Craftworks'
+ * in the pack) are run backwards. Smelting, blasting, smoking and campfire cooking never are: what they make is
+ * refined, as is what {@link #REFINED} names and a material every recipe cuts from one raw kind, and can't be
+ * recycled (ADR 0008). An assembling recipe is read through
  * its own codec, so the mod names no suite mod and still plays alone. A tag ingredient returns its first item, and an
  * ore ({@code #c:ores}) loses to anything else. The recipes are read again after a reload or a config change.
  */
@@ -71,6 +78,9 @@ public final class Recycling {
             TYPES.register(NAME, () -> RecipeType.simple(Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, NAME)));
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<RecyclingRecipe>> SERIALIZER =
             SERIALIZERS.register(NAME, RecyclingRecipe::serializer);
+
+    /** The items the pack names refined, beside what the rules find: the planks, as bamboo's, cut from a crafted block. */
+    public static final TagKey<Item> REFINED = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "refined"));
 
     /** The recipes last read, and the server's recipes they were read from: a reload makes a new map. */
     private static @Nullable Index index;
@@ -99,30 +109,33 @@ public final class Recycling {
     }
 
     /**
-     * Whether a Recycler recycles {@code stack}: anything but an essence, and but an item that holds other items,
-     * whose contents would be lost.
+     * Whether a Recycler recycles {@code stack}: anything the rules don't refuse, but an essence, and but an item
+     * that holds other items, whose contents would be lost.
      */
-    public static boolean recyclable(ItemStack stack) {
+    public static boolean recyclable(MinecraftServer server, ItemStack stack) {
         if (stack.isEmpty() || Essences.of(stack.getItem()).isPresent()) {
             return false;
         }
         var container = stack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
         var bundle = stack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY);
-        return container.nonEmptyItemCopyStream().findAny().isEmpty() && bundle.isEmpty();
+        return container.nonEmptyItemCopyStream().findAny().isEmpty() && bundle.isEmpty() && recycle(server, stack.getItem()) instanceof Into;
     }
 
-    /** What one {@code item} recycles into at full cost, before yield, each result once, in order. */
-    public static List<Share<Item>> recyclesInto(MinecraftServer server, Item item) {
-        return indexOf(server).recyclesInto(item);
+    /** What recycling one {@code item} comes to: what it recycles into at full cost, before yield, each result once, in order, or why it can't. */
+    public static Outcome<Item> recycle(MinecraftServer server, Item item) {
+        return indexOf(server).recycle(item);
     }
 
-    /** Every item a recipe makes or an override names, but an essence, and what it recycles into: what EMI shows. */
+    /**
+     * Every item a recipe makes or an override names, but an essence, and what it recycles into, when it recycles
+     * into something other than itself: what EMI shows.
+     */
     public static Map<Item, List<Share<Item>>> byRecipe(MinecraftServer server) {
         Index read = indexOf(server);
         var all = new HashMap<Item, List<Share<Item>>>();
         for (Item item : read.items()) {
-            List<Share<Item>> into = read.recyclesInto(item);
-            if (Essences.of(item).isEmpty() && !(into.size() == 1 && into.getFirst().item() == item)) {
+            if (Essences.of(item).isEmpty() && read.recycle(item) instanceof Into<Item>(List<Share<Item>> into)
+                    && !(into.size() == 1 && into.getFirst().item() == item)) {
                 all.put(item, into);
             }
         }
@@ -141,7 +154,7 @@ public final class Recycling {
     }
 
     private record Index(RecipeMap recipes, List<Identifier> assembling, Map<Item, List<Made<Item>>> makers,
-            Map<Item, List<Share<Item>>> overrides, Map<Item, List<Share<Item>>> into) {
+            Map<Item, List<Share<Item>>> overrides, Map<Item, Outcome<Item>> outcomes) {
 
         static Index read(RecipeMap recipes, List<Identifier> assembling, DynamicOps<JsonElement> ops) {
             var makers = new HashMap<Item, List<Made<Item>>>();
@@ -169,25 +182,28 @@ public final class Recycling {
             return items;
         }
 
-        List<Share<Item>> recyclesInto(Item item) {
-            return into.computeIfAbsent(item, key -> RecyclingRules.recyclesInto(key, Optional.ofNullable(overrides.get(key)),
-                    made -> makers.getOrDefault(made, List.of()), Recycling::ore));
+        Outcome<Item> recycle(Item item) {
+            return outcomes.computeIfAbsent(item, key -> RecyclingRules.recycle(key, Optional.ofNullable(overrides.get(key)),
+                    made -> makers.getOrDefault(made, List.of()), TRAITS));
         }
     }
 
     private record Read(Item result, Made<Item> made) {
     }
 
+    private static final RecyclingRules.Traits<Item> TRAITS = new RecyclingRules.Traits<>(Recycling::ore, Recycling::refined, Recycling::thing);
+
     private static boolean ore(Item item) {
         return BuiltInRegistries.ITEM.wrapAsHolder(item).is(Tags.Items.ORES);
     }
 
+    private static boolean refined(Item item) {
+        return BuiltInRegistries.ITEM.wrapAsHolder(item).is(REFINED);
+    }
+
     private static @Nullable Kind kindOf(RecipeType<?> type, List<Identifier> assembling) {
-        if (type == RecipeType.SMELTING) {
-            return Kind.SMELTING;
-        }
-        if (type == RecipeType.BLASTING || type == RecipeType.SMOKING || type == RecipeType.CAMPFIRE_COOKING) {
-            return Kind.OTHER_COOKING;
+        if (type == RecipeType.SMELTING || type == RecipeType.BLASTING || type == RecipeType.SMOKING || type == RecipeType.CAMPFIRE_COOKING) {
+            return Kind.COOKING;
         }
         if (type == RecipeType.CRAFTING) {
             return Kind.CRAFTING;
@@ -203,7 +219,7 @@ public final class Recycling {
      * for an assembling recipe, and its ingredients, one per slot, or sized for an assembling recipe. Read off the
      * recipe's own codec, since vanilla keeps a cooking or crafting result to itself and an assembling type is known
      * only by its config id. Empty when a part can't be read, or an ingredient names no item, or when it cooks a tool
-     * or armour down: that is recycling already, and run backwards it would recycle a nugget up into a pickaxe.
+     * or armour down: that is recycling already, and leaves the nugget no more refined than an ingot's uncrafting does.
      */
     private static Optional<Read> read(RecipeHolder<?> holder, Kind kind, DynamicOps<JsonElement> ops) {
         JsonObject json;
@@ -221,8 +237,7 @@ public final class Recycling {
         List<SizedIngredient> ingredients = kind == Kind.ASSEMBLING
                 ? json.has("ingredients") ? decode(SizedIngredient.NESTED_CODEC.listOf(), json.get("ingredients"), ops).orElse(List.of()) : List.of()
                 : holder.value().placementInfo().ingredients().stream().map(ingredient -> new SizedIngredient(ingredient, 1)).toList();
-        boolean cooking = kind == Kind.SMELTING || kind == Kind.OTHER_COOKING;
-        if (cooking && ingredients.stream().anyMatch(ingredient -> ingredient.ingredient().items().anyMatch(Recycling::worn))) {
+        if (kind == Kind.COOKING && ingredients.stream().anyMatch(ingredient -> ingredient.ingredient().items().anyMatch(Recycling::worn))) {
             return Optional.empty();
         }
         var shares = new ArrayList<Share<Item>>();
@@ -239,6 +254,11 @@ public final class Recycling {
         ItemStackTemplate made = product.get();
         return Optional.of(new Read(made.item().value(),
                 new Made<>(kind, holder.id().identifier().toString(), shares, made.count())));
+    }
+
+    /** Whether {@code item} is a thing rather than a material: worn, or a block with a state of its own, as a furnace or a sign. */
+    private static boolean thing(Item item) {
+        return worn(item.builtInRegistryHolder()) || item instanceof BlockItem block && block.getBlock() instanceof EntityBlock;
     }
 
     /** Whether {@code item} wears out or is worn: a tool, a weapon, or armour. */

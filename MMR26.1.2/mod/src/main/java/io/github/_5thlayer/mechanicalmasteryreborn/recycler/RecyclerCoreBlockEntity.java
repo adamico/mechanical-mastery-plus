@@ -6,15 +6,20 @@ package io.github._5thlayer.mechanicalmasteryreborn.recycler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.IntStream;
 import java.util.UUID;
 
 import io.github._5thlayer.libworks.transfer.GuardedResourceHandler;
+import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodWaking;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Recycling;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Into;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Refusal;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Refused;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules.Share;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Yield;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
@@ -23,10 +28,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Util;
 import net.minecraft.world.Containers;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.block.Block;
@@ -79,7 +86,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         INCOMPLETE,
         /** It holds nothing. */
         EMPTY,
-        /** It holds an essence no recipe decomposes, since the recipes changed. */
+        /** It holds an essence no recipe decomposes, or an item that no longer recycles, since the recipes changed. */
         NO_RECIPE,
         /** It holds fewer than one decompose takes. */
         TOO_FEW,
@@ -110,6 +117,45 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
     /** The buffer as its inputs reach it: insert only, and only an essence a recipe decomposes or what recycles. */
     public ResourceHandler<ItemResource> inputFace() {
         return inputFace;
+    }
+
+    /** Why an input took none of what a player offered it, which the input tells them on the action bar. */
+    public enum Rejection {
+        /** It is refined, so it can't be recycled. */
+        REFINED,
+        /** It is a block a player uncrafts for free. */
+        UNCRAFT_INSTEAD,
+        /** The Recycler takes no such thing: a filled box, or an essence nothing decomposes. */
+        NOT_TAKEN,
+        /** The core holds another item. */
+        HOLDS_ANOTHER,
+        /** The core holds a full stack of it. */
+        FULL,
+        /** No core claims the input, or two do. */
+        NO_RECYCLER;
+
+        public Component message() {
+            return Component.translatable(MechanicalMasteryReborn.MOD_ID + ".recycler.input." + name().toLowerCase(Locale.ROOT));
+        }
+    }
+
+    /**
+     * Why the buffer takes none of {@code stack}: what it is first, refined or to be uncrafted instead, then whether
+     * the buffer takes such a thing at all, then what it holds.
+     */
+    public Rejection rejectionOf(ItemStack stack) {
+        if (level instanceof ServerLevel server && Essences.of(stack.getItem()).isEmpty()
+                && Recycling.recycle(server.getServer(), stack.getItem()) instanceof Refused<Item>(Refusal why)) {
+            return switch (why) {
+                case REFINED -> Rejection.REFINED;
+                case UNCRAFT_INSTEAD -> Rejection.UNCRAFT_INSTEAD;
+            };
+        }
+        if (!buffer.isValid(0, ItemResource.of(stack))) {
+            return Rejection.NOT_TAKEN;
+        }
+        ItemStack held = held();
+        return !held.isEmpty() && !ItemStack.isSameItemSameComponents(held, stack) ? Rejection.HOLDS_ANOTHER : Rejection.FULL;
     }
 
     /** What the buffer holds. */
@@ -223,8 +269,10 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
             }
             full = found.get().value().results().stream().map(result -> new Share<>(result.withCount(1), result.count())).toList();
         } else {
-            full = Recycling.recyclesInto(server.getServer(), held.getItem()).stream()
-                    .map(share -> new Share<>(new ItemStackTemplate(share.item()), share.amount())).toList();
+            if (!(Recycling.recycle(server.getServer(), held.getItem()) instanceof Into<Item>(List<Share<Item>> into))) {
+                return Plan.stopped(Status.NO_RECIPE);
+            }
+            full = into.stream().map(share -> new Share<>(new ItemStackTemplate(share.item()), share.amount())).toList();
         }
         double yield = ServerConfig.yieldOf(TIER);
         List<ItemStack> most = full.stream()
@@ -398,7 +446,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         public boolean isValid(int index, ItemResource resource) {
             ItemStack stack = resource.toStack();
             return level instanceof ServerLevel server
-                    && (Decomposing.recipeFor(server, stack).isPresent() || Recycling.recyclable(stack));
+                    && (Decomposing.recipeFor(server, stack).isPresent() || Recycling.recyclable(server.getServer(), stack));
         }
 
         @Override
