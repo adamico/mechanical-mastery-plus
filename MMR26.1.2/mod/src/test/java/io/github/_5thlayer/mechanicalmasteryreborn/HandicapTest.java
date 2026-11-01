@@ -41,8 +41,8 @@ class HandicapTest {
     }
 
     @Test
-    void onlyEnergyIsChoosable() {
-        assertEquals(List.of(Handicap.ENERGY), Arrays.stream(Handicap.values()).filter(Handicap::choosable).toList());
+    void onlyEnergyAndMoneyAreChoosable() {
+        assertEquals(List.of(Handicap.ENERGY, Handicap.MONEY), Arrays.stream(Handicap.values()).filter(Handicap::choosable).toList());
     }
 
     @Test

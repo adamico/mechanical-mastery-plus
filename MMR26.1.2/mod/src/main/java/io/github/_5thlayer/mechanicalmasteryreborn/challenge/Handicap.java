@@ -19,7 +19,7 @@ public enum Handicap {
     /** Generator blocks disabled. */
     ENERGY("energy", true),
     /** Less money. */
-    MONEY("money", false);
+    MONEY("money", true);
 
     private final String id;
     private final boolean choosable;
@@ -34,7 +34,7 @@ public enum Handicap {
         return id;
     }
 
-    /** Whether the lab lets a team choose it yet: for now only energy, the others coming later (#171). */
+    /** Whether the lab lets a team choose it yet: for now energy and money, the others coming later (#171, #213). */
     public boolean choosable() {
         return choosable;
     }

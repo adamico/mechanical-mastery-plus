@@ -49,7 +49,7 @@ public final class InflationCap {
         for (UUID team : state.playing()) {
             Inflation inflation = state.inflation(team).orElseThrow();
             if (inflation.excess() >= cap) {
-                state.resetChallenge(team, server.overworld().getGameTime());
+                Challenges.reset(server, team);
                 Handicap handicap = state.handicap(team).orElseThrow();
                 int told = tell(server, team, Component.translatable("mechanicalmasteryreborn.challenge.reset",
                         cap, Challenges.title(handicap).withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.RED),

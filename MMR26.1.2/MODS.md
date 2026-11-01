@@ -29,7 +29,7 @@ The challenges after 0.0.1 (#210), each one's chain locked until a team starts i
 
 - **Gateways to Eternity**: the protection challenge. Portals the pack writes, whose waves of mobs drop what its chain needs.
 - **Neo Vitae**: the life challenge. Blood magic, paid for in the player's own health.
-- **AdminShop**: the money challenge, and the Shop, which is never locked. Not in `mods/` until its 26.1.2 port is on CurseForge.
+- **AdminShop**: the money challenge, and the Shop, which is never locked: the skyblock's store for seeds, spawn eggs, saplings, raw ores, water and lava, and where metal blocks sell. Its Offers are the pack's own, in `kubejs/data/mechanicalmasteryreborn/recipe/shop/`, checked by `scripts/check_offers.py`. Not in `mods/` until its 26.1.2 port is on CurseForge; until then `scripts/launch.py` adds its local build.
 
 Added from the pack's CurseForge profile:
 
@@ -64,4 +64,4 @@ Left out of the Showcase's list, as content with no role here: Animal Feeding Tr
 
 ## Libraries
 
-In the pack only because a mod above needs them: Apothic Attributes (Gateways to Eternity), Balm (Forgiving Void, KleeSlabs), Better Advanced Tooltips (KubeJS), Cloth Config, Collective, Configurable, Cupboard, FTB Library (FTB Chunks, FTB Teams, FTB Ultimine), FTB Teams (FTB Chunks), Fusion (Connected Glass), Fzzy Config, GeckoLib (Theurgy, Neo Vitae), JamLib, Kotlin for Forge, LibX (Skyblock Builder), Modonomicon (Theurgy, Neo Vitae), Nanite Library, Placebo (Gateways to Eternity), PolyLib (Shrink), Prickle, Puzzles Lib, Searchables, SuperMartijn642's Config Lib (Durability Tooltip), SuperMartijn642's Core Lib (Connected Glass), Titanium (Functional Storage) and YetAnotherConfigLib. A library no mod needs any more comes out with the mod.
+In the pack only because a mod above needs them: Apothic Attributes (Gateways to Eternity), Balm (Forgiving Void, KleeSlabs), Better Advanced Tooltips (KubeJS), Cloth Config, Collective, Configurable, Cupboard, FTB Library (FTB Chunks, FTB Teams, FTB Ultimine), FTB Teams (FTB Chunks, and the companion mod, which keeps each island's players in one FTB party), Fusion (Connected Glass), Fzzy Config, GeckoLib (Theurgy, Neo Vitae), JamLib, Kotlin for Forge, LibX (Skyblock Builder), Modonomicon (Theurgy, Neo Vitae), Nanite Library, Placebo (Gateways to Eternity), PolyLib (Shrink), Prickle, Puzzles Lib, Searchables, SuperMartijn642's Config Lib (Durability Tooltip), SuperMartijn642's Core Lib (Connected Glass), Titanium (Functional Storage) and YetAnotherConfigLib. A library no mod needs any more comes out with the mod.

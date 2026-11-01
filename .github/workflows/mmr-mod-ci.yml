@@ -8,10 +8,16 @@ on:
   push:
     paths:
       - 'MMR26.1.2/mod/**'
+      - 'MMR26.1.2/kubejs/data/**'
+      - 'MMR26.1.2/kubejs/server_scripts/decomposing.js'
+      - 'MMR26.1.2/scripts/check_offers.py'
       - '.github/workflows/mmr-mod-ci.yml'
   pull_request:
     paths:
       - 'MMR26.1.2/mod/**'
+      - 'MMR26.1.2/kubejs/data/**'
+      - 'MMR26.1.2/kubejs/server_scripts/decomposing.js'
+      - 'MMR26.1.2/scripts/check_offers.py'
       - '.github/workflows/mmr-mod-ci.yml'
   workflow_dispatch:
 
@@ -59,6 +65,9 @@ jobs:
 
       # Each upstream the mod declares, the libworks runtime among them, from its tag.
       - run: ./gradlew -q libworksUpstreams | sh .libworks/.github/scripts/build-upstreams.sh
+
+      # The Shop's Offers against the rules every Offer keeps, and the mixes they're checked against (#213).
+      - run: python3 ../scripts/check_offers.py
 
       # The build, with the JUnit tests.
       - run: ./gradlew build

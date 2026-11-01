@@ -1,0 +1,9 @@
+{
+  "type": "adminshop:item_selling",
+  "price": 600,
+  "permit": "reborn_money",
+  "item": {
+    "id": "minecraft:hay_block",
+    "count": 1
+  }
+}

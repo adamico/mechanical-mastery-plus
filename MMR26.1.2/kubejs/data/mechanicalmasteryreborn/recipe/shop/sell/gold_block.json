@@ -1,0 +1,8 @@
+{
+  "type": "adminshop:item_selling",
+  "price": 4500,
+  "item": {
+    "id": "minecraft:gold_block",
+    "count": 1
+  }
+}

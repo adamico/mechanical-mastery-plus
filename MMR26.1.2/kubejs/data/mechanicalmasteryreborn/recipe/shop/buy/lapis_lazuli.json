@@ -1,0 +1,8 @@
+{
+  "type": "adminshop:item_buying",
+  "price": 500,
+  "result": {
+    "id": "minecraft:lapis_lazuli",
+    "count": 1
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "adminshop:item_buying",
+  "price": 1000000,
+  "permit": "reborn_ore_buy",
+  "result": {
+    "id": "fieldworks:netherite_ore",
+    "count": 1
+  }
+}

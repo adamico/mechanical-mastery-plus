@@ -7,6 +7,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Generators;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationCap;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
+import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbteams.FtbPartySync;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
@@ -14,6 +15,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.recipe.Recycling;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 
 /**
@@ -38,5 +40,9 @@ public final class MechanicalMasteryReborn {
         Recycler.register(modBus);
         ServerConfig.register(container);
         modBus.addListener(WorksTabContents::add);
+        // With both installed, as the pack plays, an island's players share one FTB party (#225).
+        if (ModList.get().isLoaded("skyblockbuilder") && ModList.get().isLoaded("ftbteams")) {
+            FtbPartySync.register();
+        }
     }
 }

@@ -95,3 +95,4 @@ TT1211/config/worldedit/**
 # Agent sessions: their worktrees, and the CurseForge API dumps they fetch for research
 .claude/worktrees/
 /cf_*.json
+!MMR26.1.2/mod/libs/*.jar

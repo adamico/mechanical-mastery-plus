@@ -3,10 +3,13 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.record;
 
+import java.util.Collection;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import com.mojang.serialization.Codec;
@@ -24,7 +27,8 @@ import net.minecraft.world.level.saveddata.SavedDataType;
 /**
  * Each team's state, keyed on its id ({@link Teams}): whether its C.O.D. is awake, how much essence an awake
  * C.O.D. has made for it, spawned or not, the handicap it chose at the lab, which says which challenge it plays, and
- * its {@link Inflation} while it plays one, with whether it was warned that Inflation nears its cap. Its members share
+ * its {@link Inflation} while it plays one, with whether it was warned that Inflation nears its cap, and the money set
+ * aside from its Account while it plays the money challenge, and the challenges it has ever started. Its members share
  * it, and a player who joins a team shares it from then on. Saved with the world, in the overworld's data.
  */
 public final class TeamState extends SavedData {
@@ -33,6 +37,7 @@ public final class TeamState extends SavedData {
     private static final Codec<Handicap> HANDICAP_CODEC = Codec.STRING.comapFlatMap(
             id -> Handicap.byId(id).map(DataResult::success).orElseGet(() -> DataResult.error(() -> "No handicap " + id)),
             Handicap::id);
+    private static final Codec<Set<Handicap>> HANDICAPS_CODEC = HANDICAP_CODEC.listOf().xmap(TeamState::handicaps, List::copyOf);
 
     /** One team's state. */
     private static final class Entry {
@@ -42,7 +47,9 @@ public final class TeamState extends SavedData {
                 Codec.LONG.optionalFieldOf("made", 0L).forGetter(entry -> entry.made),
                 HANDICAP_CODEC.optionalFieldOf("handicap").forGetter(entry -> entry.handicap),
                 Inflation.CODEC.optionalFieldOf("inflation").forGetter(entry -> entry.inflation),
-                Codec.BOOL.optionalFieldOf("warned", false).forGetter(entry -> entry.warned))
+                Codec.BOOL.optionalFieldOf("warned", false).forGetter(entry -> entry.warned),
+                Codec.LONG.optionalFieldOf("set_aside", 0L).forGetter(entry -> entry.setAside),
+                HANDICAPS_CODEC.optionalFieldOf("unlocked", Set.of()).forGetter(entry -> entry.unlocked))
                 .apply(instance, Entry::new));
 
         boolean awake;
@@ -52,14 +59,22 @@ public final class TeamState extends SavedData {
         Optional<Inflation> inflation;
         /** Whether the team was warned that its Inflation nears its cap, since it last fell back below; only while it plays a challenge. */
         boolean warned;
+        /** The money set aside from the team's Account while it plays the money challenge, in AdminShop's cents. */
+        long setAside;
+        /** The challenges the team has started, whose chains stay unlocked for it from then on (ADR 0007). */
+        Set<Handicap> unlocked;
 
-        Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation, boolean warned) {
+        Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation, boolean warned, long setAside,
+                Set<Handicap> unlocked) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
             // A challenge saved before Inflation was counted counts from the world's start.
             this.inflation = handicap.isPresent() ? inflation.or(() -> Optional.of(Inflation.startingAt(0))) : Optional.empty();
             this.warned = handicap.isPresent() && warned;
+            this.setAside = setAside;
+            this.unlocked = handicaps(unlocked);
+            handicap.ifPresent(this.unlocked::add);
         }
     }
 
@@ -153,6 +168,7 @@ public final class TeamState extends SavedData {
         Entry entry = entry(team);
         entry.handicap = Optional.of(handicap);
         entry.inflation = Optional.of(Inflation.startingAt(gameTime));
+        entry.unlocked.add(handicap);
         setDirty();
         return true;
     }
@@ -184,6 +200,38 @@ public final class TeamState extends SavedData {
         entry.warned = false;
         setDirty();
         return true;
+    }
+
+    /** The money set aside from {@code team}'s Account while it plays the money challenge. */
+    public long setAside(UUID team) {
+        Entry entry = teams.get(team);
+        return entry == null ? 0 : entry.setAside;
+    }
+
+    /** Whether {@code team} has ever started {@code handicap}'s challenge, which keeps its chain unlocked (ADR 0007). */
+    public boolean unlocked(UUID team, Handicap handicap) {
+        Entry entry = teams.get(team);
+        return entry != null && entry.unlocked.contains(handicap);
+    }
+
+    /** Puts {@code amount} more of {@code team}'s money aside. */
+    public void putAside(UUID team, long amount) {
+        if (amount != 0) {
+            entry(team).setAside += amount;
+            setDirty();
+        }
+    }
+
+    /** Takes back everything set aside of {@code team}'s money, and says how much. */
+    public long takeBackSetAside(UUID team) {
+        Entry entry = teams.get(team);
+        if (entry == null || entry.setAside == 0) {
+            return 0;
+        }
+        long amount = entry.setAside;
+        entry.setAside = 0;
+        setDirty();
+        return amount;
     }
 
     /** The teams that play a challenge. */
@@ -244,7 +292,12 @@ public final class TeamState extends SavedData {
         setDirty();
     }
 
+    /** A set of its own of {@code handicaps}, which may be empty, as {@link EnumSet#copyOf} can't take. */
+    private static EnumSet<Handicap> handicaps(Collection<Handicap> handicaps) {
+        return handicaps.isEmpty() ? EnumSet.noneOf(Handicap.class) : EnumSet.copyOf(handicaps);
+    }
+
     private Entry entry(UUID team) {
-        return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false));
+        return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false, 0, Set.of()));
     }
 }

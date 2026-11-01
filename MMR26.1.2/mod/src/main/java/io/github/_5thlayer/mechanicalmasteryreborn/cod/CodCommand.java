@@ -94,7 +94,7 @@ final class CodCommand {
 
     private static int endChallenge(CommandContext<CommandSourceStack> context) {
         var source = context.getSource();
-        if (!TeamState.get(source.getServer()).endChallenge(island(source))) {
+        if (!Challenges.end(source.getServer(), island(source))) {
             source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.no_challenge"));
             return 0;
         }
