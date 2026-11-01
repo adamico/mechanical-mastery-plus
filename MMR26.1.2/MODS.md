@@ -17,7 +17,7 @@ The suite, taken as released CurseForge jars:
 The rest of 0.0.1:
 
 - **Theurgy**: alchemy, the path to the Galvanic Essence.
-- **Chapters**: research locks. A team's finished research is a stage, and recipes wait on it.
+- **Chapters**: research locks. A team's finished research is a stage, and recipes wait on it. Each challenge's chain is a stage too, named after its handicap, which the companion mod gives a team as it starts the challenge; the pack's stage files, in `kubejs/data/mechanicalmasteryreborn/chapters/stages/`, name the recipes it locks (ADR 0007).
 - **Skyblock Builder**: the island start, an island per team, and the void Nether and End.
 - **Default World Type**: makes Skyblock Builder's world type the one a new world picks.
 - **GuideME**: the Manual, the pack's in-game book on how to build and work the companion mod's blocks, with 3D scenes. Holding G on a part's tooltip opens its page.
@@ -29,7 +29,7 @@ The challenges after 0.0.1 (#210), each one's chain locked until a team starts i
 
 - **Gateways to Eternity**: the protection challenge. Portals the pack writes, whose waves of mobs drop what its chain needs.
 - **Neo Vitae**: the life challenge. Blood magic, paid for in the player's own health.
-- **AdminShop**: the money challenge, and the Shop, which is never locked: the skyblock's store for seeds, spawn eggs, saplings, raw ores, water and lava, and where metal blocks sell. Its Offers are the pack's own, in `kubejs/data/mechanicalmasteryreborn/recipe/shop/`, checked by `scripts/check_offers.py`. Not in `mods/` until its 26.1.2 port is on CurseForge; until then `scripts/launch.py` adds its local build.
+- **AdminShop**: the money challenge, and the Shop, which is never locked: the skyblock's store for seeds, spawn eggs, saplings, raw ores, water and lava, and where metal blocks sell. Its Offers are the pack's own, in `kubejs/data/mechanicalmasteryreborn/recipe/shop/`, checked by `scripts/check_offers.py`. Its Seller's and Buyers' recipes wait on the `money` stage. Not in `mods/` until its 26.1.2 port is on CurseForge; until then `scripts/launch.py` adds its local build.
 
 Added from the pack's CurseForge profile:
 

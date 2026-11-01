@@ -81,6 +81,10 @@ file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/man
 hash = "43fbcbe9b97bd5e9a86146a03bb48c1af3807e29b2b63f7b72832193e5309d27"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/money.json"
+hash = "20ab0b4b61b78b12a1cc72c0e46c037107fc86d1cc87ec1ffd3f3327cca9987a"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/acacia_sapling.json"
 hash = "49a9e34631357667c20c5699c7e2d47a1f9b62eec9818b9bdbe6ec2e33ddfcec"
 

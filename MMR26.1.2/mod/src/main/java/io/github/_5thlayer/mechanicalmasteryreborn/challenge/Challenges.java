@@ -24,7 +24,8 @@ import org.slf4j.Logger;
 /**
  * Starting a team's challenge, by the handicap it chose at the lab, and ending or resetting it. Each of the team's
  * players online hears vanilla's challenge fanfare when it starts, sees the challenge's name as a title with its cost
- * below, and reads both in chat. The money handicap acts on the team's Account as it starts, resets and ends.
+ * below, and reads both in chat, and is given the challenge's chain ({@link Chains}). The money handicap acts on the
+ * team's Account as it starts, resets and ends.
  */
 public final class Challenges {
 
@@ -53,6 +54,7 @@ public final class Challenges {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (Teams.of(player).equals(team)) {
                 told++;
+                Chains.unlock(server, player);
                 player.sendSystemMessage(message);
                 player.connection.send(new ClientboundSetSubtitleTextPacket(subtitle));
                 player.connection.send(new ClientboundSetTitleTextPacket(title));
