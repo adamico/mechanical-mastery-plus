@@ -314,7 +314,7 @@ hash = "bf0996fea7540b2c0a3a747fac2747d3f16646789c456770bb00db7cd422552b"
 
 [[files]]
 file = "kubejs/server_scripts/manual.js"
-hash = "e0556fffc7e0e17b94d46b71359ee3e064e19de70ec2240ff67c2c15bb9eb870"
+hash = "678774bfcc71aaaf0ff7bca581c1e6ee51c1ef63159e6f57d803e2a6a3ba347c"
 
 [[files]]
 file = "kubejs/server_scripts/shop.js"
