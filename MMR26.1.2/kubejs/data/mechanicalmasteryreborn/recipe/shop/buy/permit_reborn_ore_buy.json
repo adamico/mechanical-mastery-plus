@@ -8,6 +8,9 @@
     "components": {
       "minecraft:custom_data": {
         "key": "reborn_ore_buy"
+      },
+      "minecraft:item_name": {
+        "translate": "adminshop.permit.reborn_ore_buy"
       }
     }
   }

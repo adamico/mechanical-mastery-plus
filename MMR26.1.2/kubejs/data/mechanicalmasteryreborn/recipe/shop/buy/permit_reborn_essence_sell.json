@@ -8,6 +8,9 @@
     "components": {
       "minecraft:custom_data": {
         "key": "reborn_essence_sell"
+      },
+      "minecraft:item_name": {
+        "translate": "adminshop.permit.reborn_essence_sell"
       }
     }
   }
