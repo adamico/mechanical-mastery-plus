@@ -12,7 +12,7 @@ ServerEvents.recipes(event => {
   // redstone Theurgy takes, and into wood and stone, and AdminShop's machines, the money challenge's own. Thirty
   // kinds, more than a tier-1 Recycler's outputs hold, so it returns a random choice of them (#216).
   event.recipes.mechanicalmasteryreborn.decomposing([
-    '2x wireworks:steam_turbine',
+    'wireworks:steam_turbine',
     'wireworks:transformer',
     'wireworks:steam_engine',
     'wireworks:accumulator',
@@ -31,7 +31,7 @@ ServerEvents.recipes(event => {
     'minecraft:blast_furnace',
     'pipez:improved_upgrade',
     'theurgy:liquefaction_cauldron',
-    '2x minecraft:copper_chest',
+    'minecraft:copper_chest',
     'adminshop:seller',
     'adminshop:fluid_seller',
     'adminshop:buyer_1',
@@ -40,8 +40,7 @@ ServerEvents.recipes(event => {
     'adminshop:fluid_buyer',
     'adminshop:detector',
     'adminshop:adv_detector',
-    'adminshop:shop',
-    'adminshop:tablet'
+    'adminshop:shop'
   ], '1x mechanicalmasteryreborn:advanced_mechanical_essence')
     .id('mechanicalmasteryreborn:decomposing/advanced_mechanical_essence')
 
