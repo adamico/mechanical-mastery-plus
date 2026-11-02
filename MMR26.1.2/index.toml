@@ -54,7 +54,7 @@ hash = "fbc40ee821346b43aaf62873fb2c0da83ae93a6780fbf92ada2942ad01fa57a6"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/lab.md"
-hash = "89384d62a2ff15bd504ba7d533b91ee502a7eb61c54b665481ff51d40abf8c0a"
+hash = "8d96aa1e0a64f7dfb49a60c39b11d83681fa03ffe31809119089b07a2c71945c"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/casing.md"
@@ -74,7 +74,7 @@ hash = "e6b18971e61c664dc5e98125ebddacfc64486ebf3d59ce87099c71afa17fdefe"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/index.md"
-hash = "c15c445979b60f81decc1a07ab041aca9228ed3dd450666cc99c7519baf00059"
+hash = "131225aa3e95a6765d077535ba00a308a246d1fa792f92817c7a5de493dc3326"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/input.md"
@@ -83,6 +83,14 @@ hash = "6a39375259b6adbb16514706e3a66848d84d4fdaee924963fabf92755993ab62"
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/output.md"
 hash = "66a7f2c1fd8ec56188dc922483b9ce6628a79778fae96a7721a15735f0fb738d"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/energy.json"
+hash = "debf7ae560973274e45ed13e9f10e500f56603a5daf1f71eb9c809d0cc6940b0"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/incubation/galvanic_essence.json"
+hash = "05bb3a1ca2f3ca9daa8f4a1a3fecad089648c0bf97ed04a580448895a6bf0520"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/acacia_sapling.json"
@@ -313,8 +321,12 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/warding_essence.jso
 hash = "ede53ea642664e7ab70d559257b0462cb58d7ba1388a8053b323959f8f77a70a"
 
 [[files]]
+file = "kubejs/server_scripts/craftworks_chapters.js"
+hash = "e7f3199f4bacece01467ac1274b0f6bfd7d23e5a4364f91bf19d4f5fa6658b47"
+
+[[files]]
 file = "kubejs/server_scripts/decomposing.js"
-hash = "c8f39490b20143666d8bc65fb5e9172fa9dcae863bdb519c24860105fb295589"
+hash = "d18c6013cc6d4c8768c24742454f7e3c2b6477f36af492b6f972635742779cf9"
 
 [[files]]
 file = "kubejs/server_scripts/generators.js"

@@ -1,0 +1,42 @@
+{
+  "restrictions": {
+    "preventPickup": false,
+    "dropFromInventory": false,
+    "preventCraft": true,
+    "hideInJei": false,
+    "preventTransfer": false,
+    "preventTravel": false
+  },
+  "recipes": [
+    "theurgy:crafting/shaped/sal_ammoniac_accumulator",
+    "theurgy:crafting/shaped/sal_ammoniac_tank",
+    "theurgy:crafting/shaped/liquefaction_cauldron",
+    "theurgy:crafting/shaped/fermentation_vat",
+    "theurgy:crafting/shaped/digestion_vat",
+    "theurgy:crafting/shaped/calcination_oven",
+    "theurgy:crafting/shaped/distiller",
+    "theurgy:crafting/shaped/mercury_catalyst",
+    "theurgy:crafting/shaped/mercury_capacitor",
+    "theurgy:crafting/shaped/mercury_flux_emitter",
+    "theurgy:crafting/shaped/logistics_mercury_flux_connector",
+    "theurgy:crafting/shaped/logistics_connector_node",
+    "theurgy:crafting/shaped/logistics_item_extractor",
+    "theurgy:crafting/shaped/logistics_item_inserter",
+    "theurgy:crafting/shaped/logistics_fluid_extractor",
+    "theurgy:crafting/shaped/logistics_fluid_inserter",
+    "theurgy:crafting/shaped/logistics_nexus",
+    "theurgy:crafting/shaped/logistics_capability_probe",
+    "theurgy:crafting/shaped/logistics_capability_proxy",
+    "theurgy:crafting/shapeless/logistics_item_extractor_from_inserter",
+    "theurgy:crafting/shapeless/logistics_item_inserter_from_extractor",
+    "theurgy:crafting/shaped/reformation_result_pedestal",
+    "theurgy:crafting/shaped/reformation_source_pedestal",
+    "theurgy:crafting/shaped/reformation_target_pedestal",
+    "theurgy:crafting/shaped/incubator",
+    "theurgy:crafting/shaped/incubator_mercury_vessel",
+    "theurgy:crafting/shaped/incubator_salt_vessel",
+    "theurgy:crafting/shaped/incubator_sulfur_vessel",
+    "theurgy:crafting/shaped/pyromantic_brazier",
+    "mechanicalmasteryreborn:incubation/galvanic_essence"
+  ]
+}

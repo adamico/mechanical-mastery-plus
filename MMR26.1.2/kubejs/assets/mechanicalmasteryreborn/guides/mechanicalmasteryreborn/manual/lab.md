@@ -18,7 +18,8 @@ your team only while its challenge is played.
 
 For now the lab offers two, and the others show as coming later:
 
-- **Energy**: your generators give no energy.
+- **Energy**: your generators give no energy. Starting it opens Theurgy's chain up to the Galvanic Essence, its
+  last step.
 - **Money**: your sales to the Shop pay half, and the money your team had when it started is set aside until
   the challenge ends, when it all comes back, with whatever you earned meanwhile. Starting it opens the
   challenge's Offers in the Shop for good, among them the Permits you buy to sell Transmuted Essences and to buy
