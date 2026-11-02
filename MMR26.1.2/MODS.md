@@ -17,7 +17,7 @@ The suite, taken as released CurseForge jars:
 The rest of 0.0.1:
 
 - **Theurgy**: alchemy, the path to the Galvanic Essence.
-- **Chapters**: research locks. A team's finished research is a stage, and recipes wait on it.
+- **Chapters**: challenge locks. A challenge a team has started is a stage, and its chain waits on it (ADR 0007).
 - **Skyblock Builder**: the island start, an island per team, and the void Nether and End.
 - **Default World Type**: makes Skyblock Builder's world type the one a new world picks.
 - **GuideME**: the Manual, the pack's in-game book on how to build and work the companion mod's blocks, with 3D scenes. Holding G on a part's tooltip opens its page.
