@@ -32,7 +32,9 @@ final class WorksTabContents {
                 event.accept(Essences.item(essence));
             }
         }
-        event.accept(Recycler.CORE_ITEM.get());
+        for (int tier = 1; tier <= Recycler.TIERS; tier++) {
+            event.accept(Recycler.coreItem(tier));
+        }
         event.accept(Recycler.HAND_DRIVE_ITEM.get());
         event.accept(Recycler.FE_DRIVE_ITEM.get());
         event.accept(Recycler.INPUT_ITEM.get());

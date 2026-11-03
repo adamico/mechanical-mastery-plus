@@ -20,7 +20,7 @@ by hand. You build it block by block, from parts made on a Craftworks Assembler.
   <Block id="recycler_casing" x="0" z="2" p:place="south_west" />
   <Block id="recycler_casing" x="1" z="2" p:place="south" />
   <Block id="recycler_casing" x="2" z="1" p:place="east" />
-  <BlockAnnotation x="1" z="0" color="#ffd84a">**Core**, facing out: it holds the work, and its tier sets how well the Recycler runs.</BlockAnnotation>
+  <BlockAnnotation x="1" z="0" color="#ffd84a">**Core**, facing out: it holds the work, and its tier sets how fast the Recycler runs.</BlockAnnotation>
   <BlockAnnotation x="2" z="0" color="#4ad8ff">**Output**: the first, read before the other.</BlockAnnotation>
   <BlockAnnotation x="0" z="0" color="#4ad8ff">**Output**: the second. Each output holds three kinds of item.</BlockAnnotation>
   <BlockAnnotation x="1" z="1" color="#7cff4a">**Input**: essence, or an item to recycle, goes in here.</BlockAnnotation>
@@ -47,7 +47,8 @@ Each place must belong to that core alone: two Recyclers can't share a part. A R
 holding any other block, is incomplete and does nothing. Jade says what it lacks.
 
 A Recycler may have more floors, each a full 3x3 of parts, up to as many floors in all as its core's tier. A
-tier-1 core has one.
+tier-1 core has one. To upgrade a Recycler, break its core and place one of a higher tier where it stood: the rest
+of the 3x3 stays as it is.
 
 ## Outputs
 
@@ -65,4 +66,5 @@ Jade says when it stops, until its outputs are emptied.
 
 Put essence, or any other item to recycle, into an [input](input.md), and turn a [drive](hand_drive.md). After
 enough turns the core decomposes or recycles one, and the outputs fill. Jade, on the core, shows what it holds
-and how many turns are left. More drives turn it faster, so players on more drives run a Recycler faster.
+and how many turns are left. More drives turn it faster, so players on more drives run a Recycler faster, and a
+higher [core](core.md) needs fewer turns.

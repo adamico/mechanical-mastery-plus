@@ -104,7 +104,7 @@ final class RecyclerTests {
     private static void decomposes(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         build.expectAdvancedMix();
         helper.assertTrue(build.core().held().isEmpty(), "the core still holds " + build.core().held());
         helper.succeed();
@@ -113,9 +113,9 @@ final class RecyclerTests {
     private static void partTurned(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS - 1);
+        build.turn(ServerConfig.turnsOf(1) - 1);
         helper.assertTrue(build.outputsEmpty(), "a Recycler decomposed one turn short");
-        helper.assertValueEqual(build.core().turns(), RecyclerCoreBlockEntity.TURNS - 1, "the turns done");
+        helper.assertValueEqual(build.core().turns(), ServerConfig.turnsOf(1) - 1, "the turns done");
         helper.succeed();
     }
 
@@ -124,7 +124,7 @@ final class RecyclerTests {
         var build = RecyclerBuild.standard(helper);
         helper.assertValueEqual(build.core().turn(), RecyclerCoreBlockEntity.Turn.STOPPED, "a turn of an empty Recycler");
         build.feed(1);
-        for (int i = 1; i < RecyclerCoreBlockEntity.TURNS; i++) {
+        for (int i = 1; i < ServerConfig.turnsOf(1); i++) {
             helper.assertValueEqual(build.core().turn(), RecyclerCoreBlockEntity.Turn.COUNTED, "turn " + i);
         }
         helper.assertValueEqual(build.core().turn(), RecyclerCoreBlockEntity.Turn.WORKED, "the last turn");
@@ -149,7 +149,7 @@ final class RecyclerTests {
             build.place((Integer) changes[i], (Block) changes[i + 1]);
         }
         helper.assertValueEqual(build.core().status(), Status.INCOMPLETE, "the Recycler's status");
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         helper.assertValueEqual(build.core().turns(), 0, "the turns an incomplete Recycler counted");
         helper.assertTrue(build.outputsEmpty(), "an incomplete Recycler decomposed");
         helper.succeed();
@@ -169,7 +169,7 @@ final class RecyclerTests {
         var east = RecyclerBuild.build(helper, RecyclerBuild.CORE.east(3), Direction.SOUTH, RecyclerBuild.STANDARD);
         for (var build : List.of(west, east)) {
             build.feed(1);
-            build.turn(RecyclerCoreBlockEntity.TURNS);
+            build.turn(ServerConfig.turnsOf(1));
             build.expectAdvancedMix();
         }
         helper.succeed();
@@ -186,7 +186,7 @@ final class RecyclerTests {
         helper.setBlock(second.below(), Blocks.HOPPER);
         helper.succeedWhen(() -> {
             if (!build.core().held().isEmpty() && build.outputsEmpty() && build.core().turns() == 0) {
-                build.turn(RecyclerCoreBlockEntity.TURNS);
+                build.turn(ServerConfig.turnsOf(1));
             }
             for (int i = 0; i < RecyclerBuild.ADVANCED_MIX.size(); i++) {
                 BlockPos hopper = (i < 3 ? first : second).below();
@@ -204,7 +204,7 @@ final class RecyclerTests {
         helper.assertValueEqual(build.output(0), RecyclerBuild.CORE.north().west(), "the first output of a core facing south");
         helper.assertValueEqual(build.output(1), RecyclerBuild.CORE.east(), "the second output of a core facing south");
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         build.expectAdvancedMix();
         helper.succeed();
     }
@@ -216,7 +216,7 @@ final class RecyclerTests {
         helper.assertValueEqual(build.output(0), RecyclerBuild.CORE.south(), "the first output of a core facing east");
         helper.assertValueEqual(build.output(1), RecyclerBuild.CORE.south().west(), "the second output of a core facing east");
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         build.expectAdvancedMix();
         helper.succeed();
     }
@@ -228,7 +228,7 @@ final class RecyclerTests {
         helper.assertValueEqual(build.output(0), RecyclerBuild.CORE.west(), "the first output of a core facing south");
         helper.assertValueEqual(build.output(1), RecyclerBuild.CORE.north(), "the output in the centre");
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         build.expectAdvancedMix();
         helper.succeed();
     }
@@ -236,10 +236,10 @@ final class RecyclerTests {
     private static void noRoom(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.feed(2);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         // The buckets don't stack, so the second mix doesn't fit beside the first.
         helper.assertValueEqual(build.core().status(), Status.NO_ROOM, "the status with the first mix still on the outputs");
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         helper.assertValueEqual(build.core().turns(), 0, "the turns counted with no room for the mix");
         helper.assertValueEqual(build.core().held().getCount(), 1, "the essence left in the core");
         build.expectAdvancedMix();
@@ -253,7 +253,7 @@ final class RecyclerTests {
         build.place(1, Recycler.CASING.get());
         build.feed(1);
         helper.assertValueEqual(build.core().status(), Status.READY, "the status with three positions for a mix of five");
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         helper.assertTrue(build.core().held().isEmpty(), "the core still holds " + build.core().held());
         build.expectSomeOfTheMix(RecyclerBuild.ADVANCED_MIX, RecyclerLayout.POSITIONS_PER_OUTPUT);
         helper.succeed();
@@ -268,7 +268,7 @@ final class RecyclerTests {
         build.place(1, Blocks.AIR);
         build.place(1, Recycler.CASING.get());
         build.feed(11);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         for (int i = 0; i < 10; i++) {
             int held = i % RecyclerLayout.POSITIONS_PER_OUTPUT;
             while (build.outputEntity(0).item(held).isEmpty()) {
@@ -276,7 +276,7 @@ final class RecyclerTests {
             }
             build.take(held);
             helper.assertValueEqual(build.core().status(), Status.READY, "the status with a position emptied, " + i);
-            build.turn(RecyclerCoreBlockEntity.TURNS);
+            build.turn(ServerConfig.turnsOf(1));
         }
         helper.assertTrue(build.core().held().isEmpty(), "the core still holds " + build.core().held());
         helper.succeed();
@@ -292,13 +292,13 @@ final class RecyclerTests {
         build.place(1, Blocks.AIR);
         build.place(1, Recycler.CASING.get());
         build.feed(2);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         build.take(2);
         Status first = build.core().status();
         for (int i = 0; i < 20; i++) {
             helper.assertValueEqual(build.core().status(), first, "the status asked again, " + i);
         }
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         helper.assertValueEqual(build.core().held().isEmpty(), first == Status.READY, "the second essence used, the status having been " + first);
         helper.succeed();
     }
@@ -312,12 +312,12 @@ final class RecyclerTests {
         build.place(2, Recycler.OUTPUT.get());
         var regular = new ItemStack(Essences.item(Essence.REGULAR));
         build.feed(regular.copy());
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         build.take(0);
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         build.feed(regular.copy());
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         build.expectOutputs(new ItemStack(Items.PISTON), new ItemStack(Items.OAK_PLANKS, 16), new ItemStack(Items.HOPPER),
                 new ItemStack(Items.COMPARATOR), new ItemStack(Items.WATER_BUCKET), new ItemStack(Items.LAVA_BUCKET),
                 new ItemStack(Items.COBBLESTONE, 4));
@@ -327,7 +327,7 @@ final class RecyclerTests {
     private static void rightClickTakes(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         BlockPos output = build.output(0);
         Direction facing = helper.getBlockState(output).getValue(RecyclerOutputBlock.FACING);
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
@@ -354,7 +354,7 @@ final class RecyclerTests {
     private static void takeBack(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.feed(3);
-        build.turn(RecyclerCoreBlockEntity.TURNS - 1);
+        build.turn(ServerConfig.turnsOf(1) - 1);
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
         helper.useBlock(RecyclerBuild.CORE, player);
         helper.assertValueEqual(player.getInventory().countItem(Essences.item(Essence.ADVANCED)), 3, "the essence taken back");
@@ -366,10 +366,10 @@ final class RecyclerTests {
     private static void takeBackRestarts(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS - 1);
+        build.turn(ServerConfig.turnsOf(1) - 1);
         helper.useBlock(RecyclerBuild.CORE, helper.makeMockPlayer(GameType.SURVIVAL));
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS - 1);
+        build.turn(ServerConfig.turnsOf(1) - 1);
         helper.assertTrue(build.outputsEmpty(), "a Recycler decomposed with turns given up by a take-back");
         build.turn(1);
         build.expectAdvancedMix();
@@ -438,7 +438,7 @@ final class RecyclerTests {
         build.feed(1);
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
         long start = helper.getTick();
-        int expected = (RecyclerCoreBlockEntity.TURNS / drives - 1) * HandDriveBlock.CAP;
+        int expected = (ServerConfig.turnsOf(1) / drives - 1) * HandDriveBlock.CAP;
         helper.onEachTick(() -> {
             long elapsed = helper.getTick() - start;
             if (elapsed < expected) {
@@ -520,7 +520,7 @@ final class RecyclerTests {
         var team = TestTeams.claim(helper);
         var build = RecyclerBuild.standard(helper);
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         var log = DecomposeLog.get(helper.getLevel().getServer());
         helper.assertValueEqual(log.count(team, Essence.ADVANCED, DecomposeLog.Way.RECYCLER), 1L,
                 "the Advanced essence the island's team decomposed on a Recycler");

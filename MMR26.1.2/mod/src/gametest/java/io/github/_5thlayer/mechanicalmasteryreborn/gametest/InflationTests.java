@@ -15,7 +15,6 @@ import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
-import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -126,7 +125,7 @@ final class InflationTests {
         start(helper, team);
         var build = RecyclerBuild.standard(helper);
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         expect(helper, team, 0, 1, 0, "after a decompose on a Recycler");
         decomposeByHand(helper, team);
         expect(helper, team, 0, 2, 0, "after a decompose by hand too");

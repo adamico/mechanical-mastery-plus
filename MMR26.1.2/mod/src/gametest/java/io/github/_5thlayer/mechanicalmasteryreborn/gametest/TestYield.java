@@ -22,16 +22,16 @@ final class TestYield {
 
     /** From the server's start, a tier-1 core and decomposing by hand return everything. */
     static void useFull() {
-        NeoForge.EVENT_BUS.addListener((ServerStartedEvent event) -> ServerConfig.TIER_1_YIELD.set(FULL));
+        NeoForge.EVENT_BUS.addListener((ServerStartedEvent event) -> ServerConfig.YIELD.set(FULL));
     }
 
     /** Runs {@code body} at a tier-1 yield of {@code yield}, then puts the full one back. */
     static void at(double yield, Runnable body) {
-        ServerConfig.TIER_1_YIELD.set(yield);
+        ServerConfig.YIELD.set(yield);
         try {
             body.run();
         } finally {
-            ServerConfig.TIER_1_YIELD.set(FULL);
+            ServerConfig.YIELD.set(FULL);
         }
     }
 }

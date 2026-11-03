@@ -95,6 +95,11 @@ final class RecyclerBuild {
         helper.setBlock(pos, state);
     }
 
+    /** Puts a core of {@code tier} in the old core's place, facing the same way, as a player swaps one in. */
+    void swapCore(int tier) {
+        helper.setBlock(core, Recycler.core(tier).defaultBlockState().setValue(RecyclerCoreBlock.FACING, front));
+    }
+
     RecyclerCoreBlockEntity core() {
         return helper.getBlockEntity(core, RecyclerCoreBlockEntity.class);
     }

@@ -3,7 +3,9 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.recycler;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -28,7 +30,9 @@ import net.minecraft.world.phys.BlockHitResult;
 /**
  * A Recycler's core, in the middle of its 3x3's front edge (the line's glossary: Core). Its front faces the player
  * who placed it, out of the Recycler, whose 3x3 lies behind it, and the order its outputs are read in starts from
- * there ({@link RecyclerLayout}). Tier 1, the first core; its tier sets how many turns a decompose takes. Placed or
+ * there ({@link RecyclerLayout}). Its tier, from 1 to {@link Recycler#TIERS}, sets how many turns a decompose takes;
+ * a core of another tier placed where it stood takes its place in the same
+ * frame. Placed or
  * removed, it sets the place of every part in its 3x3.
  * An empty-hand right-click takes back the whole stack it holds, into the player's inventory, and gives up the
  * work under way; a click on an empty core, or with an item in hand, passes.
@@ -37,11 +41,21 @@ public final class RecyclerCoreBlock extends BaseEntityBlock {
 
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    private static final MapCodec<RecyclerCoreBlock> CODEC = simpleCodec(RecyclerCoreBlock::new);
+    private static final MapCodec<RecyclerCoreBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Codec.intRange(1, Recycler.TIERS).fieldOf("tier").forGetter(RecyclerCoreBlock::tier), propertiesCodec())
+            .apply(instance, RecyclerCoreBlock::new));
 
-    public RecyclerCoreBlock(Properties properties) {
+    private final int tier;
+
+    public RecyclerCoreBlock(int tier, Properties properties) {
         super(properties);
+        this.tier = tier;
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
+    }
+
+    /** The core's tier, from 1 to {@link Recycler#TIERS}. */
+    public int tier() {
+        return tier;
     }
 
     @Override

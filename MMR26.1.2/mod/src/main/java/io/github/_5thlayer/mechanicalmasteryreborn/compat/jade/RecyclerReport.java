@@ -31,7 +31,7 @@ import snownee.jade.api.view.ProgressView;
 
 /**
  * What the server tells Jade about a Recycler core: its {@link Status}, its {@link Work}, the turns done toward
- * the decompose or recycle under way, and what it holds. {@link Lines} words it on the client, apart so that a dedicated server never
+ * the decompose or recycle under way and the turns its tier takes, and what it holds. {@link Lines} words it on the client, apart so that a dedicated server never
  * loads Jade's drawing. A drive shows its core's report too ({@link #DRIVE}): it has no block entity, so the
  * server finds its core.
  */
@@ -46,10 +46,11 @@ final class RecyclerReport {
             STATUS_CODEC, Data::status,
             WORK_CODEC, Data::work,
             ByteBufCodecs.VAR_INT, Data::turns,
+            ByteBufCodecs.VAR_INT, Data::turnsPerWork,
             ItemStack.OPTIONAL_STREAM_CODEC, Data::held,
             Data::new);
 
-    record Data(Status status, Work work, int turns, ItemStack held) {
+    record Data(Status status, Work work, int turns, int turnsPerWork, ItemStack held) {
     }
 
     static final MachineReport<RecyclerCoreBlockEntity, Data> REPORT = new MachineReport<>(UID, RecyclerCoreBlockEntity.class,
@@ -59,7 +60,7 @@ final class RecyclerReport {
     static final DriveReport DRIVE = new DriveReport();
 
     private static Data read(RecyclerCoreBlockEntity core) {
-        return new Data(core.status(), core.work(), core.turns(), core.held());
+        return new Data(core.status(), core.work(), core.turns(), core.turnsPerWork(), core.held());
     }
 
     static final class DriveReport implements StreamServerDataProvider<BlockAccessor, Data> {
@@ -116,8 +117,8 @@ final class RecyclerReport {
             }
             Component status = Component.translatable("mechanicalmasteryreborn.jade.recycler." + report.status().name().toLowerCase(Locale.ROOT));
             if (report.status() == Status.READY) {
-                Component turns = Component.translatable("mechanicalmasteryreborn.jade.recycler.turns", report.turns(), RecyclerCoreBlockEntity.TURNS);
-                tooltip.add(JadeUI.progress(new ProgressView(ProgressView.Part.of((float) report.turns() / RecyclerCoreBlockEntity.TURNS), turns,
+                Component turns = Component.translatable("mechanicalmasteryreborn.jade.recycler.turns", report.turns(), report.turnsPerWork());
+                tooltip.add(JadeUI.progress(new ProgressView(ProgressView.Part.of((float) report.turns() / report.turnsPerWork()), turns,
                         JadeUI.progressStyle(), BoxStyle.nestedBox())));
             } else {
                 tooltip.add(status.copy().withStyle(ChatFormatting.RED));

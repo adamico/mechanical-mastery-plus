@@ -13,7 +13,6 @@ import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
-import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -92,7 +91,7 @@ final class CodWakeTests {
         empty(helper, OTHER_COD);
         var build = RecyclerBuild.standard(helper);
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(ServerConfig.turnsOf(1));
         helper.assertTrue(state(helper).isAwake(team), "the team whose Recycler decomposed is still dormant");
         helper.assertFalse(state(helper).isAwake(other), "another team woke");
         helper.runAtTickTime(waking() + MARGIN, () -> {

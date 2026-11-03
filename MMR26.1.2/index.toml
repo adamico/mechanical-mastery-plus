@@ -62,7 +62,19 @@ hash = "fabbec9760f81a428c31df3684524bc382890e5008ca87447d2f6e0077305be3"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/core.md"
-hash = "3d893592ceec814abf3cfb50b6a89a4618607033037c8c583658d003af9a859c"
+hash = "20e9edaf85622742713690eb83fb7ed581d781cacb8e6f957a876d2474420af6"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/core_2.md"
+hash = "db58d6f65d9bbe680c87cc2ccf79fa33ed10bd69857362e7cee45efa54d757fa"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/core_3.md"
+hash = "c942e0f657dc72d337d7ccecab6d03189a90d83aa7d39d2263ab4f83e893db9b"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/core_4.md"
+hash = "64972d5f15e928c6bb91f5a328e383f7a03147781677ebf19ecd72944eecc972"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/fe_drive.md"
@@ -70,11 +82,11 @@ hash = "cb54a7a0064460d25216780e76b08430bebc6f0bf01bf3e9a2a91935d52872f0"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/hand_drive.md"
-hash = "e6b18971e61c664dc5e98125ebddacfc64486ebf3d59ce87099c71afa17fdefe"
+hash = "a9457513a775ac5936a70fc7c7c3a37a60e77c87f6a35ccc1ba8c205639648fe"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/index.md"
-hash = "131225aa3e95a6765d077535ba00a308a246d1fa792f92817c7a5de493dc3326"
+hash = "e58bf798985f9176393ac1d4e266277fd80baa5af900cd4b4227bf3319d35b1c"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/input.md"
@@ -326,7 +338,7 @@ hash = "e7f3199f4bacece01467ac1274b0f6bfd7d23e5a4364f91bf19d4f5fa6658b47"
 
 [[files]]
 file = "kubejs/server_scripts/decomposing.js"
-hash = "79f5dc0d31cceb07247ac63735928f0875baadb7b198bed6dee83e13888cf5dd"
+hash = "8e66edce4a1f1f82a766bcbfe5592fe76be25808b475ac1f4b9051fa01305c8f"
 
 [[files]]
 file = "kubejs/server_scripts/generators.js"

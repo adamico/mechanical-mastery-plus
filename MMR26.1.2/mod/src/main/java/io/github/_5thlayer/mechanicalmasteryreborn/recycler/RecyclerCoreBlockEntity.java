@@ -49,9 +49,10 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * A Recycler's core: its one input buffer, the turns its drives have delivered, and the work. Each turn
- * counts only while the Recycler can work what it holds; the {@link #TURNS}th decomposes one recipe's worth
+ * counts only while the Recycler can work what it holds; the last of its tier's turns ({@link ServerConfig#turnsOf})
+ * decomposes one recipe's worth
  * of an essence into its mix, or recycles one of anything else into what made it ({@link Recycling}), onto the
- * outputs. Either returns the core's {@link Yield} of the full amounts ({@link ServerConfig}). It needs no power
+ * outputs. Either returns the {@link Yield} of the full amounts, the same on every core ({@link ServerConfig}). It needs no power
  * and no ticking: drives turn it.
  *
  * <p>Each kind, in the order the work names them, lands on the first position already holding its item with room for
@@ -68,11 +69,6 @@ import org.jspecify.annotations.Nullable;
  * client is sent what it holds, so a click on an empty core can pass there too.
  */
 public final class RecyclerCoreBlockEntity extends BlockEntity {
-
-    /** The first core's tier. */
-    public static final int TIER = 1;
-    /** Turns a decompose or a recycle takes on a tier-1 core. */
-    public static final int TURNS = 8;
 
     private static final String BUFFER_KEY = "buffer";
     private static final String TURNS_KEY = "turns";
@@ -112,6 +108,16 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
 
     public RecyclerCoreBlockEntity(BlockPos pos, BlockState state) {
         super(Recycler.CORE_ENTITY.get(), pos, state);
+    }
+
+    /** This core's tier. */
+    public int tier() {
+        return ((RecyclerCoreBlock) getBlockState().getBlock()).tier();
+    }
+
+    /** The turns a decompose or a recycle takes on this core. */
+    public int turnsPerWork() {
+        return ServerConfig.turnsOf(tier());
     }
 
     /** The buffer as its inputs reach it: insert only, and only an essence a recipe decomposes or what recycles. */
@@ -215,7 +221,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         }
         turns++;
         setChanged();
-        if (turns < TURNS) {
+        if (turns < turnsPerWork()) {
             return Turn.COUNTED;
         }
         turns = 0;
@@ -227,7 +233,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
     private void work(ServerLevel server, Plan plan) {
         ItemStack held = held();
         buffer.set(0, ItemResource.of(held), held.getCount() - plan.take());
-        double yield = ServerConfig.yieldOf(TIER);
+        double yield = ServerConfig.yield();
         for (Landing landing : plan.landings()) {
             int count = Yield.roll(landing.kind().amount(), yield, server.getRandom()::nextDouble);
             if (count > 0) {
@@ -274,7 +280,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
             }
             full = into.stream().map(share -> new Share<>(new ItemStackTemplate(share.item()), share.amount())).toList();
         }
-        double yield = ServerConfig.yieldOf(TIER);
+        double yield = ServerConfig.yield();
         List<ItemStack> most = full.stream()
                 .map(share -> share.item().create().copyWithCount(Yield.most(share.amount(), yield))).toList();
         int positions = outputs.size() * RecyclerLayout.POSITIONS_PER_OUTPUT;

@@ -18,7 +18,6 @@ import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingTable;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Yield;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
-import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
@@ -27,8 +26,8 @@ import net.minecraft.world.item.ItemStack;
 /**
  * Puts the Recycler's work in EMI, in two tabs whose workstation is its core: {@code mechanicalmasteryreborn:decomposing}
  * recipes, and what every item a recipe makes recycles into, from the table the server sent ({@link RecyclingTable}).
- * An item that recycles into itself has no entry. Each result shows its full amount, with the chance the tier-1
- * yield gives of it ({@link ServerConfig}): a full amount of four at a quarter is four at 25%. A mix too long for
+ * An item that recycles into itself has no entry. Each result shows its full amount, with the chance the yield,
+ * the same on every core, gives of it ({@link ServerConfig}): a full amount of four at a quarter is four at 25%. A mix too long for
  * one page is split across several ({@link RecyclerEmiPages}). EMI has never heard of either, so
  * without a category they are in no viewer at all.
  *
@@ -45,9 +44,12 @@ public final class RecyclerEmiPlugin implements EmiPlugin {
         var recycling = new EmiRecipeCategory(id("recycling"), core);
         registry.addCategory(decomposing);
         registry.addCategory(recycling);
-        registry.addWorkstation(decomposing, core);
-        registry.addWorkstation(recycling, core);
-        double yield = ServerConfig.yieldOf(RecyclerCoreBlockEntity.TIER);
+        for (int tier = 1; tier <= Recycler.TIERS; tier++) {
+            EmiStack workstation = EmiStack.of(Recycler.coreItem(tier));
+            registry.addWorkstation(decomposing, workstation);
+            registry.addWorkstation(recycling, workstation);
+        }
+        double yield = ServerConfig.yield();
         for (var holder : registry.getRecipeMap().byType(Decomposing.TYPE.get())) {
             var recipe = holder.value();
             addPaged(registry, decomposing, holder.id().identifier(), NeoForgeEmiIngredient.of(recipe.ingredient()),
