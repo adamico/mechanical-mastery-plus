@@ -39,7 +39,10 @@ import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jspecify.annotations.Nullable;
 
 /**
- * A placed C.O.D. Placed, its reserve holds a stack of Advanced essence, so a new island has no wait. While
+ * A placed C.O.D. It makes essence of its team's {@link TeamState#tier tier}, the highest the team hasn't blocked,
+ * and nothing once all four are. Placed, its reserve holds a stack of Advanced essence, so a new island has no wait.
+ * When the tier drops, what the reserve still holds stays for the team to take, and the new tier goes onto the pile
+ * on its top, as an awake C.O.D.'s overflow does, until the reserve is emptied. While
  * dormant it makes one more each {@link ServerConfig#codDormantInterval interval} its reserve holds less than
  * a stack, and nothing while it holds one: a steady pace, never an unlimited supply, and it puts nothing out of
  * itself. What it makes while dormant never counts toward Inflation.
@@ -56,7 +59,7 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
     private static final String RESERVE_KEY = "reserve";
     private static final String TICKS_TOWARD_NEXT_KEY = "ticks_toward_next";
 
-    private final CodReserve reserve = new CodReserve(() -> Essences.item(Essence.ADVANCED), this::setChanged);
+    private final CodReserve reserve = new CodReserve(this::setChanged);
     /**
      * Ticks toward the next essence; none while the reserve holds a stack, so an emptied one starts afresh. Saved
      * whenever anything else marks C.O.D. changed, as making an essence does, rather than every tick.
@@ -64,6 +67,8 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
     private int ticksTowardNext;
     /** Whether its team is awake, as of its last tick; the team's state holds it, so it is never saved here. */
     private boolean awake;
+    /** The tier it makes, as of its last tick; the team's state holds it, so it is never saved here. */
+    private Optional<Essence> tier = Optional.of(Essence.ADVANCED);
     /** The team whose island it stands on, found on its first tick: a C.O.D. never moves. */
     private @Nullable UUID team;
     /** What takes items on each side, found once it first pushes. */
@@ -71,7 +76,7 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
 
     public CodBlockEntity(BlockPos pos, BlockState state) {
         super(Cod.BLOCK_ENTITY.get(), pos, state);
-        reserve.fill();
+        reserve.fill(Essences.item(Essence.ADVANCED));
     }
 
     /** The reserve, as automation and the menu reach it: extract only. */
@@ -83,9 +88,17 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         return reserve;
     }
 
-    /** Whether C.O.D. is making essence: always once awake, and while dormant only while its reserve holds less than a stack. */
+    /** The tier it makes, the highest its team hasn't blocked; none once all four are. */
+    public Optional<Essence> tier() {
+        return tier;
+    }
+
+    /**
+     * Whether C.O.D. is making essence: never once all four tiers are blocked; otherwise always once awake, and while
+     * dormant only until its reserve holds a stack of its tier, so what an earlier tier left still lets it spill.
+     */
     public boolean isMaking() {
-        return awake || !reserve.isFull();
+        return tier.isPresent() && (awake || !reserve.isFullOf(Essences.item(tier.get())));
     }
 
     /**
@@ -93,7 +106,7 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
      * beside it, and its top is covered or its pile holds a stack. It still counts each one as made.
      */
     public boolean isBlocked() {
-        return awake && reserve.isFull() && !canSpill();
+        return awake && tier.isPresent() && reserve.isFullFor(Essences.item(tier.get())) && !canSpill();
     }
 
     /**
@@ -136,6 +149,7 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         UUID team = cod.team;
         TeamState teams = TeamState.get(server.getServer());
         cod.awake = teams.isAwake(team);
+        cod.tier = teams.tier(team);
         if (cod.awake) {
             cod.push(server);
         }
@@ -146,7 +160,7 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
 
     /** Counts a tick toward the next essence, and says whether it made one. */
     private boolean tick(int interval) {
-        if (!awake && reserve.isFull()) {
+        if (!isMaking()) {
             ticksTowardNext = 0;
             return false;
         }
@@ -154,10 +168,11 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
             return false;
         }
         ticksTowardNext = 0;
-        if (!reserve.isFull()) {
-            reserve.makeOne();
+        Item essence = Essences.item(tier.orElseThrow());
+        if (!reserve.isFullFor(essence)) {
+            reserve.makeOne(essence);
         } else {
-            spill();
+            spill(essence);
         }
         return true;
     }
@@ -179,20 +194,23 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     /** Drops one essence onto the pile on top, if it {@link #canSpill can}. */
-    private void spill() {
+    private void spill(Item essence) {
         if (level != null && canSpill()) {
             level.addFreshEntity(new ItemEntity(level, worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5,
-                    new ItemStack(Essences.item(Essence.ADVANCED)), 0, 0, 0));
+                    new ItemStack(essence), 0, 0, 0));
         }
     }
 
-    /** Whether an essence can drop onto the pile on top: no block stands there, and the pile holds less than a stack. */
+    /** Whether an essence can drop onto the pile on top: no block stands there, and the pile holds less than a stack of its tier. */
     private boolean canSpill() {
         BlockPos top = worldPosition.above();
         if (level == null || !level.getBlockState(top).getCollisionShape(level, top).isEmpty()) {
             return false;
         }
-        Item essence = Essences.item(Essence.ADVANCED);
+        if (tier.isEmpty()) {
+            return false;
+        }
+        Item essence = Essences.item(tier.get());
         int piled = 0;
         for (ItemEntity item : level.getEntitiesOfClass(ItemEntity.class, new AABB(top).inflate(1, 0.5, 1))) {
             piled += item.getItem().is(essence) ? item.getItem().getCount() : 0;

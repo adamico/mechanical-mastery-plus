@@ -11,7 +11,7 @@ import net.minecraft.network.codec.StreamCodec;
 
 /**
  * A team's Inflation while it plays a challenge: when the challenge began, in the overworld's game time, and the
- * Advanced essence its awake C.O.D. has made and the team has decomposed, by hand or on a Recycler, since then. The
+ * essence of the tier C.O.D. makes that its awake C.O.D. has made and the team has decomposed, by hand or on a Recycler, since then. The
  * excess is the one less the other, never below zero. {@link TeamState} keeps one per team that plays a challenge
  * and none otherwise; taking a fresh one, {@link #startingAt(long)}, starts the count again.
  */
