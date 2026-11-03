@@ -228,9 +228,7 @@ public final class Recycling {
         } catch (RuntimeException unreadable) {
             return Optional.empty();
         }
-        Optional<ItemStackTemplate> product = json.has("result") ? decode(ItemStackTemplate.CODEC, json.get("result"), ops)
-                : json.has("results") && json.get("results").isJsonArray() && !json.getAsJsonArray("results").isEmpty()
-                        ? decode(ItemStackTemplate.CODEC, json.getAsJsonArray("results").get(0), ops) : Optional.empty();
+        Optional<ItemStackTemplate> product = product(json, ops);
         if (product.isEmpty()) {
             return Optional.empty();
         }
@@ -265,6 +263,24 @@ public final class Recycling {
     private static boolean worn(Holder<Item> item) {
         var components = item.value().components();
         return components.has(DataComponents.MAX_DAMAGE) || components.has(DataComponents.EQUIPPABLE);
+    }
+
+    /**
+     * What {@code holder} makes, read as the rules read it, from its {@code result} or the first of its {@code results},
+     * if it can be read.
+     */
+    public static Optional<Item> made(RecipeHolder<?> holder, DynamicOps<JsonElement> ops) {
+        try {
+            return product(encode(holder.value(), ops).getAsJsonObject(), ops).map(ItemStackTemplate::item).map(Holder::value);
+        } catch (RuntimeException unreadable) {
+            return Optional.empty();
+        }
+    }
+
+    private static Optional<ItemStackTemplate> product(JsonObject json, DynamicOps<JsonElement> ops) {
+        return json.has("result") ? decode(ItemStackTemplate.CODEC, json.get("result"), ops)
+                : json.has("results") && json.get("results").isJsonArray() && !json.getAsJsonArray("results").isEmpty()
+                        ? decode(ItemStackTemplate.CODEC, json.getAsJsonArray("results").get(0), ops) : Optional.empty();
     }
 
     private static Optional<Item> firstItem(Ingredient ingredient) {
