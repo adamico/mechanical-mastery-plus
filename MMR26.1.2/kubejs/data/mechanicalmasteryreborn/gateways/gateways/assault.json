@@ -1,0 +1,55 @@
+{
+    "type": "gateways:endless",
+    "size": "large",
+    "color": "#7A3FA0",
+    "base_wave": {
+        "max_wave_time": 1200,
+        "setup_time": 200,
+        "entities": [
+            {
+                "type": "gateways:standard",
+                "count": 3,
+                "entity": "minecraft:zombie"
+            },
+            {
+                "type": "gateways:standard",
+                "count": 2,
+                "entity": "minecraft:skeleton"
+            }
+        ],
+        "modifiers": [
+            {
+                "type": "gateways:loot_table",
+                "loot_table": "mechanicalmasteryreborn:assault/rift_shard"
+            }
+        ],
+        "rewards": []
+    },
+    "modifiers": [
+        {
+            "application_mode": {
+                "type": "gateways:after_every_n_waves",
+                "max": 10,
+                "waves": 3
+            },
+            "entities": [
+                {
+                    "type": "gateways:standard",
+                    "entity": "minecraft:zombie"
+                }
+            ]
+        }
+    ],
+    "rules": {
+        "requires_nearby_player": false,
+        "leash_range": 160,
+        "follow_range_boost": 64,
+        "fail_on_out_of_bounds": false,
+        "allow_discarding": false
+    },
+    "spawn_algorithm": "gateways:inward_spiral",
+    "boss_event": {
+        "fog": false,
+        "mode": "name_plate"
+    }
+}

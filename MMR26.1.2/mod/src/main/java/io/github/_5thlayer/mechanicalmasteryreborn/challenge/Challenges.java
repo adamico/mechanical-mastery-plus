@@ -25,7 +25,8 @@ import org.slf4j.Logger;
  * Starting a team's challenge, by the handicap it chose at the lab, and ending, winning or resetting it. Each of the team's
  * players online hears vanilla's challenge fanfare when it starts, sees the challenge's name as a title with its cost
  * below, and reads both in chat, and is given the challenge's chain ({@link Chains}). The money handicap acts on the
- * team's Account as it starts, resets and ends.
+ * team's Account as it starts, resets and ends, and the protection handicap's {@link Assault} is sent as it starts and
+ * removed as it resets or ends.
  */
 public final class Challenges {
 
@@ -53,6 +54,9 @@ public final class Challenges {
         if (handicap == Handicap.MONEY) {
             MoneyHandicap.start(server, team);
         }
+        if (handicap == Handicap.PROTECTION) {
+            Assault.start(server, team);
+        }
         Component message = Component.translatable("mechanicalmasteryreborn.challenge.started",
                 name(handicap).withStyle(ChatFormatting.GOLD), cost(handicap)).withStyle(ChatFormatting.GRAY);
         Component title = title(handicap).withStyle(ChatFormatting.GOLD);
@@ -78,11 +82,15 @@ public final class Challenges {
     public static boolean end(MinecraftServer server, UUID team) {
         TeamState state = TeamState.get(server);
         boolean money = state.plays(team, Handicap.MONEY);
+        boolean protection = state.plays(team, Handicap.PROTECTION);
         if (!state.endChallenge(team)) {
             return false;
         }
         if (money) {
             MoneyHandicap.end(server, team);
+        }
+        if (protection) {
+            Assault.end(server, team);
         }
         return true;
     }
@@ -128,6 +136,9 @@ public final class Challenges {
         }
         if (state.plays(team, Handicap.MONEY)) {
             MoneyHandicap.reset(server, team);
+        }
+        if (state.plays(team, Handicap.PROTECTION)) {
+            Assault.end(server, team);
         }
         return true;
     }
