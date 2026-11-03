@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.mojang.logging.LogUtils;
+import dev.shadowsoffire.gateways.entity.EndlessGatewayEntity;
 import dev.shadowsoffire.gateways.entity.GatewayEntity;
 import dev.shadowsoffire.gateways.event.GateEvent;
 import dev.shadowsoffire.gateways.gate.GatewayRegistry;
@@ -47,22 +48,42 @@ public final class GatewaysGates implements Gates {
         var entity = gate.get().createEntity(level, player);
         entity.setPos(at.x, at.y, at.z);
         entity.getEntityData().set(GatewayEntity.WAVE, wave);
+        if (entity instanceof EndlessGatewayEntity endless && wave > 0) {
+            // The pause before the next wave is the reached wave's setup time, which Gateways notes only as a wave starts.
+            entity.getEntityData().set(EndlessGatewayEntity.SETUP_TIME, endless.getCurrentWave().setupTime());
+        }
         level.addFreshEntity(entity);
         entity.onGateCreated();
         return Optional.of(entity.getUUID());
     }
 
-    /** Reopens an Assault's gate that fails, for its timer, a mob lost or out of range, at the wave it had reached. */
     @Override
     public int wave(Entity gate) {
         return gate instanceof GatewayEntity gateway ? gateway.getWave() : 0;
     }
 
+    /**
+     * Reopens an Assault's gate that fails, for its timer, a mob lost or out of range, to play again the wave it had
+     * reached (Gateways counts a wave as it starts, so the gate reopens one behind it), notes each wave started for the
+     * team's bar, and moves the gate at a step.
+     */
     public static void register() {
         NeoForge.EVENT_BUS.addListener(GateEvent.Failed.class, event -> {
             GatewayEntity gate = event.getEntity();
             if (gate.level() instanceof ServerLevel level) {
-                Assault.reopen(level, gate.getUUID(), gate.position(), gate.getWave());
+                Assault.reopen(level, gate.getUUID(), gate.position(), Math.max(0, gate.getWave() - 1));
+            }
+        });
+        NeoForge.EVENT_BUS.addListener(GateEvent.WaveStarted.class, event -> {
+            GatewayEntity gate = event.getEntity();
+            if (gate.level() instanceof ServerLevel level) {
+                Assault.noteWave(level, gate.getUUID(), gate.getWave());
+            }
+        });
+        NeoForge.EVENT_BUS.addListener(GateEvent.WaveEnd.class, event -> {
+            GatewayEntity gate = event.getEntity();
+            if (gate.level() instanceof ServerLevel level) {
+                Assault.step(level, gate.getUUID(), gate.getWave());
             }
         });
     }

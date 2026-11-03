@@ -113,7 +113,8 @@ public final class AssaultAbsence {
         ServerPlayer summoner = Assault.summoner(server, level, team);
         List<UUID> gates = new ArrayList<>();
         for (AssaultState.Waiting gate : waiting) {
-            Vec3 at = gate.at().orElseGet(() -> free.isEmpty() ? Assault.gateAt(cod.get().pos(), Direction.EAST) : free.remove(0));
+            Vec3 at = Assault.gateAt(state, team)
+                    .orElseGet(() -> gate.at().orElseGet(() -> free.isEmpty() ? Assault.gateAt(cod.get().pos(), Direction.EAST) : free.remove(0)));
             Gates.get().open(level, at, summoner, gate.wave()).ifPresent(gates::add);
         }
         state.unpause(team, gates);

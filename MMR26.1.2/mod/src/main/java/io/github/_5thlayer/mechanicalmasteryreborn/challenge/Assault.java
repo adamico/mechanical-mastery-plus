@@ -16,6 +16,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.UUIDUtil;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -48,6 +49,8 @@ public final class Assault {
 
     /** How far off C.O.D. each platform's middle is. */
     public static final int OFFSET = 48;
+    /** Every how many waves the gate steps up, as {@code assault.json}'s step-ups and breathers do, and moves side. */
+    public static final int STEP = 5;
     /** How far the platform reaches from its middle each way: 7 by 7. */
     public static final int PLATFORM_RADIUS = 3;
     /** How far the bridge reaches each side of its middle: 3 wide. */
@@ -111,14 +114,14 @@ public final class Assault {
         BlockPos codPos = cod.get().pos();
         ServerPlayer summoner = summoner(server, level, team);
         List<BlockPos> built = new ArrayList<>();
-        List<UUID> gates = new ArrayList<>();
         for (Direction side : Direction.Plane.HORIZONTAL) {
             buildSide(level, codPos, side, built);
-            Gates.get().open(level, gateAt(codPos, side), summoner, 0).ifPresent(gates::add);
         }
-        state.putAssault(team, new AssaultState.Built(level.dimension(), built, gates));
+        Direction side = Direction.Plane.HORIZONTAL.getRandomDirection(level.getRandom());
+        List<UUID> gates = Gates.get().open(level, gateAt(codPos, side), summoner, 0).stream().toList();
+        state.putAssault(team, new AssaultState.Built(level.dimension(), built, gates, Optional.of(side), 0));
         AssaultExplosions.lift(server, team);
-        LOGGER.info("Sent team {} its Assault: {} blocks built, gates {}", team, built.size(), gates);
+        LOGGER.info("Sent team {} its Assault: {} blocks built, gate {} on the {} side", team, built.size(), gates, side);
         return true;
     }
 
@@ -149,18 +152,72 @@ public final class Assault {
     }
 
     /**
-     * Opens again at once, at {@code at} and at the wave {@code wave} it had reached, the Assault's gate {@code failed}
-     * that failed, for its timer, a mob lost or out of range: nothing stops the Assault but its end. A gate of no
-     * Assault is left alone.
+     * Opens again at once, on the side it is on (or else at {@code at}) and at the wave {@code wave} it had reached, the
+     * Assault's gate {@code failed} that failed, for its timer, a mob lost or out of range: nothing stops the Assault but
+     * its end. A gate of no Assault is left alone.
      */
     public static void reopen(ServerLevel level, UUID failed, Vec3 at, int wave) {
         AssaultState state = AssaultState.get(level.getServer());
         state.teamOf(failed).ifPresent(team -> {
-            Optional<UUID> reopened = Gates.get().open(level, at, summoner(level.getServer(), level, team), wave);
+            Vec3 where = gateAt(state, team).orElse(at);
+            Optional<UUID> reopened = Gates.get().open(level, where, summoner(level.getServer(), level, team), wave);
             state.replaceGate(team, failed, reopened);
             LOGGER.info("Reopened team {}'s failed Assault gate {} at wave {}: {}", team, failed, wave,
                     reopened.map(UUID::toString).orElse("none"));
         });
+    }
+
+    /**
+     * Moves the Assault's gate {@code gate} to one of the other three sides at random as it ends wave {@code wave}, if
+     * that wave was a step up ({@link #STEP}): Gateways counts waves from 1 and pauses after a wave by that wave's setup
+     * time, so the step's breather follows the step's first wave, and the gate moves in it. The old gate closes, kept out
+     * though its leftover mobs may stay, and the gate opens on the new side's platform at the wave reached. A gate of no
+     * Assault, or a wave before no step, is left alone.
+     */
+    public static void step(ServerLevel level, UUID gate, int wave) {
+        if (wave <= 0 || wave % STEP != 0) {
+            return;
+        }
+        AssaultState state = AssaultState.get(level.getServer());
+        state.teamOf(gate).ifPresent(team -> {
+            AssaultState.Built built = state.assault(team).orElseThrow();
+            Optional<GlobalPos> cod = state.cod(team);
+            if (cod.isEmpty()) {
+                return;
+            }
+            List<Direction> others = new ArrayList<>(Direction.Plane.HORIZONTAL.stream().toList());
+            built.side().ifPresent(others::remove);
+            Direction side = others.get(level.getRandom().nextInt(others.size()));
+            Optional<UUID> moved = Gates.get().open(level, gateAt(cod.get().pos(), side), summoner(level.getServer(), level, team), wave);
+            state.moveGate(team, gate, moved, side);
+            Entity old = level.getEntity(gate);
+            if (old != null) {
+                old.discard();
+            }
+            Component where = Component.translatable(MechanicalMasteryReborn.MOD_ID + ".assault.moved", sideName(side));
+            for (ServerPlayer player : level.getServer().getPlayerList().getPlayers()) {
+                if (Teams.of(player).equals(team)) {
+                    player.sendOverlayMessage(where);
+                }
+            }
+            LOGGER.info("Team {}'s Assault gate moves to the {} side at wave {}: {}", team, side, wave, moved.map(UUID::toString).orElse("none"));
+        });
+    }
+
+    /** Notes that the Assault's gate {@code gate} started wave {@code wave}, for the team's bar. A gate of no Assault is left alone. */
+    public static void noteWave(ServerLevel level, UUID gate, int wave) {
+        AssaultState state = AssaultState.get(level.getServer());
+        state.teamOf(gate).ifPresent(team -> state.noteWave(team, wave));
+    }
+
+    /** The side's name, as "north", for the team's bar and the action bar's word that the gate moved. */
+    public static Component sideName(Direction side) {
+        return Component.translatable(MechanicalMasteryReborn.MOD_ID + ".assault.side." + side.getSerializedName());
+    }
+
+    /** Where {@code team}'s gate stands on the side it is on now, if its C.O.D. and side are known. */
+    public static Optional<Vec3> gateAt(AssaultState state, UUID team) {
+        return state.cod(team).flatMap(cod -> state.assault(team).flatMap(AssaultState.Built::side).map(side -> gateAt(cod.pos(), side)));
     }
 
     /**
@@ -188,7 +245,7 @@ public final class Assault {
     }
 
     /** Where {@code side}'s gate stands, off C.O.D. at {@code cod}: on its platform's middle. */
-    static Vec3 gateAt(BlockPos cod, Direction side) {
+    public static Vec3 gateAt(BlockPos cod, Direction side) {
         return Vec3.atBottomCenterOf(cod.relative(side, OFFSET));
     }
 

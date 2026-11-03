@@ -14,17 +14,22 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.AssaultState;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Gates;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * The Assault's gates and bridges (#237, #239): starting the protection challenge builds a platform on each side of the
@@ -41,6 +46,8 @@ final class AssaultTests {
 
     /** The wave each of {@link #GATES}' gates opened at. */
     static final Map<UUID, Integer> WAVES = new ConcurrentHashMap<>();
+    /** Where each of {@link #GATES}' gates opened, so no test looks for a gate whose chunk may not be loaded. */
+    static final Map<UUID, Vec3> AT = new ConcurrentHashMap<>();
 
     /** A gate that is only an armor stand, standing where the Assault opens one. */
     static final Gates GATES = (level, at, summoner, wave) -> {
@@ -49,6 +56,7 @@ final class AssaultTests {
         stand.setNoGravity(true);
         level.addFreshEntity(stand);
         WAVES.put(stand.getUUID(), wave);
+        AT.put(stand.getUUID(), at);
         return Optional.of(stand.getUUID());
     };
 
@@ -64,6 +72,8 @@ final class AssaultTests {
         tests.test("assault_is_sent_at_its_island_only", 20, AssaultTests::itsIslandOnly);
         tests.test("assault_builds_all_four_sides", 20, AssaultTests::fourSides);
         tests.test("assault_reopens_a_failed_gate_at_its_wave", 20, AssaultTests::reopensFailed);
+        tests.test("assault_gate_moves_side_at_a_step", 20, AssaultTests::movesAtStep);
+        tests.test("assault_shows_its_wave_and_side_on_the_challenge_bar", 20, AssaultTests::barShowsWaveAndSide);
     }
 
     private static void builtOnStart(GameTestHelper helper) {
@@ -79,7 +89,7 @@ final class AssaultTests {
             helper.assertFalse(helper.getLevel().getBlockState(end).is(Assault.STONE.get()), "the bridge ran past the first block toward C.O.D.");
             expectStone(helper, end.east(), "the bridge's last block, by the island");
             expectStone(helper, end.east().north(), "the bridge's side");
-            helper.assertTrue(AssaultState.get(server(helper)).assault(team).orElseThrow().gates().size() == 4, "not four gates opened");
+            helper.assertTrue(AssaultState.get(server(helper)).assault(team).orElseThrow().gates().size() == 1, "not one gate opened");
             Challenges.end(server(helper), team);
             helper.succeed();
         });
@@ -144,29 +154,84 @@ final class AssaultTests {
                 helper.assertTrue(blocks.stream().anyMatch(pos -> distanceToward(cod, pos, side) > 0 && distanceToward(cod, pos, side) < far),
                         "no " + side + " bridge was built");
             }
-            helper.assertTrue(AssaultState.get(server(helper)).assault(team).orElseThrow().gates().size() == 4, "not one gate a side");
+            AssaultState.Built built = AssaultState.get(server(helper)).assault(team).orElseThrow();
+            helper.assertTrue(built.gates().size() == 1, "not one gate opened for four sides");
+            Direction side = built.side().orElseThrow();
+            helper.assertTrue(AT.get(built.gates().getFirst()).equals(Assault.gateAt(cod, side)), "the gate isn't on its side's platform");
             Challenges.end(server(helper), team);
             helper.succeed();
         });
     }
 
-    /** A gate that fails opens again at once at the wave it had reached, in its place; the failed one is kept out (#239). */
+    /** A gate that fails opens again at once at the wave it had reached, on the side it is on; the failed one is kept out (#239). */
     private static void reopensFailed(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         helper.setBlock(COD, Cod.BLOCK.get());
         helper.runAfterDelay(TICKED, () -> {
             Challenges.begin(server(helper), team, Handicap.PROTECTION);
             AssaultState state = AssaultState.get(server(helper));
+            Direction side = state.assault(team).orElseThrow().side().orElseThrow();
             UUID failed = state.assault(team).orElseThrow().gates().getFirst();
             Assault.reopen(helper.getLevel(), failed, helper.absolutePos(COD.above()).getBottomCenter(), 7);
             List<UUID> gates = state.assault(team).orElseThrow().gates();
-            helper.assertTrue(gates.size() == 4, "the Assault lost a gate as one failed");
+            helper.assertTrue(gates.size() == 1, "the Assault has " + gates.size() + " gates after one failed, not 1");
             helper.assertFalse(gates.contains(failed), "the failed gate is still the Assault's");
             helper.assertTrue(state.closed(failed), "the failed gate isn't kept out");
-            UUID reopened = gates.getLast();
+            UUID reopened = gates.getFirst();
             helper.assertTrue(Integer.valueOf(7).equals(WAVES.get(reopened)), "the gate didn't reopen at its wave");
+            helper.assertTrue(AT.get(reopened).equals(Assault.gateAt(helper.absolutePos(COD), side)), "the gate didn't reopen on its side");
             Challenges.end(server(helper), team);
             helper.assertTrue(state.closed(reopened), "the reopened gate isn't removed with the Assault");
+            helper.succeed();
+        });
+    }
+
+    /** At a step's end the gate moves to another side, at the wave reached; between steps it stays (#239). */
+    private static void movesAtStep(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        helper.setBlock(COD, Cod.BLOCK.get());
+        helper.runAfterDelay(TICKED, () -> {
+            Challenges.begin(server(helper), team, Handicap.PROTECTION);
+            AssaultState state = AssaultState.get(server(helper));
+            BlockPos cod = helper.absolutePos(COD);
+            Direction side = state.assault(team).orElseThrow().side().orElseThrow();
+            UUID gate = state.assault(team).orElseThrow().gates().getFirst();
+            Assault.step(helper.getLevel(), gate, Assault.STEP - 1);
+            helper.assertTrue(state.assault(team).orElseThrow().gates().equals(List.of(gate)), "the gate moved between steps");
+            Assault.step(helper.getLevel(), gate, Assault.STEP);
+            AssaultState.Built built = state.assault(team).orElseThrow();
+            helper.assertTrue(built.gates().size() == 1, "the Assault has " + built.gates().size() + " gates after a step, not 1");
+            UUID moved = built.gates().getFirst();
+            Direction now = built.side().orElseThrow();
+            helper.assertTrue(now != side, "the gate stayed on the " + side + " side at a step");
+            helper.assertTrue(AT.get(moved).equals(Assault.gateAt(cod, now)), "the moved gate isn't on its new side's platform");
+            helper.assertTrue(Integer.valueOf(Assault.STEP).equals(WAVES.get(moved)), "the moved gate didn't keep its wave");
+            helper.assertTrue(state.closed(gate), "the old gate isn't kept out");
+            Challenges.end(server(helper), team);
+            helper.succeed();
+        });
+    }
+
+    /** The challenge's bar names the Assault's wave and side, kept in step as the gate starts a wave (#239). */
+    private static void barShowsWaveAndSide(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        ServerPlayer player = AssaultAbsenceTests.player(helper, team);
+        helper.setBlock(COD, Cod.BLOCK.get());
+        helper.runAfterDelay(TICKED, () -> {
+            Challenges.begin(server(helper), team, Handicap.PROTECTION);
+            AssaultState.Built built = AssaultState.get(server(helper)).assault(team).orElseThrow();
+            Assault.noteWave(helper.getLevel(), built.gates().getFirst(), 7);
+        });
+        helper.runAfterDelay(TICKED + 2, () -> {
+            Direction side = AssaultState.get(server(helper)).assault(team).orElseThrow().side().orElseThrow();
+            var bar = InflationBar.of(team);
+            helper.assertTrue(bar.isPresent(), "the team has no challenge bar during its Assault");
+            Component expected = Component.translatable("mechanicalmasteryreborn.bar.assault",
+                    Challenges.title(Handicap.PROTECTION), 7, Assault.sideName(side));
+            Object top = ((TranslatableContents) bar.get().getName().getContents()).getArgs()[0];
+            helper.assertValueEqual(top, expected, "the bar's top line");
+            Challenges.end(server(helper), team);
+            AssaultAbsenceTests.leave(player);
             helper.succeed();
         });
     }

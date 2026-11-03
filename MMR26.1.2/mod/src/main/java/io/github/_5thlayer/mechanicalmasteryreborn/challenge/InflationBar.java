@@ -60,7 +60,7 @@ public final class InflationBar {
                 entry.getValue().removeAllPlayers();
                 return true;
             }
-            show(entry.getValue(), state.handicap(entry.getKey()).orElseThrow(), inflation.get());
+            show(server, entry.getKey(), entry.getValue(), state.handicap(entry.getKey()).orElseThrow(), inflation.get());
             for (ServerPlayer player : new ArrayList<>(entry.getValue().getPlayers())) {
                 if (player.hasDisconnected() || !Teams.of(player).equals(entry.getKey())) {
                     entry.getValue().removePlayer(player);
@@ -73,16 +73,25 @@ public final class InflationBar {
             state.inflation(team).ifPresent(inflation -> BARS.computeIfAbsent(team, ignored -> {
                 var bar = new ServerBossEvent(UUID.randomUUID(), Component.empty(), BossEvent.BossBarColor.RED,
                         BossEvent.BossBarOverlay.NOTCHED_10);
-                show(bar, state.handicap(team).orElseThrow(), inflation);
+                show(server, team, bar, state.handicap(team).orElseThrow(), inflation);
                 return bar;
             }).addPlayer(player));
         }
     }
 
-    /** Words the bar, such as "Energy Challenge - Inflation: 12 of 256", and fills it. */
-    private static void show(ServerBossEvent bar, Handicap handicap, Inflation inflation) {
+    /**
+     * Words the bar, such as "Energy Challenge - Inflation: 12 of 256", and fills it. While the team's Assault runs, the
+     * challenge's name carries its wave and side, such as "Protection Challenge · Wave 7, from the north" (#239).
+     */
+    private static void show(MinecraftServer server, UUID team, ServerBossEvent bar, Handicap handicap, Inflation inflation) {
         int cap = ServerConfig.inflationCap();
-        bar.setName(Component.translatable(TITLE, Challenges.title(handicap),
+        Component challenge = Challenges.title(handicap);
+        Optional<AssaultState.Built> assault = AssaultState.get(server).assault(team);
+        if (assault.isPresent() && assault.get().side().isPresent()) {
+            challenge = Component.translatable(MechanicalMasteryReborn.MOD_ID + ".bar.assault", challenge,
+                    Math.max(1, assault.get().wave()), Assault.sideName(assault.get().side().get()));
+        }
+        bar.setName(Component.translatable(TITLE, challenge,
                 Component.translatable(MechanicalMasteryReborn.MOD_ID + ".bar.inflation", inflation.excess(), cap)));
         bar.setProgress(Math.min(1.0F, (float) inflation.excess() / cap));
     }
