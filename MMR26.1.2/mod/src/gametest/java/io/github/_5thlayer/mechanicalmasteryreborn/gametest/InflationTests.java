@@ -126,7 +126,7 @@ final class InflationTests {
         start(helper, team);
         var build = RecyclerBuild.standard(helper);
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(RecyclerCoreBlockEntity.turnsNeeded());
         expect(helper, team, 0, 1, 0, "after a decompose on a Recycler");
         decomposeByHand(helper, team);
         expect(helper, team, 0, 2, 0, "after a decompose by hand too");

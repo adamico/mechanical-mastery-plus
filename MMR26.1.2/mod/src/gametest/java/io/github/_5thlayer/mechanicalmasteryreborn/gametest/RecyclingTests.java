@@ -55,7 +55,7 @@ final class RecyclingTests {
         var build = RecyclerBuild.standard(helper);
         build.feed(new ItemStack(Items.PISTON));
         helper.assertValueEqual(build.core().work(), Work.RECYCLING, "what a Recycler holding a piston does");
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(RecyclerCoreBlockEntity.turnsNeeded());
         build.expectOutputs(new ItemStack(Items.OAK_PLANKS, 3), new ItemStack(Items.COBBLESTONE, 4), new ItemStack(Items.IRON_INGOT),
                 new ItemStack(Items.REDSTONE));
         helper.assertTrue(build.core().held().isEmpty(), "the core still holds " + build.core().held());
@@ -68,7 +68,7 @@ final class RecyclingTests {
         build.place(1, Blocks.AIR);
         build.place(1, Recycler.CASING.get());
         build.feed(new ItemStack(Items.PISTON));
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(RecyclerCoreBlockEntity.turnsNeeded());
         helper.assertTrue(build.core().held().isEmpty(), "the core still holds " + build.core().held());
         build.expectSomeOfTheMix(List.of(new ItemStack(Items.OAK_PLANKS, 3), new ItemStack(Items.COBBLESTONE, 4), new ItemStack(Items.IRON_INGOT),
                 new ItemStack(Items.REDSTONE)), RecyclerLayout.POSITIONS_PER_OUTPUT);
@@ -80,7 +80,7 @@ final class RecyclingTests {
         TestYield.at(0.25, () -> {
             var build = RecyclerBuild.standard(helper);
             build.feed(new ItemStack(Items.PISTON));
-            build.turn(RecyclerCoreBlockEntity.TURNS);
+            build.turn(RecyclerCoreBlockEntity.turnsNeeded());
             build.expectPosition(1, new ItemStack(Items.COBBLESTONE));
             List<Item> chances = List.of(Items.OAK_PLANKS, Items.COBBLESTONE, Items.IRON_INGOT, Items.REDSTONE);
             for (int i : new int[] {0, 2, 3}) {
@@ -95,7 +95,7 @@ final class RecyclingTests {
     private static void override(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.feed(new ItemStack(Items.COMPARATOR));
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(RecyclerCoreBlockEntity.turnsNeeded());
         build.expectOutputs(new ItemStack(Items.QUARTZ, 3));
         helper.succeed();
     }
@@ -106,7 +106,7 @@ final class RecyclingTests {
             var build = RecyclerBuild.standard(helper);
             build.feed(new ItemStack(Items.DIRT));
             for (int pass = 0; pass < 64 && !build.core().held().isEmpty(); pass++) {
-                build.turn(RecyclerCoreBlockEntity.TURNS);
+                build.turn(RecyclerCoreBlockEntity.turnsNeeded());
                 ItemStack back = build.outputEntity(0).item(0).isEmpty() ? ItemStack.EMPTY : build.take(0);
                 helper.assertTrue(back.isEmpty() || back.is(Items.DIRT) && back.getCount() == 1, "a pass of dirt returned " + back);
                 if (!back.isEmpty()) {
@@ -121,7 +121,7 @@ final class RecyclingTests {
     private static void hopper(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.feed(new ItemStack(Items.HOPPER));
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(RecyclerCoreBlockEntity.turnsNeeded());
         build.expectOutputs(new ItemStack(Items.IRON_INGOT, 5), new ItemStack(Items.CHEST));
         helper.succeed();
     }
@@ -147,7 +147,7 @@ final class RecyclingTests {
         var build = RecyclerBuild.standard(helper);
         for (Item item : List.of(Items.IRON_NUGGET, Items.RAW_IRON, Items.WHEAT)) {
             helper.assertValueEqual(build.feed(new ItemStack(item)), 1, "the " + item + " an input took");
-            build.turn(RecyclerCoreBlockEntity.TURNS);
+            build.turn(RecyclerCoreBlockEntity.turnsNeeded());
             build.expectOutputs(new ItemStack(item));
             build.take(0);
         }
@@ -167,7 +167,7 @@ final class RecyclingTests {
     private static void stoneBricks(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.feed(new ItemStack(Items.STONE_BRICKS));
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(RecyclerCoreBlockEntity.turnsNeeded());
         build.expectOutputs(new ItemStack(Items.STONE));
         helper.succeed();
     }
@@ -176,7 +176,7 @@ final class RecyclingTests {
     private static void furnace(GameTestHelper helper) {
         var build = RecyclerBuild.standard(helper);
         build.feed(new ItemStack(Items.FURNACE));
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(RecyclerCoreBlockEntity.turnsNeeded());
         build.expectOutputs(new ItemStack(Items.COBBLESTONE, 8));
         helper.succeed();
     }
@@ -185,7 +185,7 @@ final class RecyclingTests {
         var team = TestTeams.claim(helper);
         var build = RecyclerBuild.standard(helper);
         build.feed(new ItemStack(Items.PISTON));
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(RecyclerCoreBlockEntity.turnsNeeded());
         var log = DecomposeLog.get(helper.getLevel().getServer());
         for (Essence essence : Essence.values()) {
             for (DecomposeLog.Way way : DecomposeLog.Way.values()) {
@@ -218,7 +218,7 @@ final class RecyclingTests {
         var worn = new ItemStack(Items.IRON_SHOVEL);
         worn.setDamageValue(200);
         build.feed(worn);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(RecyclerCoreBlockEntity.turnsNeeded());
         build.expectOutputs(new ItemStack(Items.IRON_INGOT), new ItemStack(Items.STICK, 2));
         helper.succeed();
     }

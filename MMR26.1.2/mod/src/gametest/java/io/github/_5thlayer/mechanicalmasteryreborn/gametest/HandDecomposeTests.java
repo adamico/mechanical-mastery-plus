@@ -3,8 +3,8 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
+import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
-import io.github._5thlayer.mechanicalmasteryreborn.essence.EssenceItem;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -38,7 +38,7 @@ final class HandDecomposeTests {
             helper.assertValueEqual(player.getInventory().countItem(result.getItem()), 1, "the player's " + result.getItem().getDescriptionId());
         }
         helper.assertTrue(player.getCooldowns().isOnCooldown(player.getMainHandItem()), "the essence is not on its cooldown");
-        helper.assertValueEqual(EssenceItem.HAND_COOLDOWN, 160, "the hand cooldown, in ticks");
+        helper.assertValueEqual(ServerConfig.handCooldown(), 160, "the hand cooldown, in ticks");
         helper.succeed();
     }
 

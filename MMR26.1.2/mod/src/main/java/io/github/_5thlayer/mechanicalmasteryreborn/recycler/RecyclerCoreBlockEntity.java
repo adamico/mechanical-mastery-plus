@@ -49,7 +49,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * A Recycler's core: its one input buffer, the turns its drives have delivered, and the work. Each turn
- * counts only while the Recycler can work what it holds; the {@link #TURNS}th decomposes one recipe's worth
+ * counts only while the Recycler can work what it holds; the {@link #turnsNeeded() last} decomposes one recipe's worth
  * of an essence into its mix, or recycles one of anything else into what made it ({@link Recycling}), onto the
  * outputs. Either returns the core's {@link Yield} of the full amounts ({@link ServerConfig}). It needs no power
  * and no ticking: drives turn it.
@@ -71,8 +71,11 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
 
     /** The first core's tier. */
     public static final int TIER = 1;
-    /** Turns a decompose or a recycle takes on a tier-1 core. */
-    public static final int TURNS = 8;
+
+    /** Turns a decompose or a recycle takes on this core ({@link ServerConfig#turnsOf}). */
+    public static int turnsNeeded() {
+        return ServerConfig.turnsOf(TIER);
+    }
 
     private static final String BUFFER_KEY = "buffer";
     private static final String TURNS_KEY = "turns";
@@ -215,7 +218,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         }
         turns++;
         setChanged();
-        if (turns < TURNS) {
+        if (turns < turnsNeeded()) {
             return Turn.COUNTED;
         }
         turns = 0;

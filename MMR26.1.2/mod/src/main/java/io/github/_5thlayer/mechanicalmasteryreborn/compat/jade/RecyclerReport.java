@@ -116,8 +116,8 @@ final class RecyclerReport {
             }
             Component status = Component.translatable("mechanicalmasteryreborn.jade.recycler." + report.status().name().toLowerCase(Locale.ROOT));
             if (report.status() == Status.READY) {
-                Component turns = Component.translatable("mechanicalmasteryreborn.jade.recycler.turns", report.turns(), RecyclerCoreBlockEntity.TURNS);
-                tooltip.add(JadeUI.progress(new ProgressView(ProgressView.Part.of((float) report.turns() / RecyclerCoreBlockEntity.TURNS), turns,
+                Component turns = Component.translatable("mechanicalmasteryreborn.jade.recycler.turns", report.turns(), RecyclerCoreBlockEntity.turnsNeeded());
+                tooltip.add(JadeUI.progress(new ProgressView(ProgressView.Part.of((float) report.turns() / RecyclerCoreBlockEntity.turnsNeeded()), turns,
                         JadeUI.progressStyle(), BoxStyle.nestedBox())));
             } else {
                 tooltip.add(status.copy().withStyle(ChatFormatting.RED));

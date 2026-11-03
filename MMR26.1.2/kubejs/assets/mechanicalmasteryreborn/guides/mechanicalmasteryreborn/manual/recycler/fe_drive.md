@@ -15,7 +15,7 @@ item_ids:
 An FE drive turns a [Recycler](index.md) on power, so nobody has to crank a [hand drive](hand_drive.md). Feed it
 FE from any side, with a cable or a generator beside it, and it stores ten turns' worth. While its Recycler has
 work and the store holds a turn's worth, it turns once every 5 ticks, as fast as one player cranking without a
-pause, and spends 40 FE on the turn. It spends nothing while the Recycler can't run, so a full drive beside an
+pause, and spends 60 FE on the turn. It spends nothing while the Recycler can't run, so a full drive beside an
 empty Recycler takes no more power.
 
 Its turns are heard and seen as a hand drive's are, and Jade, on the drive or the [core](core.md), says why the
