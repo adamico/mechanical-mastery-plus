@@ -3,12 +3,14 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn;
 
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Generators;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationCap;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbteams.FtbPartySync;
+import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.TheurgyHud;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
@@ -35,6 +37,7 @@ public final class MechanicalMasteryReborn {
         Lab.register(modBus);
         Generators.register(modBus);
         Chains.register();
+        ChainMachines.register(modBus);
         InflationCap.register();
         InflationBar.register();
         Decomposing.register(modBus);
@@ -45,6 +48,10 @@ public final class MechanicalMasteryReborn {
         // With both installed, as the pack plays, an island's players share one FTB party (#225).
         if (ModList.get().isLoaded("skyblockbuilder") && ModList.get().isLoaded("ftbteams")) {
             FtbPartySync.register();
+        }
+        // With Theurgy installed, as the pack plays, its HUD says why a locked apparatus does no work (#214).
+        if (ModList.get().isLoaded("theurgy")) {
+            TheurgyHud.register();
         }
     }
 }

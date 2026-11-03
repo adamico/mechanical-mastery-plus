@@ -86,7 +86,7 @@ hash = "66a7f2c1fd8ec56188dc922483b9ce6628a79778fae96a7721a15735f0fb738d"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/energy.json"
-hash = "debf7ae560973274e45ed13e9f10e500f56603a5daf1f71eb9c809d0cc6940b0"
+hash = "9f691b257fd8e1828fa7cad3238d06451e7cee4123fc8287deff15352a6d8c81"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/incubation/galvanic_essence.json"
@@ -326,7 +326,7 @@ hash = "e7f3199f4bacece01467ac1274b0f6bfd7d23e5a4364f91bf19d4f5fa6658b47"
 
 [[files]]
 file = "kubejs/server_scripts/decomposing.js"
-hash = "d18c6013cc6d4c8768c24742454f7e3c2b6477f36af492b6f972635742779cf9"
+hash = "79f5dc0d31cceb07247ac63735928f0875baadb7b198bed6dee83e13888cf5dd"
 
 [[files]]
 file = "kubejs/server_scripts/generators.js"

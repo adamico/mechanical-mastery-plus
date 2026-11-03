@@ -43,6 +43,7 @@ def skyblockBuilder = 'curse.maven:skyblock-builder-446691:9048404'
 def ftbTeams = 'dev.ftb.mods:ftb-teams-neoforge:26.1.2.4'
 def ftbLibrary = 'dev.ftb.mods:ftb-library-neoforge:26.1.2.11'
 def chapters = 'curse.maven:chapters-1538047:9306837'
+def theurgy = 'curse.maven:theurgy-430636:9359578'
 // AdminShop's 26.1.2 port isn't published anywhere a build can fetch it yet, so its jar is in libs/ until
 // it is; a coordinate replaces it then.
 def adminShop = files('libs/adminshop-26.1.2-2.3.2.jar')
@@ -63,4 +64,7 @@ dependencies {
     compileOnly adminShop
     // Chapters, which locks a challenge's chain until the team starts it (ADR 0007).
     compileOnly(chapters) { transitive = false }
+    // Theurgy, the energy challenge's mod: its in-world HUD says why a locked apparatus does no work (#214). Its
+    // processing is stopped by a mixin that names it only as text.
+    compileOnly(theurgy) { transitive = false }
 }

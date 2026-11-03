@@ -39,3 +39,7 @@ side = "BOTH"
 # The money handicap's halved sales, applied only with AdminShop installed (ShopTradesMixin).
 [[mixins]]
 config = "${mod_id}.mixins.json"
+
+# A chain machine from a mix does no work while its chain is locked, applied only with Theurgy installed (#214).
+[[mixins]]
+config = "${mod_id}.theurgy.mixins.json"
