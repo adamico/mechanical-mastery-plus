@@ -53,7 +53,7 @@ final class AssaultTests {
     }
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
-        tests.test("assault_start_builds_a_platform_a_bridge_and_a_gate", 20, AssaultTests::builtOnStart);
+        tests.test("assault_start_builds_a_platform_a_bridge_and_a_gate", 20 + LOADING, AssaultTests::builtOnStart);
         tests.test("assault_reset_removes_it_and_leaves_the_rift_shards", 20 + LOADING, AssaultTests::removedOnReset);
         tests.test("assault_win_removes_it", 20 + LOADING, AssaultTests::removedOnWin);
         tests.test("assault_keeps_out_a_removed_gates_mob_that_loads_later", 20, AssaultTests::keepsOutLaterMobs);
@@ -73,10 +73,11 @@ final class AssaultTests {
             helper.assertFalse(helper.getLevel().getBlockState(end).is(Assault.STONE.get()), "the bridge ran past the first block toward C.O.D.");
             expectStone(helper, end.east(), "the bridge's last block, by the island");
             expectStone(helper, end.east().north(), "the bridge's side");
-            var built = AssaultState.get(server(helper)).assault(team).orElseThrow();
-            helper.assertTrue(built.gate().map(helper.getLevel()::getEntity).isPresent(), "no gate opened on the platform");
-            Challenges.end(server(helper), team);
-            helper.succeed();
+            helper.assertTrue(AssaultState.get(server(helper)).assault(team).orElseThrow().gate().isPresent(), "no gate opened on the platform");
+            whenGateLoaded(helper, team, LOADING, () -> {
+                Challenges.end(server(helper), team);
+                helper.succeed();
+            });
         });
     }
 
