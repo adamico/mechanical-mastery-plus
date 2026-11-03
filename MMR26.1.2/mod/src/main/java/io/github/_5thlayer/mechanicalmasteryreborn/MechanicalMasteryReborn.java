@@ -12,6 +12,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationCap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
+import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbchunks.FtbChunksExplosions;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbteams.FtbPartySync;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.TheurgyHud;
 import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
@@ -58,6 +59,10 @@ public final class MechanicalMasteryReborn {
         // With both installed, as the pack plays, an island's players share one FTB party (#225).
         if (ModList.get().isLoaded("skyblockbuilder") && ModList.get().isLoaded("ftbteams")) {
             FtbPartySync.register();
+        }
+        // With FTB Chunks installed, as the pack plays, a team's explosions stay on while its Assault runs (#241).
+        if (ModList.get().isLoaded("ftbchunks")) {
+            FtbChunksExplosions.register();
         }
         // With Theurgy installed, as the pack plays, its HUD says why a locked apparatus does no work (#214).
         if (ModList.get().isLoaded("theurgy")) {

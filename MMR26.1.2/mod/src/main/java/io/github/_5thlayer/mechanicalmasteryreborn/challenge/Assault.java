@@ -119,12 +119,14 @@ public final class Assault {
         }
         Optional<UUID> gate = Gates.get().open(level, Vec3.atBottomCenterOf(middle.above()), summoner(server, level, team));
         state.putAssault(team, new AssaultState.Built(level.dimension(), built, gate));
+        AssaultExplosions.lift(server, team);
         LOGGER.info("Sent team {} its Assault: {} blocks built, gate {}", team, built.size(), gate.map(UUID::toString).orElse("none"));
         return true;
     }
 
     /** Removes {@code team}'s Assault, as its protection challenge ends or resets: its gate, what was built, and the gate's mobs. */
     static void end(MinecraftServer server, UUID team) {
+        AssaultExplosions.restore(server, team);
         AssaultState.get(server).takeAssault(team).ifPresent(built -> {
             ServerLevel level = server.getLevel(built.dimension());
             if (level == null) {
