@@ -58,7 +58,14 @@
                 "type": "gateways:only_on_every_n_waves",
                 "waves": 5
             },
-            "setup_time": 400
+            "setup_time": 400,
+            "rewards": [
+                {
+                    "type": "gateways:experience",
+                    "experience": 20,
+                    "orb_size": 5
+                }
+            ]
         },
         {
             "application_mode": {

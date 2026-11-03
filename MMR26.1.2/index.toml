@@ -102,39 +102,39 @@ hash = "66a7f2c1fd8ec56188dc922483b9ce6628a79778fae96a7721a15735f0fb738d"
 
 [[files]]
 file = "kubejs/data/gateways/gateways/gateways/basic/blaze.json"
-hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+hash = "3cbe8c62c17a4ff76773d7b087649c0a4020f3e4a08dfadd8719a3210da590d3"
 
 [[files]]
 file = "kubejs/data/gateways/gateways/gateways/basic/enderman.json"
-hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+hash = "3cbe8c62c17a4ff76773d7b087649c0a4020f3e4a08dfadd8719a3210da590d3"
 
 [[files]]
 file = "kubejs/data/gateways/gateways/gateways/basic/slime.json"
-hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+hash = "3cbe8c62c17a4ff76773d7b087649c0a4020f3e4a08dfadd8719a3210da590d3"
 
 [[files]]
 file = "kubejs/data/gateways/gateways/gateways/emerald_grove.json"
-hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+hash = "3cbe8c62c17a4ff76773d7b087649c0a4020f3e4a08dfadd8719a3210da590d3"
 
 [[files]]
 file = "kubejs/data/gateways/gateways/gateways/endless/automaton_fabricator.json"
-hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+hash = "3cbe8c62c17a4ff76773d7b087649c0a4020f3e4a08dfadd8719a3210da590d3"
 
 [[files]]
 file = "kubejs/data/gateways/gateways/gateways/endless/blaze.json"
-hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+hash = "3cbe8c62c17a4ff76773d7b087649c0a4020f3e4a08dfadd8719a3210da590d3"
 
 [[files]]
 file = "kubejs/data/gateways/gateways/gateways/hellish_fortress.json"
-hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+hash = "3cbe8c62c17a4ff76773d7b087649c0a4020f3e4a08dfadd8719a3210da590d3"
 
 [[files]]
 file = "kubejs/data/gateways/gateways/gateways/iron_automaton.json"
-hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+hash = "3cbe8c62c17a4ff76773d7b087649c0a4020f3e4a08dfadd8719a3210da590d3"
 
 [[files]]
 file = "kubejs/data/gateways/gateways/gateways/overworldian_nights.json"
-hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+hash = "3cbe8c62c17a4ff76773d7b087649c0a4020f3e4a08dfadd8719a3210da590d3"
 
 [[files]]
 file = "kubejs/data/gateways/recipe/basic/blaze.json"
@@ -186,7 +186,7 @@ hash = "5ec28791d947c06f88335ccd79fd63a510431d136c26e4c618e4b636bc715976"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/gateways/gateways/assault.json"
-hash = "288502abb92ad512bb1aa29c74a739f4a8570eb9563c1dbf17878f5c14b28cec"
+hash = "6231aacf4fdafce3d382434b02d23f44ae3c473fd1220585fa9ff0e202c8d12c"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/gateways/gateways/home.json"
