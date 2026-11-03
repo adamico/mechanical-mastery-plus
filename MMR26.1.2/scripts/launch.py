@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-# Plays Reborn's CurseForge profile as this checkout stands, with the companion mod's local build, and
-# AdminShop's until its 26.1.2 port is on CurseForge.
+# Plays Reborn's CurseForge profile as this checkout stands, with the companion mod's local build.
 #
 #   scripts/launch.py [--dry-run] [--released] [save]
 #
@@ -9,9 +8,6 @@
 # the companion mod in mods/, in place of the pack's jar when the pack carries one, or beside the
 # pack's mods while the mod is not yet on CurseForge. The next run takes it out again, so --released
 # plays the pack's own jars. The suite is always the pack's released jars.
-#
-# AdminShop's port is taken the same way, from its checkout's newest build: ~/minecraft_mods/AdminShop, or
-# where ADMINSHOP_CHECKOUT names it. Without a build of it the game runs without the Shop, and says so.
 #
 # launch_pack.py is found in skillworks' plugin, or where QUICKLAUNCH_LAUNCHER names it.
 import argparse
@@ -27,8 +23,6 @@ from pathlib import Path
 
 PACK = Path(__file__).resolve().parent.parent
 MOD_ID = "mechanicalmasteryreborn"
-ADMINSHOP = "adminshop"
-ADMINSHOP_CHECKOUT = Path(os.environ.get("ADMINSHOP_CHECKOUT", Path.home() / "minecraft_mods/AdminShop"))
 PLUGIN = Path.home() / ".claude/plugins/cache/skillworks/skillworks"
 
 
@@ -110,12 +104,6 @@ def main():
             fail(f"no build of the companion mod in {PACK / 'mod/build/libs'}: build it first, "
                  f"(cd {PACK / 'mod'} && sh ./gradlew build).")
         jars = [(MOD_ID, built[0].resolve(), built[1])] if built else []
-        if not args.released:
-            shop = lp.local_build(beside, lp.repo_builds(ADMINSHOP_CHECKOUT) if ADMINSHOP_CHECKOUT.is_dir() else {}, ADMINSHOP)
-            if shop:
-                jars.append((ADMINSHOP, shop[0].resolve(), shop[1]))
-            else:
-                lp.note(f"mods: no build of {ADMINSHOP} in {ADMINSHOP_CHECKOUT / 'build/libs'}: playing without the Shop")
         lp.sync(PACK, pack, game, beside, PACK, args.released, args.dry_run)
 
     for mod, jar, version in jars:

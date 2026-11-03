@@ -1,0 +1,13 @@
+name = "AdminShop Overhauled"
+filename = "adminshop-26.1.2-2.3.2.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "9eb2ed1b4dd644fa1b23afc6e6b692d0dd496ef1"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 9409244
+project-id = 876270
