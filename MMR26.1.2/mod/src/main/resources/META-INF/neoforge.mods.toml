@@ -43,3 +43,7 @@ config = "${mod_id}.mixins.json"
 # A chain machine from a mix does no work while its chain is locked, applied only with Theurgy installed (#214).
 [[mixins]]
 config = "${mod_id}.theurgy.mixins.json"
+
+# A home gate opens only on the island of a team that has unlocked protection, applied only with Gateways installed (#238).
+[[mixins]]
+config = "${mod_id}.gateways.mixins.json"

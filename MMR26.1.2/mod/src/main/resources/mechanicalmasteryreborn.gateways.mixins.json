@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github._5thlayer.mechanicalmasteryreborn.compat.gateways.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "GatewayMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

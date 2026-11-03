@@ -114,5 +114,8 @@
   "mechanicalmasteryreborn.recycler.input.no_recycler": "This input isn't part of a Recycler",
   "mechanicalmasteryreborn.recycler.input.not_taken": "The Recycler can't take this",
   "mechanicalmasteryreborn.recycler.input.refined": "Refined items can't be recycled",
-  "mechanicalmasteryreborn.recycler.input.uncraft_instead": "Uncraft this instead"
+  "mechanicalmasteryreborn.recycler.input.uncraft_instead": "Uncraft this instead",
+  "mechanicalmasteryreborn.home_gate.not_home": "A home gate opens only on your own team's island",
+  "mechanicalmasteryreborn.home_gate.locked": "A home gate opens only once your team has started the Protection challenge",
+  "gateways.mechanicalmasteryreborn.home": "Home Gate"
 }

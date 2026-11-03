@@ -29,6 +29,14 @@ public final class Teams {
 
         /** The team {@code player} plays in. */
         UUID of(Player player);
+
+        /**
+         * Whether {@code pos} is on a team's island itself, not the spawn island or the void, where {@link #at} still
+         * names the nearest team: by default, wherever {@link #at} names a team other than the world's.
+         */
+        default boolean onIsland(ServerLevel level, BlockPos pos) {
+            return !at(level, pos).equals(WORLD);
+        }
     }
 
     private static final Lookup ONE_TEAM = new Lookup() {
@@ -54,6 +62,11 @@ public final class Teams {
 
     public static UUID of(Player player) {
         return lookup().of(player);
+    }
+
+    /** Whether {@code pos} is on {@link #at}'s team's island itself, not the spawn island or the void. */
+    public static boolean onIsland(ServerLevel level, BlockPos pos) {
+        return lookup().onIsland(level, pos);
     }
 
     /** The lookup a world without anything else uses: Skyblock Builder's when it is installed. */
