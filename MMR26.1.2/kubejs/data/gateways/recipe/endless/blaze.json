@@ -1,5 +1,5 @@
 {
   "neoforge:conditions": [
-    { "type": "neoforge:false" }
+    { "type": "neoforge:never" }
   ]
 }
