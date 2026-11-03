@@ -854,11 +854,6 @@ hash = "694ab9f9f5de0fba1369a8c1da7ff266bb3108285bcfacb08caa51334f7e1105"
 metafile = true
 
 [[files]]
-file = "mods/modular-routers.pw.toml"
-hash = "0599e58b61792ebd63dc077da3ef5bb118406f45c5d733bcf66ce19edb102041"
-metafile = true
-
-[[files]]
 file = "mods/more-overlays-updated.pw.toml"
 hash = "209e9f283403e70a2da2f9b50a4640cf5570cda6a6dfb6b1d6f2b4ce69967ffa"
 metafile = true
