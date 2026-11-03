@@ -81,6 +81,32 @@ public final class ServerConfig {
             .comment("How many turns' worth of FE an FE drive stores. Full, it takes no more until it spends some.")
             .defineInRange("recycler.fe_drive.store_turns", 10, 1, 1_000_000);
 
+    /** How far an FE defence reaches, in blocks (#236, a first guess for #207). */
+    public static final ModConfigSpec.IntValue FE_DEFENCE_RANGE = BUILDER
+            .comment("How far an FE defence shoots, in blocks, at the nearest hostile mob it can see.")
+            .defineInRange("defence.fe.range", 12, 1, 64);
+
+    /** The damage of an FE defence's shot: a zombie takes four. */
+    public static final ModConfigSpec.DoubleValue FE_DEFENCE_DAMAGE = BUILDER
+            .comment("The damage of one shot of an FE defence. 6 takes a zombie (20 health) in four shots.")
+            .defineInRange("defence.fe.damage", 6.0, 0.5, 1000.0);
+
+    /** The ticks between two shots of an FE defence. */
+    public static final ModConfigSpec.IntValue FE_DEFENCE_INTERVAL = BUILDER
+            .comment("The ticks between two shots of one FE defence. 10 is as fast as a mob can be hurt again.")
+            .defineInRange("defence.fe.interval", 10, 1, 72000);
+
+    /** What an FE defence spends on a shot: 10 FE/t while it fires, nothing while it has no target. */
+    public static final ModConfigSpec.IntValue FE_DEFENCE_FE_PER_SHOT = BUILDER
+            .comment("The FE an FE defence spends on each shot. It spends nothing while no hostile mob is in reach.",
+                    "100 is 10 FE/t while it fires at its default pace.")
+            .defineInRange("defence.fe.fe_per_shot", 100, 1, 1_000_000);
+
+    /** How much an FE defence stores, in shots. */
+    public static final ModConfigSpec.IntValue FE_DEFENCE_STORE_SHOTS = BUILDER
+            .comment("How many shots' worth of FE an FE defence stores. Full, it takes no more until it spends some.")
+            .defineInRange("defence.fe.store_shots", 20, 1, 1_000_000);
+
     /** Recipe types of sized ingredients and results, run backwards after smelting and before crafting. */
     public static final ModConfigSpec.ConfigValue<List<? extends String>> ASSEMBLING_TYPES = BUILDER
             .comment("Recipe types recycling reads as assembling, after smelting and before crafting: each a list of sized",
@@ -225,5 +251,30 @@ public final class ServerConfig {
     /** How many turns' worth of FE an FE drive stores. */
     public static int feDriveStoreTurns() {
         return SPEC.isLoaded() ? FE_DRIVE_STORE_TURNS.getAsInt() : FE_DRIVE_STORE_TURNS.getDefault();
+    }
+
+    /** How far an FE defence shoots, in blocks. */
+    public static int feDefenceRange() {
+        return SPEC.isLoaded() ? FE_DEFENCE_RANGE.getAsInt() : FE_DEFENCE_RANGE.getDefault();
+    }
+
+    /** The damage of one shot of an FE defence. */
+    public static float feDefenceDamage() {
+        return (float) (SPEC.isLoaded() ? FE_DEFENCE_DAMAGE.getAsDouble() : FE_DEFENCE_DAMAGE.getDefault());
+    }
+
+    /** The ticks between two shots of one FE defence. */
+    public static int feDefenceInterval() {
+        return SPEC.isLoaded() ? FE_DEFENCE_INTERVAL.getAsInt() : FE_DEFENCE_INTERVAL.getDefault();
+    }
+
+    /** The FE an FE defence spends on a shot. */
+    public static int feDefenceFePerShot() {
+        return SPEC.isLoaded() ? FE_DEFENCE_FE_PER_SHOT.getAsInt() : FE_DEFENCE_FE_PER_SHOT.getDefault();
+    }
+
+    /** How many shots' worth of FE an FE defence stores. */
+    public static int feDefenceStoreShots() {
+        return SPEC.isLoaded() ? FE_DEFENCE_STORE_SHOTS.getAsInt() : FE_DEFENCE_STORE_SHOTS.getDefault();
     }
 }

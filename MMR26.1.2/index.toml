@@ -49,8 +49,12 @@ file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/man
 hash = "99185c611e6eb5735ebb50ed52a6723c1b3b095f66ed71f540aca73ddb27774d"
 
 [[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/fe_defence.md"
+hash = "05dfb8424c6eaa607d72dc1d4a266bf9a336e55cb1528af20fe512d21cbda08b"
+
+[[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/index.md"
-hash = "fbc40ee821346b43aaf62873fb2c0da83ae93a6780fbf92ada2942ad01fa57a6"
+hash = "94fb1d0f9f749bd80af85098f6782f1420d959364daa84d52ab0a4cce93b320c"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/lab.md"
@@ -419,6 +423,10 @@ hash = "e7f3199f4bacece01467ac1274b0f6bfd7d23e5a4364f91bf19d4f5fa6658b47"
 [[files]]
 file = "kubejs/server_scripts/decomposing.js"
 hash = "145221eb84beab7a82d65fb3b07ff313ed874ff64743b0e61d3307435a454bcc"
+
+[[files]]
+file = "kubejs/server_scripts/defences.js"
+hash = "38f09907876cb69cd2f6056e6d22d217e4557bef55d9ef08906a40fe8d44e0df"
 
 [[files]]
 file = "kubejs/server_scripts/generators.js"
