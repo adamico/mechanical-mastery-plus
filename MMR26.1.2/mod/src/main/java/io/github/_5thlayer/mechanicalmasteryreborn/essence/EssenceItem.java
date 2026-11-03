@@ -20,16 +20,10 @@ import net.minecraft.world.level.Level;
 /**
  * An essence, which a right-click decomposes by hand (the line's glossary: Decompose): one recipe's worth
  * of it becomes the lowest core's yield of its mix ({@link ServerConfig#byHand}), straight into the inventory,
- * and whatever doesn't fit drops. The essence then rests for {@link #HAND_COOLDOWN} ticks, shown on the hotbar,
+ * and whatever doesn't fit drops. The essence then rests for {@link ServerConfig#handCooldown} ticks, shown on the hotbar,
  * so a Recycler is much the faster way. A decompose by hand is recorded as one, and never wakes C.O.D. (#167).
  */
 public final class EssenceItem extends Item {
-
-    /**
-     * Ticks between two decomposes by hand: four times what one hand drive takes on a tier-1 core, 8 turns
-     * of 5 ticks (a placeholder #168 balances).
-     */
-    public static final int HAND_COOLDOWN = 160;
 
     public EssenceItem(Properties properties) {
         super(properties);
@@ -64,7 +58,7 @@ public final class EssenceItem extends Item {
                 player.getInventory().placeItemBackInInventory(result.create().copyWithCount(returned));
             }
         }
-        player.getCooldowns().addCooldown(decomposed, HAND_COOLDOWN);
+        player.getCooldowns().addCooldown(decomposed, ServerConfig.handCooldown());
         Essences.of(decomposed.getItem()).ifPresent(essence -> DecomposeLog.record(server.getServer(), Teams.of(player), essence, count,
                 DecomposeLog.Way.HAND));
         return InteractionResult.SUCCESS_SERVER;

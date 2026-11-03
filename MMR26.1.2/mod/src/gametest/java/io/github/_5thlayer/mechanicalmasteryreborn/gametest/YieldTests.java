@@ -32,7 +32,7 @@ final class YieldTests {
             var build = RecyclerBuild.standard(helper);
             build.feed(new ItemStack(Essences.item(Essence.REGULAR)));
             helper.assertValueEqual(build.core().work(), Work.DECOMPOSING, "what a Recycler holding an essence does");
-            build.turn(RecyclerCoreBlockEntity.TURNS);
+            build.turn(RecyclerCoreBlockEntity.turnsNeeded());
             build.expectOutputs(new ItemStack(Items.COBBLESTONE), new ItemStack(Items.OAK_PLANKS, 2));
         });
         helper.succeed();

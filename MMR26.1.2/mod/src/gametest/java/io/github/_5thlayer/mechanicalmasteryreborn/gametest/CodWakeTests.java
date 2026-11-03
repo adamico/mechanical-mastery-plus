@@ -92,7 +92,7 @@ final class CodWakeTests {
         empty(helper, OTHER_COD);
         var build = RecyclerBuild.standard(helper);
         build.feed(1);
-        build.turn(RecyclerCoreBlockEntity.TURNS);
+        build.turn(RecyclerCoreBlockEntity.turnsNeeded());
         helper.assertTrue(state(helper).isAwake(team), "the team whose Recycler decomposed is still dormant");
         helper.assertFalse(state(helper).isAwake(other), "another team woke");
         helper.runAtTickTime(waking() + MARGIN, () -> {

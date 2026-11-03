@@ -14,8 +14,8 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 
 /**
  * The mod's server config. The Recycler's settings: each core tier's yield (the line's glossary: Yield), the share of a mix,
- * or of what made an item, that one decompose or recycle returns, and decomposing by hand the lowest core's; and the FE
- * drive's pace, cost and store; and the food a hand drive's turn costs.
+ * or of what made an item, that one decompose or recycle returns, and decomposing by hand the lowest core's; the turns a
+ * core takes; the hand cooldown; the FE drive's pace, cost and store; and the food a hand drive's turn costs.
  *
  * <p>And the recipe types recycling reads as assembling. The mod names no suite mod (libworks ADR 0013), so the pack names
  * Craftworks' assembling type there.
@@ -35,6 +35,19 @@ public final class ServerConfig {
                     "each part of an item left over as the chance of one more. Decomposing by hand returns the same.")
             .defineInRange("recycler.yield.tier_1", 0.25, 0.0, 1.0);
 
+    /** Turns a decompose or a recycle takes on a tier-1 core: one hand drive cranked without a pause does it in 2 seconds. */
+    public static final ModConfigSpec.IntValue TIER_1_TURNS = BUILDER
+            .comment("The turns of its drives a tier-1 core takes to decompose or recycle one. 8 turns of 5 ticks is 2 seconds",
+                    "on one hand drive cranked without a pause, which is C.O.D.'s waking pace (cod.waking_interval), and",
+                    "at the hand drive's 0.5 exhaustion a turn about one hunger point an essence.")
+            .defineInRange("recycler.core.tier_1.turns", 8, 1, 1_000_000);
+
+    /** Ticks an essence rests after a decompose by hand: four times a hand drive's 8 turns, so a Recycler is much the faster way. */
+    public static final ModConfigSpec.IntValue HAND_COOLDOWN = BUILDER
+            .comment("The ticks an essence rests after a decompose by hand, shown on the hotbar. 160 is 8 seconds, four times what",
+                    "one hand drive takes on a tier-1 core, and slower than a dormant C.O.D. (cod.dormant_interval).")
+            .defineInRange("recycler.hand.cooldown", 160, 0, 72000);
+
     /** What a hand drive's turn that counts costs the player turning it: about a hunger point an essence (#222). */
     public static final ModConfigSpec.DoubleValue HAND_DRIVE_EXHAUSTION = BUILDER
             .comment("The food exhaustion each turn of a hand drive that counts adds to the player who turned it, as sprinting does.",
@@ -46,10 +59,16 @@ public final class ServerConfig {
             .comment("The ticks between two turns of one FE drive. 5 is as fast as a hand drive turns, one player cranking without a pause.")
             .defineInRange("recycler.fe_drive.interval", HandDriveBlock.CAP, 1, 72000);
 
-    /** What an FE drive spends on a turn that counts: cheap enough for an early engine. */
+    /**
+     * What an FE drive spends on a turn that counts (#207): 60 FE, 12 FE/t a drive, so one Steam Engine (450 FE/t) runs a
+     * bank of drives, a Solar Panel (30 FE/t at peak) two, and a 30-minute energy challenge, run on banked FE alone, takes
+     * about nine Accumulators (50,000 FE each).
+     */
     public static final ModConfigSpec.IntValue FE_DRIVE_FE_PER_TURN = BUILDER
-            .comment("The FE an FE drive spends on each turn that counts. It spends nothing on a turn its Recycler can't use.")
-            .defineInRange("recycler.fe_drive.fe_per_turn", 40, 1, 1_000_000);
+            .comment("The FE an FE drive spends on each turn that counts. It spends nothing on a turn its Recycler can't use.",
+                    "60 is 12 FE/t a drive at its default pace: a Steam Engine runs 37, a Solar Panel at peak 2, and under the",
+                    "energy handicap, which runs drives on banked FE alone, a 30-minute race takes about 9 Accumulators.")
+            .defineInRange("recycler.fe_drive.fe_per_turn", 60, 1, 1_000_000);
 
     /** How much an FE drive stores, in turns. */
     public static final ModConfigSpec.IntValue FE_DRIVE_STORE_TURNS = BUILDER
@@ -75,18 +94,26 @@ public final class ServerConfig {
                     "40 is 2 seconds, about what one hand drive turned without a pause decomposes (8 turns, 5 ticks apart).")
             .defineInRange("cod.waking_interval", 40, 1, 72000);
 
-    /** How much faster an awake C.O.D. grows each minute of a challenge, from its waking pace: a placeholder until the balance pass (#207). */
+    /**
+     * How much faster an awake C.O.D. grows each minute of a challenge, from its waking pace (#207): a twentieth, so a team
+     * that keeps level needs one more full-time drive every twenty minutes.
+     */
     public static final ModConfigSpec.DoubleValue COD_PACE_GROWTH = BUILDER
             .comment("The share of its waking pace an awake C.O.D.'s pace grows by each minute since its team's challenge began,",
-                    "without end: 0.1 is twice the waking pace ten minutes in, three times twenty minutes in. 0 keeps the waking pace.",
+                    "without end: 0.05 is twice the waking pace twenty minutes in, three times forty minutes in, so a team that",
+                    "keeps level needs one more full-time drive every twenty minutes. 0 keeps the waking pace.",
                     "It never makes more than one essence a tick.")
-            .defineInRange("cod.pace_growth", 0.1, 0.0, 100.0);
+            .defineInRange("cod.pace_growth", 0.05, 0.0, 100.0);
 
-    /** The excess Inflation may reach while a challenge is played: a placeholder until the balance pass (#207). */
+    /**
+     * The excess Inflation may reach while a challenge is played (#207): ten stacks, which a team that decomposes nothing
+     * reaches about fifteen minutes in at the default waking pace and growth.
+     */
     public static final ModConfigSpec.IntValue COD_INFLATION_CAP = BUILDER
             .comment("The excess of Advanced essence C.O.D. may make beyond what a team decomposes while it plays a challenge:",
-                    "its Inflation's cap, which the team's bar fills toward. 256 is four stacks, a placeholder.")
-            .defineInRange("cod.inflation_cap", 256, 1, 1_000_000);
+                    "its Inflation's cap, which the team's bar fills toward. 640 is ten stacks: a team that decomposes nothing",
+                    "reaches it about fifteen minutes in at the default waking pace and growth.")
+            .defineInRange("cod.inflation_cap", 640, 1, 1_000_000);
 
     /** The share of a sale the money handicap pays (#213). */
     public static final ModConfigSpec.DoubleValue MONEY_SALE_SHARE = BUILDER
@@ -101,6 +128,16 @@ public final class ServerConfig {
 
     public static void register(ModContainer container) {
         container.registerConfig(ModConfig.Type.SERVER, SPEC);
+    }
+
+    /** The turns a core of {@code tier} takes to decompose or recycle one; tier 1 is the only one yet. */
+    public static int turnsOf(int tier) {
+        return SPEC.isLoaded() ? TIER_1_TURNS.getAsInt() : TIER_1_TURNS.getDefault();
+    }
+
+    /** The ticks an essence rests after a decompose by hand. */
+    public static int handCooldown() {
+        return SPEC.isLoaded() ? HAND_COOLDOWN.getAsInt() : HAND_COOLDOWN.getDefault();
     }
 
     /** The yield of a core of {@code tier}; tier 1 is the only one yet. */

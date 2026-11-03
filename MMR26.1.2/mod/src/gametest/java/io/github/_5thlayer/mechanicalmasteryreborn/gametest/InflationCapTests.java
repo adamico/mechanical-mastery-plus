@@ -37,7 +37,7 @@ import net.minecraft.world.level.GameType;
 /**
  * Inflation's cap (#206): reaching it resets the challenge, Inflation back to nothing and C.O.D. back to its waking
  * pace as though the challenge had just begun, and keeps the island and the team's handicap; nearing it warns the
- * team. The tests play at the configured cap, 256 by default, which must be 5 or more for 80% of it to fall short of
+ * team. The tests play at the configured cap, 640 by default, which must be 5 or more for 80% of it to fall short of
  * it, and count what C.O.D. makes straight into the team's state, so they needn't wait for it. A challenge chosen as of an earlier game time stands for one that has gone on
  * that long. Each test is an island of its own.
  */
@@ -50,9 +50,9 @@ final class InflationCapTests {
     private static final BlockPos CHEST = new BlockPos(3, 2, 1);
     /** The default {@code cod.waking_interval} the tests play at. */
     private static final int WAKING = 40;
-    /** Twice the waking pace, ten minutes into a challenge at the default growth. */
+    /** Twice the waking pace, twenty minutes into a challenge at the default growth. */
     private static final int TWICE = WAKING / 2;
-    private static final int TEN_MINUTES = 12000;
+    private static final int TWENTY_MINUTES = 24000;
 
     private static final String RESET = "mechanicalmasteryreborn.challenge.reset";
     private static final String WARNING = "mechanicalmasteryreborn.challenge.warning";
@@ -68,7 +68,7 @@ final class InflationCapTests {
         tests.test("inflation_cap_warning_waits_for_a_player_online", 10, InflationCapTests::warningWaitsForAPlayer);
     }
 
-    /** Ten minutes in, C.O.D. at twice its waking pace, the team reaches its cap and is told the challenge was reset. */
+    /** Twenty minutes in, C.O.D. at twice its waking pace, the team reaches its cap and is told the challenge was reset. */
     private static void resetsAndKeeps(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         Listener player = Listener.of(helper, team);
@@ -76,9 +76,9 @@ final class InflationCapTests {
         helper.setBlock(CHEST, Blocks.CHEST);
         helper.getBlockEntity(CHEST, ChestBlockEntity.class).setItem(0, new ItemStack(Items.IRON_INGOT, 5));
         state(helper).wake(team);
-        choose(helper, team, TEN_MINUTES);
+        choose(helper, team, TWENTY_MINUTES);
         helper.runAtTickTime(1, () -> {
-            helper.assertValueEqual(cod(helper).interval(), TWICE, "the interval ten minutes into the challenge");
+            helper.assertValueEqual(cod(helper).interval(), TWICE, "the interval twenty minutes into the challenge");
             make(helper, team, cap() - 1);
         });
         helper.runAtTickTime(2, () -> {
@@ -113,8 +113,8 @@ final class InflationCapTests {
         helper.setBlock(OTHER_COD, Cod.BLOCK.get());
         state(helper).wake(team);
         state(helper).wake(other);
-        choose(helper, team, TEN_MINUTES);
-        choose(helper, other, TEN_MINUTES);
+        choose(helper, team, TWENTY_MINUTES);
+        choose(helper, other, TWENTY_MINUTES);
         helper.runAtTickTime(1, () -> {
             make(helper, team, cap());
             make(helper, other, cap() - 1);

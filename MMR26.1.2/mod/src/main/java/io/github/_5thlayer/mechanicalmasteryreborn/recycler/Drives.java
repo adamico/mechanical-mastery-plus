@@ -28,7 +28,7 @@ final class Drives {
         double z = pos.getZ() + 0.5;
         switch (turn) {
             case COUNTED -> {
-                float progress = (float) core.turns() / RecyclerCoreBlockEntity.TURNS;
+                float progress = (float) core.turns() / RecyclerCoreBlockEntity.turnsNeeded();
                 level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.4F, 0.7F + 0.6F * progress);
                 level.sendParticles(ParticleTypes.ELECTRIC_SPARK, x, y, z, 3, 0.25, 0.05, 0.25, 0.05);
             }

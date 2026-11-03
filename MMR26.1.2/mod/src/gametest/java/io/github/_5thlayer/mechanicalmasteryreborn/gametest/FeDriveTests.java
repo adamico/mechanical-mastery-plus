@@ -59,11 +59,11 @@ final class FeDriveTests {
         build.feed(1);
         for (BlockPos place : build.places) {
             if (helper.getBlockState(place).is(Recycler.FE_DRIVE.get())) {
-                helper.assertValueEqual(give(helper, place, turns(RecyclerCoreBlockEntity.TURNS)), turns(RecyclerCoreBlockEntity.TURNS),
+                helper.assertValueEqual(give(helper, place, turns(RecyclerCoreBlockEntity.turnsNeeded())), turns(RecyclerCoreBlockEntity.turnsNeeded()),
                         "the FE a drive took");
             }
         }
-        int expected = (RecyclerCoreBlockEntity.TURNS / drives - 1) * ServerConfig.feDriveInterval();
+        int expected = (RecyclerCoreBlockEntity.turnsNeeded() / drives - 1) * ServerConfig.feDriveInterval();
         timed(helper, build, expected, drives + " FE drive(s)", () -> {
         });
     }
@@ -77,7 +77,7 @@ final class FeDriveTests {
             helper.assertValueEqual(build.core().turns(), 3, "the turns three turns' worth of FE gave");
             helper.assertValueEqual(face(helper, drive).getAmountAsLong(), 0L, "the FE left in the drive");
             helper.assertTrue(build.outputsEmpty(), "the Recycler decomposed on three turns' worth of FE");
-            give(helper, drive, turns(RecyclerCoreBlockEntity.TURNS - 3));
+            give(helper, drive, turns(RecyclerCoreBlockEntity.turnsNeeded() - 3));
         });
         helper.runAfterDelay(12 * ServerConfig.feDriveInterval(), () -> {
             build.expectAdvancedMix();
@@ -89,10 +89,10 @@ final class FeDriveTests {
     private static void withHandDrive(GameTestHelper helper) {
         var build = RecyclerBuild.build(helper, Direction.SOUTH, drives(Recycler.FE_DRIVE.get(), Recycler.HAND_DRIVE.get()));
         build.feed(1);
-        give(helper, build.firstOf(Recycler.FE_DRIVE.get()), turns(RecyclerCoreBlockEntity.TURNS));
+        give(helper, build.firstOf(Recycler.FE_DRIVE.get()), turns(RecyclerCoreBlockEntity.turnsNeeded()));
         BlockPos hand = build.firstOf(Recycler.HAND_DRIVE.get());
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
-        int expected = (RecyclerCoreBlockEntity.TURNS / 2 - 1) * ServerConfig.feDriveInterval();
+        int expected = (RecyclerCoreBlockEntity.turnsNeeded() / 2 - 1) * ServerConfig.feDriveInterval();
         timed(helper, build, expected, "an FE drive and a hand drive", () -> helper.useBlock(hand, player));
     }
 

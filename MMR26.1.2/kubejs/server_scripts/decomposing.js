@@ -3,8 +3,9 @@
 // What decomposing gives, by hand or on a Recycler (#166): each essence's one fixed mix at full amounts, in the
 // order a Recycler puts it on its outputs, of which a decompose returns its yield (#184: a quarter on a tier-1
 // core and by hand, each part left over the chance of one more), and the Recycler's parts, made from wood and stone
-// alone so that a team builds its first Recycler from the island. The amounts and the parts' costs are placeholders,
-// which #207's balance pass tunes.
+// alone so that a team builds its first Recycler from the island. The amounts, one of each kind, and the parts' costs
+// are #207's first balance set: the amounts shape the build economy, not the win, so they stay at one until a
+// playtest names a shortage, and cobblestone stays the scarcest resource by design.
 // What other items recycle into the mod derives from their recipes; a mechanicalmasteryreborn:recycling recipe
 // here would override one.
 ServerEvents.recipes(event => {
