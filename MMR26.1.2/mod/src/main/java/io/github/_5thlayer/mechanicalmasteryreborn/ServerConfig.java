@@ -4,18 +4,19 @@
 package io.github._5thlayer.mechanicalmasteryreborn;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.HandDriveBlock;
-import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
+import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import net.minecraft.resources.Identifier;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 /**
- * The mod's server config. The Recycler's settings: each core tier's yield (the line's glossary: Yield), the share of a mix,
- * or of what made an item, that one decompose or recycle returns, and decomposing by hand the lowest core's; the turns a
- * core takes; the hand cooldown; the FE drive's pace, cost and store; and the food a hand drive's turn costs.
+ * The mod's server config. The Recycler's settings: the yield (the line's glossary: Yield), the share of a mix, or of what
+ * made an item, that one decompose or recycle returns, on every core and by hand; the turns each core tier takes; the hand cooldown; the FE
+ * drive's pace, cost and store; and the food a hand drive's turn costs.
  *
  * <p>And the recipe types recycling reads as assembling. The mod names no suite mod (libworks ADR 0013), so the pack names
  * Craftworks' assembling type there.
@@ -29,18 +30,20 @@ public final class ServerConfig {
 
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-    /** A tier-1 core's yield, and decomposing by hand's: a quarter, as Factorio's recycler returns. */
-    public static final ModConfigSpec.DoubleValue TIER_1_YIELD = BUILDER
-            .comment("The share of a mix, or of what made an item, that a tier-1 core returns per decompose or recycle,",
+    /** Every core's yield, and decomposing by hand's: a quarter, as Factorio's recycler returns. */
+    public static final ModConfigSpec.DoubleValue YIELD = BUILDER
+            .comment("The share of a mix, or of what made an item, that a core of any tier returns per decompose or recycle,",
                     "each part of an item left over as the chance of one more. Decomposing by hand returns the same.")
-            .defineInRange("recycler.yield.tier_1", 0.25, 0.0, 1.0);
+            .defineInRange("recycler.yield", 0.25, 0.0, 1.0);
 
-    /** Turns a decompose or a recycle takes on a tier-1 core: one hand drive cranked without a pause does it in 2 seconds. */
-    public static final ModConfigSpec.IntValue TIER_1_TURNS = BUILDER
-            .comment("The turns of its drives a tier-1 core takes to decompose or recycle one. 8 turns of 5 ticks is 2 seconds",
-                    "on one hand drive cranked without a pause, which is C.O.D.'s waking pace (cod.waking_interval), and",
-                    "at the hand drive's 0.5 exhaustion a turn about one hunger point an essence.")
-            .defineInRange("recycler.core.tier_1.turns", 8, 1, 1_000_000);
+    /** The turns a decompose or a recycle takes on each core tier, the tier-1 one first: a higher core runs faster (#189). */
+    private static final List<ModConfigSpec.IntValue> TURNS = IntStream.rangeClosed(1, Recycler.TIERS)
+            .mapToObj(tier -> BUILDER
+                    .comment("The turns of its drives a decompose or a recycle takes on a tier-" + tier + " core. The tier-1 core's 8",
+                            "turns of 5 ticks is 2 seconds on one hand drive cranked without a pause, C.O.D.'s waking pace",
+                            "(cod.waking_interval), and at the hand drive's 0.5 exhaustion a turn about one hunger point an essence.")
+                    .defineInRange("recycler.core.tier_" + tier + ".turns", 10 - 2 * tier, 1, 1_000_000))
+            .toList();
 
     /** Ticks an essence rests after a decompose by hand: four times a hand drive's 8 turns, so a Recycler is much the faster way. */
     public static final ModConfigSpec.IntValue HAND_COOLDOWN = BUILDER
@@ -130,19 +133,20 @@ public final class ServerConfig {
         container.registerConfig(ModConfig.Type.SERVER, SPEC);
     }
 
-    /** The turns a core of {@code tier} takes to decompose or recycle one; tier 1 is the only one yet. */
-    public static int turnsOf(int tier) {
-        return SPEC.isLoaded() ? TIER_1_TURNS.getAsInt() : TIER_1_TURNS.getDefault();
-    }
-
     /** The ticks an essence rests after a decompose by hand. */
     public static int handCooldown() {
         return SPEC.isLoaded() ? HAND_COOLDOWN.getAsInt() : HAND_COOLDOWN.getDefault();
     }
 
-    /** The yield of a core of {@code tier}; tier 1 is the only one yet. */
-    public static double yieldOf(int tier) {
-        return SPEC.isLoaded() ? TIER_1_YIELD.getAsDouble() : TIER_1_YIELD.getDefault();
+    /** The yield of every core, and of decomposing by hand. */
+    public static double yield() {
+        return SPEC.isLoaded() ? YIELD.getAsDouble() : YIELD.getDefault();
+    }
+
+    /** The turns a decompose or a recycle takes on a core of {@code tier}, from 1 to {@link Recycler#TIERS}. */
+    public static int turnsOf(int tier) {
+        var turns = TURNS.get(tier - 1);
+        return SPEC.isLoaded() ? turns.getAsInt() : turns.getDefault();
     }
 
     /** The recipe types recycling reads as assembling. */
@@ -193,10 +197,5 @@ public final class ServerConfig {
     /** How many turns' worth of FE an FE drive stores. */
     public static int feDriveStoreTurns() {
         return SPEC.isLoaded() ? FE_DRIVE_STORE_TURNS.getAsInt() : FE_DRIVE_STORE_TURNS.getDefault();
-    }
-
-    /** Decomposing by hand's yield: the lowest core's, so a Recycler never does worse. */
-    public static double byHand() {
-        return yieldOf(RecyclerCoreBlockEntity.TIER);
     }
 }

@@ -81,6 +81,11 @@ ServerEvents.recipes(event => {
   const part = (result, ingredients) => event.recipes.craftworks.assembling(result, ingredients)
     .id(`mechanicalmasteryreborn:assembling/${result.split(':')[1]}`)
   part('mechanicalmasteryreborn:recycler_core_1', ['4x minecraft:smooth_stone', '4x #minecraft:planks'])
+  // Each higher core is made from the one below and materials a band higher each tier: refined, then intermediate 1,
+  // then intermediate 2, none of them any one challenge's (#189).
+  part('mechanicalmasteryreborn:recycler_core_2', ['mechanicalmasteryreborn:recycler_core_1', '4x minecraft:iron_ingot', '4x minecraft:smooth_stone'])
+  part('mechanicalmasteryreborn:recycler_core_3', ['mechanicalmasteryreborn:recycler_core_2', '4x minecraft:piston', '4x minecraft:iron_bars'])
+  part('mechanicalmasteryreborn:recycler_core_4', ['mechanicalmasteryreborn:recycler_core_3', '2x minecraft:hopper', '2x minecraft:blast_furnace'])
   part('mechanicalmasteryreborn:hand_drive', ['2x minecraft:stick', '2x #minecraft:planks', 'minecraft:cobblestone'])
   part('mechanicalmasteryreborn:fe_drive', ['mechanicalmasteryreborn:hand_drive', '4x minecraft:redstone', '2x minecraft:iron_ingot'])
   part('mechanicalmasteryreborn:recycler_input', ['minecraft:chest', '2x #minecraft:planks'])

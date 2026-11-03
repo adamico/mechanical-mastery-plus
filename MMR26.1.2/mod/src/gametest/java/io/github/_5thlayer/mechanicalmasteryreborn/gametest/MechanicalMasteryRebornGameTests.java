@@ -79,6 +79,8 @@ public final class MechanicalMasteryRebornGameTests {
         GeneratorTests.register(tests);
         HandDecomposeTests.register(tests);
         RecyclerTests.register(tests);
+        CoreTierTests.register(tests);
+        FloorTests.register(tests);
         FeDriveTests.register(tests);
         RecyclerInputTests.register(tests);
         RecyclingTests.register(tests);

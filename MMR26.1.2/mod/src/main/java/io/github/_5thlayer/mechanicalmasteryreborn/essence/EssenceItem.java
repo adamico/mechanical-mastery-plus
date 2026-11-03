@@ -19,7 +19,7 @@ import net.minecraft.world.level.Level;
 
 /**
  * An essence, which a right-click decomposes by hand (the line's glossary: Decompose): one recipe's worth
- * of it becomes the lowest core's yield of its mix ({@link ServerConfig#byHand}), straight into the inventory,
+ * of it becomes the yield of its mix, as on every core ({@link ServerConfig#yield}), straight into the inventory,
  * and whatever doesn't fit drops. The essence then rests for {@link ServerConfig#handCooldown} ticks, shown on the hotbar,
  * so a Recycler is much the faster way. A decompose by hand is recorded as one, and never wakes C.O.D. (#167).
  */
@@ -51,7 +51,7 @@ public final class EssenceItem extends Item {
         }
         ItemStack decomposed = stack.copyWithCount(count);
         stack.shrink(count);
-        double yield = ServerConfig.byHand();
+        double yield = ServerConfig.yield();
         for (ItemStackTemplate result : recipe.results()) {
             int returned = Yield.roll(result.count(), yield, server.getRandom()::nextDouble);
             if (returned > 0) {

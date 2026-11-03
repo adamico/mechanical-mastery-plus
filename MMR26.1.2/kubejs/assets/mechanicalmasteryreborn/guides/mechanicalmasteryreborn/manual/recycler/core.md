@@ -17,11 +17,20 @@ out, and it faces you as you place it, so place it from where you want its front
 it.
 
 It holds the essence, or the item to recycle, that its [inputs](input.md) take in, and the work under way. Its
-tier sets how fast the Recycler runs and how well: its **yield**, the share of a mix a decompose returns. A
+tier sets how fast the Recycler runs, how many turns of its drives a decompose or a recycle takes, and how
+many [floors](index.md#floors) it may have: one for each tier. Every core returns the same **yield**, the share of a mix a decompose returns, as decomposing by hand does. A
 Recycler with too few [outputs](output.md) for every kind still runs, returning only the kinds that fit, picked at
 random, and the rest are lost.
 
 Right-click it with an empty hand to take back the whole stack it holds. That gives up the work under way. Nothing
 else can take it out.
 
-Tier 1 is the first core, and builds a Recycler of one floor.
+There are four tiers. Tier 1 is the first core: 8 turns a decompose. Each higher core is made from the one below,
+and takes fewer turns:
+
+- [Tier 2](core_2.md): 6 turns.
+- [Tier 3](core_3.md): 4 turns.
+- [Tier 4](core_4.md): 2 turns.
+
+To upgrade, break the core and place the new one where it stood, facing the same way. Breaking it drops what it
+held and gives up the work under way. The core's tooltip shows the turns the server plays with.

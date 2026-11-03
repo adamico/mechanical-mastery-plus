@@ -4,6 +4,7 @@
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
@@ -93,6 +94,37 @@ final class RecyclerBuild {
             state = state.setValue(RecyclerOutputBlock.FACING, outward);
         }
         helper.setBlock(pos, state);
+    }
+
+    /** Puts a core of {@code tier} in the old core's place, facing the same way, as a player swaps one in. */
+    void swapCore(int tier) {
+        helper.setBlock(core, Recycler.core(tier).defaultBlockState().setValue(RecyclerCoreBlock.FACING, front));
+    }
+
+    /** The nine places of floor {@code floor} above the core's, in the order outputs are read: the eight, then over the core. */
+    List<BlockPos> floor(int floor) {
+        var positions = new ArrayList<BlockPos>();
+        for (int[] place : RecyclerLayout.upperPlaces(front.getStepX(), front.getStepZ())) {
+            positions.add(core.offset(place[0], floor, place[1]));
+        }
+        return positions;
+    }
+
+    /** Puts {@code parts} in the nine places of floor {@code floor}, null for none. */
+    void buildFloor(int floor, Block... parts) {
+        List<BlockPos> positions = floor(floor);
+        for (int i = 0; i < parts.length; i++) {
+            if (parts[i] != null) {
+                helper.setBlock(positions.get(i), parts[i].defaultBlockState());
+            }
+        }
+    }
+
+    /** A floor of nine casings. */
+    static Block[] casings() {
+        Block[] nine = new Block[9];
+        Arrays.fill(nine, Recycler.CASING.get());
+        return nine;
     }
 
     RecyclerCoreBlockEntity core() {

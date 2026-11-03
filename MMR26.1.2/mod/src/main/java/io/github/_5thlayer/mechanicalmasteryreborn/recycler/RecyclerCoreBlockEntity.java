@@ -49,9 +49,10 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * A Recycler's core: its one input buffer, the turns its drives have delivered, and the work. Each turn
- * counts only while the Recycler can work what it holds; the {@link #turnsNeeded() last} decomposes one recipe's worth
+ * counts only while the Recycler can work what it holds; the last of its tier's turns ({@link ServerConfig#turnsOf})
+ * decomposes one recipe's worth
  * of an essence into its mix, or recycles one of anything else into what made it ({@link Recycling}), onto the
- * outputs. Either returns the core's {@link Yield} of the full amounts ({@link ServerConfig}). It needs no power
+ * outputs. Either returns the {@link Yield} of the full amounts, the same on every core ({@link ServerConfig}). It needs no power
  * and no ticking: drives turn it.
  *
  * <p>Each kind, in the order the work names them, lands on the first position already holding its item with room for
@@ -68,14 +69,6 @@ import org.jspecify.annotations.Nullable;
  * client is sent what it holds, so a click on an empty core can pass there too.
  */
 public final class RecyclerCoreBlockEntity extends BlockEntity {
-
-    /** The first core's tier. */
-    public static final int TIER = 1;
-
-    /** Turns a decompose or a recycle takes on this core ({@link ServerConfig#turnsOf}). */
-    public static int turnsNeeded() {
-        return ServerConfig.turnsOf(TIER);
-    }
 
     private static final String BUFFER_KEY = "buffer";
     private static final String TURNS_KEY = "turns";
@@ -115,6 +108,16 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
 
     public RecyclerCoreBlockEntity(BlockPos pos, BlockState state) {
         super(Recycler.CORE_ENTITY.get(), pos, state);
+    }
+
+    /** This core's tier. */
+    public int tier() {
+        return ((RecyclerCoreBlock) getBlockState().getBlock()).tier();
+    }
+
+    /** The turns a decompose or a recycle takes on this core. */
+    public int turnsPerWork() {
+        return ServerConfig.turnsOf(tier());
     }
 
     /** The buffer as its inputs reach it: insert only, and only an essence a recipe decomposes or what recycles. */
@@ -184,11 +187,55 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         return plan().status();
     }
 
-    /** Whether {@code pos} is one of the eight places of this core's 3x3. */
+    /**
+     * Whether {@code pos} is a place of this core's Recycler: one of the eight around it on its own floor, or one of
+     * the nine of a floor above that counts.
+     */
     boolean holdsPlace(BlockPos pos) {
+        return reaches(pos) && pos.getY() - worldPosition.getY() < floors();
+    }
+
+    /**
+     * Whether this core would claim {@code pos} if no other core did: a place on its own floor, or in its 3x3 on a
+     * floor above, below the first that isn't full of parts and within its tier.
+     */
+    boolean reaches(BlockPos pos) {
         Direction front = getBlockState().getValue(RecyclerCoreBlock.FACING);
-        return pos.getY() == worldPosition.getY() && RecyclerLayout.isPlace(front.getStepX(), front.getStepZ(),
-                pos.getX() - worldPosition.getX(), pos.getZ() - worldPosition.getZ());
+        int floor = pos.getY() - worldPosition.getY();
+        int x = pos.getX() - worldPosition.getX();
+        int z = pos.getZ() - worldPosition.getZ();
+        if (floor == 0) {
+            return RecyclerLayout.isPlace(front.getStepX(), front.getStepZ(), x, z);
+        }
+        return floor > 0 && floor < builtFloors() && RecyclerLayout.inFootprint(front.getStepX(), front.getStepZ(), x, z);
+    }
+
+    /** The floors this Recycler counts: its own, then each one above whose nine places are all its parts alone. */
+    public int floors() {
+        int built = builtFloors();
+        int floors = 1;
+        while (floors < built && floorPositions(floors).stream()
+                .allMatch(pos -> RecyclerPart.reacherOf(level, pos).filter(core -> core == this).isPresent())) {
+            floors++;
+        }
+        return floors;
+    }
+
+    /** Its own floor, then each one above full of parts, up to as many in all as its tier. */
+    private int builtFloors() {
+        int floors = 1;
+        while (floors < tier() && floorPositions(floors).stream().allMatch(pos -> level.getBlockState(pos).getBlock() instanceof RecyclerPart)) {
+            floors++;
+        }
+        return floors;
+    }
+
+    /** The places of floor {@code floor}, the core's own 0, in the order outputs are read. */
+    private List<BlockPos> floorPositions(int floor) {
+        Direction front = getBlockState().getValue(RecyclerCoreBlock.FACING);
+        int[][] places = floor == 0 ? RecyclerLayout.places(front.getStepX(), front.getStepZ())
+                : RecyclerLayout.upperPlaces(front.getStepX(), front.getStepZ());
+        return Arrays.stream(places).map(place -> worldPosition.offset(place[0], floor, place[1])).toList();
     }
 
     /** What the Recycler does with what it holds, whether or not it can now. */
@@ -218,7 +265,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         }
         turns++;
         setChanged();
-        if (turns < turnsNeeded()) {
+        if (turns < turnsPerWork()) {
             return Turn.COUNTED;
         }
         turns = 0;
@@ -230,7 +277,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
     private void work(ServerLevel server, Plan plan) {
         ItemStack held = held();
         buffer.set(0, ItemResource.of(held), held.getCount() - plan.take());
-        double yield = ServerConfig.yieldOf(TIER);
+        double yield = ServerConfig.yield();
         for (Landing landing : plan.landings()) {
             int count = Yield.roll(landing.kind().amount(), yield, server.getRandom()::nextDouble);
             if (count > 0) {
@@ -277,7 +324,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
             }
             full = into.stream().map(share -> new Share<>(new ItemStackTemplate(share.item()), share.amount())).toList();
         }
-        double yield = ServerConfig.yieldOf(TIER);
+        double yield = ServerConfig.yield();
         List<ItemStack> most = full.stream()
                 .map(share -> share.item().create().copyWithCount(Yield.most(share.amount(), yield))).toList();
         int positions = outputs.size() * RecyclerLayout.POSITIONS_PER_OUTPUT;
@@ -360,30 +407,32 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
     }
 
     /**
-     * The outputs in the order a mix fills them, or null when the 3x3 isn't a whole Recycler: every one of the
-     * eight places a part of this core's alone, with at least one drive, input and output among them.
+     * The outputs in the order a mix fills them, floor by floor upward, or null when the Recycler isn't whole: every
+     * one of the eight places on the core's floor a part of this core's alone, with at least one drive, input and
+     * output across the floors that count.
      */
     private @Nullable List<RecyclerOutputBlockEntity> outputs() {
-        Direction front = getBlockState().getValue(RecyclerCoreBlock.FACING);
         var outputs = new ArrayList<RecyclerOutputBlockEntity>();
         boolean drive = false;
         boolean input = false;
-        for (int[] place : RecyclerLayout.places(front.getStepX(), front.getStepZ())) {
-            BlockPos pos = worldPosition.offset(place[0], 0, place[1]);
-            if (!(level.getBlockState(pos).getBlock() instanceof RecyclerPart part)
-                    || RecyclerPart.coreOf(level, pos).filter(core -> core == this).isEmpty()) {
-                return null;
-            }
-            switch (part.role()) {
-                case DRIVE -> drive = true;
-                case INPUT -> input = true;
-                case OUTPUT -> {
-                    if (!(level.getBlockEntity(pos) instanceof RecyclerOutputBlockEntity output)) {
-                        return null;
-                    }
-                    outputs.add(output);
+        int floors = floors();
+        for (int floor = 0; floor < floors; floor++) {
+            for (BlockPos pos : floorPositions(floor)) {
+                if (!(level.getBlockState(pos).getBlock() instanceof RecyclerPart part)
+                        || RecyclerPart.coreOf(level, pos).filter(core -> core == this).isEmpty()) {
+                    return null;
                 }
-                case CASING -> {
+                switch (part.role()) {
+                    case DRIVE -> drive = true;
+                    case INPUT -> input = true;
+                    case OUTPUT -> {
+                        if (!(level.getBlockEntity(pos) instanceof RecyclerOutputBlockEntity output)) {
+                            return null;
+                        }
+                        outputs.add(output);
+                    }
+                    case CASING -> {
+                    }
                 }
             }
         }

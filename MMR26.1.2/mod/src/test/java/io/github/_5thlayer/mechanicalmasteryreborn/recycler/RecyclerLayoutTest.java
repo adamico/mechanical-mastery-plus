@@ -61,4 +61,23 @@ class RecyclerLayoutTest {
             assertTrue(RecyclerLayout.isPlace(front[0], front[1], -front[0], -front[1]), "the centre");
         }
     }
+
+    @Test
+    void anUpperFloorReadsTheEightThenThePlaceOverTheCore() {
+        assertArrayEquals(new int[][] {{-1, 0}, {-1, -1}, {-1, -2}, {0, -2}, {1, -2}, {1, -1}, {1, 0}, {0, -1}, {0, 0}},
+                RecyclerLayout.upperPlaces(0, 1));
+    }
+
+    @Test
+    void theFootprintIsTheNinePlacesTheCoreAmongThem() {
+        int found = 0;
+        for (int x = -3; x <= 3; x++) {
+            for (int z = -3; z <= 3; z++) {
+                found += RecyclerLayout.inFootprint(0, 1, x, z) ? 1 : 0;
+            }
+        }
+        assertEquals(9, found);
+        assertTrue(RecyclerLayout.inFootprint(0, 1, 0, 0), "the core's own place");
+        assertFalse(RecyclerLayout.inFootprint(0, 1, 0, 1), "in front of the core");
+    }
 }
