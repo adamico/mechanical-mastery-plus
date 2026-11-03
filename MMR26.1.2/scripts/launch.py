@@ -9,8 +9,13 @@
 # pack's mods while the mod is not yet on CurseForge. The next run takes it out again, so --released
 # plays the pack's own jars. The suite is always the pack's released jars.
 #
+# The launcher copies only what index.toml lists, so each run refreshes it with packwiz first, and
+# puts index.toml and pack.toml back as they were afterwards: a branch never commits a refresh, which is
+# done once on main (AGENTS.md).
+#
 # launch_pack.py is found in skillworks' plugin, or where QUICKLAUNCH_LAUNCHER names it.
 import argparse
+import contextlib
 import importlib.util
 import json
 import os
@@ -48,6 +53,21 @@ def launcher():
     if not hasattr(module, "repo_builds"):
         fail(f"{found} is older than skillworks 0.11.7, which this script needs; update skillworks.")
     return module
+
+
+@contextlib.contextmanager
+def refreshed():
+    """Refreshes the pack's index for the copy into the profile, then puts index.toml and pack.toml back
+    as they were, so a launch leaves the checkout as it found it."""
+    files = [PACK / "index.toml", PACK / "pack.toml"]
+    kept = {f: f.read_bytes() for f in files}
+    try:
+        if subprocess.run(["packwiz", "refresh"], cwd=PACK).returncode:
+            fail("packwiz refresh failed; run `mise install` in this folder for the pinned packwiz.")
+        yield
+    finally:
+        for f, content in kept.items():
+            f.write_bytes(content)
 
 
 def add(lp, game, mod, jar, version, dry_run):
@@ -104,7 +124,9 @@ def main():
             fail(f"no build of the companion mod in {PACK / 'mod/build/libs'}: build it first, "
                  f"(cd {PACK / 'mod'} && sh ./gradlew build).")
         jars = [(MOD_ID, built[0].resolve(), built[1])] if built else []
-        lp.sync(PACK, pack, game, beside, PACK, args.released, args.dry_run)
+        with refreshed():
+            lp.sync(PACK, tomllib.loads((PACK / "pack.toml").read_text()), game, beside, PACK,
+                    args.released, args.dry_run)
 
     for mod, jar, version in jars:
         add(lp, game, mod, jar, version, args.dry_run)

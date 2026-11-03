@@ -11,7 +11,7 @@ The 26.1.2 pack line, on NeoForge: a skyblock where each team starts on its own 
 
 ## Working on the pack
 
-From this folder, `mise install` installs the pinned packwiz. Add a mod with `packwiz cf add <slug>` and give it a role in `MODS.md`; `packwiz refresh` after changing a config or script. `packwiz cf export` writes the pack's zip.
+From this folder, `mise install` installs the pinned packwiz. Add a mod with `packwiz cf add <slug>` and give it a role in `MODS.md`; `packwiz refresh` on `main` after merging a change to a config or script; a branch leaves `index.toml` and `pack.toml` alone, and `scripts/launch.py` refreshes them for its run (`AGENTS.md`). `packwiz cf export` writes the pack's zip.
 
 ## Playing it locally
 
