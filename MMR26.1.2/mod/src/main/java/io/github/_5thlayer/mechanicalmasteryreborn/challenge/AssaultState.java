@@ -32,17 +32,18 @@ import net.minecraft.world.level.saveddata.SavedDataType;
  */
 public final class AssaultState extends SavedData {
 
-    /** One Assault: what it built in {@code dimension}, and its gate's entity, if one opened. */
-    public record Built(ResourceKey<Level> dimension, List<BlockPos> blocks, Optional<UUID> gate) {
+    /** One Assault: what it built in {@code dimension}, and the entities of the gates open, one per side where one opened. */
+    public record Built(ResourceKey<Level> dimension, List<BlockPos> blocks, List<UUID> gates) {
 
         static final Codec<Built> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Level.RESOURCE_KEY_CODEC.fieldOf("dimension").forGetter(Built::dimension),
                 BlockPos.CODEC.listOf().fieldOf("blocks").forGetter(Built::blocks),
-                UUIDUtil.STRING_CODEC.optionalFieldOf("gate").forGetter(Built::gate))
+                UUIDUtil.STRING_CODEC.listOf().optionalFieldOf("gates", List.of()).forGetter(Built::gates))
                 .apply(instance, Built::new));
 
         public Built {
             blocks = List.copyOf(blocks);
+            gates = List.copyOf(gates);
         }
     }
 
@@ -99,10 +100,26 @@ public final class AssaultState extends SavedData {
     Optional<Built> takeAssault(UUID team) {
         Built built = assaults.remove(team);
         if (built != null) {
-            built.gate().ifPresent(closed::add);
+            closed.addAll(built.gates());
             setDirty();
         }
         return Optional.ofNullable(built);
+    }
+
+    /** The team whose Assault has the open gate {@code gate}, if any. */
+    public Optional<UUID> teamOf(UUID gate) {
+        return assaults.entrySet().stream().filter(entry -> entry.getValue().gates().contains(gate)).map(Map.Entry::getKey).findFirst();
+    }
+
+    /** Puts {@code reopened} in place of {@code failed} in {@code team}'s Assault, and keeps {@code failed} out. */
+    void replaceGate(UUID team, UUID failed, Optional<UUID> reopened) {
+        Built built = assaults.get(team);
+        List<UUID> gates = new java.util.ArrayList<>(built.gates());
+        gates.remove(failed);
+        reopened.ifPresent(gates::add);
+        assaults.put(team, new Built(built.dimension(), built.blocks(), gates));
+        closed.add(failed);
+        setDirty();
     }
 
     /** Whether {@code gate} was the gate of an Assault since removed. */
