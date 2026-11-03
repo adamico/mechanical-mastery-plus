@@ -186,15 +186,27 @@ hash = "5ec28791d947c06f88335ccd79fd63a510431d136c26e4c618e4b636bc715976"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/gateways/gateways/assault.json"
-hash = "7844c8699b1360a2a4d6f3d60376a89bd57e34a0164bc05272b77602fd158c1e"
+hash = "99364a113d2567e6a653da83fb53fc233b975d34abd8a6bf4cdcfff3c8bbbc6e"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/gateways/gateways/home.json"
 hash = "7c5398da1ad717ca688e10a5bdee8f838bb0aaf6dd9f6c39efe5ea1f52458957"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/rift_shard.json"
-hash = "fff50a45e4aaf3b17aedc05dface62ece5578d6e7578ac0b91465617cab331b0"
+file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/creeper.json"
+hash = "593db3b9da5e3ec201b077e068c890ddacc3aeb5e156479e526bd1a5d7116276"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/skeleton.json"
+hash = "49bc9d8492b2864e20f163a6c6972c5facfdbdc8c074f3b94c9a6dea609b096e"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/spider.json"
+hash = "54e1208fe11223db3cbe05bbffc324dac0bedbaadf2f31cf4acd02ca87a8f77e"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/zombie.json"
+hash = "da7cf6788dba7973f2a16ea3363a7e5f78792b1bd909f5be074bf2bb441c5107"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/ara_vitae/vital_essence.json"
