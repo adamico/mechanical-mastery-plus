@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Assault;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
@@ -145,6 +146,7 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         var server = (ServerLevel) level;
         if (cod.team == null) {
             cod.team = Teams.at(server, pos);
+            Assault.noteCod(server, cod.team, pos);
         }
         UUID team = cod.team;
         TeamState teams = TeamState.get(server.getServer());

@@ -10,6 +10,7 @@ import com.mojang.serialization.MapCodec;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Accounts;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Gates;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -92,12 +93,15 @@ public final class MechanicalMasteryRebornGameTests {
         MoneyTests.register(tests);
         ChainTests.register(tests);
         ChainMachineTests.register(tests);
+        AssaultTests.register(tests);
         // Each test that records a decompose claims a team of its own.
         Teams.use(new TestTeams(Teams.installed()));
         // Each test that plays the money challenge opens an Account of its own.
         Accounts.use(new TestAccounts());
         // Chapters' part, each player's stages in memory.
         Chains.use(new TestStages());
+        // The dev runs have no Gateways, so an Assault's gate is an armor stand.
+        Gates.use(AssaultTests.GATES);
     }
 
     private static Identifier id(String path) {
