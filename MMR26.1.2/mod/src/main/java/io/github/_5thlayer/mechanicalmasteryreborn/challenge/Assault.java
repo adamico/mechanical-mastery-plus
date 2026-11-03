@@ -70,6 +70,7 @@ public final class Assault {
     public static void register(IEventBus modBus) {
         BLOCKS.register(modBus);
         NeoForge.EVENT_BUS.addListener(Assault::onJoin);
+        AssaultAbsence.register();
         if (ModList.get().isLoaded("gateways")) {
             GatewaysGates.register();
         }
@@ -85,7 +86,7 @@ public final class Assault {
         }
         Entity entity = event.getEntity();
         AssaultState state = AssaultState.get(level.getServer());
-        if (state.closed(entity.getUUID()) || owner(entity).filter(state::closed).isPresent()) {
+        if (AssaultAbsence.keptOut(state, entity) || state.closed(entity.getUUID()) || owner(entity).filter(state::closed).isPresent()) {
             event.setCanceled(true);
         }
     }
@@ -112,8 +113,8 @@ public final class Assault {
         List<BlockPos> built = new ArrayList<>();
         List<UUID> gates = new ArrayList<>();
         for (Direction side : Direction.Plane.HORIZONTAL) {
-            BlockPos middle = buildSide(level, codPos, side, built);
-            Gates.get().open(level, Vec3.atBottomCenterOf(middle.above()), summoner, 0).ifPresent(gates::add);
+            buildSide(level, codPos, side, built);
+            Gates.get().open(level, gateAt(codPos, side), summoner, 0).ifPresent(gates::add);
         }
         state.putAssault(team, new AssaultState.Built(level.dimension(), built, gates));
         LOGGER.info("Sent team {} its Assault: {} blocks built, gates {}", team, built.size(), gates);
@@ -127,10 +128,11 @@ public final class Assault {
             if (level == null) {
                 return;
             }
+            AssaultState state = AssaultState.get(server);
             List<UUID> gates = built.gates();
             List<Entity> removed = new ArrayList<>();
             for (Entity entity : level.getAllEntities()) {
-                if (gates.contains(entity.getUUID()) || owner(entity).filter(gates::contains).isPresent()) {
+                if (gates.contains(entity.getUUID()) || owner(entity).filter(state::closed).isPresent()) {
                     removed.add(entity);
                 }
             }
@@ -183,6 +185,11 @@ public final class Assault {
         return middle;
     }
 
+    /** Where {@code side}'s gate stands, off C.O.D. at {@code cod}: on its platform's middle. */
+    static Vec3 gateAt(BlockPos cod, Direction side) {
+        return Vec3.atBottomCenterOf(cod.relative(side, OFFSET));
+    }
+
     /** The gate entity whose wave {@code entity} came from, by Gateways' mark, if any. */
     public static Optional<UUID> owner(Entity entity) {
         return entity.getPersistentData().read(OWNER_KEY, UUIDUtil.CODEC);
@@ -201,7 +208,7 @@ public final class Assault {
     }
 
     /** One of {@code team}'s players online on its island, or else anywhere, or none. */
-    private static @Nullable ServerPlayer summoner(MinecraftServer server, ServerLevel level, UUID team) {
+    static @Nullable ServerPlayer summoner(MinecraftServer server, ServerLevel level, UUID team) {
         ServerPlayer anywhere = null;
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (!Teams.of(player).equals(team)) {

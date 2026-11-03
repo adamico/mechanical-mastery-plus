@@ -40,7 +40,7 @@ final class AssaultTests {
     private static final int TICKED = 2;
 
     /** The wave each of {@link #GATES}' gates opened at. */
-    private static final Map<UUID, Integer> WAVES = new ConcurrentHashMap<>();
+    static final Map<UUID, Integer> WAVES = new ConcurrentHashMap<>();
 
     /** A gate that is only an armor stand, standing where the Assault opens one. */
     static final Gates GATES = (level, at, summoner, wave) -> {

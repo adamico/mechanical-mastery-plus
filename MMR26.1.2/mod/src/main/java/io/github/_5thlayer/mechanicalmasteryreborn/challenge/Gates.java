@@ -9,6 +9,7 @@ import java.util.UUID;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.gateways.GatewaysGates;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.fml.ModList;
 import org.jspecify.annotations.Nullable;
@@ -26,6 +27,11 @@ public interface Gates {
      * reached as it reopens), and says the gate entity's id, or nothing if no gate opened.
      */
     Optional<UUID> open(ServerLevel level, Vec3 at, @Nullable ServerPlayer summoner, int wave);
+
+    /** The wave the gate {@code gate} has reached. */
+    default int wave(Entity gate) {
+        return 0;
+    }
 
     /** No gate at all, as a world without Gateways has. */
     Gates NONE = (level, at, summoner, wave) -> Optional.empty();

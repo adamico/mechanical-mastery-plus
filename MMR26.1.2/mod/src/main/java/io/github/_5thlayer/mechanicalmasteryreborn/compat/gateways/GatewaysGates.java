@@ -16,6 +16,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Gates;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForge;
@@ -52,6 +53,11 @@ public final class GatewaysGates implements Gates {
     }
 
     /** Reopens an Assault's gate that fails, for its timer, a mob lost or out of range, at the wave it had reached. */
+    @Override
+    public int wave(Entity gate) {
+        return gate instanceof GatewayEntity gateway ? gateway.getWave() : 0;
+    }
+
     public static void register() {
         NeoForge.EVENT_BUS.addListener(GateEvent.Failed.class, event -> {
             GatewayEntity gate = event.getEntity();
