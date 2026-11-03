@@ -177,6 +177,10 @@ file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/energy.json"
 hash = "9f691b257fd8e1828fa7cad3238d06451e7cee4123fc8287deff15352a6d8c81"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/life.json"
+hash = "68a8ca79b6f7ae097853ef9e44bd9eb1ed55bae23678b9cf453d5ee6cd2253d2"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/protection.json"
 hash = "5ec28791d947c06f88335ccd79fd63a510431d136c26e4c618e4b636bc715976"
 
@@ -191,6 +195,10 @@ hash = "7c5398da1ad717ca688e10a5bdee8f838bb0aaf6dd9f6c39efe5ea1f52458957"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/rift_shard.json"
 hash = "fff50a45e4aaf3b17aedc05dface62ece5578d6e7578ac0b91465617cab331b0"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/ara_vitae/vital_essence.json"
+hash = "663e3e55c0010969f02567937bbebfb0c5d5c11d0ddbfe5913066f109c0ede94"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/home_gate_pearl.json"
