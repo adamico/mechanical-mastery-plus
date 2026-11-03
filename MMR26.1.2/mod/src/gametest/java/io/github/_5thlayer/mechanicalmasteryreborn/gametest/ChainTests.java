@@ -14,7 +14,8 @@ import net.minecraft.world.level.GameType;
 /**
  * A challenge's chain, locked until the team starts it (ADR 0007): a player is given the stage of every chain its team
  * has unlocked, and only those, and keeps it past the challenge's end. Chapters locks the chain's recipes behind the
- * stage, named after the handicap ({@link TestStages}).
+ * stage, named after the handicap ({@link TestStages}). A chain is started as an op's command does, since the lab
+ * offers no protection yet.
  */
 final class ChainTests {
 
@@ -39,7 +40,7 @@ final class ChainTests {
         var server = helper.getLevel().getServer();
         Chains.unlock(server, player);
         helper.assertFalse(TestStages.holds(player, handicap.id()), "the " + handicap.id() + " chain was unlocked before its challenge");
-        Challenges.start(server, team, handicap);
+        Challenges.begin(server, team, handicap);
         Chains.unlock(server, player);
         helper.assertTrue(TestStages.holds(player, handicap.id()), "the " + handicap.id() + " chain stayed locked once its challenge started");
         helper.assertFalse(TestStages.holds(player, other.id()), "the " + handicap.id() + " challenge unlocked the " + other.id() + " chain");
@@ -49,7 +50,7 @@ final class ChainTests {
     private static void staysUnlocked(GameTestHelper helper, Handicap handicap) {
         UUID team = TestTeams.claim(helper);
         var server = helper.getLevel().getServer();
-        Challenges.start(server, team, handicap);
+        Challenges.begin(server, team, handicap);
         Challenges.end(server, team);
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
         TestTeams.join(player, team);
@@ -61,7 +62,7 @@ final class ChainTests {
     private static void staysUnlockedAfterAReset(GameTestHelper helper, Handicap handicap) {
         UUID team = TestTeams.claim(helper);
         var server = helper.getLevel().getServer();
-        Challenges.start(server, team, handicap);
+        Challenges.begin(server, team, handicap);
         Challenges.reset(server, team);
         Challenges.end(server, team);
         var player = helper.makeMockPlayer(GameType.SURVIVAL);

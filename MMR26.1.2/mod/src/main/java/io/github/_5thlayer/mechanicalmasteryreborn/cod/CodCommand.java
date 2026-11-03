@@ -34,7 +34,7 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
  * {@code /cod}, for operators: {@code status} says which team the player is in, which team's island they stand on,
  * whether its C.O.D. is awake, which challenge that team plays and its Inflation; {@code dormant} puts that island's
  * C.O.D. back to dormant, as a new island's is, so waking can be seen again, and leaves its challenge as it is;
- * {@code challenge start <handicap>} starts that island's team's challenge as its lab would, and {@code challenge end}
+ * {@code challenge start <handicap>} starts that island's team's challenge as its lab would, even one the lab can't offer yet (#235), and {@code challenge end}
  * ends it, its handicap with it, so choosing can be seen again, and {@code challenge revert <handicap>} forgets
  * that it won that challenge, unblocking the tier its win blocked, so winning can be seen again; {@code tier <team> <tier>} sets the tier a team's C.O.D.
  * makes, or none, for tests and in-game checks.
@@ -102,17 +102,13 @@ final class CodCommand {
             source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.challenge.unknown", id));
             return 0;
         }
-        if (!handicap.get().choosable()) {
-            source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.challenge.later", Challenges.name(handicap.get())));
-            return 0;
-        }
         UUID island = island(source);
         var playing = TeamState.get(source.getServer()).handicap(island);
         if (playing.isPresent()) {
             source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.challenge.playing", Challenges.name(playing.get())));
             return 0;
         }
-        if (!Challenges.start(source.getServer(), island, handicap.get())) {
+        if (!Challenges.begin(source.getServer(), island, handicap.get())) {
             return 0;
         }
         source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.challenge.started", Challenges.name(handicap.get())), true);

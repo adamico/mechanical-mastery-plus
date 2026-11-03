@@ -67,7 +67,6 @@
   "mechanicalmasteryreborn.command.cod.awake": "awake",
   "mechanicalmasteryreborn.command.cod.challenge": "This island's team plays the %s challenge.",
   "mechanicalmasteryreborn.command.cod.challenge.ended": "This island's team no longer plays a challenge.",
-  "mechanicalmasteryreborn.command.cod.challenge.later": "The %s handicap can't be chosen yet.",
   "mechanicalmasteryreborn.command.cod.challenge.playing": "This island's team already plays the %s challenge: end it first.",
   "mechanicalmasteryreborn.command.cod.challenge.started": "This island's team now plays the %s challenge.",
   "mechanicalmasteryreborn.command.cod.challenge.unknown": "No handicap %s: it is protection, life, energy or money.",
