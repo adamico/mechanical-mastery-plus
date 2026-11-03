@@ -10,6 +10,7 @@ import com.mojang.serialization.MapCodec;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Accounts;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Explosions;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Gates;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.Holder;
@@ -97,6 +98,7 @@ public final class MechanicalMasteryRebornGameTests {
         ChainMachineTests.register(tests);
         AssaultTests.register(tests);
         AssaultAbsenceTests.register(tests);
+        AssaultExplosionsTests.register(tests);
         // Each test that records a decompose claims a team of its own.
         Teams.use(new TestTeams(Teams.installed()));
         // Each test that plays the money challenge opens an Account of its own.
@@ -105,6 +107,8 @@ public final class MechanicalMasteryRebornGameTests {
         Chains.use(new TestStages());
         // The dev runs have no Gateways, so an Assault's gate is an armor stand.
         Gates.use(AssaultAbsenceTests.GATES);
+        // Nor FTB Chunks, so a team's explosion setting is kept in memory.
+        Explosions.use(AssaultExplosionsTests.EXPLOSIONS);
     }
 
     private static Identifier id(String path) {
