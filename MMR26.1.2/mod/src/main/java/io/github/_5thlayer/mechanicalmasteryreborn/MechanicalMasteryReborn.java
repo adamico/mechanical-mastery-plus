@@ -8,6 +8,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Generators;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationCap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbteams.FtbPartySync;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.TheurgyHud;
@@ -38,6 +39,7 @@ public final class MechanicalMasteryReborn {
         Lab.register(modBus);
         Port.register(modBus);
         Generators.register(modBus);
+        RiftShards.register(modBus);
         Chains.register();
         ChainMachines.register(modBus);
         InflationCap.register();

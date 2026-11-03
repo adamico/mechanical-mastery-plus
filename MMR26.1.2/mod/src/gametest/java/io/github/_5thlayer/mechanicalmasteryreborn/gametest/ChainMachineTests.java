@@ -19,7 +19,8 @@ import net.minecraft.world.level.block.Blocks;
  * A chain machine from a mix does no work while its island's team hasn't unlocked its chain (#214). The chain machines
  * are what the recipes in the chain's stage file make, of any type, as Craftworks' assembling recipes are in the pack;
  * no Theurgy is on the game tests' runs, so the game-test pack's energy stage file names the blast furnace's crafting
- * recipe, a smelting recipe, and a recipe no pack has.
+ * recipe, a smelting recipe, and a recipe no pack has, and its protection stage file the shield's, as the pack's names the
+ * Warding Essence's assembling recipe (#235).
  * Theurgy's own hook only asks {@link ChainMachines#lockedAt}, which these test.
  */
 final class ChainMachineTests {
@@ -46,7 +47,8 @@ final class ChainMachineTests {
         var machines = ChainMachines.of(helper.getLevel().getServer());
         helper.assertValueEqual(machines.get(Items.BLAST_FURNACE), Handicap.ENERGY, "the blast furnace's chain");
         helper.assertValueEqual(machines.get(Items.IRON_INGOT), Handicap.ENERGY, "the smelting recipe's result's chain");
-        helper.assertValueEqual(machines.size(), 2, "what the stage file's recipes make, but the one no pack has");
+        helper.assertValueEqual(machines.get(Items.SHIELD), Handicap.PROTECTION, "the protection stage file's shield's chain");
+        helper.assertValueEqual(machines.size(), 3, "what the stage files' recipes make, but the one no pack has");
         helper.succeed();
     }
 

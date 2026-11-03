@@ -6,9 +6,11 @@ package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 import java.util.List;
 
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Recycling;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.RecyclerCoreBlockEntity;
@@ -40,6 +42,7 @@ final class RecyclingTests {
         tests.test("recycling_a_piston_on_one_output_returns_a_random_choice_of_its_recipe", 1, RecyclingTests::pistonShortOnOutputs);
         tests.test("recycling_an_override_replaces_what_the_recipe_returns", 1, RecyclingTests::override);
         tests.test("recycling_an_item_no_recipe_makes_shrinks_to_nothing", 1, RecyclingTests::shrinks);
+        tests.test("recycling_a_rift_shard_shrinks_to_nothing", 1, RecyclingTests::riftShardShrinks);
         tests.test("recycling_a_hopper_returns_its_iron_and_its_chest", 1, RecyclingTests::hopper);
         tests.test("recycling_input_refuses_what_is_refined_or_uncrafted_for_free", 1, RecyclingTests::refused);
         tests.test("recycling_input_takes_what_only_uncrafting_makes", 1, RecyclingTests::uncrafted);
@@ -102,6 +105,14 @@ final class RecyclingTests {
     }
 
     /** Dirt, which no recipe makes, recycles into a quarter of itself: fed back pass after pass, it is soon gone. */
+    /** A Rift Shard, which nothing crafts, recycles into less of itself, as dirt does, so no Recycler makes one (#235). */
+    private static void riftShardShrinks(GameTestHelper helper) {
+        Item shard = RiftShards.ITEM.get();
+        helper.assertValueEqual(Recycling.recycle(helper.getLevel().getServer(), shard),
+                new RecyclingRules.Into<>(List.of(new RecyclingRules.Share<>(shard, 1))), "what a Rift Shard recycles into");
+        helper.succeed();
+    }
+
     private static void shrinks(GameTestHelper helper) {
         TestYield.at(0.25, () -> {
             var build = RecyclerBuild.standard(helper);

@@ -36,10 +36,18 @@ public final class Challenges {
 
     /** Starts {@code handicap}'s challenge for {@code team}, as {@link TeamState#choose} does at the current game time, and tells the team. */
     public static boolean start(MinecraftServer server, UUID team, Handicap handicap) {
+        return handicap.choosable() && begin(server, team, handicap);
+    }
+
+    /**
+     * Starts {@code handicap}'s challenge for {@code team} as {@link #start} does, though the lab can't offer it yet:
+     * an op's {@code /cod challenge start} (#235), so a chain is tried before its handicap is played.
+     */
+    public static boolean begin(MinecraftServer server, UUID team, Handicap handicap) {
         if (handicap == Handicap.MONEY && !MoneyHandicap.canStart(server, team)) {
             return false;
         }
-        if (!TeamState.get(server).choose(team, handicap, server.overworld().getGameTime())) {
+        if (!TeamState.get(server).begin(team, handicap, server.overworld().getGameTime())) {
             return false;
         }
         if (handicap == Handicap.MONEY) {
