@@ -34,24 +34,25 @@ final class LabTests {
     }
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
-        tests.test("lab_offers_only_energy_and_money_and_records_it_for_its_team_only", 1, LabTests::offersOnlyEnergyAndMoney);
+        tests.test("lab_offers_all_but_protection_and_records_it_for_its_team_only", 1, LabTests::offersAllButProtection);
         tests.test("lab_handicap_survives_a_save_and_load", 1, LabTests::survivesASaveAndLoad);
         tests.test("lab_chooses_nothing_for_a_player_of_another_team", 1, LabTests::choosesNothingForAnotherTeam);
+        tests.test("lab_starts_life", 1, LabTests::startsLife);
         tests.test("lab_chooses_once_while_a_challenge_is_played", 1, LabTests::choosesOnce);
         tests.test("lab_shows_its_team_s_handicap", 1, LabTests::showsItsTeamsHandicap);
         tests.test("lab_op_starts_and_ends_the_challenge_of_the_island_stood_on", 1, LabTests::opStartsAndEnds);
     }
 
-    private static void offersOnlyEnergyAndMoney(GameTestHelper helper) {
+    private static void offersAllButProtection(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         UUID other = TestTeams.claim(helper, OTHER_ISLAND, OTHER_ISLAND);
         var player = member(helper, team);
         var menu = open(helper, player);
         for (Handicap handicap : Handicap.values()) {
-            helper.assertValueEqual(handicap.choosable(), handicap == Handicap.ENERGY || handicap == Handicap.MONEY,
+            helper.assertValueEqual(handicap.choosable(), handicap != Handicap.PROTECTION,
                     "whether the lab offers " + handicap);
         }
-        for (Handicap handicap : new Handicap[] {Handicap.PROTECTION, Handicap.LIFE}) {
+        for (Handicap handicap : new Handicap[] {Handicap.PROTECTION}) {
             helper.assertFalse(menu.clickMenuButton(player, handicap.ordinal()), "the lab let the team choose " + handicap);
             helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after choosing " + handicap);
         }
@@ -87,6 +88,14 @@ final class LabTests {
         helper.succeed();
     }
 
+    private static void startsLife(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var player = member(helper, team);
+        helper.assertTrue(open(helper, player).clickMenuButton(player, Handicap.LIFE.ordinal()), "the lab refused life");
+        helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.LIFE), "the team's handicap after choosing life");
+        helper.succeed();
+    }
+
     private static void choosesOnce(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         var player = member(helper, team);
@@ -117,7 +126,7 @@ final class LabTests {
         var op = server.createCommandSourceStack().withLevel(helper.getLevel())
                 .withPosition(helper.absolutePos(LAB).getCenter()).withSuppressedOutput();
         server.getCommands().performPrefixedCommand(op, "cod challenge start life");
-        // The lab can't offer life yet, but an op may start it (#235).
+        // An op may start a challenge without the lab (#235).
         helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.LIFE), "the team's handicap after an op started life");
         server.getCommands().performPrefixedCommand(op, "cod challenge end");
         server.getCommands().performPrefixedCommand(op, "cod challenge start energy");
