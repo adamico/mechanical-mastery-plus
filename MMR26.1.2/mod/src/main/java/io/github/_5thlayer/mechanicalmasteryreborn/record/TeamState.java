@@ -293,6 +293,11 @@ public final class TeamState extends SavedData {
         return teams.entrySet().stream().filter(entry -> entry.getValue().handicap.isPresent()).map(Map.Entry::getKey).toList();
     }
 
+    /** The teams with a state of their own: woken, playing or once played a challenge, or with a tier blocked. */
+    public Set<UUID> known() {
+        return Set.copyOf(teams.keySet());
+    }
+
     /** Whether {@code team} was warned that its Inflation nears its cap, since it last fell back below. */
     public boolean warned(UUID team) {
         Entry entry = teams.get(team);

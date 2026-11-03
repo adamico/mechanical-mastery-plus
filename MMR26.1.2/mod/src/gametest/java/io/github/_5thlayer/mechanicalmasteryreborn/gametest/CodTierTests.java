@@ -52,6 +52,7 @@ final class CodTierTests {
         tests.test("cod_tier_inflation_counts_only_decomposing_of_its_tier", 1, CodTierTests::inflationCountsOnlyItsTier);
         tests.test("cod_tier_drop_keeps_the_old_essence_and_spills_the_new", 3 * waking() + 10, CodTierTests::dropKeepsOldAndSpillsNew);
         tests.test("cod_tier_dormant_drop_spills_the_new", dormant() + 10, CodTierTests::dormantDropSpillsTheNew);
+        tests.test("cod_tier_command_suggests_teams", 1, CodTierTests::commandSuggestsTeams);
         tests.test("cod_tier_command_sets_a_team_s_tier", 1, CodTierTests::commandSetsTheTier);
     }
 
@@ -168,6 +169,21 @@ final class CodTierTests {
             helper.assertTrue(spilled.get(0).getItem().is(Essences.item(Essence.IMPROVED)), "a dormant C.O.D. spilled " + spilled.get(0).getItem());
             helper.succeed();
         });
+    }
+
+    /** {@code /cod tier} suggests the id of the team whose island it is run on, and of every team with a state. */
+    private static void commandSuggestsTeams(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        UUID other = UUID.randomUUID();
+        state(helper).wake(other);
+        var server = helper.getLevel().getServer();
+        var source = server.createCommandSourceStack().withPosition(helper.absoluteVec(COD.getCenter())).withLevel(helper.getLevel());
+        var dispatcher = server.getCommands().getDispatcher();
+        var suggestions = dispatcher.getCompletionSuggestions(dispatcher.parse("cod tier ", source)).join().getList().stream()
+                .map(suggestion -> suggestion.getText()).toList();
+        helper.assertTrue(suggestions.contains(team.toString()), "/cod tier didn't suggest the island's team: " + suggestions);
+        helper.assertTrue(suggestions.contains(other.toString()), "/cod tier didn't suggest a team with a state: " + suggestions);
+        helper.succeed();
     }
 
     /** {@code /cod tier} sets each tier, and none, and refuses one it doesn't know. */

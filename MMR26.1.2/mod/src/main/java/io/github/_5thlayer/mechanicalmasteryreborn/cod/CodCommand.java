@@ -4,9 +4,11 @@
 package io.github._5thlayer.mechanicalmasteryreborn.cod;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -51,6 +53,7 @@ final class CodCommand {
                 .then(Commands.literal("status").executes(CodCommand::status))
                 .then(Commands.literal("dormant").executes(CodCommand::dormant))
                 .then(Commands.literal("tier").then(Commands.argument("team", StringArgumentType.word())
+                        .suggests((context, builder) -> SharedSuggestionProvider.suggest(teams(context.getSource()), builder))
                         .then(Commands.argument("tier", StringArgumentType.word())
                                 .suggests((context, builder) -> SharedSuggestionProvider.suggest(TIERS, builder))
                                 .executes(CodCommand::tier))))
@@ -146,6 +149,20 @@ final class CodCommand {
                 .map(made -> Component.translatable("mechanicalmasteryreborn.command.cod.tier.set", teamId, new ItemStack(Essences.item(made)).getHoverName()))
                 .orElseGet(() -> Component.translatable("mechanicalmasteryreborn.command.cod.tier.none", teamId)), true);
         return 1;
+    }
+
+    /**
+     * The team ids {@code /cod tier} suggests: the team whose island the source stands on first, then the player's
+     * own, then every other team with a state.
+     */
+    private static Set<String> teams(CommandSourceStack source) {
+        Set<String> teams = new LinkedHashSet<>();
+        teams.add(island(source).toString());
+        if (source.getPlayer() != null) {
+            teams.add(Teams.of(source.getPlayer()).toString());
+        }
+        TeamState.get(source.getServer()).known().forEach(team -> teams.add(team.toString()));
+        return teams;
     }
 
     /** A tier's name in {@code /cod tier}: {@code advanced} for Advanced Mechanical Essence. */
