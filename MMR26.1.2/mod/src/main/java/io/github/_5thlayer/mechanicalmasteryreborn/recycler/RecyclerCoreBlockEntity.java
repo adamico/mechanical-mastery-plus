@@ -187,11 +187,56 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         return plan().status();
     }
 
-    /** Whether {@code pos} is one of the eight places of this core's 3x3. */
+    /**
+     * Whether {@code pos} is a place of this core's Recycler: one of the eight around it on its own floor, or one of
+     * the nine of a floor above that counts.
+     */
     boolean holdsPlace(BlockPos pos) {
+        int floor = pos.getY() - worldPosition.getY();
+        return floor == 0 ? reaches(pos) : floor > 0 && floor < floors() && reaches(pos);
+    }
+
+    /**
+     * Whether this core would claim {@code pos} if no other core did: a place on its own floor, or in its 3x3 on a
+     * floor above, below the first that isn't full of parts and within its tier.
+     */
+    boolean reaches(BlockPos pos) {
         Direction front = getBlockState().getValue(RecyclerCoreBlock.FACING);
-        return pos.getY() == worldPosition.getY() && RecyclerLayout.isPlace(front.getStepX(), front.getStepZ(),
-                pos.getX() - worldPosition.getX(), pos.getZ() - worldPosition.getZ());
+        int floor = pos.getY() - worldPosition.getY();
+        int x = pos.getX() - worldPosition.getX();
+        int z = pos.getZ() - worldPosition.getZ();
+        if (floor == 0) {
+            return RecyclerLayout.isPlace(front.getStepX(), front.getStepZ(), x, z);
+        }
+        return floor > 0 && floor < builtFloors() && RecyclerLayout.inFootprint(front.getStepX(), front.getStepZ(), x, z);
+    }
+
+    /** The floors this Recycler counts: its own, then each one above whose nine places are all its parts alone. */
+    public int floors() {
+        int built = builtFloors();
+        int floors = 1;
+        while (floors < built && floorPositions(floors).stream()
+                .allMatch(pos -> RecyclerPart.reacherOf(level, pos).filter(core -> core == this).isPresent())) {
+            floors++;
+        }
+        return floors;
+    }
+
+    /** Its own floor, then each one above full of parts, up to as many in all as its tier. */
+    private int builtFloors() {
+        int floors = 1;
+        while (floors < tier() && floorPositions(floors).stream().allMatch(pos -> level.getBlockState(pos).getBlock() instanceof RecyclerPart)) {
+            floors++;
+        }
+        return floors;
+    }
+
+    /** The places of floor {@code floor}, the core's own 0, in the order outputs are read. */
+    private List<BlockPos> floorPositions(int floor) {
+        Direction front = getBlockState().getValue(RecyclerCoreBlock.FACING);
+        int[][] places = floor == 0 ? RecyclerLayout.places(front.getStepX(), front.getStepZ())
+                : RecyclerLayout.upperPlaces(front.getStepX(), front.getStepZ());
+        return Arrays.stream(places).map(place -> worldPosition.offset(place[0], floor, place[1])).toList();
     }
 
     /** What the Recycler does with what it holds, whether or not it can now. */
@@ -363,30 +408,32 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
     }
 
     /**
-     * The outputs in the order a mix fills them, or null when the 3x3 isn't a whole Recycler: every one of the
-     * eight places a part of this core's alone, with at least one drive, input and output among them.
+     * The outputs in the order a mix fills them, floor by floor upward, or null when the Recycler isn't whole: every
+     * one of the eight places on the core's floor a part of this core's alone, with at least one drive, input and
+     * output across the floors that count.
      */
     private @Nullable List<RecyclerOutputBlockEntity> outputs() {
-        Direction front = getBlockState().getValue(RecyclerCoreBlock.FACING);
         var outputs = new ArrayList<RecyclerOutputBlockEntity>();
         boolean drive = false;
         boolean input = false;
-        for (int[] place : RecyclerLayout.places(front.getStepX(), front.getStepZ())) {
-            BlockPos pos = worldPosition.offset(place[0], 0, place[1]);
-            if (!(level.getBlockState(pos).getBlock() instanceof RecyclerPart part)
-                    || RecyclerPart.coreOf(level, pos).filter(core -> core == this).isEmpty()) {
-                return null;
-            }
-            switch (part.role()) {
-                case DRIVE -> drive = true;
-                case INPUT -> input = true;
-                case OUTPUT -> {
-                    if (!(level.getBlockEntity(pos) instanceof RecyclerOutputBlockEntity output)) {
-                        return null;
-                    }
-                    outputs.add(output);
+        int floors = floors();
+        for (int floor = 0; floor < floors; floor++) {
+            for (BlockPos pos : floorPositions(floor)) {
+                if (!(level.getBlockState(pos).getBlock() instanceof RecyclerPart part)
+                        || RecyclerPart.coreOf(level, pos).filter(core -> core == this).isEmpty()) {
+                    return null;
                 }
-                case CASING -> {
+                switch (part.role()) {
+                    case DRIVE -> drive = true;
+                    case INPUT -> input = true;
+                    case OUTPUT -> {
+                        if (!(level.getBlockEntity(pos) instanceof RecyclerOutputBlockEntity output)) {
+                            return null;
+                        }
+                        outputs.add(output);
+                    }
+                    case CASING -> {
+                    }
                 }
             }
         }

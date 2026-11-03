@@ -46,9 +46,19 @@ A Recycler is a 3x3 of nine blocks:
 Each place must belong to that core alone: two Recyclers can't share a part. A Recycler with a place empty, or
 holding any other block, is incomplete and does nothing. Jade says what it lacks.
 
-A Recycler may have more floors, each a full 3x3 of parts, up to as many floors in all as its core's tier. A
-tier-1 core has one. To upgrade a Recycler, break its core and place one of a higher tier where it stood: the rest
-of the 3x3 stays as it is.
+## Floors
+
+A Recycler may have more floors, stacked straight up from its core's, up to as many floors in all as its core's
+tier: a tier-1 core has one, a tier-4 core up to four. Each floor above the core's is a full 3x3 of any parts, all
+nine places filled, the one over the core among them. Its drive, input and output may stand on any floor.
+
+Floors count upward to the first one that isn't full: that floor and any above it are no part of the Recycler,
+and show no frame, while the floors below go on working. A floor above what the core's tier allows isn't part of
+it either, until a higher core claims it. A place two Recyclers would both claim, across floors too, belongs to
+neither. The frame wraps every floor that counts as one tall block.
+
+To upgrade a Recycler, break its core and place one of a higher tier where it stood: the rest of the 3x3 stays as
+it is, and floors already built above are claimed at once.
 
 ## Outputs
 
@@ -57,7 +67,8 @@ recycles only with enough outputs for them all. With too few it still runs, but 
 at random, and the rest are lost: more outputs return more of a mix. The two above return six kinds at a time.
 
 Its outputs are read in order, from the one at the front-left, on the left as you face the core, clockwise seen
-from above, with the centre last. Each kind goes on the first position already holding that item, or else on the
+from above, with the centre last, then floor by floor upward, each floor in the same order and ending with the
+place over the core. Each kind goes on the first position already holding that item, or else on the
 first empty one, so on empty outputs a mix lands in the order EMI shows it. With outputs for every kind, the Recycler
 stops while any kind fits nowhere; with too few, it picks among the kinds that fit, and stops only when none does.
 Jade says when it stops, until its outputs are emptied.

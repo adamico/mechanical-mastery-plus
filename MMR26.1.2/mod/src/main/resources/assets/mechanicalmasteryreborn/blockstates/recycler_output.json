@@ -37,7 +37,8 @@
     },
     {
       "when": {
-        "place": "north_west"
+        "place": "north_west",
+        "floor": "single|top"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_top_corner"
@@ -45,7 +46,8 @@
     },
     {
       "when": {
-        "place": "north_west"
+        "place": "north_west",
+        "floor": "single|bottom"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_bottom_corner"
@@ -53,7 +55,8 @@
     },
     {
       "when": {
-        "place": "north_east"
+        "place": "north_east",
+        "floor": "single|top"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_top_corner",
@@ -62,7 +65,8 @@
     },
     {
       "when": {
-        "place": "north_east"
+        "place": "north_east",
+        "floor": "single|bottom"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_bottom_corner",
@@ -71,7 +75,8 @@
     },
     {
       "when": {
-        "place": "south_east"
+        "place": "south_east",
+        "floor": "single|top"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_top_corner",
@@ -80,7 +85,8 @@
     },
     {
       "when": {
-        "place": "south_east"
+        "place": "south_east",
+        "floor": "single|bottom"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_bottom_corner",
@@ -89,7 +95,8 @@
     },
     {
       "when": {
-        "place": "south_west"
+        "place": "south_west",
+        "floor": "single|top"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_top_corner",
@@ -98,7 +105,8 @@
     },
     {
       "when": {
-        "place": "south_west"
+        "place": "south_west",
+        "floor": "single|bottom"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_bottom_corner",
@@ -107,7 +115,8 @@
     },
     {
       "when": {
-        "place": "north"
+        "place": "north",
+        "floor": "single|top"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_top_side"
@@ -115,7 +124,8 @@
     },
     {
       "when": {
-        "place": "north"
+        "place": "north",
+        "floor": "single|bottom"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_bottom_side"
@@ -123,7 +133,8 @@
     },
     {
       "when": {
-        "place": "east"
+        "place": "east",
+        "floor": "single|top"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_top_side",
@@ -132,7 +143,8 @@
     },
     {
       "when": {
-        "place": "east"
+        "place": "east",
+        "floor": "single|bottom"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_bottom_side",
@@ -141,7 +153,8 @@
     },
     {
       "when": {
-        "place": "south"
+        "place": "south",
+        "floor": "single|top"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_top_side",
@@ -150,7 +163,8 @@
     },
     {
       "when": {
-        "place": "south"
+        "place": "south",
+        "floor": "single|bottom"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_bottom_side",
@@ -159,7 +173,8 @@
     },
     {
       "when": {
-        "place": "west"
+        "place": "west",
+        "floor": "single|top"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_top_side",
@@ -168,7 +183,8 @@
     },
     {
       "when": {
-        "place": "west"
+        "place": "west",
+        "floor": "single|bottom"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_bottom_side",
@@ -177,7 +193,8 @@
     },
     {
       "when": {
-        "place": "centre"
+        "place": "centre",
+        "floor": "single|top"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_top_plain"
@@ -185,7 +202,8 @@
     },
     {
       "when": {
-        "place": "centre"
+        "place": "centre",
+        "floor": "single|bottom"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_bottom_plain"
@@ -193,7 +211,8 @@
     },
     {
       "when": {
-        "place": "none"
+        "place": "none",
+        "floor": "single|top"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_top_plain"
@@ -201,7 +220,8 @@
     },
     {
       "when": {
-        "place": "none"
+        "place": "none",
+        "floor": "single|bottom"
       },
       "apply": {
         "model": "mechanicalmasteryreborn:block/recycler_frame_bottom_plain"

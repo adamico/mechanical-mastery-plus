@@ -1,18 +1,33 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,tall=false": {
       "model": "mechanicalmasteryreborn:block/recycler_core_1"
     },
-    "facing=east": {
+    "facing=north,tall=true": {
+      "model": "mechanicalmasteryreborn:block/recycler_core_1_tall"
+    },
+    "facing=east,tall=false": {
       "model": "mechanicalmasteryreborn:block/recycler_core_1",
       "y": 90
     },
-    "facing=south": {
+    "facing=east,tall=true": {
+      "model": "mechanicalmasteryreborn:block/recycler_core_1_tall",
+      "y": 90
+    },
+    "facing=south,tall=false": {
       "model": "mechanicalmasteryreborn:block/recycler_core_1",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,tall=true": {
+      "model": "mechanicalmasteryreborn:block/recycler_core_1_tall",
+      "y": 180
+    },
+    "facing=west,tall=false": {
       "model": "mechanicalmasteryreborn:block/recycler_core_1",
+      "y": 270
+    },
+    "facing=west,tall=true": {
+      "model": "mechanicalmasteryreborn:block/recycler_core_1_tall",
       "y": 270
     }
   }

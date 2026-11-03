@@ -55,7 +55,7 @@ public enum RecyclerPlace implements StringRepresentable {
         if (core.isPresent()) {
             BlockPos centre = RecyclerCoreBlock.centre(core.get().getBlockPos(), core.get().getBlockState());
             for (RecyclerPlace place : IN_3X3) {
-                if (place.of(centre).equals(pos)) {
+                if (place.of(centre.atY(pos.getY())).equals(pos)) {
                     return place;
                 }
             }

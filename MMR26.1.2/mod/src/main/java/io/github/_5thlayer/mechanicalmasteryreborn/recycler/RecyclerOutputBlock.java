@@ -3,6 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.recycler;
 
+import net.minecraft.server.level.ServerLevel;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -37,7 +38,7 @@ public final class RecyclerOutputBlock extends BaseEntityBlock implements Recycl
 
     public RecyclerOutputBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PLACE, RecyclerPlace.NONE));
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PLACE, RecyclerPlace.NONE).setValue(FLOOR, RecyclerFloor.SINGLE));
     }
 
     @Override
@@ -62,7 +63,21 @@ public final class RecyclerOutputBlock extends BaseEntityBlock implements Recycl
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, PLACE);
+        builder.add(FACING, PLACE, FLOOR);
+    }
+
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(state, level, pos, oldState, movedByPiston);
+        if (!oldState.is(this)) {
+            RecyclerPart.reframeAround(level, pos);
+        }
+    }
+
+    @Override
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
+        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+        RecyclerPart.reframeAround(level, pos);
     }
 
     @Override

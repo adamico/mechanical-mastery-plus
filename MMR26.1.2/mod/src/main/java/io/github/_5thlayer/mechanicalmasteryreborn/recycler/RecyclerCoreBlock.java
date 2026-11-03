@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -40,6 +41,8 @@ import net.minecraft.world.phys.BlockHitResult;
 public final class RecyclerCoreBlock extends BaseEntityBlock {
 
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+    /** Whether its Recycler has floors above the core's, so the core draws no top border. */
+    public static final BooleanProperty TALL = BooleanProperty.create("tall");
 
     private static final MapCodec<RecyclerCoreBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.intRange(1, Recycler.TIERS).fieldOf("tier").forGetter(RecyclerCoreBlock::tier), propertiesCodec())
@@ -50,7 +53,7 @@ public final class RecyclerCoreBlock extends BaseEntityBlock {
     public RecyclerCoreBlock(int tier, Properties properties) {
         super(properties);
         this.tier = tier;
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(TALL, false));
     }
 
     /** The core's tier, from 1 to {@link Recycler#TIERS}. */
@@ -65,7 +68,7 @@ public final class RecyclerCoreBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, TALL);
     }
 
     /** The centre of the 3x3 a core at {@code pos} fronts: the place right behind it. */
@@ -84,27 +87,13 @@ public final class RecyclerCoreBlock extends BaseEntityBlock {
         if (oldState.is(this)) {
             return;
         }
-        setPlaces(level, centre(pos, state));
+        RecyclerPart.reframeAround(level, pos);
     }
 
     @Override
     protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
         super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
-        setPlaces(level, centre(pos, state));
-    }
-
-    /** Sets every part in the 3x3 centred on {@code centre} to the place it now stands at, after a core came or went. */
-    private static void setPlaces(Level level, BlockPos centre) {
-        for (RecyclerPlace place : RecyclerPlace.IN_3X3) {
-            BlockPos part = place.of(centre);
-            BlockState at = level.getBlockState(part);
-            if (at.getBlock() instanceof RecyclerPart) {
-                RecyclerPlace now = RecyclerPlace.at(level, part);
-                if (at.getValue(RecyclerPart.PLACE) != now) {
-                    level.setBlock(part, at.setValue(RecyclerPart.PLACE, now), UPDATE_CLIENTS);
-                }
-            }
-        }
+        RecyclerPart.reframeAround(level, pos);
     }
 
     @Override

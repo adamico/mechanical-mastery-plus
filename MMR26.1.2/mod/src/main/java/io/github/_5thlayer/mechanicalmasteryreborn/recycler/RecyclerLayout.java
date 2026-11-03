@@ -3,6 +3,8 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.recycler;
 
+import java.util.Arrays;
+
 /**
  * Where a Recycler's eight places are, and the order its outputs are read in. Its core stands in the middle of
  * the 3x3's front edge, its front facing out, so the 3x3's centre is the place right behind it. The places read
@@ -44,6 +46,22 @@ public final class RecyclerLayout {
         }
         places[n] = new int[] {-frontX, -frontZ};
         return places;
+    }
+
+    /**
+     * The nine places of a floor above the core's as {x, z} offsets from the core, in the order outputs are read:
+     * the core's floor's eight, then the place over the core.
+     */
+    public static int[][] upperPlaces(int frontX, int frontZ) {
+        int[][] places = places(frontX, frontZ);
+        int[][] upper = Arrays.copyOf(places, places.length + 1);
+        upper[places.length] = new int[] {0, 0};
+        return upper;
+    }
+
+    /** Whether {@code (x, z)} from a core whose front faces {@code (frontX, frontZ)} stands in its 3x3, the core's own place among them. */
+    public static boolean inFootprint(int frontX, int frontZ, int x, int z) {
+        return Math.abs(x + frontX) <= 1 && Math.abs(z + frontZ) <= 1;
     }
 
     /** Whether {@code (x, z)} from a core whose front faces {@code (frontX, frontZ)} is one of its eight places. */

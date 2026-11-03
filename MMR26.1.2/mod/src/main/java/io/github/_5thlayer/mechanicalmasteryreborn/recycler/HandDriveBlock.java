@@ -54,12 +54,20 @@ public final class HandDriveBlock extends Block implements RecyclerPart {
 
     public HandDriveBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(TURNING, false).setValue(QUEUED, false).setValue(PLACE, RecyclerPlace.NONE));
+        registerDefaultState(stateDefinition.any().setValue(TURNING, false).setValue(QUEUED, false).setValue(PLACE, RecyclerPlace.NONE).setValue(FLOOR, RecyclerFloor.SINGLE));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(TURNING, QUEUED, PLACE);
+        builder.add(TURNING, QUEUED, PLACE, FLOOR);
+    }
+
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(state, level, pos, oldState, movedByPiston);
+        if (!oldState.is(this)) {
+            RecyclerPart.reframeAround(level, pos);
+        }
     }
 
     @Override
@@ -101,6 +109,7 @@ public final class HandDriveBlock extends Block implements RecyclerPart {
     @Override
     protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
         super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+        RecyclerPart.reframeAround(level, pos);
         forget(level, pos);
     }
 
