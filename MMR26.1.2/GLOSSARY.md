@@ -85,8 +85,12 @@ The path a challenge's mods take a team up to the challenge's Transmuted Essence
 _Avoid_: processing chain, path
 
 **Handicap**:
-What a challenge costs the team while it plays it, and only then: protection (an Assault on its island), life (less max health), energy (its generators give it no energy, though FE it banked ahead is still spent) or money (less money). A team's money can't be stockpiled ahead: it is set aside while the challenge is played, and given back when it ends. Its FE can, and banking it is part of the energy challenge's strategy; so can ordinary mob drops, but not the drop only an Assault gives.
+What a challenge costs the team while it plays it, and only then: protection (an Assault on its island), life (hunger that drains faster, and the same food feeding less each time it is eaten), energy (its generators give it no energy, though FE it banked ahead is still spent) or money (less money). A team's money can't be stockpiled ahead: it is set aside while the challenge is played, and given back when it ends. Its FE can, and banking it is part of the energy challenge's strategy; so can ordinary mob drops, but not the drop only an Assault gives, and so can food, though under faster hunger only a varied farm keeps up.
 _Avoid_: threat, debuff
+
+**Diet**:
+The foods a player has eaten lately, kept only while their team plays the life challenge and forgotten when it ends: a food already in a player's Diet feeds them less each time it is there.
+_Avoid_: nutrition, spice
 
 **Assault**:
 The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from gates on platforms it builds in the void, with unbreakable bridges to the island. The waves grow harder, with a breather between each step, and never stop until the quota is filled or Inflation reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, and it pauses while no one is on the island.
