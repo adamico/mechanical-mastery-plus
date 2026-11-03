@@ -5,6 +5,7 @@ package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
 import java.util.List;
 
+import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
@@ -43,7 +44,8 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
  * player's empty hand takes back what its core holds, giving up the work under way (#191); one short on outputs
  * returns a random choice of the kinds that fit, kept until the work is done, each kind on its own item first, then
  * an empty position, and stops only when none fits (#216); each part stands at its place in the 3x3, set when it or a
- * core is placed and cleared when the core goes, none where two cores' 3x3s overlap (#223). Each test builds its
+ * core is placed and cleared when the core goes, none where two cores' 3x3s overlap (#223); a hand drive's turn that counts
+ * tires the player who turned it, and a hungry survival player can't turn it (#222). Each test builds its
  * Recycler with {@link RecyclerBuild}.
  */
 final class RecyclerTests {
@@ -85,6 +87,11 @@ final class RecyclerTests {
         tests.test("recycler_one_drive_decomposes_in_eight_turns_of_its_cap", 60, helper -> drivesTurned(helper, 1));
         tests.test("recycler_two_drives_decompose_twice_as_fast", 60, helper -> drivesTurned(helper, 2));
         tests.test("recycler_drive_turns_no_faster_than_its_cap", 20, RecyclerTests::driveCap);
+        tests.test("recycler_food_turn_that_counts_tires_the_player", 1, RecyclerTests::turnTires);
+        tests.test("recycler_food_lost_turn_costs_nothing", 1, RecyclerTests::lostTurnFree);
+        tests.test("recycler_food_drive_refuses_a_hungry_player", 1, helper -> hungry(helper, 6, false));
+        tests.test("recycler_food_drive_turns_for_a_player_above_the_limit", 1, helper -> hungry(helper, 7, true));
+        tests.test("recycler_food_creative_player_turns_hungry_for_free", 1, RecyclerTests::creativeFree);
         tests.test("recycler_decompose_is_recorded_for_its_island_team", 1, RecyclerTests::recorded);
         tests.test("recycler_core_placed_sets_the_places_of_its_parts", 1, RecyclerTests::corePlacedSetsPlaces);
         tests.test("recycler_core_broken_leaves_its_parts_at_no_place", 1, RecyclerTests::coreBrokenClearsPlaces);
@@ -464,6 +471,49 @@ final class RecyclerTests {
             helper.assertValueEqual(build.core().turns(), 2, "the turns long after ten clicks in one tick");
             helper.succeed();
         });
+    }
+
+    private static void turnTires(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        build.feed(1);
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        helper.useBlock(build.firstOf(Recycler.HAND_DRIVE.get()), player);
+        helper.assertValueEqual(build.core().turns(), 1, "the turns one click gave");
+        helper.assertValueEqual(TestFood.exhaustion(player), (float) ServerConfig.handDriveExhaustion(), "the exhaustion one turn added");
+        helper.succeed();
+    }
+
+    private static void lostTurnFree(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        helper.useBlock(build.firstOf(Recycler.HAND_DRIVE.get()), player);
+        helper.assertValueEqual(TestFood.exhaustion(player), 0.0F, "the exhaustion a turn of an empty Recycler added");
+        helper.succeed();
+    }
+
+    private static void hungry(GameTestHelper helper, int food, boolean turns) {
+        var build = RecyclerBuild.standard(helper);
+        build.feed(1);
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.getFoodData().setFoodLevel(food);
+        BlockPos drive = build.firstOf(Recycler.HAND_DRIVE.get());
+        helper.useBlock(drive, player);
+        helper.assertValueEqual(build.core().turns(), turns ? 1 : 0, "the turns a click at food " + food + " gave");
+        helper.assertValueEqual(TestFood.exhaustion(player), turns ? (float) ServerConfig.handDriveExhaustion() : 0.0F,
+                "the exhaustion a click at food " + food + " added");
+        helper.assertValueEqual(helper.getBlockState(drive).getValue(HandDriveBlock.QUEUED), false, "a click at food " + food + " queued");
+        helper.succeed();
+    }
+
+    private static void creativeFree(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        build.feed(1);
+        var player = helper.makeMockPlayer(GameType.CREATIVE);
+        player.getFoodData().setFoodLevel(0);
+        helper.useBlock(build.firstOf(Recycler.HAND_DRIVE.get()), player);
+        helper.assertValueEqual(build.core().turns(), 1, "the turns a starving creative player's click gave");
+        helper.assertValueEqual(TestFood.exhaustion(player), 0.0F, "the exhaustion a creative player's turn added");
+        helper.succeed();
     }
 
     private static void recorded(GameTestHelper helper) {

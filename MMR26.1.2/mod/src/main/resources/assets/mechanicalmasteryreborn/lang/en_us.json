@@ -2,6 +2,7 @@
   "block.mechanicalmasteryreborn.cod": "C.O.D.",
   "block.mechanicalmasteryreborn.fe_drive": "Recycler Electric Drive",
   "block.mechanicalmasteryreborn.hand_drive": "Recycler Hand Drive",
+  "mechanicalmasteryreborn.hand_drive.too_hungry": "Too hungry to turn the drive: eat something",
   "block.mechanicalmasteryreborn.lab": "Lab",
   "block.mechanicalmasteryreborn.recycler_casing": "Recycler Casing",
   "block.mechanicalmasteryreborn.recycler_core_1": "Recycler Core (Tier 1)",

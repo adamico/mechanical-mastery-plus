@@ -15,7 +15,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 /**
  * The mod's server config. The Recycler's settings: each core tier's yield (the line's glossary: Yield), the share of a mix,
  * or of what made an item, that one decompose or recycle returns, and decomposing by hand the lowest core's; and the FE
- * drive's pace, cost and store.
+ * drive's pace, cost and store; and the food a hand drive's turn costs.
  *
  * <p>And the recipe types recycling reads as assembling. The mod names no suite mod (libworks ADR 0013), so the pack names
  * Craftworks' assembling type there.
@@ -34,6 +34,12 @@ public final class ServerConfig {
             .comment("The share of a mix, or of what made an item, that a tier-1 core returns per decompose or recycle,",
                     "each part of an item left over as the chance of one more. Decomposing by hand returns the same.")
             .defineInRange("recycler.yield.tier_1", 0.25, 0.0, 1.0);
+
+    /** What a hand drive's turn that counts costs the player turning it: about a hunger point an essence (#222). */
+    public static final ModConfigSpec.DoubleValue HAND_DRIVE_EXHAUSTION = BUILDER
+            .comment("The food exhaustion each turn of a hand drive that counts adds to the player who turned it, as sprinting does.",
+                    "0.5 is about one hunger point per essence on a tier-1 core (8 turns a decompose, 4 exhaustion a point).")
+            .defineInRange("recycler.hand_drive.exhaustion", 0.5, 0.0, 40.0);
 
     /** How often an FE drive turns: the hand drive's cap, so one matches one player cranking without a pause. */
     public static final ModConfigSpec.IntValue FE_DRIVE_INTERVAL = BUILDER
@@ -130,6 +136,11 @@ public final class ServerConfig {
     /** The share of a sale the money handicap pays. */
     public static double moneySaleShare() {
         return SPEC.isLoaded() ? MONEY_SALE_SHARE.getAsDouble() : MONEY_SALE_SHARE.getDefault();
+    }
+
+    /** The food exhaustion a hand drive's turn that counts adds. */
+    public static double handDriveExhaustion() {
+        return SPEC.isLoaded() ? HAND_DRIVE_EXHAUSTION.getAsDouble() : HAND_DRIVE_EXHAUSTION.getDefault();
     }
 
     /** The ticks between two turns of one FE drive. */

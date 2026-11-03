@@ -19,5 +19,10 @@ the next turn.
 Each turn is heard and seen. A click whose pitch rises as the decompose goes on, and sparks, mean the turn counted.
 A dull click and smoke mean the Recycler can't run, and the turn is lost: Jade, on the [core](core.md), says why.
 
+Turning a drive is work, as sprinting is: each turn that counts makes you hungrier, about one hunger point for
+each essence decomposed, saturation first. A lost turn costs nothing. Once your food is down to 6 (three
+drumsticks), you're too hungry to turn it, and it refuses as a lost turn would: eat, and it turns again.
+Decomposing by hand, a right-click with an essence, costs no food, so you can always get going.
+
 A Recycler's drives add up, so two players on two drives run it twice as fast. A drive stands in any of the
 Recycler's eight places. At a corner, its rails turn to run along the Recycler's outer edges.

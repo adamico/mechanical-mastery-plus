@@ -15,7 +15,7 @@ import net.minecraft.world.level.GameType;
 
 /**
  * Decomposing by hand (#166): a right-click with an essence decomposes one into its mix, by the game-test
- * pack's recipe, and rests the essence for its cooldown; it is recorded as by hand.
+ * pack's recipe, and rests the essence for its cooldown; it is recorded as by hand, and costs no food (#222).
  */
 final class HandDecomposeTests {
 
@@ -27,6 +27,7 @@ final class HandDecomposeTests {
         tests.test("hand_click_during_the_cooldown_does_nothing", 1, HandDecomposeTests::clickDuringCooldown);
         tests.test("hand_essence_with_no_recipe_does_nothing", 1, HandDecomposeTests::noRecipe);
         tests.test("hand_decompose_is_recorded_as_by_hand", 1, HandDecomposeTests::recorded);
+        tests.test("hand_food_decompose_costs_none", 1, HandDecomposeTests::costsNoFood);
     }
 
     private static void decomposesAndCoolsDown(GameTestHelper helper) {
@@ -68,6 +69,14 @@ final class HandDecomposeTests {
         helper.assertValueEqual(log.count(team, Essence.ADVANCED, DecomposeLog.Way.HAND), 1L, "the Advanced essence the team decomposed by hand");
         helper.assertValueEqual(log.count(team, Essence.ADVANCED, DecomposeLog.Way.RECYCLER), 0L,
                 "the Advanced essence the team decomposed on a Recycler");
+        helper.succeed();
+    }
+
+    private static void costsNoFood(GameTestHelper helper) {
+        var player = holding(helper, Essence.ADVANCED, 1);
+        use(helper, player);
+        expectHeld(helper, player, 0);
+        helper.assertValueEqual(TestFood.exhaustion(player), 0.0F, "the exhaustion decomposing by hand added");
         helper.succeed();
     }
 

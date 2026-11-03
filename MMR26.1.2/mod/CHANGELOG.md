@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn adds, or ch
 
 ## Unreleased
 
+- Turning a hand drive costs food, as sprinting does: each turn that counts adds 0.5 exhaustion to the player who turned it, about one hunger point an essence, the server config's `recycler.hand_drive.exhaustion`; a lost turn costs nothing. A survival player at 6 food or below can't turn it: the turn is refused as a lost one, and the action bar says they're too hungry. Creative players pay nothing. Decomposing by hand stays free (#222).
 - EMI shows a mix too long for one screen, such as Advanced's, across pages of eight rows, each numbered under its arrow (1/3, 2/3…), so every kind it gives can be read; the arrow's tooltip still counts the whole mix's kinds. A mix that fits still shows on one (#227).
 - A challenge's chain is locked for a team until it starts that challenge, and stays unlocked from then on, past a win or a reset (ADR 0007). With Chapters installed, starting a challenge grants its stage (such as `mechanicalmasteryreborn:energy`), unlocking its chain's recipes in the crafting grid and in Craftworks (#173).
 
