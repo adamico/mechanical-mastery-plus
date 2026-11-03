@@ -34,7 +34,7 @@ The challenges after 0.0.1 (#210), each one's chain locked until a team starts i
 Added from the pack's CurseForge profile:
 
 - **Functional Storage**: drawers, for the stacks of intermediates decomposing makes.
-- **Pipez**, **LaserIO**, **Modular Routers**: item, fluid and energy transport beside the suite's, from simple pipes to filtered, wireless routing.
+- **LaserIO**, **Modular Routers**: item, fluid and energy transport beside the suite's, filtered and wireless routing.
 - **Cobblegen Galore**: cobblestone generators, the skyblock's first stone.
 - **Time in a Bottle**: speeds up a block, for slow early loops.
 - **Construction Sticks**, **FTB Ultimine**: building and breaking many blocks at once.
