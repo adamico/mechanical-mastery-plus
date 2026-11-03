@@ -23,7 +23,8 @@ import snownee.jade.api.ui.JadeUI;
 import snownee.jade.api.view.ProgressView;
 
 /**
- * What the server tells Jade about a C.O.D.: whether it is making essence, whether it is blocked, the ticks done
+ * What the server tells Jade about a C.O.D.: whether its team has blocked all four tiers,
+ * whether it is making essence, whether it is blocked, the ticks done
  * toward the next out of its interval, which the server's config sets and which is shorter once it is awake, and its
  * team's Inflation and its cap while the team plays a challenge.
  * {@link Lines} words it on the client, apart so that a dedicated server never loads Jade's drawing.
@@ -33,6 +34,7 @@ final class CodReport {
     private static final Identifier UID = Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "cod");
 
     private static final StreamCodec<RegistryFriendlyByteBuf, Data> CODEC = StreamCodec.composite(
+            ByteBufCodecs.BOOL, Data::allBlocked,
             ByteBufCodecs.BOOL, Data::making,
             ByteBufCodecs.BOOL, Data::blocked,
             ByteBufCodecs.VAR_INT, Data::ticks,
@@ -41,7 +43,7 @@ final class CodReport {
             ByteBufCodecs.VAR_INT, Data::cap,
             Data::new);
 
-    record Data(boolean making, boolean blocked, int ticks, int interval, Optional<Inflation> inflation, int cap) {
+    record Data(boolean allBlocked, boolean making, boolean blocked, int ticks, int interval, Optional<Inflation> inflation, int cap) {
     }
 
     static final MachineReport<CodBlockEntity, Data> REPORT = new MachineReport<>(UID, CodBlockEntity.class, CodReport::read, CODEC);
@@ -49,7 +51,7 @@ final class CodReport {
     /** The ticks done are held to the interval, which may have shrunk by a tick since C.O.D. last counted one. */
     private static Data read(CodBlockEntity cod) {
         int interval = cod.interval();
-        return new Data(cod.isMaking(), cod.isBlocked(), Math.min(cod.ticksTowardNext(), interval), interval, cod.inflation(),
+        return new Data(cod.tier().isEmpty(), cod.isMaking(), cod.isBlocked(), Math.min(cod.ticksTowardNext(), interval), interval, cod.inflation(),
                 ServerConfig.inflationCap());
     }
 
@@ -57,7 +59,7 @@ final class CodReport {
     }
 
     /**
-     * Words the report: the next essence as a bar with the seconds left while it is making, that it is blocked
+     * Words the report: that all four tiers are blocked, if they are; otherwise the next essence as a bar with the seconds left while it is making, that it is blocked
      * while what it makes has nowhere to go, or that its slot is full; then, while its team plays a challenge, its
      * Inflation's excess against its cap, as its bar words it, with what C.O.D. has made and the team has decomposed since the challenge began.
      */
@@ -67,7 +69,9 @@ final class CodReport {
         }
 
         static void add(Data report, ITooltip tooltip) {
-            if (!report.making()) {
+            if (report.allBlocked()) {
+                tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.all_blocked"));
+            } else if (!report.making()) {
                 tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.full"));
             } else if (report.blocked()) {
                 tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.blocked"));

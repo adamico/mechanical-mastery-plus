@@ -3,6 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.essence;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -18,7 +19,7 @@ public enum Essence {
     REGULAR("regular_mechanical_essence", Kind.MECHANICAL),
     /** Yellow. */
     IMPROVED("improved_mechanical_essence", Kind.MECHANICAL),
-    /** Magenta: the one C.O.D. makes. */
+    /** Magenta: the one C.O.D. makes first. */
     ADVANCED("advanced_mechanical_essence", Kind.MECHANICAL),
     /** The energy challenge's. */
     GALVANIC("galvanic_essence", Kind.TRANSMUTED),
@@ -35,6 +36,9 @@ public enum Essence {
     public enum Kind {
         MECHANICAL, TRANSMUTED, QUINTESSENCE
     }
+
+    /** The Mechanical Essences as C.O.D. makes them, highest tier first: Advanced until it is blocked, then the next. */
+    public static final List<Essence> TIERS = List.of(ADVANCED, IMPROVED, REGULAR, BASIC);
 
     private final String path;
     private final Kind kind;

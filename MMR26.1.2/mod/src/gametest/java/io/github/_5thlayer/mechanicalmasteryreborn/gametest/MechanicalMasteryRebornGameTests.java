@@ -72,6 +72,7 @@ public final class MechanicalMasteryRebornGameTests {
         EssenceTests.register(tests);
         CodTests.register(tests);
         CodWakeTests.register(tests);
+        CodTierTests.register(tests);
         LabTests.register(tests);
         InflationTests.register(tests);
         InflationCapTests.register(tests);

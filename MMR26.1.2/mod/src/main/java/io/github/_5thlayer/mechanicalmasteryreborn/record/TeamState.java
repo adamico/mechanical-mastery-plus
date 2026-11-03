@@ -28,7 +28,8 @@ import net.minecraft.world.level.saveddata.SavedDataType;
  * Each team's state, keyed on its id ({@link Teams}): whether its C.O.D. is awake, how much essence an awake
  * C.O.D. has made for it, spawned or not, the handicap it chose at the lab, which says which challenge it plays, and
  * its {@link Inflation} while it plays one, with whether it was warned that Inflation nears its cap, and the money set
- * aside from its Account while it plays the money challenge, and the challenges it has ever started. Its members share
+ * aside from its Account while it plays the money challenge, the challenges it has ever started, and the tiers it has
+ * blocked and the challenges it has won, which no reset touches. Its members share
  * it, and a player who joins a team shares it from then on. Saved with the world, in the overworld's data.
  */
 public final class TeamState extends SavedData {
@@ -38,6 +39,12 @@ public final class TeamState extends SavedData {
             id -> Handicap.byId(id).map(DataResult::success).orElseGet(() -> DataResult.error(() -> "No handicap " + id)),
             Handicap::id);
     private static final Codec<Set<Handicap>> HANDICAPS_CODEC = HANDICAP_CODEC.listOf().xmap(TeamState::handicaps, List::copyOf);
+    /** A Mechanical Essence by its id, which never changes once shipped. */
+    private static final Codec<Essence> TIER_CODEC = Codec.STRING.comapFlatMap(
+            path -> Essence.byPath(path).filter(Essence.TIERS::contains).map(DataResult::success)
+                    .orElseGet(() -> DataResult.error(() -> "No tier " + path)),
+            Essence::path);
+    private static final Codec<Set<Essence>> TIERS_CODEC = TIER_CODEC.listOf().xmap(TeamState::tiers, List::copyOf);
 
     /** One team's state. */
     private static final class Entry {
@@ -49,7 +56,9 @@ public final class TeamState extends SavedData {
                 Inflation.CODEC.optionalFieldOf("inflation").forGetter(entry -> entry.inflation),
                 Codec.BOOL.optionalFieldOf("warned", false).forGetter(entry -> entry.warned),
                 Codec.LONG.optionalFieldOf("set_aside", 0L).forGetter(entry -> entry.setAside),
-                HANDICAPS_CODEC.optionalFieldOf("unlocked", Set.of()).forGetter(entry -> entry.unlocked))
+                HANDICAPS_CODEC.optionalFieldOf("unlocked", Set.of()).forGetter(entry -> entry.unlocked),
+                TIERS_CODEC.optionalFieldOf("blocked", Set.of()).forGetter(entry -> entry.blocked),
+                HANDICAPS_CODEC.optionalFieldOf("won", Set.of()).forGetter(entry -> entry.won))
                 .apply(instance, Entry::new));
 
         boolean awake;
@@ -63,9 +72,13 @@ public final class TeamState extends SavedData {
         long setAside;
         /** The challenges the team has started, whose chains stay unlocked for it from then on (ADR 0007). */
         Set<Handicap> unlocked;
+        /** The tiers the team has blocked, for good: C.O.D. makes the highest of the rest. */
+        Set<Essence> blocked;
+        /** The challenges the team has won, for good. */
+        Set<Handicap> won;
 
         Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation, boolean warned, long setAside,
-                Set<Handicap> unlocked) {
+                Set<Handicap> unlocked, Set<Essence> blocked, Set<Handicap> won) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
@@ -75,6 +88,8 @@ public final class TeamState extends SavedData {
             this.setAside = setAside;
             this.unlocked = handicaps(unlocked);
             handicap.ifPresent(this.unlocked::add);
+            this.blocked = tiers(blocked);
+            this.won = handicaps(won);
         }
     }
 
@@ -119,14 +134,14 @@ public final class TeamState extends SavedData {
 
     /**
      * Puts {@code team}'s C.O.D. back to dormant, as a new island's is, its count of what it made forgotten. The
-     * challenge the team plays, if any, goes on.
+     * challenge the team plays, if any, goes on, and so do the tiers it blocked and the challenges it won.
      */
     public void makeDormant(UUID team) {
         Entry entry = teams.get(team);
         if (entry == null) {
             return;
         }
-        if (entry.handicap.isPresent()) {
+        if (entry.handicap.isPresent() || !entry.blocked.isEmpty() || !entry.won.isEmpty()) {
             entry.awake = false;
             entry.made = 0;
         } else {
@@ -202,6 +217,45 @@ public final class TeamState extends SavedData {
         return true;
     }
 
+    /** The tier {@code team}'s C.O.D. makes: the highest it hasn't blocked, Advanced first, and none once all four are. */
+    public Optional<Essence> tier(UUID team) {
+        Entry entry = teams.get(team);
+        return Essence.TIERS.stream().filter(tier -> entry == null || !entry.blocked.contains(tier)).findFirst();
+    }
+
+    /**
+     * Sets the tier {@code team}'s C.O.D. makes, by blocking every tier above it and none below, or all four for
+     * none, as {@code /cod tier} does. The challenges it has won stay as they are.
+     */
+    public void setTier(UUID team, Optional<Essence> tier) {
+        Entry entry = entry(team);
+        int index = tier.map(Essence.TIERS::indexOf).orElse(Essence.TIERS.size());
+        entry.blocked = tiers(Essence.TIERS.subList(0, index));
+        setDirty();
+    }
+
+    /**
+     * Blocks the tier {@code team}'s C.O.D. makes, for good, as winning {@code won}'s challenge does, and notes the
+     * challenge won. Says whether it did: not once all four are blocked, and not for a challenge won already.
+     */
+    public boolean blockTier(UUID team, Handicap won) {
+        Optional<Essence> tier = tier(team);
+        Entry entry = entry(team);
+        if (tier.isEmpty() || entry.won.contains(won)) {
+            return false;
+        }
+        entry.blocked.add(tier.get());
+        entry.won.add(won);
+        setDirty();
+        return true;
+    }
+
+    /** Whether {@code team} has won {@code handicap}'s challenge. */
+    public boolean won(UUID team, Handicap handicap) {
+        Entry entry = teams.get(team);
+        return entry != null && entry.won.contains(handicap);
+    }
+
     /** The money set aside from {@code team}'s Account while it plays the money challenge. */
     public long setAside(UUID team) {
         Entry entry = teams.get(team);
@@ -237,6 +291,11 @@ public final class TeamState extends SavedData {
     /** The teams that play a challenge. */
     public List<UUID> playing() {
         return teams.entrySet().stream().filter(entry -> entry.getValue().handicap.isPresent()).map(Map.Entry::getKey).toList();
+    }
+
+    /** The teams with a state of their own: woken, playing or once played a challenge, or with a tier blocked. */
+    public Set<UUID> known() {
+        return Set.copyOf(teams.keySet());
     }
 
     /** Whether {@code team} was warned that its Inflation nears its cap, since it last fell back below. */
@@ -281,11 +340,11 @@ public final class TeamState extends SavedData {
 
     /**
      * Counts {@code count} of {@code essence} {@code team} decomposed, by hand or on a Recycler, against its Inflation
-     * while it plays a challenge: only Advanced essence, the tier C.O.D. makes.
+     * while it plays a challenge: only essence of the tier its C.O.D. makes.
      */
     void countDecomposed(UUID team, Essence essence, long count) {
         Entry entry = teams.get(team);
-        if (entry == null || entry.inflation.isEmpty() || essence != Essence.ADVANCED) {
+        if (entry == null || entry.inflation.isEmpty() || tier(team).filter(essence::equals).isEmpty()) {
             return;
         }
         entry.inflation = entry.inflation.map(inflation -> inflation.plusDecomposed(count));
@@ -297,7 +356,13 @@ public final class TeamState extends SavedData {
         return handicaps.isEmpty() ? EnumSet.noneOf(Handicap.class) : EnumSet.copyOf(handicaps);
     }
 
+    /** A set of its own of {@code tiers}, which may be empty. */
+    private static EnumSet<Essence> tiers(Collection<Essence> tiers) {
+        return tiers.isEmpty() ? EnumSet.noneOf(Essence.class) : EnumSet.copyOf(tiers);
+    }
+
     private Entry entry(UUID team) {
-        return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false, 0, Set.of()));
+        return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false, 0, Set.of(), Set.of(),
+                Set.of()));
     }
 }
