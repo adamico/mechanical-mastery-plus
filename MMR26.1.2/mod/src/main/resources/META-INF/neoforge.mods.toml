@@ -44,6 +44,14 @@ config = "${mod_id}.mixins.json"
 [[mixins]]
 config = "${mod_id}.theurgy.mixins.json"
 
+# The life handicap on a player's food data: faster hunger and the Diet (#244).
+[[mixins]]
+config = "${mod_id}.life.mixins.json"
+
+# The Ritual of Full Stomach's feeding counts the food it feeds in a Diet, applied only with Neo Vitae installed (#244).
+[[mixins]]
+config = "${mod_id}.neovitae.mixins.json"
+
 # A home gate opens only on the island of a team that has unlocked protection, applied only with Gateways installed (#238).
 [[mixins]]
 config = "${mod_id}.gateways.mixins.json"

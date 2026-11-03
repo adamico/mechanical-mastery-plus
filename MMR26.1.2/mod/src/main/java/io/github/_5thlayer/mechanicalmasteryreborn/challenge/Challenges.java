@@ -26,7 +26,7 @@ import org.slf4j.Logger;
  * players online hears vanilla's challenge fanfare when it starts, sees the challenge's name as a title with its cost
  * below, and reads both in chat, and is given the challenge's chain ({@link Chains}). The money handicap acts on the
  * team's Account as it starts, resets and ends, and the protection handicap's {@link Assault} is sent as it starts and
- * removed as it resets or ends.
+ * removed as it resets or ends; the life handicap's Diets are forgotten as it resets or ends.
  */
 public final class Challenges {
 
@@ -57,6 +57,9 @@ public final class Challenges {
         if (handicap == Handicap.PROTECTION) {
             Assault.start(server, team);
         }
+        if (handicap == Handicap.LIFE) {
+            LifeHandicap.refresh(server, team);
+        }
         Component message = Component.translatable("mechanicalmasteryreborn.challenge.started",
                 name(handicap).withStyle(ChatFormatting.GOLD), cost(handicap)).withStyle(ChatFormatting.GRAY);
         Component title = title(handicap).withStyle(ChatFormatting.GOLD);
@@ -83,6 +86,7 @@ public final class Challenges {
         TeamState state = TeamState.get(server);
         boolean money = state.plays(team, Handicap.MONEY);
         boolean protection = state.plays(team, Handicap.PROTECTION);
+        boolean life = state.plays(team, Handicap.LIFE);
         if (!state.endChallenge(team)) {
             return false;
         }
@@ -91,6 +95,9 @@ public final class Challenges {
         }
         if (protection) {
             Assault.end(server, team);
+        }
+        if (life) {
+            LifeHandicap.refresh(server, team);
         }
         return true;
     }
@@ -139,6 +146,9 @@ public final class Challenges {
         }
         if (state.plays(team, Handicap.PROTECTION)) {
             Assault.end(server, team);
+        }
+        if (state.plays(team, Handicap.LIFE)) {
+            LifeHandicap.forget(server, team);
         }
         return true;
     }

@@ -14,7 +14,7 @@ public enum Handicap {
 
     /** More, stronger and special mobs. */
     PROTECTION("protection", false),
-    /** Less max health. */
+    /** Faster hunger, and a Diet: the same food feeding less each time it is eaten (ADR 0011). */
     LIFE("life", false),
     /** Generator blocks disabled. */
     ENERGY("energy", true),

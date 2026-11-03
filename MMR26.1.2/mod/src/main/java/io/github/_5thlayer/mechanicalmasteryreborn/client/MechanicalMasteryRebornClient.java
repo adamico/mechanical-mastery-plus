@@ -6,11 +6,14 @@ package io.github._5thlayer.mechanicalmasteryreborn.client;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingTable;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -22,7 +25,7 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 /**
  * The client's side: C.O.D.'s and the lab's screens, the items on a Recycler output's shelf, the recycling table EMI
- * shows, the challenge a chain machine's tooltip names, and how a team's Inflation bar is drawn.
+ * shows, the challenge a chain machine's tooltip names, what a food would feed under the life handicap, and how a team's Inflation bar is drawn.
  */
 @Mod(value = MechanicalMasteryReborn.MOD_ID, dist = Dist.CLIENT)
 public final class MechanicalMasteryRebornClient {
@@ -35,6 +38,7 @@ public final class MechanicalMasteryRebornClient {
         modBus.addListener((RegisterClientPayloadHandlersEvent event) -> event.register(ChainMachines.Table.TYPE,
                 (table, context) -> ChainMachines.Table.receive(table)));
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::nameChain);
+        NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::feedsNow);
         NeoForge.EVENT_BUS.addListener(InflationBarOverlay::draw);
     }
 
@@ -44,6 +48,17 @@ public final class MechanicalMasteryRebornClient {
         if (handicap != null) {
             event.getToolTip().add(ChainMachines.line(handicap).copy().withStyle(ChatFormatting.GOLD));
         }
+    }
+
+    /** A food's tooltip, while its player's Diet is kept, shows the share it would feed them now (#244). */
+    private static void feedsNow(ItemTooltipEvent event) {
+        var player = event.getEntity();
+        if (player == null || !event.getItemStack().has(DataComponents.FOOD) || !LifeHandicap.kept(player)) {
+            return;
+        }
+        long percent = Math.round(LifeHandicap.shareNow(player, event.getItemStack()) * 100);
+        event.getToolTip().add(Component.translatable("mechanicalmasteryreborn.diet.feeds", percent)
+                .withStyle(percent < 100 ? ChatFormatting.RED : ChatFormatting.GREEN));
     }
 
     private static void registerScreens(RegisterMenuScreensEvent event) {
