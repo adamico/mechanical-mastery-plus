@@ -181,7 +181,15 @@ public final class TeamState extends SavedData {
      * offer yet, nor for a challenge it has won.
      */
     public boolean choose(UUID team, Handicap handicap, long gameTime) {
-        if (!handicap.choosable() || handicap(team).isPresent() || won(team, handicap)) {
+        return handicap.choosable() && begin(team, handicap, gameTime);
+    }
+
+    /**
+     * Starts {@code handicap}'s challenge for {@code team} as {@link #choose} does, though the lab can't offer it yet,
+     * as an op's command may (#235); false while the team plays one or has won it.
+     */
+    public boolean begin(UUID team, Handicap handicap, long gameTime) {
+        if (handicap(team).isPresent() || won(team, handicap)) {
             return false;
         }
         Entry entry = entry(team);

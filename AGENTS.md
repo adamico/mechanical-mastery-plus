@@ -8,6 +8,10 @@ A monorepo of modpacks, one folder per pack line:
 
 A task works inside one pack line's folder. Reborn's companion mod lives inside its line's folder too, in `MMR26.1.2/mod/`: a Gradle build of its own, started from the libworks template and kept out of the pack by `.packwizignore`.
 
+## Reborn's pack index
+
+`MMR26.1.2/index.toml` and `MMR26.1.2/pack.toml` are refreshed on `main` only: a branch never commits them. `MMR26.1.2/scripts/launch.py` refreshes them for its own run and puts them back, so an in-game check sees a branch's new files without a refresh. After merging a branch that adds, removes or changes pack files, run `packwiz refresh` in `MMR26.1.2/` on `main` and commit both files; a merge that conflicts on them takes `main`'s and refreshes.
+
 ## Agent skills
 
 ### Issue tracker

@@ -117,7 +117,9 @@ final class LabTests {
         var op = server.createCommandSourceStack().withLevel(helper.getLevel())
                 .withPosition(helper.absolutePos(LAB).getCenter()).withSuppressedOutput();
         server.getCommands().performPrefixedCommand(op, "cod challenge start life");
-        helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after an op started life");
+        // The lab can't offer life yet, but an op may start it (#235).
+        helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.LIFE), "the team's handicap after an op started life");
+        server.getCommands().performPrefixedCommand(op, "cod challenge end");
         server.getCommands().performPrefixedCommand(op, "cod challenge start energy");
         helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.ENERGY), "the team's handicap after an op started energy");
         helper.assertValueEqual(state(helper).handicap(other), Optional.<Handicap>empty(), "another team's handicap");

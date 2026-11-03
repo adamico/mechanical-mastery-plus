@@ -8,9 +8,11 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Generators;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationCap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbteams.FtbPartySync;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.TheurgyHud;
+import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.port.Port;
@@ -38,6 +40,7 @@ public final class MechanicalMasteryReborn {
         Lab.register(modBus);
         Port.register(modBus);
         Generators.register(modBus);
+        RiftShards.register(modBus);
         Chains.register();
         ChainMachines.register(modBus);
         InflationCap.register();
@@ -45,6 +48,7 @@ public final class MechanicalMasteryReborn {
         Decomposing.register(modBus);
         Recycling.register(modBus);
         Recycler.register(modBus);
+        Defences.register(modBus);
         ServerConfig.register(container);
         modBus.addListener(WorksTabContents::add);
         // With both installed, as the pack plays, an island's players share one FTB party (#225).
