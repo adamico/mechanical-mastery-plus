@@ -14,12 +14,16 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.AssaultState;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Gates;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
@@ -69,6 +73,7 @@ final class AssaultTests {
         tests.test("assault_builds_all_four_sides", 20, AssaultTests::fourSides);
         tests.test("assault_reopens_a_failed_gate_at_its_wave", 20, AssaultTests::reopensFailed);
         tests.test("assault_gate_moves_side_at_a_step", 20, AssaultTests::movesAtStep);
+        tests.test("assault_shows_its_wave_and_side_on_the_challenge_bar", 20, AssaultTests::barShowsWaveAndSide);
     }
 
     private static void builtOnStart(GameTestHelper helper) {
@@ -203,6 +208,30 @@ final class AssaultTests {
             helper.assertTrue(Integer.valueOf(Assault.STEP).equals(WAVES.get(moved)), "the moved gate didn't keep its wave");
             helper.assertTrue(state.closed(gate), "the old gate isn't kept out");
             Challenges.end(server(helper), team);
+            helper.succeed();
+        });
+    }
+
+    /** The challenge's bar names the Assault's wave and side, kept in step as the gate starts a wave (#239). */
+    private static void barShowsWaveAndSide(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        ServerPlayer player = AssaultAbsenceTests.player(helper, team);
+        helper.setBlock(COD, Cod.BLOCK.get());
+        helper.runAfterDelay(TICKED, () -> {
+            Challenges.begin(server(helper), team, Handicap.PROTECTION);
+            AssaultState.Built built = AssaultState.get(server(helper)).assault(team).orElseThrow();
+            Assault.noteWave(helper.getLevel(), built.gates().getFirst(), 7);
+        });
+        helper.runAfterDelay(TICKED + 2, () -> {
+            Direction side = AssaultState.get(server(helper)).assault(team).orElseThrow().side().orElseThrow();
+            var bar = InflationBar.of(team);
+            helper.assertTrue(bar.isPresent(), "the team has no challenge bar during its Assault");
+            Component expected = Component.translatable("mechanicalmasteryreborn.bar.assault",
+                    Challenges.title(Handicap.PROTECTION), 7, Assault.sideName(side));
+            Object top = ((TranslatableContents) bar.get().getName().getContents()).getArgs()[0];
+            helper.assertValueEqual(top, expected, "the bar's top line");
+            Challenges.end(server(helper), team);
+            AssaultAbsenceTests.leave(player);
             helper.succeed();
         });
     }

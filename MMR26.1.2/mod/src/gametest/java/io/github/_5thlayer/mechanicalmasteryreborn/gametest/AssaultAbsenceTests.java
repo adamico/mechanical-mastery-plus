@@ -137,7 +137,7 @@ final class AssaultAbsenceTests {
     }
 
     /** A player of {@code team}, online and at home on its island. */
-    private static ServerPlayer player(GameTestHelper helper, UUID team) {
+    static ServerPlayer player(GameTestHelper helper, UUID team) {
         ServerPlayer player = helper.makeMockServerPlayerInLevel();
         player.setGameMode(GameType.SPECTATOR);
         SUMMONERS.add(player.getUUID());
@@ -150,7 +150,7 @@ final class AssaultAbsenceTests {
         return waiting.stream().map(AssaultState.Waiting::wave).sorted().toList();
     }
 
-    private static void leave(ServerPlayer player) {
+    static void leave(ServerPlayer player) {
         player.level().getServer().getPlayerList().remove(player);
     }
 

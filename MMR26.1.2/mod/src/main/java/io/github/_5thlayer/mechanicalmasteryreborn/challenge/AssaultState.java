@@ -36,15 +36,17 @@ public final class AssaultState extends SavedData {
 
     /**
      * One Assault: what it built in {@code dimension}, the entity of its one gate while open, and the side of C.O.D. the
-     * gate is on now, where it opens again after a failure or an absence (#239).
+     * gate is on now, where it opens again after a failure or an absence, and the last wave it started, 0 before its
+     * first (#239).
      */
-    public record Built(ResourceKey<Level> dimension, List<BlockPos> blocks, List<UUID> gates, Optional<Direction> side) {
+    public record Built(ResourceKey<Level> dimension, List<BlockPos> blocks, List<UUID> gates, Optional<Direction> side, int wave) {
 
         static final Codec<Built> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Level.RESOURCE_KEY_CODEC.fieldOf("dimension").forGetter(Built::dimension),
                 BlockPos.CODEC.listOf().fieldOf("blocks").forGetter(Built::blocks),
                 UUIDUtil.STRING_CODEC.listOf().optionalFieldOf("gates", List.of()).forGetter(Built::gates),
-                Direction.CODEC.optionalFieldOf("side").forGetter(Built::side))
+                Direction.CODEC.optionalFieldOf("side").forGetter(Built::side),
+                Codec.INT.optionalFieldOf("wave", 0).forGetter(Built::wave))
                 .apply(instance, Built::new));
 
         public Built {
@@ -54,7 +56,7 @@ public final class AssaultState extends SavedData {
 
         /** This Assault with {@code gates} open instead. */
         Built withGates(List<UUID> gates) {
-            return new Built(dimension, blocks, gates, side);
+            return new Built(dimension, blocks, gates, side, wave);
         }
 
     }
@@ -165,9 +167,18 @@ public final class AssaultState extends SavedData {
     /** Moves {@code team}'s gate {@code from} to {@code side}, open there as {@code to}, and keeps {@code from} out. */
     void moveGate(UUID team, UUID from, Optional<UUID> to, Direction side) {
         Built built = assaults.get(team);
-        assaults.put(team, new Built(built.dimension(), built.blocks(), to.stream().toList(), Optional.of(side)));
+        assaults.put(team, new Built(built.dimension(), built.blocks(), to.stream().toList(), Optional.of(side), built.wave()));
         closed.add(from);
         setDirty();
+    }
+
+    /** Notes that {@code team}'s gate started wave {@code wave}. */
+    void noteWave(UUID team, int wave) {
+        Built built = assaults.get(team);
+        if (built != null && built.wave() != wave) {
+            assaults.put(team, new Built(built.dimension(), built.blocks(), built.gates(), built.side(), wave));
+            setDirty();
+        }
     }
 
     /** Whether {@code gate} was the gate of an Assault since removed. */

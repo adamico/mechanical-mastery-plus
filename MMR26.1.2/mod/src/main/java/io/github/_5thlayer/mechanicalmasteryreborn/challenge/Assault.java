@@ -16,6 +16,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.UUIDUtil;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -118,7 +119,7 @@ public final class Assault {
         }
         Direction side = Direction.Plane.HORIZONTAL.getRandomDirection(level.getRandom());
         List<UUID> gates = Gates.get().open(level, gateAt(codPos, side), summoner, 0).stream().toList();
-        state.putAssault(team, new AssaultState.Built(level.dimension(), built, gates, Optional.of(side)));
+        state.putAssault(team, new AssaultState.Built(level.dimension(), built, gates, Optional.of(side), 0));
         AssaultExplosions.lift(server, team);
         LOGGER.info("Sent team {} its Assault: {} blocks built, gate {} on the {} side", team, built.size(), gates, side);
         return true;
@@ -193,8 +194,25 @@ public final class Assault {
             if (old != null) {
                 old.discard();
             }
+            Component where = Component.translatable(MechanicalMasteryReborn.MOD_ID + ".assault.moved", sideName(side));
+            for (ServerPlayer player : level.getServer().getPlayerList().getPlayers()) {
+                if (Teams.of(player).equals(team)) {
+                    player.sendOverlayMessage(where);
+                }
+            }
             LOGGER.info("Team {}'s Assault gate moves to the {} side at wave {}: {}", team, side, wave, moved.map(UUID::toString).orElse("none"));
         });
+    }
+
+    /** Notes that the Assault's gate {@code gate} started wave {@code wave}, for the team's bar. A gate of no Assault is left alone. */
+    public static void noteWave(ServerLevel level, UUID gate, int wave) {
+        AssaultState state = AssaultState.get(level.getServer());
+        state.teamOf(gate).ifPresent(team -> state.noteWave(team, wave));
+    }
+
+    /** The side's name, as "north", for the team's bar and the action bar's word that the gate moved. */
+    public static Component sideName(Direction side) {
+        return Component.translatable(MechanicalMasteryReborn.MOD_ID + ".assault.side." + side.getSerializedName());
     }
 
     /** Where {@code team}'s gate stands on the side it is on now, if its C.O.D. and side are known. */
