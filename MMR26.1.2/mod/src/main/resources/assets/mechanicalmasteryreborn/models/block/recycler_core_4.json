@@ -2,7 +2,7 @@
   "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
     "particle": "mechanicalmasteryreborn:block/recycler_casing",
-    "front": "mechanicalmasteryreborn:block/recycler_vent",
+    "front": "mechanicalmasteryreborn:block/recycler_vent_4",
     "side": "mechanicalmasteryreborn:block/recycler_casing",
     "top": "mechanicalmasteryreborn:block/recycler_frame_side",
     "bottom": "mechanicalmasteryreborn:block/recycler_frame_side_bottom"
