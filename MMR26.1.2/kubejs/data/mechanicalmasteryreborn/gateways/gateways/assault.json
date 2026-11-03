@@ -55,9 +55,16 @@
     "modifiers": [
         {
             "application_mode": {
+                "type": "gateways:only_on_every_n_waves",
+                "waves": 5
+            },
+            "setup_time": 400
+        },
+        {
+            "application_mode": {
                 "type": "gateways:after_every_n_waves",
-                "max": 10,
-                "waves": 3
+                "waves": 5,
+                "max": 1024
             },
             "entities": [
                 {
@@ -69,6 +76,96 @@
                             "loot_table": "mechanicalmasteryreborn:assault/zombie"
                         }
                     ]
+                },
+                {
+                    "type": "gateways:standard",
+                    "entity": "minecraft:skeleton",
+                    "modifiers": [
+                        {
+                            "type": "gateways:loot_table",
+                            "loot_table": "mechanicalmasteryreborn:assault/skeleton"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": [
+                {
+                    "type": "gateways:attribute",
+                    "attribute": "minecraft:max_health",
+                    "operation": "add_multiplied_total",
+                    "value": 0.1
+                },
+                {
+                    "type": "gateways:attribute",
+                    "attribute": "minecraft:attack_damage",
+                    "operation": "add_multiplied_total",
+                    "value": 0.1
+                }
+            ]
+        },
+        {
+            "application_mode": {
+                "type": "gateways:after_every_n_waves",
+                "waves": 10,
+                "max": 1024
+            },
+            "entities": [
+                {
+                    "type": "gateways:standard",
+                    "entity": "minecraft:husk",
+                    "modifiers": [
+                        {
+                            "type": "gateways:loot_table",
+                            "loot_table": "mechanicalmasteryreborn:assault/husk"
+                        }
+                    ]
+                },
+                {
+                    "type": "gateways:standard",
+                    "entity": "minecraft:spider",
+                    "modifiers": [
+                        {
+                            "type": "gateways:loot_table",
+                            "loot_table": "mechanicalmasteryreborn:assault/spider"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "application_mode": {
+                "type": "gateways:after_every_n_waves",
+                "waves": 15,
+                "max": 1024
+            },
+            "entities": [
+                {
+                    "type": "gateways:standard",
+                    "entity": "minecraft:vindicator",
+                    "modifiers": [
+                        {
+                            "type": "gateways:loot_table",
+                            "loot_table": "mechanicalmasteryreborn:assault/vindicator"
+                        }
+                    ]
+                },
+                {
+                    "type": "gateways:standard",
+                    "entity": "minecraft:creeper",
+                    "modifiers": [
+                        {
+                            "type": "gateways:loot_table",
+                            "loot_table": "mechanicalmasteryreborn:assault/creeper"
+                        }
+                    ]
+                }
+            ],
+            "modifiers": [
+                {
+                    "type": "gateways:attribute",
+                    "attribute": "minecraft:movement_speed",
+                    "operation": "add_multiplied_total",
+                    "value": 0.05
                 }
             ]
         }

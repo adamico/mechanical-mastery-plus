@@ -22,12 +22,13 @@ public interface Gates {
 
     /**
      * Opens the Assault's gate in {@code level} at {@code at}, with {@code summoner} as its summoner, whose team its
-     * mobs hunt, or none, and says the gate entity's id, or nothing if no gate opened.
+     * mobs hunt, or none, at {@code wave}, the waves already behind it (0 for a new gate, the wave a failed one had
+     * reached as it reopens), and says the gate entity's id, or nothing if no gate opened.
      */
-    Optional<UUID> open(ServerLevel level, Vec3 at, @Nullable ServerPlayer summoner);
+    Optional<UUID> open(ServerLevel level, Vec3 at, @Nullable ServerPlayer summoner, int wave);
 
     /** No gate at all, as a world without Gateways has. */
-    Gates NONE = (level, at, summoner) -> Optional.empty();
+    Gates NONE = (level, at, summoner, wave) -> Optional.empty();
 
     /** The gates a world without anything else uses: Gateways' when it is installed. */
     static Gates installed() {

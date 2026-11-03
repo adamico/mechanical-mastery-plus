@@ -7,14 +7,18 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.mojang.logging.LogUtils;
+import dev.shadowsoffire.gateways.entity.GatewayEntity;
+import dev.shadowsoffire.gateways.event.GateEvent;
 import dev.shadowsoffire.gateways.gate.GatewayRegistry;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Assault;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Gates;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
@@ -22,7 +26,7 @@ import org.slf4j.Logger;
 /**
  * Gateways to Eternity's part: the Assault's gate is the pack's endless gate {@link #ASSAULT}, opened as a Gate Pearl
  * opens one. Its summoner is the team member the Assault names; with none, a fake player, so Gateways' mobs fall back
- * to the nearest player.
+ * to the nearest player. A gate of an Assault that fails opens again at once at its wave: it has no lives.
  */
 public final class GatewaysGates implements Gates {
 
@@ -32,7 +36,7 @@ public final class GatewaysGates implements Gates {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     @Override
-    public Optional<UUID> open(ServerLevel level, Vec3 at, @Nullable ServerPlayer summoner) {
+    public Optional<UUID> open(ServerLevel level, Vec3 at, @Nullable ServerPlayer summoner, int wave) {
         var gate = GatewayRegistry.INSTANCE.holder(ASSAULT);
         if (!gate.isBound()) {
             LOGGER.warn("No gate {} to open for the Assault", ASSAULT);
@@ -41,8 +45,19 @@ public final class GatewaysGates implements Gates {
         Player player = summoner != null ? summoner : FakePlayerFactory.getMinecraft(level);
         var entity = gate.get().createEntity(level, player);
         entity.setPos(at.x, at.y, at.z);
+        entity.getEntityData().set(GatewayEntity.WAVE, wave);
         level.addFreshEntity(entity);
         entity.onGateCreated();
         return Optional.of(entity.getUUID());
+    }
+
+    /** Reopens an Assault's gate that fails, for its timer, a mob lost or out of range, at the wave it had reached. */
+    public static void register() {
+        NeoForge.EVENT_BUS.addListener(GateEvent.Failed.class, event -> {
+            GatewayEntity gate = event.getEntity();
+            if (gate.level() instanceof ServerLevel level) {
+                Assault.reopen(level, gate.getUUID(), gate.position(), gate.getWave());
+            }
+        });
     }
 }
