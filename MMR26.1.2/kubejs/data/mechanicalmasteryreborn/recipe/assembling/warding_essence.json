@@ -1,0 +1,14 @@
+{
+  "type": "craftworks:assembling",
+  "ingredients": [
+    { "ingredient": "mechanicalmasteryreborn:rift_shard", "count": 4 },
+    { "ingredient": "minecraft:bone", "count": 2 },
+    { "ingredient": "minecraft:string", "count": 2 },
+    { "ingredient": "minecraft:gunpowder", "count": 1 },
+    { "ingredient": "minecraft:iron_ingot", "count": 1 }
+  ],
+  "results": [
+    { "id": "mechanicalmasteryreborn:warding_essence", "count": 1 }
+  ],
+  "time": 100
+}

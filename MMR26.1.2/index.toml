@@ -14,7 +14,7 @@ hash = "0885ad982a8d639f03411ecef016ca88e9fbe67cb08ba38addc495ad4a6758b0"
 
 [[files]]
 file = "config/skyblockbuilder/templates/islands/reborn.snbt"
-hash = "c3ee18100fdca4998bf6f6217cad9e99c7cd4683fdc65d2f9c8daa47cee238b8"
+hash = "2d337ee1de0a817da2fb001156c06aa2ffad0b34b5efb5b3d51d21c99b6178eb"
 
 [[files]]
 file = "config/skyblockbuilder/templates/islands/spawn.snbt"
@@ -42,7 +42,7 @@ hash = "26f43add76e35fa7883a60cf864740b3c5225d1ab7cf91c8f5a476aa0494c666"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/cod.md"
-hash = "4c90671147bdc2b21ed53073c2df1d8c3d93a552394c70acb96564c90d736651"
+hash = "c435407923de8ac9cf988c55fc7de50038e217879aeaa166dbf9a098386479e3"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/decomposing.md"
@@ -54,7 +54,7 @@ hash = "fbc40ee821346b43aaf62873fb2c0da83ae93a6780fbf92ada2942ad01fa57a6"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/lab.md"
-hash = "8d96aa1e0a64f7dfb49a60c39b11d83681fa03ffe31809119089b07a2c71945c"
+hash = "d6b2b3dad2a5cf5bf8dc7d0d83dfd861445955a1654a24ba7fe067ca4d3378d2"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/casing.md"
@@ -97,8 +97,88 @@ file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/man
 hash = "66a7f2c1fd8ec56188dc922483b9ce6628a79778fae96a7721a15735f0fb738d"
 
 [[files]]
+file = "kubejs/data/gateways/gateways/gateways/basic/blaze.json"
+hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+
+[[files]]
+file = "kubejs/data/gateways/gateways/gateways/basic/enderman.json"
+hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+
+[[files]]
+file = "kubejs/data/gateways/gateways/gateways/basic/slime.json"
+hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+
+[[files]]
+file = "kubejs/data/gateways/gateways/gateways/emerald_grove.json"
+hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+
+[[files]]
+file = "kubejs/data/gateways/gateways/gateways/endless/automaton_fabricator.json"
+hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+
+[[files]]
+file = "kubejs/data/gateways/gateways/gateways/endless/blaze.json"
+hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+
+[[files]]
+file = "kubejs/data/gateways/gateways/gateways/hellish_fortress.json"
+hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+
+[[files]]
+file = "kubejs/data/gateways/gateways/gateways/iron_automaton.json"
+hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+
+[[files]]
+file = "kubejs/data/gateways/gateways/gateways/overworldian_nights.json"
+hash = "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+
+[[files]]
+file = "kubejs/data/gateways/recipe/basic/blaze.json"
+hash = "a738bbd6cddb3a33ddeea502a803f3bb512c17d06e7a90ccd284aa9a80788091"
+
+[[files]]
+file = "kubejs/data/gateways/recipe/basic/enderman.json"
+hash = "a738bbd6cddb3a33ddeea502a803f3bb512c17d06e7a90ccd284aa9a80788091"
+
+[[files]]
+file = "kubejs/data/gateways/recipe/basic/slime.json"
+hash = "a738bbd6cddb3a33ddeea502a803f3bb512c17d06e7a90ccd284aa9a80788091"
+
+[[files]]
+file = "kubejs/data/gateways/recipe/emerald_grove.json"
+hash = "a738bbd6cddb3a33ddeea502a803f3bb512c17d06e7a90ccd284aa9a80788091"
+
+[[files]]
+file = "kubejs/data/gateways/recipe/endless/automaton_fabricator.json"
+hash = "a738bbd6cddb3a33ddeea502a803f3bb512c17d06e7a90ccd284aa9a80788091"
+
+[[files]]
+file = "kubejs/data/gateways/recipe/endless/blaze.json"
+hash = "a738bbd6cddb3a33ddeea502a803f3bb512c17d06e7a90ccd284aa9a80788091"
+
+[[files]]
+file = "kubejs/data/gateways/recipe/hellish_fortress.json"
+hash = "a738bbd6cddb3a33ddeea502a803f3bb512c17d06e7a90ccd284aa9a80788091"
+
+[[files]]
+file = "kubejs/data/gateways/recipe/iron_automaton.json"
+hash = "a738bbd6cddb3a33ddeea502a803f3bb512c17d06e7a90ccd284aa9a80788091"
+
+[[files]]
+file = "kubejs/data/gateways/recipe/overworldian_nights.json"
+hash = "a738bbd6cddb3a33ddeea502a803f3bb512c17d06e7a90ccd284aa9a80788091"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/energy.json"
 hash = "9f691b257fd8e1828fa7cad3238d06451e7cee4123fc8287deff15352a6d8c81"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/protection.json"
+hash = "287c31c0bba97eb147e801bc95a1583612878eaae1c836244cc1e67da21a481d"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/warding_essence.json"
+hash = "06958b37ec4faf76cf5e9f4c21092fb731cb87944908ff2e972fd80c11e80032"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/incubation/galvanic_essence.json"
