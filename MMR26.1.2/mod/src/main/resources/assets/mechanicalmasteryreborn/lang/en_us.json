@@ -16,6 +16,7 @@
   "emi.category.mechanicalmasteryreborn.decomposing": "Decomposing",
   "emi.category.mechanicalmasteryreborn.recycling": "Recycling",
   "emi.mechanicalmasteryreborn.recycler.short_on_outputs": "A Recycler with fewer output positions than these %s kinds returns as many as fit, picked at random; the rest are lost",
+  "emi.mechanicalmasteryreborn.recycler.page": "%s/%s",
   "item.mechanicalmasteryreborn.advanced_mechanical_essence": "Advanced Mechanical Essence",
   "item.mechanicalmasteryreborn.aureate_essence": "Aureate Essence",
   "item.mechanicalmasteryreborn.basic_mechanical_essence": "Basic Mechanical Essence",

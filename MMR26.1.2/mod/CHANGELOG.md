@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn adds, or ch
 
 ## Unreleased
 
+- EMI shows a mix too long for one screen, such as Advanced's, across pages of eight rows, each numbered under its arrow (1/3, 2/3…), so every kind it gives can be read; the arrow's tooltip still counts the whole mix's kinds. A mix that fits still shows on one (#227).
 - A challenge's chain is locked for a team until it starts that challenge, and stays unlocked from then on, past a win or a reset (ADR 0007). With Chapters installed, starting a challenge grants its stage (such as `mechanicalmasteryreborn:energy`), unlocking its chain's recipes in the crafting grid and in Craftworks (#173).
 
 - The FE drive, a Recycler drive that runs on power: it takes FE from any side into a store of ten turns' worth, and while its Recycler has work it turns once every 5 ticks, as fast as a hand drive cranked without a pause, spending 40 FE a turn; it spends nothing while the Recycler can't run, and once full takes no more. Its turns are heard and seen as a hand drive's, and Jade on it reads the core's report. The pace, cost and store are the server config's `recycler.fe_drive.interval`, `recycler.fe_drive.fe_per_turn` and `recycler.fe_drive.store_turns`. The energy handicap stops generators only, so an FE drive keeps running on the FE it and the team's batteries stored (#186).
