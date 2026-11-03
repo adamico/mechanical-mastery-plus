@@ -93,7 +93,7 @@ The foods a player has eaten lately, kept only while their team plays the life c
 _Avoid_: nutrition, spice
 
 **Assault**:
-The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from gates on platforms it builds in the void, with unbreakable bridges to the island. The waves grow harder, with a breather between each step, and never stop until the quota is filled or Inflation reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, and it pauses while no one is on the island.
+The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from one gate at a time, on one of four platforms it builds in the void around the island, with unbreakable bridges to it. The waves grow harder, with a breather between each step, at which the gate moves to another side at random, and never stop until the quota is filled or Inflation reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, and it pauses while no one is on the island.
 _Avoid_: raid, siege, invasion
 
 **Home gate**:
