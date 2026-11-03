@@ -3,9 +3,12 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.HandDriveBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import net.minecraft.resources.Identifier;
@@ -24,7 +27,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  *
  * <p>And C.O.D.'s pace while dormant, once awake, and how it grows while a challenge is played, and the cap of a team's Inflation.
  *
- * <p>And the share of a sale a team is paid while it plays the money challenge.
+ * <p>And the share of a sale a team is paid while it plays the money challenge, and the quota a challenge's Port takes to win it.
  */
 public final class ServerConfig {
 
@@ -124,6 +127,13 @@ public final class ServerConfig {
                     "rounded down to the cent. 0.5 is half. Buying is unaffected.")
             .defineInRange("money.sale_share", 0.5, 0.0, 1.0);
 
+    /**
+     * The Transmuted Essence a challenge's Port takes to win it, by the tier C.O.D. makes, highest first (#224). Each
+     * challenge must take longer than the last, even with the better core a win unlocks (#189).
+     */
+    private static final Map<Essence, ModConfigSpec.IntValue> QUOTAS = quotas(Map.of(
+            Essence.ADVANCED, 4, Essence.IMPROVED, 8, Essence.REGULAR, 16, Essence.BASIC, 48));
+
     static final ModConfigSpec SPEC = BUILDER.build();
 
     private ServerConfig() {
@@ -131,6 +141,24 @@ public final class ServerConfig {
 
     public static void register(ModContainer container) {
         container.registerConfig(ModConfig.Type.SERVER, SPEC);
+    }
+
+    private static Map<Essence, ModConfigSpec.IntValue> quotas(Map<Essence, Integer> defaults) {
+        Map<Essence, ModConfigSpec.IntValue> quotas = new EnumMap<>(Essence.class);
+        for (Essence tier : Essence.TIERS) {
+            String name = tier.path().substring(0, tier.path().indexOf('_'));
+            quotas.put(tier, BUILDER
+                    .comment("The Transmuted Essence a challenge's Port takes to win it while C.O.D. makes " + name + " essence.",
+                            "Each challenge must take longer than the last, even with the better Recycler core a win unlocks.")
+                    .defineInRange("quota." + name, defaults.get(tier), 1, 1_000_000));
+        }
+        return quotas;
+    }
+
+    /** The Transmuted Essence a Port takes to win its challenge while C.O.D. makes {@code tier}. */
+    public static int quota(Essence tier) {
+        var quota = QUOTAS.get(tier);
+        return SPEC.isLoaded() ? quota.getAsInt() : quota.getDefault();
     }
 
     /** The ticks an essence rests after a decompose by hand. */

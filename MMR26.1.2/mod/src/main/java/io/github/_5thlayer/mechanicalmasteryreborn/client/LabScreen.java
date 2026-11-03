@@ -25,7 +25,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 /**
  * The lab: each handicap with what it costs, and a button to choose it, in the suite's stand-in machine look. Only
- * the ones the lab offers can be chosen; the others are shown as coming later, and the one the team plays as played.
+ * the ones the lab offers can be chosen; the others are shown as coming later, the one the team plays as played, and the ones it has won as won.
  */
 final class LabScreen extends AbstractContainerScreen<LabMenu> {
 
@@ -45,6 +45,7 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
     private static final Component INTRO = Component.translatable("mechanicalmasteryreborn.lab.intro");
     private static final Component CHOOSE = Component.translatable("mechanicalmasteryreborn.lab.choose");
     private static final Component PLAYED = Component.translatable("mechanicalmasteryreborn.lab.played");
+    private static final Component WON = Component.translatable("mechanicalmasteryreborn.lab.won");
     private static final Component LATER = Component.translatable("mechanicalmasteryreborn.lab.later");
     private static final Component NOT_MEMBER = Component.translatable("mechanicalmasteryreborn.lab.not_member");
     private static final Component NOT_MEMBER_TOOLTIP = Component.translatable("mechanicalmasteryreborn.lab.not_member.tooltip");
@@ -106,9 +107,10 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
         Optional<Handicap> chosen = menu.chosen();
         for (Handicap handicap : Handicap.values()) {
             Button button = buttons.get(handicap.ordinal());
-            boolean notMember = handicap.choosable() && chosen.isEmpty() && !menu.isMember();
+            boolean won = menu.won(handicap);
+            boolean notMember = handicap.choosable() && chosen.isEmpty() && !won && !menu.isMember();
             button.active = menu.canChoose(handicap);
-            button.setMessage(chosen.equals(Optional.of(handicap)) ? PLAYED : !handicap.choosable() ? LATER : notMember ? NOT_MEMBER : CHOOSE);
+            button.setMessage(chosen.equals(Optional.of(handicap)) ? PLAYED : won ? WON : !handicap.choosable() ? LATER : notMember ? NOT_MEMBER : CHOOSE);
             button.setTooltip(notMember ? Tooltip.create(NOT_MEMBER_TOOLTIP) : null);
         }
     }

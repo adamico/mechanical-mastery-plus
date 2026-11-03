@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "phase=closed": {
+      "model": "mechanicalmasteryreborn:block/warding_port_closed"
+    },
+    "phase=open": {
+      "model": "mechanicalmasteryreborn:block/warding_port_open"
+    },
+    "phase=won": {
+      "model": "mechanicalmasteryreborn:block/warding_port_won"
+    }
+  }
+}

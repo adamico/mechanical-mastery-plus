@@ -25,4 +25,5 @@ For now the lab offers two, and the others show as coming later:
   challenge's Offers in the Shop for good, among them the Permits you buy to sell Transmuted Essences and to buy
   ore blocks.
 
-Your team plays one challenge at a time. Only the team whose island the lab stands on can choose at it.
+Your team plays one challenge at a time, and wins it by filling its Port beside [C.O.D.](cod.md) with its quota; a
+won challenge shows as won, and can't be chosen again. Only the team whose island the lab stands on can choose at it.

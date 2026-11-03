@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "phase=closed": {
+      "model": "mechanicalmasteryreborn:block/galvanic_port_closed"
+    },
+    "phase=open": {
+      "model": "mechanicalmasteryreborn:block/galvanic_port_open"
+    },
+    "phase=won": {
+      "model": "mechanicalmasteryreborn:block/galvanic_port_won"
+    }
+  }
+}

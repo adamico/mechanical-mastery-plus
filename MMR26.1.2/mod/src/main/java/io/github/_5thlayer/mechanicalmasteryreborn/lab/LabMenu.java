@@ -21,8 +21,9 @@ import net.minecraft.world.item.ItemStack;
 
 /**
  * The lab's choice of handicap, for the team whose island it stands on. A button per handicap, by its ordinal, starts
- * its challenge, if the lab offers it, the player is in that team and the team plays none yet. The client is sent
- * which handicap the team plays, if any, and whether the player may choose for it.
+ * its challenge, if the lab offers it, the player is in that team, the team plays none yet and hasn't won it. The
+ * client is sent which handicap the team plays, if any, which challenges it has won, and whether the player may
+ * choose for it.
  */
 public final class LabMenu extends AbstractContainerMenu {
 
@@ -32,6 +33,8 @@ public final class LabMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
     private final DataSlot chosen;
     private final DataSlot member;
+    /** The challenges the team has won, a bit per handicap's ordinal. */
+    private final DataSlot won;
 
     /** The client's menu, whose slots the sync fills. */
     public LabMenu(int containerId, Inventory inventory) {
@@ -39,6 +42,7 @@ public final class LabMenu extends AbstractContainerMenu {
         this.access = ContainerLevelAccess.NULL;
         this.chosen = addDataSlot(DataSlot.standalone());
         this.member = addDataSlot(DataSlot.standalone());
+        this.won = addDataSlot(DataSlot.standalone());
         chosen.set(NONE);
     }
 
@@ -59,6 +63,21 @@ public final class LabMenu extends AbstractContainerMenu {
         });
         this.member = addDataSlot(DataSlot.standalone());
         member.set(team.equals(players) ? 1 : 0);
+        this.won = addDataSlot(new DataSlot() {
+            @Override
+            public int get() {
+                TeamState state = TeamState.get(level.getServer());
+                int bits = 0;
+                for (Handicap handicap : Handicap.values()) {
+                    bits |= state.won(team, handicap) ? 1 << handicap.ordinal() : 0;
+                }
+                return bits;
+            }
+
+            @Override
+            public void set(int value) {
+            }
+        });
     }
 
     /** The handicap whose challenge the lab's team plays, if any. */
@@ -71,9 +90,14 @@ public final class LabMenu extends AbstractContainerMenu {
         return member.get() == 1;
     }
 
+    /** Whether the lab's team has won {@code handicap}'s challenge, which can't be started again. */
+    public boolean won(Handicap handicap) {
+        return (won.get() & 1 << handicap.ordinal()) != 0;
+    }
+
     /** Whether choosing {@code handicap} would start its challenge. */
     public boolean canChoose(Handicap handicap) {
-        return handicap.choosable() && isMember() && chosen().isEmpty();
+        return handicap.choosable() && isMember() && chosen().isEmpty() && !won(handicap);
     }
 
     @Override

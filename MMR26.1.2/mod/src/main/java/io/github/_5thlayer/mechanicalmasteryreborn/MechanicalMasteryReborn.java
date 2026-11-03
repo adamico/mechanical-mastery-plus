@@ -13,6 +13,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbteams.FtbPartySync;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.TheurgyHud;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
+import io.github._5thlayer.mechanicalmasteryreborn.port.Port;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Recycling;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
@@ -22,7 +23,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 
 /**
- * The mod's entry point: the essences, C.O.D., the lab and the energy handicap's stopped generators, the decomposing and recycling recipes and the Recycler with its config, and its part of the suite's Works tab. The game tests
+ * The mod's entry point: the essences, C.O.D., the lab, the challenges' Ports and the energy handicap's stopped generators, the decomposing and recycling recipes and the Recycler with its config, and its part of the suite's Works tab. The game tests
  * hook themselves in from the {@code gametest} source set, which never ships (libworks ADR 0011).
  */
 @Mod(MechanicalMasteryReborn.MOD_ID)
@@ -35,6 +36,7 @@ public final class MechanicalMasteryReborn {
         Essences.register(modBus);
         Cod.register(modBus);
         Lab.register(modBus);
+        Port.register(modBus);
         Generators.register(modBus);
         Chains.register();
         ChainMachines.register(modBus);

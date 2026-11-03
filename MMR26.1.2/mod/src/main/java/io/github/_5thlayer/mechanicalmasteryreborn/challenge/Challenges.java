@@ -22,7 +22,7 @@ import net.minecraft.sounds.SoundSource;
 import org.slf4j.Logger;
 
 /**
- * Starting a team's challenge, by the handicap it chose at the lab, and ending or resetting it. Each of the team's
+ * Starting a team's challenge, by the handicap it chose at the lab, and ending, winning or resetting it. Each of the team's
  * players online hears vanilla's challenge fanfare when it starts, sees the challenge's name as a title with its cost
  * below, and reads both in chat, and is given the challenge's chain ({@link Chains}). The money handicap acts on the
  * team's Account as it starts, resets and ends.
@@ -76,6 +76,39 @@ public final class Challenges {
         if (money) {
             MoneyHandicap.end(server, team);
         }
+        return true;
+    }
+
+    /**
+     * Wins the challenge {@code team} plays: blocks the tier its C.O.D. makes and notes the win ({@link TeamState#blockTier}),
+     * ends the challenge as {@link #end} does, and tells the team's players online with a title and a sound. Says whether
+     * it played one.
+     */
+    public static boolean win(MinecraftServer server, UUID team) {
+        TeamState state = TeamState.get(server);
+        var played = state.handicap(team);
+        if (played.isEmpty()) {
+            return false;
+        }
+        Handicap handicap = played.get();
+        state.blockTier(team, handicap);
+        end(server, team);
+        Component message = Component.translatable("mechanicalmasteryreborn.challenge.won", name(handicap).withStyle(ChatFormatting.GOLD))
+                .withStyle(ChatFormatting.GRAY);
+        Component title = Component.translatable("mechanicalmasteryreborn.challenge.won.title", title(handicap)).withStyle(ChatFormatting.GOLD);
+        var sound = BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE);
+        int told = 0;
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            if (Teams.of(player).equals(team)) {
+                told++;
+                player.sendSystemMessage(message);
+                player.connection.send(new ClientboundSetSubtitleTextPacket(Component.empty()));
+                player.connection.send(new ClientboundSetTitleTextPacket(title));
+                player.connection.send(new ClientboundSoundEntityPacket(sound, SoundSource.UI, player, 1.0F, 1.0F,
+                        player.getRandom().nextLong()));
+            }
+        }
+        LOGGER.info("Team {} won the {} challenge; told {} of its players online", team, handicap.id(), told);
         return true;
     }
 

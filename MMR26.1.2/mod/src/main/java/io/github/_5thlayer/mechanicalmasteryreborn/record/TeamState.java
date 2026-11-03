@@ -28,7 +28,7 @@ import net.minecraft.world.level.saveddata.SavedDataType;
  * Each team's state, keyed on its id ({@link Teams}): whether its C.O.D. is awake, how much essence an awake
  * C.O.D. has made for it, spawned or not, the handicap it chose at the lab, which says which challenge it plays, and
  * its {@link Inflation} while it plays one, with whether it was warned that Inflation nears its cap, and the money set
- * aside from its Account while it plays the money challenge, the challenges it has ever started, and the tiers it has
+ * aside from its Account while it plays the money challenge, the challenges it has ever started, the essence its Port has taken toward the quota, and the tiers it has
  * blocked and the challenges it has won, which no reset touches. Its members share
  * it, and a player who joins a team shares it from then on. Saved with the world, in the overworld's data.
  */
@@ -58,7 +58,8 @@ public final class TeamState extends SavedData {
                 Codec.LONG.optionalFieldOf("set_aside", 0L).forGetter(entry -> entry.setAside),
                 HANDICAPS_CODEC.optionalFieldOf("unlocked", Set.of()).forGetter(entry -> entry.unlocked),
                 TIERS_CODEC.optionalFieldOf("blocked", Set.of()).forGetter(entry -> entry.blocked),
-                HANDICAPS_CODEC.optionalFieldOf("won", Set.of()).forGetter(entry -> entry.won))
+                HANDICAPS_CODEC.optionalFieldOf("won", Set.of()).forGetter(entry -> entry.won),
+                Codec.LONG.optionalFieldOf("delivered", 0L).forGetter(entry -> entry.delivered))
                 .apply(instance, Entry::new));
 
         boolean awake;
@@ -76,9 +77,11 @@ public final class TeamState extends SavedData {
         Set<Essence> blocked;
         /** The challenges the team has won, for good. */
         Set<Handicap> won;
+        /** The Transmuted Essence the team's Port has taken toward the quota of the challenge it plays; only while it plays one. */
+        long delivered;
 
         Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation, boolean warned, long setAside,
-                Set<Handicap> unlocked, Set<Essence> blocked, Set<Handicap> won) {
+                Set<Handicap> unlocked, Set<Essence> blocked, Set<Handicap> won, long delivered) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
@@ -90,6 +93,7 @@ public final class TeamState extends SavedData {
             handicap.ifPresent(this.unlocked::add);
             this.blocked = tiers(blocked);
             this.won = handicaps(won);
+            this.delivered = handicap.isPresent() ? delivered : 0;
         }
     }
 
@@ -174,10 +178,10 @@ public final class TeamState extends SavedData {
     /**
      * Starts {@code handicap}'s challenge for {@code team} at {@code gameTime}, the overworld's, its Inflation from
      * nothing, and says whether it did: not while the team plays one already, and not for a handicap the lab doesn't
-     * offer yet.
+     * offer yet, nor for a challenge it has won.
      */
     public boolean choose(UUID team, Handicap handicap, long gameTime) {
-        if (!handicap.choosable() || handicap(team).isPresent()) {
+        if (!handicap.choosable() || handicap(team).isPresent() || won(team, handicap)) {
             return false;
         }
         Entry entry = entry(team);
@@ -197,13 +201,14 @@ public final class TeamState extends SavedData {
         entry.handicap = Optional.empty();
         entry.inflation = Optional.empty();
         entry.warned = false;
+        entry.delivered = 0;
         setDirty();
         return true;
     }
 
     /**
      * Resets the challenge {@code team} plays at {@code gameTime}, as though it had just begun: its Inflation from
-     * nothing, and so C.O.D. back to its waking pace, and no warning given. Its handicap stays. Says whether it played
+     * nothing, and so C.O.D. back to its waking pace, no warning given and nothing delivered to its Port. Its handicap stays. Says whether it played
      * one.
      */
     public boolean resetChallenge(UUID team, long gameTime) {
@@ -213,8 +218,25 @@ public final class TeamState extends SavedData {
         }
         entry.inflation = Optional.of(Inflation.startingAt(gameTime));
         entry.warned = false;
+        entry.delivered = 0;
         setDirty();
         return true;
+    }
+
+    /** How much Transmuted Essence {@code team}'s Port has taken toward the quota of the challenge it plays. */
+    public long delivered(UUID team) {
+        Entry entry = teams.get(team);
+        return entry == null ? 0 : entry.delivered;
+    }
+
+    /** Counts {@code count} more essence {@code team}'s Port took, while it plays a challenge. */
+    public void deliver(UUID team, long count) {
+        Entry entry = teams.get(team);
+        if (entry == null || entry.handicap.isEmpty() || count == 0) {
+            return;
+        }
+        entry.delivered += count;
+        setDirty();
     }
 
     /** The tier {@code team}'s C.O.D. makes: the highest it hasn't blocked, Advanced first, and none once all four are. */
@@ -363,6 +385,6 @@ public final class TeamState extends SavedData {
 
     private Entry entry(UUID team) {
         return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false, 0, Set.of(), Set.of(),
-                Set.of()));
+                Set.of(), 0));
     }
 }
