@@ -25,7 +25,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
  * The four Ports, one per challenge, each taking its Transmuted Essence toward the challenge's quota (#224), and
- * their input as an item face on every side. Their items are kept out of every creative tab, and nothing makes them.
+ * their input as an item face on every side. Their items are in the Works tab, so EMI lists them, and nothing makes them.
  */
 public final class Port {
 
