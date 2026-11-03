@@ -755,6 +755,11 @@ hash = "eb14ed576f8242bdadc264b317a2cc51703e3505f54845b43bb64a2586b4c7e8"
 metafile = true
 
 [[files]]
+file = "mods/patchouli.pw.toml"
+hash = "58e7bb2c9c496469b36bf02b5a02d34f62b9ef57bb7a613eac1d06bc2e70a4bd"
+metafile = true
+
+[[files]]
 file = "mods/pipez.pw.toml"
 hash = "f0419946c97099f88c5d78523915a02859e4f7bcf91cfaa69c4611ce3b72ea48"
 metafile = true
