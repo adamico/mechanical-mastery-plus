@@ -85,8 +85,24 @@ The path a challenge's mods take a team up to the challenge's Transmuted Essence
 _Avoid_: processing chain, path
 
 **Handicap**:
-What a challenge costs the team while it plays it, and only then: protection (more, stronger and special mobs), life (less max health), energy (its generators give it no energy, though FE it banked ahead is still spent) or money (less money). A team's money can't be stockpiled ahead: it is set aside while the challenge is played, and given back when it ends. Its FE can, and banking it is part of the energy challenge's strategy.
+What a challenge costs the team while it plays it, and only then: protection (an Assault on its island), life (less max health), energy (its generators give it no energy, though FE it banked ahead is still spent) or money (less money). A team's money can't be stockpiled ahead: it is set aside while the challenge is played, and given back when it ends. Its FE can, and banking it is part of the energy challenge's strategy; so can ordinary mob drops, but not the drop only an Assault gives.
 _Avoid_: threat, debuff
+
+**Assault**:
+The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from gates on platforms it builds in the void, with unbreakable bridges to the island. The waves grow harder, with a breather between each step, and never stop until the quota is filled or Inflation reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, and it pauses while no one is on the island.
+_Avoid_: raid, siege, invasion
+
+**Home gate**:
+A smaller gate a team opens on its own island with a pearl, whenever it likes, once it has started the protection challenge. It gives the Assault's drop, but less of it than the Assault, so a won protection chain goes on making Warding Essence.
+_Avoid_: practice gate, farm gate
+
+**Defence**:
+A block that fights the Assault's mobs on its own, fed by the factory with FE or with what its lines make, and never for nothing. Defences are free from the start, as the team's gear is, so growing them ahead is part of the protection challenge's strategy.
+_Avoid_: turret, tower
+
+**Rift Shard**:
+The drop only an Assault's mobs and a home gate give, which the Warding Essence is made from with ordinary drops and something recycled from the loop. A team keeps what it hasn't used past a win or a reset.
+_Avoid_: ward shard, gate drop
 
 **Generator**:
 A block the pack names as making energy, as Wireworks' engines, turbines and solar panels are. It belongs to the team whose island it stands on, and while that team plays the energy challenge it gives the team no energy, saying why, and goes on for every other team.
