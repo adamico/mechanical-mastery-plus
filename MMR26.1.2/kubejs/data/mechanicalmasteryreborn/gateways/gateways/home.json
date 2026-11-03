@@ -1,0 +1,31 @@
+{
+  "type": "gateways:normal",
+  "size": "small",
+  "color": "#7A5BD6",
+  "waves": [
+    {
+      "max_wave_time": 800,
+      "setup_time": 100,
+      "entities": [
+        { "type": "gateways:standard", "entity": "minecraft:zombie", "count": 3 }
+      ],
+      "rewards": [
+        { "type": "gateways:stack", "stack": { "id": "mechanicalmasteryreborn:rift_shard", "count": 1 } }
+      ]
+    },
+    {
+      "max_wave_time": 1000,
+      "setup_time": 150,
+      "entities": [
+        { "type": "gateways:standard", "entity": "minecraft:zombie", "count": 3 },
+        { "type": "gateways:standard", "entity": "minecraft:skeleton", "count": 2 }
+      ],
+      "rewards": [
+        { "type": "gateways:stack", "stack": { "id": "mechanicalmasteryreborn:rift_shard", "count": 1 } }
+      ]
+    }
+  ],
+  "rewards": [
+    { "type": "gateways:stack", "stack": { "id": "mechanicalmasteryreborn:rift_shard", "count": 2 } }
+  ]
+}

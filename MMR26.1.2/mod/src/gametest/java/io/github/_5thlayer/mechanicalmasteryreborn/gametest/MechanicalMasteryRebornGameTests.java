@@ -92,6 +92,7 @@ public final class MechanicalMasteryRebornGameTests {
         RecipeTests.register(tests);
         MoneyTests.register(tests);
         ChainTests.register(tests);
+        HomeGateTests.register(tests);
         ChainMachineTests.register(tests);
         AssaultTests.register(tests);
         // Each test that records a decompose claims a team of its own.

@@ -178,7 +178,23 @@ hash = "9f691b257fd8e1828fa7cad3238d06451e7cee4123fc8287deff15352a6d8c81"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/protection.json"
-hash = "287c31c0bba97eb147e801bc95a1583612878eaae1c836244cc1e67da21a481d"
+hash = "5ec28791d947c06f88335ccd79fd63a510431d136c26e4c618e4b636bc715976"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/gateways/gateways/assault.json"
+hash = "7844c8699b1360a2a4d6f3d60376a89bd57e34a0164bc05272b77602fd158c1e"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/gateways/gateways/home.json"
+hash = "7c5398da1ad717ca688e10a5bdee8f838bb0aaf6dd9f6c39efe5ea1f52458957"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/rift_shard.json"
+hash = "fff50a45e4aaf3b17aedc05dface62ece5578d6e7578ac0b91465617cab331b0"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/home_gate_pearl.json"
+hash = "8b1b98d1059d900750e2d5ab49a6cac7b93579cb75b37cdede4abf5212e5cea6"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/warding_essence.json"

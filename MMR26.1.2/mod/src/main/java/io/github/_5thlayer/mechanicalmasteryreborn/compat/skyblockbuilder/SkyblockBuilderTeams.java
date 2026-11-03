@@ -19,6 +19,9 @@ import net.minecraft.world.entity.player.Player;
  */
 public final class SkyblockBuilderTeams implements Teams.Lookup {
 
+    /** How far across from its centre a team's island reaches, for {@link #onIsland}: #207's first guess. */
+    static final int ISLAND_RADIUS = 128;
+
     @Override
     public UUID at(ServerLevel level, BlockPos pos) {
         var data = SkyblockSavedData.get(level);
@@ -41,6 +44,31 @@ public final class SkyblockBuilderTeams implements Teams.Lookup {
             }
         }
         return nearest == null ? Teams.WORLD : nearest.id();
+    }
+
+    /**
+     * Within {@link #ISLAND_RADIUS} blocks of a team's island's centre, across, and nearer it than the spawn island's: the
+     * home gate's place (#238). The islands are thousands of blocks apart, so the void between is far from any.
+     */
+    @Override
+    public boolean onIsland(ServerLevel level, BlockPos pos) {
+        Team nearest = null;
+        long nearestDistance = Long.MAX_VALUE;
+        for (Team team : SkyblockSavedData.get(level).getTeams()) {
+            ServerLevel island = team.getLevel();
+            if (island == null || !island.dimension().equals(level.dimension())) {
+                continue;
+            }
+            BlockPos center = team.getIsland().getCenter();
+            long dx = center.getX() - pos.getX();
+            long dz = center.getZ() - pos.getZ();
+            long distance = dx * dx + dz * dz;
+            if (distance < nearestDistance) {
+                nearest = team;
+                nearestDistance = distance;
+            }
+        }
+        return nearest != null && !nearest.isSpawn() && nearestDistance <= (long) ISLAND_RADIUS * ISLAND_RADIUS;
     }
 
     @Override

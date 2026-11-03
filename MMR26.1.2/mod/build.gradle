@@ -69,7 +69,8 @@ dependencies {
     // Theurgy, the energy challenge's mod: its in-world HUD says why a locked apparatus does no work (#214). Its
     // processing is stopped by a mixin that names it only as text.
     compileOnly(theurgy) { transitive = false }
-    // Gateways to Eternity, the protection challenge's mod: the Assault opens its gates and clears their mobs (#237).
+    // Gateways to Eternity, the protection challenge's mod: the Assault opens its gates and clears their mobs
+    // (#237), and a home gate opens only on its unlocked team's island (#238).
     compileOnly(gateways) { transitive = false }
     compileOnly(placebo) { transitive = false }
 }
