@@ -37,7 +37,7 @@ _Avoid_: starter machine, decomposer, crank recycler
 The block in the middle of a Recycler's front edge, facing out, which holds its work and whose tier sets how fast it runs and how well: its yield, and how many it processes at once. A player takes back what it holds by hand, giving up the work under way; nothing else can.
 
 **Drive**:
-A part of a Recycler that turns it: by a player's right-click, a redstone signal, FE, a pack mod's magic or other means. A Recycler's drives add up; a hand-worked drive never turns faster than a player, and every turn that counts tires the player turning it, as sprinting does, so it costs food: it is how a team starts, or gets by when short of everything else, not how it runs. Decomposing by hand costs no food. An FE drive spends FE from its own store, so under the energy handicap it runs on what is stored until that is spent.
+A part of a Recycler that turns it: by a player's right-click, FE or other means. A Recycler's drives add up; a hand-worked drive never turns faster than a player, and every turn that counts tires the player turning it, as sprinting does, so it costs food: it is how a team starts, or gets by when short of everything else, not how it runs. Decomposing by hand costs no food. An FE drive spends FE from its own store, so under the energy handicap it runs on what is stored until that is spent.
 _Avoid_: crank (what a hand-worked drive is turned by), handle
 
 **Casing**:
