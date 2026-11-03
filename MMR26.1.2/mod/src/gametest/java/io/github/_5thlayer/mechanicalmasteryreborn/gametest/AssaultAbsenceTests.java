@@ -3,7 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
-import java.util.Map;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -30,8 +30,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The Assault waits for someone at home (#240): with no player of the team on its island, off it or offline, its gate
- * closes at the wave it had reached, its mobs staying; with one back, it opens again at that wave. The gates
- * ({@link #GATES}) are {@link AssaultTests#GATES}' armor stands that keep a wave; a gate summoned by one of these tests'
+ * closes, each gate at the wave it had reached, its mobs staying; with one back, it opens again at that wave. The gates
+ * ({@link #GATES}) are {@link AssaultTests#GATES}' armor stands; a gate summoned by one of these tests'
  * players stands by that player, on the test, whose chunk is loaded, not on the platform {@link Assault#OFFSET} off.
  */
 final class AssaultAbsenceTests {
@@ -41,28 +41,20 @@ final class AssaultAbsenceTests {
     private static final int TICKED = 2;
     private static final int WAVE = 3;
 
-    /** The wave each test gate has reached. */
-    private static final Map<UUID, Integer> WAVES = new ConcurrentHashMap<>();
     /** These tests' players, whose gates stand by them. */
     private static final Set<UUID> SUMMONERS = ConcurrentHashMap.newKeySet();
 
+    /** {@link AssaultTests#GATES}, but a gate summoned by one of these tests' players stands by that player. */
     static final Gates GATES = new Gates() {
-        @Override
-        public Optional<UUID> open(ServerLevel level, Vec3 at, @Nullable ServerPlayer summoner) {
-            return open(level, at, summoner, 0);
-        }
-
         @Override
         public Optional<UUID> open(ServerLevel level, Vec3 at, @Nullable ServerPlayer summoner, int wave) {
             Vec3 where = summoner != null && SUMMONERS.contains(summoner.getUUID()) ? summoner.position() : at;
-            Optional<UUID> gate = AssaultTests.GATES.open(level, where, summoner);
-            gate.ifPresent(id -> WAVES.put(id, wave));
-            return gate;
+            return AssaultTests.GATES.open(level, where, summoner, wave);
         }
 
         @Override
         public int wave(Entity gate) {
-            return WAVES.getOrDefault(gate.getUUID(), 0);
+            return AssaultTests.WAVES.getOrDefault(gate.getUUID(), 0);
         }
     };
 
@@ -84,8 +76,12 @@ final class AssaultAbsenceTests {
             AssaultState state = AssaultState.get(server);
             AssaultAbsence.update(server);
             helper.assertTrue(state.paused(team).isEmpty(), "the Assault paused with a player at home");
-            UUID gate = state.assault(team).orElseThrow().gate().orElseThrow();
-            WAVES.put(gate, WAVE);
+            List<UUID> gates = state.assault(team).orElseThrow().gates();
+            helper.assertTrue(gates.size() == 4, "the Assault opened " + gates.size() + " gates, not 4");
+            for (int i = 0; i < gates.size(); i++) {
+                AssaultTests.WAVES.put(gates.get(i), WAVE + i);
+            }
+            UUID gate = gates.get(0);
             var mob = EntityType.ZOMBIE.create(helper.getLevel(), EntitySpawnReason.COMMAND);
             mob.setPos(helper.absolutePos(COD.above().east()).getBottomCenter());
             mob.setNoAi(true);
@@ -94,17 +90,23 @@ final class AssaultAbsenceTests {
 
             player.setPos(player.position().add(1000, 0, 0));
             AssaultAbsence.update(server);
-            helper.assertTrue(state.paused(team).equals(Optional.of(WAVE)), "the gate didn't close at its wave with no one home");
-            Entity closed = helper.getLevel().getEntity(gate);
-            helper.assertTrue(closed == null || closed.isRemoved(), "the gate is still open with no one home");
+            helper.assertTrue(waves(state.paused(team).orElse(List.of())).equals(List.of(WAVE, WAVE + 1, WAVE + 2, WAVE + 3)),
+                    "the gates didn't close at their waves with no one home");
+            for (UUID each : gates) {
+                Entity closed = helper.getLevel().getEntity(each);
+                helper.assertTrue(closed == null || closed.isRemoved(), "a gate is still open with no one home");
+            }
             helper.assertFalse(mob.isRemoved(), "a mob already out went with its gate");
+            Assault.reopen(helper.getLevel(), gate, player.position(), WAVE);
+            helper.assertTrue(state.assault(team).orElseThrow().gates().isEmpty(), "a gate closed for no one home reopened as a failed one");
 
             player.setPos(helper.absolutePos(HOME).getBottomCenter());
             AssaultAbsence.update(server);
             helper.assertTrue(state.paused(team).isEmpty(), "the Assault is still paused with a player back home");
-            UUID reopened = state.assault(team).orElseThrow().gate().orElseThrow();
-            helper.assertFalse(reopened.equals(gate), "no gate opened again");
-            helper.assertTrue(WAVES.get(reopened) == WAVE, "the gate opened again at wave " + WAVES.get(reopened) + ", not " + WAVE);
+            List<UUID> reopened = state.assault(team).orElseThrow().gates();
+            helper.assertTrue(reopened.stream().noneMatch(gates::contains), "a closed gate came back instead of opening again");
+            List<Integer> waves = reopened.stream().map(AssaultTests.WAVES::get).sorted().toList();
+            helper.assertTrue(waves.equals(List.of(WAVE, WAVE + 1, WAVE + 2, WAVE + 3)), "the gates opened again at waves " + waves);
             Challenges.end(server, team);
             helper.assertTrue(mob.isRemoved(), "the closed gate's mob outlived the Assault's end");
             leave(player);
@@ -138,6 +140,10 @@ final class AssaultAbsenceTests {
         TestTeams.join(player, team);
         player.setPos(helper.absolutePos(HOME).getBottomCenter());
         return player;
+    }
+
+    private static List<Integer> waves(List<AssaultState.Waiting> waiting) {
+        return waiting.stream().map(AssaultState.Waiting::wave).sorted().toList();
     }
 
     private static void leave(ServerPlayer player) {

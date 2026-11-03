@@ -23,6 +23,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Where each team's C.O.D. stands, as it noted on its first tick, and the {@link Assault} it is sent while it plays
@@ -32,25 +33,36 @@ import net.minecraft.world.level.saveddata.SavedDataType;
  */
 public final class AssaultState extends SavedData {
 
-    /** One Assault: what it built in {@code dimension}, and its gate's entity, if one opened. */
-    public record Built(ResourceKey<Level> dimension, List<BlockPos> blocks, Optional<UUID> gate) {
+    /** One Assault: what it built in {@code dimension}, and the entities of the gates open, one per side where one opened. */
+    public record Built(ResourceKey<Level> dimension, List<BlockPos> blocks, List<UUID> gates) {
 
         static final Codec<Built> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Level.RESOURCE_KEY_CODEC.fieldOf("dimension").forGetter(Built::dimension),
                 BlockPos.CODEC.listOf().fieldOf("blocks").forGetter(Built::blocks),
-                UUIDUtil.STRING_CODEC.optionalFieldOf("gate").forGetter(Built::gate))
+                UUIDUtil.STRING_CODEC.listOf().optionalFieldOf("gates", List.of()).forGetter(Built::gates))
                 .apply(instance, Built::new));
 
         public Built {
             blocks = List.copyOf(blocks);
+            gates = List.copyOf(gates);
         }
+    }
+
+    /** A gate closed for no one being home (#240): where it stood, if seen, and the wave it had reached. */
+    public record Waiting(UUID gate, Optional<Vec3> at, int wave) {
+
+        static final Codec<Waiting> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                UUIDUtil.STRING_CODEC.fieldOf("gate").forGetter(Waiting::gate),
+                Vec3.CODEC.optionalFieldOf("at").forGetter(Waiting::at),
+                Codec.INT.fieldOf("wave").forGetter(Waiting::wave))
+                .apply(instance, Waiting::new));
     }
 
     private static final Codec<AssaultState> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.unboundedMap(UUIDUtil.STRING_CODEC, GlobalPos.CODEC).optionalFieldOf("cods", Map.of()).forGetter(state -> state.cods),
             Codec.unboundedMap(UUIDUtil.STRING_CODEC, Built.CODEC).optionalFieldOf("assaults", Map.of()).forGetter(state -> state.assaults),
             UUIDUtil.STRING_CODEC.listOf().optionalFieldOf("closed", List.of()).forGetter(state -> List.copyOf(state.closed)),
-            Codec.unboundedMap(UUIDUtil.STRING_CODEC, Codec.INT).optionalFieldOf("paused", Map.of()).forGetter(state -> state.paused),
+            Codec.unboundedMap(UUIDUtil.STRING_CODEC, Waiting.CODEC.listOf()).optionalFieldOf("paused", Map.of()).forGetter(state -> state.paused),
             Codec.unboundedMap(UUIDUtil.STRING_CODEC, UUIDUtil.STRING_CODEC).optionalFieldOf("shut", Map.of()).forGetter(state -> state.shut))
             .apply(instance, AssaultState::new));
 
@@ -62,8 +74,8 @@ public final class AssaultState extends SavedData {
     /** The gates of Assaults removed, whose gate or mobs may still load with a chunk no one was near as they were removed. */
     private final Set<UUID> closed;
 
-    /** The wave each team's paused Assault had reached as its gate closed for no one being home (#240). */
-    private final Map<UUID, Integer> paused;
+    /** Each team's Assault paused for no one being home (#240): its gates closed, each to open again at its wave. */
+    private final Map<UUID, List<Waiting>> paused;
     /** The gates closed for no one being home, by their team: kept out if they load again, their mobs not. */
     private final Map<UUID, UUID> shut;
 
@@ -71,7 +83,7 @@ public final class AssaultState extends SavedData {
         this(Map.of(), Map.of(), List.of(), Map.of(), Map.of());
     }
 
-    private AssaultState(Map<UUID, GlobalPos> cods, Map<UUID, Built> assaults, List<UUID> closed, Map<UUID, Integer> paused,
+    private AssaultState(Map<UUID, GlobalPos> cods, Map<UUID, Built> assaults, List<UUID> closed, Map<UUID, List<Waiting>> paused,
             Map<UUID, UUID> shut) {
         this.cods = new HashMap<>(cods);
         this.assaults = new HashMap<>(assaults);
@@ -101,11 +113,6 @@ public final class AssaultState extends SavedData {
         return Optional.ofNullable(assaults.get(team));
     }
 
-    /** Every team's Assault. */
-    Map<UUID, Built> assaults() {
-        return assaults;
-    }
-
     void putAssault(UUID team, Built built) {
         assaults.put(team, built);
         setDirty();
@@ -122,10 +129,26 @@ public final class AssaultState extends SavedData {
             return false;
         });
         if (built != null) {
-            built.gate().ifPresent(closed::add);
+            closed.addAll(built.gates());
             setDirty();
         }
         return Optional.ofNullable(built);
+    }
+
+    /** The team whose Assault has the open gate {@code gate}, if any. */
+    public Optional<UUID> teamOf(UUID gate) {
+        return assaults.entrySet().stream().filter(entry -> entry.getValue().gates().contains(gate)).map(Map.Entry::getKey).findFirst();
+    }
+
+    /** Puts {@code reopened} in place of {@code failed} in {@code team}'s Assault, and keeps {@code failed} out. */
+    void replaceGate(UUID team, UUID failed, Optional<UUID> reopened) {
+        Built built = assaults.get(team);
+        List<UUID> gates = new java.util.ArrayList<>(built.gates());
+        gates.remove(failed);
+        reopened.ifPresent(gates::add);
+        assaults.put(team, new Built(built.dimension(), built.blocks(), gates));
+        closed.add(failed);
+        setDirty();
     }
 
     /** Whether {@code gate} was the gate of an Assault since removed. */
@@ -133,27 +156,48 @@ public final class AssaultState extends SavedData {
         return closed.contains(gate);
     }
 
-    /** The wave {@code team}'s Assault had reached as it paused, while it is paused. */
-    public Optional<Integer> paused(UUID team) {
+    /** Every team's Assault. */
+    Map<UUID, Built> assaults() {
+        return assaults;
+    }
+
+    /** The gates of {@code team}'s Assault closed for no one being home, while it is paused. */
+    public Optional<List<Waiting>> paused(UUID team) {
         return Optional.ofNullable(paused.get(team));
     }
 
-    /** Pauses {@code team}'s Assault at {@code wave}, its gate {@code gate} shut, or only notes the wave if it already is. */
-    void pause(UUID team, Optional<UUID> gate, int wave) {
-        paused.put(team, wave);
-        gate.ifPresent(shut -> this.shut.put(shut, team));
+    /** Pauses {@code team}'s Assault, its gates closed as {@code waiting}: they are no longer its open gates. */
+    void pause(UUID team, List<Waiting> waiting) {
+        paused.put(team, List.copyOf(waiting));
+        waiting.forEach(gate -> shut.put(gate.gate(), team));
+        Built built = assaults.get(team);
+        if (built != null) {
+            assaults.put(team, new Built(built.dimension(), built.blocks(), List.of()));
+        }
         setDirty();
     }
 
-    /** Ends {@code team}'s pause, saying the wave it had reached, its gate now {@code gate}. */
-    Optional<Integer> unpause(UUID team, Optional<UUID> gate) {
-        Integer wave = paused.remove(team);
-        assault(team).ifPresent(built -> assaults.put(team, new Built(built.dimension(), built.blocks(), gate)));
-        setDirty();
-        return Optional.ofNullable(wave);
+    /** Notes where the closed gate {@code gate} stood and the wave it had reached, as it loads again, while its team is away. */
+    void noteWaiting(UUID gate, Vec3 at, int wave) {
+        shut(gate).flatMap(this::paused).ifPresent(waiting -> {
+            List<Waiting> noted = waiting.stream()
+                    .map(each -> each.gate().equals(gate) ? new Waiting(gate, Optional.of(at), wave) : each).toList();
+            paused.put(shut.get(gate), noted);
+            setDirty();
+        });
     }
 
-    /** The team whose gate {@code gate} was shut for no one being home, if it was. */
+    /** Ends {@code team}'s pause, its gates open again as {@code gates}. */
+    void unpause(UUID team, List<UUID> gates) {
+        paused.remove(team);
+        Built built = assaults.get(team);
+        if (built != null) {
+            assaults.put(team, new Built(built.dimension(), built.blocks(), gates));
+        }
+        setDirty();
+    }
+
+    /** The team whose gate {@code gate} was closed for no one being home, if it was. */
     public Optional<UUID> shut(UUID gate) {
         return Optional.ofNullable(shut.get(gate));
     }

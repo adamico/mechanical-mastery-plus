@@ -10,8 +10,10 @@ import java.util.UUID;
 
 import com.mojang.logging.LogUtils;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
+import io.github._5thlayer.mechanicalmasteryreborn.compat.gateways.GatewaysGates;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.server.MinecraftServer;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -32,17 +35,18 @@ import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 
 /**
- * The protection handicap's Assault (ADR 0010), for now one gate (#237): when a team starts the protection challenge,
- * a platform of {@link #STONE} in the void {@link #OFFSET} blocks east of its C.O.D., level with the ground C.O.D.
- * stands on, a bridge of it running west toward C.O.D. until the first block in its way, and on the platform the
- * pack's endless gate ({@link Gates}), summoned by one of the team's players on its island, so its mobs hunt the team.
+ * The protection handicap's Assault (ADR 0010, #237, #239): when a team starts the protection challenge, on each of
+ * the four sides of its C.O.D. a platform of {@link #STONE} in the void {@link #OFFSET} blocks off, level with the
+ * ground C.O.D. stands on, a bridge of it running back toward C.O.D. until the first block in its way, and on the
+ * platform the pack's endless gate ({@link Gates}), summoned by one of the team's players on its island, so its mobs
+ * hunt the team. The four share one gate, whose waves step up with no ceiling; one that fails opens again at its wave.
  * A win or a reset removes the gate, what was built and the gate's mobs still around; the team keeps its Rift Shards.
  * A gate or mob in a chunk no one is near can't be seen as the Assault ends, so it is kept out when it loads again.
  * Each piece is built only into air and removed only where it still stands, so nothing else is ever touched.
  */
 public final class Assault {
 
-    /** How far east of C.O.D. the platform's middle is. */
+    /** How far off C.O.D. each platform's middle is. */
     public static final int OFFSET = 48;
     /** How far the platform reaches from its middle each way: 7 by 7. */
     public static final int PLATFORM_RADIUS = 3;
@@ -67,6 +71,9 @@ public final class Assault {
         BLOCKS.register(modBus);
         NeoForge.EVENT_BUS.addListener(Assault::onJoin);
         AssaultAbsence.register();
+        if (ModList.get().isLoaded("gateways")) {
+            GatewaysGates.register();
+        }
     }
 
     /**
@@ -102,25 +109,15 @@ public final class Assault {
             return false;
         }
         BlockPos codPos = cod.get().pos();
-        BlockPos middle = codPos.offset(OFFSET, -1, 0);
+        ServerPlayer summoner = summoner(server, level, team);
         List<BlockPos> built = new ArrayList<>();
-        for (int dx = -PLATFORM_RADIUS; dx <= PLATFORM_RADIUS; dx++) {
-            for (int dz = -PLATFORM_RADIUS; dz <= PLATFORM_RADIUS; dz++) {
-                place(level, middle.offset(dx, 0, dz), built);
-            }
+        List<UUID> gates = new ArrayList<>();
+        for (Direction side : Direction.Plane.HORIZONTAL) {
+            buildSide(level, codPos, side, built);
+            Gates.get().open(level, gateAt(codPos, side), summoner, 0).ifPresent(gates::add);
         }
-        for (int x = middle.getX() - PLATFORM_RADIUS - 1; x > codPos.getX(); x--) {
-            BlockPos lane = new BlockPos(x, middle.getY(), middle.getZ());
-            if (!level.getBlockState(lane).isAir()) {
-                break;
-            }
-            for (int dz = -BRIDGE_RADIUS; dz <= BRIDGE_RADIUS; dz++) {
-                place(level, lane.offset(0, 0, dz), built);
-            }
-        }
-        Optional<UUID> gate = Gates.get().open(level, Vec3.atBottomCenterOf(middle.above()), summoner(server, level, team));
-        state.putAssault(team, new AssaultState.Built(level.dimension(), built, gate));
-        LOGGER.info("Sent team {} its Assault: {} blocks built, gate {}", team, built.size(), gate.map(UUID::toString).orElse("none"));
+        state.putAssault(team, new AssaultState.Built(level.dimension(), built, gates));
+        LOGGER.info("Sent team {} its Assault: {} blocks built, gates {}", team, built.size(), gates);
         return true;
     }
 
@@ -132,9 +129,10 @@ public final class Assault {
                 return;
             }
             AssaultState state = AssaultState.get(server);
+            List<UUID> gates = built.gates();
             List<Entity> removed = new ArrayList<>();
             for (Entity entity : level.getAllEntities()) {
-                if (built.gate().filter(entity.getUUID()::equals).isPresent() || owner(entity).filter(state::closed).isPresent()) {
+                if (gates.contains(entity.getUUID()) || owner(entity).filter(state::closed).isPresent()) {
                     removed.add(entity);
                 }
             }
@@ -146,6 +144,50 @@ public final class Assault {
             }
             LOGGER.info("Removed team {}'s Assault", team);
         });
+    }
+
+    /**
+     * Opens again at once, at {@code at} and at the wave {@code wave} it had reached, the Assault's gate {@code failed}
+     * that failed, for its timer, a mob lost or out of range: nothing stops the Assault but its end. A gate of no
+     * Assault is left alone.
+     */
+    public static void reopen(ServerLevel level, UUID failed, Vec3 at, int wave) {
+        AssaultState state = AssaultState.get(level.getServer());
+        state.teamOf(failed).ifPresent(team -> {
+            Optional<UUID> reopened = Gates.get().open(level, at, summoner(level.getServer(), level, team), wave);
+            state.replaceGate(team, failed, reopened);
+            LOGGER.info("Reopened team {}'s failed Assault gate {} at wave {}: {}", team, failed, wave,
+                    reopened.map(UUID::toString).orElse("none"));
+        });
+    }
+
+    /**
+     * Builds the platform {@link #OFFSET} blocks off C.O.D. at {@code cod} toward {@code side}, level with the ground,
+     * and its bridge back toward C.O.D. until the first block in its way, and says the platform's middle.
+     */
+    private static BlockPos buildSide(ServerLevel level, BlockPos cod, Direction side, List<BlockPos> built) {
+        BlockPos middle = cod.relative(side, OFFSET).below();
+        Direction across = side.getClockWise();
+        for (int along = -PLATFORM_RADIUS; along <= PLATFORM_RADIUS; along++) {
+            for (int wide = -PLATFORM_RADIUS; wide <= PLATFORM_RADIUS; wide++) {
+                place(level, middle.relative(side, along).relative(across, wide), built);
+            }
+        }
+        for (int step = OFFSET - PLATFORM_RADIUS - 1; step > 0; step--) {
+            BlockPos lane = cod.below().relative(side, step);
+            if (!level.getBlockState(lane).isAir()) {
+                break;
+            }
+            for (int wide = -BRIDGE_RADIUS; wide <= BRIDGE_RADIUS; wide++) {
+                place(level, lane.relative(across, wide), built);
+            }
+        }
+        return middle;
+    }
+
+    /** Where {@code side}'s gate stands, off C.O.D. at {@code cod}: on its platform's middle. */
+    static Vec3 gateAt(BlockPos cod, Direction side) {
+        return Vec3.atBottomCenterOf(cod.relative(side, OFFSET));
     }
 
     /** The gate entity whose wave {@code entity} came from, by Gateways' mark, if any. */

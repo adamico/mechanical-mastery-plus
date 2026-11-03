@@ -3,12 +3,15 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.challenge;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
 import com.mojang.logging.LogUtils;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
+import net.minecraft.core.Direction;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -22,9 +25,10 @@ import org.slf4j.Logger;
 /**
  * The Assault waits for someone at home (#240): its mobs hunt the team's players, and FTB Chunks keeps the island
  * loaded while any member is online anywhere, so while no member of the team is on its island (in the Nether, the End,
- * at spawn, or offline) its gate closes, and when one comes back it opens again at the wave it had reached. Mobs already
+ * at spawn, or offline) its gates close, and when one comes back each opens again at the wave it had reached, where it stood. Mobs already
  * out stay, and inflation goes on. A gate closed in a chunk no one was near is kept out when it loads, its wave noted.
- * Closing for absence is not an Assault's removal: a shut gate's mobs aren't kept out.
+ * Closing for absence is not an Assault's removal: a shut gate's mobs aren't kept out, and a shut gate is no longer one of
+ * its Assault's gates, so it is never reopened as a failed one ({@link Assault#reopen}).
  */
 public final class AssaultAbsence {
 
@@ -75,30 +79,45 @@ public final class AssaultAbsence {
     }
 
     private static void close(AssaultState state, ServerLevel level, UUID team, AssaultState.Built built) {
-        Optional<UUID> gate = built.gate();
-        int wave = 0;
-        if (gate.isPresent()) {
-            Entity entity = level.getEntity(gate.get());
+        List<AssaultState.Waiting> waiting = new ArrayList<>();
+        for (UUID gate : built.gates()) {
+            Entity entity = level.getEntity(gate);
             if (entity != null) {
-                wave = Gates.get().wave(entity);
+                waiting.add(new AssaultState.Waiting(gate, Optional.of(entity.position()), Gates.get().wave(entity)));
                 entity.discard();
+            } else {
+                waiting.add(new AssaultState.Waiting(gate, Optional.empty(), 0));
             }
         }
-        state.pause(team, gate, wave);
-        LOGGER.info("No one of team {} is home: its Assault's gate closes at wave {}", team, wave);
+        state.pause(team, waiting);
+        LOGGER.info("No one of team {} is home: its Assault's gates close: {}", team, waiting);
     }
 
-    /** Opens {@code team}'s paused Assault's gate again, at the wave it had reached. */
+    /**
+     * Opens {@code team}'s paused Assault's gates again, each where it stood and at the wave it had reached; a gate never
+     * seen where it stood opens on a side no other one stands on.
+     */
     private static void reopen(MinecraftServer server, AssaultState state, ServerLevel level, UUID team) {
         Optional<GlobalPos> cod = state.cod(team);
+        List<AssaultState.Waiting> waiting = state.paused(team).orElse(List.of());
         if (cod.isEmpty()) {
             return;
         }
-        int wave = state.paused(team).orElse(0);
-        Vec3 at = Vec3.atBottomCenterOf(cod.get().pos().offset(Assault.OFFSET, 0, 0));
-        Optional<UUID> gate = Gates.get().open(level, at, Assault.summoner(server, level, team), wave);
-        state.unpause(team, gate);
-        LOGGER.info("Team {} is home: its Assault's gate opens again at wave {}", team, wave);
+        List<Vec3> free = new ArrayList<>();
+        for (Direction side : Direction.Plane.HORIZONTAL) {
+            Vec3 at = Assault.gateAt(cod.get().pos(), side);
+            if (waiting.stream().noneMatch(gate -> gate.at().filter(seen -> seen.distanceToSqr(at) < 1.0).isPresent())) {
+                free.add(at);
+            }
+        }
+        ServerPlayer summoner = Assault.summoner(server, level, team);
+        List<UUID> gates = new ArrayList<>();
+        for (AssaultState.Waiting gate : waiting) {
+            Vec3 at = gate.at().orElseGet(() -> free.isEmpty() ? Assault.gateAt(cod.get().pos(), Direction.EAST) : free.remove(0));
+            Gates.get().open(level, at, summoner, gate.wave()).ifPresent(gates::add);
+        }
+        state.unpause(team, gates);
+        LOGGER.info("Team {} is home: its Assault's gates open again: {}", team, gates);
     }
 
     /**
@@ -106,9 +125,10 @@ public final class AssaultAbsence {
      * wave noted if its team is still away.
      */
     static boolean keptOut(AssaultState state, Entity entity) {
-        Optional<UUID> team = state.shut(entity.getUUID());
-        team.filter(t -> state.paused(t).isPresent())
-                .ifPresent(t -> state.pause(t, Optional.of(entity.getUUID()), Gates.get().wave(entity)));
-        return team.isPresent();
+        if (state.shut(entity.getUUID()).isEmpty()) {
+            return false;
+        }
+        state.noteWaiting(entity.getUUID(), entity.position(), Gates.get().wave(entity));
+        return true;
     }
 }
