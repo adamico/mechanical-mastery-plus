@@ -44,10 +44,14 @@ config = "${mod_id}.mixins.json"
 [[mixins]]
 config = "${mod_id}.theurgy.mixins.json"
 
+# The life handicap on a player's food data: faster hunger and the Diet (#244).
+[[mixins]]
+config = "${mod_id}.life.mixins.json"
+
 # A home gate opens only on the island of a team that has unlocked protection, applied only with Gateways installed (#238).
 [[mixins]]
 config = "${mod_id}.gateways.mixins.json"
 
-# An Ara Vitae or Hellfire Forge from a mix does no work while the life chain is locked, applied only with Neo Vitae installed (#243).
+# An Ara Vitae or Hellfire Forge from a mix does no work while the life chain is locked (#243), and the Ritual of Full Stomach's feeding counts the food it feeds in a Diet (#244), applied only with Neo Vitae installed.
 [[mixins]]
 config = "${mod_id}.neovitae.mixins.json"

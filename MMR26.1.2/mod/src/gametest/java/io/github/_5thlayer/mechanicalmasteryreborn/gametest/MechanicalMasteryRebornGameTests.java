@@ -91,6 +91,7 @@ public final class MechanicalMasteryRebornGameTests {
         YieldTests.register(tests);
         RecipeTests.register(tests);
         MoneyTests.register(tests);
+        LifeTests.register(tests);
         ChainTests.register(tests);
         HomeGateTests.register(tests);
         ChainMachineTests.register(tests);

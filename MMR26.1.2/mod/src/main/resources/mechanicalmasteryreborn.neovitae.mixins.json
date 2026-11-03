@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AraVitaeTileMixin",
-    "HellfireForgeBlockEntityMixin"
+    "HellfireForgeBlockEntityMixin",
+    "RitualFullStomachMixin"
   ],
   "injectors": {
     "defaultRequire": 1

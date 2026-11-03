@@ -28,6 +28,8 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  * <p>And C.O.D.'s pace while dormant, once awake, and how it grows while a challenge is played, and the cap of a team's Inflation.
  *
  * <p>And the share of a sale a team is paid while it plays the money challenge, and the quota a challenge's Port takes to win it.
+ *
+ * <p>And the life handicap's faster hunger and Diet, and whether it pauses in Neo Vitae's Demon Realm.
  */
 public final class ServerConfig {
 
@@ -153,6 +155,35 @@ public final class ServerConfig {
                     "rounded down to the cent. 0.5 is half. Buying is unaffected.")
             .defineInRange("money.sale_share", 0.5, 0.0, 1.0);
 
+    /** How much faster hunger drains under the life handicap (#244, a placeholder for #207). */
+    public static final ModConfigSpec.DoubleValue LIFE_HUNGER_RATE = BUILDER
+            .comment("How many times faster a player's hunger drains while their team plays the life challenge: every exhaustion,",
+                    "from sprinting, healing, a hand drive's turn or anything else, is multiplied by it. 2 is twice vanilla's.")
+            .defineInRange("life.hunger_rate", 2.0, 1.0, 100.0);
+
+    /** How many foods a Diet holds. */
+    public static final ModConfigSpec.IntValue LIFE_DIET_SIZE = BUILDER
+            .comment("How many of the foods a player ate last their Diet holds while their team plays the life challenge.",
+                    "A food already in it feeds less each time it is there.")
+            .defineInRange("life.diet_size", 8, 0, 256);
+
+    /** How much less a food feeds for each time it is in the Diet. */
+    public static final ModConfigSpec.DoubleValue LIFE_REPEAT_FALLOFF = BUILDER
+            .comment("The share of its hunger and saturation a food feeds less for each time it is in the eater's Diet:",
+                    "0.25 feeds 75% once there, 50% twice, down to life.floor.")
+            .defineInRange("life.repeat_falloff", 0.25, 0.0, 1.0);
+
+    /** The least share a food in the Diet feeds. */
+    public static final ModConfigSpec.DoubleValue LIFE_FLOOR = BUILDER
+            .comment("The least share of its hunger and saturation a food feeds, however often it is in the eater's Diet.")
+            .defineInRange("life.floor", 0.25, 0.0, 1.0);
+
+    /** Whether the life handicap pauses for a player in Neo Vitae's Demon Realm. */
+    public static final ModConfigSpec.BooleanValue LIFE_PAUSE_IN_DEMON_REALM = BUILDER
+            .comment("Whether a player in Neo Vitae's Demon Realm (neovitae:dungeon) hungers and eats as in vanilla while their team",
+                    "plays the life challenge. Off, the handicap goes on there as anywhere else. Inflation goes on either way.")
+            .define("life.pause_in_demon_realm", false);
+
     /**
      * The Transmuted Essence a challenge's Port takes to win it, by the tier C.O.D. makes, highest first (#224). Each
      * challenge must take longer than the last, even with the better core a win unlocks (#189).
@@ -231,6 +262,31 @@ public final class ServerConfig {
     /** The share of a sale the money handicap pays. */
     public static double moneySaleShare() {
         return SPEC.isLoaded() ? MONEY_SALE_SHARE.getAsDouble() : MONEY_SALE_SHARE.getDefault();
+    }
+
+    /** How many times faster hunger drains under the life handicap. */
+    public static double lifeHungerRate() {
+        return SPEC.isLoaded() ? LIFE_HUNGER_RATE.getAsDouble() : LIFE_HUNGER_RATE.getDefault();
+    }
+
+    /** How many foods a Diet holds. */
+    public static int lifeDietSize() {
+        return SPEC.isLoaded() ? LIFE_DIET_SIZE.getAsInt() : LIFE_DIET_SIZE.getDefault();
+    }
+
+    /** How much less a food feeds for each time it is in the Diet. */
+    public static double lifeRepeatFalloff() {
+        return SPEC.isLoaded() ? LIFE_REPEAT_FALLOFF.getAsDouble() : LIFE_REPEAT_FALLOFF.getDefault();
+    }
+
+    /** The least share a food in the Diet feeds. */
+    public static double lifeFloor() {
+        return SPEC.isLoaded() ? LIFE_FLOOR.getAsDouble() : LIFE_FLOOR.getDefault();
+    }
+
+    /** Whether the life handicap pauses for a player in the Demon Realm. */
+    public static boolean lifePauseInDemonRealm() {
+        return SPEC.isLoaded() ? LIFE_PAUSE_IN_DEMON_REALM.getAsBoolean() : LIFE_PAUSE_IN_DEMON_REALM.getDefault();
     }
 
     /** The food exhaustion a hand drive's turn that counts adds. */
