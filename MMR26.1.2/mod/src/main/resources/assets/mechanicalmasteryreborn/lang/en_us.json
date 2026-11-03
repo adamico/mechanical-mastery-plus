@@ -10,6 +10,8 @@
   "mechanicalmasteryreborn.challenge.won": "Your team won the %s challenge: C.O.D. makes the tier below from now on.",
   "mechanicalmasteryreborn.challenge.won.title": "%s Won",
   "mechanicalmasteryreborn.command.cod.all_blocked": "Its team has blocked all four tiers: its C.O.D. makes nothing.",
+  "mechanicalmasteryreborn.command.cod.challenge.not_won": "This island's team hasn't won the %s challenge.",
+  "mechanicalmasteryreborn.command.cod.challenge.reverted": "This island's team no longer has the %s challenge won, and its C.O.D. makes the tier above again.",
   "mechanicalmasteryreborn.command.cod.tier": "Its C.O.D. makes %s.",
   "mechanicalmasteryreborn.command.cod.tier.none": "Team %s has now blocked all four tiers: its C.O.D. makes nothing.",
   "mechanicalmasteryreborn.command.cod.tier.set": "Team %s's C.O.D. now makes %s.",

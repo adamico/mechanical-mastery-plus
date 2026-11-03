@@ -35,7 +35,8 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
  * whether its C.O.D. is awake, which challenge that team plays and its Inflation; {@code dormant} puts that island's
  * C.O.D. back to dormant, as a new island's is, so waking can be seen again, and leaves its challenge as it is;
  * {@code challenge start <handicap>} starts that island's team's challenge as its lab would, and {@code challenge end}
- * ends it, its handicap with it, so choosing can be seen again; {@code tier <team> <tier>} sets the tier a team's C.O.D.
+ * ends it, its handicap with it, so choosing can be seen again, and {@code challenge revert <handicap>} forgets
+ * that it won that challenge, unblocking the tier its win blocked, so winning can be seen again; {@code tier <team> <tier>} sets the tier a team's C.O.D.
  * makes, or none, for tests and in-game checks.
  */
 final class CodCommand {
@@ -62,7 +63,11 @@ final class CodCommand {
                                 .suggests((context, builder) -> SharedSuggestionProvider.suggest(
                                         Arrays.stream(Handicap.values()).map(Handicap::id), builder))
                                 .executes(CodCommand::startChallenge)))
-                        .then(Commands.literal("end").executes(CodCommand::endChallenge))));
+                        .then(Commands.literal("end").executes(CodCommand::endChallenge))
+                        .then(Commands.literal("revert").then(Commands.argument("handicap", StringArgumentType.word())
+                                .suggests((context, builder) -> SharedSuggestionProvider.suggest(
+                                        Arrays.stream(Handicap.values()).map(Handicap::id), builder))
+                                .executes(CodCommand::revertWin)))));
     }
 
     private static int status(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
@@ -121,6 +126,22 @@ final class CodCommand {
             return 0;
         }
         source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.challenge.ended"), true);
+        return 1;
+    }
+
+    private static int revertWin(CommandContext<CommandSourceStack> context) {
+        var source = context.getSource();
+        String id = StringArgumentType.getString(context, "handicap");
+        var handicap = Handicap.byId(id);
+        if (handicap.isEmpty()) {
+            source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.challenge.unknown", id));
+            return 0;
+        }
+        if (!TeamState.get(source.getServer()).revertWin(island(source), handicap.get())) {
+            source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.challenge.not_won", Challenges.name(handicap.get())));
+            return 0;
+        }
+        source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.challenge.reverted", Challenges.name(handicap.get())), true);
         return 1;
     }
 

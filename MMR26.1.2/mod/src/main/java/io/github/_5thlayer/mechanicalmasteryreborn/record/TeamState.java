@@ -272,6 +272,20 @@ public final class TeamState extends SavedData {
         return true;
     }
 
+    /**
+     * Forgets that {@code team} won {@code handicap}'s challenge, so it can be played again, and unblocks the lowest
+     * tier blocked, the one the last win blocked, as {@code /cod challenge revert} does. Says whether it had won it.
+     */
+    public boolean revertWin(UUID team, Handicap handicap) {
+        Entry entry = teams.get(team);
+        if (entry == null || !entry.won.remove(handicap)) {
+            return false;
+        }
+        Essence.TIERS.reversed().stream().filter(entry.blocked::contains).findFirst().ifPresent(entry.blocked::remove);
+        setDirty();
+        return true;
+    }
+
     /** Whether {@code team} has won {@code handicap}'s challenge. */
     public boolean won(UUID team, Handicap handicap) {
         Entry entry = teams.get(team);

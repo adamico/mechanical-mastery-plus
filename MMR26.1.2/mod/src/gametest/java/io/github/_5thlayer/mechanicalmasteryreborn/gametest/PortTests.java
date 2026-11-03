@@ -64,6 +64,7 @@ final class PortTests {
         tests.test("port_reset_clears_the_count_and_a_load_keeps_it", 1, PortTests::resetClearsLoadKeeps);
         tests.test("port_lab_refuses_a_won_challenge", 1, PortTests::labRefusesAWin);
         tests.test("port_shows_closed_open_and_won", 3, PortTests::showsItsPhase);
+        tests.test("port_revert_forgets_the_win_and_unblocks_its_tier", 1, PortTests::revertForgetsTheWin);
     }
 
     /** No challenge played, then another challenge played: a hand's essence stays in it. */
@@ -215,6 +216,22 @@ final class PortTests {
             expectPhase(helper, PortPhase.WON);
             helper.succeed();
         });
+    }
+
+    /** {@code /cod challenge revert} on the island forgets the win, unblocks its tier, and lets the challenge start again. */
+    private static void revertForgetsTheWin(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        place(helper, Handicap.ENERGY);
+        start(helper, team);
+        use(helper, member(helper, team), Essence.GALVANIC, ServerConfig.quota(Essence.ADVANCED));
+        var op = server(helper).createCommandSourceStack().withLevel(helper.getLevel())
+                .withPosition(helper.absolutePos(PORT).getCenter()).withSuppressedOutput();
+        server(helper).getCommands().performPrefixedCommand(op, "cod challenge revert energy");
+        helper.assertFalse(state(helper).won(team, Handicap.ENERGY), "the win outlasted a revert");
+        helper.assertValueEqual(state(helper).tier(team), Optional.of(Essence.ADVANCED), "the tier after a revert");
+        helper.assertFalse(state(helper).revertWin(team, Handicap.ENERGY), "a challenge not won was reverted");
+        start(helper, team);
+        helper.succeed();
     }
 
     private static void place(GameTestHelper helper, Handicap handicap) {
