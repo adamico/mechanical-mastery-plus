@@ -47,3 +47,7 @@ config = "${mod_id}.theurgy.mixins.json"
 # A home gate opens only on the island of a team that has unlocked protection, applied only with Gateways installed (#238).
 [[mixins]]
 config = "${mod_id}.gateways.mixins.json"
+
+# An Ara Vitae or Hellfire Forge from a mix does no work while the life chain is locked, applied only with Neo Vitae installed (#243).
+[[mixins]]
+config = "${mod_id}.neovitae.mixins.json"

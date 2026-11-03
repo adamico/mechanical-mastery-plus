@@ -19,8 +19,9 @@ import net.minecraft.world.level.block.Blocks;
  * A chain machine from a mix does no work while its island's team hasn't unlocked its chain (#214). The chain machines
  * are what the recipes in the chain's stage file make, of any type, as Craftworks' assembling recipes are in the pack;
  * no Theurgy is on the game tests' runs, so the game-test pack's energy stage file names the blast furnace's crafting
- * recipe, a smelting recipe, and a recipe no pack has, and its protection stage file the shield's, as the pack's names the
- * Warding Essence's assembling recipe (#235).
+ * recipe, a smelting recipe, and a recipe no pack has, its protection stage file the shield's, as the pack's names the
+ * Warding Essence's assembling recipe (#235), and its life stage file the brewing stand's, standing for the Ara Vitae and
+ * Hellfire Forge (#243).
  * Theurgy's own hook only asks {@link ChainMachines#lockedAt}, which these test.
  */
 final class ChainMachineTests {
@@ -41,6 +42,7 @@ final class ChainMachineTests {
         tests.test("chain_machine_stays_unlocked_after_a_reset_and_an_end", 1, ChainMachineTests::staysUnlocked);
         tests.test("chain_machine_of_a_team_that_started_works_beside_one_that_hasnt", 1, ChainMachineTests::perTeam);
         tests.test("chain_machine_lock_leaves_other_blocks_as_they_were", 1, ChainMachineTests::leavesOtherBlocks);
+        tests.test("chain_machine_life_idle_until_life_starts", 1, ChainMachineTests::lifeIdleUntilStarted);
     }
 
     private static void readFromTheStageFile(GameTestHelper helper) {
@@ -48,7 +50,8 @@ final class ChainMachineTests {
         helper.assertValueEqual(machines.get(Items.BLAST_FURNACE), Handicap.ENERGY, "the blast furnace's chain");
         helper.assertValueEqual(machines.get(Items.IRON_INGOT), Handicap.ENERGY, "the smelting recipe's result's chain");
         helper.assertValueEqual(machines.get(Items.SHIELD), Handicap.PROTECTION, "the protection stage file's shield's chain");
-        helper.assertValueEqual(machines.size(), 3, "what the stage files' recipes make, but the one no pack has");
+        helper.assertValueEqual(machines.get(Items.BREWING_STAND), Handicap.LIFE, "the life stage file's brewing stand's chain");
+        helper.assertValueEqual(machines.size(), 4, "what the stage files' recipes make, but the one no pack has");
         helper.succeed();
     }
 
@@ -58,6 +61,20 @@ final class ChainMachineTests {
         helper.assertValueEqual(lockedAt(helper, AT), Optional.of(Handicap.ENERGY), "the machine's lock before its challenge");
         Challenges.start(helper.getLevel().getServer(), team, Handicap.ENERGY);
         helper.assertValueEqual(lockedAt(helper, AT), Optional.empty(), "the machine's lock once its challenge started");
+        helper.succeed();
+    }
+
+    /** A life machine from a mix waits for life, not for another challenge (#243). */
+    private static void lifeIdleUntilStarted(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var server = helper.getLevel().getServer();
+        helper.setBlock(AT, Blocks.BREWING_STAND);
+        helper.assertValueEqual(lockedAt(helper, AT), Optional.of(Handicap.LIFE), "the life machine's lock before life");
+        Challenges.start(server, team, Handicap.ENERGY);
+        helper.assertValueEqual(lockedAt(helper, AT), Optional.of(Handicap.LIFE), "the life machine's lock once energy started");
+        Challenges.end(server, team);
+        Challenges.begin(server, team, Handicap.LIFE);
+        helper.assertValueEqual(lockedAt(helper, AT), Optional.empty(), "the life machine's lock once life started");
         helper.succeed();
     }
 

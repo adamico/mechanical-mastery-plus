@@ -31,6 +31,10 @@ final class ChainTests {
                 helper -> lockedUntilStarted(helper, Handicap.PROTECTION, Handicap.ENERGY));
         tests.test("chain_protection_stays_unlocked_after_its_challenge_ends", 1, helper -> staysUnlocked(helper, Handicap.PROTECTION));
         tests.test("chain_protection_stays_unlocked_after_a_reset", 1, helper -> staysUnlockedAfterAReset(helper, Handicap.PROTECTION));
+        // The life chain, Neo Vitae's machines and the Vital Essence's infusion (#243).
+        tests.test("chain_life_locked_until_its_challenge_starts", 1, helper -> lockedUntilStarted(helper, Handicap.LIFE, Handicap.ENERGY));
+        tests.test("chain_life_stays_unlocked_after_its_challenge_ends", 1, helper -> staysUnlocked(helper, Handicap.LIFE));
+        tests.test("chain_life_stays_unlocked_after_a_reset", 1, helper -> staysUnlockedAfterAReset(helper, Handicap.LIFE));
     }
 
     private static void lockedUntilStarted(GameTestHelper helper, Handicap handicap, Handicap other) {

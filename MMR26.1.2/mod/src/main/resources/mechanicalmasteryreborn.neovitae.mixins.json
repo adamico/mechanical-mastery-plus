@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github._5thlayer.mechanicalmasteryreborn.compat.neovitae.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AraVitaeTileMixin",
+    "HellfireForgeBlockEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
