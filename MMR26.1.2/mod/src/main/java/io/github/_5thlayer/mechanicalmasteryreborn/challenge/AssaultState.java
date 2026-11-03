@@ -15,6 +15,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.resources.Identifier;
@@ -33,19 +34,29 @@ import net.minecraft.world.phys.Vec3;
  */
 public final class AssaultState extends SavedData {
 
-    /** One Assault: what it built in {@code dimension}, and the entities of the gates open, one per side where one opened. */
-    public record Built(ResourceKey<Level> dimension, List<BlockPos> blocks, List<UUID> gates) {
+    /**
+     * One Assault: what it built in {@code dimension}, the entity of its one gate while open, and the side of C.O.D. the
+     * gate is on now, where it opens again after a failure or an absence (#239).
+     */
+    public record Built(ResourceKey<Level> dimension, List<BlockPos> blocks, List<UUID> gates, Optional<Direction> side) {
 
         static final Codec<Built> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Level.RESOURCE_KEY_CODEC.fieldOf("dimension").forGetter(Built::dimension),
                 BlockPos.CODEC.listOf().fieldOf("blocks").forGetter(Built::blocks),
-                UUIDUtil.STRING_CODEC.listOf().optionalFieldOf("gates", List.of()).forGetter(Built::gates))
+                UUIDUtil.STRING_CODEC.listOf().optionalFieldOf("gates", List.of()).forGetter(Built::gates),
+                Direction.CODEC.optionalFieldOf("side").forGetter(Built::side))
                 .apply(instance, Built::new));
 
         public Built {
             blocks = List.copyOf(blocks);
             gates = List.copyOf(gates);
         }
+
+        /** This Assault with {@code gates} open instead. */
+        Built withGates(List<UUID> gates) {
+            return new Built(dimension, blocks, gates, side);
+        }
+
     }
 
     /** A gate closed for no one being home (#240): where it stood, if seen, and the wave it had reached. */
@@ -146,8 +157,16 @@ public final class AssaultState extends SavedData {
         List<UUID> gates = new java.util.ArrayList<>(built.gates());
         gates.remove(failed);
         reopened.ifPresent(gates::add);
-        assaults.put(team, new Built(built.dimension(), built.blocks(), gates));
+        assaults.put(team, built.withGates(gates));
         closed.add(failed);
+        setDirty();
+    }
+
+    /** Moves {@code team}'s gate {@code from} to {@code side}, open there as {@code to}, and keeps {@code from} out. */
+    void moveGate(UUID team, UUID from, Optional<UUID> to, Direction side) {
+        Built built = assaults.get(team);
+        assaults.put(team, new Built(built.dimension(), built.blocks(), to.stream().toList(), Optional.of(side)));
+        closed.add(from);
         setDirty();
     }
 
@@ -172,7 +191,7 @@ public final class AssaultState extends SavedData {
         waiting.forEach(gate -> shut.put(gate.gate(), team));
         Built built = assaults.get(team);
         if (built != null) {
-            assaults.put(team, new Built(built.dimension(), built.blocks(), List.of()));
+            assaults.put(team, built.withGates(List.of()));
         }
         setDirty();
     }
@@ -192,7 +211,7 @@ public final class AssaultState extends SavedData {
         paused.remove(team);
         Built built = assaults.get(team);
         if (built != null) {
-            assaults.put(team, new Built(built.dimension(), built.blocks(), gates));
+            assaults.put(team, built.withGates(gates));
         }
         setDirty();
     }

@@ -17,6 +17,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Gates;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -44,12 +45,14 @@ final class AssaultAbsenceTests {
     /** These tests' players, whose gates stand by them. */
     private static final Set<UUID> SUMMONERS = ConcurrentHashMap.newKeySet();
 
-    /** {@link AssaultTests#GATES}, but a gate summoned by one of these tests' players stands by that player. */
+    /** {@link AssaultTests#GATES}, but a gate summoned by one of these tests' players stands by that player, noted where it was asked to. */
     static final Gates GATES = new Gates() {
         @Override
         public Optional<UUID> open(ServerLevel level, Vec3 at, @Nullable ServerPlayer summoner, int wave) {
             Vec3 where = summoner != null && SUMMONERS.contains(summoner.getUUID()) ? summoner.position() : at;
-            return AssaultTests.GATES.open(level, where, summoner, wave);
+            Optional<UUID> gate = AssaultTests.GATES.open(level, where, summoner, wave);
+            gate.ifPresent(id -> AssaultTests.AT.put(id, at));
+            return gate;
         }
 
         @Override
@@ -77,10 +80,9 @@ final class AssaultAbsenceTests {
             AssaultAbsence.update(server);
             helper.assertTrue(state.paused(team).isEmpty(), "the Assault paused with a player at home");
             List<UUID> gates = state.assault(team).orElseThrow().gates();
-            helper.assertTrue(gates.size() == 4, "the Assault opened " + gates.size() + " gates, not 4");
-            for (int i = 0; i < gates.size(); i++) {
-                AssaultTests.WAVES.put(gates.get(i), WAVE + i);
-            }
+            helper.assertTrue(gates.size() == 1, "the Assault opened " + gates.size() + " gates, not 1");
+            AssaultTests.WAVES.put(gates.getFirst(), WAVE);
+            Direction side = state.assault(team).orElseThrow().side().orElseThrow();
             UUID gate = gates.get(0);
             var mob = EntityType.ZOMBIE.create(helper.getLevel(), EntitySpawnReason.COMMAND);
             mob.setPos(helper.absolutePos(COD.above().east()).getBottomCenter());
@@ -90,8 +92,8 @@ final class AssaultAbsenceTests {
 
             player.setPos(player.position().add(1000, 0, 0));
             AssaultAbsence.update(server);
-            helper.assertTrue(waves(state.paused(team).orElse(List.of())).equals(List.of(WAVE, WAVE + 1, WAVE + 2, WAVE + 3)),
-                    "the gates didn't close at their waves with no one home");
+            helper.assertTrue(waves(state.paused(team).orElse(List.of())).equals(List.of(WAVE)),
+                    "the gate didn't close at their waves with no one home");
             for (UUID each : gates) {
                 Entity closed = helper.getLevel().getEntity(each);
                 helper.assertTrue(closed == null || closed.isRemoved(), "a gate is still open with no one home");
@@ -106,7 +108,9 @@ final class AssaultAbsenceTests {
             List<UUID> reopened = state.assault(team).orElseThrow().gates();
             helper.assertTrue(reopened.stream().noneMatch(gates::contains), "a closed gate came back instead of opening again");
             List<Integer> waves = reopened.stream().map(AssaultTests.WAVES::get).sorted().toList();
-            helper.assertTrue(waves.equals(List.of(WAVE, WAVE + 1, WAVE + 2, WAVE + 3)), "the gates opened again at waves " + waves);
+            helper.assertTrue(waves.equals(List.of(WAVE)), "the gate opened again at waves " + waves);
+            helper.assertTrue(AssaultTests.AT.get(reopened.getFirst()).equals(Assault.gateAt(helper.absolutePos(COD), side)),
+                    "the gate didn't open again on its side");
             Challenges.end(server, team);
             helper.assertTrue(mob.isRemoved(), "the closed gate's mob outlived the Assault's end");
             leave(player);
