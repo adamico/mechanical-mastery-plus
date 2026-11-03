@@ -54,7 +54,7 @@ final class PortInput extends SnapshotJournal<Integer> implements ResourceHandle
     @Override
     public boolean isValid(int index, ItemResource resource) {
         Objects.checkIndex(index, size());
-        return resource.is(Essences.item(((PortBlock) port.getBlockState().getBlock()).essence()));
+        return resource.is(Essences.item(port.essence()));
     }
 
     @Override

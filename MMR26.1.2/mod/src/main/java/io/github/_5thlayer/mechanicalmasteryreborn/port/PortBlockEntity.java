@@ -8,6 +8,7 @@ import java.util.UUID;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
@@ -44,6 +45,11 @@ public final class PortBlockEntity extends BlockEntity {
     /** The challenge whose Port it is. */
     public Handicap handicap() {
         return ((PortBlock) getBlockState().getBlock()).handicap();
+    }
+
+    /** The Transmuted Essence it takes. */
+    public Essence essence() {
+        return Port.essence(handicap());
     }
 
     /** Whether its team plays its challenge, has won it, or neither; closed on a client, which doesn't know. */
