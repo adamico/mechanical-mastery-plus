@@ -8,10 +8,8 @@
     "preventTravel": false
   },
   "recipes": [
-    "neovitae:ara_vitae",
     "neovitae:athanor_block",
     "neovitae:tabula_vitae",
-    "neovitae:hellfire_forge",
     "neovitae:incense_altar",
     "neovitae:sanguine_crafter",
     "neovitae:sanguine_casing",
