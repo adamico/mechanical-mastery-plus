@@ -17,7 +17,7 @@ final class CreativeTabTests {
     /** The paths of the Module's items, as the Works tab shows them. */
     private static final List<String> WORKS_TAB_ORDER = List.of("cod", "lab", "warding_port", "vital_port", "galvanic_port", "aureate_port", "basic_mechanical_essence", "regular_mechanical_essence",
             "improved_mechanical_essence", "advanced_mechanical_essence", "galvanic_essence", "warding_essence", "vital_essence", "aureate_essence", "recycler_core_1", "recycler_core_2", "recycler_core_3", "recycler_core_4", "hand_drive", "fe_drive", "recycler_input", "recycler_output",
-            "recycler_casing");
+            "recycler_casing", "fe_defence");
 
     private CreativeTabTests() {
     }

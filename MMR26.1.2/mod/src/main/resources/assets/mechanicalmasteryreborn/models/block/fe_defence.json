@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "mechanicalmasteryreborn:block/recycler_plating",
+    "side": "mechanicalmasteryreborn:block/recycler_fe_drive"
+  }
+}
