@@ -1,0 +1,11 @@
+{
+  "type": "neovitae:ara_vitae_recipe",
+  "bloodNeeded": 20000,
+  "craftSpeed": 20,
+  "drainSpeed": 20,
+  "input": "neovitae:tabula_spiritus",
+  "minTier": 3,
+  "output": {
+    "id": "mechanicalmasteryreborn:vital_essence"
+  }
+}

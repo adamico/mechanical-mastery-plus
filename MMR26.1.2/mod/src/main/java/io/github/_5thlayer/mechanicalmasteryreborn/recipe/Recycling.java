@@ -267,11 +267,13 @@ public final class Recycling {
 
     /**
      * What {@code holder} makes, read as the rules read it, from its {@code result} or the first of its {@code results},
-     * if it can be read.
+     * or, as Neo Vitae's altar infusions name it, its {@code output} (#243), if it can be read.
      */
     public static Optional<Item> made(RecipeHolder<?> holder, DynamicOps<JsonElement> ops) {
         try {
-            return product(encode(holder.value(), ops).getAsJsonObject(), ops).map(ItemStackTemplate::item).map(Holder::value);
+            JsonObject json = encode(holder.value(), ops).getAsJsonObject();
+            return (json.has("output") ? decode(ItemStackTemplate.CODEC, json.get("output"), ops) : product(json, ops))
+                    .map(ItemStackTemplate::item).map(Holder::value);
         } catch (RuntimeException unreadable) {
             return Optional.empty();
         }
