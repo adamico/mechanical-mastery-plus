@@ -66,6 +66,7 @@ public final class Assault {
     public static void register(IEventBus modBus) {
         BLOCKS.register(modBus);
         NeoForge.EVENT_BUS.addListener(Assault::onJoin);
+        AssaultAbsence.register();
     }
 
     /**
@@ -78,7 +79,7 @@ public final class Assault {
         }
         Entity entity = event.getEntity();
         AssaultState state = AssaultState.get(level.getServer());
-        if (state.closed(entity.getUUID()) || owner(entity).filter(state::closed).isPresent()) {
+        if (AssaultAbsence.keptOut(state, entity) || state.closed(entity.getUUID()) || owner(entity).filter(state::closed).isPresent()) {
             event.setCanceled(true);
         }
     }
@@ -130,15 +131,14 @@ public final class Assault {
             if (level == null) {
                 return;
             }
-            built.gate().ifPresent(gate -> {
-                List<Entity> removed = new ArrayList<>();
-                for (Entity entity : level.getAllEntities()) {
-                    if (entity.getUUID().equals(gate) || owner(entity).filter(gate::equals).isPresent()) {
-                        removed.add(entity);
-                    }
+            AssaultState state = AssaultState.get(server);
+            List<Entity> removed = new ArrayList<>();
+            for (Entity entity : level.getAllEntities()) {
+                if (built.gate().filter(entity.getUUID()::equals).isPresent() || owner(entity).filter(state::closed).isPresent()) {
+                    removed.add(entity);
                 }
-                removed.forEach(Entity::discard);
-            });
+            }
+            removed.forEach(Entity::discard);
             for (BlockPos pos : built.blocks()) {
                 if (level.getBlockState(pos).is(STONE.get())) {
                     level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
@@ -166,7 +166,7 @@ public final class Assault {
     }
 
     /** One of {@code team}'s players online on its island, or else anywhere, or none. */
-    private static @Nullable ServerPlayer summoner(MinecraftServer server, ServerLevel level, UUID team) {
+    static @Nullable ServerPlayer summoner(MinecraftServer server, ServerLevel level, UUID team) {
         ServerPlayer anywhere = null;
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (!Teams.of(player).equals(team)) {

@@ -96,6 +96,7 @@ public final class MechanicalMasteryRebornGameTests {
         HomeGateTests.register(tests);
         ChainMachineTests.register(tests);
         AssaultTests.register(tests);
+        AssaultAbsenceTests.register(tests);
         // Each test that records a decompose claims a team of its own.
         Teams.use(new TestTeams(Teams.installed()));
         // Each test that plays the money challenge opens an Account of its own.
@@ -103,7 +104,7 @@ public final class MechanicalMasteryRebornGameTests {
         // Chapters' part, each player's stages in memory.
         Chains.use(new TestStages());
         // The dev runs have no Gateways, so an Assault's gate is an armor stand.
-        Gates.use(AssaultTests.GATES);
+        Gates.use(AssaultAbsenceTests.GATES);
     }
 
     private static Identifier id(String path) {
