@@ -34,7 +34,7 @@ The companion mod's machine, after Factorio's, and much faster than decomposing 
 _Avoid_: starter machine, decomposer, crank recycler
 
 **Core**:
-The block in the middle of a Recycler's front edge, facing out, which holds its work and whose tier sets how fast it runs and how well: its yield, and how many it processes at once. A player takes back what it holds by hand, giving up the work under way; nothing else can.
+The block in the middle of a Recycler's front edge, facing out, which holds its work and whose tier sets how fast it runs and how many floors its Recycler may have. There are four tiers; every core yields the same. A core of the next tier is crafted from the one below, and only once the team has won as many challenges as the tier it replaces, in any order; it takes the place of the old one in the same frame. A player takes back what it holds by hand, giving up the work under way; nothing else can.
 
 **Drive**:
 A part of a Recycler that turns it: by a player's right-click, FE or other means. A Recycler's drives add up; a hand-worked drive never turns faster than a player, and every turn that counts tires the player turning it, as sprinting does, so it costs food: it is how a team starts, or gets by when short of everything else, not how it runs. Decomposing by hand costs no food. An FE drive spends FE from its own store, so under the energy handicap it runs on what is stored until that is spent.
@@ -48,7 +48,7 @@ The full amounts an essence breaks down into: several items of its tier's band, 
 _Avoid_: output, loot
 
 **Yield**:
-The share of a mix, or of what made an item, that one decompose or recycle returns, each part of an item left over as a chance of one. The core's tier sets it; by hand is always the lowest core's.
+The share of a mix, or of what made an item, that one decompose or recycle returns, each part of an item left over as a chance of one. It is the same on every core and by hand.
 _Avoid_: fraction, return rate, efficiency
 
 **Alternate recipe**:
@@ -73,7 +73,7 @@ One of four goals, each bound to a fixed mod or set of mods, started and researc
 _Avoid_: questline, chapter, stage
 
 **Quota**:
-How many of its Transmuted Essence a challenge takes to win, against the tier C.O.D. is making.
+How many of its Transmuted Essence a challenge takes to win, against the tier C.O.D. is making. It grows with each challenge won, faster than the better core a win unlocks speeds a team up, so each challenge takes longer than the last.
 _Avoid_: target, goal
 
 **Port**:
