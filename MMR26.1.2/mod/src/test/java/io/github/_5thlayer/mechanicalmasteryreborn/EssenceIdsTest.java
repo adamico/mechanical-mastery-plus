@@ -42,8 +42,9 @@ class EssenceIdsTest {
     }
 
     @Test
-    void onlyTheMechanicalEssencesAreObtainable() {
-        assertEquals(List.of(Essence.BASIC, Essence.REGULAR, Essence.IMPROVED, Essence.ADVANCED),
+    void everyEssenceButQuintessenceIsObtainable() {
+        assertEquals(List.of(Essence.BASIC, Essence.REGULAR, Essence.IMPROVED, Essence.ADVANCED,
+                Essence.GALVANIC, Essence.WARDING, Essence.VITAL, Essence.AUREATE),
                 Arrays.stream(Essence.values()).filter(Essence::obtainable).toList());
     }
 

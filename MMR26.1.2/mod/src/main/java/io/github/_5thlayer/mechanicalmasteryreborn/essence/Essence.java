@@ -58,11 +58,12 @@ public enum Essence {
     }
 
     /**
-     * Whether a player can have it yet: only the Mechanical Essences, until the challenges that make the
-     * others exist. The others are registered all the same, so their ids are taken from the first release.
+     * Whether a player can have it yet: the Mechanical and the Transmuted Essences, which the challenges' chains
+     * make and their Ports take, but not Quintessence, until the last chapter exists. It is registered all the
+     * same, so its id is taken from the first release.
      */
     public boolean obtainable() {
-        return kind == Kind.MECHANICAL;
+        return kind != Kind.QUINTESSENCE;
     }
 
     /** The essence saved under {@code path}, if any. */

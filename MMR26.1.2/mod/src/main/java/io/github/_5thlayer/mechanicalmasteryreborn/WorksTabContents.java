@@ -15,8 +15,8 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 /**
  * Every obtainable item of the mod, in the suite's Works tab and no other (FactoryWorks ADR-0128): C.O.D.,
- * the lab and the four Ports, then the Mechanical Essences, then the Recycler's parts. One listener, in the order the tab shows them, which
- * {@code CreativeTabTests} lists too. The essences no player can have yet are in no tab.
+ * the lab and the four Ports, then the Mechanical and Transmuted Essences, then the Recycler's parts. One listener, in the order the tab shows them, which
+ * {@code CreativeTabTests} lists too. Quintessence, which no player can have yet, is in no tab.
  */
 final class WorksTabContents {
 
