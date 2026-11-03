@@ -70,7 +70,7 @@ hash = "cb54a7a0064460d25216780e76b08430bebc6f0bf01bf3e9a2a91935d52872f0"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/hand_drive.md"
-hash = "e6b18971e61c664dc5e98125ebddacfc64486ebf3d59ce87099c71afa17fdefe"
+hash = "a9457513a775ac5936a70fc7c7c3a37a60e77c87f6a35ccc1ba8c205639648fe"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/index.md"
@@ -343,6 +343,11 @@ hash = "585886bdbea3d2a5cbcf3bdae089731949f103f0180894edeaa6e67780bb00db"
 [[files]]
 file = "kubejs/server_scripts/team_of_one.js"
 hash = "4dea0d5af163d81290306bac10bf92fe2d1baabe495c543593b7344fe2ced57e"
+
+[[files]]
+file = "mods/adminshop.pw.toml"
+hash = "d8f912afa4cad8ad6fd7bdba56e4e5e85efa317fdc6556284d674ed24ee7f800"
+metafile = true
 
 [[files]]
 file = "mods/ai-improvements.pw.toml"
@@ -747,6 +752,11 @@ metafile = true
 [[files]]
 file = "mods/particle-core.pw.toml"
 hash = "eb14ed576f8242bdadc264b317a2cc51703e3505f54845b43bb64a2586b4c7e8"
+metafile = true
+
+[[files]]
+file = "mods/patchouli.pw.toml"
+hash = "58e7bb2c9c496469b36bf02b5a02d34f62b9ef57bb7a613eac1d06bc2e70a4bd"
 metafile = true
 
 [[files]]
