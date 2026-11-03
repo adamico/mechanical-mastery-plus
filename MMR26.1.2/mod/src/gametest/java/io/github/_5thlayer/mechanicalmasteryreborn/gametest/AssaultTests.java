@@ -34,6 +34,11 @@ final class AssaultTests {
     private static final BlockPos OTHER_COD = new BlockPos(7, 2, 7);
     /** Ticks for a placed C.O.D. to have ticked. */
     private static final int TICKED = 2;
+    /**
+     * Ticks to wait for the gate's chunk, {@link Assault#OFFSET} blocks off the test, to be loaded enough that the level
+     * can find the gate in it: until then an end can't see it, as with a chunk no one is near in game.
+     */
+    private static final int LOADING = 100;
 
     /** A gate that is only an armor stand, standing where the Assault opens one. */
     static final Gates GATES = (level, at, summoner) -> {
@@ -49,8 +54,9 @@ final class AssaultTests {
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("assault_start_builds_a_platform_a_bridge_and_a_gate", 20, AssaultTests::builtOnStart);
-        tests.test("assault_reset_removes_it_and_leaves_the_rift_shards", 20, AssaultTests::removedOnReset);
-        tests.test("assault_win_removes_it", 20, AssaultTests::removedOnWin);
+        tests.test("assault_reset_removes_it_and_leaves_the_rift_shards", 20 + LOADING, AssaultTests::removedOnReset);
+        tests.test("assault_win_removes_it", 20 + LOADING, AssaultTests::removedOnWin);
+        tests.test("assault_keeps_out_a_removed_gates_mob_that_loads_later", 20, AssaultTests::keepsOutLaterMobs);
         tests.test("assault_is_sent_at_its_island_only", 20, AssaultTests::itsIslandOnly);
     }
 
@@ -79,11 +85,13 @@ final class AssaultTests {
         helper.setBlock(COD, Cod.BLOCK.get());
         helper.runAfterDelay(TICKED, () -> {
             Challenges.begin(server(helper), team, Handicap.PROTECTION);
-            Removal removal = Removal.of(helper, team);
-            helper.assertTrue(Challenges.reset(server(helper), team), "the protection challenge didn't reset");
-            removal.expectRemoved(helper, "a reset");
-            Challenges.end(server(helper), team);
-            helper.succeed();
+            whenGateLoaded(helper, team, LOADING, () -> {
+                Removal removal = Removal.of(helper, team);
+                helper.assertTrue(Challenges.reset(server(helper), team), "the protection challenge didn't reset");
+                removal.expectRemoved(helper, "a reset");
+                Challenges.end(server(helper), team);
+                helper.succeed();
+            });
         });
     }
 
@@ -92,10 +100,12 @@ final class AssaultTests {
         helper.setBlock(COD, Cod.BLOCK.get());
         helper.runAfterDelay(TICKED, () -> {
             Challenges.begin(server(helper), team, Handicap.PROTECTION);
-            Removal removal = Removal.of(helper, team);
-            helper.assertTrue(Challenges.win(server(helper), team), "the protection challenge wasn't won");
-            removal.expectRemoved(helper, "a win");
-            helper.succeed();
+            whenGateLoaded(helper, team, LOADING, () -> {
+                Removal removal = Removal.of(helper, team);
+                helper.assertTrue(Challenges.win(server(helper), team), "the protection challenge wasn't won");
+                removal.expectRemoved(helper, "a win");
+                helper.succeed();
+            });
         });
     }
 
@@ -114,6 +124,34 @@ final class AssaultTests {
             Challenges.end(server(helper), team);
             helper.succeed();
         });
+    }
+
+    /** What a gate or mob of a removed Assault does when its chunk loads later: it is kept out. */
+    private static void keepsOutLaterMobs(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        helper.setBlock(COD, Cod.BLOCK.get());
+        helper.runAfterDelay(TICKED, () -> {
+            Challenges.begin(server(helper), team, Handicap.PROTECTION);
+            UUID gate = AssaultState.get(server(helper)).assault(team).orElseThrow().gate().orElseThrow();
+            Challenges.end(server(helper), team);
+            var mob = EntityType.ZOMBIE.create(helper.getLevel(), EntitySpawnReason.COMMAND);
+            mob.setPos(helper.absolutePos(COD.above()).getBottomCenter());
+            Assault.markOwner(mob, gate);
+            helper.assertFalse(helper.getLevel().addFreshEntity(mob), "a removed Assault's mob joined the level");
+            helper.succeed();
+        });
+    }
+
+    /** Runs {@code then} once the level can find {@code team}'s Assault's gate, checking each tick for up to {@code ticks}. */
+    private static void whenGateLoaded(GameTestHelper helper, UUID team, int ticks, Runnable then) {
+        UUID gate = AssaultState.get(server(helper)).assault(team).orElseThrow().gate().orElseThrow();
+        if (helper.getLevel().getEntity(gate) != null) {
+            then.run();
+        } else if (ticks <= 0) {
+            helper.fail("the gate's chunk never loaded");
+        } else {
+            helper.runAfterDelay(1, () -> whenGateLoaded(helper, team, ticks - 1, then));
+        }
     }
 
     /** A started Assault with one of its gate's mobs and a Rift Shard dropped by its platform, to see what an end removes. */

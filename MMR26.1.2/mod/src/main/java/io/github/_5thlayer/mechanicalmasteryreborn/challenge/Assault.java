@@ -24,6 +24,8 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jspecify.annotations.Nullable;
@@ -35,6 +37,7 @@ import org.slf4j.Logger;
  * stands on, a bridge of it running west toward C.O.D. until the first block in its way, and on the platform the
  * pack's endless gate ({@link Gates}), summoned by one of the team's players on its island, so its mobs hunt the team.
  * A win or a reset removes the gate, what was built and the gate's mobs still around; the team keeps its Rift Shards.
+ * A gate or mob in a chunk no one is near can't be seen as the Assault ends, so it is kept out when it loads again.
  * Each piece is built only into air and removed only where it still stands, so nothing else is ever touched.
  */
 public final class Assault {
@@ -62,6 +65,22 @@ public final class Assault {
 
     public static void register(IEventBus modBus) {
         BLOCKS.register(modBus);
+        NeoForge.EVENT_BUS.addListener(Assault::onJoin);
+    }
+
+    /**
+     * Keeps out a removed Assault's gate and mobs that were in a chunk no one was near as it was removed, which an end
+     * can't see, when that chunk loads again.
+     */
+    private static void onJoin(EntityJoinLevelEvent event) {
+        if (!(event.getLevel() instanceof ServerLevel level)) {
+            return;
+        }
+        Entity entity = event.getEntity();
+        AssaultState state = AssaultState.get(level.getServer());
+        if (state.closed(entity.getUUID()) || owner(entity).filter(state::closed).isPresent()) {
+            event.setCanceled(true);
+        }
     }
 
     /** Notes where {@code team}'s C.O.D. stands, which its Assault is built from. */

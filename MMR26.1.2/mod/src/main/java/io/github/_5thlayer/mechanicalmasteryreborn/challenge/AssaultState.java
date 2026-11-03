@@ -4,9 +4,11 @@
 package io.github._5thlayer.mechanicalmasteryreborn.challenge;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import com.mojang.serialization.Codec;
@@ -24,7 +26,8 @@ import net.minecraft.world.level.saveddata.SavedDataType;
 
 /**
  * Where each team's C.O.D. stands, as it noted on its first tick, and the {@link Assault} it is sent while it plays
- * the protection challenge: the blocks it built and the gate it opened, so its end removes exactly those. Saved with
+ * the protection challenge: the blocks it built and the gate it opened, so its end removes exactly those, and the gates
+ * of Assaults removed. Saved with
  * the world, in the overworld's data, apart from the team's own state.
  */
 public final class AssaultState extends SavedData {
@@ -45,7 +48,8 @@ public final class AssaultState extends SavedData {
 
     private static final Codec<AssaultState> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.unboundedMap(UUIDUtil.STRING_CODEC, GlobalPos.CODEC).optionalFieldOf("cods", Map.of()).forGetter(state -> state.cods),
-            Codec.unboundedMap(UUIDUtil.STRING_CODEC, Built.CODEC).optionalFieldOf("assaults", Map.of()).forGetter(state -> state.assaults))
+            Codec.unboundedMap(UUIDUtil.STRING_CODEC, Built.CODEC).optionalFieldOf("assaults", Map.of()).forGetter(state -> state.assaults),
+            UUIDUtil.STRING_CODEC.listOf().optionalFieldOf("closed", List.of()).forGetter(state -> List.copyOf(state.closed)))
             .apply(instance, AssaultState::new));
 
     public static final SavedDataType<AssaultState> TYPE = new SavedDataType<>(
@@ -53,14 +57,17 @@ public final class AssaultState extends SavedData {
 
     private final Map<UUID, GlobalPos> cods;
     private final Map<UUID, Built> assaults;
+    /** The gates of Assaults removed, whose gate or mobs may still load with a chunk no one was near as they were removed. */
+    private final Set<UUID> closed;
 
     private AssaultState() {
-        this(Map.of(), Map.of());
+        this(Map.of(), Map.of(), List.of());
     }
 
-    private AssaultState(Map<UUID, GlobalPos> cods, Map<UUID, Built> assaults) {
+    private AssaultState(Map<UUID, GlobalPos> cods, Map<UUID, Built> assaults, List<UUID> closed) {
         this.cods = new HashMap<>(cods);
         this.assaults = new HashMap<>(assaults);
+        this.closed = new HashSet<>(closed);
     }
 
     public static AssaultState get(MinecraftServer server) {
@@ -92,8 +99,14 @@ public final class AssaultState extends SavedData {
     Optional<Built> takeAssault(UUID team) {
         Built built = assaults.remove(team);
         if (built != null) {
+            built.gate().ifPresent(closed::add);
             setDirty();
         }
         return Optional.ofNullable(built);
+    }
+
+    /** Whether {@code gate} was the gate of an Assault since removed. */
+    public boolean closed(UUID gate) {
+        return closed.contains(gate);
     }
 }

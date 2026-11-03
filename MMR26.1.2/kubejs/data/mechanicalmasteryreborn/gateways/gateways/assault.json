@@ -8,22 +8,49 @@
         "entities": [
             {
                 "type": "gateways:standard",
-                "count": 3,
-                "entity": "minecraft:zombie"
+                "entity": "minecraft:zombie",
+                "count": 2,
+                "modifiers": [
+                    {
+                        "type": "gateways:loot_table",
+                        "loot_table": "mechanicalmasteryreborn:assault/zombie"
+                    }
+                ]
             },
             {
                 "type": "gateways:standard",
+                "entity": "minecraft:skeleton",
                 "count": 2,
-                "entity": "minecraft:skeleton"
-            }
-        ],
-        "modifiers": [
+                "modifiers": [
+                    {
+                        "type": "gateways:loot_table",
+                        "loot_table": "mechanicalmasteryreborn:assault/skeleton"
+                    }
+                ]
+            },
             {
-                "type": "gateways:loot_table",
-                "loot_table": "mechanicalmasteryreborn:assault/rift_shard"
+                "type": "gateways:standard",
+                "entity": "minecraft:spider",
+                "count": 1,
+                "modifiers": [
+                    {
+                        "type": "gateways:loot_table",
+                        "loot_table": "mechanicalmasteryreborn:assault/spider"
+                    }
+                ]
+            },
+            {
+                "type": "gateways:standard",
+                "entity": "minecraft:creeper",
+                "count": 1,
+                "modifiers": [
+                    {
+                        "type": "gateways:loot_table",
+                        "loot_table": "mechanicalmasteryreborn:assault/creeper"
+                    }
+                ]
             }
-        ],
-        "rewards": []
+        ]
     },
     "modifiers": [
         {
@@ -35,7 +62,13 @@
             "entities": [
                 {
                     "type": "gateways:standard",
-                    "entity": "minecraft:zombie"
+                    "entity": "minecraft:zombie",
+                    "modifiers": [
+                        {
+                            "type": "gateways:loot_table",
+                            "loot_table": "mechanicalmasteryreborn:assault/zombie"
+                        }
+                    ]
                 }
             ]
         }
