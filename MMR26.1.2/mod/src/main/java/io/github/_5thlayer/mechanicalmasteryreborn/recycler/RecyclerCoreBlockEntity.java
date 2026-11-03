@@ -192,8 +192,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
      * the nine of a floor above that counts.
      */
     boolean holdsPlace(BlockPos pos) {
-        int floor = pos.getY() - worldPosition.getY();
-        return floor == 0 ? reaches(pos) : floor > 0 && floor < floors() && reaches(pos);
+        return reaches(pos) && pos.getY() - worldPosition.getY() < floors();
     }
 
     /**

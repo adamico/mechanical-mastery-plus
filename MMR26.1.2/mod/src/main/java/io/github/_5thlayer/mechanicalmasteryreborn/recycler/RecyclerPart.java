@@ -14,8 +14,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 /**
  * A block that can stand in one of a Recycler's eight places, the rest of the 3x3 its core fronts, in one role. Its
- * {@link #PLACE} is where in the 3x3 it stands and its {@link #FLOOR} on which floor, taken when it is placed and set again when a core is placed or
- * removed nearby, so its top and bottom draw the Recycler's frame.
+ * {@link #PLACE} is where in the 3x3 it stands and its {@link #FLOOR} on which floor, taken when it is placed and
+ * set again when a part or core comes or goes nearby, so its top and bottom draw the Recycler's frame.
  */
 public interface RecyclerPart {
 
@@ -45,12 +45,14 @@ public interface RecyclerPart {
      * shares a place with one that does.
      */
     static void reframeAround(Level level, BlockPos pos) {
-        // A core it changes stands up to 2 away and 3 below; a core sharing a place with that one's 3x3 up to 3 further
-        // and 3 lower, its parts one beyond, and as far up as down.
-        int reach = 6;
-        for (int y = -reach; y <= reach; y++) {
-            for (int x = -reach; x <= reach; x++) {
-                for (int z = -reach; z <= reach; z++) {
+        // A core it changes stands up to 2 away and 3 below, and reaches 2 beyond itself; a core sharing a place with
+        // that reach stands up to 2 further, and its parts 2 beyond it: 8 across. Up and down, each core reaches 3
+        // floors from its own: 6.
+        int across = 8;
+        int up = 2 * (Recycler.TIERS - 1);
+        for (int y = -up; y <= up; y++) {
+            for (int x = -across; x <= across; x++) {
+                for (int z = -across; z <= across; z++) {
                     BlockPos at = pos.offset(x, y, z);
                     BlockState state = level.getBlockState(at);
                     BlockState now = state.getBlock() instanceof RecyclerPart ? framed(state, level, at)
