@@ -1,0 +1,22 @@
+{
+  // The only structures generated anywhere, named so no Skyblock Builder default ever brings one back:
+  // the Nether's fortresses and the End's cities. The Overworld has none, so no stronghold (ADR 0012).
+  "structuresToGenerate": {
+    "allow_list": true,
+    "elements": [
+      "minecraft:fortress",
+      "minecraft:end_city"
+    ]
+  },
+
+  // The only features generated: the dragon's obsidian towers, so the first fight has them, and chorus
+  // on the outer End's highlands. Not its return gateways, which send a player to a fixed spot below
+  // the plain's top; the plain already leads back to the main island.
+  "featuresToGenerate": {
+    "allow_list": true,
+    "elements": [
+      "minecraft:end_spike",
+      "minecraft:chorus_plant"
+    ]
+  }
+}

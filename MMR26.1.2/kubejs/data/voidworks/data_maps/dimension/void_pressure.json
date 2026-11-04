@@ -1,0 +1,8 @@
+{
+  "values": {
+    "minecraft:the_end": {
+      "base": 4,
+      "harvest_kind": "end"
+    }
+  }
+}

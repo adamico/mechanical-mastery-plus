@@ -48,6 +48,10 @@ config = "${mod_id}.theurgy.mixins.json"
 [[mixins]]
 config = "${mod_id}.life.mixins.json"
 
+# A Nether portal made in mid-air, over the Nether's lava sea or the Overworld's void, gets an arrival platform (#264).
+[[mixins]]
+config = "${mod_id}.portal.mixins.json"
+
 # A home gate opens only on the island of a team that has unlocked protection, applied only with Gateways installed (#238).
 [[mixins]]
 config = "${mod_id}.gateways.mixins.json"
