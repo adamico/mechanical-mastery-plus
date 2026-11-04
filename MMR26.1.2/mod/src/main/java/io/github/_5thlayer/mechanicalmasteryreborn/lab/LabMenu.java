@@ -3,30 +3,47 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.lab;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
+import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Stops;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 /**
  * The lab's choice of handicap, for the team whose island it stands on. A button per handicap, by its ordinal, starts
- * its challenge, if the player is in that team, the team plays none yet and hasn't won it. The
- * client is sent which handicap the team plays, if any, which challenges it has won, and whether the player may
- * choose for it.
+ * its challenge, if the player is in that team, the team plays none yet and hasn't won it. {@link #ASK} and
+ * {@link #TAKE_BACK} ask to stop the challenge it plays, and take the ask back, once a stop is offered ({@link Stops}). The
+ * client is sent which handicap the team plays, if any, which challenges it has won, whether the player may choose for
+ * it, whether a stop is offered and the player asks for it, and which members online have asked and which are left
+ * ({@link Asks}).
  */
 public final class LabMenu extends AbstractContainerMenu {
 
+    /** The button that asks to stop the challenge played, after one per handicap. */
+    public static final int ASK = Handicap.values().length;
+    /** The button that takes back the player's ask to stop it. */
+    public static final int TAKE_BACK = ASK + 1;
     /** What {@link #chosen} holds while the team plays no challenge. */
     private static final int NONE = -1;
 
@@ -35,6 +52,12 @@ public final class LabMenu extends AbstractContainerMenu {
     private final DataSlot member;
     /** The challenges the team has won, a bit per handicap's ordinal. */
     private final DataSlot won;
+    private final DataSlot stopOffered;
+    private final DataSlot asked;
+    /** The server's player, who is sent {@link Asks}; null on the client or for a game test's mock player. */
+    private final ServerPlayer viewer;
+    /** The asks the client was last sent, or holds. */
+    private Asks asks = Asks.NONE;
 
     /** The client's menu, whose slots the sync fills. */
     public LabMenu(int containerId, Inventory inventory) {
@@ -43,6 +66,9 @@ public final class LabMenu extends AbstractContainerMenu {
         this.chosen = addDataSlot(DataSlot.standalone());
         this.member = addDataSlot(DataSlot.standalone());
         this.won = addDataSlot(DataSlot.standalone());
+        this.stopOffered = addDataSlot(DataSlot.standalone());
+        this.asked = addDataSlot(DataSlot.standalone());
+        this.viewer = null;
         chosen.set(NONE);
     }
 
@@ -78,6 +104,27 @@ public final class LabMenu extends AbstractContainerMenu {
             public void set(int value) {
             }
         });
+        this.stopOffered = addDataSlot(new DataSlot() {
+            @Override
+            public int get() {
+                return Stops.offered(level.getServer(), team) ? 1 : 0;
+            }
+
+            @Override
+            public void set(int value) {
+            }
+        });
+        this.asked = addDataSlot(new DataSlot() {
+            @Override
+            public int get() {
+                return Stops.asked(team, inventory.player) ? 1 : 0;
+            }
+
+            @Override
+            public void set(int value) {
+            }
+        });
+        this.viewer = inventory.player instanceof ServerPlayer server ? server : null;
     }
 
     /** The handicap whose challenge the lab's team plays, if any. */
@@ -100,8 +147,53 @@ public final class LabMenu extends AbstractContainerMenu {
         return isMember() && chosen().isEmpty() && !won(handicap);
     }
 
+    /** Whether the lab's team may stop the challenge it plays, which only once it has reset. */
+    public boolean stopOffered() {
+        return stopOffered.get() == 1;
+    }
+
+    /** Whether the player asks to stop the challenge the lab's team plays. */
+    public boolean asked() {
+        return asked.get() == 1;
+    }
+
+    /** Whether the player may ask to stop the challenge played, or take their ask back. */
+    public boolean canAsk() {
+        return isMember() && stopOffered();
+    }
+
+    /** Which of the team's members online have asked to stop its challenge, and which are left, as the client was last sent. */
+    public Asks asks() {
+        return asks;
+    }
+
+    /** Keeps the asks the server sent, on the client. */
+    public void receive(Asks received) {
+        asks = received;
+    }
+
+    @Override
+    public void broadcastChanges() {
+        super.broadcastChanges();
+        if (viewer == null || viewer.connection == null) {
+            return;
+        }
+        access.execute((level, pos) -> {
+            Asks now = Asks.of(level.getServer(), Teams.at((ServerLevel) level, pos), containerId);
+            if (!now.equals(asks)) {
+                asks = now;
+                PacketDistributor.sendToPlayer(viewer, now);
+            }
+        });
+    }
+
     @Override
     public boolean clickMenuButton(Player player, int id) {
+        if (id == ASK || id == TAKE_BACK) {
+            return access.evaluate((level, pos) -> level instanceof ServerLevel server && (id == ASK
+                    ? Stops.ask(server.getServer(), Teams.at(server, pos), player)
+                    : Stops.takeBack(server.getServer(), Teams.at(server, pos), player)), false);
+        }
         Optional<Handicap> handicap = Handicap.byOrdinal(id).filter(this::canChoose);
         return handicap.isPresent() && access.evaluate((level, pos) -> level instanceof ServerLevel server
                 && Challenges.begin(server.getServer(), Teams.at(server, pos), handicap.get()), false);
@@ -115,5 +207,47 @@ public final class LabMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(access, player, Lab.BLOCK.get());
+    }
+
+    /**
+     * What a lab's menu sends its client of the asks to stop its team's challenge, since a data slot holds no names: the
+     * names of the members online who have asked, and of those left.
+     */
+    public record Asks(int containerId, List<String> asked, List<String> left) implements CustomPacketPayload {
+
+        public static final Type<Asks> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "lab_asks"));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, Asks> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.VAR_INT, Asks::containerId,
+                ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), Asks::asked,
+                ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), Asks::left,
+                Asks::new);
+
+        /** No asks, as a lab's client starts with. */
+        static final Asks NONE = new Asks(-1, List.of(), List.of());
+
+        public Asks {
+            asked = List.copyOf(asked);
+            left = List.copyOf(left);
+        }
+
+        static Asks of(MinecraftServer server, UUID team, int containerId) {
+            var online = Teams.online(server, team);
+            return new Asks(containerId,
+                    online.stream().filter(member -> Stops.asked(team, member)).map(member -> member.getName().getString()).sorted().toList(),
+                    online.stream().filter(member -> !Stops.asked(team, member)).map(member -> member.getName().getString()).sorted().toList());
+        }
+
+        /** Gives the lab's menu the client has open these asks. */
+        public static void receive(Asks asks, Player player) {
+            if (player.containerMenu instanceof LabMenu menu && menu.containerId == asks.containerId()) {
+                menu.receive(asks);
+            }
+        }
+
+        @Override
+        public Type<Asks> type() {
+            return TYPE;
+        }
     }
 }

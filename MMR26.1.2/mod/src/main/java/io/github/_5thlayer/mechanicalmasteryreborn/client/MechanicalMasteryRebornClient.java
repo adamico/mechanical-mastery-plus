@@ -10,6 +10,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
+import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingTable;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import net.minecraft.ChatFormatting;
@@ -44,6 +45,8 @@ public final class MechanicalMasteryRebornClient {
                 (table, context) -> RecyclingTable.receive(table)));
         modBus.addListener((RegisterClientPayloadHandlersEvent event) -> event.register(ChainMachines.Table.TYPE,
                 (table, context) -> ChainMachines.Table.receive(table)));
+        modBus.addListener((RegisterClientPayloadHandlersEvent event) -> event.register(LabMenu.Asks.TYPE,
+                (asks, context) -> LabMenu.Asks.receive(asks, context.player())));
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::nameChain);
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::feedsNow);
         NeoForge.EVENT_BUS.addListener(InflationBarOverlay::draw);

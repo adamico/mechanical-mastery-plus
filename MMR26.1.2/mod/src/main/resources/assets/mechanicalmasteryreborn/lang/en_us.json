@@ -80,7 +80,7 @@
   "mechanicalmasteryreborn.cod.woke": "%s has woken. It now makes Advanced Mechanical Essence every %s seconds, without stopping, and pushes it into anything beside it.",
   "mechanicalmasteryreborn.command.cod.awake": "awake",
   "mechanicalmasteryreborn.command.cod.challenge": "This island's team plays the %s challenge.",
-  "mechanicalmasteryreborn.command.cod.challenge.ended": "This island's team no longer plays a challenge.",
+  "mechanicalmasteryreborn.command.cod.challenge.ended": "This island's team no longer plays a challenge, and its chain is locked again.",
   "mechanicalmasteryreborn.command.cod.challenge.playing": "This island's team already plays the %s challenge: end it first.",
   "mechanicalmasteryreborn.command.cod.challenge.started": "This island's team now plays the %s challenge.",
   "mechanicalmasteryreborn.command.cod.challenge.unknown": "No handicap %s: it is protection, life, energy or money.",
@@ -137,5 +137,17 @@
   "gateways.mechanicalmasteryreborn.home": "Home Gate",
   "mechanicalmasteryreborn.home": "Home Gate",
   "mechanicalmasteryreborn.assault": "Assault Gate",
-  "mechanicalmasteryreborn.assault.explosions_stay_on": "Explosions stay on while the Assault runs"
+  "mechanicalmasteryreborn.assault.explosions_stay_on": "Explosions stay on while the Assault runs",
+  "mechanicalmasteryreborn.challenge.stop.asked": "%s asks to stop the %s challenge: %s of %s online have asked. It stops once every one has.",
+  "mechanicalmasteryreborn.challenge.stop.taken_back": "%s no longer asks to stop the %s challenge.",
+  "mechanicalmasteryreborn.challenge.stopped": "Your team stopped the %s challenge. Its chain is locked again until the challenge is started anew; your items stay yours.",
+  "mechanicalmasteryreborn.challenge.stopped.title": "%s Stopped",
+  "mechanicalmasteryreborn.lab.stop": "Stop the %s",
+  "mechanicalmasteryreborn.lab.stop.none": "Once a challenge your team plays has reset, it can be stopped here.",
+  "mechanicalmasteryreborn.lab.stop.not_yet": "Offered once this challenge has reset.",
+  "mechanicalmasteryreborn.lab.stop.ask": "Ask to stop",
+  "mechanicalmasteryreborn.lab.stop.take_back": "Take back",
+  "mechanicalmasteryreborn.lab.stop.asks": "Asked: %s. Left: %s.",
+  "mechanicalmasteryreborn.lab.stop.nobody": "nobody",
+  "mechanicalmasteryreborn.lab.stop.tooltip": "The challenge stops once every member online has asked. A stop locks its chain again until it is started anew; your team keeps every item."
 }

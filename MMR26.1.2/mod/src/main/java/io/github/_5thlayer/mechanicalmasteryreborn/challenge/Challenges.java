@@ -22,7 +22,8 @@ import net.minecraft.sounds.SoundSource;
 import org.slf4j.Logger;
 
 /**
- * Starting a team's challenge, by the handicap it chose at the lab, and ending, winning or resetting it. Each of the team's
+ * Starting a team's challenge, by the handicap it chose at the lab, and stopping, winning or resetting it; a stop locks
+ * its chain again (ADR 0013), where a win or a reset keeps it. Each of the team's
  * players online hears vanilla's challenge fanfare when it starts, sees the challenge's name as a title with its cost
  * below, and reads both in chat, and is given the challenge's chain ({@link Chains}). The money handicap acts on the
  * team's Account as it starts, resets and ends, and the protection handicap's {@link Assault} is sent as it starts and
@@ -76,8 +77,55 @@ public final class Challenges {
         return true;
     }
 
-    /** Ends the challenge {@code team} plays, as {@link TeamState#endChallenge} does, giving back what its handicap set aside, and says whether it played one. */
+    /**
+     * Stops the challenge {@code team} plays at the lab, as {@link #end} does, and tells the team's players online with a
+     * title, as a start does. Says whether it played one.
+     */
+    public static boolean stop(MinecraftServer server, UUID team) {
+        var played = TeamState.get(server).handicap(team);
+        if (played.isEmpty() || !end(server, team)) {
+            return false;
+        }
+        Handicap handicap = played.get();
+        Component message = Component.translatable("mechanicalmasteryreborn.challenge.stopped", name(handicap).withStyle(ChatFormatting.GOLD))
+                .withStyle(ChatFormatting.GRAY);
+        Component title = Component.translatable("mechanicalmasteryreborn.challenge.stopped.title", title(handicap)).withStyle(ChatFormatting.GOLD);
+        int told = 0;
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            if (Teams.of(player).equals(team)) {
+                told++;
+                player.sendSystemMessage(message);
+                player.connection.send(new ClientboundSetSubtitleTextPacket(Component.empty()));
+                player.connection.send(new ClientboundSetTitleTextPacket(title));
+            }
+        }
+        LOGGER.info("Team {} stopped the {} challenge; told {} of its players online", team, handicap.id(), told);
+        return true;
+    }
+
+    /**
+     * Ends the challenge {@code team} plays, as a stop does but with no vote and no reset needed, as an op's
+     * {@code /cod challenge end} does: {@link #finish} it, and lock its chain again (ADR 0013), its stage taken from the
+     * team's players online now and from the rest as they log in ({@link Chains#unlock}). Says whether it played one.
+     */
     public static boolean end(MinecraftServer server, UUID team) {
+        var played = TeamState.get(server).handicap(team);
+        if (played.isEmpty() || !finish(server, team)) {
+            return false;
+        }
+        TeamState.get(server).lockChain(team, played.get());
+        for (var player : Teams.online(server, team)) {
+            Chains.unlock(server, player);
+        }
+        return true;
+    }
+
+    /**
+     * Ends the challenge {@code team} plays, as {@link TeamState#endChallenge} does, giving back what its handicap set aside
+     * and dropping every ask to stop it, and says whether it played one. Its chain stays as it is: a win keeps it.
+     */
+    private static boolean finish(MinecraftServer server, UUID team) {
+        Stops.clear(team);
         TeamState state = TeamState.get(server);
         boolean money = state.plays(team, Handicap.MONEY);
         boolean protection = state.plays(team, Handicap.PROTECTION);
@@ -99,7 +147,7 @@ public final class Challenges {
 
     /**
      * Wins the challenge {@code team} plays: blocks the tier its C.O.D. makes and notes the win ({@link TeamState#blockTier}),
-     * ends the challenge as {@link #end} does, and tells the team's players online with a title and a sound, giving them the
+     * ends the challenge as {@link #finish} does, its chain kept, and tells the team's players online with a title and a sound, giving them the
      * last chapter's stage on the fourth ({@link Chains#unlock}). Says whether it played one.
      */
     public static boolean win(MinecraftServer server, UUID team) {
@@ -110,7 +158,7 @@ public final class Challenges {
         }
         Handicap handicap = played.get();
         state.blockTier(team, handicap);
-        end(server, team);
+        finish(server, team);
         if (handicap == Handicap.PROTECTION) {
             HomeGates.grant(server, team);
         }
@@ -135,12 +183,16 @@ public final class Challenges {
         return true;
     }
 
-    /** Resets the challenge {@code team} plays, as {@link TeamState#resetChallenge} does at the current game time, and its handicap with it, and says whether it played one. */
+    /**
+     * Resets the challenge {@code team} plays, as {@link TeamState#resetChallenge} does at the current game time, and its
+     * handicap with it, drops every ask to stop it, and says whether it played one.
+     */
     public static boolean reset(MinecraftServer server, UUID team) {
         TeamState state = TeamState.get(server);
         if (!state.resetChallenge(team, server.overworld().getGameTime())) {
             return false;
         }
+        Stops.clear(team);
         if (state.plays(team, Handicap.MONEY)) {
             MoneyHandicap.reset(server, team);
         }

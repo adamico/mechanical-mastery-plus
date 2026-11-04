@@ -44,7 +44,7 @@ final class ChainMachineTests {
         tests.test("chain_recipes_are_read_from_the_stage_files", 1, ChainMachineTests::recipesFromTheStageFiles);
         tests.test("chain_machines_of_every_chain_idle_until_its_challenge_starts", 1, ChainMachineTests::everyChainIdleUntilStarted);
         tests.test("chain_machine_locked_until_its_challenge_starts", 1, ChainMachineTests::lockedUntilStarted);
-        tests.test("chain_machine_stays_unlocked_after_a_reset_and_an_end", 1, ChainMachineTests::staysUnlocked);
+        tests.test("chain_machine_stays_unlocked_after_a_reset", 1, ChainMachineTests::staysUnlocked);
         tests.test("chain_machine_stays_unlocked_after_a_win", 1, ChainMachineTests::staysUnlockedAfterAWin);
         tests.test("chain_machine_of_a_team_that_started_works_beside_one_that_hasnt", 1, ChainMachineTests::perTeam);
         tests.test("chain_machine_lock_leaves_other_blocks_as_they_were", 1, ChainMachineTests::leavesOtherBlocks);
@@ -90,11 +90,11 @@ final class ChainMachineTests {
         helper.assertValueEqual(checked, 3, "the machines the game-test pack's tags hold");
         for (Handicap handicap : Handicap.values()) {
             Challenges.begin(server, team, handicap);
-            Challenges.end(server, team);
             for (var item : BuiltInRegistries.ITEM.getTagOrEmpty(ChainMachines.tag(handicap))) {
                 helper.setBlock(AT, ((BlockItem) item.value()).getBlock());
                 helper.assertValueEqual(lockedAt(helper, AT), Optional.empty(), item.getRegisteredName() + "'s lock once its challenge started");
             }
+            Challenges.win(server, team);
         }
         helper.succeed();
     }
@@ -128,8 +128,7 @@ final class ChainMachineTests {
         helper.setBlock(AT, MACHINE);
         Challenges.begin(server, team, Handicap.ENERGY);
         Challenges.reset(server, team);
-        Challenges.end(server, team);
-        helper.assertValueEqual(lockedAt(helper, AT), Optional.empty(), "the machine's lock after a reset and the challenge's end");
+        helper.assertValueEqual(lockedAt(helper, AT), Optional.empty(), "the machine's lock after a reset");
         helper.succeed();
     }
 

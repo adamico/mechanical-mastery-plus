@@ -25,7 +25,9 @@ import net.minecraft.world.entity.player.Inventory;
 
 /**
  * The lab: each handicap with what it costs, and a button to choose it, in the suite's stand-in machine look. Only
- * the lab's team can choose, one at a time; the one it plays is shown as played, and the ones it has won as won.
+ * the lab's team can choose, one at a time; the one it plays is shown as played, and the ones it has won as won. Below
+ * them a row stops the challenge played, once it has reset: a member asks for the stop or takes their ask back, and the
+ * row names who online has asked and who is left (ADR 0013).
  */
 final class LabScreen extends AbstractContainerScreen<LabMenu> {
 
@@ -46,9 +48,16 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
     private static final Component WON = Component.translatable("mechanicalmasteryreborn.lab.won");
     private static final Component NOT_MEMBER = Component.translatable("mechanicalmasteryreborn.lab.not_member");
     private static final Component NOT_MEMBER_TOOLTIP = Component.translatable("mechanicalmasteryreborn.lab.not_member.tooltip");
+    private static final Component STOP_NONE = Component.translatable("mechanicalmasteryreborn.lab.stop.none");
+    private static final Component STOP_NOT_YET = Component.translatable("mechanicalmasteryreborn.lab.stop.not_yet");
+    private static final Component ASK = Component.translatable("mechanicalmasteryreborn.lab.stop.ask");
+    private static final Component TAKE_BACK = Component.translatable("mechanicalmasteryreborn.lab.stop.take_back");
+    private static final Component STOP_TOOLTIP = Component.translatable("mechanicalmasteryreborn.lab.stop.tooltip");
+    private static final Component NOBODY = Component.translatable("mechanicalmasteryreborn.lab.stop.nobody");
 
     private final Ghosts ghosts = new Ghosts(() -> leftPos, () -> topPos);
     private final List<Button> buttons = new ArrayList<>();
+    private Button stop;
     /** Where the rows start, below the intro however many lines it wraps to. */
     private final int rowsTop;
 
@@ -61,7 +70,8 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
     }
 
     private LabScreen(LabMenu menu, Inventory inventory, Component title, int width, int rowsTop) {
-        super(menu, inventory, title, width, rowsTop + (Handicap.values().length - 1) * ROW + BUTTON_HEIGHT + MachineDraw.MARGIN);
+        // A row per handicap, and the stop's row below them.
+        super(menu, inventory, title, width, rowsTop + Handicap.values().length * ROW + BUTTON_HEIGHT + MachineDraw.MARGIN);
         this.rowsTop = rowsTop;
     }
 
@@ -91,6 +101,11 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
                     .bounds(leftPos + imageWidth - MachineDraw.MARGIN - BUTTON_WIDTH, topPos + rowTop(handicap), BUTTON_WIDTH, BUTTON_HEIGHT)
                     .build()));
         }
+        stop = addRenderableWidget(Button.builder(ASK, button -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId,
+                        menu.asked() ? LabMenu.TAKE_BACK : LabMenu.ASK))
+                .bounds(leftPos + imageWidth - MachineDraw.MARGIN - BUTTON_WIDTH, topPos + stopTop(), BUTTON_WIDTH, BUTTON_HEIGHT)
+                .tooltip(Tooltip.create(STOP_TOOLTIP))
+                .build());
         updateButtons();
     }
 
@@ -110,6 +125,9 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
             button.setMessage(chosen.equals(Optional.of(handicap)) ? PLAYED : won ? WON : notMember ? NOT_MEMBER : CHOOSE);
             button.setTooltip(notMember ? Tooltip.create(NOT_MEMBER_TOOLTIP) : null);
         }
+        stop.visible = chosen.isPresent();
+        stop.active = menu.canAsk();
+        stop.setMessage(menu.asked() ? TAKE_BACK : ASK);
     }
 
     @Override
@@ -130,6 +148,27 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
                     MachineDraw.MARGIN, y, MachineDraw.TEXT, false);
             graphics.text(font, MachineDraw.fitted(font, Challenges.cost(handicap), nameWidth), MachineDraw.MARGIN, y + COST_Y, MachineDraw.TEXT, false);
         }
+        int y = stopTop();
+        Optional<Handicap> chosen = menu.chosen();
+        if (chosen.isEmpty()) {
+            graphics.text(font, MachineDraw.fitted(font, STOP_NONE, textWidth), MachineDraw.MARGIN, y, MachineDraw.TEXT, false);
+            return;
+        }
+        Component name = Component.translatable("mechanicalmasteryreborn.lab.stop", Challenges.title(chosen.get())).withStyle(ChatFormatting.BOLD);
+        graphics.text(font, MachineDraw.fitted(font, name, nameWidth), MachineDraw.MARGIN, y, MachineDraw.TEXT, false);
+        Component line = menu.stopOffered()
+                ? Component.translatable("mechanicalmasteryreborn.lab.stop.asks", names(menu.asks().asked()), names(menu.asks().left()))
+                : STOP_NOT_YET;
+        graphics.text(font, MachineDraw.fitted(font, line, nameWidth), MachineDraw.MARGIN, y + COST_Y, MachineDraw.TEXT, false);
+    }
+
+    private static Component names(List<String> names) {
+        return names.isEmpty() ? NOBODY : Component.literal(String.join(", ", names));
+    }
+
+    /** Where the stop's row starts, below the handicaps'. */
+    private int stopTop() {
+        return rowsTop + Handicap.values().length * ROW;
     }
 
     /** Where {@code handicap}'s row starts, below the intro. */

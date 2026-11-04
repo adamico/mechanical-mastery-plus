@@ -11,12 +11,13 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-/** The lab's block, item and menu. */
+/** The lab's block, item and menu, and what the menu sends its client of the asks to stop a challenge. */
 public final class Lab {
 
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MechanicalMasteryReborn.MOD_ID);
@@ -37,5 +38,7 @@ public final class Lab {
         BLOCKS.register(modBus);
         ITEMS.register(modBus);
         MENUS.register(modBus);
+        modBus.addListener((RegisterPayloadHandlersEvent event) -> event.registrar("1")
+                .playToClient(LabMenu.Asks.TYPE, LabMenu.Asks.STREAM_CODEC));
     }
 }

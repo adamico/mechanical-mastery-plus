@@ -15,21 +15,32 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 /**
  * A challenge's chain, locked for a team until it starts the challenge and unlocked from then on, past a win or a
- * reset (ADR 0007). Each chain is a Chapters stage named after its handicap, such as {@code mechanicalmasteryreborn:energy},
+ * reset (ADR 0007), until a stop locks it again (ADR 0013). Each chain is a Chapters stage named after its handicap, such as {@code mechanicalmasteryreborn:energy},
  * and the pack's stage files lock the chain's own recipes behind it; its machines' work is locked by {@link ChainMachines}.
  * A player is given the stage of every chain its team has unlocked as the challenge starts, each time it logs in and
- * as it joins or leaves an island, so a player who joins the team later has them too.
+ * as it joins or leaves an island, so a player who joins the team later has them too, and has the stage of every other
+ * chain taken, so a stop reaches a member who was offline at the time.
  */
 public final class Chains {
 
-    /** How a player is given a stage. */
+    /** How a player is given a stage, and has it taken. */
     public interface Stages {
 
         /** Gives {@code player} the stage {@code stage}, a handicap's id or {@link LastChapter#STAGE}, if it hasn't it yet. */
         void grant(Player player, String stage);
+
+        /** Takes the stage {@code stage}, a handicap's id, from {@code player}, if it has it. */
+        void revoke(Player player, String stage);
     }
 
-    private static final Stages NONE = (player, stage) -> {
+    private static final Stages NONE = new Stages() {
+        @Override
+        public void grant(Player player, String stage) {
+        }
+
+        @Override
+        public void revoke(Player player, String stage) {
+        }
     };
 
     private static volatile Stages stages;
@@ -43,8 +54,8 @@ public final class Chains {
     }
 
     /**
-     * Gives {@code player} the stage of every chain its team has unlocked, and the last chapter's once it has won all
-     * four (ADR 0012), and tells its client which chains they are.
+     * Gives {@code player} the stage of every chain its team has unlocked and takes the stage of every other, gives it the
+     * last chapter's once its team has won all four (ADR 0012), and tells its client which chains are unlocked.
      */
     public static void unlock(MinecraftServer server, Player player) {
         if (server == null || player == null) {
@@ -55,6 +66,8 @@ public final class Chains {
         for (Handicap handicap : Handicap.values()) {
             if (state.unlocked(team, handicap)) {
                 stages().grant(player, handicap.id());
+            } else {
+                stages().revoke(player, handicap.id());
             }
         }
         if (LastChapter.reached(server, team)) {

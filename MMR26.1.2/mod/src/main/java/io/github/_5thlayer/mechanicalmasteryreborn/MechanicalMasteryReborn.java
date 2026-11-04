@@ -13,6 +13,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastChapter;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ObsidianFlakes;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Stops;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbchunks.FtbChunksExplosions;
@@ -51,6 +52,7 @@ public final class MechanicalMasteryReborn {
         Assault.register(modBus);
         LifeHandicap.register(modBus);
         Chains.register();
+        Stops.register();
         LastChapter.register();
         ChainMachines.register(modBus);
         InflationCap.register();
