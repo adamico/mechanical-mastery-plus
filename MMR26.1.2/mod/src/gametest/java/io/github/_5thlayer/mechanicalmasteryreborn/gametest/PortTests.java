@@ -45,6 +45,7 @@ final class PortTests {
     private static final BlockPos HOPPER = PORT.above();
     private static final BlockPos COD = new BlockPos(2, 2, 2);
     private static final BlockPos LAB = new BlockPos(6, 2, 2);
+    private static final BlockPos GENERATOR_AT = new BlockPos(2, 2, 6);
     /** Another team's island, in a corner of the test's. */
     private static final BlockPos OTHER_ISLAND = new BlockPos(7, 2, 7);
     /** Ample time for a hopper to push a few items, 8 ticks each. */
@@ -60,6 +61,8 @@ final class PortTests {
         tests.test("port_short_of_the_quota_blocks_nothing", 1, PortTests::shortOfTheQuota);
         tests.test("port_hopper_keeps_what_is_past_the_quota", HOPPER_TICKS + 10, PortTests::hopperKeepsTheRest);
         tests.test("port_quota_wins_the_challenge_for_its_team_only", 1, PortTests::quotaWins);
+        tests.test("port_galvanic_quota_gives_the_team_s_generators_fe_again", 1, PortTests::galvanicQuotaGivesFeAgain);
+        tests.test("port_energy_is_won_against_a_tier_below_advanced", 1, PortTests::wonBelowAdvanced);
         tests.test("port_after_a_win_cod_makes_the_tier_below_at_its_waking_pace", 3, PortTests::afterAWin);
         tests.test("port_reset_clears_the_count_and_a_load_keeps_it", 1, PortTests::resetClearsLoadKeeps);
         tests.test("port_lab_refuses_a_won_challenge", 1, PortTests::labRefusesAWin);
@@ -148,6 +151,51 @@ final class PortTests {
         helper.succeed();
     }
 
+    /**
+     * The energy handicap's cost goes with the challenge, for the team that won it only: its generator, stopped while
+     * it plays, gives FE again, and another team's, still playing, stays stopped.
+     */
+    private static void galvanicQuotaGivesFeAgain(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        UUID other = TestTeams.claim(helper, OTHER_ISLAND, OTHER_ISLAND);
+        place(helper, Handicap.ENERGY);
+        helper.setBlock(GENERATOR_AT, GeneratorTests.GENERATOR);
+        helper.setBlock(OTHER_ISLAND, GeneratorTests.GENERATOR);
+        start(helper, team);
+        helper.assertTrue(Challenges.begin(server(helper), other, Handicap.ENERGY), "the other team's challenge didn't start");
+        helper.assertValueEqual(GeneratorTests.draw(helper, GENERATOR_AT), 0, "FE drawn while the team plays energy");
+        use(helper, member(helper, team), Essence.GALVANIC, ServerConfig.quota(Essence.ADVANCED));
+        helper.assertTrue(state(helper).won(team, Handicap.ENERGY), "the quota didn't win the challenge");
+        helper.assertValueEqual(GeneratorTests.draw(helper, GENERATOR_AT), GeneratorTests.DRAW, "FE drawn after the win");
+        helper.assertValueEqual(GeneratorTests.draw(helper, OTHER_ISLAND), 0, "FE drawn from the other team's generator");
+        helper.succeed();
+    }
+
+    /**
+     * The energy challenge isn't tied to Advanced: against Improved, started at the lab, it takes Improved's quota,
+     * and a win drops C.O.D. to Regular and ends the handicap.
+     */
+    private static void wonBelowAdvanced(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        state(helper).setTier(team, Optional.of(Essence.IMPROVED));
+        place(helper, Handicap.ENERGY);
+        helper.setBlock(LAB, Lab.BLOCK.get());
+        var player = member(helper, team);
+        var menu = openLab(helper, player);
+        helper.assertTrue(menu.clickMenuButton(player, Handicap.ENERGY.ordinal()), "the lab refused energy against Improved");
+        int quota = ServerConfig.quota(Essence.IMPROVED);
+        helper.assertTrue(quota > ServerConfig.quota(Essence.ADVANCED), "Improved's quota isn't above Advanced's");
+        use(helper, player, Essence.GALVANIC, quota - 1);
+        helper.assertTrue(state(helper).plays(team, Handicap.ENERGY), "the challenge ended short of Improved's quota");
+        helper.assertValueEqual(state(helper).tier(team), Optional.of(Essence.IMPROVED), "the tier short of the quota");
+        helper.assertValueEqual(use(helper, player, Essence.GALVANIC, 2), 1, "the essence a hand keeps past the quota");
+        helper.assertTrue(state(helper).won(team, Handicap.ENERGY), "the quota didn't win the challenge");
+        helper.assertValueEqual(state(helper).tier(team), Optional.of(Essence.REGULAR), "the tier after the win");
+        helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the handicap after the win");
+        helper.assertTrue(state(helper).inflation(team).isEmpty(), "Inflation goes on after the win");
+        helper.succeed();
+    }
+
     /** Won, an awake C.O.D. makes Improved at its waking pace, past a reset and a load. */
     private static void afterAWin(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
@@ -193,8 +241,7 @@ final class PortTests {
         var player = member(helper, team);
         use(helper, player, Essence.GALVANIC, ServerConfig.quota(Essence.ADVANCED));
         helper.setBlock(LAB, Lab.BLOCK.get());
-        var menu = (LabMenu) helper.getBlockState(LAB).getMenuProvider(helper.getLevel(), helper.absolutePos(LAB))
-                .createMenu(0, player.getInventory(), player);
+        var menu = openLab(helper, player);
         helper.assertTrue(menu.won(Handicap.ENERGY), "the lab doesn't show the challenge won");
         helper.assertFalse(menu.canChoose(Handicap.ENERGY), "the lab offers a won challenge");
         helper.assertFalse(menu.clickMenuButton(player, Handicap.ENERGY.ordinal()), "the lab started a won challenge");
@@ -255,6 +302,11 @@ final class PortTests {
         helper.getBlockState(PORT).useItemOn(player.getMainHandItem(), helper.getLevel(), player, InteractionHand.MAIN_HAND,
                 new BlockHitResult(Vec3.atCenterOf(pos), Direction.UP, pos, false));
         return player.getMainHandItem().getCount();
+    }
+
+    private static LabMenu openLab(GameTestHelper helper, Player player) {
+        return (LabMenu) helper.getBlockState(LAB).getMenuProvider(helper.getLevel(), helper.absolutePos(LAB))
+                .createMenu(0, player.getInventory(), player);
     }
 
     private static void hopper(GameTestHelper helper, Essence essence, int count) {
