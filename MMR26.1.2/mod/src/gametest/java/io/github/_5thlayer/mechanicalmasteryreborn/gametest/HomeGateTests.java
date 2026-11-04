@@ -50,7 +50,7 @@ final class HomeGateTests {
         UUID team = TestTeams.claim(helper);
         var server = helper.getLevel().getServer();
         Challenges.begin(server, team, Handicap.PROTECTION);
-        Challenges.end(server, team);
+        Challenges.win(server, team);
         helper.assertTrue(HomeGates.refusal(player(helper, team, HOME), HomeGates.GATE) == null, "a home gate was refused at home after the win");
         helper.succeed();
     }

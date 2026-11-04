@@ -28,8 +28,9 @@ import net.minecraft.world.level.saveddata.SavedDataType;
  * Each team's state, keyed on its id ({@link Teams}): whether its C.O.D. is awake, how much essence an awake
  * C.O.D. has made for it, spawned or not, the handicap it chose at the lab, which says which challenge it plays, and
  * its {@link Inflation} while it plays one, with whether it was warned that Inflation nears its cap, and the money set
- * aside from its Account while it plays the money challenge, the challenges it has ever started, the essence its Port has taken toward the quota, and the tiers it has
- * blocked and the challenges it has won, which no reset touches. Its members share
+ * aside from its Account while it plays the money challenge, the challenges it has ever started and the chains it has
+ * unlocked, which a stop takes back, the resets of the challenge it plays since it last started, the essence its Port has
+ * taken toward the quota, and the tiers it has blocked and the challenges it has won, which no reset touches. Its members share
  * it, and a player who joins a team shares it from then on. Saved with the world, in the overworld's data.
  */
 public final class TeamState extends SavedData {
@@ -59,7 +60,9 @@ public final class TeamState extends SavedData {
                 HANDICAPS_CODEC.optionalFieldOf("unlocked", Set.of()).forGetter(entry -> entry.unlocked),
                 TIERS_CODEC.optionalFieldOf("blocked", Set.of()).forGetter(entry -> entry.blocked),
                 HANDICAPS_CODEC.optionalFieldOf("won", Set.of()).forGetter(entry -> entry.won),
-                Codec.LONG.optionalFieldOf("delivered", 0L).forGetter(entry -> entry.delivered))
+                Codec.LONG.optionalFieldOf("delivered", 0L).forGetter(entry -> entry.delivered),
+                HANDICAPS_CODEC.optionalFieldOf("started", Set.of()).forGetter(entry -> entry.started),
+                Codec.INT.optionalFieldOf("resets", 0).forGetter(entry -> entry.resets))
                 .apply(instance, Entry::new));
 
         boolean awake;
@@ -71,8 +74,12 @@ public final class TeamState extends SavedData {
         boolean warned;
         /** The money set aside from the team's Account while it plays the money challenge, in AdminShop's cents. */
         long setAside;
-        /** The challenges the team has started, whose chains stay unlocked for it from then on (ADR 0007). */
+        /** The challenges whose chains the team has unlocked by starting them, until a stop locks one again (ADRs 0007, 0013). */
         Set<Handicap> unlocked;
+        /** The challenges the team has ever started, which no stop forgets. */
+        Set<Handicap> started;
+        /** How often the challenge the team plays has reset since it last started; only while it plays one. */
+        int resets;
         /** The tiers the team has blocked, for good: C.O.D. makes the highest of the rest. */
         Set<Essence> blocked;
         /** The challenges the team has won, for good. */
@@ -81,7 +88,7 @@ public final class TeamState extends SavedData {
         long delivered;
 
         Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation, boolean warned, long setAside,
-                Set<Handicap> unlocked, Set<Essence> blocked, Set<Handicap> won, long delivered) {
+                Set<Handicap> unlocked, Set<Essence> blocked, Set<Handicap> won, long delivered, Set<Handicap> started, int resets) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
@@ -94,6 +101,10 @@ public final class TeamState extends SavedData {
             this.blocked = tiers(blocked);
             this.won = handicaps(won);
             this.delivered = handicap.isPresent() ? delivered : 0;
+            // Saved before a stop could lock a chain again, every chain unlocked was a challenge started.
+            this.started = handicaps(started);
+            this.started.addAll(this.unlocked);
+            this.resets = handicap.isPresent() ? resets : 0;
         }
     }
 
@@ -187,6 +198,8 @@ public final class TeamState extends SavedData {
         entry.handicap = Optional.of(handicap);
         entry.inflation = Optional.of(Inflation.startingAt(gameTime));
         entry.unlocked.add(handicap);
+        entry.started.add(handicap);
+        entry.resets = 0;
         setDirty();
         return true;
     }
@@ -201,14 +214,31 @@ public final class TeamState extends SavedData {
         entry.inflation = Optional.empty();
         entry.warned = false;
         entry.delivered = 0;
+        entry.resets = 0;
         setDirty();
         return true;
     }
 
+    /** Locks {@code handicap}'s chain again for {@code team}, as a stop does (ADR 0013), and says whether it was unlocked. */
+    public boolean lockChain(UUID team, Handicap handicap) {
+        Entry entry = teams.get(team);
+        if (entry == null || !entry.unlocked.remove(handicap)) {
+            return false;
+        }
+        setDirty();
+        return true;
+    }
+
+    /** How often the challenge {@code team} plays has reset since it last started, which a stop waits for (ADR 0013). */
+    public int resets(UUID team) {
+        Entry entry = teams.get(team);
+        return entry == null ? 0 : entry.resets;
+    }
+
     /**
      * Resets the challenge {@code team} plays at {@code gameTime}, as though it had just begun: its Inflation from
-     * nothing, and so C.O.D. back to its waking pace, no warning given and nothing delivered to its Port. Its handicap stays. Says whether it played
-     * one.
+     * nothing, and so C.O.D. back to its waking pace, no warning given and nothing delivered to its Port, and counts the
+     * reset. Its handicap stays. Says whether it played one.
      */
     public boolean resetChallenge(UUID team, long gameTime) {
         Entry entry = teams.get(team);
@@ -218,6 +248,7 @@ public final class TeamState extends SavedData {
         entry.inflation = Optional.of(Inflation.startingAt(gameTime));
         entry.warned = false;
         entry.delivered = 0;
+        entry.resets++;
         setDirty();
         return true;
     }
@@ -297,10 +328,16 @@ public final class TeamState extends SavedData {
         return entry == null ? 0 : entry.setAside;
     }
 
-    /** Whether {@code team} has ever started {@code handicap}'s challenge, which keeps its chain unlocked (ADR 0007). */
+    /** Whether {@code team} has unlocked {@code handicap}'s chain, by starting its challenge and not stopping it since (ADRs 0007, 0013). */
     public boolean unlocked(UUID team, Handicap handicap) {
         Entry entry = teams.get(team);
         return entry != null && entry.unlocked.contains(handicap);
+    }
+
+    /** Whether {@code team} has ever started {@code handicap}'s challenge, stopped since or not. */
+    public boolean started(UUID team, Handicap handicap) {
+        Entry entry = teams.get(team);
+        return entry != null && entry.started.contains(handicap);
     }
 
     /** Puts {@code amount} more of {@code team}'s money aside. */
@@ -398,6 +435,6 @@ public final class TeamState extends SavedData {
 
     private Entry entry(UUID team) {
         return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false, 0, Set.of(), Set.of(),
-                Set.of(), 0));
+                Set.of(), 0, Set.of(), 0));
     }
 }

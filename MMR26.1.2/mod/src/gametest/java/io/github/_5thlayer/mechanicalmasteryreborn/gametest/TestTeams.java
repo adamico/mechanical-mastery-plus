@@ -3,21 +3,26 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 
 /**
  * Skyblock Builder's part, for the game tests: a test claims a team of its own, whose island is the test's
- * structure, or a part of it, and can put a player in it. A block on several islands is on the smallest.
+ * structure, or a part of it, and can put a player in it, and log a mock player in and out, since none is on the
+ * server's list. A block on several islands is on the smallest.
  * Anything else is the installed lookup's, so the tests that run together never share a team.
  */
 final class TestTeams implements Teams.Lookup {
@@ -25,6 +30,7 @@ final class TestTeams implements Teams.Lookup {
     private static final Map<AABB, UUID> ISLANDS = new ConcurrentHashMap<>();
     private static final Map<AABB, UUID> NEAREST = new ConcurrentHashMap<>();
     private static final Map<UUID, UUID> PLAYERS = new ConcurrentHashMap<>();
+    private static final Set<Player> ONLINE = ConcurrentHashMap.newKeySet();
 
     private final Teams.Lookup installed;
 
@@ -58,6 +64,16 @@ final class TestTeams implements Teams.Lookup {
         PLAYERS.put(player.getUUID(), team);
     }
 
+    /** Counts {@code player} online, as the server's list counts a player logged in. */
+    static void logIn(Player player) {
+        ONLINE.add(player);
+    }
+
+    /** Counts {@code player} offline again, as the server's list drops a player logged out. */
+    static void logOut(Player player) {
+        ONLINE.remove(player);
+    }
+
     @Override
     public UUID at(ServerLevel level, BlockPos pos) {
         UUID smallest = null;
@@ -84,6 +100,13 @@ final class TestTeams implements Teams.Lookup {
     /** The team of any of {@code areas} that holds {@code pos}. */
     private static Optional<UUID> containing(Map<AABB, UUID> areas, BlockPos pos) {
         return areas.entrySet().stream().filter(area -> area.getKey().contains(pos.getCenter())).map(Map.Entry::getValue).findFirst();
+    }
+
+    @Override
+    public Collection<? extends Player> online(MinecraftServer server) {
+        var online = new ArrayList<Player>(installed.online(server));
+        online.addAll(ONLINE);
+        return online;
     }
 
     @Override

@@ -57,9 +57,9 @@ public final class MoneyHandicap {
         setAside(server, team);
     }
 
-    /** Gives {@code team}'s Account {@link #PERMIT} again if it ever started the money challenge, since a new Account starts without it. */
+    /** Gives {@code team}'s Account {@link #PERMIT} again if it ever started the money challenge, stopped since or not (ADR 0013), since a new Account starts without it. */
     public static void regrant(MinecraftServer server, UUID team) {
-        if (TeamState.get(server).unlocked(team, Handicap.MONEY)) {
+        if (TeamState.get(server).started(team, Handicap.MONEY)) {
             Accounts.get().grant(server, team, PERMIT);
         }
     }

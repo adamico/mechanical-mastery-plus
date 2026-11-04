@@ -24,4 +24,12 @@ public final class ChaptersStages implements Chains.Stages {
             ChaptersAPI.addStage(server, id);
         }
     }
+
+    @Override
+    public void revoke(Player player, String stage) {
+        Identifier id = Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, stage);
+        if (player instanceof ServerPlayer server && ChaptersAPI.hasStage(server, id)) {
+            ChaptersAPI.removeStage(server, id);
+        }
+    }
 }

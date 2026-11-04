@@ -3,10 +3,13 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.record;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import io.github._5thlayer.mechanicalmasteryreborn.compat.skyblockbuilder.SkyblockBuilderTeams;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.fml.ModList;
@@ -37,6 +40,11 @@ public final class Teams {
         default boolean onIsland(ServerLevel level, BlockPos pos) {
             return !at(level, pos).equals(WORLD);
         }
+
+        /** Every player online, of any team: by default, the server's. */
+        default Collection<? extends Player> online(MinecraftServer server) {
+            return server.getPlayerList().getPlayers();
+        }
     }
 
     private static final Lookup ONE_TEAM = new Lookup() {
@@ -62,6 +70,11 @@ public final class Teams {
 
     public static UUID of(Player player) {
         return lookup().of(player);
+    }
+
+    /** {@code team}'s members online. */
+    public static List<Player> online(MinecraftServer server, UUID team) {
+        return lookup().online(server).stream().filter(player -> of(player).equals(team)).<Player>map(player -> player).toList();
     }
 
     /** Whether {@code pos} is on {@link #at}'s team's island itself, not the spawn island or the void. */

@@ -24,4 +24,12 @@ final class TestStages implements Chains.Stages {
     public void grant(Player player, String stage) {
         STAGES.computeIfAbsent(player.getUUID(), id -> ConcurrentHashMap.newKeySet()).add(stage);
     }
+
+    @Override
+    public void revoke(Player player, String stage) {
+        Set<String> held = STAGES.get(player.getUUID());
+        if (held != null) {
+            held.remove(stage);
+        }
+    }
 }
