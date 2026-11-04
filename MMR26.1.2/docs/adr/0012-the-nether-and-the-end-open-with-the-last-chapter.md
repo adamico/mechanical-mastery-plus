@@ -4,7 +4,7 @@ A team reaches the Nether and the End only once it has won all four challenges. 
 
 Neither is vanilla, and neither is the void the Overworld is. The Nether is a sea of lava with floating fortresses and nothing else, so the Nether displacer has lava to drink and the fortresses give blaze rods, nether wart and wither skeletons. The End is a plain of end stone with its main island on it, its dragon, the dragon's towers, End cities and chorus, and the void only above it, so a team builds upwards.
 
-We could have removed both, since nothing before the last chapter needs them and the Assault, Theurgy and the Shop give their drops, but that would have cost Voidworks its displacers and the dragon its breath. We could have left them free from the start, but a team could then build Quintessence's chain ahead of its four wins, which ADR 0007 rules out for every chain. We first kept them void around their islands, but the void Nether had no lava for its displacer and nothing only it gives. Vanilla generation would have given them back, but also every one of Voidworks' gate items for free, bastions' netherite and crying obsidian above all, and taken the theme with it.
+We could have removed both, since nothing before the last chapter needs them and the Assault and Theurgy give their drops, but that would have cost Voidworks its displacers and the dragon its breath. We could have left them free from the start, but a team could then build Quintessence's chain ahead of its four wins, which ADR 0007 rules out for every chain. We first kept them void around their islands, but the void Nether had no lava for its displacer and nothing only it gives. Vanilla generation would have given them back, but also every one of Voidworks' gate items for free, bastions' netherite and crying obsidian above all, and taken the theme with it.
 
 ## Consequences
 
@@ -13,4 +13,4 @@ We could have removed both, since nothing before the last chapter needs them and
 - The pack names the structures Skyblock Builder generates rather than leaving it to its defaults: fortresses in the Nether, End cities in the End, none in the Overworld, so no stronghold, and with it no End Portal Frame, ever comes back.
 - The End's floor shuts out Voidworks' extra step of Void Pressure over open void, which looks only below a position, so the pack raises the End's base pressure by one instead: End motes stay as strong as Voidworks makes them at their best.
 - Bastions stay out of the Nether, so crying obsidian and netherite are still had only through Voidworks' steep Rungs; the fortresses' blaze rods and the End cities' shulker shells come free, once a team is in the last chapter.
-- Until the last chapter, blazes and wither skeletons come only from the Assault, Theurgy and the Shop, as before.
+- Until the last chapter, blazes and wither skeletons come only from the Assault and Theurgy, as before.
