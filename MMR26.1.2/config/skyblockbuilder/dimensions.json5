@@ -1,5 +1,6 @@
 {
-  // Every dimension is void around its islands, and empty. The Nether and the End open to a team with its fourth win (ADR 0012).
+  // The Overworld is void around its islands. The Nether is a lava sea and the End an end stone plain
+  // (world.json5); both open to a team with its fourth win (ADR 0012).
   "Overworld": {
     "isCustom": true
   },

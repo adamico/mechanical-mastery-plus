@@ -1,0 +1,16 @@
+{
+  // The Nether and the End have a surface; the Overworld stays void (ADR 0012).
+  "surface": true,
+
+  // Layers from the bottom of each dimension up.
+  "surfaceSettings": {
+    "minecraft:overworld": [],
+
+    // A sea of lava, as in Skyblock Builder's Hellblock, under the floating fortresses.
+    "minecraft:the_nether": "minecraft:bedrock,10*minecraft:lava",
+
+    // A plain of end stone with nothing but air above. Its top is at y 60, the lowest an End city
+    // stands on, so the main island rises out of it.
+    "minecraft:the_end": "60*minecraft:end_stone"
+  }
+}
