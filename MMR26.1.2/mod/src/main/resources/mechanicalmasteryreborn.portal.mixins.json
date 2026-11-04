@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github._5thlayer.mechanicalmasteryreborn.challenge.portal.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PortalForcerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

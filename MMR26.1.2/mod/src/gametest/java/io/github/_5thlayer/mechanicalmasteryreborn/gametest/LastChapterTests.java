@@ -3,6 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.ArrivalPlatform;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastChapter;
@@ -10,7 +11,9 @@ import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.util.BlockUtil;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -30,6 +33,8 @@ final class LastChapterTests {
         tests.test("last_chapter_nether_portal_forms_only_after_the_fourth_win", 1, LastChapterTests::portalAfterTheFourthWin);
         tests.test("last_chapter_nether_portal_never_forms_off_an_island", 1, LastChapterTests::noPortalOffAnIsland);
         tests.test("last_chapter_nether_portal_always_forms_in_the_nether", 1, LastChapterTests::portalInTheNether);
+        tests.test("last_chapter_arrival_platform_rings_the_frame", 1, LastChapterTests::arrivalPlatform);
+        tests.test("last_chapter_arrival_platform_under_a_portal_made_in_mid_air", 1, LastChapterTests::platformInMidAir);
     }
 
     /** Notes {@code handicaps}' challenges won for {@code team}, as winning each does, with none of a win's other effects. */
@@ -112,6 +117,47 @@ final class LastChapterTests {
         helper.assertTrue(nether != null, "the test server has no Nether");
         helper.assertTrue(LastChapter.mayFormNetherPortal(nether, helper.absolutePos(BlockPos.ZERO)),
                 "a Nether portal was refused in the Nether");
+        helper.succeed();
+    }
+
+    /**
+     * A portal made in mid-air, two wide along x with its lowest left block at {@code (3, 2, 4)}, so its frame's floor is
+     * at y 1, gets an obsidian floor two blocks past its frame on every side, x 0 to 7 and z 2 to 6, which takes only air:
+     * a block already there stays.
+     */
+    private static void arrivalPlatform(GameTestHelper helper) {
+        BlockPos kept = new BlockPos(0, 1, 2);
+        helper.setBlock(kept, Blocks.DIRT);
+        var portal = new BlockUtil.FoundRectangle(helper.absolutePos(new BlockPos(3, 2, 4)), 2, 3);
+        ArrivalPlatform.build(helper.getLevel(), portal, Direction.Axis.X);
+        for (int x = 0; x <= 7; x++) {
+            for (int z = 2; z <= 6; z++) {
+                BlockPos pos = new BlockPos(x, 1, z);
+                if (!pos.equals(kept)) {
+                    helper.assertBlockPresent(Blocks.OBSIDIAN, pos);
+                }
+            }
+        }
+        helper.assertBlockPresent(Blocks.DIRT, kept);
+        helper.assertBlockPresent(Blocks.AIR, new BlockPos(8, 1, 4));
+        helper.assertBlockPresent(Blocks.AIR, new BlockPos(4, 1, 7));
+        helper.assertBlockPresent(Blocks.AIR, new BlockPos(4, 1, 1));
+        helper.assertBlockPresent(Blocks.AIR, new BlockPos(4, 2, 3));
+        helper.succeed();
+    }
+
+    /**
+     * The game makes a portal in mid-air where it finds no ground, as between the End's main island and its outer
+     * islands, where the test server's End is void, and the portal gets its platform: its far corner, three blocks
+     * past the portal's left side and two across, is obsidian, where vanilla's ledge reaches only one.
+     */
+    private static void platformInMidAir(GameTestHelper helper) {
+        var end = helper.getLevel().getServer().getLevel(Level.END);
+        helper.assertTrue(end != null, "the test server has no End");
+        var portal = end.getPortalForcer().createPortal(new BlockPos(600, 100, 600), Direction.Axis.X);
+        helper.assertTrue(portal.isPresent(), "no portal was made in mid-air");
+        BlockPos corner = portal.get().minCorner.below().west(3).north(2);
+        helper.assertTrue(end.getBlockState(corner).is(Blocks.OBSIDIAN), "no platform under a portal made in mid-air");
         helper.succeed();
     }
 }
