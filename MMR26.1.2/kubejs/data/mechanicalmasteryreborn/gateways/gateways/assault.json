@@ -136,6 +136,16 @@
                             "loot_table": "mechanicalmasteryreborn:assault/spider"
                         }
                     ]
+                },
+                {
+                    "type": "gateways:standard",
+                    "entity": "minecraft:slime",
+                    "modifiers": [
+                        {
+                            "type": "gateways:loot_table",
+                            "loot_table": "mechanicalmasteryreborn:assault/slime"
+                        }
+                    ]
                 }
             ]
         },
@@ -165,6 +175,16 @@
                             "loot_table": "mechanicalmasteryreborn:assault/creeper"
                         }
                     ]
+                },
+                {
+                    "type": "gateways:standard",
+                    "entity": "minecraft:witch",
+                    "modifiers": [
+                        {
+                            "type": "gateways:loot_table",
+                            "loot_table": "mechanicalmasteryreborn:assault/witch"
+                        }
+                    ]
                 }
             ],
             "modifiers": [
@@ -173,6 +193,73 @@
                     "attribute": "minecraft:movement_speed",
                     "operation": "add_multiplied_total",
                     "value": 0.05
+                }
+            ]
+        },
+        {
+            "application_mode": {
+                "type": "gateways:after_every_n_waves",
+                "waves": 20,
+                "max": 1024
+            },
+            "entities": [
+                {
+                    "type": "gateways:standard",
+                    "entity": "minecraft:blaze",
+                    "modifiers": [
+                        {
+                            "type": "gateways:loot_table",
+                            "loot_table": "mechanicalmasteryreborn:assault/blaze"
+                        }
+                    ]
+                },
+                {
+                    "type": "gateways:standard",
+                    "entity": "minecraft:enderman",
+                    "modifiers": [
+                        {
+                            "type": "gateways:loot_table",
+                            "loot_table": "mechanicalmasteryreborn:assault/enderman"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "application_mode": {
+                "type": "gateways:after_every_n_waves",
+                "waves": 25,
+                "max": 1024
+            },
+            "entities": [
+                {
+                    "type": "gateways:standard",
+                    "entity": "minecraft:breeze",
+                    "modifiers": [
+                        {
+                            "type": "gateways:loot_table",
+                            "loot_table": "mechanicalmasteryreborn:assault/breeze"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "application_mode": {
+                "type": "gateways:after_every_n_waves",
+                "waves": 30,
+                "max": 1024
+            },
+            "entities": [
+                {
+                    "type": "gateways:standard",
+                    "entity": "minecraft:evoker",
+                    "modifiers": [
+                        {
+                            "type": "gateways:loot_table",
+                            "loot_table": "mechanicalmasteryreborn:assault/evoker"
+                        }
+                    ]
                 }
             ]
         }

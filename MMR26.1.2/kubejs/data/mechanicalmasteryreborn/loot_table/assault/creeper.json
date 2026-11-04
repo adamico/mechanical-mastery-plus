@@ -9,14 +9,11 @@
     },
     {
       "rolls": 1,
+      "conditions": [
+        { "condition": "minecraft:random_chance", "chance": 0.35 }
+      ],
       "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "mechanicalmasteryreborn:rift_shard",
-          "functions": [
-            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 1, "max": 2 } }
-          ]
-        }
+        { "type": "minecraft:item", "name": "mechanicalmasteryreborn:rift_shard" }
       ]
     }
   ]
