@@ -16,10 +16,12 @@ Every island starts with a lab, and it can't be broken or made.
 Right-click it to choose a **handicap**, which starts its **challenge** for your whole team. A handicap costs
 your team only while its challenge is played.
 
-For now the lab offers two, and the others show as coming later:
+For now the lab offers three, and protection shows as coming later:
 
 - **Energy**: your generators give no energy. Starting it opens Theurgy's chain up to the Galvanic Essence, its
   last step.
+- **Life**: hunger drains faster, and the same food feeds less: see [the Diet](diet.md). Starting it opens Neo
+  Vitae's chain up to the Vital Essence, infused at a tier-3 Ara Vitae reached through the Demon Realm.
 - **Money**: your sales to the Shop pay half, and the money your team had when it started is set aside until
   the challenge ends, when it all comes back, with whatever you earned meanwhile. Starting it opens the
   challenge's Offers in the Shop for good, among them the Permits you buy to sell Transmuted Essences and to buy

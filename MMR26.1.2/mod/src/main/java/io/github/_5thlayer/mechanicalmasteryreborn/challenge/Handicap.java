@@ -15,7 +15,7 @@ public enum Handicap {
     /** More, stronger and special mobs. */
     PROTECTION("protection", false),
     /** Faster hunger, and a Diet: the same food feeding less each time it is eaten (ADR 0011). */
-    LIFE("life", false),
+    LIFE("life", true),
     /** Generator blocks disabled. */
     ENERGY("energy", true),
     /** Less money. */
@@ -34,7 +34,7 @@ public enum Handicap {
         return id;
     }
 
-    /** Whether the lab lets a team choose it yet: for now energy and money, the others coming later (#171, #213). */
+    /** Whether the lab lets a team choose it yet: for now life, energy and money, protection coming later (#242). */
     public boolean choosable() {
         return choosable;
     }
