@@ -6,8 +6,9 @@
 #   - no item or fluid has two Sell Offers, since a Seller takes whichever it finds first;
 #   - whatever the Shop both buys and sells, it pays less than it charges;
 #   - nothing only the Shop gives is sold back (water, the Permits);
-#   - the Aureate Essence costs at least what the Shop pays for any other Transmuted Essence, so a won chain's extras
-#     help buy the money challenge's quota but never swap for it one for one (#232).
+#   - the Aureate Essence costs at least what the Shop pays for any other Transmuted Essence, so a won chain's extras,
+#     sold at the money handicap's share while the challenge is played, help buy its quota but never swap for it one
+#     for one (#232).
 #
 #   scripts/check_offers.py
 #
@@ -22,10 +23,9 @@ OFFERS = PACK / "kubejs/data/mechanicalmasteryreborn/recipe/shop"
 MIXES = PACK / "kubejs/server_scripts/decomposing.js"
 # What only the Shop gives: water, whose every other source starts from a bought bucket, and AdminShop's Permits.
 SHOP_ONLY = {"minecraft:water", "adminshop:permit"}
-# The Transmuted Essence the Shop only sells, and the ones it buys from a won chain.
+# The Transmuted Essence the Shop only sells. The only essences it buys are the other Transmuted Essences.
 AUREATE = "mechanicalmasteryreborn:aureate_essence"
-TRANSMUTED = {"mechanicalmasteryreborn:galvanic_essence", "mechanicalmasteryreborn:warding_essence",
-              "mechanicalmasteryreborn:vital_essence"}
+ESSENCE = re.compile(r"mechanicalmasteryreborn:\w+_essence")
 
 
 def mixes():
@@ -72,7 +72,7 @@ def main():
         problems.append(f"no Buy Offer sells {AUREATE}")
     else:
         path, unit = buys[AUREATE]
-        for good in sorted(TRANSMUTED & sells.keys()):
+        for good in sorted(good for good in sells if ESSENCE.fullmatch(good)):
             if sells[good][1] > unit:
                 problems.append(f"{path}: charges {unit:g} cents for {AUREATE}, less than {sells[good][0]} pays for {good}")
     for problem in problems:
