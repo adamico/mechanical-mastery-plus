@@ -91,9 +91,9 @@ tasks.named('test') {
 // They run on a game test server of their own, suiteGameTestServer, with those mods and the pack's recipes for
 // them as a datapack, suite_pack/; the gameTestServer run keeps none of them, so it still proves the mod plays
 // alone. Only the gametest source set, which never ships, names a suite mod.
-def machines = ['curse.maven:kc00l-craftworks-1715876:9313819', 'curse.maven:fieldworks-1737485:9319855',
-                'curse.maven:groundworks-1717892:9365582']
-def suiteMods = machines + ['curse.maven:wireworks-1721198:9309889']
+def machines = ['curse.maven:kc00l-craftworks-1715876:9424433', 'curse.maven:fieldworks-1737485:9432384',
+                'curse.maven:groundworks-1717892:9373843']
+def suiteMods = machines + ['curse.maven:wireworks-1721198:9373965']
 def suiteTestReport = layout.buildDirectory.file('reports/suite-gametest.xml').get().asFile
 
 // The run's classpath is its source set's, as Craftworks' solo run is: one with no code, the mod's own dependencies
@@ -111,7 +111,7 @@ dependencies {
     machines.each { gametestCompileOnly it }
     suiteMods.each { suiteRuntimeOnly it }
     // The newest libworks runtime those mods nest, which they require: a dev run loads the classpath's, not a nested one.
-    suiteRuntimeOnly 'io.github.5thlayer:libworks-runtime:0.1.11'
+    suiteRuntimeOnly 'io.github.5thlayer:libworks-runtime:0.1.13'
 }
 
 neoForge {
