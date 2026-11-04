@@ -101,7 +101,7 @@ The foods a player has eaten lately, kept only while their team plays the life c
 _Avoid_: nutrition, spice
 
 **Assault**:
-The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from one gate at a time, on one of four platforms it builds in the void around the island, with unbreakable bridges to it. The waves grow harder, with a breather between each step, at which the gate moves to another side at random, and never stop until the quota is filled or Inflation reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, and it pauses while no one is on the island.
+The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from one gate at a time, on one of four platforms it builds in the void around the island, with unbreakable bridges to it. The waves grow harder, with a breather between each step, at which the gate moves to another side at random, and never stop until the quota is filled or Inflation reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, what its mobs break is the team's refund when it ends, and it pauses while no one is on the island.
 _Avoid_: raid, siege, invasion
 
 **Home gate**:
@@ -133,7 +133,11 @@ A block the pack names as making energy, as Wireworks' engines, turbines and sol
 _Avoid_: power source
 
 **Lab**:
-The special block where a team chooses a handicap to start a challenge, asks for a stop, and feeds science items to research what the challenge unlocks.
+The special block where a team chooses a handicap to start a challenge, asks for a stop, takes its refund, and feeds science items to research what the challenge unlocks.
+
+**Refund**:
+What a team's lab holds for it: everything its Assaults' mobs broke on its island, given back when each Assault ends rather than put back in its place, each block as a careful mining by hand would give it. It waits until a member takes it or the lab pushes it into a block beside it.
+_Avoid_: repair, restore, compensation
 
 **Manual**:
 The pack's in-game book on how to build and work the companion mod's blocks, with 3D scenes, which every player is given once. It holds neither lore nor recipes, which are EMI's.
