@@ -35,18 +35,14 @@ The challenges after 0.0.1 (#210), each one's chain locked until a team starts i
 Added from the pack's CurseForge profile:
 
 - **Functional Storage**: drawers, for the stacks of intermediates decomposing makes.
-- **LaserIO**: item, fluid and energy transport beside the suite's, filtered and wireless routing.
 - **Cobblegen Galore**: cobblestone generators, the skyblock's first stone.
-- **Time in a Bottle**: speeds up a block, for slow early loops.
 - **Construction Sticks**, **FTB Ultimine**: building and breaking many blocks at once.
 - **OpenBlocks Elevator**: elevators between a base's floors.
 - **Forgiving Void**: falling into the void lands you back on the island instead of killing you.
 - **GraveStone**: what you carried waits in a grave where you died.
 - **Global XP**: stores experience in a block.
 - **Squat Grow**: crouching grows the plants around you.
-- **Shrink**: a device that shrinks the player.
 - **FTB Chunks**: claims a team's island, and keeps its chunks loaded.
-- **FTB Materials**: common metals and materials other mods' recipes can share.
 - **FTB Backups 3**: world backups.
 - **Eccentric Tome**: every mod's guide book in one.
 - **Connected Glass**, **KleeSlabs**: building: glass that joins its panes, and a double slab broken one half at a time.
@@ -59,10 +55,10 @@ The FactoryWorks Showcase's performance and QoL mods, minus its content: no new 
 
 - Performance: **AI Improvements**, **BadOptimizations**, **Clumps**, **Connectivity**, **Entity Culling**, **FerriteCore**, **fix GPU memory leak**, **ImmediatelyFast**, **ModernFix**, **Particle Core**, **Sodium**, **spark**.
 - Fixes: **AttributeFix**, **Crash Assistant**, **I'm Fast**, **Max Health Fix**, **Neruina**, **NetherPortalFix**.
-- QoL: **AppleSkin**, **BetterF3**, **Block Runner**, **Bridging Mod**, **Clean Swing Through Grass**, **Colorful Hearts**, **Configured**, **Controlling**, **Default Options**, **Durability Tooltip**, **Enchantment Descriptions**, **Extreme Sound Muffler**, **Freecam**, **Inventory Essentials**, **Inventory Sorter**, **Jade**, **Leaves Be Gone**, **More Overlays Updated**, **Mouse Tweaks**, **RightClickHarvest**, **Sound Physics Remastered**, **Swivel**, **Toast Control**.
+- QoL: **AppleSkin**, **BetterF3**, **Bridging Mod**, **Colorful Hearts**, **Configured**, **Controlling**, **Default Options**, **Durability Tooltip**, **Enchantment Descriptions**, **Extreme Sound Muffler**, **Freecam**, **Inventory Essentials**, **Inventory Sorter**, **Jade**, **Leaves Be Gone**, **More Overlays Updated**, **Mouse Tweaks**, **RightClickHarvest**, **Sound Physics Remastered**, **Swivel**, **Toast Control**.
 
 Left out of the Showcase's list, as content with no role here: Animal Feeding Trough, Charging Gadgets, Chisel Reborn, Comforts, Easy Villagers, Energy Meter, Factory Blocks, FTB Industrial Contraptions, Just Dire Things, JustHammers, Mining Gadgets, Refined Storage Curios Integration, Sophisticated Backpacks, Starter Kit and XP Tome. JEI's addons (JER, JEP, JEED) go too, since EMI is the viewer. TrashSlot goes as well: recycling on a Recycler is how surplus is thrown away.
 
 ## Libraries
 
-In the pack only because a mod above needs them: Apothic Attributes (Gateways to Eternity), Balm (Forgiving Void, KleeSlabs), Better Advanced Tooltips (KubeJS), Cloth Config, Collective, Configurable, Cupboard, FTB Library (FTB Chunks, FTB Teams, FTB Ultimine, AdminShop), FTB Teams (FTB Chunks, AdminShop, and the companion mod, which keeps each island's players in one FTB party), Fusion (Connected Glass), Fzzy Config, GeckoLib (Theurgy, Neo Vitae), JamLib, Kotlin for Forge, LibX (Skyblock Builder), MezzConfig (JEI), Modonomicon (Theurgy, Neo Vitae), Nanite Library, Patchouli (AdminShop's Econ Handbook), Placebo (Gateways to Eternity), PolyLib (Shrink), Prickle, Puzzles Lib, Searchables, SuperMartijn642's Config Lib (Durability Tooltip), SuperMartijn642's Core Lib (Connected Glass), Titanium (Functional Storage) and YetAnotherConfigLib. A library no mod needs any more comes out with the mod.
+In the pack only because a mod above needs them: Apothic Attributes (Gateways to Eternity), Balm (Forgiving Void, KleeSlabs), Better Advanced Tooltips (KubeJS), Cloth Config, Collective, Configurable, Cupboard, FTB Library (FTB Chunks, FTB Teams, FTB Ultimine, AdminShop), FTB Teams (FTB Chunks, AdminShop, and the companion mod, which keeps each island's players in one FTB party), Fusion (Connected Glass), Fzzy Config, GeckoLib (Theurgy, Neo Vitae), JamLib, Kotlin for Forge, LibX (Skyblock Builder), MezzConfig (JEI), Modonomicon (Theurgy, Neo Vitae), Nanite Library, Patchouli (AdminShop's Econ Handbook), Placebo (Gateways to Eternity), Prickle, Puzzles Lib, Searchables, SuperMartijn642's Config Lib (Durability Tooltip), SuperMartijn642's Core Lib (Connected Glass), Titanium (Functional Storage) and YetAnotherConfigLib. A library no mod needs any more comes out with the mod.

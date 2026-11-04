@@ -2,8 +2,8 @@
 
 All items across all pack mods (excluding `mechanicalmasteryreborn`) at **recycle depth ≥ 2**, after filtering out:
 - **Decorative blocks** (Connected Glass, stairs/slabs/walls/fences/gates/doors/trapdoors/panes/bars/chains/lanterns/torches/carpets/candles/banners/signs/beds/shelves/statues, waxed/cut/chiseled/grate/bulb copper, stone/dungeon/polished/chiseled bricks/tiles/pillars, wool/terracotta/concrete/stained glass/dyes, bookshelves, paintings, frames, pots, etc.)
-- **Tools, weapons, and armors** (handheld tools, wrenches, rods, wands, sticks, bows, arrows, suits, lances, railgun, guide books/tomes, Shrinking Device, Time in a Bottle)
-- **Items/blocks not stackable to 64** (`stacksTo(1)` or `stacksTo(16)`: AdminShop tablet & permit, Construction Stick upgrade templates, Fieldworks buckets, Functional Storage tools, LaserIO cards/holder/cloner/wrench, Neo Vitae orbs/sigils/crystals/tomes/flasks/daggers/anointments/keys/ledger, Pipez wrench & filter tool, Refined Storage disks/storage blocks/controllers/wireless grids/cards/wrench, vanilla minecarts/boats/beds/shulker boxes/banners/signs/stews/buckets/potions)
+- **Tools, weapons, and armors** (handheld tools, wrenches, rods, wands, sticks, bows, arrows, suits, lances, railgun, guide books/tomes)
+- **Items/blocks not stackable to 64** (`stacksTo(1)` or `stacksTo(16)`: AdminShop tablet & permit, Construction Stick upgrade templates, Fieldworks buckets, Functional Storage tools, Neo Vitae orbs/sigils/crystals/tomes/flasks/daggers/anointments/keys/ledger, Pipez wrench & filter tool, Refined Storage disks/storage blocks/controllers/wireless grids/cards/wrench, vanilla minecarts/boats/beds/shulker boxes/banners/signs/stews/buckets/potions)
 
 *(Items marked **`[in current mix]`** are the 29 items currently in `MMR26.1.2/kubejs/server_scripts/decomposing.js`; items marked `(packing)` are depth 2 via a storage block ingredient such as `iron_block`, `copper_block`, `redstone_block`, `coal_block`, `hay_block`, or `resin_block`.)*
 
@@ -278,17 +278,6 @@ All items across all pack mods (excluding `mechanicalmasteryreborn`) at **recycl
 - [x] `pipez:advanced_upgrade` (d=3) → `4x diamond, 4x redstone_block, 1x pipez:improved_upgrade`
 - [x] `pipez:ultimate_upgrade` (d=4) → `4x netherite_ingot, 4x redstone_block, 1x pipez:advanced_upgrade`
 
-### `laserio` (8)
-*(Note: `laser_wrench`, `card_holder`, `card_cloner`, `card_item`, `card_fluid`, `card_energy`, and `card_redstone` are all `stacksTo(1)`, and `laser_connector` / `overclocker_card` / `overclocker_node` are depth 1.)*
-- [ ] `laserio:laser_node` (d=5) → `4x iron_ingot, 4x glass_pane, 1x laserio:laser_connector`
-- [x] `laserio:laser_connector_advanced` (d=2) → `2x ender_pearl, 1x diamond, 2x redstone, 1x laserio:laser_connector, 3x gold_ingot`
-- [ ] `laserio:logic_chip_raw` (d=2) → `1x redstone, 0.5x gold_nugget, 0.5x clay_ball, 0.25x quartz_block`
-- [x] `laserio:filter_basic` (d=5) → `1x iron_bars, 1x glass_pane, 0.25x laserio:logic_chip`
-- [x] `laserio:filter_count` (d=6) → `1x laserio:filter_basic, 1x observer`
-- [x] `laserio:filter_mod` (d=6) → `1x laserio:filter_basic, 1x book`
-- [x] `laserio:filter_nbt` (d=6) → `1x laserio:filter_basic, 1x white_wool`
-- [x] `laserio:filter_tag` (d=6) → `1x laserio:filter_basic, 1x paper`
-
 ### `modularrouters` (46)
 - **Router Block (1)**:
   - [ ] `modularrouters:modular_router` (d=2) → `1x iron_ingot, 1x iron_bars, 0.25x modularrouters:blank_module`
@@ -348,14 +337,14 @@ All items across all pack mods (excluding `mechanicalmasteryreborn`) at **recycl
   - [ ] `refinedstorage:machine_casing` (d=3) → `8x refinedstorage:quartz_enriched_iron, 1x andesite`
   - [ ] `refinedstorage:storage_housing` (d=2) → `2x glass, 3x redstone, 3x refinedstorage:quartz_enriched_iron`
   - [ ] `refinedstorage:pattern` (d=2) → `3x glass, 3x redstone, 3x refinedstorage:quartz_enriched_iron`
-  - [ ] `refinedstorage:raw_basic_processor` (d=2) → `1x refinedstorage:processor_binding, 1x iron_ingot, 1x ftbmaterials:silicon_gem, 1x redstone`
-  - [x] `refinedstorage:raw_improved_processor` (d=2) → `1x refinedstorage:processor_binding, 1x gold_ingot, 1x ftbmaterials:silicon_gem, 1x redstone`
-  - [x] `refinedstorage:raw_advanced_processor` (d=2) → `1x refinedstorage:processor_binding, 1x diamond, 1x ftbmaterials:silicon_gem, 1x redstone`
-  - [ ] `refinedstorage:1k_storage_part` (d=2) → `4x ftbmaterials:silicon_gem, 1x refinedstorage:quartz_enriched_iron, 3x glass, 1x redstone`
+  - [ ] `refinedstorage:raw_basic_processor` (d=2) → `1x refinedstorage:processor_binding, 1x iron_ingot, 1x refinedstorage:silicon, 1x redstone`
+  - [x] `refinedstorage:raw_improved_processor` (d=2) → `1x refinedstorage:processor_binding, 1x gold_ingot, 1x refinedstorage:silicon, 1x redstone`
+  - [x] `refinedstorage:raw_advanced_processor` (d=2) → `1x refinedstorage:processor_binding, 1x diamond, 1x refinedstorage:silicon, 1x redstone`
+  - [ ] `refinedstorage:1k_storage_part` (d=2) → `4x refinedstorage:silicon, 1x refinedstorage:quartz_enriched_iron, 3x glass, 1x redstone`
   - [x] `refinedstorage:4k_storage_part` (d=3) → `4x refinedstorage:basic_processor, 1x refinedstorage:quartz_enriched_iron, 3x refinedstorage:1k_storage_part, 1x redstone`
   - [x] `refinedstorage:16k_storage_part` (d=4) → `4x refinedstorage:improved_processor, 1x refinedstorage:quartz_enriched_iron, 3x refinedstorage:4k_storage_part, 1x redstone`
   - [x] `refinedstorage:64k_storage_part` (d=5) → `4x refinedstorage:advanced_processor, 1x refinedstorage:quartz_enriched_iron, 3x refinedstorage:16k_storage_part, 1x redstone`
-  - [ ] `refinedstorage:64b_fluid_storage_part` (d=2) → `4x ftbmaterials:silicon_gem, 1x refinedstorage:quartz_enriched_iron, 3x glass, 1x bucket`
+  - [ ] `refinedstorage:64b_fluid_storage_part` (d=2) → `4x refinedstorage:silicon, 1x refinedstorage:quartz_enriched_iron, 3x glass, 1x bucket`
   - [x] `refinedstorage:256b_fluid_storage_part` (d=3) → `4x refinedstorage:basic_processor, 1x refinedstorage:quartz_enriched_iron, 3x refinedstorage:64b_fluid_storage_part, 1x bucket`
   - [x] `refinedstorage:1024b_fluid_storage_part` (d=4) → `4x refinedstorage:improved_processor, 1x refinedstorage:quartz_enriched_iron, 3x refinedstorage:256b_fluid_storage_part, 1x bucket`
   - [x] `refinedstorage:4096b_fluid_storage_part` (d=5) → `4x refinedstorage:advanced_processor, 1x refinedstorage:quartz_enriched_iron, 3x refinedstorage:1024b_fluid_storage_part, 1x bucket`
