@@ -4,8 +4,7 @@
   "ingredients": [
     { "ingredient": "mechanicalmasteryreborn:rift_shard", "count": 2 },
     { "ingredient": "fieldworks:tar", "count": 1 },
-    { "ingredient": "minecraft:spider_eye", "count": 1 },
-    { "ingredient": "minecraft:slime_ball", "count": 1 }
+    { "ingredient": "mechanicalmasteryreborn:obsidian_flakes", "count": 2 }
   ],
   "fluid_ingredients": [
     { "ingredient": "mechanicalmasteryreborn:ward_tallow", "amount": 250 }

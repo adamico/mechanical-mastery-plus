@@ -5,6 +5,7 @@ package io.github._5thlayer.mechanicalmasteryreborn;
 
 import io.github._5thlayer.libworks.WorksTab;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.ObsidianFlakes;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
@@ -18,7 +19,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 /**
  * Every obtainable item of the mod, in the suite's Works tab and no other (FactoryWorks ADR-0128): C.O.D.,
- * the lab and the four Ports, then the Mechanical and Transmuted Essences, then the protection Chain's Rift Shard, Ward Tallow bucket and Charged Rift, then the Recycler's parts, then the Defences. One listener, in the order the tab shows them, which
+ * the lab and the four Ports, then the Mechanical and Transmuted Essences, then the protection Chain's Rift Shard, Ward Tallow bucket, Obsidian Flakes and Charged Rift, then the Recycler's parts, then the Defences. One listener, in the order the tab shows them, which
  * {@code CreativeTabTests} lists too. Quintessence, which no player can have yet, is in no tab.
  */
 final class WorksTabContents {
@@ -42,6 +43,7 @@ final class WorksTabContents {
         }
         event.accept(RiftShards.ITEM.get());
         event.accept(WardTallow.BUCKET.get());
+        event.accept(ObsidianFlakes.ITEM.get());
         event.accept(RiftShards.CHARGED_RIFT.get());
         for (int tier = 1; tier <= Recycler.TIERS; tier++) {
             event.accept(Recycler.coreItem(tier));

@@ -14,8 +14,12 @@ import io.github._5thlayer.craftworks.machine.AssemblerBlockEntity;
 import io.github._5thlayer.craftworks.machine.AssemblerSlots;
 import io.github._5thlayer.craftworks.machine.AssemblerTier;
 import io.github._5thlayer.craftworks.machine.Assemblers;
+import io.github._5thlayer.fieldworks.harvester.HarvesterBlockEntity;
+import io.github._5thlayer.fieldworks.harvester.Harvesters;
+import io.github._5thlayer.fieldworks.harvester.TierBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.ObsidianFlakes;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
@@ -32,6 +36,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -41,13 +47,17 @@ import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.transfer.energy.EnergyHandlerUtil;
 import net.neoforged.neoforge.transfer.energy.SimpleEnergyHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 /**
- * The protection challenge's Chain on Craftworks' Assembler (#252): Render makes Ward Tallow from flesh, bone meal and
- * Wireworks' steam, Charge a Charged Rift from Rift Shards, Fieldworks' tar and the tallow, and Seal the Warding Essence
- * from the Charged Rifts and Wireworks' plastic, each the pack's own recipe in {@code suite_pack/}. Each runs on a tier 1
- * Assembler, the lowest, with its inputs set in its slots and boxes and FE fed to it until the craft is done. Only the
+ * The protection challenge's Chain on the suite's machines (#252): Render makes Ward Tallow from flesh, bone meal and
+ * Wireworks' steam, Flake takes Obsidian Flakes off a placed obsidian block with a Harvester and Fieldworks' magma
+ * slurry, Charge makes a Charged Rift from Rift Shards, Fieldworks' tar, the flakes and the tallow, and Seal the Warding
+ * Essence from the Charged Rifts and Wireworks' plastic, each the pack's own recipe in {@code suite_pack/}. The
+ * Assembler's steps run on a tier 1 Assembler, the lowest, with their inputs set in its slots and boxes and FE fed to
+ * it until the craft is done; Flake on a Burner Harvester fed coal and slurry as a hopper and a pipe would. Only the
  * {@code suiteGameTestServer} run, which loads those mods, registers them.
  */
 final class WardingChainTests {
@@ -62,6 +72,7 @@ final class WardingChainTests {
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("warding_render_makes_ward_tallow_from_steam", 40, WardingChainTests::render);
         tests.test("warding_render_fills_a_bucket_with_ward_tallow", 40, WardingChainTests::renderFillsABucket);
+        tests.test("warding_flake_takes_obsidian_flakes_off_obsidian_with_magma_slurry", 40, WardingChainTests::flake);
         tests.test("warding_charge_makes_a_charged_rift", 40, WardingChainTests::charge);
         tests.test("warding_charge_drains_ward_tallow_from_a_bucket", 40, WardingChainTests::chargeDrainsABucket);
         tests.test("warding_seal_makes_a_warding_essence", 40, WardingChainTests::seal);
@@ -82,12 +93,57 @@ final class WardingChainTests {
         helper.succeed();
     }
 
+    /** One operation breaks the obsidian to air for 4 flakes, which go to a chest at the Harvester's front, and 250 mB of slurry. */
+    private static void flake(GameTestHelper helper) {
+        BlockPos harvester = new BlockPos(4, 2, 4);
+        BlockPos chest = harvester.relative(Direction.NORTH, 2);
+        helper.setBlock(harvester.below(), Blocks.OBSIDIAN);
+        helper.setBlock(chest, Blocks.CHEST);
+        FakePlayer player = new FakePlayer(helper.getLevel(), new GameProfile(UUID.randomUUID(), "warding_flake"));
+        player.setGameMode(GameType.SURVIVAL);
+        // A footprint faces opposite the player who lays it.
+        player.setYRot(Direction.SOUTH.toYRot());
+        player.setYHeadRot(Direction.SOUTH.toYRot());
+        ItemStack stack = new ItemStack(Harvesters.item(TierBlock.HARVESTER_1).get());
+        player.setItemInHand(InteractionHand.MAIN_HAND, stack);
+        BlockPos floor = helper.absolutePos(harvester.below());
+        player.gameMode.useItemOn(player, helper.getLevel(), stack, InteractionHand.MAIN_HAND,
+                new BlockHitResult(Vec3.atCenterOf(floor).relative(Direction.UP, 0.5), Direction.UP, floor, false));
+        HarvesterBlockEntity machine = helper.getBlockEntity(harvester, HarvesterBlockEntity.class);
+        var slurry = FluidResource.of(fluid("fieldworks:magma_slurry"));
+        try (Transaction feeding = Transaction.openRoot()) {
+            helper.getLevel().getCapability(Capabilities.Item.BLOCK, helper.absolutePos(harvester.west()), Direction.WEST)
+                    .insert(ItemResource.of(Items.COAL), 8, feeding);
+            helper.assertValueEqual(helper.getLevel().getCapability(Capabilities.Fluid.BLOCK, helper.absolutePos(harvester.east()),
+                    Direction.EAST).insert(slurry, 1000, feeding), 1000, "the magma slurry piped in");
+            feeding.commit();
+        }
+        machine.setHeldRecipe(Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "harvesting/obsidian_flakes"));
+        int ran = 0;
+        var flakes = helper.getBlockEntity(chest, ChestBlockEntity.class);
+        while (flakes.countItem(ObsidianFlakes.ITEM.get()) == 0 && ran < MOST_TICKS) {
+            machine.serverTick(helper.getLevel());
+            ran++;
+        }
+        helper.assertValueEqual(flakes.countItem(ObsidianFlakes.ITEM.get()), 4, "the Obsidian Flakes in the chest after " + ran + " ticks, "
+                + machine.idleReason().map(Object::toString).orElse("not idle"));
+        helper.assertTrue(helper.getBlockState(harvester.below()).isAir(), "the obsidian outlived its operation");
+        var tanks = helper.getLevel().getCapability(Capabilities.Fluid.BLOCK, helper.absolutePos(harvester.east()), Direction.EAST);
+        int left = 0;
+        for (int index = 0; index < tanks.size(); index++) {
+            if (tanks.getResource(index).equals(slurry)) {
+                left += tanks.getAmountAsInt(index);
+            }
+        }
+        helper.assertValueEqual(left, 750, "the magma slurry left after one operation");
+        helper.succeed();
+    }
+
     private static void charge(GameTestHelper helper) {
         AssemblerBlockEntity assembler = holding(helper, "charged_rift");
         put(assembler, 0, RiftShards.ITEM.get(), 2);
         put(assembler, 1, item("fieldworks:tar"), 1);
-        put(assembler, 2, Items.SPIDER_EYE, 1);
-        put(assembler, 3, Items.SLIME_BALL, 1);
+        put(assembler, 2, ObsidianFlakes.ITEM.get(), 2);
         assembler.fluids().set(0, new FluidStack(WardTallow.SOURCE.get(), 500));
         tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
         expectOutput(helper, assembler, RiftShards.CHARGED_RIFT.get(), "Charge");
@@ -112,8 +168,7 @@ final class WardingChainTests {
         AssemblerBlockEntity assembler = holding(helper, "charged_rift");
         put(assembler, 0, RiftShards.ITEM.get(), 2);
         put(assembler, 1, item("fieldworks:tar"), 1);
-        put(assembler, 2, Items.SPIDER_EYE, 1);
-        put(assembler, 3, Items.SLIME_BALL, 1);
+        put(assembler, 2, ObsidianFlakes.ITEM.get(), 2);
         put(assembler, AssemblerSlots.DRAIN, WardTallow.BUCKET.get(), 1);
         tickUntil(helper, assembler, () -> outputs(assembler, RiftShards.CHARGED_RIFT.get()) > 0);
         helper.assertValueEqual(outputs(assembler, RiftShards.CHARGED_RIFT.get()), 1, "the Charged Rifts in the outputs");
@@ -135,7 +190,7 @@ final class WardingChainTests {
         helper.succeed();
     }
 
-    /** By the usual rule, read off Charge: its items, at full cost, and not the tallow. */
+    /** By the usual rule, read off Charge: its items, at full cost, and not the tallow; the flakes, which only a harvest makes, are raw. */
     private static void chargedRiftRecycles(GameTestHelper helper) {
         List<? extends String> before = ServerConfig.ASSEMBLING_TYPES.get();
         // As the pack's config does.
@@ -147,8 +202,8 @@ final class WardingChainTests {
                 return;
             }
             Map<Item, Double> into = shares.stream().collect(Collectors.toMap(RecyclingRules.Share::item, RecyclingRules.Share::amount, Double::sum));
-            helper.assertValueEqual(into, Map.of(RiftShards.ITEM.get(), 2.0, item("fieldworks:tar"), 1.0, Items.SPIDER_EYE, 1.0,
-                    Items.SLIME_BALL, 1.0), "what a Charged Rift recycles into");
+            helper.assertValueEqual(into, Map.of(RiftShards.ITEM.get(), 2.0, item("fieldworks:tar"), 1.0, ObsidianFlakes.ITEM.get(), 2.0),
+                    "what a Charged Rift recycles into");
         } finally {
             ServerConfig.ASSEMBLING_TYPES.set(before);
         }
