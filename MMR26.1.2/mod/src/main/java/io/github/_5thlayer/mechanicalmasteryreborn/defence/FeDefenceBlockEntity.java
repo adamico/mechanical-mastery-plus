@@ -74,14 +74,6 @@ public final class FeDefenceBlockEntity extends BlockEntity {
         return store.getAmountAsInt() < ServerConfig.feDefenceFePerShot() ? Status.NO_FE : Status.READY;
     }
 
-    public int stored() {
-        return store.getAmountAsInt();
-    }
-
-    public int capacity() {
-        return store.getCapacityAsInt();
-    }
-
     static void serverTick(Level level, BlockPos pos, BlockState state, FeDefenceBlockEntity defence) {
         defence.store.fit();
         if (defence.cooldown > 0) {

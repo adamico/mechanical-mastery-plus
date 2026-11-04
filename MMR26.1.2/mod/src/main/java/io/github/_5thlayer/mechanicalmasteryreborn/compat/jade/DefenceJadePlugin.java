@@ -19,14 +19,11 @@ import snownee.jade.api.IWailaClientRegistration;
 import snownee.jade.api.IWailaCommonRegistration;
 import snownee.jade.api.IWailaPlugin;
 import snownee.jade.api.WailaPlugin;
-import snownee.jade.api.ui.BoxStyle;
-import snownee.jade.api.ui.JadeUI;
-import snownee.jade.api.view.ProgressView;
 
 /**
- * Shows, through libworks-runtime's machine report, an FE defence's store and, while it holds less than a shot's
- * worth, that it does nothing for lack of FE (#236). Jade finds this by its annotation and loads it only when Jade is
- * installed.
+ * Shows, through libworks-runtime's machine report, that an FE defence does nothing for lack of FE while it holds less
+ * than a shot's worth (#236). Its store Jade shows on its own, from the block's energy capability. Jade finds this by
+ * its annotation and loads it only when Jade is installed.
  */
 @WailaPlugin
 public final class DefenceJadePlugin implements IWailaPlugin {
@@ -35,17 +32,13 @@ public final class DefenceJadePlugin implements IWailaPlugin {
 
     private static final StreamCodec<ByteBuf, Status> STATUS_CODEC = ByteBufCodecs.idMapper(ordinal -> Status.values()[ordinal], Status::ordinal);
 
-    private static final StreamCodec<RegistryFriendlyByteBuf, Data> CODEC = StreamCodec.composite(
-            STATUS_CODEC, Data::status,
-            ByteBufCodecs.VAR_INT, Data::stored,
-            ByteBufCodecs.VAR_INT, Data::capacity,
-            Data::new);
+    private static final StreamCodec<RegistryFriendlyByteBuf, Data> CODEC = StreamCodec.composite(STATUS_CODEC, Data::status, Data::new);
 
-    record Data(Status status, int stored, int capacity) {
+    record Data(Status status) {
     }
 
     private static final MachineReport<FeDefenceBlockEntity, Data> REPORT = new MachineReport<>(UID, FeDefenceBlockEntity.class,
-            defence -> new Data(defence.status(), defence.stored(), defence.capacity()), CODEC);
+            defence -> new Data(defence.status()), CODEC);
 
     @Override
     public void register(IWailaCommonRegistration registration) {
@@ -55,9 +48,6 @@ public final class DefenceJadePlugin implements IWailaPlugin {
     @Override
     public void registerClient(IWailaClientRegistration registration) {
         registration.registerBlockComponent(new MachineReport.Client<>(REPORT, (data, tooltip) -> {
-            Component fe = Component.translatable("mechanicalmasteryreborn.jade.defence.fe", data.stored(), data.capacity());
-            tooltip.add(JadeUI.progress(new ProgressView(ProgressView.Part.of((float) data.stored() / Math.max(1, data.capacity())), fe,
-                    JadeUI.progressStyle(), BoxStyle.nestedBox())));
             if (data.status() == Status.NO_FE) {
                 tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.defence.no_fe").withStyle(ChatFormatting.RED));
             }
