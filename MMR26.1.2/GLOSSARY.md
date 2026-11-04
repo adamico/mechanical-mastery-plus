@@ -116,8 +116,12 @@ _Avoid_: ward shard, gate drop
 The companion mod's fluid that the protection challenge's Chain renders on an Assembler from the Assault's rotten flesh and bone meal with steam, and charges Rift Shards with. It is in no mix and the Shop never buys it.
 _Avoid_: tallow oil, rendered fat
 
+**Obsidian Flakes**:
+What a Harvester takes off a placed obsidian block with magma slurry, breaking the block, for the protection challenge's Chain: only that harvest gives them, and breaking obsidian by hand gives obsidian.
+_Avoid_: obsidian dust, obsidian shards
+
 **Charged Rift**:
-The protection challenge's Chain's step between the Rift Shards and the Warding Essence: two shards charged on an Assembler with tar, a spider eye, a slime ball and Ward Tallow. Two of them, sealed with plastic, make a Warding Essence.
+The protection challenge's Chain's step between the Rift Shards and the Warding Essence: two shards charged on an Assembler with tar, Obsidian Flakes and Ward Tallow. Two of them, sealed with plastic, make a Warding Essence.
 _Avoid_: charged shard
 
 **Generator**:

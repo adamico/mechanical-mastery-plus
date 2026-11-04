@@ -67,7 +67,7 @@ jobs:
       - run: ./gradlew -q libworksUpstreams | sh .libworks/.github/scripts/build-upstreams.sh
 
       # The libworks runtime the suite game tests load, the newest the pack's suite mods nest (build.gradle, #252).
-      - run: echo '5thlayer/libworks runtime-v0.1.11 :runtime' | sh .libworks/.github/scripts/build-upstreams.sh
+      - run: echo '5thlayer/libworks runtime-v0.1.13 :runtime' | sh .libworks/.github/scripts/build-upstreams.sh
 
       # The Shop's Offers against the rules every Offer keeps, and the mixes they're checked against (#213).
       - run: python3 ../scripts/check_offers.py

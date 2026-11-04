@@ -85,13 +85,15 @@ tasks.named('test') {
 }
 
 // The protection Chain's game tests (#252) run its recipes on a real Assembler, so they need the suite mods the
-// Chain stands on: Craftworks' Assembler, Wireworks' steam and plastic and Fieldworks' tar, on Groundworks. They are
+// Chain stands on: Craftworks' Assembler, Fieldworks' Harvester, magma slurry and tar, and Wireworks' steam and
+// plastic, on Groundworks. They are
 // the pack's own jars, from CurseForge as mods/*.pw.toml name them, so a CI runner needs no build of the suite.
-// They run on a game test server of their own, suiteGameTestServer, with those mods and the pack's assembling
-// recipes as a datapack, suite_pack/; the gameTestServer run keeps none of them, so it still proves the mod plays
+// They run on a game test server of their own, suiteGameTestServer, with those mods and the pack's recipes for
+// them as a datapack, suite_pack/; the gameTestServer run keeps none of them, so it still proves the mod plays
 // alone. Only the gametest source set, which never ships, names a suite mod.
-def craftworks = ['curse.maven:kc00l-craftworks-1715876:9313819', 'curse.maven:groundworks-1717892:9365582']
-def suiteMods = craftworks + ['curse.maven:wireworks-1721198:9309889', 'curse.maven:fieldworks-1737485:9319855']
+def machines = ['curse.maven:kc00l-craftworks-1715876:9424433', 'curse.maven:fieldworks-1737485:9432384',
+                'curse.maven:groundworks-1717892:9373843']
+def suiteMods = machines + ['curse.maven:wireworks-1721198:9373965']
 def suiteTestReport = layout.buildDirectory.file('reports/suite-gametest.xml').get().asFile
 
 // The run's classpath is its source set's, as Craftworks' solo run is: one with no code, the mod's own dependencies
@@ -105,11 +107,11 @@ configurations {
 }
 
 dependencies {
-    // The game tests name the Assembler, which stands on Groundworks' footprints.
-    craftworks.each { gametestCompileOnly it }
+    // The game tests name the Assembler and the Harvester, which stand on Groundworks' footprints.
+    machines.each { gametestCompileOnly it }
     suiteMods.each { suiteRuntimeOnly it }
     // The newest libworks runtime those mods nest, which they require: a dev run loads the classpath's, not a nested one.
-    suiteRuntimeOnly 'io.github.5thlayer:libworks-runtime:0.1.11'
+    suiteRuntimeOnly 'io.github.5thlayer:libworks-runtime:0.1.13'
 }
 
 neoForge {
@@ -125,11 +127,14 @@ neoForge {
     addModdingDependenciesTo sourceSets.suite
 }
 
-// The pack's assembling recipes, copied as they are into suite_pack/, beside its pack.mcmeta in src/gametest/resources,
-// which DevPacks switches on in suiteGameTestServer.
+// The pack's assembling and harvesting recipes and what it adds to Fieldworks' tags, copied as they are into
+// suite_pack/, beside its pack.mcmeta in src/gametest/resources, which DevPacks switches on in suiteGameTestServer.
 def suitePackDir = layout.buildDirectory.dir('generated/suitePack')
 def generateSuitePack = tasks.register('generateSuitePack', Sync) {
-    from('../kubejs/data/mechanicalmasteryreborn/recipe/assembling') { into 'suite_pack/data/mechanicalmasteryreborn/recipe/assembling' }
+    from('../kubejs/data') {
+        include 'mechanicalmasteryreborn/recipe/assembling/**', 'mechanicalmasteryreborn/recipe/harvesting/**', 'fieldworks/**'
+        into 'suite_pack/data'
+    }
     into suitePackDir
 }
 sourceSets.gametest.resources.srcDir(files(suitePackDir).builtBy(generateSuitePack))

@@ -1,0 +1,8 @@
+{
+  "type": "fieldworks:harvesting",
+  "source": "minecraft:obsidian",
+  "drilling_fluid": { "fluid": "fieldworks:magma_slurry", "amount": 250 },
+  "result": { "id": "mechanicalmasteryreborn:obsidian_flakes", "count": 4 },
+  "duration": 100,
+  "replaces_default": true
+}
