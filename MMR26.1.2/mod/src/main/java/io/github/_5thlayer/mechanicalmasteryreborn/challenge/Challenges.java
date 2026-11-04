@@ -99,8 +99,8 @@ public final class Challenges {
 
     /**
      * Wins the challenge {@code team} plays: blocks the tier its C.O.D. makes and notes the win ({@link TeamState#blockTier}),
-     * ends the challenge as {@link #end} does, and tells the team's players online with a title and a sound. Says whether
-     * it played one.
+     * ends the challenge as {@link #end} does, and tells the team's players online with a title and a sound, giving them the
+     * last chapter's stage on the fourth ({@link Chains#unlock}). Says whether it played one.
      */
     public static boolean win(MinecraftServer server, UUID team) {
         TeamState state = TeamState.get(server);
@@ -122,6 +122,8 @@ public final class Challenges {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (Teams.of(player).equals(team)) {
                 told++;
+                // A fourth win gives the last chapter's stage (ADR 0012).
+                Chains.unlock(server, player);
                 player.sendSystemMessage(message);
                 player.connection.send(new ClientboundSetSubtitleTextPacket(Component.empty()));
                 player.connection.send(new ClientboundSetTitleTextPacket(title));

@@ -25,7 +25,7 @@ public final class Chains {
     /** How a player is given a stage. */
     public interface Stages {
 
-        /** Gives {@code player} the stage {@code stage}, a handicap's id, if it hasn't it yet. */
+        /** Gives {@code player} the stage {@code stage}, a handicap's id or {@link LastChapter#STAGE}, if it hasn't it yet. */
         void grant(Player player, String stage);
     }
 
@@ -42,7 +42,10 @@ public final class Chains {
                 event -> unlock(event.getEntity().level().getServer(), event.getEntity()));
     }
 
-    /** Gives {@code player} the stage of every chain its team has unlocked, and tells its client which they are. */
+    /**
+     * Gives {@code player} the stage of every chain its team has unlocked, and the last chapter's once it has won all
+     * four (ADR 0012), and tells its client which chains they are.
+     */
     public static void unlock(MinecraftServer server, Player player) {
         if (server == null || player == null) {
             return;
@@ -53,6 +56,9 @@ public final class Chains {
             if (state.unlocked(team, handicap)) {
                 stages().grant(player, handicap.id());
             }
+        }
+        if (LastChapter.reached(server, team)) {
+            stages().grant(player, LastChapter.STAGE);
         }
         if (player instanceof ServerPlayer serverPlayer) {
             ChainMachines.send(server, serverPlayer);

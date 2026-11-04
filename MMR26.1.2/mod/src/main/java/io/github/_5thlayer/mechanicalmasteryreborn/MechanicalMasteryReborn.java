@@ -6,6 +6,7 @@ package io.github._5thlayer.mechanicalmasteryreborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Assault;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastChapter;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Generators;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationCap;
@@ -46,6 +47,7 @@ public final class MechanicalMasteryReborn {
         Assault.register(modBus);
         LifeHandicap.register(modBus);
         Chains.register();
+        LastChapter.register();
         ChainMachines.register(modBus);
         InflationCap.register();
         InflationBar.register();

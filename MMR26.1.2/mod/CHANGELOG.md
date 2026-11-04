@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn adds, or ch
 
 ## Unreleased
 
+- A Nether portal forms only on the island of a team that has won all four challenges, however its frame is lit, and never off a team's island in the Overworld; in the Nether a frame always forms, so the way home is there. Players near a refused frame are told why. Only the forming is locked: anyone may go through a portal that formed. A team's fourth win gives its players the Chapters stage `mechanicalmasteryreborn:last_chapter`, as a player who logs in or joins its island later is given it, which the End Portal Frame's recipe will be locked behind (ADR 0012, #250).
 - Jade shows on Theurgy's apparatus as on any other block, a locked one's "Unlocked by the Energy challenge" line included, since the pack turns off Theurgy's in-world HUD, which covered the challenges' boss bars. The mod no longer adds its line to Theurgy's HUD, nor hides Jade on Theurgy's blocks (#255).
 - Jade shows a Theurgy apparatus's processing as a bar with its percent while it works, as Theurgy's in-world HUD did (#255).
 - The Electric Defence has art of its own and no longer looks like a Recycler part: orange-tinted steel sides and a battery's top, from Malcolm Riley's unused-textures, with a few sparks crackling over its top, redrawn every few ticks, from the core its shots now start at (#256).

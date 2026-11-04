@@ -22,6 +22,7 @@ import net.minecraft.world.phys.AABB;
 final class TestTeams implements Teams.Lookup {
 
     private static final Map<AABB, UUID> ISLANDS = new ConcurrentHashMap<>();
+    private static final Map<AABB, UUID> NEAREST = new ConcurrentHashMap<>();
     private static final Map<UUID, UUID> PLAYERS = new ConcurrentHashMap<>();
 
     private final Teams.Lookup installed;
@@ -44,6 +45,14 @@ final class TestTeams implements Teams.Lookup {
         return team;
     }
 
+    /**
+     * Makes {@code team} the nearest team to the test's structure, off any island, as Skyblock Builder names the nearest
+     * team in the void beside an island.
+     */
+    static void nearest(GameTestHelper helper, UUID team) {
+        NEAREST.put(helper.getBounds(), team);
+    }
+
     static void join(Player player, UUID team) {
         PLAYERS.put(player.getUUID(), team);
     }
@@ -60,7 +69,25 @@ final class TestTeams implements Teams.Lookup {
                 smallestSize = size;
             }
         }
-        return smallest != null ? smallest : installed.at(level, pos);
+        if (smallest != null) {
+            return smallest;
+        }
+        for (var near : NEAREST.entrySet()) {
+            if (near.getKey().contains(pos.getCenter())) {
+                return near.getValue();
+            }
+        }
+        return installed.at(level, pos);
+    }
+
+    @Override
+    public boolean onIsland(ServerLevel level, BlockPos pos) {
+        for (AABB island : ISLANDS.keySet()) {
+            if (island.contains(pos.getCenter())) {
+                return true;
+            }
+        }
+        return installed.onIsland(level, pos);
     }
 
     @Override
