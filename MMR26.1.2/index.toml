@@ -38,7 +38,7 @@ hash = "ba9a93fd7ff504848df2ce218cd28682b6aa1671f0f593f07a972c47785d3086"
 
 [[files]]
 file = "kubejs/assets/adminshop/lang/en_us.json"
-hash = "645e202124213dad13a029937da501f58bcbac021687552b9263da2618cbe77e"
+hash = "8d802c229fd422f0137b53751f4fa2cbd2edf738b9ddf3dfb21ef69c57da9152"
 
 [[files]]
 file = "kubejs/assets/emi/index/stacks/mechanicalmasteryreborn_manual.json"
@@ -194,7 +194,7 @@ hash = "c8a43e55406703ac2ce08dbf78ca3a9c19aa977525879426ddf009ade64e3951"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/protection.json"
-hash = "287c31c0bba97eb147e801bc95a1583612878eaae1c836244cc1e67da21a481d"
+hash = "8f24d012cb510e953b7b3eee1eaf4ee792237336afa8dc30da70eba1a0acdea8"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/gateways/gateways/assault.json"
@@ -257,8 +257,16 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/ara_vitae/vital_essence.json"
 hash = "663e3e55c0010969f02567937bbebfb0c5d5c11d0ddbfe5913066f109c0ede94"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/charged_rift.json"
+hash = "45a73af69eaf9b5a026a9e16ecb127aa5c47800366b4fd8d38155f04bc31a1c0"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/ward_tallow.json"
+hash = "16985818ad421aa1cb37dcb56bb81503e5378c3ff09d87afaec9a16fc19c1f88"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/warding_essence.json"
-hash = "06958b37ec4faf76cf5e9f4c21092fb731cb87944908ff2e972fd80c11e80032"
+hash = "238234046e86dedc519535d68771b906534e5ff9bf55afa8021a960b59b18d64"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/incubation/galvanic_essence.json"
@@ -311,6 +319,10 @@ hash = "c21986feb526fa1cbb76c2470684f6715be0f0ee9ee3f07245ea78415c55dac6"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/cow_spawn_egg.json"
 hash = "282d0299ce869119a2406ef1a28df58891d6f9f75c43b552462ea72ce7e0bbf4"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/crude_oil.json"
+hash = "7346e1dee4f26bad747ed78e525b85e87e3b53d91c876b572a239dd411889f7c"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/dark_oak_sapling.json"
@@ -379,6 +391,10 @@ hash = "b32364af7f2567d24a0739d7e17bb2cd7562a023021310d5fd4135ccd523cf56"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/permit_reborn_essence_sell.json"
 hash = "07644fd45e21a074134f713519b0f324eec79faf6e31bcee5c2c46bc18402ba0"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/permit_reborn_oil_buy.json"
+hash = "f7baffe9b5e6aaa4b7bed1020cca37563826745df548a00992476a740a3879f3"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/permit_reborn_ore_buy.json"
