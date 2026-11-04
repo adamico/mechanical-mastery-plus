@@ -1,6 +1,12 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "mechanicalmasteryreborn:item/obsidian_flakes"
+    "model": "mechanicalmasteryreborn:item/obsidian_flakes",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -13951174
+      }
+    ]
   }
 }
