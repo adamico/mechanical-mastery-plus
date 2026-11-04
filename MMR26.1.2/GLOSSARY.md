@@ -81,7 +81,7 @@ One of the four blocks of the island, one for each Transmuted Essence, set on C.
 _Avoid_: input (a Recycler's part), socket, slot
 
 **Chain**:
-The path a challenge's mods take a team up to the challenge's Transmuted Essence, from whatever their own recipes take. What an essence decomposes into is recycled or crafted into that, and that recycling is no part of the challenge.
+The path a challenge's mods take a team up to the challenge's Transmuted Essence, from whatever their own recipes take, or, for a challenge whose mod has no processing of its own, the path the pack writes on the suite's machines. What an essence decomposes into is recycled or crafted into that, and that recycling is no part of the challenge.
 _Avoid_: processing chain, path
 
 **Handicap**:
@@ -105,7 +105,7 @@ A block that fights the Assault's mobs on its own, fed by the factory with FE or
 _Avoid_: turret, tower
 
 **Rift Shard**:
-The drop only an Assault's mobs and a home gate give, which the Warding Essence is made from with ordinary drops and something recycled from the loop. A team keeps what it hasn't used past a win or a reset.
+The drop only an Assault's mobs and a home gate give, the harder mobs of its deeper waves giving more of it, which the protection challenge's Chain takes with the Assault's ordinary drops and oil up to the Warding Essence. A team keeps what it hasn't used past a win or a reset.
 _Avoid_: ward shard, gate drop
 
 **Generator**:
