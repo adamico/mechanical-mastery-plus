@@ -10,7 +10,7 @@ hash = "049d9bad4a2db993e486c4a6efb235ac0946fdab67a553b82ee73f5226c1976c"
 
 [[files]]
 file = "config/skyblockbuilder/dimensions.json5"
-hash = "942e81b971479152385b4ad9c3471653325f04946c34d9dd2aefc02c744517bc"
+hash = "e94813faad04d30b2f63072c2c7917f2aeb70813a5518154f673d55a65ea3758"
 
 [[files]]
 file = "config/skyblockbuilder/templates.json5"
