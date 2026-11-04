@@ -8,17 +8,6 @@
     "preventTravel": false
   },
   "recipes": [
-    "theurgy:crafting/shaped/logistics_connector_node",
-    "theurgy:crafting/shaped/logistics_item_extractor",
-    "theurgy:crafting/shaped/logistics_item_inserter",
-    "theurgy:crafting/shaped/logistics_nexus",
-    "theurgy:crafting/shaped/logistics_capability_probe",
-    "theurgy:crafting/shaped/logistics_capability_proxy",
-    "theurgy:crafting/shapeless/logistics_item_extractor_from_inserter",
-    "theurgy:crafting/shapeless/logistics_item_inserter_from_extractor",
-    "theurgy:crafting/shaped/reformation_result_pedestal",
-    "theurgy:crafting/shaped/reformation_source_pedestal",
-    "theurgy:crafting/shaped/reformation_target_pedestal",
     "mechanicalmasteryreborn:incubation/galvanic_essence"
   ]
 }

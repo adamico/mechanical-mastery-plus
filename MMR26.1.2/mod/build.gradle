@@ -47,9 +47,7 @@ def chapters = 'curse.maven:chapters-1538047:9306837'
 def theurgy = 'curse.maven:theurgy-430636:9359578'
 def gateways = 'curse.maven:gateways-to-eternity-417802:8502258'
 def placebo = 'curse.maven:placebo-283644:8502256'
-// AdminShop's 26.1.2 port isn't published anywhere a build can fetch it yet, so its jar is in libs/ until
-// it is; a coordinate replaces it then.
-def adminShop = files('libs/adminshop-26.1.2-2.3.2.jar')
+def adminShop = 'curse.maven:adminshop-overhauled-876270:9409244'
 
 dependencies {
     // Each optional to players, and named only by its own plugin under compat/, which loads only when
@@ -66,7 +64,7 @@ dependencies {
     // FTB Chunks, whose explosion protection the Assault lifts for its team while it runs (#241).
     compileOnly(ftbChunks) { transitive = false }
     // AdminShop, the money challenge's mod: the money handicap acts on its Accounts and halves its sales (#213).
-    compileOnly adminShop
+    compileOnly(adminShop) { transitive = false }
     // Chapters, which locks a challenge's chain until the team starts it (ADR 0007).
     compileOnly(chapters) { transitive = false }
     // Theurgy, the energy challenge's mod: its in-world HUD says why a locked apparatus does no work (#214). Its

@@ -5,7 +5,10 @@
 #   - no Sell Offer names an item an essence's mix holds, so what is sold takes a step after decomposing;
 #   - no item or fluid has two Sell Offers, since a Seller takes whichever it finds first;
 #   - whatever the Shop both buys and sells, it pays less than it charges;
-#   - nothing only the Shop gives is sold back (water, the Permits).
+#   - nothing only the Shop gives is sold back (water, the Permits);
+#   - the Aureate Essence costs at least what the Shop pays for any other Transmuted Essence, so a won chain's extras,
+#     sold at the money handicap's share while the challenge is played, help buy its quota but never swap for it one
+#     for one (#232).
 #
 #   scripts/check_offers.py
 #
@@ -20,6 +23,9 @@ OFFERS = PACK / "kubejs/data/mechanicalmasteryreborn/recipe/shop"
 MIXES = PACK / "kubejs/server_scripts/decomposing.js"
 # What only the Shop gives: water, whose every other source starts from a bought bucket, and AdminShop's Permits.
 SHOP_ONLY = {"minecraft:water", "adminshop:permit"}
+# The Transmuted Essence the Shop only sells. The only essences it buys are the other Transmuted Essences.
+AUREATE = "mechanicalmasteryreborn:aureate_essence"
+ESSENCE = re.compile(r"mechanicalmasteryreborn:\w+_essence")
 
 
 def mixes():
@@ -62,6 +68,13 @@ def main():
     for good, (path, unit) in sells.items():
         if good in buys and unit >= buys[good][1]:
             problems.append(f"{path}: pays {unit:g} cents a unit for {good}, which {buys[good][0]} charges {buys[good][1]:g}")
+    if AUREATE not in buys:
+        problems.append(f"no Buy Offer sells {AUREATE}")
+    else:
+        path, unit = buys[AUREATE]
+        for good in sorted(good for good in sells if ESSENCE.fullmatch(good)):
+            if sells[good][1] > unit:
+                problems.append(f"{path}: charges {unit:g} cents for {AUREATE}, less than {sells[good][0]} pays for {good}")
     for problem in problems:
         print(problem, file=sys.stderr)
     print(f"check_offers: {len(sells)} Sell and {len(buys)} Buy Offers, against {len(held)} items in the mixes: "

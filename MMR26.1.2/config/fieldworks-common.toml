@@ -1,0 +1,5 @@
+#Whether new patches of each resource, and new oil fields, generate in newly explored terrain.
+[generate]
+	#Off: no patch or oil field generates, whatever the switches below say.
+	#Reborn sells its ores from the shop, so Fieldworks generates no patches or oil fields.
+	all = false

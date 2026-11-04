@@ -1,0 +1,13 @@
+{
+  "values": [
+    "theurgy:sal_ammoniac_accumulator",
+    "theurgy:liquefaction_cauldron",
+    "theurgy:fermentation_vat",
+    "theurgy:digestion_vat",
+    "theurgy:calcination_oven",
+    "theurgy:distiller",
+    "theurgy:mercury_catalyst",
+    "theurgy:incubator",
+    "theurgy:sulfuric_flux_emitter"
+  ]
+}

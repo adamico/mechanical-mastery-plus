@@ -3,7 +3,7 @@
   "price": 30000,
   "permit": "reborn_money",
   "result": {
-    "id": "neovitae:essentia_vitae",
+    "id": "neovitae:essentia_vitae_source",
     "amount": 1000
   }
 }
