@@ -9,13 +9,13 @@
     ]
   },
 
-  // The only features generated: the dragon's obsidian towers, so the first fight has them, the
-  // return gateways of the outer End, as Skyblock Builder's defaults keep, and chorus on its highlands.
+  // The only features generated: the dragon's obsidian towers, so the first fight has them, and chorus
+  // on the outer End's highlands. Not its return gateways, which send a player to a fixed spot below
+  // the plain's top; the plain already leads back to the main island.
   "featuresToGenerate": {
     "allow_list": true,
     "elements": [
       "minecraft:end_spike",
-      "minecraft:end_gateway_return",
       "minecraft:chorus_plant"
     ]
   }

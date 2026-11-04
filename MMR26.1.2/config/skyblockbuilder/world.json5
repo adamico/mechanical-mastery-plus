@@ -9,8 +9,8 @@
     // A sea of lava, as in Skyblock Builder's Hellblock, under the floating fortresses.
     "minecraft:the_nether": "minecraft:bedrock,10*minecraft:lava",
 
-    // A plain of end stone with nothing but air above. Its top is at y 60, the lowest an End city
-    // stands on, so the main island rises out of it.
-    "minecraft:the_end": "60*minecraft:end_stone"
+    // A plain of end stone with nothing but air above. Its top block is at y 60, the lowest an End
+    // city's ground may be, so the main island rises out of it.
+    "minecraft:the_end": "61*minecraft:end_stone"
   }
 }
