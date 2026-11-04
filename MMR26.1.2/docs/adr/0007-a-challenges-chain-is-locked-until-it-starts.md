@@ -1,6 +1,6 @@
 # A challenge's chain is locked until the team starts it
 
-A challenge's chain stays locked for a team until the team starts that challenge at the lab, and stays unlocked from then on, past a win or a reset. Locking a chain means three rules, the same for every challenge:
+A challenge's chain stays locked for a team until the team starts that challenge at the lab, and stays unlocked from then on, past a win or a reset, though a stop locks it again (ADR 0013). Locking a chain means three rules, the same for every challenge:
 
 1. Before the team starts the challenge, its chain does no processing. The challenge's mods' machines do no work on the team's island, and the pack's own recipes for the chain, such as the Galvanic and Warding Essences', can't run on whatever machine makes them, a suite machine too.
 2. The challenge's mods' machines can always be crafted. What is locked is their work, never their crafting.

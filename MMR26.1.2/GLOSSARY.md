@@ -73,8 +73,12 @@ What a team plays once it has won all four challenges, for good: the Nether and 
 _Avoid_: endgame, chapter (for a challenge)
 
 **Challenge**:
-One of four goals, each bound to a fixed mod or set of mods, started and researched at the lab and followed through EMI, as Factorio's progression is, with no quest book. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. It is won by putting its quota of Transmuted Essence into its Port on C.O.D., which blocks the tier C.O.D. is making; a won challenge can't be played again. Its mods keep their own recipes. Its chain stays locked for a team until it starts the challenge, so nothing of it can be built ahead, and its machines, however they are had, do no work until then, though their crafting is never locked, and stays unlocked from then on, past a win or a reset. What its mods offer outside the chain, as the Shop, is never locked, and their items can still come from a mix, to be recycled.
+One of four goals, each bound to a fixed mod or set of mods, started and researched at the lab and followed through EMI, as Factorio's progression is, with no quest book. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. It is won by putting its quota of Transmuted Essence into its Port on C.O.D., which blocks the tier C.O.D. is making; a won challenge can't be played again. Its mods keep their own recipes. Its chain stays locked for a team until it starts the challenge, so nothing of it can be built ahead, and its machines, however they are had, do no work until then, though their crafting is never locked, and stays unlocked from then on, past a win or a reset, but not past a stop. What its mods offer outside the chain, as the Shop, is never locked, and their items can still come from a mix, to be recycled.
 _Avoid_: questline, chapter, stage
+
+**Stop**:
+A team leaving the challenge it plays at the lab, to take on another or come back to it better prepared. It is offered only once the attempt has reset, and made when every member online has asked for it. It ends the handicap and Inflation, loses what was put toward the quota, and locks the challenge's chain again until the team starts it anew, though a reset keeps it; the stopped challenge, or any other not won, can start at once.
+_Avoid_: abandon, quit, forfeit
 
 **Quota**:
 How many of its Transmuted Essence a challenge takes to win, against the tier C.O.D. is making. It grows with each challenge won, faster than the better core a win unlocks speeds a team up, so each challenge takes longer than the last.
@@ -129,7 +133,7 @@ A block the pack names as making energy, as Wireworks' engines, turbines and sol
 _Avoid_: power source
 
 **Lab**:
-The special block where a team chooses a handicap to start a challenge, and feeds science items to research what the challenge unlocks.
+The special block where a team chooses a handicap to start a challenge, asks for a stop, and feeds science items to research what the challenge unlocks.
 
 **Manual**:
 The pack's in-game book on how to build and work the companion mod's blocks, with 3D scenes, which every player is given once. It holds neither lore nor recipes, which are EMI's.
