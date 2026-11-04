@@ -51,7 +51,7 @@ final class FeDriveTests {
     private static void decomposes(GameTestHelper helper, int drives, boolean playingEnergy) {
         if (playingEnergy) {
             UUID team = TestTeams.claim(helper);
-            TeamState.get(helper.getLevel().getServer()).choose(team, Handicap.ENERGY, 0);
+            TeamState.get(helper.getLevel().getServer()).begin(team, Handicap.ENERGY, 0);
         }
         var build = RecyclerBuild.build(helper, Direction.SOUTH,
                 drives(Recycler.FE_DRIVE.get(), drives == 2 ? Recycler.FE_DRIVE.get() : Recycler.CASING.get()));

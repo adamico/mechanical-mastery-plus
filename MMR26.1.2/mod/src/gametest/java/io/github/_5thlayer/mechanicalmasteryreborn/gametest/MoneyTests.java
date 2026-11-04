@@ -38,7 +38,7 @@ final class MoneyTests {
 
     private static void startSetsAside(GameTestHelper helper) {
         UUID team = account(helper, 500);
-        helper.assertTrue(Challenges.start(server(helper), team, Handicap.MONEY), "the money challenge didn't start");
+        helper.assertTrue(Challenges.begin(server(helper), team, Handicap.MONEY), "the money challenge didn't start");
         helper.assertValueEqual(TestAccounts.balanceOf(team), 0L, "the Balance while the challenge is played");
         helper.assertValueEqual(state(helper).setAside(team), 500L, "what was set aside");
         helper.assertTrue(TestAccounts.holds(team, MoneyHandicap.PERMIT), "the team wasn't given " + MoneyHandicap.PERMIT);
@@ -48,7 +48,7 @@ final class MoneyTests {
     /** A team whose island has no FTB party yet has no Account, so nothing could be set aside or granted. */
     private static void refusedWithoutAnAccount(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
-        helper.assertFalse(Challenges.start(server(helper), team, Handicap.MONEY), "the money challenge started with no Account");
+        helper.assertFalse(Challenges.begin(server(helper), team, Handicap.MONEY), "the money challenge started with no Account");
         helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap");
         helper.succeed();
     }
@@ -57,7 +57,7 @@ final class MoneyTests {
     private static void staysUnlocked(GameTestHelper helper) {
         UUID team = account(helper, 0);
         helper.assertFalse(state(helper).unlocked(team, Handicap.MONEY), "the money challenge was unlocked before it started");
-        Challenges.start(server(helper), team, Handicap.MONEY);
+        Challenges.begin(server(helper), team, Handicap.MONEY);
         Challenges.end(server(helper), team);
         helper.assertTrue(state(helper).unlocked(team, Handicap.MONEY), "the money challenge was locked again after its end");
         helper.succeed();
@@ -65,7 +65,7 @@ final class MoneyTests {
 
     private static void endGivesBack(GameTestHelper helper) {
         UUID team = account(helper, 500);
-        Challenges.start(server(helper), team, Handicap.MONEY);
+        Challenges.begin(server(helper), team, Handicap.MONEY);
         TestAccounts.open(team, 120);
         helper.assertTrue(Challenges.end(server(helper), team), "the money challenge didn't end");
         helper.assertValueEqual(TestAccounts.balanceOf(team), 620L, "the Balance after the challenge");
@@ -75,7 +75,7 @@ final class MoneyTests {
 
     private static void resetSetsAside(GameTestHelper helper) {
         UUID team = account(helper, 500);
-        Challenges.start(server(helper), team, Handicap.MONEY);
+        Challenges.begin(server(helper), team, Handicap.MONEY);
         TestAccounts.open(team, 120);
         helper.assertTrue(Challenges.reset(server(helper), team), "the money challenge didn't reset");
         helper.assertValueEqual(TestAccounts.balanceOf(team), 0L, "the Balance after a reset");
@@ -88,7 +88,7 @@ final class MoneyTests {
     private static void salePaysHalf(GameTestHelper helper) {
         UUID team = account(helper, 0);
         helper.assertValueEqual(MoneyHandicap.sale(server(helper), team, 101), 101L, "a sale before the challenge");
-        Challenges.start(server(helper), team, Handicap.MONEY);
+        Challenges.begin(server(helper), team, Handicap.MONEY);
         helper.assertValueEqual(MoneyHandicap.sale(server(helper), team, 101), 50L, "a sale while it is played");
         Challenges.end(server(helper), team);
         helper.assertValueEqual(MoneyHandicap.sale(server(helper), team, 101), 101L, "a sale after it");
@@ -97,7 +97,7 @@ final class MoneyTests {
 
     private static void anotherChallenge(GameTestHelper helper) {
         UUID team = account(helper, 500);
-        Challenges.start(server(helper), team, Handicap.ENERGY);
+        Challenges.begin(server(helper), team, Handicap.ENERGY);
         helper.assertValueEqual(TestAccounts.balanceOf(team), 500L, "the Balance during the energy challenge");
         helper.assertValueEqual(MoneyHandicap.sale(server(helper), team, 101), 101L, "a sale during the energy challenge");
         helper.assertFalse(TestAccounts.holds(team, MoneyHandicap.PERMIT), "the energy challenge gave " + MoneyHandicap.PERMIT);
@@ -109,7 +109,7 @@ final class MoneyTests {
     /** Through the codec the world saves and loads the team state by, as {@code lab_handicap_survives_a_save_and_load} does. */
     private static void survivesASaveAndLoad(GameTestHelper helper) {
         UUID team = account(helper, 500);
-        Challenges.start(server(helper), team, Handicap.MONEY);
+        Challenges.begin(server(helper), team, Handicap.MONEY);
         var ops = helper.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE);
         var codec = TeamState.TYPE.codec();
         TeamState loaded = codec.parse(ops, codec.encodeStart(ops, state(helper)).getOrThrow()).getOrThrow();

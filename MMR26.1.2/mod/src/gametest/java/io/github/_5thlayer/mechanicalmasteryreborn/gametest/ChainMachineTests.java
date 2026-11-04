@@ -59,7 +59,7 @@ final class ChainMachineTests {
         UUID team = TestTeams.claim(helper);
         helper.setBlock(AT, MACHINE);
         helper.assertValueEqual(lockedAt(helper, AT), Optional.of(Handicap.ENERGY), "the machine's lock before its challenge");
-        Challenges.start(helper.getLevel().getServer(), team, Handicap.ENERGY);
+        Challenges.begin(helper.getLevel().getServer(), team, Handicap.ENERGY);
         helper.assertValueEqual(lockedAt(helper, AT), Optional.empty(), "the machine's lock once its challenge started");
         helper.succeed();
     }
@@ -70,7 +70,7 @@ final class ChainMachineTests {
         var server = helper.getLevel().getServer();
         helper.setBlock(AT, Blocks.BREWING_STAND);
         helper.assertValueEqual(lockedAt(helper, AT), Optional.of(Handicap.LIFE), "the life machine's lock before life");
-        Challenges.start(server, team, Handicap.ENERGY);
+        Challenges.begin(server, team, Handicap.ENERGY);
         helper.assertValueEqual(lockedAt(helper, AT), Optional.of(Handicap.LIFE), "the life machine's lock once energy started");
         Challenges.end(server, team);
         Challenges.begin(server, team, Handicap.LIFE);
@@ -82,7 +82,7 @@ final class ChainMachineTests {
         UUID team = TestTeams.claim(helper);
         var server = helper.getLevel().getServer();
         helper.setBlock(AT, MACHINE);
-        Challenges.start(server, team, Handicap.ENERGY);
+        Challenges.begin(server, team, Handicap.ENERGY);
         Challenges.reset(server, team);
         Challenges.end(server, team);
         helper.assertValueEqual(lockedAt(helper, AT), Optional.empty(), "the machine's lock after a reset and the challenge's end");
@@ -94,7 +94,7 @@ final class ChainMachineTests {
         TestTeams.claim(helper, OTHER_ISLAND, OTHER_ISLAND);
         helper.setBlock(AT, MACHINE);
         helper.setBlock(OTHER_ISLAND, MACHINE);
-        Challenges.start(helper.getLevel().getServer(), team, Handicap.ENERGY);
+        Challenges.begin(helper.getLevel().getServer(), team, Handicap.ENERGY);
         helper.assertValueEqual(lockedAt(helper, AT), Optional.empty(), "the lock of the team that started energy");
         helper.assertValueEqual(lockedAt(helper, OTHER_ISLAND), Optional.of(Handicap.ENERGY), "the lock of a team that hasn't");
         helper.succeed();

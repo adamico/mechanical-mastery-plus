@@ -25,7 +25,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 /**
  * The lab: each handicap with what it costs, and a button to choose it, in the suite's stand-in machine look. Only
- * the ones the lab offers can be chosen; the others are shown as coming later, the one the team plays as played, and the ones it has won as won.
+ * the lab's team can choose, one at a time; the one it plays is shown as played, and the ones it has won as won.
  */
 final class LabScreen extends AbstractContainerScreen<LabMenu> {
 
@@ -40,13 +40,10 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
     private static final int ROW = 26;
     private static final int BUTTON_WIDTH = 72;
     private static final int BUTTON_HEIGHT = 20;
-    /** A handicap the lab doesn't offer yet. */
-    private static final int GREYED = 0xFF707070;
     private static final Component INTRO = Component.translatable("mechanicalmasteryreborn.lab.intro");
     private static final Component CHOOSE = Component.translatable("mechanicalmasteryreborn.lab.choose");
     private static final Component PLAYED = Component.translatable("mechanicalmasteryreborn.lab.played");
     private static final Component WON = Component.translatable("mechanicalmasteryreborn.lab.won");
-    private static final Component LATER = Component.translatable("mechanicalmasteryreborn.lab.later");
     private static final Component NOT_MEMBER = Component.translatable("mechanicalmasteryreborn.lab.not_member");
     private static final Component NOT_MEMBER_TOOLTIP = Component.translatable("mechanicalmasteryreborn.lab.not_member.tooltip");
 
@@ -108,9 +105,9 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
         for (Handicap handicap : Handicap.values()) {
             Button button = buttons.get(handicap.ordinal());
             boolean won = menu.won(handicap);
-            boolean notMember = handicap.choosable() && chosen.isEmpty() && !won && !menu.isMember();
+            boolean notMember = chosen.isEmpty() && !won && !menu.isMember();
             button.active = menu.canChoose(handicap);
-            button.setMessage(chosen.equals(Optional.of(handicap)) ? PLAYED : won ? WON : !handicap.choosable() ? LATER : notMember ? NOT_MEMBER : CHOOSE);
+            button.setMessage(chosen.equals(Optional.of(handicap)) ? PLAYED : won ? WON : notMember ? NOT_MEMBER : CHOOSE);
             button.setTooltip(notMember ? Tooltip.create(NOT_MEMBER_TOOLTIP) : null);
         }
     }
@@ -129,10 +126,9 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
         int nameWidth = imageWidth - 3 * MachineDraw.MARGIN - BUTTON_WIDTH;
         for (Handicap handicap : Handicap.values()) {
             int y = rowTop(handicap);
-            int color = handicap.choosable() ? MachineDraw.TEXT : GREYED;
             graphics.text(font, MachineDraw.fitted(font, Challenges.name(handicap).withStyle(ChatFormatting.BOLD), nameWidth),
-                    MachineDraw.MARGIN, y, color, false);
-            graphics.text(font, MachineDraw.fitted(font, Challenges.cost(handicap), nameWidth), MachineDraw.MARGIN, y + COST_Y, color, false);
+                    MachineDraw.MARGIN, y, MachineDraw.TEXT, false);
+            graphics.text(font, MachineDraw.fitted(font, Challenges.cost(handicap), nameWidth), MachineDraw.MARGIN, y + COST_Y, MachineDraw.TEXT, false);
         }
     }
 

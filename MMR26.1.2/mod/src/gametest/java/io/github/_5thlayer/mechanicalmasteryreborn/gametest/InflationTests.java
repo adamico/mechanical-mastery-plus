@@ -67,7 +67,7 @@ final class InflationTests {
             helper.assertTrue(state(helper).made(team) > 0, "the awake C.O.D. made nothing");
             helper.assertTrue(state(helper).inflation(team).isEmpty(), "a team that plays no challenge has Inflation");
             long now = helper.getLevel().getServer().overworld().getGameTime();
-            helper.assertTrue(Challenges.start(helper.getLevel().getServer(), team, Handicap.ENERGY), "the challenge didn't start");
+            helper.assertTrue(Challenges.begin(helper.getLevel().getServer(), team, Handicap.ENERGY), "the challenge didn't start");
             Inflation inflation = state(helper).inflation(team).orElseThrow();
             helper.assertValueEqual(inflation.began(), now, "when the challenge began");
             helper.assertValueEqual(inflation.made(), 0L, "the essence made since the challenge began, as it begins");
@@ -231,7 +231,7 @@ final class InflationTests {
     }
 
     private static void start(GameTestHelper helper, UUID team) {
-        helper.assertTrue(Challenges.start(helper.getLevel().getServer(), team, Handicap.ENERGY), "the challenge didn't start");
+        helper.assertTrue(Challenges.begin(helper.getLevel().getServer(), team, Handicap.ENERGY), "the challenge didn't start");
     }
 
     private static void expect(GameTestHelper helper, UUID team, long made, long decomposed, long excess, String when) {
