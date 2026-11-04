@@ -194,35 +194,59 @@ hash = "287c31c0bba97eb147e801bc95a1583612878eaae1c836244cc1e67da21a481d"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/gateways/gateways/assault.json"
-hash = "6231aacf4fdafce3d382434b02d23f44ae3c473fd1220585fa9ff0e202c8d12c"
+hash = "93412ca77bdb5a2a57c4c9862a7ca64b287076bbae0911e86e17d9c3153cee21"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/gateways/gateways/home.json"
-hash = "7c5398da1ad717ca688e10a5bdee8f838bb0aaf6dd9f6c39efe5ea1f52458957"
+hash = "80d3dac8e97bffdcd21e680e4a7be1075da2e721087731288a151ec9d00ca338"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/blaze.json"
+hash = "19828b9c27ecac01959520e51d553cc7d325b8edcaa2ab839cb25f771248ac8d"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/breeze.json"
+hash = "e4eeff32b7ff9508c7b29f4595225a8a77044bd78d1453e71e321bb2156881d5"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/creeper.json"
-hash = "593db3b9da5e3ec201b077e068c890ddacc3aeb5e156479e526bd1a5d7116276"
+hash = "4a9f0ae439f4d11a17702a9f05a31439de936a00ab865deedce08dd21257ae00"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/enderman.json"
+hash = "c0afb5b77783e1d8ab7f5c8efa99898cc67815480b972fe072506141d9693ce0"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/evoker.json"
+hash = "9ae21e65d91b6af4559868e7f94ae9dbc2233cc5e95df8f6c3b2824871852a8a"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/husk.json"
-hash = "41d5cf27ba6ba490c517ec6817bf731fd8698a8153bf3268338ba9c21ae9351a"
+hash = "6e868dd8be6fe55626dfc02c528ff53e9b33a48b17b484125d33798a1cc03d00"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/skeleton.json"
-hash = "49bc9d8492b2864e20f163a6c6972c5facfdbdc8c074f3b94c9a6dea609b096e"
+hash = "2b4ac95e211907cefbb9ce4df25c2917d596d3fb241abd3f29dcc6d5c4509788"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/slime.json"
+hash = "8af7fc8c37b34dc2bd833a5ce45ffb860b779bd502a898bf3b9c2fe3afcb7406"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/spider.json"
-hash = "54e1208fe11223db3cbe05bbffc324dac0bedbaadf2f31cf4acd02ca87a8f77e"
+hash = "ba097c52c4081140c935a1b98812523b27293c1498c38154df90af31b80fbd74"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/vindicator.json"
-hash = "4273ed7ad03198c48adac0a77e0d85c7c7ddc4ec636a7ba5d3c2f1652c6cbaf6"
+hash = "aba59c8424711b935df4cf2f295cfe66629e0cfd327f467205264a98bd540125"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/witch.json"
+hash = "2dabaec896cf29954e46b4fd99deee73da6f4791533dd372ee9b5af8ace40980"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/zombie.json"
-hash = "da7cf6788dba7973f2a16ea3363a7e5f78792b1bd909f5be074bf2bb441c5107"
+hash = "974d1dc7aa558ba48b2dd53f5326bdf3350d9a1e69bcaf3fe843563236f9e80e"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/ara_vitae/vital_essence.json"
