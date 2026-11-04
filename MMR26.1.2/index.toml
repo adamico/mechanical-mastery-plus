@@ -619,11 +619,6 @@ hash = "b2955f4ece5ef911c9afcc59f560d622f717824ccc239b1e191aed2cabf385da"
 metafile = true
 
 [[files]]
-file = "mods/block-runner.pw.toml"
-hash = "eb16142adc70a313cb70ab751c55db352edcf95a7d06c867ee28a2ff587cf8dc"
-metafile = true
-
-[[files]]
 file = "mods/bridging-mod.pw.toml"
 hash = "01dcbab92c6220279f00cb53d0d4408d04c949125df94bf00d26f39023a508bb"
 metafile = true
@@ -631,11 +626,6 @@ metafile = true
 [[files]]
 file = "mods/chapters.pw.toml"
 hash = "4e429f1a57dfd92bd6be64e6f9fa8f5b9fc2e49dde5577017e29d3069f61bbcd"
-metafile = true
-
-[[files]]
-file = "mods/clean-swing-through-grass.pw.toml"
-hash = "a2082c8b1f93c0391f305d0a74419e7cfc599561d7fc6cf3e1fcebbac086183f"
 metafile = true
 
 [[files]]
@@ -784,11 +774,6 @@ hash = "e52886e60c70a18a8a70f3e7781c1716498f4b4847df41b293d06de2cd53291d"
 metafile = true
 
 [[files]]
-file = "mods/ftb-materials.pw.toml"
-hash = "d95a7ae35dadf878eb2ba7bbfa31e873a4c585f3eb15a9460da7c43ae106fd6f"
-metafile = true
-
-[[files]]
 file = "mods/ftb-teams-forge.pw.toml"
 hash = "cb69112ea7c492ee73426fb503af2d834c8bafcd8341188c99ea6dc56d38de6f"
 metafile = true
@@ -909,11 +894,6 @@ hash = "24fbef7b816e9f90e0dd956308d5e722f4145af44b1b09eab186334a06f080fa"
 metafile = true
 
 [[files]]
-file = "mods/laserio.pw.toml"
-hash = "7b10b2f9479245472877fb03f6ced88c08fc08b7fb13ae6eab2ad56dabba2a69"
-metafile = true
-
-[[files]]
 file = "mods/leaves-be-gone.pw.toml"
 hash = "a5ddd04f775c13be9315a8871836ee2e6f76d03ec152d5fd5e76e90d1b45e70e"
 metafile = true
@@ -994,11 +974,6 @@ hash = "7f58f69079e947900d188726ed7c6b347d8b6c43082930e4aa2fea3f48102f97"
 metafile = true
 
 [[files]]
-file = "mods/polylib.pw.toml"
-hash = "e66b78399d401ca18b0e60e813d503527d34b02a42125dec688690943a38e36f"
-metafile = true
-
-[[files]]
 file = "mods/prickle.pw.toml"
 hash = "d183c8bb1fbad27908d4a11c4d6f9e7d41524e9c0d3ea2e14824d07a3f93a40d"
 metafile = true
@@ -1026,11 +1001,6 @@ metafile = true
 [[files]]
 file = "mods/searchables.pw.toml"
 hash = "82e084e5fe83f87a01bc7f030f5ca0d59274122e6d634bdcb5d4c9cb3385dd71"
-metafile = true
-
-[[files]]
-file = "mods/shrink_.pw.toml"
-hash = "3db64223746b3f8cf316e4efa28acd3506c2146a4483a955ed4a43165cb36570"
 metafile = true
 
 [[files]]
@@ -1076,11 +1046,6 @@ metafile = true
 [[files]]
 file = "mods/theurgy.pw.toml"
 hash = "ebaa28b2e0aa21a92fbdf9263d1da594767715f6e75e3f2ad517c6d847a723a4"
-metafile = true
-
-[[files]]
-file = "mods/time-in-a-bottle.pw.toml"
-hash = "cb3466babb4df1861a4fb29b97e8ca263c32526d3cc46545cc9fcf4807e657a3"
 metafile = true
 
 [[files]]
