@@ -449,6 +449,10 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/sheep_spawn_egg.json
 hash = "481fd3477fcac28398f0f4d978058d7a71cb514ba94599d29cc38c0a9928e9ad"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/soul_soil.json"
+hash = "67029a72257963fbc3df51a197cbc7802932f3960afa48563680009ef6b7c817"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/spruce_sapling.json"
 hash = "871693b6af0157f4738e864bf1ea28540c9bfdbaf5741de45cb59697d4855675"
 
