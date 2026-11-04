@@ -7,6 +7,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
+import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingTable;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
@@ -23,7 +24,7 @@ import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlers
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 /**
- * The client's side: C.O.D.'s and the lab's screens, the items on a Recycler output's shelf, the recycling table EMI
+ * The client's side: C.O.D.'s and the lab's screens, the items on a Recycler output's shelf, the Electric Defence's sparks, the recycling table EMI
  * shows, the challenge a chain machine's tooltip names, what a food would feed under the life handicap, and how a team's Inflation bar is drawn.
  */
 @Mod(value = MechanicalMasteryReborn.MOD_ID, dist = Dist.CLIENT)
@@ -68,5 +69,6 @@ public final class MechanicalMasteryRebornClient {
 
     private static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(Recycler.OUTPUT_ENTITY.get(), RecyclerOutputRenderer::new);
+        event.registerBlockEntityRenderer(Defences.FE_DEFENCE_ENTITY.get(), FeDefenceRenderer::new);
     }
 }
