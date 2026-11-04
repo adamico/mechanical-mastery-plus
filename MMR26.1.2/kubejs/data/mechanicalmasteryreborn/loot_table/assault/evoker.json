@@ -48,10 +48,7 @@
           "type": "minecraft:item",
           "name": "mechanicalmasteryreborn:rift_shard",
           "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 3
-            }
+            { "function": "minecraft:set_count", "count": 3 }
           ]
         }
       ]

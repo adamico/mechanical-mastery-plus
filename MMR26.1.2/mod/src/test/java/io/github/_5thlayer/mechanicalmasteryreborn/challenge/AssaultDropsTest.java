@@ -44,7 +44,7 @@ class AssaultDropsTest {
      * The mobs whose vanilla tables give a drop only to a player's kill, so whose Assault tables copy those tables' pools
      * without that condition, and the drops each copy keeps that the Chain, or going deep, is for.
      */
-    private static final Map<String, List<String>> INLINED = Map.of(
+    private static final Map<String, List<String>> COPIED_VANILLA_DROPS = Map.of(
             "zombie", List.of("minecraft:rotten_flesh", "minecraft:iron_ingot"),
             "husk", List.of("minecraft:rotten_flesh", "minecraft:iron_ingot"),
             "spider", List.of("minecraft:string", "minecraft:spider_eye"),
@@ -113,11 +113,15 @@ class AssaultDropsTest {
             JsonObject table = read(TABLES.resolve(mob.getKey() + ".json"));
             List<JsonObject> pools = table.getAsJsonArray("pools").asList().stream().map(JsonElement::getAsJsonObject).toList();
             boolean vanilla = pools.stream().anyMatch(pool -> pool.toString().contains("\"value\":\"minecraft:entities/" + mob.getKey() + "\""));
-            for (String drop : INLINED.getOrDefault(mob.getKey(), List.of())) {
+            for (String drop : COPIED_VANILLA_DROPS.getOrDefault(mob.getKey(), List.of())) {
                 assertTrue(pools.stream().anyMatch(pool -> pool.toString().contains("\"name\":\"" + drop + "\"")),
                         mob.getKey() + "'s table leaves out its " + drop);
             }
-            assertTrue(vanilla != INLINED.containsKey(mob.getKey()), mob.getKey() + "'s table neither names nor copies its vanilla drops, or both");
+            if (COPIED_VANILLA_DROPS.containsKey(mob.getKey())) {
+                assertFalse(vanilla, mob.getKey() + "'s table both copies and names its vanilla table");
+            } else {
+                assertTrue(vanilla, mob.getKey() + "'s table leaves out its vanilla drops");
+            }
             List<Drop> shards = pools.stream().filter(pool -> pool.toString().contains(SHARD)).map(AssaultDropsTest::drop).toList();
             assertEquals(List.of(mob.getValue()), shards, mob.getKey() + "'s Rift Shards");
         }
