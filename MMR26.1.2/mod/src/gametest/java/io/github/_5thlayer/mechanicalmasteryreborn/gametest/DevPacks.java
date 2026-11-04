@@ -16,7 +16,8 @@ import net.neoforged.neoforge.event.AddPackFindersEvent;
 
 /**
  * Switches on the Module's dev pack, {@code dev_pack/}, in the {@code client} run and its game-test
- * pack, {@code gametest_pack/}, in {@code gameTestServer}, each when the Module has one: datapacks
+ * pack, {@code gametest_pack/}, in {@code gameTestServer}, and the pack's assembling recipes, {@code suite_pack/}, in
+ * {@code suiteGameTestServer} (#252), each when the Module has one: datapacks
  * in {@code src/gametest/resources}, which only the Module's own runs load and the jar leaves out
  * (libworks ADR 0004). The convention plugin names the run in {@code libworks.run}.
  */
@@ -34,6 +35,7 @@ final class DevPacks {
         String folder = switch (System.getProperty("libworks.run", "")) {
             case "client" -> "dev_pack";
             case "gameTestServer" -> "gametest_pack";
+            case "suiteGameTestServer" -> "suite_pack";
             default -> null;
         };
         if (folder == null || !has(folder)) {

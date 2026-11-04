@@ -8,6 +8,8 @@
     "preventTravel": false
   },
   "recipes": [
+    "mechanicalmasteryreborn:assembling/ward_tallow",
+    "mechanicalmasteryreborn:assembling/charged_rift",
     "mechanicalmasteryreborn:assembling/warding_essence"
   ]
 }

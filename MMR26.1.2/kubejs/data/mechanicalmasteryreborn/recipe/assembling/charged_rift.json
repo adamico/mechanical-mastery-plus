@@ -1,0 +1,17 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting-with-fluid",
+  "ingredients": [
+    { "ingredient": "mechanicalmasteryreborn:rift_shard", "count": 2 },
+    { "ingredient": "fieldworks:tar", "count": 1 },
+    { "ingredient": "minecraft:spider_eye", "count": 1 },
+    { "ingredient": "minecraft:slime_ball", "count": 1 }
+  ],
+  "fluid_ingredients": [
+    { "ingredient": "mechanicalmasteryreborn:ward_tallow", "amount": 250 }
+  ],
+  "results": [
+    { "id": "mechanicalmasteryreborn:charged_rift", "count": 1 }
+  ],
+  "time": 100
+}

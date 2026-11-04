@@ -1,0 +1,16 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting-with-fluid",
+  "ingredients": [
+    { "ingredient": "minecraft:rotten_flesh", "count": 4 },
+    { "ingredient": "minecraft:bone_meal", "count": 2 }
+  ],
+  "fluid_ingredients": [
+    { "ingredient": "wireworks:steam", "amount": 1000 }
+  ],
+  "results": [],
+  "fluid_results": [
+    { "id": "mechanicalmasteryreborn:ward_tallow", "amount": 500 }
+  ],
+  "time": 100
+}

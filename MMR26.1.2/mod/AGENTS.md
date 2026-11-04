@@ -2,7 +2,7 @@
 
 Reborn's own blocks and machines (MMR26.1.2 ADR 0003): C.O.D., the essences, and later the Recycler, the lab and the handicaps. Started from the libworks template (5thlayer/libworks) and built on its convention plugin, but kept in this repo's Reborn folder rather than a repo of its own. The pack consumes it as a released jar, like the suite, and `../.packwizignore` keeps this folder out of the pack. Its terms are the line's, in `../GLOSSARY.md` and the root `GLOSSARY.md`; its issues are Reborn's, labelled `26.1.2`.
 
-It depends on no suite mod at compile time, only on the libworks runtime it nests; the plugin's `checkPlaysAlone` fails a build that ships a suite mod's id.
+Its `src/main` depends on no suite mod at compile time, only on the libworks runtime it nests; the plugin's `checkPlaysAlone` fails a build that ships a suite mod's id.
 
 ## Where the template's pieces went
 
@@ -21,7 +21,8 @@ A registry id is saved in players' worlds, so once released it never changes. Th
 
 - `sh ./gradlew build` runs the JUnit tests, on a plain JVM with no Minecraft.
 - `sh ./gradlew runGameTestServer` runs the game tests headless and names each one it ran; it fails if it ran none.
-- The `skillworks:gametest-loop` skill runs a subset, `--tests 'mechanicalmasteryreborn:<glob>' 1`, so a ticket's game tests share a name prefix (`chain_`, `cod_`, `core_tier_`, `essence_`, `fe_drive_`, `floor_`, `generator_`, `hand_`, `inflation_`, `life_`, `lab_`, `money_`, `pace_`, `port_`, `recipe_`, `recycler_`, `recycling_`, `yield_`).
+- The `skillworks:gametest-loop` skill runs a subset, `--tests 'mechanicalmasteryreborn:<glob>' 1`, so a ticket's game tests share a name prefix (`chain_`, `cod_`, `core_tier_`, `essence_`, `fe_drive_`, `floor_`, `generator_`, `hand_`, `inflation_`, `life_`, `lab_`, `money_`, `pace_`, `port_`, `recipe_`, `recycler_`, `recycling_`, `yield_`, and `warding_` in the suite run below).
+- `sh ./gradlew runSuiteGameTestServer` runs the suite game tests, the ones prefixed `warding_`, with the pack's own Craftworks, Wireworks, Fieldworks and Groundworks jars and the pack's `kubejs/data/mechanicalmasteryreborn/recipe/assembling/` as a datapack, so a Chain the pack writes on the suite's machines runs on a real Assembler (#252). `runGameTestServer` loads none of them and registers none of those tests. The suite mods' versions in `build.gradle` follow `../mods/*.pw.toml`, and its libworks runtime is the newest they nest, which CI builds by its tag.
 - The game tests play at a full yield, so amounts are exact; a test that needs another sets it for its body with `TestYield.at`.
 - Game-test code lives in the `gametest` source set, which never ships (libworks ADRs 0004 and 0011). A new test class is registered by a line in `MechanicalMasteryRebornGameTests.registerTests`, and its tests stand on the `gametest/platform` structure.
 - Neither run loads a client, so a change to a screen, a model or a texture isn't done when the tests pass: list it for the user to check in the dev client (`skillworks:quicklaunch`).

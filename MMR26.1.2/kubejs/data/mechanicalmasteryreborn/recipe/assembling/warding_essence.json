@@ -1,11 +1,15 @@
 {
   "type": "craftworks:assembling",
+  "category": "crafting-with-fluid",
   "ingredients": [
-    { "ingredient": "mechanicalmasteryreborn:rift_shard", "count": 4 },
-    { "ingredient": "minecraft:bone", "count": 2 },
+    { "ingredient": "mechanicalmasteryreborn:charged_rift", "count": 2 },
+    { "ingredient": "wireworks:plastic", "count": 2 },
     { "ingredient": "minecraft:string", "count": 2 },
     { "ingredient": "minecraft:gunpowder", "count": 1 },
     { "ingredient": "minecraft:iron_ingot", "count": 1 }
+  ],
+  "fluid_ingredients": [
+    { "ingredient": "minecraft:water", "amount": 1000 }
   ],
   "results": [
     { "id": "mechanicalmasteryreborn:warding_essence", "count": 1 }
