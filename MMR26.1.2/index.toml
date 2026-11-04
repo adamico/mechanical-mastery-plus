@@ -34,7 +34,7 @@ hash = "ba9a93fd7ff504848df2ce218cd28682b6aa1671f0f593f07a972c47785d3086"
 
 [[files]]
 file = "kubejs/assets/adminshop/lang/en_us.json"
-hash = "89017e4ebb0cf5a9284c03d5e87fea0a807063b7ef61e285e00a1ac5792157ad"
+hash = "645e202124213dad13a029937da501f58bcbac021687552b9263da2618cbe77e"
 
 [[files]]
 file = "kubejs/assets/emi/index/stacks/mechanicalmasteryreborn_manual.json"
@@ -66,7 +66,7 @@ hash = "94fb1d0f9f749bd80af85098f6782f1420d959364daa84d52ab0a4cce93b320c"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/lab.md"
-hash = "12682d8b754e5572542f7e7c9fc7713f5205e79d74389204106bfb9699b22535"
+hash = "872e89a68ac651dd6cf5773f2c64ebe20cf94435845b8537af4c802af8ced268"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/casing.md"
@@ -182,15 +182,15 @@ hash = "617c37066da43aee69c8faef18c7cb5a34ae7166a320428aff61cd9795b34ba6"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/energy.json"
-hash = "d6586fd0793d58c8a6917fa40efd4fcf02a4befd3bbc7183c72013d1dc8cb62c"
+hash = "f0a141edd134abdb5be046ba53fecb80cc3d2b929c18b96ee528f3e7a986a6e4"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/life.json"
-hash = "13c1c64b904f7b24018f7afc832f7c1896f61a013155cd1cda2844925ec65379"
+hash = "c8a43e55406703ac2ce08dbf78ca3a9c19aa977525879426ddf009ade64e3951"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/protection.json"
-hash = "5ec28791d947c06f88335ccd79fd63a510431d136c26e4c618e4b636bc715976"
+hash = "287c31c0bba97eb147e801bc95a1583612878eaae1c836244cc1e67da21a481d"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/gateways/gateways/assault.json"
@@ -227,10 +227,6 @@ hash = "da7cf6788dba7973f2a16ea3363a7e5f78792b1bd909f5be074bf2bb441c5107"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/ara_vitae/vital_essence.json"
 hash = "663e3e55c0010969f02567937bbebfb0c5d5c11d0ddbfe5913066f109c0ede94"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/home_gate_pearl.json"
-hash = "8b1b98d1059d900750e2d5ab49a6cac7b93579cb75b37cdede4abf5212e5cea6"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/warding_essence.json"
@@ -311,6 +307,10 @@ hash = "e90c05995f62fdf16eab442d50c184b6d89d91826c123264a99bbb631c198771"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/grass_block.json"
 hash = "6f1c42369ea754694e499df2b6f1f8e64f2c3380b08a3f856b51c99e4cd912be"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/home_gate_pearl.json"
+hash = "4edb1f5993895c8595fe9ec427f38f653dc25013fd15660993d6e66c341eee5f"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/iron_ore_block.json"
@@ -475,6 +475,14 @@ hash = "7b894a2300c56897b6bb20b235131150fb22ae3e31ee605ebfe29c6b7b9344dd"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/warding_essence.json"
 hash = "ede53ea642664e7ab70d559257b0462cb58d7ba1388a8053b323959f8f77a70a"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/tags/item/chain_machines/energy.json"
+hash = "8edf53916cbb45157b90fc47ff96e5715da0fcea3d11775aaf94ceba346a81d7"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/tags/item/chain_machines/life.json"
+hash = "5cee57303d4ea21046869d09df14ca5271fe1531b1397a95b5e1b8b50e701675"
 
 [[files]]
 file = "kubejs/server_scripts/craftworks_chapters.js"
@@ -810,6 +818,11 @@ hash = "2f80b76225243805e2fa0feaef7342599871ffcb22096c4de7d4218611307ed3"
 metafile = true
 
 [[files]]
+file = "mods/jei.pw.toml"
+hash = "e8a0443aceafeddfe53eac9afe5b79182cf2e9d5c8cb31c50e30086ecfc8a4ce"
+metafile = true
+
+[[files]]
 file = "mods/kc00l-craftworks.pw.toml"
 hash = "1314736039b144a30628077b5b9fcdb3bc0cd39510826157eab915f8ca4c55c3"
 metafile = true
@@ -857,6 +870,11 @@ metafile = true
 [[files]]
 file = "mods/max-health-fix.pw.toml"
 hash = "f70730fc284406a5dd8433526b0c1320d90f77b0c705c95bc0aab932558d37e3"
+metafile = true
+
+[[files]]
+file = "mods/mezzconfig.pw.toml"
+hash = "7bc0dea2f592b67098a2b6d13b9a0ff39c53aaa74dcb34970179430fe560cc6d"
 metafile = true
 
 [[files]]
