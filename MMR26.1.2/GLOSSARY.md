@@ -108,6 +108,14 @@ _Avoid_: turret, tower
 The drop only an Assault's mobs and a home gate give, the harder mobs of its deeper waves giving more of it, which the protection challenge's Chain takes with the Assault's ordinary drops and oil up to the Warding Essence. A team keeps what it hasn't used past a win or a reset.
 _Avoid_: ward shard, gate drop
 
+**Ward Tallow**:
+The companion mod's fluid that the protection challenge's Chain renders on an Assembler from the Assault's rotten flesh and bone meal with steam, and charges Rift Shards with. It is in no mix and the Shop never buys it.
+_Avoid_: tallow oil, rendered fat
+
+**Charged Rift**:
+The protection challenge's Chain's step between the Rift Shards and the Warding Essence: two shards charged on an Assembler with tar, a spider eye, a slime ball and Ward Tallow. Two of them, sealed with plastic, make a Warding Essence.
+_Avoid_: charged shard
+
 **Generator**:
 A block the pack names as making energy, as Wireworks' engines, turbines and solar panels are. It belongs to the team whose island it stands on, and while that team plays the energy challenge it gives the team no energy, saying why, and goes on for every other team.
 _Avoid_: power source

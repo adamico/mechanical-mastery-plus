@@ -1,0 +1,16 @@
+{
+  "type": "adminshop:item_buying",
+  "price": 500000,
+  "result": {
+    "id": "adminshop:permit",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {
+        "key": "reborn_oil_buy"
+      },
+      "minecraft:item_name": {
+        "translate": "adminshop.permit.reborn_oil_buy"
+      }
+    }
+  }
+}

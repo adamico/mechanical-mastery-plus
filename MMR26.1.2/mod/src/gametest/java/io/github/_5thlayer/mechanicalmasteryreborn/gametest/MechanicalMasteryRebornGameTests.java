@@ -23,6 +23,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Rotation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
 import net.neoforged.neoforge.event.RegisterGameTestsEvent;
@@ -99,6 +100,10 @@ public final class MechanicalMasteryRebornGameTests {
         AssaultTests.register(tests);
         AssaultAbsenceTests.register(tests);
         AssaultExplosionsTests.register(tests);
+        // The protection Chain on a real Assembler, in the suiteGameTestServer run alone, which loads Craftworks (#252).
+        if (ModList.get().isLoaded("craftworks")) {
+            WardingChainTests.register(tests);
+        }
         // Each test that records a decompose claims a team of its own.
         Teams.use(new TestTeams(Teams.installed()));
         // Each test that plays the money challenge opens an Account of its own.

@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn adds, or ch
 
 ## Unreleased
 
+- Ward Tallow, `mechanicalmasteryreborn:ward_tallow`, a fluid with a liquid block and a bucket that an Assembler's drain and fill slots take, and the Charged Rift, `mechanicalmasteryreborn:charged_rift`, the protection challenge's Chain's steps between the Assault's drops and the Warding Essence (#252). Both are in the Works tab after the Rift Shard, with stand-in art. The Charged Rift recycles from the recipe the pack writes for it; Ward Tallow is in no mix.
 - Jade shows on Theurgy's apparatus as on any other block, a locked one's "Unlocked by the Energy challenge" line included, since the pack turns off Theurgy's in-world HUD, which covered the challenges' boss bars. The mod no longer adds its line to Theurgy's HUD, nor hides Jade on Theurgy's blocks (#255).
 - Jade shows a Theurgy apparatus's processing as a bar with its percent while it works, as Theurgy's in-world HUD did (#255).
 - The Electric Defence has art of its own and no longer looks like a Recycler part: orange-tinted steel sides and a battery's top, from Malcolm Riley's unused-textures, with a few sparks crackling over its top, redrawn every few ticks, from the core its shots now start at (#256).

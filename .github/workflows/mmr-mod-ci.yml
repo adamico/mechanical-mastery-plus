@@ -66,6 +66,9 @@ jobs:
       # Each upstream the mod declares, the libworks runtime among them, from its tag.
       - run: ./gradlew -q libworksUpstreams | sh .libworks/.github/scripts/build-upstreams.sh
 
+      # The libworks runtime the suite game tests load, the newest the pack's suite mods nest (build.gradle, #252).
+      - run: echo '5thlayer/libworks runtime-v0.1.11 :runtime' | sh .libworks/.github/scripts/build-upstreams.sh
+
       # The Shop's Offers against the rules every Offer keeps, and the mixes they're checked against (#213).
       - run: python3 ../scripts/check_offers.py
 
@@ -75,14 +78,19 @@ jobs:
       # A headless server that runs the game tests and names each one; it fails if it ran none.
       - run: ./gradlew runGameTestServer
 
+      # The suite game tests: the protection Chain's recipes on a real Assembler, beside the pack's suite mods (#252).
+      - run: ./gradlew runSuiteGameTestServer
+
       - if: always()
         uses: actions/upload-artifact@v7
         with:
           name: gametest-report
           path: |
             MMR26.1.2/mod/build/reports/gametest.xml
+            MMR26.1.2/mod/build/reports/suite-gametest.xml
             MMR26.1.2/mod/build/reports/tests/
             MMR26.1.2/mod/run/gametest/logs/
+            MMR26.1.2/mod/run/suitetest/logs/
           if-no-files-found: ignore
 
   reuse:
