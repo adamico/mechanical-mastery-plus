@@ -26,6 +26,6 @@
     }
   ],
   "rewards": [
-    { "type": "gateways:stack", "stack": { "id": "mechanicalmasteryreborn:rift_shard", "count": 2 } }
+    { "type": "gateways:stack", "stack": { "id": "mechanicalmasteryreborn:rift_shard", "count": 1 } }
   ]
 }

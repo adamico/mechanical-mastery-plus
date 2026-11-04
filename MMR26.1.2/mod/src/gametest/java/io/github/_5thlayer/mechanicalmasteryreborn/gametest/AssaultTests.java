@@ -19,16 +19,24 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityProcessor;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
 
 /**
@@ -43,6 +51,9 @@ final class AssaultTests {
     private static final BlockPos OTHER_COD = new BlockPos(7, 2, 7);
     /** Ticks for a placed C.O.D. to have ticked. */
     private static final int TICKED = 2;
+    /** The table Gateways gives the slimes the Assault spawns; not in the game tests' data, nor needed to be. */
+    private static final ResourceKey<LootTable> ASSAULT_SLIME = ResourceKey.create(Registries.LOOT_TABLE,
+            Identifier.fromNamespaceAndPath("mechanicalmasteryreborn", "assault/slime"));
 
     /** The wave each of {@link #GATES}' gates opened at. */
     static final Map<UUID, Integer> WAVES = new ConcurrentHashMap<>();
@@ -75,6 +86,7 @@ final class AssaultTests {
         tests.test("assault_gate_moves_side_at_a_step", 20, AssaultTests::movesAtStep);
         tests.test("assault_shows_its_wave_and_side_on_the_challenge_bar", 20, AssaultTests::barShowsWaveAndSide);
         tests.test("assault_wave_command_sets_the_open_gates_wave", 20, AssaultTests::waveCommand);
+        tests.test("assault_slime_s_split_offs_drop_no_rift_shard", 1, AssaultTests::splitOffsDropNoShard);
     }
 
     private static void builtOnStart(GameTestHelper helper) {
@@ -334,6 +346,31 @@ final class AssaultTests {
             Challenges.end(server(helper), team);
             helper.succeed();
         });
+    }
+
+    /**
+     * A slime the gate spawned carries the Assault's loot table, as Gateways' loot-table modifier sets it; its split-offs
+     * fall back to a slime's own, with no Rift Shard pool (#251).
+     */
+    private static void splitOffsDropNoShard(GameTestHelper helper) {
+        var tag = new CompoundTag();
+        tag.putString("id", "minecraft:slime");
+        tag.putInt("Size", 1);
+        tag.putString("DeathLootTable", ASSAULT_SLIME.identifier().toString());
+        Mob slime = (Mob) EntityType.loadEntityRecursive(tag, helper.getLevel(), EntitySpawnReason.COMMAND, EntityProcessor.NOP);
+        slime.setPos(helper.absoluteVec(COD.above().getBottomCenter()));
+        slime.setNoAi(true);
+        helper.getLevel().addFreshEntity(slime);
+        helper.assertValueEqual(slime.getLootTable(), Optional.of(ASSAULT_SLIME), "the gate's slime's loot table");
+        slime.setHealth(0);
+        slime.remove(Entity.RemovalReason.KILLED);
+        List<Slime> children = helper.getLevel().getEntitiesOfClass(Slime.class, slime.getBoundingBox().inflate(2), child -> child != slime);
+        helper.assertFalse(children.isEmpty(), "the slime split into nothing");
+        for (Slime child : children) {
+            helper.assertValueEqual(child.getLootTable(), EntityType.SLIME.getDefaultLootTable(), "a split-off's loot table");
+            child.discard();
+        }
+        helper.succeed();
     }
 
     private static MinecraftServer server(GameTestHelper helper) {
