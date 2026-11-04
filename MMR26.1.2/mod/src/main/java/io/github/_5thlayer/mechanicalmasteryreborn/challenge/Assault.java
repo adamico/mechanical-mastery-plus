@@ -169,7 +169,7 @@ public final class Assault {
 
     /**
      * Moves the Assault's gate {@code gate} to one of the other three sides at random as it ends wave {@code wave}, if
-     * that wave was a step up ({@link #STEP}): Gateways counts waves from 1 and pauses after a wave by that wave's setup
+     * that wave, counted from 1, was a step up ({@link #STEP}): Gateways pauses after a wave by that wave's setup
      * time, so the step's breather follows the step's first wave, and the gate moves in it. The old gate closes, kept out
      * though its leftover mobs may stay, and the gate opens on the new side's platform at the wave reached. A gate of no
      * Assault, or a wave before no step, is left alone.
