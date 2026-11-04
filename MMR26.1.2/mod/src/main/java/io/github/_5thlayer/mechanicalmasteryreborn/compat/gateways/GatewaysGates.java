@@ -49,8 +49,11 @@ public final class GatewaysGates implements Gates {
         entity.setPos(at.x, at.y, at.z);
         entity.getEntityData().set(GatewayEntity.WAVE, wave);
         if (entity instanceof EndlessGatewayEntity endless && wave > 0) {
-            // The pause before the next wave is the reached wave's setup time, which Gateways notes only as a wave starts.
-            entity.getEntityData().set(EndlessGatewayEntity.SETUP_TIME, endless.getCurrentWave().setupTime());
+            // The pause before the next wave is the finished wave's setup time, its base wave's and its modifiers', as a
+            // step's breather is, which Gateways notes only as a wave starts.
+            int[] setup = {endless.getCurrentWave().setupTime()};
+            endless.executeModifiers(wave - 1, modifier -> setup[0] = Math.max(0, setup[0] + modifier.setupTime()));
+            entity.getEntityData().set(EndlessGatewayEntity.SETUP_TIME, setup[0]);
         }
         level.addFreshEntity(entity);
         entity.onGateCreated();
