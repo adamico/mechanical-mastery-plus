@@ -23,8 +23,8 @@ It offers four:
   step, at which the gate moves to another side. They don't stop until your team fills its Port or Inflation resets
   the challenge, they pause while no one is on the island, and explosions damage your island while they come,
   claimed or not. Starting it opens the home gate's pearl, for a smaller gate of your own whenever you like. Only
-  the mobs of these gates drop Rift Shards, from which the Warding Essence is assembled. [Defences](fe_defence.md)
-  fight them for you.
+  these gates give Rift Shards, from which the Warding Essence is assembled. [Defences](fe_defence.md) fight their
+  mobs for you.
 - **Energy**: your generators give no energy. Starting it opens Theurgy's chain up to the Galvanic Essence, its
   last step.
 - **Life**: hunger drains faster, and the same food feeds less: see [the Diet](diet.md). Starting it opens Neo

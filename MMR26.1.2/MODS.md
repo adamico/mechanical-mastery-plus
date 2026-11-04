@@ -27,7 +27,7 @@ The rest of 0.0.1:
 
 The challenges after 0.0.1 (#210), each one's chain locked until a team starts it (ADR 0007):
 
-- **Gateways to Eternity**: the protection challenge. The pack writes its gates: the Assault, which the companion mod sends at a playing team's island, and the home gate, a smaller one a team opens with a pearl once it has started protection. Their mobs alone drop the Rift Shards its chain needs (ADR 0010).
+- **Gateways to Eternity**: the protection challenge. The pack writes its gates: the Assault, which the companion mod sends at a playing team's island, and the home gate, a smaller one a team opens with a pearl once it has started protection. Only these gates give the Rift Shards its chain needs (ADR 0010).
 - **Neo Vitae**: the life challenge. Blood magic, paid for in the player's own health; its chain reaches a tier-3 Ara Vitae through the Demon Realm, where the Vital Essence is infused from a Tabula Spiritus.
 - **AdminShop**: the money challenge, and the Shop, which is never locked: the skyblock's store for seeds, spawn eggs, saplings, sand, raw ores, water and lava, and where metal blocks sell. Its Offers are the pack's own, in `kubejs/data/mechanicalmasteryreborn/recipe/shop/`, checked by `scripts/check_offers.py`.
 

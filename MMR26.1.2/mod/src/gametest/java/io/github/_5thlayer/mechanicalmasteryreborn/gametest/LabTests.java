@@ -6,7 +6,10 @@ package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 import java.util.Optional;
 import java.util.UUID;
 
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.AssaultState;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
@@ -27,6 +30,10 @@ import net.minecraft.world.level.GameType;
 final class LabTests {
 
     private static final BlockPos LAB = new BlockPos(4, 2, 4);
+    /** Where protection's test places C.O.D., which the Assault is built around. */
+    private static final BlockPos COD = new BlockPos(1, 2, 1);
+    /** Ticks for a placed C.O.D. to have ticked, noting where it stands. */
+    private static final int TICKED = 2;
     /** Another team's island, in a corner of the test's. */
     private static final BlockPos OTHER_ISLAND = new BlockPos(7, 2, 7);
 
@@ -38,7 +45,7 @@ final class LabTests {
         tests.test("lab_handicap_survives_a_save_and_load", 1, LabTests::survivesASaveAndLoad);
         tests.test("lab_chooses_nothing_for_a_player_of_another_team", 1, LabTests::choosesNothingForAnotherTeam);
         tests.test("lab_starts_life", 1, LabTests::startsLife);
-        tests.test("lab_starts_protection", 1, LabTests::startsProtection);
+        tests.test("lab_starts_protection", 20, LabTests::startsProtection);
         tests.test("lab_chooses_once_while_a_challenge_is_played", 1, LabTests::choosesOnce);
         tests.test("lab_shows_its_team_s_handicap", 1, LabTests::showsItsTeamsHandicap);
         tests.test("lab_op_starts_and_ends_the_challenge_of_the_island_stood_on", 1, LabTests::opStartsAndEnds);
@@ -89,13 +96,18 @@ final class LabTests {
         helper.succeed();
     }
 
-    /** Choosing protection starts its Assault too, as the op's command does (#239); {@code assault_*} checks the Assault. */
+    /** Choosing protection sends the team its Assault, as the op's command does (#239); {@code assault_*} checks the Assault. */
     private static void startsProtection(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         var player = member(helper, team);
-        helper.assertTrue(open(helper, player).clickMenuButton(player, Handicap.PROTECTION.ordinal()), "the lab refused protection");
-        helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.PROTECTION), "the team's handicap after choosing protection");
-        helper.succeed();
+        helper.setBlock(COD, Cod.BLOCK.get());
+        helper.runAfterDelay(TICKED, () -> {
+            helper.assertTrue(open(helper, player).clickMenuButton(player, Handicap.PROTECTION.ordinal()), "the lab refused protection");
+            helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.PROTECTION), "the team's handicap after choosing protection");
+            helper.assertTrue(AssaultState.get(helper.getLevel().getServer()).assault(team).isPresent(), "choosing protection sent no Assault");
+            Challenges.end(helper.getLevel().getServer(), team);
+            helper.succeed();
+        });
     }
 
     private static void choosesOnce(GameTestHelper helper) {
