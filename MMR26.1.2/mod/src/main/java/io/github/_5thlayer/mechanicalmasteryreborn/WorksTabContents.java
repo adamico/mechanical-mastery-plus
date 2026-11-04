@@ -42,7 +42,7 @@ final class WorksTabContents {
         }
         event.accept(RiftShards.ITEM.get());
         event.accept(WardTallow.BUCKET.get());
-        event.accept(RiftShards.CHARGED.get());
+        event.accept(RiftShards.CHARGED_RIFT.get());
         for (int tier = 1; tier <= Recycler.TIERS; tier++) {
             event.accept(Recycler.coreItem(tier));
         }

@@ -20,7 +20,7 @@ public final class RiftShards {
     private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MechanicalMasteryReborn.MOD_ID);
 
     public static final DeferredItem<Item> ITEM = ITEMS.registerSimpleItem("rift_shard");
-    public static final DeferredItem<Item> CHARGED = ITEMS.registerSimpleItem("charged_rift");
+    public static final DeferredItem<Item> CHARGED_RIFT = ITEMS.registerSimpleItem("charged_rift");
 
     private RiftShards() {
     }

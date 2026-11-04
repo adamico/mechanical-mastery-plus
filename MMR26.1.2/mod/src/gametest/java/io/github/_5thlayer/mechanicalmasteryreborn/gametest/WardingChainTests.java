@@ -6,6 +6,7 @@ package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.BooleanSupplier;
 import java.util.stream.Collectors;
 
 import com.mojang.authlib.GameProfile;
@@ -53,14 +54,16 @@ final class WardingChainTests {
 
     private static final BlockPos ORIGIN = new BlockPos(4, 1, 4);
     /** More ticks than any of the Chain's crafts takes. */
-    private static final int MOST_TICKS = 400;
+    private static final int MOST_TICKS = 1000;
 
     private WardingChainTests() {
     }
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("warding_render_makes_ward_tallow_from_steam", 40, WardingChainTests::render);
+        tests.test("warding_render_fills_a_bucket_with_ward_tallow", 40, WardingChainTests::renderFillsABucket);
         tests.test("warding_charge_makes_a_charged_rift", 40, WardingChainTests::charge);
+        tests.test("warding_charge_drains_ward_tallow_from_a_bucket", 40, WardingChainTests::chargeDrainsABucket);
         tests.test("warding_seal_makes_a_warding_essence", 40, WardingChainTests::seal);
         tests.test("warding_a_charged_rift_recycles_from_its_recipe", 1, WardingChainTests::chargedRiftRecycles);
     }
@@ -70,7 +73,7 @@ final class WardingChainTests {
         put(assembler, 0, Items.ROTTEN_FLESH, 4);
         put(assembler, 1, Items.BONE_MEAL, 2);
         assembler.fluids().set(0, new FluidStack(fluid("wireworks:steam"), 1000));
-        int ran = run(helper, assembler, () -> !assembler.fluids().contents(2).isEmpty());
+        int ran = tickUntil(helper, assembler, () -> !assembler.fluids().contents(2).isEmpty());
         FluidStack made = assembler.fluids().contents(2);
         helper.assertTrue(made.getFluid() == WardTallow.SOURCE.get() && made.getAmount() == 500,
                 "Render made " + made.getAmount() + " mB of " + made.getFluid() + " in " + ran + " ticks, not 500 mB of Ward Tallow");
@@ -86,21 +89,47 @@ final class WardingChainTests {
         put(assembler, 2, Items.SPIDER_EYE, 1);
         put(assembler, 3, Items.SLIME_BALL, 1);
         assembler.fluids().set(0, new FluidStack(WardTallow.SOURCE.get(), 500));
-        run(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
-        expectOutput(helper, assembler, RiftShards.CHARGED.get(), "Charge");
+        tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
+        expectOutput(helper, assembler, RiftShards.CHARGED_RIFT.get(), "Charge");
         helper.assertValueEqual(assembler.fluids().contents(0).getAmount(), 250, "the Ward Tallow left after Charge");
+        helper.succeed();
+    }
+
+    /** Two Renders make a bucket's worth, which the fill slot takes and the outputs hold as a Ward Tallow bucket. */
+    private static void renderFillsABucket(GameTestHelper helper) {
+        AssemblerBlockEntity assembler = holding(helper, "ward_tallow");
+        put(assembler, 0, Items.ROTTEN_FLESH, 8);
+        put(assembler, 1, Items.BONE_MEAL, 4);
+        assembler.fluids().set(0, new FluidStack(fluid("wireworks:steam"), 2000));
+        put(assembler, AssemblerSlots.FILL, Items.BUCKET, 1);
+        tickUntil(helper, assembler, () -> outputs(assembler, WardTallow.BUCKET.get()) > 0);
+        helper.assertValueEqual(outputs(assembler, WardTallow.BUCKET.get()), 1, "the Ward Tallow buckets in the outputs");
+        helper.succeed();
+    }
+
+    /** A Ward Tallow bucket in the drain slot pours into Charge's box, as a crude bucket would into another recipe's. */
+    private static void chargeDrainsABucket(GameTestHelper helper) {
+        AssemblerBlockEntity assembler = holding(helper, "charged_rift");
+        put(assembler, 0, RiftShards.ITEM.get(), 2);
+        put(assembler, 1, item("fieldworks:tar"), 1);
+        put(assembler, 2, Items.SPIDER_EYE, 1);
+        put(assembler, 3, Items.SLIME_BALL, 1);
+        put(assembler, AssemblerSlots.DRAIN, WardTallow.BUCKET.get(), 1);
+        tickUntil(helper, assembler, () -> outputs(assembler, RiftShards.CHARGED_RIFT.get()) > 0);
+        helper.assertValueEqual(outputs(assembler, RiftShards.CHARGED_RIFT.get()), 1, "the Charged Rifts in the outputs");
+        helper.assertValueEqual(assembler.fluids().contents(0).getAmount(), 750, "the Ward Tallow left of the bucket after Charge");
         helper.succeed();
     }
 
     private static void seal(GameTestHelper helper) {
         AssemblerBlockEntity assembler = holding(helper, "warding_essence");
-        put(assembler, 0, RiftShards.CHARGED.get(), 2);
+        put(assembler, 0, RiftShards.CHARGED_RIFT.get(), 2);
         put(assembler, 1, item("wireworks:plastic"), 2);
         put(assembler, 2, Items.STRING, 2);
         put(assembler, 3, Items.GUNPOWDER, 1);
         put(assembler, 4, Items.IRON_INGOT, 1);
         assembler.fluids().set(0, new FluidStack(Fluids.WATER, 1000));
-        run(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
+        tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
         expectOutput(helper, assembler, Essences.item(Essence.WARDING), "Seal");
         helper.assertTrue(assembler.fluids().contents(0).isEmpty(), "Seal left some of its water");
         helper.succeed();
@@ -112,7 +141,7 @@ final class WardingChainTests {
         // As the pack's config does.
         ServerConfig.ASSEMBLING_TYPES.set(List.of("craftworks:assembling"));
         try {
-            var outcome = Recycling.recycle(helper.getLevel().getServer(), RiftShards.CHARGED.get());
+            var outcome = Recycling.recycle(helper.getLevel().getServer(), RiftShards.CHARGED_RIFT.get());
             if (!(outcome instanceof RecyclingRules.Into<Item>(List<RecyclingRules.Share<Item>> shares))) {
                 helper.fail("a Charged Rift does not recycle: " + outcome);
                 return;
@@ -147,7 +176,7 @@ final class WardingChainTests {
     }
 
     /** Ticks the Assembler, fed FE, until {@code done}; how many ticks it took. */
-    private static int run(GameTestHelper helper, AssemblerBlockEntity assembler, java.util.function.BooleanSupplier done) {
+    private static int tickUntil(GameTestHelper helper, AssemblerBlockEntity assembler, BooleanSupplier done) {
         var supply = new SimpleEnergyHandler(1_000_000, 1_000_000, 1_000_000, 1_000_000);
         var face = helper.getLevel().getCapability(Capabilities.Energy.BLOCK, helper.absolutePos(ORIGIN), Direction.UP);
         helper.assertTrue(face != null, "the Assembler takes no FE");
@@ -168,6 +197,18 @@ final class WardingChainTests {
         for (int slot = 0; slot < AssemblerSlots.INPUTS; slot++) {
             helper.assertValueEqual(assembler.inventory().getAmountAsInt(slot), 0, "what " + step + " left in input " + slot);
         }
+    }
+
+    /** How many of {@code item} the shared outputs hold. */
+    private static int outputs(AssemblerBlockEntity assembler, Item item) {
+        int count = 0;
+        for (int n = 0; n < AssemblerSlots.OUTPUTS; n++) {
+            int slot = AssemblerSlots.output(n);
+            if (assembler.inventory().getResource(slot).getItem() == item) {
+                count += assembler.inventory().getAmountAsInt(slot);
+            }
+        }
+        return count;
     }
 
     private static Item item(String id) {
