@@ -13,7 +13,9 @@ item_ids:
 
 An Electric Defence guards your island on its own. Feed it FE from any side, with a cable, a battery or a generator
 beside it, and it stores twenty shots' worth. Whenever it holds a shot's worth, it shoots the nearest hostile mob it
-can see within 12 blocks, twice a second, for 6 damage, and spends 100 FE on the shot: a zombie takes four.
+can see within 12 blocks, twice a second, for 6 damage, and spends 100 FE on the shot: a zombie takes four. A creeper
+in reach and in sight is always shot first, even with other mobs nearer, since its blast tears up your island. Its
+shots are electric, not magic, so they hurt a witch in full.
 
 It never shoots players or passive mobs, and it spends nothing while no hostile mob is in reach, so a full Defence
 waiting for a fight takes no more power. Without FE it does nothing at all, and Jade says so.
