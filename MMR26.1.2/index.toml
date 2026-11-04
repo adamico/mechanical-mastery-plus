@@ -49,6 +49,10 @@ file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/man
 hash = "99185c611e6eb5735ebb50ed52a6723c1b3b095f66ed71f540aca73ddb27774d"
 
 [[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/diet.md"
+hash = "a40da6ff22b13061b42cd289c51c5fffee2480b8638f2704fc161d4a27e5b481"
+
+[[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/fe_defence.md"
 hash = "05dfb8424c6eaa607d72dc1d4a266bf9a336e55cb1528af20fe512d21cbda08b"
 
@@ -58,7 +62,7 @@ hash = "94fb1d0f9f749bd80af85098f6782f1420d959364daa84d52ab0a4cce93b320c"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/lab.md"
-hash = "d6b2b3dad2a5cf5bf8dc7d0d83dfd861445955a1654a24ba7fe067ca4d3378d2"
+hash = "e8bc43c2baa73bdd4f34bc7889ecacca29d788b266aa6b2bd7142d56ce9cbf90"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/casing.md"
