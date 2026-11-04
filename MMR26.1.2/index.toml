@@ -34,7 +34,7 @@ hash = "ba9a93fd7ff504848df2ce218cd28682b6aa1671f0f593f07a972c47785d3086"
 
 [[files]]
 file = "kubejs/assets/adminshop/lang/en_us.json"
-hash = "b9202c1a3006aa3127a0c0faa1f21e2beac503dfdcff57d81218aee1cb4d3c27"
+hash = "89017e4ebb0cf5a9284c03d5e87fea0a807063b7ef61e285e00a1ac5792157ad"
 
 [[files]]
 file = "kubejs/assets/emi/index/stacks/mechanicalmasteryreborn_manual.json"
@@ -66,7 +66,7 @@ hash = "94fb1d0f9f749bd80af85098f6782f1420d959364daa84d52ab0a4cce93b320c"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/lab.md"
-hash = "6659cbebdaa50398544b8b5f455fa1972649a147ea698e02a9859da29da6dc09"
+hash = "12682d8b754e5572542f7e7c9fc7713f5205e79d74389204106bfb9699b22535"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/casing.md"
@@ -245,6 +245,10 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/acacia_sapling.json"
 hash = "49a9e34631357667c20c5699c7e2d47a1f9b62eec9818b9bdbe6ec2e33ddfcec"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/aureate_essence.json"
+hash = "abbcc81f62fdbfcfbf921a1ed8b9b14cffe924dab211f2ebd7f7e954274b7bc5"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/beetroot_seeds.json"
 hash = "31dfe1379639d6333262b577586625aae6e5458f9e3533b747f41944182cda8d"
 
@@ -341,6 +345,10 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/pale_oak_sapling.jso
 hash = "581906775dcfafc8437a1f295770be16ca60f65116dfd68feaa4eac930a7348a"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/permit_reborn_aureate_buy.json"
+hash = "b32364af7f2567d24a0739d7e17bb2cd7562a023021310d5fd4135ccd523cf56"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/permit_reborn_essence_sell.json"
 hash = "07644fd45e21a074134f713519b0f324eec79faf6e31bcee5c2c46bc18402ba0"
 
@@ -426,7 +434,7 @@ hash = "ee0baa985f6278a48d922faa2cde80ae305723cc842d8ea441cb14668c169be7"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/essentia_vitae.json"
-hash = "1813b77d1e8b1ef6f68138dd4e81506ec59447a6701cff94611ff85775145339"
+hash = "a29ac802b1393ee96ce1d2c4ec43c2a3bf308e8224ddc233372b0c161d912028"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/galvanic_essence.json"
@@ -450,7 +458,7 @@ hash = "b45bde2419d3be347c124df2c90b3b73948dfa89bf8311dd591686e76243a8af"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/liquified_experience.json"
-hash = "9a8fd69dc7f3c1f8d080bf528d96a4a708fb9e7939541db9c0932de3eaf02ff4"
+hash = "6b432d790f1c2eb4a03bf0c7187cca8ed2a17026886bca2583e2847de86c0694"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/sal_ammoniac.json"
