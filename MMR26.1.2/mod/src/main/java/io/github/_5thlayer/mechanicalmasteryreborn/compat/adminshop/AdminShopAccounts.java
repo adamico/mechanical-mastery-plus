@@ -22,30 +22,30 @@ public final class AdminShopAccounts implements Accounts {
 
     @Override
     public boolean opened(MinecraftServer server, UUID team) {
-        return account(server, team).map(id -> MoneyHelper.get(server).getAccountById(id) != null).orElse(false);
+        return account(server, team).map(id -> money(server).getAccountById(id) != null).orElse(false);
     }
 
     @Override
     public long balance(MinecraftServer server, UUID team) {
         return account(server, team).map(id -> {
-            var account = MoneyHelper.get(server).getAccountById(id);
+            var account = money(server).getAccountById(id);
             return account == null ? 0L : account.balance();
         }).orElse(0L);
     }
 
     @Override
     public boolean take(MinecraftServer server, UUID team, long amount) {
-        return account(server, team).map(id -> MoneyHelper.get(server).removeMoney(id, amount)).orElse(false);
+        return account(server, team).map(id -> money(server).removeMoney(id, amount)).orElse(false);
     }
 
     @Override
     public void give(MinecraftServer server, UUID team, long amount) {
-        account(server, team).ifPresent(id -> MoneyHelper.get(server).addMoney(id, amount));
+        account(server, team).ifPresent(id -> money(server).addMoney(id, amount));
     }
 
     @Override
     public void grant(MinecraftServer server, UUID team, String permit) {
-        account(server, team).ifPresent(id -> MoneyHelper.get(server).addPermit(id, permit));
+        account(server, team).ifPresent(id -> money(server).addPermit(id, permit));
     }
 
     @Override
@@ -53,11 +53,16 @@ public final class AdminShopAccounts implements Accounts {
         return IslandParties.get(server).islandOf(account);
     }
 
+    /** AdminShop's Accounts, which it keeps with the overworld. */
+    private static MoneyHelper money(MinecraftServer server) {
+        return MoneyHelper.get(server.overworld());
+    }
+
     /** AdminShop's id for {@code team}'s Account, opened through a member online if it has none yet. */
     private static Optional<UUID> account(MinecraftServer server, UUID team) {
         Optional<UUID> party = IslandParties.get(server).party(team);
         party.ifPresent(id -> {
-            MoneyHelper money = MoneyHelper.get(server);
+            MoneyHelper money = money(server);
             if (money.getAccountById(id) == null) {
                 FtbTeams.onlineMember(id).ifPresent(money::getPlayerAccount);
             }
