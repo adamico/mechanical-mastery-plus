@@ -9,8 +9,8 @@
     ]
   },
 
-  // The only features generated: the dragon's obsidian towers and the End's gateways, so the first
-  // fight has its towers, and chorus on the End's highlands.
+  // The only features generated: the dragon's obsidian towers, so the first fight has them, the
+  // return gateways of the outer End, as Skyblock Builder's defaults keep, and chorus on its highlands.
   "featuresToGenerate": {
     "allow_list": true,
     "elements": [
