@@ -4,6 +4,8 @@ Written for the pack and its players: what Mechanical Mastery Reborn adds, or ch
 
 ## Unreleased
 
+- Jade shows on Theurgy's apparatus as on any other block, a locked one's "Unlocked by the Energy challenge" line included, since the pack turns off Theurgy's in-world HUD, which covered the challenges' boss bars. The mod no longer adds its line to Theurgy's HUD, nor hides Jade on Theurgy's blocks (#255).
+- Jade shows a Theurgy apparatus's processing as a bar with its percent while it works, as Theurgy's in-world HUD did (#255).
 - A challenge's chain locks its processing, never its machines' crafting (ADR 0007, #246). Each chain's machines are now the item tag `mechanicalmasteryreborn:chain_machines/<handicap>`, filled by the pack, and no longer what the recipes in its Chapters stage file make, which are now only the chain's own recipes, such as its essence's. The pack's energy tag holds Theurgy's nine processing machines, its life tag the Ara Vitae and Hellfire Forge. A launch logs how many machines each chain's tag holds.
 - EMI marks every recipe a locked chain keeps from running with a warning sign in its corner, whose tooltip names the challenge that unlocks it: each of the chain's own recipes, and each recipe whose workstation is a chain machine, Theurgy's pages, shown through JEI, among them. The mark, and a chain machine's tooltip line, go as soon as the player's team starts that challenge (#246).
 - Winning the protection challenge gives the team's Account the `reborn_protection_won` Permit, which opens the Shop's Offer of the home gate's pearl, and a new Account of a team that won it is given it again (#246).

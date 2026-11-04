@@ -67,8 +67,8 @@ dependencies {
     compileOnly(adminShop) { transitive = false }
     // Chapters, which locks a challenge's chain until the team starts it (ADR 0007).
     compileOnly(chapters) { transitive = false }
-    // Theurgy, the energy challenge's mod: its in-world HUD says why a locked apparatus does no work (#214). Its
-    // processing is stopped by a mixin that names it only as text.
+    // Theurgy, the energy challenge's mod: the crafting-behaviour mixins that lock a chain's processing
+    // (CraftingBehaviourMixin, MercuryCatalystCraftingBehaviourMixin) compile against its classes (#214, #246).
     compileOnly(theurgy) { transitive = false }
     // Gateways to Eternity, the protection challenge's mod: the Assault opens its gates and clears their mobs
     // (#237), and a home gate opens only on its unlocked team's island (#238).
