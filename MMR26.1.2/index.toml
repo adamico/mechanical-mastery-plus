@@ -10,7 +10,11 @@ hash = "049d9bad4a2db993e486c4a6efb235ac0946fdab67a553b82ee73f5226c1976c"
 
 [[files]]
 file = "config/skyblockbuilder/dimensions.json5"
-hash = "e94813faad04d30b2f63072c2c7917f2aeb70813a5518154f673d55a65ea3758"
+hash = "b5682f7a20396de2ea4a9e10176bccb01c88037679ac144d809553819b027a75"
+
+[[files]]
+file = "config/skyblockbuilder/structures.json5"
+hash = "d56a9ee9cb5cb74a23c5dd34d4103bacff2f40c023e1a30201bee9d84b344209"
 
 [[files]]
 file = "config/skyblockbuilder/templates.json5"
@@ -23,6 +27,10 @@ hash = "2d337ee1de0a817da2fb001156c06aa2ffad0b34b5efb5b3d51d21c99b6178eb"
 [[files]]
 file = "config/skyblockbuilder/templates/islands/spawn.snbt"
 hash = "c74163f57bae03bbb4229bc3a7e7e294c3d5ee0b83c829f3643fa16481878094"
+
+[[files]]
+file = "config/skyblockbuilder/world.json5"
+hash = "59bb0f6d3ab7e4bec05fb479951022f9056b6e066f954536807e8831e0ba4c15"
 
 [[files]]
 file = "config/theurgy-client.toml"
@@ -539,6 +547,10 @@ hash = "8edf53916cbb45157b90fc47ff96e5715da0fcea3d11775aaf94ceba346a81d7"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/tags/item/chain_machines/life.json"
 hash = "5cee57303d4ea21046869d09df14ca5271fe1531b1397a95b5e1b8b50e701675"
+
+[[files]]
+file = "kubejs/data/voidworks/data_maps/dimension/void_pressure.json"
+hash = "ae7e0891d675bc37de092811593a6f914863dbd0155547676f10bd754d02b32e"
 
 [[files]]
 file = "kubejs/server_scripts/craftworks_chapters.js"
