@@ -1,0 +1,13 @@
+name = "MezzConfig"
+filename = "mezz_config-26.1.2-neoforge-0.6.10-standalone.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "80f79b91faf823d9f516b02c50d5a61bd44c6dfb"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 9374033
+project-id = 1689768
