@@ -16,7 +16,8 @@ import net.minecraft.world.entity.player.Inventory;
 
 /**
  * The team's refund at its lab (#259), a page of it over the player's inventory, in the suite's stand-in machine look:
- * below the page, buttons turn it, take everything that fits, and go back to the lab.
+ * the page's number on the title's line, and below the page, buttons turn it, take everything that fits, and go back to
+ * the lab.
  */
 final class RefundScreen extends AbstractContainerScreen<RefundMenu> {
 
@@ -83,7 +84,8 @@ final class RefundScreen extends AbstractContainerScreen<RefundMenu> {
     @Override
     protected void extractLabels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
         super.extractLabels(graphics, mouseX, mouseY);
+        // On the title's line, at the right, since the row of buttons below the page has no room for it.
         Component page = Component.translatable("mechanicalmasteryreborn.refund.page", menu.page() + 1, menu.pages());
-        graphics.text(font, page, RefundMenu.GRID_X + 2 * SMALL + 6, RefundMenu.BUTTONS_Y + 4, MachineDraw.TEXT, false);
+        graphics.text(font, page, imageWidth - MachineDraw.MARGIN - font.width(page), titleLabelY, MachineDraw.TEXT, false);
     }
 }

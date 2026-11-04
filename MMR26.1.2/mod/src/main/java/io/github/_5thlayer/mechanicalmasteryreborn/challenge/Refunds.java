@@ -29,8 +29,7 @@ import org.slf4j.Logger;
 
 /**
  * Each team's refund (#259, ADR 0015): what its Assault's mobs broke on its island, held while the Assault runs, and
- * handed over as it ends, by a win, a reset or a stop, to wait at the team's lab until a member takes it or the lab
- * pushes it out. A later Assault's adds to what still waits; nothing expires. Saved with the world, in the overworld's
+ * handed over as it ends, by a win, a reset or a stop, to wait at the team's lab until a member takes it. A later Assault's adds to what still waits; nothing expires. Saved with the world, in the overworld's
  * data, so a restart in between loses none of it.
  */
 public final class Refunds extends SavedData {
@@ -129,7 +128,7 @@ public final class Refunds extends SavedData {
     }
 
     /**
-     * What waits at {@code team}'s lab, which its lab's menu and push take from in place: a stack taken whole leaves an
+     * What waits at {@code team}'s lab, which its lab's menu takes from in place: a stack taken whole leaves an
      * empty one where it stood until the next {@link #compact}. Whoever changes it marks it {@link #setDirty dirty}.
      */
     public List<ItemStack> waiting(UUID team) {

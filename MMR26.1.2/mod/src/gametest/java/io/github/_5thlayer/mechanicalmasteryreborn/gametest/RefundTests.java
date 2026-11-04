@@ -36,7 +36,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.event.EventHooks;
 
 /**
@@ -44,7 +43,7 @@ import net.neoforged.neoforge.event.EventHooks;
  * the team's island and holds each block as a silk-touch pickaxe mines it, what spills from it and pops off with it,
  * and the frames and armour stands it knocks down with what they hold; another blast is the game's. Its endermen and
  * blazes grief nothing. The refund is handed over as the Assault ends, by a win, a reset or a stop, adds to one not
- * yet taken, and outlasts a load; the lab pushes it into a chest beside it, and gives it by hand to its team alone.
+ * yet taken, and outlasts a load; the lab gives it by hand to its team alone.
  */
 final class RefundTests {
 
@@ -64,7 +63,6 @@ final class RefundTests {
         tests.test("refund_keeps_assault_endermen_and_blazes_from_griefing", 40, RefundTests::noGriefing);
         tests.test("refund_is_handed_over_by_a_win_a_reset_and_a_stop", 40, RefundTests::handedOver);
         tests.test("refund_adds_to_one_not_yet_taken_and_outlasts_a_load", 40, RefundTests::addsAndLoads);
-        tests.test("refund_lab_pushes_into_a_chest_and_gives_nothing_to_pull", 60, RefundTests::pushed);
         tests.test("refund_lab_gives_by_hand_to_its_team_alone", 20, RefundTests::byHand);
     }
 
@@ -199,32 +197,6 @@ final class RefundTests {
         refunds.handOver(server, team);
         refunds.waiting(team).clear();
         helper.succeed();
-    }
-
-    private static void pushed(GameTestHelper helper) {
-        UUID team = TestTeams.claim(helper);
-        MinecraftServer server = server(helper);
-        Refunds refunds = Refunds.get(server);
-        // Two chests' worth, so the push stops once the chest is full and goes on once it has room.
-        for (int i = 0; i < 2 * 27; i++) {
-            refunds.hold(team, new ItemStack(Items.STONE, 64));
-        }
-        refunds.handOver(server, team);
-        helper.setBlock(LAB, Lab.BLOCK.get());
-        helper.setBlock(LAB.east(), Blocks.CHEST);
-        helper.assertTrue(helper.getLevel().getCapability(Capabilities.Item.BLOCK, helper.absolutePos(LAB), Direction.DOWN) == null,
-                "the lab offers its refund to be pulled");
-        helper.runAfterDelay(40, () -> {
-            var chest = helper.getBlockEntity(LAB.east(), ChestBlockEntity.class);
-            helper.assertValueEqual(chest.countItem(Items.STONE), 27 * 64, "what the lab pushed into the chest");
-            helper.assertValueEqual(refunds.count(team), 27 * 64, "what still waits with the chest full");
-            chest.clearContent();
-            helper.runAfterDelay(10, () -> {
-                helper.assertTrue(chest.countItem(Items.STONE) > 0, "the lab didn't push again once the chest had room");
-                refunds.waiting(team).clear();
-                helper.succeed();
-            });
-        });
     }
 
     private static void byHand(GameTestHelper helper) {

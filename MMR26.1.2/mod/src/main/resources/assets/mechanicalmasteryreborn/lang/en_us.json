@@ -157,7 +157,7 @@
   "mechanicalmasteryreborn.lab.refund.count": "%s items wait here.",
   "mechanicalmasteryreborn.lab.refund.none": "Nothing an Assault broke waits here.",
   "mechanicalmasteryreborn.lab.refund.open": "Open",
-  "mechanicalmasteryreborn.lab.refund.tooltip": "What an Assault's mobs broke on your island, given back as it ends. Take it here, or set a chest beside the lab for it to fill.",
+  "mechanicalmasteryreborn.lab.refund.tooltip": "What an Assault's mobs broke on your island, given back as it ends. Take it here.",
   "mechanicalmasteryreborn.refund.page": "Page %s of %s",
   "mechanicalmasteryreborn.refund.take_all": "Take all",
   "mechanicalmasteryreborn.refund.take_all.tooltip": "Moves as much of the whole refund as fits into your inventory.",
