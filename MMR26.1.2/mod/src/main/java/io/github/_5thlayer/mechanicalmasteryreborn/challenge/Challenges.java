@@ -122,7 +122,7 @@ public final class Challenges {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (Teams.of(player).equals(team)) {
                 told++;
-                // A fourth win gives the last chapter's stage (ADR 0012).
+                // Gives the last chapter's stage once this is the fourth win (ADR 0012).
                 Chains.unlock(server, player);
                 player.sendSystemMessage(message);
                 player.connection.send(new ClientboundSetSubtitleTextPacket(Component.empty()));

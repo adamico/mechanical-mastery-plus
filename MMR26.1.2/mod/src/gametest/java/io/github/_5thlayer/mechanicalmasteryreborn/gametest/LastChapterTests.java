@@ -4,9 +4,9 @@
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
-import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastChapter;
+import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
@@ -17,7 +17,8 @@ import net.minecraft.world.level.block.Blocks;
 
 /**
  * The last chapter, which a team reaches with its fourth win (ADR 0012): its players are given the last chapter's
- * stage, which unlocks the End Portal Frame's recipe ({@link TestStages}). Wins are played as an op's commands play them.
+ * stage, which unlocks the End Portal Frame's recipe ({@link TestStages}), and a Nether portal forms on its island. A
+ * test notes the team's wins in its state directly.
  */
 final class LastChapterTests {
 
@@ -31,13 +32,11 @@ final class LastChapterTests {
         tests.test("last_chapter_nether_portal_always_forms_in_the_nether", 1, LastChapterTests::portalInTheNether);
     }
 
-    /** Wins {@code handicaps}' challenges for {@code team}, one after another. */
-    static void win(GameTestHelper helper, UUID team, Handicap... handicaps) {
-        var server = helper.getLevel().getServer();
-        TestAccounts.open(team, 0);
+    /** Notes {@code handicaps}' challenges won for {@code team}, as winning each does, with none of a win's other effects. */
+    private static void win(GameTestHelper helper, UUID team, Handicap... handicaps) {
+        TeamState state = TeamState.get(helper.getLevel().getServer());
         for (Handicap handicap : handicaps) {
-            helper.assertTrue(Challenges.begin(server, team, handicap), "the " + handicap.id() + " challenge didn't start");
-            helper.assertTrue(Challenges.win(server, team), "the " + handicap.id() + " challenge wasn't won");
+            helper.assertTrue(state.blockTier(team, handicap), "the " + handicap.id() + " challenge wasn't noted won");
         }
     }
 
@@ -60,7 +59,7 @@ final class LastChapterTests {
      * An obsidian frame on the platform, its bottom in the floor: two wide and three tall inside, along x from
      * {@code (x, 0, z)}, so the inside's lowest left block is {@code (x + 1, 1, z)}.
      */
-    static BlockPos frame(GameTestHelper helper, int x, int z) {
+    private static BlockPos frame(GameTestHelper helper, int x, int z) {
         for (int i = 1; i <= 2; i++) {
             helper.setBlock(new BlockPos(x + i, 0, z), Blocks.OBSIDIAN);
             helper.setBlock(new BlockPos(x + i, 4, z), Blocks.OBSIDIAN);
@@ -73,7 +72,7 @@ final class LastChapterTests {
     }
 
     /** Lights the frame whose inside's lowest left block is {@code inside}, as fire does, and says whether a portal formed. */
-    static boolean light(GameTestHelper helper, BlockPos inside) {
+    private static boolean light(GameTestHelper helper, BlockPos inside) {
         helper.setBlock(inside, Blocks.FIRE);
         return helper.getBlockState(inside).is(Blocks.NETHER_PORTAL);
     }

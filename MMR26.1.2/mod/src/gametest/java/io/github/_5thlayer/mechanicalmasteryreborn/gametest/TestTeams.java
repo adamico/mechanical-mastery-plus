@@ -4,6 +4,7 @@
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -72,22 +73,17 @@ final class TestTeams implements Teams.Lookup {
         if (smallest != null) {
             return smallest;
         }
-        for (var near : NEAREST.entrySet()) {
-            if (near.getKey().contains(pos.getCenter())) {
-                return near.getValue();
-            }
-        }
-        return installed.at(level, pos);
+        return containing(NEAREST, pos).orElseGet(() -> installed.at(level, pos));
     }
 
     @Override
     public boolean onIsland(ServerLevel level, BlockPos pos) {
-        for (AABB island : ISLANDS.keySet()) {
-            if (island.contains(pos.getCenter())) {
-                return true;
-            }
-        }
-        return installed.onIsland(level, pos);
+        return containing(ISLANDS, pos).isPresent() || installed.onIsland(level, pos);
+    }
+
+    /** The team of any of {@code areas} that holds {@code pos}. */
+    private static Optional<UUID> containing(Map<AABB, UUID> areas, BlockPos pos) {
+        return areas.entrySet().stream().filter(area -> area.getKey().contains(pos.getCenter())).map(Map.Entry::getValue).findFirst();
     }
 
     @Override
