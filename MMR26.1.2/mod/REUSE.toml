@@ -52,10 +52,3 @@ path = ["gradlew", "gradlew.bat", "gradle/wrapper/**"]
 precedence = "override"
 SPDX-FileCopyrightText = "Gradle"
 SPDX-License-Identifier = "Apache-2.0"
-
-# AdminShop's 26.1.2 port, built from AmmoniumX/AdminShop#56, until it is published (build.gradle).
-[[annotations]]
-path = ["libs/adminshop-*.jar"]
-precedence = "override"
-SPDX-FileCopyrightText = "AmmoniumX and AdminShop's contributors"
-SPDX-License-Identifier = "LGPL-2.1-only"

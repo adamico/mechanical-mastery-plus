@@ -3,7 +3,7 @@
   "price": 30000,
   "permit": "reborn_money",
   "result": {
-    "id": "neovitae:liquified_experience",
+    "id": "neovitae:liquified_experience_source",
     "amount": 1000
   }
 }

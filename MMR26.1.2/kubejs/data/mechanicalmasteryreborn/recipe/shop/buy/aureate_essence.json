@@ -1,0 +1,9 @@
+{
+  "type": "adminshop:item_buying",
+  "price": 250000,
+  "permit": "reborn_aureate_buy",
+  "result": {
+    "id": "mechanicalmasteryreborn:aureate_essence",
+    "count": 1
+  }
+}

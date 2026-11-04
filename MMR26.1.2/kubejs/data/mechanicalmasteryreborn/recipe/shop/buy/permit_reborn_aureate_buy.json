@@ -1,0 +1,17 @@
+{
+  "type": "adminshop:item_buying",
+  "price": 1000000,
+  "permit": "reborn_money",
+  "result": {
+    "id": "adminshop:permit",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {
+        "key": "reborn_aureate_buy"
+      },
+      "minecraft:item_name": {
+        "translate": "adminshop.permit.reborn_aureate_buy"
+      }
+    }
+  }
+}

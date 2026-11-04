@@ -4,7 +4,8 @@
   "package": "io.github._5thlayer.mechanicalmasteryreborn.compat.adminshop.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ShopTradesMixin"
+    "HandSaleMixin",
+    "SellerSaleMixin"
   ],
   "injectors": {
     "defaultRequire": 1
