@@ -5,6 +5,10 @@ file = "config/defaultworldtype/client-config.toml"
 hash = "9f26e8c0442c30ae6c37532736f2282d7272beec800cca7431e52f9242dc7f04"
 
 [[files]]
+file = "config/fieldworks-common.toml"
+hash = "049d9bad4a2db993e486c4a6efb235ac0946fdab67a553b82ee73f5226c1976c"
+
+[[files]]
 file = "config/skyblockbuilder/dimensions.json5"
 hash = "942e81b971479152385b4ad9c3471653325f04946c34d9dd2aefc02c744517bc"
 
