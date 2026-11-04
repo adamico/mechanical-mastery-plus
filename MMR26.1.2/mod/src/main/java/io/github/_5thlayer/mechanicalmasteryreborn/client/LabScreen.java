@@ -27,7 +27,8 @@ import net.minecraft.world.entity.player.Inventory;
  * The lab: each handicap with what it costs, and a button to choose it, in the suite's stand-in machine look. Only
  * the lab's team can choose, one at a time; the one it plays is shown as played, and the ones it has won as won. Below
  * them a row stops the challenge played, once it has reset: a member asks for the stop or takes their ask back, and the
- * row names who online has asked and who is left (ADR 0013).
+ * row names who online has asked and who is left (ADR 0013). Last, a row says how much of the team's refund waits, and
+ * opens it (#259).
  */
 final class LabScreen extends AbstractContainerScreen<LabMenu> {
 
@@ -54,10 +55,15 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
     private static final Component TAKE_BACK = Component.translatable("mechanicalmasteryreborn.lab.stop.take_back");
     private static final Component STOP_TOOLTIP = Component.translatable("mechanicalmasteryreborn.lab.stop.tooltip");
     private static final Component NOBODY = Component.translatable("mechanicalmasteryreborn.lab.stop.nobody");
+    private static final Component REFUND = Component.translatable("mechanicalmasteryreborn.lab.refund");
+    private static final Component REFUND_NONE = Component.translatable("mechanicalmasteryreborn.lab.refund.none");
+    private static final Component REFUND_OPEN = Component.translatable("mechanicalmasteryreborn.lab.refund.open");
+    private static final Component REFUND_TOOLTIP = Component.translatable("mechanicalmasteryreborn.lab.refund.tooltip");
 
     private final Ghosts ghosts = new Ghosts(() -> leftPos, () -> topPos);
     private final List<Button> buttons = new ArrayList<>();
     private Button stop;
+    private Button refund;
     /** Where the rows start, below the intro however many lines it wraps to. */
     private final int rowsTop;
 
@@ -70,8 +76,8 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
     }
 
     private LabScreen(LabMenu menu, Inventory inventory, Component title, int width, int rowsTop) {
-        // A row per handicap, and the stop's row below them.
-        super(menu, inventory, title, width, rowsTop + Handicap.values().length * ROW + BUTTON_HEIGHT + MachineDraw.MARGIN);
+        // A row per handicap, and the stop's and the refund's rows below them.
+        super(menu, inventory, title, width, rowsTop + (Handicap.values().length + 1) * ROW + BUTTON_HEIGHT + MachineDraw.MARGIN);
         this.rowsTop = rowsTop;
     }
 
@@ -106,6 +112,11 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
                 .bounds(leftPos + imageWidth - MachineDraw.MARGIN - BUTTON_WIDTH, topPos + stopTop(), BUTTON_WIDTH, BUTTON_HEIGHT)
                 .tooltip(Tooltip.create(STOP_TOOLTIP))
                 .build());
+        refund = addRenderableWidget(Button.builder(REFUND_OPEN, button -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId,
+                        LabMenu.OPEN_REFUND))
+                .bounds(leftPos + imageWidth - MachineDraw.MARGIN - BUTTON_WIDTH, topPos + refundTop(), BUTTON_WIDTH, BUTTON_HEIGHT)
+                .tooltip(Tooltip.create(REFUND_TOOLTIP))
+                .build());
         updateButtons();
     }
 
@@ -128,6 +139,7 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
         stop.visible = menu.stopOffered();
         stop.active = menu.isMember();
         stop.setMessage(menu.asked() ? TAKE_BACK : ASK);
+        refund.active = menu.refund() > 0;
     }
 
     @Override
@@ -148,6 +160,11 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
                     MachineDraw.MARGIN, y, MachineDraw.TEXT, false);
             graphics.text(font, MachineDraw.fitted(font, Challenges.cost(handicap), nameWidth), MachineDraw.MARGIN, y + COST_Y, MachineDraw.TEXT, false);
         }
+        int refundY = refundTop();
+        graphics.text(font, MachineDraw.fitted(font, REFUND.copy().withStyle(ChatFormatting.BOLD), nameWidth), MachineDraw.MARGIN, refundY,
+                MachineDraw.TEXT, false);
+        Component waiting = menu.refund() > 0 ? Component.translatable("mechanicalmasteryreborn.lab.refund.count", menu.refund()) : REFUND_NONE;
+        graphics.text(font, MachineDraw.fitted(font, waiting, nameWidth), MachineDraw.MARGIN, refundY + COST_Y, MachineDraw.TEXT, false);
         int y = stopTop();
         Optional<Handicap> chosen = menu.chosen();
         if (chosen.isEmpty()) {
@@ -169,6 +186,11 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
     /** Where the stop's row starts, below the handicaps'. */
     private int stopTop() {
         return rowsTop + Handicap.values().length * ROW;
+    }
+
+    /** Where the refund's row starts, below the stop's. */
+    private int refundTop() {
+        return stopTop() + ROW;
     }
 
     /** Where {@code handicap}'s row starts, below the intro. */

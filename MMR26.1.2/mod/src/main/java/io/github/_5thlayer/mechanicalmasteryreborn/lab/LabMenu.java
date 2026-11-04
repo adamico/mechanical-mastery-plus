@@ -10,6 +10,7 @@ import java.util.UUID;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Refunds;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Stops;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
@@ -33,10 +34,11 @@ import net.neoforged.neoforge.network.PacketDistributor;
 /**
  * The lab's choice of handicap, for the team whose island it stands on. A button per handicap, by its ordinal, starts
  * its challenge, if the player is in that team, the team plays none yet and hasn't won it. {@link #ASK} and
- * {@link #TAKE_BACK} ask to stop the challenge it plays, and take the ask back, once a stop is offered ({@link Stops}). The
+ * {@link #TAKE_BACK} ask to stop the challenge it plays, and take the ask back, once a stop is offered ({@link Stops}), and
+ * {@link #OPEN_REFUND} opens the team's refund ({@link RefundMenu}). The
  * client is sent which handicap the team plays, if any, which challenges it has won, whether the player may choose for
- * it, whether a stop is offered and the player asks for it, and which members online have asked and which are left
- * ({@link Asks}).
+ * it, whether a stop is offered and the player asks for it, how many items of the team's refund wait, and which members
+ * online have asked and which are left ({@link Asks}).
  */
 public final class LabMenu extends AbstractContainerMenu {
 
@@ -44,6 +46,8 @@ public final class LabMenu extends AbstractContainerMenu {
     public static final int ASK = Handicap.values().length;
     /** The button that takes back the player's ask to stop it. */
     public static final int TAKE_BACK = ASK + 1;
+    /** The button that opens the team's refund. */
+    public static final int OPEN_REFUND = TAKE_BACK + 1;
     /** What {@link #chosen} holds while the team plays no challenge. */
     private static final int NONE = -1;
 
@@ -56,6 +60,8 @@ public final class LabMenu extends AbstractContainerMenu {
     private final DataSlot stopOffered;
     /** Whether the player asks to stop it, 1 or 0. */
     private final DataSlot asked;
+    /** How many items of the team's refund wait, up to what a data slot holds. */
+    private final DataSlot refund;
     /** The server's player, who is sent {@link Asks}; null on the client or for a game test's mock player. */
     private final ServerPlayer viewer;
     /** The asks the client was last sent, or holds. */
@@ -70,6 +76,7 @@ public final class LabMenu extends AbstractContainerMenu {
         this.won = addDataSlot(DataSlot.standalone());
         this.stopOffered = addDataSlot(DataSlot.standalone());
         this.asked = addDataSlot(DataSlot.standalone());
+        this.refund = addDataSlot(DataSlot.standalone());
         this.viewer = null;
         chosen.set(NONE);
     }
@@ -126,6 +133,16 @@ public final class LabMenu extends AbstractContainerMenu {
             public void set(int value) {
             }
         });
+        this.refund = addDataSlot(new DataSlot() {
+            @Override
+            public int get() {
+                return Math.min(Short.MAX_VALUE, Refunds.get(level.getServer()).count(team));
+            }
+
+            @Override
+            public void set(int value) {
+            }
+        });
         this.viewer = inventory.player instanceof ServerPlayer server ? server : null;
     }
 
@@ -159,6 +176,11 @@ public final class LabMenu extends AbstractContainerMenu {
         return asked.get() == 1;
     }
 
+    /** How many items of the lab's team's refund wait there, up to {@link Short#MAX_VALUE}. */
+    public int refund() {
+        return refund.get();
+    }
+
     /** Which of the team's members online have asked to stop its challenge, and which are left, as the client was last sent. */
     public Asks asks() {
         return asks;
@@ -186,6 +208,10 @@ public final class LabMenu extends AbstractContainerMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
+        if (id == OPEN_REFUND) {
+            access.execute((level, pos) -> player.openMenu(RefundMenu.provider((ServerLevel) level, pos)));
+            return true;
+        }
         if (id == ASK || id == TAKE_BACK) {
             return access.evaluate((level, pos) -> level instanceof ServerLevel server && (id == ASK
                     ? Stops.ask(server.getServer(), Teams.at(server, pos), player)
