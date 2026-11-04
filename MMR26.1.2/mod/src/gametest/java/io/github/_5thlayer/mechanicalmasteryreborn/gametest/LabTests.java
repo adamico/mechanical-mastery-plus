@@ -19,8 +19,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.GameType;
 
 /**
- * The lab (#201): a team chooses a handicap at the lab on its island, which starts that handicap's challenge. Only
- * energy and money can be chosen yet (#213). The handicap is the team's alone, is chosen once while its challenge is played, and is
+ * The lab (#201): a team chooses a handicap at the lab on its island, which starts that handicap's challenge, any of
+ * the four (#242). The handicap is the team's alone, is chosen once while its challenge is played, and is
  * saved with the team's state. An op starts and ends the challenge of the island they stand on. Each test is an island
  * of its own, with another team's in a corner.
  */
@@ -34,28 +34,21 @@ final class LabTests {
     }
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
-        tests.test("lab_offers_all_but_protection_and_records_it_for_its_team_only", 1, LabTests::offersAllButProtection);
+        tests.test("lab_records_a_handicap_for_its_team_only", 1, LabTests::recordsForItsTeamOnly);
         tests.test("lab_handicap_survives_a_save_and_load", 1, LabTests::survivesASaveAndLoad);
         tests.test("lab_chooses_nothing_for_a_player_of_another_team", 1, LabTests::choosesNothingForAnotherTeam);
         tests.test("lab_starts_life", 1, LabTests::startsLife);
+        tests.test("lab_starts_protection", 1, LabTests::startsProtection);
         tests.test("lab_chooses_once_while_a_challenge_is_played", 1, LabTests::choosesOnce);
         tests.test("lab_shows_its_team_s_handicap", 1, LabTests::showsItsTeamsHandicap);
         tests.test("lab_op_starts_and_ends_the_challenge_of_the_island_stood_on", 1, LabTests::opStartsAndEnds);
     }
 
-    private static void offersAllButProtection(GameTestHelper helper) {
+    private static void recordsForItsTeamOnly(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         UUID other = TestTeams.claim(helper, OTHER_ISLAND, OTHER_ISLAND);
         var player = member(helper, team);
         var menu = open(helper, player);
-        for (Handicap handicap : Handicap.values()) {
-            helper.assertValueEqual(handicap.choosable(), handicap != Handicap.PROTECTION,
-                    "whether the lab offers " + handicap);
-        }
-        for (Handicap handicap : new Handicap[] {Handicap.PROTECTION}) {
-            helper.assertFalse(menu.clickMenuButton(player, handicap.ordinal()), "the lab let the team choose " + handicap);
-            helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after choosing " + handicap);
-        }
         helper.assertTrue(menu.clickMenuButton(player, Handicap.ENERGY.ordinal()), "the lab refused energy");
         helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.ENERGY), "the team's handicap after choosing energy");
         helper.assertValueEqual(state(helper).handicap(other), Optional.<Handicap>empty(), "another team's handicap");
@@ -93,6 +86,15 @@ final class LabTests {
         var player = member(helper, team);
         helper.assertTrue(open(helper, player).clickMenuButton(player, Handicap.LIFE.ordinal()), "the lab refused life");
         helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.LIFE), "the team's handicap after choosing life");
+        helper.succeed();
+    }
+
+    /** Choosing protection starts its Assault too, as the op's command does (#239); {@code assault_*} checks the Assault. */
+    private static void startsProtection(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var player = member(helper, team);
+        helper.assertTrue(open(helper, player).clickMenuButton(player, Handicap.PROTECTION.ordinal()), "the lab refused protection");
+        helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.PROTECTION), "the team's handicap after choosing protection");
         helper.succeed();
     }
 

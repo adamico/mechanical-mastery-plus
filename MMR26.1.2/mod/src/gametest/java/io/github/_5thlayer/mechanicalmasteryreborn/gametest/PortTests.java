@@ -74,7 +74,7 @@ final class PortTests {
         var player = member(helper, team);
         helper.assertValueEqual(use(helper, player, Essence.GALVANIC, 4), 4, "the essence a hand keeps with no challenge played");
         // The money challenge without its Account, which the game tests have none of.
-        helper.assertTrue(state(helper).choose(team, Handicap.MONEY, 0), "the money challenge didn't start");
+        helper.assertTrue(state(helper).begin(team, Handicap.MONEY, 0), "the money challenge didn't start");
         helper.assertValueEqual(use(helper, player, Essence.GALVANIC, 4), 4, "the essence a hand keeps while another challenge is played");
         helper.assertValueEqual(state(helper).delivered(team), 0L, "the essence counted");
         helper.succeed();
@@ -135,7 +135,7 @@ final class PortTests {
         UUID other = TestTeams.claim(helper, OTHER_ISLAND, OTHER_ISLAND);
         place(helper, Handicap.ENERGY);
         start(helper, team);
-        helper.assertTrue(Challenges.start(server(helper), other, Handicap.ENERGY), "the other team's challenge didn't start");
+        helper.assertTrue(Challenges.begin(server(helper), other, Handicap.ENERGY), "the other team's challenge didn't start");
         int quota = ServerConfig.quota(Essence.ADVANCED);
         helper.assertValueEqual(use(helper, member(helper, team), Essence.GALVANIC, quota + 3), 3, "the essence a hand keeps past the quota");
         helper.assertValueEqual(state(helper).tier(team), Optional.of(Essence.IMPROVED), "the tier after the win");
@@ -185,7 +185,7 @@ final class PortTests {
         helper.succeed();
     }
 
-    /** Both the lab's button and {@link Challenges#start} refuse a challenge the team has won. */
+    /** Both the lab's button and {@link Challenges#begin} refuse a challenge the team has won. */
     private static void labRefusesAWin(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         place(helper, Handicap.ENERGY);
@@ -198,7 +198,7 @@ final class PortTests {
         helper.assertTrue(menu.won(Handicap.ENERGY), "the lab doesn't show the challenge won");
         helper.assertFalse(menu.canChoose(Handicap.ENERGY), "the lab offers a won challenge");
         helper.assertFalse(menu.clickMenuButton(player, Handicap.ENERGY.ordinal()), "the lab started a won challenge");
-        helper.assertFalse(Challenges.start(server(helper), team, Handicap.ENERGY), "a won challenge started");
+        helper.assertFalse(Challenges.begin(server(helper), team, Handicap.ENERGY), "a won challenge started");
         helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the handicap after starting a won challenge");
         helper.succeed();
     }
@@ -239,7 +239,7 @@ final class PortTests {
     }
 
     private static void start(GameTestHelper helper, UUID team) {
-        helper.assertTrue(Challenges.start(server(helper), team, Handicap.ENERGY), "the energy challenge didn't start");
+        helper.assertTrue(Challenges.begin(server(helper), team, Handicap.ENERGY), "the energy challenge didn't start");
     }
 
     private static Player member(GameTestHelper helper, UUID team) {

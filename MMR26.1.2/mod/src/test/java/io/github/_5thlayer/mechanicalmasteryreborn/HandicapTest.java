@@ -41,11 +41,6 @@ class HandicapTest {
     }
 
     @Test
-    void onlyEnergyAndMoneyAreChoosable() {
-        assertEquals(List.of(Handicap.ENERGY, Handicap.MONEY), Arrays.stream(Handicap.values()).filter(Handicap::choosable).toList());
-    }
-
-    @Test
     void everyHandicapHasANameAndACost() throws IOException {
         String lang = Files.readString(LANG);
         for (Handicap handicap : Handicap.values()) {

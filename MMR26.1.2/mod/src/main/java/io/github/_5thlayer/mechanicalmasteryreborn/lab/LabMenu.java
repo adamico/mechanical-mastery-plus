@@ -21,7 +21,7 @@ import net.minecraft.world.item.ItemStack;
 
 /**
  * The lab's choice of handicap, for the team whose island it stands on. A button per handicap, by its ordinal, starts
- * its challenge, if the lab offers it, the player is in that team, the team plays none yet and hasn't won it. The
+ * its challenge, if the player is in that team, the team plays none yet and hasn't won it. The
  * client is sent which handicap the team plays, if any, which challenges it has won, and whether the player may
  * choose for it.
  */
@@ -97,14 +97,14 @@ public final class LabMenu extends AbstractContainerMenu {
 
     /** Whether choosing {@code handicap} would start its challenge. */
     public boolean canChoose(Handicap handicap) {
-        return handicap.choosable() && isMember() && chosen().isEmpty() && !won(handicap);
+        return isMember() && chosen().isEmpty() && !won(handicap);
     }
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
         Optional<Handicap> handicap = Handicap.byOrdinal(id).filter(this::canChoose);
         return handicap.isPresent() && access.evaluate((level, pos) -> level instanceof ServerLevel server
-                && Challenges.start(server.getServer(), Teams.at(server, pos), handicap.get()), false);
+                && Challenges.begin(server.getServer(), Teams.at(server, pos), handicap.get()), false);
     }
 
     @Override

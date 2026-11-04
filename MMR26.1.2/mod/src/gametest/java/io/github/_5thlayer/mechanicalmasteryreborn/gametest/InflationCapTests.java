@@ -222,7 +222,7 @@ final class InflationCapTests {
     /** Chooses the energy challenge for {@code team}, as though it began {@code ago} ticks before now. */
     private static void choose(GameTestHelper helper, UUID team, long ago) {
         long now = helper.getLevel().getServer().overworld().getGameTime();
-        helper.assertTrue(state(helper).choose(team, Handicap.ENERGY, now - ago), "the challenge didn't start");
+        helper.assertTrue(state(helper).begin(team, Handicap.ENERGY, now - ago), "the challenge didn't start");
     }
 
     private static int cap() {

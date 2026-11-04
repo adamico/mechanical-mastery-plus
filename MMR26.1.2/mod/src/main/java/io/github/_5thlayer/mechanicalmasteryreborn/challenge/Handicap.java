@@ -12,31 +12,24 @@ import java.util.Optional;
  */
 public enum Handicap {
 
-    /** More, stronger and special mobs. */
-    PROTECTION("protection", false),
+    /** An Assault on the island (ADR 0010). */
+    PROTECTION("protection"),
     /** Faster hunger, and a Diet: the same food feeding less each time it is eaten (ADR 0011). */
-    LIFE("life", true),
+    LIFE("life"),
     /** Generator blocks disabled. */
-    ENERGY("energy", true),
+    ENERGY("energy"),
     /** Less money. */
-    MONEY("money", true);
+    MONEY("money");
 
     private final String id;
-    private final boolean choosable;
 
-    Handicap(String id, boolean choosable) {
+    Handicap(String id) {
         this.id = id;
-        this.choosable = choosable;
     }
 
     /** The name it is saved under, which its translation keys end with too. */
     public String id() {
         return id;
-    }
-
-    /** Whether the lab lets a team choose it yet: for now life, energy and money, protection coming later (#242). */
-    public boolean choosable() {
-        return choosable;
     }
 
     /** The handicap whose ordinal is {@code ordinal}, as the lab's buttons and its sync send it, if any. */

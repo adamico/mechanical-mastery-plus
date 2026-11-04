@@ -14,8 +14,7 @@ import net.minecraft.world.level.GameType;
 /**
  * A challenge's chain, locked until the team starts it (ADR 0007): a player is given the stage of every chain its team
  * has unlocked, and only those, and keeps it past the challenge's end. Chapters locks the chain's recipes behind the
- * stage, named after the handicap ({@link TestStages}). A chain is started as an op's command does, since the lab
- * offers no protection yet.
+ * stage, named after the handicap ({@link TestStages}). A chain is started as an op's command does.
  */
 final class ChainTests {
 

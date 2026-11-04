@@ -106,7 +106,7 @@ final class CodTierTests {
     private static void surviveResetAndLoad(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         var server = helper.getLevel().getServer();
-        helper.assertTrue(Challenges.start(server, team, Handicap.ENERGY), "the challenge didn't start");
+        helper.assertTrue(Challenges.begin(server, team, Handicap.ENERGY), "the challenge didn't start");
         helper.assertTrue(state(helper).blockTier(team, Handicap.ENERGY), "the win blocked nothing");
         helper.assertTrue(state(helper).resetChallenge(team, server.overworld().getGameTime()), "the challenge didn't reset");
         state(helper).makeDormant(team);
@@ -126,7 +126,7 @@ final class CodTierTests {
     private static void inflationCountsOnlyItsTier(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         state(helper).setTier(team, Optional.of(Essence.REGULAR));
-        helper.assertTrue(Challenges.start(helper.getLevel().getServer(), team, Handicap.ENERGY), "the challenge didn't start");
+        helper.assertTrue(Challenges.begin(helper.getLevel().getServer(), team, Handicap.ENERGY), "the challenge didn't start");
         decomposeByHand(helper, team, Essence.ADVANCED);
         helper.assertValueEqual(state(helper).inflation(team).orElseThrow().decomposed(), 0L, "Advanced essence decomposed, a tier blocked");
         decomposeByHand(helper, team, Essence.REGULAR);

@@ -177,16 +177,7 @@ public final class TeamState extends SavedData {
 
     /**
      * Starts {@code handicap}'s challenge for {@code team} at {@code gameTime}, the overworld's, its Inflation from
-     * nothing, and says whether it did: not while the team plays one already, and not for a handicap the lab doesn't
-     * offer yet, nor for a challenge it has won.
-     */
-    public boolean choose(UUID team, Handicap handicap, long gameTime) {
-        return handicap.choosable() && begin(team, handicap, gameTime);
-    }
-
-    /**
-     * Starts {@code handicap}'s challenge for {@code team} as {@link #choose} does, though the lab can't offer it yet,
-     * as an op's command may (#235); false while the team plays one or has won it.
+     * nothing, and says whether it did: not while the team plays one already, nor for a challenge it has won.
      */
     public boolean begin(UUID team, Handicap handicap, long gameTime) {
         if (handicap(team).isPresent() || won(team, handicap)) {
