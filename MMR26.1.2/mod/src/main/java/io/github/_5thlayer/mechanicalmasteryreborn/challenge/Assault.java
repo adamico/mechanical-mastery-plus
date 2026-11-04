@@ -74,6 +74,7 @@ public final class Assault {
         BLOCKS.register(modBus);
         NeoForge.EVENT_BUS.addListener(Assault::onJoin);
         AssaultAbsence.register();
+        NeoForge.EVENT_BUS.addListener(AssaultCommand::register);
         if (ModList.get().isLoaded("gateways")) {
             GatewaysGates.register();
         }
@@ -202,6 +203,34 @@ public final class Assault {
             }
             LOGGER.info("Team {}'s Assault gate moves to the {} side at wave {}: {}", team, side, wave, moved.map(UUID::toString).orElse("none"));
         });
+    }
+
+    /**
+     * Puts {@code team}'s open gate at wave {@code wave}, counted from 1, for checking and balancing: the gate closes, kept
+     * out as a failed one is, and opens again where it stood with the waves before {@code wave} behind it. Says whether
+     * the team had an open gate.
+     */
+    public static boolean setWave(MinecraftServer server, UUID team, int wave) {
+        AssaultState state = AssaultState.get(server);
+        Optional<AssaultState.Built> built = state.assault(team);
+        if (built.isEmpty() || built.get().gates().isEmpty()) {
+            return false;
+        }
+        ServerLevel level = server.getLevel(built.get().dimension());
+        if (level == null) {
+            return false;
+        }
+        UUID gate = built.get().gates().getFirst();
+        Entity old = level.getEntity(gate);
+        Vec3 where = gateAt(state, team).orElseGet(() -> old != null ? old.position() : Vec3.ZERO);
+        Optional<UUID> opened = Gates.get().open(level, where, summoner(server, level, team), wave - 1);
+        state.replaceGate(team, gate, opened);
+        state.noteWave(team, wave);
+        if (old != null) {
+            old.discard();
+        }
+        LOGGER.info("Set team {}'s Assault gate to wave {}: {}", team, wave, opened.map(UUID::toString).orElse("none"));
+        return true;
     }
 
     /** Notes that the Assault's gate {@code gate} started wave {@code wave}, for the team's bar. A gate of no Assault is left alone. */

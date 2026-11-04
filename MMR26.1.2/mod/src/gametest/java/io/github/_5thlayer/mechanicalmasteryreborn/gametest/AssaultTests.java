@@ -74,6 +74,7 @@ final class AssaultTests {
         tests.test("assault_reopens_a_failed_gate_at_its_wave", 20, AssaultTests::reopensFailed);
         tests.test("assault_gate_moves_side_at_a_step", 20, AssaultTests::movesAtStep);
         tests.test("assault_shows_its_wave_and_side_on_the_challenge_bar", 20, AssaultTests::barShowsWaveAndSide);
+        tests.test("assault_wave_command_sets_the_open_gates_wave", 20, AssaultTests::waveCommand);
     }
 
     private static void builtOnStart(GameTestHelper helper) {
@@ -310,6 +311,29 @@ final class AssaultTests {
 
     private static void expectStone(GameTestHelper helper, BlockPos pos, String what) {
         helper.assertTrue(helper.getLevel().getBlockState(pos).is(Assault.STONE.get()), what + " isn't Assault Stone");
+    }
+
+    /** {@code /mmr assault wave <n>} reopens the team's gate with the waves before {@code n} behind it (#247). */
+    private static void waveCommand(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        helper.setBlock(COD, Cod.BLOCK.get());
+        helper.runAfterDelay(TICKED, () -> {
+            Challenges.begin(server(helper), team, Handicap.PROTECTION);
+            AssaultState state = AssaultState.get(server(helper));
+            UUID old = state.assault(team).orElseThrow().gates().getFirst();
+            var op = server(helper).createCommandSourceStack().withLevel(helper.getLevel())
+                    .withPosition(helper.absolutePos(COD).getCenter()).withSuppressedOutput();
+            server(helper).getCommands().performPrefixedCommand(op, "mmr assault wave 10");
+            var built = state.assault(team).orElseThrow();
+            helper.assertValueEqual(built.gates().size(), 1, "the open gates after the wave command");
+            UUID gate = built.gates().getFirst();
+            helper.assertFalse(gate.equals(old), "the gate wasn't reopened");
+            helper.assertTrue(state.closed(old), "the old gate isn't kept out");
+            helper.assertValueEqual(WAVES.get(gate), 9, "the waves behind the reopened gate");
+            helper.assertValueEqual(built.wave(), 10, "the wave the team's bar shows");
+            Challenges.end(server(helper), team);
+            helper.succeed();
+        });
     }
 
     private static MinecraftServer server(GameTestHelper helper) {
