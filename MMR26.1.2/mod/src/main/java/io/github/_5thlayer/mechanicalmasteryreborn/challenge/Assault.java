@@ -41,7 +41,8 @@ import org.slf4j.Logger;
  * ground C.O.D. stands on, a bridge of it running back toward C.O.D. until the first block in its way, and on the
  * platform the pack's endless gate ({@link Gates}), summoned by one of the team's players on its island, so its mobs
  * hunt the team. The four share one gate, whose waves step up with no ceiling; one that fails opens again at its wave.
- * A win or a reset removes the gate, what was built and the gate's mobs still around; the team keeps its Rift Shards.
+ * A win, a reset or a stop removes the gate, what was built and the gate's mobs still around; the team keeps its Rift
+ * Shards, and what the mobs broke waits at its lab ({@link AssaultBreaks}).
  * A gate or mob in a chunk no one is near can't be seen as the Assault ends, so it is kept out when it loads again.
  * Each piece is built only into air and removed only where it still stands, so nothing else is ever touched.
  */
@@ -74,6 +75,7 @@ public final class Assault {
         BLOCKS.register(modBus);
         NeoForge.EVENT_BUS.addListener(Assault::onJoin);
         AssaultAbsence.register();
+        AssaultBreaks.register();
         NeoForge.EVENT_BUS.addListener(AssaultCommand::register);
         if (ModList.get().isLoaded("gateways")) {
             GatewaysGates.register();
@@ -126,9 +128,13 @@ public final class Assault {
         return true;
     }
 
-    /** Removes {@code team}'s Assault, as its protection challenge ends or resets: its gate, what was built, and the gate's mobs. */
+    /**
+     * Removes {@code team}'s Assault, as its protection challenge ends or resets: its gate, what was built, and the gate's
+     * mobs, and hands what its mobs broke over to the team's lab as its refund ({@link Refunds}).
+     */
     static void end(MinecraftServer server, UUID team) {
         AssaultExplosions.restore(server, team);
+        Refunds.get(server).handOver(server, team);
         AssaultState.get(server).takeAssault(team).ifPresent(built -> {
             ServerLevel level = server.getLevel(built.dimension());
             if (level == null) {

@@ -159,7 +159,7 @@ _Avoid_: power source
 The special block where a team chooses a handicap to start a challenge, asks for a stop, takes its refund, and feeds science items to research what the challenge unlocks.
 
 **Refund**:
-What a team's lab holds for it: everything its Assaults' mobs broke on its island, given back when each Assault ends rather than put back in its place, each block as a careful mining by hand would give it. It waits until a member takes it or the lab pushes it into a block beside it.
+What a team's lab holds for it: everything its Assaults' mobs broke on its island, given back when each Assault ends rather than put back in its place, each block as a careful mining by hand would give it. It waits there until a member takes it.
 _Avoid_: repair, restore, compensation
 
 **Manual**:

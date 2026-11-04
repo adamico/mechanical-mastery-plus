@@ -28,8 +28,9 @@ import net.minecraft.world.phys.Vec3;
 
 /**
  * Where each team's C.O.D. stands, as it noted on its first tick, and the {@link Assault} it is sent while it plays
- * the protection challenge: the blocks it built and the gate it opened, so its end removes exactly those, and the gates
- * of Assaults removed. Saved with
+ * the protection challenge: the blocks it built and the gate it opened, so its end removes exactly those, every gate it
+ * has opened, so a mob of a gate since moved or failed is still known as its mob, and the gates of Assaults removed.
+ * Saved with
  * the world, in the overworld's data, apart from the team's own state.
  */
 public final class AssaultState extends SavedData {
@@ -76,7 +77,8 @@ public final class AssaultState extends SavedData {
             Codec.unboundedMap(UUIDUtil.STRING_CODEC, Built.CODEC).optionalFieldOf("assaults", Map.of()).forGetter(state -> state.assaults),
             UUIDUtil.STRING_CODEC.listOf().optionalFieldOf("closed", List.of()).forGetter(state -> List.copyOf(state.closed)),
             Codec.unboundedMap(UUIDUtil.STRING_CODEC, Waiting.CODEC.listOf()).optionalFieldOf("paused", Map.of()).forGetter(state -> state.paused),
-            Codec.unboundedMap(UUIDUtil.STRING_CODEC, UUIDUtil.STRING_CODEC).optionalFieldOf("shut", Map.of()).forGetter(state -> state.shut))
+            Codec.unboundedMap(UUIDUtil.STRING_CODEC, UUIDUtil.STRING_CODEC).optionalFieldOf("shut", Map.of()).forGetter(state -> state.shut),
+            Codec.unboundedMap(UUIDUtil.STRING_CODEC, UUIDUtil.STRING_CODEC).optionalFieldOf("opened", Map.of()).forGetter(state -> state.opened))
             .apply(instance, AssaultState::new));
 
     public static final SavedDataType<AssaultState> TYPE = new SavedDataType<>(
@@ -91,18 +93,21 @@ public final class AssaultState extends SavedData {
     private final Map<UUID, List<Waiting>> paused;
     /** The gates closed for no one being home, by their team: kept out if they load again, their mobs not. */
     private final Map<UUID, UUID> shut;
+    /** Every gate a running Assault has opened, by its team, while that Assault runs (#259). */
+    private final Map<UUID, UUID> opened;
 
     private AssaultState() {
-        this(Map.of(), Map.of(), List.of(), Map.of(), Map.of());
+        this(Map.of(), Map.of(), List.of(), Map.of(), Map.of(), Map.of());
     }
 
     private AssaultState(Map<UUID, GlobalPos> cods, Map<UUID, Built> assaults, List<UUID> closed, Map<UUID, List<Waiting>> paused,
-            Map<UUID, UUID> shut) {
+            Map<UUID, UUID> shut, Map<UUID, UUID> opened) {
         this.cods = new HashMap<>(cods);
         this.assaults = new HashMap<>(assaults);
         this.closed = new HashSet<>(closed);
         this.paused = new HashMap<>(paused);
         this.shut = new HashMap<>(shut);
+        this.opened = new HashMap<>(opened);
     }
 
     public static AssaultState get(MinecraftServer server) {
@@ -128,12 +133,14 @@ public final class AssaultState extends SavedData {
 
     void putAssault(UUID team, Built built) {
         assaults.put(team, built);
+        built.gates().forEach(gate -> opened.put(gate, team));
         setDirty();
     }
 
     Optional<Built> takeAssault(UUID team) {
         Built built = assaults.remove(team);
         paused.remove(team);
+        opened.values().removeIf(team::equals);
         shut.entrySet().removeIf(entry -> {
             if (entry.getValue().equals(team)) {
                 closed.add(entry.getKey());
@@ -159,6 +166,7 @@ public final class AssaultState extends SavedData {
         List<UUID> gates = new java.util.ArrayList<>(built.gates());
         gates.remove(failed);
         reopened.ifPresent(gates::add);
+        reopened.ifPresent(gate -> opened.put(gate, team));
         assaults.put(team, built.withGates(gates));
         closed.add(failed);
         setDirty();
@@ -168,6 +176,7 @@ public final class AssaultState extends SavedData {
     void moveGate(UUID team, UUID from, Optional<UUID> to, Direction side) {
         Built built = assaults.get(team);
         assaults.put(team, new Built(built.dimension(), built.blocks(), to.stream().toList(), Optional.of(side), built.wave()));
+        to.ifPresent(gate -> opened.put(gate, team));
         closed.add(from);
         setDirty();
     }
@@ -179,6 +188,11 @@ public final class AssaultState extends SavedData {
             assaults.put(team, new Built(built.dimension(), built.blocks(), built.gates(), built.side(), wave));
             setDirty();
         }
+    }
+
+    /** The team whose running Assault opened {@code gate}, open still or since moved, failed or closed for an absence. */
+    public Optional<UUID> openedBy(UUID gate) {
+        return Optional.ofNullable(opened.get(gate));
     }
 
     /** Whether {@code gate} was the gate of an Assault since removed. */
@@ -223,6 +237,7 @@ public final class AssaultState extends SavedData {
         Built built = assaults.get(team);
         if (built != null) {
             assaults.put(team, built.withGates(gates));
+            gates.forEach(gate -> opened.put(gate, team));
         }
         setDirty();
     }

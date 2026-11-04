@@ -102,6 +102,7 @@ public final class MechanicalMasteryRebornGameTests {
         AssaultTests.register(tests);
         AssaultAbsenceTests.register(tests);
         AssaultExplosionsTests.register(tests);
+        RefundTests.register(tests);
         // The protection Chain on a real Assembler, in the suiteGameTestServer run alone, which loads Craftworks (#252).
         if (ModList.get().isLoaded("craftworks")) {
             WardingChainTests.register(tests);

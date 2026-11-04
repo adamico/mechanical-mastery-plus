@@ -17,7 +17,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-/** The lab's block, item and menu, and what the menu sends its client of the asks to stop a challenge. */
+/** The lab's block, item and menus, and what the lab's menu sends its client of the asks to stop a challenge. */
 public final class Lab {
 
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MechanicalMasteryReborn.MOD_ID);
@@ -30,6 +30,9 @@ public final class Lab {
     public static final DeferredItem<BlockItem> ITEM = ITEMS.registerSimpleBlockItem("lab", BLOCK);
     public static final DeferredHolder<MenuType<?>, MenuType<LabMenu>> MENU =
             MENUS.register("lab", () -> new MenuType<>(LabMenu::new, FeatureFlags.VANILLA_SET));
+    /** The team's refund, a page at a time (#259). */
+    public static final DeferredHolder<MenuType<?>, MenuType<RefundMenu>> REFUND_MENU =
+            MENUS.register("lab_refund", () -> new MenuType<>(RefundMenu::new, FeatureFlags.VANILLA_SET));
 
     private Lab() {
     }

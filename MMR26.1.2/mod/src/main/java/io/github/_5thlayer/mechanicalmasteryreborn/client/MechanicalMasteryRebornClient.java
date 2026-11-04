@@ -75,6 +75,7 @@ public final class MechanicalMasteryRebornClient {
     private static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(Cod.MENU.get(), CodScreen::new);
         event.register(Lab.MENU.get(), LabScreen::new);
+        event.register(Lab.REFUND_MENU.get(), RefundScreen::new);
     }
 
     private static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {

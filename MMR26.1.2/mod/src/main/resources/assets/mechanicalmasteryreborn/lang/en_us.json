@@ -149,5 +149,18 @@
   "mechanicalmasteryreborn.lab.stop.take_back": "Take back",
   "mechanicalmasteryreborn.lab.stop.asks": "Asked: %s. Left: %s.",
   "mechanicalmasteryreborn.lab.stop.nobody": "nobody",
-  "mechanicalmasteryreborn.lab.stop.tooltip": "The challenge stops once every member online has asked. A stop locks its chain again until it is started anew; your team keeps every item."
+  "mechanicalmasteryreborn.lab.stop.tooltip": "The challenge stops once every member online has asked. A stop locks its chain again until it is started anew; your team keeps every item.",
+  "container.mechanicalmasteryreborn.lab_refund": "Refund",
+  "mechanicalmasteryreborn.refund.handed_over": "The Assault is over: %s items it broke wait for you at the lab.",
+  "mechanicalmasteryreborn.refund.waiting": "%s items of your refund wait for you at the lab.",
+  "mechanicalmasteryreborn.lab.refund": "Refund",
+  "mechanicalmasteryreborn.lab.refund.count": "%s items wait here.",
+  "mechanicalmasteryreborn.lab.refund.none": "Nothing an Assault broke waits here.",
+  "mechanicalmasteryreborn.lab.refund.open": "Open",
+  "mechanicalmasteryreborn.lab.refund.tooltip": "What an Assault's mobs broke on your island, given back as it ends. Take it here.",
+  "mechanicalmasteryreborn.refund.page": "Page %s of %s",
+  "mechanicalmasteryreborn.refund.take_all": "Take all",
+  "mechanicalmasteryreborn.refund.take_all.tooltip": "Moves as much of the whole refund as fits into your inventory.",
+  "mechanicalmasteryreborn.refund.back": "Back",
+  "mechanicalmasteryreborn.refund.not_member": "Only the team whose island this lab stands on can take its refund."
 }
