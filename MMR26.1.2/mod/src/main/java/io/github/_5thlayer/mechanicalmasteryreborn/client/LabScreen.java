@@ -125,8 +125,8 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
             button.setMessage(chosen.equals(Optional.of(handicap)) ? PLAYED : won ? WON : notMember ? NOT_MEMBER : CHOOSE);
             button.setTooltip(notMember ? Tooltip.create(NOT_MEMBER_TOOLTIP) : null);
         }
-        stop.visible = chosen.isPresent();
-        stop.active = menu.canAsk();
+        stop.visible = menu.stopOffered();
+        stop.active = menu.isMember();
         stop.setMessage(menu.asked() ? TAKE_BACK : ASK);
     }
 

@@ -56,7 +56,7 @@ final class MoneyTests {
     /** What lets a recreated party be given {@link MoneyHandicap#PERMIT} again (ADR 0007). */
     private static void staysStarted(GameTestHelper helper) {
         UUID team = account(helper, 0);
-        helper.assertFalse(state(helper).started(team, Handicap.MONEY), "the money challenge was started before it started");
+        helper.assertFalse(state(helper).started(team, Handicap.MONEY), "the money challenge counted as started before it was");
         Challenges.begin(server(helper), team, Handicap.MONEY);
         Challenges.end(server(helper), team);
         // A stop costs money only the attempt (ADR 0013).

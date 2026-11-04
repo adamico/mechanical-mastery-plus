@@ -92,7 +92,8 @@ public final class Stops {
 
     /**
      * Drops the ask of {@code player}, who logs out, and stops their team's challenge if every member still online has
-     * asked. They are still on the server's list as they log out, so they are left out by hand.
+     * asked, as when the one member left to ask logs out. They are still on the server's list as they log out, so they
+     * are left out by hand.
      */
     public static void loggedOut(MinecraftServer server, Player player) {
         if (server == null) {
@@ -100,7 +101,8 @@ public final class Stops {
         }
         UUID team = Teams.of(player);
         Set<UUID> asks = ASKS.get(team);
-        if (asks != null && asks.remove(player.getUUID())) {
+        if (asks != null) {
+            asks.remove(player.getUUID());
             stopIfAllAsked(server, team, player);
         }
     }

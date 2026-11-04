@@ -50,6 +50,7 @@ final class StopTests {
         tests.test("stop_waits_for_every_member_online", 1, StopTests::waitsForEveryMember);
         tests.test("stop_drops_the_ask_of_a_member_who_logs_out", 1, StopTests::dropsALoggedOutAsk);
         tests.test("stop_waits_for_a_member_who_logs_in", 1, StopTests::waitsForALogIn);
+        tests.test("stop_made_when_the_last_member_left_to_ask_logs_out", 1, StopTests::madeWhenTheLastLeftLogsOut);
         tests.test("stop_take_back_removes_the_ask", 1, StopTests::takeBack);
         tests.test("stop_asks_cleared_by_a_reset_or_a_win", 1, StopTests::clearedByAResetOrAWin);
         tests.test("stop_offer_survives_a_save_and_load", 1, StopTests::survivesASaveAndLoad);
@@ -174,6 +175,19 @@ final class StopTests {
             helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.ENERGY), "the team's handicap after the asker logged out");
             ask(helper, players.get(1));
             helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after the one online asked");
+        });
+        helper.succeed();
+    }
+
+    private static void madeWhenTheLastLeftLogsOut(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        online(helper, team, 2, players -> {
+            playedAndReset(helper, team);
+            ask(helper, players.get(0));
+            Stops.loggedOut(server(helper), players.get(1));
+            TestTeams.logOut(players.get(1));
+            helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(),
+                    "the team's handicap once the only member who hadn't asked logged out");
         });
         helper.succeed();
     }

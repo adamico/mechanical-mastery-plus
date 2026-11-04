@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Stops;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
@@ -52,7 +52,9 @@ public final class LabMenu extends AbstractContainerMenu {
     private final DataSlot member;
     /** The challenges the team has won, a bit per handicap's ordinal. */
     private final DataSlot won;
+    /** Whether the team may stop the challenge it plays, 1 or 0. */
     private final DataSlot stopOffered;
+    /** Whether the player asks to stop it, 1 or 0. */
     private final DataSlot asked;
     /** The server's player, who is sent {@link Asks}; null on the client or for a game test's mock player. */
     private final ServerPlayer viewer;
@@ -157,11 +159,6 @@ public final class LabMenu extends AbstractContainerMenu {
         return asked.get() == 1;
     }
 
-    /** Whether the player may ask to stop the challenge played, or take their ask back. */
-    public boolean canAsk() {
-        return isMember() && stopOffered();
-    }
-
     /** Which of the team's members online have asked to stop its challenge, and which are left, as the client was last sent. */
     public Asks asks() {
         return asks;
@@ -231,6 +228,7 @@ public final class LabMenu extends AbstractContainerMenu {
             left = List.copyOf(left);
         }
 
+        /** {@code team}'s asks as they stand, for the menu {@code containerId}. */
         static Asks of(MinecraftServer server, UUID team, int containerId) {
             var online = Teams.online(server, team);
             return new Asks(containerId,
