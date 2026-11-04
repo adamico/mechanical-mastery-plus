@@ -1,0 +1,17 @@
+# The last stand is a race that can't be lost
+
+Once a team has won all four challenges and starts the last chapter at the lab, C.O.D. makes again, Nullessence this time, and the team wins the pack when its Lead, what its Quintessence has cancelled minus the Nullessence C.O.D. has made, reaches the margin. C.O.D. paces itself on the team: it speeds up, a little behind, as the team's Quintessence nears its pace, up to a ceiling, and slows to a floor when the team stalls, and the Lead never falls below minus the margin. Nothing resets and nothing is lost: the last chapter is the pack's ending, and every challenge before it already had its failure.
+
+Quintessence is made two ways. Its Voidworks way runs all four chains again, on Nullessence decomposed on the Recycler, assembles one of each Transmuted Essence into a Quartessence and climbs it into Quintessence by a steep Rung in a Mutation Chamber, paid in motes from the Nether and the End. The Athanor's way turns Nullessence into Quintessence with no Voidworks, while the team takes on handicaps there, each opening a supply line fed by what the handicap takes from the team as it takes it: its generators' output, its hearts, the Null Shards its Assault drops, the money it earns. The more lines are fed, the faster and the cheaper; only all four take it ahead of C.O.D. on its own. So Voidworks is what wins the race, unless a team bets everything on the Athanor.
+
+We could have ended the pack with one Quintessence put into C.O.D., but with C.O.D. silent the last chapter would have had no adversary. We could have woken C.O.D. making Advanced essence again, but that made the ending a replay of the first challenge. We could have let the last stand fail as a challenge does, but a team that has won four would then be reset at the end of the pack, and the rubber band, the floor and the capped Lead keep a stalled team from falling hopelessly behind instead.
+
+## Consequences
+
+- Every Nullessence C.O.D. makes counts against the Lead, kept, voided or processed alike, as Inflation counts essence however it is stored, so only Quintessence moves the Lead.
+- Each Nullessence is a choice: decomposed into the four chains' mix, or put into the Athanor.
+- Under the Athanor's energy handicap a team's banked FE is cut and its generators' output goes to the Athanor, unlike the energy challenge, which leaves banked FE flowing (ADR 0009). A spell is a bet a team takes on for speed, not a challenge it prepares for, so there is nothing to bank toward.
+- No line is fed from a stock: a line takes only what its handicap takes during the spell, so food, Essentia Vitae, fuel or drops saved up ahead feed nothing. Essentia Vitae counts only from hearts given at the Athanor, and a Null Shard only in the spell it dropped in.
+- The handicaps are taken on at their challenges' peak for a fixed spell that can't be ended early, and one counts only while it is in effect, so a paused Assault counts for nothing; one Athanor works to a team, since a handicap applies to the whole team.
+- What is locked until the last stand is the Quartessence's recipe, the Quintessence Rung and the Athanor's work (ADR 0007), never Voidworks' machines, which a team may use before the last chapter.
+- The margin, what a Quintessence cancels, C.O.D.'s pacing, the Athanor's rates, the spell's length and the Rung's cost are the companion mod's config, tuned in play.

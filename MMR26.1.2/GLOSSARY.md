@@ -9,7 +9,7 @@ The suite.
 On this line the loop runs backwards. The world has been reduced to essence: each one holds the idea of every other resource, which has to be decomposed out of it.
 
 **C.O.D.**:
-The line's adversary, a sentient AI that cannot be shut down. It makes essence of the highest tier not yet blocked, and nothing else: Advanced first, then one tier lower each time a challenge is won, until all four are blocked, when it makes nothing more. When its tier drops, what it still holds stays for the team to take, and the new tier spills out until there is room. Dormant, it makes it at a steady pace a little faster than decomposing by hand, and only until it holds a stack, so it never runs dry and never piles up. A team's first decompose on a Recycler (decomposing by hand never does) wakes it, and from then on it makes essence much faster, steadily between challenges and ever faster, without end, while one is played. Between challenges, being awake is only more essence for the team: C.O.D. is an adversary only while a challenge is played.
+The line's adversary, a sentient AI that nothing but Quintessence can shut down. It makes essence of the highest tier not yet blocked, and nothing else: Advanced first, then one tier lower each time a challenge is won, until all four are blocked, when it makes nothing more until its last stand. When its tier drops, what it still holds stays for the team to take, and the new tier spills out until there is room. Dormant, it makes it at a steady pace a little faster than decomposing by hand, and only until it holds a stack, so it never runs dry and never piles up. A team's first decompose on a Recycler (decomposing by hand never does) wakes it, and from then on it makes essence much faster, steadily between challenges and ever faster, without end, while one is played. Between challenges, being awake is only more essence for the team: C.O.D. is an adversary only while a challenge is played.
 
 **Suite**:
 The 5thlayer -works mods (Groundworks, Beltworks, Pipeworks, Wireworks, Craftworks, Fieldworks, Voidworks, Gearworks), which the pack consumes as released jars, as any player would. What the pack needs from them it scripts itself; a change goes to the mod only for a bug or a workaround worth sharing.
@@ -66,11 +66,30 @@ One of the four new essences, each made at the end of one challenge by that chal
 _Avoid_: new essence
 
 **Quintessence**:
-The final essence, made in the last chapter from the four Transmuted Essences, which shuts C.O.D. down for good. It is made with Voidworks in the Nether and the End, which a team reaches only once it has won all four challenges.
+The final essence, made in the last chapter. Its Voidworks way assembles one of each Transmuted Essence into a Quartessence and climbs that, in a Mutation Chamber, by a steep Rung paid in motes from the Nether and the End; a second way, with no Voidworks, makes it from Nullessence only while the team bears handicaps it chooses, harder than in their challenges, and the faster the more it bears. Put into C.O.D. itself during its last stand, by hand or any automation, each one cancels a fixed amount of what C.O.D. makes, and only Quintessence moves the Lead.
+
+**Quartessence**:
+The four Transmuted Essences assembled into one, one of each, which a Mutation Chamber climbs into Quintessence. Its recipe and that Rung stay locked until the last stand starts; Voidworks itself never is.
+
+**Nullessence**:
+What C.O.D. makes in its last stand, the opposite of Quintessence. A team decomposes it on the Recycler into a mix drawn from all four tiers', which the four chains run on, or turns it into Quintessence by a second way of its own; whatever becomes of it, C.O.D. has made it, and it counts against the Lead.
+_Avoid_: antithesis, anti-essence
+
+**Athanor**:
+The companion mod's block, one to a team, that turns Nullessence, and nothing else, into Quintessence: the second way, with no Voidworks, crafted from something of each challenge's own. Each handicap a team takes on there runs for a fixed spell that can't be ended early, at its challenge's peak from the start, and opens a supply line fed by the very thing the handicap takes, as it is taken: the team's generators' output, with banked FE cut (energy); Essentia Vitae from hearts given at the Athanor itself, under the hungriest diet (life); Null Shards from that spell's Assault, at its hardest steps (protection); and money drained from what the team earns during the spell, with its money set aside and the Shop's prices up (money). So nothing saved up feeds a line. The Athanor works only while a line is fed, and the more lines are, the faster it works and the less Nullessence each Quintessence takes; only all four take it ahead of C.O.D. on its own. A line counts only while its handicap is in effect, so a paused Assault counts for nothing while its spell runs on.
+_Avoid_: furnace, purifier
 
 **Last chapter**:
-What a team plays once it has won all four challenges, for good: the Nether and the End open to it, and it makes Quintessence there.
+What a team plays once it has won all four challenges, for good: the Nether and the End open to it, it starts C.O.D.'s last stand at the lab, and it makes Quintessence there. Quintessence's chain stays locked until the last stand starts, as a challenge's does. It has no handicap and can't be lost.
 _Avoid_: endgame, chapter (for a challenge)
+
+**Last stand**:
+C.O.D. making again, Nullessence this time, once a team has won all four challenges and starts the last chapter at the lab. It speeds up, a little behind, as the team's Quintessence nears its pace, up to a ceiling, and slows to a set floor when the team stalls. It ends, and the pack is won, when the team's Lead reaches the margin: C.O.D. shuts down for good and stands dark on the island.
+_Avoid_: final challenge, fifth challenge
+
+**Lead**:
+How far the team's Quintessence is ahead of C.O.D. in its last stand: what the team's Quintessence has cancelled minus the Nullessence C.O.D. has made since the last stand started, kept, voided or processed alike. Decomposing doesn't move it. It never falls below minus the margin, and the team wins the pack when it reaches the margin.
+_Avoid_: score, Inflation (which is a challenge's)
 
 **Challenge**:
 One of four goals, each bound to a fixed mod or set of mods, started and researched at the lab and followed through EMI, as Factorio's progression is, with no quest book. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. It is won by putting its quota of Transmuted Essence into its Port on C.O.D., which blocks the tier C.O.D. is making; a won challenge can't be played again. Its mods keep their own recipes. Its chain stays locked for a team until it starts the challenge, so nothing of it can be built ahead, and its machines, however they are had, do no work until then, though their crafting is never locked, and stays unlocked from then on, past a win or a reset, but not past a stop. What its mods offer outside the chain, as the Shop, is never locked, and their items can still come from a mix, to be recycled.
@@ -111,6 +130,10 @@ _Avoid_: practice gate, farm gate
 **Defence**:
 A block that fights the Assault's mobs on its own, fed by the factory with FE or with what its lines make, and never for nothing. Defences are free from the start, as the team's gear is, so growing them ahead is part of the protection challenge's strategy.
 _Avoid_: turret, tower
+
+**Null Shard**:
+The drop only the mobs of an Assault taken on at the Athanor give, which the Athanor's protection line uses up; any automation may bring it there.
+_Avoid_: Rift Shard (the challenge's own drop)
 
 **Rift Shard**:
 The drop only an Assault's mobs and a home gate give, the harder mobs of its deeper waves giving more of it, which the protection challenge's Chain takes with the Assault's ordinary drops and oil up to the Warding Essence. A team keeps what it hasn't used past a win or a reset.
