@@ -2,7 +2,7 @@
 navigation:
   title: The Diet
   icon: minecraft:bread
-  position: 4
+  position: 6
 ---
 
 # The Diet
