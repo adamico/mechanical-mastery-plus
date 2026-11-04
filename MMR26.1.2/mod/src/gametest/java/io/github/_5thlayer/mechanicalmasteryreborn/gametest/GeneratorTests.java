@@ -28,14 +28,14 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
  */
 final class GeneratorTests {
 
-    /** In the game-test pack's generator tag. */
-    private static final Block GENERATOR = Blocks.LODESTONE;
+    /** In the game-test pack's generator tag; PortTests stands it on its island too. */
+    static final Block GENERATOR = Blocks.LODESTONE;
     /** Not in the tag. */
     private static final Block MACHINE = Blocks.TARGET;
     private static final int BUFFER = 1000;
     /** What each buffer holds, short of full, so that what it holds and what it can hold differ. */
     private static final int HELD = 600;
-    private static final int DRAW = 100;
+    static final int DRAW = 100;
 
     private static final BlockPos AT = new BlockPos(2, 2, 2);
     /** Another team's island, in a corner of the test's. */
@@ -114,7 +114,7 @@ final class GeneratorTests {
     }
 
     /** What a network drawing {@link #DRAW} FE from {@code pos} would get. */
-    private static int draw(GameTestHelper helper, BlockPos pos) {
+    static int draw(GameTestHelper helper, BlockPos pos) {
         try (Transaction transaction = Transaction.openRoot()) {
             return face(helper, pos).extract(DRAW, transaction);
         }

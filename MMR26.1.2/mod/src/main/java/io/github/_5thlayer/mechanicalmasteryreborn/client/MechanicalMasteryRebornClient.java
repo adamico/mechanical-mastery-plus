@@ -5,7 +5,6 @@ package io.github._5thlayer.mechanicalmasteryreborn.client;
 
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
-import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
@@ -42,12 +41,13 @@ public final class MechanicalMasteryRebornClient {
         NeoForge.EVENT_BUS.addListener(InflationBarOverlay::draw);
     }
 
-    /** A chain machine's tooltip, in EMI and anywhere else, names the challenge that unlocks it (#214). */
+    /**
+     * A chain machine's tooltip, in EMI and anywhere else, names the challenge that unlocks its work, until the player's
+     * team has started it (#214, #246).
+     */
     private static void nameChain(ItemTooltipEvent event) {
-        Handicap handicap = ChainMachines.Table.received().machines().get(event.getItemStack().getItem());
-        if (handicap != null) {
-            event.getToolTip().add(ChainMachines.line(handicap).copy().withStyle(ChatFormatting.GOLD));
-        }
+        ChainMachines.chainOf(event.getItemStack().getItem()).filter(ChainMachines.Table.received()::locked)
+                .ifPresent(handicap -> event.getToolTip().add(ChainMachines.line(handicap).copy().withStyle(ChatFormatting.GOLD)));
     }
 
     /** A food's tooltip, while its player's Diet is kept, shows the share it would feed them now (#244). */

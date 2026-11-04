@@ -7,6 +7,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.compat.chapters.ChaptersStage
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
@@ -15,8 +16,9 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 /**
  * A challenge's chain, locked for a team until it starts the challenge and unlocked from then on, past a win or a
  * reset (ADR 0007). Each chain is a Chapters stage named after its handicap, such as {@code mechanicalmasteryreborn:energy},
- * and the pack's stage files lock the chain's recipes behind it. A player is given the stage of every chain its team has
- * unlocked as the challenge starts and each time it logs in, so a player who joins the team later has them too.
+ * and the pack's stage files lock the chain's own recipes behind it; its machines' work is locked by {@link ChainMachines}.
+ * A player is given the stage of every chain its team has unlocked as the challenge starts, each time it logs in and
+ * as it joins or leaves an island, so a player who joins the team later has them too.
  */
 public final class Chains {
 
@@ -40,7 +42,7 @@ public final class Chains {
                 event -> unlock(event.getEntity().level().getServer(), event.getEntity()));
     }
 
-    /** Gives {@code player} the stage of every chain its team has unlocked. */
+    /** Gives {@code player} the stage of every chain its team has unlocked, and tells its client which they are. */
     public static void unlock(MinecraftServer server, Player player) {
         if (server == null || player == null) {
             return;
@@ -51,6 +53,9 @@ public final class Chains {
             if (state.unlocked(team, handicap)) {
                 stages().grant(player, handicap.id());
             }
+        }
+        if (player instanceof ServerPlayer serverPlayer) {
+            ChainMachines.send(server, serverPlayer);
         }
     }
 
