@@ -69,7 +69,7 @@ _Avoid_: new essence
 The final essence, made in the last chapter from the four Transmuted Essences, which shuts C.O.D. down for good.
 
 **Challenge**:
-One of four goals, each bound to a fixed mod or set of mods, started and researched at the lab and followed through EMI, as Factorio's progression is, with no quest book. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. It is won by putting its quota of Transmuted Essence into its Port on C.O.D., which blocks the tier C.O.D. is making; a won challenge can't be played again. Its mods keep their own recipes. Its chain stays locked for a team until it starts the challenge, so nothing of it can be built ahead, and a chain machine that comes from a mix does no work until then, though its crafting is never locked, and stays unlocked from then on, past a win or a reset. What its mods offer outside the chain, as the Shop, is never locked, and their items can still come from a mix, to be recycled.
+One of four goals, each bound to a fixed mod or set of mods, started and researched at the lab and followed through EMI, as Factorio's progression is, with no quest book. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. It is won by putting its quota of Transmuted Essence into its Port on C.O.D., which blocks the tier C.O.D. is making; a won challenge can't be played again. Its mods keep their own recipes. Its chain stays locked for a team until it starts the challenge, so nothing of it can be built ahead, and its machines, however they are had, do no work until then, though their crafting is never locked, and stays unlocked from then on, past a win or a reset. What its mods offer outside the chain, as the Shop, is never locked, and their items can still come from a mix, to be recycled.
 _Avoid_: questline, chapter, stage
 
 **Quota**:
@@ -97,7 +97,7 @@ The protection challenge's handicap: waves of mobs the companion mod sends at a 
 _Avoid_: raid, siege, invasion
 
 **Home gate**:
-A smaller gate a team opens on its own island with a pearl, whenever it likes, once it has started the protection challenge. It gives the Assault's drop, but less of it than the Assault, so a won protection chain goes on making Warding Essence.
+A smaller gate a team opens on its own island with a pearl, whenever it likes, once it has won the protection challenge: no recipe makes the pearl, and the Shop sells it from the win on. It gives the Assault's drop, but less of it than the Assault, so a won protection chain goes on making Warding Essence.
 _Avoid_: practice gate, farm gate
 
 **Defence**:
@@ -127,5 +127,5 @@ _Avoid_: stage, unlock (as a noun)
 Where goods are traded for money: a second way to resources beside decomposing, and the skyblock's store for what no essence gives, as saplings, water and lava. A team buys what it lacks, and sells only the few goods the Shop takes, made things as metal blocks rather than whatever it has too much of; a fluid that only the Shop gives is never sold back. Until Basic, whose mix holds them, it is the only source of ores, and it is always the source of a team's first food: seeds and passive farm animals. Money was the heart of Mechanical Mastery Plus and stays a big part of its sequel. It is never locked, and the money handicap is what makes it costly.
 
 **Permit**:
-AdminShop's named unlock, held by a team's Account, which opens Offers gated by it. A Sell Permit opens Offers the Shop buys from the team, a Buy Permit Offers it sells to the team; one never opens both. A team buys its Permits in the Shop, all but the one it is given when it starts the money challenge, and keeps them for good.
+AdminShop's named unlock, held by a team's Account, which opens Offers gated by it. A Sell Permit opens Offers the Shop buys from the team, a Buy Permit Offers it sells to the team; one never opens both. A team buys its Permits in the Shop, all but the ones it is given, when it starts the money challenge and when it wins protection, and keeps them for good.
 _Avoid_: Trade Permit, license, tier

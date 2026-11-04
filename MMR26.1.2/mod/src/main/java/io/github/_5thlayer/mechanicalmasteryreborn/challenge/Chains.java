@@ -16,8 +16,9 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 /**
  * A challenge's chain, locked for a team until it starts the challenge and unlocked from then on, past a win or a
  * reset (ADR 0007). Each chain is a Chapters stage named after its handicap, such as {@code mechanicalmasteryreborn:energy},
- * and the pack's stage files lock the chain's own recipes behind it; its machines' work is locked by {@link ChainMachines}. A player is given the stage of every chain its team has
- * unlocked as the challenge starts and each time it logs in, so a player who joins the team later has them too.
+ * and the pack's stage files lock the chain's own recipes behind it; its machines' work is locked by {@link ChainMachines}.
+ * A player is given the stage of every chain its team has unlocked as the challenge starts, each time it logs in and
+ * as it joins or leaves an island, so a player who joins the team later has them too.
  */
 public final class Chains {
 

@@ -95,7 +95,7 @@ public final class ChainEmiPlugin implements EmiPlugin {
         @Override
         public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
             if (shown()) {
-                graphics.text(Minecraft.getInstance().font, MARK, bounds.x() + 1, bounds.y() + 1, 0xFFFFAA00, true);
+                graphics.text(Minecraft.getInstance().font, MARK, bounds.x() + 1, bounds.y() + 1, 0xFFFFFFFF, true);
             }
         }
 

@@ -19,6 +19,7 @@ import dev.ftb.mods.ftbteams.api.Team;
 import dev.ftb.mods.ftbteams.api.TeamManager;
 import dev.ftb.mods.ftbteams.api.property.TeamProperties;
 import dev.ftb.mods.ftbteams.data.PartyTeam;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.HomeGates;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.MoneyHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.record.IslandParties;
@@ -93,10 +94,12 @@ public final class FtbPartySync {
             case Move.Join join -> {
                 ServerPlayer player = server.getPlayerList().getPlayer(join.player());
                 party(manager, join.party()).join(player);
+                Chains.unlock(server, player);
             }
             case Move.Leave leave -> {
                 ServerPlayer player = server.getPlayerList().getPlayer(leave.player());
                 party(manager, leave.party()).kickPlayerForcibly(player);
+                Chains.unlock(server, player);
             }
             case Move.Rename rename -> {
                 Team party = party(manager, rename.party());

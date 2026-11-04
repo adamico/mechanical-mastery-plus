@@ -134,7 +134,7 @@ public final class ChainMachines {
             found = new Read(recipes, readStages(server, recipes));
             read = found;
         }
-        return found.chain();
+        return found.byId();
     }
 
     /**
@@ -156,7 +156,7 @@ public final class ChainMachines {
     }
 
     private static Map<Identifier, Handicap> readStages(MinecraftServer server, RecipeMap recipes) {
-        var chain = new HashMap<Identifier, Handicap>();
+        var byId = new HashMap<Identifier, Handicap>();
         for (Handicap handicap : Handicap.values()) {
             var file = Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "chapters/stages/" + handicap.id() + ".json");
             var resource = server.getResourceManager().getResource(file);
@@ -177,16 +177,16 @@ public final class ChainMachines {
             for (JsonElement id : stage.getAsJsonObject().getAsJsonArray("recipes")) {
                 Identifier recipe = id.isJsonPrimitive() ? Identifier.tryParse(id.getAsString()) : null;
                 if (recipe != null && recipes.byKey(ResourceKey.create(Registries.RECIPE, recipe)) != null) {
-                    chain.putIfAbsent(recipe, handicap);
+                    byId.putIfAbsent(recipe, handicap);
                 } else {
                     LOGGER.warn("The {} chain's stage file names {}, which is no recipe the server has", handicap.id(), id);
                 }
             }
         }
-        return Map.copyOf(chain);
+        return Map.copyOf(byId);
     }
 
-    private record Read(RecipeMap recipes, Map<Identifier, Handicap> chain) {
+    private record Read(RecipeMap recipes, Map<Identifier, Handicap> byId) {
     }
 
     /**
