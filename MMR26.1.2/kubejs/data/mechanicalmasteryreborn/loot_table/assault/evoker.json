@@ -4,10 +4,7 @@
     {
       "rolls": 1,
       "entries": [
-        {
-          "type": "minecraft:loot_table",
-          "value": "minecraft:entities/evoker"
-        }
+        { "type": "minecraft:loot_table", "value": "minecraft:entities/evoker" }
       ]
     },
     {
@@ -17,10 +14,7 @@
           "type": "minecraft:item",
           "name": "mechanicalmasteryreborn:rift_shard",
           "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 3
-            }
+            { "function": "minecraft:set_count", "count": 3 }
           ]
         }
       ]

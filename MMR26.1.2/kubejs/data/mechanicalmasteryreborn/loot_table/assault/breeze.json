@@ -4,10 +4,7 @@
     {
       "rolls": 1,
       "entries": [
-        {
-          "type": "minecraft:loot_table",
-          "value": "minecraft:entities/breeze"
-        }
+        { "type": "minecraft:loot_table", "value": "minecraft:entities/breeze" }
       ]
     },
     {
@@ -17,10 +14,7 @@
           "type": "minecraft:item",
           "name": "mechanicalmasteryreborn:rift_shard",
           "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 2
-            }
+            { "function": "minecraft:set_count", "count": 2 }
           ]
         }
       ]

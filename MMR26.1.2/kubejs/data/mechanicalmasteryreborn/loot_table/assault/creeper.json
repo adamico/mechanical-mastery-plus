@@ -4,25 +4,16 @@
     {
       "rolls": 1,
       "entries": [
-        {
-          "type": "minecraft:loot_table",
-          "value": "minecraft:entities/creeper"
-        }
+        { "type": "minecraft:loot_table", "value": "minecraft:entities/creeper" }
       ]
     },
     {
       "rolls": 1,
       "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.35
-        }
+        { "condition": "minecraft:random_chance", "chance": 0.35 }
       ],
       "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "mechanicalmasteryreborn:rift_shard"
-        }
+        { "type": "minecraft:item", "name": "mechanicalmasteryreborn:rift_shard" }
       ]
     }
   ]

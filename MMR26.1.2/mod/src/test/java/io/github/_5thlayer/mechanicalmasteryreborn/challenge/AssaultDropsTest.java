@@ -4,6 +4,7 @@
 package io.github._5thlayer.mechanicalmasteryreborn.challenge;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -46,10 +47,11 @@ class AssaultDropsTest {
     @Test
     void eachStepAddsItsMobs() throws IOException {
         Map<Integer, List<String>> steps = new TreeMap<>();
-        for (JsonElement modifier : read(ASSAULT).getAsJsonArray("modifiers")) {
-            JsonObject mode = modifier.getAsJsonObject().getAsJsonObject("application_mode");
-            if (mode.get("type").getAsString().equals("gateways:after_every_n_waves") && modifier.getAsJsonObject().has("entities")) {
-                steps.computeIfAbsent(mode.get("waves").getAsInt(), waves -> new ArrayList<>()).addAll(mobs(modifier.getAsJsonObject()));
+        for (JsonElement element : read(ASSAULT).getAsJsonArray("modifiers")) {
+            JsonObject modifier = element.getAsJsonObject();
+            JsonObject mode = modifier.getAsJsonObject("application_mode");
+            if (mode.get("type").getAsString().equals("gateways:after_every_n_waves") && modifier.has("entities")) {
+                steps.computeIfAbsent(mode.get("waves").getAsInt(), waves -> new ArrayList<>()).addAll(mobs(modifier));
             }
         }
         assertEquals(Map.of(
@@ -109,7 +111,7 @@ class AssaultDropsTest {
     void leavesOutTheMobsThatDontFit() throws IOException {
         for (JsonElement entity : entities()) {
             String mob = name(entity.getAsJsonObject());
-            assertTrue(!Set.of("ghast", "endermite", "silverfish", "phantom").contains(mob), "the Assault sends a " + mob);
+            assertFalse(Set.of("ghast", "endermite", "silverfish", "phantom").contains(mob), "the Assault sends a " + mob);
         }
     }
 
@@ -119,7 +121,7 @@ class AssaultDropsTest {
             for (Path file : files.filter(path -> path.toString().endsWith(".json")).toList()) {
                 boolean lootTable = DATA.relativize(file).toString().replace('\\', '/').matches("[^/]+/loot_tables?/.*");
                 if (lootTable && !file.startsWith(TABLES)) {
-                    assertTrue(!Files.readString(file).contains(SHARD), file + " gives a Rift Shard");
+                    assertFalse(Files.readString(file).contains(SHARD), file + " gives a Rift Shard");
                 }
             }
         }
@@ -167,9 +169,10 @@ class AssaultDropsTest {
                 if (count.isJsonPrimitive()) {
                     min = max = count.getAsInt();
                 } else {
-                    assertEquals("minecraft:uniform", count.getAsJsonObject().get("type").getAsString());
-                    min = count.getAsJsonObject().get("min").getAsInt();
-                    max = count.getAsJsonObject().get("max").getAsInt();
+                    JsonObject uniform = count.getAsJsonObject();
+                    assertEquals("minecraft:uniform", uniform.get("type").getAsString());
+                    min = uniform.get("min").getAsInt();
+                    max = uniform.get("max").getAsInt();
                 }
             }
         }
