@@ -36,6 +36,7 @@ final class HomeGateTests {
         tests.test("home_gate_refused_off_any_island", 1, HomeGateTests::refusedOffAnyIsland);
         tests.test("home_gate_refused_to_a_player_with_no_team", 1, HomeGateTests::refusedWithNoTeam);
         tests.test("home_gate_check_leaves_other_gates_as_they_were", 1, HomeGateTests::leavesOtherGates);
+        tests.test("home_gate_pearl_s_permit_given_once_protection_is_won", 1, HomeGateTests::permitOnceWon);
     }
 
     private static void opensAtHome(GameTestHelper helper) {
@@ -51,6 +52,18 @@ final class HomeGateTests {
         Challenges.begin(server, team, Handicap.PROTECTION);
         Challenges.end(server, team);
         helper.assertTrue(HomeGates.refusal(player(helper, team, HOME), HomeGates.GATE) == null, "a home gate was refused at home after the win");
+        helper.succeed();
+    }
+
+    /** The pearl has no recipe: the Shop sells it behind {@link HomeGates#PERMIT}, which only a protection win gives (#246). */
+    private static void permitOnceWon(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var server = helper.getLevel().getServer();
+        TestAccounts.open(team, 0);
+        Challenges.begin(server, team, Handicap.PROTECTION);
+        helper.assertFalse(TestAccounts.holds(team, HomeGates.PERMIT), "the pearl's Permit while protection is played");
+        Challenges.win(server, team);
+        helper.assertTrue(TestAccounts.holds(team, HomeGates.PERMIT), "the pearl's Permit once protection is won");
         helper.succeed();
     }
 

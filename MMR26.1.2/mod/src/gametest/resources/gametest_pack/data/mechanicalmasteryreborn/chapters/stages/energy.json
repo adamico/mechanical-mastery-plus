@@ -1,6 +1,5 @@
 {
   "recipes": [
-    "minecraft:blast_furnace",
     "minecraft:iron_ingot_from_smelting_iron_ore",
     "mechanicalmasteryreborn:no_such_recipe"
   ]

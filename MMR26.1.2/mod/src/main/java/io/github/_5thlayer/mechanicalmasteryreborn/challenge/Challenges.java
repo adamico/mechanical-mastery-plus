@@ -111,6 +111,9 @@ public final class Challenges {
         Handicap handicap = played.get();
         state.blockTier(team, handicap);
         end(server, team);
+        if (handicap == Handicap.PROTECTION) {
+            HomeGates.grant(server, team);
+        }
         Component message = Component.translatable("mechanicalmasteryreborn.challenge.won", name(handicap).withStyle(ChatFormatting.GOLD))
                 .withStyle(ChatFormatting.GRAY);
         Component title = Component.translatable("mechanicalmasteryreborn.challenge.won.title", title(handicap)).withStyle(ChatFormatting.GOLD);

@@ -10,23 +10,26 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 /**
- * A chain machine from a mix does no work while its island's team hasn't unlocked its chain (#214). The chain machines
- * are what the recipes in the chain's stage file make, of any type, as Craftworks' assembling recipes are in the pack;
- * no Theurgy is on the game tests' runs, so the game-test pack's energy stage file names the blast furnace's crafting
- * recipe, a smelting recipe, and a recipe no pack has, its protection stage file the shield's, as the pack's names the
- * Warding Essence's assembling recipe (#235), and its life stage file the brewing stand's, standing for the Ara Vitae and
- * Hellfire Forge (#243).
- * Theurgy's own hook only asks {@link ChainMachines#lockedAt}, which these test.
+ * A chain machine does no work while its island's team hasn't started its challenge, and its crafting is never locked
+ * (ADR 0007, #246). Each chain's machines are its tag, {@code mechanicalmasteryreborn:chain_machines/<handicap>}, not
+ * what its stage file's recipes make: no Theurgy or Neo Vitae is on the game tests' runs, so the game-test pack's tags
+ * hold the blast furnace and smoker for energy's and the brewing stand for life's, standing for the pack's own lists,
+ * which {@code ChainMachineListTest} reads. Its stage files name the chain's own recipes, a smelting recipe for energy
+ * and the shield's for protection, and the glass bottle's for life, which make no machine. Theurgy's and Neo Vitae's own hooks only ask
+ * {@link ChainMachines#lockedAt}, which these test.
  */
 final class ChainMachineTests {
 
-    /** Made by the crafting recipe in the game-test pack's energy stage file. */
+    /** In the game-test pack's energy tag. */
     private static final Block MACHINE = Blocks.BLAST_FURNACE;
 
     private static final BlockPos AT = new BlockPos(2, 2, 2);
@@ -37,21 +40,62 @@ final class ChainMachineTests {
     }
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
-        tests.test("chain_machines_are_read_from_the_stage_file_s_recipes_of_any_type", 1, ChainMachineTests::readFromTheStageFile);
+        tests.test("chain_machines_are_read_from_their_tags_not_the_stage_files", 1, ChainMachineTests::readFromTheTags);
+        tests.test("chain_recipes_are_read_from_the_stage_files", 1, ChainMachineTests::recipesFromTheStageFiles);
+        tests.test("chain_machines_of_every_chain_idle_until_its_challenge_starts", 1, ChainMachineTests::everyChainIdleUntilStarted);
         tests.test("chain_machine_locked_until_its_challenge_starts", 1, ChainMachineTests::lockedUntilStarted);
         tests.test("chain_machine_stays_unlocked_after_a_reset_and_an_end", 1, ChainMachineTests::staysUnlocked);
+        tests.test("chain_machine_stays_unlocked_after_a_win", 1, ChainMachineTests::staysUnlockedAfterAWin);
         tests.test("chain_machine_of_a_team_that_started_works_beside_one_that_hasnt", 1, ChainMachineTests::perTeam);
         tests.test("chain_machine_lock_leaves_other_blocks_as_they_were", 1, ChainMachineTests::leavesOtherBlocks);
         tests.test("chain_machine_life_idle_until_life_starts", 1, ChainMachineTests::lifeIdleUntilStarted);
     }
 
-    private static void readFromTheStageFile(GameTestHelper helper) {
-        var machines = ChainMachines.of(helper.getLevel().getServer());
-        helper.assertValueEqual(machines.get(Items.BLAST_FURNACE), Handicap.ENERGY, "the blast furnace's chain");
-        helper.assertValueEqual(machines.get(Items.IRON_INGOT), Handicap.ENERGY, "the smelting recipe's result's chain");
-        helper.assertValueEqual(machines.get(Items.SHIELD), Handicap.PROTECTION, "the protection stage file's shield's chain");
-        helper.assertValueEqual(machines.get(Items.BREWING_STAND), Handicap.LIFE, "the life stage file's brewing stand's chain");
-        helper.assertValueEqual(machines.size(), 4, "what the stage files' recipes make, but the one no pack has");
+    private static void readFromTheTags(GameTestHelper helper) {
+        helper.assertValueEqual(ChainMachines.chainOf(Items.BLAST_FURNACE), Optional.of(Handicap.ENERGY), "the blast furnace's chain");
+        helper.assertValueEqual(ChainMachines.chainOf(Items.SMOKER), Optional.of(Handicap.ENERGY), "the smoker's chain");
+        helper.assertValueEqual(ChainMachines.chainOf(Items.BREWING_STAND), Optional.of(Handicap.LIFE), "the brewing stand's chain");
+        helper.assertValueEqual(ChainMachines.chainOf(Items.SHIELD), Optional.empty(), "the chain of what a stage file's recipe makes");
+        helper.assertValueEqual(ChainMachines.chainOf(Items.IRON_INGOT), Optional.empty(), "the chain of what a stage file's smelting makes");
+        helper.succeed();
+    }
+
+    /** What EMI marks besides the locked machines' recipes: every recipe a stage file names, but one no pack has. */
+    private static void recipesFromTheStageFiles(GameTestHelper helper) {
+        var recipes = ChainMachines.recipes(helper.getLevel().getServer());
+        helper.assertValueEqual(recipes.get(Identifier.withDefaultNamespace("iron_ingot_from_smelting_iron_ore")), Handicap.ENERGY,
+                "the energy stage file's recipe's chain");
+        helper.assertValueEqual(recipes.get(Identifier.withDefaultNamespace("shield")), Handicap.PROTECTION, "the protection stage file's recipe's chain");
+        helper.assertValueEqual(recipes.get(Identifier.withDefaultNamespace("glass_bottle")), Handicap.LIFE, "the life stage file's recipe's chain");
+        helper.assertValueEqual(recipes.size(), 3, "the stage files' recipes, but the one no pack has");
+        helper.succeed();
+    }
+
+    /** Every machine each chain's tag holds waits for that chain's challenge, and no other's. */
+    private static void everyChainIdleUntilStarted(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var server = helper.getLevel().getServer();
+        int checked = 0;
+        for (Handicap handicap : Handicap.values()) {
+            for (var item : BuiltInRegistries.ITEM.getTagOrEmpty(ChainMachines.tag(handicap))) {
+                if (!(item.value() instanceof BlockItem block)) {
+                    helper.fail(item.getRegisteredName() + " in the " + handicap.id() + " chain's tag is no block");
+                    return;
+                }
+                helper.setBlock(AT, block.getBlock());
+                helper.assertValueEqual(lockedAt(helper, AT), Optional.of(handicap), item.getRegisteredName() + "'s lock before its challenge");
+                checked++;
+            }
+        }
+        helper.assertValueEqual(checked, 3, "the machines the game-test pack's tags hold");
+        for (Handicap handicap : Handicap.values()) {
+            Challenges.begin(server, team, handicap);
+            Challenges.end(server, team);
+            for (var item : BuiltInRegistries.ITEM.getTagOrEmpty(ChainMachines.tag(handicap))) {
+                helper.setBlock(AT, ((BlockItem) item.value()).getBlock());
+                helper.assertValueEqual(lockedAt(helper, AT), Optional.empty(), item.getRegisteredName() + "'s lock once its challenge started");
+            }
+        }
         helper.succeed();
     }
 
@@ -89,6 +133,16 @@ final class ChainMachineTests {
         helper.succeed();
     }
 
+    private static void staysUnlockedAfterAWin(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var server = helper.getLevel().getServer();
+        helper.setBlock(AT, MACHINE);
+        Challenges.begin(server, team, Handicap.ENERGY);
+        Challenges.win(server, team);
+        helper.assertValueEqual(lockedAt(helper, AT), Optional.empty(), "the machine's lock after its challenge was won");
+        helper.succeed();
+    }
+
     private static void perTeam(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         TestTeams.claim(helper, OTHER_ISLAND, OTHER_ISLAND);
@@ -103,7 +157,7 @@ final class ChainMachineTests {
     private static void leavesOtherBlocks(GameTestHelper helper) {
         TestTeams.claim(helper);
         helper.setBlock(AT, Blocks.FURNACE);
-        helper.assertValueEqual(lockedAt(helper, AT), Optional.empty(), "the lock of a block no stage file names");
+        helper.assertValueEqual(lockedAt(helper, AT), Optional.empty(), "the lock of a block no chain's tag holds");
         helper.succeed();
     }
 
