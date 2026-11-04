@@ -25,6 +25,10 @@ file = "config/skyblockbuilder/templates/islands/spawn.snbt"
 hash = "c74163f57bae03bbb4229bc3a7e7e294c3d5ee0b83c829f3643fa16481878094"
 
 [[files]]
+file = "config/theurgy-client.toml"
+hash = "aa5ec03cdd86b25f9092a081aeea91876ec061665d19f7bdaa7f7a52a88b8a18"
+
+[[files]]
 file = "defaultconfigs/adminshop-server.toml"
 hash = "9b3782f8d1e9dc632bb9db8d0b0df8af475f199ba47e2ea5a4a37631948036fb"
 
