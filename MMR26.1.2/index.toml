@@ -113,6 +113,10 @@ file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/man
 hash = "66a7f2c1fd8ec56188dc922483b9ce6628a79778fae96a7721a15735f0fb738d"
 
 [[files]]
+file = "kubejs/data/fieldworks/tags/block/harvestable.json"
+hash = "255358a6781577aaea957e718d0ea085d81492ad68dfe48b0576070d1736286f"
+
+[[files]]
 file = "kubejs/data/gateways/gateways/gateways/basic/blaze.json"
 hash = "be6917136f90869132da20e86a7242b84c74ea700dec95456b0cff0a7f4efd9a"
 
@@ -258,7 +262,7 @@ hash = "663e3e55c0010969f02567937bbebfb0c5d5c11d0ddbfe5913066f109c0ede94"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/charged_rift.json"
-hash = "45a73af69eaf9b5a026a9e16ecb127aa5c47800366b4fd8d38155f04bc31a1c0"
+hash = "f7cae0ca343b708282bc77e7ba9eb75c65825c4623b41beec20933770e636f31"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/ward_tallow.json"
@@ -267,6 +271,10 @@ hash = "16985818ad421aa1cb37dcb56bb81503e5378c3ff09d87afaec9a16fc19c1f88"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/warding_essence.json"
 hash = "238234046e86dedc519535d68771b906534e5ff9bf55afa8021a960b59b18d64"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/harvesting/obsidian_flakes.json"
+hash = "b51f14260bd2f2bf2ff88e6f8a3cc86a445e065118d8dbce6d87037af33844bc"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/incubation/galvanic_essence.json"
@@ -593,7 +601,7 @@ metafile = true
 
 [[files]]
 file = "mods/beltworks.pw.toml"
-hash = "5a8b607261a4a9940c524b3d283c299600f666034176c689a470eec6fd8e750e"
+hash = "b3b180c161ee0a3c1e19599c3fb6193a17c9bc7dce1e6550338aecaa119aead6"
 metafile = true
 
 [[files]]
@@ -738,7 +746,7 @@ metafile = true
 
 [[files]]
 file = "mods/fieldworks.pw.toml"
-hash = "c237fe1e6cf51b8c33cab06223d8ca9dc04a20c35a42d2c2d2ed291213662136"
+hash = "161101b7f835bf1a8addeb9f4f68ce460d1d2f2191c28b0ed4ba886b9e81d7bd"
 metafile = true
 
 [[files]]
@@ -823,7 +831,7 @@ metafile = true
 
 [[files]]
 file = "mods/groundworks.pw.toml"
-hash = "e2c150e06552ee2262a6303180c0b59bccba37de7c833b201772faf8adb76929"
+hash = "c277274c6d756e2831ece7f8cec83484b3b9ea1042cc3273c7b6bcffa7be3930"
 metafile = true
 
 [[files]]
@@ -868,17 +876,17 @@ metafile = true
 
 [[files]]
 file = "mods/kc00l-craftworks.pw.toml"
-hash = "1314736039b144a30628077b5b9fcdb3bc0cd39510826157eab915f8ca4c55c3"
+hash = "9afdf2d0840d27f850a16b40b4820b64418fcdc77a598a9a8b0dc7b9aa3b27b6"
 metafile = true
 
 [[files]]
 file = "mods/kc00ls-gearworks.pw.toml"
-hash = "7a027d1c1aaaab7b089d4d89de34152025cf23ad7640e83ed2118bcf575dc05a"
+hash = "156ab7fc05cd8d5584268e4fb5ab397e164cc9ff06835b9eab7878da27ce918b"
 metafile = true
 
 [[files]]
 file = "mods/kc00ls-pipeworks.pw.toml"
-hash = "a1dfa3b64933b64978c790beba1fcdce7f2643b1f8149eb61ee7fa3617658422"
+hash = "af44e4ab7e55bf053d8144fca65a9eef29e243bb31f66423aa30eaec9158e269"
 metafile = true
 
 [[files]]
@@ -1088,7 +1096,7 @@ metafile = true
 
 [[files]]
 file = "mods/wireworks.pw.toml"
-hash = "556764729681e5333648a02dec75172c639af1339d66904bf3af34404d2a82d4"
+hash = "c477de61d251a388f5b68c52c45a5612d5043ad75c839b8f1c10305c242e4c51"
 metafile = true
 
 [[files]]
