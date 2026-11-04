@@ -37,10 +37,11 @@ precedence = "override"
 SPDX-FileCopyrightText = "Andrea D'Amico"
 SPDX-License-Identifier = "MIT"
 
-# The Recycler's textures, from Malcolm Riley's unused-textures, some modified (NOTICE).
+# The Recycler's and the Electric Defence's textures, from Malcolm Riley's unused-textures, some modified (NOTICE).
 [[annotations]]
 path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/recycler_*.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/block/fe_defence_*.png",
 ]
 precedence = "override"
 SPDX-FileCopyrightText = "Malcolm Riley"

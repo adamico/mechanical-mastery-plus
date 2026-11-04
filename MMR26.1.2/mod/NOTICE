@@ -35,3 +35,15 @@ Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
         - recycler_output_front.png is space-plating-plain with space-plating-square's outermost rows
           and columns, and a 1px lip round the opening in a shade taken from space-plating-square.
 Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
+
+Electric Defence textures
+-------------------------
+
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/block/fe_defence_*.png
+Author: Malcolm Riley
+Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
+        8b85ad732023174d9a9da74e6bf2272d6c0bef17
+        - fe_defence_top.png is battery_top, copied unmodified.
+        - fe_defence_side.png is metal_steel_block tinted orange: each pixel blended 55% toward
+          orange (255, 120, 30) scaled by the pixel's own lightness.
+Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)

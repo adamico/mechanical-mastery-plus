@@ -54,6 +54,9 @@ public final class FeDefenceBlockEntity extends BlockEntity {
     public static final ResourceKey<DamageType> ELECTRIC = ResourceKey.create(Registries.DAMAGE_TYPE,
             Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "electric"));
 
+    /** Where the sparks over the defence's top meet, from its block's corner: its shots start there (#256). */
+    public static final Vec3 SPARK_CORE = new Vec3(0.5, 1.3, 0.5);
+
     private static final String STORE_KEY = "store";
     private static final String COOLDOWN_KEY = "cooldown";
 
@@ -122,7 +125,7 @@ public final class FeDefenceBlockEntity extends BlockEntity {
 
     private static void shoot(ServerLevel level, BlockPos pos, LivingEntity target) {
         target.hurtServer(level, level.damageSources().source(ELECTRIC), ServerConfig.feDefenceDamage());
-        Vec3 from = Vec3.atCenterOf(pos);
+        Vec3 from = Vec3.atLowerCornerOf(pos).add(SPARK_CORE);
         Vec3 to = target.getEyePosition();
         int steps = Math.max(1, (int) (from.distanceTo(to) * 2));
         for (int step = 1; step <= steps; step++) {
