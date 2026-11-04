@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 /**
  * The money handicap's halved sales by hand (#213): what AdminShop credits a team for an item or a fluid sold in the
- * Shop passes through {@link MoneyHandicap#sale} first. {@link Pseudo}, as {@link SellerSaleMixin}, which halves a
- * Seller's.
+ * Shop passes through {@link MoneyHandicap#sale} first. AdminShop has no hook of its own. {@link Pseudo}, so without
+ * AdminShop, whose class it targets by name, it never applies. {@link SellerSaleMixin} halves a Seller's sales.
  */
 @Pseudo
 @Mixin(targets = "com.ammonium.adminshop.network.PacketSellRequest")
