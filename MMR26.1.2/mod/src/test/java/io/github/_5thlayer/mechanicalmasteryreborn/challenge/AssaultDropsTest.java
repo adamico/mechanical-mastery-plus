@@ -40,6 +40,19 @@ class AssaultDropsTest {
     private static final String SHARD = "mechanicalmasteryreborn:rift_shard";
     private static final String TABLE = "mechanicalmasteryreborn:assault/";
 
+    /**
+     * The mobs whose vanilla tables give a drop only to a player's kill, so whose Assault tables copy those tables' pools
+     * without that condition, and the drops each copy keeps that the Chain, or going deep, is for.
+     */
+    private static final Map<String, List<String>> INLINED = Map.of(
+            "zombie", List.of("minecraft:rotten_flesh", "minecraft:iron_ingot"),
+            "husk", List.of("minecraft:rotten_flesh", "minecraft:iron_ingot"),
+            "spider", List.of("minecraft:string", "minecraft:spider_eye"),
+            "vindicator", List.of("minecraft:emerald"),
+            "blaze", List.of("minecraft:blaze_rod"),
+            "breeze", List.of("minecraft:breeze_rod"),
+            "evoker", List.of("minecraft:totem_of_undying", "minecraft:emerald"));
+
     /** What a mob's Rift Shard pool gives: a chance of between {@code min} and {@code max} shards. */
     private record Drop(double chance, int min, int max) {
     }
@@ -99,10 +112,23 @@ class AssaultDropsTest {
         for (var mob : expected.entrySet()) {
             JsonObject table = read(TABLES.resolve(mob.getKey() + ".json"));
             List<JsonObject> pools = table.getAsJsonArray("pools").asList().stream().map(JsonElement::getAsJsonObject).toList();
-            assertTrue(pools.stream().anyMatch(pool -> pool.toString().contains("\"value\":\"minecraft:entities/" + mob.getKey() + "\"")),
-                    mob.getKey() + "'s table leaves out its vanilla drops");
+            boolean vanilla = pools.stream().anyMatch(pool -> pool.toString().contains("\"value\":\"minecraft:entities/" + mob.getKey() + "\""));
+            for (String drop : INLINED.getOrDefault(mob.getKey(), List.of())) {
+                assertTrue(pools.stream().anyMatch(pool -> pool.toString().contains("\"name\":\"" + drop + "\"")),
+                        mob.getKey() + "'s table leaves out its " + drop);
+            }
+            assertTrue(vanilla != INLINED.containsKey(mob.getKey()), mob.getKey() + "'s table neither names nor copies its vanilla drops, or both");
             List<Drop> shards = pools.stream().filter(pool -> pool.toString().contains(SHARD)).map(AssaultDropsTest::drop).toList();
             assertEquals(List.of(mob.getValue()), shards, mob.getKey() + "'s Rift Shards");
+        }
+    }
+
+    /** The Electric Defence kills with no player, and its kills drop the same as a player's (#251). */
+    @Test
+    void noDropNeedsAPlayersKill() throws IOException {
+        for (String mob : tableNames()) {
+            assertFalse(Files.readString(TABLES.resolve(mob + ".json")).contains("minecraft:killed_by_player"),
+                    mob + "'s table gives a drop only to a player's kill");
         }
     }
 
