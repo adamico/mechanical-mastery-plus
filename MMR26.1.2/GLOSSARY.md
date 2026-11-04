@@ -68,6 +68,10 @@ _Avoid_: new essence
 **Quintessence**:
 The final essence, made in the last chapter from the four Transmuted Essences, which shuts C.O.D. down for good. It is made with Voidworks in the Nether and the End, which a team reaches only once it has won all four challenges.
 
+**Last chapter**:
+What a team plays once it has won all four challenges, for good: the Nether and the End open to it, and it makes Quintessence there.
+_Avoid_: endgame, chapter (for a challenge)
+
 **Challenge**:
 One of four goals, each bound to a fixed mod or set of mods, started and researched at the lab and followed through EMI, as Factorio's progression is, with no quest book. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. It is won by putting its quota of Transmuted Essence into its Port on C.O.D., which blocks the tier C.O.D. is making; a won challenge can't be played again. Its mods keep their own recipes. Its chain stays locked for a team until it starts the challenge, so nothing of it can be built ahead, and its machines, however they are had, do no work until then, though their crafting is never locked, and stays unlocked from then on, past a win or a reset. What its mods offer outside the chain, as the Shop, is never locked, and their items can still come from a mix, to be recycled.
 _Avoid_: questline, chapter, stage

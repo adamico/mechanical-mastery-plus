@@ -1,5 +1,5 @@
 {
-  // Every dimension is void around its islands: the Nether and the End are reachable, and empty.
+  // Every dimension is void around its islands, and empty. The Nether and the End open to a team with its fourth win (ADR 0012).
   "Overworld": {
     "isCustom": true
   },

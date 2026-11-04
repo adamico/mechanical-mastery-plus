@@ -4,6 +4,7 @@
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -22,6 +23,7 @@ import net.minecraft.world.phys.AABB;
 final class TestTeams implements Teams.Lookup {
 
     private static final Map<AABB, UUID> ISLANDS = new ConcurrentHashMap<>();
+    private static final Map<AABB, UUID> NEAREST = new ConcurrentHashMap<>();
     private static final Map<UUID, UUID> PLAYERS = new ConcurrentHashMap<>();
 
     private final Teams.Lookup installed;
@@ -44,6 +46,14 @@ final class TestTeams implements Teams.Lookup {
         return team;
     }
 
+    /**
+     * Makes {@code team} the nearest team to the test's structure, off any island, as Skyblock Builder names the nearest
+     * team in the void beside an island.
+     */
+    static void nearest(GameTestHelper helper, UUID team) {
+        NEAREST.put(helper.getBounds(), team);
+    }
+
     static void join(Player player, UUID team) {
         PLAYERS.put(player.getUUID(), team);
     }
@@ -60,7 +70,20 @@ final class TestTeams implements Teams.Lookup {
                 smallestSize = size;
             }
         }
-        return smallest != null ? smallest : installed.at(level, pos);
+        if (smallest != null) {
+            return smallest;
+        }
+        return containing(NEAREST, pos).orElseGet(() -> installed.at(level, pos));
+    }
+
+    @Override
+    public boolean onIsland(ServerLevel level, BlockPos pos) {
+        return containing(ISLANDS, pos).isPresent() || installed.onIsland(level, pos);
+    }
+
+    /** The team of any of {@code areas} that holds {@code pos}. */
+    private static Optional<UUID> containing(Map<AABB, UUID> areas, BlockPos pos) {
+        return areas.entrySet().stream().filter(area -> area.getKey().contains(pos.getCenter())).map(Map.Entry::getValue).findFirst();
     }
 
     @Override
