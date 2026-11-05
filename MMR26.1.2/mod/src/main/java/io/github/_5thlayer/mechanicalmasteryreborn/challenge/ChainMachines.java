@@ -132,7 +132,7 @@ public final class ChainMachines {
             }
         }
         return new Table(recipes(server), unlocked, lastChapterRecipes(server), !LastChapter.reached(server, team),
-                lastStandRecipes(server), state.lastStand(team).isEmpty());
+                lastStandRecipes(server), !LastStands.started(server, team));
     }
 
     /** Every chain's own recipe, by its id, and the handicap whose challenge unlocks it. */

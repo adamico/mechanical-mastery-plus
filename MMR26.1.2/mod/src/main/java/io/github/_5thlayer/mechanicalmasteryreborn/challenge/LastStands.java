@@ -53,7 +53,12 @@ public final class LastStands {
 
     /** Whether the lab offers {@code team} its last stand: it has won all four challenges and not started it yet. */
     public static boolean offered(MinecraftServer server, UUID team) {
-        return LastChapter.reached(server, team) && TeamState.get(server).lastStand(team).isEmpty();
+        return LastChapter.reached(server, team) && !started(server, team);
+    }
+
+    /** Whether {@code team} has started its last stand, running or won: from then on, for good. */
+    public static boolean started(MinecraftServer server, UUID team) {
+        return TeamState.get(server).lastStand(team).isPresent();
     }
 
     /**

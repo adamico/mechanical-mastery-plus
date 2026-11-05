@@ -14,6 +14,7 @@ import io.github._5thlayer.craftworks.machine.AssemblerBlockEntity;
 import io.github._5thlayer.craftworks.machine.AssemblerSlots;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.QuintessenceRung;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
@@ -47,8 +48,8 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
 /**
  * Quintessence's Voidworks way (#262) on Voidworks' own machines, in the {@code suiteGameTestServer} run alone, which
  * loads Craftworks and Voidworks: the pack's Assembler recipe for the Quartessence, and the pack's Family whose Rung a
- * Mutation Chamber climbs from it into Quintessence only once its island's team has started its last stand, which a
- * Void Crucible never takes, and which locks no other Family. Its lock on the Assembler is the pack's Chapters stage
+ * Mutation Chamber climbs from it into Quintessence only once its island's team has started its last stand, saying so
+ * to Jade until then, which a Void Crucible never takes, and which locks no other Family. Its lock on the Assembler is the pack's Chapters stage
  * file, which no game test run loads. A Chamber's motes come from a crying obsidian beside it, which this class gives
  * the {@code voidworks:motes} capability, as a void machine's store.
  */
@@ -121,6 +122,7 @@ final class SuiteQuintessenceTests {
                             "the Quartessence the Chamber holds");
                     helper.assertValueEqual(VoidSpender.countByGrade(store), Map.of(grade, TRIES * motes(upgrade)),
                             "the motes left once the Chamber woke");
+                    helper.assertTrue(waits(chamber), "the Chamber doesn't say it waits for the last stand");
                 })
                 .thenSucceed();
     }
@@ -135,6 +137,7 @@ final class SuiteQuintessenceTests {
         int grade = grade(helper);
         int awake = dormantMotes(helper);
         var store = store(helper, grade, awake + TRIES * motes(upgrade));
+        helper.assertFalse(waits(chamber), "the Chamber says it waits once the last stand started");
         helper.startSequence()
                 .thenWaitUntil(() -> helper.assertTrue(!chamber.output().isEmpty(), "the Chamber made nothing"))
                 .thenExecute(() -> {
@@ -169,6 +172,11 @@ final class SuiteQuintessenceTests {
         helper.assertValueEqual(crucible.items().insertFromHand(hand), 0, "the Quartessence a hand puts in the Crucible");
         helper.assertTrue(crucible.items().accepts(ItemResource.of(Items.COPPER_INGOT)), "the Crucible's rule refuses copper");
         helper.succeed();
+    }
+
+    /** What Jade asks a Chamber: whether it holds a Quartessence it won't climb until the last stand. */
+    private static boolean waits(MutationChamberBlockEntity chamber) {
+        return ((QuintessenceRung.Chamber) (Object) chamber).mechanicalmasteryreborn$waitsForTheLastStand();
     }
 
     private static Upgrade<Item> quintessenceRung() {

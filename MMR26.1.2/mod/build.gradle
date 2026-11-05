@@ -91,11 +91,10 @@ tasks.named('test') {
 // the End Portal Frame's (#265) and the Quartessence's (#262), and the pack's Family that climbs a Quartessence into
 // Quintessence on Voidworks' Mutation Chamber (#262). They need the suite mods those recipes stand on: Craftworks'
 // Assembler, Fieldworks' Harvester, magma slurry and tar, Wireworks' steam and plastic, and Voidworks' Mutation Chamber
-// and Void Crucible, on Groundworks. They are the pack's
-// own jars, from CurseForge as mods/*.pw.toml name them, so a CI runner needs no build of the suite.
-// They run on a game test server of their own, suiteGameTestServer, with those mods and the pack's recipes for
-// them as a datapack, suite_pack/; the gameTestServer run keeps none of them, so it still proves the mod plays
-// alone. Only the gametest source set, which never ships, names a suite mod.
+// and Void Crucible, on Groundworks. They are the pack's own jars, from CurseForge as mods/*.pw.toml name them, so a
+// CI runner needs no build of the suite. They run on a game test server of their own, suiteGameTestServer, with those
+// mods and the pack's recipes for them as a datapack, suite_pack/; the gameTestServer run keeps none of them, so it
+// still proves the mod plays alone. Only the gametest source set, which never ships, names a suite mod.
 def machines = ['curse.maven:kc00l-craftworks-1715876:9424433', 'curse.maven:fieldworks-1737485:9432384',
                 'curse.maven:groundworks-1717892:9373843', 'curse.maven:voidworks-1742531:9450242']
 def suiteMods = machines + ['curse.maven:wireworks-1721198:9373965']
@@ -133,8 +132,8 @@ neoForge {
 }
 
 // The pack's assembling and harvesting recipes, what it adds to Fieldworks' tags, and its Voidworks Families with their
-// Rungs' tags, copied as they are into
-// suite_pack/, beside its pack.mcmeta in src/gametest/resources, which DevPacks switches on in suiteGameTestServer.
+// Rungs' tags, copied as they are into suite_pack/, beside its pack.mcmeta in src/gametest/resources, which DevPacks
+// switches on in suiteGameTestServer.
 def suitePackDir = layout.buildDirectory.dir('generated/suitePack')
 def generateSuitePack = tasks.register('generateSuitePack', Sync) {
     from('../kubejs/data') {
