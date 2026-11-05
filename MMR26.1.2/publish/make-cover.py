@@ -16,13 +16,15 @@
 #   - above the title band, the four tier essences in a row, lowest first, scaled up nearest-neighbour,
 #     each glowing in its own colour;
 #   - the band, dark, ruled top and bottom in the accent, holding the suite's title turned around, as
-#     A Touch of Darkness's is: "MECHANICAL MASTERY" in Impact caps, in the accent's orange,
-#     then the suite's white pill holding "reborn". The icon stacks them;
+#     A Touch of Darkness's is: "MECHANICAL MASTERY" in Chakra Petch caps, in the accent's
+#     orange, then the suite's white pill holding "reborn". The icon stacks them;
 #   - beneath the band, the four Transmuted Essences with Nullessence and Quintessence, the last
 #     stand's two sides, paired in their middle.
 #
 # Its art is the companion mod's own textures only (mod/NOTICE), nothing of Mojang's. Its fonts are
-# found on the system, with fallbacks; none is committed.
+# found on the system, with fallbacks; none is committed. Chakra Petch is a Google Font (SIL OFL),
+# installed by hand, its Bold for the title and its Medium for the pill; without it the title falls
+# back to Impact and the pill to Arial Black, which every run there draws the same, if not as designed.
 import math
 import os
 import random
@@ -33,7 +35,7 @@ T = 'mod/src/main/resources/assets/mechanicalmasteryreborn/textures/item/'
 SEED = 26
 BG = (6, 6, 10)
 BAND = (4, 4, 7, 235)
-ACCENT = (255, 136, 32)  # orange
+ACCENT = (255, 136, 32)  # orange, a machine's warning paint, apart from every essence's colour
 PILL = (240, 240, 236)
 PILL_TEXT = (24, 22, 30)
 # each essence glows in its texture's commonest colour, but Nullessence, near-black, glows white so it
@@ -47,10 +49,16 @@ TIERS = ['basic_mechanical_essence', 'regular_mechanical_essence', 'improved_mec
 TRANSMUTED = ['galvanic_essence', 'warding_essence', 'vital_essence', 'aureate_essence']
 LAST_STAND = ['nullessence', 'quintessence']
 TITLE, WORD = 'MECHANICAL MASTERY', 'reborn'
-IMPACT = ['/System/Library/Fonts/Supplemental/Impact.ttf', '/usr/share/fonts/TTF/impact.ttf',
-          os.path.expanduser('~/.local/share/fonts/msfonts/impact.ttf'), '/usr/share/fonts/noto/NotoSans-Black.ttf']
-BLACK = ['/System/Library/Fonts/Supplemental/Arial Black.ttf', '/usr/share/fonts/TTF/ariblk.ttf',
-         os.path.expanduser('~/.local/share/fonts/msfonts/ariblk.ttf'), '/usr/share/fonts/noto/NotoSans-Black.ttf']
+FONTS = ['~/Library/Fonts/', '/Library/Fonts/', '~/.local/share/fonts/chakrapetch/', '~/.local/share/fonts/',
+         '/usr/share/fonts/TTF/', '/usr/share/fonts/truetype/chakra-petch/']
+TITLE_FONT = [d + 'ChakraPetch-Bold.ttf' for d in FONTS] + [
+    '/System/Library/Fonts/Supplemental/Impact.ttf', '/usr/share/fonts/TTF/impact.ttf',
+    '~/.local/share/fonts/msfonts/impact.ttf', '/usr/share/fonts/noto/NotoSans-Black.ttf']
+WORD_FONT = [d + 'ChakraPetch-Medium.ttf' for d in FONTS] + [
+    '/System/Library/Fonts/Supplemental/Arial Black.ttf', '/usr/share/fonts/TTF/ariblk.ttf',
+    '~/.local/share/fonts/msfonts/ariblk.ttf', '/usr/share/fonts/noto/NotoSans-Black.ttf']
+WORD_SCALE = 0.7  # the pill's word against the title
+FIT = 0.92  # the most of the width the title takes; a wider font is drawn smaller
 
 
 def texture(name):
@@ -101,27 +109,33 @@ def void(W, H):
 
 
 def font(names, size):
-    for n in names:
+    for n in map(os.path.expanduser, names):
         if os.path.exists(n):
             return ImageFont.truetype(n, size)
     raise SystemExit('needs one of ' + ', '.join(names))
 
 
-def make(W, H, out, title_size, px, under_px, band_y, stacked=False):
-    # px and under_px are the sizes of the essences above and beneath the band, whole multiples of the
-    # textures' 32 so nearest-neighbour keeps their pixels square; band_y is where the band's middle is, a fraction of the height; stacked breaks the title in two
-    # lines over the pill, for the square icon
-    f1, f2 = font(IMPACT, title_size), font(BLACK, int(title_size * 0.62))
+def make(out, W, H, title_size, px, under_px, stacked=False):
+    # title_size is the title's largest size, drawn smaller where it would not fit; px and under_px are
+    # the sizes of the essences above and beneath the band, whole multiples of the textures' 32 so
+    # nearest-neighbour keeps their pixels square; stacked breaks the title in two lines over the
+    # pill, for the square icon
     lines = TITLE.split(' ') if stacked else [TITLE]
     d = ImageDraw.Draw(Image.new('RGB', (1, 1)))
-    lb = [d.textbbox((0, 0), s, font=f1) for s in lines]
-    b2 = d.textbbox((0, 0), WORD, font=f2)
-    lh = max(b[3] - b[1] for b in lb)
-    w2, h2 = b2[2] - b2[0], b2[3] - b2[1]
-    pad, gap, sh = int(title_size * 0.16), int(title_size * 0.12), max(3, title_size // 20)
-    bw, ph = w2 + 2 * pad, (h2 + 2 * int(title_size * 0.12) if stacked else lh)
-    th = len(lines) * lh + (len(lines) - 1) * gap + (gap + ph if stacked else 0)
-    cy, bh = int(band_y * H), int(th + title_size * 0.7)
+    while True:
+        f1, f2 = font(TITLE_FONT, title_size), font(WORD_FONT, int(title_size * WORD_SCALE))
+        lb = [d.textbbox((0, 0), s, font=f1) for s in lines]
+        b2 = d.textbbox((0, 0), WORD, font=f2)
+        lh = max(b[3] - b[1] for b in lb)
+        w2, h2 = b2[2] - b2[0], b2[3] - b2[1]
+        pad, gap, sh = int(title_size * 0.16), int(title_size * 0.12), max(3, title_size // 20)
+        bw, ph = w2 + 2 * pad, (h2 + 2 * int(title_size * 0.12) if stacked else max(lh, h2 + 2 * pad))
+        widths = [b[2] - b[0] for b in lb]
+        if (max(widths + [bw]) if stacked else widths[0] + gap + bw) <= FIT * W:
+            break
+        title_size -= 2
+    th = len(lines) * lh + (len(lines) - 1) * gap + gap + ph if stacked else ph
+    cy, bh = H // 2, int(th + title_size * 0.7)
     top, bottom = cy - bh // 2, cy + bh // 2
 
     img = void(W, H)
@@ -142,9 +156,9 @@ def make(W, H, out, title_size, px, under_px, band_y, stacked=False):
         places = [((W - (b[2] - b[0])) // 2, y + i * (lh + gap)) for i, b in enumerate(lb)]
         bx, bt = (W - bw) // 2, y + len(lines) * (lh + gap)
     else:
-        w1 = lb[0][2] - lb[0][0]
+        w1 = widths[0]
         x = (W - (w1 + gap + bw)) // 2
-        places = [(x, y)]
+        places = [(x, y + (ph - lh) // 2)]
         bx, bt = x + w1 + gap, y
     for s, b, (x, ly) in zip(lines, lb, places):
         d.text((x + sh - b[0], ly + sh - b[1]), s, font=f1, fill=(0, 0, 0))
@@ -155,6 +169,11 @@ def make(W, H, out, title_size, px, under_px, band_y, stacked=False):
     img.convert('RGB').save(out)
 
 
-make(1280, 640, 'publish/reborn-cover.png', 96, 128, 96, 0.5)
-make(512, 512, 'publish/reborn-icon.png', 92, 64, 64, 0.5, stacked=True)
-make(1920, 1080, 'publish/reborn-card.png', 144, 192, 128, 0.5)
+# each image: where it goes, its size, its title's largest size and its essences' sizes
+COVER = ('publish/reborn-cover.png', 1280, 640, 96, 128, 96)
+ICON = ('publish/reborn-icon.png', 512, 512, 92, 64, 64)
+CARD = ('publish/reborn-card.png', 1920, 1080, 144, 192, 128)
+
+make(*COVER)
+make(*ICON, stacked=True)
+make(*CARD)

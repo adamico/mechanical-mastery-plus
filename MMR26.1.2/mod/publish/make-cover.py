@@ -14,11 +14,14 @@
 #   - a wall of the Recycler's casing, drive and vent textures, tiled nearest-neighbour as Beltworks'
 #     tiles its belts, in a fixed pattern so every run draws the same image, dimmed so the title reads;
 #   - the title band, dark, ruled top and bottom in the accent, holding the suite's title turned
-#     around, as A Touch of Darkness's is: "MECHANICAL MASTERY" in Impact caps, in the accent's
+#     around, as A Touch of Darkness's is: "MECHANICAL MASTERY" in Chakra Petch caps, in the accent's
 #     orange, then the suite's white pill holding "core". The icon stacks them.
 #
 # Its art is the mod's own textures only, Malcolm Riley's Recycler textures (NOTICE), nothing of
-# Mojang's. Its fonts are found on the system, with fallbacks; none is committed.
+# Mojang's. Its fonts are found on the system, with fallbacks; none is committed. Chakra Petch is a
+# Google Font (SIL OFL), installed by hand, its Bold for the title and its Medium for the pill;
+# without it the title falls back to Impact and the pill to Arial Black, which every run there draws
+# the same, if not as designed.
 import os
 
 from PIL import Image, ImageDraw, ImageFont
@@ -28,14 +31,20 @@ WALL = ['recycler_casing', 'recycler_drive', 'recycler_vent']
 DIM = 0.45  # how far the wall is blended toward BG
 BG = (14, 13, 16)
 BAND = (8, 8, 11, 225)
-ACCENT = (255, 136, 32)  # orange
+ACCENT = (255, 136, 32)  # orange, a machine's warning paint, apart from every essence's colour
 PILL = (240, 240, 236)
 PILL_TEXT = (24, 22, 30)
 TITLE, WORD = 'MECHANICAL MASTERY', 'core'
-IMPACT = ['/System/Library/Fonts/Supplemental/Impact.ttf', '/usr/share/fonts/TTF/impact.ttf',
-          os.path.expanduser('~/.local/share/fonts/msfonts/impact.ttf'), '/usr/share/fonts/noto/NotoSans-Black.ttf']
-BLACK = ['/System/Library/Fonts/Supplemental/Arial Black.ttf', '/usr/share/fonts/TTF/ariblk.ttf',
-         os.path.expanduser('~/.local/share/fonts/msfonts/ariblk.ttf'), '/usr/share/fonts/noto/NotoSans-Black.ttf']
+FONTS = ['~/Library/Fonts/', '/Library/Fonts/', '~/.local/share/fonts/chakrapetch/', '~/.local/share/fonts/',
+         '/usr/share/fonts/TTF/', '/usr/share/fonts/truetype/chakra-petch/']
+TITLE_FONT = [d + 'ChakraPetch-Bold.ttf' for d in FONTS] + [
+    '/System/Library/Fonts/Supplemental/Impact.ttf', '/usr/share/fonts/TTF/impact.ttf',
+    '~/.local/share/fonts/msfonts/impact.ttf', '/usr/share/fonts/noto/NotoSans-Black.ttf']
+WORD_FONT = [d + 'ChakraPetch-Medium.ttf' for d in FONTS] + [
+    '/System/Library/Fonts/Supplemental/Arial Black.ttf', '/usr/share/fonts/TTF/ariblk.ttf',
+    '~/.local/share/fonts/msfonts/ariblk.ttf', '/usr/share/fonts/noto/NotoSans-Black.ttf']
+WORD_SCALE = 0.7  # the pill's word against the title
+FIT = 0.92  # the most of the width the title takes; a wider font is drawn smaller
 
 
 def wall(W, H, tile):
@@ -51,25 +60,31 @@ def wall(W, H, tile):
 
 
 def font(names, size):
-    for n in names:
+    for n in map(os.path.expanduser, names):
         if os.path.exists(n):
             return ImageFont.truetype(n, size)
     raise SystemExit('needs one of ' + ', '.join(names))
 
 
-def make(W, H, out, title_size, tile, stacked=False):
-    # tile is a wall tile's size, a whole multiple of the textures' 16 so their pixels stay square;
-    # stacked breaks the title in two lines over the pill, for the square icon
-    f1, f2 = font(IMPACT, title_size), font(BLACK, int(title_size * 0.62))
+def make(out, W, H, title_size, tile, stacked=False):
+    # title_size is the title's largest size, drawn smaller where it would not fit; tile is a wall
+    # tile's size, a whole multiple of the textures' 16 so their pixels stay square; stacked breaks
+    # the title in two lines over the pill, for the square icon
     lines = TITLE.split(' ') if stacked else [TITLE]
     d = ImageDraw.Draw(Image.new('RGB', (1, 1)))
-    lb = [d.textbbox((0, 0), s, font=f1) for s in lines]
-    b2 = d.textbbox((0, 0), WORD, font=f2)
-    lh = max(b[3] - b[1] for b in lb)
-    w2, h2 = b2[2] - b2[0], b2[3] - b2[1]
-    pad, gap, sh = int(title_size * 0.16), int(title_size * 0.12), max(3, title_size // 20)
-    bw, ph = w2 + 2 * pad, (h2 + 2 * int(title_size * 0.12) if stacked else lh)
-    th = len(lines) * lh + (len(lines) - 1) * gap + (gap + ph if stacked else 0)
+    while True:
+        f1, f2 = font(TITLE_FONT, title_size), font(WORD_FONT, int(title_size * WORD_SCALE))
+        lb = [d.textbbox((0, 0), s, font=f1) for s in lines]
+        b2 = d.textbbox((0, 0), WORD, font=f2)
+        lh = max(b[3] - b[1] for b in lb)
+        w2, h2 = b2[2] - b2[0], b2[3] - b2[1]
+        pad, gap, sh = int(title_size * 0.16), int(title_size * 0.12), max(3, title_size // 20)
+        bw, ph = w2 + 2 * pad, (h2 + 2 * int(title_size * 0.12) if stacked else max(lh, h2 + 2 * pad))
+        widths = [b[2] - b[0] for b in lb]
+        if (max(widths + [bw]) if stacked else widths[0] + gap + bw) <= FIT * W:
+            break
+        title_size -= 2
+    th = len(lines) * lh + (len(lines) - 1) * gap + gap + ph if stacked else ph
     cy, bh = H // 2, int(th + title_size * 0.7)
     top, bottom = cy - bh // 2, cy + bh // 2
 
@@ -87,9 +102,9 @@ def make(W, H, out, title_size, tile, stacked=False):
         places = [((W - (b[2] - b[0])) // 2, y + i * (lh + gap)) for i, b in enumerate(lb)]
         bx, bt = (W - bw) // 2, y + len(lines) * (lh + gap)
     else:
-        w1 = lb[0][2] - lb[0][0]
+        w1 = widths[0]
         x = (W - (w1 + gap + bw)) // 2
-        places = [(x, y)]
+        places = [(x, y + (ph - lh) // 2)]
         bx, bt = x + w1 + gap, y
     for s, b, (x, ly) in zip(lines, lb, places):
         d.text((x + sh - b[0], ly + sh - b[1]), s, font=f1, fill=(0, 0, 0))
@@ -100,5 +115,9 @@ def make(W, H, out, title_size, tile, stacked=False):
     img.convert('RGB').save(out)
 
 
-make(1280, 640, 'publish/mechanicalmasteryreborn-cover.png', 104, 80)
-make(512, 512, 'publish/mechanicalmasteryreborn-icon.png', 92, 64, stacked=True)
+# each image: where it goes, its size, its title's largest size and its wall tiles' size
+COVER = ('publish/mechanicalmasteryreborn-cover.png', 1280, 640, 104, 80)
+ICON = ('publish/mechanicalmasteryreborn-icon.png', 512, 512, 92, 64)
+
+make(*COVER)
+make(*ICON, stacked=True)
