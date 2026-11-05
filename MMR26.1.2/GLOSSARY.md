@@ -174,7 +174,7 @@ _Avoid_: stage, unlock (as a noun)
 Where goods are traded for money: a second way to resources beside decomposing, and the skyblock's store for what no essence gives, as saplings, water and lava. A team buys what it lacks, and sells only the few goods the Shop takes, made things as metal blocks rather than whatever it has too much of; a fluid that only the Shop gives is never sold back. Until Basic, whose mix holds them, it is the only source of ores, and it is always the source of a team's first food: seeds and passive farm animals. Money was the heart of Mechanical Mastery Plus and stays a big part of its sequel. It is never locked, and the money handicap is what makes it costly.
 
 **Permit**:
-AdminShop's named unlock, held by a team's Account, which opens Offers gated by it. A Sell Permit opens Offers the Shop buys from the team, a Buy Permit Offers it sells to the team; one never opens both. A team buys its Permits in the Shop and keeps them for good, all but the two it is given: the money challenge's, which opens every Offer of its chain and is held while the chain is unlocked, from a start to a stop, and the protection win's, for good.
+AdminShop's named unlock, held by a team's Account, which opens Offers gated by it. A Sell Permit opens Offers the Shop buys from the team, a Buy Permit Offers it sells to the team; one never opens both. The Shop sells none: a team holds only the two it is given, the money challenge's, which opens every Offer of its chain and is held while the chain is unlocked, from a start to a stop, and the protection win's, for good.
 _Avoid_: Trade Permit, license, tier
 
 **Gallery pack**:

@@ -1,7 +1,6 @@
 {
   "type": "adminshop:fluid_buying",
   "price": 50000,
-  "permit": "reborn_oil_buy",
   "result": {
     "id": "fieldworks:crude_oil",
     "amount": 1000

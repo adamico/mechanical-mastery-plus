@@ -39,7 +39,7 @@ final class MoneyTests {
         tests.test("money_reset_keeps_its_permit", 1, MoneyTests::resetKeepsPermit);
         tests.test("money_win_keeps_its_permit", 1, MoneyTests::winKeepsPermit);
         tests.test("money_stop_takes_its_permit_back", 1, MoneyTests::stopTakesPermitBack);
-        tests.test("money_stop_keeps_the_permits_the_team_bought", 1, MoneyTests::stopKeepsBoughtPermits);
+        tests.test("money_stop_keeps_the_teams_other_permits", 1, MoneyTests::stopKeepsOtherPermits);
         tests.test("money_start_again_gives_its_permit_back", 1, MoneyTests::startAgainGivesPermitBack);
         tests.test("money_new_account_regranted_only_while_the_chain_is_unlocked", 1, MoneyTests::regrantOnlyWhileUnlocked);
     }
@@ -102,13 +102,13 @@ final class MoneyTests {
         helper.succeed();
     }
 
-    /** The Permits the team bought in the Shop are its own, as a built machine is. */
-    private static void stopKeepsBoughtPermits(GameTestHelper helper) {
+    /** A Permit the team holds on its own account, as one a later Shop might sell, is its own, as a built machine is. */
+    private static void stopKeepsOtherPermits(GameTestHelper helper) {
         UUID team = account(helper, 0);
         Challenges.begin(server(helper), team, Handicap.MONEY);
-        Accounts.get().grant(server(helper), team, "reborn_oil_buy");
+        Accounts.get().grant(server(helper), team, "reborn_other");
         Challenges.end(server(helper), team);
-        helper.assertTrue(TestAccounts.holds(team, "reborn_oil_buy"), "the stop took the Oil Buy Permit the team bought");
+        helper.assertTrue(TestAccounts.holds(team, "reborn_other"), "the stop took a Permit of the team's own");
         helper.assertFalse(TestAccounts.holds(team, MoneyHandicap.PERMIT), "the team kept " + MoneyHandicap.PERMIT + " past the stop");
         helper.succeed();
     }
