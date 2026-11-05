@@ -1,14 +1,15 @@
 ---
 navigation:
   title: The Recycler
+  parent: index.md
   icon: recycler_core_1
-  position: 1
+  position: 2
 ---
 
 # The Recycler
 
-The Recycler [decomposes](../decomposing.md) essence and recycles what crafting made, much faster than decomposing
-by hand. You build it block by block, from parts made on a Craftworks Assembler.
+The Recycler [decomposes](../decomposing.md) essence and recycles what crafting made, much faster than
+decomposing by hand. You build it block by block from parts made on a Craftworks Assembler.
 
 <GameScene zoom={4} interactive={true}>
   <Block id="recycler_core_1" x="1" z="0" p:facing="north" />
@@ -30,52 +31,47 @@ by hand. You build it block by block, from parts made on a Craftworks Assembler.
   </BlockAnnotationTemplate>
 </GameScene>
 
-A tier-1 Recycler with two outputs: drag to turn it, and hover over a part to see what
-it does.
+A tier-1 Recycler with two outputs. Drag to turn it, and hover over a part to see what it does.
 
 ## Building one
 
 A Recycler is a 3x3 of nine blocks:
 
-- Its [core](core.md) stands in the middle of one edge, its front facing out, and the rest of the 3x3 lies
-  behind it.
-- The other eight places, the centre among them, take any mix of [drives](hand_drive.md),
-  [inputs](input.md), [outputs](output.md) and [casings](casing.md), with at least one drive, one input and
-  one output.
+- Its [core](core.md) stands in the middle of one edge, its front facing out. The rest of the 3x3 lies behind it.
+- The other eight places, the centre among them, take any mix of [drives](hand_drive.md), [inputs](input.md),
+  [outputs](output.md) and [casings](casing.md), with at least one drive, one input and one output.
 
-Each place must belong to that core alone: two Recyclers can't share a part. A Recycler with a place empty, or
-holding any other block, is incomplete and does nothing. Jade says what it lacks.
+Two Recyclers can't share a part. A Recycler with a place empty, or holding any other block, is incomplete and
+does nothing. Jade says what it lacks.
 
 ## Floors
 
-A Recycler may have more floors, stacked straight up from its core's, up to as many floors in all as its core's
-tier: a tier-1 core has one, a tier-4 core up to four. Each floor above the core's is a full 3x3 of any parts, all
-nine places filled, the one over the core among them. Its drive, input and output may stand on any floor.
+A Recycler may have more floors, stacked straight up from the core's, up to as many floors as its core's tier.
+Each floor above the core's is a full 3x3 of any parts, all nine places filled, the one over the core among them.
+Its drive, input and output may stand on any floor.
 
-Floors count upward to the first one that isn't full: that floor and any above it are no part of the Recycler,
-and show no frame, while the floors below go on working. A floor above what the core's tier allows isn't part of
-it either, until a higher core claims it. A place two Recyclers would both claim, across floors too, belongs to
-neither. The frame wraps every floor that counts as one tall block.
+Floors count upward to the first that isn't full. That floor and any above it are no part of the Recycler and show
+no frame, while the floors below go on working. A floor above what the core's tier allows isn't part of it either,
+until a higher core claims it. A place two Recyclers would both claim, across floors too, belongs to neither. The
+frame wraps every floor that counts as one tall block.
 
-To upgrade a Recycler, break its core and place one of a higher tier where it stood: the rest of the 3x3 stays as
-it is, and floors already built above are claimed at once.
+To upgrade a Recycler, break its core and place one of a higher tier where it stood. The rest stays as it is, and
+floors already built above are claimed at once.
 
 ## Outputs
 
-Each [output](output.md) holds three kinds of item, so a Recycler returns every kind in what it decomposes or
-recycles only with enough outputs for them all. With too few it still runs, but returns as many kinds as fit, picked
-at random, and the rest are lost: more outputs return more of a mix. The two above return six kinds at a time.
+Each [output](output.md) holds three kinds of item, so a Recycler returns every kind in a mix only with enough
+outputs for them all. With too few it still runs, but returns only as many kinds as fit, picked at random, and the
+rest are lost. More outputs return more of a mix.
 
-Its outputs are read in order, from the one at the front-left, on the left as you face the core, clockwise seen
-from above, with the centre last, then floor by floor upward, each floor in the same order and ending with the
-place over the core. Each kind goes on the first position already holding that item, or else on the
-first empty one, so on empty outputs a mix lands in the order EMI shows it. With outputs for every kind, the Recycler
-stops while any kind fits nowhere; with too few, it picks among the kinds that fit, and stops only when none does.
-Jade says when it stops, until its outputs are emptied.
+Outputs are read in order: from the front-left one, on your left as you face the core, clockwise seen from above,
+the centre last, then floor by floor upward, each floor in the same order and ending with the place over the core.
+Each kind goes on the first position already holding that item, or else on the first empty one, so on empty outputs
+a mix lands in the order EMI shows it. With outputs for every kind, the Recycler stops while any kind fits
+nowhere. With too few, it picks among the kinds that fit, and stops only when none does. Jade says when it stops.
 
 ## Running it
 
-Put essence, or any other item to recycle, into an [input](input.md), and turn a [drive](hand_drive.md). After
-enough turns the core decomposes or recycles one, and the outputs fill. Jade, on the core, shows what it holds
-and how many turns are left. More drives turn it faster, so players on more drives run a Recycler faster, and a
-higher [core](core.md) needs fewer turns.
+Put essence, or an item to recycle, into an [input](input.md), and turn a [drive](hand_drive.md). After enough
+turns the core decomposes or recycles one, and the outputs fill. Jade on the core shows what it holds and how
+many turns are left. More drives turn it faster, and a higher [core](core.md) needs fewer turns.
