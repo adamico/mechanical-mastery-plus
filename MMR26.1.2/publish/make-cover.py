@@ -17,22 +17,21 @@
 #   - the team's starting island in the middle, drawn from its template (ISLAND) block by block, a
 #     quarter turned so its tree stands at the back, each block a cube in a flat colour of its own,
 #     its top lighter than its sides; a Port takes its essence's colour;
-#   - on the cover and the card, the essences by kind, each scaled up nearest-neighbour and glowing in
-#     its colour: left of the island the four tiers in a diamond, lowest at the top; right of it the
-#     four Transmuted Essences in a diamond; and on all three, the icon too, Nullessence and
-#     Quintessence, the last stand's two sides, larger, overlapping each other over the tree's leaves,
-#     the only essences large enough to read on the icon;
+#   - the essences by kind, each scaled up nearest-neighbour and glowing in its colour: left of the
+#     island the four tiers in a diamond, lowest at the top; right of it the four Transmuted Essences
+#     in a diamond, each tight enough for its essences to overlap; and Nullessence and Quintessence,
+#     the last stand's two sides, larger, overlapping each other over the tree's leaves;
 #   - the band across the island's earth, as the old logo's letters crossed it, dark but letting the
 #     island show through, ruled top and bottom in the accent, holding the suite's title turned
 #     around, as A Touch of Darkness's is: "MECHANICAL MASTERY" in Barlow Condensed caps, in the
 #     accent's orange, then the suite's white pill holding "reborn". The icon stacks them.
 #
-# Its art is the companion mod's own textures and flat colours only (mod/NOTICE), nothing of
-# Mojang's: the island's vanilla blocks are colours, not textures. Its fonts are
-# found on the system, with fallbacks; none is committed. Barlow Condensed and Barlow are Google Fonts
-# (SIL OFL), installed by hand, the first's Black for the title, as heavy as it comes so it stands
-# out, and the second's Bold for the pill; without them the title falls back to Impact and the pill to
-# Arial Black, which every run there draws the same, if not as designed.
+# Its art is the companion mod's own textures and flat colours only (mod/NOTICE), nothing of Mojang's:
+# the island's vanilla blocks are colours, not textures. Its fonts are found on the system, with
+# fallbacks; none is committed. Barlow Condensed and Barlow are Google Fonts (SIL OFL), installed by
+# hand, the first's Black for the title, as heavy as it comes so it stands out, and the second's Bold
+# for the pill; without them the title falls back to Impact and the pill to Arial Black, which every
+# run there draws the same, if not as designed.
 import math
 import os
 import random
@@ -57,9 +56,10 @@ TIERS = ['basic_mechanical_essence', 'regular_mechanical_essence', 'improved_mec
 # animated, and their first frames are drawn
 TRANSMUTED = ['galvanic_essence', 'warding_essence', 'vital_essence', 'aureate_essence']
 LAST_STAND = ['nullessence', 'quintessence']
-# where the tier essences' diamond and the Transmuted Essences' stand, as fractions of the width and
-# height, and how far a diamond's points are from its middle, in essences
-LEFT, RIGHT, SPREAD = (0.14, 0.34), (0.86, 0.34), 1.0
+# where the tier essences' diamond and the Transmuted Essences' stand, as fractions of the width, kept
+# inside the image, halfway down to the band; and how far a diamond's points are from its middle, in
+# essences
+LEFT, RIGHT, SPREAD = 0.14, 0.86, 0.72
 # where Nullessence and Quintessence stand, over the tree's leaves, a fraction of the island's height
 # below its top, and how far each stands off that middle, in their own size
 PAIR, OVERLAP = 0.2, 0.18
@@ -116,9 +116,12 @@ def essences(img, placed, px):
         img.alpha_composite(texture(name).resize((px, px), Image.NEAREST), (x - px // 2, y - px // 2))
 
 
-def diamond(img, names, at, px):
-    # four essences at a diamond's top, left, right and bottom points, about at, a fraction of the image
-    cx, cy, r = int(at[0] * img.width), int(at[1] * img.height), int(SPREAD * px)
+def diamond(img, names, fx, y, px):
+    # four essences at a diamond's top, left, right and bottom points, about the fraction fx of the
+    # width, kept inside the image, and y
+    r = int(SPREAD * px)
+    edge = r + px // 2 + px // 8
+    cx, cy = min(max(int(fx * img.width), edge), img.width - edge), y
     return [(n, cx + dx * r, cy + dy * r) for n, (dx, dy) in zip(names, [(0, -1), (-1, 0), (1, 0), (0, 1)])]
 
 
@@ -224,8 +227,8 @@ def make(out, W, H, title_size, band_y, island_h, island_y, pair_px, px=None, st
     img.alpha_composite(sky(W, H, W // 2, at[1] + land.height * 0.4))
     img.alpha_composite(land, at)
     if px:
-        essences(img, diamond(img, TIERS, LEFT, px), px)
-        essences(img, diamond(img, TRANSMUTED, RIGHT, px), px)
+        essences(img, diamond(img, TIERS, LEFT, top // 2, px), px)
+        essences(img, diamond(img, TRANSMUTED, RIGHT, top // 2, px), px)
     mx, my, o = W // 2, at[1] + int(PAIR * land.height), int(OVERLAP * pair_px)
     essences(img, [(LAST_STAND[0], mx - o, my - o), (LAST_STAND[1], mx + o, my + o)], pair_px)
 
@@ -257,9 +260,9 @@ def make(out, W, H, title_size, band_y, island_h, island_y, pair_px, px=None, st
 
 # each image: where it goes, its size, its title's size, where its band is, the island's height and
 # top, and its Nullessence's and Quintessence's size and the other essences'
-COVER = ('publish/reborn-cover.png', 1280, 640, 108, 0.76, 0.92, 0.04, 192, 64)
-ICON = ('publish/reborn-icon.png', 512, 512, 100, 0.74, 0.62, 0.02, 96)
-CARD = ('publish/reborn-card.png', 1920, 1080, 162, 0.77, 0.9, 0.04, 288, 96)
+COVER = ('publish/reborn-cover.png', 1280, 640, 108, 0.76, 0.92, 0.04, 192, 96)
+ICON = ('publish/reborn-icon.png', 512, 512, 100, 0.74, 0.62, 0.02, 96, 64)
+CARD = ('publish/reborn-card.png', 1920, 1080, 162, 0.77, 0.9, 0.04, 288, 128)
 
 make(*COVER)
 make(*ICON, stacked=True)
