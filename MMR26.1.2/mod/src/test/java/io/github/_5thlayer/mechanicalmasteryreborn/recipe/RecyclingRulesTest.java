@@ -198,4 +198,19 @@ class RecyclingRulesTest {
         assertEquals(into("iron_ingot", 8), recycle("iron_block", Optional.of(shares("iron_ingot", 8))));
         assertEquals(into("oak_log", 1), recycle("oak_planks", Optional.of(shares("oak_log", 1))));
     }
+
+    @Test
+    void mixesAreClosedWhenEveryItemRecyclesIntoWhatAMixHolds() {
+        recipe("furnace", 1, Kind.CRAFTING, "minecraft:furnace", "8 cobblestone");
+        recipe("oak_planks", 4, Kind.CRAFTING, "minecraft:oak_planks", "oak_log");
+        assertEquals(Map.of(), RecyclingRules.unclosed(List.of(List.of("furnace", "iron_ingot"), List.of("cobblestone", "oak_planks")), this::recycle));
+    }
+
+    @Test
+    void mixesAreUnclosedByWhatTheirItemsRecycleIntoOutsideThem() {
+        recipe("piston", 1, Kind.CRAFTING, "minecraft:piston", "3 oak_planks", "4 cobblestone", "iron_ingot", "redstone");
+        recipe("hopper", 1, Kind.CRAFTING, "minecraft:hopper", "5 iron_ingot", "chest");
+        assertEquals(Map.of("piston", List.of("iron_ingot", "redstone"), "hopper", List.of("iron_ingot", "chest")),
+                RecyclingRules.unclosed(List.of(List.of("piston", "hopper"), List.of("cobblestone", "oak_planks")), this::recycle));
+    }
 }

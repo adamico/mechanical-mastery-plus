@@ -44,7 +44,7 @@ _Avoid_: crank (what a hand-worked drive is turned by), handle
 A neutral part of a Recycler that does nothing but fill a place in its 3x3.
 
 **Mix**:
-The full amounts an essence breaks down into: several items of its tier's band, in fixed amounts. A decompose returns its yield of them, so each essence's mix holds on average, not on every decompose, and only on a Recycler with room for every kind. A mix may hold any number of kinds, in any amounts. Below Advanced, a tier's mix holds what the mixes above it are made from, so a team's factory grows upstream; what a chain needs beyond that comes from the Shop or the world. Basic's is the first to hold raw ores; no mix holds an ore block. Each essence has one mix, never changed by research.
+The full amounts an essence breaks down into: several items of its tier's band, in fixed amounts. A decompose returns its yield of them, so each essence's mix holds on average, not on every decompose, and only on a Recycler with room for every kind. A mix may hold any number of kinds, in any amounts. Below Advanced, a tier's mix holds what the mixes above it are made from, so a team's factory grows upstream; what a chain needs beyond that comes from the Shop or the world. Basic's is the first to hold raw ores; no mix holds an ore block. The mixes are closed: whatever an item of a mix recycles into, some mix holds. Each essence has one mix, never changed by research.
 _Avoid_: output, loot
 
 **Yield**:
