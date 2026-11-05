@@ -38,5 +38,6 @@ A reset forgets every member's Diet, and a new one starts with the attempt.
 
 In the [last chapter](../last_chapter.md), your team can take life on again as a **spell** at the
 [Hermetic Lab](../hermetic_lab.md), under the hungriest Diet of all, which starts with the spell and is
-forgotten when it ends. Members give hearts at the Hermetic Lab itself, as a self-sacrifice, and each becomes
-Essentia Vitae for its life line; Essentia Vitae can't be piped in.
+forgotten when it ends. Only hearts feed its life line: a member gives one at the Hermetic Lab itself, as a
+self-sacrifice, and it becomes Essentia Vitae there. Essentia Vitae from anywhere else, a tank, an altar or a
+mob, never counts.

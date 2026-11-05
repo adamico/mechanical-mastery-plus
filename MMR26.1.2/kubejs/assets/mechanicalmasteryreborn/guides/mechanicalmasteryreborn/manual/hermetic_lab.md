@@ -34,9 +34,10 @@ counts, and what a line still holds when its spell ends is lost. The row says wh
   between blocks on your island at all, so what your batteries banked can't be spent, and FE drives and Electric
   Defences stand still. The line is fed while generators within the Hermetic Lab's reach, all together, give it
   what it asks for.
-- **Life**: the hungriest [Diet](diet.md). Give a heart at the Hermetic Lab's menu, as a self-sacrifice: it becomes
-  Essentia Vitae in the Hermetic Lab, more for each Rune of Self Sacrifice beside it. Only a member can give, never
-  their last heart, and the Hermetic Lab holds only so much. Essentia Vitae can't be piped in.
+- **Life**: the hungriest [Diet](diet.md). Only hearts feed the line: give one at the Hermetic Lab's menu, as a
+  self-sacrifice, and it becomes Essentia Vitae there, more for each Rune of Self Sacrifice beside it. Only a
+  member can give, never their last heart, and the Hermetic Lab holds only so much. Essentia Vitae from anywhere
+  else, a tank, an altar or a mob, never counts.
 - **Protection**: an Assault starting at its hardest waves, with explosions on and the refund as usual. Its mobs
   drop no Rift Shards: they drop **Null Shards** instead, which belong to the spell they dropped in. Put them into
   the Hermetic Lab while that spell runs, and they feed its protection line; shards left from an earlier spell are
