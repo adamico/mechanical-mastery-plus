@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "minecraft:block/polished_blackstone"
+    "all": "mechanicalmasteryreborn:block/galvanic_port_closed"
   }
 }

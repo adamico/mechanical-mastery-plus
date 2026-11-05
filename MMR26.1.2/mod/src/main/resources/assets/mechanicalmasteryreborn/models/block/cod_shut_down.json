@@ -1,9 +1,6 @@
 {
   "parent": "mechanicalmasteryreborn:block/cod",
   "textures": {
-    "particle": "minecraft:block/smooth_basalt",
-    "side": "minecraft:block/smooth_basalt",
-    "end": "minecraft:block/smooth_basalt",
-    "fish": "minecraft:item/cooked_cod"
+    "side": "mechanicalmasteryreborn:block/cod_side_shut_down"
   }
 }

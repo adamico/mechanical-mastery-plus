@@ -56,3 +56,30 @@ Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
         - fe_defence_side.png is metal_steel_block tinted orange: each pixel blended 55% toward
           orange (255, 120, 30) scaled by the pixel's own lightness.
 Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
+
+C.O.D., lab and Port textures
+-----------------------------
+
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/block/cod_*.png,
+       src/main/resources/assets/mechanicalmasteryreborn/textures/block/lab_*.png,
+       src/main/resources/assets/mechanicalmasteryreborn/textures/block/*_port_*.png
+Author: Malcolm Riley
+Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
+        8b85ad732023174d9a9da74e6bf2272d6c0bef17
+        - cod_top.png is device_terminal_top, and cod_side_shut_down.png device_terminal_front_off,
+          with the beige casing darkened: each pixel brighter than 120 and of a spread under 60
+          between its channels scaled by (0.32, 0.33, 0.36).
+        - cod_side.png is device_terminal_front_on with the casing darkened the same way, its black
+          screen lit dark green (8, 70 + its lightness, 20), its white cursor bright green
+          (120, 255, 140) and its yellow lamp green (40, 210, 70).
+        - lab_bottom.png is sand_obsidian, copied unmodified; lab_top.png is device_workbench_top,
+          and lab_side.png glass_crystal_0, greyed to 55% and 60% of their lightness and laid over
+          sand_obsidian.
+        - <essence>_port_open.png is block_gem_sapphire recoloured to the essence's colour, each
+          pixel that colour scaled by 1.6 times its lightness: galvanic (137, 225, 233), warding
+          (169, 176, 185), vital (101, 219, 101) and aureate (228, 184, 109).
+        - <essence>_port_closed.png is industrial_metal_duct_flat_2 with its middle 6x6 pixels
+          those of the open texture at 45% brightness.
+        - <essence>_port_won.png is block_gem_sapphire_2 with its gem recoloured as the open one
+          (only pixels of a spread over 40 between their channels) and its frame lightened by 10%.
+Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)

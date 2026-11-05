@@ -28,8 +28,8 @@ SPDX-License-Identifier = "MIT"
 # Mechanical Mastery Plus's own art, by its maintainer, carried over from MMP1.19.2/ (NOTICE): the
 # four Mechanical Essences copied as they are, the Transmuted Essences and Quintessence
 # recoloured from the Advanced one, Nullessence from Quintessence, and the Quartessence a quarter
-# of each Transmuted Essence's. C.O.D. and the Obsidian
-# Flakes have no texture of their own: their models draw vanilla's at runtime (libworks ADR 0012).
+# of each Transmuted Essence's. The Obsidian Flakes have no texture of their own: their model draws
+# vanilla's at runtime (libworks ADR 0012).
 [[annotations]]
 path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/item/*.png",
@@ -38,11 +38,15 @@ precedence = "override"
 SPDX-FileCopyrightText = "Andrea D'Amico"
 SPDX-License-Identifier = "MIT"
 
-# The Recycler's and the Electric Defence's textures, from Malcolm Riley's unused-textures, some modified (NOTICE).
+# The Recycler's, the Electric Defence's, C.O.D.'s, the lab's and the Ports' textures, from Malcolm Riley's
+# unused-textures, some modified (NOTICE).
 [[annotations]]
 path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/recycler_*.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/fe_defence_*.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/block/cod_*.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/block/lab_*.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/block/*_port_*.png",
 ]
 precedence = "override"
 SPDX-FileCopyrightText = "Malcolm Riley"
