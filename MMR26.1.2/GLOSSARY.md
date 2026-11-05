@@ -156,7 +156,7 @@ A block the pack names as making energy, as Wireworks' engines, turbines and sol
 _Avoid_: power source
 
 **Lab**:
-The special block where a team chooses a handicap to start a challenge, asks for a stop, takes its refund, and feeds science items to research what the challenge unlocks. Once the team starts its last stand it awakens as the Hermetic Lab.
+The special block where a team chooses a handicap to start a challenge, asks for a stop, takes its refund, swaps a dirt for an emergency sapling when it has none, at most once a day, and feeds science items to research what the challenge unlocks. Once the team starts its last stand it awakens as the Hermetic Lab.
 
 **Refund**:
 What a team's lab holds for it: everything its Assaults' mobs broke on its island, given back when each Assault ends rather than put back in its place, each block as a careful mining by hand would give it. It waits there until a member takes it.

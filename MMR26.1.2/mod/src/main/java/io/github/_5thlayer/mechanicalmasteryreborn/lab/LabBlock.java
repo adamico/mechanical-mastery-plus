@@ -37,7 +37,8 @@ import org.jspecify.annotations.Nullable;
  * The lab, where the team whose island it stands on chooses a handicap to start a challenge. A click opens it. Once the
  * team's last stand has started it awakens as the Hermetic Lab (#263), and stands changed ({@link #HERMETIC}): a click
  * opens the Hermetic Lab's menu instead, Jade names it so, and a hand of Nullessence or Null Shards puts them in, told on the action bar why
- * it takes none. On the server it ticks, to work as the Hermetic Lab ({@link LabBlockEntity}).
+ * it takes none. A hand of dirt asks it for an emergency sapling, plain or Hermetic ({@link EmergencySaplings}). On the
+ * server it ticks, to work as the Hermetic Lab ({@link LabBlockEntity}).
  */
 public final class LabBlock extends BaseEntityBlock {
 
@@ -91,6 +92,13 @@ public final class LabBlock extends BaseEntityBlock {
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
             BlockHitResult hit) {
+        if (EmergencySaplings.asks(stack)) {
+            if (level instanceof ServerLevel server) {
+                EmergencySaplings.ask(server, pos, player, stack);
+                return InteractionResult.SUCCESS_SERVER;
+            }
+            return InteractionResult.SUCCESS;
+        }
         boolean shard = stack.is(NullShards.ITEM.get());
         if (!stack.is(Essences.item(Essence.NULLESSENCE)) && !shard) {
             return InteractionResult.TRY_WITH_EMPTY_HAND;
