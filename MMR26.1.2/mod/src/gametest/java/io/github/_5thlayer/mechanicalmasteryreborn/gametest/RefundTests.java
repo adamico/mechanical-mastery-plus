@@ -13,6 +13,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Refunds;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
+import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.RefundMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -64,6 +65,7 @@ final class RefundTests {
         tests.test("refund_is_handed_over_by_a_win_a_reset_and_a_stop", 40, RefundTests::handedOver);
         tests.test("refund_adds_to_one_not_yet_taken_and_outlasts_a_load", 40, RefundTests::addsAndLoads);
         tests.test("refund_lab_gives_by_hand_to_its_team_alone", 20, RefundTests::byHand);
+        tests.test("refund_lab_shows_its_row_only_while_some_waits", 1, RefundTests::rowOnlyWhileSomeWaits);
     }
 
     /** Starts the protection challenge for a new team, then runs {@code body} with the team and its Assault's gate. */
@@ -225,6 +227,33 @@ final class RefundTests {
         helper.assertValueEqual(member.getInventory().countItem(Items.DIAMOND), 2, "the diamonds take all took");
         helper.assertValueEqual(refunds.count(team), 0, "what waits after take all");
         helper.succeed();
+    }
+
+    /** The lab has no refund's row while nothing waits, shows it once some does, and has none again once it is taken; an open lab follows. */
+    private static void rowOnlyWhileSomeWaits(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        MinecraftServer server = server(helper);
+        helper.setBlock(LAB, Lab.BLOCK.get());
+        Player member = helper.makeMockPlayer(GameType.SURVIVAL);
+        TestTeams.join(member, team);
+        LabMenu lab = lab(helper, member);
+        helper.assertFalse(lab.showsRefund(), "the lab shows the refund's row while nothing waits");
+        Refunds refunds = Refunds.get(server);
+        refunds.hold(team, new ItemStack(Items.STONE, 3));
+        helper.assertFalse(lab.showsRefund(), "the lab shows the refund's row while it is only held");
+        refunds.handOver(server, team);
+        helper.assertTrue(lab.showsRefund(), "a lab open through the hand-over hides the refund's row");
+        helper.assertTrue(lab(helper, member).showsRefund(), "the lab hides the refund's row while some waits");
+        helper.assertTrue(open(helper, member).clickMenuButton(member, RefundMenu.TAKE_ALL), "take all took nothing");
+        helper.assertFalse(lab.showsRefund(), "a lab open through take all still shows the refund's row");
+        helper.assertFalse(lab(helper, member).showsRefund(), "the lab shows the refund's row once it is emptied");
+        helper.succeed();
+    }
+
+    private static LabMenu lab(GameTestHelper helper, Player player) {
+        var menu = helper.getBlockState(LAB).getMenuProvider(helper.getLevel(), helper.absolutePos(LAB)).createMenu(0, player.getInventory(), player);
+        helper.assertTrue(menu instanceof LabMenu, "the lab opened " + menu);
+        return (LabMenu) menu;
     }
 
     private static RefundMenu open(GameTestHelper helper, Player player) {
