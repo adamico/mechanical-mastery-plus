@@ -117,18 +117,18 @@ public final class MechanicalMasteryRebornClient {
 
     /**
      * The fish engraved on C.O.D.'s lid, vanilla's cod read from the player's own game (libworks ADR 0012), lit green
-     * while C.O.D. runs and dark once it is shut down. The item draws it green too.
+     * while its team is awake and dark while dormant or once shut down. The item draws it green too.
      */
     private static void registerBlockTints(RegisterColorHandlersEvent.BlockTintSources event) {
         event.register(List.of(new BlockTintSource() {
             @Override
             public int color(BlockState state) {
-                return state.getValue(CodBlock.SHUT_DOWN) ? 0xFF505458 : 0xFF50DC70;
+                return state.getValue(CodBlock.AWAKE) && !state.getValue(CodBlock.SHUT_DOWN) ? 0xFF50DC70 : 0xFF505458;
             }
 
             @Override
             public Set<Property<?>> relevantProperties() {
-                return Set.of(CodBlock.SHUT_DOWN);
+                return Set.of(CodBlock.SHUT_DOWN, CodBlock.AWAKE);
             }
         }), Cod.BLOCK.get());
     }

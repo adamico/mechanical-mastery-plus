@@ -201,7 +201,7 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         UUID team = cod.team;
         TeamState teams = TeamState.get(server.getServer());
         cod.read(teams);
-        cod.showShutDown();
+        cod.showState();
         if (cod.active()) {
             cod.push(server);
         }
@@ -222,15 +222,19 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         lastStand = teams.lastStand(team);
     }
 
-    /** Stands dark once its team's last stand is won, and lit otherwise, if that changed. */
-    private void showShutDown() {
+    /** Stands dark once its team's last stand is won, and lit otherwise, and shows whether its team is awake, if either changed. */
+    private void showState() {
         if (level == null) {
             return;
         }
         BlockState state = getBlockState();
-        boolean shutDown = lastStand.filter(LastStand::won).isPresent();
-        if (state.hasProperty(CodBlock.SHUT_DOWN) && state.getValue(CodBlock.SHUT_DOWN) != shutDown) {
-            level.setBlock(worldPosition, state.setValue(CodBlock.SHUT_DOWN, shutDown), Block.UPDATE_ALL);
+        if (!state.hasProperty(CodBlock.SHUT_DOWN) || !state.hasProperty(CodBlock.AWAKE)) {
+            return;
+        }
+        BlockState shown = state.setValue(CodBlock.SHUT_DOWN, lastStand.filter(LastStand::won).isPresent())
+                .setValue(CodBlock.AWAKE, awake);
+        if (shown != state) {
+            level.setBlock(worldPosition, shown, Block.UPDATE_ALL);
         }
     }
 
@@ -246,7 +250,7 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         }
         LastStands.take(server.getServer(), owner(server), count);
         read(TeamState.get(server.getServer()));
-        showShutDown();
+        showState();
     }
 
     /**

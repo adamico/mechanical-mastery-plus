@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
+import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
@@ -89,6 +90,7 @@ final class CodWakeTests {
         place(helper, OTHER_COD);
         empty(helper, COD);
         empty(helper, OTHER_COD);
+        helper.assertFalse(helper.getBlockState(COD).getValue(CodBlock.AWAKE), "the dormant C.O.D. stands awake");
         var build = RecyclerBuild.standard(helper);
         build.feed(1);
         build.turn(ServerConfig.turnsOf(1));
@@ -97,6 +99,9 @@ final class CodWakeTests {
         helper.runAtTickTime(waking() + MARGIN, () -> {
             expectHolds(helper, COD, 1, "the woken C.O.D. a waking interval later");
             expectHolds(helper, OTHER_COD, 0, "the other team's C.O.D. a waking interval later");
+            // The block shows it, so the client lights the fish on its lid (#301).
+            helper.assertTrue(helper.getBlockState(COD).getValue(CodBlock.AWAKE), "the woken C.O.D. stands dormant");
+            helper.assertFalse(helper.getBlockState(OTHER_COD).getValue(CodBlock.AWAKE), "the other team's C.O.D. stands awake");
             helper.succeed();
         });
     }
