@@ -79,7 +79,7 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
     private final boolean showsLastStand;
 
     LabScreen(LabMenu menu, Inventory inventory, Component title) {
-        this(menu, inventory, title, width(Minecraft.getInstance().font));
+        this(menu, inventory, title, width(Minecraft.getInstance().font, menu.showsLastStand()));
     }
 
     private LabScreen(LabMenu menu, Inventory inventory, Component title, int width) {
@@ -94,12 +94,15 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
         this.showsLastStand = menu.showsLastStand();
     }
 
-    /** Wide enough for every handicap's name and cost beside its button. */
-    private static int width(Font font) {
+    /** Wide enough for every handicap's name and cost beside its button, and the last stand's line when {@code lastStand} shows. */
+    private static int width(Font font, boolean lastStand) {
         int text = 0;
         for (Handicap handicap : Handicap.values()) {
             text = Math.max(text, font.width(Challenges.name(handicap).withStyle(ChatFormatting.BOLD)));
             text = Math.max(text, font.width(Challenges.cost(handicap)));
+        }
+        if (lastStand) {
+            text = Math.max(text, font.width(LAST_STAND_COST));
         }
         return Math.max(MIN_WIDTH, 3 * MachineDraw.MARGIN + BUTTON_WIDTH + text);
     }
