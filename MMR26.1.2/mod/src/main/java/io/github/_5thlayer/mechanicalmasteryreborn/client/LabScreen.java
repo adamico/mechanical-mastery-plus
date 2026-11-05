@@ -27,10 +27,11 @@ import org.jspecify.annotations.Nullable;
 /**
  * The lab: each handicap with what it costs, and a button to choose it, in the suite's stand-in machine look. Only
  * the lab's team can choose, one at a time; the one it plays is shown as played, and the ones it has won as won. Below
- * them a row stops the challenge played, once it has reset: a member asks for the stop or takes their ask back, and the
- * row names who online has asked and who is left (ADR 0013). Then a row says how much of the team's refund waits, and
- * opens it (#259). Last, once the team has won all four challenges, a row starts its last stand (ADR 0014); until
- * then the lab has no such row at all, and a fourth win while the lab is open grows it by the row at once.
+ * them, while a stop is offered, once the challenge played has reset, a row stops it: a member asks for the stop or takes
+ * their ask back, and the row names who online has asked and who is left (ADR 0013, #271). Then, while something of the
+ * team's refund waits, a row says how much and opens it (#259, #269). Last, once the team has won all four challenges, a
+ * row starts its last stand (ADR 0014). A row that doesn't show takes no space, the rows below it move up, and a row
+ * showing or going while the lab is open grows or shrinks it at once.
  */
 final class LabScreen extends AbstractContainerScreen<LabMenu> {
 
@@ -51,14 +52,11 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
     private static final Component WON = Component.translatable("mechanicalmasteryreborn.lab.won");
     private static final Component NOT_MEMBER = Component.translatable("mechanicalmasteryreborn.lab.not_member");
     private static final Component NOT_MEMBER_TOOLTIP = Component.translatable("mechanicalmasteryreborn.lab.not_member.tooltip");
-    private static final Component STOP_NONE = Component.translatable("mechanicalmasteryreborn.lab.stop.none");
-    private static final Component STOP_NOT_YET = Component.translatable("mechanicalmasteryreborn.lab.stop.not_yet");
     private static final Component ASK = Component.translatable("mechanicalmasteryreborn.lab.stop.ask");
     private static final Component TAKE_BACK = Component.translatable("mechanicalmasteryreborn.lab.stop.take_back");
     private static final Component STOP_TOOLTIP = Component.translatable("mechanicalmasteryreborn.lab.stop.tooltip");
     private static final Component NOBODY = Component.translatable("mechanicalmasteryreborn.lab.stop.nobody");
     private static final Component REFUND = Component.translatable("mechanicalmasteryreborn.lab.refund");
-    private static final Component REFUND_NONE = Component.translatable("mechanicalmasteryreborn.lab.refund.none");
     private static final Component REFUND_OPEN = Component.translatable("mechanicalmasteryreborn.lab.refund.open");
     private static final Component REFUND_TOOLTIP = Component.translatable("mechanicalmasteryreborn.lab.refund.tooltip");
     private static final Component LAST_STAND = Component.translatable("mechanicalmasteryreborn.last_stand");
@@ -69,13 +67,17 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
 
     private final Ghosts ghosts = new Ghosts(() -> leftPos, () -> topPos);
     private final List<Button> buttons = new ArrayList<>();
-    private Button stop;
-    private Button refund;
+    /** None while no stop is offered. */
+    private @Nullable Button stop;
+    /** None while the team's refund holds nothing. */
+    private @Nullable Button refund;
     /** None until the team has won all four challenges. */
     private @Nullable Button lastStand;
     /** Where the rows start, below the intro however many lines it wraps to. */
     private final int rowsTop;
-    /** Whether this screen has the last stand's row, which its height is set by. */
+    /** Whether this screen has the stop's, the refund's and the last stand's rows, which its height is set by. */
+    private final boolean showsStop;
+    private final boolean showsRefund;
     private final boolean showsLastStand;
 
     LabScreen(LabMenu menu, Inventory inventory, Component title) {
@@ -87,11 +89,17 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
     }
 
     private LabScreen(LabMenu menu, Inventory inventory, Component title, int width, int rowsTop) {
-        // A row per handicap, and the stop's, the refund's and, once shown, the last stand's rows below them.
-        super(menu, inventory, title, width, rowsTop + (Handicap.values().length + (menu.showsLastStand() ? 2 : 1)) * ROW + BUTTON_HEIGHT
-                + MachineDraw.MARGIN);
+        // A row per handicap, and below them the stop's, the refund's and the last stand's, each only while it shows.
+        super(menu, inventory, title, width, rowsTop + (rows(menu) - 1) * ROW + BUTTON_HEIGHT + MachineDraw.MARGIN);
         this.rowsTop = rowsTop;
+        this.showsStop = menu.showsStop();
+        this.showsRefund = menu.showsRefund();
         this.showsLastStand = menu.showsLastStand();
+    }
+
+    /** How many rows the lab shows: one per handicap and one per optional row that shows. */
+    private static int rows(LabMenu menu) {
+        return Handicap.values().length + (menu.showsStop() ? 1 : 0) + (menu.showsRefund() ? 1 : 0) + (menu.showsLastStand() ? 1 : 0);
     }
 
     /** Wide enough for every handicap's name and cost beside its button, and the last stand's line when {@code withLastStand}. */
@@ -123,12 +131,12 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
                     .bounds(leftPos + imageWidth - MachineDraw.MARGIN - BUTTON_WIDTH, topPos + rowTop(handicap), BUTTON_WIDTH, BUTTON_HEIGHT)
                     .build()));
         }
-        stop = addRenderableWidget(Button.builder(ASK, button -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId,
+        stop = !showsStop ? null : addRenderableWidget(Button.builder(ASK, button -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId,
                         menu.asked() ? LabMenu.TAKE_BACK : LabMenu.ASK))
                 .bounds(leftPos + imageWidth - MachineDraw.MARGIN - BUTTON_WIDTH, topPos + stopTop(), BUTTON_WIDTH, BUTTON_HEIGHT)
                 .tooltip(Tooltip.create(STOP_TOOLTIP))
                 .build());
-        refund = addRenderableWidget(Button.builder(REFUND_OPEN, button -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId,
+        refund = !showsRefund ? null : addRenderableWidget(Button.builder(REFUND_OPEN, button -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId,
                         LabMenu.OPEN_REFUND))
                 .bounds(leftPos + imageWidth - MachineDraw.MARGIN - BUTTON_WIDTH, topPos + refundTop(), BUTTON_WIDTH, BUTTON_HEIGHT)
                 .tooltip(Tooltip.create(REFUND_TOOLTIP))
@@ -141,11 +149,11 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
         updateButtons();
     }
 
-    /** A screen's size is fixed, so once the last stand's row is to show, a screen with it takes this one's place over the same menu. */
+    /** A screen's size is fixed, so once a row is to show or go, a screen with the rows that show takes this one's place over the same menu. */
     @Override
     protected void containerTick() {
         super.containerTick();
-        if (menu.showsLastStand() != showsLastStand) {
+        if (menu.showsStop() != showsStop || menu.showsRefund() != showsRefund || menu.showsLastStand() != showsLastStand) {
             minecraft.setScreen(new LabScreen(menu, minecraft.player.getInventory(), title));
             return;
         }
@@ -162,10 +170,10 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
             button.setMessage(chosen.equals(Optional.of(handicap)) ? PLAYED : won ? WON : notMember ? NOT_MEMBER : CHOOSE);
             button.setTooltip(notMember ? Tooltip.create(NOT_MEMBER_TOOLTIP) : null);
         }
-        stop.visible = menu.stopOffered();
-        stop.active = menu.isMember();
-        stop.setMessage(menu.asked() ? TAKE_BACK : ASK);
-        refund.active = menu.refund() > 0;
+        if (stop != null) {
+            stop.active = menu.isMember();
+            stop.setMessage(menu.asked() ? TAKE_BACK : ASK);
+        }
         if (lastStand == null) {
             return;
         }
@@ -196,11 +204,21 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
                     MachineDraw.MARGIN, y, MachineDraw.TEXT, false);
             graphics.text(font, MachineDraw.fitted(font, Challenges.cost(handicap), nameWidth), MachineDraw.MARGIN, y + COST_Y, MachineDraw.TEXT, false);
         }
-        int refundY = refundTop();
-        graphics.text(font, MachineDraw.fitted(font, REFUND.copy().withStyle(ChatFormatting.BOLD), nameWidth), MachineDraw.MARGIN, refundY,
-                MachineDraw.TEXT, false);
-        Component waiting = menu.refund() > 0 ? Component.translatable("mechanicalmasteryreborn.lab.refund.count", menu.refund()) : REFUND_NONE;
-        graphics.text(font, MachineDraw.fitted(font, waiting, nameWidth), MachineDraw.MARGIN, refundY + COST_Y, MachineDraw.TEXT, false);
+        Optional<Handicap> chosen = menu.chosen();
+        if (showsStop && chosen.isPresent()) {
+            int y = stopTop();
+            Component name = Component.translatable("mechanicalmasteryreborn.lab.stop", Challenges.title(chosen.get())).withStyle(ChatFormatting.BOLD);
+            graphics.text(font, MachineDraw.fitted(font, name, nameWidth), MachineDraw.MARGIN, y, MachineDraw.TEXT, false);
+            Component line = Component.translatable("mechanicalmasteryreborn.lab.stop.asks", names(menu.asks().asked()), names(menu.asks().left()));
+            graphics.text(font, MachineDraw.fitted(font, line, nameWidth), MachineDraw.MARGIN, y + COST_Y, MachineDraw.TEXT, false);
+        }
+        if (showsRefund) {
+            int refundY = refundTop();
+            graphics.text(font, MachineDraw.fitted(font, REFUND.copy().withStyle(ChatFormatting.BOLD), nameWidth), MachineDraw.MARGIN, refundY,
+                    MachineDraw.TEXT, false);
+            Component waiting = Component.translatable("mechanicalmasteryreborn.lab.refund.count", menu.refund());
+            graphics.text(font, MachineDraw.fitted(font, waiting, nameWidth), MachineDraw.MARGIN, refundY + COST_Y, MachineDraw.TEXT, false);
+        }
         if (showsLastStand) {
             int lastStandY = lastStandTop();
             graphics.text(font, MachineDraw.fitted(font, LAST_STAND.copy().withStyle(ChatFormatting.BOLD), nameWidth), MachineDraw.MARGIN,
@@ -208,18 +226,6 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
             graphics.text(font, MachineDraw.fitted(font, LAST_STAND_COST, nameWidth), MachineDraw.MARGIN, lastStandY + COST_Y,
                     MachineDraw.TEXT, false);
         }
-        int y = stopTop();
-        Optional<Handicap> chosen = menu.chosen();
-        if (chosen.isEmpty()) {
-            graphics.text(font, MachineDraw.fitted(font, STOP_NONE, textWidth), MachineDraw.MARGIN, y, MachineDraw.TEXT, false);
-            return;
-        }
-        Component name = Component.translatable("mechanicalmasteryreborn.lab.stop", Challenges.title(chosen.get())).withStyle(ChatFormatting.BOLD);
-        graphics.text(font, MachineDraw.fitted(font, name, nameWidth), MachineDraw.MARGIN, y, MachineDraw.TEXT, false);
-        Component line = menu.stopOffered()
-                ? Component.translatable("mechanicalmasteryreborn.lab.stop.asks", names(menu.asks().asked()), names(menu.asks().left()))
-                : STOP_NOT_YET;
-        graphics.text(font, MachineDraw.fitted(font, line, nameWidth), MachineDraw.MARGIN, y + COST_Y, MachineDraw.TEXT, false);
     }
 
     private static Component names(List<String> names) {
@@ -231,14 +237,14 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
         return rowsTop + Handicap.values().length * ROW;
     }
 
-    /** Where the refund's row starts, below the stop's. */
+    /** Where the refund's row starts, below the stop's if it shows. */
     private int refundTop() {
-        return stopTop() + ROW;
+        return stopTop() + (showsStop ? ROW : 0);
     }
 
-    /** Where the last stand's row starts, below the refund's. */
+    /** Where the last stand's row starts, below the refund's if it shows. */
     private int lastStandTop() {
-        return refundTop() + ROW;
+        return refundTop() + (showsRefund ? ROW : 0);
     }
 
     /** Where {@code handicap}'s row starts, below the intro. */

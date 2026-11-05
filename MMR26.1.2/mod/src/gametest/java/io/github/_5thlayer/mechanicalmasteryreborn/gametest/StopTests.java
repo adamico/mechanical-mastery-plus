@@ -43,6 +43,7 @@ final class StopTests {
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("stop_not_offered_before_a_reset", 1, StopTests::notOfferedBeforeAReset);
+        tests.test("stop_lab_shows_its_row_only_while_offered", 1, StopTests::rowOnlyWhileOffered);
         tests.test("stop_by_a_team_of_one_after_a_reset", 1, StopTests::byATeamOfOne);
         tests.test("stop_locks_the_chain_again", 1, StopTests::locksTheChainAgain);
         tests.test("stop_then_start_again_unlocks_and_waits_for_a_reset", 1, StopTests::startAgain);
@@ -71,6 +72,25 @@ final class StopTests {
             TestTeams.join(visitor, UUID.randomUUID());
             helper.assertFalse(open(helper, visitor).clickMenuButton(visitor, LabMenu.ASK), "the lab took an ask from another team's player");
             helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.ENERGY), "the team's handicap after a visitor's ask");
+        });
+        helper.succeed();
+    }
+
+    /** The lab has no stop's row until the played challenge has reset, and none again once it ends; an open lab follows. */
+    private static void rowOnlyWhileOffered(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        online(helper, team, 1, players -> {
+            Player player = players.getFirst();
+            var menu = open(helper, player);
+            helper.assertFalse(menu.showsStop(), "the lab shows the stop's row before the team played");
+            menu.clickMenuButton(player, Handicap.ENERGY.ordinal());
+            helper.assertFalse(menu.showsStop(), "the lab shows the stop's row before the attempt reset");
+            Challenges.reset(server(helper), team);
+            helper.assertTrue(menu.showsStop(), "a lab open through a reset hides the stop's row");
+            helper.assertTrue(open(helper, player).showsStop(), "the lab hides the stop's row after a reset");
+            Challenges.end(server(helper), team);
+            helper.assertFalse(menu.showsStop(), "a lab open through the challenge's end still shows the stop's row");
+            helper.assertFalse(open(helper, player).showsStop(), "the lab shows the stop's row after the challenge ended");
         });
         helper.succeed();
     }

@@ -41,8 +41,9 @@ import net.neoforged.neoforge.network.PacketDistributor;
  * client is sent which handicap the team plays, if any, which challenges it has won, whether the player may choose for
  * it, whether a stop is offered and the player asks for it, how many items of the team's refund wait, and which members
  * online have asked and which are left ({@link Asks}), and where the team's last stand is ({@link LastStandPhase}). As it
- * opens, the client is also sent whether the lab shows the last stand's row at all, not until the team has won all
- * four challenges, so its screen opens at the right size; a fourth win while it is open shows the row from the next sync.
+ * opens, the client is also sent whether a stop is offered, how much of the refund waits and where the last stand is, so
+ * its screen opens at the right size with only the rows that show ({@link #showsStop}, {@link #showsRefund},
+ * {@link #showsLastStand}); a change while it is open shows or hides a row from the next sync.
  */
 public final class LabMenu extends AbstractContainerMenu {
 
@@ -83,17 +84,14 @@ public final class LabMenu extends AbstractContainerMenu {
     private final DataSlot refund;
     /** Where the team's last stand is, by its {@link LastStandPhase}'s ordinal. */
     private final DataSlot lastStand;
-    /** Whether the lab showed the last stand's row as it opened. */
-    private final boolean showedLastStand;
     /** The server's player, who is sent {@link Asks}; null on the client or for a game test's mock player. */
     private final ServerPlayer viewer;
     /** The asks the client was last sent, or holds. */
     private Asks asks = Asks.NONE;
 
-    /** The client's menu, whose slots the sync fills, with whether it shows the last stand's row as the server wrote it. */
+    /** The client's menu, whose slots the sync fills, starting from the stop, the refund and the last stand as the server wrote them. */
     public LabMenu(int containerId, Inventory inventory, RegistryFriendlyByteBuf buffer) {
         super(Lab.MENU.get(), containerId);
-        this.showedLastStand = buffer.readBoolean();
         this.access = ContainerLevelAccess.NULL;
         this.chosen = addDataSlot(DataSlot.standalone());
         this.member = addDataSlot(DataSlot.standalone());
@@ -104,6 +102,9 @@ public final class LabMenu extends AbstractContainerMenu {
         this.lastStand = addDataSlot(DataSlot.standalone());
         this.viewer = null;
         chosen.set(NONE);
+        stopOffered.set(buffer.readBoolean() ? 1 : 0);
+        refund.set(buffer.readVarInt());
+        lastStand.set(buffer.readVarInt());
     }
 
     LabMenu(int containerId, Inventory inventory, ServerLevel level, BlockPos pos) {
@@ -111,7 +112,6 @@ public final class LabMenu extends AbstractContainerMenu {
         this.access = ContainerLevelAccess.create(level, pos);
         UUID team = Teams.at(level, pos);
         UUID players = Teams.of(inventory.player);
-        this.showedLastStand = phase(level.getServer(), team) != LastStandPhase.LOCKED;
         this.chosen = addDataSlot(new DataSlot() {
             @Override
             public int get() {
@@ -182,10 +182,18 @@ public final class LabMenu extends AbstractContainerMenu {
         this.viewer = inventory.player instanceof ServerPlayer server ? server : null;
     }
 
-    /** Opens the lab at {@code pos} for {@code player}, telling the client whether it shows the last stand's row. */
+    /** Opens the lab at {@code pos} for {@code player}, telling the client which of its optional rows show. */
     public static void open(Player player, ServerLevel level, BlockPos pos) {
-        boolean shows = phase(level.getServer(), Teams.at(level, pos)) != LastStandPhase.LOCKED;
-        player.openMenu(level.getBlockState(pos).getMenuProvider(level, pos), buffer -> buffer.writeBoolean(shows));
+        MinecraftServer server = level.getServer();
+        UUID team = Teams.at(level, pos);
+        boolean stop = Stops.offered(server, team);
+        int waiting = Math.min(Short.MAX_VALUE, Refunds.get(server).count(team));
+        int phase = phase(server, team).ordinal();
+        player.openMenu(level.getBlockState(pos).getMenuProvider(level, pos), buffer -> {
+            buffer.writeBoolean(stop);
+            buffer.writeVarInt(waiting);
+            buffer.writeVarInt(phase);
+        });
     }
 
     /** Where {@code team}'s last stand is. */
@@ -239,12 +247,19 @@ public final class LabMenu extends AbstractContainerMenu {
         return ordinal >= 0 && ordinal < phases.length ? phases[ordinal] : LastStandPhase.LOCKED;
     }
 
-    /**
-     * Whether the lab shows the last stand's row: once its team has won all four challenges, as it opened or since, by
-     * the last sync.
-     */
+    /** Whether the lab shows the stop's row: while a stop is offered, by the last sync. */
+    public boolean showsStop() {
+        return stopOffered();
+    }
+
+    /** Whether the lab shows the refund's row: while something of the team's refund waits, by the last sync. */
+    public boolean showsRefund() {
+        return refund() > 0;
+    }
+
+    /** Whether the lab shows the last stand's row: once its team has won all four challenges, by the last sync. */
     public boolean showsLastStand() {
-        return showedLastStand || lastStand() != LastStandPhase.LOCKED;
+        return lastStand() != LastStandPhase.LOCKED;
     }
 
     /** Whether starting the last stand here would start it. */
