@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn adds, or ch
 
 ## Unreleased
 
+- A challenge's start and C.O.D.'s last stand's start sound vanilla's raid horn to the team's players online, in place of the challenge fanfare, which a win keeps (#272).
 - The Warding and Vital Ports beside C.O.D. now wear their essence's colour: Warding light grey (light grey concrete while played, light grey glazed terracotta once won), Vital lime (lime concrete, then lime glazed terracotta), in place of cyan and red (#270).
 - For operators, `/cod challenge win <handicap>` wins that challenge for the team whose island they stand on, as its Port's last essence would, or, not played, notes it started and won with none of a start's effects (no Assault, no money set aside, no Diet), blocking C.O.D.'s tier and unlocking its chain, so four reach the last chapter and the last stand quickly. It refuses a challenge won already and any while another is played (#268).
 - The lab has no refund row, line, Open button or space, while nothing of the team's refund waits; the row shows once something does and goes once it is emptied, while the lab is open too (#269).

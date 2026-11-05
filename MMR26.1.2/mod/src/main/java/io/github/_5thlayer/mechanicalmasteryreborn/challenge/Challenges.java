@@ -9,6 +9,7 @@ import com.mojang.logging.LogUtils;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -17,6 +18,7 @@ import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
 import net.minecraft.network.protocol.game.ClientboundSoundEntityPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import org.slf4j.Logger;
@@ -24,7 +26,7 @@ import org.slf4j.Logger;
 /**
  * Starting a team's challenge, by the handicap it chose at the lab, and stopping, winning or resetting it; a stop locks
  * its chain again (ADR 0013), where a win or a reset keeps it. Each of the team's
- * players online hears vanilla's challenge fanfare when it starts, sees the challenge's name as a title with its cost
+ * players online hears vanilla's raid horn when it starts, and its challenge fanfare when it is won, sees the challenge's name as a title with its cost
  * below, and reads both in chat, and is given the challenge's chain ({@link Chains}). The money handicap acts on the
  * team's Account as it starts, resets and ends, and the protection handicap's {@link Assault} is sent as it starts and
  * removed as it resets or ends; the life handicap's Diets are forgotten as it resets or ends.
@@ -60,7 +62,7 @@ public final class Challenges {
                 name(handicap).withStyle(ChatFormatting.GOLD), cost(handicap)).withStyle(ChatFormatting.GRAY);
         Component title = title(handicap).withStyle(ChatFormatting.GOLD);
         Component subtitle = cost(handicap);
-        var sound = BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE);
+        Holder<SoundEvent> sound = SoundEvents.RAID_HORN;
         int told = 0;
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (Teams.of(player).equals(team)) {
