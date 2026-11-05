@@ -10,9 +10,11 @@ import java.util.UUID;
 
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Assault;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
+import io.github._5thlayer.mechanicalmasteryreborn.record.LastStand;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
@@ -27,6 +29,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HopperBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -34,9 +38,11 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.transfer.CombinedResourceHandler;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.ResourceHandlerUtil;
 import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -54,6 +60,12 @@ import org.jspecify.annotations.Nullable;
  * block stands there; past that, nowhere, so the pile shows the team it is falling behind and lag stays bounded.
  * While the team plays a challenge, each one it makes counts toward its {@link Inflation}, and it makes them ever faster
  * with the time since the challenge began ({@link CodPace}), back at its waking pace once the challenge ends.
+ *
+ * <p>Once its team starts its last stand ({@link LastStands}), it makes Nullessence instead, whatever its team's tier, at
+ * the {@link LastStand#rate rate} the team's pace sets, awake or not, every one counted against the team's Lead, and it
+ * takes Quintessence on every side ({@link CodIntake}) and by hand. A hopper that feeds it is never pushed into. Once
+ * the Lead reaches the margin it shuts down for good: it makes nothing more, takes nothing more, and stands dark
+ * ({@link CodBlock#SHUT_DOWN}).
  */
 public final class CodBlockEntity extends BlockEntity implements MenuProvider {
 
@@ -61,6 +73,9 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
     private static final String TICKS_TOWARD_NEXT_KEY = "ticks_toward_next";
 
     private final CodReserve reserve = new CodReserve(this::setChanged);
+    private final CodIntake intake = new CodIntake(this);
+    /** What automation reaches on every side: the reserve to take from, then the intake to put Quintessence into. */
+    private final ResourceHandler<ItemResource> face = new CombinedResourceHandler<>(reserve, intake);
     /**
      * Ticks toward the next essence; none while the reserve holds a stack, so an emptied one starts afresh. Saved
      * whenever anything else marks C.O.D. changed, as making an essence does, rather than every tick.
@@ -70,6 +85,8 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
     private boolean awake;
     /** The tier it makes, as of its last tick; the team's state holds it, so it is never saved here. */
     private Optional<Essence> tier = Optional.of(Essence.ADVANCED);
+    /** Its team's last stand, as of its last tick; the team's state holds it, so it is never saved here. */
+    private Optional<LastStand> lastStand = Optional.empty();
     /** The team whose island it stands on, found on its first tick: a C.O.D. never moves. */
     private @Nullable UUID team;
     /** What takes items on each side, found once it first pushes. */
@@ -80,9 +97,14 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         reserve.fill(Essences.item(Essence.ADVANCED));
     }
 
-    /** The reserve, as automation and the menu reach it: extract only. */
+    /** The reserve, as the menu reaches it: extract only. */
     public ResourceHandler<ItemResource> reserve() {
         return reserve;
+    }
+
+    /** What automation reaches on every side: the reserve, extract only, and the Quintessence intake, insert only. */
+    public ResourceHandler<ItemResource> face() {
+        return face;
     }
 
     CodReserve reserveSlot() {
@@ -94,12 +116,35 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         return tier;
     }
 
+    /** Its team's last stand, once started, as of its last tick: on the server only. */
+    public Optional<LastStand> lastStand() {
+        return lastStand;
+    }
+
     /**
-     * Whether C.O.D. is making essence: never once all four tiers are blocked; otherwise always once awake, and while
-     * dormant only until its reserve holds a stack of its tier, so what an earlier tier left still lets it spill.
+     * What it makes: Nullessence while its team's last stand runs, nothing once it is won, and otherwise its team's tier,
+     * none once all four are blocked.
+     */
+    public Optional<Essence> making() {
+        if (lastStand.isPresent()) {
+            return lastStand.get().won() ? Optional.empty() : Optional.of(Essence.NULLESSENCE);
+        }
+        return tier;
+    }
+
+    /** Whether it makes without stop, as once awake or in its last stand, rather than only up to a stack, as while dormant. */
+    private boolean active() {
+        return awake || lastStand.filter(stand -> !stand.won()).isPresent();
+    }
+
+    /**
+     * Whether C.O.D. is making essence: never once all four tiers are blocked, outside its last stand, nor once that is
+     * won; otherwise always once awake or in its last stand, and while dormant only until its reserve holds a stack of
+     * its tier, so what an earlier tier left still lets it spill.
      */
     public boolean isMaking() {
-        return tier.isPresent() && (awake || !reserve.isFullOf(Essences.item(tier.get())));
+        Optional<Essence> made = making();
+        return made.isPresent() && (active() || !reserve.isFullOf(Essences.item(made.get())));
     }
 
     /**
@@ -107,14 +152,19 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
      * beside it, and its top is covered or its pile holds a stack. It still counts each one as made.
      */
     public boolean isBlocked() {
-        return awake && tier.isPresent() && reserve.isFullFor(Essences.item(tier.get())) && !canSpill();
+        Optional<Essence> made = making();
+        return active() && made.isPresent() && reserve.isFullFor(Essences.item(made.get())) && !canSpill();
     }
 
     /**
      * The ticks it takes to make one essence: at its waking pace once awake, and faster with the time since its team's
-     * challenge began while it plays one; on the server only, so a client sees the waking pace.
+     * challenge began while it plays one; on the server only, so a client sees the waking pace. In its last stand, a
+     * minute over its rate.
      */
     public int interval() {
+        if (lastStand.isPresent()) {
+            return lastStand.get().interval();
+        }
         if (!awake) {
             return ServerConfig.codDormantInterval();
         }
@@ -150,14 +200,78 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         }
         UUID team = cod.team;
         TeamState teams = TeamState.get(server.getServer());
-        cod.awake = teams.isAwake(team);
-        cod.tier = teams.tier(team);
-        if (cod.awake) {
+        cod.read(teams);
+        cod.showShutDown();
+        if (cod.active()) {
             cod.push(server);
         }
-        if (cod.tick(cod.interval()) && cod.awake) {
+        if (!cod.tick(cod.interval())) {
+            return;
+        }
+        if (cod.lastStand.isPresent()) {
+            teams.countNullessenceMade(team, ServerConfig.lastStandMargin());
+        } else if (cod.awake) {
             teams.countMade(team);
         }
+    }
+
+    /** Takes its team's state as it stands: whether it is awake, its tier and its last stand. */
+    private void read(TeamState teams) {
+        awake = teams.isAwake(team);
+        tier = teams.tier(team);
+        lastStand = teams.lastStand(team);
+    }
+
+    /** Stands dark once its team's last stand is won, and lit otherwise, if that changed. */
+    private void showShutDown() {
+        if (level == null) {
+            return;
+        }
+        BlockState state = getBlockState();
+        boolean shutDown = lastStand.filter(LastStand::won).isPresent();
+        if (state.hasProperty(CodBlock.SHUT_DOWN) && state.getValue(CodBlock.SHUT_DOWN) != shutDown) {
+            level.setBlock(worldPosition, state.setValue(CodBlock.SHUT_DOWN, shutDown), Block.UPDATE_ALL);
+        }
+    }
+
+    /** How many Quintessence its team's last stand still takes to reach the margin; none while none runs, or on a client. */
+    int quintessenceNeeded() {
+        return level instanceof ServerLevel server ? LastStands.needed(server.getServer(), owner(server)) : 0;
+    }
+
+    /** Counts {@code count} Quintessence put into it toward its team's Lead, and shuts down at once if that won the pack. */
+    void takeQuintessence(int count) {
+        if (count <= 0 || !(level instanceof ServerLevel server)) {
+            return;
+        }
+        LastStands.take(server.getServer(), owner(server), count);
+        read(TeamState.get(server.getServer()));
+        showShutDown();
+    }
+
+    /**
+     * Puts as much of {@code stack} into the intake as it takes, as a player's click does, and says how many it took; the
+     * stack is left with the rest.
+     */
+    public int feed(ItemStack stack) {
+        if (stack.isEmpty()) {
+            return 0;
+        }
+        int taken;
+        try (var transaction = Transaction.openRoot()) {
+            taken = intake.insert(0, ItemResource.of(stack), stack.getCount(), transaction);
+            transaction.commit();
+        }
+        stack.shrink(taken);
+        return taken;
+    }
+
+    /** The team whose island it stands on. */
+    private UUID owner(ServerLevel server) {
+        if (team == null) {
+            team = Teams.at(server, worldPosition);
+        }
+        return team;
     }
 
     /** Counts a tick toward the next essence, and says whether it made one. */
@@ -170,7 +284,7 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
             return false;
         }
         ticksTowardNext = 0;
-        Item essence = Essences.item(tier.orElseThrow());
+        Item essence = Essences.item(making().orElseThrow());
         if (!reserve.isFullFor(essence)) {
             reserve.makeOne(essence);
         } else {
@@ -179,7 +293,10 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         return true;
     }
 
-    /** Pushes what the reserve holds into whatever takes items beside it. */
+    /**
+     * Pushes what the reserve holds into whatever takes items beside it, but a hopper that faces into C.O.D., which
+     * would fill with what it can't put back.
+     */
     private void push(ServerLevel server) {
         if (neighbours == null) {
             neighbours = new EnumMap<>(Direction.class);
@@ -187,11 +304,15 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
                 neighbours.put(side, BlockCapabilityCache.create(Capabilities.Item.BLOCK, server, worldPosition.relative(side), side.getOpposite()));
             }
         }
-        for (var neighbour : neighbours.values()) {
+        for (var neighbour : neighbours.entrySet()) {
             if (reserve.isEmpty()) {
                 return;
             }
-            ResourceHandlerUtil.move(reserve, neighbour.getCapability(), resource -> true, Integer.MAX_VALUE, null);
+            BlockState beside = server.getBlockState(worldPosition.relative(neighbour.getKey()));
+            if (beside.hasProperty(HopperBlock.FACING) && beside.getValue(HopperBlock.FACING) == neighbour.getKey().getOpposite()) {
+                continue;
+            }
+            ResourceHandlerUtil.move(reserve, neighbour.getValue().getCapability(), resource -> true, Integer.MAX_VALUE, null);
         }
     }
 
@@ -203,16 +324,17 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
 
-    /** Whether an essence can drop onto the pile on top: no block stands there, and the pile holds less than a stack of its tier. */
+    /** Whether an essence can drop onto the pile on top: no block stands there, and the pile holds less than a stack of what it makes. */
     private boolean canSpill() {
         BlockPos top = worldPosition.above();
         if (level == null || !level.getBlockState(top).getCollisionShape(level, top).isEmpty()) {
             return false;
         }
-        if (tier.isEmpty()) {
+        Optional<Essence> made = making();
+        if (made.isEmpty()) {
             return false;
         }
-        Item essence = Essences.item(tier.get());
+        Item essence = Essences.item(made.get());
         int piled = 0;
         for (ItemEntity item : level.getEntitiesOfClass(ItemEntity.class, new AABB(top).inflate(1, 0.5, 1))) {
             piled += item.getItem().is(essence) ? item.getItem().getCount() : 0;

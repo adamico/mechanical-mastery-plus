@@ -10,6 +10,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Generators;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationCap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastChapter;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ObsidianFlakes;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
@@ -54,6 +55,7 @@ public final class MechanicalMasteryReborn {
         Chains.register();
         Stops.register();
         LastChapter.register();
+        LastStands.register();
         ChainMachines.register(modBus);
         InflationCap.register();
         InflationBar.register();

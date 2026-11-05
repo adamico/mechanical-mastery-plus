@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "shut_down=false": {
       "model": "mechanicalmasteryreborn:block/cod"
+    },
+    "shut_down=true": {
+      "model": "mechanicalmasteryreborn:block/cod_shut_down"
     }
   }
 }

@@ -38,3 +38,17 @@ Advanced essence, and grows with each tier below. Jade on the Port shows how far
 
 Winning ends the challenge, gives back what its handicap took, and blocks the tier C.O.D. made: from then on it
 makes the tier below, at its pace between challenges. A won challenge can't be played again.
+
+## The last stand
+
+Once your team has won all four challenges, C.O.D. makes nothing until you start its **last stand** at the
+[lab](lab.md). From then on it makes **Nullessence**, which decomposes into every tier's mix, and each one it makes
+counts against your team's **Lead**, whether you keep it, void it or decompose it.
+
+Put **Quintessence** into C.O.D., by hand or from a hopper or a pipe on any side: each one cancels a fixed amount and
+raises your Lead. C.O.D. starts slow, and speeds up, a little behind, as your Quintessence keeps pace with it, up to
+a ceiling; it slows back down when you stall. Your Lead never falls further than the margin below zero, and the last
+stand can't be lost, stopped or reset.
+
+When your Lead reaches the margin, C.O.D. shuts down for good and stands dark, and your team has won the pack. The
+bar at the top of your screen, and Jade on C.O.D., show your Lead and how fast C.O.D. makes Nullessence.

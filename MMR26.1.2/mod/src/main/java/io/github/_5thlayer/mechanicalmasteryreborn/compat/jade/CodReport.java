@@ -8,8 +8,10 @@ import java.util.Optional;
 import io.github._5thlayer.libworks.machine.jade.MachineReport;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
+import io.github._5thlayer.mechanicalmasteryreborn.record.LastStand;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -26,7 +28,7 @@ import snownee.jade.api.view.ProgressView;
  * What the server tells Jade about a C.O.D.: whether its team has blocked all four tiers,
  * whether it is making essence, whether it is blocked, the ticks done
  * toward the next out of its interval, which the server's config sets and which is shorter once it is awake, and its
- * team's Inflation and its cap while the team plays a challenge.
+ * team's Inflation and its cap while the team plays a challenge, and its last stand and the margin once started.
  * {@link Lines} words it on the client, apart so that a dedicated server never loads Jade's drawing.
  */
 final class CodReport {
@@ -41,9 +43,17 @@ final class CodReport {
             ByteBufCodecs.VAR_INT, Data::interval,
             ByteBufCodecs.optional(Inflation.STREAM_CODEC), Data::inflation,
             ByteBufCodecs.VAR_INT, Data::cap,
+            ByteBufCodecs.optional(StreamCodec.composite(
+                    ByteBufCodecs.VAR_LONG, LastStand::lead,
+                    ByteBufCodecs.DOUBLE, LastStand::pace,
+                    ByteBufCodecs.DOUBLE, LastStand::rate,
+                    ByteBufCodecs.BOOL, LastStand::won,
+                    LastStand::new)), Data::lastStand,
+            ByteBufCodecs.VAR_INT, Data::margin,
             Data::new);
 
-    record Data(boolean allBlocked, boolean making, boolean blocked, int ticks, int interval, Optional<Inflation> inflation, int cap) {
+    record Data(boolean allBlocked, boolean making, boolean blocked, int ticks, int interval, Optional<Inflation> inflation, int cap,
+            Optional<LastStand> lastStand, int margin) {
     }
 
     static final MachineReport<CodBlockEntity, Data> REPORT = new MachineReport<>(UID, CodBlockEntity.class, CodReport::read, CODEC);
@@ -51,8 +61,8 @@ final class CodReport {
     /** The ticks done are held to the interval, which may have shrunk by a tick since C.O.D. last counted one. */
     private static Data read(CodBlockEntity cod) {
         int interval = cod.interval();
-        return new Data(cod.tier().isEmpty(), cod.isMaking(), cod.isBlocked(), Math.min(cod.ticksTowardNext(), interval), interval, cod.inflation(),
-                ServerConfig.inflationCap());
+        return new Data(cod.making().isEmpty(), cod.isMaking(), cod.isBlocked(), Math.min(cod.ticksTowardNext(), interval), interval, cod.inflation(),
+                ServerConfig.inflationCap(), cod.lastStand(), ServerConfig.lastStandMargin());
     }
 
     private CodReport() {
@@ -62,6 +72,8 @@ final class CodReport {
      * Words the report: that all four tiers are blocked, if they are; otherwise the next essence as a bar with the seconds left while it is making, that it is blocked
      * while what it makes has nowhere to go, or that its slot is full; then, while its team plays a challenge, its
      * Inflation's excess against its cap, as its bar words it, with what C.O.D. has made and the team has decomposed since the challenge began.
+     * Once its last stand is won, only that it has shut down for good; while it runs, its Lead and C.O.D.'s rate, as its bar
+     * words them.
      */
     static final class Lines {
 
@@ -69,6 +81,10 @@ final class CodReport {
         }
 
         static void add(Data report, ITooltip tooltip) {
+            if (report.lastStand().filter(LastStand::won).isPresent()) {
+                tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.shut_down"));
+                return;
+            }
             if (report.allBlocked()) {
                 tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.all_blocked"));
             } else if (!report.making()) {
@@ -86,6 +102,7 @@ final class CodReport {
                 tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.made_decomposed", inflation.made(),
                         inflation.decomposed()).withStyle(ChatFormatting.GRAY));
             });
+            report.lastStand().ifPresent(stand -> tooltip.add(InflationBar.lead(stand, report.margin())));
         }
     }
 }

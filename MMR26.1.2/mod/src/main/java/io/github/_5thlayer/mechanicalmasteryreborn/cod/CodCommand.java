@@ -12,12 +12,15 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+import com.mojang.brigadier.arguments.LongArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
@@ -37,7 +40,8 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
  * {@code challenge start <handicap>} starts that island's team's challenge as its lab would (#235), and {@code challenge end}
  * ends it, its handicap with it, so choosing can be seen again, and {@code challenge revert <handicap>} forgets
  * that it won that challenge, unblocking the tier its win blocked, so winning can be seen again; {@code tier <team> <tier>} sets the tier a team's C.O.D.
- * makes, or none, for tests and in-game checks.
+ * makes, or none, for tests and in-game checks; {@code last_stand start} starts that island's team's last stand as its lab
+ * would, and {@code last_stand lead <lead>} sets its Lead, so the floor, the cap and the win can be seen.
  */
 final class CodCommand {
 
@@ -67,7 +71,11 @@ final class CodCommand {
                         .then(Commands.literal("revert").then(Commands.argument("handicap", StringArgumentType.word())
                                 .suggests((context, builder) -> SharedSuggestionProvider.suggest(
                                         Arrays.stream(Handicap.values()).map(Handicap::id), builder))
-                                .executes(CodCommand::revertWin)))));
+                                .executes(CodCommand::revertWin))))
+                .then(Commands.literal("last_stand")
+                        .then(Commands.literal("start").executes(CodCommand::startLastStand))
+                        .then(Commands.literal("lead").then(Commands.argument("lead", LongArgumentType.longArg())
+                                .executes(CodCommand::setLead)))));
     }
 
     private static int status(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
@@ -88,9 +96,36 @@ final class CodCommand {
         state.inflation(island).ifPresent(inflation -> source.sendSuccess(() -> Component.translatable(
                 "mechanicalmasteryreborn.command.cod.inflation", inflation.made(), inflation.decomposed(), inflation.excess(),
                 ServerConfig.inflationCap()), false));
+        state.lastStand(island).ifPresent(stand -> source.sendSuccess(() -> stand.won()
+                ? Component.translatable("mechanicalmasteryreborn.command.cod.last_stand.won")
+                : InflationBar.lead(stand, ServerConfig.lastStandMargin()), false));
         if (!own.equals(island)) {
             source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.elsewhere"), false);
         }
+        return 1;
+    }
+
+    private static int startLastStand(CommandContext<CommandSourceStack> context) {
+        var source = context.getSource();
+        if (!LastStands.begin(source.getServer(), island(source))) {
+            source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.last_stand.not_offered"));
+            return 0;
+        }
+        source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.last_stand.started"), true);
+        return 1;
+    }
+
+    private static int setLead(CommandContext<CommandSourceStack> context) {
+        var source = context.getSource();
+        long lead = LongArgumentType.getLong(context, "lead");
+        UUID island = island(source);
+        var state = TeamState.get(source.getServer());
+        if (!state.setLead(island, lead, ServerConfig.lastStandMargin())) {
+            source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.last_stand.none"));
+            return 0;
+        }
+        source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.last_stand.lead",
+                state.lastStand(island).orElseThrow().lead()), true);
         return 1;
     }
 
