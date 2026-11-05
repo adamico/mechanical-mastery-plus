@@ -22,7 +22,9 @@ The challenge can't start until your team has a Shop account, which comes a mome
 
 ## The Offers
 
-Starting money gives your team the challenge's **Permit** for good, which opens its Offers in the Shop:
+Starting money gives your team the challenge's **Permit**, which opens its Offers in the Shop. Your team keeps it
+for good, through a win, a reset or a stop: money's chain is paid for, not built, so a stop locks nothing. The
+Offers it opens:
 
 - Sell Offers for the challenge's own fluids, such as Essentia Vitae, lava, liquified experience, sal ammoniac
   and superheated steam, and for a few blocks, such as hay and dried kelp. Sellers sell them for you.
@@ -30,13 +32,12 @@ Starting money gives your team the challenge's **Permit** for good, which opens 
 - The **Ore Buy Permit**, which lets you buy ore blocks.
 - The **Aureate Buy Permit**, which opens the Aureate Essence's Offer: the only source of it.
 
-Permits are bought once and kept for good, even past a stop. The Oil Buy Permit, the raw ores, the seeds, the
-saplings and the animals need no challenge.
+The Permits you buy there are kept for good as well. The Oil Buy Permit, the raw ores, the seeds, the saplings
+and the animals need no challenge.
 
 ## The chain
 
-Money's chain locks nothing: it is paid for, not built. Fill the quota by selling what your factory makes and
-buying the Aureate Essence with it.
+Fill the quota by selling what your factory makes and buying the Aureate Essence with it.
 
 ## In the last stand
 
