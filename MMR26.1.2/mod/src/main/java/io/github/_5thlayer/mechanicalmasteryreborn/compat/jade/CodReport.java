@@ -8,7 +8,7 @@ import java.util.Optional;
 import io.github._5thlayer.libworks.machine.jade.MachineReport;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
-import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
 import io.github._5thlayer.mechanicalmasteryreborn.record.LastStand;
@@ -102,7 +102,7 @@ final class CodReport {
                 tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.made_decomposed", inflation.made(),
                         inflation.decomposed()).withStyle(ChatFormatting.GRAY));
             });
-            report.lastStand().ifPresent(stand -> tooltip.add(InflationBar.lead(stand, report.margin())));
+            report.lastStand().ifPresent(stand -> tooltip.add(LastStands.lead(stand, report.margin())));
         }
     }
 }

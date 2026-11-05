@@ -57,6 +57,11 @@ public record LastStand(long lead, double pace, double rate, boolean won) {
         return new LastStand(lead, 0, 0, true);
     }
 
+    /** Whether it runs: started, as it is, and not yet won. */
+    public boolean running() {
+        return !won;
+    }
+
     /** The ticks C.O.D. takes to make one Nullessence at its rate, to the nearest tick and never under one. */
     public int interval() {
         return (int) Math.max(1, Math.min(Integer.MAX_VALUE, Math.round(TICKS_PER_MINUTE / Math.max(rate, 1e-9))));

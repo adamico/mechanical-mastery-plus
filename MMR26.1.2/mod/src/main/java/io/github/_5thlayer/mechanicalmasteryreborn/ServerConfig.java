@@ -295,27 +295,32 @@ public final class ServerConfig {
         return SPEC.isLoaded() ? COD_INFLATION_CAP.getAsInt() : COD_INFLATION_CAP.getDefault();
     }
 
-    /** The share of a sale the money handicap pays. */
+    /** The Lead that wins the pack in C.O.D.'s last stand, and minus which the Lead never falls below. */
     public static int lastStandMargin() {
         return SPEC.isLoaded() ? LAST_STAND_MARGIN.getAsInt() : LAST_STAND_MARGIN.getDefault();
     }
 
+    /** What one Quintessence put into C.O.D. cancels in its last stand. */
     public static int lastStandQuintessenceCancels() {
         return SPEC.isLoaded() ? LAST_STAND_QUINTESSENCE_CANCELS.getAsInt() : LAST_STAND_QUINTESSENCE_CANCELS.getDefault();
     }
 
+    /** The least Nullessence C.O.D. makes a minute in its last stand. */
     public static double lastStandFloor() {
         return SPEC.isLoaded() ? LAST_STAND_FLOOR.getAsDouble() : LAST_STAND_FLOOR.getDefault();
     }
 
+    /** The most Nullessence C.O.D. makes a minute in its last stand. */
     public static double lastStandCeiling() {
         return SPEC.isLoaded() ? LAST_STAND_CEILING.getAsDouble() : LAST_STAND_CEILING.getDefault();
     }
 
+    /** The ticks over which C.O.D. measures the team's Quintessence in its last stand, and its rate follows it. */
     public static int lastStandLag() {
         return SPEC.isLoaded() ? LAST_STAND_LAG.getAsInt() : LAST_STAND_LAG.getDefault();
     }
 
+    /** The share of a sale the money handicap pays. */
     public static double moneySaleShare() {
         return SPEC.isLoaded() ? MONEY_SALE_SHARE.getAsDouble() : MONEY_SALE_SHARE.getDefault();
     }

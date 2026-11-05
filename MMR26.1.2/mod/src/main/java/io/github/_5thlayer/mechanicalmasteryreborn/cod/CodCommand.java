@@ -19,7 +19,6 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
-import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
@@ -98,7 +97,7 @@ final class CodCommand {
                 ServerConfig.inflationCap()), false));
         state.lastStand(island).ifPresent(stand -> source.sendSuccess(() -> stand.won()
                 ? Component.translatable("mechanicalmasteryreborn.command.cod.last_stand.won")
-                : InflationBar.lead(stand, ServerConfig.lastStandMargin()), false));
+                : LastStands.lead(stand, ServerConfig.lastStandMargin()), false));
         if (!own.equals(island)) {
             source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.elsewhere"), false);
         }

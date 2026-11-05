@@ -5,7 +5,6 @@ package io.github._5thlayer.mechanicalmasteryreborn.challenge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -105,15 +104,10 @@ public final class InflationBar {
     private static void show(ServerBossEvent bar, LastStand stand) {
         int margin = ServerConfig.lastStandMargin();
         bar.setColor(BossEvent.BossBarColor.PURPLE);
-        bar.setName(Component.translatable(TITLE, Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand"), lead(stand, margin)));
+        bar.setName(Component.translatable(TITLE, Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand"), LastStands.lead(stand, margin)));
         bar.setProgress(Math.clamp((float) (stand.lead() + margin) / (2 * margin), 0.0F, 1.0F));
     }
 
-    /** The last stand's line, as its bar and Jade word it: its Lead against the margin, and C.O.D.'s rate. */
-    public static Component lead(LastStand stand, int margin) {
-        return Component.translatable(MechanicalMasteryReborn.MOD_ID + ".bar.last_stand", stand.lead(), margin,
-                String.format(Locale.ROOT, "%.1f", stand.rate()));
-    }
 
     /**
      * Words the bar, such as "Energy Challenge - Inflation: 12 of 256", and fills it. While the team's Assault runs, the

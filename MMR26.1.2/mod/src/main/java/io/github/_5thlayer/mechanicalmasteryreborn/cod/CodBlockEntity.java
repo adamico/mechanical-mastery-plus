@@ -134,7 +134,7 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
 
     /** Whether it makes without stop, as once awake or in its last stand, rather than only up to a stack, as while dormant. */
     private boolean active() {
-        return awake || lastStand.filter(stand -> !stand.won()).isPresent();
+        return awake || lastStand.filter(LastStand::running).isPresent();
     }
 
     /**

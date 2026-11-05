@@ -443,7 +443,7 @@ public final class TeamState extends SavedData {
 
     /** Whether {@code team}'s last stand runs: started and not yet won. */
     public boolean inLastStand(UUID team) {
-        return lastStand(team).filter(stand -> !stand.won()).isPresent();
+        return lastStand(team).filter(LastStand::running).isPresent();
     }
 
     /** Whether {@code team} has won the pack: its Lead reached the margin and C.O.D. shut down. */
@@ -471,7 +471,7 @@ public final class TeamState extends SavedData {
      */
     public boolean cancel(UUID team, long amount, int lag, long margin) {
         Entry entry = teams.get(team);
-        if (entry == null || amount <= 0 || entry.lastStand.filter(stand -> !stand.won()).isEmpty()) {
+        if (entry == null || amount <= 0 || entry.lastStand.filter(LastStand::running).isEmpty()) {
             return false;
         }
         LastStand stand = entry.lastStand.get().plusCancelled(amount, lag);
@@ -495,7 +495,7 @@ public final class TeamState extends SavedData {
     public void tickLastStands(double floor, double ceiling, int lag) {
         boolean changed = false;
         for (Entry entry : teams.values()) {
-            if (entry.lastStand.filter(stand -> !stand.won()).isPresent()) {
+            if (entry.lastStand.filter(LastStand::running).isPresent()) {
                 entry.lastStand = entry.lastStand.map(stand -> stand.afterTick(floor, ceiling, lag));
                 changed = true;
             }
@@ -511,7 +511,7 @@ public final class TeamState extends SavedData {
      */
     public boolean setLead(UUID team, long lead, long margin) {
         Entry entry = teams.get(team);
-        if (entry == null || entry.lastStand.filter(stand -> !stand.won()).isEmpty()) {
+        if (entry == null || entry.lastStand.filter(LastStand::running).isEmpty()) {
             return false;
         }
         LastStand stand = entry.lastStand.get();

@@ -3,9 +3,11 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.challenge;
 
+import java.util.Locale;
 import java.util.UUID;
 
 import com.mojang.logging.LogUtils;
+import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.record.LastStand;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
@@ -61,9 +63,9 @@ public final class LastStands {
         if (!TeamState.get(server).beginLastStand(team, ServerConfig.lastStandFloor())) {
             return false;
         }
-        Component name = Component.translatable("mechanicalmasteryreborn.last_stand");
-        Component cost = Component.translatable("mechanicalmasteryreborn.last_stand.started.subtitle", ServerConfig.lastStandMargin());
-        int told = tell(server, team, Component.translatable("mechanicalmasteryreborn.last_stand.started",
+        Component name = Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand");
+        Component cost = Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand.started.subtitle", ServerConfig.lastStandMargin());
+        int told = tell(server, team, Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand.started",
                 name.copy().withStyle(ChatFormatting.GOLD), cost).withStyle(ChatFormatting.GRAY),
                 name.copy().withStyle(ChatFormatting.GOLD), cost, SoundEvents.UI_TOAST_CHALLENGE_COMPLETE);
         LOGGER.info("Team {} started its last stand; told {} of its players online", team, told);
@@ -72,7 +74,7 @@ public final class LastStands {
 
     /** How many more Quintessence {@code team}'s running last stand takes to reach the margin; none while none runs. */
     public static int needed(MinecraftServer server, UUID team) {
-        var stand = TeamState.get(server).lastStand(team).filter(running -> !running.won());
+        var stand = TeamState.get(server).lastStand(team).filter(LastStand::running);
         if (stand.isEmpty()) {
             return 0;
         }
@@ -95,11 +97,17 @@ public final class LastStands {
         }
     }
 
+    /** The last stand's line, as its bar and Jade word it: its Lead against the margin, and C.O.D.'s rate. */
+    public static Component lead(LastStand stand, int margin) {
+        return Component.translatable(MechanicalMasteryReborn.MOD_ID + ".bar.last_stand", stand.lead(), margin,
+                String.format(Locale.ROOT, "%.1f", stand.rate()));
+    }
+
     /** Tells the team's players online that C.O.D. shut down and the pack is won. */
     private static void won(MinecraftServer server, UUID team) {
-        Component title = Component.translatable("mechanicalmasteryreborn.last_stand.won.title").withStyle(ChatFormatting.GOLD);
-        Component subtitle = Component.translatable("mechanicalmasteryreborn.last_stand.won.subtitle");
-        int told = tell(server, team, Component.translatable("mechanicalmasteryreborn.last_stand.won").withStyle(ChatFormatting.GRAY),
+        Component title = Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand.won.title").withStyle(ChatFormatting.GOLD);
+        Component subtitle = Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand.won.subtitle");
+        int told = tell(server, team, Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand.won").withStyle(ChatFormatting.GRAY),
                 title, subtitle, SoundEvents.END_PORTAL_SPAWN);
         LOGGER.info("Team {} shut C.O.D. down and won the pack; told {} of its players online", team, told);
     }
