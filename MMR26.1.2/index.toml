@@ -201,6 +201,10 @@ file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/energy.json"
 hash = "f0a141edd134abdb5be046ba53fecb80cc3d2b929c18b96ee528f3e7a986a6e4"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/last_chapter.json"
+hash = "6d11da7cf1ec8d87bb2146117f9100094e29a07c960f32dcde57f2141b56855e"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/life.json"
 hash = "c8a43e55406703ac2ce08dbf78ca3a9c19aa977525879426ddf009ade64e3951"
 
@@ -273,6 +277,10 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/charged_rift.json"
 hash = "f7cae0ca343b708282bc77e7ba9eb75c65825c4623b41beec20933770e636f31"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/end_portal_frame.json"
+hash = "32f47fac79aa54ed0dab417b906d98aa3d51927928d2ff691840bfe5d1be409f"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/ward_tallow.json"
 hash = "16985818ad421aa1cb37dcb56bb81503e5378c3ff09d87afaec9a16fc19c1f88"
 
@@ -319,6 +327,10 @@ hash = "29b2448583d57bc188aa67e9c2d9b16706a65f00fcdcf0dc240bf91b5daf325a"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/chicken_spawn_egg.json"
 hash = "27a5142d79936d19cbaf3cd6e2dac647a7ec6e2651e9a01248124a51d666c81c"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/chorus_flower.json"
+hash = "5136de8f333b08957877bbb97d19590a3ea8765c89d2bd258c74208c2eb2ebe7"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/coal.json"
