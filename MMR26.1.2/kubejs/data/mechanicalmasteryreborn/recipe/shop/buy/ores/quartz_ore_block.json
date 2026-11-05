@@ -1,9 +1,9 @@
 {
   "type": "adminshop:item_buying",
   "price": 50000,
-  "permit": "reborn_ore_buy",
+  "permit": "reborn_money",
   "result": {
-    "id": "fieldworks:iron_ore",
+    "id": "fieldworks:quartz_ore",
     "count": 1
   }
 }

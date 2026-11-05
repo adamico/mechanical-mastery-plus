@@ -1,9 +1,9 @@
 {
   "type": "adminshop:item_selling",
   "price": 250000,
-  "permit": "reborn_essence_sell",
+  "permit": "reborn_money",
   "item": {
-    "id": "mechanicalmasteryreborn:warding_essence",
+    "id": "mechanicalmasteryreborn:vital_essence",
     "count": 1
   }
 }

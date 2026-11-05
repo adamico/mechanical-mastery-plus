@@ -1,9 +1,9 @@
 {
   "type": "adminshop:item_buying",
   "price": 40000,
-  "permit": "reborn_ore_buy",
+  "permit": "reborn_money",
   "result": {
-    "id": "fieldworks:sulfur_ore",
+    "id": "fieldworks:copper_ore",
     "count": 1
   }
 }

@@ -49,6 +49,11 @@ public final class AdminShopAccounts implements Accounts {
     }
 
     @Override
+    public void revoke(MinecraftServer server, UUID team, String permit) {
+        account(server, team).ifPresent(id -> money(server).removePermit(id, permit));
+    }
+
+    @Override
     public Optional<UUID> teamOf(MinecraftServer server, UUID account) {
         return IslandParties.get(server).islandOf(account);
     }

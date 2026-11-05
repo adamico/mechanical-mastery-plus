@@ -6,6 +6,7 @@ package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 import java.util.Optional;
 import java.util.UUID;
 
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Accounts;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.MoneyHandicap;
@@ -16,9 +17,10 @@ import net.minecraft.server.MinecraftServer;
 
 /**
  * The money handicap (#213): starting the money challenge sets the team's Balance aside and gives it the
- * {@code reborn_money} Permit for good; its end gives the Balance back, with what the team earned meanwhile; a reset
- * sets what it earned aside too, as though the challenge had just begun; and while it plays, a sale pays half. Each
- * test is a team of its own, with an Account of its own ({@link TestAccounts}).
+ * {@code reborn_money} Permit, which a win or a reset keeps and a stop takes back (ADR 0013, #296); its end gives the
+ * Balance back, with what the team earned meanwhile; a reset sets what it earned aside too, as though the challenge had
+ * just begun; and while it plays, a sale pays half. Each test is a team of its own, with an Account of its own
+ * ({@link TestAccounts}).
  */
 final class MoneyTests {
 
@@ -34,6 +36,12 @@ final class MoneyTests {
         tests.test("money_sale_pays_half_only_while_the_challenge_is_played", 1, MoneyTests::salePaysHalf);
         tests.test("money_another_challenge_leaves_the_balance_alone", 1, MoneyTests::anotherChallenge);
         tests.test("money_set_aside_survives_a_save_and_load", 1, MoneyTests::survivesASaveAndLoad);
+        tests.test("money_reset_keeps_its_permit", 1, MoneyTests::resetKeepsPermit);
+        tests.test("money_win_keeps_its_permit", 1, MoneyTests::winKeepsPermit);
+        tests.test("money_stop_takes_its_permit_back", 1, MoneyTests::stopTakesPermitBack);
+        tests.test("money_stop_keeps_the_teams_other_permits", 1, MoneyTests::stopKeepsOtherPermits);
+        tests.test("money_start_again_gives_its_permit_back", 1, MoneyTests::startAgainGivesPermitBack);
+        tests.test("money_new_account_regranted_only_while_the_chain_is_unlocked", 1, MoneyTests::regrantOnlyWhileUnlocked);
     }
 
     private static void startSetsAside(GameTestHelper helper) {
@@ -53,14 +61,85 @@ final class MoneyTests {
         helper.succeed();
     }
 
-    /** What lets a recreated party be given {@link MoneyHandicap#PERMIT} again (ADR 0007). */
+    /** A stop forgets no start, as any challenge's; only the chain, and money's Permit with it, is locked again (ADR 0013). */
     private static void staysStarted(GameTestHelper helper) {
         UUID team = account(helper, 0);
         helper.assertFalse(state(helper).started(team, Handicap.MONEY), "the money challenge counted as started before it was");
         Challenges.begin(server(helper), team, Handicap.MONEY);
         Challenges.end(server(helper), team);
-        // A stop costs money only the attempt (ADR 0013).
         helper.assertTrue(state(helper).started(team, Handicap.MONEY), "the money challenge's start was forgotten after its end");
+        helper.assertFalse(state(helper).unlocked(team, Handicap.MONEY), "the money chain stayed unlocked past its stop");
+        helper.succeed();
+    }
+
+    private static void resetKeepsPermit(GameTestHelper helper) {
+        UUID team = account(helper, 0);
+        Challenges.begin(server(helper), team, Handicap.MONEY);
+        helper.assertTrue(Challenges.reset(server(helper), team), "the money challenge didn't reset");
+        helper.assertTrue(TestAccounts.holds(team, MoneyHandicap.PERMIT), "a reset took " + MoneyHandicap.PERMIT);
+        helper.succeed();
+    }
+
+    private static void winKeepsPermit(GameTestHelper helper) {
+        UUID team = account(helper, 0);
+        Challenges.begin(server(helper), team, Handicap.MONEY);
+        helper.assertTrue(Challenges.win(server(helper), team), "the money challenge wasn't won");
+        helper.assertTrue(TestAccounts.holds(team, MoneyHandicap.PERMIT), "a win took " + MoneyHandicap.PERMIT);
+        helper.assertTrue(state(helper).unlocked(team, Handicap.MONEY), "a win locked the money chain");
+        helper.succeed();
+    }
+
+    /** By the lab's vote ({@link Challenges#stop}) and by an operator's {@code /cod challenge end} ({@link Challenges#end}) alike. */
+    private static void stopTakesPermitBack(GameTestHelper helper) {
+        UUID team = account(helper, 0);
+        Challenges.begin(server(helper), team, Handicap.MONEY);
+        Challenges.reset(server(helper), team);
+        helper.assertTrue(Challenges.stop(server(helper), team), "the money challenge didn't stop");
+        helper.assertFalse(TestAccounts.holds(team, MoneyHandicap.PERMIT), "the team kept " + MoneyHandicap.PERMIT + " past the stop");
+        Challenges.begin(server(helper), team, Handicap.MONEY);
+        helper.assertTrue(Challenges.end(server(helper), team), "the money challenge didn't end");
+        helper.assertFalse(TestAccounts.holds(team, MoneyHandicap.PERMIT), "the team kept " + MoneyHandicap.PERMIT + " past /cod challenge end");
+        helper.succeed();
+    }
+
+    /** A Permit the team holds on its own account, as one a later Shop might sell, is its own, as a built machine is. */
+    private static void stopKeepsOtherPermits(GameTestHelper helper) {
+        UUID team = account(helper, 0);
+        Challenges.begin(server(helper), team, Handicap.MONEY);
+        Accounts.get().grant(server(helper), team, "reborn_other");
+        Challenges.end(server(helper), team);
+        helper.assertTrue(TestAccounts.holds(team, "reborn_other"), "the stop took a Permit of the team's own");
+        helper.assertFalse(TestAccounts.holds(team, MoneyHandicap.PERMIT), "the team kept " + MoneyHandicap.PERMIT + " past the stop");
+        helper.succeed();
+    }
+
+    private static void startAgainGivesPermitBack(GameTestHelper helper) {
+        UUID team = account(helper, 0);
+        Challenges.begin(server(helper), team, Handicap.MONEY);
+        Challenges.end(server(helper), team);
+        helper.assertTrue(Challenges.begin(server(helper), team, Handicap.MONEY), "the money challenge didn't start again");
+        helper.assertTrue(TestAccounts.holds(team, MoneyHandicap.PERMIT), "starting again didn't give " + MoneyHandicap.PERMIT + " back");
+        helper.succeed();
+    }
+
+    /** A new Account, as a recreated party's, starts with no Permit: it is given money's again only while the chain is unlocked. */
+    private static void regrantOnlyWhileUnlocked(GameTestHelper helper) {
+        UUID team = account(helper, 0);
+        MoneyHandicap.regrant(server(helper), team);
+        helper.assertFalse(TestAccounts.holds(team, MoneyHandicap.PERMIT), "a team that never started money was given " + MoneyHandicap.PERMIT);
+        Challenges.begin(server(helper), team, Handicap.MONEY);
+        TestAccounts.open(team, 0);
+        MoneyHandicap.regrant(server(helper), team);
+        helper.assertTrue(TestAccounts.holds(team, MoneyHandicap.PERMIT), "a new Account wasn't given " + MoneyHandicap.PERMIT + " while money is played");
+        Challenges.end(server(helper), team);
+        TestAccounts.open(team, 0);
+        MoneyHandicap.regrant(server(helper), team);
+        helper.assertFalse(TestAccounts.holds(team, MoneyHandicap.PERMIT), "a new Account was given " + MoneyHandicap.PERMIT + " after a stop");
+        Challenges.begin(server(helper), team, Handicap.MONEY);
+        Challenges.win(server(helper), team);
+        TestAccounts.open(team, 0);
+        MoneyHandicap.regrant(server(helper), team);
+        helper.assertTrue(TestAccounts.holds(team, MoneyHandicap.PERMIT), "a new Account wasn't given " + MoneyHandicap.PERMIT + " once money is won");
         helper.succeed();
     }
 
