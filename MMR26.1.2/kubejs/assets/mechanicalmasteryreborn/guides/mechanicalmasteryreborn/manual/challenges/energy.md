@@ -34,7 +34,7 @@ Essence**.
 
 ## In the last stand
 
-In the [last chapter](../last_chapter.md), your team can take energy on again as a **spell** at the
+In the [last chapter](../last_chapter.md), your team can take the energy handicap on again as a **spell** at the
 [Hermetic Lab](../hermetic_lab.md), harder than the challenge: your generators give their output to the
 Hermetic Lab and to nothing else, and no FE moves between blocks on your island at all, so banked FE, FE drives
 and Electric Defences all stand still. The line is fed while generators within the Hermetic Lab's reach give it

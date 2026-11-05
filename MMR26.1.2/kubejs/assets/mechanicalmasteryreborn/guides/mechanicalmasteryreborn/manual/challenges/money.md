@@ -13,7 +13,7 @@ than made.
 
 ## The handicap
 
-When your team starts money, all the money it has is **set aside**, so the challenge is paid only with what you
+When your team starts the money challenge, all the money it has is **set aside**, so the challenge is paid only with what you
 earn under the handicap, and every sale to the Shop pays only a share of its price, by hand or by Seller. Buying
 costs what it always does. When the challenge ends, by a win or a stop, what was set aside comes back, with
 whatever you earned meanwhile. A reset sets aside what you earned so far as well.
@@ -22,7 +22,7 @@ The challenge can't start until your team has a Shop account, which comes a mome
 
 ## The Offers
 
-Starting money gives your team the challenge's **Permit**, which opens its Offers in the Shop. Your team keeps it
+Starting the money challenge gives your team its **Permit**, which opens the challenge's Offers in the Shop. Your team keeps it
 for good, through a win, a reset or a stop: money's chain is paid for, not built, so a stop locks nothing. The
 Offers it opens:
 
@@ -41,7 +41,7 @@ Fill the quota by selling what your factory makes and buying the Aureate Essence
 
 ## In the last stand
 
-In the [last chapter](../last_chapter.md), your team can take money on again as a **spell** at the
+In the [last chapter](../last_chapter.md), your team can take the money handicap on again as a **spell** at the
 [Hermetic Lab](../hermetic_lab.md), harder than the challenge: your savings are set aside, sales pay less than
 under the challenge, the Shop's prices rise, and the Hermetic Lab drains a steady amount from what you earn
 meanwhile to feed its money line, fed only while the drain can be paid.
