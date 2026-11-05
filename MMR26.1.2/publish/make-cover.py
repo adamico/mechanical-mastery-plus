@@ -16,16 +16,16 @@
 #   - above the title band, the four tier essences in a row, lowest first, scaled up nearest-neighbour,
 #     each glowing in its own colour;
 #   - the band, dark, ruled top and bottom in the accent, holding the suite's title turned around, as
-#     A Touch of Darkness's is: "MECHANICAL MASTERY" in Quantico caps, in the accent's
+#     A Touch of Darkness's is: "MECHANICAL MASTERY" in Barlow Condensed caps, in the accent's
 #     orange, then the suite's white pill holding "reborn". The icon stacks them;
 #   - beneath the band, the four Transmuted Essences with Nullessence and Quintessence, the last
 #     stand's two sides, paired in their middle.
 #
 # Its art is the companion mod's own textures only (mod/NOTICE), nothing of Mojang's. Its fonts are
-# found on the system, with fallbacks; none is committed. Quantico is a Google Font
-# (SIL OFL), installed by hand, its Bold for the title and its Regular for the pill; without it the
-# title falls back to Impact and the pill to Arial Black, which every run there draws the same, if
-# not as designed.
+# found on the system, with fallbacks; none is committed. Barlow Condensed and Barlow are Google Fonts
+# (SIL OFL), installed by hand, the first's Black for the title, as heavy as it comes so it stands
+# out, and the second's Bold for the pill; without them the title falls back to Impact and the pill to
+# Arial Black, which every run there draws the same, if not as designed.
 import math
 import os
 import random
@@ -50,12 +50,12 @@ TIERS = ['basic_mechanical_essence', 'regular_mechanical_essence', 'improved_mec
 TRANSMUTED = ['galvanic_essence', 'warding_essence', 'vital_essence', 'aureate_essence']
 LAST_STAND = ['nullessence', 'quintessence']
 TITLE, WORD = 'MECHANICAL MASTERY', 'reborn'
-FONTS = ['~/Library/Fonts/', '/Library/Fonts/', '~/.local/share/fonts/quantico/', '~/.local/share/fonts/',
-         '/usr/share/fonts/TTF/', '/usr/share/fonts/truetype/quantico/']
-TITLE_FONT = [d + 'Quantico-Bold.ttf' for d in FONTS] + [
+FONTS = ['~/Library/Fonts/', '/Library/Fonts/', '~/.local/share/fonts/barlow/', '~/.local/share/fonts/',
+         '/usr/share/fonts/TTF/', '/usr/share/fonts/truetype/barlow/']
+TITLE_FONT = [d + 'BarlowCondensed-Black.ttf' for d in FONTS] + [
     '/System/Library/Fonts/Supplemental/Impact.ttf', '/usr/share/fonts/TTF/impact.ttf',
     '~/.local/share/fonts/msfonts/impact.ttf', '/usr/share/fonts/noto/NotoSans-Black.ttf']
-WORD_FONT = [d + 'Quantico-Regular.ttf' for d in FONTS] + [
+WORD_FONT = [d + 'Barlow-Bold.ttf' for d in FONTS] + [
     '/System/Library/Fonts/Supplemental/Arial Black.ttf', '/usr/share/fonts/TTF/ariblk.ttf',
     '~/.local/share/fonts/msfonts/ariblk.ttf', '/usr/share/fonts/noto/NotoSans-Black.ttf']
 WORD_SCALE = 0.7  # the pill's word against the title

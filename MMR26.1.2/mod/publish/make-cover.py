@@ -14,14 +14,14 @@
 #   - a wall of the Recycler's casing, drive and vent textures, tiled nearest-neighbour as Beltworks'
 #     tiles its belts, in a fixed pattern so every run draws the same image, dimmed so the title reads;
 #   - the title band, dark, ruled top and bottom in the accent, holding the suite's title turned
-#     around, as A Touch of Darkness's is: "MECHANICAL MASTERY" in Quantico caps, in the accent's
+#     around, as A Touch of Darkness's is: "MECHANICAL MASTERY" in Barlow Condensed caps, in the accent's
 #     orange, then the suite's white pill holding "core". The icon stacks them.
 #
 # Its art is the mod's own textures only, Malcolm Riley's Recycler textures (NOTICE), nothing of
-# Mojang's. Its fonts are found on the system, with fallbacks; none is committed. Quantico is a Google
-# Font (SIL OFL), installed by hand, its Bold for the title and its Regular for the pill; without it
-# the title falls back to Impact and the pill to Arial Black, which every run there draws the same,
-# if not as designed.
+# Mojang's. Its fonts are found on the system, with fallbacks; none is committed. Barlow Condensed and
+# Barlow are Google Fonts (SIL OFL), installed by hand, the first's Black for the title, as heavy as
+# it comes so it stands out, and the second's Bold for the pill; without them the title falls back to
+# Impact and the pill to Arial Black, which every run there draws the same, if not as designed.
 import os
 
 from PIL import Image, ImageDraw, ImageFont
@@ -35,12 +35,12 @@ ACCENT = (255, 136, 32)  # orange, a machine's warning paint, apart from every e
 PILL = (240, 240, 236)
 PILL_TEXT = (24, 22, 30)
 TITLE, WORD = 'MECHANICAL MASTERY', 'core'
-FONTS = ['~/Library/Fonts/', '/Library/Fonts/', '~/.local/share/fonts/quantico/', '~/.local/share/fonts/',
-         '/usr/share/fonts/TTF/', '/usr/share/fonts/truetype/quantico/']
-TITLE_FONT = [d + 'Quantico-Bold.ttf' for d in FONTS] + [
+FONTS = ['~/Library/Fonts/', '/Library/Fonts/', '~/.local/share/fonts/barlow/', '~/.local/share/fonts/',
+         '/usr/share/fonts/TTF/', '/usr/share/fonts/truetype/barlow/']
+TITLE_FONT = [d + 'BarlowCondensed-Black.ttf' for d in FONTS] + [
     '/System/Library/Fonts/Supplemental/Impact.ttf', '/usr/share/fonts/TTF/impact.ttf',
     '~/.local/share/fonts/msfonts/impact.ttf', '/usr/share/fonts/noto/NotoSans-Black.ttf']
-WORD_FONT = [d + 'Quantico-Regular.ttf' for d in FONTS] + [
+WORD_FONT = [d + 'Barlow-Bold.ttf' for d in FONTS] + [
     '/System/Library/Fonts/Supplemental/Arial Black.ttf', '/usr/share/fonts/TTF/ariblk.ttf',
     '~/.local/share/fonts/msfonts/ariblk.ttf', '/usr/share/fonts/noto/NotoSans-Black.ttf']
 WORD_SCALE = 0.7  # the pill's word against the title
