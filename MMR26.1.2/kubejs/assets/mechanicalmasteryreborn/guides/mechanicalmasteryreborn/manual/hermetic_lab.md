@@ -37,10 +37,11 @@ counts, and what a line still holds when its spell ends is lost. The row says wh
 - **Life**: the hungriest [Diet](diet.md). Give a heart at the Hermetic Lab's menu, as a self-sacrifice: it becomes
   Essentia Vitae in the Hermetic Lab, more for each Rune of Self Sacrifice beside it. Only a member can give, never
   their last heart, and the Hermetic Lab holds only so much. Essentia Vitae can't be piped in.
-- **Protection**: an Assault at its hardest steps from the first wave, with explosions on and the refund as usual.
-  Its mobs drop **Null Shards** in place of Rift Shards, each stamped with the spell it fell in: put them into the
-  Hermetic Lab, which takes only the running spell's and voids any other. While no one of your team is home the
-  Assault waits, and its line counts for nothing while the spell runs on.
+- **Protection**: an Assault starting at its hardest waves, with explosions on and the refund as usual. Its mobs
+  drop no Rift Shards: they drop **Null Shards** instead, which belong to the spell they dropped in. Put them into
+  the Hermetic Lab while that spell runs, and they feed its protection line; shards left from an earlier spell are
+  worthless, and the Hermetic Lab voids them. While nobody of your team is home the Assault waits, and the line
+  feeds nothing, though the spell's time runs on.
 - **Money**: your savings are set aside, sales pay less than under the challenge, the Shop's prices rise, and the
   Hermetic Lab drains a steady amount from what your team earns meanwhile. The line is fed while the drain can be
   paid, and what was set aside comes back when the spell ends.

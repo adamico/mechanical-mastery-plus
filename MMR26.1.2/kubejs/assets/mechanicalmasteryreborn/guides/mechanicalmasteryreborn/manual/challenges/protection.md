@@ -76,7 +76,8 @@ what its mobs break is not refunded.
 ## In the last stand
 
 In the [last chapter](../last_chapter.md), your team can take protection on again as a **spell** at the
-[Hermetic Lab](../hermetic_lab.md): an Assault opens at once at its hardest steps, with explosions on and the
-refund as usual, and its mobs drop **Null Shards** in place of Rift Shards, each stamped with the spell it fell
-in. Put them into the Hermetic Lab to feed its protection line, during that spell only. A paused Assault, with
-nobody home, feeds nothing while the spell runs on.
+[Hermetic Lab](../hermetic_lab.md). An Assault opens at once, starting at its hardest waves, with explosions on
+and the refund as usual. Its mobs drop no Rift Shards: they drop **Null Shards** instead, which belong to the
+spell they dropped in. Put them into the Hermetic Lab while that spell runs, and they feed its protection line;
+once the spell ends they are worthless, and a later spell's Assault drops its own. While nobody of your team is
+home the Assault waits, and the line feeds nothing, though the spell's time runs on.
