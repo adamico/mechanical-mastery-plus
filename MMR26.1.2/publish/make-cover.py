@@ -19,8 +19,9 @@
 #     its top lighter than its sides; a Port takes its essence's colour;
 #   - on the cover and the card, the essences by kind, each scaled up nearest-neighbour and glowing in
 #     its colour: left of the island the four tiers in a diamond, lowest at the top; right of it the
-#     four Transmuted Essences in a diamond, holding in its middle Nullessence and Quintessence, the
-#     last stand's two sides, overlapping; the icon, too small for them, keeps the island alone;
+#     four Transmuted Essences in a diamond; and Nullessence and Quintessence, the last stand's two
+#     sides, larger, overlapping each other over the tree's leaves; the icon, too small for them, keeps
+#     the island alone;
 #   - the band across the island's earth, as the old logo's letters crossed it, dark but letting the
 #     island show through, ruled top and bottom in the accent, holding the suite's title turned
 #     around, as A Touch of Darkness's is: "MECHANICAL MASTERY" in Barlow Condensed caps, in the
@@ -52,14 +53,16 @@ GLOWS = {'nullessence': (255, 255, 255)}
 # the four tiers, lowest first
 TIERS = ['basic_mechanical_essence', 'regular_mechanical_essence', 'improved_mechanical_essence',
          'advanced_mechanical_essence']
-# the Transmuted Essences, whose diamond holds Nullessence and Quintessence in its middle, the two ways
-# to Quintessence, overlapping; those two are animated, and their first frames are drawn
+# the Transmuted Essences, and Nullessence and Quintessence, the last stand's two sides; those two are
+# animated, and their first frames are drawn
 TRANSMUTED = ['galvanic_essence', 'warding_essence', 'vital_essence', 'aureate_essence']
 LAST_STAND = ['nullessence', 'quintessence']
 # where the tier essences' diamond and the Transmuted Essences' stand, as fractions of the width and
 # height, and how far a diamond's points are from its middle, in essences
 LEFT, RIGHT, SPREAD = (0.14, 0.34), (0.86, 0.34), 1.5
-OVERLAP = 0.3  # how far Nullessence and Quintessence stand off the diamond's middle, in essences
+# where Nullessence and Quintessence stand, over the tree's leaves, how much larger than the others they
+# are drawn, and how far each stands off that middle, in their own size
+PAIR, PAIR_SCALE, OVERLAP = (0.5, 0.22), 2, 0.18
 ISLAND = 'config/skyblockbuilder/templates/islands/reborn.snbt'
 # each of the island's blocks as the (top, side) colour it is drawn in; a Port's is its essence's
 BLOCKS = {'stone': ((128, 128, 132),) * 2, 'dirt': ((134, 96, 66),) * 2,
@@ -221,9 +224,10 @@ def make(out, W, H, title_size, band_y, island_h, island_y, px=None, stacked=Fal
     img.alpha_composite(land, at)
     if px:
         essences(img, diamond(img, TIERS, LEFT, px), px)
-        mx, my, o = int(RIGHT[0] * W), int(RIGHT[1] * H), int(OVERLAP * px)
-        pair = [(LAST_STAND[0], mx - o, my - o), (LAST_STAND[1], mx + o, my + o)]
-        essences(img, diamond(img, TRANSMUTED, RIGHT, px) + pair, px)
+        essences(img, diamond(img, TRANSMUTED, RIGHT, px), px)
+        big = PAIR_SCALE * px
+        mx, my, o = int(PAIR[0] * W), int(PAIR[1] * H), int(OVERLAP * big)
+        essences(img, [(LAST_STAND[0], mx - o, my - o), (LAST_STAND[1], mx + o, my + o)], big)
 
     band = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     ImageDraw.Draw(band).rectangle([0, top, W, bottom], fill=BAND)
