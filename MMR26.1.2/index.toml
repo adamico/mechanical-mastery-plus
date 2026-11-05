@@ -337,244 +337,244 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/incubation/galvanic_essence.j
 hash = "05bb3a1ca2f3ca9daa8f4a1a3fecad089648c0bf97ed04a580448895a6bf0520"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/acacia_sapling.json"
-hash = "49a9e34631357667c20c5699c7e2d47a1f9b62eec9818b9bdbe6ec2e33ddfcec"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/aureate_essence.json"
-hash = "1897623f1e23d8caccf147fd20b30f23eb9a8c83d9c2cadd08bb8f7c8718ed7a"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/beetroot_seeds.json"
-hash = "31dfe1379639d6333262b577586625aae6e5458f9e3533b747f41944182cda8d"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/birch_sapling.json"
-hash = "50dd02f0588d476134a0f2e77eb417ed1a7ddec074fd1d65916120fcf8c37cd3"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/cactus.json"
-hash = "2971d6b9890602ffeb762c59f784f9f4671803e9472d20734e6eed1c85c069a1"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/carrot.json"
-hash = "c400640597504159eef2a01eb47d769eaecc672d3d4619ab4f07431b19969268"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/cherry_sapling.json"
-hash = "29b2448583d57bc188aa67e9c2d9b16706a65f00fcdcf0dc240bf91b5daf325a"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/chicken_spawn_egg.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/chicken_spawn_egg.json"
 hash = "27a5142d79936d19cbaf3cd6e2dac647a7ec6e2651e9a01248124a51d666c81c"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/chorus_flower.json"
-hash = "5136de8f333b08957877bbb97d19590a3ea8765c89d2bd258c74208c2eb2ebe7"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/coal.json"
-hash = "46e371ccd5bbe43bda72b65a1dd1ff64f0efcbb4d2c773bb7f7b08cb4bd3ec22"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/coal_ore_block.json"
-hash = "2f5e0d22ca16ce1c300e847688c6893e4474bc6e438646f52c9dc8f7f1897f71"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/copper_ore_block.json"
-hash = "1cbd7f6ab167339722ca5b62222a99eaa7eef2201ff7683799a4ebfd38f03705"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/cow_spawn_egg.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/cow_spawn_egg.json"
 hash = "282d0299ce869119a2406ef1a28df58891d6f9f75c43b552462ea72ce7e0bbf4"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/crude_oil.json"
-hash = "6ba6ff11073daa560b6be40f27a9b6a3e0b63f7d766e518aa09117700301ced2"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/dark_oak_sapling.json"
-hash = "28fedf01b259f9d1bcea05b6fe4132eb842d475943e04f028170f4c4a7b5bfa4"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/diamond_ore_block.json"
-hash = "7f728bb81c83d31e204b75f3808ce4a19d6c7196bc51a1f9a379a5a51053f8cc"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/dirt.json"
-hash = "d62818b57eaedcd924b9389cd907ddb8a05f6e1b4b29af056fd19810b08d64aa"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/glowstone_ore_block.json"
-hash = "8c3cfed92aebb47faca7972d2762f5eb2be0232a5fcbc29ca9bd658d3f39b051"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/gold_ore_block.json"
-hash = "dd96a80cd698baf6a0bba69bfcc182dd24f9d0caad0707b0f9d09bcc635f5c61"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/grass_block.json"
-hash = "6f1c42369ea754694e499df2b6f1f8e64f2c3380b08a3f856b51c99e4cd912be"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/home_gate_pearl.json"
-hash = "4edb1f5993895c8595fe9ec427f38f653dc25013fd15660993d6e66c341eee5f"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/iron_ore_block.json"
-hash = "95921b380fa76cab1d43fed0525ad870e63d6691cbc5eecbf735ecb860404fe6"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/jungle_sapling.json"
-hash = "5446dcc366a3611781796376b3d495c3234d9ecc21b34248d032aa023ae422c7"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/lapis_lazuli.json"
-hash = "2fbb2a08683198b6d7fffa5b62e0b99003fb950716a3069412208497e0cfff99"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/lava.json"
-hash = "635887ff4839abac0baf111924cd857091a48f1d3d0399e3d20a16dcf8effe7a"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/mangrove_propagule.json"
-hash = "aa3303f52a33099290e1270e81e42f08cc6c693c1bc4619730fa9e16ba8bb515"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/netherite_ore_block.json"
-hash = "a9f816fed7f4cf633bf9ccb9bb94546454abbf82bd5d17d27a1eb84dfa729145"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/oak_sapling.json"
-hash = "1bcf3a926257693bbb33c5b59c8c23a6d534968418c7980dfaab77accf45eba8"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/pale_oak_sapling.json"
-hash = "581906775dcfafc8437a1f295770be16ca60f65116dfd68feaa4eac930a7348a"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/pig_spawn_egg.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/pig_spawn_egg.json"
 hash = "66ce11c00db6d3a8809802b3df61faed5a269d6db64e4a57b94cb45f2db04b82"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/potato.json"
-hash = "56028fd7bf25e19884d554b7a8a138c885da30b6e1f941330c2e0e1eb5181d27"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/quartz_ore_block.json"
-hash = "a1863b645e198932fd519afc849cf9212e0665bd60eb74de885ec29e69893a39"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/raw_copper.json"
-hash = "d9d84c1bbe1a4a527975e6c83e16222fadf7da4c224aad9dc531f2a0abf0fbca"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/raw_gold.json"
-hash = "9946bf78548efd9386728f4207ce26b54678ab3ddd78a1f2907c29a9fcd0f38a"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/raw_iron.json"
-hash = "a8e94eadc29943e31638ae7b0c91e9d5779e3ce45301f5dac75b855ace8671b5"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/redstone.json"
-hash = "f9e740f8494c94d936ce4622735650848c2654bebc5f6106db80b5011ccf3bc1"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/redstone_ore_block.json"
-hash = "f5d95b4d0fb2a230f2c0a56d9a8dec0bc221011c015201f0a37a39836de8c500"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/sand.json"
-hash = "48c74798ae59fb2864e8e7b60222f1b8adb803a9902531c317c8c71469b55171"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/sheep_spawn_egg.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/sheep_spawn_egg.json"
 hash = "481fd3477fcac28398f0f4d978058d7a71cb514ba94599d29cc38c0a9928e9ad"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/soul_soil.json"
-hash = "67029a72257963fbc3df51a197cbc7802932f3960afa48563680009ef6b7c817"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/essence/aureate_essence.json"
+hash = "1897623f1e23d8caccf147fd20b30f23eb9a8c83d9c2cadd08bb8f7c8718ed7a"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/spruce_sapling.json"
-hash = "871693b6af0157f4738e864bf1ea28540c9bfdbaf5741de45cb59697d4855675"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/fluids/crude_oil.json"
+hash = "6ba6ff11073daa560b6be40f27a9b6a3e0b63f7d766e518aa09117700301ced2"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/stone_ore_block.json"
-hash = "33341f74eba7270e1f7e9fc14c8ce3c223c062b608a1742f64e7585c28dd5169"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/fluids/lava.json"
+hash = "635887ff4839abac0baf111924cd857091a48f1d3d0399e3d20a16dcf8effe7a"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/sugar_cane.json"
-hash = "0c166abc6b38cc27c5b6bb2e140277d39b5d05fa78845154ebf2be63b0248b63"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/sulfur_ore_block.json"
-hash = "d31b17112efb3996475dc8c35bd842a153aced6f5eefbc58837b83465599ce0c"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/uranium_ore_block.json"
-hash = "285f697012dbaf241f7e01e6331409e465358c28a40cc9059cd98fd3131d50e5"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/water.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/fluids/water.json"
 hash = "868729daa84b3fd422093a81404749552365d6b63e7711796a89f62dec4f78e0"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/wheat_seeds.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/dirt.json"
+hash = "d62818b57eaedcd924b9389cd907ddb8a05f6e1b4b29af056fd19810b08d64aa"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/grass_block.json"
+hash = "6f1c42369ea754694e499df2b6f1f8e64f2c3380b08a3f856b51c99e4cd912be"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/sand.json"
+hash = "48c74798ae59fb2864e8e7b60222f1b8adb803a9902531c317c8c71469b55171"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/soul_soil.json"
+hash = "67029a72257963fbc3df51a197cbc7802932f3960afa48563680009ef6b7c817"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/coal_ore_block.json"
+hash = "2f5e0d22ca16ce1c300e847688c6893e4474bc6e438646f52c9dc8f7f1897f71"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/copper_ore_block.json"
+hash = "1cbd7f6ab167339722ca5b62222a99eaa7eef2201ff7683799a4ebfd38f03705"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/diamond_ore_block.json"
+hash = "7f728bb81c83d31e204b75f3808ce4a19d6c7196bc51a1f9a379a5a51053f8cc"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/glowstone_ore_block.json"
+hash = "8c3cfed92aebb47faca7972d2762f5eb2be0232a5fcbc29ca9bd658d3f39b051"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/gold_ore_block.json"
+hash = "dd96a80cd698baf6a0bba69bfcc182dd24f9d0caad0707b0f9d09bcc635f5c61"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/iron_ore_block.json"
+hash = "95921b380fa76cab1d43fed0525ad870e63d6691cbc5eecbf735ecb860404fe6"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/netherite_ore_block.json"
+hash = "a9f816fed7f4cf633bf9ccb9bb94546454abbf82bd5d17d27a1eb84dfa729145"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/quartz_ore_block.json"
+hash = "a1863b645e198932fd519afc849cf9212e0665bd60eb74de885ec29e69893a39"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/redstone_ore_block.json"
+hash = "f5d95b4d0fb2a230f2c0a56d9a8dec0bc221011c015201f0a37a39836de8c500"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/stone_ore_block.json"
+hash = "33341f74eba7270e1f7e9fc14c8ce3c223c062b608a1742f64e7585c28dd5169"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/sulfur_ore_block.json"
+hash = "d31b17112efb3996475dc8c35bd842a153aced6f5eefbc58837b83465599ce0c"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/uranium_ore_block.json"
+hash = "285f697012dbaf241f7e01e6331409e465358c28a40cc9059cd98fd3131d50e5"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/plants/acacia_sapling.json"
+hash = "49a9e34631357667c20c5699c7e2d47a1f9b62eec9818b9bdbe6ec2e33ddfcec"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/plants/birch_sapling.json"
+hash = "50dd02f0588d476134a0f2e77eb417ed1a7ddec074fd1d65916120fcf8c37cd3"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/plants/cactus.json"
+hash = "2971d6b9890602ffeb762c59f784f9f4671803e9472d20734e6eed1c85c069a1"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/plants/cherry_sapling.json"
+hash = "29b2448583d57bc188aa67e9c2d9b16706a65f00fcdcf0dc240bf91b5daf325a"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/plants/chorus_flower.json"
+hash = "5136de8f333b08957877bbb97d19590a3ea8765c89d2bd258c74208c2eb2ebe7"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/plants/dark_oak_sapling.json"
+hash = "28fedf01b259f9d1bcea05b6fe4132eb842d475943e04f028170f4c4a7b5bfa4"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/plants/jungle_sapling.json"
+hash = "5446dcc366a3611781796376b3d495c3234d9ecc21b34248d032aa023ae422c7"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/plants/mangrove_propagule.json"
+hash = "aa3303f52a33099290e1270e81e42f08cc6c693c1bc4619730fa9e16ba8bb515"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/plants/oak_sapling.json"
+hash = "1bcf3a926257693bbb33c5b59c8c23a6d534968418c7980dfaab77accf45eba8"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/plants/pale_oak_sapling.json"
+hash = "581906775dcfafc8437a1f295770be16ca60f65116dfd68feaa4eac930a7348a"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/plants/spruce_sapling.json"
+hash = "871693b6af0157f4738e864bf1ea28540c9bfdbaf5741de45cb59697d4855675"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/plants/sugar_cane.json"
+hash = "0c166abc6b38cc27c5b6bb2e140277d39b5d05fa78845154ebf2be63b0248b63"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/protection/home_gate_pearl.json"
+hash = "4edb1f5993895c8595fe9ec427f38f653dc25013fd15660993d6e66c341eee5f"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/raw/coal.json"
+hash = "46e371ccd5bbe43bda72b65a1dd1ff64f0efcbb4d2c773bb7f7b08cb4bd3ec22"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/raw/lapis_lazuli.json"
+hash = "2fbb2a08683198b6d7fffa5b62e0b99003fb950716a3069412208497e0cfff99"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/raw/raw_copper.json"
+hash = "d9d84c1bbe1a4a527975e6c83e16222fadf7da4c224aad9dc531f2a0abf0fbca"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/raw/raw_gold.json"
+hash = "9946bf78548efd9386728f4207ce26b54678ab3ddd78a1f2907c29a9fcd0f38a"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/raw/raw_iron.json"
+hash = "a8e94eadc29943e31638ae7b0c91e9d5779e3ce45301f5dac75b855ace8671b5"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/raw/redstone.json"
+hash = "f9e740f8494c94d936ce4622735650848c2654bebc5f6106db80b5011ccf3bc1"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/seeds/beetroot_seeds.json"
+hash = "31dfe1379639d6333262b577586625aae6e5458f9e3533b747f41944182cda8d"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/seeds/carrot.json"
+hash = "c400640597504159eef2a01eb47d769eaecc672d3d4619ab4f07431b19969268"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/seeds/potato.json"
+hash = "56028fd7bf25e19884d554b7a8a138c885da30b6e1f941330c2e0e1eb5181d27"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/seeds/wheat_seeds.json"
 hash = "6b433ed4f65126a4a4b8edaf3f48531684550ca22fbce1e0bfef18a80aa42f3b"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/copper_block.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/blocks/copper_block.json"
 hash = "ad6d5a5d2ac2b3eb2e9d9f92d23846eca33a718519ceb166c50b496ee99e1a21"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/dried_kelp_block.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/blocks/dried_kelp_block.json"
 hash = "ee0baa985f6278a48d922faa2cde80ae305723cc842d8ea441cb14668c169be7"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/essentia_vitae.json"
-hash = "a29ac802b1393ee96ce1d2c4ec43c2a3bf308e8224ddc233372b0c161d912028"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/galvanic_essence.json"
-hash = "167c1b2add94724c43b17b00dfef273daeff944b2a9e909424115dc6453975c4"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/gold_block.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/blocks/gold_block.json"
 hash = "b3c24872e25fcf85c3c51d9cc696cb63519d0c1e2262b130cdc16a40d9b288d0"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/hay_block.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/blocks/hay_block.json"
 hash = "0c1b6a0c2804a471c95a51a2a8bf9b01973bc1bcbeb8b2851282a47ba4396599"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/iron_block.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/blocks/iron_block.json"
 hash = "9d80024c21292687dc40fd9c0126efaeadcbf493a74f92273cf2a4339dbba2c9"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/lava.json"
-hash = "b45bde2419d3be347c124df2c90b3b73948dfa89bf8311dd591686e76243a8af"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/essence/galvanic_essence.json"
+hash = "167c1b2add94724c43b17b00dfef273daeff944b2a9e909424115dc6453975c4"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/liquified_experience.json"
-hash = "6b432d790f1c2eb4a03bf0c7187cca8ed2a17026886bca2583e2847de86c0694"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/sal_ammoniac.json"
-hash = "31950bab46db9464ea3fbbb28bae3acd1e637fe02500398f9014c2520c628c9e"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/superheated_steam.json"
-hash = "b8e971ab2c6fe4267a5b83fe6d2ba18dc38061003f6874ae48db6c41ff108c2e"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/vital_essence.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/essence/vital_essence.json"
 hash = "38c9ac5a73b3d50dba3099f0aac8885ba0ed643102e5119edf43b190843e87e6"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/warding_essence.json"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/essence/warding_essence.json"
 hash = "c04156465fab3e460a087d3372a201230547981a088554157cd629c924c6b5a4"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/fluids/essentia_vitae.json"
+hash = "a29ac802b1393ee96ce1d2c4ec43c2a3bf308e8224ddc233372b0c161d912028"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/fluids/lava.json"
+hash = "b45bde2419d3be347c124df2c90b3b73948dfa89bf8311dd591686e76243a8af"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/fluids/liquified_experience.json"
+hash = "6b432d790f1c2eb4a03bf0c7187cca8ed2a17026886bca2583e2847de86c0694"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/fluids/sal_ammoniac.json"
+hash = "31950bab46db9464ea3fbbb28bae3acd1e637fe02500398f9014c2520c628c9e"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/fluids/superheated_steam.json"
+hash = "b8e971ab2c6fe4267a5b83fe6d2ba18dc38061003f6874ae48db6c41ff108c2e"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/tags/item/chain_machines/energy.json"
