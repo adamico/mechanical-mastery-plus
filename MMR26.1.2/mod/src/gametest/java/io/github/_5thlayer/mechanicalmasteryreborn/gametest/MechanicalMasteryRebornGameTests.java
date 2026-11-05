@@ -104,9 +104,11 @@ public final class MechanicalMasteryRebornGameTests {
         AssaultAbsenceTests.register(tests);
         AssaultExplosionsTests.register(tests);
         RefundTests.register(tests);
-        // The protection Chain on a real Assembler, in the suiteGameTestServer run alone, which loads Craftworks (#252).
+        // The protection Chain and the End Portal Frame on a real Assembler, in the suiteGameTestServer run alone, which
+        // loads Craftworks (#252, #265).
         if (ModList.get().isLoaded("craftworks")) {
             WardingChainTests.register(tests);
+            LastChapterFrameTests.register(tests);
         }
         // Each test that records a decompose claims a team of its own.
         Teams.use(new TestTeams(Teams.installed()));

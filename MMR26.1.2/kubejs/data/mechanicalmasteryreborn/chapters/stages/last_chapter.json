@@ -1,0 +1,13 @@
+{
+  "restrictions": {
+    "preventPickup": false,
+    "dropFromInventory": false,
+    "preventCraft": true,
+    "hideInJei": false,
+    "preventTransfer": false,
+    "preventTravel": false
+  },
+  "recipes": [
+    "mechanicalmasteryreborn:assembling/end_portal_frame"
+  ]
+}
