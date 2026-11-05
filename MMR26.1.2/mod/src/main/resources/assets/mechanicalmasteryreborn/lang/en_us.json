@@ -46,6 +46,7 @@
   "config.jade.plugin_mechanicalmasteryreborn.cod": "C.O.D.",
   "config.jade.plugin_mechanicalmasteryreborn.drive": "Recycler drive",
   "config.jade.plugin_mechanicalmasteryreborn.generator": "Generator stopped by the energy handicap",
+  "config.jade.plugin_mechanicalmasteryreborn.quintessence_rung": "Mutation Chamber waiting for the last stand",
   "config.jade.plugin_mechanicalmasteryreborn.recycler": "Recycler",
   "container.mechanicalmasteryreborn.cod": "C.O.D.",
   "container.mechanicalmasteryreborn.lab": "Lab",

@@ -18,12 +18,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * A Mutation Chamber climbs no Quartessence into Quintessence until its island's team has started its last stand (#262):
  * each upgrade asks {@link QuintessenceRung#lockedAt} first and while locked skips, spending nothing, as when it holds too
- * few. Voidworks has no hook of its own, and the mod compiles against no suite mod, so this names only NeoForge's types.
+ * few, and Jade asks it the same ({@link QuintessenceRung.Chamber}). Voidworks has no hook of its own, and the mod
+ * compiles against no suite mod, so this names only NeoForge's types.
  * {@link Pseudo}, so without Voidworks, whose class it targets by name, it never applies.
  */
 @Pseudo
 @Mixin(targets = "io.github._5thlayer.voidworks.mutation.MutationChamberBlockEntity")
-public abstract class MutationChamberBlockEntityMixin {
+public abstract class MutationChamberBlockEntityMixin implements QuintessenceRung.Chamber {
 
     /** Voidworks' {@code MutationItems.INPUT}: the slot of what waits to upgrade. */
     private static final int INPUT = 0;
@@ -34,9 +35,15 @@ public abstract class MutationChamberBlockEntityMixin {
 
     @Inject(method = "upgrade", at = @At("HEAD"), cancellable = true)
     private void mechanicalmasteryreborn$waitForTheLastStand(ServerLevel level, CallbackInfo callback) {
-        BlockEntity chamber = (BlockEntity) (Object) this;
-        if (QuintessenceRung.lockedAt(level, chamber.getBlockPos(), inventory.getResource(INPUT).getItem())) {
+        if (mechanicalmasteryreborn$waitsForTheLastStand()) {
             callback.cancel();
         }
+    }
+
+    @Override
+    public boolean mechanicalmasteryreborn$waitsForTheLastStand() {
+        BlockEntity chamber = (BlockEntity) (Object) this;
+        return chamber.getLevel() != null
+                && QuintessenceRung.lockedAt(chamber.getLevel(), chamber.getBlockPos(), inventory.getResource(INPUT).getItem());
     }
 }

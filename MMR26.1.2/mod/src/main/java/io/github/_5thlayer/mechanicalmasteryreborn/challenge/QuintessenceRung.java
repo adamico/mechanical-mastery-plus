@@ -5,7 +5,6 @@ package io.github._5thlayer.mechanicalmasteryreborn.challenge;
 
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
-import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -20,11 +19,18 @@ import net.minecraft.world.level.Level;
  */
 public final class QuintessenceRung {
 
+    /** A Mutation Chamber, as Voidworks' mixin makes it, which says whether it waits, as Jade shows. */
+    public interface Chamber {
+
+        /** Whether it holds a Quartessence it won't climb until its island's team has started its last stand. */
+        boolean mechanicalmasteryreborn$waitsForTheLastStand();
+    }
+
     private QuintessenceRung() {
     }
 
     /** Whether {@code item} is the Quartessence, the Rung's bottom, which only a Mutation Chamber climbs. */
-    public static boolean climbs(Item item) {
+    public static boolean isQuartessence(Item item) {
         return item == Essences.item(Essence.QUARTESSENCE);
     }
 
@@ -33,7 +39,7 @@ public final class QuintessenceRung {
      * hasn't started its last stand. Server-side only: anywhere else, never.
      */
     public static boolean lockedAt(Level level, BlockPos pos, Item held) {
-        return climbs(held) && level instanceof ServerLevel server
-                && TeamState.get(server.getServer()).lastStand(Teams.at(server, pos)).isEmpty();
+        return isQuartessence(held) && level instanceof ServerLevel server
+                && !LastStands.started(server.getServer(), Teams.at(server, pos));
     }
 }

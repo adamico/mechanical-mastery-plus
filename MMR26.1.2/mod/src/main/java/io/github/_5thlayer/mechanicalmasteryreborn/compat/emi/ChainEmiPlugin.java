@@ -57,7 +57,7 @@ public final class ChainEmiPlugin implements EmiPlugin {
     @Override
     public void register(EmiRegistry registry) {
         registry.addRecipeDecorator(ChainEmiPlugin::decorate);
-        registry.removeRecipes(recipe -> recipe.getCategory().getId().getPath().equals(CRUCIBLE) && climbsQuartessence(recipe));
+        registry.removeRecipes(recipe -> climbsQuartessence(recipe, CRUCIBLE));
     }
 
     private static void decorate(EmiRecipe recipe, WidgetHolder widgets) {
@@ -68,15 +68,15 @@ public final class ChainEmiPlugin implements EmiPlugin {
         } else if (recipe.getId() != null && ChainMachines.Table.received().lastChapter().contains(recipe.getId())) {
             widgets.add(new Mark(() -> ChainMachines.Table.received().lastChapterLocked(), LAST_CHAPTER, widgets.getWidth()));
         } else if (recipe.getId() != null && ChainMachines.Table.received().lastStand().contains(recipe.getId())
-                || recipe.getCategory().getId().getPath().equals(CHAMBER) && climbsQuartessence(recipe)) {
+                || climbsQuartessence(recipe, CHAMBER)) {
             widgets.add(new Mark(() -> ChainMachines.Table.received().lastStandLocked(), LAST_STAND, widgets.getWidth()));
         }
     }
 
-    /** Whether {@code recipe} takes a Quartessence, as Quintessence's Rung does. */
-    private static boolean climbsQuartessence(EmiRecipe recipe) {
-        return recipe.getInputs().stream().flatMap(input -> input.getEmiStacks().stream())
-                .anyMatch(stack -> !stack.getItemStack().isEmpty() && QuintessenceRung.climbs(stack.getItemStack().getItem()));
+    /** Whether {@code recipe} is Quintessence's Rung in the category whose path is {@code category}: it takes a Quartessence. */
+    private static boolean climbsQuartessence(EmiRecipe recipe, String category) {
+        return recipe.getCategory().getId().getPath().equals(category) && recipe.getInputs().stream().flatMap(input -> input.getEmiStacks().stream())
+                .anyMatch(stack -> !stack.getItemStack().isEmpty() && QuintessenceRung.isQuartessence(stack.getItemStack().getItem()));
     }
 
     /** The chain whose challenge {@code recipe} waits for, locked or not: the team's progress is asked as it draws. */

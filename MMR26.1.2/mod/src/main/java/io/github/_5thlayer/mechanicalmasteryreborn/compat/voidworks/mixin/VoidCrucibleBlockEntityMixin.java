@@ -25,6 +25,6 @@ public abstract class VoidCrucibleBlockEntityMixin {
     @ModifyArg(method = "<init>", index = 1, at = @At(value = "INVOKE",
             target = "Lio/github/_5thlayer/voidworks/mutation/MutationItems;<init>(ILjava/util/function/Predicate;Ljava/lang/Runnable;)V"))
     private static Predicate<ItemResource> mechanicalmasteryreborn$refuseQuartessence(Predicate<ItemResource> accepts) {
-        return resource -> accepts.test(resource) && !QuintessenceRung.climbs(resource.getItem());
+        return resource -> accepts.test(resource) && !QuintessenceRung.isQuartessence(resource.getItem());
     }
 }
