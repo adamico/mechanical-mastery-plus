@@ -106,9 +106,9 @@ final class MoneyTests {
     private static void stopKeepsBoughtPermits(GameTestHelper helper) {
         UUID team = account(helper, 0);
         Challenges.begin(server(helper), team, Handicap.MONEY);
-        Accounts.get().grant(server(helper), team, "reborn_ore_buy");
+        Accounts.get().grant(server(helper), team, "reborn_essence_sell");
         Challenges.end(server(helper), team);
-        helper.assertTrue(TestAccounts.holds(team, "reborn_ore_buy"), "the stop took the Ore Buy Permit the team bought");
+        helper.assertTrue(TestAccounts.holds(team, "reborn_essence_sell"), "the stop took the Essence Sell Permit the team bought");
         helper.assertFalse(TestAccounts.holds(team, MoneyHandicap.PERMIT), "the team kept " + MoneyHandicap.PERMIT + " past the stop");
         helper.succeed();
     }
