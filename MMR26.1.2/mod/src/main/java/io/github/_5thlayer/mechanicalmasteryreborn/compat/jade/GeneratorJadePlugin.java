@@ -17,9 +17,9 @@ import snownee.jade.api.IWailaPlugin;
 import snownee.jade.api.WailaPlugin;
 
 /**
- * Says on a generator that the energy handicap stops it, while its team plays the energy challenge (#202). Only the
- * server knows which challenge a team plays, so it sends the line's one fact, and nothing for any other block. Jade
- * finds this by its annotation and loads it only when Jade is installed.
+ * Says on a generator that the energy handicap stops it, while its team plays the energy challenge (#202) or bears the
+ * energy spell (#294). Only the server knows which handicap a team bears, so it sends the line's one fact, and nothing
+ * for any other block. Jade finds this by its annotation and loads it only when Jade is installed.
  */
 @WailaPlugin
 public final class GeneratorJadePlugin implements IWailaPlugin {

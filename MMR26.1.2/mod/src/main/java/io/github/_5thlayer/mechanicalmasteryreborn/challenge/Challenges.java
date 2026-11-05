@@ -215,7 +215,8 @@ public final class Challenges {
 
     /**
      * Resets the challenge {@code team} plays, as {@link TeamState#resetChallenge} does at the current game time, and its
-     * handicap with it, drops every ask to stop it, and says whether it played one.
+     * handicap with it, drops every ask to stop it, and says whether it played one. Protection's Assault is removed and a
+     * new one sent from wave 1, as though the challenge had just begun (#294).
      */
     public static boolean reset(MinecraftServer server, UUID team) {
         TeamState state = TeamState.get(server);
@@ -228,6 +229,7 @@ public final class Challenges {
         }
         if (state.plays(team, Handicap.PROTECTION)) {
             Assault.end(server, team);
+            Assault.start(server, team);
         }
         if (state.plays(team, Handicap.LIFE)) {
             LifeHandicap.forget(server, team);

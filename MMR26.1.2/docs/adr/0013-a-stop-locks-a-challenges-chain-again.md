@@ -8,7 +8,7 @@ A chain that stayed unlocked past a stop would let a team start each challenge, 
 
 - **No stop.** A bad pick would hold a team in an endless reset loop against a tier it can't beat, though the challenges are meant to be played in any order.
 - **A wait or a faster C.O.D. as a stop's cost, the chain kept.** Either only slows down unlocking every chain ahead, and a team that has won a few challenges has little left to charge.
-- **A stop at any time.** With the chain locked again an early stop gains nothing, but in protection a team losing a wave could stop and start again to get wave 1 back. After a reset the Assault is already gone, so only then is there nothing left to escape.
+- **A stop at any time.** With the chain locked again an early stop gains nothing, but in protection a team losing a wave could stop and start again to get wave 1 back. A reset already sends a new Assault from wave 1, so only after one is there nothing left to escape.
 - **The owner's word, or every member's vote with a timeout for the absent.** Teams have no owner, and a vote of every member would wait on players who never log in again.
 
 ## Consequences

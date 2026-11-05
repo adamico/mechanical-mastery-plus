@@ -43,7 +43,7 @@ import net.minecraft.world.phys.Vec3;
  * The Assault's gates and bridges (#237, #239): starting the protection challenge builds a platform on each side of the
  * team's C.O.D. and a bridge to the first block toward it, and opens a gate on each ({@link #GATES}, an armor stand, since the
  * dev runs have no Gateways); a reset and an end remove the gate, what was built and the gate's mobs, but no Rift
- * Shard; a failed gate reopens at its wave; and only the playing team's island is sent one. C.O.D. notes where it stands on its first tick.
+ * Shard, and a reset sends a new Assault from wave 1 (#294); a failed gate reopens at its wave; and only the playing team's island is sent one. C.O.D. notes where it stands on its first tick.
  */
 final class AssaultTests {
 
@@ -77,7 +77,7 @@ final class AssaultTests {
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("assault_start_builds_a_platform_a_bridge_and_a_gate", 20, AssaultTests::builtOnStart);
-        tests.test("assault_reset_removes_it_and_leaves_the_rift_shards", 20, AssaultTests::removedOnReset);
+        tests.test("assault_reset_sends_a_new_one_from_wave_1_and_leaves_the_rift_shards", 20, AssaultTests::newOnReset);
         tests.test("assault_win_removes_it", 20, AssaultTests::removedOnWin);
         tests.test("assault_keeps_out_a_removed_gates_mob_that_loads_later", 20, AssaultTests::keepsOutLaterMobs);
         tests.test("assault_is_sent_at_its_island_only", 20, AssaultTests::itsIslandOnly);
@@ -108,14 +108,27 @@ final class AssaultTests {
         });
     }
 
-    private static void removedOnReset(GameTestHelper helper) {
+    /** A reset removes the Assault as an end does and sends a new one from wave 1, as though the challenge had just begun (#294). */
+    private static void newOnReset(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         helper.setBlock(COD, Cod.BLOCK.get());
         helper.runAfterDelay(TICKED, () -> {
             Challenges.begin(server(helper), team, Handicap.PROTECTION);
             Removal removal = Removal.of(helper, team);
+            helper.assertTrue(Assault.setWave(server(helper), team, 7), "the gate's wave wasn't set");
+            UUID gate = AssaultState.get(server(helper)).assault(team).orElseThrow().gates().getFirst();
             helper.assertTrue(Challenges.reset(server(helper), team), "the protection challenge didn't reset");
-            removal.expectRemoved(helper, "a reset");
+            removal.expectGone(helper, "a reset");
+            AssaultState state = AssaultState.get(server(helper));
+            helper.assertTrue(state.closed(gate), "the gate at wave 7 isn't kept out after a reset");
+            helper.assertTrue(state.assault(team).isPresent(), "no new Assault was sent after a reset");
+            AssaultState.Built sent = state.assault(team).get();
+            helper.assertValueEqual(sent.gates().size(), 1, "the gates the new Assault opened");
+            UUID opened = sent.gates().getFirst();
+            helper.assertFalse(opened.equals(removal.gate()) || opened.equals(gate), "the new Assault's gate is an old one");
+            helper.assertValueEqual(WAVES.get(opened), 0, "the waves behind the new Assault's gate");
+            helper.assertValueEqual(sent.wave(), 0, "the new Assault's wave");
+            expectStone(helper, helper.absolutePos(COD).offset(Assault.OFFSET, -1, 0), "the new Assault's platform");
             Challenges.end(server(helper), team);
             helper.succeed();
         });
@@ -290,16 +303,21 @@ final class AssaultTests {
         }
 
         void expectRemoved(GameTestHelper helper, String after) {
+            expectGone(helper, after);
+            for (BlockPos pos : built.blocks()) {
+                helper.assertTrue(helper.getLevel().getBlockState(pos).isAir(), "the Assault's block at " + pos + " is still there after " + after);
+            }
+            helper.assertTrue(AssaultState.get(server(helper)).assault(team).isEmpty(), "the team is still sent an Assault after " + after);
+        }
+
+        /** The gate kept out and closed, its mob gone and the Rift Shard left, as after any end; what was built may stand again. */
+        void expectGone(GameTestHelper helper, String after) {
             AssaultState state = AssaultState.get(server(helper));
             helper.assertTrue(state.closed(gate), "the gate isn't kept out after " + after);
             Entity open = helper.getLevel().getEntity(gate);
             helper.assertTrue(open == null || open.isRemoved(), "the gate is still open after " + after);
             helper.assertTrue(mob.isRemoved(), "the gate's mob is still around after " + after);
             helper.assertFalse(shard.isRemoved(), "a Rift Shard was taken by " + after);
-            for (BlockPos pos : built.blocks()) {
-                helper.assertTrue(helper.getLevel().getBlockState(pos).isAir(), "the Assault's block at " + pos + " is still there after " + after);
-            }
-            helper.assertTrue(state.assault(team).isEmpty(), "the team is still sent an Assault after " + after);
         }
     }
 

@@ -7,7 +7,7 @@ We could have done what #211 first read: more natural spawns on the island, attr
 ## Consequences
 
 - One gate is open at a time. Four at once, as #239 first built them, was too hard in play; a gate that moves at random keeps every side to be defended while the team fights one front.
-- The Assault ends on a win, a reset or a stop (ADR 0013): its gates, platforms, bridges and remaining mobs are removed, the team keeps its unused Rift Shards, and what its mobs broke is refunded at the lab (ADR 0015).
+- The Assault ends on a win, a reset or a stop (ADR 0013): its gates, platforms, bridges and remaining mobs are removed, the team keeps its unused Rift Shards, and what its mobs broke is refunded at the lab (ADR 0015). A reset then sends a new Assault from wave 1, as though the challenge had just begun.
 - Its mobs hunt the team's players, so its gates close while no member is on the island, and open again at the wave they had reached when one comes back. Inflation goes on.
 - Explosions damage the playing team's island, claimed or not: the companion mod turns on the team's FTB Chunks `allow_explosions` while the Assault runs, turns it back on if a player turns it off, and restores the team's own value when it ends. Every other claim protection stays.
 - A mob knocked off a bridge dies in the void with its drop.
