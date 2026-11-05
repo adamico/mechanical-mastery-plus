@@ -67,7 +67,7 @@ public final class LastStands {
         Component cost = Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand.started.subtitle", ServerConfig.lastStandMargin());
         int told = tell(server, team, Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand.started",
                 name.copy().withStyle(ChatFormatting.GOLD), cost).withStyle(ChatFormatting.GRAY),
-                name.copy().withStyle(ChatFormatting.GOLD), cost, SoundEvents.UI_TOAST_CHALLENGE_COMPLETE);
+                name.copy().withStyle(ChatFormatting.GOLD), cost, SoundEvents.RAID_HORN, Challenges.RAID_HORN_VOLUME);
         LOGGER.info("Team {} started its last stand; told {} of its players online", team, told);
         return true;
     }
@@ -108,13 +108,12 @@ public final class LastStands {
         Component title = Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand.won.title").withStyle(ChatFormatting.GOLD);
         Component subtitle = Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand.won.subtitle");
         int told = tell(server, team, Component.translatable(MechanicalMasteryReborn.MOD_ID + ".last_stand.won").withStyle(ChatFormatting.GRAY),
-                title, subtitle, SoundEvents.END_PORTAL_SPAWN);
+                title, subtitle, BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.END_PORTAL_SPAWN), 1.0F);
         LOGGER.info("Team {} shut C.O.D. down and won the pack; told {} of its players online", team, told);
     }
 
     /** Tells {@code team}'s players online, giving each its stages, and says how many it told. */
-    private static int tell(MinecraftServer server, UUID team, Component message, Component title, Component subtitle, SoundEvent sound) {
-        Holder<SoundEvent> holder = BuiltInRegistries.SOUND_EVENT.wrapAsHolder(sound);
+    private static int tell(MinecraftServer server, UUID team, Component message, Component title, Component subtitle, Holder<SoundEvent> holder, float volume) {
         int told = 0;
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (Teams.of(player).equals(team)) {
@@ -123,7 +122,7 @@ public final class LastStands {
                 player.sendSystemMessage(message);
                 player.connection.send(new ClientboundSetSubtitleTextPacket(subtitle));
                 player.connection.send(new ClientboundSetTitleTextPacket(title));
-                player.connection.send(new ClientboundSoundEntityPacket(holder, SoundSource.UI, player, 1.0F, 1.0F,
+                player.connection.send(new ClientboundSoundEntityPacket(holder, SoundSource.UI, player, volume, 1.0F,
                         player.getRandom().nextLong()));
             }
         }
