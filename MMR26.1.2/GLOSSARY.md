@@ -69,7 +69,7 @@ _Avoid_: new essence
 The final essence, made in the last chapter. Its Voidworks way assembles one of each Transmuted Essence into a Quartessence and climbs that, in a Mutation Chamber, by a steep Rung paid in motes from the Nether and the End; a second way, with no Voidworks, makes it from Nullessence only while the team bears handicaps it chooses, harder than in their challenges, and the faster the more it bears. Put into C.O.D. itself during its last stand, by hand or any automation, each one cancels a fixed amount of what C.O.D. makes, and only Quintessence moves the Lead.
 
 **Quartessence**:
-The four Transmuted Essences assembled into one, one of each, which a Mutation Chamber climbs into Quintessence. Its recipe and that Rung stay locked until the last stand starts; Voidworks itself never is.
+The four Transmuted Essences assembled into one, one of each, which a Mutation Chamber, never a Void Crucible, climbs into Quintessence. Its recipe and that Rung stay locked until the last stand starts; Voidworks itself never is.
 
 **Nullessence**:
 What C.O.D. makes in its last stand, the opposite of Quintessence. A team decomposes it on the Recycler into a mix drawn from all four tiers', which the four chains run on, or turns it into Quintessence by a second way of its own; whatever becomes of it, C.O.D. has made it, and it counts against the Lead.

@@ -19,8 +19,8 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 /**
  * Every obtainable item of the mod, in the suite's Works tab and no other (FactoryWorks ADR-0128): C.O.D.,
- * the lab and the four Ports, then the Mechanical and Transmuted Essences, then the protection Chain's Rift Shard, Ward Tallow bucket, Obsidian Flakes and Charged Rift, then the Recycler's parts, then the Defences. One listener, in the order the tab shows them, which
- * {@code CreativeTabTests} lists too. Quintessence, which no player can have yet, is in no tab.
+ * the lab and the four Ports, then every essence, then the protection Chain's Rift Shard, Ward Tallow bucket, Obsidian Flakes and Charged Rift, then the Recycler's parts, then the Defences. One listener, in the order the tab shows them, which
+ * {@code CreativeTabTests} lists too.
  */
 final class WorksTabContents {
 
@@ -37,9 +37,7 @@ final class WorksTabContents {
             event.accept(Port.ITEMS_BY_HANDICAP.get(handicap).get());
         }
         for (Essence essence : Essence.values()) {
-            if (essence.obtainable()) {
-                event.accept(Essences.item(essence));
-            }
+            event.accept(Essences.item(essence));
         }
         event.accept(RiftShards.ITEM.get());
         event.accept(WardTallow.BUCKET.get());

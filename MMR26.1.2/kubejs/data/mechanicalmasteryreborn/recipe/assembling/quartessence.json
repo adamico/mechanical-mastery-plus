@@ -1,0 +1,14 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting",
+  "ingredients": [
+    { "ingredient": "mechanicalmasteryreborn:galvanic_essence", "count": 1 },
+    { "ingredient": "mechanicalmasteryreborn:warding_essence", "count": 1 },
+    { "ingredient": "mechanicalmasteryreborn:vital_essence", "count": 1 },
+    { "ingredient": "mechanicalmasteryreborn:aureate_essence", "count": 1 }
+  ],
+  "results": [
+    { "id": "mechanicalmasteryreborn:quartessence", "count": 1 }
+  ],
+  "time": 100
+}

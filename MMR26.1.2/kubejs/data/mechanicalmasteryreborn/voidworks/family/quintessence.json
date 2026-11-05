@@ -1,0 +1,14 @@
+{
+  "rungs": [
+    {
+      "items": "#mechanicalmasteryreborn:rung/quintessence/quartessence"
+    },
+    {
+      "items": "#mechanicalmasteryreborn:rung/quintessence/quintessence",
+      "result": "mechanicalmasteryreborn:quintessence",
+      "count": 4,
+      "cost": 12800,
+      "chance": 0.5
+    }
+  ]
+}

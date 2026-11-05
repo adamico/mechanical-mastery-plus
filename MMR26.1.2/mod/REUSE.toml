@@ -27,7 +27,8 @@ SPDX-License-Identifier = "MIT"
 
 # Mechanical Mastery Plus's own art, by its maintainer, carried over from MMP1.19.2/ (NOTICE): the
 # four Mechanical Essences copied as they are, the Transmuted Essences and Quintessence
-# recoloured from the Advanced one, and Nullessence from Quintessence. C.O.D. and the Obsidian
+# recoloured from the Advanced one, Nullessence from Quintessence, and the Quartessence a quarter
+# of each Transmuted Essence's. C.O.D. and the Obsidian
 # Flakes have no texture of their own: their models draw vanilla's at runtime (libworks ADR 0012).
 [[annotations]]
 path = [

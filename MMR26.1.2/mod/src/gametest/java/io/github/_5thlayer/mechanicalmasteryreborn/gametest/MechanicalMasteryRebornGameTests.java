@@ -62,6 +62,9 @@ public final class MechanicalMasteryRebornGameTests {
         // Posted only when game tests are enabled, which a production game never is.
         modBus.addListener(MechanicalMasteryRebornGameTests::registerTests);
         GeneratorTests.registerCapabilities(modBus);
+        if (ModList.get().isLoaded("voidworks")) {
+            SuiteQuintessenceTests.registerCapabilities(modBus);
+        }
         TestYield.useFull();
     }
 
@@ -98,6 +101,7 @@ public final class MechanicalMasteryRebornGameTests {
         HomeGateTests.register(tests);
         LastChapterTests.register(tests);
         LastStandTests.register(tests);
+        QuintessenceTests.register(tests);
         ChainMachineTests.register(tests);
         StopTests.register(tests);
         AssaultTests.register(tests);
@@ -105,10 +109,13 @@ public final class MechanicalMasteryRebornGameTests {
         AssaultExplosionsTests.register(tests);
         RefundTests.register(tests);
         // The protection Chain and the End Portal Frame on a real Assembler, in the suiteGameTestServer run alone, which
-        // loads Craftworks (#252, #265).
+        // loads Craftworks (#252, #265), and the Quartessence's way to Quintessence there, which loads Voidworks too (#262).
         if (ModList.get().isLoaded("craftworks")) {
             WardingChainTests.register(tests);
             LastChapterFrameTests.register(tests);
+        }
+        if (ModList.get().isLoaded("voidworks")) {
+            SuiteQuintessenceTests.register(tests);
         }
         // Each test that records a decompose claims a team of its own.
         Teams.use(new TestTeams(Teams.installed()));
