@@ -18,7 +18,8 @@
 #   - the band, dark, ruled top and bottom in the accent, holding the suite's title turned around, as
 #     A Touch of Darkness's is: "MECHANICAL MASTERY" in Impact caps, in the accent's orange,
 #     then the suite's white pill holding "reborn". The icon stacks them;
-#   - beneath the band, the four Transmuted Essences with Quintessence in their middle.
+#   - beneath the band, the four Transmuted Essences with Nullessence and Quintessence, the last
+#     stand's two sides, paired in their middle.
 #
 # Its art is the companion mod's own textures only (mod/NOTICE), nothing of Mojang's. Its fonts are
 # found on the system, with fallbacks; none is committed.
@@ -35,14 +36,16 @@ BAND = (4, 4, 7, 235)
 ACCENT = (255, 136, 32)  # orange
 PILL = (240, 240, 236)
 PILL_TEXT = (24, 22, 30)
-# each essence glows in its texture's commonest colour
+# each essence glows in its texture's commonest colour, but Nullessence, near-black, glows white so it
+# stands out of the void
+GLOWS = {'nullessence': (255, 255, 255)}
 # the four tiers, lowest first
 TIERS = ['basic_mechanical_essence', 'regular_mechanical_essence', 'improved_mechanical_essence',
          'advanced_mechanical_essence']
-# the Transmuted Essences, two each side of Quintessence; Quintessence's texture is animated, and its
-# first frame is drawn
+# the Transmuted Essences, two each side of Nullessence and Quintessence; those two are animated, and
+# their first frames are drawn
 TRANSMUTED = ['galvanic_essence', 'warding_essence', 'vital_essence', 'aureate_essence']
-QUINTESSENCE = 'quintessence'
+LAST_STAND = ['nullessence', 'quintessence']
 TITLE, WORD = 'MECHANICAL MASTERY', 'reborn'
 IMPACT = ['/System/Library/Fonts/Supplemental/Impact.ttf', '/usr/share/fonts/TTF/impact.ttf',
           os.path.expanduser('~/.local/share/fonts/msfonts/impact.ttf'), '/usr/share/fonts/noto/NotoSans-Black.ttf']
@@ -72,14 +75,16 @@ def glow(rgb, r, peak=140):
 
 
 def essence(img, name, cx, cy, px):
-    g = glow(colour(name), int(px * 1.5))
+    g = glow(GLOWS.get(name) or colour(name), int(px * 1.5))
     img.alpha_composite(g, (cx - g.width // 2, cy - g.height // 2))
     s = texture(name).resize((px, px), Image.NEAREST)
     img.alpha_composite(s, (cx - px // 2, cy - px // 2))
 
 
 def row(img, items, cy, px, gap):
-    # items in a row centred on the width, px each with gap between them
+    # items in a row centred on the width, px each with gap between them, or less where the width
+    # holds no more
+    gap = min(gap, (img.width - len(items) * px) // (len(items) + 1))
     x0 = (img.width - len(items) * px - (len(items) - 1) * gap) // 2 + px // 2
     for i, name in enumerate(items):
         essence(img, name, x0 + i * (px + gap), cy, px)
@@ -121,7 +126,7 @@ def make(W, H, out, title_size, px, under_px, band_y, stacked=False):
 
     img = void(W, H)
     row(img, TIERS, top // 2, px, px // 2)
-    under = TRANSMUTED[:2] + [QUINTESSENCE] + TRANSMUTED[2:]
+    under = TRANSMUTED[:2] + LAST_STAND + TRANSMUTED[2:]
     row(img, under, (bottom + H) // 2, under_px, under_px * 2 // 3)
 
     band = Image.new('RGBA', (W, H), (0, 0, 0, 0))
