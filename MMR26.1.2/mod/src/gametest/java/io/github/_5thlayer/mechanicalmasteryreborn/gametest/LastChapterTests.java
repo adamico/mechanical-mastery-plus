@@ -4,15 +4,18 @@
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ArrivalPlatform;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastChapter;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
+import java.util.Set;
 import java.util.UUID;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.BlockUtil;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
@@ -30,6 +33,8 @@ final class LastChapterTests {
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("last_chapter_stage_given_with_the_fourth_win", 1, LastChapterTests::stageWithTheFourthWin);
+        tests.test("last_chapter_recipes_are_read_from_its_stage_file", 1, LastChapterTests::recipesFromTheStageFile);
+        tests.test("last_chapter_recipes_marked_locked_until_the_fourth_win", 1, LastChapterTests::markedUntilTheFourthWin);
         tests.test("last_chapter_nether_portal_forms_only_after_the_fourth_win", 1, LastChapterTests::portalAfterTheFourthWin);
         tests.test("last_chapter_nether_portal_never_forms_off_an_island", 1, LastChapterTests::noPortalOffAnIsland);
         tests.test("last_chapter_nether_portal_always_forms_in_the_nether", 1, LastChapterTests::portalInTheNether);
@@ -43,6 +48,26 @@ final class LastChapterTests {
         for (Handicap handicap : handicaps) {
             helper.assertTrue(state.blockTier(team, handicap), "the " + handicap.id() + " challenge wasn't noted won");
         }
+    }
+
+    /** What EMI marks as the last chapter's: every recipe its stage file names, the game-test pack's the eye of ender's. */
+    private static void recipesFromTheStageFile(GameTestHelper helper) {
+        helper.assertValueEqual(ChainMachines.lastChapterRecipes(helper.getLevel().getServer()),
+                Set.of(Identifier.withDefaultNamespace("ender_eye")), "the last chapter's stage file's recipes");
+        helper.succeed();
+    }
+
+    /** The table a team's player is sent marks the last chapter's recipes locked until the fourth win, and never after. */
+    private static void markedUntilTheFourthWin(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var server = helper.getLevel().getServer();
+        win(helper, team, Handicap.PROTECTION, Handicap.LIFE, Handicap.ENERGY);
+        var table = ChainMachines.table(server, team);
+        helper.assertTrue(table.lastChapterLocked(), "the last chapter's recipes unmarked after three wins");
+        helper.assertTrue(table.lastChapter().contains(Identifier.withDefaultNamespace("ender_eye")), "the table sent lacks the last chapter's recipe");
+        win(helper, team, Handicap.MONEY);
+        helper.assertFalse(ChainMachines.table(server, team).lastChapterLocked(), "the last chapter's recipes marked after the fourth win");
+        helper.succeed();
     }
 
     /** No member was online at the win: a player is given the stage as they log in or join the island. */

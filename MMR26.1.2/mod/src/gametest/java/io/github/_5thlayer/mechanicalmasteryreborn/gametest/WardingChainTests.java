@@ -58,7 +58,8 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
  * Essence from the Charged Rifts and Wireworks' plastic, each the pack's own recipe in {@code suite_pack/}. The
  * Assembler's steps run on a tier 1 Assembler, the lowest, with their inputs set in its slots and boxes and FE fed to
  * it until the craft is done; Flake on a Burner Harvester fed coal and slurry as a hopper and a pipe would. Only the
- * {@code suiteGameTestServer} run, which loads those mods, registers them.
+ * {@code suiteGameTestServer} run, which loads those mods, registers them. Its fixtures place and run an Assembler for
+ * any of the pack's assembling recipes, as {@link LastChapterFrameTests} does.
  */
 final class WardingChainTests {
 
@@ -70,13 +71,13 @@ final class WardingChainTests {
     }
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
-        tests.test("warding_render_makes_ward_tallow_from_steam", 40, WardingChainTests::render);
-        tests.test("warding_render_fills_a_bucket_with_ward_tallow", 40, WardingChainTests::renderFillsABucket);
-        tests.test("warding_flake_takes_obsidian_flakes_off_obsidian_with_magma_slurry", 40, WardingChainTests::flake);
-        tests.test("warding_charge_makes_a_charged_rift", 40, WardingChainTests::charge);
-        tests.test("warding_charge_drains_ward_tallow_from_a_bucket", 40, WardingChainTests::chargeDrainsABucket);
-        tests.test("warding_seal_makes_a_warding_essence", 40, WardingChainTests::seal);
-        tests.test("warding_a_charged_rift_recycles_from_its_recipe", 1, WardingChainTests::chargedRiftRecycles);
+        tests.test("suite_warding_render_makes_ward_tallow_from_steam", 40, WardingChainTests::render);
+        tests.test("suite_warding_render_fills_a_bucket_with_ward_tallow", 40, WardingChainTests::renderFillsABucket);
+        tests.test("suite_warding_flake_takes_obsidian_flakes_off_obsidian_with_magma_slurry", 40, WardingChainTests::flake);
+        tests.test("suite_warding_charge_makes_a_charged_rift", 40, WardingChainTests::charge);
+        tests.test("suite_warding_charge_drains_ward_tallow_from_a_bucket", 40, WardingChainTests::chargeDrainsABucket);
+        tests.test("suite_warding_seal_makes_a_warding_essence", 40, WardingChainTests::seal);
+        tests.test("suite_warding_a_charged_rift_recycles_from_its_recipe", 1, WardingChainTests::chargedRiftRecycles);
     }
 
     private static void render(GameTestHelper helper) {
@@ -213,7 +214,7 @@ final class WardingChainTests {
     // -- fixtures -------------------------------------------------------------------------------
 
     /** A tier 1 Assembler placed at {@link #ORIGIN} by a player's click, holding the pack's recipe {@code assembling/<path>}. */
-    private static AssemblerBlockEntity holding(GameTestHelper helper, String path) {
+    static AssemblerBlockEntity holding(GameTestHelper helper, String path) {
         FakePlayer player = new FakePlayer(helper.getLevel(), new GameProfile(UUID.randomUUID(), "warding_chain"));
         player.setGameMode(GameType.SURVIVAL);
         ItemStack stack = new ItemStack(Assemblers.item(AssemblerTier.ONE).get());
@@ -226,12 +227,12 @@ final class WardingChainTests {
         return assembler;
     }
 
-    private static void put(AssemblerBlockEntity assembler, int slot, Item item, int count) {
+    static void put(AssemblerBlockEntity assembler, int slot, Item item, int count) {
         assembler.inventory().set(slot, ItemResource.of(item), count);
     }
 
     /** Ticks the Assembler, fed FE, until {@code done}; how many ticks it took. */
-    private static int tickUntil(GameTestHelper helper, AssemblerBlockEntity assembler, BooleanSupplier done) {
+    static int tickUntil(GameTestHelper helper, AssemblerBlockEntity assembler, BooleanSupplier done) {
         var supply = new SimpleEnergyHandler(1_000_000, 1_000_000, 1_000_000, 1_000_000);
         var face = helper.getLevel().getCapability(Capabilities.Energy.BLOCK, helper.absolutePos(ORIGIN), Direction.UP);
         helper.assertTrue(face != null, "the Assembler takes no FE");
@@ -245,7 +246,7 @@ final class WardingChainTests {
         return ran;
     }
 
-    private static void expectOutput(GameTestHelper helper, AssemblerBlockEntity assembler, Item made, String step) {
+    static void expectOutput(GameTestHelper helper, AssemblerBlockEntity assembler, Item made, String step) {
         var output = assembler.inventory().getResource(AssemblerSlots.OUTPUT);
         int count = assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT);
         helper.assertTrue(output.getItem() == made && count == 1, step + " made " + count + " " + output.getItem() + ", not one " + made);

@@ -84,8 +84,8 @@ tasks.named('test') {
     inputs.dir('../kubejs/data').withPropertyName('packData').withPathSensitivity(PathSensitivity.RELATIVE)
 }
 
-// The protection Chain's game tests (#252) run its recipes on a real Assembler, so they need the suite mods the
-// Chain stands on: Craftworks' Assembler, Fieldworks' Harvester, magma slurry and tar, and Wireworks' steam and
+// The protection Chain's game tests (#252) and the End Portal Frame's (#265), all named suite_*, run the pack's
+// recipes on a real Assembler, so they need the suite mods the Chain stands on: Craftworks' Assembler, Fieldworks' Harvester, magma slurry and tar, and Wireworks' steam and
 // plastic, on Groundworks. They are
 // the pack's own jars, from CurseForge as mods/*.pw.toml name them, so a CI runner needs no build of the suite.
 // They run on a game test server of their own, suiteGameTestServer, with those mods and the pack's recipes for
@@ -120,7 +120,7 @@ neoForge {
             type = 'gameTestServer'
             sourceSet = sourceSets.suite
             gameDirectory = file('run/suitetest')
-            programArguments.addAll '--tests', 'mechanicalmasteryreborn:warding_*', '--report', suiteTestReport.absolutePath
+            programArguments.addAll '--tests', 'mechanicalmasteryreborn:suite_*', '--report', suiteTestReport.absolutePath
         }
     }
 

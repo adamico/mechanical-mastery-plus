@@ -5,6 +5,7 @@ package io.github._5thlayer.mechanicalmasteryreborn.compat.emi;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BooleanSupplier;
 
 import dev.emi.emi.api.EmiApi;
 import dev.emi.emi.api.EmiEntrypoint;
@@ -28,7 +29,8 @@ import net.minecraft.network.chat.Component;
  * Marks every recipe a team's locked chain keeps from running (ADR 0007, #246), naming the challenge that unlocks it:
  * each of a chain's own recipes, by its id in the {@link ChainMachines.Table} the server sent, and each recipe whose
  * category's workstations include a chain machine, Theurgy's pages that EMI shows through JEI's plugins among them.
- * The mark is asked at every frame, so it goes as soon as the team starts the challenge.
+ * It marks the last chapter's recipes too, such as the End Portal Frame's, until the team has won all four (ADR 0012,
+ * #265). The mark is asked at every frame, so it goes as soon as the team starts the challenge, or reaches the chapter.
  *
  * <p>EMI finds this by its annotation and loads it only when EMI is installed, as {@link RecyclerEmiPlugin}.
  */
@@ -37,6 +39,8 @@ public final class ChainEmiPlugin implements EmiPlugin {
 
     /** The mark, a warning sign in the corner of the recipe. */
     private static final Component MARK = Component.literal("⚠").withStyle(ChatFormatting.GOLD);
+    /** What the mark on a last chapter's recipe says. */
+    private static final Component LAST_CHAPTER = Component.translatable("mechanicalmasteryreborn.last_chapter.unlocked_by");
 
     @Override
     public void register(EmiRegistry registry) {
@@ -44,7 +48,13 @@ public final class ChainEmiPlugin implements EmiPlugin {
     }
 
     private static void decorate(EmiRecipe recipe, WidgetHolder widgets) {
-        chainOf(recipe).ifPresent(handicap -> widgets.add(new Mark(handicap, widgets.getWidth())));
+        var chain = chainOf(recipe);
+        if (chain.isPresent()) {
+            Handicap handicap = chain.get();
+            widgets.add(new Mark(() -> ChainMachines.Table.received().locked(handicap), ChainMachines.line(handicap), widgets.getWidth()));
+        } else if (recipe.getId() != null && ChainMachines.Table.received().lastChapter().contains(recipe.getId())) {
+            widgets.add(new Mark(() -> ChainMachines.Table.received().lastChapterLocked(), LAST_CHAPTER, widgets.getWidth()));
+        }
     }
 
     /** The chain whose challenge {@code recipe} waits for, locked or not: the team's progress is asked as it draws. */
@@ -70,21 +80,23 @@ public final class ChainEmiPlugin implements EmiPlugin {
         return Optional.empty();
     }
 
-    /** The mark on a recipe of {@code handicap}'s chain, drawn, with its tooltip, only while the team hasn't started it. */
+    /** The mark on a locked recipe, drawn, with its tooltip {@code line}, only while {@code locked} holds. */
     private static final class Mark extends Widget {
 
         private static final int SIZE = 9;
 
-        private final Handicap handicap;
+        private final BooleanSupplier locked;
+        private final Component line;
         private final Bounds bounds;
 
-        Mark(Handicap handicap, int width) {
-            this.handicap = handicap;
+        Mark(BooleanSupplier locked, Component line, int width) {
+            this.locked = locked;
+            this.line = line;
             this.bounds = new Bounds(width - SIZE, 0, SIZE, SIZE);
         }
 
         private boolean shown() {
-            return ChainMachines.Table.received().locked(handicap);
+            return locked.getAsBoolean();
         }
 
         @Override
@@ -104,7 +116,7 @@ public final class ChainEmiPlugin implements EmiPlugin {
             if (!shown()) {
                 return List.of();
             }
-            return List.of(ClientTooltipComponent.create(ChainMachines.line(handicap).copy()
+            return List.of(ClientTooltipComponent.create(line.copy()
                     .withStyle(ChatFormatting.GOLD).getVisualOrderText()));
         }
     }
