@@ -24,7 +24,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -183,13 +182,10 @@ public final class LabMenu extends AbstractContainerMenu {
         this.viewer = inventory.player instanceof ServerPlayer server ? server : null;
     }
 
-    /**
-     * Opens the lab at {@code pos} for {@code player} through its {@code provider}, telling the client whether it shows the
-     * last stand's row.
-     */
-    public static void open(Player player, MenuProvider provider, ServerLevel level, BlockPos pos) {
+    /** Opens the lab at {@code pos} for {@code player}, telling the client whether it shows the last stand's row. */
+    public static void open(Player player, ServerLevel level, BlockPos pos) {
         boolean shows = phase(level.getServer(), Teams.at(level, pos)) != LastStandPhase.LOCKED;
-        player.openMenu(provider, buffer -> buffer.writeBoolean(shows));
+        player.openMenu(level.getBlockState(pos).getMenuProvider(level, pos), buffer -> buffer.writeBoolean(shows));
     }
 
     /** Where {@code team}'s last stand is. */

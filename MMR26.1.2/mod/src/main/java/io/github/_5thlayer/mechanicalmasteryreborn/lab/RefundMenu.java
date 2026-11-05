@@ -135,7 +135,7 @@ public final class RefundMenu extends AbstractContainerMenu {
                 return isMember() && access.evaluate((level, pos) -> takeAll((ServerLevel) level, pos, player), false);
             }
             case BACK -> {
-                access.execute((level, pos) -> LabMenu.open(player, level.getBlockState(pos).getMenuProvider(level, pos), (ServerLevel) level, pos));
+                access.execute((level, pos) -> LabMenu.open(player, (ServerLevel) level, pos));
                 return true;
             }
             default -> {

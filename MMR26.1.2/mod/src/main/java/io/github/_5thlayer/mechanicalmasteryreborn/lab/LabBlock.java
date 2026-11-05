@@ -35,7 +35,7 @@ public final class LabBlock extends Block {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!level.isClientSide()) {
-            LabMenu.open(player, state.getMenuProvider(level, pos), (ServerLevel) level, pos);
+            LabMenu.open(player, (ServerLevel) level, pos);
         }
         return InteractionResult.SUCCESS;
     }

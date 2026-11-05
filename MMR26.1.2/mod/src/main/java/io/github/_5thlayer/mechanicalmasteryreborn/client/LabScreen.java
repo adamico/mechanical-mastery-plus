@@ -94,14 +94,14 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
         this.showsLastStand = menu.showsLastStand();
     }
 
-    /** Wide enough for every handicap's name and cost beside its button, and the last stand's line when {@code lastStand} shows. */
-    private static int width(Font font, boolean lastStand) {
+    /** Wide enough for every handicap's name and cost beside its button, and the last stand's line when {@code withLastStand}. */
+    private static int width(Font font, boolean withLastStand) {
         int text = 0;
         for (Handicap handicap : Handicap.values()) {
             text = Math.max(text, font.width(Challenges.name(handicap).withStyle(ChatFormatting.BOLD)));
             text = Math.max(text, font.width(Challenges.cost(handicap)));
         }
-        if (lastStand) {
+        if (withLastStand) {
             text = Math.max(text, font.width(LAST_STAND_COST));
         }
         return Math.max(MIN_WIDTH, 3 * MachineDraw.MARGIN + BUTTON_WIDTH + text);
@@ -133,8 +133,8 @@ final class LabScreen extends AbstractContainerScreen<LabMenu> {
                 .bounds(leftPos + imageWidth - MachineDraw.MARGIN - BUTTON_WIDTH, topPos + refundTop(), BUTTON_WIDTH, BUTTON_HEIGHT)
                 .tooltip(Tooltip.create(REFUND_TOOLTIP))
                 .build());
-        lastStand = !showsLastStand ? null : addRenderableWidget(Button.builder(LAST_STAND_START, button -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId,
-                        LabMenu.START_LAST_STAND))
+        lastStand = !showsLastStand ? null : addRenderableWidget(Button.builder(LAST_STAND_START,
+                        button -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, LabMenu.START_LAST_STAND))
                 .bounds(leftPos + imageWidth - MachineDraw.MARGIN - BUTTON_WIDTH, topPos + lastStandTop(), BUTTON_WIDTH, BUTTON_HEIGHT)
                 .tooltip(Tooltip.create(LAST_STAND_TOOLTIP))
                 .build());
