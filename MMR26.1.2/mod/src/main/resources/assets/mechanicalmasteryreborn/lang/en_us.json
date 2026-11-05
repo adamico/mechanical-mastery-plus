@@ -186,6 +186,7 @@
   "mechanicalmasteryreborn.command.cod.last_stand.lead": "This island's team's Lead is now %s.",
   "mechanicalmasteryreborn.command.cod.last_stand.won": "This island's team has won its last stand: C.O.D. has shut down.",
   "item.mechanicalmasteryreborn.null_shard": "Null Shard",
+  "item.mechanicalmasteryreborn.null_shard.tooltip": "Feeds the Hermetic Lab's protection line, only during the spell it fell in",
   "mechanicalmasteryreborn.spell.title": "%s Spell",
   "mechanicalmasteryreborn.spell.started": "Your team took on the %s at its Hermetic Lab: %s",
   "mechanicalmasteryreborn.spell.ended": "Your team's %s has ended.",

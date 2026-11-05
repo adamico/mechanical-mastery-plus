@@ -10,6 +10,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -19,6 +20,7 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
@@ -34,7 +36,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * The lab, where the team whose island it stands on chooses a handicap to start a challenge. A click opens it. Once the
  * team's last stand has started it awakens as the Hermetic Lab (#263), and stands changed ({@link #HERMETIC}): a click
- * opens the Hermetic Lab's menu instead, and a hand of Nullessence or Null Shards puts them in, told on the action bar why
+ * opens the Hermetic Lab's menu instead, Jade names it so, and a hand of Nullessence or Null Shards puts them in, told on the action bar why
  * it takes none. On the server it ticks, to work as the Hermetic Lab ({@link LabBlockEntity}).
  */
 public final class LabBlock extends BaseEntityBlock {
@@ -44,6 +46,7 @@ public final class LabBlock extends BaseEntityBlock {
 
     private static final MapCodec<LabBlock> CODEC = simpleCodec(LabBlock::new);
     private static final Component TITLE = Component.translatable("container.mechanicalmasteryreborn.lab");
+    private static final Component HERMETIC_NAME = Component.translatable("container.mechanicalmasteryreborn.hermetic_lab");
 
     public LabBlock(Properties properties) {
         super(properties);
@@ -63,6 +66,16 @@ public final class LabBlock extends BaseEntityBlock {
     @Override
     protected RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+
+    /** The lab's item, named the Hermetic Lab while it stands awakened, as Jade and a pick show it. */
+    @Override
+    protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
+        ItemStack stack = super.getCloneItemStack(level, pos, state, includeData);
+        if (state.getValue(HERMETIC)) {
+            stack.set(DataComponents.ITEM_NAME, HERMETIC_NAME);
+        }
+        return stack;
     }
 
     @Override

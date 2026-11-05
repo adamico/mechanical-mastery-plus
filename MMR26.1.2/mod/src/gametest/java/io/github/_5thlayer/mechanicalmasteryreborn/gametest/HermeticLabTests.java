@@ -31,6 +31,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.record.Spell;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -394,7 +395,7 @@ final class HermeticLabTests {
 
     /**
      * Before the last stand the lab stands as itself, opens the lab's menu and takes no Nullessence by hand; once it starts,
-     * it stands as the Hermetic Lab and opens the Hermetic Lab's menu, which reaches the team's refund.
+     * it stands as the Hermetic Lab, is named so, and opens the Hermetic Lab's menu.
      */
     private static void awakens(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
@@ -409,6 +410,9 @@ final class HermeticLabTests {
         helper.runAtTickTime(2, () -> {
             helper.assertTrue(helper.getBlockState(LAB).getValue(LabBlock.HERMETIC), "the lab didn't awaken with the last stand");
             helper.assertTrue(menu(helper, player) instanceof HermeticLabMenu, "the lab in the last stand opens " + menu(helper, player));
+            ItemStack picked = helper.getBlockState(LAB).getCloneItemStack(helper.getLevel(), helper.absolutePos(LAB), false);
+            helper.assertValueEqual(picked.getHoverName(), Component.translatable("container.mechanicalmasteryreborn.hermetic_lab"),
+                    "the name Jade shows the awakened lab by");
             helper.succeed();
         });
     }

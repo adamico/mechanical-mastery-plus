@@ -48,6 +48,7 @@ def theurgy = 'curse.maven:theurgy-430636:9359578'
 def gateways = 'curse.maven:gateways-to-eternity-417802:8502258'
 def placebo = 'curse.maven:placebo-283644:8502256'
 def adminShop = 'curse.maven:adminshop-overhauled-876270:9409244'
+def guideme = 'curse.maven:guideme-1173950:9366331'
 
 dependencies {
     // Each optional to players, and named only by its own plugin under compat/, which loads only when
@@ -74,6 +75,8 @@ dependencies {
     // (#237), and a home gate opens only on its unlocked team's island (#238).
     compileOnly(gateways) { transitive = false }
     compileOnly(placebo) { transitive = false }
+    // GuideME, the pack's manual: its key opens the page of a block the player looks at that only ever stands placed.
+    compileOnly(guideme) { transitive = false }
 
     // The JUnit tests run with no Minecraft, so they read the pack's JSON with the Gson Minecraft ships (#251).
     testImplementation 'com.google.code.gson:gson:2.13.2'

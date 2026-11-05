@@ -10,6 +10,7 @@ How to build and work the blocks your island runs on. It holds no recipes: EMI s
 and what every essence decomposes into.
 
 Hold <KeyBind id="key.guideme.guide" /> over a block or an essence in your inventory to open its page here.
+Press it while looking at the lab, C.O.D. or one of its Ports, which you only ever find placed, to open theirs.
 
 - [The Recycler](recycler/index.md), built block by block, which decomposes and recycles.
 - [Decomposing and recycling](decomposing.md), by hand or on a Recycler.
