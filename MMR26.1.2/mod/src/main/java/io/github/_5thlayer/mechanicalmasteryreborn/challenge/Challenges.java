@@ -162,6 +162,33 @@ public final class Challenges {
         if (handicap == Handicap.PROTECTION) {
             HomeGates.grant(server, team);
         }
+        tellWon(server, team, handicap);
+        return true;
+    }
+
+    /**
+     * Wins {@code handicap}'s challenge for {@code team}, as an op's {@code /cod challenge win} does: as {@link #win(MinecraftServer, UUID)}
+     * does while the team plays it, and otherwise notes it started and won ({@link TeamState#winUnplayed}) with none of
+     * a start's effects, and tells the team as a win does. Says whether it did: not for a challenge won already, nor
+     * while the team plays another.
+     */
+    public static boolean win(MinecraftServer server, UUID team, Handicap handicap) {
+        TeamState state = TeamState.get(server);
+        if (state.plays(team, handicap)) {
+            return win(server, team);
+        }
+        if (!state.winUnplayed(team, handicap)) {
+            return false;
+        }
+        if (handicap == Handicap.PROTECTION) {
+            HomeGates.grant(server, team);
+        }
+        tellWon(server, team, handicap);
+        return true;
+    }
+
+    /** Tells {@code team}'s players online it won {@code handicap}'s challenge, with a title and a sound, and gives them its stages. */
+    private static void tellWon(MinecraftServer server, UUID team, Handicap handicap) {
         Component message = Component.translatable("mechanicalmasteryreborn.challenge.won", name(handicap).withStyle(ChatFormatting.GOLD))
                 .withStyle(ChatFormatting.GRAY);
         Component title = Component.translatable("mechanicalmasteryreborn.challenge.won.title", title(handicap)).withStyle(ChatFormatting.GOLD);
@@ -180,7 +207,6 @@ public final class Challenges {
             }
         }
         LOGGER.info("Team {} won the {} challenge; told {} of its players online", team, handicap.id(), told);
-        return true;
     }
 
     /**

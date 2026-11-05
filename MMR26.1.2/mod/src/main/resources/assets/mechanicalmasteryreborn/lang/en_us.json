@@ -14,6 +14,8 @@
   "mechanicalmasteryreborn.challenge.won.title": "%s Won",
   "mechanicalmasteryreborn.nether_portal.locked": "The portal won't open: the Nether opens to an island's team once it has won all four challenges.",
   "mechanicalmasteryreborn.command.cod.all_blocked": "Its team has blocked all four tiers: its C.O.D. makes nothing.",
+  "mechanicalmasteryreborn.command.cod.challenge.won": "This island's team has won the %s challenge, and its C.O.D. makes the tier below.",
+  "mechanicalmasteryreborn.command.cod.challenge.won_already": "This island's team has won the %s challenge already.",
   "mechanicalmasteryreborn.command.cod.challenge.not_won": "This island's team hasn't won the %s challenge.",
   "mechanicalmasteryreborn.command.cod.challenge.reverted": "This island's team no longer has the %s challenge won, and its C.O.D. makes the tier above again.",
   "mechanicalmasteryreborn.command.cod.tier": "Its C.O.D. makes %s.",

@@ -37,7 +37,8 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
  * whether its C.O.D. is awake, which challenge that team plays and its Inflation; {@code dormant} puts that island's
  * C.O.D. back to dormant, as a new island's is, so waking can be seen again, and leaves its challenge as it is;
  * {@code challenge start <handicap>} starts that island's team's challenge as its lab would (#235), and {@code challenge end}
- * ends it, its handicap with it, so choosing can be seen again, and {@code challenge revert <handicap>} forgets
+ * ends it, its handicap with it, so choosing can be seen again, {@code challenge win <handicap>} wins that challenge
+ * as its Port's last essence would, or, not played, notes it started and won with none of a start's effects (#268), and {@code challenge revert <handicap>} forgets
  * that it won that challenge, unblocking the tier its win blocked, so winning can be seen again; {@code tier <team> <tier>} sets the tier a team's C.O.D.
  * makes, or none, for tests and in-game checks; {@code last_stand start} starts that island's team's last stand as its lab
  * would, and {@code last_stand lead <lead>} sets its Lead, so the floor, the cap and the win can be seen.
@@ -67,6 +68,10 @@ final class CodCommand {
                                         Arrays.stream(Handicap.values()).map(Handicap::id), builder))
                                 .executes(CodCommand::startChallenge)))
                         .then(Commands.literal("end").executes(CodCommand::endChallenge))
+                        .then(Commands.literal("win").then(Commands.argument("handicap", StringArgumentType.word())
+                                .suggests((context, builder) -> SharedSuggestionProvider.suggest(
+                                        Arrays.stream(Handicap.values()).map(Handicap::id), builder))
+                                .executes(CodCommand::winChallenge)))
                         .then(Commands.literal("revert").then(Commands.argument("handicap", StringArgumentType.word())
                                 .suggests((context, builder) -> SharedSuggestionProvider.suggest(
                                         Arrays.stream(Handicap.values()).map(Handicap::id), builder))
@@ -156,6 +161,32 @@ final class CodCommand {
             return 0;
         }
         source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.challenge.ended"), true);
+        return 1;
+    }
+
+    private static int winChallenge(CommandContext<CommandSourceStack> context) {
+        var source = context.getSource();
+        String id = StringArgumentType.getString(context, "handicap");
+        var handicap = Handicap.byId(id);
+        if (handicap.isEmpty()) {
+            source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.challenge.unknown", id));
+            return 0;
+        }
+        UUID island = island(source);
+        var state = TeamState.get(source.getServer());
+        if (state.won(island, handicap.get())) {
+            source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.challenge.won_already", Challenges.name(handicap.get())));
+            return 0;
+        }
+        var playing = state.handicap(island);
+        if (playing.isPresent() && playing.get() != handicap.get()) {
+            source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.challenge.playing", Challenges.name(playing.get())));
+            return 0;
+        }
+        if (!Challenges.win(source.getServer(), island, handicap.get())) {
+            return 0;
+        }
+        source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.challenge.won", Challenges.name(handicap.get())), true);
         return 1;
     }
 
