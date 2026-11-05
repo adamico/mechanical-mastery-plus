@@ -2,9 +2,9 @@
   "parent": "minecraft:block/block",
   "render_type": "minecraft:cutout",
   "textures": {
-    "particle": "minecraft:block/blast_furnace_side",
-    "side": "minecraft:block/blast_furnace_side",
-    "end": "minecraft:block/blast_furnace_top",
+    "particle": "mechanicalmasteryreborn:block/cod_side",
+    "side": "mechanicalmasteryreborn:block/cod_side",
+    "end": "mechanicalmasteryreborn:block/cod_top",
     "fish": "minecraft:item/cod"
   },
   "elements": [
@@ -21,13 +21,10 @@
       }
     },
     {
-      "from": [-0.01, 0, -0.01],
-      "to": [16.01, 16, 16.01],
+      "from": [0, 16.01, 0],
+      "to": [16, 16.01, 16],
       "faces": {
-        "north": {"texture": "#fish", "uv": [0, 0, 16, 16], "cullface": "north"},
-        "south": {"texture": "#fish", "uv": [0, 0, 16, 16], "cullface": "south"},
-        "west": {"texture": "#fish", "uv": [0, 0, 16, 16], "cullface": "west"},
-        "east": {"texture": "#fish", "uv": [0, 0, 16, 16], "cullface": "east"}
+        "up": {"texture": "#fish", "uv": [0, 0, 16, 16], "cullface": "up", "tintindex": 0}
       }
     }
   ]

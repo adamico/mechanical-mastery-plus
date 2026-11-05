@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "minecraft:block/light_blue_glazed_terracotta"
+    "all": "mechanicalmasteryreborn:block/galvanic_port_won"
   }
 }

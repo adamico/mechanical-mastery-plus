@@ -34,16 +34,19 @@ public final class CodBlock extends BaseEntityBlock {
     /** Whether it has shut down for good, its team's last stand won, and so stands dark. */
     public static final BooleanProperty SHUT_DOWN = BooleanProperty.create("shut_down");
 
+    /** Whether its team is awake, so the client lights the fish on its lid; dormant, the fish stands dark. */
+    public static final BooleanProperty AWAKE = BooleanProperty.create("awake");
+
     private static final MapCodec<CodBlock> CODEC = simpleCodec(CodBlock::new);
 
     public CodBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(SHUT_DOWN, false));
+        registerDefaultState(stateDefinition.any().setValue(SHUT_DOWN, false).setValue(AWAKE, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(SHUT_DOWN);
+        builder.add(SHUT_DOWN, AWAKE);
     }
 
     @Override
