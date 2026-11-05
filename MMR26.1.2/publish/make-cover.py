@@ -16,15 +16,16 @@
 #   - above the title band, the four tier essences in a row, lowest first, scaled up nearest-neighbour,
 #     each glowing in its own colour;
 #   - the band, dark, ruled top and bottom in the accent, holding the suite's title turned around, as
-#     A Touch of Darkness's is: "MECHANICAL MASTERY" in Chakra Petch caps, in the accent's
+#     A Touch of Darkness's is: "MECHANICAL MASTERY" in Saira Extra Condensed caps, in the accent's
 #     orange, then the suite's white pill holding "reborn". The icon stacks them;
 #   - beneath the band, the four Transmuted Essences with Nullessence and Quintessence, the last
 #     stand's two sides, paired in their middle.
 #
 # Its art is the companion mod's own textures only (mod/NOTICE), nothing of Mojang's. Its fonts are
-# found on the system, with fallbacks; none is committed. Chakra Petch is a Google Font (SIL OFL),
-# installed by hand, its Bold for the title and its Medium for the pill; without it the title falls
-# back to Impact and the pill to Arial Black, which every run there draws the same, if not as designed.
+# found on the system, with fallbacks; none is committed. Saira Extra Condensed and Saira are Google
+# Fonts (SIL OFL), installed by hand, the first's ExtraBold for the title and the second's SemiBold
+# for the pill, static or variable; without them the title falls back to Impact and the pill to
+# Arial Black, which every run there draws the same, if not as designed.
 import math
 import os
 import random
@@ -49,12 +50,13 @@ TIERS = ['basic_mechanical_essence', 'regular_mechanical_essence', 'improved_mec
 TRANSMUTED = ['galvanic_essence', 'warding_essence', 'vital_essence', 'aureate_essence']
 LAST_STAND = ['nullessence', 'quintessence']
 TITLE, WORD = 'MECHANICAL MASTERY', 'reborn'
-FONTS = ['~/Library/Fonts/', '/Library/Fonts/', '~/.local/share/fonts/chakrapetch/', '~/.local/share/fonts/',
-         '/usr/share/fonts/TTF/', '/usr/share/fonts/truetype/chakra-petch/']
-TITLE_FONT = [d + 'ChakraPetch-Bold.ttf' for d in FONTS] + [
+FONTS = ['~/Library/Fonts/', '/Library/Fonts/', '~/.local/share/fonts/saira/', '~/.local/share/fonts/',
+         '/usr/share/fonts/TTF/', '/usr/share/fonts/truetype/saira/']
+# a font is a path, or a path and the named instance of a variable font
+TITLE_FONT = [d + 'SairaExtraCondensed-ExtraBold.ttf' for d in FONTS] + [
     '/System/Library/Fonts/Supplemental/Impact.ttf', '/usr/share/fonts/TTF/impact.ttf',
     '~/.local/share/fonts/msfonts/impact.ttf', '/usr/share/fonts/noto/NotoSans-Black.ttf']
-WORD_FONT = [d + 'ChakraPetch-Medium.ttf' for d in FONTS] + [
+WORD_FONT = [f for d in FONTS for f in [d + 'Saira-SemiBold.ttf', (d + 'Saira[wdth,wght].ttf', 'SemiBold')]] + [
     '/System/Library/Fonts/Supplemental/Arial Black.ttf', '/usr/share/fonts/TTF/ariblk.ttf',
     '~/.local/share/fonts/msfonts/ariblk.ttf', '/usr/share/fonts/noto/NotoSans-Black.ttf']
 WORD_SCALE = 0.7  # the pill's word against the title
@@ -109,10 +111,15 @@ def void(W, H):
 
 
 def font(names, size):
-    for n in map(os.path.expanduser, names):
-        if os.path.exists(n):
-            return ImageFont.truetype(n, size)
-    raise SystemExit('needs one of ' + ', '.join(names))
+    for n in names:
+        path, instance = n if isinstance(n, tuple) else (n, None)
+        path = os.path.expanduser(path)
+        if os.path.exists(path):
+            f = ImageFont.truetype(path, size)
+            if instance:
+                f.set_variation_by_name(instance)
+            return f
+    raise SystemExit('needs one of ' + ', '.join(n if isinstance(n, str) else n[0] for n in names))
 
 
 def make(out, W, H, title_size, px, under_px, stacked=False):
@@ -170,9 +177,9 @@ def make(out, W, H, title_size, px, under_px, stacked=False):
 
 
 # each image: where it goes, its size, its title's largest size and its essences' sizes
-COVER = ('publish/reborn-cover.png', 1280, 640, 96, 128, 96)
-ICON = ('publish/reborn-icon.png', 512, 512, 92, 64, 64)
-CARD = ('publish/reborn-card.png', 1920, 1080, 144, 192, 128)
+COVER = ('publish/reborn-cover.png', 1280, 640, 128, 128, 96)
+ICON = ('publish/reborn-icon.png', 512, 512, 112, 64, 64)
+CARD = ('publish/reborn-card.png', 1920, 1080, 192, 192, 128)
 
 make(*COVER)
 make(*ICON, stacked=True)
