@@ -1,6 +1,7 @@
 {
   "parent": "mechanicalmasteryreborn:block/cod",
   "textures": {
+    "particle": "mechanicalmasteryreborn:block/cod_side_shut_down",
     "side": "mechanicalmasteryreborn:block/cod_side_shut_down"
   }
 }

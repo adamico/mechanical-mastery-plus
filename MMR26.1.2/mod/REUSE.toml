@@ -28,8 +28,8 @@ SPDX-License-Identifier = "MIT"
 # Mechanical Mastery Plus's own art, by its maintainer, carried over from MMP1.19.2/ (NOTICE): the
 # four Mechanical Essences copied as they are, the Transmuted Essences and Quintessence
 # recoloured from the Advanced one, Nullessence from Quintessence, and the Quartessence a quarter
-# of each Transmuted Essence's. The Obsidian Flakes have no texture of their own: their model draws
-# vanilla's at runtime (libworks ADR 0012).
+# of each Transmuted Essence's. The Obsidian Flakes have no texture of their own, nor the fish on
+# C.O.D.'s lid: their models draw vanilla's at runtime (libworks ADR 0012).
 [[annotations]]
 path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/item/*.png",

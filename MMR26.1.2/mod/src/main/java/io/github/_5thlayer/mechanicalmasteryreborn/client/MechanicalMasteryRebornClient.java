@@ -9,23 +9,31 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.NullShards;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
+import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.guideme.PlacedBlockPages;
 import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingTable;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
+import java.util.List;
+import java.util.Set;
+
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterFluidModelsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.fluid.FluidTintSources;
@@ -35,7 +43,7 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 /**
  * The client's side: C.O.D.'s and the lab's screens, the items on a Recycler output's shelf, the Electric Defence's sparks, the recycling table EMI
- * shows, the challenge a chain machine's tooltip names, how Ward Tallow draws, what a food would feed under the life handicap, and how a team's Inflation bar is drawn.
+ * shows, the challenge a chain machine's tooltip names, the fish on C.O.D.'s lid, how Ward Tallow draws, what a food would feed under the life handicap, and how a team's Inflation bar is drawn.
  */
 @Mod(value = MechanicalMasteryReborn.MOD_ID, dist = Dist.CLIENT)
 public final class MechanicalMasteryRebornClient {
@@ -44,6 +52,7 @@ public final class MechanicalMasteryRebornClient {
         modBus.addListener(MechanicalMasteryRebornClient::registerScreens);
         modBus.addListener(MechanicalMasteryRebornClient::registerRenderers);
         modBus.addListener(MechanicalMasteryRebornClient::registerFluidModels);
+        modBus.addListener(MechanicalMasteryRebornClient::registerBlockTints);
         modBus.addListener((RegisterClientPayloadHandlersEvent event) -> event.register(RecyclingTable.TYPE,
                 (table, context) -> RecyclingTable.receive(table)));
         modBus.addListener((RegisterClientPayloadHandlersEvent event) -> event.register(ChainMachines.Table.TYPE,
@@ -104,5 +113,23 @@ public final class MechanicalMasteryRebornClient {
         event.register(new FluidModel.Unbaked(new Material(Identifier.withDefaultNamespace("block/water_still")),
                 new Material(Identifier.withDefaultNamespace("block/water_flow")), null, FluidTintSources.constant(0xFFE6D3A3)),
                 WardTallow.SOURCE, WardTallow.FLOWING);
+    }
+
+    /**
+     * The fish engraved on C.O.D.'s lid, vanilla's cod read from the player's own game (libworks ADR 0012), lit green
+     * while C.O.D. runs and dark once it is shut down. The item draws it green too.
+     */
+    private static void registerBlockTints(RegisterColorHandlersEvent.BlockTintSources event) {
+        event.register(List.of(new BlockTintSource() {
+            @Override
+            public int color(BlockState state) {
+                return state.getValue(CodBlock.SHUT_DOWN) ? 0xFF505458 : 0xFF50DC70;
+            }
+
+            @Override
+            public Set<Property<?>> relevantProperties() {
+                return Set.of(CodBlock.SHUT_DOWN);
+            }
+        }), Cod.BLOCK.get());
     }
 }

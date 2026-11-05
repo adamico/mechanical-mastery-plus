@@ -1,6 +1,12 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "mechanicalmasteryreborn:block/cod"
+    "model": "mechanicalmasteryreborn:block/cod",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -11477904
+      }
+    ]
   }
 }
