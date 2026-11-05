@@ -13,8 +13,8 @@ item_ids:
 # The challenges
 
 Your team plays four challenges, one at a time and in any order, each against the tier of essence
-[C.O.D.](../cod.md) makes at the time: **protection**, **energy**, **life** and **money**. Each is a way back up
-from what you decompose, through its own mods, to its own **Transmuted Essence**. Winning one blocks the tier
+[C.O.D.](../cod.md) makes at the time: **protection**, **energy**, **life** and **money**. Each climbs from
+what you decompose, through its own mods, to its own **Transmuted Essence**. Winning one blocks the tier
 C.O.D. makes, so it drops to the tier below, which is harder and longer to decompose. The next challenge is
 played against that.
 

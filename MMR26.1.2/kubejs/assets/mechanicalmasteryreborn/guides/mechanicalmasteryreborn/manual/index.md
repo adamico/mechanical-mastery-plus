@@ -16,7 +16,7 @@ while looking at the lab, C.O.D. or a Port to open theirs.
 - [The Recycler](recycler/index.md): built block by block, it decomposes and recycles.
 - [Decomposing and recycling](decomposing.md): decompose essence by hand or on a Recycler, recycle only on one.
 - [The lab](lab.md): where your team starts a challenge, stops one and takes its refund.
-- [The challenges](challenges/index.md): the four ways back up to a Transmuted Essence, and the rules they share:
+- [The challenges](challenges/index.md): four ways up from what you decompose to a Transmuted Essence, and the rules they share:
   [protection](challenges/protection.md), [energy](challenges/energy.md), [life](challenges/life.md) and
   [money](challenges/money.md).
 - [C.O.D.](cod.md): the maker of the essence you decompose, and its Ports.
