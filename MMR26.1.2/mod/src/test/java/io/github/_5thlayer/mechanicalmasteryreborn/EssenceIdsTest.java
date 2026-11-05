@@ -32,6 +32,7 @@ class EssenceIdsTest {
             "warding_essence",
             "vital_essence",
             "aureate_essence",
+            "quartessence",
             "quintessence",
             "nullessence");
 

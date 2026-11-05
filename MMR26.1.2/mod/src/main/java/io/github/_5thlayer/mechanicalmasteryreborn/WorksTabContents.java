@@ -21,7 +21,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 /**
  * Every obtainable item of the mod, in the suite's Works tab and no other (FactoryWorks ADR-0128): C.O.D.,
- * the lab, the Athanor and the four Ports, then the essences, then the protection Chain's Rift Shard, Ward Tallow bucket, Obsidian Flakes and Charged Rift,
+ * the lab, the Athanor and the four Ports, then every essence, then the protection Chain's Rift Shard, Ward Tallow bucket, Obsidian Flakes and Charged Rift,
  * and the Athanor's Null Shard, then the Recycler's parts, then the Defences. One listener, in the order the tab shows them, which
  * {@code CreativeTabTests} lists too.
  */

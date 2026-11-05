@@ -8,8 +8,8 @@ import java.util.Optional;
 
 /**
  * Every essence the mod registers, under the id a world saves it by, which never changes once shipped
- * (#163): the four Mechanical Essences, the four Transmuted Essences, Quintessence and Nullessence (#261), as the
- * line's glossary names them. Plain data, so a JUnit test reads it without Minecraft.
+ * (#163): the four Mechanical Essences, the four Transmuted Essences, the Quartessence (#262), Quintessence and
+ * Nullessence (#261), as the line's glossary names them. Plain data, so a JUnit test reads it without Minecraft.
  */
 public enum Essence {
 
@@ -29,6 +29,8 @@ public enum Essence {
     VITAL("vital_essence", Kind.TRANSMUTED),
     /** The money challenge's. */
     AUREATE("aureate_essence", Kind.TRANSMUTED),
+    /** The four Transmuted Essences assembled into one, which a Mutation Chamber climbs into Quintessence (#262). */
+    QUARTESSENCE("quartessence", Kind.QUARTESSENCE),
     /** Made from the four Transmuted Essences in the last chapter. */
     QUINTESSENCE("quintessence", Kind.QUINTESSENCE),
     /** What C.O.D. makes in its last stand, the opposite of Quintessence. */
@@ -36,7 +38,7 @@ public enum Essence {
 
     /** Which family of essences one belongs to. */
     public enum Kind {
-        MECHANICAL, TRANSMUTED, QUINTESSENCE, NULLESSENCE
+        MECHANICAL, TRANSMUTED, QUARTESSENCE, QUINTESSENCE, NULLESSENCE
     }
 
     /** The Mechanical Essences as C.O.D. makes them, highest tier first: Advanced until it is blocked, then the next. */

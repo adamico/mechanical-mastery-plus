@@ -58,7 +58,8 @@ import org.slf4j.Logger;
  * has started are sent to it in a {@link Table}, so EMI marks each locked recipe, and a chain machine's tooltip names
  * its challenge, until the team has started it. The last chapter's recipes, such as the End Portal Frame's, are the
  * ones its own stage file names ({@code chapters/stages/last_chapter.json}), and the Table marks them until the team has
- * reached it (ADR 0012, #265).
+ * reached it (ADR 0012, #265). The last stand's, such as the Quartessence's, are its stage file's
+ * ({@code chapters/stages/last_stand.json}), marked until the team has started it (#262).
  */
 public final class ChainMachines {
 
@@ -72,7 +73,7 @@ public final class ChainMachines {
 
     public static void register(IEventBus modBus) {
         // The client's handler is the client's own (MechanicalMasteryRebornClient), so a dedicated server never loads it.
-        modBus.addListener((RegisterPayloadHandlersEvent event) -> event.registrar("3")
+        modBus.addListener((RegisterPayloadHandlersEvent event) -> event.registrar("4")
                 .playToClient(Table.TYPE, Table.STREAM_CODEC));
         NeoForge.EVENT_BUS.addListener(ChainMachines::onDatapackSync);
         NeoForge.EVENT_BUS.addListener(ChainMachines::onTagsUpdated);
@@ -130,7 +131,8 @@ public final class ChainMachines {
                 unlocked.add(handicap);
             }
         }
-        return new Table(recipes(server), unlocked, lastChapterRecipes(server), !LastChapter.reached(server, team));
+        return new Table(recipes(server), unlocked, lastChapterRecipes(server), !LastChapter.reached(server, team),
+                lastStandRecipes(server), state.lastStand(team).isEmpty());
     }
 
     /** Every chain's own recipe, by its id, and the handicap whose challenge unlocks it. */
@@ -143,6 +145,11 @@ public final class ChainMachines {
         return stages(server).lastChapter();
     }
 
+    /** Every recipe the last stand unlocks, by its id. */
+    public static Set<Identifier> lastStandRecipes(MinecraftServer server) {
+        return stages(server).lastStand();
+    }
+
     private static Read stages(MinecraftServer server) {
         RecipeMap recipes = server.getRecipeManager().recipeMap();
         Read found = read;
@@ -153,7 +160,8 @@ public final class ChainMachines {
                     byId.putIfAbsent(recipe, handicap);
                 }
             }
-            found = new Read(recipes, Map.copyOf(byId), Set.copyOf(readStage(server, recipes, LastChapter.STAGE)));
+            found = new Read(recipes, Map.copyOf(byId), Set.copyOf(readStage(server, recipes, LastChapter.STAGE)),
+                    Set.copyOf(readStage(server, recipes, LastStands.STAGE)));
             read = found;
         }
         return found;
@@ -207,16 +215,16 @@ public final class ChainMachines {
         return found;
     }
 
-    private record Read(RecipeMap recipes, Map<Identifier, Handicap> byId, Set<Identifier> lastChapter) {
+    private record Read(RecipeMap recipes, Map<Identifier, Handicap> byId, Set<Identifier> lastChapter, Set<Identifier> lastStand) {
     }
 
     /**
      * What a client is sent of the chains, since it is sent no stage file and knows no team: each chain's own recipes,
      * the challenges the player's team has started, the last chapter's recipes and whether the team has yet to reach
-     * it. The client keeps the last one in {@link #received}.
+     * it, and the last stand's and whether the team has yet to start it. The client keeps the last one in {@link #received}.
      */
     public record Table(Map<Identifier, Handicap> recipes, Set<Handicap> unlocked, Set<Identifier> lastChapter,
-                        boolean lastChapterLocked) implements CustomPacketPayload {
+                        boolean lastChapterLocked, Set<Identifier> lastStand, boolean lastStandLocked) implements CustomPacketPayload {
 
         public static final Type<Table> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "chain_machines"));
 
@@ -229,15 +237,18 @@ public final class ChainMachines {
                 HANDICAP.apply(ByteBufCodecs.collection(HashSet::new)), table -> new HashSet<>(table.unlocked()),
                 Identifier.STREAM_CODEC.apply(ByteBufCodecs.collection(HashSet::new)).cast(), table -> new HashSet<>(table.lastChapter()),
                 ByteBufCodecs.BOOL.cast(), Table::lastChapterLocked,
+                Identifier.STREAM_CODEC.apply(ByteBufCodecs.collection(HashSet::new)).cast(), table -> new HashSet<>(table.lastStand()),
+                ByteBufCodecs.BOOL.cast(), Table::lastStandLocked,
                 Table::new);
 
         /** The table the client was last sent: nothing locked is known until a server sends one. */
-        private static volatile Table received = new Table(Map.of(), EnumSet.allOf(Handicap.class), Set.of(), false);
+        private static volatile Table received = new Table(Map.of(), EnumSet.allOf(Handicap.class), Set.of(), false, Set.of(), false);
 
         public Table {
             recipes = Map.copyOf(recipes);
             unlocked = Set.copyOf(unlocked);
             lastChapter = Set.copyOf(lastChapter);
+            lastStand = Set.copyOf(lastStand);
         }
 
         public static Table received() {

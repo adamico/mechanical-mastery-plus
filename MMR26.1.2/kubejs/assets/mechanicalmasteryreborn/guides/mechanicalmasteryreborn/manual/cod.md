@@ -46,11 +46,14 @@ Once your team has won all four challenges, C.O.D. makes nothing until you start
 counts against your team's **Lead**, whether you keep it, void it or decompose it.
 
 Put **Quintessence** into C.O.D., by hand or from a hopper or a pipe on any side: each one cancels a fixed amount and
-raises your Lead. C.O.D. starts slow, and speeds up, a little behind, as your Quintessence keeps pace with it, up to
+raises your Lead. To make it, assemble one of each Transmuted Essence (Galvanic, Warding, Vital and Aureate) into a
+**Quartessence** on an Assembler, and climb Quartessence into Quintessence in a Voidworks **Mutation Chamber**, a steep
+Rung paid in motes; a Void Crucible won't take it. Both unlock only once your last stand has started. C.O.D. starts slow, and speeds up, a little behind, as your Quintessence keeps pace with it, up to
 a ceiling; it slows back down when you stall. Your Lead never falls further than the margin below zero, and the last
 stand can't be lost, stopped or reset.
 
-Quintessence is made from Nullessence at the [Athanor](athanor.md), while your team bears its handicaps there.
+Quintessence can also be made from Nullessence at the [Athanor](athanor.md), with no Voidworks, while your team bears
+its handicaps there.
 
 When your Lead reaches the margin, C.O.D. shuts down for good and stands dark, and your team has won the pack. The
 bar at the top of your screen, and Jade on C.O.D., show your Lead and how fast C.O.D. makes Nullessence.
