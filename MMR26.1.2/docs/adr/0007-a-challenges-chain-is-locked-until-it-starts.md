@@ -8,7 +8,7 @@ A challenge's chain stays locked for a team until the team starts that challenge
 
 Locking is per recipe and per machine, not per mod: what a challenge's mods offer outside the chain, as AdminShop's Shop, is never locked, and a locked mod's items can still come from an essence's mix, to be recycled, as Neo Vitae's Hellfire Forge comes from Advanced's.
 
-Two cases fall outside the rules. Protection's Home Gate Pearl is never craftable: the Shop sells it once the team has won protection. Money's chain locks nothing, since a team's money is set aside while the money challenge is played (glossary **Handicap**), so the chain is paid only with money earned during it.
+Two cases fall outside the rules. Protection's Home Gate Pearl is never craftable: the Shop sells it once the team has won protection. Money's chain is no machine's work but the Shop's Offers, every one gated on the one Permit the team is given when it starts the challenge and loses when it stops it (ADR 0013, #296): the ore blocks, the other Transmuted Essences' sale and the Aureate. No Permit of the chain is bought, since a bought Permit would be the team's to keep, as a built machine is, and the Offers it opened would stay open past a stop. A team's money is set aside while the money challenge is played (glossary **Handicap**), so the chain is paid only with money earned during it.
 
 We could have left a challenge's mods free from the start, as Theurgy and Neo Vitae were in 0.0.1. A team could then build a whole chain while no handicap applies and C.O.D. makes no Inflation, and starting the challenge would only switch a finished factory on. The handicap and the Inflation clock are the challenge, so the chain has to run under them.
 

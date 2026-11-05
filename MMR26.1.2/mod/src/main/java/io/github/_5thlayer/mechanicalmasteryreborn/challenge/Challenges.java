@@ -28,7 +28,7 @@ import org.slf4j.Logger;
  * its chain again (ADR 0013), where a win or a reset keeps it. Each of the team's
  * players online hears vanilla's raid horn when it starts, and its challenge fanfare when it is won, sees the challenge's name as a title with its cost
  * below, and reads both in chat, and is given the challenge's chain ({@link Chains}). The money handicap acts on the
- * team's Account as it starts, resets and ends, and the protection handicap's {@link Assault} is sent as it starts and
+ * team's Account as it starts, resets and ends, its Permit taken back by a stop, and the protection handicap's {@link Assault} is sent as it starts and
  * removed as it resets or ends; the life handicap's Diets are forgotten as it resets or ends.
  */
 public final class Challenges {
@@ -110,7 +110,8 @@ public final class Challenges {
     /**
      * Ends the challenge {@code team} plays, as a stop does but with no vote and no reset needed, as an op's
      * {@code /cod challenge end} does: {@link #finish} it, and lock its chain again (ADR 0013), its stage taken from the
-     * team's players online now and from the rest as they log in ({@link Chains#unlock}). Says whether it played one.
+     * team's players online now and from the rest as they log in ({@link Chains#unlock}), and money's Permit from the
+     * team's Account ({@link MoneyHandicap#lock}). Says whether it played one.
      */
     public static boolean end(MinecraftServer server, UUID team) {
         var played = TeamState.get(server).handicap(team);
@@ -118,6 +119,9 @@ public final class Challenges {
             return false;
         }
         TeamState.get(server).lockChain(team, played.get());
+        if (played.get() == Handicap.MONEY) {
+            MoneyHandicap.lock(server, team);
+        }
         for (var player : Teams.online(server, team)) {
             Chains.unlock(server, player);
         }

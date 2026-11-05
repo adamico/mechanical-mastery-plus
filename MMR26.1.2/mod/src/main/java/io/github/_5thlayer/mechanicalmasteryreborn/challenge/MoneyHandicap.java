@@ -18,7 +18,8 @@ import org.slf4j.Logger;
 /**
  * The money handicap, less money (#213), on the team's {@link Accounts Account}. When the team starts the money
  * challenge its Balance is set aside, so the chain is paid only with money earned under the handicap, and it is given
- * {@link #PERMIT}, which opens the chain's Offers, for good (ADR 0007). A reset sets aside what it earned too, as though
+ * {@link #PERMIT}, which opens the chain's Offers: money's chain, kept past a win or a reset and taken back by a stop,
+ * as every chain is (ADRs 0007, 0013). A reset sets aside what it earned too, as though
  * the challenge had just begun; its end gives back everything set aside, on top of what it earned since. While it plays,
  * each sale pays only {@link ServerConfig#moneySaleShare its share} of the price; buying is unaffected. The money spell
  * at the Hermetic Lab (#263) sets the Balance aside the same way and gives it back as it ends, pays a smaller share of a sale,
@@ -26,7 +27,10 @@ import org.slf4j.Logger;
  */
 public final class MoneyHandicap {
 
-    /** The Permit the team is given when it starts the money challenge, which every Offer of the chain needs. */
+    /**
+     * The Permit the team is given when it starts the money challenge and loses when it stops it, which every Offer of
+     * the chain needs. A Permit the team buys is its own, kept as a built machine is, so none of the chain's Offers hangs on one.
+     */
     public static final String PERMIT = "reborn_money";
 
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -60,11 +64,20 @@ public final class MoneyHandicap {
         setAside(server, team);
     }
 
-    /** Gives {@code team}'s Account {@link #PERMIT} again if it ever started the money challenge, stopped since or not (ADR 0013), since a new Account starts without it. */
+    /**
+     * Gives {@code team}'s Account {@link #PERMIT} again if its money chain is unlocked, by a start not stopped since or a
+     * win (ADR 0013), since a new Account starts without it.
+     */
     public static void regrant(MinecraftServer server, UUID team) {
-        if (TeamState.get(server).started(team, Handicap.MONEY)) {
+        if (TeamState.get(server).unlocked(team, Handicap.MONEY)) {
             Accounts.get().grant(server, team, PERMIT);
         }
+    }
+
+    /** Takes {@link #PERMIT} from {@code team}'s Account, as a stop locks its money chain again (ADR 0013). */
+    static void lock(MinecraftServer server, UUID team) {
+        Accounts.get().revoke(server, team, PERMIT);
+        LOGGER.info("Took {} from team {}, as its money challenge stopped", PERMIT, team);
     }
 
     /** Gives {@code team} back everything set aside, as its money challenge ends. */
