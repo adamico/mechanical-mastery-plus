@@ -16,16 +16,16 @@
 #   - above the title band, the four tier essences in a row, lowest first, scaled up nearest-neighbour,
 #     each glowing in its own colour;
 #   - the band, dark, ruled top and bottom in the accent, holding the suite's title turned around, as
-#     A Touch of Darkness's is: "MECHANICAL MASTERY" in Saira Extra Condensed caps, in the accent's
+#     A Touch of Darkness's is: "MECHANICAL MASTERY" in Quantico caps, in the accent's
 #     orange, then the suite's white pill holding "reborn". The icon stacks them;
 #   - beneath the band, the four Transmuted Essences with Nullessence and Quintessence, the last
 #     stand's two sides, paired in their middle.
 #
 # Its art is the companion mod's own textures only (mod/NOTICE), nothing of Mojang's. Its fonts are
-# found on the system, with fallbacks; none is committed. Saira Extra Condensed and Saira are Google
-# Fonts (SIL OFL), installed by hand, the first's ExtraBold for the title and the second's SemiBold
-# for the pill, static or variable; without them the title falls back to Impact and the pill to
-# Arial Black, which every run there draws the same, if not as designed.
+# found on the system, with fallbacks; none is committed. Quantico is a Google Font
+# (SIL OFL), installed by hand, its Bold for the title and its Regular for the pill; without it the
+# title falls back to Impact and the pill to Arial Black, which every run there draws the same, if
+# not as designed.
 import math
 import os
 import random
@@ -50,13 +50,12 @@ TIERS = ['basic_mechanical_essence', 'regular_mechanical_essence', 'improved_mec
 TRANSMUTED = ['galvanic_essence', 'warding_essence', 'vital_essence', 'aureate_essence']
 LAST_STAND = ['nullessence', 'quintessence']
 TITLE, WORD = 'MECHANICAL MASTERY', 'reborn'
-FONTS = ['~/Library/Fonts/', '/Library/Fonts/', '~/.local/share/fonts/saira/', '~/.local/share/fonts/',
-         '/usr/share/fonts/TTF/', '/usr/share/fonts/truetype/saira/']
-# a font is a path, or a path and the named instance of a variable font
-TITLE_FONT = [d + 'SairaExtraCondensed-ExtraBold.ttf' for d in FONTS] + [
+FONTS = ['~/Library/Fonts/', '/Library/Fonts/', '~/.local/share/fonts/quantico/', '~/.local/share/fonts/',
+         '/usr/share/fonts/TTF/', '/usr/share/fonts/truetype/quantico/']
+TITLE_FONT = [d + 'Quantico-Bold.ttf' for d in FONTS] + [
     '/System/Library/Fonts/Supplemental/Impact.ttf', '/usr/share/fonts/TTF/impact.ttf',
     '~/.local/share/fonts/msfonts/impact.ttf', '/usr/share/fonts/noto/NotoSans-Black.ttf']
-WORD_FONT = [f for d in FONTS for f in [d + 'Saira-SemiBold.ttf', (d + 'Saira[wdth,wght].ttf', 'SemiBold')]] + [
+WORD_FONT = [d + 'Quantico-Regular.ttf' for d in FONTS] + [
     '/System/Library/Fonts/Supplemental/Arial Black.ttf', '/usr/share/fonts/TTF/ariblk.ttf',
     '~/.local/share/fonts/msfonts/ariblk.ttf', '/usr/share/fonts/noto/NotoSans-Black.ttf']
 WORD_SCALE = 0.7  # the pill's word against the title
@@ -111,15 +110,10 @@ def void(W, H):
 
 
 def font(names, size):
-    for n in names:
-        path, instance = n if isinstance(n, tuple) else (n, None)
-        path = os.path.expanduser(path)
-        if os.path.exists(path):
-            f = ImageFont.truetype(path, size)
-            if instance:
-                f.set_variation_by_name(instance)
-            return f
-    raise SystemExit('needs one of ' + ', '.join(n if isinstance(n, str) else n[0] for n in names))
+    for n in map(os.path.expanduser, names):
+        if os.path.exists(n):
+            return ImageFont.truetype(n, size)
+    raise SystemExit('needs one of ' + ', '.join(names))
 
 
 def make(out, W, H, title_size, px, under_px, stacked=False):
