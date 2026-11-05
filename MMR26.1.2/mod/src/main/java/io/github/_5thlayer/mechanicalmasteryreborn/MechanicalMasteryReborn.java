@@ -12,7 +12,6 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationCap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastChapter;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ObsidianFlakes;
-import io.github._5thlayer.mechanicalmasteryreborn.challenge.PolishedCalcite;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Stops;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
@@ -50,7 +49,6 @@ public final class MechanicalMasteryReborn {
         RiftShards.register(modBus);
         WardTallow.register(modBus);
         ObsidianFlakes.register(modBus);
-        PolishedCalcite.register(modBus);
         Assault.register(modBus);
         LifeHandicap.register(modBus);
         Chains.register();

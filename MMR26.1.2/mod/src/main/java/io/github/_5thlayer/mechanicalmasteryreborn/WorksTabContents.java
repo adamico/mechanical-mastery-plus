@@ -6,7 +6,6 @@ package io.github._5thlayer.mechanicalmasteryreborn;
 import io.github._5thlayer.libworks.WorksTab;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ObsidianFlakes;
-import io.github._5thlayer.mechanicalmasteryreborn.challenge.PolishedCalcite;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
@@ -55,6 +54,5 @@ final class WorksTabContents {
         event.accept(Recycler.OUTPUT_ITEM.get());
         event.accept(Recycler.CASING_ITEM.get());
         event.accept(Defences.FE_DEFENCE_ITEM.get());
-        event.accept(PolishedCalcite.ITEM.get());
     }
 }
