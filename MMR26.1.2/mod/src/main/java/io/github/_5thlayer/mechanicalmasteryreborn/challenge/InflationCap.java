@@ -49,13 +49,7 @@ public final class InflationCap {
         for (UUID team : state.playing()) {
             Inflation inflation = state.inflation(team).orElseThrow();
             if (inflation.excess() >= cap) {
-                Challenges.reset(server, team);
-                Handicap handicap = state.handicap(team).orElseThrow();
-                int told = tell(server, team, Component.translatable("mechanicalmasteryreborn.challenge.reset",
-                        cap, Challenges.title(handicap).withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.RED),
-                        SoundEvents.BEACON_DEACTIVATE);
-                LOGGER.info("Team {} reached its Inflation cap of {}; its {} challenge was reset; told {} of its players online",
-                        team, cap, handicap.id(), told);
+                reset(server, team);
             } else if (near(inflation.excess(), cap)) {
                 if (!state.warned(team)) {
                     Handicap handicap = state.handicap(team).orElseThrow();
@@ -72,6 +66,24 @@ public final class InflationCap {
                 state.setWarned(team, false);
             }
         }
+    }
+
+    /**
+     * Resets the challenge {@code team} plays, as reaching Inflation's cap does ({@link Challenges#reset}), and tells its
+     * players online, as an op's {@code /cod challenge reset} does too (#294). Says whether it played one.
+     */
+    public static boolean reset(MinecraftServer server, UUID team) {
+        if (!Challenges.reset(server, team)) {
+            return false;
+        }
+        int cap = ServerConfig.inflationCap();
+        Handicap handicap = TeamState.get(server).handicap(team).orElseThrow();
+        int told = tell(server, team, Component.translatable("mechanicalmasteryreborn.challenge.reset",
+                cap, Challenges.title(handicap).withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.RED),
+                SoundEvents.BEACON_DEACTIVATE);
+        LOGGER.info("Team {}'s {} challenge was reset, as at its Inflation cap of {}; told {} of its players online",
+                team, handicap.id(), cap, told);
+        return true;
     }
 
     /** Whether {@code excess} is at 80% of {@code cap} or more, where the team is warned. */

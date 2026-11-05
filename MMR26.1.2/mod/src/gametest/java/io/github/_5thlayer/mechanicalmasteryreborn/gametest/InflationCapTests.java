@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
@@ -18,6 +19,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.netty.channel.embedded.EmbeddedChannel;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.NbtOps;
@@ -66,6 +68,8 @@ final class InflationCapTests {
         tests.test("inflation_cap_warns_once_near_it_and_again_after_falling_back", 10, InflationCapTests::warnsOnceAndAgain);
         tests.test("inflation_cap_warning_survives_a_load_and_a_reset_clears_it", 10, InflationCapTests::warningSurvivesALoad);
         tests.test("inflation_cap_warning_waits_for_a_player_online", 10, InflationCapTests::warningWaitsForAPlayer);
+        tests.test("inflation_cap_reset_command_resets_as_the_cap_does", 10, InflationCapTests::resetCommand);
+        tests.test("inflation_cap_reset_command_refuses_with_no_challenge", 10, InflationCapTests::resetCommandRefuses);
     }
 
     /** Twenty minutes in, C.O.D. at twice its waking pace, the team reaches its cap and is told the challenge was reset. */
@@ -102,6 +106,54 @@ final class InflationCapTests {
             player.leave(helper);
             helper.succeed();
         });
+    }
+
+    /**
+     * An operator's {@code /cod challenge reset} resets the challenge the island's team plays as reaching the cap does,
+     * the team told, so a reset can be seen without waiting for Inflation (#294).
+     */
+    private static void resetCommand(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        Listener player = Listener.of(helper, team);
+        helper.setBlock(COD, Cod.BLOCK.get());
+        state(helper).wake(team);
+        choose(helper, team, TWENTY_MINUTES);
+        helper.runAtTickTime(1, () -> make(helper, team, 3));
+        helper.runAtTickTime(2, () -> {
+            helper.assertValueEqual(state(helper).resets(team), 0, "the resets before the command");
+            helper.assertValueEqual(runReset(helper), 1, "the reset command's result");
+            long now = helper.getLevel().getServer().overworld().getGameTime();
+            Inflation inflation = state(helper).inflation(team).orElseThrow();
+            helper.assertValueEqual(inflation.excess(), 0L, "the excess after the reset command");
+            helper.assertTrue(now - inflation.began() <= 1, "the challenge didn't begin again at the reset command");
+            helper.assertValueEqual(state(helper).resets(team), 1, "the resets after the command");
+            helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.ENERGY), "the handicap after the reset command");
+            helper.assertValueEqual(player.heard(RESET), 1, "reset announcements after the command");
+            player.leave(helper);
+            helper.succeed();
+        });
+    }
+
+    /** With no challenge played on the island, {@code /cod challenge reset} fails and resets nothing. */
+    private static void resetCommandRefuses(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        helper.setBlock(COD, Cod.BLOCK.get());
+        helper.runAtTickTime(1, () -> {
+            helper.assertValueEqual(runReset(helper), 0, "the reset command's result with no challenge");
+            helper.assertValueEqual(state(helper).resets(team), 0, "the resets with no challenge");
+            helper.succeed();
+        });
+    }
+
+    /** Runs {@code /cod challenge reset} as an operator standing on the test's island, and gives its result. */
+    private static int runReset(GameTestHelper helper) {
+        CommandSourceStack op = helper.getLevel().getServer().createCommandSourceStack().withLevel(helper.getLevel())
+                .withPosition(helper.absolutePos(COD).getCenter()).withSuppressedOutput();
+        try {
+            return op.getServer().getCommands().getDispatcher().execute("cod challenge reset", op);
+        } catch (CommandSyntaxException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     /** Two teams play a challenge, ten minutes in; one reaches its cap, the other is one short of it. */
