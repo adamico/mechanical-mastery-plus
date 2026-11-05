@@ -2,8 +2,8 @@
   "type": "craftworks:assembling",
   "category": "crafting",
   "ingredients": [
-    { "ingredient": "minecraft:obsidian", "count": 4 },
-    { "ingredient": "minecraft:ender_eye", "count": 1 },
+    { "ingredient": "minecraft:calcite", "count": 4 },
+    { "ingredient": "minecraft:ender_pearl", "count": 4 },
     { "ingredient": "minecraft:nether_wart", "count": 4 }
   ],
   "results": [
