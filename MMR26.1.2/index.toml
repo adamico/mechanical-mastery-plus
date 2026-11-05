@@ -606,7 +606,7 @@ hash = "e7f3199f4bacece01467ac1274b0f6bfd7d23e5a4364f91bf19d4f5fa6658b47"
 
 [[files]]
 file = "kubejs/server_scripts/decomposing.js"
-hash = "f0bd34e375ffe39c9acc2b408cbde0ad50c37d30904bf47c89b7528279faf57e"
+hash = "88afdad988bcdcbd7af67401a33cfa482cefa8f10257b47f3563beb089421efc"
 
 [[files]]
 file = "kubejs/server_scripts/defences.js"
