@@ -10,9 +10,9 @@ import net.minecraft.world.item.Items;
 
 /**
  * The End Portal Frame, crafted on the Assembler from four obsidian, an eye of ender and four nether wart (ADR 0012,
- * #265): the pack's own recipe in {@code suite_pack/}, run on a tier 1 Assembler with {@link WardingChainTests}'
- * fixtures. Its lock until the fourth win is the pack's Chapters stage file, which no game test run loads. Only the
- * {@code suiteGameTestServer} run, which loads Craftworks, registers it.
+ * #265): the pack's own recipe in {@code suite_pack/}, run on a {@link SuiteAssembler}. Its lock until the fourth win
+ * is the pack's Chapters stage file, which no game test run loads. Only the {@code suiteGameTestServer} run, which
+ * loads Craftworks, registers it.
  */
 final class LastChapterFrameTests {
 
@@ -24,12 +24,12 @@ final class LastChapterFrameTests {
     }
 
     private static void assembles(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = WardingChainTests.holding(helper, "end_portal_frame");
-        WardingChainTests.put(assembler, 0, Items.OBSIDIAN, 4);
-        WardingChainTests.put(assembler, 1, Items.ENDER_EYE, 1);
-        WardingChainTests.put(assembler, 2, Items.NETHER_WART, 4);
-        WardingChainTests.tickUntil(helper, assembler, () -> !assembler.inventory().getResource(AssemblerSlots.OUTPUT).isEmpty());
-        WardingChainTests.expectOutput(helper, assembler, Items.END_PORTAL_FRAME, "the frame's recipe");
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "end_portal_frame");
+        SuiteAssembler.put(assembler, 0, Items.OBSIDIAN, 4);
+        SuiteAssembler.put(assembler, 1, Items.ENDER_EYE, 1);
+        SuiteAssembler.put(assembler, 2, Items.NETHER_WART, 4);
+        SuiteAssembler.tickUntil(helper, assembler, () -> !assembler.inventory().getResource(AssemblerSlots.OUTPUT).isEmpty());
+        SuiteAssembler.expectOutput(helper, assembler, Items.END_PORTAL_FRAME, "the frame's recipe");
         helper.succeed();
     }
 }

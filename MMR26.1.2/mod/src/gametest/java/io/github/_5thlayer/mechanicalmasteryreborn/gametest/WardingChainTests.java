@@ -6,14 +6,11 @@ package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.function.BooleanSupplier;
 import java.util.stream.Collectors;
 
 import com.mojang.authlib.GameProfile;
 import io.github._5thlayer.craftworks.machine.AssemblerBlockEntity;
 import io.github._5thlayer.craftworks.machine.AssemblerSlots;
-import io.github._5thlayer.craftworks.machine.AssemblerTier;
-import io.github._5thlayer.craftworks.machine.Assemblers;
 import io.github._5thlayer.fieldworks.harvester.HarvesterBlockEntity;
 import io.github._5thlayer.fieldworks.harvester.Harvesters;
 import io.github._5thlayer.fieldworks.harvester.TierBlock;
@@ -45,8 +42,6 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.transfer.energy.EnergyHandlerUtil;
-import net.neoforged.neoforge.transfer.energy.SimpleEnergyHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
@@ -58,14 +53,9 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
  * Essence from the Charged Rifts and Wireworks' plastic, each the pack's own recipe in {@code suite_pack/}. The
  * Assembler's steps run on a tier 1 Assembler, the lowest, with their inputs set in its slots and boxes and FE fed to
  * it until the craft is done; Flake on a Burner Harvester fed coal and slurry as a hopper and a pipe would. Only the
- * {@code suiteGameTestServer} run, which loads those mods, registers them. Its fixtures place and run an Assembler for
- * any of the pack's assembling recipes, as {@link LastChapterFrameTests} does.
+ * {@code suiteGameTestServer} run, which loads those mods, registers them. Its Assembler is a {@link SuiteAssembler}.
  */
 final class WardingChainTests {
-
-    private static final BlockPos ORIGIN = new BlockPos(4, 1, 4);
-    /** More ticks than any of the Chain's crafts takes. */
-    private static final int MOST_TICKS = 1000;
 
     private WardingChainTests() {
     }
@@ -81,11 +71,11 @@ final class WardingChainTests {
     }
 
     private static void render(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = holding(helper, "ward_tallow");
-        put(assembler, 0, Items.ROTTEN_FLESH, 4);
-        put(assembler, 1, Items.BONE_MEAL, 2);
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "ward_tallow");
+        SuiteAssembler.put(assembler, 0, Items.ROTTEN_FLESH, 4);
+        SuiteAssembler.put(assembler, 1, Items.BONE_MEAL, 2);
         assembler.fluids().set(0, new FluidStack(fluid("wireworks:steam"), 1000));
-        int ran = tickUntil(helper, assembler, () -> !assembler.fluids().contents(2).isEmpty());
+        int ran = SuiteAssembler.tickUntil(helper, assembler, () -> !assembler.fluids().contents(2).isEmpty());
         FluidStack made = assembler.fluids().contents(2);
         helper.assertTrue(made.getFluid() == WardTallow.SOURCE.get() && made.getAmount() == 500,
                 "Render made " + made.getAmount() + " mB of " + made.getFluid() + " in " + ran + " ticks, not 500 mB of Ward Tallow");
@@ -122,7 +112,7 @@ final class WardingChainTests {
         machine.setHeldRecipe(Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "harvesting/obsidian_flakes"));
         int ran = 0;
         var flakes = helper.getBlockEntity(chest, ChestBlockEntity.class);
-        while (flakes.countItem(ObsidianFlakes.ITEM.get()) == 0 && ran < MOST_TICKS) {
+        while (flakes.countItem(ObsidianFlakes.ITEM.get()) == 0 && ran < SuiteAssembler.MOST_TICKS) {
             machine.serverTick(helper.getLevel());
             ran++;
         }
@@ -141,52 +131,52 @@ final class WardingChainTests {
     }
 
     private static void charge(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = holding(helper, "charged_rift");
-        put(assembler, 0, RiftShards.ITEM.get(), 2);
-        put(assembler, 1, item("fieldworks:tar"), 1);
-        put(assembler, 2, ObsidianFlakes.ITEM.get(), 2);
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "charged_rift");
+        SuiteAssembler.put(assembler, 0, RiftShards.ITEM.get(), 2);
+        SuiteAssembler.put(assembler, 1, item("fieldworks:tar"), 1);
+        SuiteAssembler.put(assembler, 2, ObsidianFlakes.ITEM.get(), 2);
         assembler.fluids().set(0, new FluidStack(WardTallow.SOURCE.get(), 500));
-        tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
-        expectOutput(helper, assembler, RiftShards.CHARGED_RIFT.get(), "Charge");
+        SuiteAssembler.tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
+        SuiteAssembler.expectOutput(helper, assembler, RiftShards.CHARGED_RIFT.get(), "Charge");
         helper.assertValueEqual(assembler.fluids().contents(0).getAmount(), 250, "the Ward Tallow left after Charge");
         helper.succeed();
     }
 
     /** Two Renders make a bucket's worth, which the fill slot takes and the outputs hold as a Ward Tallow bucket. */
     private static void renderFillsABucket(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = holding(helper, "ward_tallow");
-        put(assembler, 0, Items.ROTTEN_FLESH, 8);
-        put(assembler, 1, Items.BONE_MEAL, 4);
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "ward_tallow");
+        SuiteAssembler.put(assembler, 0, Items.ROTTEN_FLESH, 8);
+        SuiteAssembler.put(assembler, 1, Items.BONE_MEAL, 4);
         assembler.fluids().set(0, new FluidStack(fluid("wireworks:steam"), 2000));
-        put(assembler, AssemblerSlots.FILL, Items.BUCKET, 1);
-        tickUntil(helper, assembler, () -> outputs(assembler, WardTallow.BUCKET.get()) > 0);
+        SuiteAssembler.put(assembler, AssemblerSlots.FILL, Items.BUCKET, 1);
+        SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, WardTallow.BUCKET.get()) > 0);
         helper.assertValueEqual(outputs(assembler, WardTallow.BUCKET.get()), 1, "the Ward Tallow buckets in the outputs");
         helper.succeed();
     }
 
     /** A Ward Tallow bucket in the drain slot pours into Charge's box, as a crude bucket would into another recipe's. */
     private static void chargeDrainsABucket(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = holding(helper, "charged_rift");
-        put(assembler, 0, RiftShards.ITEM.get(), 2);
-        put(assembler, 1, item("fieldworks:tar"), 1);
-        put(assembler, 2, ObsidianFlakes.ITEM.get(), 2);
-        put(assembler, AssemblerSlots.DRAIN, WardTallow.BUCKET.get(), 1);
-        tickUntil(helper, assembler, () -> outputs(assembler, RiftShards.CHARGED_RIFT.get()) > 0);
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "charged_rift");
+        SuiteAssembler.put(assembler, 0, RiftShards.ITEM.get(), 2);
+        SuiteAssembler.put(assembler, 1, item("fieldworks:tar"), 1);
+        SuiteAssembler.put(assembler, 2, ObsidianFlakes.ITEM.get(), 2);
+        SuiteAssembler.put(assembler, AssemblerSlots.DRAIN, WardTallow.BUCKET.get(), 1);
+        SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, RiftShards.CHARGED_RIFT.get()) > 0);
         helper.assertValueEqual(outputs(assembler, RiftShards.CHARGED_RIFT.get()), 1, "the Charged Rifts in the outputs");
         helper.assertValueEqual(assembler.fluids().contents(0).getAmount(), 750, "the Ward Tallow left of the bucket after Charge");
         helper.succeed();
     }
 
     private static void seal(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = holding(helper, "warding_essence");
-        put(assembler, 0, RiftShards.CHARGED_RIFT.get(), 2);
-        put(assembler, 1, item("wireworks:plastic"), 2);
-        put(assembler, 2, Items.STRING, 2);
-        put(assembler, 3, Items.GUNPOWDER, 1);
-        put(assembler, 4, Items.IRON_INGOT, 1);
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "warding_essence");
+        SuiteAssembler.put(assembler, 0, RiftShards.CHARGED_RIFT.get(), 2);
+        SuiteAssembler.put(assembler, 1, item("wireworks:plastic"), 2);
+        SuiteAssembler.put(assembler, 2, Items.STRING, 2);
+        SuiteAssembler.put(assembler, 3, Items.GUNPOWDER, 1);
+        SuiteAssembler.put(assembler, 4, Items.IRON_INGOT, 1);
         assembler.fluids().set(0, new FluidStack(Fluids.WATER, 1000));
-        tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
-        expectOutput(helper, assembler, Essences.item(Essence.WARDING), "Seal");
+        SuiteAssembler.tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
+        SuiteAssembler.expectOutput(helper, assembler, Essences.item(Essence.WARDING), "Seal");
         helper.assertTrue(assembler.fluids().contents(0).isEmpty(), "Seal left some of its water");
         helper.succeed();
     }
@@ -212,48 +202,6 @@ final class WardingChainTests {
     }
 
     // -- fixtures -------------------------------------------------------------------------------
-
-    /** A tier 1 Assembler placed at {@link #ORIGIN} by a player's click, holding the pack's recipe {@code assembling/<path>}. */
-    static AssemblerBlockEntity holding(GameTestHelper helper, String path) {
-        FakePlayer player = new FakePlayer(helper.getLevel(), new GameProfile(UUID.randomUUID(), "warding_chain"));
-        player.setGameMode(GameType.SURVIVAL);
-        ItemStack stack = new ItemStack(Assemblers.item(AssemblerTier.ONE).get());
-        player.setItemInHand(InteractionHand.MAIN_HAND, stack);
-        BlockPos floor = helper.absolutePos(ORIGIN.below());
-        player.gameMode.useItemOn(player, helper.getLevel(), stack, InteractionHand.MAIN_HAND,
-                new BlockHitResult(Vec3.atCenterOf(floor).relative(Direction.UP, 0.5), Direction.UP, floor, false));
-        AssemblerBlockEntity assembler = helper.getBlockEntity(ORIGIN, AssemblerBlockEntity.class);
-        assembler.setHeldRecipe(Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "assembling/" + path), player);
-        return assembler;
-    }
-
-    static void put(AssemblerBlockEntity assembler, int slot, Item item, int count) {
-        assembler.inventory().set(slot, ItemResource.of(item), count);
-    }
-
-    /** Ticks the Assembler, fed FE, until {@code done}; how many ticks it took. */
-    static int tickUntil(GameTestHelper helper, AssemblerBlockEntity assembler, BooleanSupplier done) {
-        var supply = new SimpleEnergyHandler(1_000_000, 1_000_000, 1_000_000, 1_000_000);
-        var face = helper.getLevel().getCapability(Capabilities.Energy.BLOCK, helper.absolutePos(ORIGIN), Direction.UP);
-        helper.assertTrue(face != null, "the Assembler takes no FE");
-        int ran = 0;
-        while (!done.getAsBoolean() && ran < MOST_TICKS) {
-            EnergyHandlerUtil.move(supply, face, 1000, null);
-            assembler.serverTick(helper.getLevel());
-            ran++;
-        }
-        helper.assertTrue(done.getAsBoolean(), "the Assembler made nothing in " + MOST_TICKS + " ticks: " + assembler.state());
-        return ran;
-    }
-
-    static void expectOutput(GameTestHelper helper, AssemblerBlockEntity assembler, Item made, String step) {
-        var output = assembler.inventory().getResource(AssemblerSlots.OUTPUT);
-        int count = assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT);
-        helper.assertTrue(output.getItem() == made && count == 1, step + " made " + count + " " + output.getItem() + ", not one " + made);
-        for (int slot = 0; slot < AssemblerSlots.INPUTS; slot++) {
-            helper.assertValueEqual(assembler.inventory().getAmountAsInt(slot), 0, "what " + step + " left in input " + slot);
-        }
-    }
 
     /** How many of {@code item} the shared outputs hold. */
     private static int outputs(AssemblerBlockEntity assembler, Item item) {

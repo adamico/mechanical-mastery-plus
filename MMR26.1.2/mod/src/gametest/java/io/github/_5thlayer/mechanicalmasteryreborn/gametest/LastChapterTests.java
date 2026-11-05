@@ -50,7 +50,7 @@ final class LastChapterTests {
         }
     }
 
-    /** What EMI marks as the last chapter's: every recipe its stage file names, the game-test pack's the eye of ender's. */
+    /** What EMI marks as the last chapter's: every recipe its stage file names, which in the game-test pack is the eye of ender's. */
     private static void recipesFromTheStageFile(GameTestHelper helper) {
         helper.assertValueEqual(ChainMachines.lastChapterRecipes(helper.getLevel().getServer()),
                 Set.of(Identifier.withDefaultNamespace("ender_eye")), "the last chapter's stage file's recipes");

@@ -135,15 +135,15 @@ public final class ChainMachines {
 
     /** Every chain's own recipe, by its id, and the handicap whose challenge unlocks it. */
     public static Map<Identifier, Handicap> recipes(MinecraftServer server) {
-        return read(server).byId();
+        return stages(server).byId();
     }
 
     /** Every recipe the last chapter unlocks, by its id. */
     public static Set<Identifier> lastChapterRecipes(MinecraftServer server) {
-        return read(server).lastChapter();
+        return stages(server).lastChapter();
     }
 
-    private static Read read(MinecraftServer server) {
+    private static Read stages(MinecraftServer server) {
         RecipeMap recipes = server.getRecipeManager().recipeMap();
         Read found = read;
         if (found == null || found.recipes() != recipes) {
@@ -184,19 +184,19 @@ public final class ChainMachines {
         if (resource.isEmpty()) {
             return Set.of();
         }
-        JsonElement read;
+        JsonElement json;
         try (Reader reader = resource.get().openAsReader()) {
-            read = JsonParser.parseReader(reader);
+            json = JsonParser.parseReader(reader);
         } catch (IOException | RuntimeException unreadable) {
             LOGGER.warn("Can't read the {} stage file {}", stage, file, unreadable);
             return Set.of();
         }
-        if (!read.isJsonObject() || !read.getAsJsonObject().has("recipes")
-                || !read.getAsJsonObject().get("recipes").isJsonArray()) {
+        if (!json.isJsonObject() || !json.getAsJsonObject().has("recipes")
+                || !json.getAsJsonObject().get("recipes").isJsonArray()) {
             return Set.of();
         }
         var found = new LinkedHashSet<Identifier>();
-        for (JsonElement id : read.getAsJsonObject().getAsJsonArray("recipes")) {
+        for (JsonElement id : json.getAsJsonObject().getAsJsonArray("recipes")) {
             Identifier recipe = id.isJsonPrimitive() ? Identifier.tryParse(id.getAsString()) : null;
             if (recipe != null && recipes.byKey(ResourceKey.create(Registries.RECIPE, recipe)) != null) {
                 found.add(recipe);
