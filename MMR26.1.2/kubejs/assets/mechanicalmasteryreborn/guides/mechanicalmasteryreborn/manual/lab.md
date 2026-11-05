@@ -32,11 +32,10 @@ It offers four:
   Vitae's chain up to the Vital Essence, infused at a tier-3 Ara Vitae reached through the Demon Realm.
 - **Money**: your sales to the Shop pay half, and the money your team had when it started is set aside until
   the challenge ends, when it all comes back, with whatever you earned meanwhile. Starting it opens the
-  challenge's Offers in the Shop: the ore blocks, and the Permits you buy to sell Transmuted Essences and to buy
-  the Aureate. The Offers stay open through a win or a reset, close again if your team stops the challenge, and
-  open again when it starts it anew; the Permits your team bought are its to keep. Its own Transmuted Essence, the Aureate, is bought rather than made: the Aureate Buy Permit, for
-  $10,000, opens its Offer, $2,500 each, and the challenge's own fluids, sold by Sellers, can pay for the whole
-  quota.
+  challenge's Offers in the Shop: the ore blocks, the sale of the other Transmuted Essences, and the Aureate.
+  They stay open through a win or a reset, close again if your team stops the challenge, and open again when it
+  starts it anew. Its own Transmuted Essence, the Aureate, is bought rather than made, and the challenge's own
+  fluids, sold by Sellers, can pay for the whole quota.
 
 Your team plays one challenge at a time, and wins it by filling its Port beside [C.O.D.](cod.md) with its quota; a
 won challenge shows as won, and can't be chosen again. Only the team whose island the lab stands on can choose at it.

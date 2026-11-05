@@ -29,7 +29,7 @@ public final class MoneyHandicap {
 
     /**
      * The Permit the team is given when it starts the money challenge and loses when it stops it, which every Offer of
-     * the chain needs. The Permits the team buys through those Offers are its own, kept as a built machine is.
+     * the chain needs. A Permit the team buys is its own, kept as a built machine is, so none of the chain's Offers hangs on one.
      */
     public static final String PERMIT = "reborn_money";
 
