@@ -19,9 +19,9 @@
 #     its top lighter than its sides; a Port takes its essence's colour;
 #   - on the cover and the card, the essences by kind, each scaled up nearest-neighbour and glowing in
 #     its colour: left of the island the four tiers in a diamond, lowest at the top; right of it the
-#     four Transmuted Essences in a diamond; and Nullessence and Quintessence, the last stand's two
-#     sides, larger, overlapping each other over the tree's leaves; the icon, too small for them, keeps
-#     the island alone;
+#     four Transmuted Essences in a diamond; and on all three, the icon too, Nullessence and
+#     Quintessence, the last stand's two sides, larger, overlapping each other over the tree's leaves,
+#     the only essences large enough to read on the icon;
 #   - the band across the island's earth, as the old logo's letters crossed it, dark but letting the
 #     island show through, ruled top and bottom in the accent, holding the suite's title turned
 #     around, as A Touch of Darkness's is: "MECHANICAL MASTERY" in Barlow Condensed caps, in the
@@ -60,9 +60,9 @@ LAST_STAND = ['nullessence', 'quintessence']
 # where the tier essences' diamond and the Transmuted Essences' stand, as fractions of the width and
 # height, and how far a diamond's points are from its middle, in essences
 LEFT, RIGHT, SPREAD = (0.14, 0.34), (0.86, 0.34), 1.0
-# where Nullessence and Quintessence stand, over the tree's leaves, how much larger than the others they
-# are drawn, and how far each stands off that middle, in their own size
-PAIR, PAIR_SCALE, OVERLAP = (0.5, 0.22), 3, 0.18
+# where Nullessence and Quintessence stand, over the tree's leaves, a fraction of the island's height
+# below its top, and how far each stands off that middle, in their own size
+PAIR, OVERLAP = 0.2, 0.18
 ISLAND = 'config/skyblockbuilder/templates/islands/reborn.snbt'
 # each of the island's blocks as the (top, side) colour it is drawn in; a Port's is its essence's
 BLOCKS = {'stone': ((128, 128, 132),) * 2, 'dirt': ((134, 96, 66),) * 2,
@@ -190,12 +190,13 @@ def font(names, size):
     raise SystemExit('needs one of ' + ', '.join(names))
 
 
-def make(out, W, H, title_size, band_y, island_h, island_y, px=None, stacked=False):
+def make(out, W, H, title_size, band_y, island_h, island_y, pair_px, px=None, stacked=False):
     # title_size is the title's size, drawn smaller where it would not fit, as with a fallback font;
     # band_y is where the band's middle is, island_h how much of the height the island takes and
-    # island_y where its top is, each a fraction of the height; px is the essences' size, a whole
-    # multiple of the textures' 32 so nearest-neighbour keeps their pixels square, or None to leave
-    # them out; stacked breaks the title in two lines over the pill, for the square icon
+    # island_y where its top is, each a fraction of the height; pair_px is Nullessence's and
+    # Quintessence's size and px the others', whole multiples of the textures' 32 so nearest-neighbour
+    # keeps their pixels square, px None to leave the others out; stacked breaks the title in two
+    # lines over the pill, for the square icon
     lines = TITLE.split(' ') if stacked else [TITLE]
     d = ImageDraw.Draw(Image.new('RGB', (1, 1)))
     while True:
@@ -225,9 +226,8 @@ def make(out, W, H, title_size, band_y, island_h, island_y, px=None, stacked=Fal
     if px:
         essences(img, diamond(img, TIERS, LEFT, px), px)
         essences(img, diamond(img, TRANSMUTED, RIGHT, px), px)
-        big = PAIR_SCALE * px
-        mx, my, o = int(PAIR[0] * W), int(PAIR[1] * H), int(OVERLAP * big)
-        essences(img, [(LAST_STAND[0], mx - o, my - o), (LAST_STAND[1], mx + o, my + o)], big)
+    mx, my, o = W // 2, at[1] + int(PAIR * land.height), int(OVERLAP * pair_px)
+    essences(img, [(LAST_STAND[0], mx - o, my - o), (LAST_STAND[1], mx + o, my + o)], pair_px)
 
     band = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     ImageDraw.Draw(band).rectangle([0, top, W, bottom], fill=BAND)
@@ -256,10 +256,10 @@ def make(out, W, H, title_size, band_y, island_h, island_y, px=None, stacked=Fal
 
 
 # each image: where it goes, its size, its title's size, where its band is, the island's height and
-# top, and its essences' size
-COVER = ('publish/reborn-cover.png', 1280, 640, 108, 0.76, 0.92, 0.04, 64)
-ICON = ('publish/reborn-icon.png', 512, 512, 100, 0.74, 0.62, 0.02)
-CARD = ('publish/reborn-card.png', 1920, 1080, 162, 0.77, 0.9, 0.04, 96)
+# top, and its Nullessence's and Quintessence's size and the other essences'
+COVER = ('publish/reborn-cover.png', 1280, 640, 108, 0.76, 0.92, 0.04, 192, 64)
+ICON = ('publish/reborn-icon.png', 512, 512, 100, 0.74, 0.62, 0.02, 96)
+CARD = ('publish/reborn-card.png', 1920, 1080, 162, 0.77, 0.9, 0.04, 288, 96)
 
 make(*COVER)
 make(*ICON, stacked=True)
