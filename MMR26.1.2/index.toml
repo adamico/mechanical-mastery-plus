@@ -58,7 +58,7 @@ hash = "26f43add76e35fa7883a60cf864740b3c5225d1ab7cf91c8f5a476aa0494c666"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/cod.md"
-hash = "a657f3c53601f16462bdf2e987bc3703202e7583a0c631d79c4d4e09adcfb995"
+hash = "1ed2902ce99322cb2fe45617056131d40d3fd80ce7450fec9fa5f12685e3dec1"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/decomposing.md"
@@ -73,12 +73,16 @@ file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/man
 hash = "fcc731c70a74d360062db1ad3b301c6dcf3d3c7bab73bc905ba677f1eb8f6deb"
 
 [[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/hermetic_lab.md"
+hash = "bfac3ed3d17ce0082ee41bc9aa05821809e66a3906e976e588a74e9798e578ef"
+
+[[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/index.md"
-hash = "94fb1d0f9f749bd80af85098f6782f1420d959364daa84d52ab0a4cce93b320c"
+hash = "9082401f4dc75d900c0226c12096ff7ddc5655508c34a3727a54f4a7503694c4"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/lab.md"
-hash = "68a8fa9be2e313e2648100411daeb199eb905bd0f98cb7dd3fb5a21cc51dac4b"
+hash = "6b4fb7869f2eaf560002ee000bc1942869357ef30b569d08748e2e619d631b6a"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/casing.md"
@@ -205,6 +209,10 @@ file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/last_chapter.json"
 hash = "6d11da7cf1ec8d87bb2146117f9100094e29a07c960f32dcde57f2141b56855e"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/last_stand.json"
+hash = "fddceef4b5913d2def8f75832a07e0afa5c692d6ec5a56e47124036d3ae6c2e4"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/life.json"
 hash = "c8a43e55406703ac2ce08dbf78ca3a9c19aa977525879426ddf009ade64e3951"
 
@@ -279,6 +287,10 @@ hash = "f7cae0ca343b708282bc77e7ba9eb75c65825c4623b41beec20933770e636f31"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/end_portal_frame.json"
 hash = "32f47fac79aa54ed0dab417b906d98aa3d51927928d2ff691840bfe5d1be409f"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/quartessence.json"
+hash = "e61cc83aa91718f98a885c8aaf976cb55d8004cf9bd2d50446ee89f4d82249cb"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/ward_tallow.json"
@@ -559,6 +571,18 @@ hash = "8edf53916cbb45157b90fc47ff96e5715da0fcea3d11775aaf94ceba346a81d7"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/tags/item/chain_machines/life.json"
 hash = "5cee57303d4ea21046869d09df14ca5271fe1531b1397a95b5e1b8b50e701675"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/tags/item/rung/quintessence/quartessence.json"
+hash = "4e957e4e76f7ebe96767e54f78499f5c01b678cbccbf6c736b4c01dc0d9e17e1"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/tags/item/rung/quintessence/quintessence.json"
+hash = "acad793984fd87a6b7159fa3672f6addc5b0341e1af8ffabbd08cfe4a72ed32e"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/voidworks/family/quintessence.json"
+hash = "7dfdabdb3e7ef68caea852c4a1313b9f2d8b9e01cf9c1a39d063c222460d4428"
 
 [[files]]
 file = "kubejs/data/voidworks/data_maps/dimension/void_pressure.json"
