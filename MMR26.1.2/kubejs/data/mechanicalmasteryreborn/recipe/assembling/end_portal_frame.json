@@ -2,7 +2,7 @@
   "type": "craftworks:assembling",
   "category": "crafting",
   "ingredients": [
-    { "ingredient": "minecraft:calcite", "count": 4 },
+    { "ingredient": "mechanicalmasteryreborn:polished_calcite", "count": 4 },
     { "ingredient": "minecraft:ender_pearl", "count": 4 },
     { "ingredient": "minecraft:nether_wart", "count": 4 }
   ],

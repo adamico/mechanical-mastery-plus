@@ -147,6 +147,10 @@ _Avoid_: tallow oil, rendered fat
 What a Harvester takes off a placed obsidian block with magma slurry, breaking the block, for the protection challenge's Chain: only that harvest gives them, and breaking obsidian by hand gives obsidian.
 _Avoid_: obsidian dust, obsidian shards
 
+**Polished Calcite**:
+The companion mod's block the assembler makes from four calcite, and the End Portal Frame from four of it with ender pearls and nether wart: the frame's pale body, since end stone is had only in the End. Calcite comes from the Shop, and then from a generator with a calcite block as its modifier.
+_Avoid_: end stone (which it stands for)
+
 **Charged Rift**:
 The protection challenge's Chain's step between the Rift Shards and the Warding Essence: two shards charged on an Assembler with tar, Obsidian Flakes and Ward Tallow. Two of them, sealed with plastic, make a Warding Essence.
 _Avoid_: charged shard

@@ -8,6 +8,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastChapter;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.PolishedCalcite;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import java.util.Set;
@@ -19,6 +20,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.BlockUtil;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 /**
@@ -35,6 +37,7 @@ final class LastChapterTests {
         tests.test("last_chapter_stage_given_with_the_fourth_win", 1, LastChapterTests::stageWithTheFourthWin);
         tests.test("last_chapter_recipes_are_read_from_its_stage_file", 1, LastChapterTests::recipesFromTheStageFile);
         tests.test("last_chapter_recipes_marked_locked_until_the_fourth_win", 1, LastChapterTests::markedUntilTheFourthWin);
+        tests.test("last_chapter_polished_calcite_drops_itself", 1, LastChapterTests::polishedCalciteDropsItself);
         tests.test("last_chapter_nether_portal_forms_only_after_the_fourth_win", 1, LastChapterTests::portalAfterTheFourthWin);
         tests.test("last_chapter_nether_portal_never_forms_off_an_island", 1, LastChapterTests::noPortalOffAnIsland);
         tests.test("last_chapter_nether_portal_always_forms_in_the_nether", 1, LastChapterTests::portalInTheNether);
@@ -67,6 +70,17 @@ final class LastChapterTests {
         helper.assertTrue(table.lastChapter().contains(Identifier.withDefaultNamespace("ender_eye")), "the table sent lacks the last chapter's recipe");
         win(helper, team, Handicap.MONEY);
         helper.assertFalse(ChainMachines.table(server, team).lastChapterLocked(), "the last chapter's recipes marked after the fourth win");
+        helper.succeed();
+    }
+
+    /** Polished Calcite, which the End Portal Frame is crafted from, drops itself when mined, as calcite does. */
+    private static void polishedCalciteDropsItself(GameTestHelper helper) {
+        BlockPos at = new BlockPos(1, 2, 1);
+        helper.setBlock(at, PolishedCalcite.BLOCK.get());
+        var drops = Block.getDrops(helper.getBlockState(at), helper.getLevel(), helper.absolutePos(at), null);
+        helper.assertValueEqual(drops.size(), 1, "the kinds Polished Calcite drops");
+        helper.assertTrue(drops.getFirst().is(PolishedCalcite.ITEM.get()) && drops.getFirst().getCount() == 1,
+                "Polished Calcite dropped " + drops.getFirst() + ", not itself");
         helper.succeed();
     }
 
