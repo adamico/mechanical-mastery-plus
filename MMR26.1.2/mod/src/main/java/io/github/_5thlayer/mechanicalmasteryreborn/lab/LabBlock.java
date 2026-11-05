@@ -95,10 +95,14 @@ public final class LabBlock extends BaseEntityBlock {
         if (!stack.is(Essences.item(Essence.NULLESSENCE)) && !shard) {
             return InteractionResult.TRY_WITH_EMPTY_HAND;
         }
+        // Before it awakens a hand of them opens the lab, on the client as on the server.
+        if (!state.getValue(HERMETIC)) {
+            return InteractionResult.TRY_WITH_EMPTY_HAND;
+        }
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
-        if (!hermetic((ServerLevel) level, pos) || !(level.getBlockEntity(pos) instanceof LabBlockEntity lab)) {
+        if (!(level.getBlockEntity(pos) instanceof LabBlockEntity lab)) {
             return InteractionResult.TRY_WITH_EMPTY_HAND;
         }
         if (lab.feed(stack) == 0) {

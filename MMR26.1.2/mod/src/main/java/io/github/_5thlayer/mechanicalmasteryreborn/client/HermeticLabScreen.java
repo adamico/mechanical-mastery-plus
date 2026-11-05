@@ -163,7 +163,7 @@ final class HermeticLabScreen extends AbstractContainerScreen<HermeticLabMenu> {
                 left, Challenges.name(handicap));
     }
 
-    /** Where row {@code index} starts: a handicap's by its ordinal, then the heart's. */
+    /** Where row {@code index} starts: a handicap's by its ordinal, then the heart's, then the refund's. */
     private static int rowTop(int index) {
         return HermeticLabMenu.ROWS_Y + index * HermeticLabMenu.ROW;
     }

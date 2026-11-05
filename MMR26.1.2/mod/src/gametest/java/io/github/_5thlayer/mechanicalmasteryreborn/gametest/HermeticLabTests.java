@@ -105,7 +105,7 @@ final class HermeticLabTests {
         win(helper, team);
         helper.setBlock(GENERATOR, GENERATOR_BLOCK);
         helper.setBlock(LAB, Lab.BLOCK.get());
-        lab(helper).feed(nullessence(64));
+        helper.assertValueEqual(lab(helper).feed(nullessence(64)), 0, "the Nullessence the lab took before the last stand");
         helper.assertFalse(Spells.begin(server(helper), team, Handicap.ENERGY), "a spell was taken on before the last stand");
         state(helper).beginSpell(team, Handicap.ENERGY, Spell.starting(server(helper).overworld().getGameTime(), PAID + 10));
         helper.runAtTickTime(PAID, () -> {

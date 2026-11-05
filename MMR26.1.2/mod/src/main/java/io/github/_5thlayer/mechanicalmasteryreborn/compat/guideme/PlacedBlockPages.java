@@ -6,13 +6,13 @@ package io.github._5thlayer.mechanicalmasteryreborn.compat.guideme;
 import java.util.Arrays;
 import java.util.Optional;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import guideme.GuidesCommon;
 import guideme.PageAnchor;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.LabBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.port.PortBlock;
-import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;

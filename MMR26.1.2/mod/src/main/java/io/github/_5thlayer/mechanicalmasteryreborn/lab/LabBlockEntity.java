@@ -392,6 +392,11 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
         return taken;
     }
 
+    /** Whether its team's last stand runs; never on a client. */
+    boolean lastStandRuns() {
+        return level instanceof ServerLevel server && TeamState.get(server.getServer()).inLastStand(owner(server));
+    }
+
     /** The id of the protection spell its team bears, whose Null Shards it takes; none on a client. */
     Optional<UUID> shardSpell() {
         if (!(level instanceof ServerLevel server)) {
@@ -466,9 +471,10 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
             this.lab = lab;
         }
 
+        /** Nullessence, and only while the lab's team's last stand runs, so none is put in where it would never be used. */
         @Override
         public boolean isValid(int index, ItemResource resource) {
-            return resource.is(Essences.item(Essence.NULLESSENCE));
+            return resource.is(Essences.item(Essence.NULLESSENCE)) && lab.lastStandRuns();
         }
 
         @Override

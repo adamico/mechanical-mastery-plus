@@ -24,8 +24,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.NbtOps;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -90,7 +90,7 @@ final class LastStandTests {
         helper.assertValueEqual(menu.lastStand(), LabMenu.LastStandPhase.RUNNING, "a lab open as the last stand started");
         helper.assertFalse(menu.clickMenuButton(player, LabMenu.START_LAST_STAND), "the lab started the last stand twice");
         helper.assertTrue(provider(helper).createMenu(0, player.getInventory(), player) instanceof HermeticLabMenu,
-                "the lab opens its own menu once the last stand started");
+                "the lab opens the Hermetic Lab's menu once the last stand started");
         Chains.unlock(helper.getLevel().getServer(), player);
         helper.assertTrue(TestStages.holds(player, LastStands.STAGE), "no last stand's stage once it started");
         helper.succeed();
@@ -200,7 +200,7 @@ final class LastStandTests {
             TeamState loaded = codec.parse(ops, codec.encodeStart(ops, state(helper)).getOrThrow()).getOrThrow();
             helper.assertTrue(loaded.wonThePack(team), "the win after a load");
             helper.assertTrue(provider(helper).createMenu(0, player.getInventory(), player) instanceof HermeticLabMenu,
-                    "the lab once the pack is won opens the lab's own menu");
+                    "the lab once the pack is won opens the Hermetic Lab's menu");
             helper.succeed();
         });
     }
