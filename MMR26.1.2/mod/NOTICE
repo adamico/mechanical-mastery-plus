@@ -68,7 +68,7 @@ Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
         8b85ad732023174d9a9da74e6bf2272d6c0bef17
         - cod_top.png is device_terminal_top, and cod_side_shut_down.png device_terminal_front_off,
           with the beige casing darkened: each pixel brighter than 120 and of a spread under 60
-          between its channels scaled by (0.32, 0.33, 0.36).
+          between its channels scaled by (0.55, 0.56, 0.6).
         - cod_side.png is device_terminal_front_on with the casing darkened the same way, its black
           screen lit dark green (8, 70 + its lightness, 20), its white cursor bright green
           (120, 255, 140) and its yellow lamp green (40, 210, 70).
