@@ -11,17 +11,23 @@
 #   - publish/reborn-icon.png, 512x512, its icon, which must read at 64px;
 #   - publish/reborn-card.png, 1920x1080, the video's title and end card.
 #
-# What it draws:
-#   - the void: a near-black ground with faint specks, seeded, so every run draws the same image;
-#   - above the title band, the four tier essences in a row, lowest first, scaled up nearest-neighbour,
-#     each glowing in its own colour;
-#   - the band, dark, ruled top and bottom in the accent, holding the suite's title turned around, as
-#     A Touch of Darkness's is: "MECHANICAL MASTERY" in Barlow Condensed caps, in the accent's
-#     orange, then the suite's white pill holding "reborn". The icon stacks them;
-#   - beneath the band, the four Transmuted Essences with Nullessence and Quintessence, the last
-#     stand's two sides, paired in their middle.
+# What it draws, after the very first Mechanical Mastery's logo, its island on an orange sky:
+#   - the void: a near-black ground with faint specks, seeded, so every run draws the same image, and
+#     an orange glow behind the island, in the accent;
+#   - the team's starting island in the middle, drawn from its template (ISLAND) block by block, a
+#     quarter turned so its tree stands at the back, each block a cube in a flat colour of its own,
+#     its top lighter than its sides; a Port takes its essence's colour;
+#   - on the cover and the card, the four tier essences either side of the tree, lowest first, and the
+#     four Transmuted Essences either side of the grass, Nullessence and Quintessence, the last
+#     stand's two sides, nearest the island, each scaled up nearest-neighbour and glowing in its
+#     colour; the icon, too small for them, keeps the island alone;
+#   - the band across the island's earth, as the old logo's letters crossed it, dark but letting the
+#     island show through, ruled top and bottom in the accent, holding the suite's title turned
+#     around, as A Touch of Darkness's is: "MECHANICAL MASTERY" in Barlow Condensed caps, in the
+#     accent's orange, then the suite's white pill holding "reborn". The icon stacks them.
 #
-# Its art is the companion mod's own textures only (mod/NOTICE), nothing of Mojang's. Its fonts are
+# Its art is the companion mod's own textures and flat colours only (mod/NOTICE), nothing of
+# Mojang's: the island's vanilla blocks are colours, not textures. Its fonts are
 # found on the system, with fallbacks; none is committed. Barlow Condensed and Barlow are Google Fonts
 # (SIL OFL), installed by hand, the first's Black for the title, as heavy as it comes so it stands
 # out, and the second's Bold for the pill; without them the title falls back to Impact and the pill to
@@ -29,13 +35,14 @@
 import math
 import os
 import random
+import re
 
 from PIL import Image, ImageDraw, ImageFont
 
 T = 'mod/src/main/resources/assets/mechanicalmasteryreborn/textures/item/'
 SEED = 26
 BG = (6, 6, 10)
-BAND = (4, 4, 7, 235)
+BAND = (4, 4, 7, 170)  # dark enough for the title, light enough for the island beneath
 ACCENT = (255, 136, 32)  # orange, a machine's warning paint, apart from every essence's colour
 PILL = (240, 240, 236)
 PILL_TEXT = (24, 22, 30)
@@ -45,10 +52,23 @@ GLOWS = {'nullessence': (255, 255, 255)}
 # the four tiers, lowest first
 TIERS = ['basic_mechanical_essence', 'regular_mechanical_essence', 'improved_mechanical_essence',
          'advanced_mechanical_essence']
-# the Transmuted Essences, two each side of Nullessence and Quintessence; those two are animated, and
-# their first frames are drawn
+# the Transmuted Essences, two each side of the island, outside Nullessence and Quintessence; those two
+# are animated, and their first frames are drawn
 TRANSMUTED = ['galvanic_essence', 'warding_essence', 'vital_essence', 'aureate_essence']
 LAST_STAND = ['nullessence', 'quintessence']
+# the tier essences' and the others' places, as fractions of the width
+TIER_X = [0.1, 0.22, 0.78, 0.9]
+UNDER_X = [0.05, 0.14, 0.23, 0.77, 0.86, 0.95]
+ISLAND = 'config/skyblockbuilder/templates/islands/reborn.snbt'
+# each of the island's blocks as the (top, side) colour it is drawn in; a Port's is its essence's
+BLOCKS = {'stone': ((128, 128, 132),) * 2, 'dirt': ((134, 96, 66),) * 2,
+          'grass_block': ((106, 170, 64), (134, 96, 66)), 'water': ((60, 100, 210),) * 2,
+          'lava': ((240, 120, 30),) * 2, 'oak_log': ((176, 140, 88), (104, 82, 52)),
+          'oak_leaves': ((58, 120, 40),) * 2, 'cod': ((64, 64, 72),) * 2, 'lab': ((92, 88, 104),) * 2}
+PORTS = ['galvanic', 'warding', 'vital', 'aureate']
+LIGHT = (0.8, 0.62)  # the island's left and right faces against its top
+VIEW = (0.9, 0.3)  # how wide a block's diagonal is drawn and how far its top tilts toward the camera
+SKY = 200  # the orange glow's strength at its middle
 TITLE, WORD = 'MECHANICAL MASTERY', 'reborn'
 FONTS = ['~/Library/Fonts/', '/Library/Fonts/', '~/.local/share/fonts/barlow/', '~/.local/share/fonts/',
          '/usr/share/fonts/TTF/', '/usr/share/fonts/truetype/barlow/']
@@ -90,13 +110,61 @@ def essence(img, name, cx, cy, px):
     img.alpha_composite(s, (cx - px // 2, cy - px // 2))
 
 
-def row(img, items, cy, px, gap):
-    # items in a row centred on the width, px each with gap between them, or less where the width
-    # holds no more
-    gap = min(gap, (img.width - len(items) * px) // (len(items) + 1))
-    x0 = (img.width - len(items) * px - (len(items) - 1) * gap) // 2 + px // 2
-    for i, name in enumerate(items):
-        essence(img, name, x0 + i * (px + gap), cy, px)
+def flank(img, items, xs, y, px):
+    # items at the fractions xs of the width, at the fraction y of the height
+    for name, fx in zip(items, xs):
+        essence(img, name, int(fx * img.width), int(y * img.height), px)
+
+
+def blocks():
+    # the island's blocks as (x, y, z) and their colours, a quarter turned so the tree stands at the back
+    src = open(ISLAND).read()
+    palette = re.findall(r'"([^"]+)"', src[src.index('palette'):])
+    colours = dict(BLOCKS, **{p + '_port': (colour(p + '_essence'),) * 2 for p in PORTS})
+    out = []
+    for x, y, z, state in re.findall(r'pos: \[(\d+), (\d+), (\d+)\], state: (\d+|"[^"]+")', src):
+        state = palette[int(state)] if state.isdigit() else state.strip('"')
+        name = state.split('{')[0].split(':')[1]
+        if name not in colours:
+            raise SystemExit(f'no colour for {state} in {ISLAND}')
+        out.append(((8 - int(z), int(y), int(x)), colours[name]))
+    return out
+
+
+def island(u):
+    # the island, u pixels to a block: each block's top and two front faces, back to front, a face
+    # another block covers left out
+    bs = blocks()
+    solid = {b for b, _ in bs}
+    wide, tilt = VIEW
+    p = lambda x, y, z: ((x - z) * wide * u, ((x + z) * tilt - y) * u)
+    corners = [p(x + i, y + j, z + k) for (x, y, z), _ in bs for i in (0, 1) for j in (0, 1) for k in (0, 1)]
+    ox, oy = -min(c[0] for c in corners), -min(c[1] for c in corners)
+    im = Image.new('RGBA', (int(max(c[0] for c in corners) + ox) + 2, int(max(c[1] for c in corners) + oy) + 2))
+    d = ImageDraw.Draw(im)
+    q = lambda x, y, z: (p(x, y, z)[0] + ox, p(x, y, z)[1] + oy)
+    shade = lambda c, f: tuple(int(v * f) for v in c)
+    for (x, y, z), (top, side) in sorted(bs, key=lambda b: (b[0][0] + b[0][2], b[0][1])):
+        if (x, y + 1, z) not in solid:
+            d.polygon([q(x, y + 1, z), q(x + 1, y + 1, z), q(x + 1, y + 1, z + 1), q(x, y + 1, z + 1)], fill=top)
+        if (x + 1, y, z) not in solid:
+            d.polygon([q(x + 1, y + 1, z), q(x + 1, y + 1, z + 1), q(x + 1, y, z + 1), q(x + 1, y, z)],
+                      fill=shade(side, LIGHT[1]))
+        if (x, y, z + 1) not in solid:
+            d.polygon([q(x, y + 1, z + 1), q(x + 1, y + 1, z + 1), q(x + 1, y, z + 1), q(x, y, z + 1)],
+                      fill=shade(side, LIGHT[0]))
+    return im
+
+
+def sky(W, H, cx, cy):
+    # the orange glow behind the island, falling off into the void
+    r = max(W, H) * 0.55
+    a = Image.new('L', (W, H))
+    a.putdata([int(SKY * max(0, 1 - math.hypot(x - cx, (y - cy) * 1.1) / r) ** 1.5)
+               for y in range(H) for x in range(W)])
+    im = Image.new('RGBA', (W, H), ACCENT + (0,))
+    im.putalpha(a)
+    return im
 
 
 def void(W, H):
@@ -116,11 +184,13 @@ def font(names, size):
     raise SystemExit('needs one of ' + ', '.join(names))
 
 
-def make(out, W, H, title_size, px, under_px, stacked=False):
-    # title_size is the title's size, drawn smaller where it would not fit, as with a fallback font; px
-    # and under_px are the sizes of the essences above and beneath the band, whole multiples of the
-    # textures' 32 so nearest-neighbour keeps their pixels square; stacked breaks the title in two lines
-    # over the pill, for the square icon
+def make(out, W, H, title_size, band_y, island_h, island_y, px=None, under_px=None, stacked=False):
+    # title_size is the title's size, drawn smaller where it would not fit, as with a fallback font;
+    # band_y is where the band's middle is, island_h how much of the height the island takes and
+    # island_y where its top is, each a fraction of the height; px and under_px are the sizes of the
+    # tier essences and the others, whole multiples of the textures' 32 so nearest-neighbour keeps
+    # their pixels square, or None to leave them out; stacked breaks the title in two lines over the
+    # pill, for the square icon
     lines = TITLE.split(' ') if stacked else [TITLE]
     d = ImageDraw.Draw(Image.new('RGB', (1, 1)))
     while True:
@@ -136,13 +206,20 @@ def make(out, W, H, title_size, px, under_px, stacked=False):
             break
         title_size -= 2
     th = len(lines) * lh + (len(lines) - 1) * gap + gap + ph if stacked else ph
-    cy, bh = H // 2, int(th + title_size * 0.7)
+    cy, bh = int(band_y * H), int(th + title_size * 0.7)
     top, bottom = cy - bh // 2, cy + bh // 2
 
     img = void(W, H)
-    row(img, TIERS, top // 2, px, px // 2)
-    under = TRANSMUTED[:2] + LAST_STAND + TRANSMUTED[2:]
-    row(img, under, (bottom + H) // 2, under_px, under_px * 2 // 3)
+    u = 1
+    while island(u + 1).height <= island_h * H:
+        u += 1
+    land = island(u)
+    at = ((W - land.width) // 2, int(island_y * H))
+    img.alpha_composite(sky(W, H, W // 2, at[1] + land.height * 0.4))
+    img.alpha_composite(land, at)
+    if px:
+        flank(img, TIERS, TIER_X, 0.22, px)
+        flank(img, TRANSMUTED[:2] + LAST_STAND + TRANSMUTED[2:], UNDER_X, 0.54, under_px)
 
     band = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     ImageDraw.Draw(band).rectangle([0, top, W, bottom], fill=BAND)
@@ -170,10 +247,11 @@ def make(out, W, H, title_size, px, under_px, stacked=False):
     img.convert('RGB').save(out)
 
 
-# each image: where it goes, its size, its title's size and its essences' sizes
-COVER = ('publish/reborn-cover.png', 1280, 640, 108, 128, 96)
-ICON = ('publish/reborn-icon.png', 512, 512, 100, 64, 64)
-CARD = ('publish/reborn-card.png', 1920, 1080, 162, 192, 128)
+# each image: where it goes, its size, its title's size, where its band is, the island's height and
+# top, and its essences' sizes
+COVER = ('publish/reborn-cover.png', 1280, 640, 108, 0.76, 0.92, 0.04, 96, 64)
+ICON = ('publish/reborn-icon.png', 512, 512, 100, 0.74, 0.62, 0.02)
+CARD = ('publish/reborn-card.png', 1920, 1080, 162, 0.77, 0.9, 0.04, 128, 96)
 
 make(*COVER)
 make(*ICON, stacked=True)
