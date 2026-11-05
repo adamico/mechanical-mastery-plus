@@ -59,10 +59,10 @@ TRANSMUTED = ['galvanic_essence', 'warding_essence', 'vital_essence', 'aureate_e
 LAST_STAND = ['nullessence', 'quintessence']
 # where the tier essences' diamond and the Transmuted Essences' stand, as fractions of the width and
 # height, and how far a diamond's points are from its middle, in essences
-LEFT, RIGHT, SPREAD = (0.14, 0.34), (0.86, 0.34), 1.5
+LEFT, RIGHT, SPREAD = (0.14, 0.34), (0.86, 0.34), 1.0
 # where Nullessence and Quintessence stand, over the tree's leaves, how much larger than the others they
 # are drawn, and how far each stands off that middle, in their own size
-PAIR, PAIR_SCALE, OVERLAP = (0.5, 0.22), 2, 0.18
+PAIR, PAIR_SCALE, OVERLAP = (0.5, 0.22), 3, 0.18
 ISLAND = 'config/skyblockbuilder/templates/islands/reborn.snbt'
 # each of the island's blocks as the (top, side) colour it is drawn in; a Port's is its essence's
 BLOCKS = {'stone': ((128, 128, 132),) * 2, 'dirt': ((134, 96, 66),) * 2,
