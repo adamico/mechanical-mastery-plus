@@ -1,13 +1,13 @@
 name = "FTB Library (NeoForge)"
-filename = "ftb-library-neoforge-26.1.2.11.jar"
+filename = "ftb-library-neoforge-26.1.2.12.jar"
 side = "both"
 
 [download]
 hash-format = "sha1"
-hash = "2455a98a9ec1f0103dab17900024bf78b16c8a5d"
+hash = "a877b361308cdf6a1e3c6db96ebe43c9218d74e8"
 mode = "metadata:curseforge"
 
 [update]
 [update.curseforge]
-file-id = 9361489
+file-id = 9456005
 project-id = 404465
