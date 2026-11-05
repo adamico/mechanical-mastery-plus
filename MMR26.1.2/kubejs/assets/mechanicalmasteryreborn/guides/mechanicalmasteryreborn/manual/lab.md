@@ -40,7 +40,8 @@ It offers four:
 Your team plays one challenge at a time, and wins it by filling its Port beside [C.O.D.](cod.md) with its quota; a
 won challenge shows as won, and can't be chosen again. Only the team whose island the lab stands on can choose at it.
 
-Once your team has won all four, the lab's last row starts C.O.D.'s [last stand](cod.md), the pack's ending.
+Once your team has won all four, the lab's last row starts C.O.D.'s [last stand](cod.md), the pack's ending. From then on the lab
+awakens as the [Hermetic Lab](hermetic_lab.md).
 
 A challenge's machines, such as Theurgy's apparatus or the Ara Vitae, can be crafted at any time, but do no work
 on your island until your team starts it, and its own recipes, such as its essence's, can't be made until then.

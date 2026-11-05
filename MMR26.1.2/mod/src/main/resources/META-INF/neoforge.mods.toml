@@ -36,7 +36,8 @@ versionRange = "${libworks_runtime_range}"
 ordering = "NONE"
 side = "BOTH"
 
-# The money handicap's halved sales, applied only with AdminShop installed (HandSaleMixin, SellerSaleMixin).
+# The money handicap's halved sales and the money spell's risen prices, applied only with AdminShop installed
+# (HandSaleMixin, SellerSaleMixin, PurchaseMixin, BuyerPurchaseMixin).
 [[mixins]]
 config = "${mod_id}.mixins.json"
 
@@ -59,3 +60,7 @@ config = "${mod_id}.gateways.mixins.json"
 # An Ara Vitae or Hellfire Forge from a mix does no work while the life chain is locked (#243), and the Ritual of Full Stomach's feeding counts the food it feeds in a Diet (#244), applied only with Neo Vitae installed.
 [[mixins]]
 config = "${mod_id}.neovitae.mixins.json"
+
+# A Mutation Chamber climbs no Quartessence into Quintessence until its team has started its last stand, and a Void Crucible never takes one, applied only with Voidworks installed (#262).
+[[mixins]]
+config = "${mod_id}.voidworks.mixins.json"

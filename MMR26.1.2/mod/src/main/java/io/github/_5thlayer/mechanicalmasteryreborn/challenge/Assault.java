@@ -104,6 +104,14 @@ public final class Assault {
 
     /** Sends {@code team} its Assault, as its protection challenge starts, and says whether it could: only with a C.O.D. found. */
     static boolean start(MinecraftServer server, UUID team) {
+        return start(server, team, 0);
+    }
+
+    /**
+     * Sends {@code team} its Assault, its gate opening with {@code wave} waves behind it, as the protection spell's opens at
+     * its hardest steps (#263), and says whether it could: only with a C.O.D. found.
+     */
+    static boolean start(MinecraftServer server, UUID team, int wave) {
         AssaultState state = AssaultState.get(server);
         if (state.assault(team).isPresent()) {
             return true;
@@ -121,8 +129,8 @@ public final class Assault {
             buildSide(level, codPos, side, built);
         }
         Direction side = Direction.Plane.HORIZONTAL.getRandomDirection(level.getRandom());
-        List<UUID> gates = Gates.get().open(level, gateAt(codPos, side), summoner, 0).stream().toList();
-        state.putAssault(team, new AssaultState.Built(level.dimension(), built, gates, Optional.of(side), 0));
+        List<UUID> gates = Gates.get().open(level, gateAt(codPos, side), summoner, wave).stream().toList();
+        state.putAssault(team, new AssaultState.Built(level.dimension(), built, gates, Optional.of(side), wave));
         AssaultExplosions.lift(server, team);
         LOGGER.info("Sent team {} its Assault: {} blocks built, gate {} on the {} side", team, built.size(), gates, side);
         return true;

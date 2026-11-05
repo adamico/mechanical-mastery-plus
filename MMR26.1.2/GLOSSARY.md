@@ -69,15 +69,15 @@ _Avoid_: new essence
 The final essence, made in the last chapter. Its Voidworks way assembles one of each Transmuted Essence into a Quartessence and climbs that, in a Mutation Chamber, by a steep Rung paid in motes from the Nether and the End; a second way, with no Voidworks, makes it from Nullessence only while the team bears handicaps it chooses, harder than in their challenges, and the faster the more it bears. Put into C.O.D. itself during its last stand, by hand or any automation, each one cancels a fixed amount of what C.O.D. makes, and only Quintessence moves the Lead.
 
 **Quartessence**:
-The four Transmuted Essences assembled into one, one of each, which a Mutation Chamber climbs into Quintessence. Its recipe and that Rung stay locked until the last stand starts; Voidworks itself never is.
+The four Transmuted Essences assembled into one, one of each, which a Mutation Chamber, never a Void Crucible, climbs into Quintessence. Its recipe and that Rung stay locked until the last stand starts; Voidworks itself never is.
 
 **Nullessence**:
 What C.O.D. makes in its last stand, the opposite of Quintessence. A team decomposes it on the Recycler into a mix drawn from all four tiers', which the four chains run on, or turns it into Quintessence by a second way of its own; whatever becomes of it, C.O.D. has made it, and it counts against the Lead.
 _Avoid_: antithesis, anti-essence
 
-**Athanor**:
-The companion mod's block, one to a team, that turns Nullessence, and nothing else, into Quintessence: the second way, with no Voidworks, crafted from something of each challenge's own. Each handicap a team takes on there runs for a fixed spell that can't be ended early, at its challenge's peak from the start, and opens a supply line fed by the very thing the handicap takes, as it is taken: the team's generators' output, with banked FE cut (energy); Essentia Vitae from hearts given at the Athanor itself, under the hungriest diet (life); Null Shards from that spell's Assault, at its hardest steps (protection); and money drained from what the team earns during the spell, with its money set aside and the Shop's prices up (money). So nothing saved up feeds a line. The Athanor works only while a line is fed, and the more lines are, the faster it works and the less Nullessence each Quintessence takes; only all four take it ahead of C.O.D. on its own. A line counts only while its handicap is in effect, so a paused Assault counts for nothing while its spell runs on.
-_Avoid_: furnace, purifier
+**Hermetic Lab**:
+The team's lab, awakened once the team starts its last stand: it stands changed and opens a menu of its own, and turns Nullessence, and nothing else, into Quintessence, the second way, with no Voidworks. Each handicap a team takes on there runs for a fixed spell that can't be ended early, at its challenge's peak from the start, and opens a supply line fed by the very thing the handicap takes, as it is taken: the team's generators' output, with banked FE cut (energy); Essentia Vitae from hearts given at the Hermetic Lab itself, under the hungriest diet (life); Null Shards from that spell's Assault, at its hardest steps (protection); and money drained from what the team earns during the spell, with its money set aside and the Shop's prices up (money). So nothing saved up feeds a line. The Hermetic Lab works only while a line is fed, and the more lines are, the faster it works and the less Nullessence each Quintessence takes; only all four take it ahead of C.O.D. on its own. A line counts only while its handicap is in effect, so a paused Assault counts for nothing while its spell runs on.
+_Avoid_: Athanor (Neo Vitae's own block), furnace, purifier
 
 **Last chapter**:
 What a team plays once it has won all four challenges, for good: the Nether and the End open to it, it starts C.O.D.'s last stand at the lab, and it makes Quintessence there. Quintessence's chain stays locked until the last stand starts, as a challenge's does. It has no handicap and can't be lost.
@@ -132,7 +132,7 @@ A block that fights the Assault's mobs on its own, fed by the factory with FE or
 _Avoid_: turret, tower
 
 **Null Shard**:
-The drop only the mobs of an Assault taken on at the Athanor give, which the Athanor's protection line uses up; any automation may bring it there.
+The drop only the mobs of an Assault taken on at the Hermetic Lab give, which its protection line uses up; any automation may bring it there.
 _Avoid_: Rift Shard (the challenge's own drop)
 
 **Rift Shard**:
@@ -156,7 +156,7 @@ A block the pack names as making energy, as Wireworks' engines, turbines and sol
 _Avoid_: power source
 
 **Lab**:
-The special block where a team chooses a handicap to start a challenge, asks for a stop, takes its refund, and feeds science items to research what the challenge unlocks.
+The special block where a team chooses a handicap to start a challenge, asks for a stop, takes its refund, and feeds science items to research what the challenge unlocks. Once the team starts its last stand it awakens as the Hermetic Lab.
 
 **Refund**:
 What a team's lab holds for it: everything its Assaults' mobs broke on its island, given back when each Assault ends rather than put back in its place, each block as a careful mining by hand would give it. It waits there until a member takes it.

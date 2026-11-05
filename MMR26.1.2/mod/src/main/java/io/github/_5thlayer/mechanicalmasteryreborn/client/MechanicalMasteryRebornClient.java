@@ -6,8 +6,10 @@ package io.github._5thlayer.mechanicalmasteryreborn.client;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.NullShards;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
+import io.github._5thlayer.mechanicalmasteryreborn.compat.guideme.PlacedBlockPages;
 import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
@@ -21,13 +23,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterFluidModelsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.fluid.FluidTintSources;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 /**
@@ -49,7 +52,12 @@ public final class MechanicalMasteryRebornClient {
                 (asks, context) -> LabMenu.Asks.receive(asks, context.player())));
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::nameChain);
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::feedsNow);
+        NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::nullShardUse);
         NeoForge.EVENT_BUS.addListener(InflationBarOverlay::draw);
+        // With GuideME, as the pack plays, its key opens the manual's page of a block that only ever stands placed.
+        if (ModList.get().isLoaded("guideme")) {
+            PlacedBlockPages.register();
+        }
     }
 
     /**
@@ -72,8 +80,16 @@ public final class MechanicalMasteryRebornClient {
                 .withStyle(percent < 100 ? ChatFormatting.RED : ChatFormatting.GREEN));
     }
 
+    /** A Null Shard's tooltip says what it is for, since no recipe uses it (#263). */
+    private static void nullShardUse(ItemTooltipEvent event) {
+        if (event.getItemStack().is(NullShards.ITEM.get())) {
+            event.getToolTip().add(Component.translatable("item.mechanicalmasteryreborn.null_shard.tooltip").withStyle(ChatFormatting.GRAY));
+        }
+    }
+
     private static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(Cod.MENU.get(), CodScreen::new);
+        event.register(Lab.HERMETIC_MENU.get(), HermeticLabScreen::new);
         event.register(Lab.MENU.get(), LabScreen::new);
         event.register(Lab.REFUND_MENU.get(), RefundScreen::new);
     }

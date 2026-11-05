@@ -32,6 +32,7 @@ class EssenceIdsTest {
             "warding_essence",
             "vital_essence",
             "aureate_essence",
+            "quartessence",
             "quintessence",
             "nullessence");
 
@@ -40,13 +41,6 @@ class EssenceIdsTest {
     @Test
     void everyEssenceHasItsSpecifiedId() {
         assertEquals(SPECIFIED, Arrays.stream(Essence.values()).map(Essence::path).toList());
-    }
-
-    @Test
-    void everyEssenceButQuintessenceIsObtainable() {
-        assertEquals(List.of(Essence.BASIC, Essence.REGULAR, Essence.IMPROVED, Essence.ADVANCED,
-                Essence.GALVANIC, Essence.WARDING, Essence.VITAL, Essence.AUREATE, Essence.NULLESSENCE),
-                Arrays.stream(Essence.values()).filter(Essence::obtainable).toList());
     }
 
     @Test

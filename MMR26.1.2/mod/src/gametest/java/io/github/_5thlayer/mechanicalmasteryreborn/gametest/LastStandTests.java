@@ -15,6 +15,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
+import io.github._5thlayer.mechanicalmasteryreborn.lab.HermeticLabMenu;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
 import io.github._5thlayer.mechanicalmasteryreborn.record.LastStand;
@@ -24,6 +25,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -85,8 +87,10 @@ final class LastStandTests {
         helper.assertTrue(menu.showsLastStand(), "the lab hides the last stand's row after the fourth win");
         helper.assertTrue(menu.clickMenuButton(player, LabMenu.START_LAST_STAND), "the lab refused the last stand after the fourth win");
         helper.assertValueEqual(state(helper).lastStand(team), Optional.of(LastStand.starting(FLOOR)), "the last stand as it starts");
-        helper.assertValueEqual(open(helper, player).lastStand(), LabMenu.LastStandPhase.RUNNING, "the lab once the last stand started");
-        helper.assertFalse(open(helper, player).clickMenuButton(player, LabMenu.START_LAST_STAND), "the lab started the last stand twice");
+        helper.assertValueEqual(menu.lastStand(), LabMenu.LastStandPhase.RUNNING, "a lab open as the last stand started");
+        helper.assertFalse(menu.clickMenuButton(player, LabMenu.START_LAST_STAND), "the lab started the last stand twice");
+        helper.assertTrue(provider(helper).createMenu(0, player.getInventory(), player) instanceof HermeticLabMenu,
+                "the lab opens the Hermetic Lab's menu once the last stand started");
         Chains.unlock(helper.getLevel().getServer(), player);
         helper.assertTrue(TestStages.holds(player, LastStands.STAGE), "no last stand's stage once it started");
         helper.succeed();
@@ -195,7 +199,8 @@ final class LastStandTests {
             var codec = TeamState.TYPE.codec();
             TeamState loaded = codec.parse(ops, codec.encodeStart(ops, state(helper)).getOrThrow()).getOrThrow();
             helper.assertTrue(loaded.wonThePack(team), "the win after a load");
-            helper.assertValueEqual(open(helper, player).lastStand(), LabMenu.LastStandPhase.WON, "the lab once the pack is won");
+            helper.assertTrue(provider(helper).createMenu(0, player.getInventory(), player) instanceof HermeticLabMenu,
+                    "the lab once the pack is won opens the Hermetic Lab's menu");
             helper.succeed();
         });
     }
@@ -234,12 +239,17 @@ final class LastStandTests {
     }
 
     private static LabMenu open(GameTestHelper helper, Player player) {
+        return (LabMenu) provider(helper).createMenu(0, player.getInventory(), player);
+    }
+
+    /** What the lab opens, placed first if it isn't yet: the lab's menu before the last stand, the Hermetic Lab's after. */
+    private static MenuProvider provider(GameTestHelper helper) {
         if (!helper.getBlockState(LAB).is(Lab.BLOCK.get())) {
             helper.setBlock(LAB, Lab.BLOCK.get());
         }
         var provider = helper.getBlockState(LAB).getMenuProvider(helper.getLevel(), helper.absolutePos(LAB));
         helper.assertTrue(provider != null, "the lab opens nothing");
-        return (LabMenu) provider.createMenu(0, player.getInventory(), player);
+        return provider;
     }
 
     private static Player member(GameTestHelper helper, UUID team) {

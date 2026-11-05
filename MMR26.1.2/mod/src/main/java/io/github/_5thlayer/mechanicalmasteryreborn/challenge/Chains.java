@@ -76,7 +76,7 @@ public final class Chains {
         if (LastChapter.reached(server, team)) {
             stages().grant(player, LastChapter.STAGE);
         }
-        if (state.lastStand(team).isPresent()) {
+        if (LastStands.started(server, team)) {
             stages().grant(player, LastStands.STAGE);
         }
         if (player instanceof ServerPlayer serverPlayer) {

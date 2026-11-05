@@ -3,6 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.challenge;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import com.mojang.logging.LogUtils;
@@ -19,7 +20,9 @@ import org.slf4j.Logger;
  * challenge its Balance is set aside, so the chain is paid only with money earned under the handicap, and it is given
  * {@link #PERMIT}, which opens the chain's Offers, for good (ADR 0007). A reset sets aside what it earned too, as though
  * the challenge had just begun; its end gives back everything set aside, on top of what it earned since. While it plays,
- * each sale pays only {@link ServerConfig#moneySaleShare its share} of the price; buying is unaffected.
+ * each sale pays only {@link ServerConfig#moneySaleShare its share} of the price; buying is unaffected. The money spell
+ * at the Hermetic Lab (#263) sets the Balance aside the same way and gives it back as it ends, pays a smaller share of a sale,
+ * and raises the Shop's prices ({@link #purchase}).
  */
 public final class MoneyHandicap {
 
@@ -76,10 +79,32 @@ public final class MoneyHandicap {
      * while the team plays the money challenge, and the whole price otherwise.
      */
     public static long sale(MinecraftServer server, UUID account, long price) {
-        boolean plays = Accounts.get().teamOf(server, account)
-                .map(team -> TeamState.get(server).plays(team, Handicap.MONEY))
+        Optional<UUID> team = Accounts.get().teamOf(server, account);
+        TeamState state = TeamState.get(server);
+        if (team.filter(id -> state.plays(id, Handicap.MONEY)).isPresent()) {
+            return share(price, ServerConfig.moneySaleShare());
+        }
+        if (team.filter(id -> state.underSpell(id, Handicap.MONEY)).isPresent()) {
+            return share(price, ServerConfig.hermeticLabMoneySaleShare());
+        }
+        return price;
+    }
+
+    /**
+     * What a purchase of {@code price} costs {@code account}, AdminShop's id for a team's Account: the price risen by
+     * {@link ServerConfig#hermeticLabMoneyPriceRise its rise}, rounded up, while the team bears the money spell at its Hermetic Lab
+     * (#263), and the price otherwise.
+     */
+    public static long purchase(MinecraftServer server, UUID account, long price) {
+        boolean spell = Accounts.get().teamOf(server, account)
+                .map(team -> TeamState.get(server).underSpell(team, Handicap.MONEY))
                 .orElse(false);
-        return plays ? share(price, ServerConfig.moneySaleShare()) : price;
+        return spell ? rise(price, ServerConfig.hermeticLabMoneyPriceRise()) : price;
+    }
+
+    /** {@code price} times {@code rise}, rounded up. */
+    static long rise(long price, double rise) {
+        return (long) Math.ceil(price * rise);
     }
 
     /** {@code share} of {@code price}, rounded down. */
@@ -87,7 +112,8 @@ public final class MoneyHandicap {
         return (long) Math.floor(price * share);
     }
 
-    private static void setAside(MinecraftServer server, UUID team) {
+    /** Sets {@code team}'s whole Balance aside, so its Account holds only what it earns from now on. */
+    static void setAside(MinecraftServer server, UUID team) {
         Accounts accounts = Accounts.get();
         long balance = accounts.balance(server, team);
         if (balance > 0 && accounts.take(server, team, balance)) {

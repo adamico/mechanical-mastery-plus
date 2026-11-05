@@ -10,9 +10,11 @@ How to build and work the blocks your island runs on. It holds no recipes: EMI s
 and what every essence decomposes into.
 
 Hold <KeyBind id="key.guideme.guide" /> over a block or an essence in your inventory to open its page here.
+Press it while looking at the lab, C.O.D. or one of its Ports, which you only ever find placed, to open theirs.
 
 - [The Recycler](recycler/index.md), built block by block, which decomposes and recycles.
 - [Decomposing and recycling](decomposing.md), by hand or on a Recycler.
 - [The lab](lab.md), where your team starts a challenge.
 - [C.O.D.](cod.md), which makes the essence you decompose.
 - [The Electric Defence](fe_defence.md), which guards your island on FE.
+- [The Hermetic Lab](hermetic_lab.md), your lab awakened in the last stand, which makes Quintessence from Nullessence while your team bears its handicaps.
