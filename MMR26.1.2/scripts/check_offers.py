@@ -29,10 +29,10 @@ ESSENCE = re.compile(r"mechanicalmasteryreborn:\w+_essence")
 
 
 def mixes():
-    """Every item any essence's mix holds, from the first argument of each decomposing recipe."""
+    """Every item any essence's mix holds, from each mix's list: a decomposing recipe's first argument or a *_MIX const."""
     text = MIXES.read_text()
     held = set()
-    for mix in re.findall(r"decomposing\(\[(.*?)\]", text, re.S):
+    for mix in re.findall(r"(?:decomposing\(|_MIX = )\[(.*?)\]", text, re.S):
         held.update(re.findall(r"'(?:\d+x )?([a-z0-9_.-]+:[a-z0-9_/.-]+)'", mix))
     return held
 

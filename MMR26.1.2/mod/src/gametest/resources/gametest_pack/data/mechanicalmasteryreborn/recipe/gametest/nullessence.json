@@ -1,0 +1,7 @@
+{
+  "type": "mechanicalmasteryreborn:decomposing",
+  "ingredient": {"ingredient": "mechanicalmasteryreborn:nullessence", "count": 1},
+  "results": [
+    {"id": "minecraft:cobblestone", "count": 2}
+  ]
+}

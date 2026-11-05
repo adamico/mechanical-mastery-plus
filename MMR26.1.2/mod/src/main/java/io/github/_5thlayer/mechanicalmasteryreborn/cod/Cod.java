@@ -22,7 +22,10 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-/** C.O.D.'s block, item, block entity and menu, its reserve as an item face on every side, and the {@code /cod} command. */
+/**
+ * C.O.D.'s block, item, block entity and menu, its reserve and its Quintessence intake as an item face on every side, and
+ * the {@code /cod} command.
+ */
 public final class Cod {
 
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MechanicalMasteryReborn.MOD_ID);
@@ -54,6 +57,6 @@ public final class Cod {
     }
 
     private static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(Capabilities.Item.BLOCK, BLOCK_ENTITY.get(), (cod, side) -> cod.reserve());
+        event.registerBlockEntity(Capabilities.Item.BLOCK, BLOCK_ENTITY.get(), (cod, side) -> cod.face());
     }
 }

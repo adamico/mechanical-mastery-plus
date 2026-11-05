@@ -11,6 +11,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -28,8 +29,9 @@ public final class Lab {
     public static final DeferredBlock<LabBlock> BLOCK = BLOCKS.registerBlock("lab", LabBlock::new,
             props -> props.mapColor(MapColor.METAL).strength(-1.0F, 3600000.0F).sound(SoundType.METAL).noLootTable());
     public static final DeferredItem<BlockItem> ITEM = ITEMS.registerSimpleBlockItem("lab", BLOCK);
+    /** The extra data the server sends on opening is whether the lab shows its last stand's row ({@link LabMenu#open}). */
     public static final DeferredHolder<MenuType<?>, MenuType<LabMenu>> MENU =
-            MENUS.register("lab", () -> new MenuType<>(LabMenu::new, FeatureFlags.VANILLA_SET));
+            MENUS.register("lab", () -> IMenuTypeExtension.create(LabMenu::new));
     /** The team's refund, a page at a time (#259). */
     public static final DeferredHolder<MenuType<?>, MenuType<RefundMenu>> REFUND_MENU =
             MENUS.register("lab_refund", () -> new MenuType<>(RefundMenu::new, FeatureFlags.VANILLA_SET));

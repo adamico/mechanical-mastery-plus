@@ -30,8 +30,9 @@ import net.minecraft.world.level.saveddata.SavedDataType;
  * its {@link Inflation} while it plays one, with whether it was warned that Inflation nears its cap, and the money set
  * aside from its Account while it plays the money challenge, the challenges it has ever started and the chains it has
  * unlocked, which a stop takes back, the resets of the challenge it plays since it last started, the essence its Port has
- * taken toward the quota, and the tiers it has blocked and the challenges it has won, which no reset touches. Its members share
- * it, and a player who joins a team shares it from then on. Saved with the world, in the overworld's data.
+ * taken toward the quota, and the tiers it has blocked and the challenges it has won, which no reset touches, and its
+ * {@link LastStand} once it has started it. Its members share it, and a player who joins a team shares it from then on.
+ * Saved with the world, in the overworld's data.
  */
 public final class TeamState extends SavedData {
 
@@ -46,6 +47,12 @@ public final class TeamState extends SavedData {
                     .orElseGet(() -> DataResult.error(() -> "No tier " + path)),
             Essence::path);
     private static final Codec<Set<Essence>> TIERS_CODEC = TIER_CODEC.listOf().xmap(TeamState::tiers, List::copyOf);
+    private static final Codec<LastStand> LAST_STAND_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.LONG.optionalFieldOf("lead", 0L).forGetter(LastStand::lead),
+            Codec.DOUBLE.optionalFieldOf("pace", 0.0).forGetter(LastStand::pace),
+            Codec.DOUBLE.optionalFieldOf("rate", 0.0).forGetter(LastStand::rate),
+            Codec.BOOL.optionalFieldOf("won", false).forGetter(LastStand::won))
+            .apply(instance, LastStand::new));
 
     /** One team's state. */
     private static final class Entry {
@@ -62,7 +69,8 @@ public final class TeamState extends SavedData {
                 HANDICAPS_CODEC.optionalFieldOf("won", Set.of()).forGetter(entry -> entry.won),
                 Codec.LONG.optionalFieldOf("delivered", 0L).forGetter(entry -> entry.delivered),
                 HANDICAPS_CODEC.optionalFieldOf("started", Set.of()).forGetter(entry -> entry.started),
-                Codec.INT.optionalFieldOf("resets", 0).forGetter(entry -> entry.resets))
+                Codec.INT.optionalFieldOf("resets", 0).forGetter(entry -> entry.resets),
+                LAST_STAND_CODEC.optionalFieldOf("last_stand").forGetter(entry -> entry.lastStand))
                 .apply(instance, Entry::new));
 
         boolean awake;
@@ -86,9 +94,12 @@ public final class TeamState extends SavedData {
         Set<Handicap> won;
         /** The Transmuted Essence the team's Port has taken toward the quota of the challenge it plays; only while it plays one. */
         long delivered;
+        /** C.O.D.'s last stand, from the moment the team starts it, for good. */
+        Optional<LastStand> lastStand;
 
         Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation, boolean warned, long setAside,
-                Set<Handicap> unlocked, Set<Essence> blocked, Set<Handicap> won, long delivered, Set<Handicap> started, int resets) {
+                Set<Handicap> unlocked, Set<Essence> blocked, Set<Handicap> won, long delivered, Set<Handicap> started, int resets,
+                Optional<LastStand> lastStand) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
@@ -105,6 +116,7 @@ public final class TeamState extends SavedData {
             this.started = handicaps(started);
             this.started.addAll(this.unlocked);
             this.resets = handicap.isPresent() ? resets : 0;
+            this.lastStand = lastStand;
         }
     }
 
@@ -156,7 +168,7 @@ public final class TeamState extends SavedData {
         if (entry == null) {
             return;
         }
-        if (entry.handicap.isPresent() || !entry.blocked.isEmpty() || !entry.won.isEmpty()) {
+        if (entry.handicap.isPresent() || !entry.blocked.isEmpty() || !entry.won.isEmpty() || entry.lastStand.isPresent()) {
             entry.awake = false;
             entry.made = 0;
         } else {
@@ -423,6 +435,91 @@ public final class TeamState extends SavedData {
         setDirty();
     }
 
+    /** {@code team}'s last stand, once it has started it, won or not. */
+    public Optional<LastStand> lastStand(UUID team) {
+        Entry entry = teams.get(team);
+        return entry == null ? Optional.empty() : entry.lastStand;
+    }
+
+    /** Whether {@code team}'s last stand runs: started and not yet won. */
+    public boolean inLastStand(UUID team) {
+        return lastStand(team).filter(LastStand::running).isPresent();
+    }
+
+    /** Whether {@code team} has won the pack: its Lead reached the margin and C.O.D. shut down. */
+    public boolean wonThePack(UUID team) {
+        return lastStand(team).filter(LastStand::won).isPresent();
+    }
+
+    /**
+     * Starts {@code team}'s last stand, C.O.D. at its {@code floor}, and says whether it did: only once the team has won all
+     * four challenges, and only once.
+     */
+    public boolean beginLastStand(UUID team, double floor) {
+        Entry entry = teams.get(team);
+        if (entry == null || entry.lastStand.isPresent() || entry.won.size() < Handicap.values().length) {
+            return false;
+        }
+        entry.lastStand = Optional.of(LastStand.starting(floor));
+        setDirty();
+        return true;
+    }
+
+    /**
+     * Counts {@code amount} cancelled by {@code team}'s Quintessence in its last stand, over C.O.D.'s {@code lag}, and shuts
+     * C.O.D. down for good once the Lead reaches the {@code margin}. Says whether this won the pack.
+     */
+    public boolean cancel(UUID team, long amount, int lag, long margin) {
+        Entry entry = teams.get(team);
+        if (entry == null || amount <= 0 || entry.lastStand.filter(LastStand::running).isEmpty()) {
+            return false;
+        }
+        LastStand stand = entry.lastStand.get().plusCancelled(amount, lag);
+        boolean won = stand.lead() >= margin;
+        entry.lastStand = Optional.of(won ? stand.shutDown() : stand);
+        setDirty();
+        return won;
+    }
+
+    /** Counts one Nullessence C.O.D. made for {@code team} in its last stand, against the Lead, never below minus the {@code margin}. */
+    public void countNullessenceMade(UUID team, long margin) {
+        Entry entry = teams.get(team);
+        if (entry == null || entry.lastStand.isEmpty()) {
+            return;
+        }
+        entry.lastStand = entry.lastStand.map(stand -> stand.plusOneMade(margin));
+        setDirty();
+    }
+
+    /** Moves every running last stand's pace and C.O.D.'s rate on by a tick ({@link LastStand#afterTick}). */
+    public void tickLastStands(double floor, double ceiling, int lag) {
+        boolean changed = false;
+        for (Entry entry : teams.values()) {
+            if (entry.lastStand.filter(LastStand::running).isPresent()) {
+                entry.lastStand = entry.lastStand.map(stand -> stand.afterTick(floor, ceiling, lag));
+                changed = true;
+            }
+        }
+        if (changed) {
+            setDirty();
+        }
+    }
+
+    /**
+     * Sets the Lead of {@code team}'s running last stand, as {@code /cod last_stand lead} does, never below minus the
+     * {@code margin}; it wins nothing, short of the margin or past it. Says whether the team's last stand runs.
+     */
+    public boolean setLead(UUID team, long lead, long margin) {
+        Entry entry = teams.get(team);
+        if (entry == null || entry.lastStand.filter(LastStand::running).isEmpty()) {
+            return false;
+        }
+        LastStand stand = entry.lastStand.get();
+        entry.lastStand = Optional.of(new LastStand(Math.max(-margin, lead), stand.pace(), stand.rate(), false));
+        setDirty();
+        return true;
+    }
+
     /** A set of its own of {@code handicaps}, which may be empty, as {@link EnumSet#copyOf} can't take. */
     private static EnumSet<Handicap> handicaps(Collection<Handicap> handicaps) {
         return handicaps.isEmpty() ? EnumSet.noneOf(Handicap.class) : EnumSet.copyOf(handicaps);
@@ -435,6 +532,6 @@ public final class TeamState extends SavedData {
 
     private Entry entry(UUID team) {
         return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false, 0, Set.of(), Set.of(),
-                Set.of(), 0, Set.of(), 0));
+                Set.of(), 0, Set.of(), 0, Optional.empty()));
     }
 }

@@ -12,7 +12,7 @@ ServerEvents.recipes(event => {
   // Advanced's mix (#209): intermediate-2 and deeper items across the pack's mods (excluding decorative blocks,
   // tools/armor, non-64-stackable items, and the excluded items in docs/research/advanced-mix-candidates.md).
   // One of each kind; a Recycler with fewer output slots than the mix returns a random choice of what fits (#216).
-  event.recipes.mechanicalmasteryreborn.decomposing([
+  const ADVANCED_MIX = [
     // Suite: Beltworks, Craftworks, Fieldworks, Gearworks, Pipeworks, Voidworks, Wireworks
     'beltworks:loader',
     'beltworks:feeder',
@@ -74,8 +74,16 @@ ServerEvents.recipes(event => {
     'mechanicalmasteryreborn:hand_drive',
     'mechanicalmasteryreborn:recycler_input',
     'mechanicalmasteryreborn:recycler_output',
-  ], '1x mechanicalmasteryreborn:advanced_mechanical_essence')
+  ]
+  event.recipes.mechanicalmasteryreborn.decomposing(ADVANCED_MIX, '1x mechanicalmasteryreborn:advanced_mechanical_essence')
     .id('mechanicalmasteryreborn:decomposing/advanced_mechanical_essence')
+
+  // Nullessence's mix (#261), what C.O.D. makes in its last stand: every item of the four tiers' mixes, so each chain
+  // finds its inputs whatever order its team won the challenges in. Advanced's is the only tier's mix so far; another
+  // tier's joins it here once it has one.
+  const NULLESSENCE_MIX = ADVANCED_MIX
+  event.recipes.mechanicalmasteryreborn.decomposing(NULLESSENCE_MIX, '1x mechanicalmasteryreborn:nullessence')
+    .id('mechanicalmasteryreborn:decomposing/nullessence')
 
   // A whole Recycler takes a core and eight more parts, at least one of them a drive, one an input and one an output.
   const part = (result, ingredients) => event.recipes.craftworks.assembling(result, ingredients)

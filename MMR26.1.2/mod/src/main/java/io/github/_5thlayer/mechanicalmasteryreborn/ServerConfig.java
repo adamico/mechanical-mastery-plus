@@ -149,6 +149,42 @@ public final class ServerConfig {
                     "reaches it about fifteen minutes in at the default waking pace and growth.")
             .defineInRange("cod.inflation_cap", 640, 1, 1_000_000);
 
+    /**
+     * The Lead that wins the pack in C.O.D.'s last stand (#261, a first guess): sixteen stacks of Nullessence, which C.O.D.
+     * at its floor takes an hour to put a stalled team behind by.
+     */
+    public static final ModConfigSpec.IntValue LAST_STAND_MARGIN = BUILDER
+            .comment("The Lead a team's Quintessence must reach in C.O.D.'s last stand to shut it down and win the pack. The Lead",
+                    "never falls below minus this. 1024 is sixteen stacks of Nullessence: at its default floor C.O.D. puts a team that",
+                    "puts in nothing that far behind in an hour.")
+            .defineInRange("last_stand.margin", 1024, 1, 1_000_000);
+
+    /** What one Quintessence put into C.O.D. cancels of the Nullessence it makes: a stack. */
+    public static final ModConfigSpec.IntValue LAST_STAND_QUINTESSENCE_CANCELS = BUILDER
+            .comment("The Nullessence one Quintessence put into C.O.D. cancels in its last stand: what it adds to the team's Lead.",
+                    "64 is a stack.")
+            .defineInRange("last_stand.quintessence_cancels", 64, 1, 1_000_000);
+
+    /** The least Nullessence C.O.D. makes a minute in its last stand: one every 3.75 seconds. */
+    public static final ModConfigSpec.DoubleValue LAST_STAND_FLOOR = BUILDER
+            .comment("The Nullessence C.O.D. makes a minute in its last stand while the team's Quintessence stalls, and as it starts.",
+                    "16 is one every 3.75 seconds, a little slower than an awake C.O.D. between challenges (30 a minute).")
+            .defineInRange("last_stand.floor", 16.0, 0.01, 72_000.0);
+
+    /** The most Nullessence C.O.D. makes a minute in its last stand: a Quintessence's worth. */
+    public static final ModConfigSpec.DoubleValue LAST_STAND_CEILING = BUILDER
+            .comment("The most Nullessence C.O.D. makes a minute in its last stand, however fast the team's Quintessence goes in.",
+                    "Below it C.O.D. keeps pace with the team, so the team gains on it only past it. 64 is what one Quintessence",
+                    "a minute cancels at the default last_stand.quintessence_cancels. Below last_stand.floor, the floor holds.")
+            .defineInRange("last_stand.ceiling", 64.0, 0.01, 72_000.0);
+
+    /** How far behind the team C.O.D.'s pace follows in its last stand: two minutes. */
+    public static final ModConfigSpec.IntValue LAST_STAND_LAG = BUILDER
+            .comment("The ticks over which C.O.D. measures the team's Quintessence in its last stand, and by which its rate follows",
+                    "it: a team that speeds up gains on C.O.D. for about this long, and once it stalls C.O.D. falls back to its floor",
+                    "over about as long. 2400 is two minutes.")
+            .defineInRange("last_stand.lag", 2400, 1, 1_728_000);
+
     /** The share of a sale the money handicap pays (#213). */
     public static final ModConfigSpec.DoubleValue MONEY_SALE_SHARE = BUILDER
             .comment("The share of a sale's price AdminShop pays a team while it plays the money challenge, by hand or by a Seller,",
@@ -257,6 +293,31 @@ public final class ServerConfig {
     /** The excess Inflation may reach while a challenge is played. */
     public static int inflationCap() {
         return SPEC.isLoaded() ? COD_INFLATION_CAP.getAsInt() : COD_INFLATION_CAP.getDefault();
+    }
+
+    /** The Lead that wins the pack in C.O.D.'s last stand, and minus which the Lead never falls below. */
+    public static int lastStandMargin() {
+        return SPEC.isLoaded() ? LAST_STAND_MARGIN.getAsInt() : LAST_STAND_MARGIN.getDefault();
+    }
+
+    /** What one Quintessence put into C.O.D. cancels in its last stand. */
+    public static int lastStandQuintessenceCancels() {
+        return SPEC.isLoaded() ? LAST_STAND_QUINTESSENCE_CANCELS.getAsInt() : LAST_STAND_QUINTESSENCE_CANCELS.getDefault();
+    }
+
+    /** The least Nullessence C.O.D. makes a minute in its last stand. */
+    public static double lastStandFloor() {
+        return SPEC.isLoaded() ? LAST_STAND_FLOOR.getAsDouble() : LAST_STAND_FLOOR.getDefault();
+    }
+
+    /** The most Nullessence C.O.D. makes a minute in its last stand. */
+    public static double lastStandCeiling() {
+        return SPEC.isLoaded() ? LAST_STAND_CEILING.getAsDouble() : LAST_STAND_CEILING.getDefault();
+    }
+
+    /** The ticks over which C.O.D. measures the team's Quintessence in its last stand, and its rate follows it. */
+    public static int lastStandLag() {
+        return SPEC.isLoaded() ? LAST_STAND_LAG.getAsInt() : LAST_STAND_LAG.getDefault();
     }
 
     /** The share of a sale the money handicap pays. */

@@ -10,6 +10,7 @@ import java.util.UUID;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Refunds;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Stops;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
@@ -35,10 +36,13 @@ import net.neoforged.neoforge.network.PacketDistributor;
  * The lab's choice of handicap, for the team whose island it stands on. A button per handicap, by its ordinal, starts
  * its challenge, if the player is in that team, the team plays none yet and hasn't won it. {@link #ASK} and
  * {@link #TAKE_BACK} ask to stop the challenge it plays, and take the ask back, once a stop is offered ({@link Stops}), and
- * {@link #OPEN_REFUND} opens the team's refund ({@link RefundMenu}). The
+ * {@link #OPEN_REFUND} opens the team's refund ({@link RefundMenu}), and {@link #START_LAST_STAND} starts the team's last
+ * stand ({@link LastStands}), once it has won all four challenges and if the player is in that team. The
  * client is sent which handicap the team plays, if any, which challenges it has won, whether the player may choose for
  * it, whether a stop is offered and the player asks for it, how many items of the team's refund wait, and which members
- * online have asked and which are left ({@link Asks}).
+ * online have asked and which are left ({@link Asks}), and where the team's last stand is ({@link LastStandPhase}). As it
+ * opens, the client is also sent whether the lab shows the last stand's row at all, not until the team has won all
+ * four challenges, so its screen opens at the right size; a fourth win while it is open shows the row from the next sync.
  */
 public final class LabMenu extends AbstractContainerMenu {
 
@@ -48,6 +52,21 @@ public final class LabMenu extends AbstractContainerMenu {
     public static final int TAKE_BACK = ASK + 1;
     /** The button that opens the team's refund. */
     public static final int OPEN_REFUND = TAKE_BACK + 1;
+    /** The button that starts the team's last stand. */
+    public static final int START_LAST_STAND = OPEN_REFUND + 1;
+
+    /** Where a team's last stand is, as the lab shows it. */
+    public enum LastStandPhase {
+        /** Not yet offered: the team hasn't won all four challenges. */
+        LOCKED,
+        /** Offered: the team has won all four and not started it. */
+        OFFERED,
+        /** Started, and C.O.D. not shut down yet. */
+        RUNNING,
+        /** Won: C.O.D. shut down for good. */
+        WON
+    }
+
     /** What {@link #chosen} holds while the team plays no challenge. */
     private static final int NONE = -1;
 
@@ -62,14 +81,19 @@ public final class LabMenu extends AbstractContainerMenu {
     private final DataSlot asked;
     /** How many items of the team's refund wait, up to what a data slot holds. */
     private final DataSlot refund;
+    /** Where the team's last stand is, by its {@link LastStandPhase}'s ordinal. */
+    private final DataSlot lastStand;
+    /** Whether the lab showed the last stand's row as it opened. */
+    private final boolean showedLastStand;
     /** The server's player, who is sent {@link Asks}; null on the client or for a game test's mock player. */
     private final ServerPlayer viewer;
     /** The asks the client was last sent, or holds. */
     private Asks asks = Asks.NONE;
 
-    /** The client's menu, whose slots the sync fills. */
-    public LabMenu(int containerId, Inventory inventory) {
+    /** The client's menu, whose slots the sync fills, with whether it shows the last stand's row as the server wrote it. */
+    public LabMenu(int containerId, Inventory inventory, RegistryFriendlyByteBuf buffer) {
         super(Lab.MENU.get(), containerId);
+        this.showedLastStand = buffer.readBoolean();
         this.access = ContainerLevelAccess.NULL;
         this.chosen = addDataSlot(DataSlot.standalone());
         this.member = addDataSlot(DataSlot.standalone());
@@ -77,6 +101,7 @@ public final class LabMenu extends AbstractContainerMenu {
         this.stopOffered = addDataSlot(DataSlot.standalone());
         this.asked = addDataSlot(DataSlot.standalone());
         this.refund = addDataSlot(DataSlot.standalone());
+        this.lastStand = addDataSlot(DataSlot.standalone());
         this.viewer = null;
         chosen.set(NONE);
     }
@@ -86,6 +111,7 @@ public final class LabMenu extends AbstractContainerMenu {
         this.access = ContainerLevelAccess.create(level, pos);
         UUID team = Teams.at(level, pos);
         UUID players = Teams.of(inventory.player);
+        this.showedLastStand = phase(level.getServer(), team) != LastStandPhase.LOCKED;
         this.chosen = addDataSlot(new DataSlot() {
             @Override
             public int get() {
@@ -143,7 +169,32 @@ public final class LabMenu extends AbstractContainerMenu {
             public void set(int value) {
             }
         });
+        this.lastStand = addDataSlot(new DataSlot() {
+            @Override
+            public int get() {
+                return phase(level.getServer(), team).ordinal();
+            }
+
+            @Override
+            public void set(int value) {
+            }
+        });
         this.viewer = inventory.player instanceof ServerPlayer server ? server : null;
+    }
+
+    /** Opens the lab at {@code pos} for {@code player}, telling the client whether it shows the last stand's row. */
+    public static void open(Player player, ServerLevel level, BlockPos pos) {
+        boolean shows = phase(level.getServer(), Teams.at(level, pos)) != LastStandPhase.LOCKED;
+        player.openMenu(level.getBlockState(pos).getMenuProvider(level, pos), buffer -> buffer.writeBoolean(shows));
+    }
+
+    /** Where {@code team}'s last stand is. */
+    private static LastStandPhase phase(MinecraftServer server, UUID team) {
+        var stand = TeamState.get(server).lastStand(team);
+        if (stand.isPresent()) {
+            return stand.get().won() ? LastStandPhase.WON : LastStandPhase.RUNNING;
+        }
+        return LastStands.offered(server, team) ? LastStandPhase.OFFERED : LastStandPhase.LOCKED;
     }
 
     /** The handicap whose challenge the lab's team plays, if any. */
@@ -181,6 +232,26 @@ public final class LabMenu extends AbstractContainerMenu {
         return refund.get();
     }
 
+    /** Where the lab's team's last stand is. */
+    public LastStandPhase lastStand() {
+        LastStandPhase[] phases = LastStandPhase.values();
+        int ordinal = lastStand.get();
+        return ordinal >= 0 && ordinal < phases.length ? phases[ordinal] : LastStandPhase.LOCKED;
+    }
+
+    /**
+     * Whether the lab shows the last stand's row: once its team has won all four challenges, as it opened or since, by
+     * the last sync.
+     */
+    public boolean showsLastStand() {
+        return showedLastStand || lastStand() != LastStandPhase.LOCKED;
+    }
+
+    /** Whether starting the last stand here would start it. */
+    public boolean canStartLastStand() {
+        return isMember() && lastStand() == LastStandPhase.OFFERED;
+    }
+
     /** Which of the team's members online have asked to stop its challenge, and which are left, as the client was last sent. */
     public Asks asks() {
         return asks;
@@ -211,6 +282,10 @@ public final class LabMenu extends AbstractContainerMenu {
         if (id == OPEN_REFUND) {
             access.execute((level, pos) -> player.openMenu(RefundMenu.provider((ServerLevel) level, pos)));
             return true;
+        }
+        if (id == START_LAST_STAND) {
+            return canStartLastStand() && access.evaluate((level, pos) -> level instanceof ServerLevel server
+                    && LastStands.begin(server.getServer(), Teams.at(server, pos)), false);
         }
         if (id == ASK || id == TAKE_BACK) {
             return access.evaluate((level, pos) -> level instanceof ServerLevel server && (id == ASK

@@ -8,8 +8,8 @@ import java.util.Optional;
 
 /**
  * Every essence the mod registers, under the id a world saves it by, which never changes once shipped
- * (#163): the four Mechanical Essences, the four Transmuted Essences and Quintessence, as the line's
- * glossary names them. Plain data, so a JUnit test reads it without Minecraft.
+ * (#163): the four Mechanical Essences, the four Transmuted Essences, Quintessence and Nullessence (#261), as the
+ * line's glossary names them. Plain data, so a JUnit test reads it without Minecraft.
  */
 public enum Essence {
 
@@ -30,11 +30,13 @@ public enum Essence {
     /** The money challenge's. */
     AUREATE("aureate_essence", Kind.TRANSMUTED),
     /** Made from the four Transmuted Essences in the last chapter. */
-    QUINTESSENCE("quintessence", Kind.QUINTESSENCE);
+    QUINTESSENCE("quintessence", Kind.QUINTESSENCE),
+    /** What C.O.D. makes in its last stand, the opposite of Quintessence. */
+    NULLESSENCE("nullessence", Kind.NULLESSENCE);
 
     /** Which family of essences one belongs to. */
     public enum Kind {
-        MECHANICAL, TRANSMUTED, QUINTESSENCE
+        MECHANICAL, TRANSMUTED, QUINTESSENCE, NULLESSENCE
     }
 
     /** The Mechanical Essences as C.O.D. makes them, highest tier first: Advanced until it is blocked, then the next. */
@@ -59,7 +61,8 @@ public enum Essence {
 
     /**
      * Whether a player can have it yet: the Mechanical and the Transmuted Essences, which the challenges' chains
-     * make and their Ports take, but not Quintessence, until the last chapter exists. It is registered all the
+     * make and their Ports take, and Nullessence, which C.O.D. makes in its last stand, but not Quintessence, until a
+     * way to make it exists (#262, #263). It is registered all the
      * same, so its id is taken from the first release.
      */
     public boolean obtainable() {
