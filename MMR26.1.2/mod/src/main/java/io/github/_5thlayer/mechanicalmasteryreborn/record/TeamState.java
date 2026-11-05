@@ -315,6 +315,22 @@ public final class TeamState extends SavedData {
     }
 
     /**
+     * Notes that {@code team} started and won {@code handicap}'s challenge without playing it, as an op's
+     * {@code /cod challenge win} does: blocks the tier its C.O.D. makes, as {@link #blockTier} does, and unlocks its
+     * chain. Says whether it did: not while the team plays a challenge, nor for one it has won.
+     */
+    public boolean winUnplayed(UUID team, Handicap handicap) {
+        if (handicap(team).isPresent() || won(team, handicap) || !blockTier(team, handicap)) {
+            return false;
+        }
+        Entry entry = entry(team);
+        entry.unlocked.add(handicap);
+        entry.started.add(handicap);
+        setDirty();
+        return true;
+    }
+
+    /**
      * Forgets that {@code team} won {@code handicap}'s challenge, so it can be played again, and unblocks the lowest
      * tier blocked, the one the last win blocked, as {@code /cod challenge revert} does. Says whether it had won it.
      */

@@ -7,8 +7,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.AssaultState;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastChapter;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
@@ -49,6 +51,7 @@ final class LabTests {
         tests.test("lab_chooses_once_while_a_challenge_is_played", 1, LabTests::choosesOnce);
         tests.test("lab_shows_its_team_s_handicap", 1, LabTests::showsItsTeamsHandicap);
         tests.test("lab_op_starts_and_ends_the_challenge_of_the_island_stood_on", 1, LabTests::opStartsAndEnds);
+        tests.test("lab_op_wins_the_challenges_of_the_island_stood_on", 1, LabTests::opWins);
     }
 
     private static void recordsForItsTeamOnly(GameTestHelper helper) {
@@ -153,6 +156,49 @@ final class LabTests {
         server.getCommands().performPrefixedCommand(op, "cod challenge start energy");
         helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.ENERGY), "the team's handicap, started again");
         helper.succeed();
+    }
+
+    /**
+     * An op's {@code /cod challenge win} (#268) wins the challenge played as its Port would, notes one not played started
+     * and won with none of a start's effects, refuses one won already or one while another is played, and four reach the
+     * last chapter and the lab's last stand.
+     */
+    private static void opWins(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        UUID other = TestTeams.claim(helper, OTHER_ISLAND, OTHER_ISLAND);
+        var player = member(helper, team);
+        var server = helper.getLevel().getServer();
+        var op = server.createCommandSourceStack().withLevel(helper.getLevel())
+                .withPosition(helper.absolutePos(LAB).getCenter()).withSuppressedOutput();
+        var commands = server.getCommands();
+        commands.performPrefixedCommand(op, "cod challenge start energy");
+        commands.performPrefixedCommand(op, "cod challenge win life");
+        helper.assertFalse(state(helper).won(team, Handicap.LIFE), "an op won life while energy was played");
+        commands.performPrefixedCommand(op, "cod challenge win energy");
+        helper.assertTrue(state(helper).won(team, Handicap.ENERGY), "an op's win left energy, played, unwon");
+        helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after an op won energy");
+        commands.performPrefixedCommand(op, "cod challenge win protection");
+        helper.assertTrue(state(helper).won(team, Handicap.PROTECTION), "an op's win left protection, not played, unwon");
+        helper.assertTrue(state(helper).unlocked(team, Handicap.PROTECTION), "an op's win left protection's chain locked");
+        helper.assertTrue(AssaultState.get(server).assault(team).isEmpty(), "an op's win of protection, not played, sent an Assault");
+        helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after an op won protection");
+        var tier = state(helper).tier(team);
+        commands.performPrefixedCommand(op, "cod challenge win protection");
+        helper.assertValueEqual(state(helper).tier(team), tier, "the tier after an op won protection twice");
+        commands.performPrefixedCommand(op, "cod challenge win life");
+        helper.assertValueEqual(state(helper).setAside(team), 0L, "money set aside by an op's win");
+        helper.assertTrue(menuShowsNoLastStand(helper, player), "the lab shows the last stand's row after three wins");
+        commands.performPrefixedCommand(op, "cod challenge win money");
+        helper.assertTrue(state(helper).won(team, Handicap.MONEY), "an op's win left money, not played, unwon");
+        helper.assertFalse(state(helper).won(other, Handicap.MONEY), "an op's win reached another team");
+        Chains.unlock(server, player);
+        helper.assertTrue(TestStages.holds(player, LastChapter.STAGE), "four op's wins left the last chapter locked");
+        helper.assertTrue(open(helper, player).showsLastStand(), "the lab hides the last stand's row after four op's wins");
+        helper.succeed();
+    }
+
+    private static boolean menuShowsNoLastStand(GameTestHelper helper, Player player) {
+        return !open(helper, player).showsLastStand();
     }
 
     private static Player member(GameTestHelper helper, UUID team) {
