@@ -57,32 +57,60 @@ file = "kubejs/assets/mechanicalmasteryreborn/guideme_guides/manual.json"
 hash = "26f43add76e35fa7883a60cf864740b3c5225d1ab7cf91c8f5a476aa0494c666"
 
 [[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/energy.md"
+hash = "96a009244a9de076808b535b86b18d9caf2ba7866d626c84735023753c0dcf76"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/index.md"
+hash = "0de0f3283242fea207e6aea4cb12dfacf18911860eb63c94a2b8595cef5afe4c"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/life.md"
+hash = "5218b1ea597af0e5c77d9b434f0848272660659c4e1941f31cae98a17ee9c38f"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/money.md"
+hash = "15a37d8982461192deea179d2e4019074b6fc4c68f74998f68dc75f682a64335"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/protection.md"
+hash = "e740fdf629acc1238ddaa15b174065b1d4daef28a126fb7f963e3b20c48e56e8"
+
+[[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/cod.md"
-hash = "1ed2902ce99322cb2fe45617056131d40d3fd80ce7450fec9fa5f12685e3dec1"
+hash = "a6c1e7195914cc4cce4f1d66a99a0f74ff7ac3401cc7f5ab3ffcb88c2f25aa8f"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/decomposing.md"
-hash = "99185c611e6eb5735ebb50ed52a6723c1b3b095f66ed71f540aca73ddb27774d"
+hash = "148f251de880a138adfac4368a7670bddeebe3ae40ef6e9a3491d066a99f66c1"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/diet.md"
-hash = "9f05b2795a15eb9df55cc7728e0799ce38a3492689021da3117b68ecc4fe0fc0"
+hash = "5922b556a30d5bbced0111bde0c72a8483e5f9a2858f2f57f29c819f04bf7375"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/fe_defence.md"
-hash = "fcc731c70a74d360062db1ad3b301c6dcf3d3c7bab73bc905ba677f1eb8f6deb"
+hash = "4df9ebad7bcda620e02a3f483c796d7c7044f6b5a91025e4938054dde610ee8d"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/hermetic_lab.md"
-hash = "bfac3ed3d17ce0082ee41bc9aa05821809e66a3906e976e588a74e9798e578ef"
+hash = "beebb550b36326b32aa9ddfa4adacab0a81d9287a6fbf2dbe655bacec5589b96"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/index.md"
-hash = "9082401f4dc75d900c0226c12096ff7ddc5655508c34a3727a54f4a7503694c4"
+hash = "3b0a016fd92e3bc2004f74a44e391df9ac6da1b0c58859a0f866c78c4f439a1a"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/island.md"
+hash = "18c38f491b1e0e930ae3c4d8c9b9eef0ebffc6f67f4ffbd65fd80d26ee0dc8a1"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/lab.md"
-hash = "6b4fb7869f2eaf560002ee000bc1942869357ef30b569d08748e2e619d631b6a"
+hash = "e1f56836622f48774dc4f2f27157bb677f5c43b9e2d309fda83fddfcac60d6a2"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/last_chapter.md"
+hash = "0a19217ec4a3f9ec95f4568635cc17521cac94f7f5f65ba56925b3538ca7d964"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/casing.md"
@@ -90,39 +118,39 @@ hash = "fabbec9760f81a428c31df3684524bc382890e5008ca87447d2f6e0077305be3"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/core.md"
-hash = "6dfb69b64af614da29b8b36822c6e806b46be7ca39a5332a87fa03e61a0dfc9b"
+hash = "9877450ef59a01a7fbe62c7c58c736f486f46cd30ff6ea5948303413203ebeb4"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/core_2.md"
-hash = "e01629ee4d721bb5b820b506a24a1fe4836723bbbcb8b6a0fe8e82b85507b30f"
+hash = "8e377d0f4ae0431c7fdd25a37a104f56dd5009904078a009029d17e95037ded2"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/core_3.md"
-hash = "3a6dbd3192c35546cd439692f0909697397bdf5e6e70d6fb4c41787457b9979b"
+hash = "2ced7298e366c838f37a03e29d0a37a491591880e0e7c04890e747659d3112ae"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/core_4.md"
-hash = "5bdb26eb27de0db78ee4d18c8391a0db51cd209cd279f8f947081731131bb700"
+hash = "e96309f1bf7c173443b2dd058e0d1b5ebdbe4c2a3176eba2ec4f183ea5326013"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/fe_drive.md"
-hash = "d4c1a65a1e0816f2e56b2547df8540fbd9f07285d9814629c71e2e863fced9c0"
+hash = "f5c94cade1f31288e2fed1627e397319f952c6ed835c9e06dfb6382cededcc6e"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/hand_drive.md"
-hash = "a9457513a775ac5936a70fc7c7c3a37a60e77c87f6a35ccc1ba8c205639648fe"
+hash = "1c5d45af9b8ea5329097d20c10336c48eaf94bf8de53625999c7e753b69d3e6e"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/index.md"
-hash = "9a83e3519dfe6b0ed7fde427487373cad7ba80c3aa60f2250cfbc58b972a5b3a"
+hash = "649956cb55e02ba967745e57d911ef56342f727317ea7f862f398062b65a1c2f"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/input.md"
-hash = "6a39375259b6adbb16514706e3a66848d84d4fdaee924963fabf92755993ab62"
+hash = "10119cc61e16ac0e57724595d43ee43036b8d03b5120558e814638f7943972cb"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/recycler/output.md"
-hash = "66a7f2c1fd8ec56188dc922483b9ce6628a79778fae96a7721a15735f0fb738d"
+hash = "07a30c09e4920791e1c94b7bd3d458e362c7f586b5a0dd186780d2bd86e59098"
 
 [[files]]
 file = "kubejs/data/fieldworks/tags/block/harvestable.json"
@@ -594,7 +622,7 @@ hash = "e7f3199f4bacece01467ac1274b0f6bfd7d23e5a4364f91bf19d4f5fa6658b47"
 
 [[files]]
 file = "kubejs/server_scripts/decomposing.js"
-hash = "7912978d9bd2c425f234a9f2b85d97506a51eea587e1ef25521c21d375394ff6"
+hash = "f0bd34e375ffe39c9acc2b408cbde0ad50c37d30904bf47c89b7528279faf57e"
 
 [[files]]
 file = "kubejs/server_scripts/defences.js"

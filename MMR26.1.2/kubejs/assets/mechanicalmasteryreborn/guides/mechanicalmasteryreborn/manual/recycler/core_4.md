@@ -12,8 +12,8 @@ item_ids:
 
 <BlockImage id="recycler_core_4" scale="4" p:facing="north" />
 
-A tier-4 [core](core.md). It works as every core does, but a decompose or a recycle takes 2 turns of its
-drives, and its Recycler may have up to 4 [floors](index.md#floors). It returns the same yield as any other core.
+A tier-4 [core](core.md). It works as every core does, with fewer turns of its drives per decompose or recycle,
+and its Recycler may have up to 4 [floors](index.md#floors).
 
-It is made on a Craftworks Assembler from a [tier-3 core](core_3.md) and hoppers and blast furnaces. To upgrade, break the
-Recycler's core and place this one where it stood, facing the same way.
+It is made on a Craftworks Assembler from a [tier-3 core](core_3.md). To upgrade, break the Recycler's core and place
+this one where it stood, facing the same way.
