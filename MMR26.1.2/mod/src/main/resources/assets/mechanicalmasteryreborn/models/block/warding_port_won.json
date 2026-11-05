@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "minecraft:block/cyan_glazed_terracotta"
+    "all": "minecraft:block/light_gray_glazed_terracotta"
   }
 }
