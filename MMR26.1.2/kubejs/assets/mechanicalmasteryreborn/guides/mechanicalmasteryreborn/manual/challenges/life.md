@@ -19,8 +19,8 @@ lately: a food already in it feeds less each time it is eaten again, in hunger a
 Essentia Vitae comes first from your own health, and health comes back only from food, so a team living on one
 crop bleeds slowly. Only a varied farm keeps up.
 
-The handicap goes on in Neo Vitae's Demon Realm, unless the server is set to pause it there, so plan what you
-eat for the trip. Running empty starves as it always does, and nothing worse.
+The handicap goes on in Neo Vitae's Demon Realm, so plan what you eat for the trip. Running empty starves as it
+always does, and nothing worse.
 
 ## The chain
 
