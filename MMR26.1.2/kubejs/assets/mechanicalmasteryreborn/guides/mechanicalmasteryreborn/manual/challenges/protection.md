@@ -69,9 +69,9 @@ Starting the challenge opens the chain's recipes, all made on an Assembler:
 ## The home gate
 
 Once your team has won protection, the Shop sells the **home gate's pearl**, which no recipe makes. Throw it on
-your own island, once your team has started protection, to open a smaller gate of your own whenever you like: a
-short one of a few waves, which gives Rift Shards too, fewer than the Assault, so a won chain goes on making
-Warding Essence. It opens nowhere else, and what its mobs break is not refunded.
+your own island to open a smaller gate of your own whenever you like: a short one of a few waves, which gives
+Rift Shards too, fewer than the Assault, so a won chain goes on making Warding Essence. It opens nowhere else, and
+what its mobs break is not refunded.
 
 ## In the last stand
 
