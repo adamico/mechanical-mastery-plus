@@ -48,6 +48,13 @@ precedence = "override"
 SPDX-FileCopyrightText = "Malcolm Riley"
 SPDX-License-Identifier = "CC-BY-4.0"
 
+# The cover and icon publish/make-cover.py draws from the Recycler's textures (NOTICE).
+[[annotations]]
+path = ["publish/*.png"]
+precedence = "override"
+SPDX-FileCopyrightText = ["Malcolm Riley", "2026 5thlayer"]
+SPDX-License-Identifier = "CC-BY-4.0"
+
 # The Gradle wrapper is Gradle's.
 [[annotations]]
 path = ["gradlew", "gradlew.bat", "gradle/wrapper/**"]

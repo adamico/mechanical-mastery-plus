@@ -36,6 +36,15 @@ Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
           and columns, and a 1px lip round the opening in a shade taken from space-plating-square.
 Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
 
+Cover and icon
+--------------
+
+Files: publish/mechanicalmasteryreborn-cover.png, publish/mechanicalmasteryreborn-icon.png
+Author: Malcolm Riley
+Source: recycler_casing.png, recycler_drive.png and recycler_vent.png above, which
+        publish/make-cover.py tiles behind the mod pages' title
+Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
+
 Electric Defence textures
 -------------------------
 
