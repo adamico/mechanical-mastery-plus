@@ -117,10 +117,10 @@ def font(names, size):
 
 
 def make(out, W, H, title_size, px, under_px, stacked=False):
-    # title_size is the title's largest size, drawn smaller where it would not fit; px and under_px are
-    # the sizes of the essences above and beneath the band, whole multiples of the textures' 32 so
-    # nearest-neighbour keeps their pixels square; stacked breaks the title in two lines over the
-    # pill, for the square icon
+    # title_size is the title's size, drawn smaller where it would not fit, as with a fallback font; px
+    # and under_px are the sizes of the essences above and beneath the band, whole multiples of the
+    # textures' 32 so nearest-neighbour keeps their pixels square; stacked breaks the title in two lines
+    # over the pill, for the square icon
     lines = TITLE.split(' ') if stacked else [TITLE]
     d = ImageDraw.Draw(Image.new('RGB', (1, 1)))
     while True:
@@ -170,10 +170,10 @@ def make(out, W, H, title_size, px, under_px, stacked=False):
     img.convert('RGB').save(out)
 
 
-# each image: where it goes, its size, its title's largest size and its essences' sizes
-COVER = ('publish/reborn-cover.png', 1280, 640, 128, 128, 96)
-ICON = ('publish/reborn-icon.png', 512, 512, 112, 64, 64)
-CARD = ('publish/reborn-card.png', 1920, 1080, 192, 192, 128)
+# each image: where it goes, its size, its title's size and its essences' sizes
+COVER = ('publish/reborn-cover.png', 1280, 640, 108, 128, 96)
+ICON = ('publish/reborn-icon.png', 512, 512, 100, 64, 64)
+CARD = ('publish/reborn-card.png', 1920, 1080, 162, 192, 128)
 
 make(*COVER)
 make(*ICON, stacked=True)
