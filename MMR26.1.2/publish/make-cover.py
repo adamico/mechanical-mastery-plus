@@ -17,10 +17,10 @@
 #   - the team's starting island in the middle, drawn from its template (ISLAND) block by block, a
 #     quarter turned so its tree stands at the back, each block a cube in a flat colour of its own,
 #     its top lighter than its sides; a Port takes its essence's colour;
-#   - on the cover and the card, the four tier essences either side of the tree, lowest first, and the
-#     four Transmuted Essences either side of the grass, Nullessence and Quintessence, the last
-#     stand's two sides, nearest the island, each scaled up nearest-neighbour and glowing in its
-#     colour; the icon, too small for them, keeps the island alone;
+#   - on the cover and the card, the essences by kind, each scaled up nearest-neighbour and glowing in
+#     its colour: left of the island the four tiers in a diamond, lowest at the top; right of it the
+#     four Transmuted Essences in a diamond, holding in its middle Nullessence and Quintessence, the
+#     last stand's two sides, overlapping; the icon, too small for them, keeps the island alone;
 #   - the band across the island's earth, as the old logo's letters crossed it, dark but letting the
 #     island show through, ruled top and bottom in the accent, holding the suite's title turned
 #     around, as A Touch of Darkness's is: "MECHANICAL MASTERY" in Barlow Condensed caps, in the
@@ -52,13 +52,14 @@ GLOWS = {'nullessence': (255, 255, 255)}
 # the four tiers, lowest first
 TIERS = ['basic_mechanical_essence', 'regular_mechanical_essence', 'improved_mechanical_essence',
          'advanced_mechanical_essence']
-# the Transmuted Essences, two each side of the island, outside Nullessence and Quintessence; those two
-# are animated, and their first frames are drawn
+# the Transmuted Essences, whose diamond holds Nullessence and Quintessence in its middle, the two ways
+# to Quintessence, overlapping; those two are animated, and their first frames are drawn
 TRANSMUTED = ['galvanic_essence', 'warding_essence', 'vital_essence', 'aureate_essence']
 LAST_STAND = ['nullessence', 'quintessence']
-# the tier essences' and the others' places, as fractions of the width
-TIER_X = [0.1, 0.22, 0.78, 0.9]
-UNDER_X = [0.05, 0.14, 0.23, 0.77, 0.86, 0.95]
+# where the tier essences' diamond and the Transmuted Essences' stand, as fractions of the width and
+# height, and how far a diamond's points are from its middle, in essences
+LEFT, RIGHT, SPREAD = (0.14, 0.34), (0.86, 0.34), 1.5
+OVERLAP = 0.3  # how far Nullessence and Quintessence stand off the diamond's middle, in essences
 ISLAND = 'config/skyblockbuilder/templates/islands/reborn.snbt'
 # each of the island's blocks as the (top, side) colour it is drawn in; a Port's is its essence's
 BLOCKS = {'stone': ((128, 128, 132),) * 2, 'dirt': ((134, 96, 66),) * 2,
@@ -103,17 +104,19 @@ def glow(rgb, r, peak=140):
     return im
 
 
-def essence(img, name, cx, cy, px):
-    g = glow(GLOWS.get(name) or colour(name), int(px * 1.5))
-    img.alpha_composite(g, (cx - g.width // 2, cy - g.height // 2))
-    s = texture(name).resize((px, px), Image.NEAREST)
-    img.alpha_composite(s, (cx - px // 2, cy - px // 2))
+def essences(img, placed, px):
+    # each (name, x, y) essence px wide, every glow laid first so none washes over a neighbour
+    for name, x, y in placed:
+        g = glow(GLOWS.get(name) or colour(name), int(px * 1.5))
+        img.alpha_composite(g, (x - g.width // 2, y - g.height // 2))
+    for name, x, y in placed:
+        img.alpha_composite(texture(name).resize((px, px), Image.NEAREST), (x - px // 2, y - px // 2))
 
 
-def flank(img, items, xs, y, px):
-    # items at the fractions xs of the width, at the fraction y of the height
-    for name, fx in zip(items, xs):
-        essence(img, name, int(fx * img.width), int(y * img.height), px)
+def diamond(img, names, at, px):
+    # four essences at a diamond's top, left, right and bottom points, about at, a fraction of the image
+    cx, cy, r = int(at[0] * img.width), int(at[1] * img.height), int(SPREAD * px)
+    return [(n, cx + dx * r, cy + dy * r) for n, (dx, dy) in zip(names, [(0, -1), (-1, 0), (1, 0), (0, 1)])]
 
 
 def blocks():
@@ -184,13 +187,12 @@ def font(names, size):
     raise SystemExit('needs one of ' + ', '.join(names))
 
 
-def make(out, W, H, title_size, band_y, island_h, island_y, px=None, under_px=None, stacked=False):
+def make(out, W, H, title_size, band_y, island_h, island_y, px=None, stacked=False):
     # title_size is the title's size, drawn smaller where it would not fit, as with a fallback font;
     # band_y is where the band's middle is, island_h how much of the height the island takes and
-    # island_y where its top is, each a fraction of the height; px and under_px are the sizes of the
-    # tier essences and the others, whole multiples of the textures' 32 so nearest-neighbour keeps
-    # their pixels square, or None to leave them out; stacked breaks the title in two lines over the
-    # pill, for the square icon
+    # island_y where its top is, each a fraction of the height; px is the essences' size, a whole
+    # multiple of the textures' 32 so nearest-neighbour keeps their pixels square, or None to leave
+    # them out; stacked breaks the title in two lines over the pill, for the square icon
     lines = TITLE.split(' ') if stacked else [TITLE]
     d = ImageDraw.Draw(Image.new('RGB', (1, 1)))
     while True:
@@ -218,8 +220,10 @@ def make(out, W, H, title_size, band_y, island_h, island_y, px=None, under_px=No
     img.alpha_composite(sky(W, H, W // 2, at[1] + land.height * 0.4))
     img.alpha_composite(land, at)
     if px:
-        flank(img, TIERS, TIER_X, 0.22, px)
-        flank(img, TRANSMUTED[:2] + LAST_STAND + TRANSMUTED[2:], UNDER_X, 0.54, under_px)
+        essences(img, diamond(img, TIERS, LEFT, px), px)
+        mx, my, o = int(RIGHT[0] * W), int(RIGHT[1] * H), int(OVERLAP * px)
+        pair = [(LAST_STAND[0], mx - o, my - o), (LAST_STAND[1], mx + o, my + o)]
+        essences(img, diamond(img, TRANSMUTED, RIGHT, px) + pair, px)
 
     band = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     ImageDraw.Draw(band).rectangle([0, top, W, bottom], fill=BAND)
@@ -248,10 +252,10 @@ def make(out, W, H, title_size, band_y, island_h, island_y, px=None, under_px=No
 
 
 # each image: where it goes, its size, its title's size, where its band is, the island's height and
-# top, and its essences' sizes
-COVER = ('publish/reborn-cover.png', 1280, 640, 108, 0.76, 0.92, 0.04, 96, 64)
+# top, and its essences' size
+COVER = ('publish/reborn-cover.png', 1280, 640, 108, 0.76, 0.92, 0.04, 64)
 ICON = ('publish/reborn-icon.png', 512, 512, 100, 0.74, 0.62, 0.02)
-CARD = ('publish/reborn-card.png', 1920, 1080, 162, 0.77, 0.9, 0.04, 128, 96)
+CARD = ('publish/reborn-card.png', 1920, 1080, 162, 0.77, 0.9, 0.04, 96)
 
 make(*COVER)
 make(*ICON, stacked=True)
