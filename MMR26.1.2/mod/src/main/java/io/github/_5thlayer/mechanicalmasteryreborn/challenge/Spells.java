@@ -98,6 +98,13 @@ public final class Spells {
         }
     }
 
+    /** Ends every spell {@code team} bears, and its handicap with it, as winning the pack does: C.O.D. is shut down, and the Athanor with it. */
+    static void endAll(MinecraftServer server, UUID team) {
+        for (Handicap handicap : Handicap.values()) {
+            end(server, team, handicap);
+        }
+    }
+
     /** Ends {@code team}'s spell of {@code handicap} as its time runs out, its handicap with it, and tells its players online. */
     private static void end(MinecraftServer server, UUID team, Handicap handicap) {
         if (TeamState.get(server).endSpell(team, handicap).isEmpty()) {

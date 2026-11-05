@@ -92,6 +92,7 @@ final class AthanorTests {
         tests.test("athanor_all_four_lines_make_a_quintessence_for_less_than_it_cancels", 380, AthanorTests::allFourLines);
         tests.test("athanor_second_of_a_team_does_nothing", 2 * PAID + AthanorBlockEntity.INTERVAL, AthanorTests::secondDoesNothing);
         tests.test("athanor_spell_cant_be_ended_early_and_ends_its_handicap", SHORT + 6, AthanorTests::spellRunsItsLength);
+        tests.test("athanor_winning_the_pack_ends_every_spell", 1, AthanorTests::winEndsSpells);
     }
 
     /** All four won but the last stand not started: no spell can be taken on, and one noted all the same does nothing. */
@@ -395,6 +396,20 @@ final class AthanorTests {
             helper.assertTrue(Spells.begin(server(helper), team, Handicap.ENERGY, 1), "the energy spell wasn't taken on again once it ended");
         });
         helper.runAtTickTime(SHORT + 5, helper::succeed);
+    }
+
+    /** Winning the pack ends every spell at once, with its handicap: C.O.D. is shut down, and the Athanor has nothing left to do. */
+    private static void winEndsSpells(GameTestHelper helper) {
+        UUID team = started(helper);
+        helper.setBlock(LODESTONE, GeneratorTests.GENERATOR);
+        helper.assertTrue(Spells.begin(server(helper), team, Handicap.ENERGY), "the energy spell wasn't taken on");
+        long margin = ServerConfig.lastStandMargin();
+        state(helper).setLead(team, margin - ServerConfig.lastStandQuintessenceCancels(), margin);
+        LastStands.take(server(helper), team, 1);
+        helper.assertTrue(state(helper).wonThePack(team), "the margin didn't win the pack");
+        helper.assertFalse(state(helper).underSpell(team, Handicap.ENERGY), "the energy spell outlived the pack's win");
+        helper.assertValueEqual(GeneratorTests.draw(helper, LODESTONE), GeneratorTests.DRAW, "FE drawn from a generator once the pack was won");
+        helper.succeed();
     }
 
     /** A team of the test's island that has won all four challenges and started its last stand. */

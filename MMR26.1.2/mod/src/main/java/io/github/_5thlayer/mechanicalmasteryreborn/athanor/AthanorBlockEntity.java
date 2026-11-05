@@ -3,6 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.athanor;
 
+import java.util.EnumSet;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -84,7 +85,9 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
     private static final String ESSENTIA_KEY = "essentia";
     private static final String SHARD_TICKS_KEY = "shard_ticks";
     private static final String PROGRESS_KEY = "progress";
-    private static final String LINES_KEY = "lines";
+    private static final String OWED_KEY = "owed";
+    private static final int TICKS_PER_SECOND = 20;
+    private static final int TICKS_PER_MINUTE = 1200;
 
     /** What an Athanor is doing, as its menu shows it. */
     public enum Phase {
@@ -108,11 +111,16 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
     /** The Essentia Vitae the hearts given at it became, in mB. */
     private int essentia;
     /** The ticks the Null Shards already taken still feed the protection line for. */
-    private int shardTicks;
+    private double shardTicks;
     /** How far it is toward the next Quintessence, from 0 to 1. */
     private double progress;
-    /** The lines that count until the next payment, a bit per handicap's ordinal. */
-    private int lines;
+    /**
+     * The Nullessence the next Quintessence owes so far: each tick's share of it at the cost of the lines counting then,
+     * so a Quintessence begun on fewer lines and finished on more pays for each part at its own cost.
+     */
+    private double owed;
+    /** The lines that count until the next payment, while their spells run; never saved, so a load pays at once. */
+    private final EnumSet<Handicap> lines = EnumSet.noneOf(Handicap.class);
     /** Ticks since the lines were last paid for; never saved, so a load pays at once. */
     private int sinceEvaluated = INTERVAL;
     /** What it is doing, as of its last tick; never saved. */
@@ -138,14 +146,14 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         return phase;
     }
 
-    /** The lines that count until the next payment. */
+    /** Whether {@code handicap}'s line counts until the next payment. */
     public boolean counts(Handicap handicap) {
-        return (lines & 1 << handicap.ordinal()) != 0;
+        return lines.contains(handicap);
     }
 
     /** How many lines count until the next payment. */
     public int linesCounting() {
-        return Integer.bitCount(lines);
+        return lines.size();
     }
 
     /** The Nullessence it holds. */
@@ -186,28 +194,24 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         UUID owner = owner(level);
         TeamState teams = TeamState.get(server);
         if (!claim(level, owner, teams)) {
-            show(Phase.SECOND, 0);
+            phase = Phase.SECOND;
+            lines.clear();
             return;
         }
         if (!teams.inLastStand(owner)) {
-            show(teams.wonThePack(owner) ? Phase.DONE : Phase.LOCKED, 0);
+            phase = teams.wonThePack(owner) ? Phase.DONE : Phase.LOCKED;
+            lines.clear();
             return;
         }
         if (++sinceEvaluated >= INTERVAL) {
             sinceEvaluated = 0;
-            show(Phase.IDLE, pay(level, owner, teams));
+            lines.clear();
+            lines.addAll(pay(level, owner, teams));
         }
-        phase = lines == 0 ? Phase.IDLE : Phase.WORKING;
+        // A line paid for counts only while its spell runs: one that just ended stops at once.
+        lines.removeIf(handicap -> !teams.underSpell(owner, handicap));
+        phase = lines.isEmpty() ? Phase.IDLE : Phase.WORKING;
         work();
-    }
-
-    /** Notes what it is doing and which lines count, saved if that changed. */
-    private void show(Phase now, int counting) {
-        phase = now;
-        if (lines != counting) {
-            lines = counting;
-            setChanged();
-        }
     }
 
     /**
@@ -230,19 +234,19 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
     }
 
     /** Pays for each line whose spell runs, for the next {@link #INTERVAL}, and says which lines count. */
-    private int pay(ServerLevel level, UUID owner, TeamState teams) {
+    private EnumSet<Handicap> pay(ServerLevel level, UUID owner, TeamState teams) {
         MinecraftServer server = level.getServer();
-        int counting = 0;
+        EnumSet<Handicap> counting = EnumSet.noneOf(Handicap.class);
         if (teams.underSpell(owner, Handicap.ENERGY) && takeOutput(level, owner, (long) ServerConfig.athanorEnergyDemand() * INTERVAL)) {
-            counting |= 1 << Handicap.ENERGY.ordinal();
+            counting.add(Handicap.ENERGY);
         }
         if (!teams.underSpell(owner, Handicap.LIFE)) {
             setEssentia(0);
         } else {
-            int need = ServerConfig.athanorLifeDemand() * INTERVAL / 20;
+            int need = ServerConfig.athanorLifeDemand() * INTERVAL / TICKS_PER_SECOND;
             if (essentia >= need) {
                 setEssentia(essentia - need);
-                counting |= 1 << Handicap.LIFE.ordinal();
+                counting.add(Handicap.LIFE);
             }
         }
         Optional<Spell> protection = teams.spell(owner, Handicap.PROTECTION);
@@ -250,17 +254,18 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         if (protection.isEmpty()) {
             setShardTicks(0);
         } else if (assaultRuns(server, owner)) {
-            if (shardTicks < INTERVAL && shards.takeOne()) {
-                setShardTicks(shardTicks + Math.max(1, 1200 / ServerConfig.athanorProtectionDemand()));
+            double perShard = (double) TICKS_PER_MINUTE / ServerConfig.athanorProtectionDemand();
+            while (shardTicks < INTERVAL && shards.takeOne()) {
+                setShardTicks(shardTicks + perShard);
             }
             if (shardTicks >= INTERVAL) {
                 setShardTicks(shardTicks - INTERVAL);
-                counting |= 1 << Handicap.PROTECTION.ordinal();
+                counting.add(Handicap.PROTECTION);
             }
         }
         if (teams.underSpell(owner, Handicap.MONEY)
-                && Accounts.get().take(server, owner, (long) ServerConfig.athanorMoneyDemand() * INTERVAL / 20)) {
-            counting |= 1 << Handicap.MONEY.ordinal();
+                && Accounts.get().take(server, owner, (long) ServerConfig.athanorMoneyDemand() * INTERVAL / TICKS_PER_SECOND)) {
+            counting.add(Handicap.MONEY);
         }
         return counting;
     }
@@ -306,24 +311,32 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         return state.assault(owner).isPresent() && state.paused(owner).isEmpty();
     }
 
-    /** Moves the next Quintessence on by a tick, while a line counts and it holds enough Nullessence for it, and makes it once done. */
+    /**
+     * Moves the next Quintessence on by a tick while a line counts, each tick owing its share of the Quintessence's cost
+     * at the lines counting then, so long as it holds the Nullessence owed; once done, uses up what is owed and makes it.
+     */
     private void work() {
         int counting = linesCounting();
         if (counting == 0) {
             return;
         }
-        int cost = AthanorWork.cost(counting, ServerConfig.athanorCosts());
-        if (nullessence() < cost) {
-            return;
-        }
-        progress = Math.min(1.0, progress + AthanorWork.progressPerTick(counting, ServerConfig.athanorTicks()));
-        if (progress < 1.0 || !output.hasRoom()) {
+        double share = AthanorWork.progressPerTick(counting, ServerConfig.athanorTicks());
+        double owing = owed + share * AthanorWork.cost(counting, ServerConfig.athanorCosts());
+        if (progress < 1.0) {
+            if (nullessence() < Math.ceil(owing - 1e-9)) {
+                return;
+            }
+            progress = Math.min(1.0, progress + share);
+            owed = owing;
             setChanged();
+        }
+        if (progress < 1.0 || !output.hasRoom()) {
             return;
         }
-        nullessence.use(cost);
+        nullessence.use((int) Math.min(nullessence(), Math.round(owed)));
         output.makeOne();
         progress = 0;
+        owed = 0;
         setChanged();
     }
 
@@ -346,6 +359,9 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         }
         if (player.getHealth() <= HEART) {
             return Optional.of(Component.translatable("mechanicalmasteryreborn.athanor.heart.last"));
+        }
+        if (essentia >= ESSENTIA_CAPACITY) {
+            return Optional.of(Component.translatable("mechanicalmasteryreborn.athanor.heart.full"));
         }
         player.setHealth(player.getHealth() - HEART);
         int yield = (int) Math.round(ServerConfig.athanorLifePerHeart() * (1 + ServerConfig.athanorLifeRuneBonus() * runes()));
@@ -422,7 +438,7 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         }
     }
 
-    private void setShardTicks(int ticks) {
+    private void setShardTicks(double ticks) {
         if (shardTicks != ticks) {
             shardTicks = ticks;
             setChanged();
@@ -442,9 +458,9 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         shards.serialize(out.child(SHARDS_KEY));
         output.serialize(out.child(OUTPUT_KEY));
         out.putInt(ESSENTIA_KEY, essentia);
-        out.putInt(SHARD_TICKS_KEY, shardTicks);
+        out.putDouble(SHARD_TICKS_KEY, shardTicks);
         out.putDouble(PROGRESS_KEY, progress);
-        out.putInt(LINES_KEY, lines);
+        out.putDouble(OWED_KEY, owed);
     }
 
     @Override
@@ -454,9 +470,9 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         shards.deserialize(input.childOrEmpty(SHARDS_KEY));
         output.deserialize(input.childOrEmpty(OUTPUT_KEY));
         essentia = input.getIntOr(ESSENTIA_KEY, 0);
-        shardTicks = input.getIntOr(SHARD_TICKS_KEY, 0);
+        shardTicks = input.getDoubleOr(SHARD_TICKS_KEY, 0);
         progress = input.getDoubleOr(PROGRESS_KEY, 0);
-        lines = input.getIntOr(LINES_KEY, 0);
+        owed = input.getDoubleOr(OWED_KEY, 0);
     }
 
     @Override

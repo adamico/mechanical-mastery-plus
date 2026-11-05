@@ -210,6 +210,7 @@
   "mechanicalmasteryreborn.athanor.heart.tooltip": "A heart of yours becomes Essentia Vitae for the life line, more with Runes of Self Sacrifice around.",
   "mechanicalmasteryreborn.athanor.heart.no_spell": "Takes hearts only while your team bears the Life Spell here",
   "mechanicalmasteryreborn.athanor.heart.last": "You have no heart left to give",
+  "mechanicalmasteryreborn.athanor.heart.full": "Holds all the Essentia Vitae it can",
   "mechanicalmasteryreborn.athanor.not_member": "This Athanor isn't your team's",
   "mechanicalmasteryreborn.athanor.full": "Takes no more Nullessence",
   "mechanicalmasteryreborn.athanor.shard_refused": "Takes only Null Shards of the Protection Spell running"
