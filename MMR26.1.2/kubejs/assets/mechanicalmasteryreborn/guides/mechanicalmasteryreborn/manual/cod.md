@@ -50,5 +50,7 @@ raises your Lead. C.O.D. starts slow, and speeds up, a little behind, as your Qu
 a ceiling; it slows back down when you stall. Your Lead never falls further than the margin below zero, and the last
 stand can't be lost, stopped or reset.
 
+Quintessence is made from Nullessence at the [Athanor](athanor.md), while your team bears its handicaps there.
+
 When your Lead reaches the margin, C.O.D. shuts down for good and stands dark, and your team has won the pack. The
 bar at the top of your screen, and Jade on C.O.D., show your Lead and how fast C.O.D. makes Nullessence.

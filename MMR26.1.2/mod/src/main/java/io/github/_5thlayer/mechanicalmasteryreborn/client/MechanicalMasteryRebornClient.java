@@ -4,6 +4,7 @@
 package io.github._5thlayer.mechanicalmasteryreborn.client;
 
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
+import io.github._5thlayer.mechanicalmasteryreborn.athanor.Athanor;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
@@ -74,6 +75,7 @@ public final class MechanicalMasteryRebornClient {
 
     private static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(Cod.MENU.get(), CodScreen::new);
+        event.register(Athanor.MENU.get(), AthanorScreen::new);
         event.register(Lab.MENU.get(), LabScreen::new);
         event.register(Lab.REFUND_MENU.get(), RefundScreen::new);
     }

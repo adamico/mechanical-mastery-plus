@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+import io.github._5thlayer.mechanicalmasteryreborn.athanor.AthanorWork;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.HandDriveBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
@@ -30,6 +31,9 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  * <p>And the share of a sale a team is paid while it plays the money challenge, and the quota a challenge's Port takes to win it.
  *
  * <p>And the life handicap's faster hunger and Diet, and whether it pauses in Neo Vitae's Demon Realm.
+ *
+ * <p>And the Athanor's: its spells' length, its pace and cost by how many supply lines count, each line's demand, and the
+ * spells' harder handicaps.
  */
 public final class ServerConfig {
 
@@ -163,7 +167,7 @@ public final class ServerConfig {
     public static final ModConfigSpec.IntValue LAST_STAND_QUINTESSENCE_CANCELS = BUILDER
             .comment("The Nullessence one Quintessence put into C.O.D. cancels in its last stand: what it adds to the team's Lead.",
                     "64 is a stack.")
-            .defineInRange("last_stand.quintessence_cancels", 64, 1, 1_000_000);
+            .defineInRange("last_stand.quintessence_cancels", AthanorWork.DEFAULT_QUINTESSENCE_CANCELS, 1, 1_000_000);
 
     /** The least Nullessence C.O.D. makes a minute in its last stand: one every 3.75 seconds. */
     public static final ModConfigSpec.DoubleValue LAST_STAND_FLOOR = BUILDER
@@ -219,6 +223,89 @@ public final class ServerConfig {
             .comment("Whether a player in Neo Vitae's Demon Realm (neovitae:dungeon) hungers and eats as in vanilla while their team",
                     "plays the life challenge. Off, the handicap goes on there as anywhere else. Inflation goes on either way.")
             .define("life.pause_in_demon_realm", false);
+
+    /** How long a spell at the Athanor runs: five minutes. */
+    public static final ModConfigSpec.IntValue ATHANOR_SPELL_LENGTH = BUILDER
+            .comment("The ticks a handicap taken on at the Athanor runs for: its spell, which can't be ended early. 6000 is five minutes.")
+            .defineInRange("athanor.spell_length", 6000, 20, 1_728_000);
+
+    /** The ticks a Quintessence takes at the Athanor, by how many of its lines count. */
+    private static final List<ModConfigSpec.IntValue> ATHANOR_TICKS = IntStream.rangeClosed(1, AthanorWork.LINES)
+            .mapToObj(lines -> BUILDER
+                    .comment("The ticks the Athanor takes to make one Quintessence while " + lines + " of its supply lines count.")
+                    .defineInRange("athanor.lines_" + lines + ".ticks", AthanorWork.DEFAULT_TICKS.get(lines - 1), 1, 1_728_000))
+            .toList();
+
+    /** The Nullessence a Quintessence takes at the Athanor, by how many of its lines count. */
+    private static final List<ModConfigSpec.IntValue> ATHANOR_COSTS = IntStream.rangeClosed(1, AthanorWork.LINES)
+            .mapToObj(lines -> BUILDER
+                    .comment("The Nullessence the Athanor takes for one Quintessence while " + lines + " of its supply lines count.",
+                            "Only with all four should it be fewer than last_stand.quintessence_cancels, so only all four beat break-even.")
+                    .defineInRange("athanor.lines_" + lines + ".nullessence", AthanorWork.DEFAULT_COSTS.get(lines - 1), 1, 512))
+            .toList();
+
+    /** The FE a tick the energy line takes from the team's generators. */
+    public static final ModConfigSpec.IntValue ATHANOR_ENERGY_DEMAND = BUILDER
+            .comment("The FE a tick the Athanor's energy line takes from its team's generators; it counts only while they give that much.",
+                    "256 is a little over half a Steam Engine.")
+            .defineInRange("athanor.energy.demand", 256, 1, 1_000_000);
+
+    /** How far, in chunks, the Athanor reaches for its team's generators. */
+    public static final ModConfigSpec.IntValue ATHANOR_ENERGY_REACH = BUILDER
+            .comment("How many chunks around it, each way, the Athanor takes its team's generators' output from. 8 reaches 136 blocks.")
+            .defineInRange("athanor.energy.reach", 8, 0, 32);
+
+    /** The Essentia Vitae a second the life line takes. */
+    public static final ModConfigSpec.IntValue ATHANOR_LIFE_DEMAND = BUILDER
+            .comment("The mB of Essentia Vitae a second the Athanor's life line takes, from hearts given at it.",
+                    "10 is a heart every 10 seconds at athanor.life.per_heart's default.")
+            .defineInRange("athanor.life.demand", 10, 1, 100_000);
+
+    /** The Essentia Vitae one heart given at the Athanor becomes. */
+    public static final ModConfigSpec.IntValue ATHANOR_LIFE_PER_HEART = BUILDER
+            .comment("The mB of Essentia Vitae one heart given at the Athanor becomes, before Neo Vitae's self-sacrifice runes nearby add theirs.")
+            .defineInRange("athanor.life.per_heart", 100, 1, 100_000);
+
+    /** What each self-sacrifice rune near the Athanor adds to a heart's Essentia Vitae. */
+    public static final ModConfigSpec.DoubleValue ATHANOR_LIFE_RUNE_BONUS = BUILDER
+            .comment("The share more Essentia Vitae a heart becomes for each of Neo Vitae's Runes of Self Sacrifice within 2 blocks",
+                    "of the Athanor; a reinforced one counts twice.")
+            .defineInRange("athanor.life.rune_bonus", 0.1, 0.0, 10.0);
+
+    /** How much faster hunger drains under the life spell: harder than the challenge's. */
+    public static final ModConfigSpec.DoubleValue ATHANOR_LIFE_HUNGER_RATE = BUILDER
+            .comment("How many times faster a player's hunger drains while their team bears the life spell at the Athanor,",
+                    "the hungriest Diet. 3 is a half again the life challenge's default.")
+            .defineInRange("athanor.life.hunger_rate", 3.0, 1.0, 100.0);
+
+    /** The Null Shards a minute the protection line takes. */
+    public static final ModConfigSpec.IntValue ATHANOR_PROTECTION_DEMAND = BUILDER
+            .comment("The Null Shards a minute the Athanor's protection line takes, from its spell's Assault.")
+            .defineInRange("athanor.protection.demand", 6, 1, 1200);
+
+    /** The wave the protection spell's Assault opens at: its hardest steps. */
+    public static final ModConfigSpec.IntValue ATHANOR_PROTECTION_WAVE = BUILDER
+            .comment("The waves behind the protection spell's Assault gate as it opens: 25 opens it at wave 26, past the step that",
+                    "adds the breeze, at the Assault's hardest.")
+            .defineInRange("athanor.protection.wave", 25, 0, 1000);
+
+    /** The money a second the money line drains. */
+    public static final ModConfigSpec.IntValue ATHANOR_MONEY_DEMAND = BUILDER
+            .comment("The cents a second the Athanor's money line drains from its team's Account, which holds only what it earns",
+                    "during the spell; the line counts only while the drain is paid. 50 is half a coin a second.")
+            .defineInRange("athanor.money.demand", 50, 1, 1_000_000_000);
+
+    /** The share of a sale the money spell pays: harder than the challenge's. */
+    public static final ModConfigSpec.DoubleValue ATHANOR_MONEY_SALE_SHARE = BUILDER
+            .comment("The share of a sale's price AdminShop pays a team while it bears the money spell at the Athanor,",
+                    "rounded down to the cent. 0.25 is half the money challenge's default.")
+            .defineInRange("athanor.money.sale_share", 0.25, 0.0, 1.0);
+
+    /** What the Shop's prices are multiplied by under the money spell. */
+    public static final ModConfigSpec.DoubleValue ATHANOR_MONEY_PRICE_RISE = BUILDER
+            .comment("What the Shop's prices are multiplied by while a team bears the money spell at the Athanor, by hand or by",
+                    "a Buyer, rounded up to the cent. 1.5 is half again.")
+            .defineInRange("athanor.money.price_rise", 1.5, 1.0, 100.0);
 
     /**
      * The Transmuted Essence a challenge's Port takes to win it, by the tier C.O.D. makes, highest first (#224). Each
@@ -393,5 +480,75 @@ public final class ServerConfig {
     /** How many shots' worth of FE an FE defence stores. */
     public static int feDefenceStoreShots() {
         return SPEC.isLoaded() ? FE_DEFENCE_STORE_SHOTS.getAsInt() : FE_DEFENCE_STORE_SHOTS.getDefault();
+    }
+
+    /** The ticks a spell at the Athanor runs. */
+    public static int athanorSpellLength() {
+        return SPEC.isLoaded() ? ATHANOR_SPELL_LENGTH.getAsInt() : ATHANOR_SPELL_LENGTH.getDefault();
+    }
+
+    /** The ticks a Quintessence takes at the Athanor with one, two, three and four lines counting. */
+    public static List<Integer> athanorTicks() {
+        return ATHANOR_TICKS.stream().map(value -> SPEC.isLoaded() ? value.getAsInt() : value.getDefault()).toList();
+    }
+
+    /** The Nullessence a Quintessence takes at the Athanor with one, two, three and four lines counting. */
+    public static List<Integer> athanorCosts() {
+        return ATHANOR_COSTS.stream().map(value -> SPEC.isLoaded() ? value.getAsInt() : value.getDefault()).toList();
+    }
+
+    /** The FE a tick the Athanor's energy line takes. */
+    public static int athanorEnergyDemand() {
+        return SPEC.isLoaded() ? ATHANOR_ENERGY_DEMAND.getAsInt() : ATHANOR_ENERGY_DEMAND.getDefault();
+    }
+
+    /** How many chunks each way the Athanor reaches for its team's generators. */
+    public static int athanorEnergyReach() {
+        return SPEC.isLoaded() ? ATHANOR_ENERGY_REACH.getAsInt() : ATHANOR_ENERGY_REACH.getDefault();
+    }
+
+    /** The mB of Essentia Vitae a second the Athanor's life line takes. */
+    public static int athanorLifeDemand() {
+        return SPEC.isLoaded() ? ATHANOR_LIFE_DEMAND.getAsInt() : ATHANOR_LIFE_DEMAND.getDefault();
+    }
+
+    /** The mB of Essentia Vitae a heart given at the Athanor becomes. */
+    public static int athanorLifePerHeart() {
+        return SPEC.isLoaded() ? ATHANOR_LIFE_PER_HEART.getAsInt() : ATHANOR_LIFE_PER_HEART.getDefault();
+    }
+
+    /** The share more a heart becomes for each self-sacrifice rune near the Athanor. */
+    public static double athanorLifeRuneBonus() {
+        return SPEC.isLoaded() ? ATHANOR_LIFE_RUNE_BONUS.getAsDouble() : ATHANOR_LIFE_RUNE_BONUS.getDefault();
+    }
+
+    /** How many times faster hunger drains under the life spell. */
+    public static double athanorLifeHungerRate() {
+        return SPEC.isLoaded() ? ATHANOR_LIFE_HUNGER_RATE.getAsDouble() : ATHANOR_LIFE_HUNGER_RATE.getDefault();
+    }
+
+    /** The Null Shards a minute the Athanor's protection line takes. */
+    public static int athanorProtectionDemand() {
+        return SPEC.isLoaded() ? ATHANOR_PROTECTION_DEMAND.getAsInt() : ATHANOR_PROTECTION_DEMAND.getDefault();
+    }
+
+    /** The waves behind the protection spell's Assault gate as it opens. */
+    public static int athanorProtectionWave() {
+        return SPEC.isLoaded() ? ATHANOR_PROTECTION_WAVE.getAsInt() : ATHANOR_PROTECTION_WAVE.getDefault();
+    }
+
+    /** The cents a second the Athanor's money line drains. */
+    public static int athanorMoneyDemand() {
+        return SPEC.isLoaded() ? ATHANOR_MONEY_DEMAND.getAsInt() : ATHANOR_MONEY_DEMAND.getDefault();
+    }
+
+    /** The share of a sale the money spell pays. */
+    public static double athanorMoneySaleShare() {
+        return SPEC.isLoaded() ? ATHANOR_MONEY_SALE_SHARE.getAsDouble() : ATHANOR_MONEY_SALE_SHARE.getDefault();
+    }
+
+    /** What the Shop's prices are multiplied by under the money spell. */
+    public static double athanorMoneyPriceRise() {
+        return SPEC.isLoaded() ? ATHANOR_MONEY_PRICE_RISE.getAsDouble() : ATHANOR_MONEY_PRICE_RISE.getDefault();
     }
 }

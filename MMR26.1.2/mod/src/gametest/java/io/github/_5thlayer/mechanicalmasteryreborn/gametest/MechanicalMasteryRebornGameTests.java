@@ -62,6 +62,7 @@ public final class MechanicalMasteryRebornGameTests {
         // Posted only when game tests are enabled, which a production game never is.
         modBus.addListener(MechanicalMasteryRebornGameTests::registerTests);
         GeneratorTests.registerCapabilities(modBus);
+        AthanorTests.registerCapabilities(modBus);
         TestYield.useFull();
     }
 
@@ -104,6 +105,7 @@ public final class MechanicalMasteryRebornGameTests {
         AssaultAbsenceTests.register(tests);
         AssaultExplosionsTests.register(tests);
         RefundTests.register(tests);
+        AthanorTests.register(tests);
         // The protection Chain and the End Portal Frame on a real Assembler, in the suiteGameTestServer run alone, which
         // loads Craftworks (#252, #265).
         if (ModList.get().isLoaded("craftworks")) {

@@ -59,16 +59,6 @@ public enum Essence {
         return kind;
     }
 
-    /**
-     * Whether a player can have it yet: the Mechanical and the Transmuted Essences, which the challenges' chains
-     * make and their Ports take, and Nullessence, which C.O.D. makes in its last stand, but not Quintessence, until a
-     * way to make it exists (#262, #263). It is registered all the
-     * same, so its id is taken from the first release.
-     */
-    public boolean obtainable() {
-        return kind != Kind.QUINTESSENCE;
-    }
-
     /** The essence saved under {@code path}, if any. */
     public static Optional<Essence> byPath(String path) {
         for (Essence essence : values()) {

@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "HandSaleMixin",
-    "SellerSaleMixin"
+    "SellerSaleMixin",
+    "PurchaseMixin",
+    "BuyerPurchaseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

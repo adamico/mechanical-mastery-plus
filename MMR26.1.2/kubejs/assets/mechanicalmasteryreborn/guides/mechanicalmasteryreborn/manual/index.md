@@ -16,3 +16,4 @@ Hold <KeyBind id="key.guideme.guide" /> over a block or an essence in your inven
 - [The lab](lab.md), where your team starts a challenge.
 - [C.O.D.](cod.md), which makes the essence you decompose.
 - [The Electric Defence](fe_defence.md), which guards your island on FE.
+- [The Athanor](athanor.md), which makes Quintessence from Nullessence while your team bears its handicaps.

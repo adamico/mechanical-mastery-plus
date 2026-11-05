@@ -43,13 +43,6 @@ class EssenceIdsTest {
     }
 
     @Test
-    void everyEssenceButQuintessenceIsObtainable() {
-        assertEquals(List.of(Essence.BASIC, Essence.REGULAR, Essence.IMPROVED, Essence.ADVANCED,
-                Essence.GALVANIC, Essence.WARDING, Essence.VITAL, Essence.AUREATE, Essence.NULLESSENCE),
-                Arrays.stream(Essence.values()).filter(Essence::obtainable).toList());
-    }
-
-    @Test
     void everyEssenceHasAModelATextureAndAName() throws IOException {
         String lang = Files.readString(ASSETS.resolve("lang/en_us.json"));
         for (Essence essence : Essence.values()) {

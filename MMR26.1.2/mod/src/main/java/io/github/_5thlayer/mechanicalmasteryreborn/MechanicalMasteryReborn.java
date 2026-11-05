@@ -3,6 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn;
 
+import io.github._5thlayer.mechanicalmasteryreborn.athanor.Athanor;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Assault;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
@@ -13,7 +14,9 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastChapter;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ObsidianFlakes;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.NullShards;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Spells;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Stops;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
@@ -32,7 +35,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 
 /**
- * The mod's entry point: the essences, C.O.D., the lab, the challenges' Ports and the energy handicap's stopped generators, the decomposing and recycling recipes and the Recycler with its config, and its part of the suite's Works tab. The game tests
+ * The mod's entry point: the essences, C.O.D., the lab, the Athanor and its spells, the challenges' Ports and the energy handicap's stopped generators, the decomposing and recycling recipes and the Recycler with its config, and its part of the suite's Works tab. The game tests
  * hook themselves in from the {@code gametest} source set, which never ships (libworks ADR 0011).
  */
 @Mod(MechanicalMasteryReborn.MOD_ID)
@@ -48,6 +51,8 @@ public final class MechanicalMasteryReborn {
         Port.register(modBus);
         Generators.register(modBus);
         RiftShards.register(modBus);
+        NullShards.register(modBus);
+        Athanor.register(modBus);
         WardTallow.register(modBus);
         ObsidianFlakes.register(modBus);
         Assault.register(modBus);
@@ -56,6 +61,7 @@ public final class MechanicalMasteryReborn {
         Stops.register();
         LastChapter.register();
         LastStands.register();
+        Spells.register();
         ChainMachines.register(modBus);
         InflationCap.register();
         InflationBar.register();

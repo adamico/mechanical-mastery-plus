@@ -9,6 +9,7 @@ import java.util.function.Supplier;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
+import io.github._5thlayer.mechanicalmasteryreborn.record.Spell;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -30,7 +31,9 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
  * and saturation alike. It hooks vanilla's food data itself, so whatever feeds a player counts, Neo Vitae's Ritual of
  * Full Stomach too; a feeding nothing names, such as a cake's bite or the ritual's Essentia, counts as {@link #OTHER}.
  * The Diet is a player's attachment, synced to them for the tooltip, and forgotten when the challenge ends or resets.
- * With the server config's switch on, a player in Neo Vitae's Demon Realm hungers and eats as in vanilla.
+ * With the server config's switch on, a player in Neo Vitae's Demon Realm hungers and eats as in vanilla. A team that
+ * bears the life spell at its Athanor (#263) bears it the same way, its hunger faster still, its Diet kept from the
+ * spell's start and forgotten as it ends.
  */
 public final class LifeHandicap {
 
@@ -71,7 +74,11 @@ public final class LifeHandicap {
 
     /** The exhaustion {@code amount} adds to {@code player}: {@link ServerConfig#lifeHungerRate} times it under the handicap. */
     public static float exhaustion(Player player, float amount) {
-        return applies(player) ? (float) (amount * ServerConfig.lifeHungerRate()) : amount;
+        if (!applies(player)) {
+            return amount;
+        }
+        boolean spell = !TeamState.get(player.level().getServer()).plays(Teams.of(player), Handicap.LIFE);
+        return (float) (amount * (spell ? ServerConfig.athanorLifeHungerRate() : ServerConfig.lifeHungerRate()));
     }
 
     /**
@@ -103,7 +110,7 @@ public final class LifeHandicap {
         return player.getData(DIET).kept() && !paused(player);
     }
 
-    /** Sets the Diet of each of {@code team}'s players online to what its challenge keeps, as it starts, resets or ends. */
+    /** Sets the Diet of each of {@code team}'s players online to what its challenge or spell keeps, as one starts, resets or ends. */
     static void refresh(MinecraftServer server, UUID team) {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (Teams.of(player).equals(team)) {
@@ -133,17 +140,18 @@ public final class LifeHandicap {
     private static Diet current(Player player) {
         UUID team = Teams.of(player);
         TeamState state = TeamState.get(player.level().getServer());
-        if (!state.plays(team, Handicap.LIFE)) {
+        if (!state.bears(team, Handicap.LIFE)) {
             return Diet.NONE;
         }
-        long began = state.inflation(team).map(Inflation::began).orElse(0L);
+        long began = state.plays(team, Handicap.LIFE) ? state.inflation(team).map(Inflation::began).orElse(0L)
+                : state.spell(team, Handicap.LIFE).map(Spell::began).orElse(0L);
         Diet diet = player.getData(DIET);
         return diet.began() == began ? diet : Diet.beginning(began);
     }
 
     private static boolean applies(Player player) {
         return !player.level().isClientSide() && !paused(player)
-                && TeamState.get(player.level().getServer()).plays(Teams.of(player), Handicap.LIFE);
+                && TeamState.get(player.level().getServer()).bears(Teams.of(player), Handicap.LIFE);
     }
 
     private static boolean paused(Player player) {
