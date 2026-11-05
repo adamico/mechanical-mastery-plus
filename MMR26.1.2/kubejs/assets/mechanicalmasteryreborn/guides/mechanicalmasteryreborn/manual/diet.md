@@ -1,6 +1,7 @@
 ---
 navigation:
   title: The Diet
+  parent: index.md
   icon: minecraft:bread
   position: 8
 ---

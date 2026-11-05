@@ -1,6 +1,7 @@
 ---
 navigation:
   title: The lab
+  parent: index.md
   icon: lab
   position: 4
 item_ids:

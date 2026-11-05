@@ -1,6 +1,7 @@
 ---
 navigation:
   title: Decomposing and recycling
+  parent: index.md
   icon: advanced_mechanical_essence
   position: 3
 item_ids:

@@ -1,6 +1,7 @@
 ---
 navigation:
   title: C.O.D.
+  parent: index.md
   icon: cod
   position: 6
 item_ids:

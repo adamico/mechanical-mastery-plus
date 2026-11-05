@@ -1,6 +1,7 @@
 ---
 navigation:
   title: The challenges
+  parent: index.md
   icon: galvanic_essence
   position: 5
 item_ids:

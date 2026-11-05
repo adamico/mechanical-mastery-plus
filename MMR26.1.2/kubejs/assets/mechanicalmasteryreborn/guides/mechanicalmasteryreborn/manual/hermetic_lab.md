@@ -1,6 +1,7 @@
 ---
 navigation:
   title: The Hermetic Lab
+  parent: index.md
   icon: lab
   position: 10
 item_ids:

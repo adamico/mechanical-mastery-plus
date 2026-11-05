@@ -1,6 +1,7 @@
 ---
 navigation:
   title: The Recycler
+  parent: index.md
   icon: recycler_core_1
   position: 2
 ---

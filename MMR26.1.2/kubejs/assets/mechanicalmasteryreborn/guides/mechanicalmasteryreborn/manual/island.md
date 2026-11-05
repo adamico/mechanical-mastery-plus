@@ -1,6 +1,7 @@
 ---
 navigation:
   title: Your island and team
+  parent: index.md
   icon: minecraft:grass_block
   position: 1
 ---

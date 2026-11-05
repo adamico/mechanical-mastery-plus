@@ -1,6 +1,7 @@
 ---
 navigation:
   title: The last chapter
+  parent: index.md
   icon: quintessence
   position: 9
 item_ids:

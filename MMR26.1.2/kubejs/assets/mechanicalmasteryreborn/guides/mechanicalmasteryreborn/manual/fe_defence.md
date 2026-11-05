@@ -1,6 +1,7 @@
 ---
 navigation:
   title: Electric Defence
+  parent: index.md
   icon: fe_defence
   position: 7
 item_ids:
