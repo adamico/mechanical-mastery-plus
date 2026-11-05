@@ -49,6 +49,7 @@ public final class InflationCap {
         for (UUID team : state.playing()) {
             Inflation inflation = state.inflation(team).orElseThrow();
             if (inflation.excess() >= cap) {
+                LOGGER.info("Team {} reached its Inflation cap of {}", team, cap);
                 reset(server, team);
             } else if (near(inflation.excess(), cap)) {
                 if (!state.warned(team)) {
@@ -81,8 +82,7 @@ public final class InflationCap {
         int told = tell(server, team, Component.translatable("mechanicalmasteryreborn.challenge.reset",
                 cap, Challenges.title(handicap).withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.RED),
                 SoundEvents.BEACON_DEACTIVATE);
-        LOGGER.info("Team {}'s {} challenge was reset, as at its Inflation cap of {}; told {} of its players online",
-                team, handicap.id(), cap, told);
+        LOGGER.info("Team {}'s {} challenge was reset; told {} of its players online", team, handicap.id(), told);
         return true;
     }
 
