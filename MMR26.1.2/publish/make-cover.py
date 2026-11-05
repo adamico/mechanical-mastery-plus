@@ -16,8 +16,8 @@
 #   - above the title band, the four tier essences in a row, lowest first, scaled up nearest-neighbour,
 #     each glowing in its own colour;
 #   - the band, dark, ruled top and bottom in the accent, holding the suite's title turned around, as
-#     A Touch of Darkness's is: "MECHANICAL MASTERY" in Impact caps, in the Advanced essence's
-#     magenta, then the suite's white pill holding "reborn". The icon stacks them;
+#     A Touch of Darkness's is: "MECHANICAL MASTERY" in Impact caps, in the accent's orange,
+#     then the suite's white pill holding "reborn". The icon stacks them;
 #   - beneath the band, the four Transmuted Essences with Quintessence in their middle.
 #
 # Its art is the companion mod's own textures only (mod/NOTICE), nothing of Mojang's. Its fonts are
@@ -32,7 +32,7 @@ T = 'mod/src/main/resources/assets/mechanicalmasteryreborn/textures/item/'
 SEED = 26
 BG = (6, 6, 10)
 BAND = (4, 4, 7, 235)
-ACCENT = (202, 109, 228)  # the Advanced essence's magenta
+ACCENT = (255, 136, 32)  # orange
 PILL = (240, 240, 236)
 PILL_TEXT = (24, 22, 30)
 # each essence glows in its texture's commonest colour

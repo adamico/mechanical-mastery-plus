@@ -14,8 +14,8 @@
 #   - a wall of the Recycler's casing, drive and vent textures, tiled nearest-neighbour as Beltworks'
 #     tiles its belts, in a fixed pattern so every run draws the same image, dimmed so the title reads;
 #   - the title band, dark, ruled top and bottom in the accent, holding the suite's title turned
-#     around, as A Touch of Darkness's is: "MECHANICAL MASTERY" in Impact caps, in the Advanced
-#     essence's magenta, then the suite's white pill holding "core". The icon stacks them.
+#     around, as A Touch of Darkness's is: "MECHANICAL MASTERY" in Impact caps, in the accent's
+#     orange, then the suite's white pill holding "core". The icon stacks them.
 #
 # Its art is the mod's own textures only, Malcolm Riley's Recycler textures (NOTICE), nothing of
 # Mojang's. Its fonts are found on the system, with fallbacks; none is committed.
@@ -28,7 +28,7 @@ WALL = ['recycler_casing', 'recycler_drive', 'recycler_vent']
 DIM = 0.45  # how far the wall is blended toward BG
 BG = (14, 13, 16)
 BAND = (8, 8, 11, 225)
-ACCENT = (202, 109, 228)  # the Advanced essence's magenta
+ACCENT = (255, 136, 32)  # orange
 PILL = (240, 240, 236)
 PILL_TEXT = (24, 22, 30)
 TITLE, WORD = 'MECHANICAL MASTERY', 'core'
