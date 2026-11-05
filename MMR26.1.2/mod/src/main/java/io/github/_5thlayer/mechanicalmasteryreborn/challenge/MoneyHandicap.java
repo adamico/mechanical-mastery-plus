@@ -21,7 +21,7 @@ import org.slf4j.Logger;
  * {@link #PERMIT}, which opens the chain's Offers, for good (ADR 0007). A reset sets aside what it earned too, as though
  * the challenge had just begun; its end gives back everything set aside, on top of what it earned since. While it plays,
  * each sale pays only {@link ServerConfig#moneySaleShare its share} of the price; buying is unaffected. The money spell
- * at the Athanor (#263) sets the Balance aside the same way and gives it back as it ends, pays a smaller share of a sale,
+ * at the Hermetic Lab (#263) sets the Balance aside the same way and gives it back as it ends, pays a smaller share of a sale,
  * and raises the Shop's prices ({@link #purchase}).
  */
 public final class MoneyHandicap {
@@ -85,21 +85,21 @@ public final class MoneyHandicap {
             return share(price, ServerConfig.moneySaleShare());
         }
         if (team.filter(id -> state.underSpell(id, Handicap.MONEY)).isPresent()) {
-            return share(price, ServerConfig.athanorMoneySaleShare());
+            return share(price, ServerConfig.hermeticLabMoneySaleShare());
         }
         return price;
     }
 
     /**
      * What a purchase of {@code price} costs {@code account}, AdminShop's id for a team's Account: the price risen by
-     * {@link ServerConfig#athanorMoneyPriceRise its rise}, rounded up, while the team bears the money spell at its Athanor
+     * {@link ServerConfig#hermeticLabMoneyPriceRise its rise}, rounded up, while the team bears the money spell at its Hermetic Lab
      * (#263), and the price otherwise.
      */
     public static long purchase(MinecraftServer server, UUID account, long price) {
         boolean spell = Accounts.get().teamOf(server, account)
                 .map(team -> TeamState.get(server).underSpell(team, Handicap.MONEY))
                 .orElse(false);
-        return spell ? rise(price, ServerConfig.athanorMoneyPriceRise()) : price;
+        return spell ? rise(price, ServerConfig.hermeticLabMoneyPriceRise()) : price;
     }
 
     /** {@code price} times {@code rise}, rounded up. */

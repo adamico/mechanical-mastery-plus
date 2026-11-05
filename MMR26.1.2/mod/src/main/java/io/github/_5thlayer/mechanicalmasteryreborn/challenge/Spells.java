@@ -29,8 +29,8 @@ import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import org.slf4j.Logger;
 
 /**
- * The handicaps a team takes on at its Athanor in its last stand (#263, ADR 0014), each for a fixed
- * {@link ServerConfig#athanorSpellLength spell} that can't be ended early, at its challenge's peak from the start: its
+ * The handicaps a team takes on at its Hermetic Lab in its last stand (#263, ADR 0014), each for a fixed
+ * {@link ServerConfig#hermeticLabSpellLength spell} that can't be ended early, at its challenge's peak from the start: its
  * generators stopped and its banked FE cut ({@link Generators}), the hungriest Diet ({@link LifeHandicap}), an Assault
  * opened at its hardest steps whose mobs drop Null Shards ({@link Assault}, {@link NullShards}), and its money set aside
  * with sales paying less and the Shop's prices up ({@link MoneyHandicap}). Spells overlap, and one can be taken again once
@@ -48,7 +48,7 @@ public final class Spells {
     }
 
     /**
-     * Whether {@code team} can take on {@code handicap} at its Athanor now: its last stand runs, no spell of it runs yet,
+     * Whether {@code team} can take on {@code handicap} at its Hermetic Lab now: its last stand runs, no spell of it runs yet,
      * and, for money, it has an Account to act on.
      */
     public static boolean canBegin(MinecraftServer server, UUID team, Handicap handicap) {
@@ -58,11 +58,11 @@ public final class Spells {
     }
 
     /**
-     * Has {@code team} take on {@code handicap} for a spell from now, and tells its players online, as the Athanor's
+     * Has {@code team} take on {@code handicap} for a spell from now, and tells its players online, as the Hermetic Lab's
      * button does. Says whether it did: only as {@link #canBegin} allows.
      */
     public static boolean begin(MinecraftServer server, UUID team, Handicap handicap) {
-        return begin(server, team, handicap, ServerConfig.athanorSpellLength());
+        return begin(server, team, handicap, ServerConfig.hermeticLabSpellLength());
     }
 
     /** Has {@code team} take on {@code handicap}, as {@link #begin(MinecraftServer, UUID, Handicap)} does, for a spell of {@code length} ticks, as the game tests do. */
@@ -77,7 +77,7 @@ public final class Spells {
         }
         switch (handicap) {
             case MONEY -> MoneyHandicap.setAside(server, team);
-            case PROTECTION -> Assault.start(server, team, ServerConfig.athanorProtectionWave());
+            case PROTECTION -> Assault.start(server, team, ServerConfig.hermeticLabProtectionWave());
             case LIFE -> LifeHandicap.refresh(server, team);
             case ENERGY -> {
             }
@@ -98,7 +98,7 @@ public final class Spells {
         }
     }
 
-    /** Ends every spell {@code team} bears, and its handicap with it, as winning the pack does: C.O.D. is shut down, and the Athanor with it. */
+    /** Ends every spell {@code team} bears, and its handicap with it, as winning the pack does: C.O.D. is shut down, and the Hermetic Lab with it. */
     static void endAll(MinecraftServer server, UUID team) {
         for (Handicap handicap : Handicap.values()) {
             end(server, team, handicap);
@@ -123,12 +123,12 @@ public final class Spells {
         LOGGER.info("Team {}'s {} spell ended; told {} of its players online", team, handicap.id(), told);
     }
 
-    /** The spell's name, such as "Energy Spell", as its start's title and the Athanor show it. */
+    /** The spell's name, such as "Energy Spell", as its start's title and the Hermetic Lab show it. */
     public static MutableComponent title(Handicap handicap) {
         return Component.translatable(MechanicalMasteryReborn.MOD_ID + ".spell.title", Challenges.name(handicap));
     }
 
-    /** What the handicap costs the team while it bears its spell, as the Athanor shows it. */
+    /** What the handicap costs the team while it bears its spell, as the Hermetic Lab shows it. */
     public static MutableComponent cost(Handicap handicap) {
         return Component.translatable(MechanicalMasteryReborn.MOD_ID + ".spell." + handicap.id() + ".cost");
     }

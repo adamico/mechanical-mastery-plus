@@ -30,8 +30,8 @@ import org.jspecify.annotations.Nullable;
  * The energy handicap's cost: a generator, a block in the pack's {@link #TAG}, gives no FE while the team whose island
  * it stands on plays the energy challenge (MMR26.1.2 ADR 0005). This answers for its FE ahead of every other mod, on
  * every block, with a face that shows the generator's own buffer but gives and takes nothing; anywhere else it answers
- * nothing, and the block's own mod answers as before. While a team bears the energy spell at its Athanor its generators
- * are stopped the same way, their output going to the Athanor ({@link #output}), and every other block on its island
+ * nothing, and the block's own mod answers as before. While a team bears the energy spell at its Hermetic Lab its generators
+ * are stopped the same way, their output going to the Hermetic Lab ({@link #output}), and every other block on its island
  * that answers for FE answers with that face too, so banked FE is cut ({@link #isCut}). The suite's networks draw a generator's FE through that face
  * every tick, so the generator fills its own buffer and idles until the challenge ends. The pack fills the tag, so this names no suite mod.
  */
@@ -82,7 +82,7 @@ public final class Generators {
     }
 
     /**
-     * The face a stopped generator's own mod answers with on no side, which its team's Athanor takes its output through
+     * The face a stopped generator's own mod answers with on no side, which its team's Hermetic Lab takes its output through
      * under the energy spell, if any.
      */
     public static @Nullable EnergyHandler output(Level level, BlockPos pos) {
@@ -103,7 +103,7 @@ public final class Generators {
 
     /**
      * Whether no FE moves in or out of the block at {@code pos}, as on the island of a team that bears the energy spell
-     * at its Athanor (ADR 0014): banked FE is cut there too, unlike under the energy challenge (ADR 0009). Server-side only.
+     * at its Hermetic Lab (ADR 0014): banked FE is cut there too, unlike under the energy challenge (ADR 0009). Server-side only.
      */
     public static boolean isCut(Level level, BlockPos pos) {
         if (!(level instanceof ServerLevel server)) {

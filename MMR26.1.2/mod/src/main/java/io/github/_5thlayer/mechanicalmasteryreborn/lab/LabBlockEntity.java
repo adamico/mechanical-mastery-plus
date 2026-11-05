@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 5thlayer
 // SPDX-License-Identifier: MIT
 
-package io.github._5thlayer.mechanicalmasteryreborn.athanor;
+package io.github._5thlayer.mechanicalmasteryreborn.lab;
 
 import java.util.EnumSet;
 import java.util.Optional;
@@ -19,7 +19,6 @@ import io.github._5thlayer.mechanicalmasteryreborn.record.Spell;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.GlobalPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -34,6 +33,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -49,21 +49,21 @@ import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 import org.jspecify.annotations.Nullable;
 
 /**
- * A placed Athanor (#263, ADR 0014). It takes Nullessence, and nothing else, by any automation or by hand, and makes
+ * A placed lab's work once its team's last stand starts, when it awakens as the Hermetic Lab (#263, ADR 0014) and stands
+ * changed ({@link LabBlock#HERMETIC}). It takes Nullessence, and nothing else, by any automation or by hand, and makes
  * Quintessence of it, which automation takes out, while its team's last stand runs and at least one of its supply lines
- * counts. One works to a team: the first to tick claims it in the team's state, and another of the same team does nothing
- * until that one is broken.
+ * counts. Before the last stand it does nothing.
  *
  * <p>Each line is fed only by what its handicap takes from the team, as it takes it, while the team bears that handicap's
  * {@link Spell spell}, and every {@link #INTERVAL} ticks it pays for the next: the team's generators' output on its island,
- * taken through their own faces ({@link Generators#output}), at {@link ServerConfig#athanorEnergyDemand its demand}; the
+ * taken through their own faces ({@link Generators#output}), at {@link ServerConfig#hermeticLabEnergyDemand its demand}; the
  * Essentia Vitae the hearts given at it became, which only {@link #giveHeart} adds to, so none comes piped in; the
  * Null Shards of the spell running, which its Assault's mobs dropped, and only while that Assault isn't paused; and money
  * drained from the team's Account, which holds only what it earned during the spell. A line not paid for counts for
  * nothing until it is again; what it holds once its spell ends is lost, so nothing saved up feeds a line. The more lines
- * count, the faster it works and the fewer Nullessence a Quintessence takes ({@link AthanorWork}).
+ * count, the faster it works and the fewer Nullessence a Quintessence takes ({@link HermeticLabWork}).
  */
-public final class AthanorBlockEntity extends BlockEntity implements MenuProvider {
+public final class LabBlockEntity extends BlockEntity implements MenuProvider {
 
     /** How often, in ticks, the supply lines are paid for, and so how long one paid for counts. */
     public static final int INTERVAL = 20;
@@ -76,6 +76,7 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
     /** Neo Vitae's Rune of Self Sacrifice, and its reinforced one, which counts twice. */
     static final Identifier RUNE = Identifier.fromNamespaceAndPath("neovitae", "rune_sacrifice_self");
     static final Identifier REINFORCED_RUNE = Identifier.fromNamespaceAndPath("neovitae", "rune_2_sacrifice_self");
+    private static final Component TITLE = Component.translatable("container.mechanicalmasteryreborn.hermetic_lab");
     /** Slots of Nullessence it holds: enough for the dearest Quintessence. */
     static final int NULLESSENCE_SLOTS = 8;
 
@@ -89,12 +90,10 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
     private static final int TICKS_PER_SECOND = 20;
     private static final int TICKS_PER_MINUTE = 1200;
 
-    /** What an Athanor is doing, as its menu shows it. */
+    /** What a Hermetic Lab is doing, as its menu shows it. */
     public enum Phase {
         /** Its team's last stand hasn't started: it does no work. */
         LOCKED,
-        /** Another Athanor of its team is the one that works. */
-        SECOND,
         /** Its team's last stand runs, but no line counts. */
         IDLE,
         /** At least one line counts. */
@@ -125,11 +124,11 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
     private int sinceEvaluated = INTERVAL;
     /** What it is doing, as of its last tick; never saved. */
     private Phase phase = Phase.LOCKED;
-    /** The team whose island it stands on, found on its first tick: an Athanor never moves. */
+    /** The team whose island it stands on, found on its first tick: a lab never moves. */
     private @Nullable UUID team;
 
-    public AthanorBlockEntity(BlockPos pos, BlockState state) {
-        super(Athanor.BLOCK_ENTITY.get(), pos, state);
+    public LabBlockEntity(BlockPos pos, BlockState state) {
+        super(Lab.BLOCK_ENTITY.get(), pos, state);
     }
 
     /** What automation reaches on every side. */
@@ -185,19 +184,15 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         return progress;
     }
 
-    static void serverTick(Level level, BlockPos pos, BlockState state, AthanorBlockEntity athanor) {
-        athanor.tick((ServerLevel) level);
+    static void serverTick(Level level, BlockPos pos, BlockState state, LabBlockEntity lab) {
+        lab.tick((ServerLevel) level);
     }
 
     private void tick(ServerLevel level) {
         MinecraftServer server = level.getServer();
         UUID owner = owner(level);
         TeamState teams = TeamState.get(server);
-        if (!claim(level, owner, teams)) {
-            phase = Phase.SECOND;
-            lines.clear();
-            return;
-        }
+        showHermetic(teams.lastStand(owner).isPresent());
         if (!teams.inLastStand(owner)) {
             phase = teams.wonThePack(owner) ? Phase.DONE : Phase.LOCKED;
             lines.clear();
@@ -214,36 +209,25 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         work();
     }
 
-    /**
-     * Makes this its team's working Athanor, unless another is and still stands, and says whether this is the one. One
-     * that no longer stands where the team's state has it, in a loaded chunk, is forgotten.
-     */
-    private boolean claim(ServerLevel level, UUID owner, TeamState teams) {
-        GlobalPos here = GlobalPos.of(level.dimension(), worldPosition);
-        if (teams.claimAthanor(owner, here)) {
-            return true;
+    /** Stands as the Hermetic Lab once its team's last stand has started, and as the lab before, if that changed. */
+    private void showHermetic(boolean hermetic) {
+        BlockState state = getBlockState();
+        if (level != null && state.hasProperty(LabBlock.HERMETIC) && state.getValue(LabBlock.HERMETIC) != hermetic) {
+            level.setBlock(worldPosition, state.setValue(LabBlock.HERMETIC, hermetic), Block.UPDATE_ALL);
         }
-        Optional<GlobalPos> claimed = teams.athanor(owner);
-        ServerLevel there = claimed.map(pos -> level.getServer().getLevel(pos.dimension())).orElse(null);
-        if (claimed.isPresent() && there != null && there.isLoaded(claimed.get().pos())
-                && !there.getBlockState(claimed.get().pos()).is(Athanor.BLOCK.get())) {
-            teams.releaseAthanor(owner, claimed.get());
-            return teams.claimAthanor(owner, here);
-        }
-        return false;
     }
 
     /** Pays for each line whose spell runs, for the next {@link #INTERVAL}, and says which lines count. */
     private EnumSet<Handicap> pay(ServerLevel level, UUID owner, TeamState teams) {
         MinecraftServer server = level.getServer();
         EnumSet<Handicap> counting = EnumSet.noneOf(Handicap.class);
-        if (teams.underSpell(owner, Handicap.ENERGY) && takeOutput(level, owner, (long) ServerConfig.athanorEnergyDemand() * INTERVAL)) {
+        if (teams.underSpell(owner, Handicap.ENERGY) && takeOutput(level, owner, (long) ServerConfig.hermeticLabEnergyDemand() * INTERVAL)) {
             counting.add(Handicap.ENERGY);
         }
         if (!teams.underSpell(owner, Handicap.LIFE)) {
             setEssentia(0);
         } else {
-            int need = ServerConfig.athanorLifeDemand() * INTERVAL / TICKS_PER_SECOND;
+            int need = ServerConfig.hermeticLabLifeDemand() * INTERVAL / TICKS_PER_SECOND;
             if (essentia >= need) {
                 setEssentia(essentia - need);
                 counting.add(Handicap.LIFE);
@@ -254,7 +238,7 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         if (protection.isEmpty()) {
             setShardTicks(0);
         } else if (assaultRuns(server, owner)) {
-            double perShard = (double) TICKS_PER_MINUTE / ServerConfig.athanorProtectionDemand();
+            double perShard = (double) TICKS_PER_MINUTE / ServerConfig.hermeticLabProtectionDemand();
             while (shardTicks < INTERVAL && shards.takeOne()) {
                 setShardTicks(shardTicks + perShard);
             }
@@ -264,18 +248,18 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
             }
         }
         if (teams.underSpell(owner, Handicap.MONEY)
-                && Accounts.get().take(server, owner, (long) ServerConfig.athanorMoneyDemand() * INTERVAL / TICKS_PER_SECOND)) {
+                && Accounts.get().take(server, owner, (long) ServerConfig.hermeticLabMoneyDemand() * INTERVAL / TICKS_PER_SECOND)) {
             counting.add(Handicap.MONEY);
         }
         return counting;
     }
 
     /**
-     * Takes {@code need} FE from the team's generators within {@link ServerConfig#athanorEnergyReach reach}, through their
+     * Takes {@code need} FE from the team's generators within {@link ServerConfig#hermeticLabEnergyReach reach}, through their
      * own faces, and says whether they gave that much; if not, it takes none.
      */
     private boolean takeOutput(ServerLevel level, UUID owner, long need) {
-        int reach = ServerConfig.athanorEnergyReach();
+        int reach = ServerConfig.hermeticLabEnergyReach();
         ChunkPos centre = ChunkPos.containing(worldPosition);
         try (Transaction transaction = Transaction.openRoot()) {
             long taken = 0;
@@ -320,8 +304,8 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         if (counting == 0) {
             return;
         }
-        double share = AthanorWork.progressPerTick(counting, ServerConfig.athanorTicks());
-        double owing = owed + share * AthanorWork.cost(counting, ServerConfig.athanorCosts());
+        double share = HermeticLabWork.progressPerTick(counting, ServerConfig.hermeticLabTicks());
+        double owing = owed + share * HermeticLabWork.cost(counting, ServerConfig.hermeticLabCosts());
         if (progress < 1.0) {
             if (nullessence() < Math.ceil(owing - 1e-9)) {
                 return;
@@ -342,8 +326,8 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
 
     /**
      * Takes a heart of {@code player}'s, as Neo Vitae's self-sacrifice does, into Essentia Vitae, more for each
-     * self-sacrifice rune around, and says why not if it doesn't: only from its team's player, while this is its team's
-     * working Athanor, its last stand runs and it bears the life spell, and never a player's last heart.
+     * self-sacrifice rune around, and says why not if it doesn't: only from its team's player, while its team's last stand
+     * runs and it bears the life spell, never a player's last heart, and not once it holds all it can.
      */
     public Optional<Component> giveHeart(Player player) {
         if (!(level instanceof ServerLevel server)) {
@@ -352,19 +336,19 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         UUID owner = owner(server);
         TeamState teams = TeamState.get(server.getServer());
         if (!Teams.of(player).equals(owner)) {
-            return Optional.of(Component.translatable("mechanicalmasteryreborn.athanor.not_member"));
+            return Optional.of(Component.translatable("mechanicalmasteryreborn.hermetic_lab.not_member"));
         }
-        if (phase == Phase.SECOND || phase == Phase.LOCKED || phase == Phase.DONE || !teams.underSpell(owner, Handicap.LIFE)) {
-            return Optional.of(Component.translatable("mechanicalmasteryreborn.athanor.heart.no_spell"));
+        if (phase == Phase.LOCKED || phase == Phase.DONE || !teams.underSpell(owner, Handicap.LIFE)) {
+            return Optional.of(Component.translatable("mechanicalmasteryreborn.hermetic_lab.heart.no_spell"));
         }
         if (player.getHealth() <= HEART) {
-            return Optional.of(Component.translatable("mechanicalmasteryreborn.athanor.heart.last"));
+            return Optional.of(Component.translatable("mechanicalmasteryreborn.hermetic_lab.heart.last"));
         }
         if (essentia >= ESSENTIA_CAPACITY) {
-            return Optional.of(Component.translatable("mechanicalmasteryreborn.athanor.heart.full"));
+            return Optional.of(Component.translatable("mechanicalmasteryreborn.hermetic_lab.heart.full"));
         }
         player.setHealth(player.getHealth() - HEART);
-        int yield = (int) Math.round(ServerConfig.athanorLifePerHeart() * (1 + ServerConfig.athanorLifeRuneBonus() * runes()));
+        int yield = (int) Math.round(ServerConfig.hermeticLabLifePerHeart() * (1 + ServerConfig.hermeticLabLifeRuneBonus() * runes()));
         setEssentia(Math.min(ESSENTIA_CAPACITY, essentia + yield));
         server.playSound(null, worldPosition, SoundEvents.PLAYER_HURT, SoundSource.PLAYERS, 1.0F, 0.8F);
         return Optional.empty();
@@ -416,13 +400,6 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
         return TeamState.get(server.getServer()).spell(owner(server), Handicap.PROTECTION).map(Spell::id);
     }
 
-    /** Forgets that this is its team's working Athanor, as it is broken. */
-    void release() {
-        if (level instanceof ServerLevel server) {
-            TeamState.get(server.getServer()).releaseAthanor(owner(server), GlobalPos.of(server.dimension(), worldPosition));
-        }
-    }
-
     /** The team whose island it stands on. */
     UUID owner(ServerLevel server) {
         if (team == null) {
@@ -443,12 +420,6 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
             shardTicks = ticks;
             setChanged();
         }
-    }
-
-    @Override
-    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
-        super.preRemoveSideEffects(pos, state);
-        release();
     }
 
     @Override
@@ -477,22 +448,22 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
 
     @Override
     public Component getDisplayName() {
-        return getBlockState().getBlock().getName();
+        return TITLE;
     }
 
     @Override
     public AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
-        return new AthanorMenu(containerId, inventory, this);
+        return new HermeticLabMenu(containerId, inventory, this);
     }
 
     /** Its Nullessence: put in by anything, taken out by nothing but its work. */
     private static final class Input extends ItemStacksResourceHandler {
 
-        private final AthanorBlockEntity athanor;
+        private final LabBlockEntity lab;
 
-        Input(AthanorBlockEntity athanor) {
+        Input(LabBlockEntity lab) {
             super(NULLESSENCE_SLOTS);
-            this.athanor = athanor;
+            this.lab = lab;
         }
 
         @Override
@@ -518,18 +489,18 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
 
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
-            athanor.setChanged();
+            lab.setChanged();
         }
     }
 
     /** Its Null Shards: put in by anything, only those of the protection spell running, and used up by its work. */
     private static final class Shards extends ItemStacksResourceHandler {
 
-        private final AthanorBlockEntity athanor;
+        private final LabBlockEntity lab;
 
-        Shards(AthanorBlockEntity athanor) {
+        Shards(LabBlockEntity lab) {
             super(1);
-            this.athanor = athanor;
+            this.lab = lab;
         }
 
         @Override
@@ -538,7 +509,7 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
                 return false;
             }
             UUID stamped = resource.get(NullShards.SPELL.get());
-            return stamped != null && athanor.shardSpell().filter(stamped::equals).isPresent();
+            return stamped != null && lab.shardSpell().filter(stamped::equals).isPresent();
         }
 
         @Override
@@ -566,7 +537,7 @@ public final class AthanorBlockEntity extends BlockEntity implements MenuProvide
 
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
-            athanor.setChanged();
+            lab.setChanged();
         }
     }
 

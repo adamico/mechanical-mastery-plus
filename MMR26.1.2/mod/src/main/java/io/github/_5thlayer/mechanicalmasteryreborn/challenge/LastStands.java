@@ -33,7 +33,7 @@ import org.slf4j.Logger;
  * makes Nullessence, each one against the team's Lead, and each Quintessence put into C.O.D. cancels a fixed amount of it.
  * Starting it gives the team's players {@link #STAGE}, which Quintessence's chain is locked behind ({@link Chains#unlock}).
  * Once the Lead reaches the margin C.O.D. shuts down for good and the team has won the pack. It has no handicap, never
- * resets and can't be stopped. Winning it ends every spell the team bears at its Athanor ({@link Spells}). Each tick
+ * resets and can't be stopped. Winning it ends every spell the team bears at its Hermetic Lab ({@link Spells}). Each tick
  * moves every running last stand's pace on ({@link LastStand#afterTick}).
  */
 public final class LastStands {

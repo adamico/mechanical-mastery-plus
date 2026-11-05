@@ -20,7 +20,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
-import net.minecraft.core.GlobalPos;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
@@ -34,7 +33,7 @@ import net.minecraft.world.level.saveddata.SavedDataType;
  * aside from its Account while it plays the money challenge, the challenges it has ever started and the chains it has
  * unlocked, which a stop takes back, the resets of the challenge it plays since it last started, the essence its Port has
  * taken toward the quota, and the tiers it has blocked and the challenges it has won, which no reset touches, and its
- * {@link LastStand} once it has started it, the {@link Spell spells} it bears at its Athanor and where that Athanor stands.
+ * {@link LastStand} once it has started it, and the {@link Spell spells} it bears at its Hermetic Lab.
  * Its members share it, and a player who joins a team shares it from then on.
  * Saved with the world, in the overworld's data.
  */
@@ -76,8 +75,7 @@ public final class TeamState extends SavedData {
                 HANDICAPS_CODEC.optionalFieldOf("started", Set.of()).forGetter(entry -> entry.started),
                 Codec.INT.optionalFieldOf("resets", 0).forGetter(entry -> entry.resets),
                 LAST_STAND_CODEC.optionalFieldOf("last_stand").forGetter(entry -> entry.lastStand),
-                SPELLS_CODEC.optionalFieldOf("spells", Map.of()).forGetter(entry -> entry.spells),
-                GlobalPos.CODEC.optionalFieldOf("athanor").forGetter(entry -> entry.athanor))
+                SPELLS_CODEC.optionalFieldOf("spells", Map.of()).forGetter(entry -> entry.spells))
                 .apply(instance, Entry::new));
 
         boolean awake;
@@ -103,14 +101,12 @@ public final class TeamState extends SavedData {
         long delivered;
         /** C.O.D.'s last stand, from the moment the team starts it, for good. */
         Optional<LastStand> lastStand;
-        /** The handicaps the team bears at its Athanor, each for its spell, while it runs. */
+        /** The handicaps the team bears at its Hermetic Lab, each for its spell, while it runs. */
         Map<Handicap, Spell> spells;
-        /** Where the team's one working Athanor stands, once one has claimed it. */
-        Optional<GlobalPos> athanor;
 
         Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation, boolean warned, long setAside,
                 Set<Handicap> unlocked, Set<Essence> blocked, Set<Handicap> won, long delivered, Set<Handicap> started, int resets,
-                Optional<LastStand> lastStand, Map<Handicap, Spell> spells, Optional<GlobalPos> athanor) {
+                Optional<LastStand> lastStand, Map<Handicap, Spell> spells) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
@@ -129,7 +125,6 @@ public final class TeamState extends SavedData {
             this.resets = handicap.isPresent() ? resets : 0;
             this.lastStand = lastStand;
             this.spells = spells.isEmpty() ? new EnumMap<>(Handicap.class) : new EnumMap<>(spells);
-            this.athanor = athanor;
         }
     }
 
@@ -182,7 +177,7 @@ public final class TeamState extends SavedData {
             return;
         }
         if (entry.handicap.isPresent() || !entry.blocked.isEmpty() || !entry.won.isEmpty() || entry.lastStand.isPresent()
-                || !entry.spells.isEmpty() || entry.athanor.isPresent()) {
+                || !entry.spells.isEmpty()) {
             entry.awake = false;
             entry.made = 0;
         } else {
@@ -550,18 +545,18 @@ public final class TeamState extends SavedData {
         return true;
     }
 
-    /** The spell of {@code handicap} {@code team} bears at its Athanor, while it runs. */
+    /** The spell of {@code handicap} {@code team} bears at its Hermetic Lab, while it runs. */
     public Optional<Spell> spell(UUID team, Handicap handicap) {
         Entry entry = teams.get(team);
         return entry == null ? Optional.empty() : Optional.ofNullable(entry.spells.get(handicap));
     }
 
-    /** Whether {@code team} bears {@code handicap} at its Athanor, for a spell that runs. */
+    /** Whether {@code team} bears {@code handicap} at its Hermetic Lab, for a spell that runs. */
     public boolean underSpell(UUID team, Handicap handicap) {
         return spell(team, handicap).isPresent();
     }
 
-    /** Whether any team bears {@code handicap} at its Athanor, which is cheaper to ask than which team a block is on. */
+    /** Whether any team bears {@code handicap} at its Hermetic Lab, which is cheaper to ask than which team a block is on. */
     public boolean anyUnderSpell(Handicap handicap) {
         for (Entry entry : teams.values()) {
             if (entry.spells.containsKey(handicap)) {
@@ -613,35 +608,6 @@ public final class TeamState extends SavedData {
         return over;
     }
 
-    /** Where {@code team}'s working Athanor stands, once one has claimed it. */
-    public Optional<GlobalPos> athanor(UUID team) {
-        Entry entry = teams.get(team);
-        return entry == null ? Optional.empty() : entry.athanor;
-    }
-
-    /**
-     * Makes the Athanor at {@code pos} {@code team}'s working one, unless another already is, and says whether it is
-     * {@code team}'s working one now.
-     */
-    public boolean claimAthanor(UUID team, GlobalPos pos) {
-        Entry entry = entry(team);
-        if (entry.athanor.isPresent()) {
-            return entry.athanor.get().equals(pos);
-        }
-        entry.athanor = Optional.of(pos);
-        setDirty();
-        return true;
-    }
-
-    /** Forgets that the Athanor at {@code pos} is {@code team}'s working one, as it is broken, if it was. */
-    public void releaseAthanor(UUID team, GlobalPos pos) {
-        Entry entry = teams.get(team);
-        if (entry != null && entry.athanor.filter(pos::equals).isPresent()) {
-            entry.athanor = Optional.empty();
-            setDirty();
-        }
-    }
-
     /** A set of its own of {@code handicaps}, which may be empty, as {@link EnumSet#copyOf} can't take. */
     private static EnumSet<Handicap> handicaps(Collection<Handicap> handicaps) {
         return handicaps.isEmpty() ? EnumSet.noneOf(Handicap.class) : EnumSet.copyOf(handicaps);
@@ -654,6 +620,6 @@ public final class TeamState extends SavedData {
 
     private Entry entry(UUID team) {
         return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false, 0, Set.of(), Set.of(),
-                Set.of(), 0, Set.of(), 0, Optional.empty(), Map.of(), Optional.empty()));
+                Set.of(), 0, Set.of(), 0, Optional.empty(), Map.of()));
     }
 }

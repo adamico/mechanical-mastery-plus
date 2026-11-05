@@ -10,7 +10,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.UUIDUtil;
 
 /**
- * A handicap a team took on at its Athanor (#263, ADR 0014), for a fixed spell that can't be ended early: its {@code id},
+ * A handicap a team took on at its Hermetic Lab (#263, ADR 0014), for a fixed spell that can't be ended early: its {@code id},
  * which each Null Shard its Assault drops is stamped with, the overworld's game time it {@code began} at, and the one it
  * {@code ends} at. {@link TeamState} keeps one per handicap while it runs. Plain data, so a JUnit test reads it without
  * Minecraft.

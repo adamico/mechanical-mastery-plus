@@ -1,17 +1,17 @@
 // SPDX-FileCopyrightText: 2026 5thlayer
 // SPDX-License-Identifier: MIT
 
-package io.github._5thlayer.mechanicalmasteryreborn.athanor;
+package io.github._5thlayer.mechanicalmasteryreborn.lab;
 
 import java.util.List;
 
 /**
- * How fast an Athanor works and what each Quintessence costs it, by how many of its supply lines count (#263, ADR 0014):
+ * How fast a Hermetic Lab works and what each Quintessence costs it, by how many of its supply lines count (#263, ADR 0014):
  * none makes nothing, and each more line is faster and cheaper. Only all four beat break-even on their own: fewer
  * Nullessence a Quintessence than one {@link #DEFAULT_QUINTESSENCE_CANCELS cancels}. Plain data, so a JUnit test reads it
  * without Minecraft; the server config holds the values played with, these being its defaults.
  */
-public final class AthanorWork {
+public final class HermeticLabWork {
 
     /** The supply lines there are, one per handicap. */
     public static final int LINES = 4;
@@ -22,7 +22,7 @@ public final class AthanorWork {
     /** The default of what one Quintessence cancels in C.O.D.'s last stand, which the costs are set against. */
     public static final int DEFAULT_QUINTESSENCE_CANCELS = 64;
 
-    private AthanorWork() {
+    private HermeticLabWork() {
     }
 
     /** The share of a Quintessence one tick makes with {@code lines} counting, out of {@code ticks} by line count; none with none. */

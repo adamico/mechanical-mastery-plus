@@ -32,7 +32,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
  * Full Stomach too; a feeding nothing names, such as a cake's bite or the ritual's Essentia, counts as {@link #OTHER}.
  * The Diet is a player's attachment, synced to them for the tooltip, and forgotten when the challenge ends or resets.
  * With the server config's switch on, a player in Neo Vitae's Demon Realm hungers and eats as in vanilla. A team that
- * bears the life spell at its Athanor (#263) bears it the same way, its hunger faster still, its Diet kept from the
+ * bears the life spell at its Hermetic Lab (#263) bears it the same way, its hunger faster still, its Diet kept from the
  * spell's start and forgotten as it ends.
  */
 public final class LifeHandicap {
@@ -78,7 +78,7 @@ public final class LifeHandicap {
             return amount;
         }
         boolean spell = !TeamState.get(player.level().getServer()).plays(Teams.of(player), Handicap.LIFE);
-        return (float) (amount * (spell ? ServerConfig.athanorLifeHungerRate() : ServerConfig.lifeHungerRate()));
+        return (float) (amount * (spell ? ServerConfig.hermeticLabLifeHungerRate() : ServerConfig.lifeHungerRate()));
     }
 
     /**

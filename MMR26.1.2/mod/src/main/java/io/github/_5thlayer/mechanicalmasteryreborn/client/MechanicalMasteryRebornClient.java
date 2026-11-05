@@ -4,7 +4,6 @@
 package io.github._5thlayer.mechanicalmasteryreborn.client;
 
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
-import io.github._5thlayer.mechanicalmasteryreborn.athanor.Athanor;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
@@ -23,12 +22,12 @@ import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterFluidModelsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.fluid.FluidTintSources;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 /**
@@ -75,7 +74,7 @@ public final class MechanicalMasteryRebornClient {
 
     private static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(Cod.MENU.get(), CodScreen::new);
-        event.register(Athanor.MENU.get(), AthanorScreen::new);
+        event.register(Lab.HERMETIC_MENU.get(), HermeticLabScreen::new);
         event.register(Lab.MENU.get(), LabScreen::new);
         event.register(Lab.REFUND_MENU.get(), RefundScreen::new);
     }

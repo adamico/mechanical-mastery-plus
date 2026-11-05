@@ -24,9 +24,9 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
- * The Null Shard (the line's glossary), the drop only the mobs of an Assault taken on at the Athanor give (#263), which
+ * The Null Shard (the line's glossary), the drop only the mobs of an Assault taken on at the Hermetic Lab give (#263), which
  * its protection line uses up. While a team bears the protection spell, every Rift Shard its Assault's mobs would drop
- * drops as a Null Shard instead, stamped with {@link #SPELL the spell} it fell in, so the Athanor takes only that spell's
+ * drops as a Null Shard instead, stamped with {@link #SPELL the spell} it fell in, so the Hermetic Lab takes only that spell's
  * and none saved from an earlier one. Nothing crafts it.
  */
 public final class NullShards {

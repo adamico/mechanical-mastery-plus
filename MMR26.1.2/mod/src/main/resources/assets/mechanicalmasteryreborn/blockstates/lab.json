@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "hermetic=false": {
       "model": "mechanicalmasteryreborn:block/lab"
+    },
+    "hermetic=true": {
+      "model": "mechanicalmasteryreborn:block/lab_hermetic"
     }
   }
 }
