@@ -4,9 +4,12 @@
 package io.github._5thlayer.mechanicalmasteryreborn.recipe;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -92,6 +95,27 @@ public final class RecyclingRules {
                 .thenComparing(recipe -> recipe.ingredients().stream().anyMatch(ingredient -> traits.ore().test(ingredient.item())))
                 .thenComparing(Made::id);
         return new Into<>(made.stream().min(order).map(RecyclingRules::cost).orElseGet(() -> List.of(new Share<>(item, 1))));
+    }
+
+    /**
+     * Every item of {@code mixes} that recycles into an item no mix holds, and those items, each once, in order: none
+     * when the mixes are closed (the line's glossary: Mix). An item refused, or that recycles into itself, closes.
+     */
+    public static <I> Map<I, List<I>> unclosed(Collection<? extends Collection<I>> mixes, Function<I, Outcome<I>> recycle) {
+        var held = new HashSet<I>();
+        mixes.forEach(held::addAll);
+        var unclosed = new LinkedHashMap<I, List<I>>();
+        for (Collection<I> mix : mixes) {
+            for (I item : mix) {
+                if (!unclosed.containsKey(item) && recycle.apply(item) instanceof Into<I>(List<Share<I>> into)) {
+                    List<I> outside = into.stream().map(Share::item).filter(result -> !held.contains(result)).distinct().toList();
+                    if (!outside.isEmpty()) {
+                        unclosed.put(item, outside);
+                    }
+                }
+            }
+        }
+        return unclosed;
     }
 
     private static <I> boolean cookedOrNamed(I item, Function<I, List<Made<I>>> makers, Traits<I> traits) {

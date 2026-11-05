@@ -60,13 +60,14 @@ public final class RecyclerEmiPlugin implements EmiPlugin {
     }
 
     /**
-     * One recipe for each page of {@code results} ({@link RecyclerEmiPages}). The first page keeps {@code id}, so a
+     * One recipe for each page of {@code results} ({@link RecyclerEmiPages}), each naming all of them as its outputs.
+     * The first page keeps {@code id}, so a
      * real recipe's page still links to it; each later one is a synthetic id of its own, beside it.
      */
     private static void addPaged(EmiRegistry registry, EmiRecipeCategory category, Identifier id, EmiIngredient input, List<EmiStack> results) {
         var pages = RecyclerEmiPages.split(results);
         for (int i = 0; i < pages.size(); i++) {
-            registry.addRecipe(new RecyclerEmiRecipe(category, i == 0 ? id : pageId(id, i + 1), input, pages.get(i), i + 1, pages.size(), results.size()));
+            registry.addRecipe(new RecyclerEmiRecipe(category, i == 0 ? id : pageId(id, i + 1), input, results, pages.get(i), i + 1, pages.size()));
         }
     }
 

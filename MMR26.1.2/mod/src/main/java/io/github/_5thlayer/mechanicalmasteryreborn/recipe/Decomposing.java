@@ -3,12 +3,16 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.recipe;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -45,6 +49,7 @@ public final class Decomposing {
         TYPES.register(modBus);
         SERIALIZERS.register(modBus);
         NeoForge.EVENT_BUS.addListener(Decomposing::onDatapackSync);
+        NeoForge.EVENT_BUS.addListener(MixesCommand::register);
     }
 
     /** The recipe {@code stack} decomposes by, if any, whatever its count. */
@@ -53,6 +58,16 @@ public final class Decomposing {
             return Optional.empty();
         }
         return level.recipeAccess().getRecipeFor(TYPE.get(), new SingleRecipeInput(stack), level);
+    }
+
+    /**
+     * Every item of the pack's mixes that recycles into an item no mix holds, and those items (the line's glossary:
+     * Mix): none when the mixes are closed.
+     */
+    public static Map<Item, List<Item>> unclosed(MinecraftServer server) {
+        List<List<Item>> mixes = server.getRecipeManager().recipeMap().byType(TYPE.get()).stream()
+                .map(holder -> holder.value().results().stream().map(result -> result.item().value()).toList()).toList();
+        return RecyclingRules.unclosed(mixes, item -> Recycling.recycle(server, item));
     }
 
     private static void onDatapackSync(OnDatapackSyncEvent event) {

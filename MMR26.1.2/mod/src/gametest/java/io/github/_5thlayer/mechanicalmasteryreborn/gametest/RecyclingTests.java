@@ -4,11 +4,13 @@
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
 import java.util.List;
+import java.util.Map;
 
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
+import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Recycling;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingRules;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
@@ -53,6 +55,7 @@ final class RecyclingTests {
         tests.test("recycling_input_refuses_a_filled_shulker_box", 1, RecyclingTests::shulkerBoxes);
         tests.test("recycling_input_refuses_an_essence_nothing_decomposes", 1, RecyclingTests::essenceWithNoRecipe);
         tests.test("recycling_ignores_damage_and_enchantments", 1, RecyclingTests::damagedTool);
+        tests.test("recycling_names_what_the_mixes_recycle_into_outside_them", 1, RecyclingTests::unclosedMixes);
     }
 
     private static void piston(GameTestHelper helper) {
@@ -232,6 +235,18 @@ final class RecyclingTests {
         build.feed(worn);
         build.turn(ServerConfig.turnsOf(1));
         build.expectOutputs(new ItemStack(Items.IRON_INGOT), new ItemStack(Items.STICK, 2));
+        helper.succeed();
+    }
+
+    /**
+     * The game-test pack's mixes hold cobblestone and planks but no iron, redstone, chest or quartz, so the piston,
+     * the hopper and the comparator's override recycle outside them; the buckets recycle into themselves.
+     */
+    private static void unclosedMixes(GameTestHelper helper) {
+        helper.assertValueEqual(Decomposing.unclosed(helper.getLevel().getServer()),
+                Map.<Item, List<Item>>of(Items.PISTON, List.of(Items.IRON_INGOT, Items.REDSTONE), Items.HOPPER, List.of(Items.IRON_INGOT, Items.CHEST),
+                        Items.COMPARATOR, List.of(Items.QUARTZ)),
+                "what the mixes recycle into outside them");
         helper.succeed();
     }
 }

@@ -63,9 +63,102 @@ ServerEvents.recipes(event => {
   event.recipes.mechanicalmasteryreborn.decomposing(ADVANCED_MIX, '1x mechanicalmasteryreborn:advanced_mechanical_essence')
     .id('mechanicalmasteryreborn:decomposing/advanced_mechanical_essence')
 
-  const NULLESSENCE_MIX = ADVANCED_MIX
+  const IMPROVED_MIX = [
+    'beltworks:belt_tile',
+    'pipeworks:pipe',
+    'minecraft:furnace',
+    'minecraft:piston',
+    'minecraft:bucket',
+    'minecraft:cauldron',
+    'minecraft:smithing_table',
+    'minecraft:compass',
+    'minecraft:dropper',
+    'minecraft:chest',
+    'minecraft:crafting_table',
+    'minecraft:stick',
+    'minecraft:quartz_block',
+    'minecraft:book',
+    'minecraft:redstone_torch',
+    'minecraft:iron_pickaxe',
+    'minecraft:bow',
+    'minecraft:barrel',
+    'minecraft:campfire',
+    'minecraft:bookshelf',
+    'minecraft:iron_block',
+    'minecraft:copper_block',
+    'minecraft:hay_block',
+    'minecraft:resin_block',
+  ]
+  event.recipes.mechanicalmasteryreborn.decomposing(IMPROVED_MIX, '1x mechanicalmasteryreborn:improved_mechanical_essence')
+    .id('mechanicalmasteryreborn:decomposing/improved_mechanical_essence')
+
+  const REGULAR_MIX = [
+    'minecraft:copper_ingot',
+    'minecraft:iron_ingot',
+    'minecraft:gold_ingot',
+    'minecraft:oak_planks',
+    'minecraft:dried_kelp',
+    'minecraft:stone',
+    'minecraft:smooth_stone',
+    'minecraft:glass',
+    'minecraft:paper',
+    'minecraft:sandstone',
+    'minecraft:deepslate',
+    'minecraft:blue_dye',
+    'minecraft:oak_slab',
+    'minecraft:decorated_pot',
+    'minecraft:brick',
+  ]
+  event.recipes.mechanicalmasteryreborn.decomposing(REGULAR_MIX, '1x mechanicalmasteryreborn:regular_mechanical_essence')
+    .id('mechanicalmasteryreborn:decomposing/regular_mechanical_essence')
+
+  const BASIC_MIX = [
+    'minecraft:raw_copper',
+    'minecraft:raw_iron',
+    'minecraft:raw_gold',
+    'minecraft:redstone',
+    'minecraft:quartz',
+    'minecraft:coal',
+    'minecraft:lapis_lazuli',
+    'minecraft:diamond',
+    'minecraft:emerald',
+    'minecraft:oak_log',
+    'minecraft:dark_oak_log',
+    'minecraft:pale_oak_log',
+    'minecraft:kelp',
+    'minecraft:cobblestone',
+    'minecraft:cobbled_deepslate',
+    'minecraft:crying_obsidian',
+    'minecraft:slime_ball',
+    'minecraft:resin_clump',
+    'minecraft:sugar_cane',
+    'minecraft:amethyst_shard',
+    'minecraft:sand',
+    'minecraft:string',
+    'minecraft:wheat',
+    'minecraft:leather',
+    'minecraft:clay_ball',
+    'minecraft:blackstone',
+    'minecraft:andesite',
+    'minecraft:diorite',
+    'theurgy:mercury_shard',
+    'theurgy:sal_ammoniac_crystal',
+    'theurgy:alchemical_salt_strata',
+    'theurgy:alchemical_sulfur_rotten_flesh',
+    'neovitae:tabula_rasa',
+  ]
+  event.recipes.mechanicalmasteryreborn.decomposing(BASIC_MIX, '1x mechanicalmasteryreborn:basic_mechanical_essence')
+    .id('mechanicalmasteryreborn:decomposing/basic_mechanical_essence')
+
+  const NULLESSENCE_MIX = ADVANCED_MIX.concat(IMPROVED_MIX, REGULAR_MIX, BASIC_MIX)
+    .filter((item, index, all) => all.indexOf(item) === index)
   event.recipes.mechanicalmasteryreborn.decomposing(NULLESSENCE_MIX, '1x mechanicalmasteryreborn:nullessence')
     .id('mechanicalmasteryreborn:decomposing/nullessence')
+
+  event.recipes.mechanicalmasteryreborn.recycling(['theurgy:sal_ammoniac_crystal'], '1x theurgy:sal_ammoniac_crystal')
+    .id('mechanicalmasteryreborn:recycling/sal_ammoniac_crystal')
+  event.recipes.mechanicalmasteryreborn.recycling(['theurgy:sal_ammoniac_crystal', '2x minecraft:gold_ingot', 'minecraft:decorated_pot', '3x minecraft:sandstone'], '1x theurgy:digestion_vat')
+    .id('mechanicalmasteryreborn:recycling/digestion_vat')
 
   const part = (result, ingredients) => event.recipes.craftworks.assembling(result, ingredients)
     .id(`mechanicalmasteryreborn:assembling/${result.split(':')[1]}`)

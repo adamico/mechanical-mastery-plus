@@ -20,7 +20,8 @@ import net.minecraft.resources.Identifier;
  * One decompose or recycle as EMI draws it: the ingredient, with its count, an arrow, and the results in rows of
  * three, as a Recycler with an output for each row lays them out on its empty outputs. With more kinds than one output
  * holds, the arrow's tooltip says that a Recycler with fewer positions than the mix's kinds returns only some of
- * them. One page of a mix split across several shows its number under the arrow.
+ * them. One page of a mix split across several shows its number under the arrow, and draws its own results but names
+ * the whole mix as its outputs, so looking up any item of the mix finds every page of it to turn through.
  */
 final class RecyclerEmiRecipe extends BasicEmiRecipe {
 
@@ -34,15 +35,17 @@ final class RecyclerEmiRecipe extends BasicEmiRecipe {
     private final int page;
     private final int pages;
     private final int kinds;
+    private final List<EmiStack> shown;
 
-    RecyclerEmiRecipe(EmiRecipeCategory category, Identifier id, EmiIngredient input, List<EmiStack> results, int page, int pages, int kinds) {
+    RecyclerEmiRecipe(EmiRecipeCategory category, Identifier id, EmiIngredient input, List<EmiStack> mix, List<EmiStack> shown, int page, int pages) {
         super(category, id, 0, 0);
         this.page = page;
         this.pages = pages;
-        this.kinds = kinds;
+        this.kinds = mix.size();
+        this.shown = List.copyOf(shown);
         inputs.add(input);
-        outputs.addAll(results);
-        int rows = (outputs.size() + COLUMNS - 1) / COLUMNS;
+        outputs.addAll(mix);
+        int rows = (this.shown.size() + COLUMNS - 1) / COLUMNS;
         this.width = ARROW_X + ARROW + 4 + COLUMNS * SLOT;
         this.height = Math.max(pages > 1 ? SLOT + 2 * LABEL + 2 : SLOT, rows * SLOT);
     }
@@ -61,8 +64,8 @@ final class RecyclerEmiRecipe extends BasicEmiRecipe {
                     ARROW_X + ARROW / 2, middle + SLOT + 1, 0xFF404040, false).horizontalAlign(TextWidget.Alignment.CENTER);
         }
         int left = ARROW_X + ARROW + 4;
-        for (int i = 0; i < outputs.size(); i++) {
-            widgets.addSlot(outputs.get(i), left + (i % COLUMNS) * SLOT, (i / COLUMNS) * SLOT).recipeContext(this);
+        for (int i = 0; i < shown.size(); i++) {
+            widgets.addSlot(shown.get(i), left + (i % COLUMNS) * SLOT, (i / COLUMNS) * SLOT).recipeContext(this);
         }
     }
 }

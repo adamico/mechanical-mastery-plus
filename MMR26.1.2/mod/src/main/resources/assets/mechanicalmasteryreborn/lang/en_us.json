@@ -116,6 +116,8 @@
   "death.attack.mechanicalmasteryreborn.electric.player": "%1$s was shocked by an Electric Defence while fighting %2$s",
   "mechanicalmasteryreborn.command.mmr.assault.wave.set": "The Assault's gate is at wave %s",
   "mechanicalmasteryreborn.command.mmr.assault.wave.no_gate": "This island's team has no open Assault gate",
+  "mechanicalmasteryreborn.command.mmr.mixes.closed": "Every item of the mixes recycles into what a mix holds",
+  "mechanicalmasteryreborn.command.mmr.mixes.unclosed": "%s recycles into what no mix holds: %s",
   "mechanicalmasteryreborn.jade.defence.no_fe": "No FE: it shoots nothing until it is fed",
   "mechanicalmasteryreborn.jade.generator.stopped": "Stopped: this island's team plays the energy challenge",
   "mechanicalmasteryreborn.jade.recycler.empty": "Nothing to decompose or recycle",
