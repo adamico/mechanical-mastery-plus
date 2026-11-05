@@ -55,3 +55,7 @@ A place a release is published to: CurseForge (client zip), CurseForge's server 
 
 **Release record**:
 What a release learns while it is published, such as the client zip's CurseForge file id, kept beside the client zip so a retry can use it.
+
+**Alpha**:
+The stage a pack line is in before it is playable without caveats: the pack's versions stay below 0.1.0 (a companion mod keeps its own numbering) and its page and file names say "alpha". A stage, not CurseForge's Alpha file type: an alpha release is still published as a Release file, so it reaches the CurseForge app.
+_Avoid_: beta, early access, preview

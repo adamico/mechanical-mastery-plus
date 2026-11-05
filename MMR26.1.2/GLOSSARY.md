@@ -176,3 +176,11 @@ Where goods are traded for money: a second way to resources beside decomposing, 
 **Permit**:
 AdminShop's named unlock, held by a team's Account, which opens Offers gated by it. A Sell Permit opens Offers the Shop buys from the team, a Buy Permit Offers it sells to the team; one never opens both. A team buys its Permits in the Shop, all but the ones it is given, when it starts the money challenge and when it wins protection, and keeps them for good.
 _Avoid_: Trade Permit, license, tier
+
+**Gallery pack**:
+A datapack in the companion mod's jar, off until a player turns it on, that builds a working scene of each of the companion mod's own features, each with a sign naming it, as every suite mod's does (libworks ADR 0010). It holds only the companion mod's blocks.
+_Avoid_: demo pack, showcase pack
+
+**Pack gallery**:
+A second datapack in the companion mod's jar, also off until a player turns it on, that builds the pack's scenes: whole lines of the pack's mods working together, one per stretch of the pack's story, for its video and gallery images. It needs the whole pack to load.
+_Avoid_: gallery pack (for this one), showcase
