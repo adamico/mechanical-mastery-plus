@@ -35,7 +35,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * C.O.D.'s last stand (#261, ADR 0014): the lab offers it only once the team has won all four challenges; started, C.O.D.
+ * C.O.D.'s last stand (#261, ADR 0014): the lab shows and offers it only once the team has won all four challenges; started, C.O.D.
  * makes Nullessence at its floor, each one against the team's Lead, which never falls below minus the margin; Quintessence
  * put into C.O.D., by a hopper or by hand, raises the Lead and, a lag later, C.O.D.'s rate, never past its ceiling; and
  * once the Lead reaches the margin C.O.D. shuts down for good. The tests play at the default config. A test notes the
@@ -75,11 +75,14 @@ final class LastStandTests {
         win(helper, team, Handicap.ENERGY, Handicap.PROTECTION, Handicap.LIFE);
         LabMenu menu = open(helper, player);
         helper.assertValueEqual(menu.lastStand(), LabMenu.LastStandPhase.LOCKED, "the last stand after three wins");
+        helper.assertFalse(menu.showsLastStand(), "the lab shows the last stand's row after three wins");
         helper.assertFalse(menu.clickMenuButton(player, LabMenu.START_LAST_STAND), "the lab started the last stand after three wins");
         helper.assertTrue(state(helper).lastStand(team).isEmpty(), "a last stand after three wins");
         win(helper, team, Handicap.MONEY);
+        helper.assertTrue(menu.showsLastStand(), "a lab open through the fourth win still hides the last stand's row");
         menu = open(helper, player);
         helper.assertValueEqual(menu.lastStand(), LabMenu.LastStandPhase.OFFERED, "the last stand after the fourth win");
+        helper.assertTrue(menu.showsLastStand(), "the lab hides the last stand's row after the fourth win");
         helper.assertTrue(menu.clickMenuButton(player, LabMenu.START_LAST_STAND), "the lab refused the last stand after the fourth win");
         helper.assertValueEqual(state(helper).lastStand(team), Optional.of(LastStand.starting(FLOOR)), "the last stand as it starts");
         helper.assertValueEqual(open(helper, player).lastStand(), LabMenu.LastStandPhase.RUNNING, "the lab once the last stand started");

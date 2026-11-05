@@ -24,6 +24,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -40,7 +41,9 @@ import net.neoforged.neoforge.network.PacketDistributor;
  * stand ({@link LastStands}), once it has won all four challenges and if the player is in that team. The
  * client is sent which handicap the team plays, if any, which challenges it has won, whether the player may choose for
  * it, whether a stop is offered and the player asks for it, how many items of the team's refund wait, and which members
- * online have asked and which are left ({@link Asks}), and where the team's last stand is ({@link LastStandPhase}).
+ * online have asked and which are left ({@link Asks}), and where the team's last stand is ({@link LastStandPhase}). As it
+ * opens, the client is also sent whether the lab shows the last stand's row at all, not until the team has won all
+ * four challenges, so its screen opens at the right size; a fourth win while it is open shows the row from the next sync.
  */
 public final class LabMenu extends AbstractContainerMenu {
 
@@ -81,14 +84,17 @@ public final class LabMenu extends AbstractContainerMenu {
     private final DataSlot refund;
     /** Where the team's last stand is, by its {@link LastStandPhase}'s ordinal. */
     private final DataSlot lastStand;
+    /** Whether the lab showed the last stand's row as it opened. */
+    private final boolean showedLastStand;
     /** The server's player, who is sent {@link Asks}; null on the client or for a game test's mock player. */
     private final ServerPlayer viewer;
     /** The asks the client was last sent, or holds. */
     private Asks asks = Asks.NONE;
 
-    /** The client's menu, whose slots the sync fills. */
-    public LabMenu(int containerId, Inventory inventory) {
+    /** The client's menu, whose slots the sync fills, with whether it shows the last stand's row as the server wrote it. */
+    public LabMenu(int containerId, Inventory inventory, RegistryFriendlyByteBuf buffer) {
         super(Lab.MENU.get(), containerId);
+        this.showedLastStand = buffer.readBoolean();
         this.access = ContainerLevelAccess.NULL;
         this.chosen = addDataSlot(DataSlot.standalone());
         this.member = addDataSlot(DataSlot.standalone());
@@ -106,6 +112,7 @@ public final class LabMenu extends AbstractContainerMenu {
         this.access = ContainerLevelAccess.create(level, pos);
         UUID team = Teams.at(level, pos);
         UUID players = Teams.of(inventory.player);
+        this.showedLastStand = phase(level.getServer(), team) != LastStandPhase.LOCKED;
         this.chosen = addDataSlot(new DataSlot() {
             @Override
             public int get() {
@@ -176,6 +183,15 @@ public final class LabMenu extends AbstractContainerMenu {
         this.viewer = inventory.player instanceof ServerPlayer server ? server : null;
     }
 
+    /**
+     * Opens the lab at {@code pos} for {@code player} through its {@code provider}, telling the client whether it shows the
+     * last stand's row.
+     */
+    public static void open(Player player, MenuProvider provider, ServerLevel level, BlockPos pos) {
+        boolean shows = phase(level.getServer(), Teams.at(level, pos)) != LastStandPhase.LOCKED;
+        player.openMenu(provider, buffer -> buffer.writeBoolean(shows));
+    }
+
     /** Where {@code team}'s last stand is. */
     private static LastStandPhase phase(MinecraftServer server, UUID team) {
         var stand = TeamState.get(server).lastStand(team);
@@ -225,6 +241,14 @@ public final class LabMenu extends AbstractContainerMenu {
         LastStandPhase[] phases = LastStandPhase.values();
         int ordinal = lastStand.get();
         return ordinal >= 0 && ordinal < phases.length ? phases[ordinal] : LastStandPhase.LOCKED;
+    }
+
+    /**
+     * Whether the lab shows the last stand's row: once its team has won all four challenges, as it opened or since, by
+     * the last sync.
+     */
+    public boolean showsLastStand() {
+        return showedLastStand || lastStand() != LastStandPhase.LOCKED;
     }
 
     /** Whether starting the last stand here would start it. */
