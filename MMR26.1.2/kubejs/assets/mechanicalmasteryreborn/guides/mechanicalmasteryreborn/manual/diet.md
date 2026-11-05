@@ -2,7 +2,7 @@
 navigation:
   title: The Diet
   icon: minecraft:bread
-  position: 6
+  position: 8
 ---
 
 # The Diet
@@ -15,5 +15,6 @@ a varied menu, and a food you haven't had for a while feeds you fully again.
 
 A food's tooltip shows how much it feeds you now, as "Feeds N% now".
 
-The Diet is kept only while the life challenge is played: when it ends, your Diet is forgotten and every food
-feeds fully again.
+The Diet is kept only while the life challenge is played: when it ends, or resets, your Diet is forgotten and every
+food feeds fully again. It survives your death. In the last chapter, the [Hermetic Lab](hermetic_lab.md)'s life
+spell keeps a Diet of its own, the hungriest, which starts with the spell and is forgotten when it ends.

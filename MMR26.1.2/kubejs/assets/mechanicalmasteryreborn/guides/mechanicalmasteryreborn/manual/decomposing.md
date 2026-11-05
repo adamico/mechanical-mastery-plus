@@ -2,7 +2,7 @@
 navigation:
   title: Decomposing and recycling
   icon: advanced_mechanical_essence
-  position: 2
+  position: 3
 item_ids:
   - mechanicalmasteryreborn:basic_mechanical_essence
   - mechanicalmasteryreborn:regular_mechanical_essence

@@ -2,7 +2,7 @@
 navigation:
   title: The Recycler
   icon: recycler_core_1
-  position: 1
+  position: 2
 ---
 
 # The Recycler

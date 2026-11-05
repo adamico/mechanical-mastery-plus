@@ -2,7 +2,7 @@
 navigation:
   title: Electric Defence
   icon: fe_defence
-  position: 5
+  position: 7
 item_ids:
   - mechanicalmasteryreborn:fe_defence
 ---

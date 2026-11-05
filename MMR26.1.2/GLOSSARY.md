@@ -163,7 +163,7 @@ What a team's lab holds for it: everything its Assaults' mobs broke on its islan
 _Avoid_: repair, restore, compensation
 
 **Manual**:
-The pack's in-game book on how to build and work the companion mod's blocks, with 3D scenes, which every player is given once. It holds neither lore nor recipes, which are EMI's.
+The pack's in-game book on how to build and work the companion mod's blocks, with 3D scenes, and on how its challenges and its last chapter are played, which every player is given once. It holds neither lore nor recipes, which are EMI's: a chain is told as its steps' names, never their amounts.
 _Avoid_: guide, quest book, wiki
 
 **Research**:
