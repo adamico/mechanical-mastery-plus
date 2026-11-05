@@ -33,8 +33,11 @@ public interface Accounts {
     /** Adds {@code amount} to {@code team}'s Balance. */
     void give(MinecraftServer server, UUID team, long amount);
 
-    /** Gives {@code team} {@code permit}, for good. */
+    /** Gives {@code team} {@code permit}, until it is {@link #revoke revoked}, if ever. */
     void grant(MinecraftServer server, UUID team, String permit);
+
+    /** Takes {@code permit} from {@code team}, if it holds it. */
+    void revoke(MinecraftServer server, UUID team, String permit);
 
     /** The team whose Account {@code account} is, by AdminShop's id for it, if any. */
     Optional<UUID> teamOf(MinecraftServer server, UUID account);
@@ -62,6 +65,10 @@ public interface Accounts {
 
         @Override
         public void grant(MinecraftServer server, UUID team, String permit) {
+        }
+
+        @Override
+        public void revoke(MinecraftServer server, UUID team, String permit) {
         }
 
         @Override

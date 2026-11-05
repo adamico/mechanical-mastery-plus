@@ -18,4 +18,4 @@ A chain that stayed unlocked past a stop would let a team start each challenge, 
 - A stop otherwise ends the challenge as `/cod challenge end` did before it: the handicap and Inflation end, the Port's count goes back to zero, money set aside is given back, an Assault is removed and the Diet forgotten. The team keeps every item.
 - Nothing waits after a stop: any challenge not won, the stopped one too, can start at once.
 - An operator's `/cod challenge end` is a stop without the vote or the reset, so it locks the chain again too. A played attempt ends only by a win, a reset or a stop.
-- Money's chain locks nothing, so stopping money costs only the attempt.
+- Money's chain is the Shop's Offers gated on the `reborn_money` Permit, so a stop takes that Permit from the team's Account, and starting the challenge anew gives it back (#296). The Permits the team bought through it, and the Offers they open, stay, as a built machine does.

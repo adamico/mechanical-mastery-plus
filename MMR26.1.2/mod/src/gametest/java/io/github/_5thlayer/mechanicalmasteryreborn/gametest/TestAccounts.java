@@ -66,6 +66,11 @@ final class TestAccounts implements Accounts {
     }
 
     @Override
+    public void revoke(MinecraftServer server, UUID team, String permit) {
+        PERMITS.getOrDefault(team, Set.of()).remove(permit);
+    }
+
+    @Override
     public Optional<UUID> teamOf(MinecraftServer server, UUID account) {
         return Optional.of(account);
     }
