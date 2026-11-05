@@ -14,7 +14,7 @@ while looking at the lab, C.O.D. or a Port to open theirs.
 
 - [Your island and team](island.md): what you start with, and who it counts for.
 - [The Recycler](recycler/index.md): built block by block, it decomposes and recycles.
-- [Decomposing and recycling](decomposing.md): by hand or on a Recycler.
+- [Decomposing and recycling](decomposing.md): decompose essence by hand or on a Recycler, recycle only on one.
 - [The lab](lab.md): where your team starts a challenge, stops one and takes its refund.
 - [The challenges](challenges/index.md): the four ways back up to a Transmuted Essence, and the rules they share:
   [protection](challenges/protection.md), [energy](challenges/energy.md), [life](challenges/life.md) and
