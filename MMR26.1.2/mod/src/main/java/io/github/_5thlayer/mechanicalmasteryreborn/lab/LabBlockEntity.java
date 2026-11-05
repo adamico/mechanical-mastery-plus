@@ -12,6 +12,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Accounts;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.AssaultState;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Generators;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.NullShards;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
@@ -192,7 +193,7 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
         MinecraftServer server = level.getServer();
         UUID owner = owner(level);
         TeamState teams = TeamState.get(server);
-        showHermetic(teams.lastStand(owner).isPresent());
+        showHermetic(LastStands.started(server, owner));
         if (!teams.inLastStand(owner)) {
             phase = teams.wonThePack(owner) ? Phase.DONE : Phase.LOCKED;
             lines.clear();

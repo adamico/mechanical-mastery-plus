@@ -4,10 +4,10 @@
 package io.github._5thlayer.mechanicalmasteryreborn.lab;
 
 import com.mojang.serialization.MapCodec;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.NullShards;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
-import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -141,6 +141,6 @@ public final class LabBlock extends BaseEntityBlock {
 
     /** Whether the lab at {@code pos} is the Hermetic Lab: its team's last stand has started. */
     static boolean hermetic(ServerLevel level, BlockPos pos) {
-        return TeamState.get(level.getServer()).lastStand(Teams.at(level, pos)).isPresent();
+        return LastStands.started(level.getServer(), Teams.at(level, pos));
     }
 }
