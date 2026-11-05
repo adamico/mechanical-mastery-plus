@@ -26,3 +26,9 @@ Its rows, as your team gets to them:
   items wait, and a button to open them. Take them a stack at a time, or everything that fits at once.
 - **Last stand**, once your team has won all four: start C.O.D.'s [last stand](cod.md), the pack's ending. From
   then on the lab is the [Hermetic Lab](hermetic_lab.md), and the refund stays a click away there.
+
+## An emergency sapling
+
+If your island's tree gave you no sapling, or your last tree went without leaving one, right-click the lab holding
+dirt: it swaps one dirt for an oak sapling. It gives one only to a member who carries no sapling, and then makes the
+whole team wait a while before it gives another, so it is a way out, not a source of wood.

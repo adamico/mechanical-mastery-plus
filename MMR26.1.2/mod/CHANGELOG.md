@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn adds, or ch
 
 ## Unreleased
 
+- The lab gives an emergency sapling: a member of its team who right-clicks it holding dirt, and carries no sapling, swaps one dirt for an oak sapling, so a team whose leaves dropped none, and that has no Shop yet, can always grow a tree again. The team then waits a Minecraft day for another (`lab.sapling_cooldown`, 24000 ticks), and the action bar says why the lab gives none (#302).
 - A reset of the protection challenge sends a new Assault from its first wave, as though the challenge had just begun, once the old one is removed and its refund handed over; before, the team played on with no gate, no Rift Shards and no way to win (#294).
 - Jade on a stopped generator says the team bears the energy handicap, in place of saying it plays the energy challenge, which was wrong under the Hermetic Lab's energy spell (#294).
 - For operators, `/cod challenge reset` resets the challenge the island's team plays, as reaching Inflation's cap would, the team told the same, so a reset can be seen without waiting for Inflation (#294).

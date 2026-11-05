@@ -32,6 +32,8 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  *
  * <p>And the life handicap's faster hunger and Diet, and whether it pauses in Neo Vitae's Demon Realm.
  *
+ * <p>And how long a team waits between its lab's emergency saplings.
+ *
  * <p>And the Hermetic Lab's: its spells' length, its pace and cost by how many supply lines count, each line's demand, and the
  * spells' harder handicaps.
  */
@@ -223,6 +225,12 @@ public final class ServerConfig {
             .comment("Whether a player in Neo Vitae's Demon Realm (neovitae:dungeon) hungers and eats as in vanilla while their team",
                     "plays the life challenge. Off, the handicap goes on there as anywhere else. Inflation goes on either way.")
             .define("life.pause_in_demon_realm", false);
+
+    /** How long a team waits between emergency saplings from its lab: a Minecraft day (#302). */
+    public static final ModConfigSpec.IntValue LAB_SAPLING_COOLDOWN = BUILDER
+            .comment("The ticks a team waits after its lab gives it an emergency sapling, for a dirt, before it gives another.",
+                    "24000 is one Minecraft day, so the lab is a way out of losing every sapling, never a source of wood.")
+            .defineInRange("lab.sapling_cooldown", 24000, 0, 1_728_000);
 
     /** How long a spell at the Hermetic Lab runs: five minutes. */
     public static final ModConfigSpec.IntValue HERMETIC_LAB_SPELL_LENGTH = BUILDER
@@ -550,5 +558,10 @@ public final class ServerConfig {
     /** What the Shop's prices are multiplied by under the money spell. */
     public static double hermeticLabMoneyPriceRise() {
         return SPEC.isLoaded() ? HERMETIC_LAB_MONEY_PRICE_RISE.getAsDouble() : HERMETIC_LAB_MONEY_PRICE_RISE.getDefault();
+    }
+
+    /** The ticks a team waits between emergency saplings from its lab. */
+    public static int labSaplingCooldown() {
+        return SPEC.isLoaded() ? LAB_SAPLING_COOLDOWN.getAsInt() : LAB_SAPLING_COOLDOWN.getDefault();
     }
 }
