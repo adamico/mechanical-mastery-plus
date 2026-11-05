@@ -705,7 +705,7 @@ metafile = true
 
 [[files]]
 file = "mods/collective.pw.toml"
-hash = "62d95ead5ed5daf06a2c19e33df7b4d2d0ba6c48a23b15f81cf948efe3a99b53"
+hash = "369348587fd9f78a20d323ba94782ce3f073b219a3f945cbe080a79956847ede"
 metafile = true
 
 [[files]]
@@ -825,22 +825,22 @@ metafile = true
 
 [[files]]
 file = "mods/ftb-chunks-forge.pw.toml"
-hash = "5819b227140768306636a76607df189439d03ce6e420c680ba8a63a4312e9cd7"
+hash = "bb30d841f1c6074b51c287ab5a6f1768d186e14393f138be1939a7ce034cb849"
 metafile = true
 
 [[files]]
 file = "mods/ftb-library-forge.pw.toml"
-hash = "e52886e60c70a18a8a70f3e7781c1716498f4b4847df41b293d06de2cd53291d"
+hash = "4f15b4ccacfadd7db9027c233646473c898daf4cfc91b2fe134d25f4f7ffa646"
 metafile = true
 
 [[files]]
 file = "mods/ftb-teams-forge.pw.toml"
-hash = "cb69112ea7c492ee73426fb503af2d834c8bafcd8341188c99ea6dc56d38de6f"
+hash = "6da8dd62f4f281ff1813b455fa51b334fc63f5d95f5a46b1d9c62e599582bf6e"
 metafile = true
 
 [[files]]
 file = "mods/ftb-ultimine-forge.pw.toml"
-hash = "2607e2c07c06c9b4bbe5373fc685dab5b463c1b1564a1b56cd51305b224f3f23"
+hash = "5d705f537f485d24b5b76bcc07148f6ea4c062a4582a3c0b8f92fe26f2c6e348"
 metafile = true
 
 [[files]]
@@ -950,7 +950,7 @@ metafile = true
 
 [[files]]
 file = "mods/kubejs.pw.toml"
-hash = "24fbef7b816e9f90e0dd956308d5e722f4145af44b1b09eab186334a06f080fa"
+hash = "e1634fb529876c6e4ea001830deb4512f68350bb341c06b76f882db946cf19f1"
 metafile = true
 
 [[files]]
@@ -960,7 +960,7 @@ metafile = true
 
 [[files]]
 file = "mods/libx.pw.toml"
-hash = "041aa3d3d1a1946f05dbcd2bdf6a7799c2cf600f8c05aa42d2fdbaecc54d5a41"
+hash = "5ce6a6767087df71d0c38bee04959722151f1163147acdc4d8d85117e727bf2e"
 metafile = true
 
 [[files]]
@@ -970,12 +970,12 @@ metafile = true
 
 [[files]]
 file = "mods/mezzconfig.pw.toml"
-hash = "7bc0dea2f592b67098a2b6d13b9a0ff39c53aaa74dcb34970179430fe560cc6d"
+hash = "cef44d7c0b39b6e84bddf76e33d78c57494c08c3aca098fe31040ac5035d18db"
 metafile = true
 
 [[files]]
 file = "mods/modernfix.pw.toml"
-hash = "5e6c8be15112734f5257cde1dcf4cd7a78eb4563a3382ebaae27274434f8adfd"
+hash = "e1d4ec6401ebfa1599dbf80c82e5cec165abc27daa9b2a9fecfce92025acce9e"
 metafile = true
 
 [[files]]
@@ -1000,7 +1000,7 @@ metafile = true
 
 [[files]]
 file = "mods/neovitae.pw.toml"
-hash = "a0cc6dde0f3aea5a23c7168bf80580d6bffa236af282f921273804c2d0bfa9dc"
+hash = "6f3a0c01ea4b76ba03681d90eb3629b3b4f808c6c7a8f162a20db3a8b8963a9e"
 metafile = true
 
 [[files]]
@@ -1095,7 +1095,7 @@ metafile = true
 
 [[files]]
 file = "mods/supermartijn642s-core-lib.pw.toml"
-hash = "b0ad232c32758bf191ea2176baa4fde15424974811a212f6ab17918378add9ff"
+hash = "c0f7b5416eb954ad44e7480bf70a0bb9139ff5ca531fdbcd0c5c8568483a5584"
 metafile = true
 
 [[files]]
