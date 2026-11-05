@@ -34,6 +34,8 @@ import org.slf4j.Logger;
 public final class Challenges {
 
     private static final Logger LOGGER = LogUtils.getLogger();
+    /** The raid horn's files are mixed at a hundredth of full volume; vanilla's raids play it at 64, as this does. */
+    static final float RAID_HORN_VOLUME = 64.0F;
 
     private Challenges() {
     }
@@ -71,7 +73,7 @@ public final class Challenges {
                 player.sendSystemMessage(message);
                 player.connection.send(new ClientboundSetSubtitleTextPacket(subtitle));
                 player.connection.send(new ClientboundSetTitleTextPacket(title));
-                player.connection.send(new ClientboundSoundEntityPacket(sound, SoundSource.UI, player, 1.0F, 1.0F,
+                player.connection.send(new ClientboundSoundEntityPacket(sound, SoundSource.UI, player, RAID_HORN_VOLUME, 1.0F,
                         player.getRandom().nextLong()));
             }
         }
