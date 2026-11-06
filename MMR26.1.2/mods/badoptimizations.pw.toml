@@ -1,6 +1,6 @@
 name = "BadOptimizations"
 filename = "BadOptimizations-2.4.1-26.1-forge.jar"
-side = "both"
+side = "client"
 
 [download]
 hash-format = "sha1"

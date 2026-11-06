@@ -1,6 +1,6 @@
 name = "Toast Control"
 filename = "ToastControl-26.1.2-10.0.0.jar"
-side = "both"
+side = "client"
 
 [download]
 hash-format = "sha1"

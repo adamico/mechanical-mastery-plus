@@ -1,6 +1,6 @@
 name = "Swivel - Better 3rd Person / Third Person Camera, Free Look & Orbit Camera (Controller Support)"
 filename = "swivel-neoforge-1.2.0+mc26.1-26.1.2.jar"
-side = "both"
+side = "client"
 
 [download]
 hash-format = "sha1"

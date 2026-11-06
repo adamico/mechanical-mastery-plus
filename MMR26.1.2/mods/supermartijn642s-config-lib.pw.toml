@@ -1,6 +1,6 @@
 name = "SuperMartijn642's Config Lib"
 filename = "supermartijn642configlib-1.1.8-neoforge-mc26.1.jar"
-side = "both"
+side = "client"
 
 [download]
 hash-format = "sha1"
