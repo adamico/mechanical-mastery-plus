@@ -10,7 +10,7 @@ libworks {
     // upstream('groundworks') { range = '[0.4.0,0.5)' }
     // Nested by jar-in-jar: the Works tab the whole suite shares, and from 0.1.8 libworks-gametest on
     // the game tests' classpath (5thlayer/libworks ADR 0008).
-    runtime = '0.1.8'
+    runtime = '0.1.13'
     // Spelled out, since the repo holds the pack's tags too (mmp1.19.2-v*, mmr-v*): a release of the
     // mod can never take one of them (AGENTS.md).
     tagPrefix = 'mechanicalmasteryreborn-v'
