@@ -3,6 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn;
 
+import io.github._5thlayer.libworks.gallery.GalleryPack;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Assault;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
@@ -69,6 +70,8 @@ public final class MechanicalMasteryReborn {
         Defences.register(modBus);
         ServerConfig.register(container);
         modBus.addListener(WorksTabContents::add);
+        // The Gallery pack, off until a player turns it on in a world's Data Packs screen (libworks ADR 0010, #278).
+        GalleryPack.register(modBus, MOD_ID);
         // With both installed, as the pack plays, an island's players share one FTB party (#225).
         if (ModList.get().isLoaded("skyblockbuilder") && ModList.get().isLoaded("ftbteams")) {
             FtbPartySync.register();

@@ -111,6 +111,7 @@ public final class MechanicalMasteryRebornGameTests {
         AssaultExplosionsTests.register(tests);
         RefundTests.register(tests);
         HermeticLabTests.register(tests);
+        GalleryTests.register(tests);
         // The protection Chain and the End Portal Frame on a real Assembler, in the suiteGameTestServer run alone, which
         // loads Craftworks (#252, #265), and the Quartessence's way to Quintessence there, which loads Voidworks too (#262).
         if (ModList.get().isLoaded("craftworks")) {
@@ -140,9 +141,18 @@ public final class MechanicalMasteryRebornGameTests {
     record Registrar(RegisterGameTestsEvent event, Holder<TestEnvironmentDefinition<?>> environment) {
 
         void test(String name, int maxTicks, Consumer<GameTestHelper> body) {
+            register(name, maxTicks, body, environment);
+        }
+
+        /** A test in a batch of its own: one that turns a datapack on, which reloads the server's data under every test running with it (libworks ADR 0010). */
+        void testOnItsOwn(String name, int maxTicks, Consumer<GameTestHelper> body) {
+            register(name, maxTicks, body, event.registerEnvironment(id("on_its_own/" + name), new TestEnvironmentDefinition.AllOf(List.of())));
+        }
+
+        private void register(String name, int maxTicks, Consumer<GameTestHelper> body, Holder<TestEnvironmentDefinition<?>> batch) {
             var id = id(name);
             CodeGameTest.define(id, body);
-            event.registerTest(id, new CodeGameTest(id, new TestData<>(environment, PLATFORM, maxTicks, 0, true, Rotation.NONE)));
+            event.registerTest(id, new CodeGameTest(id, new TestData<>(batch, PLATFORM, maxTicks, 0, true, Rotation.NONE)));
         }
     }
 }
