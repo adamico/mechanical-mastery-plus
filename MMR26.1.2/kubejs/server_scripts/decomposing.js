@@ -84,9 +84,6 @@ ServerEvents.recipes(event => {
     'minecraft:barrel',
     'minecraft:campfire',
     'minecraft:bookshelf',
-    'minecraft:iron_block',
-    'minecraft:copper_block',
-    'minecraft:hay_block',
     'minecraft:resin_block',
   ]
   event.recipes.mechanicalmasteryreborn.decomposing(IMPROVED_MIX, '1x mechanicalmasteryreborn:improved_mechanical_essence')
