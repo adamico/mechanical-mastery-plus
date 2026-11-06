@@ -4,7 +4,17 @@
 
 <a href="https://shockbyte.com/billing/aff.php?aff=11622"><img src="https://shockbyte.com/assets/img/partners/twitch/shockbyte_affiliate.png" alt="Minecraft Server Hosting" /></a>
 
-<!-- The player section, the pack's CurseForge description: the maintainer's blurb, then the facts from docs/alpha-outline.md. -->
+This is Mechanical Mastery Reborn (MMR), the sequel to my 2024 Mechanical Mastery Plus (MMP), itself a fork of AmmoniumX’s Mechanical Mastery. MMP ended with the creation of a sentient factory, C.O.D., which never stopped making Mechanical Essences, until there was nothing else left.
+
+In MMR your goal is to stop C.O.D. and restore the world’s balance. You break its essences down again: whole machines from the very first one, then intermediates, and finally raw resources. You use what comes out to build production lines for four new Transmuted Essences.
+
+For the factories I picked the -works, a suite of tech mods I make, designed around automation: Craftworks, Beltworks, Pipeworks, Wireworks, Fieldworks, Groundworks, Voidworks and Gearworks. They are made to work with vanilla mechanics and other mods alike, the challenges’ mods included, so every chain can be automated.
+
+The pack has no quest book. Instead, every player starts with the Manual, a GuideME book with 3D scenes that explains how to build the pack’s machines and how each challenge is played. Hold its key over a block or essence to open its page.
+
+You take on four challenges in any order you like, each built around a different mod: Money (AdminShop), Life (Neo Vitae), Protection (Gateways to Eternity) and Energy (Theurgy). Each one comes with a handicap that hinders its production line. Each challenge you win stops C.O.D. making one tier of essence, and once all four are won, the last chapter asks for Quintessence, the one essence that can shut C.O.D. down for good.
+
+C.O.D. will not let you do that without a fight, though...
 
 ## For developers
 
