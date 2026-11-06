@@ -1,8 +1,6 @@
 # Mechanical Mastery Reborn Core
 
-<!-- For players, written by the maintainer and never by an agent: what Mechanical Mastery Reborn Core is, why it exists
-and how it feels to play. It is also the Modrinth and CurseForge description
-(docs/agents/publishing.md). The technical sections go below it. -->
+![Mechanical Mastery Reborn Core](https://raw.githubusercontent.com/adamico/mechanical-mastery-plus/main/MMR26.1.2/mod/publish/mechanicalmasteryreborn-cover.png)
 
 The companion mod of the Mechanical Mastery Reborn modpack: C.O.D., its essences and the lab.
 
