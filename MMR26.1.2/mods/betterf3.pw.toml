@@ -1,6 +1,6 @@
 name = "BetterF3"
 filename = "BetterF3-18.0.2-NeoForge-26.1.jar"
-side = "both"
+side = "client"
 
 [download]
 hash-format = "sha1"

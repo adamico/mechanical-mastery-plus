@@ -1,6 +1,6 @@
 name = "Freecam"
 filename = "freecam-neoforge-1.5.1+mc26.1.2.jar"
-side = "both"
+side = "client"
 
 [download]
 hash-format = "sha1"
