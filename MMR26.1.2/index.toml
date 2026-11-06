@@ -58,7 +58,7 @@ hash = "4c68ab99c906dd487952f61bf33c0635039a8bbff3f02099e3cd8272fe51b4aa"
 
 [[files]]
 file = "config/fancymenu/customization/title_screen.txt"
-hash = "2ec5e9b90f9ae41e7188aced16d5a89a4169a3a71d5bb4f5adfbf41163175174"
+hash = "fc1e4c509990692de033feb6faf3e29f04c7c20ff83dd2e9dcfaf9e0f480c601"
 
 [[files]]
 file = "config/fancymenu/options.txt"

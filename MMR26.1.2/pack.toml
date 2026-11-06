@@ -1,12 +1,12 @@
 name = "Mechanical Mastery Reborn"
 author = "kc00l"
-version = "0.0.1"
+version = "0.0.2"
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "3d84d8b5609dc16ab1b8085b291751c9a8a52e9f3284dc508d535915bcfdb318"
+hash = "217b548fd406da7c45d7c84166854d8a95edba5f788a4c938de2c88b60e1521a"
 
 [versions]
 minecraft = "26.1.2"

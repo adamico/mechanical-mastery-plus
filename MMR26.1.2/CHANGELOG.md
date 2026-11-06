@@ -2,7 +2,15 @@
 
 ## Unreleased
 
+## 0.0.2
+
 - The pack has a title screen of its own: its island and essences behind the pack's title, the menu's buttons in its colours, the pack's version, a link to report a bug, and its name and Quintessence on the game's window (FancyMenu).
+
+### Mods
+
+- Added FancyMenu (`fancymenu_neoforge_3.9.14_MC_26.1.2.jar`)
+- Added Konkrete (`konkrete_neoforge_1.10.1_MC_26.1.1.jar`)
+- Added Melody (`melody_neoforge_1.0.16_MC_26.1.1.jar`)
 
 ## 0.0.1
 
