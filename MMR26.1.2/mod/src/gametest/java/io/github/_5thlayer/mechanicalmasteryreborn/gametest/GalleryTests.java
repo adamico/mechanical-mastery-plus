@@ -83,6 +83,9 @@ final class GalleryTests {
                 helper.assertTrue(helper.getLevel().getBlockState(sign).is(Blocks.OAK_SIGN),
                         "scene " + SCENES.get(index).name() + " has no sign at " + sign.toShortString());
             }
+        // Waited for, not read at once: the plots' chunks were force-loaded for the test, and their entities become
+        // reachable a tick after the chunks do.
+        }).thenWaitUntil(() -> {
             var essences = Layout.ONE_ROW.sceneOrigin(at, SCENES.indexOf(scene("essences")));
             var shown = helper.getLevel().getEntitiesOfClass(Display.ItemDisplay.class, AABB.of(GalleryCheck.plot(essences))).stream()
                     .map(GalleryTests::shownItem).toList();
