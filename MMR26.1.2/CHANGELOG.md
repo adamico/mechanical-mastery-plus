@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.0.1
+
 - A server leaves out the client-only mods: rendering, sound, tooltip, camera and menu mods, and the libraries only they need.
 - Craftworks 0.11.3: a new server's first start no longer logs a `NullPointerException` from Craftworks' config (5thlayer/craftworks#84).
 - Voidworks 0.2.2: its Jade plugin loads on a dedicated server, so a player joining one sees Voidworks' Jade lines; 0.2.1 logged "Failed to load plugin from Voidworks" there (5thlayer/voidworks#137, found in #277).
