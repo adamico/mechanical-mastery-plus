@@ -1,5 +1,5 @@
 # Clears a scene's plot, from ~2 to ~25 east and ~-12 to the sign at ~0 south, 16 high on a stone floor.
-# Entities go first (the essences' item displays, C.O.D.'s pile), and loose items last: the fills pop the
+# Entities go first (the essences' item displays), and loose items last: the fills pop the
 # sign and spill what the chests, hoppers and barrels held.
 execute positioned ~2 ~-1 ~-12 as @e[type=!minecraft:player,dx=23,dy=16,dz=12] run kill @s
 # structure_void first: a fill that changes nothing fails the build (libworks ADR 0010).
