@@ -24,6 +24,57 @@ customization {
 
 element {
   element_type = image
+  instance_identifier = reborn_tiers
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 1
+  height = 1
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.1396 - {"placeholder":"guiheight"} * 0.263","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.037","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.5259","decimal":"false"}}
+  advanced_height = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.5259","decimal":"false"}}
+  source = [source:local]/config/fancymenu/assets/reborn_menu_tiers.fma
+  stay_on_screen = false
+  restart_animated_on_menu_load = false
+}
+
+element {
+  element_type = image
+  instance_identifier = reborn_transmuted
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 1
+  height = 1
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.8599 - {"placeholder":"guiheight"} * 0.263","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.037","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.5259","decimal":"false"}}
+  advanced_height = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.5259","decimal":"false"}}
+  source = [source:local]/config/fancymenu/assets/reborn_menu_transmuted.fma
+  stay_on_screen = false
+  restart_animated_on_menu_load = false
+}
+
+element {
+  element_type = image
+  instance_identifier = reborn_last_stand
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 1
+  height = 1
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} / 2 - {"placeholder":"guiheight"} * 0.4491","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"0 - {"placeholder":"guiheight"} * 0.2444","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.8981","decimal":"false"}}
+  advanced_height = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.7685","decimal":"false"}}
+  source = [source:local]/config/fancymenu/assets/reborn_menu_last_stand.fma
+  stay_on_screen = false
+  restart_animated_on_menu_load = false
+}
+
+element {
+  element_type = image
   instance_identifier = reborn_band
   anchor_point = top-left
   x = 0
@@ -61,7 +112,7 @@ element {
   x = 4
   y = 4
   width = 300
-  height = 12
+  height = 20
   source = Mechanical Mastery Reborn 0.0.1 alpha
   source_mode = direct
   shadow = true
@@ -193,7 +244,7 @@ vanilla_button {
 
 vanilla_button {
   element_type = vanilla_button
-  instance_identifier = mc_titlescreen_language_button
+  instance_identifier = 376390
   anchor_point = top-left
   x = 0
   y = 0
@@ -206,7 +257,7 @@ vanilla_button {
 
 vanilla_button {
   element_type = vanilla_button
-  instance_identifier = mc_titlescreen_accessibility_button
+  instance_identifier = 604390
   anchor_point = top-left
   x = 0
   y = 0

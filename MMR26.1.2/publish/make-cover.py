@@ -10,10 +10,13 @@
 #   - publish/reborn-cover.png, 1280x640, the CurseForge project's cover;
 #   - publish/reborn-icon.png, 512x512, its icon, which must read at 64px;
 #   - publish/reborn-card.png, 1920x1080, the video's title and end card;
-#   - config/fancymenu/assets/reborn_menu_*.png, the title screen's pieces, apart, for FancyMenu to lay
-#     out at any window's size: the background, the card's scene with no band, its island higher; the
-#     lettering on nothing; a slice of the band, which FancyMenu stretches across the screen; the
-#     buttons' backgrounds; and the window's icon, Quintessence, at 16 and 32 pixels.
+#   - config/fancymenu/assets/reborn_menu_*, the title screen's pieces, apart, for FancyMenu to lay out
+#     at any window's size: the background, the card's scene with no band and no essences, its island
+#     higher; the tiers' diamond turning clockwise and the Transmuted Essences' anticlockwise, and
+#     Nullessence and Quintessence circling each other, as FMA animations, which the layout places
+#     where this prints; the lettering on nothing; a slice of the band, which FancyMenu stretches
+#     across the screen; the buttons' backgrounds; and the window's icon, Quintessence, at 16 and 32
+#     pixels.
 #
 # What it draws, after the very first Mechanical Mastery's logo, its island on an orange sky:
 #   - the void: a near-black ground with faint specks, seeded, so every run draws the same image, and
@@ -36,10 +39,14 @@
 # hand, the first's Black for the title, as heavy as it comes so it stands out, and the second's Bold
 # for the pill; without them the title falls back to Impact and the pill to Arial Black, which every
 # run there draws the same, if not as designed.
+import functools
+import io
+import json
 import math
 import os
 import random
 import re
+import zipfile
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -90,18 +97,35 @@ WORD_SCALE = 0.7  # the pill's word against the title
 FIT = 0.92  # the most of the width the title takes; a wider font is drawn smaller
 
 
-def texture(name):
+@functools.cache
+def texture(name, frame=0):
+    # the texture's frame, the first unless asked, its frames stacked down its strip when animated
     im = Image.open(f'{T}{name}.png').convert('RGBA')
-    return im.crop((0, 0, im.width, im.width))
+    return im.crop((0, frame * im.width, im.width, (frame + 1) * im.width))
 
 
+def frame_at(name, t):
+    # which of an animated texture's frames shows t seconds in, as its .mcmeta times them in game: a
+    # frame listed with its own time holds for it, the others for the frametime, in ticks
+    meta = json.load(open(f'{T}{name}.png.mcmeta'))['animation']
+    frames = [(f['index'], f.get('time', meta['frametime'])) if isinstance(f, dict) else (f, meta['frametime'])
+              for f in meta['frames']]
+    tick = round(t * 20) % sum(d for _, d in frames)
+    for index, d in frames:
+        if tick < d:
+            return index
+        tick -= d
+
+
+@functools.cache
 def colour(name):
     # the texture's commonest opaque colour
     return max((n, p) for n, p in texture(name).getcolors(1 << 16) if p[3])[1][:3]
 
 
+@functools.cache
 def glow(rgb, r, peak=140):
-    # a pool of light falling off to nothing in the void
+    # a pool of light falling off to nothing in the void, drawn once for an animation's frames to reuse
     a = [int(peak * (1 - d) ** 2) if d < 1 else 0
          for y in range(2 * r) for x in range(2 * r) for d in [math.hypot(x - r + 0.5, y - r + 0.5) / r]]
     im = Image.new('RGBA', (2 * r, 2 * r), rgb + (0,))
@@ -112,12 +136,18 @@ def glow(rgb, r, peak=140):
 
 
 def essences(img, placed, px):
-    # each (name, x, y) essence px wide, every glow laid first so none washes over a neighbour
-    for name, x, y in placed:
-        g = glow(GLOWS.get(name) or colour(name), int(px * 1.5))
+    # each (name, x, y) essence px wide, every glow laid first so none washes over a neighbour; an
+    # essence may also be (name, x, y, px, frame, light), its own size, texture frame and brightness
+    placed = [e + (px, 0, 1) if len(e) == 3 else e for e in placed]
+    for name, x, y, size, _, light in placed:
+        g = glow(GLOWS.get(name) or colour(name), int(size * 1.5), int(140 * light))
         img.alpha_composite(g, (x - g.width // 2, y - g.height // 2))
-    for name, x, y in placed:
-        img.alpha_composite(texture(name).resize((px, px), Image.NEAREST), (x - px // 2, y - px // 2))
+    for name, x, y, size, frame, light in placed:
+        tex = texture(name, frame).resize((size, size), Image.NEAREST)
+        if light < 1:
+            tex = Image.merge('RGBA', [*(c.point(lambda v: int(v * light)) for c in tex.split()[:3]),
+                                       tex.getchannel('A')])
+        img.alpha_composite(tex, (x - size // 2, y - size // 2))
 
 
 def diamond(img, names, fx, y, px):
@@ -259,9 +289,10 @@ def band(img, top, bottom, title_size):
     d.rectangle([0, bottom - lt, img.width, bottom], fill=ACCENT)
 
 
-def scene(W, H, top, island_h, island_y, pair_px, px):
+def scene(W, H, top, island_h, island_y, pair_px, px, pair=True):
     # the void, the island and its glow, and the essences, the tiers' and the Transmuted Essences'
-    # diamonds halfway down to top
+    # diamonds halfway down to top, and Nullessence and Quintessence unless pair is False. Returns the
+    # image and where the pair's middle is
     img = void(W, H)
     u = 1
     while island(u + 1).height <= island_h * H:
@@ -274,8 +305,9 @@ def scene(W, H, top, island_h, island_y, pair_px, px):
         essences(img, diamond(img, TIERS, LEFT, top // 2, px), px)
         essences(img, diamond(img, TRANSMUTED, RIGHT, top // 2, px), px)
     mx, my, o = W // 2, at[1] + int(PAIR * land.height), int(OVERLAP * pair_px)
-    essences(img, [(LAST_STAND[0], mx - o, my - o), (LAST_STAND[1], mx + o, my + o)], pair_px)
-    return img
+    if pair:
+        essences(img, [(LAST_STAND[0], mx - o, my - o), (LAST_STAND[1], mx + o, my + o)], pair_px)
+    return img, (mx, my)
 
 
 def make(out, W, H, title_size, band_y, island_h, island_y, pair_px, px=None, stacked=False):
@@ -286,18 +318,82 @@ def make(out, W, H, title_size, band_y, island_h, island_y, pair_px, px=None, st
     title_size, th = fit(W, title_size, stacked)
     cy, bh = int(band_y * H), int(th + title_size * 0.7)
     top, bottom = cy - bh // 2, cy + bh // 2
-    img = scene(W, H, top, island_h, island_y, pair_px, px)
+    img, _ = scene(W, H, top, island_h, island_y, pair_px, px)
     band(img, top, bottom, title_size)
     lettering(img, title_size, cy, stacked)
     img.convert('RGB').save(out)
 
 
+def fma(out, frames, seconds):
+    # an animation as FancyMenu's FMA, a zip of its frames and their timing, looping for good: it
+    # streams the frames, so only a few are held at a time, however many there are. Each frame is cut
+    # to 256 colours, by libimagequant, which keeps the glows' falloff, to under half its size
+    with zipfile.ZipFile(out, 'w', zipfile.ZIP_STORED) as z:
+        z.writestr('metadata.json', json.dumps({'loop_count': 0, 'frame_time': round(1000 * seconds / len(frames))}))
+        for i, im in enumerate(frames):
+            data = io.BytesIO()
+            im.quantize(256, method=Image.Quantize.LIBIMAGEQUANT).save(data, 'PNG', optimize=True)
+            z.writestr(f'frames/{i}.png', data.getvalue())
+
+
+def turning(names, px, clockwise):
+    # a diamond of essences px wide turning about its middle, once in TURN seconds, the essences
+    # upright: its frames, each a box just holding the essences and their glows
+    r = int(SPREAD * px)
+    half = r + int(px * 1.5)
+    out = []
+    for i in range(TURN * FPS):
+        a = 2 * math.pi * i / (TURN * FPS) * (1 if clockwise else -1)
+        img = Image.new('RGBA', (2 * half, 2 * half), (0, 0, 0, 0))
+        # y runs down the screen, so a growing angle turns clockwise
+        essences(img, [(n, half + round(r * (dx * math.cos(a) - dy * math.sin(a))),
+                        half + round(r * (dx * math.sin(a) + dy * math.cos(a))))
+                       for n, (dx, dy) in zip(names, [(0, -1), (-1, 0), (1, 0), (0, 1)])], px)
+        out.append(img)
+    return out
+
+
+def circling(px):
+    # Nullessence and Quintessence opposite each other on a circle about an upright axis between them,
+    # once in PAIR_TURN seconds, seen from a little above, as the island is: the nearer one lower,
+    # larger and brighter, and drawn over the farther; each playing its texture's frames as it does in
+    # game. Its frames, each a box just holding them and their glows
+    r, tilt = int(PAIR_ORBIT * px), PAIR_ORBIT * px * VIEW[1]
+    big = int(px * (1 + DEPTH))
+    hw, hh = r + int(big * 1.5), int(tilt) + int(big * 1.5)
+    out = []
+    for i in range(PAIR_TURN * FPS):
+        t = i / FPS
+        a = 2 * math.pi * t / PAIR_TURN - 3 * math.pi / 4  # Nullessence starts behind, up and left, as on the cover
+        placed = []
+        for name, b in zip(LAST_STAND, (a, a + math.pi)):
+            z = math.cos(b)  # 1 nearest the screen, -1 farthest
+            placed.append((z, (name, hw + round(r * math.sin(b)), hh + round(tilt * z), int(px * (1 + DEPTH * z)),
+                               frame_at(name, t), 1 - DIM * (1 - z) / 2)))
+        img = Image.new('RGBA', (2 * hw, 2 * hh), (0, 0, 0, 0))
+        essences(img, [e for _, e in sorted(placed)], px)
+        out.append(img)
+    return out
+
+
 def menu(W, H, title_size, top, island_h, island_y, pair_px, px):
     # the title screen's pieces, apart, so FancyMenu lays them out at any window's size: its
-    # background, the scene with no band, top the fraction of the height where the band would start;
-    # the lettering on nothing, cropped to it; and a slice of the band as tall as the lettering needs,
-    # which FancyMenu stretches across the screen
-    scene(W, H, int(top * H), island_h, island_y, pair_px, px).convert('RGB').save(MENU + 'background.png')
+    # background, the scene with no band and no essences, top the fraction of the height where the
+    # band would start; the two diamonds turning and the pair circling, each an FMA centred where the
+    # cover has it; the lettering on nothing, cropped to it; and a slice of the band as tall as the
+    # lettering needs, which FancyMenu stretches across the screen. Prints where each animation's box
+    # goes, for the layout
+    img, (mx, my) = scene(W, H, int(top * H), island_h, island_y, pair_px, None, pair=False)
+    img.convert('RGB').save(MENU + 'background.png')
+    for name, names, fx, clockwise in [('tiers', TIERS, LEFT, True), ('transmuted', TRANSMUTED, RIGHT, False)]:
+        (_, cx, cy), = diamond(img, names[:1], fx, int(top * H) // 2, px)
+        cy += int(SPREAD * px)  # the first essence stands at the top point
+        frames = turning(names, px, clockwise)
+        fma(MENU + name + '.fma', frames, TURN)
+        print(f'{name}: middle {cx}, {cy}; box {frames[0].width}x{frames[0].height}')
+    frames = circling(pair_px)
+    fma(MENU + 'last_stand.fma', frames, PAIR_TURN)
+    print(f'last_stand: middle {mx}, {my}; box {frames[0].width}x{frames[0].height}')
     title_size, th = fit(W, title_size)
     title = Image.new('RGBA', (W, 2 * th), (0, 0, 0, 0))
     lettering(title, title_size, th)
@@ -328,6 +424,11 @@ CARD = ('publish/reborn-card.png', 1920, 1080, 162, 0.77, 0.9, 0.04, 288, 128)
 # island's height and top, and the essences' sizes
 MENU = 'config/fancymenu/assets/reborn_menu_'
 TITLE_SCREEN = (1920, 1080, 120, 0.6, 0.56, 0.03, 224, 128)
+# its animations: their frames a second, few enough to keep them small, each essence moving a few
+# pixels a frame; a diamond's turn, in seconds; the pair's, four of their
+# textures' 4.5-second cycles so it loops seamlessly; the pair's circle's radius, in their size; and
+# how much larger and smaller, and how much dimmer at the back, depth makes them
+FPS, TURN, PAIR_TURN, PAIR_ORBIT, DEPTH, DIM = 10, 20, 18, 0.45, 0.15, 0.3
 
 make(*COVER)
 make(*ICON, stacked=True)
