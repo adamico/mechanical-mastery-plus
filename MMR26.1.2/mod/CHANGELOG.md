@@ -4,6 +4,8 @@ Written for the pack and its players: what Mechanical Mastery Reborn Core adds, 
 
 ## Unreleased
 
+- Jade names an awakened lab the Hermetic Lab, and its icon shows the Hermetic Lab's look, crying obsidian under a respawn anchor's top; before, Jade named it Lab with the plain lab's icon, though its menu and a pick of it said Hermetic Lab. A pick of an awakened lab now wears that look in the hotbar too (#303).
+
 ## 0.2.0
 
 - The mod is now named Mechanical Mastery Reborn Core, as on CurseForge; its mod id, `mechanicalmasteryreborn`, is unchanged, so worlds and configs carry over (#275).

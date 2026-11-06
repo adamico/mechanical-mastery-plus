@@ -1,6 +1,20 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "mechanicalmasteryreborn:block/lab"
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "cases": [
+      {
+        "when": "hermetic",
+        "model": {
+          "type": "minecraft:model",
+          "model": "mechanicalmasteryreborn:block/lab_hermetic"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "mechanicalmasteryreborn:block/lab"
+    }
   }
 }
