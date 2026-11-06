@@ -9,6 +9,62 @@ file = "config/defaultworldtype/client-config.toml"
 hash = "9f26e8c0442c30ae6c37532736f2282d7272beec800cca7431e52f9242dc7f04"
 
 [[files]]
+file = "config/fancymenu/assets/reborn_menu_background.png"
+hash = "6d39e9b33faf846438c7c94794adaecff86fc7d93b98c57deda1dfea5a4ce59e"
+
+[[files]]
+file = "config/fancymenu/assets/reborn_menu_band.png"
+hash = "3301e9ecea35a9bcc6e9d50c749d4bee4d45dd76112b23b1521ecd32b8020d8f"
+
+[[files]]
+file = "config/fancymenu/assets/reborn_menu_button.png"
+hash = "4c365891966aabe583370c7b4701c4c9821304327cdbd27e3694f077e079ab09"
+
+[[files]]
+file = "config/fancymenu/assets/reborn_menu_button_hover.png"
+hash = "1a1966cadd11367b1d494f9f9b5182f434b0cfc5c0c5b5b0de76f09dd0ff4237"
+
+[[files]]
+file = "config/fancymenu/assets/reborn_menu_button_off.png"
+hash = "a4a839f02bf10472fe16d951cbc75d62e1e89d3c4efff211d498e7e9b36b6a81"
+
+[[files]]
+file = "config/fancymenu/assets/reborn_menu_icon_16.png"
+hash = "c688511cc37c70db6ba943cb3237f66dbd94bdadbde28f36943574d132d3a28e"
+
+[[files]]
+file = "config/fancymenu/assets/reborn_menu_icon_32.png"
+hash = "346ae10c69a39538691722dca9457631ce13b69bde62eb964216f2aaac861ae6"
+
+[[files]]
+file = "config/fancymenu/assets/reborn_menu_last_stand.fma"
+hash = "25627d5994787ae0f1185b677477ee63e95d3e00684eea32fc09020d31d5fe4b"
+
+[[files]]
+file = "config/fancymenu/assets/reborn_menu_tiers.fma"
+hash = "f76b72a9e7865e6f8bd0b15889161889ec038e8d3cee3e642f5d154de1c21cc1"
+
+[[files]]
+file = "config/fancymenu/assets/reborn_menu_title.png"
+hash = "8a33c05396468a41f44204a5e12fcd90f54b151158ef2518cbfb0c29db84792c"
+
+[[files]]
+file = "config/fancymenu/assets/reborn_menu_transmuted.fma"
+hash = "4be9925fff3a94e01b6e4ce4b3717a939f6614278e00921eb0962aefb20e6351"
+
+[[files]]
+file = "config/fancymenu/customizablemenus.txt"
+hash = "4c68ab99c906dd487952f61bf33c0635039a8bbff3f02099e3cd8272fe51b4aa"
+
+[[files]]
+file = "config/fancymenu/customization/title_screen.txt"
+hash = "2ec5e9b90f9ae41e7188aced16d5a89a4169a3a71d5bb4f5adfbf41163175174"
+
+[[files]]
+file = "config/fancymenu/options.txt"
+hash = "b2e21f32769e832a111e3e28c308aa7d38234b446847ba3ef6ba8652a27e2401"
+
+[[files]]
 file = "config/fieldworks-common.toml"
 hash = "049d9bad4a2db993e486c4a6efb235ac0946fdab67a553b82ee73f5226c1976c"
 
@@ -794,6 +850,11 @@ hash = "22d1859ddf426c57a209c0ebac804a21be524e16e104580c4bdca511e48a50c0"
 metafile = true
 
 [[files]]
+file = "mods/fancymenu.pw.toml"
+hash = "31abf2e6a698b4298bb772ee2c26a5fe61eecde679c73a1ab001c9f5e0259176"
+metafile = true
+
+[[files]]
 file = "mods/ferritecore.pw.toml"
 hash = "c2d1674a4d1466e09946819d58436b555256613d2cbcb8f12e26d950bd76d8ef"
 metafile = true
@@ -944,6 +1005,11 @@ hash = "928b184b2cca22c30b702a444a09b8c030d57cf6de58d8f7b145d301c8a83bf0"
 metafile = true
 
 [[files]]
+file = "mods/konkrete.pw.toml"
+hash = "3929423ce96f2aa2159edd96e4c5da8754ef7a2301dd92d0d9342fc26e8982e6"
+metafile = true
+
+[[files]]
 file = "mods/kotlin-for-forge.pw.toml"
 hash = "205974de9e49d9afc2bda55ca8b0400ad1196ef0fae7899c9344af3c122a3aee"
 metafile = true
@@ -971,6 +1037,11 @@ metafile = true
 [[files]]
 file = "mods/mechanical-mastery-reborn-core.pw.toml"
 hash = "e80e6b663a7e699c289c5dab4a0dfdb167d1a4949348037a4e86e93c972e9586"
+metafile = true
+
+[[files]]
+file = "mods/melody.pw.toml"
+hash = "9d908f5908e2fc0eca2d556e36ac71419eeb08db43dda6ff9d06cf138c521e06"
 metafile = true
 
 [[files]]
