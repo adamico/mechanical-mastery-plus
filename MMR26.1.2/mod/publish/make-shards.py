@@ -19,8 +19,8 @@
 #
 # One shape draws all three, so they read as the same drop in three states: a six-sided chunk
 # broken off, leaning a little, as the polygon below. Its facets are bands by distance from its
-# long axis, lit from the top left; the crack jags where a fixed seed sends it, so every run draws
-# the same pixels. Nothing is read from another image: the palettes are the Warding Essence's and
+# long axis, lit from the top left; each crack starts, jags and ends where a fixed seed sends it,
+# so every run draws the same pixels. Nothing is read from another image: the palettes are the Warding Essence's and
 # Nullessence's colours, copied in as numbers. The maintainer picked this shape from three
 # candidates, and the crackling over sparks thrown clear of the chunk (#310).
 import json
@@ -41,6 +41,7 @@ GLOW = (196, 148, 255)  # the lightning between, the raw chunk's own light
 FRAMES = 16  # the Charged Rift Shard's frames, each a crack of its own, lilac and white in turn
 FRAMETIME = 2  # ticks a frame holds
 CRACK_SIDE = -0.3  # how far toward the lit edge the crack may jag, against the half-width
+CRACK_WANDER = 4  # how many rows from the head, and from the foot, a crack's ends may fall
 # the facets, by distance across the chunk against its half-width: up to each limit, a band
 BANDS = ((-0.5, 'bright'), (0.1, 'light'), (0.65, 'dark'), (9, 'deep'))
 
@@ -82,15 +83,18 @@ def rift():
 
 
 def crack(img, rng):
-    # a jagged path down the chunk's inside, from under its head to above its foot: one step down
-    # a row, with a step across where the seed sends it, kept off the outline and off the lit
-    # edge's highlight, where a white flash would vanish
+    # a jagged path down the chunk's inside, from a row near its head to one near its foot, both
+    # the seed's pick as is where in its row it starts: one step down a row, with a step across
+    # where the seed sends it, kept off the outline and off the lit edge's highlight, where a
+    # white flash would vanish
     inside = lambda x, y: 0 <= x < SIZE and 0 <= y < SIZE and img.getpixel((x, y))[3] > 0
     half = max(abs(across((x, y))) for y in range(SIZE) for x in range(SIZE) if inside(x, y))
     body = lambda x, y: inside(x, y) and img.getpixel((x, y))[:3] != WARD[0] and across((x, y)) / half > CRACK_SIDE
-    (hx, hy), (fx, fy) = AXIS
-    path, x = [], hx
-    for y in range(hy + 2, fy - 1):
+    (_, hy), (_, fy) = AXIS
+    top, bottom = rng.randint(hy + 1, hy + CRACK_WANDER), rng.randint(fy - CRACK_WANDER, fy - 1)
+    x = rng.choice([x for x in range(SIZE) if body(x, top)])
+    path = [(x, top)]
+    for y in range(top + 1, bottom + 1):
         for dx in rng.sample((-1, 0, 1), 3):
             if body(x + dx, y) and (dx == 0 or body(x + dx, y - 1)):
                 break
