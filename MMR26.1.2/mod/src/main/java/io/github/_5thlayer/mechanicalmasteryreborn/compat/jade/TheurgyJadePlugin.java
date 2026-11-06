@@ -12,6 +12,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.fml.ModList;
+import snownee.jade.api.ITooltip;
 import snownee.jade.api.IWailaClientRegistration;
 import snownee.jade.api.IWailaCommonRegistration;
 import snownee.jade.api.IWailaPlugin;
@@ -44,10 +45,23 @@ public final class TheurgyJadePlugin implements IWailaPlugin {
     @Override
     public void registerClient(IWailaClientRegistration registration) {
         if (ModList.get().isLoaded("theurgy")) {
-            registration.registerBlockComponent(new MachineReport.Client<>(REPORT, (percent, tooltip) ->
-                    tooltip.add(JadeUI.progress(new ProgressView(ProgressView.Part.of(percent / 100f),
-                            Component.translatable("mechanicalmasteryreborn.jade.theurgy.progress", percent),
-                            JadeUI.progressStyle(), BoxStyle.nestedBox())))), Block.class);
+            registration.registerBlockComponent(new MachineReport.Client<>(REPORT, Bar::add), Block.class);
+        }
+    }
+
+    /**
+     * The bar, in a class of its own: a dedicated server can't load Jade's {@code Element}, whose interfaces are the
+     * client's, and verifying a method here that hands one to the tooltip would load it and fail the plugin (#308).
+     */
+    static final class Bar {
+
+        private Bar() {
+        }
+
+        static void add(Integer percent, ITooltip tooltip) {
+            tooltip.add(JadeUI.progress(new ProgressView(ProgressView.Part.of(percent / 100f),
+                    Component.translatable("mechanicalmasteryreborn.jade.theurgy.progress", percent),
+                    JadeUI.progressStyle(), BoxStyle.nestedBox())));
         }
     }
 }
