@@ -2,6 +2,7 @@
 /.gitignore
 /docs/
 /scripts/
+/server_files/
 /tools/
 /releases/
 /CHANGELOG.md
