@@ -14,7 +14,7 @@ The suite, taken as released CurseForge jars:
 - **Voidworks**: void harvested from the world and carried between dimensions, the reason the void Nether and End are reachable.
 - **Gearworks**: the FE suit and lance, the team's gear, which the protection challenge makes worth having. In the pack with the rest of the suite (ADR 0002), and no challenge's mod (ADR 0007).
 
-The rest of 0.0.1:
+The rest of the pack:
 
 - **Theurgy**: alchemy, the path to the Galvanic Essence.
 - **Chapters**: challenge locks. A challenge a team has started is a stage, and its chain waits on it (ADR 0007).
@@ -26,7 +26,7 @@ The rest of 0.0.1:
 - **Refined Storage**: storage.
 - **KubeJS**, **Rhino**: the pack's scripts: recipes, balance, giving a player with no team a team of one, and the Manual: its pages and giving it to each player once.
 
-The challenges after 0.0.1 (#210), each one's chain locked until a team starts it (ADR 0007):
+The protection, life and money challenges (#210), each one's chain locked until a team starts it (ADR 0007):
 
 - **Gateways to Eternity**: the protection challenge. The pack writes its gates: the Assault, which the companion mod sends at a playing team's island, and the home gate, a smaller one a team opens with a pearl once it has started protection. Only these gates give the Rift Shards its chain needs (ADR 0010).
 - **Neo Vitae**: the life challenge. Blood magic, paid for in the player's own health; its chain reaches a tier-3 Ara Vitae through the Demon Realm, where the Vital Essence is infused from a Tabula Spiritus.
