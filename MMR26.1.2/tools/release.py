@@ -7,9 +7,10 @@
 #
 # cut makes the release from HEAD on main, all of it local: the changelog's Unreleased entries and the
 # mods changed since the last release become <version>'s section, the version goes into pack.toml,
-# the client zip is exported into releases/<version>/, and the release is committed and tagged with
-# the zip's sha256. It runs the tool's tests first, and a failure before the commit puts every file
-# back. A later export never matches the zip byte for byte, so the zip it exported is the release's.
+# and with its stage into the title screen's line naming the pack, the client zip is exported into
+# releases/<version>/, and the release is committed and tagged with the zip's sha256. It runs the
+# tool's tests first, and a failure before the commit puts every file back. A later export never
+# matches the zip byte for byte, so the zip it exported is the release's.
 # It runs on main only, since only main commits index.toml and pack.toml (AGENTS.md).
 #
 # publish sends a cut release to its sites, in order: the client zip to CurseForge, the server pack
@@ -50,7 +51,9 @@ from sites import Published, Refused
 ROOT = Path(__file__).resolve().parent.parent
 VERSION = re.compile(r"\d+\.\d+\.\d+")
 # What a cut changes, and puts back when it fails.
-CUT_FILES = ["pack.toml", "index.toml", "CHANGELOG.md"]
+# The title screen's layout, whose text line naming the pack says its version.
+TITLE_SCREEN = "config/fancymenu/customization/title_screen.txt"
+CUT_FILES = ["pack.toml", "index.toml", "CHANGELOG.md", TITLE_SCREEN]
 SERVER_CONFIG = "server_files/server-setup-config.yaml"
 SITES = ["curseforge", "server", "github"]
 # Below this version the pack is an alpha (the root GLOSSARY.md).
@@ -206,6 +209,8 @@ def cut(pack, version, packwiz, out=print):
     try:
         changelog.write_text(text)
         replaced(pack.root / "pack.toml", r'^version = ".*"$', f'version = "{version}"')
+        replaced(pack.root / TITLE_SCREEN, rf"^(\s*source = ){re.escape(pack.name)} .*$",
+                 lambda m: m[1] + titled(pack.name, version))
         packwiz.refresh()
         exported = packwiz.export()
         if not exported.is_file():
@@ -268,9 +273,8 @@ class CutRelease:
         tagged = tomllib.loads(pack.text("show", f"{self.tag}:./pack.toml"))
         self.minecraft, self.neoforge = tagged["versions"]["minecraft"], tagged["versions"]["neoforge"]
         self.notes = notes(pack.text("show", f"{self.tag}:./CHANGELOG.md"), version)
-        stage = " alpha" if is_alpha(version) else ""
-        self.title = f"{tagged['name']} {version}{stage}"
-        self.server_title = f"{tagged['name']} Server {version}{stage}"
+        self.title = titled(tagged["name"], version)
+        self.server_title = titled(f"{tagged['name']} Server", version)
         self.server_zip = f"{pack.slug}-Server-{version}.zip"
         self.record = Record(self.zip.parent / "record.json")
 
@@ -306,6 +310,11 @@ class CutRelease:
 
 def is_alpha(version):
     return tuple(map(int, version.split("."))) < FIRST_PAST_ALPHA
+
+
+def titled(name, version):
+    """What a release of <name> at <version> is called: its name, version and stage."""
+    return f"{name} {version}{' alpha' if is_alpha(version) else ''}"
 
 
 def cdn_url(file_id, file_name):

@@ -1,0 +1,4 @@
+type = customizablemenus
+
+net.minecraft.client.gui.screens.TitleScreen {
+}

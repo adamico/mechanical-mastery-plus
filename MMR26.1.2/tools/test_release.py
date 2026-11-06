@@ -25,6 +25,7 @@ FILES = {
                                              "    modpackUrl: <the-client-zip-url>\n"
                                              "    formatSpecific:\n        ignoreProject: []\n"
                                              "    additionalFiles: []\n",
+    release.TITLE_SCREEN: "element {\n  element_type = text_v2\n  source = Test Pack 0.0.0 alpha\n}\n",
     "server_files/start-server.sh": "#!/bin/bash\njava -jar serverstarter.jar\n",
 }
 
@@ -94,6 +95,7 @@ class Cut(unittest.TestCase):
         self.assertEqual("# Changelog\n\n## Unreleased\n\n## 0.0.1\n\n- The first alpha.\n",
                          self.folder.read("CHANGELOG.md"))
         self.assertIn('version = "0.0.1"', self.folder.read("pack.toml"))
+        self.assertIn("  source = Test Pack 0.0.1 alpha\n", self.folder.read(release.TITLE_SCREEN))
         zip_data = self.folder.pack.client_zip("0.0.1").read_bytes()
         self.assertEqual("releases/0.0.1/test-pack-0.0.1.zip",
                          str(self.folder.pack.client_zip("0.0.1").relative_to(self.folder.root)))
@@ -105,6 +107,10 @@ class Cut(unittest.TestCase):
         # Cut is local: it says how to push, and pushes nothing.
         self.assertEqual("", self.folder.git("remote"))
         self.assertIn("Push with:    git push origin HEAD test-v0.0.1", self.folder.out)
+
+    def test_past_the_alpha_the_title_screen_names_the_version_alone(self):
+        self.folder.cut("0.1.0")
+        self.assertIn("  source = Test Pack 0.1.0\n", self.folder.read(release.TITLE_SCREEN))
 
     def test_refuses_a_pack_folder_with_changes(self):
         self.folder.write("mods/b.pw.toml", mod("B", "b-1.0.jar", 12))
