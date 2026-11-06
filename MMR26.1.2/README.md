@@ -1,19 +1,27 @@
 # Mechanical Mastery Reborn (26.1.2)
 
+![Mechanical Mastery Reborn](https://raw.githubusercontent.com/adamico/mechanical-mastery-plus/main/MMR26.1.2/publish/reborn-cover.png)
+
+<a href="https://shockbyte.com/billing/aff.php?aff=11622"><img src="https://shockbyte.com/assets/img/partners/twitch/shockbyte_affiliate.png" alt="Minecraft Server Hosting" /></a>
+
+<!-- The player section, the pack's CurseForge description: the maintainer's blurb, then the facts from docs/alpha-outline.md. -->
+
+## For developers
+
 The 26.1.2 pack line, on NeoForge: a skyblock where each team starts on its own island beside C.O.D. and its endless Advanced essence. Its terms are in `GLOSSARY.md`, its decisions in `docs/adr/`, the spec in #163.
 
-## What is here
+### What is here
 
 - The pack: a [packwiz](https://packwiz.infra.link) manifest, `pack.toml`, `index.toml` and a `.pw.toml` per mod in `mods/`, with `config/` and `kubejs/`. Every jar comes from CurseForge. `MODS.md` says what each mod is for.
 - The island: Skyblock Builder's config in `config/skyblockbuilder/`, with the team island in `templates/islands/reborn.snbt`: C.O.D., the lab and a tree, and no Recycler, which the team builds from the island's wood and stone. `kubejs/server_scripts/team_of_one.js` gives a player with no team a team, and an island, of their own.
 - The recipes: `kubejs/server_scripts/decomposing.js` gives each essence its mix and the Recycler's parts their recipes. What any other item recycles into the companion mod derives from its recipes, and `defaultconfigs/mechanicalmasteryreborn-server.toml` has it read Craftworks' Assembler recipes too (#184).
 - `mod/`: the companion mod, a Gradle build of its own (see `mod/AGENTS.md`). `.packwizignore` keeps it, and the repo's other files, out of the pack.
 
-## Working on the pack
+### Working on the pack
 
 From this folder, `mise install` installs the pinned packwiz. Add a mod with `packwiz cf add <slug>` and give it a role in `MODS.md`; `packwiz refresh` on `main` after merging a change to a config or script; a branch leaves `index.toml` and `pack.toml` alone, and `scripts/launch.py` refreshes them for its run (`AGENTS.md`). `packwiz cf export` writes the pack's zip.
 
-## Playing it locally
+### Playing it locally
 
 Once: export the zip, import it into the CurseForge app as a profile named "Mechanical Mastery Reborn", and play it once from CurseForge, so it installs NeoForge.
 
@@ -23,7 +31,7 @@ The companion mod is not on CurseForge yet, so the pack does not list it, and a 
 
 `scripts/check_offers.py` checks the Shop's Offers against the rules every Offer keeps (#213).
 
-## Releasing
+### Releasing
 
 Reborn releases on its own (ADR 0004), with `tools/release.py`, Mechanical Mastery Plus's release tool pointed at Reborn's identity in `tools/release.toml`: its slug, its tag prefix `mmr26.1.2-v`, its CurseForge project (once #291 makes it; until then `publish` refuses every site, since the server pack names the client zip's CurseForge download, and `--dry-run` still shows what each would be sent) and the GitHub repo. Until 0.1.0 the pack is an alpha: its files' display names say "alpha", but every file is uploaded as a Release file, so it reaches the CurseForge app.
 
