@@ -1,0 +1,297 @@
+type = fancymenu_layout
+
+layout-meta {
+  identifier = title_screen
+  render_custom_elements_behind_vanilla = false
+  is_enabled = true
+  layout_index = 0
+}
+
+menu_background {
+  instance_identifier = reborn_background
+  background_type = image
+  show_background = true
+  image_path = [source:local]/config/fancymenu/assets/reborn_menu_background.png
+  slide = false
+  repeat_texture = false
+  parallax = false
+}
+
+customization {
+  action = backgroundoptions
+  keepaspectratio = true
+}
+
+element {
+  element_type = image
+  instance_identifier = reborn_tiers
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 1
+  height = 1
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.1396 - {"placeholder":"guiheight"} * 0.263","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.037","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.5259","decimal":"false"}}
+  advanced_height = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.5259","decimal":"false"}}
+  source = [source:local]/config/fancymenu/assets/reborn_menu_tiers.fma
+  stay_on_screen = false
+  restart_animated_on_menu_load = false
+}
+
+element {
+  element_type = image
+  instance_identifier = reborn_transmuted
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 1
+  height = 1
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} * 0.8599 - {"placeholder":"guiheight"} * 0.263","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.037","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.5259","decimal":"false"}}
+  advanced_height = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.5259","decimal":"false"}}
+  source = [source:local]/config/fancymenu/assets/reborn_menu_transmuted.fma
+  stay_on_screen = false
+  restart_animated_on_menu_load = false
+}
+
+element {
+  element_type = image
+  instance_identifier = reborn_last_stand
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 1
+  height = 1
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} / 2 - {"placeholder":"guiheight"} * 0.4491","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"0 - {"placeholder":"guiheight"} * 0.2444","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.8981","decimal":"false"}}
+  advanced_height = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.7685","decimal":"false"}}
+  source = [source:local]/config/fancymenu/assets/reborn_menu_last_stand.fma
+  stay_on_screen = false
+  restart_animated_on_menu_load = false
+}
+
+element {
+  element_type = image
+  instance_identifier = reborn_band
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 1
+  height = 1
+  advanced_posx = {"placeholder":"calc","values":{"expression":"0","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.6","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"}","decimal":"false"}}
+  advanced_height = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.17","decimal":"false"}}
+  source = [source:local]/config/fancymenu/assets/reborn_menu_band.png
+  stay_on_screen = false
+}
+
+element {
+  element_type = image
+  instance_identifier = reborn_title
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 1
+  height = 1
+  advanced_posx = {"placeholder":"calc","values":{"expression":"({"placeholder":"guiwidth"} - {"placeholder":"guiheight"} * 1.2102) / 2","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.6361","decimal":"false"}}
+  advanced_width = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 1.2102","decimal":"false"}}
+  advanced_height = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.0972","decimal":"false"}}
+  source = [source:local]/config/fancymenu/assets/reborn_menu_title.png
+  stay_on_screen = false
+}
+
+element {
+  element_type = text_v2
+  instance_identifier = reborn_version
+  anchor_point = top-left
+  x = 4
+  y = 4
+  width = 300
+  height = 20
+  source = Mechanical Mastery Reborn 0.0.1 alpha
+  source_mode = direct
+  shadow = true
+  scale = 1.0
+  base_color = #F0F0EC
+  auto_line_wrapping = false
+  enable_scrolling = false
+  parse_markdown = false
+}
+
+element {
+  element_type = custom_button
+  instance_identifier = reborn_report_bug
+  anchor_point = top-right
+  x = -84
+  y = 2
+  width = 80
+  height = 14
+  stay_on_screen = true
+  label = Report a bug
+  description = Opens the pack's bug report form on GitHub
+  transparent_background = true
+  underline_label_on_hover = true
+  label_hover_color = #FF8820
+  button_element_executable_block_identifier = reborn_report_bug_block
+  [executable_action_instance:reborn_report_bug_open][action_type:openlink] = https://github.com/adamico/mechanical-mastery-plus/issues/new?template=bug-form.yaml
+  [executable_block:reborn_report_bug_block][type:generic] = [executables:reborn_report_bug_open;]
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = mc_titlescreen_singleplayer_button
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 151
+  height = 20
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} / 2 - 152","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.77 + 6","decimal":"false"}}
+  backgroundnormal = [source:local]/config/fancymenu/assets/reborn_menu_button.png
+  backgroundhovered = [source:local]/config/fancymenu/assets/reborn_menu_button_hover.png
+  background_texture_inactive = [source:local]/config/fancymenu/assets/reborn_menu_button_off.png
+  nine_slice_custom_background = true
+  nine_slice_border_x = 2
+  nine_slice_border_y = 2
+  label_hover_color = #FF8820
+  is_hidden = false
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = mc_titlescreen_multiplayer_button
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 151
+  height = 20
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} / 2 + 1","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.77 + 6","decimal":"false"}}
+  backgroundnormal = [source:local]/config/fancymenu/assets/reborn_menu_button.png
+  backgroundhovered = [source:local]/config/fancymenu/assets/reborn_menu_button_hover.png
+  background_texture_inactive = [source:local]/config/fancymenu/assets/reborn_menu_button_off.png
+  nine_slice_custom_background = true
+  nine_slice_border_x = 2
+  nine_slice_border_y = 2
+  label_hover_color = #FF8820
+  is_hidden = false
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = forge_titlescreen_mods_button
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 100
+  height = 20
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} / 2 - 152","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.77 + 30","decimal":"false"}}
+  backgroundnormal = [source:local]/config/fancymenu/assets/reborn_menu_button.png
+  backgroundhovered = [source:local]/config/fancymenu/assets/reborn_menu_button_hover.png
+  background_texture_inactive = [source:local]/config/fancymenu/assets/reborn_menu_button_off.png
+  nine_slice_custom_background = true
+  nine_slice_border_x = 2
+  nine_slice_border_y = 2
+  label_hover_color = #FF8820
+  is_hidden = false
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = mc_titlescreen_options_button
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 100
+  height = 20
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} / 2 - 50","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.77 + 30","decimal":"false"}}
+  backgroundnormal = [source:local]/config/fancymenu/assets/reborn_menu_button.png
+  backgroundhovered = [source:local]/config/fancymenu/assets/reborn_menu_button_hover.png
+  background_texture_inactive = [source:local]/config/fancymenu/assets/reborn_menu_button_off.png
+  nine_slice_custom_background = true
+  nine_slice_border_x = 2
+  nine_slice_border_y = 2
+  label_hover_color = #FF8820
+  is_hidden = false
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = mc_titlescreen_quit_button
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 100
+  height = 20
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} / 2 + 52","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.77 + 30","decimal":"false"}}
+  backgroundnormal = [source:local]/config/fancymenu/assets/reborn_menu_button.png
+  backgroundhovered = [source:local]/config/fancymenu/assets/reborn_menu_button_hover.png
+  background_texture_inactive = [source:local]/config/fancymenu/assets/reborn_menu_button_off.png
+  nine_slice_custom_background = true
+  nine_slice_border_x = 2
+  nine_slice_border_y = 2
+  label_hover_color = #FF8820
+  is_hidden = false
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = 376390
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 20
+  height = 20
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} / 2 - 176","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.77 + 30","decimal":"false"}}
+  is_hidden = false
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = 604390
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 20
+  height = 20
+  advanced_posx = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiwidth"} / 2 + 156","decimal":"false"}}
+  advanced_posy = {"placeholder":"calc","values":{"expression":"{"placeholder":"guiheight"} * 0.77 + 30","decimal":"false"}}
+  is_hidden = false
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = mc_titlescreen_realms_button
+  anchor_point = vanilla
+  is_hidden = true
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = minecraft_logo_widget
+  anchor_point = vanilla
+  is_hidden = true
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = minecraft_splash_widget
+  anchor_point = vanilla
+  is_hidden = true
+}
+
+vanilla_button {
+  element_type = vanilla_button
+  instance_identifier = minecraft_realms_notification_icons_widget
+  anchor_point = vanilla
+  is_hidden = true
+}

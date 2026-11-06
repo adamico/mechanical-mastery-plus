@@ -46,6 +46,7 @@ Added from the pack's CurseForge profile:
 - **FTB Backups 3**: world backups.
 - **Eccentric Tome**: every mod's guide book in one.
 - **Connected Glass**, **KleeSlabs**: building: glass that joins its panes, and a double slab broken one half at a time.
+- **FancyMenu**: the pack's title screen, its window title and icon, in `config/fancymenu/`, its art drawn by `publish/make-cover.py`. Client only, with **Konkrete** and **Melody**, the libraries it needs.
 
 The companion mod, Mechanical Mastery Reborn Core, is in the pack as its released CurseForge jar, like the suite. `scripts/launch.py` plays its local build in place of that jar.
 

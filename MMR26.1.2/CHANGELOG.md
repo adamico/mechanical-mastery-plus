@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- The pack has a title screen of its own: its island and essences behind the pack's title, the menu's buttons in its colours, the pack's version, a link to report a bug, and its name and Quintessence on the game's window (FancyMenu).
+
 ## 0.0.1
 
 - A server leaves out the client-only mods: rendering, sound, tooltip, camera and menu mods, and the libraries only they need.
