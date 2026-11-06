@@ -1,0 +1,97 @@
+# ServerStarter's config for Reborn's server pack. Servers install from the server pack, never from
+# this repo (docs/adr/0001): tools/release.py publish fills in each release's own values below.
+_specver: 2
+
+modpack:
+    name: Mechanical Mastery Reborn
+    description: A skyblock where each team starts on its own island beside C.O.D.
+
+install:
+    # ~ takes Minecraft's version from the client zip's manifest.
+    mcVersion: ~
+
+    # Each release's server pack names its tag's NeoForge here (tools/release.py publish):
+    # ServerStarter garbles the "neoforge-" id a manifest gives, so it can't be left to the manifest.
+    loaderVersion: <the-neoforge-version>
+
+    installerUrl: 'https://maven.neoforged.net/releases/net/neoforged/neoforge/{{@loaderversion@}}/neoforge-{{@loaderversion@}}-installer.jar'
+    installerArguments:
+        - '--installServer'
+
+    # Each release's server pack puts its own client zip's url here (tools/release.py publish).
+    modpackUrl: <the-client-zip-url-each-release-fills-in>
+    modpackFormat: curse
+
+    formatSpecific:
+        # Each release's server pack lists here every CurseForge project of its manifest
+        # (tools/release.py publish), so ServerStarter never asks cursemeta, which is gone, for a
+        # download url. The manifest is the only record of the pack's mods, so this stays [].
+        ignoreProject: []
+
+    baseInstallPath: ~
+
+    # Files of the client zip a server has no use for, as globs.
+    ignoreFiles:
+        - config/*-client.toml
+        - config/defaultworldtype/client-config.toml
+        - defaultconfigs/*-client.toml
+        - kubejs/assets/**
+        - kubejs/client_scripts/**
+        - kubejs/probe/**
+        - resourcepacks/**
+
+    # Each release's server pack adds every mod of its manifest not marked side = "client" here, from
+    # CurseForge's CDN (tools/release.py publish), so this lists only files the pack doesn't have.
+    additionalFiles: []
+
+    localFiles: []
+
+    checkFolder: true
+    installLoader: true
+    spongeBootstrapper: https://github.com/simon816/SpongeBootstrap/releases/download/v0.7.1/SpongeBootstrap-0.7.1.jar
+    connectTimeout: 30
+    readTimeout: 30
+
+launch:
+    spongefix: false
+
+    # Puts the world on a RAM disk; the server must have run once fully before this is true.
+    ramDisk: false
+
+    checkOffline: false
+    maxRam: 6G
+    minRam: 2G
+    autoRestart: true
+    crashLimit: 10
+    crashTimer: 60min
+    preJavaArgs: ~
+
+    # NeoForge's installer writes the arguments that start the server, per OS, under libraries/.
+    startFile: ''
+    startCommand:
+        - '@libraries/net/neoforged/neoforge/{{@loaderversion@}}/{{@os@}}_args.txt'
+        - 'nogui'
+
+    # Minecraft 26.1 needs Java 25; ~ takes java from the PATH.
+    forcedJavaPath: ~
+
+    javaArgs:
+        - '-XX:+UseG1GC'
+        - '-XX:+ParallelRefProcEnabled'
+        - '-XX:MaxGCPauseMillis=200'
+        - '-XX:+UnlockExperimentalVMOptions'
+        - '-XX:+DisableExplicitGC'
+        - '-XX:+AlwaysPreTouch'
+        - '-XX:G1NewSizePercent=30'
+        - '-XX:G1MaxNewSizePercent=40'
+        - '-XX:G1HeapRegionSize=8M'
+        - '-XX:G1ReservePercent=20'
+        - '-XX:G1HeapWastePercent=5'
+        - '-XX:G1MixedGCCountTarget=4'
+        - '-XX:InitiatingHeapOccupancyPercent=15'
+        - '-XX:G1MixedGCLiveThresholdPercent=90'
+        - '-XX:G1RSetUpdatingPauseTimePercent=5'
+        - '-XX:SurvivorRatio=32'
+        - '-XX:+PerfDisableSharedMem'
+        - '-XX:MaxTenuringThreshold=1'
+        - '-Dfml.readTimeout=180'
