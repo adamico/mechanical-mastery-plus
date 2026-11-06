@@ -49,11 +49,12 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
 /**
  * The protection challenge's Chain on the suite's machines (#252): Render makes Ward Tallow from flesh, bone meal and
  * Wireworks' steam, Flake takes Obsidian Flakes off a placed obsidian block with a Harvester and Fieldworks' magma
- * slurry, Charge makes a Charged Rift Shard from Rift Shards, Fieldworks' tar, the flakes and the tallow, and Seal the Warding
- * Essence from the Charged Rift Shard Shards and Wireworks' plastic, each the pack's own recipe in {@code suite_pack/}. The
- * Assembler's steps run on a tier 1 Assembler, the lowest, with their inputs set in its slots and boxes and FE fed to
- * it until the craft is done; Flake on a Burner Harvester fed coal and slurry as a hopper and a pipe would. Only the
- * {@code suiteGameTestServer} run, which loads those mods, registers them. Its Assembler is a {@link SuiteAssembler}.
+ * slurry, Charge makes a Charged Rift Shard from Rift Shards, Fieldworks' tar, the flakes and the tallow, and Seal the
+ * Warding Essence from the Charged Rift Shards and Wireworks' plastic, each the pack's own recipe in
+ * {@code suite_pack/}. The Assembler's steps run on a tier 1 Assembler, the lowest, with their inputs set in its slots
+ * and boxes and FE fed to it until the craft is done; Flake on a Burner Harvester fed coal and slurry as a hopper and a
+ * pipe would. Only the {@code suiteGameTestServer} run, which loads those mods, registers them. Its Assembler is a
+ * {@link SuiteAssembler}.
  */
 final class WardingChainTests {
 
@@ -162,7 +163,7 @@ final class WardingChainTests {
         SuiteAssembler.put(assembler, 2, ObsidianFlakes.ITEM.get(), 2);
         SuiteAssembler.put(assembler, AssemblerSlots.DRAIN, WardTallow.BUCKET.get(), 1);
         SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, RiftShards.CHARGED_RIFT.get()) > 0);
-        helper.assertValueEqual(outputs(assembler, RiftShards.CHARGED_RIFT.get()), 1, "the Charged Rift Shard Shards in the outputs");
+        helper.assertValueEqual(outputs(assembler, RiftShards.CHARGED_RIFT.get()), 1, "the Charged Rift Shards in the outputs");
         helper.assertValueEqual(assembler.fluids().contents(0).getAmount(), 750, "the Ward Tallow left of the bucket after Charge");
         helper.succeed();
     }

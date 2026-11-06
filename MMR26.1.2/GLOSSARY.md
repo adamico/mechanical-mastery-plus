@@ -148,7 +148,7 @@ What a Harvester takes off a placed obsidian block with magma slurry, breaking t
 _Avoid_: obsidian dust, obsidian shards
 
 **Charged Rift Shard**:
-The protection challenge's Chain's step between the Rift Shards and the Warding Essence: two shards charged on an Assembler with tar, Obsidian Flakes and Ward Tallow. Two of them, sealed with plastic, make a Warding Essence. Its id, `charged_rift`, is from before the rename and stays (#310).
+The protection challenge's Chain's step between the Rift Shards and the Warding Essence: two shards charged on an Assembler with tar, Obsidian Flakes and Ward Tallow. Two of them, sealed with plastic, make a Warding Essence.
 _Avoid_: charged rift, charged shard
 
 **Generator**:
