@@ -32,10 +32,24 @@ SPDX-License-Identifier = "MIT"
 # C.O.D.'s lid: their models draw vanilla's at runtime (libworks ADR 0012).
 [[annotations]]
 path = [
-    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/*.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/*_essence.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/nullessence.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/quartessence.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/quintessence.png",
 ]
 precedence = "override"
 SPDX-FileCopyrightText = "Andrea D'Amico"
+SPDX-License-Identifier = "MIT"
+
+# The Rift Shard, the Charged Rift and the Null Shard, which publish/make-shards.py draws (NOTICE).
+[[annotations]]
+path = [
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/rift_shard.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/charged_rift.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/null_shard.png",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 5thlayer"
 SPDX-License-Identifier = "MIT"
 
 # The Recycler's, the Electric Defence's, C.O.D.'s, the lab's and the Ports' textures, from Malcolm Riley's

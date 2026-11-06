@@ -9,12 +9,18 @@ credits for what was copied in.
 Mechanical Mastery Plus textures
 --------------------------------
 
-Files: src/main/resources/assets/mechanicalmasteryreborn/textures/item/*.png
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/item/*_essence.png, nullessence.png,
+       quartessence.png and quintessence.png
 Author: Andrea D'Amico, for Mechanical Mastery Plus (MMP1.19.2/ in this repository)
 Source: MMP1.19.2/kubejs/assets/kubejs/textures/item/cube1.png to cube4.png, copied unmodified as the
         four Mechanical Essences and recoloured from cube4.png for the Transmuted Essences and
         Quintessence
 Licence: MIT
+
+The Rift Shard, the Charged Rift and the Null Shard (rift_shard.png, charged_rift.png and
+null_shard.png in the same folder) are not third-party: publish/make-shards.py draws them from code
+alone, reading no other image, only the Warding Essence's and Nullessence's colours copied in as
+numbers, so they are this repository's own work.
 
 Recycler textures
 -----------------
