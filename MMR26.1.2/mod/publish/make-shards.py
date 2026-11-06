@@ -11,9 +11,9 @@
 # src/main/resources/assets/mechanicalmasteryreborn/textures/item/:
 #   - rift_shard.png, the raw drop of an Assault's mobs: a chunk of the void's purple;
 #   - charged_rift.png and charged_rift.png.mcmeta, that chunk once the Warding chain has charged
-#     it: lit through in the Warding Essence's steel grey, split by a crack down its length along
-#     which lightning flashes, in the raw chunk's lilac and white, on a strip of frames the
-#     .mcmeta plays as Nullessence's is played;
+#     it: lit through in the Warding Essence's steel grey, lightning crackling down its length, in
+#     the raw chunk's lilac and white, a crack of its own in each frame of a strip the .mcmeta
+#     plays as Nullessence's is played, with no frame held;
 #   - null_shard.png, the drop of an Assault taken on as a spell: the chunk gone to Nullessence's
 #     near-black, keeping the raw chunk's purple rim so it still reads on a dark ground.
 #
@@ -22,7 +22,7 @@
 # long axis, lit from the top left; the crack jags where a fixed seed sends it, so every run draws
 # the same pixels. Nothing is read from another image: the palettes are the Warding Essence's and
 # Nullessence's colours, copied in as numbers. The maintainer picked this shape from three
-# candidates, and the crack over sparks thrown clear of the chunk (#310).
+# candidates, and the crackling over sparks thrown clear of the chunk (#310).
 import json
 import random
 
@@ -37,13 +37,9 @@ RIFT = ((26, 8, 46), (74, 28, 128), (126, 60, 208), (196, 148, 255))  # the void
 WARD = ((40, 44, 52), (131, 140, 152), (169, 176, 185), (240, 242, 246))  # the Warding Essence's
 NULL = ((20, 23, 16), (10, 12, 8), (32, 38, 26), (56, 64, 48))  # Nullessence's
 FLASH = (255, 255, 255)  # the lightning at its brightest
-GLOW = (196, 148, 255)  # the lightning rising and fading, the raw chunk's own light
-SEAM = (40, 44, 52)  # the crack between flashes, the Warding palette's outline
-# the Charged Rift Shard's frames, each the crack's colour and how many frametimes it holds: a
-# flash rises, peaks and fades, then the seam lies dark a while, twice over, the second flash
-# along another crack
-FRAMES = ((SEAM, 24), (GLOW, 1), (FLASH, 2), (GLOW, 1), (SEAM, 8), (GLOW, 1), (FLASH, 2), (GLOW, 1))
-FRAMETIME = 2  # ticks per frametime
+GLOW = (196, 148, 255)  # the lightning between, the raw chunk's own light
+FRAMES = 16  # the Charged Rift Shard's frames, each a crack of its own, lilac and white in turn
+FRAMETIME = 2  # ticks a frame holds
 CRACK_SIDE = -0.3  # how far toward the lit edge the crack may jag, against the half-width
 # the facets, by distance across the chunk against its half-width: up to each limit, a band
 BANDS = ((-0.5, 'bright'), (0.1, 'light'), (0.65, 'dark'), (9, 'deep'))
@@ -106,15 +102,14 @@ def crack(img, rng):
 
 
 def charged():
-    # the chunk lit through: the Warding palette, with the crack drawn in each frame's colour
+    # the chunk lit through: the Warding palette, with a crack of its own in each frame's colour
     # down a strip of frames
     rng = random.Random(SEED)
-    cracks = [crack(chunk(WARD), rng), crack(chunk(WARD), rng)]
-    strip = Image.new('RGBA', (SIZE, SIZE * len(FRAMES)), (0, 0, 0, 0))
-    for i, (colour, _) in enumerate(FRAMES):
+    strip = Image.new('RGBA', (SIZE, SIZE * FRAMES), (0, 0, 0, 0))
+    for i in range(FRAMES):
         frame = chunk(WARD)
-        for x, y in cracks[i >= len(FRAMES) // 2]:
-            frame.putpixel((x, y), colour + (255,))
+        for x, y in crack(frame, rng):
+            frame.putpixel((x, y), (GLOW, FLASH)[i % 2] + (255,))
         strip.paste(frame, (0, i * SIZE))
     return strip
 
@@ -127,7 +122,5 @@ def null():
 for name, draw in {'rift_shard': rift, 'charged_rift': charged, 'null_shard': null}.items():
     draw().save(f'{OUT}{name}.png')
 with open(f'{OUT}charged_rift.png.mcmeta', 'w') as f:
-    json.dump({'animation': {'frametime': FRAMETIME,
-                             'frames': [{'index': i, 'time': hold * FRAMETIME} for i, (_, hold) in enumerate(FRAMES)]}},
-              f, indent=2)
+    json.dump({'animation': {'frametime': FRAMETIME}}, f, indent=2)
     f.write('\n')
