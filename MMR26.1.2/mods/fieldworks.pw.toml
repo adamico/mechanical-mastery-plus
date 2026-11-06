@@ -1,13 +1,13 @@
 name = "Fieldworks"
-filename = "fieldworks-0.7.1.jar"
+filename = "fieldworks-0.7.2.jar"
 side = "both"
 
 [download]
 hash-format = "sha1"
-hash = "7444038389820af66b9cf410fd08ddb9200a24d7"
+hash = "bedad030c68af32b2c520fe69a9f60d9ec4dd03a"
 mode = "metadata:curseforge"
 
 [update]
 [update.curseforge]
-file-id = 9432384
+file-id = 9472029
 project-id = 1737485
