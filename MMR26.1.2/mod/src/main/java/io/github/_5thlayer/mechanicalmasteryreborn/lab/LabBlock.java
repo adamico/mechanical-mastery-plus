@@ -3,6 +3,8 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.lab;
 
+import java.util.List;
+
 import com.mojang.serialization.MapCodec;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.NullShards;
@@ -19,6 +21,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomModelData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -44,6 +47,13 @@ public final class LabBlock extends BaseEntityBlock {
 
     /** Whether it has awakened as the Hermetic Lab, its team's last stand started. */
     public static final BooleanProperty HERMETIC = BooleanProperty.create("hermetic");
+    /**
+     * The custom model data string the lab's pick carries while it stands awakened, on which the lab's item model
+     * ({@code items/lab.json}) selects the Hermetic Lab's look, so a pick in the hotbar and Jade's icon show it (#303).
+     */
+    public static final String HERMETIC_LOOK = "hermetic";
+    /** The pick's custom model data while the lab stands awakened: {@link #HERMETIC_LOOK} alone. */
+    private static final CustomModelData HERMETIC_MODEL = new CustomModelData(List.of(), List.of(), List.of(HERMETIC_LOOK), List.of());
 
     private static final MapCodec<LabBlock> CODEC = simpleCodec(LabBlock::new);
     private static final Component TITLE = Component.translatable("container.mechanicalmasteryreborn.lab");
@@ -69,12 +79,16 @@ public final class LabBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    /** The lab's item, named the Hermetic Lab while it stands awakened, as Jade and a pick show it. */
+    /**
+     * The lab's item, which a pick gives and Jade draws its icon from: named the Hermetic Lab and wearing its look while
+     * the lab stands awakened. Jade's name comes from the block, so {@code LabJadePlugin} replaces it.
+     */
     @Override
     protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
         ItemStack stack = super.getCloneItemStack(level, pos, state, includeData);
         if (state.getValue(HERMETIC)) {
             stack.set(DataComponents.ITEM_NAME, HERMETIC_NAME);
+            stack.set(DataComponents.CUSTOM_MODEL_DATA, HERMETIC_MODEL);
         }
         return stack;
     }

@@ -30,6 +30,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Spell;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
@@ -41,6 +42,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomModelData;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -394,8 +396,9 @@ final class HermeticLabTests {
     }
 
     /**
-     * Before the last stand the lab stands as itself, opens the lab's menu and takes no Nullessence by hand; once it starts,
-     * it stands as the Hermetic Lab, is named so, and opens the Hermetic Lab's menu.
+     * Before the last stand the lab stands as itself, opens the lab's menu, and its pick is the plain lab; once it starts,
+     * it stands as the Hermetic Lab, opens the Hermetic Lab's menu, and its pick, which Jade draws its icon from (#303),
+     * is named the Hermetic Lab and wears its look.
      */
     private static void awakens(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
@@ -405,16 +408,27 @@ final class HermeticLabTests {
         helper.runAtTickTime(1, () -> {
             helper.assertFalse(helper.getBlockState(LAB).getValue(LabBlock.HERMETIC), "the lab awakened before the last stand");
             helper.assertTrue(menu(helper, player) instanceof LabMenu, "the lab before the last stand opens " + menu(helper, player));
+            ItemStack picked = pick(helper);
+            helper.assertValueEqual(picked.getHoverName(), Component.translatable("block.mechanicalmasteryreborn.lab"),
+                    "the name of the lab's pick before the last stand");
+            helper.assertFalse(picked.has(DataComponents.CUSTOM_MODEL_DATA), "the lab's pick before the last stand wears a look of its own");
             helper.assertTrue(LastStands.begin(server(helper), team), "the last stand didn't start");
         });
         helper.runAtTickTime(2, () -> {
             helper.assertTrue(helper.getBlockState(LAB).getValue(LabBlock.HERMETIC), "the lab didn't awaken with the last stand");
             helper.assertTrue(menu(helper, player) instanceof HermeticLabMenu, "the lab in the last stand opens " + menu(helper, player));
-            ItemStack picked = helper.getBlockState(LAB).getCloneItemStack(helper.getLevel(), helper.absolutePos(LAB), false);
+            ItemStack picked = pick(helper);
             helper.assertValueEqual(picked.getHoverName(), Component.translatable("container.mechanicalmasteryreborn.hermetic_lab"),
-                    "the name Jade shows the awakened lab by");
+                    "the name of the awakened lab's pick");
+            helper.assertValueEqual(picked.getOrDefault(DataComponents.CUSTOM_MODEL_DATA, CustomModelData.EMPTY).strings(),
+                    List.of(LabBlock.HERMETIC_LOOK), "the look the awakened lab's pick wears");
             helper.succeed();
         });
+    }
+
+    /** What a middle click of the lab gives, and what Jade draws the lab's icon from. */
+    private static ItemStack pick(GameTestHelper helper) {
+        return helper.getBlockState(LAB).getCloneItemStack(helper.getLevel(), helper.absolutePos(LAB), false);
     }
 
     private static AbstractContainerMenu menu(GameTestHelper helper, Player player) {
