@@ -147,9 +147,9 @@ _Avoid_: tallow oil, rendered fat
 What a Harvester takes off a placed obsidian block with magma slurry, breaking the block, for the protection challenge's Chain: only that harvest gives them, and breaking obsidian by hand gives obsidian.
 _Avoid_: obsidian dust, obsidian shards
 
-**Charged Rift**:
-The protection challenge's Chain's step between the Rift Shards and the Warding Essence: two shards charged on an Assembler with tar, Obsidian Flakes and Ward Tallow. Two of them, sealed with plastic, make a Warding Essence.
-_Avoid_: charged shard
+**Charged Rift Shard**:
+The protection challenge's Chain's step between the Rift Shards and the Warding Essence: two shards charged on an Assembler with tar, Obsidian Flakes and Ward Tallow. Two of them, sealed with plastic, make a Warding Essence. Its id, `charged_rift`, is from before the rename and stays (#310).
+_Avoid_: charged rift, charged shard
 
 **Generator**:
 A block the pack names as making energy, as Wireworks' engines, turbines and solar panels are. It belongs to the team whose island it stands on, and while that team plays the energy challenge it gives the team no energy, saying why, and goes on for every other team.

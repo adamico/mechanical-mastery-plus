@@ -4,7 +4,8 @@ Written for the pack and its players: what Mechanical Mastery Reborn Core adds, 
 
 ## Unreleased
 
-- The Rift Shard, the Charged Rift and the Null Shard wear art of their own, drawn by a committed script in place of the stand-ins: a chunk of the void's purple, the same chunk lit through in the Warding Essence's steel grey and sparking once charged, and gone to Nullessence's near-black with a purple rim as the Null Shard (#310).
+- The Rift Shard, the Charged Rift Shard and the Null Shard wear art of their own, drawn by a committed script in place of the stand-ins: a chunk of the void's purple; the same chunk lit through in the Warding Essence's steel grey, with lightning flashing along a crack down its length, once charged; and gone to Nullessence's near-black with a purple rim as the Null Shard (#310).
+- The Charged Rift is named the Charged Rift Shard, as it is a shard still; its id, `mechanicalmasteryreborn:charged_rift`, stays, so worlds carry over (#310).
 - Jade names an awakened lab the Hermetic Lab, and its icon shows the Hermetic Lab's look, crying obsidian under a respawn anchor's top; before, Jade named it Lab with the plain lab's icon, though its menu and a pick of it said Hermetic Lab. A pick of an awakened lab now wears that look in the hotbar too (#303).
 
 ## 0.2.0

@@ -41,7 +41,7 @@ precedence = "override"
 SPDX-FileCopyrightText = "Andrea D'Amico"
 SPDX-License-Identifier = "MIT"
 
-# The Rift Shard, the Charged Rift and the Null Shard, which publish/make-shards.py draws (NOTICE).
+# The Rift Shard, the Charged Rift Shard and the Null Shard, which publish/make-shards.py draws (NOTICE).
 [[annotations]]
 path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/item/rift_shard.png",

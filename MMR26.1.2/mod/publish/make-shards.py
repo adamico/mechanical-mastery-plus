@@ -1,26 +1,29 @@
 # SPDX-FileCopyrightText: 2026 5thlayer
 # SPDX-License-Identifier: MIT
 
-# The Rift Shard's, the Charged Rift's and the Null Shard's item textures, drawn from code so no
-# stand-in art of unknown source ships (#310). Run from the companion mod's root (MMR26.1.2/mod/)
+# The Rift Shard's, the Charged Rift Shard's and the Null Shard's item textures, drawn from code
+# so no stand-in art of unknown source ships (#310). Run from the companion mod's root (MMR26.1.2/mod/)
 # with Pillow installed:
 #
 #   python3 publish/make-shards.py
 #
-# It writes, all committed, 16x16 RGBA, in
+# It writes, all committed, 16 pixels wide, RGBA, in
 # src/main/resources/assets/mechanicalmasteryreborn/textures/item/:
 #   - rift_shard.png, the raw drop of an Assault's mobs: a chunk of the void's purple;
-#   - charged_rift.png, that chunk once the Warding chain has charged it: lit through in the
-#     Warding Essence's steel grey, a glint at its head, sparking;
+#   - charged_rift.png and charged_rift.png.mcmeta, that chunk once the Warding chain has charged
+#     it: lit through in the Warding Essence's steel grey, split by a crack down its length along
+#     which lightning flashes, in the raw chunk's lilac and white, on a strip of frames the
+#     .mcmeta plays as Nullessence's is played;
 #   - null_shard.png, the drop of an Assault taken on as a spell: the chunk gone to Nullessence's
 #     near-black, keeping the raw chunk's purple rim so it still reads on a dark ground.
 #
 # One shape draws all three, so they read as the same drop in three states: a six-sided chunk
 # broken off, leaning a little, as the polygon below. Its facets are bands by distance from its
-# long axis, lit from the top left; the sparks fall where a fixed seed puts them, so every run
-# draws the same pixels. Nothing is read from another image: the palettes are the Warding
-# Essence's and Nullessence's colours, copied in as numbers. The maintainer picked this shape
-# from three candidates (#310).
+# long axis, lit from the top left; the crack jags where a fixed seed sends it, so every run draws
+# the same pixels. Nothing is read from another image: the palettes are the Warding Essence's and
+# Nullessence's colours, copied in as numbers. The maintainer picked this shape from three
+# candidates, and the crack over sparks thrown clear of the chunk (#310).
+import json
 import random
 
 from PIL import Image, ImageDraw
@@ -33,9 +36,15 @@ SEED = 310
 RIFT = ((26, 8, 46), (74, 28, 128), (126, 60, 208), (196, 148, 255))  # the void's purple
 WARD = ((40, 44, 52), (131, 140, 152), (169, 176, 185), (240, 242, 246))  # the Warding Essence's
 NULL = ((20, 23, 16), (10, 12, 8), (32, 38, 26), (56, 64, 48))  # Nullessence's
-GLINT = (255, 255, 255)
-SPARK = (240, 242, 246)
-SPARKS = 4  # how many sparks a Charged Rift throws
+FLASH = (255, 255, 255)  # the lightning at its brightest
+GLOW = (196, 148, 255)  # the lightning rising and fading, the raw chunk's own light
+SEAM = (40, 44, 52)  # the crack between flashes, the Warding palette's outline
+# the Charged Rift Shard's frames, each the crack's colour and how many frametimes it holds: a
+# flash rises, peaks and fades, then the seam lies dark a while, twice over, the second flash
+# along another crack
+FRAMES = ((SEAM, 24), (GLOW, 1), (FLASH, 2), (GLOW, 1), (SEAM, 8), (GLOW, 1), (FLASH, 2), (GLOW, 1))
+FRAMETIME = 2  # ticks per frametime
+CRACK_SIDE = -0.3  # how far toward the lit edge the crack may jag, against the half-width
 # the facets, by distance across the chunk against its half-width: up to each limit, a band
 BANDS = ((-0.5, 'bright'), (0.1, 'light'), (0.65, 'dark'), (9, 'deep'))
 
@@ -76,20 +85,38 @@ def rift():
     return chunk(RIFT)
 
 
+def crack(img, rng):
+    # a jagged path down the chunk's inside, from under its head to above its foot: one step down
+    # a row, with a step across where the seed sends it, kept off the outline and off the lit
+    # edge's highlight, where a white flash would vanish
+    inside = lambda x, y: 0 <= x < SIZE and 0 <= y < SIZE and img.getpixel((x, y))[3] > 0
+    half = max(abs(across((x, y))) for y in range(SIZE) for x in range(SIZE) if inside(x, y))
+    body = lambda x, y: inside(x, y) and img.getpixel((x, y))[:3] != WARD[0] and across((x, y)) / half > CRACK_SIDE
+    (hx, hy), (fx, fy) = AXIS
+    path, x = [], hx
+    for y in range(hy + 2, fy - 1):
+        for dx in rng.sample((-1, 0, 1), 3):
+            if body(x + dx, y) and (dx == 0 or body(x + dx, y - 1)):
+                break
+        if dx:
+            path.append((x + dx, y - 1))
+        x += dx
+        path.append((x, y))
+    return path
+
+
 def charged():
-    # the chunk lit through: the Warding palette, a glint under its head, and sparks thrown clear
-    # of the body, two pixels off it, where the seed puts them
-    img = chunk(WARD)
-    (hx, hy), _ = AXIS
-    img.putpixel((hx, hy + 1), GLINT + (255,))
-    filled = lambda x, y: 0 <= x < SIZE and 0 <= y < SIZE and img.getpixel((x, y))[3] > 0
-    clear = [(x, y) for y in range(SIZE) for x in range(SIZE)
-             if not filled(x, y)
-             and any(filled(x + dx, y + dy) for dx, dy in ((2, 0), (-2, 0), (0, 2), (0, -2)))
-             and not any(filled(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))]
-    for x, y in random.Random(SEED).sample(clear, SPARKS):
-        img.putpixel((x, y), SPARK + (255,))
-    return img
+    # the chunk lit through: the Warding palette, with the crack drawn in each frame's colour
+    # down a strip of frames
+    rng = random.Random(SEED)
+    cracks = [crack(chunk(WARD), rng), crack(chunk(WARD), rng)]
+    strip = Image.new('RGBA', (SIZE, SIZE * len(FRAMES)), (0, 0, 0, 0))
+    for i, (colour, _) in enumerate(FRAMES):
+        frame = chunk(WARD)
+        for x, y in cracks[i >= len(FRAMES) // 2]:
+            frame.putpixel((x, y), colour + (255,))
+        strip.paste(frame, (0, i * SIZE))
+    return strip
 
 
 def null():
@@ -99,3 +126,8 @@ def null():
 
 for name, draw in {'rift_shard': rift, 'charged_rift': charged, 'null_shard': null}.items():
     draw().save(f'{OUT}{name}.png')
+with open(f'{OUT}charged_rift.png.mcmeta', 'w') as f:
+    json.dump({'animation': {'frametime': FRAMETIME,
+                             'frames': [{'index': i, 'time': hold * FRAMETIME} for i, (_, hold) in enumerate(FRAMES)]}},
+              f, indent=2)
+    f.write('\n')

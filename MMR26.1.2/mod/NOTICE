@@ -17,7 +17,7 @@ Source: MMP1.19.2/kubejs/assets/kubejs/textures/item/cube1.png to cube4.png, cop
         Quintessence
 Licence: MIT
 
-The Rift Shard, the Charged Rift and the Null Shard (rift_shard.png, charged_rift.png and
+The Rift Shard, the Charged Rift Shard and the Null Shard (rift_shard.png, charged_rift.png and
 null_shard.png in the same folder) are not third-party: publish/make-shards.py draws them from code
 alone, reading no other image, only the Warding Essence's and Nullessence's colours copied in as
 numbers, so they are this repository's own work.
