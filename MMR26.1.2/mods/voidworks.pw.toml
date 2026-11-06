@@ -1,13 +1,13 @@
 name = "Voidworks"
-filename = "voidworks-0.2.1.jar"
+filename = "voidworks-0.2.2.jar"
 side = "both"
 
 [download]
 hash-format = "sha1"
-hash = "96df8f584e0a5d35980077541d36e9cce3672611"
+hash = "8e2299c8ec41b8cc841b7b0e35d6e928405371e6"
 mode = "metadata:curseforge"
 
 [update]
 [update.curseforge]
-file-id = 9450242
+file-id = 9472112
 project-id = 1742531
