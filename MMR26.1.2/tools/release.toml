@@ -1,0 +1,8 @@
+# The facts that name this pack wherever it is released, beside what pack.toml says. The repo holds
+# other packs too, so this pack's release tags are <tag-prefix><version> (ADR 0004); the companion
+# mod's own tags are mechanicalmasteryreborn-v<version>.
+tag-prefix = "mmr26.1.2-v"
+slug = "mechanical-mastery-reborn"
+# curseforge-project = <id>: the pack's CurseForge project doesn't exist yet (#291). Until it does,
+# publish --dry-run shows what it would send, and publish refuses to send it.
+github-repo = "adamico/mechanical-mastery-plus"
