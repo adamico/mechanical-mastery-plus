@@ -1,6 +1,0 @@
-# AdminShop's server config, copied into each new world (#213). Only what the pack sets differs from the mod's
-# defaults; NeoForge fills in the rest.
-
-[server_config]
-	# Enough for a team's first seeds and two spawn eggs, and little more: food is its first purchase. In cents.
-	starting_money = 15000

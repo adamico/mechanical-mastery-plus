@@ -1,0 +1,7 @@
+# AdminShop's config (#213). AdminShop registers it as a common config, so it lives in config/, not defaultconfigs/:
+# NeoForge only copies server configs from defaultconfigs/, and this one was ignored there. Only what the pack sets
+# differs from the mod's defaults; NeoForge fills in the rest.
+
+[server_config]
+	# Enough for a team's first seeds, its food and a couple of spawn eggs, so the start is viable. In cents.
+	starting_money = 20000
