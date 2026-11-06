@@ -21,6 +21,12 @@ IF NOT EXIST "%cd%\serverstarter-2.5.1.jar" (
 )
 
 :MAIN
+REM Reborn's world is Skyblock Builder's skyblock, and a dedicated server takes its world type from
+REM server.properties. It is written only when the server has none, so a server pack unzipped over
+REM a running server keeps its settings.
+IF NOT EXIST "%cd%\server.properties" (
+   >"%cd%\server.properties" ECHO level-type=skyblockbuilder\:skyblock
+)
 java -jar serverstarter-2.5.1.jar
 GOTO EOF
 

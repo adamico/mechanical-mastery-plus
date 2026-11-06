@@ -47,4 +47,11 @@ if grep -Eq '^\s*ramDisk:\s*true\s*$' server-setup-config.yaml; then
     trap 'sudo umount "$save_dir"; rm -rf -- "$save_dir"; mv -- "${save_dir}_backup" "$save_dir"' EXIT
 fi
 
+# Reborn's world is Skyblock Builder's skyblock, and a dedicated server takes its world type from
+# server.properties: Default World Type only picks it on a client's Create World screen. It is written
+# only when the server has none, so a server pack unzipped over a running server keeps its settings.
+if [[ ! -f server.properties ]]; then
+    printf 'level-type=skyblockbuilder\\:skyblock\n' > server.properties
+fi
+
 java -jar "$SERVERSTARTER_JAR"
