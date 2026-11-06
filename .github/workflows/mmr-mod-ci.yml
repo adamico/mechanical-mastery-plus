@@ -63,11 +63,11 @@ jobs:
       - run: ./gradlew -p plugin publishToMavenLocal
         working-directory: MMR26.1.2/mod/.libworks
 
-      # Each upstream the mod declares, the libworks runtime among them, from its tag.
+      # Each upstream the mod declares, the libworks runtime among them, from its tag. The suite game tests load
+      # the newest runtime the pack's suite mods nest (build.gradle's suiteRuntimeOnly, #252), which is the mod's
+      # own since #278; once the suite's gets ahead, build that tag here too, by a line of its own: a tag built
+      # twice fails, since its folder is already there.
       - run: ./gradlew -q libworksUpstreams | sh .libworks/.github/scripts/build-upstreams.sh
-
-      # The libworks runtime the suite game tests load, the newest the pack's suite mods nest (build.gradle, #252).
-      - run: echo '5thlayer/libworks runtime-v0.1.13 :runtime' | sh .libworks/.github/scripts/build-upstreams.sh
 
       # The Shop's Offers against the rules every Offer keeps, and the mixes they're checked against (#213).
       - run: python3 ../scripts/check_offers.py
