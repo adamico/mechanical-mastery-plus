@@ -1,3 +1,5 @@
 # packwiz metadata for the mods; the jars stay ignored
 !/mods/
 __pycache__/
+# The server pack ships its own server.properties, for the skyblock world type
+!/server_files/server.properties
