@@ -3,6 +3,5 @@
 # mod's own tags are mechanicalmasteryreborn-v<version>.
 tag-prefix = "mmr26.1.2-v"
 slug = "mechanical-mastery-reborn"
-# curseforge-project = <id>: the pack's CurseForge project doesn't exist yet (#291). Until it does,
-# publish --dry-run shows what it would send, and publish refuses to send it.
+curseforge-project = 1786950
 github-repo = "adamico/mechanical-mastery-plus"
