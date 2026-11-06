@@ -11,18 +11,19 @@
 # src/main/resources/assets/mechanicalmasteryreborn/textures/item/:
 #   - rift_shard.png, the raw drop of an Assault's mobs: a chunk of the void's purple;
 #   - charged_rift.png and charged_rift.png.mcmeta, that chunk once the Warding chain has charged
-#     it: lit through in the Warding Essence's steel grey, lightning crackling down its length, in
-#     the raw chunk's lilac and white, a crack of its own in each frame of a strip the .mcmeta
-#     plays as Nullessence's is played, with no frame held;
+#     it: lit through in the Warding Essence's steel grey, white lightning crackling down its
+#     middle and out past its ends, a bolt of its own in the frames that carry one, fading over
+#     the frame after, the chunk alone between, on a strip the .mcmeta plays as Nullessence's is
+#     played;
 #   - null_shard.png, the drop of an Assault taken on as a spell: the chunk gone to Nullessence's
 #     near-black, keeping the raw chunk's purple rim so it still reads on a dark ground.
 #
 # One shape draws all three, so they read as the same drop in three states: a six-sided chunk
 # broken off, leaning a little, as the polygon below. Its facets are bands by distance from its
-# long axis, lit from the top left; each crack starts, jags and ends where a fixed seed sends it,
+# long axis, lit from the top left; each bolt starts, jags and ends where a fixed seed sends it,
 # so every run draws the same pixels. Nothing is read from another image: the palettes are the Warding Essence's and
 # Nullessence's colours, copied in as numbers. The maintainer picked this shape from three
-# candidates, and the crackling over sparks thrown clear of the chunk (#310).
+# candidates, and the bolts over sparks thrown clear of the chunk (#310).
 import json
 import random
 
@@ -36,12 +37,18 @@ SEED = 310
 RIFT = ((26, 8, 46), (74, 28, 128), (126, 60, 208), (196, 148, 255))  # the void's purple
 WARD = ((40, 44, 52), (131, 140, 152), (169, 176, 185), (240, 242, 246))  # the Warding Essence's
 NULL = ((20, 23, 16), (10, 12, 8), (32, 38, 26), (56, 64, 48))  # Nullessence's
-FLASH = (255, 255, 255)  # the lightning at its brightest
-GLOW = (196, 148, 255)  # the lightning between, the raw chunk's own light
-FRAMES = 16  # the Charged Rift Shard's frames, each a crack of its own, lilac and white in turn
+BOLT = (255, 255, 255)  # the lightning, white
+FRAMES = 16  # the Charged Rift Shard's frames, two ticks each, none held
+BOLT_CHANCE = 0.6  # the odds a frame carries a bolt; the rest show the chunk alone
+FADE = 0.45  # how much of a bolt the frame after it keeps, as it fades
+FORK_CHANCE = 0.5  # the odds a bolt forks
+FORK = 3  # a fork's length, in pixels
 FRAMETIME = 2  # ticks a frame holds
-CRACK_SIDE = -0.3  # how far toward the lit edge the crack may jag, against the half-width
-CRACK_WANDER = 4  # how many rows from the head, and from the foot, a crack's ends may fall
+BOLT_WANDER = 5  # how many rows at the top, and at the bottom, a bolt's ends may fall in
+BOLT_JAG = 2  # the most pixels a bolt steps across in one row
+BOLT_LEAN = (-3, 8)  # how many columns right of its head a bolt's foot falls, least to most
+BOLT_OFF = 1  # how far from the chunk's middle, either way, a bolt's line crosses it
+BOLT_SPREAD = 1.5  # how far a bolt may stray from its own line, in pixels
 # the facets, by distance across the chunk against its half-width: up to each limit, a band
 BANDS = ((-0.5, 'bright'), (0.1, 'light'), (0.65, 'dark'), (9, 'deep'))
 
@@ -57,6 +64,12 @@ def across(p):
     return ((by - ay) * (p[0] - ax) - (bx - ax) * (p[1] - ay)) / ((bx - ax) ** 2 + (by - ay) ** 2) ** 0.5
 
 
+def half_width():
+    mask = Image.new('L', (SIZE, SIZE), 0)
+    ImageDraw.Draw(mask).polygon(POLY, fill=255)
+    return max(abs(across((x, y))) for y in range(SIZE) for x in range(SIZE) if mask.getpixel((x, y)) > 0)
+
+
 def chunk(pal):
     # the polygon filled in bands by distance from the axis against the chunk's half-width: the
     # highlight along the lit edge, the lit facet, the shaded facet, and the shade's far edge
@@ -67,54 +80,76 @@ def chunk(pal):
     outline, dark, light, bright = pal
     shades = {'bright': bright, 'light': light, 'dark': dark,
               'deep': tuple((o + d) // 2 for o, d in zip(outline, dark))}
-    cells = [(x, y) for y in range(SIZE) for x in range(SIZE) if inside(x, y)]
-    half = max(abs(across(c)) for c in cells)
     img = Image.new('RGBA', (SIZE, SIZE), (0, 0, 0, 0))
-    for x, y in cells:
+    for x, y in [(x, y) for y in range(SIZE) for x in range(SIZE) if inside(x, y)]:
         edge = not all(inside(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))
-        t = across((x, y)) / half
+        t = across((x, y)) / HALF
         band = next(b for limit, b in BANDS if t < limit)
         img.putpixel((x, y), (outline if edge else shades[band]) + (255,))
     return img
+
+
+HALF = half_width()  # the chunk's half-width, the furthest its pixels lie from the axis
 
 
 def rift():
     return chunk(RIFT)
 
 
-def crack(img, rng):
-    # a jagged path down the chunk's inside, from a row near its head to one near its foot, both
-    # the seed's pick as is where in its row it starts: one step down a row, with a step across
-    # where the seed sends it, kept off the outline and off the lit edge's highlight, where a
-    # white flash would vanish
-    inside = lambda x, y: 0 <= x < SIZE and 0 <= y < SIZE and img.getpixel((x, y))[3] > 0
-    half = max(abs(across((x, y))) for y in range(SIZE) for x in range(SIZE) if inside(x, y))
-    body = lambda x, y: inside(x, y) and img.getpixel((x, y))[:3] != WARD[0] and across((x, y)) / half > CRACK_SIDE
-    (_, hy), (_, fy) = AXIS
-    top, bottom = rng.randint(hy + 1, hy + CRACK_WANDER), rng.randint(fy - CRACK_WANDER, fy - 1)
-    x = rng.choice([x for x in range(SIZE) if body(x, top)])
-    path = [(x, top)]
+def bolt(rng):
+    # a jagged path down the canvas, longer than the chunk, from the seed's pick of a row near the
+    # top to its pick of a row near the bottom, so no two bolts are of a length, on a line of its
+    # own through the chunk's middle, leaning by the seed's pick, mostly from the top left to the
+    # bottom right; it walks one row at a time, up to two pixels across where the seed sends it,
+    # kept close to its line; now and then a short fork off it
+    top, bottom = rng.randint(0, BOLT_WANDER - 1), rng.randint(SIZE - BOLT_WANDER, SIZE - 1)
+    (ax, ay), (bx, by) = AXIS
+    mx, my = (ax + bx) / 2 + rng.randint(-BOLT_OFF, BOLT_OFF), (ay + by) / 2
+    lean = rng.randint(*BOLT_LEAN)
+    x0 = min(SIZE - 1, max(0, round(mx - lean * (my - top) / (bottom - top))))
+    x1 = min(SIZE - 1, max(0, round(mx + lean * (bottom - my) / (bottom - top))))
+    line = lambda y: x0 + (x1 - x0) * (y - top) / (bottom - top)
+    near = lambda x, y: 0 <= x < SIZE and abs(x - line(y)) <= BOLT_SPREAD
+    x, path = x0, [(x0, top)]
     for y in range(top + 1, bottom + 1):
-        for dx in rng.sample((-1, 0, 1), 3):
-            if body(x + dx, y) and (dx == 0 or body(x + dx, y - 1)):
+        for dx in rng.sample(range(-BOLT_JAG, BOLT_JAG + 1), 2 * BOLT_JAG + 1):
+            if near(x + dx, y) and all(0 <= x + d < SIZE for d in range(min(dx, 0), max(dx, 0) + 1)):
                 break
-        if dx:
-            path.append((x + dx, y - 1))
+        else:
+            dx = max(-BOLT_JAG, min(BOLT_JAG, round(line(y)) - x))
+        path += [(x + d, y - 1) for d in range(min(dx, 0), max(dx, 0) + 1) if d]
         x += dx
         path.append((x, y))
+    if rng.random() < FORK_CHANCE:
+        fx, fy = rng.choice(path[1:-1])
+        d = rng.choice((-1, 1))
+        path += [(fx + d * i, fy + i) for i in range(1, FORK + 1) if 0 <= fx + d * i < SIZE and fy + i < SIZE]
     return path
 
 
 def charged():
-    # the chunk lit through: the Warding palette, with a crack of its own in each frame's colour
+    # the chunk lit through: the Warding palette, and over the frames the seed picks for one, a
+    # white bolt of its own, fading in the frame after rather than vanishing: there it is drawn at
+    # FADE of its strength, blended into the chunk where it crosses it and part-clear beside it;
     # down a strip of frames
     rng = random.Random(SEED)
     strip = Image.new('RGBA', (SIZE, SIZE * FRAMES), (0, 0, 0, 0))
-    for i in range(FRAMES):
+    i = 0
+    while i < FRAMES:
         frame = chunk(WARD)
-        for x, y in crack(frame, rng):
-            frame.putpixel((x, y), (GLOW, FLASH)[i % 2] + (255,))
         strip.paste(frame, (0, i * SIZE))
+        if rng.random() < BOLT_CHANCE:
+            fade = frame.copy()
+            for x, y in bolt(rng):
+                frame.putpixel((x, y), BOLT + (255,))
+                r, g, b, a = fade.getpixel((x, y))
+                fade.putpixel((x, y), tuple(round(c * (1 - FADE) + w * FADE) for c, w in zip((r, g, b), BOLT))
+                              + (255 if a else round(255 * FADE),))
+            strip.paste(frame, (0, i * SIZE))
+            if i + 1 < FRAMES:
+                strip.paste(fade, (0, (i + 1) * SIZE))
+            i += 1
+        i += 1
     return strip
 
 
