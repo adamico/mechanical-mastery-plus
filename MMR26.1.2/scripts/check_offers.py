@@ -2,7 +2,8 @@
 # Checks the pack's Shop Offers (#213), the AdminShop recipes in kubejs/data/mechanicalmasteryreborn/recipe/shop/,
 # against the rules every Offer keeps:
 #
-#   - no Sell Offer names an item an essence's mix holds, so what is sold takes a step after decomposing;
+#   - no Sell Offer names an item the first essence's mix holds, the Advanced's, so a team's first money takes a step
+#     after decomposing; from the first win on, a team has other money, and what a lower mix holds may be sold (#305);
 #   - no item or fluid has two Sell Offers, since a Seller takes whichever it finds first;
 #   - whatever the Shop both buys and sells, it pays less than it charges;
 #   - nothing only the Shop gives is sold back (water, the Permits);
@@ -12,7 +13,7 @@
 #
 #   scripts/check_offers.py
 #
-# The mixes are read from kubejs/server_scripts/decomposing.js. Exits non-zero, naming each Offer that breaks a rule.
+# The Advanced mix is read from kubejs/server_scripts/decomposing.js. Exits non-zero, naming each Offer that breaks a rule.
 import json
 import re
 import sys
@@ -28,13 +29,10 @@ AUREATE = "mechanicalmasteryreborn:aureate_essence"
 ESSENCE = re.compile(r"mechanicalmasteryreborn:\w+_essence")
 
 
-def mixes():
-    """Every item any essence's mix holds, from each mix's list: a decomposing recipe's first argument or a *_MIX const."""
-    text = MIXES.read_text()
-    held = set()
-    for mix in re.findall(r"(?:decomposing\(|_MIX = )\[(.*?)\]", text, re.S):
-        held.update(re.findall(r"'(?:\d+x )?([a-z0-9_.-]+:[a-z0-9_/.-]+)'", mix))
-    return held
+def first_mix():
+    """Every item the first essence's mix holds, from the ADVANCED_MIX const."""
+    mix = re.search(r"ADVANCED_MIX = \[(.*?)\]", MIXES.read_text(), re.S)
+    return set(re.findall(r"'(?:\d+x )?([a-z0-9_.-]+:[a-z0-9_/.-]+)'", mix.group(1))) if mix else set()
 
 
 def offers():
@@ -47,15 +45,15 @@ def offers():
 
 
 def main():
-    held = mixes()
+    held = first_mix()
     if not held:
-        sys.exit(f"check_offers: no mix found in {MIXES}")
+        sys.exit(f"check_offers: no Advanced mix found in {MIXES}")
     problems = []
     sells, buys = {}, {}
     for path, selling, good, unit in offers():
         if selling:
             if good in held:
-                problems.append(f"{path}: sells {good}, which a mix holds")
+                problems.append(f"{path}: sells {good}, which the Advanced mix holds")
             if good in SHOP_ONLY:
                 problems.append(f"{path}: sells {good}, which only the Shop gives")
             if good in sells:
@@ -77,7 +75,7 @@ def main():
                 problems.append(f"{path}: charges {unit:g} cents for {AUREATE}, less than {sells[good][0]} pays for {good}")
     for problem in problems:
         print(problem, file=sys.stderr)
-    print(f"check_offers: {len(sells)} Sell and {len(buys)} Buy Offers, against {len(held)} items in the mixes: "
+    print(f"check_offers: {len(sells)} Sell and {len(buys)} Buy Offers, against {len(held)} items in the Advanced mix: "
           f"{len(problems)} problem(s)")
     sys.exit(1 if problems else 0)
 
