@@ -14,10 +14,13 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.port.Port;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.Display;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -28,8 +31,8 @@ import net.minecraft.world.phys.AABB;
 
 /**
  * The Gallery pack (libworks ADR 0010, #278), through libworks' {@link GalleryCheck}: the pack is offered and
- * off, its functions load, its build runs every command and stands each scene's key block in place, the essences
- * scene shows every essence, a scene's sign builds it again leaving nothing loose, and its clear empties a plot.
+ * off, its functions load, its build runs every command and stands each scene's key block and sign in place, the
+ * essences scene shows every essence, a scene's sign builds it again leaving nothing loose, and its clear empties a plot.
  * These check the gallery only: what the scenes' blocks do is the mod's other game tests' to check. Each test
  * turns the pack on, which reloads the server's data, so each runs in a batch of its own.
  */
@@ -60,7 +63,10 @@ final class GalleryTests {
                 helper -> GalleryCheck.clears(helper, MechanicalMasteryReborn.MOD_ID, ORIGIN, Layout.ONE_ROW));
     }
 
-    /** libworks' build check over every plot, written out to add what a key block can't show: every essence on show. */
+    /**
+     * libworks' build check over every plot, written out to add what a key block can't show: a sign on every plot, and every
+     * essence on show. {@code GalleryCheck.builds} takes no further assertion, so its steps are repeated here.
+     */
     private static void builds(GameTestHelper helper) {
         var at = helper.absolutePos(ORIGIN);
         var functions = helper.getLevel().getServer().getFunctions();
@@ -72,11 +78,16 @@ final class GalleryTests {
             }
             GalleryCheck.assertRuns(helper, source, GalleryPack.build(MechanicalMasteryReborn.MOD_ID));
             GalleryCheck.assertKeyBlocks(helper, at, Layout.ONE_ROW, SCENES);
+            for (int index = 0; index < SCENES.size(); index++) {
+                var sign = Layout.ONE_ROW.sceneOrigin(at, index).offset(SIGN);
+                helper.assertTrue(helper.getLevel().getBlockState(sign).is(Blocks.OAK_SIGN),
+                        "scene " + SCENES.get(index).name() + " has no sign at " + sign.toShortString());
+            }
             var essences = Layout.ONE_ROW.sceneOrigin(at, SCENES.indexOf(scene("essences")));
             var shown = helper.getLevel().getEntitiesOfClass(Display.ItemDisplay.class, AABB.of(GalleryCheck.plot(essences))).stream()
                     .map(GalleryTests::shownItem).toList();
             for (Essence essence : Essence.values()) {
-                var id = MechanicalMasteryReborn.MOD_ID + ":" + essence.path();
+                var id = BuiltInRegistries.ITEM.getKey(Essences.item(essence));
                 helper.assertTrue(shown.contains(id), "the essences scene shows no " + id + ", only " + shown);
             }
             helper.assertValueEqual(shown.size(), Essence.values().length, "the essences on show");
@@ -101,10 +112,11 @@ final class GalleryTests {
     }
 
     /** The id of the item {@code display} shows, read from what it saves, since the display keeps its stack to itself. */
-    private static String shownItem(Display.ItemDisplay display) {
+    private static Identifier shownItem(Display.ItemDisplay display) {
         var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, display.registryAccess());
         display.saveWithoutId(output);
-        return output.buildResult().getCompound("item").flatMap(item -> item.getString("id")).orElse("nothing");
+        return output.buildResult().getCompound("item").flatMap(item -> item.getString("id")).map(Identifier::parse)
+                .orElse(Identifier.withDefaultNamespace("air"));
     }
 
     private static Scene scene(String name) {
