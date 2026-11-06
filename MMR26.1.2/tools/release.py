@@ -220,7 +220,8 @@ def cut(pack, version, packwiz, out=print):
 
 
 class Record:
-    """The release record: the client zip's CurseForge file id, and the sites the release has reached."""
+    """The release record: the client zip's CurseForge file id, which its server pack is uploaded under (#277),
+    and the sites the release has reached."""
 
     def __init__(self, path):
         self.path = path
@@ -310,7 +311,7 @@ def to_curseforge(release, curseforge, dry_run, out):
         raise Published(f"CurseForge already has {release.version}, and a published version never changes.")
     metadata = release.metadata(release.title, gameVersions=curseforge.game_version_ids(release.minecraft))
     file_id = curseforge.upload(metadata, release.zip.name, release.data)
-    # A dry run answers no id, and keeps the one it was given.
+    # A dry run answers no id, and keeps the record's.
     release.record.client_file_id = file_id or release.record.client_file_id
     if not dry_run:
         out(f"Uploaded {release.zip.name} to CurseForge ({release.record.client_file_id}); it shows once reviewed.")

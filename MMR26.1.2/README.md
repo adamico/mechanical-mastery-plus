@@ -25,7 +25,7 @@ The companion mod is not on CurseForge yet, so the pack does not list it, and a 
 
 ## Releasing
 
-Reborn releases on its own (ADR 0004), with `tools/release.py`, Mechanical Mastery Plus's release tool pointed at Reborn's identity in `tools/release.toml`: its slug, its tag prefix `mmr26.1.2-v`, its CurseForge project and the GitHub repo. Until 0.1.0 the pack is an alpha: its files' display names say "alpha", but every file is uploaded as a Release file, so it reaches the CurseForge app.
+Reborn releases on its own (ADR 0004), with `tools/release.py`, Mechanical Mastery Plus's release tool pointed at Reborn's identity in `tools/release.toml`: its slug, its tag prefix `mmr26.1.2-v`, its CurseForge project (once #291 makes it; until then `publish` sends only to GitHub, and `--dry-run` still shows the CurseForge upload) and the GitHub repo. Until 0.1.0 the pack is an alpha: its files' display names say "alpha", but every file is uploaded as a Release file, so it reaches the CurseForge app.
 
 A change a player will notice adds its line under `## Unreleased` in `CHANGELOG.md`; the mods added, updated and removed are listed by the release itself (`tools/release.py mods`).
 
