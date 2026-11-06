@@ -1,13 +1,13 @@
 name = "kc00l's Gearworks"
-filename = "gearworks-0.2.2.jar"
+filename = "gearworks-0.2.3.jar"
 side = "both"
 
 [download]
 hash-format = "sha1"
-hash = "ccdba1c560f6ba2a008e38b2f618b47989c119b7"
+hash = "ad647d6fdb828b4c6943750b18f2d37e134f2807"
 mode = "metadata:curseforge"
 
 [update]
 [update.curseforge]
-file-id = 9374991
+file-id = 9471995
 project-id = 1739524
