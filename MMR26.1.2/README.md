@@ -22,3 +22,15 @@ Then build the companion mod (`sh ./gradlew build` in `mod/`) and run `scripts/l
 The companion mod is not on CurseForge yet, so the pack does not list it, and a profile imported from the zip has no C.O.D. until `scripts/launch.py` adds the local build.
 
 `scripts/check_offers.py` checks the Shop's Offers against the rules every Offer keeps (#213).
+
+## Releasing
+
+Reborn releases on its own (ADR 0004), with `tools/release.py`, Mechanical Mastery Plus's release tool pointed at Reborn's identity in `tools/release.toml`: its slug, its tag prefix `mmr26.1.2-v`, its CurseForge project and the GitHub repo. Until 0.1.0 the pack is an alpha: its files' display names say "alpha", but every file is uploaded as a Release file, so it reaches the CurseForge app.
+
+A change a player will notice adds its line under `## Unreleased` in `CHANGELOG.md`; the mods added, updated and removed are listed by the release itself (`tools/release.py mods`).
+
+1. `tools/release.py cut <version>` on `main` from a clean pack folder: once the tool's tests pass, it writes the version's changelog section, bumps `pack.toml`, exports the client zip into `releases/<version>/`, commits, and tags `mmr26.1.2-v<version>` with the zip's sha256. It pushes and publishes nothing, and a failure before the commit puts every file back.
+2. `git push origin HEAD mmr26.1.2-v<version>`.
+3. `tools/release.py publish <version>`: the client zip goes to CurseForge, then to the tag's GitHub release. The release record beside the zip keeps what each site has, so after a failure, fix it and publish again. `--dry-run` shows what it would send, and `--site` sends to one site. The CurseForge token comes from 1Password through `tools/publish.env`.
+
+`mise run test` runs the release tool's tests.
