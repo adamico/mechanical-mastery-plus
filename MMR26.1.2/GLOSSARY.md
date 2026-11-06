@@ -18,8 +18,8 @@ The 5thlayer -works mods (Groundworks, Beltworks, Pipeworks, Wireworks, Craftwor
 The FactoryWorks Showcase, the suite's own sandbox pack. A separate pack that this line borrows a base of mods from, and never depends on.
 
 **Companion mod**:
-Mechanical Mastery Reborn's own mod, which holds what the pack can't script: C.O.D., the essences, the Recycler, the lab and each team's challenge state. The pack consumes it as a released jar, like the suite.
-_Avoid_: pack mod, core mod
+Mechanical Mastery Reborn's own mod, which holds what the pack can't script: C.O.D., the essences, the Recycler, the lab and each team's challenge state. The pack consumes it as a released jar, like the suite. It is published as "Mechanical Mastery Reborn Core", since the pack holds the name "Mechanical Mastery Reborn"; that is its name, not a term.
+_Avoid_: pack mod, core mod, Reborn Core
 
 **Decompose**:
 To break a Mechanical Essence down into its mix, on a Recycler or, much more slowly, by hand, as Factorio's scrap is. It is how resources enter this line. The higher the tier, the more processed what it decomposes into: Advanced into the most refined intermediates, Basic into raw resources. A lower tier's outputs need more stages to become what the tier above yielded, so the factory built for one tier becomes the last stages of the next one's and grows upstream rather than being replaced. Each lower tier is harder and longer to decompose, with more loops and more mods: Advanced, the first, is the easiest, and Basic, the last, the hardest.

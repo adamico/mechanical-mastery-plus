@@ -1,6 +1,6 @@
-# Mechanical Mastery Reborn
+# Mechanical Mastery Reborn Core
 
-<!-- For players, written by the maintainer and never by an agent: what Mechanical Mastery Reborn is, why it exists
+<!-- For players, written by the maintainer and never by an agent: what Mechanical Mastery Reborn Core is, why it exists
 and how it feels to play. It is also the Modrinth and CurseForge description
 (docs/agents/publishing.md). The technical sections go below it. -->
 

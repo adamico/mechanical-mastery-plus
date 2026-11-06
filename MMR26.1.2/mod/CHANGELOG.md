@@ -1,9 +1,10 @@
 # Changelog
 
-Written for the pack and its players: what Mechanical Mastery Reborn adds, or changes. A published version never changes: a fix is the next patch (`docs/agents/releases.md`).
+Written for the pack and its players: what Mechanical Mastery Reborn Core adds, or changes. A published version never changes: a fix is the next patch (`docs/agents/releases.md`).
 
 ## Unreleased
 
+- The mod is now named Mechanical Mastery Reborn Core, as on CurseForge; its mod id, `mechanicalmasteryreborn`, is unchanged, so worlds and configs carry over (#275).
 - C.O.D., the lab and the four Ports wear art of their own, from Malcolm Riley's unused-textures, in place of vanilla's (#301). C.O.D. is a grey terminal whose screen glows green while it runs and goes black once it is shut down, with vanilla's cod engraved on its lid, lit green once its team is awake and dark while dormant or shut down (the block state `awake`); the lab is obsidian under a workbench's grid (the Hermetic Lab is unchanged); each Port is a steel plate showing a dim gem of its essence's colour while closed, the whole gem while open, and the gem in a silver frame once won, in the essence item's colours: Galvanic cyan, Warding steel grey, Vital green and Aureate gold.
 - The lab gives an emergency sapling: a member of its team who right-clicks it holding dirt, and carries no sapling, swaps one dirt for an oak sapling, so a team whose leaves dropped none, and that has no Shop yet, can always grow a tree again. The team then waits a Minecraft day for another (`lab.sapling_cooldown`, 24000 ticks), and the action bar says why the lab gives none (#302).
 - A reset of the protection challenge sends a new Assault from its first wave, as though the challenge had just begun, once the old one is removed and its refund handed over; before, the team played on with no gate, no Rift Shards and no way to win (#294).
