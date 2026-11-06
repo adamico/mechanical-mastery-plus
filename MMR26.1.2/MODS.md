@@ -47,7 +47,7 @@ Added from the pack's CurseForge profile:
 - **Eccentric Tome**: every mod's guide book in one.
 - **Connected Glass**, **KleeSlabs**: building: glass that joins its panes, and a double slab broken one half at a time.
 
-The companion mod, Mechanical Mastery Reborn, is in the pack once it is on CurseForge. Until then `scripts/launch.py` adds its local build.
+The companion mod, Mechanical Mastery Reborn Core, is in the pack as its released CurseForge jar, like the suite. `scripts/launch.py` plays its local build in place of that jar.
 
 ## The Showcase's base
 

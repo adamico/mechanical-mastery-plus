@@ -5,8 +5,7 @@
 #
 # It is skillworks' quicklaunch pack launcher, launch_pack.py (skillworks 0.11.7 or later), taking mod
 # builds from this pack line's folder only, so the companion mod in mod/ is the one local build. Each run copies the pack's configs and kubejs/ into the profile and puts the newest local build of
-# the companion mod in mods/, in place of the pack's jar when the pack carries one, or beside the
-# pack's mods while the mod is not yet on CurseForge. The next run takes it out again, so --released
+# the companion mod in mods/, in place of the pack's jar. The next run takes it out again, so --released
 # plays the pack's own jars. The suite is always the pack's released jars.
 #
 # The launcher copies only what index.toml lists, so each run refreshes it with packwiz first, and

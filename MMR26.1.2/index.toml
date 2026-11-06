@@ -969,6 +969,11 @@ hash = "f70730fc284406a5dd8433526b0c1320d90f77b0c705c95bc0aab932558d37e3"
 metafile = true
 
 [[files]]
+file = "mods/mechanical-mastery-reborn-core.pw.toml"
+hash = "e80e6b663a7e699c289c5dab4a0dfdb167d1a4949348037a4e86e93c972e9586"
+metafile = true
+
+[[files]]
 file = "mods/mezzconfig.pw.toml"
 hash = "cef44d7c0b39b6e84bddf76e33d78c57494c08c3aca098fe31040ac5035d18db"
 metafile = true
