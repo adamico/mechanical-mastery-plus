@@ -74,7 +74,7 @@ hash = "8f6c6e05064868810b2a35ced5f372e785bf10fc90aab06e2c6e848901a8542d"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/protection.md"
-hash = "e740fdf629acc1238ddaa15b174065b1d4daef28a126fb7f963e3b20c48e56e8"
+hash = "4438bd34b1032766fa02c7becbf0228c4638339c78bee4db4fc71ed2c19c66e9"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/cod.md"
@@ -1120,7 +1120,7 @@ metafile = true
 
 [[files]]
 file = "mods/voidworks.pw.toml"
-hash = "96899336c3e0cc9007e62c10798ba5b0dcdadb027341dcf3ddc2805918f7b160"
+hash = "af9107ba04833702fece2c83a39c405354dc47c6147a672d919382c2e8a6bfa8"
 metafile = true
 
 [[files]]
