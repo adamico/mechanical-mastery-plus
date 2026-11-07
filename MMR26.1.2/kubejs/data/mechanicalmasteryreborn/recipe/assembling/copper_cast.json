@@ -5,7 +5,7 @@
     { "ingredient": "mechanicalmasteryreborn:mold", "count": 1 }
   ],
   "fluid_ingredients": [
-    { "ingredient": "mechanicalmasteryreborn:molten_copper", "amount": 100 }
+    { "ingredient": "mechanicalmasteryreborn:molten_copper", "amount": 200 }
   ],
   "results": [
     { "id": "mechanicalmasteryreborn:copper_cast", "count": 1 }

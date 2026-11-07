@@ -39,10 +39,12 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
  * an ingot of copper, iron or gold with lava into molten metal, cast it in a Mold, cool the cast with water and knock out
  * that metal's Coin and Burnt Sand in one step, wash the Burnt Sand back into sand, and make the next Mold from sand and
  * clay; exchange coins up, two copper for an iron and three iron for a gold, and seal coins of all three metals into an
- * Aureate Essence, which the Shop buys (#323). The cool and the shakeout are one recipe, since a cooled cast would be an
- * item that only waits to be knocked out. Each metal's steps run the same tests, one each. The recipes are locked under the money challenge's stage, as every
- * chain's are (ADRs 0007, 0013), read from the pack's own stage file. Only the {@code suiteGameTestServer} run registers
- * them. Their Assembler is a {@link SuiteAssembler}.
+ * Aureate Essence, which the Shop buys (#323). The molten metal carries the lava's rock as dross, which the shakeout
+ * knocks out with the Burnt Sand, so a melt gives as much as its ingot and lava take. The cool and the shakeout are one
+ * recipe, since a cooled cast would be an item that only waits to be knocked out. Each metal's steps run the same tests,
+ * one each. The recipes are locked under the money challenge's stage, as every chain's are (ADRs 0007, 0013), read from
+ * the pack's own stage file. Only the {@code suiteGameTestServer} run registers them. Their Assembler is a
+ * {@link SuiteAssembler}.
  */
 final class MintTests {
 
@@ -84,8 +86,8 @@ final class MintTests {
         assembler.fluids().set(0, new FluidStack(Fluids.LAVA, 100));
         SuiteAssembler.tickUntil(helper, assembler, () -> !assembler.fluids().contents(2).isEmpty());
         FluidStack made = assembler.fluids().contents(2);
-        helper.assertTrue(made.getFluid() == metal.molten.get() && made.getAmount() == 100,
-                "Melt made " + made.getAmount() + " mB of " + made.getFluid() + ", not 100 mB of molten " + metal.name());
+        helper.assertTrue(made.getFluid() == metal.molten.get() && made.getAmount() == 200,
+                "Melt made " + made.getAmount() + " mB of " + made.getFluid() + ", not 200 mB of molten " + metal.name());
         helper.assertTrue(assembler.fluids().contents(0).isEmpty() && assembler.inventory().getAmountAsInt(0) == 0,
                 "Melt left some of its ingot or lava");
         helper.succeed();
@@ -96,7 +98,7 @@ final class MintTests {
         AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "molten_" + metal.name());
         SuiteAssembler.put(assembler, 0, INGOTS.get(metal), 1);
         assembler.fluids().set(0, new FluidStack(Fluids.LAVA, 100));
-        assembler.fluids().set(2, new FluidStack(metal.molten.get(), 900));
+        assembler.fluids().set(2, new FluidStack(metal.molten.get(), 800));
         SuiteAssembler.put(assembler, AssemblerSlots.FILL, Items.BUCKET, 1);
         SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, metal.bucket.get()) > 0);
         helper.assertValueEqual(outputs(assembler, metal.bucket.get()), 1, "the molten " + metal.name() + " buckets in the outputs");
@@ -106,7 +108,7 @@ final class MintTests {
     private static void cast(GameTestHelper helper, Mint.Metal metal) {
         AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, metal.name() + "_cast");
         SuiteAssembler.put(assembler, 0, Mint.MOLD.get(), 1);
-        assembler.fluids().set(0, new FluidStack(metal.molten.get(), 100));
+        assembler.fluids().set(0, new FluidStack(metal.molten.get(), 200));
         SuiteAssembler.tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
         SuiteAssembler.expectOutput(helper, assembler, metal.cast.get(), "Cast");
         helper.assertTrue(assembler.fluids().contents(0).isEmpty(), "Cast left some of its molten " + metal.name());
@@ -120,7 +122,7 @@ final class MintTests {
         SuiteAssembler.put(assembler, AssemblerSlots.DRAIN, metal.bucket.get(), 1);
         SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, metal.cast.get()) > 0);
         helper.assertValueEqual(outputs(assembler, metal.cast.get()), 1, "the " + metal.name() + " casts in the outputs");
-        helper.assertValueEqual(assembler.fluids().contents(0).getAmount(), 900, "the molten " + metal.name() + " left of the bucket after Cast");
+        helper.assertValueEqual(assembler.fluids().contents(0).getAmount(), 800, "the molten " + metal.name() + " left of the bucket after Cast");
         helper.succeed();
     }
 
@@ -128,7 +130,7 @@ final class MintTests {
     private static void castTakesFromAPipe(GameTestHelper helper, Mint.Metal metal) {
         AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, metal.name() + "_cast");
         SuiteAssembler.put(assembler, 0, Mint.MOLD.get(), 1);
-        helper.assertTrue(pipeIn(helper, FluidResource.of(metal.molten.get()), 100),
+        helper.assertTrue(pipeIn(helper, FluidResource.of(metal.molten.get()), 200),
                 "no fluid connection of the Assembler took molten " + metal.name());
         SuiteAssembler.tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
         SuiteAssembler.expectOutput(helper, assembler, metal.cast.get(), "Cast");
