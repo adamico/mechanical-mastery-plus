@@ -1,0 +1,15 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting-with-fluid",
+  "ingredients": [
+    { "ingredient": "minecraft:iron_ingot", "count": 1 }
+  ],
+  "fluid_ingredients": [
+    { "ingredient": "minecraft:lava", "amount": 100 }
+  ],
+  "results": [],
+  "fluid_results": [
+    { "id": "mechanicalmasteryreborn:molten_iron", "amount": 100 }
+  ],
+  "time": 100
+}

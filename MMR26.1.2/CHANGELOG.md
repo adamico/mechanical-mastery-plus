@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- The money challenge mints gold on the Assembler, locked until the team starts the challenge as every chain is, and kept past a reset but not a stop: a gold ingot melts with lava into molten gold, the molten gold is cast in a Mold, and the cast is cooled with water and knocked out into a Gold Coin and Burnt Sand. Burnt Sand washes back into sand, and sand and clay with water make the next Mold. Every step takes a fluid, so the Personal Assembler plans none of it (#320).
+- The money challenge mints copper, iron and gold on the Assembler, locked until the team starts the challenge as every chain is, and kept past a reset but not a stop: an ingot melts with lava into molten metal, the molten metal is cast in a Mold, and the cast is cooled with water and knocked out into that metal's Coin and Burnt Sand. Burnt Sand washes back into sand, and sand and clay with water make the next Mold. Every step takes a fluid, so the Personal Assembler plans none of it (#320).
 - The Shop prices lava as a consumable, $5 a bucket in place of $1000, and no longer buys it back, since only the Shop gives it. The Galvanic, Warding and Vital Essences sell for more than what their chains spend making them and under twice that, in place of $2500 each: $4.50, $1500 and $340. The Shop no longer buys any fluid: Essentia Vitae, liquified experience, sal ammoniac and superheated steam go, so a chain's fluids go into its essence rather than being sold. So a won chain's extras are a profit at full price and a loss at the money handicap's half (#319).
 
 ## 0.0.2

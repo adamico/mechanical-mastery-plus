@@ -93,20 +93,20 @@ Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
 Mint textures
 -------------
 
-Files: src/main/resources/assets/mechanicalmasteryreborn/textures/item/gold_coin.png, mold.png,
-       gold_cast.png and burnt_sand.png,
-       src/main/resources/assets/mechanicalmasteryreborn/textures/block/molten_gold.png and
-       molten_gold.png.mcmeta
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/item/<metal>_coin.png,
+       <metal>_cast.png, mold.png and burnt_sand.png,
+       src/main/resources/assets/mechanicalmasteryreborn/textures/block/molten_<metal>.png and
+       molten_<metal>.png.mcmeta, for copper, iron and gold
 Author: Malcolm Riley
 Source: https://github.com/malcolmriley/unused-textures, items/ and fluids/ at commit
         8b85ad732023174d9a9da74e6bf2272d6c0bef17
-        - gold_coin.png is items/metal_coin_gold, and mold.png items/part_mould_ingot, copied
-          unmodified.
-        - gold_cast.png is items/part_mould tinted gold: each pixel 30% its own colour and 70% gold
-          (255, 200, 60) scaled by 1.6 times the pixel's lightness.
-        - burnt_sand.png is items/material_dust_washed_sand darkened: each pixel's channels scaled by
-          (0.45, 0.42, 0.40).
-        - molten_gold.png is fluids/fluid_molten recoloured gold: each pixel (255, 205, 70) scaled by
-          0.3 plus its lightness; molten_gold.png.mcmeta is fluids/fluid_molten.png.mcmeta, copied
+        - <metal>_coin.png is items/metal_coin_<metal>, mold.png items/part_mould_ingot and
+          burnt_sand.png items/material_dust_dark_ash, copied unmodified.
+        - <metal>_cast.png is items/part_mould tinted to the metal: each pixel 30% its own colour and
+          70% the metal's colour scaled by 1.6 times the pixel's lightness: copper (230, 120, 70),
+          iron (205, 205, 210) and gold (255, 200, 60).
+        - molten_<metal>.png is fluids/fluid_molten recoloured to the metal: each pixel the metal's
+          colour scaled by 0.3 plus its lightness: copper (240, 125, 70), iron (225, 70, 40) and gold
+          (255, 205, 70); molten_<metal>.png.mcmeta is fluids/fluid_molten.png.mcmeta, copied
           unmodified.
 Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)

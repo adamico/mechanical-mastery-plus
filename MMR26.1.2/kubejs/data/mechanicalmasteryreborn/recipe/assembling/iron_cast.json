@@ -1,0 +1,14 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting-with-fluid",
+  "ingredients": [
+    { "ingredient": "mechanicalmasteryreborn:mold", "count": 1 }
+  ],
+  "fluid_ingredients": [
+    { "ingredient": "mechanicalmasteryreborn:molten_iron", "amount": 100 }
+  ],
+  "results": [
+    { "id": "mechanicalmasteryreborn:iron_cast", "count": 1 }
+  ],
+  "time": 100
+}
