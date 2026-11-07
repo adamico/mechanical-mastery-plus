@@ -19,7 +19,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
-import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationCap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.OverproductionCap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
@@ -35,10 +35,10 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 /**
  * {@code /cod}, for operators: {@code status} says which team the player is in, which team's island they stand on,
- * whether its C.O.D. is awake, which challenge that team plays and its Inflation; {@code dormant} puts that island's
+ * whether its C.O.D. is awake, which challenge that team plays and its Overproduction; {@code dormant} puts that island's
  * C.O.D. back to dormant, as a new island's is, so waking can be seen again, and leaves its challenge as it is;
  * {@code challenge start <handicap>} starts that island's team's challenge as its lab would (#235), and {@code challenge end}
- * ends it, its handicap with it, so choosing can be seen again, {@code challenge reset} resets it as reaching Inflation's
+ * ends it, its handicap with it, so choosing can be seen again, {@code challenge reset} resets it as reaching Overproduction's
  * cap would, so a reset can be seen without waiting for it (#294), {@code challenge win <handicap>} wins that challenge
  * as its Port's last essence would, or, not played, notes it started and won with none of a start's effects (#268), and {@code challenge revert <handicap>} forgets
  * that it won that challenge, unblocking the tier its win blocked, so winning can be seen again; {@code tier <team> <tier>} sets the tier a team's C.O.D.
@@ -100,9 +100,9 @@ final class CodCommand {
         source.sendSuccess(() -> state.tier(island)
                 .map(tier -> Component.translatable("mechanicalmasteryreborn.command.cod.tier", new ItemStack(Essences.item(tier)).getHoverName()))
                 .orElseGet(() -> Component.translatable("mechanicalmasteryreborn.command.cod.all_blocked")), false);
-        state.inflation(island).ifPresent(inflation -> source.sendSuccess(() -> Component.translatable(
-                "mechanicalmasteryreborn.command.cod.inflation", inflation.made(), inflation.decomposed(), inflation.excess(),
-                ServerConfig.inflationCap()), false));
+        state.overproduction(island).ifPresent(overproduction -> source.sendSuccess(() -> Component.translatable(
+                "mechanicalmasteryreborn.command.cod.overproduction", overproduction.made(), overproduction.decomposed(), overproduction.excess(),
+                ServerConfig.overproductionCap()), false));
         state.lastStand(island).ifPresent(stand -> source.sendSuccess(() -> stand.won()
                 ? Component.translatable("mechanicalmasteryreborn.command.cod.last_stand.won")
                 : LastStands.lead(stand, ServerConfig.lastStandMargin()), false));
@@ -169,7 +169,7 @@ final class CodCommand {
 
     private static int resetChallenge(CommandContext<CommandSourceStack> context) {
         var source = context.getSource();
-        if (!InflationCap.reset(source.getServer(), island(source))) {
+        if (!OverproductionCap.reset(source.getServer(), island(source))) {
             source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.no_challenge"));
             return 0;
         }

@@ -106,7 +106,7 @@ final class StopTests {
             helper.assertTrue(menu.stopOffered(), "the lab offered no stop after a reset");
             helper.assertTrue(menu.clickMenuButton(player, LabMenu.ASK), "the lab refused the ask");
             helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after the stop");
-            helper.assertTrue(state(helper).inflation(team).isEmpty(), "Inflation went on after the stop");
+            helper.assertTrue(state(helper).overproduction(team).isEmpty(), "Overproduction went on after the stop");
             helper.assertValueEqual(state(helper).delivered(team), 0L, "the Port's count after the stop");
             helper.assertFalse(menu.stopOffered(), "the lab offered a stop after the stop");
         });

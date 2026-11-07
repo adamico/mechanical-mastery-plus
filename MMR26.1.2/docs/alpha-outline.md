@@ -50,15 +50,15 @@ the same thing (#273). The README's note that the companion mod isn't on CurseFo
   farm animals; until Basic, the only source of ores. Money was the heart of Plus and stays a big part of Reborn
   [G Shop, M].
 
-### C.O.D. and Inflation
+### C.O.D. and Overproduction
 
 - C.O.D., the Conscious Overproduction Device whose making ended Plus, is Reborn's adversary: a sentient AI that
   nothing but Quintessence can shut down [SG C.O.D., G C.O.D.].
 - It makes essence of the highest tier not yet blocked, and nothing else. Dormant, it makes it slowly and only up
   to a stack; a team's first decompose on a Recycler wakes it [G C.O.D.].
 - Between challenges, being awake is only more essence. While a challenge is played it makes ever faster, without
-  end, and Inflation, the excess it has built over what the team has decomposed, climbs whenever decomposing falls
-  behind. At its cap the challenge resets [G C.O.D., G Inflation].
+  end, and Overproduction, the excess it has built over what the team has decomposed, climbs whenever decomposing falls
+  behind. At its cap the challenge resets [G C.O.D., G Overproduction].
 
 ### The four challenges
 
@@ -94,7 +94,7 @@ the same thing (#273). The README's note that the companion mod isn't on CurseFo
 ### Team islands and servers
 
 - An island per team; a player with no team gets a team, and an island, of their own [R, M Skyblock Builder].
-- Each island has its own C.O.D., its own challenges and Inflation; a Recycler counts for the team whose island it
+- Each island has its own C.O.D., its own challenges and Overproduction; a Recycler counts for the team whose island it
   stands on [G C.O.D., G Port, #273].
 - Each release has a server pack on CurseForge, a child of the client file, which leaves out the client-only mods
   [SG Server pack, ADR 0001, R].

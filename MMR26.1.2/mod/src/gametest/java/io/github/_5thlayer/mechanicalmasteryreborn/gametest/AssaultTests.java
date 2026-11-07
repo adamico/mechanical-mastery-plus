@@ -14,7 +14,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.AssaultState;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Gates;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
-import io.github._5thlayer.mechanicalmasteryreborn.challenge.InflationBar;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.OverproductionBar;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import net.minecraft.core.BlockPos;
@@ -250,7 +250,7 @@ final class AssaultTests {
         });
         helper.runAfterDelay(TICKED + 2, () -> {
             Direction side = AssaultState.get(server(helper)).assault(team).orElseThrow().side().orElseThrow();
-            var bar = InflationBar.of(team);
+            var bar = OverproductionBar.of(team);
             helper.assertTrue(bar.isPresent(), "the team has no challenge bar during its Assault");
             Component expected = Component.translatable("mechanicalmasteryreborn.bar.assault",
                     Challenges.title(Handicap.PROTECTION), 7, Assault.sideName(side));

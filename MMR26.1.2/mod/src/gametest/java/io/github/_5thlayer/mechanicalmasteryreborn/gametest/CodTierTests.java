@@ -31,7 +31,7 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 /**
  * C.O.D.'s tier (#231): it makes the highest tier its team hasn't blocked, and nothing once all four are; the blocked
- * tiers and won challenges outlast a reset and a load; Inflation counts only decomposing of that tier; and on a drop,
+ * tiers and won challenges outlast a reset and a load; Overproduction counts only decomposing of that tier; and on a drop,
  * the reserve keeps the old essence while the new spills on top. Each test is an island of its own, one team.
  */
 final class CodTierTests {
@@ -49,7 +49,7 @@ final class CodTierTests {
         tests.test("cod_tier_makes_the_highest_tier_not_blocked", dormant() + 10, CodTierTests::makesTheHighestNotBlocked);
         tests.test("cod_tier_makes_nothing_once_all_four_are_blocked", 2 * waking() + 10, CodTierTests::nothingOnceAllBlocked);
         tests.test("cod_tier_blocked_tiers_and_won_challenges_survive_a_reset_and_a_load", 1, CodTierTests::surviveResetAndLoad);
-        tests.test("cod_tier_inflation_counts_only_decomposing_of_its_tier", 1, CodTierTests::inflationCountsOnlyItsTier);
+        tests.test("cod_tier_overproduction_counts_only_decomposing_of_its_tier", 1, CodTierTests::overproductionCountsOnlyItsTier);
         tests.test("cod_tier_drop_keeps_the_old_essence_and_spills_the_new", 3 * waking() + 10, CodTierTests::dropKeepsOldAndSpillsNew);
         tests.test("cod_tier_dormant_drop_spills_the_new", dormant() + 10, CodTierTests::dormantDropSpillsTheNew);
         tests.test("cod_tier_command_suggests_teams", 1, CodTierTests::commandSuggestsTeams);
@@ -123,14 +123,14 @@ final class CodTierTests {
     }
 
     /** At Regular, since the game tests' pack decomposes only Advanced and Regular essence. */
-    private static void inflationCountsOnlyItsTier(GameTestHelper helper) {
+    private static void overproductionCountsOnlyItsTier(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         state(helper).setTier(team, Optional.of(Essence.REGULAR));
         helper.assertTrue(Challenges.begin(helper.getLevel().getServer(), team, Handicap.ENERGY), "the challenge didn't start");
         decomposeByHand(helper, team, Essence.ADVANCED);
-        helper.assertValueEqual(state(helper).inflation(team).orElseThrow().decomposed(), 0L, "Advanced essence decomposed, a tier blocked");
+        helper.assertValueEqual(state(helper).overproduction(team).orElseThrow().decomposed(), 0L, "Advanced essence decomposed, a tier blocked");
         decomposeByHand(helper, team, Essence.REGULAR);
-        helper.assertValueEqual(state(helper).inflation(team).orElseThrow().decomposed(), 1L, "Regular essence decomposed, C.O.D.'s tier");
+        helper.assertValueEqual(state(helper).overproduction(team).orElseThrow().decomposed(), 1L, "Regular essence decomposed, C.O.D.'s tier");
         helper.succeed();
     }
 

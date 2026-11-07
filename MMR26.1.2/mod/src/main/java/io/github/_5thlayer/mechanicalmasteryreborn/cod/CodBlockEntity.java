@@ -13,7 +13,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Assault;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
-import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
+import io.github._5thlayer.mechanicalmasteryreborn.record.Overproduction;
 import io.github._5thlayer.mechanicalmasteryreborn.record.LastStand;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
@@ -52,13 +52,13 @@ import org.jspecify.annotations.Nullable;
  * on its top, as an awake C.O.D.'s overflow does, until the reserve is emptied. While
  * dormant it makes one more each {@link ServerConfig#codDormantInterval interval} its reserve holds less than
  * a stack, and nothing while it holds one: a steady pace, never an unlimited supply, and it puts nothing out of
- * itself. What it makes while dormant never counts toward Inflation.
+ * itself. What it makes while dormant never counts toward Overproduction.
  *
  * <p>Once its team is awake ({@link TeamState}), it makes one each {@link ServerConfig#codWakingInterval waking
  * interval} without stop, every one counted for the team as made. Each goes into the reserve, which pushes into
  * whatever takes items beside it; once the reserve is full, onto a pile on its top, of up to a stack, unless a
  * block stands there; past that, nowhere, so the pile shows the team it is falling behind and lag stays bounded.
- * While the team plays a challenge, each one it makes counts toward its {@link Inflation}, and it makes them ever faster
+ * While the team plays a challenge, each one it makes counts toward its {@link Overproduction}, and it makes them ever faster
  * with the time since the challenge began ({@link CodPace}), back at its waking pace once the challenge ends.
  *
  * <p>Once its team starts its last stand ({@link LastStands}), it makes Nullessence instead, whatever its team's tier, at
@@ -173,18 +173,18 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
             return waking;
         }
         long now = server.getServer().overworld().getGameTime();
-        return inflation()
+        return overproduction()
                 .map(played -> CodPace.interval(waking, ServerConfig.codPaceGrowth(), now - played.began()))
                 .orElse(waking);
     }
 
-    /** Its team's Inflation, while the team plays a challenge; on the server only. */
-    public Optional<Inflation> inflation() {
+    /** Its team's Overproduction, while the team plays a challenge; on the server only. */
+    public Optional<Overproduction> overproduction() {
         if (!(level instanceof ServerLevel server)) {
             return Optional.empty();
         }
         UUID owner = team != null ? team : Teams.at(server, worldPosition);
-        return TeamState.get(server.getServer()).inflation(owner);
+        return TeamState.get(server.getServer()).overproduction(owner);
     }
 
     /** The ticks done toward the next essence, out of {@link #interval}; none while it isn't making. */

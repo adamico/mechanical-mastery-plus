@@ -26,7 +26,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  * Craftworks' assembling type there.
  * NeoForge sends a server config to each client, so EMI shows the yield a server plays with.
  *
- * <p>And C.O.D.'s pace while dormant, once awake, and how it grows while a challenge is played, and the cap of a team's Inflation.
+ * <p>And C.O.D.'s pace while dormant, once awake, and how it grows while a challenge is played, and the cap of a team's Overproduction.
  *
  * <p>And the share of a sale a team is paid while it plays the money challenge, and the quota a challenge's Port takes to win it.
  *
@@ -146,14 +146,14 @@ public final class ServerConfig {
             .defineInRange("cod.pace_growth", 0.05, 0.0, 100.0);
 
     /**
-     * The excess Inflation may reach while a challenge is played (#207): ten stacks, which a team that decomposes nothing
+     * The excess Overproduction may reach while a challenge is played (#207): ten stacks, which a team that decomposes nothing
      * reaches about fifteen minutes in at the default waking pace and growth.
      */
-    public static final ModConfigSpec.IntValue COD_INFLATION_CAP = BUILDER
+    public static final ModConfigSpec.IntValue COD_OVERPRODUCTION_CAP = BUILDER
             .comment("The excess of Advanced essence C.O.D. may make beyond what a team decomposes while it plays a challenge:",
-                    "its Inflation's cap, which the team's bar fills toward. 640 is ten stacks: a team that decomposes nothing",
+                    "its Overproduction's cap, which the team's bar fills toward. 640 is ten stacks: a team that decomposes nothing",
                     "reaches it about fifteen minutes in at the default waking pace and growth.")
-            .defineInRange("cod.inflation_cap", 640, 1, 1_000_000);
+            .defineInRange("cod.overproduction_cap", 640, 1, 1_000_000);
 
     /**
      * The Lead that wins the pack in C.O.D.'s last stand (#261, a first guess): sixteen stacks of Nullessence, which C.O.D.
@@ -223,7 +223,7 @@ public final class ServerConfig {
     /** Whether the life handicap pauses for a player in Neo Vitae's Demon Realm. */
     public static final ModConfigSpec.BooleanValue LIFE_PAUSE_IN_DEMON_REALM = BUILDER
             .comment("Whether a player in Neo Vitae's Demon Realm (neovitae:dungeon) hungers and eats as in vanilla while their team",
-                    "plays the life challenge. Off, the handicap goes on there as anywhere else. Inflation goes on either way.")
+                    "plays the life challenge. Off, the handicap goes on there as anywhere else. Overproduction goes on either way.")
             .define("life.pause_in_demon_realm", false);
 
     /** How long a team waits between emergency saplings from its lab: a Minecraft day (#302). */
@@ -385,9 +385,9 @@ public final class ServerConfig {
         return SPEC.isLoaded() ? COD_PACE_GROWTH.getAsDouble() : COD_PACE_GROWTH.getDefault();
     }
 
-    /** The excess Inflation may reach while a challenge is played. */
-    public static int inflationCap() {
-        return SPEC.isLoaded() ? COD_INFLATION_CAP.getAsInt() : COD_INFLATION_CAP.getDefault();
+    /** The excess Overproduction may reach while a challenge is played. */
+    public static int overproductionCap() {
+        return SPEC.isLoaded() ? COD_OVERPRODUCTION_CAP.getAsInt() : COD_OVERPRODUCTION_CAP.getDefault();
     }
 
     /** The Lead that wins the pack in C.O.D.'s last stand, and minus which the Lead never falls below. */

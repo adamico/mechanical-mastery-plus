@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
-import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
+import io.github._5thlayer.mechanicalmasteryreborn.record.Overproduction;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Spell;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
@@ -143,7 +143,7 @@ public final class LifeHandicap {
         if (!state.bears(team, Handicap.LIFE)) {
             return Diet.NONE;
         }
-        long began = state.plays(team, Handicap.LIFE) ? state.inflation(team).map(Inflation::began).orElse(0L)
+        long began = state.plays(team, Handicap.LIFE) ? state.overproduction(team).map(Overproduction::began).orElse(0L)
                 : state.spell(team, Handicap.LIFE).map(Spell::began).orElse(0L);
         Diet diet = player.getData(DIET);
         return diet.began() == began ? diet : Diet.beginning(began);

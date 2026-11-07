@@ -11,7 +11,7 @@ import java.util.UUID;
 
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
-import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
+import io.github._5thlayer.mechanicalmasteryreborn.record.Overproduction;
 import io.github._5thlayer.mechanicalmasteryreborn.record.LastStand;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
@@ -25,23 +25,23 @@ import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 /**
- * Each team's Inflation as a boss bar, filling toward the {@link ServerConfig#inflationCap cap}, titled with the
+ * Each team's Overproduction as a boss bar, filling toward the {@link ServerConfig#overproductionCap cap}, titled with the
  * challenge the team plays, as its start's title names it, then the excess and the cap. Every one of the team's
  * players online sees it, wherever they stand, from the moment the team chooses a handicap until its challenge ends,
  * and a player who logs in or joins the team mid-challenge sees it too. In the team's last stand the same bar shows its
  * Lead instead, from minus the margin, empty, to the margin, full, and C.O.D.'s rate, until the pack is won. The client draws the challenge's name above
- * the bar and the Inflation line below it; its title joins the two, for anything else that shows it.
- * Kept in step with the team's state each tick, so nothing that changes Inflation has to tell it; a bar sends its
+ * the bar and the Overproduction line below it; its title joins the two, for anything else that shows it.
+ * Kept in step with the team's state each tick, so nothing that changes Overproduction has to tell it; a bar sends its
  * players anything only when it changes. Never saved: the server makes them afresh from the teams' state.
  */
-public final class InflationBar {
+public final class OverproductionBar {
 
-    /** The key of every Inflation bar's title, by which the client knows to draw it its own way. */
+    /** The key of every Overproduction bar's title, by which the client knows to draw it its own way. */
     public static final String TITLE = MechanicalMasteryReborn.MOD_ID + ".bar.challenge";
 
     private static final Map<UUID, ServerBossEvent> BARS = new HashMap<>();
 
-    private InflationBar() {
+    private OverproductionBar() {
     }
 
     public static void register() {
@@ -84,14 +84,14 @@ public final class InflationBar {
 
     /** Whether {@code team} has a bar: while it plays a challenge or its last stand runs. */
     private static boolean shown(TeamState state, UUID team) {
-        return state.inflation(team).isPresent() || state.inLastStand(team);
+        return state.overproduction(team).isPresent() || state.inLastStand(team);
     }
 
-    /** Words and fills {@code team}'s bar, by its challenge's Inflation or its last stand's Lead. */
+    /** Words and fills {@code team}'s bar, by its challenge's Overproduction or its last stand's Lead. */
     private static void show(MinecraftServer server, TeamState state, UUID team, ServerBossEvent bar) {
-        Optional<Inflation> inflation = state.inflation(team);
-        if (inflation.isPresent()) {
-            show(server, team, bar, state.handicap(team).orElseThrow(), inflation.get());
+        Optional<Overproduction> overproduction = state.overproduction(team);
+        if (overproduction.isPresent()) {
+            show(server, team, bar, state.handicap(team).orElseThrow(), overproduction.get());
         } else {
             show(bar, state.lastStand(team).orElseThrow());
         }
@@ -110,11 +110,11 @@ public final class InflationBar {
 
 
     /**
-     * Words the bar, such as "Energy Challenge - Inflation: 12 of 256", and fills it. While the team's Assault runs, the
+     * Words the bar, such as "Energy Challenge - Overproduction: 12 of 256", and fills it. While the team's Assault runs, the
      * challenge's name carries its wave and side, such as "Protection Challenge · Wave 7, from the north" (#239).
      */
-    private static void show(MinecraftServer server, UUID team, ServerBossEvent bar, Handicap handicap, Inflation inflation) {
-        int cap = ServerConfig.inflationCap();
+    private static void show(MinecraftServer server, UUID team, ServerBossEvent bar, Handicap handicap, Overproduction overproduction) {
+        int cap = ServerConfig.overproductionCap();
         Component challenge = Challenges.title(handicap);
         Optional<AssaultState.Built> assault = AssaultState.get(server).assault(team);
         if (assault.isPresent() && assault.get().side().isPresent()) {
@@ -122,7 +122,7 @@ public final class InflationBar {
                     Math.max(1, assault.get().wave()), Assault.sideName(assault.get().side().get()));
         }
         bar.setName(Component.translatable(TITLE, challenge,
-                Component.translatable(MechanicalMasteryReborn.MOD_ID + ".bar.inflation", inflation.excess(), cap)));
-        bar.setProgress(Math.min(1.0F, (float) inflation.excess() / cap));
+                Component.translatable(MechanicalMasteryReborn.MOD_ID + ".bar.overproduction", overproduction.excess(), cap)));
+        bar.setProgress(Math.min(1.0F, (float) overproduction.excess() / cap));
     }
 }

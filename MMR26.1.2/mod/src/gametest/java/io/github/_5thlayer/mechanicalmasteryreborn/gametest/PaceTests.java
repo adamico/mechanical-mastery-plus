@@ -75,7 +75,7 @@ final class PaceTests {
         choose(helper, team, 20 * MINUTE);
         helper.runAtTickTime(2 * TWICE + MARGIN, () -> {
             helper.assertValueEqual(cod(helper).interval(), TWICE, "the interval twenty minutes into the challenge");
-            helper.assertValueEqual(state(helper).inflation(team).orElseThrow().made(), 2L, "the essence made in 42 ticks");
+            helper.assertValueEqual(state(helper).overproduction(team).orElseThrow().made(), 2L, "the essence made in 42 ticks");
             helper.succeed();
         });
     }

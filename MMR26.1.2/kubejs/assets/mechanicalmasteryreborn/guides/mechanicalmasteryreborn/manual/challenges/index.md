@@ -47,20 +47,20 @@ locked until your team starts the challenge:
 A chain stays unlocked past a win and past a reset, and through the challenges that follow. A stop locks it
 again until your team starts the challenge anew.
 
-## Inflation
+## Overproduction
 
-While your team plays a challenge, C.O.D. makes its tier of essence ever faster, without a ceiling. **Inflation**
+While your team plays a challenge, C.O.D. makes its tier of essence ever faster, without a ceiling. **Overproduction**
 is what it has made minus what you have decomposed, by hand or on a Recycler, since the challenge began. Keeping
 or voiding essence doesn't lower it. A stock decomposed early counts against what C.O.D. makes next.
 
-Everyone online sees Inflation on the bar at the top of their screen, under the challenge's name, and Jade on
-C.O.D. shows it too. As Inflation nears its cap, a bell rings and a warning is read in chat, once, and again only
-if Inflation falls back and climbs again.
+Everyone online sees Overproduction on the bar at the top of their screen, under the challenge's name, and Jade on
+C.O.D. shows it too. As Overproduction nears its cap, a bell rings and a warning is read in chat, once, and again only
+if Overproduction falls back and climbs again.
 
 ## The reset
 
-When Inflation reaches its cap, the challenge **resets**, as though it had just begun: C.O.D. falls back to the
-pace it woke at, Inflation starts from nothing, and what was put into the Port is lost. Your island, machines,
+When Overproduction reaches its cap, the challenge **resets**, as though it had just begun: C.O.D. falls back to the
+pace it woke at, Overproduction starts from nothing, and what was put into the Port is lost. Your island, machines,
 items, chain and handicap stay as they are. What the handicap took is kept aside until the challenge ends. Each
 challenge's page says what else its reset does. Everyone online hears a beacon switch off and reads that the
 challenge was reset.
@@ -71,7 +71,7 @@ Once an attempt has reset at least once, the lab offers to **stop** the challeng
 back to it better prepared. Any member asks to stop there, or takes the ask back. The challenge stops once every
 member online has asked. A member who logs out drops their ask; one who logs in counts from then on.
 
-A stop ends the handicap and Inflation, gives back what the handicap took, and locks the chain again until your
+A stop ends the handicap and Overproduction, gives back what the handicap took, and locks the chain again until your
 team starts the challenge anew. Your team keeps every item. Any challenge not won, the stopped one too, can start
 at once.
 

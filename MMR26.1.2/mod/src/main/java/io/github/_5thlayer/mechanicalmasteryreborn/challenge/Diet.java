@@ -16,7 +16,7 @@ import net.minecraft.resources.Identifier;
 
 /**
  * A player's Diet, as the line's glossary has it: the foods they ate lately, oldest first, while their team plays the
- * life challenge begun at {@code began}, the game time its Inflation counts from. A Diet of another beginning is
+ * life challenge begun at {@code began}, the game time its Overproduction counts from. A Diet of another beginning is
  * forgotten, so a reset forgets it too. {@link #NONE} while the team plays no life challenge. Plain data, so a JUnit test
  * reads it without Minecraft.
  */

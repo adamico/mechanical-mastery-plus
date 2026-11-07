@@ -132,7 +132,7 @@ final class PortTests {
         });
     }
 
-    /** At the quota: the tier is blocked for the team only, and the challenge, Inflation and the handicap end. */
+    /** At the quota: the tier is blocked for the team only, and the challenge, Overproduction and the handicap end. */
     private static void quotaWins(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         UUID other = TestTeams.claim(helper, OTHER_ISLAND, OTHER_ISLAND);
@@ -144,7 +144,7 @@ final class PortTests {
         helper.assertValueEqual(state(helper).tier(team), Optional.of(Essence.IMPROVED), "the tier after the win");
         helper.assertTrue(state(helper).won(team, Handicap.ENERGY), "the win wasn't noted");
         helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the handicap after the win");
-        helper.assertTrue(state(helper).inflation(team).isEmpty(), "Inflation goes on after the win");
+        helper.assertTrue(state(helper).overproduction(team).isEmpty(), "Overproduction goes on after the win");
         helper.assertValueEqual(state(helper).delivered(team), 0L, "the count after the win");
         helper.assertValueEqual(state(helper).tier(other), Optional.of(Essence.ADVANCED), "the other team's tier");
         helper.assertTrue(state(helper).plays(other, Handicap.ENERGY), "the other team's challenge ended");
@@ -192,7 +192,7 @@ final class PortTests {
         helper.assertTrue(state(helper).won(team, Handicap.ENERGY), "the quota didn't win the challenge");
         helper.assertValueEqual(state(helper).tier(team), Optional.of(Essence.REGULAR), "the tier after the win");
         helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the handicap after the win");
-        helper.assertTrue(state(helper).inflation(team).isEmpty(), "Inflation goes on after the win");
+        helper.assertTrue(state(helper).overproduction(team).isEmpty(), "Overproduction goes on after the win");
         helper.succeed();
     }
 
@@ -210,7 +210,7 @@ final class PortTests {
         var codec = TeamState.TYPE.codec();
         TeamState loaded = codec.parse(ops, codec.encodeStart(ops, state(helper)).getOrThrow()).getOrThrow();
         helper.assertValueEqual(loaded.tier(team), Optional.of(Essence.IMPROVED), "the tier after a load");
-        helper.assertTrue(loaded.inflation(team).isEmpty(), "Inflation after a load");
+        helper.assertTrue(loaded.overproduction(team).isEmpty(), "Overproduction after a load");
         helper.runAtTickTime(2, () -> {
             helper.assertValueEqual(cod.tier(), Optional.of(Essence.IMPROVED), "C.O.D.'s tier after the win");
             helper.assertValueEqual(cod.interval(), ServerConfig.codWakingInterval(), "C.O.D.'s interval after the win");

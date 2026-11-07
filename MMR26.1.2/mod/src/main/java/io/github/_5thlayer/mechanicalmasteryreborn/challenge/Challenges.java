@@ -246,7 +246,7 @@ public final class Challenges {
         return Component.translatable("mechanicalmasteryreborn.handicap." + handicap.id());
     }
 
-    /** The challenge's name, such as "Energy Challenge", as its start's title and its Inflation's bar show it. */
+    /** The challenge's name, such as "Energy Challenge", as its start's title and its Overproduction's bar show it. */
     public static MutableComponent title(Handicap handicap) {
         return Component.translatable("mechanicalmasteryreborn.challenge.title", name(handicap));
     }

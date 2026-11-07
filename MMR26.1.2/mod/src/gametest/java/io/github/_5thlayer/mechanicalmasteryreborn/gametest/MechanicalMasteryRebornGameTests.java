@@ -83,8 +83,8 @@ public final class MechanicalMasteryRebornGameTests {
         LabTests.register(tests);
         LabSaplingTests.register(tests);
         PortTests.register(tests);
-        InflationTests.register(tests);
-        InflationCapTests.register(tests);
+        OverproductionTests.register(tests);
+        OverproductionCapTests.register(tests);
         PaceTests.register(tests);
         GeneratorTests.register(tests);
         HandDecomposeTests.register(tests);
