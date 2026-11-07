@@ -29,7 +29,7 @@ import net.minecraft.world.level.saveddata.SavedDataType;
 /**
  * Each team's state, keyed on its id ({@link Teams}): whether its C.O.D. is awake, how much essence an awake
  * C.O.D. has made for it, spawned or not, the handicap it chose at the lab, which says which challenge it plays, and
- * its {@link Inflation} while it plays one, with whether it was warned that Inflation nears its cap, and the money set
+ * its {@link Overproduction} while it plays one, with whether it was warned that Overproduction nears its cap, and the money set
  * aside from its Account while it plays the money challenge, the challenges it has ever started and the chains it has
  * unlocked, which a stop takes back, the resets of the challenge it plays since it last started, the essence its Port has
  * taken toward the quota, and the tiers it has blocked and the challenges it has won, which no reset touches, and its
@@ -65,7 +65,9 @@ public final class TeamState extends SavedData {
                 Codec.BOOL.optionalFieldOf("awake", false).forGetter(entry -> entry.awake),
                 Codec.LONG.optionalFieldOf("made", 0L).forGetter(entry -> entry.made),
                 HANDICAP_CODEC.optionalFieldOf("handicap").forGetter(entry -> entry.handicap),
-                Inflation.CODEC.optionalFieldOf("inflation").forGetter(entry -> entry.inflation),
+                Overproduction.CODEC.optionalFieldOf("overproduction").forGetter(entry -> entry.overproduction),
+                // Saved by 0.2.0 and before under the term's old name, read only so a challenge played carries over.
+                Overproduction.CODEC.optionalFieldOf("inflation").forGetter(entry -> Optional.empty()),
                 Codec.BOOL.optionalFieldOf("warned", false).forGetter(entry -> entry.warned),
                 Codec.LONG.optionalFieldOf("set_aside", 0L).forGetter(entry -> entry.setAside),
                 HANDICAPS_CODEC.optionalFieldOf("unlocked", Set.of()).forGetter(entry -> entry.unlocked),
@@ -82,8 +84,8 @@ public final class TeamState extends SavedData {
         long made;
         Optional<Handicap> handicap;
         /** Present exactly while {@link #handicap} is. */
-        Optional<Inflation> inflation;
-        /** Whether the team was warned that its Inflation nears its cap, since it last fell back below; only while it plays a challenge. */
+        Optional<Overproduction> overproduction;
+        /** Whether the team was warned that its Overproduction nears its cap, since it last fell back below; only while it plays a challenge. */
         boolean warned;
         /** The money set aside from the team's Account while it plays the money challenge, in AdminShop's cents. */
         long setAside;
@@ -104,14 +106,22 @@ public final class TeamState extends SavedData {
         /** The handicaps the team bears at its Hermetic Lab, each for its spell, while it runs. */
         Map<Handicap, Spell> spells;
 
-        Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Inflation> inflation, boolean warned, long setAside,
+        Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Overproduction> overproduction,
+                Optional<Overproduction> inflation, boolean warned, long setAside, Set<Handicap> unlocked, Set<Essence> blocked,
+                Set<Handicap> won, long delivered, Set<Handicap> started, int resets, Optional<LastStand> lastStand,
+                Map<Handicap, Spell> spells) {
+            this(awake, made, handicap, overproduction.or(() -> inflation), warned, setAside, unlocked, blocked, won, delivered,
+                    started, resets, lastStand, spells);
+        }
+
+        Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Overproduction> overproduction, boolean warned, long setAside,
                 Set<Handicap> unlocked, Set<Essence> blocked, Set<Handicap> won, long delivered, Set<Handicap> started, int resets,
                 Optional<LastStand> lastStand, Map<Handicap, Spell> spells) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
-            // A challenge saved before Inflation was counted counts from the world's start.
-            this.inflation = handicap.isPresent() ? inflation.or(() -> Optional.of(Inflation.startingAt(0))) : Optional.empty();
+            // A challenge saved before Overproduction was counted counts from the world's start.
+            this.overproduction = handicap.isPresent() ? overproduction.or(() -> Optional.of(Overproduction.startingAt(0))) : Optional.empty();
             this.warned = handicap.isPresent() && warned;
             this.setAside = setAside;
             this.unlocked = handicaps(unlocked);
@@ -208,7 +218,7 @@ public final class TeamState extends SavedData {
     }
 
     /**
-     * Starts {@code handicap}'s challenge for {@code team} at {@code gameTime}, the overworld's, its Inflation from
+     * Starts {@code handicap}'s challenge for {@code team} at {@code gameTime}, the overworld's, its Overproduction from
      * nothing, and says whether it did: not while the team plays one already, nor for a challenge it has won.
      */
     public boolean begin(UUID team, Handicap handicap, long gameTime) {
@@ -217,7 +227,7 @@ public final class TeamState extends SavedData {
         }
         Entry entry = entry(team);
         entry.handicap = Optional.of(handicap);
-        entry.inflation = Optional.of(Inflation.startingAt(gameTime));
+        entry.overproduction = Optional.of(Overproduction.startingAt(gameTime));
         entry.unlocked.add(handicap);
         entry.started.add(handicap);
         entry.resets = 0;
@@ -225,14 +235,14 @@ public final class TeamState extends SavedData {
         return true;
     }
 
-    /** Ends the challenge {@code team} plays, its handicap and Inflation with it, and says whether it played one. */
+    /** Ends the challenge {@code team} plays, its handicap and Overproduction with it, and says whether it played one. */
     public boolean endChallenge(UUID team) {
         Entry entry = teams.get(team);
         if (entry == null || entry.handicap.isEmpty()) {
             return false;
         }
         entry.handicap = Optional.empty();
-        entry.inflation = Optional.empty();
+        entry.overproduction = Optional.empty();
         entry.warned = false;
         entry.delivered = 0;
         entry.resets = 0;
@@ -257,7 +267,7 @@ public final class TeamState extends SavedData {
     }
 
     /**
-     * Resets the challenge {@code team} plays at {@code gameTime}, as though it had just begun: its Inflation from
+     * Resets the challenge {@code team} plays at {@code gameTime}, as though it had just begun: its Overproduction from
      * nothing, and so C.O.D. back to its waking pace, no warning given and nothing delivered to its Port, and counts the
      * reset. Its handicap stays. Says whether it played one.
      */
@@ -266,7 +276,7 @@ public final class TeamState extends SavedData {
         if (entry == null || entry.handicap.isEmpty()) {
             return false;
         }
-        entry.inflation = Optional.of(Inflation.startingAt(gameTime));
+        entry.overproduction = Optional.of(Overproduction.startingAt(gameTime));
         entry.warned = false;
         entry.delivered = 0;
         entry.resets++;
@@ -407,14 +417,14 @@ public final class TeamState extends SavedData {
         return Set.copyOf(teams.keySet());
     }
 
-    /** Whether {@code team} was warned that its Inflation nears its cap, since it last fell back below. */
+    /** Whether {@code team} was warned that its Overproduction nears its cap, since it last fell back below. */
     public boolean warned(UUID team) {
         Entry entry = teams.get(team);
         return entry != null && entry.warned;
     }
 
     /**
-     * Notes whether {@code team} was warned that its Inflation nears its cap, while it plays a challenge, and says
+     * Notes whether {@code team} was warned that its Overproduction nears its cap, while it plays a challenge, and says
      * whether that changed.
      */
     public boolean setWarned(UUID team, boolean warned) {
@@ -427,10 +437,10 @@ public final class TeamState extends SavedData {
         return true;
     }
 
-    /** {@code team}'s Inflation, while it plays a challenge. */
-    public Optional<Inflation> inflation(UUID team) {
+    /** {@code team}'s Overproduction, while it plays a challenge. */
+    public Optional<Overproduction> overproduction(UUID team) {
         Entry entry = teams.get(team);
-        return entry == null ? Optional.empty() : entry.inflation;
+        return entry == null ? Optional.empty() : entry.overproduction;
     }
 
     /** How much essence an awake C.O.D. has made for {@code team}, whether it spawned or not. */
@@ -439,24 +449,24 @@ public final class TeamState extends SavedData {
         return entry == null ? 0 : entry.made;
     }
 
-    /** Counts one essence an awake C.O.D. made for {@code team}, and toward its Inflation while it plays a challenge. */
+    /** Counts one essence an awake C.O.D. made for {@code team}, and toward its Overproduction while it plays a challenge. */
     public void countMade(UUID team) {
         Entry entry = entry(team);
         entry.made++;
-        entry.inflation = entry.inflation.map(Inflation::plusOneMade);
+        entry.overproduction = entry.overproduction.map(Overproduction::plusOneMade);
         setDirty();
     }
 
     /**
-     * Counts {@code count} of {@code essence} {@code team} decomposed, by hand or on a Recycler, against its Inflation
+     * Counts {@code count} of {@code essence} {@code team} decomposed, by hand or on a Recycler, against its Overproduction
      * while it plays a challenge: only essence of the tier its C.O.D. makes.
      */
     void countDecomposed(UUID team, Essence essence, long count) {
         Entry entry = teams.get(team);
-        if (entry == null || entry.inflation.isEmpty() || tier(team).filter(essence::equals).isEmpty()) {
+        if (entry == null || entry.overproduction.isEmpty() || tier(team).filter(essence::equals).isEmpty()) {
             return;
         }
-        entry.inflation = entry.inflation.map(inflation -> inflation.plusDecomposed(count));
+        entry.overproduction = entry.overproduction.map(overproduction -> overproduction.plusDecomposed(count));
         setDirty();
     }
 

@@ -27,11 +27,11 @@ The waves grow harder step by step: more and tougher mobs, then new kinds, from 
 first waves to blazes, endermen, breezes and evokers deep in. Each step ends with a **breather**, a longer pause,
 and the gate moves to another side at random. The bar at the top of your screen says which wave is on and from
 which side. A wave your team doesn't clear in time fails, and the gate opens again at once, at the wave it had
-reached. The waves stop only when your team fills its Port, Inflation resets the challenge, or your team stops
+reached. The waves stop only when your team fills its Port, Overproduction resets the challenge, or your team stops
 it.
 
 The Assault waits while no member of your team is on the island, and goes on from where it stood when one comes
-back. The mobs already out stay, and Inflation runs on. A mob knocked off a bridge dies in the void with its drop.
+back. The mobs already out stay, and Overproduction runs on. A mob knocked off a bridge dies in the void with its drop.
 
 **Explosions** damage your island while the Assault runs, claimed or not: they are kept on for your team until
 the Assault ends. Its endermen pick up no blocks and its blazes light nothing, so blasts are the one way it damages

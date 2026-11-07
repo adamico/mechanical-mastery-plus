@@ -22,7 +22,7 @@ import net.minecraft.world.level.saveddata.SavedDataType;
 
 /**
  * How much essence each team has decomposed, by tier, and how: on a Recycler or by hand, since the world began. Both
- * count against the team's {@link Inflation} the same; only a decompose on a Recycler wakes C.O.D. ({@link TeamState}).
+ * count against the team's {@link Overproduction} the same; only a decompose on a Recycler wakes C.O.D. ({@link TeamState}).
  * Saved with the world, in the overworld's data.
  */
 public final class DecomposeLog extends SavedData {
@@ -83,7 +83,7 @@ public final class DecomposeLog extends SavedData {
         return server.overworld().getDataStorage().computeIfAbsent(TYPE);
     }
 
-    /** Records {@code count} of {@code essence} decomposed by {@code team}, one way, and counts it against its Inflation. */
+    /** Records {@code count} of {@code essence} decomposed by {@code team}, one way, and counts it against its Overproduction. */
     public static void record(MinecraftServer server, UUID team, Essence essence, int count, Way way) {
         get(server).add(team, essence, count, way);
         TeamState.get(server).countDecomposed(team, essence, count);

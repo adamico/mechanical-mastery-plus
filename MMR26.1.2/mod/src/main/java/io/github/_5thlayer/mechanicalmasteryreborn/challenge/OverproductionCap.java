@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import com.mojang.logging.LogUtils;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
-import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
+import io.github._5thlayer.mechanicalmasteryreborn.record.Overproduction;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.ChatFormatting;
@@ -24,43 +24,43 @@ import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import org.slf4j.Logger;
 
 /**
- * Inflation's {@link ServerConfig#inflationCap cap}. A team whose Inflation reaches it has its challenge reset, as
- * though it had just begun: its Inflation from nothing, and so C.O.D. back to its waking pace, its handicap kept, and
+ * Overproduction's {@link ServerConfig#overproductionCap cap}. A team whose Overproduction reaches it has its challenge reset, as
+ * though it had just begun: its Overproduction from nothing, and so C.O.D. back to its waking pace, its handicap kept, and
  * its island untouched. Each of the team's players online reads that in chat, with a sound. Nearing it, at 80%, they
- * are warned the same way, once, and again only after Inflation has fallen back below; while none of them is online
+ * are warned the same way, once, and again only after Overproduction has fallen back below; while none of them is online
  * the warning waits for the first who is. Checked at the end of each tick, before the bars are, so nothing that
- * changes Inflation has to tell it and a bar never shows a reached cap.
+ * changes Overproduction has to tell it and a bar never shows a reached cap.
  */
-public final class InflationCap {
+public final class OverproductionCap {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    private InflationCap() {
+    private OverproductionCap() {
     }
 
     public static void register() {
-        // Registered before InflationBar's listener, so it runs first in the same tick.
+        // Registered before OverproductionBar's listener, so it runs first in the same tick.
         NeoForge.EVENT_BUS.addListener(ServerTickEvent.Post.class, event -> check(event.getServer()));
     }
 
     private static void check(MinecraftServer server) {
         TeamState state = TeamState.get(server);
-        int cap = ServerConfig.inflationCap();
+        int cap = ServerConfig.overproductionCap();
         for (UUID team : state.playing()) {
-            Inflation inflation = state.inflation(team).orElseThrow();
-            if (inflation.excess() >= cap) {
-                LOGGER.info("Team {} reached its Inflation cap of {}", team, cap);
+            Overproduction overproduction = state.overproduction(team).orElseThrow();
+            if (overproduction.excess() >= cap) {
+                LOGGER.info("Team {} reached its Overproduction cap of {}", team, cap);
                 reset(server, team);
-            } else if (near(inflation.excess(), cap)) {
+            } else if (near(overproduction.excess(), cap)) {
                 if (!state.warned(team)) {
                     Handicap handicap = state.handicap(team).orElseThrow();
                     int told = tell(server, team, Component.translatable("mechanicalmasteryreborn.challenge.warning",
-                            inflation.excess(), cap, Challenges.title(handicap)).withStyle(ChatFormatting.YELLOW),
+                            overproduction.excess(), cap, Challenges.title(handicap)).withStyle(ChatFormatting.YELLOW),
                             SoundEvents.BELL_BLOCK);
                     if (told > 0) {
                         state.setWarned(team, true);
-                        LOGGER.info("Team {} nears its Inflation cap, at {} of {}; told {} of its players online",
-                                team, inflation.excess(), cap, told);
+                        LOGGER.info("Team {} nears its Overproduction cap, at {} of {}; told {} of its players online",
+                                team, overproduction.excess(), cap, told);
                     }
                 }
             } else {
@@ -70,14 +70,14 @@ public final class InflationCap {
     }
 
     /**
-     * Resets the challenge {@code team} plays, as reaching Inflation's cap does ({@link Challenges#reset}), and tells its
+     * Resets the challenge {@code team} plays, as reaching Overproduction's cap does ({@link Challenges#reset}), and tells its
      * players online, as an op's {@code /cod challenge reset} does too (#294). Says whether it played one.
      */
     public static boolean reset(MinecraftServer server, UUID team) {
         if (!Challenges.reset(server, team)) {
             return false;
         }
-        int cap = ServerConfig.inflationCap();
+        int cap = ServerConfig.overproductionCap();
         Handicap handicap = TeamState.get(server).handicap(team).orElseThrow();
         int told = tell(server, team, Component.translatable("mechanicalmasteryreborn.challenge.reset",
                 cap, Challenges.title(handicap).withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.RED),

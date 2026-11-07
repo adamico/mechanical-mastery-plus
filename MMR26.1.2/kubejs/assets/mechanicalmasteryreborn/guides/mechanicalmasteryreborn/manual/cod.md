@@ -24,7 +24,7 @@ pipe. Once its slot is full, essence piles up on its top, up to a stack, unless 
 what it makes is lost. A pile on top means your Recycler is falling behind.
 
 While your team plays a [challenge](challenges/index.md), C.O.D. makes essence ever faster. Each one it makes
-that you don't decompose adds to **Inflation**. When Inflation reaches its cap, the challenge starts over.
+that you don't decompose adds to **Overproduction**. When Overproduction reaches its cap, the challenge starts over.
 
 ## The Ports
 

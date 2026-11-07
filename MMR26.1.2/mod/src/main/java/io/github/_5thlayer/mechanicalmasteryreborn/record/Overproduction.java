@@ -10,29 +10,29 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 /**
- * A team's Inflation while it plays a challenge: when the challenge began, in the overworld's game time, and the
+ * A team's Overproduction while it plays a challenge: when the challenge began, in the overworld's game time, and the
  * essence of the tier C.O.D. makes that its awake C.O.D. has made and the team has decomposed, by hand or on a Recycler, since then. The
  * excess is the one less the other, never below zero. {@link TeamState} keeps one per team that plays a challenge
  * and none otherwise; taking a fresh one, {@link #startingAt(long)}, starts the count again.
  */
-public record Inflation(long began, long made, long decomposed) {
+public record Overproduction(long began, long made, long decomposed) {
 
-    static final Codec<Inflation> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.LONG.fieldOf("began").forGetter(Inflation::began),
-            Codec.LONG.optionalFieldOf("made", 0L).forGetter(Inflation::made),
-            Codec.LONG.optionalFieldOf("decomposed", 0L).forGetter(Inflation::decomposed))
-            .apply(instance, Inflation::new));
+    static final Codec<Overproduction> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.LONG.fieldOf("began").forGetter(Overproduction::began),
+            Codec.LONG.optionalFieldOf("made", 0L).forGetter(Overproduction::made),
+            Codec.LONG.optionalFieldOf("decomposed", 0L).forGetter(Overproduction::decomposed))
+            .apply(instance, Overproduction::new));
 
     /** How the server sends it to a client, for Jade. */
-    public static final StreamCodec<ByteBuf, Inflation> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.VAR_LONG, Inflation::began,
-            ByteBufCodecs.VAR_LONG, Inflation::made,
-            ByteBufCodecs.VAR_LONG, Inflation::decomposed,
-            Inflation::new);
+    public static final StreamCodec<ByteBuf, Overproduction> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.VAR_LONG, Overproduction::began,
+            ByteBufCodecs.VAR_LONG, Overproduction::made,
+            ByteBufCodecs.VAR_LONG, Overproduction::decomposed,
+            Overproduction::new);
 
-    /** Inflation as a challenge begins at {@code gameTime}: nothing made or decomposed yet. */
-    public static Inflation startingAt(long gameTime) {
-        return new Inflation(gameTime, 0, 0);
+    /** Overproduction as a challenge begins at {@code gameTime}: nothing made or decomposed yet. */
+    public static Overproduction startingAt(long gameTime) {
+        return new Overproduction(gameTime, 0, 0);
     }
 
     /**
@@ -45,12 +45,12 @@ public record Inflation(long began, long made, long decomposed) {
     }
 
     /** This, with one more essence made. */
-    Inflation plusOneMade() {
-        return new Inflation(began, made + 1, decomposed);
+    Overproduction plusOneMade() {
+        return new Overproduction(began, made + 1, decomposed);
     }
 
     /** This, with {@code count} more essence decomposed. */
-    Inflation plusDecomposed(long count) {
-        return new Inflation(began, made, decomposed + count);
+    Overproduction plusDecomposed(long count) {
+        return new Overproduction(began, made, decomposed + count);
     }
 }

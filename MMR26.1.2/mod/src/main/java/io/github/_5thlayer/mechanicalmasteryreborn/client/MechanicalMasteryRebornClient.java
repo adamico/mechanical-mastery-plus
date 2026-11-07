@@ -43,7 +43,7 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 /**
  * The client's side: C.O.D.'s and the lab's screens, the items on a Recycler output's shelf, the Electric Defence's sparks, the recycling table EMI
- * shows, the challenge a chain machine's tooltip names, the fish on C.O.D.'s lid, how Ward Tallow draws, what a food would feed under the life handicap, and how a team's Inflation bar is drawn.
+ * shows, the challenge a chain machine's tooltip names, the fish on C.O.D.'s lid, how Ward Tallow draws, what a food would feed under the life handicap, and how a team's Overproduction bar is drawn.
  */
 @Mod(value = MechanicalMasteryReborn.MOD_ID, dist = Dist.CLIENT)
 public final class MechanicalMasteryRebornClient {
@@ -62,7 +62,7 @@ public final class MechanicalMasteryRebornClient {
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::nameChain);
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::feedsNow);
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::nullShardUse);
-        NeoForge.EVENT_BUS.addListener(InflationBarOverlay::draw);
+        NeoForge.EVENT_BUS.addListener(OverproductionBarOverlay::draw);
         // With GuideME, as the pack plays, its key opens the manual's page of a block that only ever stands placed.
         if (ModList.get().isLoaded("guideme")) {
             PlacedBlockPages.register();

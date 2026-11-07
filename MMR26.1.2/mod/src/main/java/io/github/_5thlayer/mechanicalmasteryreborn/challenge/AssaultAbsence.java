@@ -26,7 +26,7 @@ import org.slf4j.Logger;
  * The Assault waits for someone at home (#240): its mobs hunt the team's players, and FTB Chunks keeps the island
  * loaded while any member is online anywhere, so while no member of the team is on its island (in the Nether, the End,
  * at spawn, or offline) its gates close, and when one comes back each opens again at the wave it had reached, where it stood. Mobs already
- * out stay, and inflation goes on. A gate closed in a chunk no one was near is kept out when it loads, its wave noted.
+ * out stay, and overproduction goes on. A gate closed in a chunk no one was near is kept out when it loads, its wave noted.
  * Closing for absence is not an Assault's removal: a shut gate's mobs aren't kept out, and a shut gate is no longer one of
  * its Assault's gates, so it is never reopened as a failed one ({@link Assault#reopen}).
  */

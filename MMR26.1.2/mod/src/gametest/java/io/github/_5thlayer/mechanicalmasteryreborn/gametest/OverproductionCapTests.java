@@ -16,7 +16,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
-import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
+import io.github._5thlayer.mechanicalmasteryreborn.record.Overproduction;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.netty.channel.embedded.EmbeddedChannel;
 import net.minecraft.commands.CommandSourceStack;
@@ -37,13 +37,13 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.GameType;
 
 /**
- * Inflation's cap (#206): reaching it resets the challenge, Inflation back to nothing and C.O.D. back to its waking
+ * Overproduction's cap (#206): reaching it resets the challenge, Overproduction back to nothing and C.O.D. back to its waking
  * pace as though the challenge had just begun, and keeps the island and the team's handicap; nearing it warns the
  * team. The tests play at the configured cap, 640 by default, which must be 5 or more for 80% of it to fall short of
  * it, and count what C.O.D. makes straight into the team's state, so they needn't wait for it. A challenge chosen as of an earlier game time stands for one that has gone on
  * that long. Each test is an island of its own.
  */
-final class InflationCapTests {
+final class OverproductionCapTests {
 
     private static final BlockPos COD = new BlockPos(1, 2, 1);
     /** Another team's C.O.D., on an island of its own in a corner of the test's. */
@@ -59,17 +59,17 @@ final class InflationCapTests {
     private static final String RESET = "mechanicalmasteryreborn.challenge.reset";
     private static final String WARNING = "mechanicalmasteryreborn.challenge.warning";
 
-    private InflationCapTests() {
+    private OverproductionCapTests() {
     }
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
-        tests.test("inflation_cap_reached_resets_the_challenge_and_keeps_the_rest", 10, InflationCapTests::resetsAndKeeps);
-        tests.test("inflation_cap_reached_leaves_another_team_alone", 10, InflationCapTests::leavesAnotherTeamAlone);
-        tests.test("inflation_cap_warns_once_near_it_and_again_after_falling_back", 10, InflationCapTests::warnsOnceAndAgain);
-        tests.test("inflation_cap_warning_survives_a_load_and_a_reset_clears_it", 10, InflationCapTests::warningSurvivesALoad);
-        tests.test("inflation_cap_warning_waits_for_a_player_online", 10, InflationCapTests::warningWaitsForAPlayer);
-        tests.test("inflation_cap_reset_command_resets_as_the_cap_does", 10, InflationCapTests::resetCommand);
-        tests.test("inflation_cap_reset_command_refuses_with_no_challenge", 10, InflationCapTests::resetCommandRefuses);
+        tests.test("overproduction_cap_reached_resets_the_challenge_and_keeps_the_rest", 10, OverproductionCapTests::resetsAndKeeps);
+        tests.test("overproduction_cap_reached_leaves_another_team_alone", 10, OverproductionCapTests::leavesAnotherTeamAlone);
+        tests.test("overproduction_cap_warns_once_near_it_and_again_after_falling_back", 10, OverproductionCapTests::warnsOnceAndAgain);
+        tests.test("overproduction_cap_warning_survives_a_load_and_a_reset_clears_it", 10, OverproductionCapTests::warningSurvivesALoad);
+        tests.test("overproduction_cap_warning_waits_for_a_player_online", 10, OverproductionCapTests::warningWaitsForAPlayer);
+        tests.test("overproduction_cap_reset_command_resets_as_the_cap_does", 10, OverproductionCapTests::resetCommand);
+        tests.test("overproduction_cap_reset_command_refuses_with_no_challenge", 10, OverproductionCapTests::resetCommandRefuses);
     }
 
     /** Twenty minutes in, C.O.D. at twice its waking pace, the team reaches its cap and is told the challenge was reset. */
@@ -86,16 +86,16 @@ final class InflationCapTests {
             make(helper, team, cap() - 1);
         });
         helper.runAtTickTime(2, () -> {
-            helper.assertValueEqual(state(helper).inflation(team).orElseThrow().excess(), (long) cap() - 1, "the excess just short of the cap");
+            helper.assertValueEqual(state(helper).overproduction(team).orElseThrow().excess(), (long) cap() - 1, "the excess just short of the cap");
             helper.assertValueEqual(player.heard(RESET), 0, "reset announcements short of the cap");
             make(helper, team, 1);
         });
         helper.runAtTickTime(3, () -> {
             long now = helper.getLevel().getServer().overworld().getGameTime();
-            Inflation inflation = state(helper).inflation(team).orElseThrow();
-            helper.assertValueEqual(inflation.excess(), 0L, "the excess once the cap was reached");
-            helper.assertValueEqual(inflation.made(), 0L, "the essence made once the cap was reached");
-            helper.assertTrue(now - inflation.began() <= 1, "the challenge didn't begin again as the cap was reached");
+            Overproduction overproduction = state(helper).overproduction(team).orElseThrow();
+            helper.assertValueEqual(overproduction.excess(), 0L, "the excess once the cap was reached");
+            helper.assertValueEqual(overproduction.made(), 0L, "the essence made once the cap was reached");
+            helper.assertTrue(now - overproduction.began() <= 1, "the challenge didn't begin again as the cap was reached");
             helper.assertValueEqual(cod(helper).interval(), WAKING, "the interval once the cap was reached");
             helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.ENERGY), "the handicap once the cap was reached");
             helper.assertTrue(state(helper).isAwake(team), "C.O.D. fell dormant as the cap was reached");
@@ -110,7 +110,7 @@ final class InflationCapTests {
 
     /**
      * An operator's {@code /cod challenge reset} resets the challenge the island's team plays as reaching the cap does,
-     * the team told, so a reset can be seen without waiting for Inflation (#294).
+     * the team told, so a reset can be seen without waiting for Overproduction (#294).
      */
     private static void resetCommand(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
@@ -123,9 +123,9 @@ final class InflationCapTests {
             helper.assertValueEqual(state(helper).resets(team), 0, "the resets before the command");
             helper.assertValueEqual(runReset(helper), 1, "the reset command's result");
             long now = helper.getLevel().getServer().overworld().getGameTime();
-            Inflation inflation = state(helper).inflation(team).orElseThrow();
-            helper.assertValueEqual(inflation.excess(), 0L, "the excess after the reset command");
-            helper.assertTrue(now - inflation.began() <= 1, "the challenge didn't begin again at the reset command");
+            Overproduction overproduction = state(helper).overproduction(team).orElseThrow();
+            helper.assertValueEqual(overproduction.excess(), 0L, "the excess after the reset command");
+            helper.assertTrue(now - overproduction.began() <= 1, "the challenge didn't begin again at the reset command");
             helper.assertValueEqual(state(helper).resets(team), 1, "the resets after the command");
             helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.ENERGY), "the handicap after the reset command");
             helper.assertValueEqual(player.heard(RESET), 1, "reset announcements after the command");
@@ -172,9 +172,9 @@ final class InflationCapTests {
             make(helper, other, cap() - 1);
         });
         helper.runAtTickTime(2, () -> {
-            helper.assertValueEqual(state(helper).inflation(team).orElseThrow().excess(), 0L, "the excess of the team that reached its cap");
-            Inflation inflation = state(helper).inflation(other).orElseThrow();
-            helper.assertValueEqual(inflation.excess(), (long) cap() - 1, "the other team's excess");
+            helper.assertValueEqual(state(helper).overproduction(team).orElseThrow().excess(), 0L, "the excess of the team that reached its cap");
+            Overproduction overproduction = state(helper).overproduction(other).orElseThrow();
+            helper.assertValueEqual(overproduction.excess(), (long) cap() - 1, "the other team's excess");
             helper.assertValueEqual(cod(helper, OTHER_COD).interval(), TWICE, "the other team's interval");
             helper.assertValueEqual(stranger.heard(RESET), 0, "reset announcements to the other team");
             stranger.leave(helper);
@@ -278,7 +278,7 @@ final class InflationCapTests {
     }
 
     private static int cap() {
-        return ServerConfig.inflationCap();
+        return ServerConfig.overproductionCap();
     }
 
     private static CodBlockEntity cod(GameTestHelper helper) {

@@ -10,7 +10,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlockEntity;
-import io.github._5thlayer.mechanicalmasteryreborn.record.Inflation;
+import io.github._5thlayer.mechanicalmasteryreborn.record.Overproduction;
 import io.github._5thlayer.mechanicalmasteryreborn.record.LastStand;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -28,7 +28,7 @@ import snownee.jade.api.view.ProgressView;
  * What the server tells Jade about a C.O.D.: whether its team has blocked all four tiers,
  * whether it is making essence, whether it is blocked, the ticks done
  * toward the next out of its interval, which the server's config sets and which is shorter once it is awake, and its
- * team's Inflation and its cap while the team plays a challenge, and its last stand and the margin once started.
+ * team's Overproduction and its cap while the team plays a challenge, and its last stand and the margin once started.
  * {@link Lines} words it on the client, apart so that a dedicated server never loads Jade's drawing.
  */
 final class CodReport {
@@ -41,7 +41,7 @@ final class CodReport {
             ByteBufCodecs.BOOL, Data::blocked,
             ByteBufCodecs.VAR_INT, Data::ticks,
             ByteBufCodecs.VAR_INT, Data::interval,
-            ByteBufCodecs.optional(Inflation.STREAM_CODEC), Data::inflation,
+            ByteBufCodecs.optional(Overproduction.STREAM_CODEC), Data::overproduction,
             ByteBufCodecs.VAR_INT, Data::cap,
             ByteBufCodecs.optional(StreamCodec.composite(
                     ByteBufCodecs.VAR_LONG, LastStand::lead,
@@ -52,7 +52,7 @@ final class CodReport {
             ByteBufCodecs.VAR_INT, Data::margin,
             Data::new);
 
-    record Data(boolean allBlocked, boolean making, boolean blocked, int ticks, int interval, Optional<Inflation> inflation, int cap,
+    record Data(boolean allBlocked, boolean making, boolean blocked, int ticks, int interval, Optional<Overproduction> overproduction, int cap,
             Optional<LastStand> lastStand, int margin) {
     }
 
@@ -61,8 +61,8 @@ final class CodReport {
     /** The ticks done are held to the interval, which may have shrunk by a tick since C.O.D. last counted one. */
     private static Data read(CodBlockEntity cod) {
         int interval = cod.interval();
-        return new Data(cod.making().isEmpty(), cod.isMaking(), cod.isBlocked(), Math.min(cod.ticksTowardNext(), interval), interval, cod.inflation(),
-                ServerConfig.inflationCap(), cod.lastStand(), ServerConfig.lastStandMargin());
+        return new Data(cod.making().isEmpty(), cod.isMaking(), cod.isBlocked(), Math.min(cod.ticksTowardNext(), interval), interval, cod.overproduction(),
+                ServerConfig.overproductionCap(), cod.lastStand(), ServerConfig.lastStandMargin());
     }
 
     private CodReport() {
@@ -71,7 +71,7 @@ final class CodReport {
     /**
      * Words the report: that all four tiers are blocked, if they are; otherwise the next essence as a bar with the seconds left while it is making, that it is blocked
      * while what it makes has nowhere to go, or that its slot is full; then, while its team plays a challenge, its
-     * Inflation's excess against its cap, as its bar words it, with what C.O.D. has made and the team has decomposed since the challenge began.
+     * Overproduction's excess against its cap, as its bar words it, with what C.O.D. has made and the team has decomposed since the challenge began.
      * Once its last stand is won, only that it has shut down for good; while it runs, its Lead and C.O.D.'s rate, as its bar
      * words them.
      */
@@ -97,10 +97,10 @@ final class CodReport {
                 tooltip.add(JadeUI.progress(new ProgressView(ProgressView.Part.of((float) report.ticks() / report.interval()), next,
                         JadeUI.progressStyle(), BoxStyle.nestedBox())));
             }
-            report.inflation().ifPresent(inflation -> {
-                tooltip.add(Component.translatable("mechanicalmasteryreborn.bar.inflation", inflation.excess(), report.cap()));
-                tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.made_decomposed", inflation.made(),
-                        inflation.decomposed()).withStyle(ChatFormatting.GRAY));
+            report.overproduction().ifPresent(overproduction -> {
+                tooltip.add(Component.translatable("mechanicalmasteryreborn.bar.overproduction", overproduction.excess(), report.cap()));
+                tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.cod.made_decomposed", overproduction.made(),
+                        overproduction.decomposed()).withStyle(ChatFormatting.GRAY));
             });
             report.lastStand().ifPresent(stand -> tooltip.add(LastStands.lead(stand, report.margin())));
         }
