@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- The money challenge mints copper, iron and gold on the Assembler, locked until the team starts the challenge as every chain is, and kept past a reset but not a stop: an ingot melts with lava into molten metal, the molten metal is cast in a Mold, and the cast is cooled with water and knocked out into that metal's Coin and Burnt Sand. Burnt Sand washes back into sand, and sand and clay with water make the next Mold. Every step takes a fluid, so the Personal Assembler plans none of it (#320).
+- The money challenge mints copper, iron and gold on the Assembler, locked until the team starts the challenge as every chain is, and kept past a reset but not a stop: an ingot melts with lava into molten metal, which carries the lava's rock as dross, the molten metal is cast in a Mold, and the cast is cooled with water and knocked out into that metal's Coin and Burnt Sand, which holds the dross. Burnt Sand washes back into sand, and sand and clay with water make the next Mold. Every step takes a fluid, so the Personal Assembler plans none of it (#320).
 
 ## 0.0.2
 
