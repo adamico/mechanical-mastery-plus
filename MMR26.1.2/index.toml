@@ -58,7 +58,7 @@ hash = "4c68ab99c906dd487952f61bf33c0635039a8bbff3f02099e3cd8272fe51b4aa"
 
 [[files]]
 file = "config/fancymenu/customization/title_screen.txt"
-hash = "f26d938a1a702ae955d0ac4ef3d4141476183042f5930196b9bbf489329133ee"
+hash = "abf52a18d804650f30eaad9b567d227aa47855bde3cc2d062a695c51dcf4d142"
 
 [[files]]
 file = "config/fancymenu/options.txt"
@@ -479,6 +479,10 @@ hash = "03792a046e9734d148fabb8ba89e7d09122d818426150f538f551b8dc3cb30fa"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/fluids/water.json"
 hash = "868729daa84b3fd422093a81404749552365d6b63e7711796a89f62dec4f78e0"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/clay.json"
+hash = "de83a6c4fa3436256b5703e39c665c3f2c728ede6ab2409f76e619032dcfc0b6"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/dirt.json"

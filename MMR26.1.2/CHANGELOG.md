@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.0.5
+
 - The Shop sells clay, 16 blocks for $20, as it sells sand.
 
 ## 0.0.4
