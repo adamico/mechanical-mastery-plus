@@ -58,7 +58,7 @@ hash = "4c68ab99c906dd487952f61bf33c0635039a8bbff3f02099e3cd8272fe51b4aa"
 
 [[files]]
 file = "config/fancymenu/customization/title_screen.txt"
-hash = "abf52a18d804650f30eaad9b567d227aa47855bde3cc2d062a695c51dcf4d142"
+hash = "44550e4f5a83d723c43ad2425bb8c1447acc7cf87f6f0ec852d01f962a6a870e"
 
 [[files]]
 file = "config/fancymenu/options.txt"
@@ -414,7 +414,7 @@ hash = "0bfaf04fc7b6a34273b183d0330768e9c6ee70c17e068fa31d72e4d41896fc41"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/mold.json"
-hash = "ffa4e7b189ce3e5be0e0c051246010d65216bb63e404699e77d5cadcd9edb925"
+hash = "5b1640c80dfc4cbde9bbf9f0e06d71744fdcdb2a07b3b2265cc2a477463be66c"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/molten_copper.json"
@@ -481,8 +481,8 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/fluids/water.json"
 hash = "868729daa84b3fd422093a81404749552365d6b63e7711796a89f62dec4f78e0"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/clay.json"
-hash = "de83a6c4fa3436256b5703e39c665c3f2c728ede6ab2409f76e619032dcfc0b6"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/clay_ball.json"
+hash = "4c76ff91cf166f1853eda818818f5504d6d15fcbc52237ad824053b55bd17007"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/dirt.json"

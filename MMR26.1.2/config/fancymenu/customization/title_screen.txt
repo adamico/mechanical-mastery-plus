@@ -113,7 +113,7 @@ element {
   y = 4
   width = 300
   height = 20
-  source = Mechanical Mastery Reborn 0.0.5 alpha
+  source = Mechanical Mastery Reborn 0.0.6 alpha
   source_mode = direct
   shadow = true
   scale = 1.0
