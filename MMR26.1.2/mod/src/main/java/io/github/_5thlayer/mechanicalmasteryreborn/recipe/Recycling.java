@@ -81,7 +81,7 @@ public final class Recycling {
 
     /**
      * The items the pack names refined, beside what the rules find: the planks, as bamboo's, cut from a crafted block, and
-     * the mint's Gold Cast and Gold Coin, poured metal as an ingot is, so no Recycler runs the shakeout backwards (#320).
+     * the mint's casts and Coins, poured metal as an ingot is, so no Recycler runs the shakeout backwards (#320).
      */
     public static final TagKey<Item> REFINED = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "refined"));
 

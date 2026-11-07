@@ -3,6 +3,8 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.challenge;
 
+import java.util.List;
+
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BucketItem;
@@ -26,9 +28,10 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 /**
  * The money challenge's mint (ADR 0017, #320), what the pack's assembling recipes melt, cast and knock out a Coin
- * with: molten gold, as Ward Tallow is a fluid, with its block and bucket so pipes, tanks and an Assembler's drain and
- * fill slots take it; the Mold (the line's glossary), one for every metal; the gold cast, a Mold filled with gold, which
- * knows its coin; Burnt Sand, what the shakeout leaves; and the Gold Coin. None is in a mix, and the Shop buys none.
+ * with: for each of copper, iron and gold a {@link Metal}, its molten metal, as Ward Tallow is a fluid, with its block
+ * and bucket so pipes, tanks and an Assembler's drain and fill slots take it, its cast, a Mold filled with that metal,
+ * which knows its coin, and its Coin; and, for every metal, the Mold (the line's glossary) and Burnt Sand, what the
+ * shakeout leaves. None is in a mix, and the Shop buys none.
  */
 public final class Mint {
 
@@ -38,54 +41,16 @@ public final class Mint {
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MechanicalMasteryReborn.MOD_ID);
     private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MechanicalMasteryReborn.MOD_ID);
 
-    public static final DeferredHolder<FluidType, FluidType> MOLTEN_GOLD_TYPE = FLUID_TYPES.register(
-            "molten_gold",
-            () -> new FluidType(FluidType.Properties.create()
-                    .descriptionId("fluid_type." + MechanicalMasteryReborn.MOD_ID + ".molten_gold")
-                    .lightLevel(15)
-                    .density(3000)
-                    .temperature(1300)
-                    .viscosity(6000)
-                    .rarity(Rarity.COMMON)));
-
-    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> MOLTEN_GOLD =
-            FLUIDS.register("molten_gold", () -> new BaseFlowingFluid.Source(properties()));
-    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_MOLTEN_GOLD =
-            FLUIDS.register("flowing_molten_gold", () -> new BaseFlowingFluid.Flowing(properties()));
-
-    public static final DeferredHolder<Block, LiquidBlock> MOLTEN_GOLD_BLOCK = BLOCKS.registerBlock("molten_gold",
-            props -> new LiquidBlock(MOLTEN_GOLD.get(), liquidProperties(props)));
-
-    /** A plain {@link BucketItem}, not a subclass: NeoForge gives the fluid item capability to that exact class only. */
-    public static final DeferredItem<BucketItem> MOLTEN_GOLD_BUCKET = ITEMS.registerItem("molten_gold_bucket",
-            props -> new BucketItem(MOLTEN_GOLD.get(), props),
-            props -> props.craftRemainder(Items.BUCKET).stacksTo(1));
+    public static final Metal COPPER = new Metal("copper", MapColor.COLOR_ORANGE);
+    public static final Metal IRON = new Metal("iron", MapColor.METAL);
+    public static final Metal GOLD = new Metal("gold", MapColor.GOLD);
+    /** The mint's metals, in the order the Works tab lists them. */
+    public static final List<Metal> METALS = List.of(COPPER, IRON, GOLD);
 
     public static final DeferredItem<Item> MOLD = ITEMS.registerSimpleItem("mold");
-    public static final DeferredItem<Item> GOLD_CAST = ITEMS.registerSimpleItem("gold_cast");
     public static final DeferredItem<Item> BURNT_SAND = ITEMS.registerSimpleItem("burnt_sand");
-    public static final DeferredItem<Item> GOLD_COIN = ITEMS.registerSimpleItem("gold_coin");
 
     private Mint() {
-    }
-
-    private static BaseFlowingFluid.Properties properties() {
-        return new BaseFlowingFluid.Properties(MOLTEN_GOLD_TYPE, MOLTEN_GOLD, FLOWING_MOLTEN_GOLD)
-                .block(MOLTEN_GOLD_BLOCK).bucket(MOLTEN_GOLD_BUCKET);
-    }
-
-    /** Takes the properties rather than making them: a block's registry id rides on them. */
-    private static BlockBehaviour.Properties liquidProperties(BlockBehaviour.Properties props) {
-        return props
-                .mapColor(MapColor.GOLD)
-                .replaceable()
-                .noCollision()
-                .strength(100.0F)
-                .lightLevel(state -> 15)
-                .pushReaction(PushReaction.DESTROY)
-                .noLootTable()
-                .liquid()
-                .sound(SoundType.EMPTY);
     }
 
     public static void register(IEventBus modBus) {
@@ -93,5 +58,64 @@ public final class Mint {
         FLUIDS.register(modBus);
         BLOCKS.register(modBus);
         ITEMS.register(modBus);
+    }
+
+    /**
+     * One metal of the mint, named as its ids are: {@code molten_<name>}, its flowing fluid, block and bucket,
+     * {@code <name>_cast} and {@code <name>_coin}.
+     */
+    public static final class Metal {
+
+        private final String name;
+        public final DeferredHolder<FluidType, FluidType> type;
+        public final DeferredHolder<Fluid, BaseFlowingFluid.Source> molten;
+        public final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> flowing;
+        public final DeferredHolder<Block, LiquidBlock> block;
+        /** A plain {@link BucketItem}, not a subclass: NeoForge gives the fluid item capability to that exact class only. */
+        public final DeferredItem<BucketItem> bucket;
+        public final DeferredItem<Item> cast;
+        public final DeferredItem<Item> coin;
+
+        private Metal(String name, MapColor mapColor) {
+            this.name = name;
+            String molten = "molten_" + name;
+            type = FLUID_TYPES.register(molten, () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("fluid_type." + MechanicalMasteryReborn.MOD_ID + "." + molten)
+                    .lightLevel(15)
+                    .density(3000)
+                    .temperature(1300)
+                    .viscosity(6000)
+                    .rarity(Rarity.COMMON)));
+            this.molten = FLUIDS.register(molten, () -> new BaseFlowingFluid.Source(properties()));
+            flowing = FLUIDS.register("flowing_" + molten, () -> new BaseFlowingFluid.Flowing(properties()));
+            block = BLOCKS.registerBlock(molten, props -> new LiquidBlock(this.molten.get(), liquidProperties(props, mapColor)));
+            bucket = ITEMS.registerItem(molten + "_bucket", props -> new BucketItem(this.molten.get(), props),
+                    props -> props.craftRemainder(Items.BUCKET).stacksTo(1));
+            cast = ITEMS.registerSimpleItem(name + "_cast");
+            coin = ITEMS.registerSimpleItem(name + "_coin");
+        }
+
+        /** The metal's name, as in its ids. */
+        public String name() {
+            return name;
+        }
+
+        private BaseFlowingFluid.Properties properties() {
+            return new BaseFlowingFluid.Properties(type, molten, flowing).block(block).bucket(bucket);
+        }
+
+        /** Takes the properties rather than making them: a block's registry id rides on them. */
+        private static BlockBehaviour.Properties liquidProperties(BlockBehaviour.Properties props, MapColor mapColor) {
+            return props
+                    .mapColor(mapColor)
+                    .replaceable()
+                    .noCollision()
+                    .strength(100.0F)
+                    .lightLevel(state -> 15)
+                    .pushReaction(PushReaction.DESTROY)
+                    .noLootTable()
+                    .liquid()
+                    .sound(SoundType.EMPTY);
+        }
     }
 }

@@ -1,0 +1,15 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting-with-fluid",
+  "ingredients": [
+    { "ingredient": "mechanicalmasteryreborn:copper_cast", "count": 1 }
+  ],
+  "fluid_ingredients": [
+    { "ingredient": "minecraft:water", "amount": 250 }
+  ],
+  "results": [
+    { "id": "mechanicalmasteryreborn:copper_coin", "count": 1 },
+    { "id": "mechanicalmasteryreborn:burnt_sand", "count": 1 }
+  ],
+  "time": 100
+}
