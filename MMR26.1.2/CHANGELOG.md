@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- The Shop prices lava as a consumable, $5 a bucket in place of $1000, and no longer buys it back, since only the Shop gives it. The Galvanic, Warding and Vital Essences sell for more than what their chains spend making them and under twice that, in place of $2500 each: $7.50, $1500 and $340. The Shop no longer buys Essentia Vitae, so a life chain's vitae goes into Vital Essence rather than being sold. So a won chain's extras are a profit at full price and a loss at the money handicap's half (#319).
+- The Shop prices lava as a consumable, $5 a bucket in place of $1000, and no longer buys it back, since only the Shop gives it. The Galvanic, Warding and Vital Essences sell for more than what their chains spend making them and under twice that, in place of $2500 each: $7.50, $1500 and $340. The Shop no longer buys Essentia Vitae or liquified experience, so a life chain's fluids go into Vital Essence rather than being sold. So a won chain's extras are a profit at full price and a loss at the money handicap's half (#319).
 
 ## 0.0.2
 
