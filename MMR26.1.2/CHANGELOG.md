@@ -2,7 +2,13 @@
 
 ## Unreleased
 
+## 0.0.4
+
 - Groundworks 0.7.1: a sheet holding a Blueprint is told from paper: it is named Blueprint, glints, and its tooltip says Copy or Cut, how many blocks it holds and the box's size, and "Pasting air" when set to; a blank sheet with a Corner stored says where. A sheet stamped by 0.7.0 catches up the first time it is held (5thlayer/groundworks#87).
+
+### Mods
+
+- Updated Groundworks: `groundworks-0.7.0.jar` → `groundworks-0.7.1.jar`
 
 ## 0.0.3
 
