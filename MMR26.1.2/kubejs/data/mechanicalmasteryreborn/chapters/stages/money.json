@@ -18,6 +18,9 @@
     "mechanicalmasteryreborn:assembling/gold_cast",
     "mechanicalmasteryreborn:assembling/gold_coin",
     "mechanicalmasteryreborn:assembling/sand_from_burnt_sand",
-    "mechanicalmasteryreborn:assembling/mold"
+    "mechanicalmasteryreborn:assembling/mold",
+    "mechanicalmasteryreborn:assembling/iron_coin_from_copper_coins",
+    "mechanicalmasteryreborn:assembling/gold_coin_from_iron_coins",
+    "mechanicalmasteryreborn:assembling/aureate_essence"
   ]
 }

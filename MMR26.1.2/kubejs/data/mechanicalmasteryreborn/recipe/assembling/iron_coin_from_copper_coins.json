@@ -1,0 +1,11 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting",
+  "ingredients": [
+    { "ingredient": "mechanicalmasteryreborn:copper_coin", "count": 2 }
+  ],
+  "results": [
+    { "id": "mechanicalmasteryreborn:iron_coin", "count": 1 }
+  ],
+  "time": 100
+}

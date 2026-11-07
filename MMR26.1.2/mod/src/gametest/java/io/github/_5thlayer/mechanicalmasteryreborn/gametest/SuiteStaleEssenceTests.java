@@ -4,6 +4,7 @@
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
 import java.util.UUID;
+import java.util.function.Consumer;
 
 import com.ammonium.adminshop.recipes.RecipeManager;
 import io.github._5thlayer.craftworks.machine.AssemblerBlockEntity;
@@ -12,6 +13,7 @@ import io.github._5thlayer.craftworks.assembler.PersonalAssembler;
 import io.github._5thlayer.craftworks.machine.AssemblerSlots;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Mint;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
@@ -44,7 +46,7 @@ import net.neoforged.neoforge.transfer.item.ItemResource;
 /**
  * A stale Transmuted Essence on the suite's machines and AdminShop (#322), in the {@code suiteGameTestServer} run alone:
  * a Warding Essence sealed on a real Assembler, ticking as the world ticks it, on the island of a team playing protection
- * is stamped with its attempt, so after a reset the Port refuses it and takes the next one sealed, as it refuses one
+ * is stamped with its attempt, as an Aureate sealed from the mint's coins by a team playing money is (#323), so after a reset the Port refuses it and takes the next one sealed, as it refuses one
  * crafted on a member's Personal Assembler before the reset; and a stale essence,
  * like an unstamped or a won chain's one, still matches the Shop's sell Offer, the pack's own, and still goes into a
  * Quartessence. Its Assembler is a {@link SuiteAssembler}.
@@ -61,7 +63,10 @@ final class SuiteStaleEssenceTests {
     }
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
-        tests.test("suite_stale_warding_sealed_before_a_reset_is_refused_by_the_port", TICKS, SuiteStaleEssenceTests::sealedBeforeAReset);
+        tests.test("suite_stale_warding_sealed_before_a_reset_is_refused_by_the_port", TICKS,
+                helper -> sealedBeforeAReset(helper, Handicap.PROTECTION, "warding_essence", SuiteStaleEssenceTests::fillSeal));
+        tests.test("suite_stale_aureate_sealed_before_a_reset_is_refused_by_the_port", TICKS,
+                helper -> sealedBeforeAReset(helper, Handicap.MONEY, "aureate_essence", SuiteStaleEssenceTests::fillAureateSeal));
         tests.test("suite_stale_essence_crafted_on_the_personal_assembler_before_a_reset_is_refused_by_the_port", 1,
                 SuiteStaleEssenceTests::craftedByHand);
         tests.test("suite_stale_essence_matches_the_shop_s_sell_offer", 1, SuiteStaleEssenceTests::shopBuysIt);
@@ -69,11 +74,12 @@ final class SuiteStaleEssenceTests {
         tests.test("suite_stale_essence_goes_into_a_quartessence", 40, SuiteStaleEssenceTests::quartessence);
     }
 
-    private static void sealedBeforeAReset(GameTestHelper helper) {
+    /** {@code handicap}'s essence sealed by the pack's recipe {@code assembling/<recipe>}, its inputs put in by {@code fill}. */
+    private static void sealedBeforeAReset(GameTestHelper helper, Handicap handicap, String recipe, Consumer<AssemblerBlockEntity> fill) {
         UUID team = TestTeams.claim(helper);
-        helper.setBlock(PORT, Port.BLOCKS_BY_HANDICAP.get(Handicap.PROTECTION).get());
-        helper.assertTrue(state(helper).begin(team, Handicap.PROTECTION, helper.getLevel().getGameTime()), "protection didn't start");
-        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "warding_essence");
+        helper.setBlock(PORT, Port.BLOCKS_BY_HANDICAP.get(handicap).get());
+        helper.assertTrue(state(helper).begin(team, handicap, helper.getLevel().getGameTime()), handicap.id() + " didn't start");
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, recipe);
         var supply = new SimpleEnergyHandler(1_000_000, 1_000_000, 1_000_000, 1_000_000);
         // FE fed each tick, as a cable would, while the world ticks the Assembler as it ticks every machine.
         helper.onEachTick(() -> {
@@ -82,20 +88,20 @@ final class SuiteStaleEssenceTests {
                 EnergyHandlerUtil.move(supply, face, 1000, null);
             }
         });
-        fillSeal(assembler);
+        fill.accept(assembler);
         ItemStack[] earlier = new ItemStack[1];
         helper.startSequence()
                 .thenWaitUntil(() -> helper.assertTrue(sealed(assembler), "the Assembler sealed nothing"))
                 .thenExecute(() -> {
                     earlier[0] = takeOutput(assembler);
-                    helper.assertTrue(state(helper).resetChallenge(team, helper.getLevel().getGameTime()), "protection didn't reset");
-                    fillSeal(assembler);
+                    helper.assertTrue(state(helper).resetChallenge(team, helper.getLevel().getGameTime()), handicap.id() + " didn't reset");
+                    fill.accept(assembler);
                 })
                 .thenWaitUntil(() -> helper.assertTrue(sealed(assembler), "the Assembler sealed nothing after the reset"))
                 .thenExecute(() -> {
                     ItemStack current = takeOutput(assembler);
-                    helper.assertValueEqual(offer(helper, team, earlier[0]), 1, "the Warding Essence sealed before the reset a hand keeps");
-                    helper.assertValueEqual(offer(helper, team, current), 0, "the Warding Essence sealed after the reset a hand keeps");
+                    helper.assertValueEqual(offer(helper, team, earlier[0]), 1, "the essence sealed before the reset a hand keeps");
+                    helper.assertValueEqual(offer(helper, team, current), 0, "the essence sealed after the reset a hand keeps");
                     helper.assertValueEqual(state(helper).delivered(team), 1L, "the essence counted");
                 })
                 .thenSucceed();
@@ -214,6 +220,13 @@ final class SuiteStaleEssenceTests {
         SuiteAssembler.put(assembler, 3, Items.GUNPOWDER, 1);
         SuiteAssembler.put(assembler, 4, Items.IRON_INGOT, 1);
         assembler.fluids().set(0, new FluidStack(Fluids.WATER, 1000));
+    }
+
+    /** The Aureate Essence's inputs, the mint's Seal, coins of all three metals, in the Assembler's slots. */
+    private static void fillAureateSeal(AssemblerBlockEntity assembler) {
+        SuiteAssembler.put(assembler, 0, Mint.COPPER.coin.get(), 8);
+        SuiteAssembler.put(assembler, 1, Mint.IRON.coin.get(), 4);
+        SuiteAssembler.put(assembler, 2, Mint.GOLD.coin.get(), 2);
     }
 
     private static boolean sealed(AssemblerBlockEntity assembler) {
