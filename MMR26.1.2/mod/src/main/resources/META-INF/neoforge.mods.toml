@@ -41,6 +41,10 @@ side = "BOTH"
 [[mixins]]
 config = "${mod_id}.mixins.json"
 
+# A Transmuted Essence a playing team's machine or Personal Assembler makes is stamped with its attempt (#322).
+[[mixins]]
+config = "${mod_id}.essence.mixins.json"
+
 # A chain machine from a mix does no work while its chain is locked, applied only with Theurgy installed (#214).
 [[mixins]]
 config = "${mod_id}.theurgy.mixins.json"

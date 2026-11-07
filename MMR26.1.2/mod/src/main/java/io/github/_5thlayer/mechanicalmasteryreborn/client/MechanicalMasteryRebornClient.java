@@ -13,6 +13,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.guideme.PlacedBlockPages;
 import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Attempts;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingTable;
@@ -35,6 +36,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterConditionalItemModelPropertyEvent;
 import net.neoforged.neoforge.client.event.RegisterFluidModelsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.fluid.FluidTintSources;
@@ -60,9 +62,14 @@ public final class MechanicalMasteryRebornClient {
                 (table, context) -> ChainMachines.Table.receive(table)));
         modBus.addListener((RegisterClientPayloadHandlersEvent event) -> event.register(LabMenu.Asks.TYPE,
                 (asks, context) -> LabMenu.Asks.receive(asks, context.player())));
+        modBus.addListener((RegisterClientPayloadHandlersEvent event) -> event.register(Attempts.Viewer.TYPE,
+                (viewer, context) -> Attempts.Viewer.receive(viewer)));
+        modBus.addListener((RegisterConditionalItemModelPropertyEvent event) -> event.register(
+                Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "stale"), StaleEssence.MAP_CODEC));
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::nameChain);
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::feedsNow);
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::nullShardUse);
+        NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::staleEssence);
         NeoForge.EVENT_BUS.addListener(OverproductionBarOverlay::draw);
         // With GuideME, as the pack plays, its key opens the manual's page of a block that only ever stands placed.
         if (ModList.get().isLoaded("guideme")) {
@@ -88,6 +95,13 @@ public final class MechanicalMasteryRebornClient {
         long percent = Math.round(LifeHandicap.shareNow(player, event.getItemStack()) * 100);
         event.getToolTip().add(Component.translatable("mechanicalmasteryreborn.diet.feeds", percent)
                 .withStyle(percent < 100 ? ChatFormatting.RED : ChatFormatting.GREEN));
+    }
+
+    /** A stale Transmuted Essence's tooltip says it was made before the last reset, so a Port refuses it (#322). */
+    private static void staleEssence(ItemTooltipEvent event) {
+        if (Attempts.staleToViewer(event.getItemStack())) {
+            event.getToolTip().add(Component.translatable("mechanicalmasteryreborn.essence.stale").withStyle(ChatFormatting.DARK_GRAY));
+        }
     }
 
     /** A Null Shard's tooltip says what it is for, since no recipe uses it (#263). */

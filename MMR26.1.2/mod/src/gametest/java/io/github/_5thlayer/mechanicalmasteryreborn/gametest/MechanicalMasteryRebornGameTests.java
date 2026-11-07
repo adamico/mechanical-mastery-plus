@@ -84,6 +84,7 @@ public final class MechanicalMasteryRebornGameTests {
         LabTests.register(tests);
         LabSaplingTests.register(tests);
         PortTests.register(tests);
+        StaleEssenceTests.register(tests);
         OverproductionTests.register(tests);
         OverproductionCapTests.register(tests);
         PaceTests.register(tests);
@@ -122,6 +123,11 @@ public final class MechanicalMasteryRebornGameTests {
         }
         if (ModList.get().isLoaded("voidworks")) {
             SuiteQuintessenceTests.register(tests);
+        }
+        // A stale Transmuted Essence sealed on a real Assembler, matched by the Shop's sell Offers and assembled into a
+        // Quartessence, in the suiteGameTestServer run alone, which loads Craftworks and AdminShop (#322).
+        if (ModList.get().isLoaded("craftworks") && ModList.get().isLoaded("adminshop")) {
+            SuiteStaleEssenceTests.register(tests);
         }
         // Each test that records a decompose claims a team of its own.
         Teams.use(new TestTeams(Teams.installed()));

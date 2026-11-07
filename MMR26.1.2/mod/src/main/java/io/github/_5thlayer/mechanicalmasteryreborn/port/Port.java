@@ -5,6 +5,7 @@ package io.github._5thlayer.mechanicalmasteryreborn.port;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
@@ -51,6 +52,11 @@ public final class Port {
     /** {@code handicap}'s Transmuted Essence, which its Port takes. */
     public static Essence essence(Handicap handicap) {
         return ESSENCES.get(handicap);
+    }
+
+    /** The challenge whose Port takes {@code essence}, if it is a Transmuted Essence. */
+    public static Optional<Handicap> handicapOf(Essence essence) {
+        return ESSENCES.entrySet().stream().filter(entry -> entry.getValue() == essence).map(Map.Entry::getKey).findFirst();
     }
 
     /** The id of {@code handicap}'s Port, after its essence: {@code galvanic_port} for energy's. */

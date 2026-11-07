@@ -33,7 +33,8 @@ import net.minecraft.world.level.saveddata.SavedDataType;
  * aside from its Account while it plays the money challenge, the challenges it has ever started and the chains it has
  * unlocked, which a stop takes back, the resets of the challenge it plays since it last started, the essence its Port has
  * taken toward the quota, and the tiers it has blocked and the challenges it has won, which no reset touches, and its
- * {@link LastStand} once it has started it, and the {@link Spell spells} it bears at its Hermetic Lab.
+ * {@link LastStand} once it has started it, the {@link Spell spells} it bears at its Hermetic Lab, and its attempt number,
+ * which each start and reset moves on.
  * Its members share it, and a player who joins a team shares it from then on.
  * Saved with the world, in the overworld's data.
  */
@@ -77,7 +78,8 @@ public final class TeamState extends SavedData {
                 HANDICAPS_CODEC.optionalFieldOf("started", Set.of()).forGetter(entry -> entry.started),
                 Codec.INT.optionalFieldOf("resets", 0).forGetter(entry -> entry.resets),
                 LAST_STAND_CODEC.optionalFieldOf("last_stand").forGetter(entry -> entry.lastStand),
-                SPELLS_CODEC.optionalFieldOf("spells", Map.of()).forGetter(entry -> entry.spells))
+                SPELLS_CODEC.optionalFieldOf("spells", Map.of()).forGetter(entry -> entry.spells),
+                Codec.INT.optionalFieldOf("attempt", 0).forGetter(entry -> entry.attempt))
                 .apply(instance, Entry::new));
 
         boolean awake;
@@ -105,18 +107,20 @@ public final class TeamState extends SavedData {
         Optional<LastStand> lastStand;
         /** The handicaps the team bears at its Hermetic Lab, each for its spell, while it runs. */
         Map<Handicap, Spell> spells;
+        /** The team's attempt number, which every start and reset moves on, and nothing moves back (ADR 0016). */
+        int attempt;
 
         Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Overproduction> overproduction,
                 Optional<Overproduction> inflation, boolean warned, long setAside, Set<Handicap> unlocked, Set<Essence> blocked,
                 Set<Handicap> won, long delivered, Set<Handicap> started, int resets, Optional<LastStand> lastStand,
-                Map<Handicap, Spell> spells) {
+                Map<Handicap, Spell> spells, int attempt) {
             this(awake, made, handicap, overproduction.or(() -> inflation), warned, setAside, unlocked, blocked, won, delivered,
-                    started, resets, lastStand, spells);
+                    started, resets, lastStand, spells, attempt);
         }
 
         Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Overproduction> overproduction, boolean warned, long setAside,
                 Set<Handicap> unlocked, Set<Essence> blocked, Set<Handicap> won, long delivered, Set<Handicap> started, int resets,
-                Optional<LastStand> lastStand, Map<Handicap, Spell> spells) {
+                Optional<LastStand> lastStand, Map<Handicap, Spell> spells, int attempt) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
@@ -135,6 +139,8 @@ public final class TeamState extends SavedData {
             this.resets = handicap.isPresent() ? resets : 0;
             this.lastStand = lastStand;
             this.spells = spells.isEmpty() ? new EnumMap<>(Handicap.class) : new EnumMap<>(spells);
+            // Saved before attempts were numbered, a team's first: the essence it made then carries no stamp, and is current.
+            this.attempt = attempt;
         }
     }
 
@@ -179,7 +185,7 @@ public final class TeamState extends SavedData {
 
     /**
      * Puts {@code team}'s C.O.D. back to dormant, as a new island's is, its count of what it made forgotten. The
-     * challenge the team plays, if any, goes on, and so do the tiers it blocked and the challenges it won.
+     * challenge the team plays, if any, goes on, and so do the tiers it blocked, the challenges it won and its attempt number.
      */
     public void makeDormant(UUID team) {
         Entry entry = teams.get(team);
@@ -187,7 +193,7 @@ public final class TeamState extends SavedData {
             return;
         }
         if (entry.handicap.isPresent() || !entry.blocked.isEmpty() || !entry.won.isEmpty() || entry.lastStand.isPresent()
-                || !entry.spells.isEmpty()) {
+                || !entry.spells.isEmpty() || entry.attempt > 0) {
             entry.awake = false;
             entry.made = 0;
         } else {
@@ -231,6 +237,7 @@ public final class TeamState extends SavedData {
         entry.unlocked.add(handicap);
         entry.started.add(handicap);
         entry.resets = 0;
+        entry.attempt++;
         setDirty();
         return true;
     }
@@ -280,8 +287,18 @@ public final class TeamState extends SavedData {
         entry.warned = false;
         entry.delivered = 0;
         entry.resets++;
+        entry.attempt++;
         setDirty();
         return true;
+    }
+
+    /**
+     * {@code team}'s attempt number, which each start and reset of a challenge moves on and nothing moves back: a Transmuted
+     * Essence stamped with an earlier one is stale (ADR 0016).
+     */
+    public int attempt(UUID team) {
+        Entry entry = teams.get(team);
+        return entry == null ? 0 : entry.attempt;
     }
 
     /** How much Transmuted Essence {@code team}'s Port has taken toward the quota of the challenge it plays. */
@@ -630,6 +647,6 @@ public final class TeamState extends SavedData {
 
     private Entry entry(UUID team) {
         return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false, 0, Set.of(), Set.of(),
-                Set.of(), 0, Set.of(), 0, Optional.empty(), Map.of()));
+                Set.of(), 0, Set.of(), 0, Optional.empty(), Map.of(), 0));
     }
 }
