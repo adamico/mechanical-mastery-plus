@@ -229,7 +229,10 @@ final class OverproductionTests {
             helper.assertValueEqual(bar.get().getProgress(), 1.0F / ServerConfig.overproductionCap(), "the bar's fill, one made");
             helper.assertValueEqual(bar.get().getName(), Component.translatable("mechanicalmasteryreborn.bar.challenge",
                     Component.translatable("mechanicalmasteryreborn.challenge.title", Component.translatable("mechanicalmasteryreborn.handicap.energy")),
-                    Component.translatable("mechanicalmasteryreborn.bar.overproduction", 1L, ServerConfig.overproductionCap())), "the bar's title");
+                    Component.translatable("mechanicalmasteryreborn.bar.resets",
+                            Component.translatable("mechanicalmasteryreborn.bar.overproduction", 1L, ServerConfig.overproductionCap()))), "the bar's title");
+            String read = bar.get().getName().getString();
+            helper.assertTrue(read.contains("resets") && read.contains("essence"), "the bar's title doesn't name the reset and what it loses: " + read);
             helper.assertTrue(bar.get().getPlayers().contains(player), "the team's player doesn't see its bar");
             helper.assertFalse(bar.get().getPlayers().contains(stranger), "another team's player sees the bar");
             helper.assertTrue(OverproductionBar.of(other).isEmpty(), "a team that plays no challenge has a bar");

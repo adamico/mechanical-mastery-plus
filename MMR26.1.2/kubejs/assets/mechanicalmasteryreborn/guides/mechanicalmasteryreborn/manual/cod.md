@@ -28,7 +28,8 @@ burst of flame and void motes, seen and heard across your island. The fish on it
 as the challenge is played. A reset, a stop or a win plays no ritual.
 
 While your team plays a challenge, C.O.D. makes essence ever faster. Each one it makes
-that you don't decompose adds to **Overproduction**. When Overproduction reaches its cap, the challenge starts over.
+that you don't decompose adds to **Overproduction**. When Overproduction reaches its cap, the challenge starts over:
+what its Port has taken is lost, and the Transmuted Essence made for it turns stale.
 
 ## The Ports
 

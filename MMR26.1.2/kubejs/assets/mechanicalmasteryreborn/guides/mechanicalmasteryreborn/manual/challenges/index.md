@@ -50,9 +50,15 @@ again until your team starts the challenge anew.
 
 ## Overproduction
 
-While your team plays a challenge, C.O.D. makes its tier of essence ever faster, without a ceiling. **Overproduction**
-is what it has made minus what you have decomposed, by hand or on a Recycler, since the challenge began. Keeping
-or voiding essence doesn't lower it. A stock decomposed early counts against what C.O.D. makes next.
+While your team plays a challenge, C.O.D. makes its tier of essence ever faster, without a ceiling. Its essence is
+no harm in itself: keep it, use it, or void it as you please. What counts is whether you keep up with it.
+**Overproduction** is how far your team has fallen behind C.O.D.: what it has made minus what you have decomposed,
+by hand or on a Recycler, since the challenge began. Keeping or voiding essence doesn't lower it, and hoarding it
+doesn't raise it; only decomposing gains ground. A stock decomposed early counts against what C.O.D. makes next.
+
+Fall too far behind and the challenge **resets**. The reset is the threat: it takes what the Port has taken, and
+makes every Transmuted Essence the attempt made stale, so essence held back is lost along with what went in. You
+are told so as the challenge starts, the bar says so, and so do the warning and the reset itself.
 
 Everyone online sees Overproduction on the bar at the top of their screen, under the challenge's name, and Jade on
 C.O.D. shows it too. As Overproduction nears its cap, a bell rings and a warning is read in chat, once, and again only
