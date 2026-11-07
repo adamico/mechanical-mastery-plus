@@ -37,7 +37,7 @@ Once: export the zip, import it into the CurseForge app as a profile named "Mech
 
 Then build the companion mod (`sh ./gradlew build` in `mod/`) and run `scripts/launch.py`. It plays that profile offline, into its most recent save, as this checkout stands: the configs and `kubejs/` are copied in, and the companion mod's newest local build goes into `mods/`. The suite stays as the pack has it. `--released` plays the pack's own jars, `--dry-run` says what it would do. It is skillworks' quicklaunch pack launcher with only the companion mod built locally, so it needs skillworks 0.11.7 or later installed, or `QUICKLAUNCH_LAUNCHER` naming its `launch_pack.py`; `QUICKLAUNCH_INSTANCE` names a profile elsewhere.
 
-`scripts/check_offers.py` checks the Shop's Offers against the rules every Offer keeps (#213).
+`scripts/check_offers.py` checks the Shop's Offers against the rules every Offer keeps (#213), and `scripts/test_check_offers.py` holds a case each of its price rules fails on (#319).
 
 ### Releasing
 

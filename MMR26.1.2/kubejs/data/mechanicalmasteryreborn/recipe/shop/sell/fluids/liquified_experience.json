@@ -1,9 +1,0 @@
-{
-  "type": "adminshop:fluid_selling",
-  "price": 30000,
-  "permit": "reborn_money",
-  "result": {
-    "id": "neovitae:liquified_experience_source",
-    "amount": 1000
-  }
-}

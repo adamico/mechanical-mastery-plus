@@ -9,7 +9,7 @@ Its `src/main` depends on no suite mod at compile time, only on the libworks run
 The template assumes the Module is the whole repo. Here:
 
 - Every Gradle command runs from this folder: `sh ./gradlew ...`.
-- CI is `.github/workflows/mmr-mod-ci.yml` at the repo root, a copy of libworks' `module-ci.yml` run from this folder, which runs only on changes under `MMR26.1.2/mod/`, to itself, and to what `scripts/check_offers.py` checks the Shop's Offers against (`kubejs/data/`, `decomposing.js` and the script), which it runs before the build. It builds the libworks plugin from the tag its `LIBWORKS_PLUGIN` names, which must be the version `build.gradle` applies: move both together, and take what changed in `module-ci.yml` at the new tag.
+- CI is `.github/workflows/mmr-mod-ci.yml` at the repo root, a copy of libworks' `module-ci.yml` run from this folder, which runs only on changes under `MMR26.1.2/mod/`, to itself, and to what `scripts/check_offers.py` checks the Shop's Offers against (`kubejs/data/`, `decomposing.js`, the script and its cases in `scripts/test_check_offers.py`), which it runs, with those cases, before the build. It builds the libworks plugin from the tag its `LIBWORKS_PLUGIN` names, which must be the version `build.gradle` applies: move both together, and take what changed in `module-ci.yml` at the new tag.
 - The skills, the issue tracker and the triage labels are the repo's (`docs/agents/` at the root). There is no skills submodule here.
 - The versioning rule is libworks' ADR 0001: below 1.0 an addition bumps the patch and only a breaking change bumps the minor. ADR numbers are the repo's, so this folder keeps no copy.
 

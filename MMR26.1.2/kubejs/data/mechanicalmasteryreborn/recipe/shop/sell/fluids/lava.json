@@ -1,9 +1,0 @@
-{
-  "type": "adminshop:fluid_selling",
-  "price": 50000,
-  "permit": "reborn_money",
-  "result": {
-    "id": "minecraft:lava",
-    "amount": 1000
-  }
-}

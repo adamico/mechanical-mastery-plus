@@ -6,12 +6,14 @@ package io.github._5thlayer.mechanicalmasteryreborn.client;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Mint;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.NullShards;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.guideme.PlacedBlockPages;
 import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Attempts;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingTable;
@@ -34,6 +36,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterConditionalItemModelPropertyEvent;
 import net.neoforged.neoforge.client.event.RegisterFluidModelsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.fluid.FluidTintSources;
@@ -59,9 +62,14 @@ public final class MechanicalMasteryRebornClient {
                 (table, context) -> ChainMachines.Table.receive(table)));
         modBus.addListener((RegisterClientPayloadHandlersEvent event) -> event.register(LabMenu.Asks.TYPE,
                 (asks, context) -> LabMenu.Asks.receive(asks, context.player())));
+        modBus.addListener((RegisterClientPayloadHandlersEvent event) -> event.register(Attempts.Viewer.TYPE,
+                (viewer, context) -> Attempts.Viewer.receive(viewer)));
+        modBus.addListener((RegisterConditionalItemModelPropertyEvent event) -> event.register(
+                Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "stale"), StaleEssence.MAP_CODEC));
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::nameChain);
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::feedsNow);
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::nullShardUse);
+        NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::staleEssence);
         NeoForge.EVENT_BUS.addListener(OverproductionBarOverlay::draw);
         // With GuideME, as the pack plays, its key opens the manual's page of a block that only ever stands placed.
         if (ModList.get().isLoaded("guideme")) {
@@ -89,6 +97,13 @@ public final class MechanicalMasteryRebornClient {
                 .withStyle(percent < 100 ? ChatFormatting.RED : ChatFormatting.GREEN));
     }
 
+    /** A stale Transmuted Essence's tooltip says it was made before the last reset, so a Port refuses it (#322). */
+    private static void staleEssence(ItemTooltipEvent event) {
+        if (Attempts.staleToViewer(event.getItemStack())) {
+            event.getToolTip().add(Component.translatable("mechanicalmasteryreborn.essence.stale").withStyle(ChatFormatting.DARK_GRAY));
+        }
+    }
+
     /** A Null Shard's tooltip says what it is for, since no recipe uses it (#263). */
     private static void nullShardUse(ItemTooltipEvent event) {
         if (event.getItemStack().is(NullShards.ITEM.get())) {
@@ -108,27 +123,39 @@ public final class MechanicalMasteryRebornClient {
         event.registerBlockEntityRenderer(Defences.FE_DEFENCE_ENTITY.get(), FeDefenceRenderer::new);
     }
 
-    /** Ward Tallow in the world, a tank or a pipe: vanilla water's sprites, drawn to be tinted, under a tallow tint. */
+    /** Ward Tallow in the world, a tank or a pipe: vanilla water's sprites, drawn to be tinted, under a tallow tint; each molten metal its own. */
     private static void registerFluidModels(RegisterFluidModelsEvent event) {
         event.register(new FluidModel.Unbaked(new Material(Identifier.withDefaultNamespace("block/water_still")),
                 new Material(Identifier.withDefaultNamespace("block/water_flow")), null, FluidTintSources.constant(0xFFE6D3A3)),
                 WardTallow.SOURCE, WardTallow.FLOWING);
+        // Each molten metal: its own sprite, already coloured, for both still and flowing, under a white tint.
+        for (Mint.Metal metal : Mint.METALS) {
+            var molten = new Material(Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "block/molten_" + metal.name()));
+            event.register(new FluidModel.Unbaked(molten, molten, null, FluidTintSources.constant(0xFFFFFFFF)), metal.molten, metal.flowing);
+        }
     }
 
     /**
      * The fish engraved on C.O.D.'s lid, vanilla's cod read from the player's own game (libworks ADR 0012), lit green
-     * while its team is awake and dark while dormant or once shut down. The item draws it green too.
+     * while its team is awake, red while it plays a challenge, and dark while dormant or once shut down. The item draws it
+     * green too.
      */
     private static void registerBlockTints(RegisterColorHandlersEvent.BlockTintSources event) {
         event.register(List.of(new BlockTintSource() {
             @Override
             public int color(BlockState state) {
-                return state.getValue(CodBlock.AWAKE) && !state.getValue(CodBlock.SHUT_DOWN) ? 0xFF50DC70 : 0xFF505458;
+                if (state.getValue(CodBlock.SHUT_DOWN)) {
+                    return 0xFF505458;
+                }
+                if (state.getValue(CodBlock.CHALLENGED)) {
+                    return 0xFFE04848;
+                }
+                return state.getValue(CodBlock.AWAKE) ? 0xFF50DC70 : 0xFF505458;
             }
 
             @Override
             public Set<Property<?>> relevantProperties() {
-                return Set.of(CodBlock.SHUT_DOWN, CodBlock.AWAKE);
+                return Set.of(CodBlock.SHUT_DOWN, CodBlock.AWAKE, CodBlock.CHALLENGED);
             }
         }), Cod.BLOCK.get());
     }

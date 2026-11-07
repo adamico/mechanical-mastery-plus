@@ -52,8 +52,8 @@ precedence = "override"
 SPDX-FileCopyrightText = "2026 5thlayer"
 SPDX-License-Identifier = "MIT"
 
-# The Recycler's, the Electric Defence's, C.O.D.'s, the lab's and the Ports' textures, from Malcolm Riley's
-# unused-textures, some modified (NOTICE).
+# The Recycler's, the Electric Defence's, C.O.D.'s, the lab's, the Ports' and the mint's textures, from Malcolm
+# Riley's unused-textures, some modified (NOTICE).
 [[annotations]]
 path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/recycler_*.png",
@@ -61,6 +61,12 @@ path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/cod_*.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/lab_*.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/*_port_*.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/block/molten_*.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/block/molten_*.png.mcmeta",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/*_coin.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/*_cast.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/mold.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/burnt_sand.png",
 ]
 precedence = "override"
 SPDX-FileCopyrightText = "Malcolm Riley"

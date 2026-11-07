@@ -11,6 +11,7 @@ import java.util.UUID;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodBlockEntity;
@@ -58,6 +59,7 @@ final class OverproductionCapTests {
 
     private static final String RESET = "mechanicalmasteryreborn.challenge.reset";
     private static final String WARNING = "mechanicalmasteryreborn.challenge.warning";
+    private static final String STARTED_RESET = "mechanicalmasteryreborn.challenge.started.reset";
 
     private OverproductionCapTests() {
     }
@@ -70,6 +72,7 @@ final class OverproductionCapTests {
         tests.test("overproduction_cap_warning_waits_for_a_player_online", 10, OverproductionCapTests::warningWaitsForAPlayer);
         tests.test("overproduction_cap_reset_command_resets_as_the_cap_does", 10, OverproductionCapTests::resetCommand);
         tests.test("overproduction_cap_reset_command_refuses_with_no_challenge", 10, OverproductionCapTests::resetCommandRefuses);
+        tests.test("overproduction_cap_is_stated_as_the_challenge_starts", 10, OverproductionCapTests::statedAtTheStart);
     }
 
     /** Twenty minutes in, C.O.D. at twice its waking pace, the team reaches its cap and is told the challenge was reset. */
@@ -103,6 +106,7 @@ final class OverproductionCapTests {
             ItemStack kept = helper.getBlockEntity(CHEST, ChestBlockEntity.class).getItem(0);
             helper.assertTrue(kept.is(Items.IRON_INGOT) && kept.getCount() == 5, "the chest's items weren't kept: " + kept);
             helper.assertValueEqual(player.heard(RESET), 1, "reset announcements once the cap was reached");
+            namesTheLoss(helper, player.last(RESET), "the reset message");
             player.leave(helper);
             helper.succeed();
         });
@@ -195,6 +199,7 @@ final class OverproductionCapTests {
         });
         helper.runAtTickTime(3, () -> {
             helper.assertValueEqual(player.heard(WARNING), 1, "warnings at 80% of the cap");
+            namesTheLoss(helper, player.last(WARNING), "the warning");
             make(helper, team, 1);
         });
         helper.runAtTickTime(4, () -> {
@@ -272,6 +277,24 @@ final class OverproductionCapTests {
     }
 
     /** Chooses the energy challenge for {@code team}, as though it began {@code ago} ticks before now. */
+    /** A team's player starting a challenge at the lab reads, with the start, what a reset would lose (#321). */
+    private static void statedAtTheStart(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        Listener player = Listener.of(helper, team);
+        helper.assertTrue(Challenges.begin(helper.getLevel().getServer(), team, Handicap.ENERGY), "the challenge didn't start");
+        helper.assertValueEqual(player.heard(STARTED_RESET), 1, "lines on the reset as the challenge started");
+        namesTheLoss(helper, player.last(STARTED_RESET), "the start's line on the reset");
+        player.leave(helper);
+        helper.succeed();
+    }
+
+    /** Fails unless {@code line}, as a player reads it, names the reset and what it loses: the Port's and the attempt's essence. */
+    private static void namesTheLoss(GameTestHelper helper, Component line, String what) {
+        String read = line.getString();
+        helper.assertTrue(read.contains("reset") && read.contains("Port") && read.contains("Transmuted Essence"),
+                what + " doesn't name the reset and what it loses: " + read);
+    }
+
     private static void choose(GameTestHelper helper, UUID team, long ago) {
         long now = helper.getLevel().getServer().overworld().getGameTime();
         helper.assertTrue(state(helper).begin(team, Handicap.ENERGY, now - ago), "the challenge didn't start");
@@ -324,6 +347,13 @@ final class OverproductionCapTests {
             return (int) read.stream()
                     .filter(line -> line.getContents() instanceof TranslatableContents contents && contents.getKey().equals(key))
                     .count();
+        }
+
+        /** The last line it read in chat that was {@code key}'s. */
+        Component last(String key) {
+            return read.reversed().stream()
+                    .filter(line -> line.getContents() instanceof TranslatableContents contents && contents.getKey().equals(key))
+                    .findFirst().orElseThrow();
         }
 
         void leave(GameTestHelper helper) {

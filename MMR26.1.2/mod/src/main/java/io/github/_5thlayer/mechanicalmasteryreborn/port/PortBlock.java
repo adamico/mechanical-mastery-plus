@@ -32,8 +32,9 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * A challenge's Port, beside C.O.D. It takes its challenge's Transmuted Essence while its team plays that challenge,
- * by a right-click with it or from automation on any side, until the quota; and refuses anything else. A hand is told
- * why on the action bar; automation is refused silently.
+ * by a right-click with it or from automation on any side, until the quota; and refuses anything else, a stale one made
+ * before the attempt's last reset among them (ADR 0016). A hand keeps what it offered and is told why on the action bar;
+ * automation is refused silently.
  */
 public final class PortBlock extends BaseEntityBlock {
 
@@ -110,6 +111,9 @@ public final class PortBlock extends BaseEntityBlock {
         }
         if (phase == PortPhase.WON) {
             return refuse(player, Component.translatable("mechanicalmasteryreborn.port.won"));
+        }
+        if (port.stale(stack)) {
+            return refuse(player, Component.translatable("mechanicalmasteryreborn.port.stale"));
         }
         int taken = port.take(stack.getCount());
         stack.shrink(taken);

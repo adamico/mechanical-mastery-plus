@@ -6,6 +6,8 @@ package io.github._5thlayer.mechanicalmasteryreborn.challenge;
 import java.util.UUID;
 
 import com.mojang.logging.LogUtils;
+import io.github._5thlayer.mechanicalmasteryreborn.cod.CodRitual;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Attempts;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.ChatFormatting;
@@ -29,7 +31,8 @@ import org.slf4j.Logger;
  * players online hears vanilla's raid horn when it starts, and its challenge fanfare when it is won, sees the challenge's name as a title with its cost
  * below, and reads both in chat, and is given the challenge's chain ({@link Chains}). The money handicap acts on the
  * team's Account as it starts, resets and ends, its Permit taken back by a stop, and the protection handicap's {@link Assault} is sent as it starts and
- * removed as it resets or ends; the life handicap's Diets are forgotten as it resets or ends.
+ * removed as it resets or ends; the life handicap's Diets are forgotten as it resets or ends. A start alone plays its
+ * ritual on the team's C.O.D. ({@link CodRitual}).
  */
 public final class Challenges {
 
@@ -60,8 +63,11 @@ public final class Challenges {
         if (handicap == Handicap.LIFE) {
             LifeHandicap.refresh(server, team);
         }
+        CodRitual.play(server, team);
         Component message = Component.translatable("mechanicalmasteryreborn.challenge.started",
                 name(handicap).withStyle(ChatFormatting.GOLD), cost(handicap)).withStyle(ChatFormatting.GRAY);
+        // What a reset costs, said before it can happen (#321).
+        Component resets = Component.translatable("mechanicalmasteryreborn.challenge.started.reset").withStyle(ChatFormatting.YELLOW);
         Component title = title(handicap).withStyle(ChatFormatting.GOLD);
         Component subtitle = cost(handicap);
         Holder<SoundEvent> sound = SoundEvents.RAID_HORN;
@@ -71,6 +77,7 @@ public final class Challenges {
                 told++;
                 Chains.unlock(server, player);
                 player.sendSystemMessage(message);
+                player.sendSystemMessage(resets);
                 player.connection.send(new ClientboundSetSubtitleTextPacket(subtitle));
                 player.connection.send(new ClientboundSetTitleTextPacket(title));
                 player.connection.send(new ClientboundSoundEntityPacket(sound, SoundSource.UI, player, RAID_HORN_VOLUME, 1.0F,
@@ -238,6 +245,7 @@ public final class Challenges {
         if (state.plays(team, Handicap.LIFE)) {
             LifeHandicap.forget(server, team);
         }
+        Attempts.send(server, team);
         return true;
     }
 

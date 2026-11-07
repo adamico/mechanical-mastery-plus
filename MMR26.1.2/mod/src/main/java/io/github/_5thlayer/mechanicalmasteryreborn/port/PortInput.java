@@ -13,7 +13,8 @@ import net.neoforged.neoforge.transfer.transaction.SnapshotJournal;
 import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 
 /**
- * A Port's item face: it takes its own essence, up to what's left of the quota while open, and nothing else, ever.
+ * A Port's item face: it takes its own essence of the current attempt, up to what's left of the quota while open, and
+ * nothing else, ever: a stale one stays where it was offered from (ADR 0016).
  * What a transaction inserts is held as pending, and counted toward the quota only once the outermost transaction
  * commits, so a simulated insert counts nothing. It holds nothing: what it takes is used up.
  */
@@ -54,7 +55,7 @@ final class PortInput extends SnapshotJournal<Integer> implements ResourceHandle
     @Override
     public boolean isValid(int index, ItemResource resource) {
         Objects.checkIndex(index, size());
-        return resource.is(Essences.item(port.essence()));
+        return resource.is(Essences.item(port.essence())) && !port.stale(resource.getComponents());
     }
 
     @Override

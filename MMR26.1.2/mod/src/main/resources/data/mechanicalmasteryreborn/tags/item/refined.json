@@ -1,5 +1,11 @@
 {
   "values": [
-    "#minecraft:planks"
+    "#minecraft:planks",
+    "mechanicalmasteryreborn:copper_cast",
+    "mechanicalmasteryreborn:copper_coin",
+    "mechanicalmasteryreborn:iron_cast",
+    "mechanicalmasteryreborn:iron_coin",
+    "mechanicalmasteryreborn:gold_cast",
+    "mechanicalmasteryreborn:gold_coin"
   ]
 }

@@ -4,6 +4,7 @@
 package io.github._5thlayer.mechanicalmasteryreborn.challenge;
 
 import io.github._5thlayer.mechanicalmasteryreborn.compat.chapters.ChaptersStages;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Attempts;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.server.MinecraftServer;
@@ -58,7 +59,7 @@ public final class Chains {
 
     /**
      * Gives {@code player} the stage of every chain its team has unlocked and takes the stage of every other, gives it the
-     * last chapter's once its team has won all four (ADR 0012) and the last stand's once it has started it (ADR 0014), and tells its client which chains are unlocked.
+     * last chapter's once its team has won all four (ADR 0012) and the last stand's once it has started it (ADR 0014), and tells its client which chains are unlocked and its team's attempt (#322).
      */
     public static void unlock(MinecraftServer server, Player player) {
         if (server == null || player == null) {
@@ -81,6 +82,7 @@ public final class Chains {
         }
         if (player instanceof ServerPlayer serverPlayer) {
             ChainMachines.send(server, serverPlayer);
+            Attempts.send(server, serverPlayer);
         }
     }
 

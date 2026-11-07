@@ -79,7 +79,10 @@ public final class Recycling {
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<RecyclingRecipe>> SERIALIZER =
             SERIALIZERS.register(NAME, RecyclingRecipe::serializer);
 
-    /** The items the pack names refined, beside what the rules find: the planks, as bamboo's, cut from a crafted block. */
+    /**
+     * The items the pack names refined, beside what the rules find: the planks, as bamboo's, cut from a crafted block, and
+     * the mint's casts and Coins, poured metal as an ingot is, so no Recycler runs the shakeout backwards (#320).
+     */
     public static final TagKey<Item> REFINED = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "refined"));
 
     /** The recipes last read, and the server's recipes they were read from: a reload makes a new map. */

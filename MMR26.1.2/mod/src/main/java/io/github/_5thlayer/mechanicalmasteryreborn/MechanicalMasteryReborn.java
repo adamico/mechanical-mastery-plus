@@ -13,6 +13,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.OverproductionCap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastChapter;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Mint;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.NullShards;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ObsidianFlakes;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
@@ -23,6 +24,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbchunks.FtbChunksExplosions;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbteams.FtbPartySync;
 import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Attempts;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.port.Port;
@@ -46,6 +48,7 @@ public final class MechanicalMasteryReborn {
 
     public MechanicalMasteryReborn(IEventBus modBus, ModContainer container) {
         Essences.register(modBus);
+        Attempts.register(modBus);
         Cod.register(modBus);
         Lab.register(modBus);
         Port.register(modBus);
@@ -54,6 +57,7 @@ public final class MechanicalMasteryReborn {
         NullShards.register(modBus);
         WardTallow.register(modBus);
         ObsidianFlakes.register(modBus);
+        Mint.register(modBus);
         Assault.register(modBus);
         LifeHandicap.register(modBus);
         Chains.register();

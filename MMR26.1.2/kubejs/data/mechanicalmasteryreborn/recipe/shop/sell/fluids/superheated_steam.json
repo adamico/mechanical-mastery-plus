@@ -1,9 +1,0 @@
-{
-  "type": "adminshop:fluid_selling",
-  "price": 40000,
-  "permit": "reborn_money",
-  "result": {
-    "id": "wireworks:superheated_steam",
-    "amount": 1000
-  }
-}

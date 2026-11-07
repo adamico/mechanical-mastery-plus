@@ -1,9 +1,0 @@
-{
-  "type": "adminshop:fluid_selling",
-  "price": 20000,
-  "permit": "reborn_money",
-  "result": {
-    "id": "theurgy:sal_ammoniac",
-    "amount": 1000
-  }
-}
