@@ -6,6 +6,7 @@ package io.github._5thlayer.mechanicalmasteryreborn.challenge;
 import java.util.UUID;
 
 import com.mojang.logging.LogUtils;
+import io.github._5thlayer.mechanicalmasteryreborn.cod.CodRitual;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.ChatFormatting;
@@ -29,7 +30,8 @@ import org.slf4j.Logger;
  * players online hears vanilla's raid horn when it starts, and its challenge fanfare when it is won, sees the challenge's name as a title with its cost
  * below, and reads both in chat, and is given the challenge's chain ({@link Chains}). The money handicap acts on the
  * team's Account as it starts, resets and ends, its Permit taken back by a stop, and the protection handicap's {@link Assault} is sent as it starts and
- * removed as it resets or ends; the life handicap's Diets are forgotten as it resets or ends.
+ * removed as it resets or ends; the life handicap's Diets are forgotten as it resets or ends. A start alone plays its
+ * ritual on the team's C.O.D. ({@link CodRitual}).
  */
 public final class Challenges {
 
@@ -60,6 +62,7 @@ public final class Challenges {
         if (handicap == Handicap.LIFE) {
             LifeHandicap.refresh(server, team);
         }
+        CodRitual.play(server, team);
         Component message = Component.translatable("mechanicalmasteryreborn.challenge.started",
                 name(handicap).withStyle(ChatFormatting.GOLD), cost(handicap)).withStyle(ChatFormatting.GRAY);
         Component title = title(handicap).withStyle(ChatFormatting.GOLD);

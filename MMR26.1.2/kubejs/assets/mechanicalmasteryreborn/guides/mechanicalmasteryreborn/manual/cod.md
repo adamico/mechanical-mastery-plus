@@ -23,7 +23,11 @@ much faster, without stopping, and pushes each one into whatever takes items bes
 pipe. Once its slot is full, essence piles up on its top, up to a stack, unless a block stands there. Past that,
 what it makes is lost. A pile on top means your Recycler is falling behind.
 
-While your team plays a [challenge](challenges/index.md), C.O.D. makes essence ever faster. Each one it makes
+When your team starts a [challenge](challenges/index.md), C.O.D. answers with a ritual: an ominous call and a
+burst of flame and void motes, seen and heard across your island. The fish on its lid then glows red for as long
+as the challenge is played. A reset, a stop or a win plays no ritual.
+
+While your team plays a challenge, C.O.D. makes essence ever faster. Each one it makes
 that you don't decompose adds to **Overproduction**. When Overproduction reaches its cap, the challenge starts over.
 
 ## The Ports

@@ -85,6 +85,8 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
     private boolean awake;
     /** The tier it makes, as of its last tick; the team's state holds it, so it is never saved here. */
     private Optional<Essence> tier = Optional.of(Essence.ADVANCED);
+    /** Whether its team plays a challenge, as of its last tick; the team's state holds it, so it is never saved here. */
+    private boolean challenged;
     /** Its team's last stand, as of its last tick; the team's state holds it, so it is never saved here. */
     private Optional<LastStand> lastStand = Optional.empty();
     /** The team whose island it stands on, found on its first tick: a C.O.D. never moves. */
@@ -219,20 +221,25 @@ public final class CodBlockEntity extends BlockEntity implements MenuProvider {
     private void read(TeamState teams) {
         awake = teams.isAwake(team);
         tier = teams.tier(team);
+        challenged = teams.handicap(team).isPresent();
         lastStand = teams.lastStand(team);
     }
 
-    /** Stands dark once its team's last stand is won, and lit otherwise, and shows whether its team is awake, if either changed. */
+    /**
+     * Stands dark once its team's last stand is won, and lit otherwise, and shows whether its team is awake and whether
+     * it plays a challenge, if any changed.
+     */
     private void showState() {
         if (level == null) {
             return;
         }
         BlockState state = getBlockState();
-        if (!state.hasProperty(CodBlock.SHUT_DOWN) || !state.hasProperty(CodBlock.AWAKE)) {
+        if (!state.hasProperty(CodBlock.SHUT_DOWN) || !state.hasProperty(CodBlock.AWAKE) || !state.hasProperty(CodBlock.CHALLENGED)) {
             return;
         }
         BlockState shown = state.setValue(CodBlock.SHUT_DOWN, lastStand.filter(LastStand::won).isPresent())
-                .setValue(CodBlock.AWAKE, awake);
+                .setValue(CodBlock.AWAKE, awake)
+                .setValue(CodBlock.CHALLENGED, challenged);
         if (shown != state) {
             level.setBlock(worldPosition, shown, Block.UPDATE_ALL);
         }
