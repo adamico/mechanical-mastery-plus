@@ -68,6 +68,7 @@
   "mechanicalmasteryreborn.port.won": "Won: this challenge is over",
   "mechanicalmasteryreborn.port.stale": "Stale: made before the last reset, so it counts no more",
   "mechanicalmasteryreborn.essence.stale": "Made before the last reset",
+  "mechanicalmasteryreborn.essence.stale_name": "Stale %s",
   "mechanicalmasteryreborn.recycler_core.turns": "%s turns a decompose or recycle",
   "block.mechanicalmasteryreborn.recycler_input": "Recycler Input",
   "block.mechanicalmasteryreborn.recycler_output": "Recycler Output",

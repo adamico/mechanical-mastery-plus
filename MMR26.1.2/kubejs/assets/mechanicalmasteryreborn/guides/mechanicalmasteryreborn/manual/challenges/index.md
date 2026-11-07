@@ -87,7 +87,7 @@ far your team has got, and the Port wears its essence's colour while it is open.
 
 Each Transmuted Essence your chain makes while you play its challenge is marked with the attempt it was made in. A
 Port takes only the current attempt's, so essence held back is lost to a reset as surely as what the Port took.
-A stale essence looks dimmed and its tooltip says it was made before the last reset; a Port refuses it, leaving it
+A stale essence looks dimmed, is named stale, and its tooltip says it was made before the last reset; a Port refuses it, leaving it
 in the hand, hopper or pipe that offered it, and a hand is told why. Stale and current essence don't stack together.
 A stale essence isn't wasted: the Shop still buys it, and it still goes into a Quartessence. Essence from before
 this rule, and a won chain's, is never stale.

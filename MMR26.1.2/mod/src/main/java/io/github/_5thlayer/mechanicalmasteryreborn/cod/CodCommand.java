@@ -21,6 +21,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.OverproductionCap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Attempts;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
@@ -211,10 +212,13 @@ final class CodCommand {
             source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.challenge.unknown", id));
             return 0;
         }
-        if (!TeamState.get(source.getServer()).revertWin(island(source), handicap.get())) {
+        UUID team = island(source);
+        if (!TeamState.get(source.getServer()).revertWin(team, handicap.get())) {
             source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.challenge.not_won", Challenges.name(handicap.get())));
             return 0;
         }
+        // The team's players see again the essence the win had kept from going stale as stale (#322).
+        Attempts.send(source.getServer(), team);
         source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.challenge.reverted", Challenges.name(handicap.get())), true);
         return 1;
     }

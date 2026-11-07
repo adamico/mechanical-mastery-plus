@@ -8,6 +8,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Yield;
 import io.github._5thlayer.mechanicalmasteryreborn.record.DecomposeLog;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -22,11 +23,18 @@ import net.minecraft.world.level.Level;
  * of it becomes the yield of its mix, as on every core ({@link ServerConfig#yield}), straight into the inventory,
  * and whatever doesn't fit drops. The essence then rests for {@link ServerConfig#handCooldown} ticks, shown on the hotbar,
  * so a Recycler is much the faster way. A decompose by hand is recorded as one, and never wakes C.O.D. (#167).
+ * A stale Transmuted Essence is named so, as its viewer sees it ({@link Attempts#staleToViewer}, #322).
  */
 public final class EssenceItem extends Item {
 
     public EssenceItem(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public Component getName(ItemStack stack) {
+        Component name = super.getName(stack);
+        return Attempts.staleToViewer(stack) ? Component.translatable("mechanicalmasteryreborn.essence.stale_name", name) : name;
     }
 
     @Override
