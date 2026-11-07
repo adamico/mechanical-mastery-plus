@@ -66,6 +66,8 @@ public final class Challenges {
         CodRitual.play(server, team);
         Component message = Component.translatable("mechanicalmasteryreborn.challenge.started",
                 name(handicap).withStyle(ChatFormatting.GOLD), cost(handicap)).withStyle(ChatFormatting.GRAY);
+        // What a reset costs, said before it can happen (#321).
+        Component resets = Component.translatable("mechanicalmasteryreborn.challenge.started.reset").withStyle(ChatFormatting.YELLOW);
         Component title = title(handicap).withStyle(ChatFormatting.GOLD);
         Component subtitle = cost(handicap);
         Holder<SoundEvent> sound = SoundEvents.RAID_HORN;
@@ -75,6 +77,7 @@ public final class Challenges {
                 told++;
                 Chains.unlock(server, player);
                 player.sendSystemMessage(message);
+                player.sendSystemMessage(resets);
                 player.connection.send(new ClientboundSetSubtitleTextPacket(subtitle));
                 player.connection.send(new ClientboundSetTitleTextPacket(title));
                 player.connection.send(new ClientboundSoundEntityPacket(sound, SoundSource.UI, player, RAID_HORN_VOLUME, 1.0F,

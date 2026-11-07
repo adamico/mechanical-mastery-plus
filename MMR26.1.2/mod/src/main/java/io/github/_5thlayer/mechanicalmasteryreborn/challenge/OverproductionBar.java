@@ -38,6 +38,8 @@ public final class OverproductionBar {
 
     /** The key of every Overproduction bar's title, by which the client knows to draw it its own way. */
     public static final String TITLE = MechanicalMasteryReborn.MOD_ID + ".bar.challenge";
+    /** Follows Overproduction on the bar with what the cap costs: the challenge resets, losing the attempt's essence (#321). */
+    public static final String RESETS = MechanicalMasteryReborn.MOD_ID + ".bar.resets";
 
     private static final Map<UUID, ServerBossEvent> BARS = new HashMap<>();
 
@@ -110,8 +112,9 @@ public final class OverproductionBar {
 
 
     /**
-     * Words the bar, such as "Energy Challenge - Overproduction: 12 of 256", and fills it. While the team's Assault runs, the
-     * challenge's name carries its wave and side, such as "Protection Challenge · Wave 7, from the north" (#239).
+     * Words the bar, such as "Energy Challenge - Overproduction: 12 of 256 · At the cap it resets, losing this attempt's essence",
+     * and fills it. While the team's Assault runs, the challenge's name carries its wave and side, such as "Protection
+     * Challenge · Wave 7, from the north" (#239).
      */
     private static void show(MinecraftServer server, UUID team, ServerBossEvent bar, Handicap handicap, Overproduction overproduction) {
         int cap = ServerConfig.overproductionCap();
@@ -121,8 +124,8 @@ public final class OverproductionBar {
             challenge = Component.translatable(MechanicalMasteryReborn.MOD_ID + ".bar.assault", challenge,
                     Math.max(1, assault.get().wave()), Assault.sideName(assault.get().side().get()));
         }
-        bar.setName(Component.translatable(TITLE, challenge,
-                Component.translatable(MechanicalMasteryReborn.MOD_ID + ".bar.overproduction", overproduction.excess(), cap)));
+        bar.setName(Component.translatable(TITLE, challenge, Component.translatable(RESETS,
+                Component.translatable(MechanicalMasteryReborn.MOD_ID + ".bar.overproduction", overproduction.excess(), cap))));
         bar.setProgress(Math.min(1.0F, (float) overproduction.excess() / cap));
     }
 }
