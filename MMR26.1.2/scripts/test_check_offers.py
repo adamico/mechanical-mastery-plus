@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# A case each of scripts/check_offers.py's price rules fails on, and the pack's own Offers, which pass (#319).
+# A case each of scripts/check_offers.py's rules fails on, and the pack's own Offers, which pass (#319, #323).
 #
 #   python3 scripts/test_check_offers.py
 import sys
@@ -55,6 +55,20 @@ class CheckOffersTest(unittest.TestCase):
         # The fluid rule is for fluids alone: an item the Shop sells may be sold back below its price.
         self.assertEqual(problems(("buy/blocks/sand.json", False, False, "minecraft:sand", 125),
                                   ("sell/blocks/sand.json", True, False, "minecraft:sand", 100)), [])
+
+    def test_a_buy_offer_for_a_transmuted_essence_fails(self):
+        found = problems(("buy/essence/aureate_essence.json", False, False, "mechanicalmasteryreborn:aureate_essence", 250000))
+        self.assertEqual(len(found), 1)
+        self.assertIn("only its chain makes", found[0])
+
+    def test_a_sell_offer_for_a_transmuted_essence_passes(self):
+        self.assertEqual(problems(("sell/essence/aureate_essence.json", True, False, "mechanicalmasteryreborn:aureate_essence", 5000)), [])
+
+    def test_any_offer_for_a_coin_fails(self):
+        for selling in (True, False):
+            found = problems(("coin.json", selling, False, "mechanicalmasteryreborn:gold_coin", 500))
+            self.assertEqual(len(found), 1)
+            self.assertIn("never trades", found[0])
 
 
 if __name__ == "__main__":

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.ammonium.adminshop.recipes.RecipeManager;
 import io.github._5thlayer.craftworks.machine.AssemblerBlockEntity;
 import io.github._5thlayer.craftworks.machine.AssemblerSlots;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
@@ -16,11 +17,14 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Mint;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.material.Fluids;
@@ -34,11 +38,13 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
  * The money challenge's mint (ADR 0017, #320), the pack's own recipes in {@code suite_pack/} on a real Assembler: melt
  * an ingot of copper, iron or gold with lava into molten metal, cast it in a Mold, cool the cast with water and knock out
  * that metal's Coin and Burnt Sand in one step, wash the Burnt Sand back into sand, and make the next Mold from sand and
- * clay. The molten metal carries the lava's rock as dross, which the shakeout knocks out with the Burnt Sand, so a melt
- * gives as much as its ingot and lava take. The cool and the shakeout are one recipe, since a cooled cast would be an
- * item that only waits to be knocked out. Each metal's steps run the same tests, one each. The recipes are locked under
- * the money challenge's stage, as every chain's are (ADRs 0007, 0013), read from the pack's own stage file. Only the
- * {@code suiteGameTestServer} run registers them. Their Assembler is a {@link SuiteAssembler}.
+ * clay; exchange coins up, two copper for an iron and three iron for a gold, and seal coins of all three metals into an
+ * Aureate Essence, which the Shop buys (#323). The molten metal carries the lava's rock as dross, which the shakeout
+ * knocks out with the Burnt Sand, so a melt gives as much as its ingot and lava take. The cool and the shakeout are one
+ * recipe, since a cooled cast would be an item that only waits to be knocked out. Each metal's steps run the same tests,
+ * one each. The recipes are locked under the money challenge's stage, as every chain's are (ADRs 0007, 0013), read from
+ * the pack's own stage file. Only the {@code suiteGameTestServer} run registers them. Their Assembler is a
+ * {@link SuiteAssembler}.
  */
 final class MintTests {
 
@@ -60,6 +66,12 @@ final class MintTests {
             tests.test("suite_mint_" + name + "_shakeout_knocks_a_coin_and_burnt_sand_out_of_a_cast", 40, helper -> shakeout(helper, metal));
             tests.test("suite_mint_" + name + "_an_ingot_ends_as_a_coin_and_burnt_sand", 40, helper -> line(helper, metal));
         }
+        tests.test("suite_mint_exchange_trades_two_copper_coins_for_an_iron_one", 40,
+                helper -> exchange(helper, "iron_coin_from_copper_coins", Mint.COPPER, 2, Mint.IRON));
+        tests.test("suite_mint_exchange_trades_three_iron_coins_for_a_gold_one", 40,
+                helper -> exchange(helper, "gold_coin_from_iron_coins", Mint.IRON, 3, Mint.GOLD));
+        tests.test("suite_mint_seal_makes_an_aureate_from_coins_of_all_three_metals", 40, MintTests::seal);
+        tests.test("suite_mint_shop_buys_the_aureate", 1, MintTests::shopBuysTheAureate);
         tests.test("suite_mint_wash_makes_sand_from_burnt_sand", 40, MintTests::wash);
         tests.test("suite_mint_mold_makes_a_mold_from_sand_and_clay", 40, MintTests::mold);
         tests.test("suite_mint_recipes_are_the_money_chains", 1, MintTests::moneysRecipes);
@@ -143,6 +155,34 @@ final class MintTests {
         helper.succeed();
     }
 
+    /** {@code count} of {@code from}'s coins exchanged up for one of {@code to}'s, by the pack's recipe {@code assembling/<path>}. */
+    private static void exchange(GameTestHelper helper, String path, Mint.Metal from, int count, Mint.Metal to) {
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, path);
+        SuiteAssembler.put(assembler, 0, from.coin.get(), count);
+        SuiteAssembler.tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
+        SuiteAssembler.expectOutput(helper, assembler, to.coin.get(), "the exchange of " + from.name() + " coins");
+        helper.succeed();
+    }
+
+    /** Coins of all three metals sealed into an Aureate Essence (ADR 0017). */
+    private static void seal(GameTestHelper helper) {
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "aureate_essence");
+        SuiteAssembler.put(assembler, 0, Mint.COPPER.coin.get(), 8);
+        SuiteAssembler.put(assembler, 1, Mint.IRON.coin.get(), 4);
+        SuiteAssembler.put(assembler, 2, Mint.GOLD.coin.get(), 2);
+        SuiteAssembler.tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
+        SuiteAssembler.expectOutput(helper, assembler, Essences.item(Essence.AUREATE), "the Seal");
+        helper.succeed();
+    }
+
+    /** The pack's sell Offer for the Aureate, under the money Permit as the other three essences' are. */
+    private static void shopBuysTheAureate(GameTestHelper helper) {
+        var offer = RecipeManager.isSellItemRecipe(helper.getLevel(), new ItemStack(Essences.item(Essence.AUREATE)));
+        helper.assertTrue(offer.isPresent(), "no sell Offer matches the Aureate Essence");
+        helper.assertTrue(offer.get().value().getPrice() > 0, "the Aureate's sell Offer pays nothing");
+        helper.succeed();
+    }
+
     private static void wash(GameTestHelper helper) {
         AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "sand_from_burnt_sand");
         SuiteAssembler.put(assembler, 0, Mint.BURNT_SAND.get(), 1);
@@ -205,7 +245,8 @@ final class MintTests {
     /** What EMI marks as the money chain's: every mint recipe, read from the pack's own stage file. */
     private static void moneysRecipes(GameTestHelper helper) {
         var recipes = ChainMachines.recipes(helper.getLevel().getServer());
-        var paths = new ArrayList<>(List.of("sand_from_burnt_sand", "mold"));
+        var paths = new ArrayList<>(List.of("sand_from_burnt_sand", "mold", "iron_coin_from_copper_coins", "gold_coin_from_iron_coins",
+                "aureate_essence"));
         for (Mint.Metal metal : Mint.METALS) {
             paths.addAll(List.of("molten_" + metal.name(), metal.name() + "_cast", metal.name() + "_coin"));
         }

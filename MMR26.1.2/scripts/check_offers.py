@@ -8,6 +8,8 @@
 #   - whatever the Shop both buys and sells, it pays less than it charges;
 #   - nothing only the Shop gives is sold back (water, the Permits), and no fluid the Shop sells has a Sell Offer
 #     unless something in the pack makes it, so a bought bucket is never sold back (#319).
+#   - the Shop sells no Transmuted Essence, each being made by its chain, and buys no Coin, so a team's gold is either
+#     sold or minted, never both (ADR 0017, #323).
 #
 # A Transmuted Essence's price, above what made it and under twice that, is worked out by hand from its chain (#319).
 #
@@ -26,6 +28,9 @@ OFFERS = PACK / "kubejs/data/mechanicalmasteryreborn/recipe/shop"
 MIXES = PACK / "kubejs/server_scripts/decomposing.js"
 # What only the Shop gives: water, whose every other source starts from a bought bucket, and AdminShop's Permits.
 SHOP_ONLY = {"minecraft:water", "adminshop:permit"}
+# The Transmuted Essences, which the Shop buys but never sells, and the mint's Coins, which it neither buys nor sells.
+ESSENCES = {f"mechanicalmasteryreborn:{e}_essence" for e in ("galvanic", "warding", "vital", "aureate")}
+COINS = {f"mechanicalmasteryreborn:{m}_coin" for m in ("copper", "iron", "gold")}
 # The fluids the Shop sells that something in the pack makes too, and so may be sold back. Every other fluid with a
 # Buy Offer is one only the Shop gives, as lava is since dripstone is left out of the pack.
 MADE_FLUIDS = set()
@@ -52,6 +57,8 @@ def check(offers, held):
     problems = []
     sells, buys, bought_fluids = {}, {}, set()
     for path, selling, fluid, good, unit in offers:
+        if good in COINS:
+            problems.append(f"{path}: trades {good}, which the Shop never trades")
         if selling:
             if good in held:
                 problems.append(f"{path}: sells {good}, which the Advanced mix holds")
@@ -61,6 +68,8 @@ def check(offers, held):
                 problems.append(f"{path}: sells {good}, which {sells[good][0]} sells too")
             sells[good] = (path, unit)
         else:
+            if good in ESSENCES:
+                problems.append(f"{path}: charges for {good}, which only its chain makes")
             if fluid:
                 bought_fluids.add(good)
             # The cheapest Buy Offer of each good is the one a sale back must stay under.
