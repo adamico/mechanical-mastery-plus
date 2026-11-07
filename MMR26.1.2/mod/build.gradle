@@ -88,8 +88,8 @@ tasks.named('test') {
 }
 
 // The suite game tests, all named suite_*, run the pack's recipes on a real Assembler: the protection Chain's (#252),
-// the End Portal Frame's (#265) and the Quartessence's (#262), and the pack's Family that climbs a Quartessence into
-// Quintessence on Voidworks' Mutation Chamber (#262). They need the suite mods those recipes stand on: Craftworks'
+// the End Portal Frame's (#265), the Quartessence's (#262) and the money Chain's mint (#320), and the pack's Family
+// that climbs a Quartessence into Quintessence on Voidworks' Mutation Chamber (#262). They need the suite mods those recipes stand on: Craftworks'
 // Assembler, Fieldworks' Harvester, magma slurry and tar, Wireworks' steam and plastic, and Voidworks' Mutation Chamber
 // and Void Crucible, on Groundworks. They are the pack's own jars, from CurseForge as mods/*.pw.toml name them, so a
 // CI runner needs no build of the suite. They run on a game test server of their own, suiteGameTestServer, with those
@@ -132,13 +132,14 @@ neoForge {
 }
 
 // The pack's assembling and harvesting recipes, what it adds to Fieldworks' tags, and its Voidworks Families with their
-// Rungs' tags, copied as they are into suite_pack/, beside its pack.mcmeta in src/gametest/resources, which DevPacks
-// switches on in suiteGameTestServer.
+// Rungs' tags, and the money stage file that locks the mint (#320), copied as they are into suite_pack/, beside its
+// pack.mcmeta in src/gametest/resources, which DevPacks switches on in suiteGameTestServer.
 def suitePackDir = layout.buildDirectory.dir('generated/suitePack')
 def generateSuitePack = tasks.register('generateSuitePack', Sync) {
     from('../kubejs/data') {
         include 'mechanicalmasteryreborn/recipe/assembling/**', 'mechanicalmasteryreborn/recipe/harvesting/**', 'fieldworks/**',
-                'mechanicalmasteryreborn/voidworks/**', 'mechanicalmasteryreborn/tags/item/rung/**'
+                'mechanicalmasteryreborn/voidworks/**', 'mechanicalmasteryreborn/tags/item/rung/**',
+                'mechanicalmasteryreborn/chapters/stages/money.json'
         into 'suite_pack/data'
     }
     into suitePackDir

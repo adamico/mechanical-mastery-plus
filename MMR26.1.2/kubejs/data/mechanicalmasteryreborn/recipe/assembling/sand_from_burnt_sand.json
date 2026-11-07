@@ -1,0 +1,14 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting-with-fluid",
+  "ingredients": [
+    { "ingredient": "mechanicalmasteryreborn:burnt_sand", "count": 1 }
+  ],
+  "fluid_ingredients": [
+    { "ingredient": "minecraft:water", "amount": 250 }
+  ],
+  "results": [
+    { "id": "minecraft:sand", "count": 1 }
+  ],
+  "time": 100
+}

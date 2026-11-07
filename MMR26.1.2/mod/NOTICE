@@ -89,3 +89,24 @@ Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
         - <essence>_port_won.png is block_gem_sapphire_2 with its gem recoloured as the open one
           (only pixels of a spread over 40 between their channels) and its frame lightened by 10%.
 Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
+
+Mint textures
+-------------
+
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/item/gold_coin.png, mold.png,
+       gold_cast.png and burnt_sand.png,
+       src/main/resources/assets/mechanicalmasteryreborn/textures/block/molten_gold.png and
+       molten_gold.png.mcmeta
+Author: Malcolm Riley
+Source: https://github.com/malcolmriley/unused-textures, items/ and fluids/ at commit
+        8b85ad732023174d9a9da74e6bf2272d6c0bef17
+        - gold_coin.png is items/metal_coin_gold, and mold.png items/part_mould_ingot, copied
+          unmodified.
+        - gold_cast.png is items/part_mould tinted gold: each pixel 30% its own colour and 70% gold
+          (255, 200, 60) scaled by 1.6 times the pixel's lightness.
+        - burnt_sand.png is items/material_dust_washed_sand darkened: each pixel's channels scaled by
+          (0.45, 0.42, 0.40).
+        - molten_gold.png is fluids/fluid_molten recoloured gold: each pixel (255, 205, 70) scaled by
+          0.3 plus its lightness; molten_gold.png.mcmeta is fluids/fluid_molten.png.mcmeta, copied
+          unmodified.
+Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
