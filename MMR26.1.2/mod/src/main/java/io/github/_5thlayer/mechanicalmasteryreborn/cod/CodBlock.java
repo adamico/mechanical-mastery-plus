@@ -37,16 +37,22 @@ public final class CodBlock extends BaseEntityBlock {
     /** Whether its team is awake, so the client lights the fish on its lid; dormant, the fish stands dark. */
     public static final BooleanProperty AWAKE = BooleanProperty.create("awake");
 
+    /**
+     * Whether its team plays a challenge, so the client lights the fish on its lid red in place of green; the team's
+     * state holds it, as it does {@link #AWAKE}.
+     */
+    public static final BooleanProperty CHALLENGED = BooleanProperty.create("challenged");
+
     private static final MapCodec<CodBlock> CODEC = simpleCodec(CodBlock::new);
 
     public CodBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(SHUT_DOWN, false).setValue(AWAKE, false));
+        registerDefaultState(stateDefinition.any().setValue(SHUT_DOWN, false).setValue(AWAKE, false).setValue(CHALLENGED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(SHUT_DOWN, AWAKE);
+        builder.add(SHUT_DOWN, AWAKE, CHALLENGED);
     }
 
     @Override

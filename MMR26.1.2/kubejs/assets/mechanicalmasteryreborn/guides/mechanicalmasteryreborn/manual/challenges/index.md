@@ -29,7 +29,8 @@ The rules below hold for every challenge. Each challenge's page tells what is it
 ## Starting one
 
 Any member chooses a handicap at the [lab](../lab.md), and the challenge starts for the whole team. Everyone
-online sees its name, reads what it costs and hears the raid horn. The **handicap** is what the challenge costs
+online sees its name, reads what it costs and hears the raid horn, and [C.O.D.](../cod.md) answers with a ritual
+that anyone on your island sees and hears. The **handicap** is what the challenge costs
 your team, and it costs you only while the challenge is played.
 
 ## The chain
