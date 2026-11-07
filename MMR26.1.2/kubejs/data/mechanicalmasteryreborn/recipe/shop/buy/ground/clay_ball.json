@@ -1,8 +1,8 @@
 {
   "type": "adminshop:item_buying",
-  "price": 2000,
+  "price": 500,
   "result": {
-    "id": "minecraft:clay",
+    "id": "minecraft:clay_ball",
     "count": 16
   }
 }

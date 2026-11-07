@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- The Shop sells clay balls in place of clay, 16 for $5, since nothing in the pack automates breaking clay into balls.
+
 ## 0.0.5
 
 - The Shop sells clay, 16 blocks for $20, as it sells sand.
