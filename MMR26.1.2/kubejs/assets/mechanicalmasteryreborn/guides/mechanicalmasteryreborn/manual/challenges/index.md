@@ -61,8 +61,9 @@ if Overproduction falls back and climbs again.
 ## The reset
 
 When Overproduction reaches its cap, the challenge **resets**, as though it had just begun: C.O.D. falls back to the
-pace it woke at, Overproduction starts from nothing, and what was put into the Port is lost. Your island, machines,
-items, chain and handicap stay as they are. What the handicap took is kept aside until the challenge ends. Each
+pace it woke at, Overproduction starts from nothing, and what was put into the Port is lost. So is every Transmuted
+Essence the attempt made: it turns **stale**, and the Port takes it no more. Your island, machines, items, chain and
+handicap stay as they are. What the handicap took is kept aside until the challenge ends. Each
 challenge's page says what else its reset does. Everyone online hears a beacon switch off and reads that the
 challenge was reset.
 
@@ -73,7 +74,8 @@ back to it better prepared. Any member asks to stop there, or takes the ask back
 member online has asked. A member who logs out drops their ask; one who logs in counts from then on.
 
 A stop ends the handicap and Overproduction, gives back what the handicap took, and locks the chain again until your
-team starts the challenge anew. Your team keeps every item. Any challenge not won, the stopped one too, can start
+team starts the challenge anew. Your team keeps every item, though the Transmuted Essence the stopped attempt made
+is stale once a challenge starts again. Any challenge not won, the stopped one too, can start
 at once.
 
 ## The Port and the quota
@@ -82,6 +84,13 @@ A challenge is won by filling its **Port**, at one of C.O.D.'s corners, with its
 Essence: right-click the Port with the essence, or feed it from a hopper or a pipe on any side. A Port takes only
 its own essence, only while its challenge is played, and never more than the quota. Jade on the Port shows how
 far your team has got, and the Port wears its essence's colour while it is open.
+
+Each Transmuted Essence your chain makes while you play its challenge is marked with the attempt it was made in. A
+Port takes only the current attempt's, so essence held back is lost to a reset as surely as what the Port took.
+A stale essence looks dimmed and its tooltip says it was made before the last reset; a Port refuses it, leaving it
+in the hand, hopper or pipe that offered it, and a hand is told why. Stale and current essence don't stack together.
+A stale essence isn't wasted: the Shop still buys it, and it still goes into a Quartessence. Essence from before
+this rule, and a won chain's, is never stale.
 
 The quota grows with each tier below the one you started at, faster than the better core a win unlocks speeds
 you up, so each challenge takes longer than the last.

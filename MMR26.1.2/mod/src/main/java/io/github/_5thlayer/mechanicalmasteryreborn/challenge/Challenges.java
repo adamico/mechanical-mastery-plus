@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import com.mojang.logging.LogUtils;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.CodRitual;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Attempts;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.ChatFormatting;
@@ -241,6 +242,7 @@ public final class Challenges {
         if (state.plays(team, Handicap.LIFE)) {
             LifeHandicap.forget(server, team);
         }
+        Attempts.send(server, team);
         return true;
     }
 

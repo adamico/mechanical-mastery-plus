@@ -8,10 +8,12 @@ import java.util.UUID;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Attempts;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -73,6 +75,11 @@ public final class PortBlockEntity extends BlockEntity {
             return 0;
         }
         return TeamState.get(server.getServer()).tier(team(server)).map(ServerConfig::quota).orElse(0);
+    }
+
+    /** Whether {@code components}, of its own essence, were made in an attempt before the current one, so it refuses them (ADR 0016). */
+    boolean stale(DataComponentGetter components) {
+        return level instanceof ServerLevel server && Attempts.stale(server.getServer(), essence(), components);
     }
 
     /** How many more it takes: what's left of the quota while open, and none otherwise. */

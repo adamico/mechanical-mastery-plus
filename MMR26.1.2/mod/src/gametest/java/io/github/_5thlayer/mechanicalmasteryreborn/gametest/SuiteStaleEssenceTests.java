@@ -1,0 +1,189 @@
+// SPDX-FileCopyrightText: 2026 5thlayer
+// SPDX-License-Identifier: MIT
+
+package io.github._5thlayer.mechanicalmasteryreborn.gametest;
+
+import java.util.UUID;
+
+import com.ammonium.adminshop.recipes.RecipeManager;
+import io.github._5thlayer.craftworks.machine.AssemblerBlockEntity;
+import io.github._5thlayer.craftworks.machine.AssemblerSlots;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Making;
+import io.github._5thlayer.mechanicalmasteryreborn.port.Port;
+import io.github._5thlayer.mechanicalmasteryreborn.port.PortBlock;
+import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.transfer.energy.EnergyHandlerUtil;
+import net.neoforged.neoforge.transfer.energy.SimpleEnergyHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+
+/**
+ * A stale Transmuted Essence on the suite's machines and AdminShop (#322), in the {@code suiteGameTestServer} run alone:
+ * a Warding Essence sealed on a real Assembler, ticking as the world ticks it, on the island of a team playing protection
+ * is stamped with its attempt, so after a reset the Port refuses it and takes the next one sealed; and a stale essence,
+ * like an unstamped or a won chain's one, still matches the Shop's sell Offer, the pack's own, and still goes into a
+ * Quartessence. Its Assembler is a {@link SuiteAssembler}.
+ */
+final class SuiteStaleEssenceTests {
+
+    private static final BlockPos PORT = new BlockPos(1, 1, 1);
+    /** Where a chain machine stands on the island, for an essence made without a real one. */
+    private static final BlockPos MACHINE = new BlockPos(1, 1, 6);
+    /** Long enough for a tier 1 Assembler to seal twice. */
+    private static final int TICKS = 2 * SuiteAssembler.MOST_TICKS;
+
+    private SuiteStaleEssenceTests() {
+    }
+
+    static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
+        tests.test("suite_stale_warding_sealed_before_a_reset_is_refused_by_the_port", TICKS, SuiteStaleEssenceTests::sealedBeforeAReset);
+        tests.test("suite_stale_essence_matches_the_shop_s_sell_offer", 1, SuiteStaleEssenceTests::shopBuysIt);
+        tests.test("suite_stale_unstamped_and_won_chain_essence_match_the_shop_s_sell_offer", 1, SuiteStaleEssenceTests::shopBuysCurrent);
+        tests.test("suite_stale_essence_goes_into_a_quartessence", 40, SuiteStaleEssenceTests::quartessence);
+    }
+
+    private static void sealedBeforeAReset(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        helper.setBlock(PORT, Port.BLOCKS_BY_HANDICAP.get(Handicap.PROTECTION).get());
+        helper.assertTrue(state(helper).begin(team, Handicap.PROTECTION, helper.getLevel().getGameTime()), "protection didn't start");
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "warding_essence");
+        var supply = new SimpleEnergyHandler(1_000_000, 1_000_000, 1_000_000, 1_000_000);
+        // FE fed each tick, as a cable would, while the world ticks the Assembler as it ticks every machine.
+        helper.onEachTick(() -> {
+            var face = helper.getLevel().getCapability(Capabilities.Energy.BLOCK, helper.absolutePos(SuiteAssembler.ORIGIN), Direction.UP);
+            if (face != null) {
+                EnergyHandlerUtil.move(supply, face, 1000, null);
+            }
+        });
+        fillSeal(assembler);
+        ItemStack[] earlier = new ItemStack[1];
+        helper.startSequence()
+                .thenWaitUntil(() -> helper.assertTrue(sealed(assembler), "the Assembler sealed nothing"))
+                .thenExecute(() -> {
+                    earlier[0] = takeOutput(assembler);
+                    helper.assertTrue(state(helper).resetChallenge(team, helper.getLevel().getGameTime()), "protection didn't reset");
+                    fillSeal(assembler);
+                })
+                .thenWaitUntil(() -> helper.assertTrue(sealed(assembler), "the Assembler sealed nothing after the reset"))
+                .thenExecute(() -> {
+                    ItemStack current = takeOutput(assembler);
+                    helper.assertValueEqual(offer(helper, team, earlier[0]), 1, "the Warding Essence sealed before the reset a hand keeps");
+                    helper.assertValueEqual(offer(helper, team, current), 0, "the Warding Essence sealed after the reset a hand keeps");
+                    helper.assertValueEqual(state(helper).delivered(team), 1L, "the essence counted");
+                })
+                .thenSucceed();
+    }
+
+    /** A stale essence, made before a reset, matches the Shop's sell Offer for its kind. */
+    private static void shopBuysIt(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        helper.assertTrue(state(helper).begin(team, Handicap.ENERGY, 0), "energy didn't start");
+        ItemStack stale = made(helper, Essence.GALVANIC);
+        helper.assertTrue(state(helper).resetChallenge(team, 0), "energy didn't reset");
+        helper.assertValueEqual(offer(helper, team, stale), 1, "the stale essence a Port refused");
+        expectSells(helper, stale, "a stale Galvanic Essence");
+        helper.succeed();
+    }
+
+    /** An unstamped essence and a won chain's, which is never stamped, match the Shop's sell Offer too. */
+    private static void shopBuysCurrent(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        expectSells(helper, new ItemStack(Essences.item(Essence.GALVANIC)), "an unstamped Galvanic Essence");
+        helper.assertTrue(state(helper).winUnplayed(team, Handicap.ENERGY), "energy wasn't noted won");
+        helper.assertTrue(state(helper).begin(team, Handicap.LIFE, 0), "life didn't start");
+        ItemStack wonChain = made(helper, Essence.GALVANIC);
+        helper.assertTrue(state(helper).resetChallenge(team, 0), "life didn't reset");
+        expectSells(helper, wonChain, "a won chain's Galvanic Essence");
+        helper.succeed();
+    }
+
+    /** The pack's Quartessence recipe takes a stale Transmuted Essence as any other. */
+    private static void quartessence(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        helper.assertTrue(state(helper).begin(team, Handicap.ENERGY, 0), "energy didn't start");
+        ItemStack stale = made(helper, Essence.GALVANIC);
+        helper.assertTrue(state(helper).resetChallenge(team, 0), "energy didn't reset");
+        helper.assertValueEqual(offer(helper, team, stale), 1, "the stale essence a Port refused");
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "quartessence");
+        assembler.inventory().set(0, ItemResource.of(stale), 1);
+        SuiteAssembler.put(assembler, 1, Essences.item(Essence.WARDING), 1);
+        SuiteAssembler.put(assembler, 2, Essences.item(Essence.VITAL), 1);
+        SuiteAssembler.put(assembler, 3, Essences.item(Essence.AUREATE), 1);
+        SuiteAssembler.tickUntil(helper, assembler, () -> sealed(assembler));
+        SuiteAssembler.expectOutput(helper, assembler, Essences.item(Essence.QUARTESSENCE), "the Quartessence's recipe");
+        helper.succeed();
+    }
+
+    private static void expectSells(GameTestHelper helper, ItemStack stack, String what) {
+        var offer = RecipeManager.isSellItemRecipe(helper.getLevel(), stack);
+        helper.assertTrue(offer.isPresent(), "no sell Offer matches " + what);
+        helper.assertTrue(offer.get().value().getPrice() > 0, "the sell Offer for " + what + " pays nothing");
+    }
+
+    /** One {@code essence}, as a chain machine on the island makes it in its tick. */
+    private static ItemStack made(GameTestHelper helper, Essence essence) {
+        Making.atBlock(helper.getLevel(), helper.absolutePos(MACHINE));
+        try {
+            return new ItemStack(Essences.item(essence));
+        } finally {
+            Making.done();
+        }
+    }
+
+    /** A protection Port at {@link #PORT}, if none is there, right-clicked with {@code stack}; says how many are left in hand. */
+    private static int offer(GameTestHelper helper, UUID team, ItemStack stack) {
+        if (!(helper.getBlockState(PORT).getBlock() instanceof PortBlock)) {
+            helper.setBlock(PORT, Port.BLOCKS_BY_HANDICAP.get(Port.handicapOf(Essences.of(stack.getItem()).orElseThrow()).orElseThrow()).get());
+        }
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        TestTeams.join(player, team);
+        player.setItemInHand(InteractionHand.MAIN_HAND, stack.copy());
+        BlockPos pos = helper.absolutePos(PORT);
+        helper.getBlockState(PORT).useItemOn(player.getMainHandItem(), helper.getLevel(), player, InteractionHand.MAIN_HAND,
+                new BlockHitResult(Vec3.atCenterOf(pos), Direction.UP, pos, false));
+        return player.getMainHandItem().getCount();
+    }
+
+    /** The Warding Essence's inputs, the pack's Seal, in the Assembler's slots and box. */
+    private static void fillSeal(AssemblerBlockEntity assembler) {
+        SuiteAssembler.put(assembler, 0, RiftShards.CHARGED_RIFT.get(), 2);
+        SuiteAssembler.put(assembler, 1, BuiltInRegistries.ITEM.getValue(Identifier.parse("wireworks:plastic")), 2);
+        SuiteAssembler.put(assembler, 2, Items.STRING, 2);
+        SuiteAssembler.put(assembler, 3, Items.GUNPOWDER, 1);
+        SuiteAssembler.put(assembler, 4, Items.IRON_INGOT, 1);
+        assembler.fluids().set(0, new FluidStack(Fluids.WATER, 1000));
+    }
+
+    private static boolean sealed(AssemblerBlockEntity assembler) {
+        return assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0;
+    }
+
+    /** What the Assembler made, taken out of it as automation would. */
+    private static ItemStack takeOutput(AssemblerBlockEntity assembler) {
+        var resource = assembler.inventory().getResource(AssemblerSlots.OUTPUT);
+        int count = assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT);
+        assembler.inventory().set(AssemblerSlots.OUTPUT, ItemResource.EMPTY, 0);
+        return resource.toStack(count);
+    }
+
+    private static TeamState state(GameTestHelper helper) {
+        return TeamState.get(helper.getLevel().getServer());
+    }
+}

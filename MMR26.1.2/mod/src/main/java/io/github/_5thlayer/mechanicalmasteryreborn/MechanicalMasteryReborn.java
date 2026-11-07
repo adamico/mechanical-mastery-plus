@@ -23,6 +23,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbchunks.FtbChunksExplosions;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbteams.FtbPartySync;
 import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
+import io.github._5thlayer.mechanicalmasteryreborn.essence.Attempts;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.port.Port;
@@ -46,6 +47,7 @@ public final class MechanicalMasteryReborn {
 
     public MechanicalMasteryReborn(IEventBus modBus, ModContainer container) {
         Essences.register(modBus);
+        Attempts.register(modBus);
         Cod.register(modBus);
         Lab.register(modBus);
         Port.register(modBus);

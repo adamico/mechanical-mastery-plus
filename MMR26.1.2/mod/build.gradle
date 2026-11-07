@@ -89,15 +89,17 @@ tasks.named('test') {
 
 // The suite game tests, all named suite_*, run the pack's recipes on a real Assembler: the protection Chain's (#252),
 // the End Portal Frame's (#265) and the Quartessence's (#262), and the pack's Family that climbs a Quartessence into
-// Quintessence on Voidworks' Mutation Chamber (#262). They need the suite mods those recipes stand on: Craftworks'
-// Assembler, Fieldworks' Harvester, magma slurry and tar, Wireworks' steam and plastic, and Voidworks' Mutation Chamber
-// and Void Crucible, on Groundworks. They are the pack's own jars, from CurseForge as mods/*.pw.toml name them, so a
+// Quintessence on Voidworks' Mutation Chamber (#262), and match a stale Transmuted Essence against the Shop's sell Offers
+// (#322). They need the suite mods those recipes stand on: Craftworks' Assembler, Fieldworks' Harvester, magma slurry
+// and tar, Wireworks' steam and plastic, and Voidworks' Mutation Chamber and Void Crucible, on Groundworks; and AdminShop,
+// with the Patchouli and FTB Teams it requires. They are the pack's own jars, from CurseForge as mods/*.pw.toml name them, so a
 // CI runner needs no build of the suite. They run on a game test server of their own, suiteGameTestServer, with those
 // mods and the pack's recipes for them as a datapack, suite_pack/; the gameTestServer run keeps none of them, so it
 // still proves the mod plays alone. Only the gametest source set, which never ships, names a suite mod.
 def machines = ['curse.maven:kc00l-craftworks-1715876:9471754', 'curse.maven:fieldworks-1737485:9472029',
                 'curse.maven:groundworks-1717892:9373843', 'curse.maven:voidworks-1742531:9450242']
 def suiteMods = machines + ['curse.maven:wireworks-1721198:9373965']
+def shop = [adminShop, 'curse.maven:patchouli-306770:8404543', ftbTeams, ftbLibrary]
 def suiteTestReport = layout.buildDirectory.file('reports/suite-gametest.xml').get().asFile
 
 // The run's classpath is its source set's, as Craftworks' solo run is: one with no code, the mod's own dependencies
@@ -113,7 +115,10 @@ configurations {
 dependencies {
     // The game tests name the Assembler and the Harvester, which stand on Groundworks' footprints, and Voidworks' machines.
     machines.each { gametestCompileOnly it }
+    // The game tests ask AdminShop which sell Offer an item matches.
+    gametestCompileOnly(adminShop) { transitive = false }
     suiteMods.each { suiteRuntimeOnly it }
+    shop.each { suiteRuntimeOnly(it) { transitive = false } }
     // The newest libworks runtime those mods nest, which they require: a dev run loads the classpath's, not a nested one.
     suiteRuntimeOnly 'io.github.5thlayer:libworks-runtime:0.1.13'
 }
@@ -138,7 +143,8 @@ def suitePackDir = layout.buildDirectory.dir('generated/suitePack')
 def generateSuitePack = tasks.register('generateSuitePack', Sync) {
     from('../kubejs/data') {
         include 'mechanicalmasteryreborn/recipe/assembling/**', 'mechanicalmasteryreborn/recipe/harvesting/**', 'fieldworks/**',
-                'mechanicalmasteryreborn/voidworks/**', 'mechanicalmasteryreborn/tags/item/rung/**'
+                'mechanicalmasteryreborn/voidworks/**', 'mechanicalmasteryreborn/tags/item/rung/**',
+                'mechanicalmasteryreborn/recipe/shop/sell/essence/**'
         into 'suite_pack/data'
     }
     into suitePackDir

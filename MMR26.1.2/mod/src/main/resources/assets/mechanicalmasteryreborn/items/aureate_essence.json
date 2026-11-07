@@ -1,6 +1,17 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "mechanicalmasteryreborn:item/aureate_essence"
+    "type": "minecraft:condition",
+    "property": "mechanicalmasteryreborn:stale",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "mechanicalmasteryreborn:item/aureate_essence",
+      "tints": [
+        { "type": "minecraft:constant", "value": 8421504 }
+      ]
+    },
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "mechanicalmasteryreborn:item/aureate_essence"
+    }
   }
 }
