@@ -7,7 +7,10 @@ import java.util.UUID;
 
 import com.ammonium.adminshop.recipes.RecipeManager;
 import io.github._5thlayer.craftworks.machine.AssemblerBlockEntity;
+import com.mojang.authlib.GameProfile;
+import io.github._5thlayer.craftworks.assembler.PersonalAssembler;
 import io.github._5thlayer.craftworks.machine.AssemblerSlots;
+import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
@@ -21,6 +24,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -29,6 +33,9 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.util.FakePlayer;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.transfer.energy.EnergyHandlerUtil;
 import net.neoforged.neoforge.transfer.energy.SimpleEnergyHandler;
@@ -37,7 +44,8 @@ import net.neoforged.neoforge.transfer.item.ItemResource;
 /**
  * A stale Transmuted Essence on the suite's machines and AdminShop (#322), in the {@code suiteGameTestServer} run alone:
  * a Warding Essence sealed on a real Assembler, ticking as the world ticks it, on the island of a team playing protection
- * is stamped with its attempt, so after a reset the Port refuses it and takes the next one sealed; and a stale essence,
+ * is stamped with its attempt, so after a reset the Port refuses it and takes the next one sealed, as it refuses one
+ * crafted on a member's Personal Assembler before the reset; and a stale essence,
  * like an unstamped or a won chain's one, still matches the Shop's sell Offer, the pack's own, and still goes into a
  * Quartessence. Its Assembler is a {@link SuiteAssembler}.
  */
@@ -54,6 +62,8 @@ final class SuiteStaleEssenceTests {
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("suite_stale_warding_sealed_before_a_reset_is_refused_by_the_port", TICKS, SuiteStaleEssenceTests::sealedBeforeAReset);
+        tests.test("suite_stale_essence_crafted_on_the_personal_assembler_before_a_reset_is_refused_by_the_port", 1,
+                SuiteStaleEssenceTests::craftedByHand);
         tests.test("suite_stale_essence_matches_the_shop_s_sell_offer", 1, SuiteStaleEssenceTests::shopBuysIt);
         tests.test("suite_stale_unstamped_and_won_chain_essence_match_the_shop_s_sell_offer", 1, SuiteStaleEssenceTests::shopBuysCurrent);
         tests.test("suite_stale_essence_goes_into_a_quartessence", 40, SuiteStaleEssenceTests::quartessence);
@@ -89,6 +99,41 @@ final class SuiteStaleEssenceTests {
                     helper.assertValueEqual(state(helper).delivered(team), 1L, "the essence counted");
                 })
                 .thenSucceed();
+    }
+
+    /**
+     * A Galvanic Essence crafted on a member's Personal Assembler while the team plays energy, by the game tests' own
+     * hand recipe ({@code suite_pack/.../gametest_galvanic_by_hand.json}, the pack having none), is stamped as the player's
+     * tick makes it, so after a reset the Port refuses it.
+     */
+    private static void craftedByHand(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        helper.assertTrue(state(helper).begin(team, Handicap.ENERGY, 0), "energy didn't start");
+        // A fake player, which logs in nowhere and drops whatever is sent to it, as Craftworks' and Voidworks' syncs send.
+        ServerPlayer player = new FakePlayer(helper.getLevel(), new GameProfile(UUID.randomUUID(), "suite_hand"));
+        player.setGameMode(GameType.SURVIVAL);
+        TestTeams.join(player, team);
+        player.getInventory().add(new ItemStack(Items.REDSTONE));
+        helper.assertTrue(PersonalAssembler.craft(player,
+                Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "assembling/gametest_galvanic_by_hand"), 1),
+                "the Personal Assembler queued nothing");
+        var galvanic = Essences.item(Essence.GALVANIC);
+        for (int tick = 0; tick < SuiteAssembler.MOST_TICKS && player.getInventory().countItem(galvanic) == 0; tick++) {
+            // A player's tick as its events frame it, which Craftworks' Personal Assembler crafts in; a fake player has
+            // no tick of its own.
+            NeoForge.EVENT_BUS.post(new PlayerTickEvent.Pre(player));
+            NeoForge.EVENT_BUS.post(new PlayerTickEvent.Post(player));
+        }
+        ItemStack crafted = ItemStack.EMPTY;
+        for (int slot = 0; slot < player.getInventory().getContainerSize(); slot++) {
+            if (player.getInventory().getItem(slot).is(galvanic)) {
+                crafted = player.getInventory().getItem(slot).copy();
+            }
+        }
+        helper.assertFalse(crafted.isEmpty(), "the Personal Assembler crafted no Galvanic Essence");
+        helper.assertTrue(state(helper).resetChallenge(team, 0), "energy didn't reset");
+        helper.assertValueEqual(offer(helper, team, crafted), 1, "the hand-crafted essence a hand keeps after the reset");
+        helper.succeed();
     }
 
     /** A stale essence, made before a reset, matches the Shop's sell Offer for its kind. */
