@@ -26,9 +26,7 @@ Starting the money challenge gives your team its **Permit**, which opens the cha
 team keeps it through a win or a reset, loses it when it stops the challenge, and is given it again when it starts
 the challenge anew: the Offers are the money chain, locked and unlocked as any other chain is. The Permit opens:
 
-- Sell Offers for the challenge's own fluids, such as sal ammoniac and
-  superheated steam, and for a few blocks, such as hay and dried kelp. Sellers sell them for you. A fluid only the
-  Shop gives, as water and lava, is never sold back.
+- Sell Offers for a few blocks, such as hay and dried kelp. Sellers sell them for you. The Shop buys no fluid.
 - Sell Offers for the Galvanic, Warding and Vital Essences, never the Aureate. Each sells for more than what made
   it, so a won chain's extras are a profit; under the challenge's share of a sale they are a loss, so they help
   with the quota but never pay for it outright.
