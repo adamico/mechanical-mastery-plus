@@ -6,12 +6,14 @@
 #     after decomposing; from the first win on, a team has other money, and what a lower mix holds may be sold (#305);
 #   - no item or fluid has two Sell Offers, since a Seller takes whichever it finds first;
 #   - whatever the Shop both buys and sells, it pays less than it charges;
-#   - nothing only the Shop gives is sold back (water, the Permits);
-#   - the Aureate Essence costs at least what the Shop pays for any other Transmuted Essence, so a won chain's extras,
-#     sold at the money handicap's share while the challenge is played, help buy its quota but never swap for it one
-#     for one (#232).
+#   - nothing only the Shop gives is sold back (water, the Permits), and no fluid the Shop sells has a Sell Offer
+#     unless something in the pack makes it, so a bought bucket is never sold back (#319).
+#
+# A Transmuted Essence's price, above what made it and under twice that, is worked out by hand from its chain (#319).
 #
 #   scripts/check_offers.py
+#
+# scripts/test_check_offers.py holds a case each price rule fails on.
 #
 # The Advanced mix is read from kubejs/server_scripts/decomposing.js. Exits non-zero, naming each Offer that breaks a rule.
 import json
@@ -24,9 +26,9 @@ OFFERS = PACK / "kubejs/data/mechanicalmasteryreborn/recipe/shop"
 MIXES = PACK / "kubejs/server_scripts/decomposing.js"
 # What only the Shop gives: water, whose every other source starts from a bought bucket, and AdminShop's Permits.
 SHOP_ONLY = {"minecraft:water", "adminshop:permit"}
-# The Transmuted Essence the Shop only sells. The only essences it buys are the other Transmuted Essences.
-AUREATE = "mechanicalmasteryreborn:aureate_essence"
-ESSENCE = re.compile(r"mechanicalmasteryreborn:\w+_essence")
+# The fluids the Shop sells that something in the pack makes too, and so may be sold back. Every other fluid with a
+# Buy Offer is one only the Shop gives, as lava is since dripstone is left out of the pack.
+MADE_FLUIDS = set()
 
 
 def first_mix():
@@ -36,21 +38,20 @@ def first_mix():
 
 
 def offers():
+    """Each Offer as (path, selling, fluid, good, price a unit in cents)."""
     for path in sorted(OFFERS.rglob("*.json")):
         offer = json.loads(path.read_text())
         kind = offer["type"].split(":")[1]
         goods = offer.get("result") or offer.get("item") or {"id": "#" + offer["tag"], "count": offer["count"]}
         amount = goods.get("count", goods.get("amount", 1))
-        yield path.relative_to(PACK), kind.endswith("selling"), goods["id"], offer["price"] / amount
+        yield path.relative_to(PACK), kind.endswith("selling"), kind.startswith("fluid"), goods["id"], offer["price"] / amount
 
 
-def main():
-    held = first_mix()
-    if not held:
-        sys.exit(f"check_offers: no Advanced mix found in {MIXES}")
+def check(offers, held):
+    """Every rule an Offer of offers breaks, against held, the items the Advanced mix holds."""
     problems = []
-    sells, buys = {}, {}
-    for path, selling, good, unit in offers():
+    sells, buys, bought_fluids = {}, {}, set()
+    for path, selling, fluid, good, unit in offers:
         if selling:
             if good in held:
                 problems.append(f"{path}: sells {good}, which the Advanced mix holds")
@@ -60,22 +61,27 @@ def main():
                 problems.append(f"{path}: sells {good}, which {sells[good][0]} sells too")
             sells[good] = (path, unit)
         else:
+            if fluid:
+                bought_fluids.add(good)
             # The cheapest Buy Offer of each good is the one a sale back must stay under.
             if good not in buys or unit < buys[good][1]:
                 buys[good] = (path, unit)
     for good, (path, unit) in sells.items():
         if good in buys and unit >= buys[good][1]:
             problems.append(f"{path}: pays {unit:g} cents a unit for {good}, which {buys[good][0]} charges {buys[good][1]:g}")
-    if AUREATE not in buys:
-        problems.append(f"no Buy Offer sells {AUREATE}")
-    else:
-        path, unit = buys[AUREATE]
-        for good in sorted(good for good in sells if ESSENCE.fullmatch(good)):
-            if sells[good][1] > unit:
-                problems.append(f"{path}: charges {unit:g} cents for {AUREATE}, less than {sells[good][0]} pays for {good}")
+        if good in bought_fluids and good not in MADE_FLUIDS and good not in SHOP_ONLY:
+            problems.append(f"{path}: sells {good}, a fluid only the Shop gives, which {buys[good][0]} sells")
+    return problems, len(sells), len(buys)
+
+
+def main():
+    held = first_mix()
+    if not held:
+        sys.exit(f"check_offers: no Advanced mix found in {MIXES}")
+    problems, sells, buys = check(offers(), held)
     for problem in problems:
         print(problem, file=sys.stderr)
-    print(f"check_offers: {len(sells)} Sell and {len(buys)} Buy Offers, against {len(held)} items in the Advanced mix: "
+    print(f"check_offers: {sells} Sell and {buys} Buy Offers, against {len(held)} items in the Advanced mix: "
           f"{len(problems)} problem(s)")
     sys.exit(1 if problems else 0)
 

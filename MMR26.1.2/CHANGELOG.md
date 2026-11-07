@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- The Shop prices lava as a consumable, $5 a bucket in place of $1000, and no longer buys it back, since only the Shop gives it. The Galvanic, Warding and Vital Essences sell for more than what their chains spend making them and under twice that, in place of $2500 each: $7.50, $1500 and $19,000. So a won chain's extras are a profit at full price and a loss at the money handicap's half (#319).
+
 ## 0.0.2
 
 - The pack has a title screen of its own: its island and essences behind the pack's title, the menu's buttons in its colours, the pack's version, a link to report a bug, and its name and Quintessence on the game's window (FancyMenu).
