@@ -26,7 +26,7 @@ To break a Mechanical Essence down into its mix, on a Recycler or, much more slo
 _Avoid_: break down (Voidworks' word for its own item breakdown)
 
 **Recycle**:
-To break any item that isn't an essence down one band, on a Recycler only, for part of what made it, as Factorio's recycler does. It undoes only the crafting that made an item, never smelting, so it stops at refined: a refined item can't be recycled, and a raw one only recycles into less of itself. Nor does it undo what a player can uncraft for free: a block of ingots can't be recycled, and is uncrafted instead. Anything cooked counts as refined, food included, and what an ore drops, raw as it is, can't be recycled either. Where a recipe takes any of several items, recycling returns the first its tag lists. What the pack says an item recycles into always holds, refined or not. It is how a team gets below the band its essence decomposes into, and how it throws surplus away. Recycling never wakes C.O.D. and never counts against Inflation.
+To break any item that isn't an essence down one band, on a Recycler only, for part of what made it, as Factorio's recycler does. It undoes only the crafting that made an item, never smelting, so it stops at refined: a refined item can't be recycled, and a raw one only recycles into less of itself. Nor does it undo what a player can uncraft for free: a block of ingots can't be recycled, and is uncrafted instead. Anything cooked counts as refined, food included, and what an ore drops, raw as it is, can't be recycled either. Where a recipe takes any of several items, recycling returns the first its tag lists. What the pack says an item recycles into always holds, refined or not. It is how a team gets below the band its essence decomposes into, and how it throws surplus away. Recycling never wakes C.O.D. and never counts against Overproduction.
 _Avoid_: decompose (for an item that isn't an essence), scrap, void
 
 **Recycler**:
@@ -57,12 +57,12 @@ An ascending recipe a challenge's research unlocks, often on one machine of the 
 **Band**:
 How processed an item is, from the top: intermediate 2, intermediate 1, refined, raw. A refined item is a material only smelted from raw, however many times, or cut from one raw kind alone: ingots, planks, glass, stone, smooth stone, sandstone, paper and bone meal. A thing worn or with a state of its own, as armour or a furnace, is never refined, however it is made. A raw item is one nothing crafts: what the world gives, as logs, cobblestone, ores, raw ores, what an ore drops, as redstone and quartz, and mob drops. An intermediate 1 is the first crafted thing, and recycles completely into refined and raw items in one step, as a piston or a stick does; an intermediate 2 is anything that takes two steps or more, as an Assembler made from a Crafter does, or a Hopper from a Chest. Wood and stone count as much as metal. Each essence tier decomposes mostly into one band, Advanced into intermediate 2 down to Basic into raw.
 
-**Inflation**:
+**Overproduction**:
 The excess C.O.D. has built up since the current challenge began: essences it has made minus essences the team has decomposed, of the tier it is making. Only while a challenge is played does C.O.D. make them ever faster, with no ceiling, so it climbs whenever decomposing falls behind; voiding or storing essence doesn't lower it. When it reaches its cap before the challenge is finished, the challenge resets, and C.O.D. falls back to the pace it woke at.
-_Avoid_: glut, overflow, timer
+_Avoid_: Inflation (the money handicap's price rises), glut, overflow, timer
 
 **Transmuted Essence**:
-One of the four new essences, each made at the end of one challenge by that challenge's own way of processing essence. Once a team has put its challenge's quota of them into its Port on C.O.D., the tier C.O.D. is making is blocked for good, and C.O.D. drops to the tier below; a reset loses what was put in toward the quota. A won chain goes on making them, and the Shop buys every one but the Aureate, which it only sells. They are Galvanic (energy), Warding (protection), Vital (life) and Aureate (money). Each belongs to its challenge, not to a tier.
+One of the four new essences, each made at the end of one challenge by that challenge's own way of processing essence. Once a team has put its challenge's quota of them into its Port on C.O.D., the tier C.O.D. is making is blocked for good, and C.O.D. drops to the tier below; a reset loses what was put in toward the quota, and makes every one made before it stale: each is marked with the attempt it was made in and a Port takes only the current attempt's. Stale matters to a Port alone: the Shop buys a stale one, and a Quartessence takes it, as any other. A won chain goes on making them, and the Shop buys every one, for more than what made it but less than twice that, so a won chain never pays for the next challenge outright, and sells none. They are Galvanic (energy), Warding (protection), Vital (life) and Aureate (money). Each belongs to its challenge, not to a tier.
 _Avoid_: new essence
 
 **Quintessence**:
@@ -89,14 +89,14 @@ _Avoid_: final challenge, fifth challenge
 
 **Lead**:
 How far the team's Quintessence is ahead of C.O.D. in its last stand: what the team's Quintessence has cancelled minus the Nullessence C.O.D. has made since the last stand started, kept, voided or processed alike. Decomposing doesn't move it. It never falls below minus the margin, and the team wins the pack when it reaches the margin.
-_Avoid_: score, Inflation (which is a challenge's)
+_Avoid_: score, Overproduction (which is a challenge's)
 
 **Challenge**:
 One of four goals, each bound to a fixed mod or set of mods, started and researched at the lab and followed through EMI, as Factorio's progression is, with no quest book. On every tier, the challenge reshapes how a team climbs back up from what it decomposed, through its own mods and alternate recipes. The team picks which challenge to take on against each tier C.O.D. makes, so the four are played in any order. Each challenge can be beaten against any tier, harder the lower the tier. It is won by putting its quota of Transmuted Essence into its Port on C.O.D., which blocks the tier C.O.D. is making; a won challenge can't be played again. Its mods keep their own recipes. Its chain stays locked for a team until it starts the challenge, so nothing of it can be built ahead, and its machines, however they are had, do no work until then, though their crafting is never locked, and stays unlocked from then on, past a win or a reset, but not past a stop. Money's chain is the Shop's Offers its Permit opens, held the same way. What its mods offer outside the chain, as the Shop, is never locked, and their items can still come from a mix, to be recycled.
 _Avoid_: questline, chapter, stage
 
 **Stop**:
-A team leaving the challenge it plays at the lab, to take on another or come back to it better prepared. It is offered only once the attempt has reset, and made when every member online has asked for it. It ends the handicap and Inflation, loses what was put toward the quota, and locks the challenge's chain again until the team starts it anew, though a reset keeps it; the stopped challenge, or any other not won, can start at once.
+A team leaving the challenge it plays at the lab, to take on another or come back to it better prepared. It is offered only once the attempt has reset, and made when every member online has asked for it. It ends the handicap and Overproduction, loses what was put toward the quota, and locks the challenge's chain again until the team starts it anew, though a reset keeps it; the stopped challenge, or any other not won, can start at once.
 _Avoid_: abandon, quit, forfeit
 
 **Quota**:
@@ -120,7 +120,7 @@ The foods a player has eaten lately, kept only while their team plays the life c
 _Avoid_: nutrition, spice
 
 **Assault**:
-The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from one gate at a time, on one of four platforms it builds in the void around the island, with unbreakable bridges to it. The waves grow harder, with a breather between each step, at which the gate moves to another side at random, and never stop until the quota is filled or Inflation reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, what its mobs break is the team's refund when it ends, and it pauses while no one is on the island.
+The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from one gate at a time, on one of four platforms it builds in the void around the island, with unbreakable bridges to it. The waves grow harder, with a breather between each step, at which the gate moves to another side at random, and never stop until the quota is filled or Overproduction reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, what its mobs break is the team's refund when it ends, and it pauses while no one is on the island.
 _Avoid_: raid, siege, invasion
 
 **Home gate**:
@@ -151,6 +151,18 @@ _Avoid_: obsidian dust, obsidian shards
 The protection challenge's Chain's step between the Rift Shards and the Warding Essence: two shards charged on an Assembler with tar, Obsidian Flakes and Ward Tallow. Two of them, sealed with plastic, make a Warding Essence.
 _Avoid_: charged rift, charged shard
 
+**Coin**:
+What the money challenge's Chain mints from an ingot of copper, iron or gold, melted with lava and cast in a mold, and what an Aureate Essence is made from, coins of all three metals. A team short of a metal exchanges coins up for it: copper coins for an iron one, iron coins for a gold one. The Shop never buys a coin, so a team's gold is either sold or minted, never both.
+_Avoid_: currency, money (the Account's), token
+
+**Mold**:
+What the money challenge's Chain casts a Coin in, one for every metal, the metal poured deciding the coin. It is made from sand and clay, and each cast uses it up: the shakeout, knocking the cooled cast out of it, gives the coin and Burnt Sand.
+_Avoid_: cast (the filled mold), die
+
+**Burnt Sand**:
+What a Mold leaves at the shakeout, its sand spent by the heat; washed with water, it is sand again, for the next mold.
+_Avoid_: spent sand, return sand
+
 **Generator**:
 A block the pack names as making energy, as Wireworks' engines, turbines and solar panels are. It belongs to the team whose island it stands on, and while that team plays the energy challenge it gives the team no energy, saying why, and goes on for every other team.
 _Avoid_: power source
@@ -171,7 +183,7 @@ Consuming science items in the lab to unlock a challenge's alternate recipes for
 _Avoid_: stage, unlock (as a noun)
 
 **Shop**:
-Where goods are traded for money: a second way to resources beside decomposing, and the skyblock's store for what no essence gives, as saplings, water and lava. A team buys what it lacks, and sells only the few goods the Shop takes, made things as metal blocks rather than whatever it has too much of; a fluid that only the Shop gives is never sold back. It never buys what the first essence's mix holds, so a team's first money takes a step after decomposing; from the first win on, what a mix holds may be sold. Until Basic, whose mix holds them, it is the only source of ores, and it is always the source of a team's first food: seeds and passive farm animals. Money was the heart of Mechanical Mastery Plus and stays a big part of its sequel. It is never locked, and the money handicap is what makes it costly.
+Where goods are traded for money: a second way to resources beside decomposing, and the skyblock's store for what no essence gives, as saplings, water and lava. A team buys what it lacks, and sells only the few goods the Shop takes, made things as metal blocks rather than whatever it has too much of; a fluid that only the Shop gives is never sold back. Whatever the Shop takes, it pays more for than what made it cost, at full price; the share the money handicap pays may leave a loss. It never buys what the first essence's mix holds, so a team's first money takes a step after decomposing; from the first win on, what a mix holds may be sold. Until Basic, whose mix holds them, it is the only source of ores, and it is always the source of a team's first food: seeds and passive farm animals. Money was the heart of Mechanical Mastery Plus and stays a big part of its sequel. It is never locked, and the money handicap is what makes it costly.
 
 **Permit**:
 AdminShop's named unlock, held by a team's Account, which opens Offers gated by it. A Sell Permit opens Offers the Shop buys from the team, a Buy Permit Offers it sells to the team; one never opens both. The Shop sells none: a team holds only the two it is given, the money challenge's, which opens every Offer of its chain and is held while the chain is unlocked, from a start to a stop, and the protection win's, for good.
