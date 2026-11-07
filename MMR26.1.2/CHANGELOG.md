@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- A Mold is made three times as fast, so one Assembler making Molds keeps three casting copper, iron and gold busy.
+
 - The Shop sells clay balls in place of clay, 16 for $5, since nothing in the pack automates breaking clay into balls.
 
 ## 0.0.5
