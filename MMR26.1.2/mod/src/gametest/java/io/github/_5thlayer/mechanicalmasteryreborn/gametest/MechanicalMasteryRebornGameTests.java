@@ -114,10 +114,11 @@ public final class MechanicalMasteryRebornGameTests {
         HermeticLabTests.register(tests);
         GalleryTests.register(tests);
         // The protection Chain and the End Portal Frame on a real Assembler, in the suiteGameTestServer run alone, which
-        // loads Craftworks (#252, #265), and the Quartessence's way to Quintessence there, which loads Voidworks too (#262).
+        // loads Craftworks (#252, #265), and the money Chain's mint (#320), and the Quartessence's way to Quintessence there, which loads Voidworks too (#262).
         if (ModList.get().isLoaded("craftworks")) {
             WardingChainTests.register(tests);
             LastChapterFrameTests.register(tests);
+            MintTests.register(tests);
         }
         if (ModList.get().isLoaded("voidworks")) {
             SuiteQuintessenceTests.register(tests);

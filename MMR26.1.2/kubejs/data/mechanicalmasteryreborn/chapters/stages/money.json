@@ -1,0 +1,17 @@
+{
+  "restrictions": {
+    "preventPickup": false,
+    "dropFromInventory": false,
+    "preventCraft": true,
+    "hideInJei": false,
+    "preventTransfer": false,
+    "preventTravel": false
+  },
+  "recipes": [
+    "mechanicalmasteryreborn:assembling/molten_gold",
+    "mechanicalmasteryreborn:assembling/gold_cast",
+    "mechanicalmasteryreborn:assembling/gold_coin",
+    "mechanicalmasteryreborn:assembling/sand_from_burnt_sand",
+    "mechanicalmasteryreborn:assembling/mold"
+  ]
+}

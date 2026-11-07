@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- The money challenge mints gold on the Assembler, locked until the team starts the challenge as every chain is, and kept past a reset but not a stop: a gold ingot melts with lava into molten gold, the molten gold is cast in a Mold, and the cast is cooled with water and knocked out into a Gold Coin and Burnt Sand. Burnt Sand washes back into sand, and sand and clay with water make the next Mold. Every step takes a fluid, so the Personal Assembler plans none of it (#320).
+
 ## 0.0.2
 
 - The pack has a title screen of its own: its island and essences behind the pack's title, the menu's buttons in its colours, the pack's version, a link to report a bug, and its name and Quintessence on the game's window (FancyMenu).

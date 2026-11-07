@@ -5,6 +5,7 @@ package io.github._5thlayer.mechanicalmasteryreborn;
 
 import io.github._5thlayer.libworks.WorksTab;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Mint;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.NullShards;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ObsidianFlakes;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.RiftShards;
@@ -21,7 +22,8 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 /**
  * Every obtainable item of the mod, in the suite's Works tab and no other (FactoryWorks ADR-0128): C.O.D.,
  * the lab and the four Ports, then every essence, then the protection Chain's Rift Shard, Ward Tallow bucket,
- * Obsidian Flakes and Charged Rift Shard, and the Hermetic Lab's Null Shard, then the Recycler's parts, then the
+ * Obsidian Flakes and Charged Rift Shard, the money Chain's mint, from the molten gold bucket to the Gold Coin,
+ * and the Hermetic Lab's Null Shard, then the Recycler's parts, then the
  * Defences. One listener, in the order the tab shows them, which
  * {@code CreativeTabTests} lists too.
  */
@@ -46,6 +48,11 @@ final class WorksTabContents {
         event.accept(WardTallow.BUCKET.get());
         event.accept(ObsidianFlakes.ITEM.get());
         event.accept(RiftShards.CHARGED_RIFT.get());
+        event.accept(Mint.MOLTEN_GOLD_BUCKET.get());
+        event.accept(Mint.MOLD.get());
+        event.accept(Mint.GOLD_CAST.get());
+        event.accept(Mint.BURNT_SAND.get());
+        event.accept(Mint.GOLD_COIN.get());
         event.accept(NullShards.ITEM.get());
         for (int tier = 1; tier <= Recycler.TIERS; tier++) {
             event.accept(Recycler.coreItem(tier));

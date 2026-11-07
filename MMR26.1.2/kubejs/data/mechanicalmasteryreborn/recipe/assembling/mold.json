@@ -1,0 +1,15 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting-with-fluid",
+  "ingredients": [
+    { "ingredient": "minecraft:sand", "count": 1 },
+    { "ingredient": "minecraft:clay_ball", "count": 1 }
+  ],
+  "fluid_ingredients": [
+    { "ingredient": "minecraft:water", "amount": 100 }
+  ],
+  "results": [
+    { "id": "mechanicalmasteryreborn:mold", "count": 1 }
+  ],
+  "time": 100
+}

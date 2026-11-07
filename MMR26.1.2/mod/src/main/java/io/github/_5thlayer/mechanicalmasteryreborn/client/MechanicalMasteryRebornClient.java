@@ -6,6 +6,7 @@ package io.github._5thlayer.mechanicalmasteryreborn.client;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LifeHandicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Mint;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.NullShards;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
@@ -108,11 +109,14 @@ public final class MechanicalMasteryRebornClient {
         event.registerBlockEntityRenderer(Defences.FE_DEFENCE_ENTITY.get(), FeDefenceRenderer::new);
     }
 
-    /** Ward Tallow in the world, a tank or a pipe: vanilla water's sprites, drawn to be tinted, under a tallow tint. */
+    /** Ward Tallow in the world, a tank or a pipe: vanilla water's sprites, drawn to be tinted, under a tallow tint; molten gold its own. */
     private static void registerFluidModels(RegisterFluidModelsEvent event) {
         event.register(new FluidModel.Unbaked(new Material(Identifier.withDefaultNamespace("block/water_still")),
                 new Material(Identifier.withDefaultNamespace("block/water_flow")), null, FluidTintSources.constant(0xFFE6D3A3)),
                 WardTallow.SOURCE, WardTallow.FLOWING);
+        // Molten gold: its own sprite, already coloured, for both still and flowing, under a white tint.
+        var moltenGold = new Material(Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "block/molten_gold"));
+        event.register(new FluidModel.Unbaked(moltenGold, moltenGold, null, FluidTintSources.constant(0xFFFFFFFF)), Mint.MOLTEN_GOLD, Mint.FLOWING_MOLTEN_GOLD);
     }
 
     /**
