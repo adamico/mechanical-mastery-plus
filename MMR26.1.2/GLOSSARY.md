@@ -160,7 +160,7 @@ What the money challenge's Chain casts a Coin in, one for every metal, the metal
 _Avoid_: cast (the filled mold), die
 
 **Burnt Sand**:
-What a Mold leaves at the shakeout, its sand spent by the heat; washed with water, it is sand again, for the next mold.
+What a Mold leaves at the shakeout, its sand spent by the heat and holding the dross, the rock of the lava the metal was melted with, which rode in the molten metal into the mold; washed with water, it is sand again, for the next mold.
 _Avoid_: spent sand, return sand
 
 **Generator**:

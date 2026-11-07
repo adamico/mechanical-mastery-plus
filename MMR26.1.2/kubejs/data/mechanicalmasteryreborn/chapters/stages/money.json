@@ -8,6 +8,12 @@
     "preventTravel": false
   },
   "recipes": [
+    "mechanicalmasteryreborn:assembling/molten_copper",
+    "mechanicalmasteryreborn:assembling/copper_cast",
+    "mechanicalmasteryreborn:assembling/copper_coin",
+    "mechanicalmasteryreborn:assembling/molten_iron",
+    "mechanicalmasteryreborn:assembling/iron_cast",
+    "mechanicalmasteryreborn:assembling/iron_coin",
     "mechanicalmasteryreborn:assembling/molten_gold",
     "mechanicalmasteryreborn:assembling/gold_cast",
     "mechanicalmasteryreborn:assembling/gold_coin",

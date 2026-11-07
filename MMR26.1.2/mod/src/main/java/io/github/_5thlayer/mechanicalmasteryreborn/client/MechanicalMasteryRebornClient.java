@@ -123,14 +123,16 @@ public final class MechanicalMasteryRebornClient {
         event.registerBlockEntityRenderer(Defences.FE_DEFENCE_ENTITY.get(), FeDefenceRenderer::new);
     }
 
-    /** Ward Tallow in the world, a tank or a pipe: vanilla water's sprites, drawn to be tinted, under a tallow tint; molten gold its own. */
+    /** Ward Tallow in the world, a tank or a pipe: vanilla water's sprites, drawn to be tinted, under a tallow tint; each molten metal its own. */
     private static void registerFluidModels(RegisterFluidModelsEvent event) {
         event.register(new FluidModel.Unbaked(new Material(Identifier.withDefaultNamespace("block/water_still")),
                 new Material(Identifier.withDefaultNamespace("block/water_flow")), null, FluidTintSources.constant(0xFFE6D3A3)),
                 WardTallow.SOURCE, WardTallow.FLOWING);
-        // Molten gold: its own sprite, already coloured, for both still and flowing, under a white tint.
-        var moltenGold = new Material(Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "block/molten_gold"));
-        event.register(new FluidModel.Unbaked(moltenGold, moltenGold, null, FluidTintSources.constant(0xFFFFFFFF)), Mint.MOLTEN_GOLD, Mint.FLOWING_MOLTEN_GOLD);
+        // Each molten metal: its own sprite, already coloured, for both still and flowing, under a white tint.
+        for (Mint.Metal metal : Mint.METALS) {
+            var molten = new Material(Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "block/molten_" + metal.name()));
+            event.register(new FluidModel.Unbaked(molten, molten, null, FluidTintSources.constant(0xFFFFFFFF)), metal.molten, metal.flowing);
+        }
     }
 
     /**

@@ -3,7 +3,9 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import io.github._5thlayer.craftworks.machine.AssemblerBlockEntity;
@@ -29,97 +31,103 @@ import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 
 /**
- * The money challenge's mint for gold (ADR 0017, #320), the pack's own recipes in {@code suite_pack/} on a real
- * Assembler: melt a gold ingot with lava into molten gold, cast it in a Mold, cool the cast with water and knock out a
- * Gold Coin and Burnt Sand in one step, wash the Burnt Sand back into sand, and make the next Mold from sand and clay.
- * The cool and the shakeout are one recipe, since a cooled cast would be an item that only waits to be knocked out. The
- * recipes are locked under the money challenge's stage, as every chain's are (ADRs 0007, 0013), read from the pack's own
- * stage file. Only the {@code suiteGameTestServer} run registers them. Their Assembler is a {@link SuiteAssembler}.
+ * The money challenge's mint (ADR 0017, #320), the pack's own recipes in {@code suite_pack/} on a real Assembler: melt
+ * an ingot of copper, iron or gold with lava into molten metal, cast it in a Mold, cool the cast with water and knock out
+ * that metal's Coin and Burnt Sand in one step, wash the Burnt Sand back into sand, and make the next Mold from sand and
+ * clay. The molten metal carries the lava's rock as dross, which the shakeout knocks out with the Burnt Sand, so a melt
+ * gives as much as its ingot and lava take. The cool and the shakeout are one recipe, since a cooled cast would be an
+ * item that only waits to be knocked out. Each metal's steps run the same tests, one each. The recipes are locked under
+ * the money challenge's stage, as every chain's are (ADRs 0007, 0013), read from the pack's own stage file. Only the
+ * {@code suiteGameTestServer} run registers them. Their Assembler is a {@link SuiteAssembler}.
  */
 final class MintTests {
 
-    private static final List<String> RECIPES = List.of("molten_gold", "gold_cast", "gold_coin", "sand_from_burnt_sand", "mold");
+    private static final Map<Mint.Metal, Item> INGOTS = Map.of(Mint.COPPER, Items.COPPER_INGOT, Mint.IRON, Items.IRON_INGOT,
+            Mint.GOLD, Items.GOLD_INGOT);
 
     private MintTests() {
     }
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
-        tests.test("suite_mint_melt_makes_molten_gold_from_a_gold_ingot_and_lava", 40, MintTests::melt);
-        tests.test("suite_mint_melt_fills_a_bucket_with_molten_gold", 40, MintTests::meltFillsABucket);
-        tests.test("suite_mint_cast_fills_a_mold_with_molten_gold", 40, MintTests::cast);
-        tests.test("suite_mint_cast_drains_molten_gold_from_a_bucket", 40, MintTests::castDrainsABucket);
-        tests.test("suite_mint_cast_takes_molten_gold_from_a_pipe", 40, MintTests::castTakesFromAPipe);
-        tests.test("suite_mint_cool_spends_its_water_and_gives_back_nothing_else", 40, MintTests::cool);
-        tests.test("suite_mint_shakeout_knocks_a_gold_coin_and_burnt_sand_out_of_a_cast", 40, MintTests::shakeout);
+        for (Mint.Metal metal : Mint.METALS) {
+            String name = metal.name();
+            tests.test("suite_mint_" + name + "_melt_makes_molten_" + name + "_from_an_ingot_and_lava", 40, helper -> melt(helper, metal));
+            tests.test("suite_mint_" + name + "_melt_fills_a_bucket", 40, helper -> meltFillsABucket(helper, metal));
+            tests.test("suite_mint_" + name + "_cast_fills_a_mold", 40, helper -> cast(helper, metal));
+            tests.test("suite_mint_" + name + "_cast_drains_a_bucket", 40, helper -> castDrainsABucket(helper, metal));
+            tests.test("suite_mint_" + name + "_cast_takes_molten_" + name + "_from_a_pipe", 40, helper -> castTakesFromAPipe(helper, metal));
+            tests.test("suite_mint_" + name + "_cool_spends_its_water_and_gives_back_nothing_else", 40, helper -> cool(helper, metal));
+            tests.test("suite_mint_" + name + "_shakeout_knocks_a_coin_and_burnt_sand_out_of_a_cast", 40, helper -> shakeout(helper, metal));
+            tests.test("suite_mint_" + name + "_an_ingot_ends_as_a_coin_and_burnt_sand", 40, helper -> line(helper, metal));
+        }
         tests.test("suite_mint_wash_makes_sand_from_burnt_sand", 40, MintTests::wash);
         tests.test("suite_mint_mold_makes_a_mold_from_sand_and_clay", 40, MintTests::mold);
-        tests.test("suite_mint_a_gold_ingot_ends_as_a_gold_coin_and_burnt_sand", 40, MintTests::line);
         tests.test("suite_mint_recipes_are_the_money_chains", 1, MintTests::moneysRecipes);
         tests.test("suite_mint_locked_until_the_money_challenge_starts", 1, MintTests::lockedUntilStarted);
         tests.test("suite_mint_stays_unlocked_after_a_reset", 1, MintTests::staysUnlockedAfterAReset);
         tests.test("suite_mint_locked_again_after_a_stop", 1, MintTests::lockedAgainAfterAStop);
     }
 
-    private static void melt(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "molten_gold");
-        SuiteAssembler.put(assembler, 0, Items.GOLD_INGOT, 1);
+    private static void melt(GameTestHelper helper, Mint.Metal metal) {
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "molten_" + metal.name());
+        SuiteAssembler.put(assembler, 0, INGOTS.get(metal), 1);
         assembler.fluids().set(0, new FluidStack(Fluids.LAVA, 100));
         SuiteAssembler.tickUntil(helper, assembler, () -> !assembler.fluids().contents(2).isEmpty());
         FluidStack made = assembler.fluids().contents(2);
-        helper.assertTrue(made.getFluid() == Mint.MOLTEN_GOLD.get() && made.getAmount() == 100,
-                "Melt made " + made.getAmount() + " mB of " + made.getFluid() + ", not 100 mB of molten gold");
+        helper.assertTrue(made.getFluid() == metal.molten.get() && made.getAmount() == 200,
+                "Melt made " + made.getAmount() + " mB of " + made.getFluid() + ", not 200 mB of molten " + metal.name());
         helper.assertTrue(assembler.fluids().contents(0).isEmpty() && assembler.inventory().getAmountAsInt(0) == 0,
-                "Melt left some of its gold or lava");
+                "Melt left some of its ingot or lava");
         helper.succeed();
     }
 
-    /** A melt that tops the output box up to a bucket's worth: the fill slot takes it, and the outputs hold a molten gold bucket. */
-    private static void meltFillsABucket(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "molten_gold");
-        SuiteAssembler.put(assembler, 0, Items.GOLD_INGOT, 1);
+    /** A melt that tops the output box up to a bucket's worth: the fill slot takes it, and the outputs hold the metal's bucket. */
+    private static void meltFillsABucket(GameTestHelper helper, Mint.Metal metal) {
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "molten_" + metal.name());
+        SuiteAssembler.put(assembler, 0, INGOTS.get(metal), 1);
         assembler.fluids().set(0, new FluidStack(Fluids.LAVA, 100));
-        assembler.fluids().set(2, new FluidStack(Mint.MOLTEN_GOLD.get(), 900));
+        assembler.fluids().set(2, new FluidStack(metal.molten.get(), 800));
         SuiteAssembler.put(assembler, AssemblerSlots.FILL, Items.BUCKET, 1);
-        SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, Mint.MOLTEN_GOLD_BUCKET.get()) > 0);
-        helper.assertValueEqual(outputs(assembler, Mint.MOLTEN_GOLD_BUCKET.get()), 1, "the molten gold buckets in the outputs");
+        SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, metal.bucket.get()) > 0);
+        helper.assertValueEqual(outputs(assembler, metal.bucket.get()), 1, "the molten " + metal.name() + " buckets in the outputs");
         helper.succeed();
     }
 
-    private static void cast(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "gold_cast");
+    private static void cast(GameTestHelper helper, Mint.Metal metal) {
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, metal.name() + "_cast");
         SuiteAssembler.put(assembler, 0, Mint.MOLD.get(), 1);
-        assembler.fluids().set(0, new FluidStack(Mint.MOLTEN_GOLD.get(), 100));
+        assembler.fluids().set(0, new FluidStack(metal.molten.get(), 200));
         SuiteAssembler.tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
-        SuiteAssembler.expectOutput(helper, assembler, Mint.GOLD_CAST.get(), "Cast");
-        helper.assertTrue(assembler.fluids().contents(0).isEmpty(), "Cast left some of its molten gold");
+        SuiteAssembler.expectOutput(helper, assembler, metal.cast.get(), "Cast");
+        helper.assertTrue(assembler.fluids().contents(0).isEmpty(), "Cast left some of its molten " + metal.name());
         helper.succeed();
     }
 
-    /** A molten gold bucket in the drain slot pours into Cast's box, as a Ward Tallow bucket does into Charge's. */
-    private static void castDrainsABucket(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "gold_cast");
+    /** The metal's bucket in the drain slot pours into Cast's box, as a Ward Tallow bucket does into Charge's. */
+    private static void castDrainsABucket(GameTestHelper helper, Mint.Metal metal) {
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, metal.name() + "_cast");
         SuiteAssembler.put(assembler, 0, Mint.MOLD.get(), 1);
-        SuiteAssembler.put(assembler, AssemblerSlots.DRAIN, Mint.MOLTEN_GOLD_BUCKET.get(), 1);
-        SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, Mint.GOLD_CAST.get()) > 0);
-        helper.assertValueEqual(outputs(assembler, Mint.GOLD_CAST.get()), 1, "the gold casts in the outputs");
-        helper.assertValueEqual(assembler.fluids().contents(0).getAmount(), 900, "the molten gold left of the bucket after Cast");
+        SuiteAssembler.put(assembler, AssemblerSlots.DRAIN, metal.bucket.get(), 1);
+        SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, metal.cast.get()) > 0);
+        helper.assertValueEqual(outputs(assembler, metal.cast.get()), 1, "the " + metal.name() + " casts in the outputs");
+        helper.assertValueEqual(assembler.fluids().contents(0).getAmount(), 800, "the molten " + metal.name() + " left of the bucket after Cast");
         helper.succeed();
     }
 
-    /** Molten gold piped into one of the Assembler's fluid connections, as a pipe or a tank beside it would, fills Cast's box. */
-    private static void castTakesFromAPipe(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "gold_cast");
+    /** Molten metal piped into one of the Assembler's fluid connections, as a pipe or a tank beside it would, fills Cast's box. */
+    private static void castTakesFromAPipe(GameTestHelper helper, Mint.Metal metal) {
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, metal.name() + "_cast");
         SuiteAssembler.put(assembler, 0, Mint.MOLD.get(), 1);
-        helper.assertTrue(pipeIn(helper, FluidResource.of(Mint.MOLTEN_GOLD.get()), 100), "no fluid connection of the Assembler took molten gold");
+        helper.assertTrue(pipeIn(helper, FluidResource.of(metal.molten.get()), 200),
+                "no fluid connection of the Assembler took molten " + metal.name());
         SuiteAssembler.tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
-        SuiteAssembler.expectOutput(helper, assembler, Mint.GOLD_CAST.get(), "Cast");
+        SuiteAssembler.expectOutput(helper, assembler, metal.cast.get(), "Cast");
         helper.succeed();
     }
 
     /** Cooling takes the water and leaves no fluid behind, so nothing is left to void. */
-    private static void cool(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = coined(helper);
-        helper.assertTrue(assembler.fluids().contents(0).isEmpty(), "the cool left some of its water");
+    private static void cool(GameTestHelper helper, Mint.Metal metal) {
+        AssemblerBlockEntity assembler = coined(helper, metal);
         for (int box = 0; box < 3; box++) {
             helper.assertTrue(assembler.fluids().contents(box).isEmpty(), "the cool left a fluid in box " + box + ": "
                     + assembler.fluids().contents(box).getFluid());
@@ -127,9 +135,9 @@ final class MintTests {
         helper.succeed();
     }
 
-    private static void shakeout(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = coined(helper);
-        helper.assertValueEqual(outputs(assembler, Mint.GOLD_COIN.get()), 1, "the Gold Coins the shakeout knocked out");
+    private static void shakeout(GameTestHelper helper, Mint.Metal metal) {
+        AssemblerBlockEntity assembler = coined(helper, metal);
+        helper.assertValueEqual(outputs(assembler, metal.coin.get()), 1, "the " + metal.name() + " coins the shakeout knocked out");
         helper.assertValueEqual(outputs(assembler, Mint.BURNT_SAND.get()), 1, "the Burnt Sand the shakeout left");
         helper.assertValueEqual(assembler.inventory().getAmountAsInt(0), 0, "the casts left after the shakeout");
         helper.succeed();
@@ -156,7 +164,7 @@ final class MintTests {
     }
 
     /** The whole mint on one Assembler, each step's product carried to the next as a belt or a pipe would. */
-    private static void line(GameTestHelper helper) {
+    private static void line(GameTestHelper helper, Mint.Metal metal) {
         AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "mold");
         SuiteAssembler.put(assembler, 0, Items.SAND, 1);
         SuiteAssembler.put(assembler, 1, Items.CLAY_BALL, 1);
@@ -164,26 +172,26 @@ final class MintTests {
         SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, Mint.MOLD.get()) > 0);
         take(assembler, Mint.MOLD.get());
 
-        hold(helper, assembler, "molten_gold");
-        SuiteAssembler.put(assembler, 0, Items.GOLD_INGOT, 1);
+        hold(helper, assembler, "molten_" + metal.name());
+        SuiteAssembler.put(assembler, 0, INGOTS.get(metal), 1);
         assembler.fluids().set(0, new FluidStack(Fluids.LAVA, 100));
         SuiteAssembler.tickUntil(helper, assembler, () -> !assembler.fluids().contents(2).isEmpty());
         FluidStack molten = assembler.fluids().contents(2);
         assembler.fluids().set(2, FluidStack.EMPTY);
 
-        hold(helper, assembler, "gold_cast");
+        hold(helper, assembler, metal.name() + "_cast");
         SuiteAssembler.put(assembler, 0, Mint.MOLD.get(), 1);
         assembler.fluids().set(0, molten);
-        SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, Mint.GOLD_CAST.get()) > 0);
-        take(assembler, Mint.GOLD_CAST.get());
+        SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, metal.cast.get()) > 0);
+        take(assembler, metal.cast.get());
 
-        hold(helper, assembler, "gold_coin");
-        SuiteAssembler.put(assembler, 0, Mint.GOLD_CAST.get(), 1);
+        hold(helper, assembler, metal.name() + "_coin");
+        SuiteAssembler.put(assembler, 0, metal.cast.get(), 1);
         assembler.fluids().set(0, new FluidStack(Fluids.WATER, 250));
-        SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, Mint.GOLD_COIN.get()) > 0);
-        helper.assertValueEqual(outputs(assembler, Mint.GOLD_COIN.get()), 1, "the Gold Coins a gold ingot ended as");
-        helper.assertValueEqual(outputs(assembler, Mint.BURNT_SAND.get()), 1, "the Burnt Sand a gold ingot's cast left");
-        take(assembler, Mint.GOLD_COIN.get());
+        SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, metal.coin.get()) > 0);
+        helper.assertValueEqual(outputs(assembler, metal.coin.get()), 1, "the " + metal.name() + " coins an ingot ended as");
+        helper.assertValueEqual(outputs(assembler, Mint.BURNT_SAND.get()), 1, "the Burnt Sand an ingot's cast left");
+        take(assembler, metal.coin.get());
         take(assembler, Mint.BURNT_SAND.get());
 
         hold(helper, assembler, "sand_from_burnt_sand");
@@ -197,7 +205,11 @@ final class MintTests {
     /** What EMI marks as the money chain's: every mint recipe, read from the pack's own stage file. */
     private static void moneysRecipes(GameTestHelper helper) {
         var recipes = ChainMachines.recipes(helper.getLevel().getServer());
-        for (String path : RECIPES) {
+        var paths = new ArrayList<>(List.of("sand_from_burnt_sand", "mold"));
+        for (Mint.Metal metal : Mint.METALS) {
+            paths.addAll(List.of("molten_" + metal.name(), metal.name() + "_cast", metal.name() + "_coin"));
+        }
+        for (String path : paths) {
             helper.assertValueEqual(recipes.get(recipe(path)), Handicap.MONEY, "the chain of the mint's " + path);
         }
         helper.succeed();
@@ -252,12 +264,12 @@ final class MintTests {
 
     // -- fixtures -------------------------------------------------------------------------------
 
-    /** An Assembler that has cooled and knocked out one gold cast. */
-    private static AssemblerBlockEntity coined(GameTestHelper helper) {
-        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "gold_coin");
-        SuiteAssembler.put(assembler, 0, Mint.GOLD_CAST.get(), 1);
+    /** An Assembler that has cooled and knocked out one of {@code metal}'s casts. */
+    private static AssemblerBlockEntity coined(GameTestHelper helper, Mint.Metal metal) {
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, metal.name() + "_coin");
+        SuiteAssembler.put(assembler, 0, metal.cast.get(), 1);
         assembler.fluids().set(0, new FluidStack(Fluids.WATER, 250));
-        SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, Mint.GOLD_COIN.get()) > 0);
+        SuiteAssembler.tickUntil(helper, assembler, () -> outputs(assembler, metal.coin.get()) > 0);
         return assembler;
     }
 
