@@ -61,10 +61,6 @@ file = "config/fancymenu/customization/title_screen.txt"
 hash = "fc1e4c509990692de033feb6faf3e29f04c7c20ff83dd2e9dcfaf9e0f480c601"
 
 [[files]]
-file = "config/fancymenu/options.txt"
-hash = "b2e21f32769e832a111e3e28c308aa7d38234b446847ba3ef6ba8652a27e2401"
-
-[[files]]
 file = "config/fieldworks-common.toml"
 hash = "049d9bad4a2db993e486c4a6efb235ac0946fdab67a553b82ee73f5226c1976c"
 
@@ -118,7 +114,7 @@ hash = "96a009244a9de076808b535b86b18d9caf2ba7866d626c84735023753c0dcf76"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/index.md"
-hash = "0de0f3283242fea207e6aea4cb12dfacf18911860eb63c94a2b8595cef5afe4c"
+hash = "a52be26701f6c1f1560619936d48cfac226babe7659d1e54cc4796d567fec864"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/life.md"
@@ -130,11 +126,11 @@ hash = "8f6c6e05064868810b2a35ced5f372e785bf10fc90aab06e2c6e848901a8542d"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/protection.md"
-hash = "4438bd34b1032766fa02c7becbf0228c4638339c78bee4db4fc71ed2c19c66e9"
+hash = "cfc0850a5754b0717e5e07736b387bae4e4934e09f9da537a0c4ba6127632d20"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/cod.md"
-hash = "a6c1e7195914cc4cce4f1d66a99a0f74ff7ac3401cc7f5ab3ffcb88c2f25aa8f"
+hash = "42929ef0874aa3bd614534c594917aeeb4c7a7afaa6a018ebd5ddbe4bb030270"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/decomposing.md"
