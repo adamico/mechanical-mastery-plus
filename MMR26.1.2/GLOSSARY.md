@@ -65,6 +65,18 @@ _Avoid_: Inflation (the money handicap's price rises), glut, overflow, timer
 One of the four new essences, each made at the end of one challenge by that challenge's own way of processing essence. Once a team has put its challenge's quota of them into its Port on C.O.D., the tier C.O.D. is making is blocked for good, and C.O.D. drops to the tier below; a reset loses what was put in toward the quota, and makes every one made before it stale: each is marked with the attempt it was made in and a Port takes only the current attempt's. Stale matters to a Port alone: the Shop buys a stale one, and a Quartessence takes it, as any other. A won chain goes on making them, and the Shop buys every one, for more than what made it but less than twice that, so a won chain never pays for the next challenge outright, and sells none. They are Galvanic (energy), Warding (protection), Vital (life) and Aureate (money). Each belongs to its challenge, not to a tier.
 _Avoid_: new essence
 
+**Galvanic Charge**:
+A packed form of one of the energy chain's three branches, mercury, salt or sulfur, made from many of it. The Incubator takes one of each to make a Galvanic Core.
+_Avoid_: compressed mercury, packed salt
+
+**Galvanic Core**:
+What the Incubator makes from a Galvanic Charge of each branch. Several of them, with more alchemy, are assembled into one Galvanic Essence.
+_Avoid_: galvanic seed
+
+**Extraction**:
+Breaking a Transmuted Essence other than the Galvanic down on a machine of the energy chain into a mix of raw mercury, salt and sulfur, its own for each essence. A stale one is extracted as any other. It feeds the chain's lowest stages, never past one, and is a trade against selling the essence, not a must.
+_Avoid_: decomposing (the Recycler's), recycling
+
 **Quintessence**:
 The final essence, made in the last chapter. Its Voidworks way assembles one of each Transmuted Essence into a Quartessence and climbs that, in a Mutation Chamber, by a steep Rung paid in motes from the Nether and the End; a second way, with no Voidworks, makes it from Nullessence only while the team bears handicaps it chooses, harder than in their challenges, and the faster the more it bears. Put into C.O.D. itself during its last stand, by hand or any automation, each one cancels a fixed amount of what C.O.D. makes, and only Quintessence moves the Lead.
 
@@ -112,7 +124,7 @@ The path a challenge's mods take a team up to the challenge's Transmuted Essence
 _Avoid_: processing chain, path
 
 **Handicap**:
-What a challenge costs the team while it plays it, and only then: protection (an Assault on its island), life (hunger that drains faster, and the same food feeding less each time it is eaten), energy (its generators give it no energy, though FE it banked ahead is still spent) or money (less money). A team's money can't be stockpiled ahead: it is set aside while the challenge is played, and given back when it ends. Its FE can, and banking it is part of the energy challenge's strategy; so can ordinary mob drops, but not the drop only an Assault gives, and so can food, though under faster hunger only a varied farm keeps up.
+What a challenge costs the team while it plays it, and only then: protection (an Assault on its island), life (hunger that drains faster, and the same food feeding less each time it is eaten), energy (its generators give it no energy, though FE it banked ahead is still spent, and its chain's heat comes from FE alone) or money (less money). A team's money can't be stockpiled ahead: it is set aside while the challenge is played, and given back when it ends. Its FE can, and banking it is part of the energy challenge's strategy; so can ordinary mob drops, but not the drop only an Assault gives, and so can food, though under faster hunger only a varied farm keeps up.
 _Avoid_: threat, debuff
 
 **Diet**:
