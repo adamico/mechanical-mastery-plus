@@ -16,3 +16,15 @@ PlayerEvents.loggedIn(event => {
   event.server.runCommandSilent(`guideme give ${player.username} mechanicalmasteryreborn:manual`)
   data.putBoolean(given, true)
 })
+
+// Theurgy's manual, The Hermetica, is given the same way: once per player, on their first join. It is kept under
+// its own key, so a player who joined before it was given gets it on their next join.
+PlayerEvents.loggedIn(event => {
+  const player = event.player
+  const given = `mechanicalmasteryreborn:hermetica_given/${player.uuid}`
+  const data = event.server.persistentData
+  if (data.contains(given)) return
+  if (!Platform.isLoaded('theurgy')) return
+  player.give('theurgy:the_hermetica')
+  data.putBoolean(given, true)
+})
