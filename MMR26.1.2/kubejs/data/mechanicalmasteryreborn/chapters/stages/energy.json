@@ -8,7 +8,8 @@
     "preventTravel": false
   },
   "recipes": [
-    "mechanicalmasteryreborn:incubation/galvanic_essence",
+    "mechanicalmasteryreborn:incubation/galvanic_core",
+    "mechanicalmasteryreborn:assembling/galvanic_essence",
     "mechanicalmasteryreborn:assembling/mercury_charge",
     "mechanicalmasteryreborn:assembling/mercury_charge_from_shards",
     "mechanicalmasteryreborn:assembling/salt_charge",

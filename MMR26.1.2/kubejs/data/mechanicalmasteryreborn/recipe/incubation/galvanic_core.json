@@ -1,0 +1,12 @@
+{
+  "type": "theurgy:incubation",
+  "category": "misc",
+  "mercury": "mechanicalmasteryreborn:mercury_charge",
+  "salt": "mechanicalmasteryreborn:salt_charge",
+  "sulfur": "mechanicalmasteryreborn:sulfur_charge",
+  "result": {
+    "type": "theurgy:item",
+    "id": "mechanicalmasteryreborn:galvanic_core"
+  },
+  "time": 100
+}

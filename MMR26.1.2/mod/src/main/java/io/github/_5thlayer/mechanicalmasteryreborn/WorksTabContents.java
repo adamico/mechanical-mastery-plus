@@ -24,7 +24,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
  * Every obtainable item of the mod, in the suite's Works tab and no other (FactoryWorks ADR-0128): C.O.D.,
  * the lab and the four Ports, then every essence, then the protection Chain's Rift Shard, Ward Tallow bucket,
  * Obsidian Flakes and Charged Rift Shard, the money Chain's mint, from the molten metals' buckets to the Coins,
- * the energy chain's Galvanic Charges, and the Hermetic Lab's Null Shard, then the Recycler's parts, then the
+ * the energy chain's Galvanic Charges and Core, and the Hermetic Lab's Null Shard, then the Recycler's parts, then the
  * Defences. One listener, in the order the tab shows them, which
  * {@code CreativeTabTests} lists too.
  */
@@ -63,6 +63,7 @@ final class WorksTabContents {
         for (var charge : GalvanicCharges.ALL) {
             event.accept(charge.get());
         }
+        event.accept(GalvanicCharges.CORE.get());
         event.accept(NullShards.ITEM.get());
         for (int tier = 1; tier <= Recycler.TIERS; tier++) {
             event.accept(Recycler.coreItem(tier));

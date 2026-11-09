@@ -25,6 +25,8 @@ public final class GalvanicCharges {
     public static final DeferredItem<Item> SULFUR = ITEMS.registerSimpleItem("sulfur_charge");
     /** The three charges, in the order the Works tab lists them. */
     public static final List<DeferredItem<Item>> ALL = List.of(MERCURY, SALT, SULFUR);
+    /** The Galvanic Core the Incubator makes from one charge of each branch, several of which make a Galvanic Essence (#331). */
+    public static final DeferredItem<Item> CORE = ITEMS.registerSimpleItem("galvanic_core");
 
     private GalvanicCharges() {
     }

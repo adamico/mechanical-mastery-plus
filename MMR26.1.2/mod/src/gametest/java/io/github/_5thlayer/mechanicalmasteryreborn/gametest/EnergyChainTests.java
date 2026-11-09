@@ -42,6 +42,7 @@ final class EnergyChainTests {
         tests.test("chain_energy_catalyst_makes_only_the_flux_its_fe_pays_for", 1, EnergyChainTests::onlyWhatItPaysFor);
         tests.test("chain_energy_catalyst_pays_only_for_the_flux_it_stores", 1, EnergyChainTests::paysForStored);
         tests.test("chain_energy_has_three_galvanic_charges", 1, EnergyChainTests::threeCharges);
+        tests.test("energy_chain_has_a_galvanic_core", 1, EnergyChainTests::galvanicCore);
         tests.test("chain_energy_charges_locked_and_marked_until_the_energy_challenge_starts", 1, EnergyChainTests::chargesLockedUntilStarted);
     }
 
@@ -86,6 +87,12 @@ final class EnergyChainTests {
             helper.assertTrue(BuiltInRegistries.ITEM.containsKey(id), "no " + id);
         }
         helper.assertValueEqual(GalvanicCharges.ALL.size(), 3, "the Galvanic Charges");
+        helper.succeed();
+    }
+
+    private static void galvanicCore(GameTestHelper helper) {
+        var id = Identifier.fromNamespaceAndPath("mechanicalmasteryreborn", "galvanic_core");
+        helper.assertTrue(BuiltInRegistries.ITEM.containsKey(id), "no " + id);
         helper.succeed();
     }
 
