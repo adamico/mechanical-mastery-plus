@@ -24,8 +24,8 @@ is spent as usual until it runs out. Banking FE ahead is part of playing the ene
 
 Starting the challenge sets Theurgy's apparatus to work on your island: the Sal Ammoniac Accumulator, the
 Liquefaction Cauldron, the Fermentation and Digestion Vats, the Calcination Oven, the Distiller, the Mercury
-Catalyst, the Incubator and the Reformation Array's Sulfuric Flux Emitter. Jade on each shows how far its work
-has got.
+Catalyst, the Incubator and the Reformation Array: its Sulfuric Flux Emitter and its source, target and result
+pedestals. Jade on each shows how far its work has got.
 
 The chain climbs Theurgy's processing from what you decompose up to its salts, sulfurs and mercury, and ends at
 the Incubator, where mercury crystal, mineral salt and redstone sulfur are incubated into the **Galvanic
