@@ -197,6 +197,12 @@ public final class ServerConfig {
                     "rounded down to the cent. 0.5 is half. Buying is unaffected.")
             .defineInRange("money.sale_share", 0.5, 0.0, 1.0);
 
+    /** The FE the Mercury Catalyst draws for each unit of mercury flux it makes (ADR 0018, #328). */
+    public static final ModConfigSpec.IntValue ENERGY_FE_PER_FLUX = BUILDER
+            .comment("The FE Theurgy's Mercury Catalyst draws for each unit of mercury flux it makes; with too little it makes none.",
+                    "It takes FE from any side, holding a thousand units' worth. A rough first pass, for playtests to tune.")
+            .defineInRange("energy.fe_per_flux", 20, 1, 1_000_000);
+
     /** How much faster hunger drains under the life handicap (#244, a placeholder for #207). */
     public static final ModConfigSpec.DoubleValue LIFE_HUNGER_RATE = BUILDER
             .comment("How many times faster a player's hunger drains while their team plays the life challenge: every exhaustion,",
@@ -418,6 +424,10 @@ public final class ServerConfig {
     /** The share of a sale the money handicap pays. */
     public static double moneySaleShare() {
         return SPEC.isLoaded() ? MONEY_SALE_SHARE.getAsDouble() : MONEY_SALE_SHARE.getDefault();
+    }
+
+    public static int energyFePerFlux() {
+        return SPEC.isLoaded() ? ENERGY_FE_PER_FLUX.getAsInt() : ENERGY_FE_PER_FLUX.getDefault();
     }
 
     /** How many times faster hunger drains under the life handicap. */

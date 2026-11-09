@@ -37,6 +37,11 @@ public abstract class CraftingBehaviourMixin implements ChainMachine {
     }
 
     @Override
+    public BlockEntity mechanicalmasteryreborn$entity() {
+        return blockEntity;
+    }
+
+    @Override
     public boolean mechanicalmasteryreborn$stopIfLocked() {
         BlockEntity entity = blockEntity;
         if (entity == null || entity.getLevel() == null
