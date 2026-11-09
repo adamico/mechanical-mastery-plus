@@ -11,7 +11,9 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.GalvanicCharges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.BrazierHeat;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.CatalystFuel;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.Identifier;
@@ -41,6 +43,9 @@ final class EnergyChainTests {
         tests.test("chain_energy_catalyst_makes_flux_while_it_draws_fe", 1, EnergyChainTests::drawsFe);
         tests.test("chain_energy_catalyst_makes_only_the_flux_its_fe_pays_for", 1, EnergyChainTests::onlyWhatItPaysFor);
         tests.test("chain_energy_catalyst_pays_only_for_the_flux_it_stores", 1, EnergyChainTests::paysForStored);
+        tests.test("chain_energy_brazier_gives_no_heat_while_the_team_plays_energy", 1, EnergyChainTests::brazierCold);
+        tests.test("chain_energy_brazier_heats_again_after_a_win", 1, EnergyChainTests::brazierHeatsAfterWin);
+        tests.test("chain_energy_brazier_heats_again_after_a_stop", 1, EnergyChainTests::brazierHeatsAfterStop);
         tests.test("chain_energy_has_three_galvanic_charges", 1, EnergyChainTests::threeCharges);
         tests.test("chain_energy_charges_locked_and_marked_until_the_energy_challenge_starts", 1, EnergyChainTests::chargesLockedUntilStarted);
     }
@@ -77,6 +82,41 @@ final class EnergyChainTests {
         fill(fuel, rate * 10);
         helper.assertValueEqual(fuel.convert(5, flux -> Math.min(flux, 2)), 2, "the flux the store took");
         helper.assertValueEqual(fuel.getAmountAsInt(), rate * 8, "the FE left after two flux stored");
+        helper.succeed();
+    }
+
+    /** Where a Brazier would stand under a chain machine, on the test's island. */
+    private static final BlockPos BRAZIER = new BlockPos(2, 2, 2);
+
+    /**
+     * The Brazier's heat while the team plays energy (#329). A Caloric Flux Emitter heats a machine through its heat
+     * receiver, which the Brazier's check never touches, so it heats on: with no Theurgy here, that is checked in game.
+     */
+    private static void brazierCold(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var server = helper.getLevel().getServer();
+        var at = helper.absolutePos(BRAZIER);
+        helper.assertFalse(BrazierHeat.cold(helper.getLevel(), at), "the Brazier was cold before the energy challenge");
+        helper.assertTrue(Challenges.begin(server, team, Handicap.ENERGY), "the energy challenge didn't start");
+        helper.assertTrue(BrazierHeat.cold(helper.getLevel(), at), "the Brazier heated while the team plays energy");
+        helper.succeed();
+    }
+
+    private static void brazierHeatsAfterWin(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var server = helper.getLevel().getServer();
+        helper.assertTrue(Challenges.begin(server, team, Handicap.ENERGY), "the energy challenge didn't start");
+        helper.assertTrue(Challenges.win(server, team), "the energy challenge wasn't won");
+        helper.assertFalse(BrazierHeat.cold(helper.getLevel(), helper.absolutePos(BRAZIER)), "the Brazier stayed cold after the win");
+        helper.succeed();
+    }
+
+    private static void brazierHeatsAfterStop(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var server = helper.getLevel().getServer();
+        helper.assertTrue(Challenges.begin(server, team, Handicap.ENERGY), "the energy challenge didn't start");
+        helper.assertTrue(Challenges.stop(server, team), "the energy challenge wasn't stopped");
+        helper.assertFalse(BrazierHeat.cold(helper.getLevel(), helper.absolutePos(BRAZIER)), "the Brazier stayed cold after the stop");
         helper.succeed();
     }
 
