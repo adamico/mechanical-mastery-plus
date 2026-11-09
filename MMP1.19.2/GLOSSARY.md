@@ -2,9 +2,6 @@
 
 The 1.19.2 pack line, a fork of Ammonium's Mechanical Mastery. Shared terms are in the root `GLOSSARY.md`.
 
-**Spine**:
-Create and its addons, Thermal, Mekanism and Compact Crafting.
-
 **Mechanical Essence**:
 On this line the loop runs forward: the player makes essences from resources and sells them to the shop for the next tier's resources.
 

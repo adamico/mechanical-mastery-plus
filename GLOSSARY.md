@@ -11,9 +11,6 @@ _Avoid_: port, edition
 **Skyblock**:
 How every Mechanical Mastery line starts: a lone island in a void world, with every resource after it earned through the pack's progression. It defines the pack, so it is kept on every line.
 
-**Spine**:
-The mods whose machines a line's tiers are built on. Each line names its own.
-
 **Mechanical Essence**:
 The pack's own tiered product: Basic (red), Regular (blue), Improved (yellow) and Advanced (magenta). Each line runs its own loop through them.
 _Avoid_: cube
