@@ -97,7 +97,7 @@ the same thing (#273). The README's note that the companion mod isn't on CurseFo
 - Each island has its own C.O.D., its own challenges and Overproduction; a Recycler counts for the team whose island it
   stands on [G C.O.D., G Port, #273].
 - Each release has a server pack on CurseForge, a child of the client file, which leaves out the client-only mods
-  [SG Server pack, ADR 0001, R].
+  [SG Server pack, R].
 
 ### Help in game
 

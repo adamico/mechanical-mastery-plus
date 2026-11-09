@@ -57,7 +57,7 @@ import org.jspecify.annotations.Nullable;
  * Recycling (the line's glossary: Recycle): the {@code mechanicalmasteryreborn:recycling} recipe type the pack
  * overrides with, and what any item recycles into at full cost, derived from the recipes that make it run
  * backwards by {@link RecyclingRules}. The mod derives it, since the pack could never write one for every item
- * (ADR 0003, amended for #184).
+ * (ADR 0019).
  *
  * <p>Vanilla crafting and the assembling types the config names ({@link ServerConfig#assemblingTypes}, Craftworks'
  * in the pack) are run backwards. Smelting, blasting, smoking and campfire cooking never are: what they make is

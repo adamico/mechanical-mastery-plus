@@ -52,7 +52,8 @@ mods added, updated and removed are listed by the release itself (`tools/release
    site, and `--client-file-id <id>` stands in for a lost record. The CurseForge token comes from
    1Password through `tools/publish.env`.
 
-Servers install only from the server pack (`docs/adr/0001`). `mise run test` runs the release
+Servers install only from the server pack, never by pulling this repo: `server_files/` is that pack's
+source, and its `modpackUrl` is a placeholder each release fills in with its client zip. `mise run test` runs the release
 tool's tests; the pack identity it releases under is in `tools/release.toml`.
 
 ## Links

@@ -4,4 +4,4 @@ The energy handicap cuts only a team's generators (ADR 0005). FE the team banked
 
 ## Considered Options
 
-- Setting banked FE aside, as #215 planned: storage on a playing team's island gives no FE and keeps its charge until the challenge ends. Rejected; it removes preparation as a strategy and needs a storage tag and a capability face for every battery and item.
+- Setting banked FE aside: storage on a playing team's island gives no FE and keeps its charge until the challenge ends. Rejected; it removes preparation as a strategy and needs a storage tag and a capability face for every battery and item.

@@ -8,7 +8,7 @@ What an Assault's mobs break on a team's island drops nothing and is recorded, a
 - **Spots no one may build on until the end, then filled.** A destroyed machine couldn't be rebuilt in place for the rest of the fight while Inflation climbs.
 - **Blasts that drop everything where they break.** On a skyblock the drops fall into the void, the next blast destroys them, and the team must run into the fight to collect them.
 - **A refund at each breather too.** A team could wait out a step, and ADR 0010's threat to the base would be for show.
-- **A snapshot of the island, blasts that break nothing, or no repair at all**, rejected in #254's triage.
+- **A snapshot of the island, blasts that break nothing, or no repair at all**, rejected when the stop was triaged.
 
 ## Consequences
 

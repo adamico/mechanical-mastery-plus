@@ -14,6 +14,5 @@ The money challenge's chain was the Shop's Offers alone: sell, then buy the Aure
 - Banked gold now helps the way banked FE does (ADR 0009): it feeds the mint, but the mint is locked until the start (ADR 0007) and is built and run under C.O.D.'s clock.
 - Gold is either sold or minted, never both, which is the choice the handicap sharpens.
 - A team short of a metal exchanges coins up for it, so a tier whose mix holds little gold is played from copper.
-- Lava, once bought once for a cobblestone generator, is now spent by every melt, so its price is set against what a melt is worth, well under a copper ingot's, and the Shop no longer buys it back: nothing in the pack makes lava, and a fluid only the Shop gives is never sold back.
-- The pack keeps dripstone out, so no lava farm undercuts the Shop; such farms also weigh on a server's tick rate.
+- Lava is spent by every melt and only the Shop gives it: nothing in the pack makes lava, no lava farm undercuts the Shop, and the Shop never buys it back.
 - The Galvanic, Warding and Vital Essences, whose sale hangs on the money Permit, are priced by the same rule, more than their inputs cost and less than twice that, so a won chain doesn't pay for the mint outright.
