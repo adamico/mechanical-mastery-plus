@@ -1,0 +1,15 @@
+{
+  "type": "theurgy:liquefaction",
+  "category": "misc",
+  "ingredient": "mechanicalmasteryreborn:aureate_essence",
+  "result": {
+    "type": "theurgy:item",
+    "count": 16,
+    "id": "theurgy:mercury_shard"
+  },
+  "solvent": {
+    "amount": 100,
+    "ingredient": "theurgy:sal_ammoniac"
+  },
+  "time": 200
+}
