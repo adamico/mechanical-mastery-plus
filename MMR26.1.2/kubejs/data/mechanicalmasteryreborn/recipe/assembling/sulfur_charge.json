@@ -1,0 +1,21 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting",
+  "ingredients": [
+    {
+      "ingredient": "theurgy:alchemical_sulfur_redstone",
+      "count": 4
+    },
+    {
+      "ingredient": "minecraft:redstone",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "id": "mechanicalmasteryreborn:sulfur_charge",
+      "count": 1
+    }
+  ],
+  "time": 100
+}

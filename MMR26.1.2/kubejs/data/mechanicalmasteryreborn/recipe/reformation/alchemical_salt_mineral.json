@@ -1,0 +1,16 @@
+{
+  "type": "theurgy:reformation",
+  "category": "misc",
+  "mercuryFlux": 200,
+  "result": {
+    "id": "theurgy:alchemical_salt_mineral"
+  },
+  "sources": [
+    {
+      "count": 2,
+      "ingredient": "theurgy:alchemical_salt_strata"
+    }
+  ],
+  "target": "theurgy:alchemical_salt_mineral",
+  "time": 200
+}

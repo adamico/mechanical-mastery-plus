@@ -7,6 +7,7 @@ import io.github._5thlayer.libworks.gallery.GalleryPack;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Assault;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.GalvanicCharges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Generators;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.OverproductionBar;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.OverproductionCap;
@@ -58,6 +59,7 @@ public final class MechanicalMasteryReborn {
         WardTallow.register(modBus);
         ObsidianFlakes.register(modBus);
         Mint.register(modBus);
+        GalvanicCharges.register(modBus);
         Assault.register(modBus);
         LifeHandicap.register(modBus);
         Chains.register();

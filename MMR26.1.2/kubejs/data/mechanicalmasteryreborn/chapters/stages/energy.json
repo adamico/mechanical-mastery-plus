@@ -8,6 +8,12 @@
     "preventTravel": false
   },
   "recipes": [
-    "mechanicalmasteryreborn:incubation/galvanic_essence"
+    "mechanicalmasteryreborn:incubation/galvanic_essence",
+    "mechanicalmasteryreborn:assembling/mercury_charge",
+    "mechanicalmasteryreborn:assembling/mercury_charge_from_shards",
+    "mechanicalmasteryreborn:assembling/salt_charge",
+    "mechanicalmasteryreborn:assembling/sulfur_charge",
+    "mechanicalmasteryreborn:reformation/alchemical_salt_mineral",
+    "mechanicalmasteryreborn:reformation/alchemical_niter_other_minerals_common"
   ]
 }
