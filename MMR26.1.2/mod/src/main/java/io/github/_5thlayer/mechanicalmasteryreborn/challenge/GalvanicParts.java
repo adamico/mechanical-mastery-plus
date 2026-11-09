@@ -12,11 +12,12 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
- * The energy chain's Galvanic Charges (the line's glossary, ADR 0018, #330): mercury, salt and sulfur, each packed in
- * an Assembler by the pack's recipes, salt and sulfur only once they have climbed their reformation stages. The
- * recipes are the energy chain's, locked until the team starts it.
+ * The energy chain's Galvanic parts (the line's glossary, ADR 0018): the Galvanic Charges, mercury, salt and sulfur,
+ * each packed in an Assembler by the pack's recipes, salt and sulfur only once they have climbed their reformation
+ * stages (#330); and the Galvanic Core the Incubator makes from one of each, several of which make a Galvanic Essence
+ * (#331). Their recipes are the energy chain's, locked until the team starts it.
  */
-public final class GalvanicCharges {
+public final class GalvanicParts {
 
     private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MechanicalMasteryReborn.MOD_ID);
 
@@ -24,11 +25,11 @@ public final class GalvanicCharges {
     public static final DeferredItem<Item> SALT = ITEMS.registerSimpleItem("salt_charge");
     public static final DeferredItem<Item> SULFUR = ITEMS.registerSimpleItem("sulfur_charge");
     /** The three charges, in the order the Works tab lists them. */
-    public static final List<DeferredItem<Item>> ALL = List.of(MERCURY, SALT, SULFUR);
-    /** The Galvanic Core the Incubator makes from one charge of each branch, several of which make a Galvanic Essence (#331). */
+    public static final List<DeferredItem<Item>> CHARGES = List.of(MERCURY, SALT, SULFUR);
+    /** The Galvanic Core. */
     public static final DeferredItem<Item> CORE = ITEMS.registerSimpleItem("galvanic_core");
 
-    private GalvanicCharges() {
+    private GalvanicParts() {
     }
 
     public static void register(IEventBus modBus) {

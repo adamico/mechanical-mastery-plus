@@ -4,7 +4,7 @@
 package io.github._5thlayer.mechanicalmasteryreborn;
 
 import io.github._5thlayer.libworks.WorksTab;
-import io.github._5thlayer.mechanicalmasteryreborn.challenge.GalvanicCharges;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.GalvanicParts;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Mint;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.NullShards;
@@ -60,10 +60,10 @@ final class WorksTabContents {
         for (Mint.Metal metal : Mint.METALS) {
             event.accept(metal.coin.get());
         }
-        for (var charge : GalvanicCharges.ALL) {
+        for (var charge : GalvanicParts.CHARGES) {
             event.accept(charge.get());
         }
-        event.accept(GalvanicCharges.CORE.get());
+        event.accept(GalvanicParts.CORE.get());
         event.accept(NullShards.ITEM.get());
         for (int tier = 1; tier <= Recycler.TIERS; tier++) {
             event.accept(Recycler.coreItem(tier));

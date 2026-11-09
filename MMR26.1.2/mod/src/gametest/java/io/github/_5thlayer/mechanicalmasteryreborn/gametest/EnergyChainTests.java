@@ -9,8 +9,11 @@ import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
-import io.github._5thlayer.mechanicalmasteryreborn.challenge.GalvanicCharges;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.GalvanicParts;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Spells;
+import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.BrazierHeat;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.CatalystFuel;
 import net.minecraft.core.BlockPos;
@@ -43,11 +46,13 @@ final class EnergyChainTests {
         tests.test("chain_energy_catalyst_makes_flux_while_it_draws_fe", 1, EnergyChainTests::drawsFe);
         tests.test("chain_energy_catalyst_makes_only_the_flux_its_fe_pays_for", 1, EnergyChainTests::onlyWhatItPaysFor);
         tests.test("chain_energy_catalyst_pays_only_for_the_flux_it_stores", 1, EnergyChainTests::paysForStored);
+        tests.test("chain_energy_catalyst_keeps_its_fe_through_a_config_reload", 1, EnergyChainTests::keepsFeOnReload);
         tests.test("chain_energy_brazier_gives_no_heat_while_the_team_plays_energy", 1, EnergyChainTests::brazierCold);
         tests.test("chain_energy_brazier_heats_again_after_a_win", 1, EnergyChainTests::brazierHeatsAfterWin);
         tests.test("chain_energy_brazier_heats_again_after_a_stop", 1, EnergyChainTests::brazierHeatsAfterStop);
+        tests.test("chain_energy_brazier_heats_under_the_energy_spell", 1, EnergyChainTests::brazierHeatsUnderSpell);
         tests.test("chain_energy_has_three_galvanic_charges", 1, EnergyChainTests::threeCharges);
-        tests.test("energy_chain_has_a_galvanic_core", 1, EnergyChainTests::galvanicCore);
+        tests.test("chain_energy_has_a_galvanic_core", 1, EnergyChainTests::galvanicCore);
         tests.test("chain_energy_charges_locked_and_marked_until_the_energy_challenge_starts", 1, EnergyChainTests::chargesLockedUntilStarted);
     }
 
@@ -86,6 +91,17 @@ final class EnergyChainTests {
         helper.succeed();
     }
 
+    /** A config reload sizes the store again, and keeps the FE that still fits. */
+    private static void keepsFeOnReload(GameTestHelper helper) {
+        int rate = ServerConfig.energyFePerFlux();
+        var fuel = new CatalystFuel(() -> { });
+        fill(fuel, rate * 10);
+        CatalystFuel.configReloaded();
+        helper.assertValueEqual(fuel.convert(0, flux -> flux), 0, "the flux made when none was asked");
+        helper.assertValueEqual(fuel.getAmountAsInt(), rate * 10, "the FE kept through the reload");
+        helper.succeed();
+    }
+
     /** Where a Brazier would stand under a chain machine, on the test's island. */
     private static final BlockPos BRAZIER = new BlockPos(2, 2, 2);
 
@@ -121,12 +137,28 @@ final class EnergyChainTests {
         helper.succeed();
     }
 
+    /**
+     * Under the last stand's energy spell a Brazier heats on: generators feed only the Hermetic Lab and banked FE stands
+     * still, so a cold Brazier would leave the chain no heat at all.
+     */
+    private static void brazierHeatsUnderSpell(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var server = helper.getLevel().getServer();
+        for (Handicap handicap : Handicap.values()) {
+            helper.assertTrue(TeamState.get(server).blockTier(team, handicap), "the " + handicap.id() + " challenge wasn't noted won");
+        }
+        helper.assertTrue(LastStands.begin(server, team), "the last stand didn't start");
+        helper.assertTrue(Spells.begin(server, team, Handicap.ENERGY), "the energy spell wasn't taken on");
+        helper.assertFalse(BrazierHeat.cold(helper.getLevel(), helper.absolutePos(BRAZIER)), "the Brazier went cold under the energy spell");
+        helper.succeed();
+    }
+
     private static void threeCharges(GameTestHelper helper) {
         for (String name : new String[] {"mercury", "salt", "sulfur"}) {
             var id = Identifier.fromNamespaceAndPath("mechanicalmasteryreborn", name + "_charge");
             helper.assertTrue(BuiltInRegistries.ITEM.containsKey(id), "no " + id);
         }
-        helper.assertValueEqual(GalvanicCharges.ALL.size(), 3, "the Galvanic Charges");
+        helper.assertValueEqual(GalvanicParts.CHARGES.size(), 3, "the Galvanic Charges");
         helper.succeed();
     }
 

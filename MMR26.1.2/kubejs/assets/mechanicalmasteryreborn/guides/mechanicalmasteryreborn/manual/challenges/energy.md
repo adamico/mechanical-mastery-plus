@@ -32,20 +32,20 @@ FE is the chain's fuel, so every step of it is paid from FE your team banked ahe
 - **No heat from the Brazier.** While your team plays energy, a Pyromantic Brazier gives the chain no heat, so its
   heated stages run only on heat paid for in FE. The Brazier stays cold through a reset too: only a win or a stop
   of the challenge lights it again.
-- **Mercury flux from FE.** The Mercury Catalyst draws FE for the mercury flux it makes, and every reformation on
-  the pedestals spends that flux.
-- **Charges.** Mercury, salt and sulfur are each packed into a **Galvanic Charge** in an Assembler. Salt and sulfur
-  first climb reformation stages on the pedestals.
-- **Cores.** The Incubator makes a **Galvanic Core** from the three charges.
-- **The essence.** Assemblers make the **Galvanic Essence** from several cores.
+- **Mercury flux from FE.** The Mercury Catalyst turns banked FE into mercury flux, the power the Reformation
+  Array runs on, so reforming costs FE too.
+- **Galvanic Charges.** Each of mercury, salt and sulfur ends up in a **Galvanic Charge**, the chain's way of
+  holding a branch's work. Salt and sulfur must be reformed on the pedestals first.
+- **Galvanic Cores.** A **Galvanic Core** brings the three branches together.
+- **The essence.** The **Galvanic Essence** is the chain's goal, and it takes many cores.
 
-Charge and core recipes are part of the chain, so they stay locked until the challenge starts: mercury saved up
-ahead still has to be packed under the handicap, on banked FE.
+The charges and cores belong to the chain, so they stay locked until the challenge starts: mercury saved up ahead
+still has to go through the chain under the handicap, on banked FE.
 
 ## Extraction
 
-The Liquefaction Cauldron extracts a Transmuted Essence won in another challenge into one raw form of the chain's
-lowest stages, each essence giving its own. A team that won other challenges first can feed the chain from them,
+A Transmuted Essence won in another challenge can be extracted into one raw form for the chain's lowest stages,
+each essence giving its own. A team that won other challenges first can feed the chain from them,
 at the cost of not selling them.
 
 ## In the last stand

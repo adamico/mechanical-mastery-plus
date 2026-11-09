@@ -12,7 +12,7 @@ The energy challenge's chain was Theurgy's apparatus as Theurgy ships it: heated
 
 ## Consequences
 
-- The Brazier counts again once the challenge ends, by a win, a stop or a reset, as the generators do, so a won chain runs on furnace fuel.
+- The Brazier heats again once the challenge ends, by a win or a stop, so a won chain runs on furnace fuel. A reset doesn't end it: the handicap stays, and the Brazier stays cold through it.
 - The Galvanic Charge and Galvanic Core recipes are chain recipes, locked until the start (ADR 0007), so packing saved-up shards waits for the handicap.
 - The FE each unit of flux costs is a server setting, tuned in playtests until the chain at Improved takes as long to build and run as money's mint.
 - Extraction lets a team that won other challenges first feed the chain's lowest stages from their Transmuted Essence, at the cost of not selling it.

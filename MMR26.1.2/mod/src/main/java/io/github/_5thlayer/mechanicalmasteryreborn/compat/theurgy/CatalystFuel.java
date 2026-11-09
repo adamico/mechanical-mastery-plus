@@ -8,7 +8,10 @@ import java.util.function.IntUnaryOperator;
 import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.transfer.energy.SimpleEnergyHandler;
@@ -26,11 +29,28 @@ public final class CatalystFuel extends SimpleEnergyHandler {
 
     private static final Identifier CATALYST = Identifier.fromNamespaceAndPath("theurgy", "mercury_catalyst");
 
-    private final Runnable changed;
+    /** Counts the server config's loads, so each store sizes itself again once per load, not on every tick. */
+    private static volatile int configLoads;
 
-    /** Lets a cable reach the Catalyst's store, with Theurgy installed. */
+    private final Runnable changed;
+    private int sizedFor = -1;
+
+    /** Lets a cable reach the Catalyst's store, with Theurgy installed, and sizes the stores to each config load. */
     public static void register(IEventBus modBus) {
         modBus.addListener(CatalystFuel::registerCapability);
+        modBus.addListener(ModConfigEvent.Loading.class, event -> onConfig(event.getConfig()));
+        modBus.addListener(ModConfigEvent.Reloading.class, event -> onConfig(event.getConfig()));
+    }
+
+    private static void onConfig(ModConfig config) {
+        if (config.getType() == ModConfig.Type.SERVER && MechanicalMasteryReborn.MOD_ID.equals(config.getModId())) {
+            configReloaded();
+        }
+    }
+
+    /** Marks every store to size itself to the server config again, as a load or reload of it does. */
+    public static void configReloaded() {
+        configLoads++;
     }
 
     private static void registerCapability(RegisterCapabilitiesEvent event) {
@@ -49,7 +69,9 @@ public final class CatalystFuel extends SimpleEnergyHandler {
      * Answers the flux made.
      */
     public int convert(int flux, IntUnaryOperator store) {
-        fit();
+        if (sizedFor != configLoads) {
+            fit();
+        }
         int rate = ServerConfig.energyFePerFlux();
         int paid = Math.min(flux, energy / rate);
         if (paid <= 0) {
@@ -62,8 +84,12 @@ public final class CatalystFuel extends SimpleEnergyHandler {
         return made;
     }
 
-    /** Sizes the store to the config, which may have changed since it was made, spilling what no longer fits. */
+    /**
+     * Sizes the store to the config as last loaded. Stored FE is kept up to the new capacity; only a smaller
+     * {@code energy.fe_per_flux} spills what no longer fits.
+     */
     private void fit() {
+        sizedFor = configLoads;
         capacity = ServerConfig.energyFePerFlux() * UNITS;
         maxInsert = capacity;
         if (energy > capacity) {

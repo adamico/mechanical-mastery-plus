@@ -7,7 +7,8 @@ import io.github._5thlayer.libworks.gallery.GalleryPack;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Assault;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
-import io.github._5thlayer.mechanicalmasteryreborn.challenge.GalvanicCharges;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.GalvanicParts;
+import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.CatalystFuel;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Generators;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.OverproductionBar;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.OverproductionCap;
@@ -59,7 +60,7 @@ public final class MechanicalMasteryReborn {
         WardTallow.register(modBus);
         ObsidianFlakes.register(modBus);
         Mint.register(modBus);
-        GalvanicCharges.register(modBus);
+        GalvanicParts.register(modBus);
         Assault.register(modBus);
         LifeHandicap.register(modBus);
         Chains.register();
@@ -84,7 +85,7 @@ public final class MechanicalMasteryReborn {
         }
         // With Theurgy installed, as the pack plays, the Mercury Catalyst takes FE from cables (#328).
         if (ModList.get().isLoaded("theurgy")) {
-            io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.CatalystFuel.register(modBus);
+            CatalystFuel.register(modBus);
         }
         // With FTB Chunks installed, as the pack plays, a team's explosions stay on while its Assault runs (#241).
         if (ModList.get().isLoaded("ftbchunks")) {
