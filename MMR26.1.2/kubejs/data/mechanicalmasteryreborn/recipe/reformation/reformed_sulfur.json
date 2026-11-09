@@ -1,0 +1,16 @@
+{
+  "type": "theurgy:reformation",
+  "category": "misc",
+  "mercuryFlux": 200,
+  "result": {
+    "id": "mechanicalmasteryreborn:reformed_sulfur"
+  },
+  "sources": [
+    {
+      "count": 2,
+      "ingredient": "#theurgy:alchemical_sulfurs"
+    }
+  ],
+  "target": "theurgy:alchemical_sulfur_redstone",
+  "time": 200
+}

@@ -3,7 +3,7 @@
   "category": "crafting",
   "ingredients": [
     {
-      "ingredient": "theurgy:alchemical_salt_mineral",
+      "ingredient": "mechanicalmasteryreborn:reformed_salt",
       "count": 4
     },
     {

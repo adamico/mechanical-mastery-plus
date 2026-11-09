@@ -3,7 +3,7 @@
   "category": "crafting",
   "ingredients": [
     {
-      "ingredient": "theurgy:alchemical_sulfur_redstone",
+      "ingredient": "mechanicalmasteryreborn:reformed_sulfur",
       "count": 4
     },
     {

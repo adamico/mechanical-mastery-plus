@@ -35,7 +35,8 @@ FE is the chain's fuel, so every step of it is paid from FE your team banked ahe
 - **Mercury flux from FE.** The Mercury Catalyst turns banked FE into mercury flux, the power the Reformation
   Array runs on, so reforming costs FE too.
 - **Galvanic Charges.** Each of mercury, salt and sulfur ends up in a **Galvanic Charge**, the chain's way of
-  holding a branch's work. Salt and sulfur must be reformed on the pedestals first.
+  holding a branch's work. Salt and sulfur go in only as **Reformed Salt** and **Reformed Sulfur**, which only
+  the Reformation Array's pedestals make, from whatever salt or sulfur the chain gives.
 - **Galvanic Cores.** A **Galvanic Core** brings the three branches together.
 - **The essence.** The **Galvanic Essence** is the chain's goal, and it takes many cores.
 

@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn Core adds, 
 
 ## Unreleased
 
+- Reformation can't be skipped on the way to the Galvanic Charges (ADR 0018): Reformed Salt and Reformed Sulfur (`reformed_salt`, `reformed_sulfur`), which only the Reformation Array's pedestals make, from any of Theurgy's salts or sulfurs, paid in mercury flux, and which the Salt and Sulfur Galvanic Charges now take in place of mineral salt and redstone sulfur. The pack's reformations of strata salt to mineral salt and rotten-flesh sulfur to niter are gone. Art from Malcolm Riley's unused-textures (#330).
 - The energy chain's Galvanic Core (ADR 0018): the Incubator makes it from one Galvanic Charge of each kind (`galvanic_core`), with art from Malcolm Riley's unused-textures (#331).
 - The Galvanic Essence is now made from Galvanic Cores, several to one, in Assemblers, in place of Theurgy's own incubation from mercury, salt and sulfur (ADR 0018, #331).
 - While a team plays energy, a Pyromantic Brazier on its island gives Theurgy's machines no heat, so their heat comes from Caloric Flux Emitters and so from FE (ADR 0018). A win or a stop heats it again; through a reset it stays cold, and under the last stand's energy spell it heats on (#329).

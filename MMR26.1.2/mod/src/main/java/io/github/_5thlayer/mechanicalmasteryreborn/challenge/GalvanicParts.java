@@ -13,14 +13,17 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
  * The energy chain's Galvanic parts (the line's glossary, ADR 0018): the Galvanic Charges, mercury, salt and sulfur,
- * each packed in an Assembler by the pack's recipes, salt and sulfur only once they have climbed their reformation
- * stages (#330); and the Galvanic Core the Incubator makes from one of each, several of which make a Galvanic Essence
+ * each packed in an Assembler by the pack's recipes, salt and sulfur only as Reformed Salt and Reformed Sulfur, which only
+ * the Reformation Array makes (#330); and the Galvanic Core the Incubator makes from one of each, several of which make a Galvanic Essence
  * (#331). Their recipes are the energy chain's, locked until the team starts it.
  */
 public final class GalvanicParts {
 
     private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MechanicalMasteryReborn.MOD_ID);
 
+    /** Reformed Salt and Reformed Sulfur, which the Salt and Sulfur Charges take, made only on the Reformation Array. */
+    public static final DeferredItem<Item> REFORMED_SALT = ITEMS.registerSimpleItem("reformed_salt");
+    public static final DeferredItem<Item> REFORMED_SULFUR = ITEMS.registerSimpleItem("reformed_sulfur");
     public static final DeferredItem<Item> MERCURY = ITEMS.registerSimpleItem("mercury_charge");
     public static final DeferredItem<Item> SALT = ITEMS.registerSimpleItem("salt_charge");
     public static final DeferredItem<Item> SULFUR = ITEMS.registerSimpleItem("sulfur_charge");

@@ -3,12 +3,12 @@
   "category": "misc",
   "mercuryFlux": 200,
   "result": {
-    "id": "theurgy:alchemical_salt_mineral"
+    "id": "mechanicalmasteryreborn:reformed_salt"
   },
   "sources": [
     {
       "count": 2,
-      "ingredient": "theurgy:alchemical_salt_strata"
+      "ingredient": "#theurgy:alchemical_salts"
     }
   ],
   "target": "theurgy:alchemical_salt_mineral",

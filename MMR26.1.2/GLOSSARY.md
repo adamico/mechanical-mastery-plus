@@ -61,8 +61,16 @@ Breaking a Transmuted Essence other than the Galvanic down on a machine of the e
 _Avoid_: decomposing (the Recycler's), recycling
 
 **Galvanic Charge**:
-One of three items the energy chain packs on the way to the Galvanic Essence: mercury, salt and sulfur each into its own, salt and sulfur only once they have climbed reformation stages. Packing them is the chain's, so it stays locked until the team starts energy, and mercury saved up ahead still waits for the handicap.
+One of three items the energy chain packs on the way to the Galvanic Essence: mercury, salt and sulfur each into its own, salt and sulfur only as Reformed Salt and Reformed Sulfur. Packing them is the chain's, so it stays locked until the team starts energy, and mercury saved up ahead still waits for the handicap.
 _Avoid_: cell, battery
+
+**Reformed Salt**:
+The salt a Salt Charge packs, made only on the Reformation Array's pedestals, paid in mercury flux, from any salt the Distiller, Calcination or Extraction gives, so reformation can't be skipped.
+_Avoid_: mineral salt (Theurgy's, which only sits on the target pedestal)
+
+**Reformed Sulfur**:
+The sulfur a Sulfur Charge packs, made only on the Reformation Array's pedestals, paid in mercury flux, from any sulfur the Distiller, Calcination or Extraction gives, so reformation can't be skipped.
+_Avoid_: redstone sulfur (Theurgy's, which only sits on the target pedestal)
 
 **Galvanic Core**:
 What the Incubator makes from one Galvanic Charge of each kind; several make a Galvanic Essence.

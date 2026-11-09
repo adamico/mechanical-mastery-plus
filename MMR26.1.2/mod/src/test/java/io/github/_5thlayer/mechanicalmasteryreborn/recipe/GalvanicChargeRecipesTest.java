@@ -21,9 +21,9 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The energy chain's Galvanic Charges (ADR 0018, #330), in the pack this mod's folder sits in: Assemblers pack Theurgy's
- * mercury crystals, or the Basic mix's raw mercury shards, mineral salt and redstone sulfur, each with redstone, into
- * the three charges; the Reformation Array raises the Basic mix's strata salt to mineral salt, and its rotten-flesh
- * sulfur to the niter Theurgy's own reformation turns into redstone sulfur; and every one of those recipes is named by
+ * mercury crystals, or the Basic mix's raw mercury shards, Reformed Salt and Reformed Sulfur, each with redstone, into
+ * the three charges; the reformed forms come only from the Reformation Array, which turns any salt or sulfur, from the
+ * Distiller, Calcination or Extraction, into them; and every one of those recipes is named by
  * the energy chain's stage file, so Chapters locks it and EMI marks it until the team starts energy. No Theurgy is on
  * the game tests' runs, so its recipes can't load there; the game test {@code EnergyChainTests} plays the lock.
  */
@@ -43,24 +43,46 @@ class GalvanicChargeRecipesTest {
     }
 
     @Test
-    void assemblersPackMineralSaltIntoASaltCharge() throws IOException {
-        assertPacks("salt_charge", Map.of("theurgy:alchemical_salt_mineral", 4, "minecraft:redstone", 1), "salt_charge");
+    void assemblersPackReformedSaltIntoASaltCharge() throws IOException {
+        assertPacks("salt_charge", Map.of(MOD + "reformed_salt", 4, "minecraft:redstone", 1), "salt_charge");
     }
 
     @Test
-    void assemblersPackRedstoneSulfurIntoASulfurCharge() throws IOException {
-        assertPacks("sulfur_charge", Map.of("theurgy:alchemical_sulfur_redstone", 4, "minecraft:redstone", 1), "sulfur_charge");
+    void assemblersPackReformedSulfurIntoASulfurCharge() throws IOException {
+        assertPacks("sulfur_charge", Map.of(MOD + "reformed_sulfur", 4, "minecraft:redstone", 1), "sulfur_charge");
     }
 
     @Test
-    void reformationRaisesStrataSaltToMineralSalt() throws IOException {
-        assertReforms("alchemical_salt_mineral", "theurgy:alchemical_salt_strata", "theurgy:alchemical_salt_mineral");
+    void reformationTurnsAnySaltIntoReformedSaltOnAMineralSaltPedestal() throws IOException {
+        assertReforms("reformed_salt", "#theurgy:alchemical_salts", "theurgy:alchemical_salt_mineral", MOD + "reformed_salt");
     }
 
     @Test
-    void reformationRaisesRottenFleshSulfurToTheNiterThatBecomesRedstoneSulfur() throws IOException {
-        assertReforms("alchemical_niter_other_minerals_common", "theurgy:alchemical_sulfur_rotten_flesh",
-                "theurgy:alchemical_niter_other_minerals_common");
+    void reformationTurnsAnySulfurIntoReformedSulfurOnARedstoneSulfurPedestal() throws IOException {
+        assertReforms("reformed_sulfur", "#theurgy:alchemical_sulfurs", "theurgy:alchemical_sulfur_redstone", MOD + "reformed_sulfur");
+    }
+
+    @Test
+    void theReformedFormsAreMadeOnlyOnTheReformationArray() throws IOException {
+        try (var files = Files.walk(DATA.resolve("recipe"))) {
+            for (Path file : files.filter(f -> f.toString().endsWith(".json")).toList()) {
+                String json = Files.readString(file);
+                if (!(json.contains(MOD + "reformed_salt\"") || json.contains(MOD + "reformed_sulfur\""))) {
+                    continue;
+                }
+                JsonObject recipe = JsonParser.parseString(json).getAsJsonObject();
+                String result = recipe.has("result") ? recipe.getAsJsonObject("result").get("id").getAsString() : "";
+                if (result.startsWith(MOD + "reformed_")) {
+                    assertEquals("theurgy:reformation", recipe.get("type").getAsString(), file + " makes a reformed form");
+                }
+                if (recipe.has("results")) {
+                    for (JsonElement out : recipe.getAsJsonArray("results")) {
+                        assertTrue(!out.getAsJsonObject().get("id").getAsString().startsWith(MOD + "reformed_"),
+                                file + " makes a reformed form");
+                    }
+                }
+            }
+        }
     }
 
     @Test
@@ -69,7 +91,7 @@ class GalvanicChargeRecipesTest {
         JsonParser.parseString(Files.readString(DATA.resolve("chapters/stages/energy.json"))).getAsJsonObject()
                 .getAsJsonArray("recipes").forEach(id -> stage.add(id.getAsString()));
         for (String id : List.of("assembling/mercury_charge", "assembling/mercury_charge_from_shards", "assembling/salt_charge",
-                "assembling/sulfur_charge", "reformation/alchemical_salt_mineral", "reformation/alchemical_niter_other_minerals_common")) {
+                "assembling/sulfur_charge", "reformation/reformed_salt", "reformation/reformed_sulfur")) {
             assertTrue(stage.contains(MOD + id), "the energy stage doesn't name " + id);
         }
     }
@@ -87,11 +109,11 @@ class GalvanicChargeRecipesTest {
         assertEquals(MOD + charge, results.get(0).getAsJsonObject().get("id").getAsString());
     }
 
-    private static void assertReforms(String path, String source, String result) throws IOException {
+    private static void assertReforms(String path, String source, String target, String result) throws IOException {
         JsonObject recipe = recipe("reformation/" + path);
         assertEquals("theurgy:reformation", recipe.get("type").getAsString());
         assertEquals(source, recipe.getAsJsonArray("sources").get(0).getAsJsonObject().get("ingredient").getAsString());
-        assertEquals(result, recipe.get("target").getAsString(), path + "'s target pedestal");
+        assertEquals(target, recipe.get("target").getAsString(), path + "'s target pedestal");
         assertEquals(result, recipe.getAsJsonObject("result").get("id").getAsString());
         assertTrue(recipe.get("mercuryFlux").getAsInt() > 0, path + " costs no mercury flux");
     }
