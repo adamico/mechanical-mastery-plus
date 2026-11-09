@@ -107,6 +107,7 @@ public final class MechanicalMasteryRebornGameTests {
         LastStandTests.register(tests);
         QuintessenceTests.register(tests);
         ChainMachineTests.register(tests);
+        EnergyChainTests.register(tests);
         StopTests.register(tests);
         AssaultTests.register(tests);
         AssaultAbsenceTests.register(tests);

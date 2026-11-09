@@ -80,6 +80,10 @@ public final class MechanicalMasteryReborn {
         if (ModList.get().isLoaded("skyblockbuilder") && ModList.get().isLoaded("ftbteams")) {
             FtbPartySync.register();
         }
+        // With Theurgy installed, as the pack plays, the Mercury Catalyst takes FE from cables (#328).
+        if (ModList.get().isLoaded("theurgy")) {
+            io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.CatalystFuel.register(modBus);
+        }
         // With FTB Chunks installed, as the pack plays, a team's explosions stay on while its Assault runs (#241).
         if (ModList.get().isLoaded("ftbchunks")) {
             FtbChunksExplosions.register();
