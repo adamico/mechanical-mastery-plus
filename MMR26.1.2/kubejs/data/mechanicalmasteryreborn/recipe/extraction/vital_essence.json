@@ -1,0 +1,15 @@
+{
+  "type": "theurgy:liquefaction",
+  "category": "misc",
+  "ingredient": "mechanicalmasteryreborn:vital_essence",
+  "result": {
+    "type": "theurgy:item",
+    "count": 16,
+    "id": "theurgy:alchemical_sulfur_rotten_flesh"
+  },
+  "solvent": {
+    "amount": 100,
+    "ingredient": "theurgy:sal_ammoniac"
+  },
+  "time": 200
+}

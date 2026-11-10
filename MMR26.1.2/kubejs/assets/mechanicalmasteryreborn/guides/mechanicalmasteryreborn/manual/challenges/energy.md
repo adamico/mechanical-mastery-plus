@@ -27,9 +27,27 @@ Liquefaction Cauldron, the Fermentation and Digestion Vats, the Calcination Oven
 Catalyst, the Incubator and the Reformation Array: its Sulfuric Flux Emitter and its source, target and result
 pedestals. Jade on each shows how far its work has got.
 
-The chain climbs Theurgy's processing from what you decompose up to its salts, sulfurs and mercury, and ends at
-the Incubator, where mercury crystal, mineral salt and redstone sulfur are incubated into the **Galvanic
-Essence**.
+FE is the chain's fuel, so every step of it is paid from FE your team banked ahead:
+
+- **No heat from the Brazier.** While your team plays energy, a Pyromantic Brazier gives the chain no heat, so its
+  heated stages run only on heat paid for in FE. The Brazier stays cold through a reset too: only a win or a stop
+  of the challenge lights it again.
+- **Mercury flux from FE.** The Mercury Catalyst turns banked FE into mercury flux, the power the Reformation
+  Array runs on, so reforming costs FE too.
+- **Galvanic Charges.** Each of mercury, salt and sulfur ends up in a **Galvanic Charge**, the chain's way of
+  holding a branch's work. Salt and sulfur go in only as **Reformed Salt** and **Reformed Sulfur**, which only
+  the Reformation Array's pedestals make, from whatever salt or sulfur the chain gives.
+- **Galvanic Cores.** A **Galvanic Core** brings the three branches together.
+- **The essence.** The **Galvanic Essence** is the chain's goal, and it takes many cores.
+
+The charges and cores belong to the chain, so they stay locked until the challenge starts: mercury saved up ahead
+still has to go through the chain under the handicap, on banked FE.
+
+## Extraction
+
+A Transmuted Essence won in another challenge can be extracted into one raw form for the chain's lowest stages,
+each essence giving its own. A team that won other challenges first can feed the chain from them,
+at the cost of not selling them.
 
 ## In the last stand
 

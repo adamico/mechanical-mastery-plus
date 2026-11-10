@@ -1,0 +1,16 @@
+{
+  "type": "theurgy:reformation",
+  "category": "misc",
+  "mercuryFlux": 200,
+  "result": {
+    "id": "mechanicalmasteryreborn:reformed_salt"
+  },
+  "sources": [
+    {
+      "count": 2,
+      "ingredient": "#theurgy:alchemical_salts"
+    }
+  ],
+  "target": "theurgy:alchemical_salt_mineral",
+  "time": 200
+}

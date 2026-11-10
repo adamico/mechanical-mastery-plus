@@ -57,8 +57,24 @@ One of the four new essences, each made at the end of one challenge by that chal
 _Avoid_: new essence
 
 **Extraction**:
-Breaking a Transmuted Essence other than the Galvanic down on a machine of the energy chain into a mix of raw mercury, salt and sulfur, its own for each essence. A stale one is extracted as any other. It feeds the chain's lowest stages, never past one, and is a trade against selling the essence, not a must.
+Breaking a Transmuted Essence other than the Galvanic down on a machine of the energy chain into one raw form of mercury, salt or sulfur, its own for each essence. A stale one is extracted as any other. It feeds the chain's lowest stages, never past one, and is a trade against selling the essence, not a must.
 _Avoid_: decomposing (the Recycler's), recycling
+
+**Galvanic Charge**:
+One of three items the energy chain packs on the way to the Galvanic Essence: mercury, salt and sulfur each into its own, salt and sulfur only as Reformed Salt and Reformed Sulfur. Packing them is the chain's, so it stays locked until the team starts energy, and mercury saved up ahead still waits for the handicap.
+_Avoid_: cell, battery
+
+**Reformed Salt**:
+The salt a Salt Charge packs, made only on the Reformation Array's pedestals, paid in mercury flux, from any salt the Distiller, Calcination or Extraction gives, so reformation can't be skipped.
+_Avoid_: mineral salt (Theurgy's, which only sits on the target pedestal)
+
+**Reformed Sulfur**:
+The sulfur a Sulfur Charge packs, made only on the Reformation Array's pedestals, paid in mercury flux, from any sulfur the Distiller, Calcination or Extraction gives, so reformation can't be skipped.
+_Avoid_: redstone sulfur (Theurgy's, which only sits on the target pedestal)
+
+**Galvanic Core**:
+What the Incubator makes from one Galvanic Charge of each kind; several make a Galvanic Essence.
+_Avoid_: Core (a Recycler's)
 
 **Quintessence**:
 The final essence, made in the last stand. Its Voidworks way assembles one of each Transmuted Essence into a Quartessence and climbs that, in a Mutation Chamber, by a steep Rung paid in motes from the Nether and the End; a second way, with no Voidworks, makes it from Nullessence only while the team bears handicaps it chooses, harder than in their challenges, and the faster the more it bears. Put into C.O.D. itself during its last stand, by hand or any automation, each one cancels a fixed amount of what C.O.D. makes, and only Quintessence moves the Lead.

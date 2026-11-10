@@ -1,0 +1,14 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting",
+  "ingredients": [
+    { "ingredient": "mechanicalmasteryreborn:galvanic_core", "count": 2 },
+    { "ingredient": "theurgy:mercury_crystal", "count": 1 },
+    { "ingredient": "theurgy:alchemical_salt_mineral", "count": 1 },
+    { "ingredient": "theurgy:alchemical_sulfur_redstone", "count": 1 }
+  ],
+  "results": [
+    { "id": "mechanicalmasteryreborn:galvanic_essence", "count": 1 }
+  ],
+  "time": 100
+}

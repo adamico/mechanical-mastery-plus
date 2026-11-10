@@ -110,3 +110,27 @@ Source: https://github.com/malcolmriley/unused-textures, items/ and fluids/ at c
           (255, 205, 70); molten_<metal>.png.mcmeta is fluids/fluid_molten.png.mcmeta, copied
           unmodified.
 Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
+
+Galvanic Charge and Core textures
+---------------------------------
+
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/item/mercury_charge.png,
+       salt_charge.png, sulfur_charge.png and galvanic_core.png
+Author: Malcolm Riley
+Source: https://github.com/malcolmriley/unused-textures, items/
+        - mercury_charge.png is items/part_electronic_electrode_tin_encrusted, salt_charge.png
+          items/part_electronic_electrode_iron_encrusted and galvanic_core.png
+          items/part_electronic_battery_galvanic_2, copied unmodified.
+        - sulfur_charge.png is items/part_electronic_electrode_gold_encrusted recoloured magenta.
+Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
+
+Reformed Salt and Reformed Sulfur textures
+------------------------------------------
+
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/item/reformed_salt.png and
+       reformed_sulfur.png
+Author: Malcolm Riley
+Source: https://github.com/malcolmriley/unused-textures, items/
+        - reformed_salt.png is items/material_crystal_salt, copied unmodified.
+        - reformed_sulfur.png is items/material_crystal_sulfur_fancy recoloured magenta.
+Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)

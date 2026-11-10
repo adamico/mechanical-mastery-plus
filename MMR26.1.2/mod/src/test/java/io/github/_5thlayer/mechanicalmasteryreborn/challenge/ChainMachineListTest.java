@@ -28,7 +28,7 @@ class ChainMachineListTest {
     private static final Pattern ID = Pattern.compile("\"([a-z0-9_.-]+:[a-z0-9_/.-]+)\"");
 
     @Test
-    void energysMachinesAreTheurgysNineProcessingMachines() throws IOException {
+    void energysMachinesAreTheurgysProcessingMachinesAndReformationPedestals() throws IOException {
         assertEquals(List.of(
                 "theurgy:sal_ammoniac_accumulator",
                 "theurgy:liquefaction_cauldron",
@@ -38,7 +38,10 @@ class ChainMachineListTest {
                 "theurgy:distiller",
                 "theurgy:mercury_catalyst",
                 "theurgy:incubator",
-                "theurgy:sulfuric_flux_emitter"), ids(Handicap.ENERGY));
+                "theurgy:sulfuric_flux_emitter",
+                "theurgy:reformation_source_pedestal",
+                "theurgy:reformation_target_pedestal",
+                "theurgy:reformation_result_pedestal"), ids(Handicap.ENERGY));
     }
 
     @Test

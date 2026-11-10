@@ -1,0 +1,21 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting",
+  "ingredients": [
+    {
+      "ingredient": "mechanicalmasteryreborn:reformed_salt",
+      "count": 4
+    },
+    {
+      "ingredient": "minecraft:redstone",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "id": "mechanicalmasteryreborn:salt_charge",
+      "count": 1
+    }
+  ],
+  "time": 100
+}

@@ -52,8 +52,8 @@ precedence = "override"
 SPDX-FileCopyrightText = "2026 5thlayer"
 SPDX-License-Identifier = "MIT"
 
-# The Recycler's, the Electric Defence's, C.O.D.'s, the lab's, the Ports' and the mint's textures, from Malcolm
-# Riley's unused-textures, some modified (NOTICE).
+# The Recycler's, the Electric Defence's, C.O.D.'s, the lab's, the Ports', the mint's and the Galvanic Charges',
+# Core's and reformed forms' textures, from Malcolm Riley's unused-textures, some modified (NOTICE).
 [[annotations]]
 path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/recycler_*.png",
@@ -67,6 +67,9 @@ path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/item/*_cast.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/item/mold.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/item/burnt_sand.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/*_charge.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/galvanic_core.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/reformed_*.png",
 ]
 precedence = "override"
 SPDX-FileCopyrightText = "Malcolm Riley"
