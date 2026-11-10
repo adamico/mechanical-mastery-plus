@@ -168,6 +168,8 @@
   "mechanicalmasteryreborn.jade.cod.made_decomposed": "Made %s, decomposed %s since the challenge began",
   "mechanicalmasteryreborn.jade.cod.next": "Next essence in %s s",
   "mechanicalmasteryreborn.jade.theurgy.progress": "Processing %s%%",
+  "mechanicalmasteryreborn.jade.theurgy.flux": "Mercury Flux: %s / %s",
+  "mechanicalmasteryreborn.jade.theurgy.vessels": "Mercury, salt, sulfur:",
   "death.attack.mechanicalmasteryreborn.electric": "%1$s was shocked by an Electric Defence",
   "death.attack.mechanicalmasteryreborn.electric.player": "%1$s was shocked by an Electric Defence while fighting %2$s",
   "mechanicalmasteryreborn.command.mmr.assault.wave.set": "The Assault's gate is at wave %s",
