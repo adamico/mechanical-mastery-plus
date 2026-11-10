@@ -114,7 +114,7 @@ hash = "26f43add76e35fa7883a60cf864740b3c5225d1ab7cf91c8f5a476aa0494c666"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/energy.md"
-hash = "96a009244a9de076808b535b86b18d9caf2ba7866d626c84735023753c0dcf76"
+hash = "fce504d5e9088c415a53d3e5e5ae9978a795dee5e2e48be5af74edbbf78edce3"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/index.md"
@@ -286,7 +286,7 @@ hash = "617c37066da43aee69c8faef18c7cb5a34ae7166a320428aff61cd9795b34ba6"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/energy.json"
-hash = "f0a141edd134abdb5be046ba53fecb80cc3d2b929c18b96ee528f3e7a986a6e4"
+hash = "dd3a4c9633b0e40a4fbb7dd120635dba3a98fe1e5951289fff791ad3577efaa3"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/last_chapter.json"
@@ -389,6 +389,10 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/end_portal_frame.j
 hash = "32f47fac79aa54ed0dab417b906d98aa3d51927928d2ff691840bfe5d1be409f"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/galvanic_essence.json"
+hash = "b50a0c301b951172f2b524802760d26c788a42d98c64feea3342fa6263ae77c2"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/gold_cast.json"
 hash = "f51810b22035e660e8d7ca98004381f6af2dc123da09e14def05799e37401431"
 
@@ -413,6 +417,14 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/iron_coin_from_cop
 hash = "0bfaf04fc7b6a34273b183d0330768e9c6ee70c17e068fa31d72e4d41896fc41"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/mercury_charge.json"
+hash = "70dda082a965bee8a960023e87b408de0355d4248421d2dee80255bf6fd497b1"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/mercury_charge_from_shards.json"
+hash = "717fcfa09228f40a193c939cb2bfe2bd5544da5e5d1505023f4444b34a085a11"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/mold.json"
 hash = "5b1640c80dfc4cbde9bbf9f0e06d71744fdcdb2a07b3b2265cc2a477463be66c"
 
@@ -433,8 +445,16 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/quartessence.json"
 hash = "e61cc83aa91718f98a885c8aaf976cb55d8004cf9bd2d50446ee89f4d82249cb"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/salt_charge.json"
+hash = "9ae45d108224a48b7942ddeb567dc227e39a4ee3734c4c360c5e30a54c6e6431"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/sand_from_burnt_sand.json"
 hash = "17b363c8e84168e180b94baa1ab899b2d0ed7f277d0c45875f99f3641ced5205"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/sulfur_charge.json"
+hash = "71539fa7b8b606c08ebaff76553ca86c8cda1d886f650eed4b9b94c614615f1d"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/ward_tallow.json"
@@ -445,12 +465,32 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/warding_essence.js
 hash = "238234046e86dedc519535d68771b906534e5ff9bf55afa8021a960b59b18d64"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/extraction/aureate_essence.json"
+hash = "3070c61fd6230c7791edcc9805f17c8f2b3c4adb16e373e7ecee79766c71a255"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/extraction/vital_essence.json"
+hash = "0f9643b0a655693548b78f1bd31a4182a402732bd44ae110835efd4e284b8cfc"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/extraction/warding_essence.json"
+hash = "8b9c62aa0bb03e6032448664a2189cfe43cce63c4ae195a2571623d5792b725b"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/harvesting/obsidian_flakes.json"
 hash = "b51f14260bd2f2bf2ff88e6f8a3cc86a445e065118d8dbce6d87037af33844bc"
 
 [[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/incubation/galvanic_essence.json"
-hash = "05bb3a1ca2f3ca9daa8f4a1a3fecad089648c0bf97ed04a580448895a6bf0520"
+file = "kubejs/data/mechanicalmasteryreborn/recipe/incubation/galvanic_core.json"
+hash = "b98a7ca88292553a77d4f1fc2839884e625bc267064905726029cd53513fe36b"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/reformation/reformed_salt.json"
+hash = "73d66296498af65cb63ccb7e6e82a598dbd66f43d9ac9ecabd58918db55115b0"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/reformation/reformed_sulfur.json"
+hash = "de158c6d515c0a19c060180cf117aedc81c6b3adc1f21ab86541f63ed11d8988"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/chicken_spawn_egg.json"
@@ -666,7 +706,7 @@ hash = "46630b5faa22268f67e539804b9099a15bc26c0e91f1900dc6f5f5ed99b1b8ae"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/essence/galvanic_essence.json"
-hash = "3d64695cd2f369c07594c3739c5ab10a412f4d668529dec0c4997e9583c3217d"
+hash = "ce79f3e13828f9c489a94b7237f15451f102c2cececef0172a42a29595f03c5b"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/essence/vital_essence.json"
@@ -678,7 +718,7 @@ hash = "d1916de4106dad833f9eb5e8559c497fdbe82c3d395d9bb3d1272851df8d3e10"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/tags/item/chain_machines/energy.json"
-hash = "8edf53916cbb45157b90fc47ff96e5715da0fcea3d11775aaf94ceba346a81d7"
+hash = "6465cb38f0a203d40fff674aa2d74588ff34338278c5e5a383f7ff9e08fe4fe4"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/tags/item/chain_machines/life.json"
@@ -706,7 +746,7 @@ hash = "e7f3199f4bacece01467ac1274b0f6bfd7d23e5a4364f91bf19d4f5fa6658b47"
 
 [[files]]
 file = "kubejs/server_scripts/decomposing.js"
-hash = "88afdad988bcdcbd7af67401a33cfa482cefa8f10257b47f3563beb089421efc"
+hash = "ea3069a1562d158ac795b0663d031a79c5e415af261a2f23471266bcdf5a316e"
 
 [[files]]
 file = "kubejs/server_scripts/defences.js"
@@ -718,7 +758,7 @@ hash = "bf0996fea7540b2c0a3a747fac2747d3f16646789c456770bb00db7cd422552b"
 
 [[files]]
 file = "kubejs/server_scripts/manual.js"
-hash = "678774bfcc71aaaf0ff7bca581c1e6ee51c1ef63159e6f57d803e2a6a3ba347c"
+hash = "1015de7fabbc0e294639e78c4525559ecf0f0bc461c1e15ce575c769802912ef"
 
 [[files]]
 file = "kubejs/server_scripts/shop.js"
