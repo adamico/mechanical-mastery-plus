@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn Core adds, 
 
 ## Unreleased
 
+- Reformed Salt and Reformed Sulfur keep their own name and look; the Reformation Array gave them its target's, so they read as Alchemical Salt or Sulfur (#330).
 - The Reformation Array's source and target pedestals take Theurgy's salts, so Reformed Salt can be made; they took only sulfurs and niters (#330).
 - The Incubator's vessels take the Galvanic Charges, by hand, from Theurgy's logistics and from feeders; they took only Theurgy's own mercury, salt and sulfur, so the Galvanic Core couldn't be made (#331).
 - Jade shows on the Incubator what its mercury, salt and sulfur vessels hold, beside its progress, as Theurgy's own HUD did, and on the Mercury Catalyst the FE it has stored against its capacity (#327).
