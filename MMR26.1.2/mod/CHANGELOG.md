@@ -4,7 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn Core adds, 
 
 ## Unreleased
 
-- Jade shows on the Incubator what its mercury, salt and sulfur vessels hold, beside its progress, as Theurgy's own HUD did (#327).
+- Jade shows on the Incubator what its mercury, salt and sulfur vessels hold, beside its progress, as Theurgy's own HUD did, and on the Mercury Catalyst the FE it has stored against its capacity (#327).
 - Reformation can't be skipped on the way to the Galvanic Charges (ADR 0018): Reformed Salt and Reformed Sulfur (`reformed_salt`, `reformed_sulfur`), which only the Reformation Array's pedestals make, from any of Theurgy's salts or sulfurs, paid in mercury flux, and which the Salt and Sulfur Galvanic Charges now take in place of mineral salt and redstone sulfur. The pack's reformations of strata salt to mineral salt and rotten-flesh sulfur to niter are gone. Art from Malcolm Riley's unused-textures (#330).
 - The energy chain's Galvanic Core (ADR 0018): the Incubator makes it from one Galvanic Charge of each kind (`galvanic_core`), with art from Malcolm Riley's unused-textures (#331).
 - The Galvanic Essence is now made from Galvanic Cores, several to one, in Assemblers, in place of Theurgy's own incubation from mercury, salt and sulfur (ADR 0018, #331).
