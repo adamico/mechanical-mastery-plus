@@ -42,7 +42,7 @@ public final class TheurgyJadePlugin implements IWailaPlugin {
 
     private static final Identifier UID = Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "theurgy_progress");
 
-    private static final MachineReport<BlockEntity, Integer> REPORT = new MachineReport<>(UID, BlockEntity.class,
+    private static final MachineReport<BlockEntity, Integer> PROGRESS = new MachineReport<>(UID, BlockEntity.class,
             entity -> TheurgyProgress.percent(entity).orElse(null), ByteBufCodecs.VAR_INT.cast());
 
     private static final MachineReport<BlockEntity, TheurgyFlux.Stored> FLUX = new MachineReport<>(
@@ -59,7 +59,7 @@ public final class TheurgyJadePlugin implements IWailaPlugin {
     @Override
     public void register(IWailaCommonRegistration registration) {
         if (ModList.get().isLoaded("theurgy")) {
-            registration.registerBlockDataProvider(REPORT, BlockEntity.class);
+            registration.registerBlockDataProvider(PROGRESS, BlockEntity.class);
             registration.registerBlockDataProvider(FLUX, BlockEntity.class);
             registration.registerBlockDataProvider(VESSELS, BlockEntity.class);
         }
@@ -68,8 +68,8 @@ public final class TheurgyJadePlugin implements IWailaPlugin {
     @Override
     public void registerClient(IWailaClientRegistration registration) {
         if (ModList.get().isLoaded("theurgy")) {
+            registration.registerBlockComponent(new MachineReport.Client<>(PROGRESS, Bar::add), Block.class);
             registration.registerBlockComponent(new MachineReport.Client<>(VESSELS, Bar::vessels), Block.class);
-            registration.registerBlockComponent(new MachineReport.Client<>(REPORT, Bar::add), Block.class);
             registration.registerBlockComponent(new MachineReport.Client<>(FLUX, Bar::flux), Block.class);
         }
     }
