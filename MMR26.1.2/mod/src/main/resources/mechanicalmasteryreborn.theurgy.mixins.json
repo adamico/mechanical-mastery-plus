@@ -10,7 +10,9 @@
     "IncubatorSaltVesselMixin",
     "IncubatorSulfurVesselMixin",
     "MercuryCatalystBlockEntityMixin",
-    "MercuryCatalystCraftingBehaviourMixin"
+    "MercuryCatalystCraftingBehaviourMixin",
+    "ReformationSourcePedestalMixin",
+    "ReformationTargetPedestalMixin"
   ],
   "injectors": {
     "defaultRequire": 1
