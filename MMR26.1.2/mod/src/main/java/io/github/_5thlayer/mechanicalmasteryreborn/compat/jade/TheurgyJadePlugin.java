@@ -6,15 +6,12 @@ package io.github._5thlayer.mechanicalmasteryreborn.compat.jade;
 import io.github._5thlayer.libworks.machine.jade.MachineReport;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.IncubatorVessels;
-import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.TheurgyFlux;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.TheurgyProgress;
 import java.util.List;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -32,8 +29,8 @@ import snownee.jade.api.view.ProgressView;
 /**
  * Shows on Theurgy's blocks what Theurgy's in-world HUD showed before the pack turned it off (#255) and Jade doesn't
  * show on its own (#327): an apparatus's processing as a bar with its percent, sent only while it processes
- * ({@link TheurgyProgress}); the mercury flux a block holds ({@link TheurgyFlux}); and on the Incubator, its vessels'
- * mercury, salt and sulfur ({@link IncubatorVessels}). Items, fluids and FE Jade shows from the blocks' capabilities.
+ * ({@link TheurgyProgress}), and on the Incubator its vessels' mercury, salt and sulfur ({@link IncubatorVessels}).
+ * Items, fluids and FE Jade shows from the blocks' capabilities, and mercury flux Theurgy's own Jade plugin shows.
  * Registers nothing unless Theurgy is installed. Jade finds this by its annotation and loads it only when Jade is
  * installed.
  */
@@ -45,11 +42,6 @@ public final class TheurgyJadePlugin implements IWailaPlugin {
     private static final MachineReport<BlockEntity, Integer> PROGRESS = new MachineReport<>(UID, BlockEntity.class,
             entity -> TheurgyProgress.percent(entity).orElse(null), ByteBufCodecs.VAR_INT.cast());
 
-    private static final MachineReport<BlockEntity, TheurgyFlux.Stored> FLUX = new MachineReport<>(
-            Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "theurgy_flux"), BlockEntity.class,
-            entity -> TheurgyFlux.of(entity).orElse(null), StreamCodec.<RegistryFriendlyByteBuf, TheurgyFlux.Stored, Integer, Integer>composite(
-                    ByteBufCodecs.VAR_INT, TheurgyFlux.Stored::amount, ByteBufCodecs.VAR_INT, TheurgyFlux.Stored::capacity,
-                    TheurgyFlux.Stored::new));
 
     private static final MachineReport<BlockEntity, List<ItemStack>> VESSELS = new MachineReport<>(
             Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "theurgy_incubator_vessels"), BlockEntity.class,
@@ -60,7 +52,6 @@ public final class TheurgyJadePlugin implements IWailaPlugin {
     public void register(IWailaCommonRegistration registration) {
         if (ModList.get().isLoaded("theurgy")) {
             registration.registerBlockDataProvider(PROGRESS, BlockEntity.class);
-            registration.registerBlockDataProvider(FLUX, BlockEntity.class);
             registration.registerBlockDataProvider(VESSELS, BlockEntity.class);
         }
     }
@@ -70,7 +61,6 @@ public final class TheurgyJadePlugin implements IWailaPlugin {
         if (ModList.get().isLoaded("theurgy")) {
             registration.registerBlockComponent(new MachineReport.Client<>(PROGRESS, Bar::add), Block.class);
             registration.registerBlockComponent(new MachineReport.Client<>(VESSELS, Bar::vessels), Block.class);
-            registration.registerBlockComponent(new MachineReport.Client<>(FLUX, Bar::flux), Block.class);
         }
     }
 
@@ -87,11 +77,6 @@ public final class TheurgyJadePlugin implements IWailaPlugin {
             tooltip.add(JadeUI.progress(new ProgressView(ProgressView.Part.of(percent / 100f),
                     Component.translatable("mechanicalmasteryreborn.jade.theurgy.progress", percent),
                     JadeUI.progressStyle(), BoxStyle.nestedBox())));
-        }
-
-        static void flux(TheurgyFlux.Stored flux, ITooltip tooltip) {
-            tooltip.add(Component.translatable("mechanicalmasteryreborn.jade.theurgy.flux", flux.amount(), flux.capacity())
-                    .withStyle(ChatFormatting.GRAY));
         }
 
         /** The three vessels in a row, mercury, salt then sulfur, an empty vessel as an empty slot. */
