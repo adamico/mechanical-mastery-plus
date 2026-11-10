@@ -6,6 +6,9 @@
   "mixins": [
     "CraftingBehaviourMixin",
     "HeatConsumerBehaviourMixin",
+    "IncubatorMercuryVesselMixin",
+    "IncubatorSaltVesselMixin",
+    "IncubatorSulfurVesselMixin",
     "MercuryCatalystBlockEntityMixin",
     "MercuryCatalystCraftingBehaviourMixin"
   ],
