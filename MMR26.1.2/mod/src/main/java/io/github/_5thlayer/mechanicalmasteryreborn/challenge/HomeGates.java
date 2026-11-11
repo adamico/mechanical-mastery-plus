@@ -40,6 +40,11 @@ public final class HomeGates {
         }
     }
 
+    /** Takes {@link #PERMIT} from {@code team}'s Account, as a reverted protection win does (#335). */
+    static void revoke(MinecraftServer server, UUID team) {
+        Accounts.get().revoke(server, team, PERMIT);
+    }
+
     /**
      * Why {@code player} can't open {@code gate} where they stand, or null if they can, or it is no home gate. Only the
      * server knows the teams, so the client is never refused: the server's refusal is the one that counts.

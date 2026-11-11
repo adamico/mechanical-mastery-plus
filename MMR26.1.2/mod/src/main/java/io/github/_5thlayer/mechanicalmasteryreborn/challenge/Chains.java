@@ -59,7 +59,7 @@ public final class Chains {
 
     /**
      * Gives {@code player} the stage of every chain its team has unlocked and takes the stage of every other, gives it the
-     * last chapter's once its team has won all four (ADR 0012) and the last stand's once it has started it (ADR 0014), and tells its client which chains are unlocked and its team's attempt (#322).
+     * last chapter's while its team has won all four (ADR 0012) and the last stand's once it has started it (ADR 0014), and tells its client which chains are unlocked and its team's attempt (#322).
      */
     public static void unlock(MinecraftServer server, Player player) {
         if (server == null || player == null) {
@@ -76,6 +76,9 @@ public final class Chains {
         }
         if (LastChapter.reached(server, team)) {
             stages().grant(player, LastChapter.STAGE);
+        } else {
+            // Only an op's revert takes a win back.
+            stages().revoke(player, LastChapter.STAGE);
         }
         if (LastStands.started(server, team)) {
             stages().grant(player, LastStands.STAGE);
