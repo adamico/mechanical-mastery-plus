@@ -1,6 +1,7 @@
 {
   "type": "craftworks:assembling",
-  "category": "crafting",
+  "category": "advanced-crafting",
+  "hand_craftable": false,
   "ingredients": [
     { "ingredient": "mechanicalmasteryreborn:galvanic_core", "count": 2 },
     { "ingredient": "theurgy:mercury_crystal", "count": 1 },
