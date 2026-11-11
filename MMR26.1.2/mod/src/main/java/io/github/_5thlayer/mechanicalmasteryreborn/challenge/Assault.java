@@ -21,6 +21,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -31,6 +32,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
@@ -41,6 +43,7 @@ import org.slf4j.Logger;
  * ground C.O.D. stands on, a bridge of it running back toward C.O.D. until the first block in its way, and on the
  * platform the pack's endless gate ({@link Gates}), summoned by one of the team's players on its island, so its mobs
  * hunt the team. The four share one gate, whose waves step up with no ceiling; one that fails opens again at its wave.
+ * A Wave Caller calls the next wave early, at a platform drawn at random, so a team may have a gate on several (#341).
  * A win, a reset or a stop removes the gate, what was built and the gate's mobs still around; the team keeps its Rift
  * Shards, and what the mobs broke waits at its lab ({@link AssaultBreaks}).
  * A gate or mob in a chunk no one is near can't be seen as the Assault ends, so it is kept out when it loads again.
@@ -63,16 +66,23 @@ public final class Assault {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     private static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MechanicalMasteryReborn.MOD_ID);
+    private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MechanicalMasteryReborn.MOD_ID);
 
     /** What the platform and bridge are built of: unbreakable as C.O.D. is, and dropping nothing. */
     public static final DeferredBlock<Block> STONE = BLOCKS.registerSimpleBlock("assault_stone",
             props -> props.mapColor(MapColor.COLOR_PURPLE).strength(-1.0F, 3600000.0F).sound(SoundType.DEEPSLATE_BRICKS).noLootTable());
+
+    /** The Wave Caller (#341), which the Shop sells from the protection challenge's start. */
+    public static final DeferredBlock<WaveCaller> WAVE_CALLER = BLOCKS.registerBlock("wave_caller", WaveCaller::new,
+            props -> props.mapColor(MapColor.COLOR_PURPLE).strength(1.5F, 6.0F).sound(SoundType.AMETHYST));
+    public static final DeferredItem<BlockItem> WAVE_CALLER_ITEM = ITEMS.registerSimpleBlockItem("wave_caller", WAVE_CALLER);
 
     private Assault() {
     }
 
     public static void register(IEventBus modBus) {
         BLOCKS.register(modBus);
+        ITEMS.register(modBus);
         NeoForge.EVENT_BUS.addListener(Assault::onJoin);
         AssaultAbsence.register();
         AssaultBreaks.register();
@@ -174,9 +184,13 @@ public final class Assault {
     public static void reopen(ServerLevel level, UUID failed, Vec3 at, int wave) {
         AssaultState state = AssaultState.get(level.getServer());
         state.teamOf(failed).ifPresent(team -> {
-            Vec3 where = gateAt(state, team).orElse(at);
+            // With waves called, the team's gates stand on several sides, so each opens again on its own (#341).
+            Vec3 where = state.side(failed).flatMap(side -> state.cod(team).map(cod -> gateAt(cod.pos(), side)))
+                    .or(() -> gateAt(state, team)).orElse(at);
+            int called = Gates.get().called(level, failed);
             Optional<UUID> reopened = Gates.get().open(level, where, summoner(level.getServer(), level, team), wave);
             state.replaceGate(team, failed, reopened);
+            reopened.ifPresent(gate -> callAgain(level, gate, called));
             LOGGER.info("Reopened team {}'s failed Assault gate {} at wave {}: {}", team, failed, wave,
                     reopened.map(UUID::toString).orElse("none"));
         });
@@ -200,11 +214,20 @@ public final class Assault {
             if (cod.isEmpty()) {
                 return;
             }
+            Optional<Direction> from = state.side(gate).or(built::side);
             List<Direction> others = new ArrayList<>(Direction.Plane.HORIZONTAL.stream().toList());
-            built.side().ifPresent(others::remove);
+            from.ifPresent(others::remove);
+            // With waves called, the gate moves to a side no other gate of the team stands on, if there is one (#341).
+            List<Direction> free = new ArrayList<>(others);
+            built.gates().stream().filter(other -> !other.equals(gate)).forEach(other -> state.side(other).ifPresent(free::remove));
+            if (!free.isEmpty()) {
+                others = free;
+            }
             Direction side = others.get(level.getRandom().nextInt(others.size()));
+            int called = Gates.get().called(level, gate);
             Optional<UUID> moved = Gates.get().open(level, gateAt(cod.get().pos(), side), summoner(level.getServer(), level, team), wave);
             state.moveGate(team, gate, moved, side);
+            moved.ifPresent(opened -> callAgain(level, opened, called));
             Entity old = level.getEntity(gate);
             if (old != null) {
                 old.discard();
@@ -250,7 +273,58 @@ public final class Assault {
     /** Notes that the Assault's gate {@code gate} started wave {@code wave}, for the team's bar. A gate of no Assault is left alone. */
     public static void noteWave(ServerLevel level, UUID gate, int wave) {
         AssaultState state = AssaultState.get(level.getServer());
-        state.teamOf(gate).ifPresent(team -> state.noteWave(team, wave));
+        // A gate behind another, its wave called later, never takes the team's bar back (#341).
+        state.teamOf(gate).filter(team -> state.assault(team).map(built -> wave > built.wave()).orElse(false))
+                .ifPresent(team -> state.noteWave(team, wave));
+    }
+
+    /**
+     * Calls {@code team}'s Assault's next wave at once, as a Wave Caller does (#341): at a platform drawn at random from
+     * all four, the one in use included. A gate standing there has its next wave called, ending its breather, or else
+     * following its wave with none; on a platform with no gate, one opens with the waves the Assault has reached behind
+     * it, its first wave called. Says whether the team had a running Assault: a paused one, with no one home, calls nothing.
+     */
+    public static boolean call(MinecraftServer server, UUID team) {
+        AssaultState state = AssaultState.get(server);
+        Optional<AssaultState.Built> built = state.assault(team);
+        Optional<GlobalPos> cod = state.cod(team);
+        if (built.isEmpty() || cod.isEmpty() || state.paused(team).isPresent()) {
+            return false;
+        }
+        ServerLevel level = server.getLevel(built.get().dimension());
+        if (level == null) {
+            return false;
+        }
+        Direction side = Direction.Plane.HORIZONTAL.getRandomDirection(level.getRandom());
+        Optional<UUID> standing = built.get().gates().stream().filter(gate -> state.side(gate).equals(Optional.of(side))).findFirst();
+        Optional<UUID> called = standing.filter(gate -> Gates.get().call(level, gate));
+        if (standing.isEmpty()) {
+            called = Gates.get().open(level, gateAt(cod.get().pos(), side), summoner(server, level, team), built.get().wave());
+            called.ifPresent(gate -> {
+                state.addGate(team, gate, side);
+                Gates.get().call(level, gate);
+            });
+        }
+        Component where = Component.translatable(MechanicalMasteryReborn.MOD_ID + ".assault.called", sideName(side));
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            if (Teams.of(player).equals(team)) {
+                player.sendOverlayMessage(where);
+            }
+        }
+        LOGGER.info("Team {} called its Assault's next wave on the {} side: {}", team, side, called.map(UUID::toString).orElse("none"));
+        return true;
+    }
+
+    /** Calls {@code times} waves of the gate {@code gate}, opened in place of one that had them called (#341). */
+    private static void callAgain(ServerLevel level, UUID gate, int times) {
+        for (int i = 0; i < times; i++) {
+            Gates.get().call(level, gate);
+        }
+    }
+
+    /** The side of C.O.D. at {@code cod} whose platform the gate at {@code at} stands on, if any. */
+    public static Optional<Direction> sideOf(BlockPos cod, Vec3 at) {
+        return Direction.Plane.HORIZONTAL.stream().filter(side -> gateAt(cod, side).distanceToSqr(at) < 1.0).findFirst();
     }
 
     /** The side's name, as "north", for the team's bar and the action bar's word that the gate moved. */

@@ -59,6 +59,22 @@ final class AssaultAbsenceTests {
         public int wave(Entity gate) {
             return AssaultTests.WAVES.getOrDefault(gate.getUUID(), 0);
         }
+
+        @Override
+        public boolean call(ServerLevel level, UUID gate) {
+            WaveCallerTests.CALLS.merge(gate, 1, Integer::sum);
+            return true;
+        }
+
+        @Override
+        public int called(ServerLevel level, UUID gate) {
+            return WaveCallerTests.CALLS.getOrDefault(gate, 0);
+        }
+
+        @Override
+        public boolean callHome(ServerLevel level, UUID team) {
+            return WaveCallerTests.HOME_GATES.contains(team) && WaveCallerTests.HOME_CALLS.add(team);
+        }
     };
 
     private AssaultAbsenceTests() {

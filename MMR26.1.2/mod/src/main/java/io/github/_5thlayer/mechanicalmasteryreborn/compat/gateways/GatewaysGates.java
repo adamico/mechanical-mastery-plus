@@ -14,6 +14,8 @@ import dev.shadowsoffire.gateways.gate.GatewayRegistry;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Assault;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Gates;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.HomeGates;
+import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,6 +36,9 @@ public final class GatewaysGates implements Gates {
 
     /** The endless gate the pack writes for the Assault. */
     public static final Identifier ASSAULT = Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "assault");
+
+    /** The persistent-data key a gate keeps its called waves under, each to start with no breather (#341). */
+    private static final String CALLED_KEY = MechanicalMasteryReborn.MOD_ID + ".called";
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
@@ -61,13 +66,45 @@ public final class GatewaysGates implements Gates {
     }
 
     @Override
+    public boolean call(ServerLevel level, UUID gate) {
+        if (!(level.getEntity(gate) instanceof GatewayEntity gateway) || gateway.isRemoved()) {
+            return false;
+        }
+        gateway.getPersistentData().putInt(CALLED_KEY, called(gateway) + 1);
+        return true;
+    }
+
+    @Override
+    public boolean callHome(ServerLevel level, UUID team) {
+        boolean called = false;
+        for (Entity entity : level.getAllEntities()) {
+            if (entity instanceof GatewayEntity gate && !gate.isRemoved() && gate.isValid()
+                    && HomeGates.GATE.equals(GatewayRegistry.INSTANCE.getKey(gate.getGateway()))
+                    && Teams.at(level, gate.blockPosition()).equals(team)) {
+                called |= call(level, gate.getUUID());
+            }
+        }
+        return called;
+    }
+
+    @Override
+    public int called(ServerLevel level, UUID gate) {
+        return level.getEntity(gate) instanceof GatewayEntity gateway ? called(gateway) : 0;
+    }
+
+    /** How many of {@code gate}'s next waves are called, each to start with no breather. */
+    public static int called(GatewayEntity gate) {
+        return gate.getPersistentData().getIntOr(CALLED_KEY, 0);
+    }
+
+    @Override
     public int wave(Entity gate) {
         return gate instanceof GatewayEntity gateway ? gateway.getWave() : 0;
     }
 
     /**
      * Reopens an Assault's gate that fails, for its timer, a mob lost or out of range, to play again the wave it had
-     * reached, notes each wave started for the team's bar, and moves the gate at a step. Gateways' count is of the
+     * reached, notes each wave started for the team's bar, using up a called wave (#341), and moves the gate at a step. Gateways' count is of the
      * waves a gate has finished, and goes up only after its wave-end event: a gate failing, starting or ending wave 7
      * says 6.
      */
@@ -80,6 +117,10 @@ public final class GatewaysGates implements Gates {
         });
         NeoForge.EVENT_BUS.addListener(GateEvent.WaveStarted.class, event -> {
             GatewayEntity gate = event.getEntity();
+            int called = called(gate);
+            if (called > 0) {
+                gate.getPersistentData().putInt(CALLED_KEY, called - 1);
+            }
             if (gate.level() instanceof ServerLevel level) {
                 Assault.noteWave(level, gate.getUUID(), gate.getWave() + 1);
             }

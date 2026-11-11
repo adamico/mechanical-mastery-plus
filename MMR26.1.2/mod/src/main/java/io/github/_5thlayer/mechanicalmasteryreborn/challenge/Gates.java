@@ -33,6 +33,27 @@ public interface Gates {
         return 0;
     }
 
+    /**
+     * Brings on the gate {@code gate}'s next wave at once, as a Wave Caller does (#341): in its breather, at once; in a
+     * wave, as soon as that wave ends, with no breather. Says whether it is a gate whose wave could be called.
+     */
+    default boolean call(ServerLevel level, UUID gate) {
+        return false;
+    }
+
+    /** How many of the gate {@code gate}'s next waves are called and not yet started, which a gate opened in its place keeps. */
+    default int called(ServerLevel level, UUID gate) {
+        return 0;
+    }
+
+    /**
+     * Calls the next wave of every home gate open on {@code team}'s island in {@code level}, as a Wave Caller does with no
+     * Assault running (#341), and says whether there was one.
+     */
+    default boolean callHome(ServerLevel level, UUID team) {
+        return false;
+    }
+
     /** No gate at all, as a world without Gateways has. */
     Gates NONE = (level, at, summoner, wave) -> Optional.empty();
 
