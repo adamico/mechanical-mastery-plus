@@ -63,6 +63,17 @@ Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
           orange (255, 120, 30) scaled by the pixel's own lightness.
 Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
 
+Wave Caller textures
+--------------------
+
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/block/wave_caller_*.png
+Author: Malcolm Riley
+Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
+        8b85ad732023174d9a9da74e6bf2272d6c0bef17
+        - wave_caller_side.png is device_terminal_speaker and wave_caller_end.png
+          space-plating-square, copied unmodified.
+Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
+
 C.O.D., lab and Port textures
 -----------------------------
 

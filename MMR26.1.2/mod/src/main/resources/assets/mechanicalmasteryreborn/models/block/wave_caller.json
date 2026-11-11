@@ -1,8 +1,7 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "top": "minecraft:block/crying_obsidian",
-    "bottom": "minecraft:block/obsidian",
-    "side": "minecraft:block/obsidian"
+    "end": "mechanicalmasteryreborn:block/wave_caller_end",
+    "side": "mechanicalmasteryreborn:block/wave_caller_side"
   }
 }
