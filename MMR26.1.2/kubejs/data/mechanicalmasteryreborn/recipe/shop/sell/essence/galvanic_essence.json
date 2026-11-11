@@ -1,6 +1,6 @@
 {
   "type": "adminshop:item_selling",
-  "price": 4000,
+  "price": 125,
   "permit": "reborn_money",
   "item": {
     "id": "mechanicalmasteryreborn:galvanic_essence",
