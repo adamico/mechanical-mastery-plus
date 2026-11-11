@@ -123,12 +123,16 @@ What a challenge costs the team while it plays it, and only then: protection (an
 _Avoid_: threat, debuff
 
 **Assault**:
-The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from one gate at a time, on one of four platforms it builds in the void around the island, with unbreakable bridges to it. The waves grow harder, with a breather between each step, at which the gate moves to another side at random, and never stop until the quota is filled or Overproduction reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, what its mobs break is the team's refund when it ends, and it pauses while no one is on the island.
+The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from one gate at a time unless the team calls more, on one of four platforms it builds in the void around the island, with unbreakable bridges to it. The waves grow harder, with a breather between each step, at which the gate moves to another side at random, and never stop until the quota is filled or Overproduction reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, what its mobs break is the team's refund when it ends, and it pauses while no one is on the island.
 _Avoid_: raid, siege, invasion
 
 **Home gate**:
 A smaller gate a team opens on its own island with a pearl, whenever it likes, once it has won the protection challenge: no recipe makes the pearl, and the Shop sells it from the win on. It gives the Assault's drop, but less of it than the Assault, so a won protection chain goes on making Warding Essence.
 _Avoid_: practice gate, farm gate
+
+**Wave Caller**:
+A block a team places anywhere on its island, as many as it likes, that brings on its gate's next wave at once, without waiting for the current one to end. On the Assault the called wave opens at a platform drawn at random from all four, the one already in use included, and ends any breather, so a team calling waves may fight two fronts at once: calling waves is how it trades risk for pace. On a home gate the wave joins the fight in the same gate. It does nothing while no gate of the team's is open, as when a paused Assault waits for a member to come back. The Shop sells it from the start of the protection challenge, and it stays on the island past a win.
+_Avoid_: Rift Caller, gate horn
 
 **Defence**:
 A block that fights the Assault's mobs on its own, fed by the factory with FE or with what its lines make, and never for nothing. Defences are free from the start, as the team's gear is, so growing them ahead is part of the protection challenge's strategy.

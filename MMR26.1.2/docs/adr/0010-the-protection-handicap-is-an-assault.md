@@ -6,7 +6,7 @@ We could have done what the protection challenge first read: more natural spawns
 
 ## Consequences
 
-- One gate is open at a time. Four at once, as the Assault was first built, was too hard in play; a gate that moves at random keeps every side to be defended while the team fights one front.
+- One gate is open at a time unless the team calls more. Four at once, as the Assault was first built, was too hard in play as a given; a gate that moves at random keeps every side to be defended while the team fights one front. A Wave Caller (#341) lets the team bring on the next wave early at a random platform, the one in use included, so more fronts are a risk the team chooses for pace, with no cap. Each open gate pauses, fails and opens again on its own.
 - The Assault ends on a win, a reset or a stop (ADR 0013): its gates, platforms, bridges and remaining mobs are removed, the team keeps its unused Rift Shards, and what its mobs broke is refunded at the lab (ADR 0015). A reset then sends a new Assault from wave 1, as though the challenge had just begun.
 - Its mobs hunt the team's players, so its gates close while no member is on the island, and open again at the wave they had reached when one comes back. Inflation goes on.
 - Explosions damage the playing team's island, claimed or not: the companion mod turns on the team's FTB Chunks `allow_explosions` while the Assault runs, turns it back on if a player turns it off, and restores the team's own value when it ends. Every other claim protection stays.
