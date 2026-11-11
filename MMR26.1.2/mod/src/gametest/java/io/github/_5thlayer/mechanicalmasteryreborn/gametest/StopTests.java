@@ -190,7 +190,7 @@ final class StopTests {
         Challenges.begin(server(helper), team, Handicap.LIFE);
         Challenges.reset(server(helper), team);
         CompoundTag saved = (CompoundTag) codec.encodeStart(ops, state(helper)).getOrThrow();
-        saved.getCompoundOrEmpty("teams").getCompoundOrEmpty(team.toString()).remove("reset");
+        saved.getCompoundOrEmpty("teams").getCompoundOrEmpty(team.toString()).remove("ever_reset");
         TeamState legacy = codec.parse(ops, saved).getOrThrow();
         helper.assertTrue(legacy.everReset(team, Handicap.LIFE), "a legacy save forgot the played challenge had reset");
         helper.assertFalse(legacy.everReset(team, Handicap.ENERGY), "a legacy save knew of a reset it never saved");

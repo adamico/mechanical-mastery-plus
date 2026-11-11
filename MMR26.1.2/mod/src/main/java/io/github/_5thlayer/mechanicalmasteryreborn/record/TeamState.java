@@ -69,7 +69,7 @@ public final class TeamState extends SavedData {
 
         static final MapCodec<Resets> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 Codec.INT.optionalFieldOf("resets", 0).forGetter(Resets::count),
-                HANDICAPS_CODEC.optionalFieldOf("reset", Set.of()).forGetter(Resets::ever))
+                HANDICAPS_CODEC.optionalFieldOf("ever_reset", Set.of()).forGetter(Resets::ever))
                 .apply(instance, Resets::new));
     }
 
@@ -90,7 +90,7 @@ public final class TeamState extends SavedData {
                 HANDICAPS_CODEC.optionalFieldOf("won", Set.of()).forGetter(entry -> entry.won),
                 Codec.LONG.optionalFieldOf("delivered", 0L).forGetter(entry -> entry.delivered),
                 HANDICAPS_CODEC.optionalFieldOf("started", Set.of()).forGetter(entry -> entry.started),
-                Resets.CODEC.forGetter(entry -> new Resets(entry.resets, entry.reset)),
+                Resets.CODEC.forGetter(entry -> new Resets(entry.resets, entry.everReset)),
                 LAST_STAND_CODEC.optionalFieldOf("last_stand").forGetter(entry -> entry.lastStand),
                 SPELLS_CODEC.optionalFieldOf("spells", Map.of()).forGetter(entry -> entry.spells),
                 Codec.INT.optionalFieldOf("attempt", 0).forGetter(entry -> entry.attempt))
@@ -112,7 +112,7 @@ public final class TeamState extends SavedData {
         /** How often the challenge the team plays has reset since it last started; only while it plays one. */
         int resets;
         /** The challenges that have ever reset for the team, which a stop offered from the start waits on no more (ADR 0013). */
-        Set<Handicap> reset;
+        Set<Handicap> everReset;
         /** The tiers the team has blocked, for good: C.O.D. makes the highest of the rest. */
         Set<Essence> blocked;
         /** The challenges the team has won, for good. */
@@ -136,7 +136,7 @@ public final class TeamState extends SavedData {
 
         Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Overproduction> overproduction, boolean warned, long setAside,
                 Set<Handicap> unlocked, Set<Essence> blocked, Set<Handicap> won, long delivered, Set<Handicap> started, int resets,
-                Optional<LastStand> lastStand, Map<Handicap, Spell> spells, int attempt, Set<Handicap> reset) {
+                Optional<LastStand> lastStand, Map<Handicap, Spell> spells, int attempt, Set<Handicap> everReset) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
@@ -154,8 +154,8 @@ public final class TeamState extends SavedData {
             this.started.addAll(this.unlocked);
             this.resets = handicap.isPresent() ? resets : 0;
             // Saved before the challenges ever reset were kept, only the one played knew it had.
-            this.reset = handicaps(reset);
-            handicap.filter(played -> this.resets > 0).ifPresent(this.reset::add);
+            this.everReset = handicaps(everReset);
+            handicap.filter(played -> this.resets > 0).ifPresent(this.everReset::add);
             this.lastStand = lastStand;
             this.spells = spells.isEmpty() ? new EnumMap<>(Handicap.class) : new EnumMap<>(spells);
             // Saved before attempts were numbered, a team's first: the essence it made then carries no stamp, and is current.
@@ -295,7 +295,7 @@ public final class TeamState extends SavedData {
     /** Whether {@code handicap}'s challenge has ever reset for {@code team}, past any stop: its stop waits on no reset (ADR 0013). */
     public boolean everReset(UUID team, Handicap handicap) {
         Entry entry = teams.get(team);
-        return entry != null && entry.reset.contains(handicap);
+        return entry != null && entry.everReset.contains(handicap);
     }
 
     /**
@@ -312,7 +312,7 @@ public final class TeamState extends SavedData {
         entry.warned = false;
         entry.delivered = 0;
         entry.resets++;
-        entry.reset.add(entry.handicap.get());
+        entry.everReset.add(entry.handicap.get());
         entry.attempt++;
         setDirty();
         return true;
