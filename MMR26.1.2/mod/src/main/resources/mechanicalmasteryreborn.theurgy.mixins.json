@@ -6,8 +6,14 @@
   "mixins": [
     "CraftingBehaviourMixin",
     "HeatConsumerBehaviourMixin",
+    "IncubatorMercuryVesselMixin",
+    "IncubatorSaltVesselMixin",
+    "IncubatorSulfurVesselMixin",
     "MercuryCatalystBlockEntityMixin",
-    "MercuryCatalystCraftingBehaviourMixin"
+    "MercuryCatalystCraftingBehaviourMixin",
+    "ReformationRecipeMixin",
+    "ReformationSourcePedestalMixin",
+    "ReformationTargetPedestalMixin"
   ],
   "injectors": {
     "defaultRequire": 1

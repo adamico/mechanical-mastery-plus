@@ -9,6 +9,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
+import net.minecraft.world.level.storage.ValueInput;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
@@ -92,6 +93,15 @@ public final class CatalystFuel extends SimpleEnergyHandler {
         sizedFor = configLoads;
         capacity = ServerConfig.energyFePerFlux() * UNITS;
         maxInsert = capacity;
+        if (energy > capacity) {
+            set(capacity);
+        }
+    }
+
+    /** Loads only what fits: a store saved under a smaller {@code energy.fe_per_flux} would hold more than its capacity. */
+    @Override
+    public void deserialize(ValueInput input) {
+        super.deserialize(input);
         if (energy > capacity) {
             set(capacity);
         }
