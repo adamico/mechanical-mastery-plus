@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
@@ -31,7 +32,8 @@ import net.minecraft.world.level.saveddata.SavedDataType;
  * C.O.D. has made for it, spawned or not, the handicap it chose at the lab, which says which challenge it plays, and
  * its {@link Overproduction} while it plays one, with whether it was warned that Overproduction nears its cap, and the money set
  * aside from its Account while it plays the money challenge, the challenges it has ever started and the chains it has
- * unlocked, which a stop takes back, the resets of the challenge it plays since it last started, the essence its Port has
+ * unlocked, which a stop takes back, the resets of the challenge it plays since it last started and the challenges that have
+ * ever reset, the essence its Port has
  * taken toward the quota, and the tiers it has blocked and the challenges it has won, which no reset touches, and its
  * {@link LastStand} once it has started it, the {@link Spell spells} it bears at its Hermetic Lab, and its attempt number,
  * which each start and reset moves on.
@@ -59,6 +61,18 @@ public final class TeamState extends SavedData {
             Codec.BOOL.optionalFieldOf("won", false).forGetter(LastStand::won))
             .apply(instance, LastStand::new));
 
+    /**
+     * The resets of the challenge a team plays since it last started, and the challenges ever reset, saved side by side
+     * under their own names: one field to the codec, which takes no more than sixteen.
+     */
+    private record Resets(int count, Set<Handicap> ever) {
+
+        static final MapCodec<Resets> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                Codec.INT.optionalFieldOf("resets", 0).forGetter(Resets::count),
+                HANDICAPS_CODEC.optionalFieldOf("ever_reset", Set.of()).forGetter(Resets::ever))
+                .apply(instance, Resets::new));
+    }
+
     /** One team's state. */
     private static final class Entry {
 
@@ -76,7 +90,7 @@ public final class TeamState extends SavedData {
                 HANDICAPS_CODEC.optionalFieldOf("won", Set.of()).forGetter(entry -> entry.won),
                 Codec.LONG.optionalFieldOf("delivered", 0L).forGetter(entry -> entry.delivered),
                 HANDICAPS_CODEC.optionalFieldOf("started", Set.of()).forGetter(entry -> entry.started),
-                Codec.INT.optionalFieldOf("resets", 0).forGetter(entry -> entry.resets),
+                Resets.CODEC.forGetter(entry -> new Resets(entry.resets, entry.everReset)),
                 LAST_STAND_CODEC.optionalFieldOf("last_stand").forGetter(entry -> entry.lastStand),
                 SPELLS_CODEC.optionalFieldOf("spells", Map.of()).forGetter(entry -> entry.spells),
                 Codec.INT.optionalFieldOf("attempt", 0).forGetter(entry -> entry.attempt))
@@ -97,6 +111,8 @@ public final class TeamState extends SavedData {
         Set<Handicap> started;
         /** How often the challenge the team plays has reset since it last started; only while it plays one. */
         int resets;
+        /** The challenges that have ever reset for the team, which a stop offered from the start waits on no more (ADR 0013). */
+        Set<Handicap> everReset;
         /** The tiers the team has blocked, for good: C.O.D. makes the highest of the rest. */
         Set<Essence> blocked;
         /** The challenges the team has won, for good. */
@@ -112,15 +128,15 @@ public final class TeamState extends SavedData {
 
         Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Overproduction> overproduction,
                 Optional<Overproduction> inflation, boolean warned, long setAside, Set<Handicap> unlocked, Set<Essence> blocked,
-                Set<Handicap> won, long delivered, Set<Handicap> started, int resets, Optional<LastStand> lastStand,
+                Set<Handicap> won, long delivered, Set<Handicap> started, Resets resets, Optional<LastStand> lastStand,
                 Map<Handicap, Spell> spells, int attempt) {
             this(awake, made, handicap, overproduction.or(() -> inflation), warned, setAside, unlocked, blocked, won, delivered,
-                    started, resets, lastStand, spells, attempt);
+                    started, resets.count(), lastStand, spells, attempt, resets.ever());
         }
 
         Entry(boolean awake, long made, Optional<Handicap> handicap, Optional<Overproduction> overproduction, boolean warned, long setAside,
                 Set<Handicap> unlocked, Set<Essence> blocked, Set<Handicap> won, long delivered, Set<Handicap> started, int resets,
-                Optional<LastStand> lastStand, Map<Handicap, Spell> spells, int attempt) {
+                Optional<LastStand> lastStand, Map<Handicap, Spell> spells, int attempt, Set<Handicap> everReset) {
             this.awake = awake;
             this.made = made;
             this.handicap = handicap;
@@ -137,6 +153,9 @@ public final class TeamState extends SavedData {
             this.started = handicaps(started);
             this.started.addAll(this.unlocked);
             this.resets = handicap.isPresent() ? resets : 0;
+            // Saved before the challenges ever reset were kept, only the one played knew it had.
+            this.everReset = handicaps(everReset);
+            handicap.filter(played -> this.resets > 0).ifPresent(this.everReset::add);
             this.lastStand = lastStand;
             this.spells = spells.isEmpty() ? new EnumMap<>(Handicap.class) : new EnumMap<>(spells);
             // Saved before attempts were numbered, a team's first: the essence it made then carries no stamp, and is current.
@@ -273,6 +292,12 @@ public final class TeamState extends SavedData {
         return entry == null ? 0 : entry.resets;
     }
 
+    /** Whether {@code handicap}'s challenge has ever reset for {@code team}, past any stop: its stop waits on no reset (ADR 0013). */
+    public boolean everReset(UUID team, Handicap handicap) {
+        Entry entry = teams.get(team);
+        return entry != null && entry.everReset.contains(handicap);
+    }
+
     /**
      * Resets the challenge {@code team} plays at {@code gameTime}, as though it had just begun: its Overproduction from
      * nothing, and so C.O.D. back to its waking pace, no warning given and nothing delivered to its Port, and counts the
@@ -287,6 +312,7 @@ public final class TeamState extends SavedData {
         entry.warned = false;
         entry.delivered = 0;
         entry.resets++;
+        entry.everReset.add(entry.handicap.get());
         entry.attempt++;
         setDirty();
         return true;
@@ -647,6 +673,6 @@ public final class TeamState extends SavedData {
 
     private Entry entry(UUID team) {
         return teams.computeIfAbsent(team, ignored -> new Entry(false, 0, Optional.empty(), Optional.empty(), false, 0, Set.of(), Set.of(),
-                Set.of(), 0, Set.of(), 0, Optional.empty(), Map.of(), 0));
+                Set.of(), 0, Set.of(), 0, Optional.empty(), Map.of(), 0, Set.of()));
     }
 }

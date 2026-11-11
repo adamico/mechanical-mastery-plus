@@ -19,6 +19,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.MinecraftServer;
@@ -28,7 +29,7 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 
 /**
- * A stop at the lab (ADR 0013): offered once the challenge's attempt has reset, made the moment every member online has
+ * A stop at the lab (ADR 0013): offered once the challenge has ever reset for the team, made the moment every member online has
  * asked, and locking the challenge's chain again, where a reset and a win keep it. Each test's mock players are counted
  * online ({@link TestTeams#logIn}) for its body only.
  */
@@ -46,7 +47,9 @@ final class StopTests {
         tests.test("stop_lab_shows_its_row_only_while_offered", 1, StopTests::rowOnlyWhileOffered);
         tests.test("stop_by_a_team_of_one_after_a_reset", 1, StopTests::byATeamOfOne);
         tests.test("stop_locks_the_chain_again", 1, StopTests::locksTheChainAgain);
-        tests.test("stop_then_start_again_unlocks_and_waits_for_a_reset", 1, StopTests::startAgain);
+        tests.test("stop_then_start_again_unlocks_and_offers_a_stop_at_once", 1, StopTests::startAgain);
+        tests.test("stop_never_reset_challenge_waits_though_another_reset", 1, StopTests::neverResetWaits);
+        tests.test("stop_ever_reset_survives_a_save_and_load", 1, StopTests::everResetSurvivesASaveAndLoad);
         tests.test("stop_keeps_another_chain_unlocked", 1, StopTests::keepsAnotherChain);
         tests.test("stop_waits_for_every_member_online", 1, StopTests::waitsForEveryMember);
         tests.test("stop_drops_the_ask_of_a_member_who_logs_out", 1, StopTests::dropsALoggedOutAsk);
@@ -146,9 +149,51 @@ final class StopTests {
             helper.assertTrue(menu.clickMenuButton(player, Handicap.ENERGY.ordinal()), "the lab refused the stopped challenge");
             Chains.unlock(server(helper), player);
             helper.assertTrue(TestStages.holds(player, Handicap.ENERGY.id()), "starting energy again left its chain locked");
-            helper.assertFalse(menu.stopOffered(), "the lab offered a stop before this attempt reset");
-            helper.assertFalse(menu.clickMenuButton(player, LabMenu.ASK), "an ask was taken before this attempt reset");
+            helper.assertTrue(menu.stopOffered(), "the lab waited for a reset of a challenge that had reset before");
+            helper.assertTrue(menu.clickMenuButton(player, LabMenu.ASK), "an ask was refused though the challenge had reset before");
+            helper.assertValueEqual(state(helper).handicap(team), Optional.<Handicap>empty(), "the team's handicap after the second stop");
         });
+        helper.succeed();
+    }
+
+    /** A reset of one challenge opens the stop of that challenge only: another still waits for its own first reset. */
+    private static void neverResetWaits(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        online(helper, team, 1, players -> {
+            Player player = players.getFirst();
+            var menu = open(helper, player);
+            menu.clickMenuButton(player, Handicap.ENERGY.ordinal());
+            Challenges.reset(server(helper), team);
+            menu.clickMenuButton(player, LabMenu.ASK);
+            helper.assertTrue(menu.clickMenuButton(player, Handicap.LIFE.ordinal()), "the lab refused the life challenge");
+            helper.assertFalse(menu.stopOffered(), "the lab offered a stop of a challenge never reset");
+            helper.assertFalse(menu.clickMenuButton(player, LabMenu.ASK), "an ask was taken for a challenge never reset");
+            helper.assertValueEqual(state(helper).handicap(team), Optional.of(Handicap.LIFE), "the team's handicap after a refused ask");
+        });
+        helper.succeed();
+    }
+
+    /**
+     * The challenges ever reset outlive a stop, a save and a load; a world saved before they were kept counts the one it
+     * plays with resets as reset.
+     */
+    private static void everResetSurvivesASaveAndLoad(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        playedAndReset(helper, team);
+        Challenges.end(server(helper), team);
+        var ops = helper.getLevel().registryAccess().createSerializationContext(NbtOps.INSTANCE);
+        var codec = TeamState.TYPE.codec();
+        TeamState loaded = codec.parse(ops, codec.encodeStart(ops, state(helper)).getOrThrow()).getOrThrow();
+        helper.assertTrue(loaded.everReset(team, Handicap.ENERGY), "the challenge stopped after a reset never reset after a load");
+        helper.assertFalse(loaded.everReset(team, Handicap.LIFE), "a challenge never played had reset after a load");
+
+        Challenges.begin(server(helper), team, Handicap.LIFE);
+        Challenges.reset(server(helper), team);
+        CompoundTag saved = (CompoundTag) codec.encodeStart(ops, state(helper)).getOrThrow();
+        saved.getCompoundOrEmpty("teams").getCompoundOrEmpty(team.toString()).remove("ever_reset");
+        TeamState legacy = codec.parse(ops, saved).getOrThrow();
+        helper.assertTrue(legacy.everReset(team, Handicap.LIFE), "a legacy save forgot the played challenge had reset");
+        helper.assertFalse(legacy.everReset(team, Handicap.ENERGY), "a legacy save knew of a reset it never saved");
         helper.succeed();
     }
 

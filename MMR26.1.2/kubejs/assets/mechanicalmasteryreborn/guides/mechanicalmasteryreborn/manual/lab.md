@@ -20,7 +20,7 @@ Its rows, as your team gets to them:
 - **A handicap**, one row for each of the four [challenges](challenges/index.md): protection, energy, life and
   money. Choose one and its challenge starts for the whole team. Your team plays one challenge at a time, and a
   won one shows as won and can't be chosen again.
-- **Stop**, offered once the attempt has reset at least once: ask to stop the challenge, or take the ask back.
+- **Stop**, offered once the challenge has ever reset for the team: ask to stop the challenge, or take the ask back.
   The row says who has asked.
 - **Refund**, whenever an [Assault](challenges/protection.md) has broken something on your island: how many
   items wait, and a button to open them. Take them a stack at a time, or everything that fits at once.
