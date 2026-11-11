@@ -75,8 +75,9 @@ challenge was reset.
 
 ## The stop
 
-Once an attempt has reset at least once, the lab offers to **stop** the challenge, to take on another or to come
-back to it better prepared. Any member asks to stop there, or takes the ask back. The challenge stops once every
+Once a challenge has reset for your team, the lab offers to **stop** it, to take on another or to come back to it
+better prepared. A challenge that has reset before offers the stop from the moment it starts again; one that never
+has waits for its first reset. Any member asks to stop there, or takes the ask back. The challenge stops once every
 member online has asked. A member who logs out drops their ask; one who logs in counts from then on.
 
 A stop ends the handicap and Overproduction, gives back what the handicap took, and locks the chain again until your

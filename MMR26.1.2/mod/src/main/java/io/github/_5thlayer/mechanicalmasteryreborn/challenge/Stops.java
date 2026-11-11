@@ -22,8 +22,8 @@ import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import org.slf4j.Logger;
 
 /**
- * A team's vote, at the lab, to stop the challenge it plays (ADR 0013). A stop is offered once the current attempt has
- * reset; any member may ask for it and take their ask back, and the challenge stops ({@link Challenges#stop}) the moment
+ * A team's vote, at the lab, to stop the challenge it plays (ADR 0013). A stop is offered once the challenge has reset
+ * for the team, in this attempt or any before; any member may ask for it and take their ask back, and the challenge stops ({@link Challenges#stop}) the moment
  * every member online has asked. The asks live in memory only: a member's is dropped as they log out, and a reset, a win
  * or the challenge's end clears them all. A member who logs in while asks are open counts from then on.
  */
@@ -43,10 +43,10 @@ public final class Stops {
         NeoForge.EVENT_BUS.addListener(ServerStoppedEvent.class, event -> ASKS.clear());
     }
 
-    /** Whether {@code team} may stop the challenge it plays: only once this attempt has reset. */
+    /** Whether {@code team} may stop the challenge it plays: only once it has ever reset for the team, this attempt or before. */
     public static boolean offered(MinecraftServer server, UUID team) {
         TeamState state = TeamState.get(server);
-        return state.handicap(team).isPresent() && state.resets(team) > 0;
+        return state.handicap(team).filter(handicap -> state.everReset(team, handicap)).isPresent();
     }
 
     /**

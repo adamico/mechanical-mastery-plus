@@ -103,7 +103,7 @@ One of four goals, each bound to a fixed mod or set of mods, started at the lab 
 _Avoid_: questline, chapter, stage
 
 **Stop**:
-A team leaving the challenge it plays at the lab, to take on another or come back to it better prepared. It is offered only once the attempt has reset, and made when every member online has asked for it. It ends the handicap and Overproduction, loses what was put toward the quota, and locks the challenge's chain again until the team starts it anew, though a reset keeps it; the stopped challenge, or any other not won, can start at once.
+A team leaving the challenge it plays at the lab, to take on another or come back to it better prepared. It is offered only once the challenge has reset for the team, and from then on on every attempt of it, from its start, and made when every member online has asked for it. It ends the handicap and Overproduction, loses what was put toward the quota, and locks the challenge's chain again until the team starts it anew, though a reset keeps it; the stopped challenge, or any other not won, can start at once.
 _Avoid_: abandon, quit, forfeit
 
 **Quota**:

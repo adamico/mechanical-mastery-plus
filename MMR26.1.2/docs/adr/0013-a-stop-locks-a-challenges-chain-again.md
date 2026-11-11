@@ -1,6 +1,6 @@
 # A stop locks a challenge's chain again
 
-A team can stop the challenge it plays at the lab, once the attempt has reset at least once, to take on another or come back to it better prepared. A stop locks the challenge's chain again, however many resets came before, and the chain opens again when the team starts it anew; a reset still keeps it (ADR 0007). The stop is made when every member online has asked for it at the lab.
+A team can stop the challenge it plays at the lab, once the challenge has reset for it at least once, in this attempt or any before, to take on another or come back to it better prepared. A stop locks the challenge's chain again, however many resets came before, and the chain opens again when the team starts it anew; a reset still keeps it (ADR 0007). The stop is made when every member online has asked for it at the lab.
 
 A chain that stayed unlocked past a stop would let a team start each challenge, stop it a minute later, and build every chain with no handicap and no Inflation running, which ADR 0007 rules out. A reset keeps the chain because the team is still fighting that challenge; a stop gives it back because the team has left it.
 
@@ -13,7 +13,7 @@ A chain that stayed unlocked past a stop would let a team start each challenge, 
 
 ## Consequences
 
-- Only the current attempt's resets count: a team that stops and starts the challenge again must reset once more before it can stop it again.
+- A reset opens the stop for good, for that challenge and that team (#336): a team that stops and starts the challenge again may stop it at once, having already paid a reset. Asking a new reset of each attempt only charged the price again. A challenge never reset still waits for its first, whatever other challenges have reset. The challenges ever reset are saved with the team's state; a world saved before they were kept counts the one it plays as reset if its attempt has.
 - A member's ask is dropped when they log out, and a member who logs in while a vote is open counts from then on, so a member alone on the server can stop the challenge. Every ask is cleared when the challenge resets or is won, and a member can take theirs back.
 - A stop otherwise ends the challenge as `/cod challenge end` did before it: the handicap and Inflation end, the Port's count goes back to zero, money set aside is given back, an Assault is removed and the Diet forgotten. The team keeps every item.
 - Nothing waits after a stop: any challenge not won, the stopped one too, can start at once.
