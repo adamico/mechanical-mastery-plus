@@ -102,7 +102,7 @@ hash = "ba9a93fd7ff504848df2ce218cd28682b6aa1671f0f593f07a972c47785d3086"
 
 [[files]]
 file = "kubejs/assets/adminshop/lang/en_us.json"
-hash = "fa07ff3eae936b1d178b14762075ee5a5ab8782f83ac46f52bc8dfc4d66aa6fd"
+hash = "074579e281906d52c9e7f21983b0ea19468f5aabd10cf439b371cc913ee75cbe"
 
 [[files]]
 file = "kubejs/assets/emi/index/stacks/mechanicalmasteryreborn_manual.json"
@@ -130,7 +130,7 @@ hash = "01bc81317ab6a6bd7a8c94e500244b1c55919580ca257db9105227c59a759b82"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/protection.md"
-hash = "cfc0850a5754b0717e5e07736b387bae4e4934e09f9da537a0c4ba6127632d20"
+hash = "73321d03dfcd9e75c3908c073b9aab28a5dbfc0522b7f7168cf7b19f7f7ee781"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/cod.md"
@@ -639,6 +639,10 @@ hash = "0c166abc6b38cc27c5b6bb2e140277d39b5d05fa78845154ebf2be63b0248b63"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/protection/home_gate_pearl.json"
 hash = "4edb1f5993895c8595fe9ec427f38f653dc25013fd15660993d6e66c341eee5f"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/protection/wave_caller.json"
+hash = "0b25caa379f887a994fad3990de7a10b7f182b5fe0757d6d579871cd5e2f3bd6"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/raw/lapis_lazuli.json"
