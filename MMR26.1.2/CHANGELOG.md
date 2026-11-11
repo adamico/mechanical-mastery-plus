@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- The Shop no longer sells redstone by the piece: it comes from a redstone ore block, as raw metals can.
+
 ## 0.0.6
 
 - A Mold is made three times as fast, so one Assembler making Molds keeps three casting copper, iron and gold busy.
