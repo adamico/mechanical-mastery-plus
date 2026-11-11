@@ -58,6 +58,9 @@ final class StopTests {
         tests.test("stop_take_back_removes_the_ask", 1, StopTests::takeBack);
         tests.test("stop_asks_cleared_by_a_reset_or_a_win", 1, StopTests::clearedByAResetOrAWin);
         tests.test("stop_offer_survives_a_save_and_load", 1, StopTests::survivesASaveAndLoad);
+        tests.test("revert_locks_the_chain_again", 1, StopTests::revertLocksTheChainAgain);
+        tests.test("revert_takes_the_stage_from_a_member_offline_as_they_log_in", 1, StopTests::revertLocksOffline);
+        tests.test("revert_keeps_another_chain_unlocked", 1, StopTests::revertKeepsAnotherChain);
     }
 
     private static void notOfferedBeforeAReset(GameTestHelper helper) {
@@ -321,6 +324,57 @@ final class StopTests {
         loaded = codec.parse(ops, saved).getOrThrow();
         helper.assertFalse(loaded.unlocked(team, Handicap.ENERGY), "the chain a stop locked was unlocked after a load");
         helper.assertTrue(loaded.started(team, Handicap.ENERGY), "the challenge stopped was never started after a load");
+        helper.succeed();
+    }
+
+    /** A win reverted locks its chain again, as a stop does (#335): the stage, the team's unlock and the machines. */
+    private static void revertLocksTheChainAgain(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        helper.setBlock(MACHINE, Blocks.BLAST_FURNACE);
+        online(helper, team, 1, players -> {
+            Player player = players.getFirst();
+            Challenges.begin(server(helper), team, Handicap.ENERGY);
+            Challenges.win(server(helper), team);
+            Chains.unlock(server(helper), player);
+            helper.assertTrue(TestStages.holds(player, Handicap.ENERGY.id()), "the energy chain stayed locked past the win");
+            helper.assertValueEqual(lockedAt(helper), Optional.empty(), "the machine's lock past the win");
+            helper.assertTrue(Challenges.revert(server(helper), team, Handicap.ENERGY), "the energy win wasn't reverted");
+            helper.assertFalse(TestStages.holds(player, Handicap.ENERGY.id()), "the player kept the energy chain past the revert");
+            helper.assertFalse(state(helper).unlocked(team, Handicap.ENERGY), "the team kept the energy chain past the revert");
+            helper.assertValueEqual(lockedAt(helper), Optional.of(Handicap.ENERGY), "the machine's lock after the revert");
+            helper.assertFalse(Challenges.revert(server(helper), team, Handicap.ENERGY), "a win was reverted twice");
+        });
+        helper.succeed();
+    }
+
+    private static void revertLocksOffline(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var offline = member(helper, team);
+        online(helper, team, 1, players -> {
+            Challenges.begin(server(helper), team, Handicap.ENERGY);
+            Challenges.win(server(helper), team);
+        });
+        Chains.unlock(server(helper), offline);
+        helper.assertTrue(TestStages.holds(offline, Handicap.ENERGY.id()), "the member didn't get the energy chain on logging in");
+        Challenges.revert(server(helper), team, Handicap.ENERGY);
+        Chains.unlock(server(helper), offline);
+        helper.assertFalse(TestStages.holds(offline, Handicap.ENERGY.id()), "a member offline at the revert kept the energy chain on logging in");
+        helper.succeed();
+    }
+
+    private static void revertKeepsAnotherChain(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        online(helper, team, 1, players -> {
+            Player player = players.getFirst();
+            Challenges.begin(server(helper), team, Handicap.LIFE);
+            Challenges.win(server(helper), team);
+            Challenges.begin(server(helper), team, Handicap.ENERGY);
+            Challenges.win(server(helper), team);
+            Chains.unlock(server(helper), player);
+            helper.assertTrue(Challenges.revert(server(helper), team, Handicap.ENERGY), "the energy win wasn't reverted");
+            helper.assertTrue(TestStages.holds(player, Handicap.LIFE.id()), "the revert locked the life chain won earlier");
+            helper.assertTrue(state(helper).unlocked(team, Handicap.LIFE), "the team lost the life chain to the revert");
+        });
         helper.succeed();
     }
 

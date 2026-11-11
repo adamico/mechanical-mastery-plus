@@ -202,6 +202,26 @@ public final class Challenges {
         return true;
     }
 
+    /**
+     * Takes back {@code team}'s win of {@code handicap}'s challenge, as an op's {@code /cod challenge revert} does
+     * ({@link TeamState#revertWin}), and locks its chain again as {@link #end} does (#335). Says whether it had won it.
+     */
+    public static boolean revert(MinecraftServer server, UUID team, Handicap handicap) {
+        TeamState state = TeamState.get(server);
+        if (!state.revertWin(team, handicap)) {
+            return false;
+        }
+        state.lockChain(team, handicap);
+        if (handicap == Handicap.MONEY) {
+            MoneyHandicap.lock(server, team);
+        }
+        // Also tells their clients the essence the win had kept from going stale is stale again (#322).
+        for (var player : Teams.online(server, team)) {
+            Chains.unlock(server, player);
+        }
+        return true;
+    }
+
     /** Tells {@code team}'s players online it won {@code handicap}'s challenge, with a title and a sound, and gives them its stages. */
     private static void tellWon(MinecraftServer server, UUID team, Handicap handicap) {
         Component message = Component.translatable("mechanicalmasteryreborn.challenge.won", name(handicap).withStyle(ChatFormatting.GOLD))

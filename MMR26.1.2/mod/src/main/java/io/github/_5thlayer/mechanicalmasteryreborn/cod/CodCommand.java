@@ -21,7 +21,6 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.OverproductionCap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
-import io.github._5thlayer.mechanicalmasteryreborn.essence.Attempts;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
@@ -42,7 +41,7 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
  * ends it, its handicap with it, so choosing can be seen again, {@code challenge reset} resets it as reaching Overproduction's
  * cap would, so a reset can be seen without waiting for it (#294), {@code challenge win <handicap>} wins that challenge
  * as its Port's last essence would, or, not played, notes it started and won with none of a start's effects (#268), and {@code challenge revert <handicap>} forgets
- * that it won that challenge, unblocking the tier its win blocked, so winning can be seen again; {@code tier <team> <tier>} sets the tier a team's C.O.D.
+ * that it won that challenge, unblocking the tier its win blocked and locking its chain again (#335), so winning can be seen again; {@code tier <team> <tier>} sets the tier a team's C.O.D.
  * makes, or none, for tests and in-game checks; {@code last_stand start} starts that island's team's last stand as its lab
  * would, and {@code last_stand lead <lead>} sets its Lead, so the floor, the cap and the win can be seen.
  */
@@ -213,12 +212,10 @@ final class CodCommand {
             return 0;
         }
         UUID team = island(source);
-        if (!TeamState.get(source.getServer()).revertWin(team, handicap.get())) {
+        if (!Challenges.revert(source.getServer(), team, handicap.get())) {
             source.sendFailure(Component.translatable("mechanicalmasteryreborn.command.cod.challenge.not_won", Challenges.name(handicap.get())));
             return 0;
         }
-        // The team's players see again the essence the win had kept from going stale as stale (#322).
-        Attempts.send(source.getServer(), team);
         source.sendSuccess(() -> Component.translatable("mechanicalmasteryreborn.command.cod.challenge.reverted", Challenges.name(handicap.get())), true);
         return 1;
     }
