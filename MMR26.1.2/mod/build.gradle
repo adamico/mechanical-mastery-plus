@@ -97,7 +97,7 @@ tasks.named('test') {
 // CI runner needs no build of the suite. They run on a game test server of their own, suiteGameTestServer, with those
 // mods and the pack's recipes for them as a datapack, suite_pack/; the gameTestServer run keeps none of them, so it
 // still proves the mod plays alone. Only the gametest source set, which never ships, names a suite mod.
-def machines = ['curse.maven:kc00l-craftworks-1715876:9475676', 'curse.maven:fieldworks-1737485:9555941',
+def machines = ['curse.maven:kc00l-craftworks-1715876:9560983', 'curse.maven:fieldworks-1737485:9555941',
                 'curse.maven:groundworks-1717892:9494770', 'curse.maven:voidworks-1742531:9450242']
 def suiteMods = machines + ['curse.maven:wireworks-1721198:9373965']
 def shop = [adminShop, 'curse.maven:patchouli-306770:8404543', ftbTeams, ftbLibrary]
