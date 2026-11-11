@@ -446,7 +446,7 @@ hash = "e61cc83aa91718f98a885c8aaf976cb55d8004cf9bd2d50446ee89f4d82249cb"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/salt_charge.json"
-hash = "9ae45d108224a48b7942ddeb567dc227e39a4ee3734c4c360c5e30a54c6e6431"
+hash = "b14db35060d79ad4f057f7d3fa09f75aa0b48a480f69ca2d7d0e0903e82b9fa0"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/sand_from_burnt_sand.json"
@@ -454,7 +454,7 @@ hash = "17b363c8e84168e180b94baa1ab899b2d0ed7f277d0c45875f99f3641ced5205"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/sulfur_charge.json"
-hash = "71539fa7b8b606c08ebaff76553ca86c8cda1d886f650eed4b9b94c614615f1d"
+hash = "c9d083ebdb62ba3cbf5e1705637ca05a789755cdadb700882e2a81d63a3038bc"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/ward_tallow.json"
@@ -486,11 +486,11 @@ hash = "b98a7ca88292553a77d4f1fc2839884e625bc267064905726029cd53513fe36b"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/reformation/reformed_salt.json"
-hash = "73d66296498af65cb63ccb7e6e82a598dbd66f43d9ac9ecabd58918db55115b0"
+hash = "0be8a2ce2437fcc0a8f213131b70f05203bd4e98719195c085be63688abf3674"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/reformation/reformed_sulfur.json"
-hash = "de158c6d515c0a19c060180cf117aedc81c6b3adc1f21ab86541f63ed11d8988"
+hash = "01bf46aeae4caf42840a391f24066cbe80cfdf0a1d6f24eb0d2096714a993766"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/chicken_spawn_egg.json"
