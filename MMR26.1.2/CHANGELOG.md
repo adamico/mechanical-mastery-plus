@@ -5,6 +5,7 @@
 - The Shop no longer sells raw ores, coal or redstone one at a time: they come from a mix, or from the ore blocks the money Permit opens.
 - The Shop prices crude oil as a consumable, as it does lava: $5 a bucket in place of $500.
 - The Shop buys every Transmuted Essence for $2000, in place of $60 (Galvanic), $1500 (Warding), $340 (Vital) and $50 (Aureate): the price pays for the time a chain takes to set up, not for its inputs, and is the same for all four since the challenges are taken in any order.
+- The Galvanic, Warding and Aureate Essences each take a minute on a tier-1 Assembler, in place of ten seconds, so one Assembler fills a quota in minutes and a team that wants it sooner builds more.
 
 ## 0.0.6
 

@@ -37,7 +37,7 @@ final class SuiteAssembler {
 
     static final BlockPos ORIGIN = new BlockPos(4, 1, 4);
     /** More ticks than any of the pack's assembling recipes takes. */
-    static final int MOST_TICKS = 1000;
+    static final int MOST_TICKS = 1500;
 
     private SuiteAssembler() {
     }
