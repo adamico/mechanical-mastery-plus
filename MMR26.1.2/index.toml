@@ -929,7 +929,7 @@ metafile = true
 
 [[files]]
 file = "mods/fieldworks.pw.toml"
-hash = "cc63b8930e28dc8c1fa75dff0fc3cb82a61a6cd56e73bc06c02bc7fc99803be6"
+hash = "cc45617e4e42b54fb3f7f082dfa54510f1ab97ec95bd25a9a348daff975a8dac"
 metafile = true
 
 [[files]]
