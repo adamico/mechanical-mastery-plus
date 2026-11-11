@@ -100,7 +100,7 @@ public final class TheurgyJadePlugin implements IWailaPlugin {
         }
 
         static void fuel(Fuel fuel, ITooltip tooltip) {
-            tooltip.add(JadeUI.progress(new ProgressView(ProgressView.Part.of(fuel.capacity() == 0 ? 0 : (float) fuel.stored() / fuel.capacity()),
+            tooltip.add(JadeUI.progress(new ProgressView(ProgressView.Part.of(fuel.capacity() == 0 ? 0 : Math.min(1f, (float) fuel.stored() / fuel.capacity())),
                     Component.translatable("mechanicalmasteryreborn.jade.theurgy.fuel", fuel.stored(), fuel.capacity()),
                     JadeUI.progressStyle(), BoxStyle.nestedBox())));
         }

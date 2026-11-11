@@ -19,6 +19,9 @@ import io.github._5thlayer.mechanicalmasteryreborn.compat.theurgy.CatalystFuel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.util.ProblemReporter;
+import net.minecraft.world.level.storage.TagValueInput;
+import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
@@ -47,6 +50,7 @@ final class EnergyChainTests {
         tests.test("chain_energy_catalyst_makes_only_the_flux_its_fe_pays_for", 1, EnergyChainTests::onlyWhatItPaysFor);
         tests.test("chain_energy_catalyst_pays_only_for_the_flux_it_stores", 1, EnergyChainTests::paysForStored);
         tests.test("chain_energy_catalyst_keeps_its_fe_through_a_config_reload", 1, EnergyChainTests::keepsFeOnReload);
+        tests.test("chain_energy_catalyst_loads_no_more_fe_than_it_holds", 1, EnergyChainTests::loadsTrimmed);
         tests.test("chain_energy_brazier_gives_no_heat_while_the_team_plays_energy", 1, EnergyChainTests::brazierCold);
         tests.test("chain_energy_brazier_heats_again_after_a_win", 1, EnergyChainTests::brazierHeatsAfterWin);
         tests.test("chain_energy_brazier_heats_again_after_a_stop", 1, EnergyChainTests::brazierHeatsAfterStop);
@@ -99,6 +103,19 @@ final class EnergyChainTests {
         CatalystFuel.configReloaded();
         helper.assertValueEqual(fuel.convert(0, flux -> flux), 0, "the flux made when none was asked");
         helper.assertValueEqual(fuel.getAmountAsInt(), rate * 10, "the FE kept through the reload");
+        helper.succeed();
+    }
+
+    /**
+     * A store saved under a smaller {@code energy.fe_per_flux} than it loads under holds more FE than fits: it loads
+     * only what fits (#327, where Jade's bar failed on it).
+     */
+    private static void loadsTrimmed(GameTestHelper helper) {
+        var fuel = new CatalystFuel(() -> { });
+        var saved = TagValueOutput.createWithoutContext(ProblemReporter.DISCARDING);
+        saved.putInt("energy", fuel.getCapacityAsInt() * 4);
+        fuel.deserialize(TagValueInput.create(ProblemReporter.DISCARDING, helper.getLevel().registryAccess(), saved.buildResult()));
+        helper.assertValueEqual(fuel.getAmountAsInt(), fuel.getCapacityAsInt(), "the FE loaded");
         helper.succeed();
     }
 
