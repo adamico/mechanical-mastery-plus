@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.UUID;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.mojang.authlib.GameProfile;
 import io.github._5thlayer.craftworks.assembler.PersonalAssembler;
@@ -41,7 +42,7 @@ final class SuiteGalvanicTests {
     }
 
     private static void refusedByHand(GameTestHelper helper) {
-        sameCategoryAsThePack(helper);
+        matchesThePackRecipe(helper);
         ServerPlayer player = new FakePlayer(helper.getLevel(), new GameProfile(UUID.randomUUID(), "suite_galvanic"));
         player.setGameMode(GameType.SURVIVAL);
         player.getInventory().add(new ItemStack(Items.REDSTONE));
@@ -51,7 +52,7 @@ final class SuiteGalvanicTests {
     }
 
     private static void madeOnAnAssembler(GameTestHelper helper) {
-        sameCategoryAsThePack(helper);
+        matchesThePackRecipe(helper);
         AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, RECIPE);
         SuiteAssembler.put(assembler, 0, Items.REDSTONE, 1);
         SuiteAssembler.tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT) > 0);
@@ -60,7 +61,7 @@ final class SuiteGalvanicTests {
     }
 
     /** The test's recipe has the category and {@code hand_craftable} of the pack's {@code galvanic_essence}. */
-    private static void sameCategoryAsThePack(GameTestHelper helper) {
+    private static void matchesThePackRecipe(GameTestHelper helper) {
         for (String key : new String[] {"category", "hand_craftable"}) {
             helper.assertValueEqual(field(helper, RECIPE, key), field(helper, "galvanic_essence", key),
                     "the " + key + " of the test's Galvanic recipe beside the pack's");
@@ -68,11 +69,10 @@ final class SuiteGalvanicTests {
     }
 
     /** {@code key} of the assembling recipe {@code recipe} as its file writes it, or null if it writes none. */
-    private static String field(GameTestHelper helper, String recipe, String key) {
+    private static JsonElement field(GameTestHelper helper, String recipe, String key) {
         Identifier file = Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "recipe/assembling/" + recipe + ".json");
         try (Reader reader = helper.getLevel().getServer().getResourceManager().openAsReader(file)) {
-            var value = JsonParser.parseReader(reader).getAsJsonObject().get(key);
-            return value == null ? null : value.getAsString();
+            return JsonParser.parseReader(reader).getAsJsonObject().get(key);
         } catch (IOException e) {
             throw new IllegalStateException("no " + file, e);
         }
