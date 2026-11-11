@@ -390,7 +390,7 @@ hash = "32f47fac79aa54ed0dab417b906d98aa3d51927928d2ff691840bfe5d1be409f"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/galvanic_essence.json"
-hash = "44a73ca97884bba095d26987f74993d57bf78529ada4f6de5af53a48a4eeaec4"
+hash = "08e7504873cbb4d03965a45a097918b16fa6a1912409c94c202f7c4807f8bfe0"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/gold_cast.json"
