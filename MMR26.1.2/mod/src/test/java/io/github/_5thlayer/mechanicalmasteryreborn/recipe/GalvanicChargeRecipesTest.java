@@ -44,12 +44,12 @@ class GalvanicChargeRecipesTest {
 
     @Test
     void assemblersPackReformedSaltIntoASaltCharge() throws IOException {
-        assertPacks("salt_charge", Map.of(MOD + "reformed_salt", 4, "minecraft:redstone", 1), "salt_charge");
+        assertPacks("salt_charge", Map.of(MOD + "reformed_salt", 2, "minecraft:redstone", 1), "salt_charge");
     }
 
     @Test
     void assemblersPackReformedSulfurIntoASulfurCharge() throws IOException {
-        assertPacks("sulfur_charge", Map.of(MOD + "reformed_sulfur", 4, "minecraft:redstone", 1), "sulfur_charge");
+        assertPacks("sulfur_charge", Map.of(MOD + "reformed_sulfur", 2, "minecraft:redstone", 1), "sulfur_charge");
     }
 
     @Test
