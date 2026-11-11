@@ -7,6 +7,7 @@
 - The Shop buys every Transmuted Essence for $2000, in place of $60 (Galvanic), $1500 (Warding), $340 (Vital) and $50 (Aureate): the price pays for the time a chain takes to set up, not for its inputs, and is the same for all four since the challenges are taken in any order.
 - The Galvanic, Warding and Aureate Essences each take a minute on a tier-1 Assembler, in place of ten seconds, so one Assembler fills a quota in minutes and a team that wants it sooner builds more.
 - The Ara Vitae makes four Vital Essences from a Tabula Spiritus for 1000 mB of blood, in place of one for 20000, so a life chain fills its quota at each tier in about the time the other chains do (#340).
+- A Galvanic Essence takes half the reformations: a Salt or Sulfur Galvanic Charge takes 2 Reformed Salt or Sulfur in place of 4, each reformed from one salt or sulfur in place of two, in 7 seconds in place of 10, for 400 mercury flux in place of 200. One Reformation Array now feeds one Assembler, about one essence a minute, for the same FE (#342).
 
 ## 0.0.6
 
