@@ -6,6 +6,7 @@ package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ArrivalPlatform;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Challenges;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastChapter;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
@@ -33,6 +34,7 @@ final class LastChapterTests {
 
     static void register(MechanicalMasteryRebornGameTests.Registrar tests) {
         tests.test("last_chapter_stage_given_with_the_fourth_win", 1, LastChapterTests::stageWithTheFourthWin);
+        tests.test("last_chapter_stage_taken_back_by_a_revert", 1, LastChapterTests::stageTakenBackByARevert);
         tests.test("last_chapter_recipes_are_read_from_its_stage_file", 1, LastChapterTests::recipesFromTheStageFile);
         tests.test("last_chapter_recipes_marked_locked_until_the_fourth_win", 1, LastChapterTests::markedUntilTheFourthWin);
         tests.test("last_chapter_nether_portal_forms_only_after_the_fourth_win", 1, LastChapterTests::portalAfterTheFourthWin);
@@ -48,6 +50,21 @@ final class LastChapterTests {
         for (Handicap handicap : handicaps) {
             helper.assertTrue(state.blockTier(team, handicap), "the " + handicap.id() + " challenge wasn't noted won");
         }
+    }
+
+    /** A reverted win leaves the team three: a member is no longer given the last chapter's stage, online or as they log in. */
+    private static void stageTakenBackByARevert(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var server = helper.getLevel().getServer();
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        TestTeams.join(player, team);
+        win(helper, team, Handicap.PROTECTION, Handicap.LIFE, Handicap.ENERGY, Handicap.MONEY);
+        Chains.unlock(server, player);
+        helper.assertTrue(TestStages.holds(player, LastChapter.STAGE), "the player wasn't given the last chapter with the fourth win");
+        helper.assertTrue(Challenges.revert(server, team, Handicap.ENERGY), "the energy win wasn't reverted");
+        Chains.unlock(server, player);
+        helper.assertFalse(TestStages.holds(player, LastChapter.STAGE), "the player kept the last chapter past a reverted win");
+        helper.succeed();
     }
 
     /** What EMI marks as the last chapter's: every recipe its stage file names, which in the game-test pack is the eye of ender's. */
