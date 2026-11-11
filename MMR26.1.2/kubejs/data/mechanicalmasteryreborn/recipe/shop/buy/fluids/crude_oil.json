@@ -1,6 +1,6 @@
 {
   "type": "adminshop:fluid_buying",
-  "price": 50000,
+  "price": 500,
   "result": {
     "id": "fieldworks:crude_oil",
     "amount": 1000

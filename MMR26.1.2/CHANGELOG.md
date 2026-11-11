@@ -3,6 +3,7 @@
 ## Unreleased
 
 - The Shop no longer sells raw ores, coal or redstone one at a time: they come from a mix, or from the ore blocks the money Permit opens.
+- The Shop prices crude oil as a consumable, as it does lava: $5 a bucket in place of $500.
 
 ## 0.0.6
 
