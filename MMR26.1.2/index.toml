@@ -366,7 +366,7 @@ hash = "974d1dc7aa558ba48b2dd53f5326bdf3350d9a1e69bcaf3fe843563236f9e80e"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/ara_vitae/vital_essence.json"
-hash = "663e3e55c0010969f02567937bbebfb0c5d5c11d0ddbfe5913066f109c0ede94"
+hash = "b4533920ccca422bf3f9d28540a73cb81891a1304309763a31482d2c3a8dcdf6"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/aureate_essence.json"
