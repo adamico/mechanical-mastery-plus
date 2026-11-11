@@ -37,6 +37,7 @@ final class HomeGateTests {
         tests.test("home_gate_refused_to_a_player_with_no_team", 1, HomeGateTests::refusedWithNoTeam);
         tests.test("home_gate_check_leaves_other_gates_as_they_were", 1, HomeGateTests::leavesOtherGates);
         tests.test("home_gate_pearl_s_permit_given_once_protection_is_won", 1, HomeGateTests::permitOnceWon);
+        tests.test("home_gate_pearl_s_permit_taken_back_by_a_revert", 1, HomeGateTests::permitTakenBackByARevert);
     }
 
     private static void opensAtHome(GameTestHelper helper) {
@@ -64,6 +65,18 @@ final class HomeGateTests {
         helper.assertFalse(TestAccounts.holds(team, HomeGates.PERMIT), "the pearl's Permit while protection is played");
         Challenges.win(server, team);
         helper.assertTrue(TestAccounts.holds(team, HomeGates.PERMIT), "the pearl's Permit once protection is won");
+        helper.succeed();
+    }
+
+    /** A reverted protection win takes the Permit back, so the Shop no longer sells a pearl the locked chain refuses (#335). */
+    private static void permitTakenBackByARevert(GameTestHelper helper) {
+        UUID team = TestTeams.claim(helper);
+        var server = helper.getLevel().getServer();
+        TestAccounts.open(team, 0);
+        Challenges.begin(server, team, Handicap.PROTECTION);
+        Challenges.win(server, team);
+        helper.assertTrue(Challenges.revert(server, team, Handicap.PROTECTION), "the protection win wasn't reverted");
+        helper.assertFalse(TestAccounts.holds(team, HomeGates.PERMIT), "the pearl's Permit past a reverted protection win");
         helper.succeed();
     }
 

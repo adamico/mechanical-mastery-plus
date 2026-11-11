@@ -213,7 +213,8 @@ public final class Challenges {
 
     /**
      * Takes back {@code team}'s win of {@code handicap}'s challenge, as an op's {@code /cod challenge revert} does
-     * ({@link TeamState#revertWin}), and locks its chain again as {@link #end} does (#335). Says whether it had won it.
+     * ({@link TeamState#revertWin}), locks its chain again as {@link #end} does, and takes back the home gate's
+     * Permit a protection win gave ({@link HomeGates#revoke}) (#335). Says whether it had won it.
      */
     public static boolean revert(MinecraftServer server, UUID team, Handicap handicap) {
         if (!TeamState.get(server).revertWin(team, handicap)) {
@@ -221,6 +222,9 @@ public final class Challenges {
         }
         // Also tells the team's clients the essence the win had kept from going stale is stale again (#322).
         lockChain(server, team, handicap);
+        if (handicap == Handicap.PROTECTION) {
+            HomeGates.revoke(server, team);
+        }
         return true;
     }
 
