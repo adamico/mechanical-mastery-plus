@@ -2,7 +2,7 @@
   "type": "craftworks:assembling",
   "category": "crafting-with-fluid",
   "ingredients": [
-    { "ingredient": "mechanicalmasteryreborn:charged_rift", "count": 2 },
+    { "ingredient": "mechanicalmasteryreborn:charged_rift", "count": 1 },
     { "ingredient": "wireworks:plastic", "count": 2 },
     { "ingredient": "minecraft:string", "count": 2 },
     { "ingredient": "minecraft:gunpowder", "count": 1 },

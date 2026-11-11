@@ -170,7 +170,7 @@ final class WardingChainTests {
 
     private static void seal(GameTestHelper helper) {
         AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, "warding_essence");
-        SuiteAssembler.put(assembler, 0, RiftShards.CHARGED_RIFT.get(), 2);
+        SuiteAssembler.put(assembler, 0, RiftShards.CHARGED_RIFT.get(), 1);
         SuiteAssembler.put(assembler, 1, item("wireworks:plastic"), 2);
         SuiteAssembler.put(assembler, 2, Items.STRING, 2);
         SuiteAssembler.put(assembler, 3, Items.GUNPOWDER, 1);

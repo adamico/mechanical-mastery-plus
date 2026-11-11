@@ -74,7 +74,7 @@ Starting the challenge opens the chain's recipes, all made on an Assembler:
 - **Obsidian Flakes** come only off a placed obsidian block a Harvester works with magma slurry, which breaks the
   block. Breaking obsidian by hand gives obsidian.
 - A **Charged Rift Shard** is Rift Shards charged with tar, Obsidian Flakes and Ward Tallow.
-- Charged Rift Shards, sealed with plastic, make the **Warding Essence**.
+- A Charged Rift Shard, sealed with plastic, makes the **Warding Essence**.
 
 ## The home gate
 
