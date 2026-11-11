@@ -34,7 +34,7 @@ the challenge anew: the Offers are the money chain, locked and unlocked as any o
 
 The Shop never buys a coin, so your gold is either sold or minted, never both.
 
-The Shop sells no Permit. Crude oil, the raw ores, the seeds, the saplings and the animals need no challenge.
+The Shop sells no Permit. Crude oil, the seeds, the saplings and the animals need no challenge.
 
 ## The chain
 

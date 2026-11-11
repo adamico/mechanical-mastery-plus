@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- The Shop no longer sells redstone by the piece: it comes from a redstone ore block, as raw metals can.
+- The Shop no longer sells raw ores, coal or redstone one at a time: they come from a mix, or from the ore blocks the money Permit opens.
 
 ## 0.0.6
 
