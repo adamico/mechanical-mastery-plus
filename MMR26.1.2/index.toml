@@ -130,7 +130,7 @@ hash = "01bc81317ab6a6bd7a8c94e500244b1c55919580ca257db9105227c59a759b82"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/protection.md"
-hash = "73321d03dfcd9e75c3908c073b9aab28a5dbfc0522b7f7168cf7b19f7f7ee781"
+hash = "43977403a3def4d48cd324b79841aa795c83a6e3e5fa4d96571e59bd56ecb7d1"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/cod.md"
@@ -462,7 +462,7 @@ hash = "16985818ad421aa1cb37dcb56bb81503e5378c3ff09d87afaec9a16fc19c1f88"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/warding_essence.json"
-hash = "b1375867e5b2c6ac6739babc2c2759c8ddc67a4714795641c3597c4f358f6667"
+hash = "2361a3c2983ccf227c736299d25065071ca94251556c1ef9965dd14a4b660d6e"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/extraction/aureate_essence.json"
