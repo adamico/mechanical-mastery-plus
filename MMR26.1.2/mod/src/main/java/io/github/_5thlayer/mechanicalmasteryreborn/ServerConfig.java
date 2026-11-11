@@ -201,7 +201,7 @@ public final class ServerConfig {
     public static final ModConfigSpec.IntValue ENERGY_FE_PER_FLUX = BUILDER
             .comment("The FE Theurgy's Mercury Catalyst draws for each unit of mercury flux it makes; with too little it makes none.",
                     "It takes FE from any side, holding a thousand units' worth. A rough first pass, for playtests to tune.")
-            .defineInRange("energy.fe_per_flux", 20, 1, 1_000_000);
+            .defineInRange("energy.fe_per_flux", 5, 1, 1_000_000);
 
     /** How much faster hunger drains under the life handicap (#244, a placeholder for #207). */
     public static final ModConfigSpec.DoubleValue LIFE_HUNGER_RATE = BUILDER
