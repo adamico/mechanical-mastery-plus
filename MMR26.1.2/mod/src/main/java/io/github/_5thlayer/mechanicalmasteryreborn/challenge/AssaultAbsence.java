@@ -113,9 +113,17 @@ public final class AssaultAbsence {
         ServerPlayer summoner = Assault.summoner(server, level, team);
         List<UUID> gates = new ArrayList<>();
         for (AssaultState.Waiting gate : waiting) {
-            Vec3 at = Assault.gateAt(state, team)
-                    .orElseGet(() -> gate.at().orElseGet(() -> free.isEmpty() ? Assault.gateAt(cod.get().pos(), Direction.EAST) : free.remove(0)));
-            Gates.get().open(level, at, summoner, gate.wave()).ifPresent(gates::add);
+            Vec3 fallback = free.isEmpty() ? Assault.gateAt(cod.get().pos(), Direction.EAST) : free.get(0);
+            // With waves called, the gates stood on several sides, so each opens again on its own (#341).
+            Vec3 at = state.side(gate.gate()).map(side -> Assault.gateAt(cod.get().pos(), side))
+                    .or(() -> Assault.gateAt(state, team)).orElseGet(() -> gate.at().orElse(fallback));
+            if (at == fallback && !free.isEmpty()) {
+                free.remove(0);
+            }
+            Optional<UUID> opened = Gates.get().open(level, at, summoner, gate.wave());
+            opened.ifPresent(gates::add);
+            Optional<Direction> side = Assault.sideOf(cod.get().pos(), at);
+            opened.ifPresent(id -> side.ifPresent(each -> state.noteSide(id, each)));
         }
         state.unpause(team, gates);
         LOGGER.info("Team {} is home: its Assault's gates open again: {}", team, gates);

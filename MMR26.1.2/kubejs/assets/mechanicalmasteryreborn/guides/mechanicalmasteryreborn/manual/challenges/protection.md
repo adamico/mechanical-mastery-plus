@@ -10,6 +10,7 @@ item_ids:
   - mechanicalmasteryreborn:obsidian_flakes
   - mechanicalmasteryreborn:charged_rift
   - mechanicalmasteryreborn:assault_stone
+  - mechanicalmasteryreborn:wave_caller
 ---
 
 # The protection challenge
@@ -37,6 +38,17 @@ back. The mobs already out stay, and Overproduction runs on. A mob knocked off a
 the Assault ends. Its endermen pick up no blocks and its blazes light nothing, so blasts are the one way it damages
 your base. [Defences](../fe_defence.md) fight its mobs for you, and they are free from the start, so build them
 ahead.
+
+## Calling waves
+
+The Assault sets its own pace. To go faster, the Shop sells the **Wave Caller** from the challenge's start. Place
+as many as you like anywhere on your island, and use one to bring on the next wave at once, from wherever it
+stands. A breather ends on the spot. The called wave opens on one of the four platforms at random, the one already
+in use included: on that one, it follows the wave already on with no pause; on another, a second gate opens and the
+fight has a new front. Calling waves is how your team trades risk for pace, as many fronts as it dares. A called
+wave is the Assault's next wave like any other, with its drops and its step, and a gate that fails or closes while
+no one is home opens again on its own side. A Wave Caller calls nothing while the Assault waits, and stays on your
+island after a win.
 
 ## The refund
 
@@ -69,11 +81,11 @@ Starting the challenge opens the chain's recipes, all made on an Assembler:
 Once your team has won protection, the Shop sells the **home gate's pearl**, which no recipe makes. Throw it on
 your own island to open a smaller gate of your own whenever you like: a few waves, which drop Rift Shards too,
 fewer than the Assault, so a won chain goes on making Warding Essence. It opens nowhere else, and what its mobs
-break is not refunded.
+break is not refunded. A Wave Caller brings on its next wave at once too, in the same gate.
 
 ## In the last stand
 
 In the [last chapter](../last_chapter.md), your team can take the protection handicap on again as a **spell** at
 the [Hermetic Lab](../hermetic_lab.md). An Assault opens at once from its hardest waves, with explosions on and
-the refund as usual. Its mobs drop **Null Shards** instead of Rift Shards, which feed the Hermetic Lab's
+the refund as usual, and a Wave Caller calls its waves too. Its mobs drop **Null Shards** instead of Rift Shards, which feed the Hermetic Lab's
 protection line while that spell runs.

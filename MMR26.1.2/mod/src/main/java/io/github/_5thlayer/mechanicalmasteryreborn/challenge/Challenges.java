@@ -59,6 +59,7 @@ public final class Challenges {
         }
         if (handicap == Handicap.PROTECTION) {
             Assault.start(server, team);
+            WaveCaller.grant(server, team);
         }
         if (handicap == Handicap.LIFE) {
             LifeHandicap.refresh(server, team);
@@ -138,6 +139,9 @@ public final class Challenges {
         TeamState.get(server).lockChain(team, handicap);
         if (handicap == Handicap.MONEY) {
             MoneyHandicap.lock(server, team);
+        }
+        if (handicap == Handicap.PROTECTION) {
+            WaveCaller.lock(server, team);
         }
         for (var player : Teams.online(server, team)) {
             Chains.unlock(server, player);

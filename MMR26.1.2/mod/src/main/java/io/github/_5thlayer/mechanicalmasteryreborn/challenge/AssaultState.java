@@ -3,6 +3,7 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.challenge;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +37,7 @@ import net.minecraft.world.phys.Vec3;
 public final class AssaultState extends SavedData {
 
     /**
-     * One Assault: what it built in {@code dimension}, the entity of its one gate while open, and the side of C.O.D. the
+     * One Assault: what it built in {@code dimension}, the entities of its gates while open, one unless waves are called (#341), and the side of C.O.D. the
      * gate is on now, where it opens again after a failure or an absence, and the last wave it started, 0 before its
      * first (#239).
      */
@@ -78,7 +79,8 @@ public final class AssaultState extends SavedData {
             UUIDUtil.STRING_CODEC.listOf().optionalFieldOf("closed", List.of()).forGetter(state -> List.copyOf(state.closed)),
             Codec.unboundedMap(UUIDUtil.STRING_CODEC, Waiting.CODEC.listOf()).optionalFieldOf("paused", Map.of()).forGetter(state -> state.paused),
             Codec.unboundedMap(UUIDUtil.STRING_CODEC, UUIDUtil.STRING_CODEC).optionalFieldOf("shut", Map.of()).forGetter(state -> state.shut),
-            Codec.unboundedMap(UUIDUtil.STRING_CODEC, UUIDUtil.STRING_CODEC).optionalFieldOf("opened", Map.of()).forGetter(state -> state.opened))
+            Codec.unboundedMap(UUIDUtil.STRING_CODEC, UUIDUtil.STRING_CODEC).optionalFieldOf("opened", Map.of()).forGetter(state -> state.opened),
+            Codec.unboundedMap(UUIDUtil.STRING_CODEC, Direction.CODEC).optionalFieldOf("sides", Map.of()).forGetter(state -> state.sides))
             .apply(instance, AssaultState::new));
 
     public static final SavedDataType<AssaultState> TYPE = new SavedDataType<>(
@@ -95,19 +97,22 @@ public final class AssaultState extends SavedData {
     private final Map<UUID, UUID> shut;
     /** Every gate a running Assault has opened, by its team, while that Assault runs (#259). */
     private final Map<UUID, UUID> opened;
+    /** The side of C.O.D. each open gate stands on, since with waves called a team's gates stand on several (#341). */
+    private final Map<UUID, Direction> sides;
 
     private AssaultState() {
-        this(Map.of(), Map.of(), List.of(), Map.of(), Map.of(), Map.of());
+        this(Map.of(), Map.of(), List.of(), Map.of(), Map.of(), Map.of(), Map.of());
     }
 
     private AssaultState(Map<UUID, GlobalPos> cods, Map<UUID, Built> assaults, List<UUID> closed, Map<UUID, List<Waiting>> paused,
-            Map<UUID, UUID> shut, Map<UUID, UUID> opened) {
+            Map<UUID, UUID> shut, Map<UUID, UUID> opened, Map<UUID, Direction> sides) {
         this.cods = new HashMap<>(cods);
         this.assaults = new HashMap<>(assaults);
         this.closed = new HashSet<>(closed);
         this.paused = new HashMap<>(paused);
         this.shut = new HashMap<>(shut);
         this.opened = new HashMap<>(opened);
+        this.sides = new HashMap<>(sides);
     }
 
     public static AssaultState get(MinecraftServer server) {
@@ -134,6 +139,7 @@ public final class AssaultState extends SavedData {
     void putAssault(UUID team, Built built) {
         assaults.put(team, built);
         built.gates().forEach(gate -> opened.put(gate, team));
+        built.side().ifPresent(side -> built.gates().forEach(gate -> sides.put(gate, side)));
         setDirty();
     }
 
@@ -150,6 +156,7 @@ public final class AssaultState extends SavedData {
         });
         if (built != null) {
             closed.addAll(built.gates());
+            built.gates().forEach(sides::remove);
             setDirty();
         }
         return Optional.ofNullable(built);
@@ -163,20 +170,54 @@ public final class AssaultState extends SavedData {
     /** Puts {@code reopened} in place of {@code failed} in {@code team}'s Assault, and keeps {@code failed} out. */
     void replaceGate(UUID team, UUID failed, Optional<UUID> reopened) {
         Built built = assaults.get(team);
-        List<UUID> gates = new java.util.ArrayList<>(built.gates());
+        List<UUID> gates = new ArrayList<>(built.gates());
         gates.remove(failed);
         reopened.ifPresent(gates::add);
         reopened.ifPresent(gate -> opened.put(gate, team));
+        Direction side = sides.remove(failed);
+        if (side != null) {
+            reopened.ifPresent(gate -> sides.put(gate, side));
+        }
         assaults.put(team, built.withGates(gates));
         closed.add(failed);
+        setDirty();
+    }
+
+    /** Adds {@code gate}, opened by a called wave (#341), to {@code team}'s Assault's open gates. */
+    void addGate(UUID team, UUID gate, Direction side) {
+        Built built = assaults.get(team);
+        List<UUID> gates = new ArrayList<>(built.gates());
+        gates.add(gate);
+        assaults.put(team, built.withGates(gates));
+        opened.put(gate, team);
+        sides.put(gate, side);
+        setDirty();
+    }
+
+    /** The side of C.O.D. the open gate {@code gate} stands on, if known. */
+    public Optional<Direction> side(UUID gate) {
+        return Optional.ofNullable(sides.get(gate));
+    }
+
+    /** Notes that the open gate {@code gate} stands on {@code side}, as a paused Assault's gate opens again. */
+    void noteSide(UUID gate, Direction side) {
+        sides.put(gate, side);
         setDirty();
     }
 
     /** Moves {@code team}'s gate {@code from} to {@code side}, open there as {@code to}, and keeps {@code from} out. */
     void moveGate(UUID team, UUID from, Optional<UUID> to, Direction side) {
         Built built = assaults.get(team);
-        assaults.put(team, new Built(built.dimension(), built.blocks(), to.stream().toList(), Optional.of(side), built.wave()));
+        List<UUID> gates = new ArrayList<>(built.gates());
+        int index = gates.indexOf(from);
+        if (index >= 0) {
+            gates.remove(index);
+        }
+        to.ifPresent(gate -> gates.add(Math.max(index, 0), gate));
+        assaults.put(team, new Built(built.dimension(), built.blocks(), gates, Optional.of(side), built.wave()));
         to.ifPresent(gate -> opened.put(gate, team));
+        to.ifPresent(gate -> sides.put(gate, side));
+        sides.remove(from);
         closed.add(from);
         setDirty();
     }

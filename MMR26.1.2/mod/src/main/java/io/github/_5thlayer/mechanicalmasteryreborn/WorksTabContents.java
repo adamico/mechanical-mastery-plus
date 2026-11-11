@@ -4,6 +4,7 @@
 package io.github._5thlayer.mechanicalmasteryreborn;
 
 import io.github._5thlayer.libworks.WorksTab;
+import io.github._5thlayer.mechanicalmasteryreborn.challenge.Assault;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.GalvanicParts;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Mint;
@@ -25,7 +26,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
  * the lab and the four Ports, then every essence, then the protection Chain's Rift Shard, Ward Tallow bucket,
  * Obsidian Flakes and Charged Rift Shard, the money Chain's mint, from the molten metals' buckets to the Coins,
  * the energy chain's reformed salt and sulfur, Galvanic Charges and Core, and the Hermetic Lab's Null Shard, then the Recycler's parts, then the
- * Defences. One listener, in the order the tab shows them, which
+ * Defences and the Wave Caller. One listener, in the order the tab shows them, which
  * {@code CreativeTabTests} lists too.
  */
 final class WorksTabContents {
@@ -76,5 +77,6 @@ final class WorksTabContents {
         event.accept(Recycler.OUTPUT_ITEM.get());
         event.accept(Recycler.CASING_ITEM.get());
         event.accept(Defences.FE_DEFENCE_ITEM.get());
+        event.accept(Assault.WAVE_CALLER_ITEM.get());
     }
 }

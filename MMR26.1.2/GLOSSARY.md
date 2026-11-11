@@ -131,7 +131,7 @@ A smaller gate a team opens on its own island with a pearl, whenever it likes, o
 _Avoid_: practice gate, farm gate
 
 **Wave Caller**:
-A block a team places anywhere on its island, as many as it likes, that brings on its gate's next wave at once, without waiting for the current one to end. On the Assault the called wave opens at a platform drawn at random from all four, the one already in use included, and ends any breather, so a team calling waves may fight two fronts at once: calling waves is how it trades risk for pace. On a home gate the wave joins the fight in the same gate. It does nothing while no gate of the team's is open, as when a paused Assault waits for a member to come back. The Shop sells it from the start of the protection challenge, and it stays on the island past a win.
+A block a team places anywhere on its island, as many as it likes, that brings on its gate's next wave at once: in a breather, at once; in a wave, right after it, with no breather. On the Assault the called wave opens at a platform drawn at random from all four, the one already in use included, and ends any breather, so a team calling waves may fight on several fronts at once: calling waves is how it trades risk for pace. On a home gate the wave comes in the same gate. It does nothing while no gate of the team's is open, as when a paused Assault waits for a member to come back. The Shop sells it from the start of the protection challenge, and it stays on the island past a win.
 _Avoid_: Rift Caller, gate horn
 
 **Defence**:

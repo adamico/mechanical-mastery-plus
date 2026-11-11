@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn Core adds, 
 
 ## Unreleased
 
+- The Wave Caller (`wave_caller`), which the Shop sells from the protection challenge's start: placed anywhere on a team's island, its use brings on the next wave at once. The Assault's comes at a platform drawn at random from all four, the one in use included, ending any breather, so a team calling waves may fight on several fronts; with no Assault running, a home gate's next wave comes in the same gate. It calls nothing while the Assault waits for someone at home (#341).
 - For operators, `/cod challenge revert <handicap>` locks the challenge's chain again, as a stop does: it kept it unlocked, so its recipes and machines looked ungated; and a team left short of four wins loses the last chapter's stage, and a reverted protection win takes back the home gate pearl's Permit (#335).
 - Reformed Salt and Reformed Sulfur keep their own name and look; the Reformation Array gave them its target's, so they read as Alchemical Salt or Sulfur (#330).
 - The Reformation Array's source and target pedestals take Theurgy's salts, so Reformed Salt can be made; they took only sulfurs and niters (#330).
