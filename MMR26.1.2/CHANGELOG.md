@@ -6,6 +6,7 @@
 - The Shop prices crude oil as a consumable, as it does lava: $5 a bucket in place of $500.
 - The Shop buys every Transmuted Essence for $2000, in place of $60 (Galvanic), $1500 (Warding), $340 (Vital) and $50 (Aureate): the price pays for the time a chain takes to set up, not for its inputs, and is the same for all four since the challenges are taken in any order.
 - The Galvanic, Warding and Aureate Essences each take a minute on a tier-1 Assembler, in place of ten seconds, so one Assembler fills a quota in minutes and a team that wants it sooner builds more.
+- The Ara Vitae makes four Vital Essences from a Tabula Spiritus for 1000 mB of blood, in place of one for 20000, so a life chain fills its quota at each tier in about the time the other chains do (#340).
 
 ## 0.0.6
 
