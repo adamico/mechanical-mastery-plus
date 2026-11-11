@@ -1,0 +1,12 @@
+{
+  "type": "craftworks:assembling",
+  "category": "advanced-crafting",
+  "hand_craftable": false,
+  "ingredients": [
+    { "ingredient": "minecraft:redstone", "count": 1 }
+  ],
+  "results": [
+    { "id": "mechanicalmasteryreborn:galvanic_essence", "count": 1 }
+  ],
+  "time": 1
+}
