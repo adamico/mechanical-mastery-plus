@@ -1,6 +1,6 @@
 {
   "type": "adminshop:item_selling",
-  "price": 34000,
+  "price": 200000,
   "permit": "reborn_money",
   "item": {
     "id": "mechanicalmasteryreborn:vital_essence",
