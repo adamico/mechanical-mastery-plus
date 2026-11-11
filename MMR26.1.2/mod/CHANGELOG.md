@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn Core adds, 
 
 ## Unreleased
 
+- For operators, `/cod challenge revert <handicap>` locks the challenge's chain again, as a stop does: it kept it unlocked, so its recipes and machines looked ungated (#335).
 - Reformed Salt and Reformed Sulfur keep their own name and look; the Reformation Array gave them its target's, so they read as Alchemical Salt or Sulfur (#330).
 - The Reformation Array's source and target pedestals take Theurgy's salts, so Reformed Salt can be made; they took only sulfurs and niters (#330).
 - The Incubator's vessels take the Galvanic Charges, by hand, from Theurgy's logistics and from feeders; they took only Theurgy's own mercury, salt and sulfur, so the Galvanic Core couldn't be made (#331).

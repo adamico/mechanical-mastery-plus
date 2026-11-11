@@ -58,9 +58,9 @@ final class StopTests {
         tests.test("stop_take_back_removes_the_ask", 1, StopTests::takeBack);
         tests.test("stop_asks_cleared_by_a_reset_or_a_win", 1, StopTests::clearedByAResetOrAWin);
         tests.test("stop_offer_survives_a_save_and_load", 1, StopTests::survivesASaveAndLoad);
-        tests.test("revert_locks_the_chain_again", 1, StopTests::revertLocksTheChainAgain);
-        tests.test("revert_takes_the_stage_from_a_member_offline_as_they_log_in", 1, StopTests::revertLocksOffline);
-        tests.test("revert_keeps_another_chain_unlocked", 1, StopTests::revertKeepsAnotherChain);
+        tests.test("stop_revert_locks_the_chain_again", 1, StopTests::revertLocksTheChainAgain);
+        tests.test("stop_revert_takes_the_stage_from_a_member_offline_as_they_log_in", 1, StopTests::revertLocksOffline);
+        tests.test("stop_revert_keeps_another_chain_unlocked", 1, StopTests::revertKeepsAnotherChain);
     }
 
     private static void notOfferedBeforeAReset(GameTestHelper helper) {

@@ -125,14 +125,23 @@ public final class Challenges {
         if (played.isEmpty() || !finish(server, team)) {
             return false;
         }
-        TeamState.get(server).lockChain(team, played.get());
-        if (played.get() == Handicap.MONEY) {
+        lockChain(server, team, played.get());
+        return true;
+    }
+
+    /**
+     * Locks {@code handicap}'s chain again for {@code team} (ADR 0013): its stage taken from the team's players online now
+     * and from the rest as they log in ({@link Chains#unlock}), which also tells their clients, and money's Permit from
+     * the team's Account ({@link MoneyHandicap#lock}).
+     */
+    private static void lockChain(MinecraftServer server, UUID team, Handicap handicap) {
+        TeamState.get(server).lockChain(team, handicap);
+        if (handicap == Handicap.MONEY) {
             MoneyHandicap.lock(server, team);
         }
         for (var player : Teams.online(server, team)) {
             Chains.unlock(server, player);
         }
-        return true;
     }
 
     /**
@@ -207,18 +216,11 @@ public final class Challenges {
      * ({@link TeamState#revertWin}), and locks its chain again as {@link #end} does (#335). Says whether it had won it.
      */
     public static boolean revert(MinecraftServer server, UUID team, Handicap handicap) {
-        TeamState state = TeamState.get(server);
-        if (!state.revertWin(team, handicap)) {
+        if (!TeamState.get(server).revertWin(team, handicap)) {
             return false;
         }
-        state.lockChain(team, handicap);
-        if (handicap == Handicap.MONEY) {
-            MoneyHandicap.lock(server, team);
-        }
-        // Also tells their clients the essence the win had kept from going stale is stale again (#322).
-        for (var player : Teams.online(server, team)) {
-            Chains.unlock(server, player);
-        }
+        // Also tells the team's clients the essence the win had kept from going stale is stale again (#322).
+        lockChain(server, team, handicap);
         return true;
     }
 
