@@ -370,7 +370,7 @@ hash = "663e3e55c0010969f02567937bbebfb0c5d5c11d0ddbfe5913066f109c0ede94"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/aureate_essence.json"
-hash = "bb5d01883b1208dd884e2d51516bdb40bc8d74307d2491a503b737f9ff4c42e1"
+hash = "622d3b0fc52daa35905d0368bf77723638cca272c88e3fd70bc012f5d29d8aca"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/charged_rift.json"
@@ -390,7 +390,7 @@ hash = "32f47fac79aa54ed0dab417b906d98aa3d51927928d2ff691840bfe5d1be409f"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/galvanic_essence.json"
-hash = "b50a0c301b951172f2b524802760d26c788a42d98c64feea3342fa6263ae77c2"
+hash = "44a73ca97884bba095d26987f74993d57bf78529ada4f6de5af53a48a4eeaec4"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/gold_cast.json"
@@ -462,7 +462,7 @@ hash = "16985818ad421aa1cb37dcb56bb81503e5378c3ff09d87afaec9a16fc19c1f88"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/warding_essence.json"
-hash = "238234046e86dedc519535d68771b906534e5ff9bf55afa8021a960b59b18d64"
+hash = "b1375867e5b2c6ac6739babc2c2759c8ddc67a4714795641c3597c4f358f6667"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/extraction/aureate_essence.json"
