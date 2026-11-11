@@ -27,9 +27,9 @@ team keeps it through a win or a reset, loses it when it stops the challenge, an
 the challenge anew: the Offers are the money chain, locked and unlocked as any other chain is. The Permit opens:
 
 - Sell Offers for a few blocks, such as hay and dried kelp. Sellers sell them for you. The Shop buys no fluid.
-- Sell Offers for the four Transmuted Essences, the Aureate among them. Each sells for more than what made it, so a
-  won chain's extras are a profit; under the challenge's share of a sale they are a loss, so they help with the
-  quota but never pay for it outright. The Shop sells none of them.
+- Sell Offers for the four Transmuted Essences, the Aureate among them. All four sell for the same price, far more
+  than what made them, to pay for the time a chain takes to set up, so a won chain's extras are an income even under
+  the challenge's share of a sale. The Shop sells none of them.
 - The ore blocks.
 
 The Shop never buys a coin, so your gold is either sold or minted, never both.

@@ -15,4 +15,4 @@ The money challenge's chain was the Shop's Offers alone: sell, then buy the Aure
 - Gold is either sold or minted, never both, which is the choice the handicap sharpens.
 - A team short of a metal exchanges coins up for it, so a tier whose mix holds little gold is played from copper.
 - Lava is spent by every melt and only the Shop gives it: nothing in the pack makes lava, no lava farm undercuts the Shop, and the Shop never buys it back.
-- The Galvanic, Warding and Vital Essences, whose sale hangs on the money Permit, are priced by the same rule, more than their inputs cost and less than twice that, so a won chain doesn't pay for the mint outright.
+- The Galvanic, Warding and Vital Essences, whose sale hangs on the money Permit, are priced by the same rule, more than their inputs cost and less than twice that, so a won chain doesn't pay for the mint outright. ADR 0020 replaces this rule, the Aureate's price included: every Transmuted Essence now sells for the same price.
