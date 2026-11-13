@@ -201,6 +201,7 @@
   "mechanicalmasteryreborn.lab.sapling.has_sapling": "You already carry a sapling",
   "mechanicalmasteryreborn.lab.sapling.cooling_down": "The lab can give your team another sapling in %s min",
   "mechanicalmasteryreborn.lab.sapling.not_member": "Only the team whose island this lab stands on can ask it for a sapling",
+  "mechanicalmasteryreborn.recycler.input.denied": "This is never recycled",
   "mechanicalmasteryreborn.recycler.input.full": "The Recycler is full",
   "mechanicalmasteryreborn.recycler.input.holds_another": "The Recycler is holding something else",
   "mechanicalmasteryreborn.recycler.input.no_recycler": "This input isn't part of a Recycler",

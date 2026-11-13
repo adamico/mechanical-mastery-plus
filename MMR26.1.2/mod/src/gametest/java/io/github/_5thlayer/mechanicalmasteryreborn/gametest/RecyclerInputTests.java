@@ -44,6 +44,8 @@ final class RecyclerInputTests {
         tests.test("recycler_input_clicked_with_a_refined_block_places_nothing_and_says_why", 1,
                 helper -> refused(helper, new ItemStack(Items.STONE), "refined"));
         tests.test("recycler_input_clicked_with_a_refined_item_says_why", 1, helper -> refused(helper, new ItemStack(Items.IRON_INGOT), "refined"));
+        tests.test("recycler_input_clicked_with_rotten_flesh_says_it_is_never_recycled", 1,
+                helper -> refused(helper, new ItemStack(Items.ROTTEN_FLESH), "denied"));
         tests.test("recycler_input_clicked_with_a_storage_block_says_to_uncraft_it", 1,
                 helper -> refused(helper, new ItemStack(Items.IRON_BLOCK), "uncraft_instead"));
         tests.test("recycler_input_clicked_with_a_recyclable_block_inserts_it", 1, RecyclerInputTests::inserts);

@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn Core adds, 
 
 ## Unreleased
 
+- The Recycler takes no rotten flesh, by hand or from automation, so spoiled food can't be thrown away or undone on one, and EMI shows nothing for it. What it refuses outright, whatever makes it or an override says, is the item tag `mechanicalmasteryreborn:unrecyclable`, which holds rotten flesh and the pack can add to (#364).
 - Food in a Cooking for Blockheads fridge with an ice unit no longer spoils, with Spoiled installed (#363).
 - Life's chain machines do no work on an island whose team hasn't started life, as energy's don't: Agritech's planters, Pantry's Artisan Press and Farmer's Delight's Cooking Pot. Their tooltips and EMI name the challenge. The Animal Pen, Cutting Board and butchering are never locked (#362).
 - Neo Vitae is gone: its Ara Vitae and Hellfire Forge no longer wait on the life chain, the Ritual of Full Stomach no longer counts in a Diet, the `life.pause_in_demon_realm` and `hermetic_lab.life.rune_bonus` server settings are removed, and a heart given at the Hermetic Lab becomes the same Essentia Vitae whatever stands around it (#360).

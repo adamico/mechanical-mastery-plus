@@ -47,6 +47,7 @@ final class RecyclingTests {
         tests.test("recycling_a_rift_shard_shrinks_to_nothing", 1, RecyclingTests::riftShardShrinks);
         tests.test("recycling_a_hopper_returns_its_iron_and_its_chest", 1, RecyclingTests::hopper);
         tests.test("recycling_input_refuses_what_is_refined_or_uncrafted_for_free", 1, RecyclingTests::refused);
+        tests.test("recycling_input_refuses_rotten_flesh", 1, RecyclingTests::rottenFlesh);
         tests.test("recycling_input_takes_what_only_uncrafting_makes", 1, RecyclingTests::uncrafted);
         tests.test("recycling_emi_leaves_out_what_is_refused", 1, RecyclingTests::table);
         tests.test("recycling_one_of_what_a_recipe_makes_several_of_returns_its_share", 1, RecyclingTests::stoneBricks);
@@ -154,6 +155,18 @@ final class RecyclingTests {
             helper.assertValueEqual(build.feed(new ItemStack(item)), 0, "the " + item + " an input took");
         }
         helper.assertValueEqual(build.core().status(), Status.EMPTY, "the status after the input refused them");
+        helper.succeed();
+    }
+
+    /**
+     * Rotten flesh is what spoiled food becomes, so the pack denies it (#364): nothing makes it, yet the Recycler takes
+     * none, not even to throw it away, and EMI shows nothing for it, so a rot is never undone.
+     */
+    private static void rottenFlesh(GameTestHelper helper) {
+        var build = RecyclerBuild.standard(helper);
+        helper.assertValueEqual(build.feed(new ItemStack(Items.ROTTEN_FLESH)), 0, "the rotten flesh an input took");
+        helper.assertValueEqual(build.core().status(), Status.EMPTY, "the status after the input refused it");
+        helper.assertFalse(Recycling.byRecipe(helper.getLevel().getServer()).containsKey(Items.ROTTEN_FLESH), "EMI is sent what rotten flesh recycles into");
         helper.succeed();
     }
 

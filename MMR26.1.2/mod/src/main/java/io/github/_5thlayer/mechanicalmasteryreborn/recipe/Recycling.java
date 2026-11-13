@@ -85,6 +85,12 @@ public final class Recycling {
      */
     public static final TagKey<Item> REFINED = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "refined"));
 
+    /**
+     * The items the pack denies the Recycler outright, whatever makes them or an override says: rotten flesh, what
+     * spoiled food becomes, so a rot is never undone (#364).
+     */
+    public static final TagKey<Item> UNRECYCLABLE = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "unrecyclable"));
+
     /** The recipes last read, and the server's recipes they were read from: a reload makes a new map. */
     private static @Nullable Index index;
 
@@ -194,7 +200,8 @@ public final class Recycling {
     private record Read(Item result, Made<Item> made) {
     }
 
-    private static final RecyclingRules.Traits<Item> TRAITS = new RecyclingRules.Traits<>(Recycling::ore, Recycling::refined, Recycling::thing);
+    private static final RecyclingRules.Traits<Item> TRAITS = new RecyclingRules.Traits<>(Recycling::ore, Recycling::refined, Recycling::thing,
+            Recycling::unrecyclable);
 
     private static boolean ore(Item item) {
         return BuiltInRegistries.ITEM.wrapAsHolder(item).is(Tags.Items.ORES);
@@ -202,6 +209,10 @@ public final class Recycling {
 
     private static boolean refined(Item item) {
         return BuiltInRegistries.ITEM.wrapAsHolder(item).is(REFINED);
+    }
+
+    private static boolean unrecyclable(Item item) {
+        return BuiltInRegistries.ITEM.wrapAsHolder(item).is(UNRECYCLABLE);
     }
 
     private static @Nullable Kind kindOf(RecipeType<?> type, List<Identifier> assembling) {

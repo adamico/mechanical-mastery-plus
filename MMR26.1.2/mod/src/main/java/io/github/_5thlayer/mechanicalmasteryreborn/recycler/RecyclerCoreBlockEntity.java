@@ -131,6 +131,8 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
         REFINED,
         /** It is a block a player uncrafts for free. */
         UNCRAFT_INSTEAD,
+        /** The pack denies it the Recycler, whatever makes it: rotten flesh. */
+        DENIED,
         /** The Recycler takes no such thing: a filled box, or an essence nothing decomposes. */
         NOT_TAKEN,
         /** The core holds another item. */
@@ -155,6 +157,7 @@ public final class RecyclerCoreBlockEntity extends BlockEntity {
             return switch (why) {
                 case REFINED -> Rejection.REFINED;
                 case UNCRAFT_INSTEAD -> Rejection.UNCRAFT_INSTEAD;
+                case DENIED -> Rejection.DENIED;
             };
         }
         if (!buffer.isValid(0, ItemResource.of(stack))) {

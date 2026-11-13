@@ -47,10 +47,14 @@ class RecyclingRulesTest {
         return recycle(item, Optional.empty());
     }
 
-    /** Ores end in {@code _ore}; the refined tag holds the planks; a furnace holds things, and a helmet is worn. */
+    /**
+     * Ores end in {@code _ore}; the refined tag holds the planks; a furnace holds things, and a helmet is worn; the
+     * pack denies what is rotten.
+     */
     private Outcome<String> recycle(String item, Optional<List<Share<String>>> override) {
         return RecyclingRules.recycle(item, override, key -> makers.getOrDefault(key, List.of()),
-                new Traits<>(key -> key.endsWith("_ore"), key -> key.endsWith("_planks"), key -> key.equals("furnace") || key.endsWith("_helmet")));
+                new Traits<>(key -> key.endsWith("_ore"), key -> key.endsWith("_planks"), key -> key.equals("furnace") || key.endsWith("_helmet"),
+                        key -> key.startsWith("rotten_")));
     }
 
     private static Outcome<String> into(Object... itemsAndAmounts) {
@@ -68,6 +72,17 @@ class RecyclingRulesTest {
     @Test
     void anItemNoRecipeMakesRecyclesIntoItself() {
         assertEquals(into("dirt", 1), recycle("dirt"));
+    }
+
+    @Test
+    void aDeniedItemNoRecipeMakesIsRefusedRatherThanThrownAway() {
+        assertEquals(new Refused<>(Refusal.DENIED), recycle("rotten_flesh"));
+    }
+
+    @Test
+    void aDeniedItemIsRefusedWhateverMakesItOrAnOverrideSays() {
+        recipe("rotten_flesh", 1, Kind.CRAFTING, "pack:rot", "beef");
+        assertEquals(new Refused<>(Refusal.DENIED), recycle("rotten_flesh", Optional.of(shares("beef", 1))));
     }
 
     @Test

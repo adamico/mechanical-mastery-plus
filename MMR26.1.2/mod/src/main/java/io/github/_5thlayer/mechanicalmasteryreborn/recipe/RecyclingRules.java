@@ -39,7 +39,9 @@ public final class RecyclingRules {
          */
         REFINED,
         /** A player uncrafts it for free: a block of what it is made of nine of. */
-        UNCRAFT_INSTEAD
+        UNCRAFT_INSTEAD,
+        /** The pack denies it, whatever makes it: rotten flesh, so a rot is never undone (#364). */
+        DENIED
     }
 
     /** {@code amount} of {@code item}, whole or not. */
@@ -53,9 +55,10 @@ public final class RecyclingRules {
     /**
      * What the rules ask of an item beyond its recipes: whether it is an {@code ore}, which loses to any other
      * ingredient; whether the pack names it {@code refined}; and whether it is a {@code thing}, worn or a block with a
-     * state of its own, as a furnace or a sign, which is never refined however it is made.
+     * state of its own, as a furnace or a sign, which is never refined however it is made; and whether the pack
+     * {@code denied} it, which no recipe or override makes recyclable.
      */
-    public record Traits<I>(Predicate<I> ore, Predicate<I> refined, Predicate<I> thing) {
+    public record Traits<I>(Predicate<I> ore, Predicate<I> refined, Predicate<I> thing, Predicate<I> denied) {
     }
 
     /** What recycling an item comes to: what it recycles into, or why it can't be. */
@@ -71,12 +74,16 @@ public final class RecyclingRules {
     }
 
     /**
-     * What recycling one {@code item} comes to: {@code override} when the pack wrote one, whatever the item is; else
+     * What recycling one {@code item} comes to: refused when the pack denies it; else {@code override} when the pack
+     * wrote one, whatever the item is; else
      * refused when it is cooked or named refined, or uncrafted for free, or, but for a thing, cut from one raw kind
      * by every recipe that makes it; else the cost of the crafting or assembling recipe {@code makers} names for it,
      * but one that uncrafts it from a block; else itself, which is how a raw item, a nugget among them, is thrown away.
      */
     public static <I> Outcome<I> recycle(I item, Optional<List<Share<I>>> override, Function<I, List<Made<I>>> makers, Traits<I> traits) {
+        if (traits.denied().test(item)) {
+            return new Refused<>(Refusal.DENIED);
+        }
         if (override.isPresent()) {
             return new Into<>(override.get());
         }
