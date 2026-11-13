@@ -298,7 +298,7 @@ hash = "fddceef4b5913d2def8f75832a07e0afa5c692d6ec5a56e47124036d3ae6c2e4"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/life.json"
-hash = "c8a43e55406703ac2ce08dbf78ca3a9c19aa977525879426ddf009ade64e3951"
+hash = "afd2695ef54e7c286d582c6fea1f78a34432811ddc3ea0bae5989e918ce4ec8b"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/chapters/stages/money.json"
@@ -363,10 +363,6 @@ hash = "2dabaec896cf29954e46b4fd99deee73da6f4791533dd372ee9b5af8ace40980"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/loot_table/assault/zombie.json"
 hash = "974d1dc7aa558ba48b2dd53f5326bdf3350d9a1e69bcaf3fe843563236f9e80e"
-
-[[files]]
-file = "kubejs/data/mechanicalmasteryreborn/recipe/ara_vitae/vital_essence.json"
-hash = "b4533920ccca422bf3f9d28540a73cb81891a1304309763a31482d2c3a8dcdf6"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/assembling/aureate_essence.json"
@@ -483,6 +479,10 @@ hash = "b51f14260bd2f2bf2ff88e6f8a3cc86a445e065118d8dbce6d87037af33844bc"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/incubation/galvanic_core.json"
 hash = "b98a7ca88292553a77d4f1fc2839884e625bc267064905726029cd53513fe36b"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/recycling/cooking_pot.json"
+hash = "97db45731d6f53c4c6c5c8c6a0dd89ac546b284583809451bd2f8b6434c7084b"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/reformation/reformed_salt.json"
@@ -710,7 +710,7 @@ hash = "6465cb38f0a203d40fff674aa2d74588ff34338278c5e5a383f7ff9e08fe4fe4"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/tags/item/chain_machines/life.json"
-hash = "5cee57303d4ea21046869d09df14ca5271fe1531b1397a95b5e1b8b50e701675"
+hash = "f74498097708215ee46031db7467ce3abed880ed8188eff156e81993d9787e31"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/tags/item/rung/quintessence/quartessence.json"
@@ -734,7 +734,7 @@ hash = "e7f3199f4bacece01467ac1274b0f6bfd7d23e5a4364f91bf19d4f5fa6658b47"
 
 [[files]]
 file = "kubejs/server_scripts/decomposing.js"
-hash = "ea3069a1562d158ac795b0663d031a79c5e415af261a2f23471266bcdf5a316e"
+hash = "894f090b61902ef195377544bbdcfa52314510e097696bdc587419f532024f20"
 
 [[files]]
 file = "kubejs/server_scripts/defences.js"
@@ -762,8 +762,18 @@ hash = "d8f912afa4cad8ad6fd7bdba56e4e5e85efa317fdc6556284d674ed24ee7f800"
 metafile = true
 
 [[files]]
+file = "mods/agritech-evolved.pw.toml"
+hash = "1ee72c566736ceb34f3402cf5cb1968c2abf1271d081961a91121f32ab869175"
+metafile = true
+
+[[files]]
 file = "mods/ai-improvements.pw.toml"
 hash = "9ace9c9b5de9f6faebfc7a53e62c6698aac372de5dbe9fc71c3d74b94857e3b3"
+metafile = true
+
+[[files]]
+file = "mods/animal-pens.pw.toml"
+hash = "6710c98a3fccc8add56b5173940bd3a617f4d8ad1ffb6e931846c5ce2e355cbb"
 metafile = true
 
 [[files]]
@@ -809,6 +819,11 @@ metafile = true
 [[files]]
 file = "mods/bridging-mod.pw.toml"
 hash = "d3839916e7610e951e2dea350cb5a5a3369238cdef279336b87ee0f71f7792c1"
+metafile = true
+
+[[files]]
+file = "mods/butchery.pw.toml"
+hash = "e5e5bfdd88bad3ca1f274406c4009c8003a1f1bc74009451deb71aee0b9f9baf"
 metafile = true
 
 [[files]]
@@ -872,6 +887,11 @@ hash = "1d9a2b95944be707a32548511c95f9376f0a779cefe5181ad27eea6179d0b91e"
 metafile = true
 
 [[files]]
+file = "mods/cooking-for-blockheads.pw.toml"
+hash = "8d5e2457e95b30248da9d598a756f79d6997a36ad07f74b0794eddc89139d863"
+metafile = true
+
+[[files]]
 file = "mods/crash-assistant.pw.toml"
 hash = "2203fb93b453be5f187f727e7a118bafa30198adc2e94404496cba0bc2f04a0b"
 metafile = true
@@ -917,6 +937,11 @@ hash = "3361309a964408c302cb0cf0d410b6ea13bfbfdaa2bbb29204aeb9cfb9c73b4b"
 metafile = true
 
 [[files]]
+file = "mods/epherolib.pw.toml"
+hash = "f871491abaffbc9f1324377525c4cbf47d46ffdf65def452b2816a009ead74aa"
+metafile = true
+
+[[files]]
 file = "mods/extreme-sound-muffler.pw.toml"
 hash = "22d1859ddf426c57a209c0ebac804a21be524e16e104580c4bdca511e48a50c0"
 metafile = true
@@ -924,6 +949,11 @@ metafile = true
 [[files]]
 file = "mods/fancymenu.pw.toml"
 hash = "31abf2e6a698b4298bb772ee2c26a5fe61eecde679c73a1ab001c9f5e0259176"
+metafile = true
+
+[[files]]
+file = "mods/farmers-delight-26-neo-ver.pw.toml"
+hash = "c7390831034c70cea7016b180cf5e291be30f2fd8b8f59f3e5e465b65bb27125"
 metafile = true
 
 [[files]]
@@ -1147,11 +1177,6 @@ hash = "e8896f2b6d31219313e3fe795490959d3aed95da6c1922b5472e2357a123bd8d"
 metafile = true
 
 [[files]]
-file = "mods/neovitae.pw.toml"
-hash = "6f3a0c01ea4b76ba03681d90eb3629b3b4f808c6c7a8f162a20db3a8b8963a9e"
-metafile = true
-
-[[files]]
 file = "mods/neruina.pw.toml"
 hash = "22555af3fcd31fc296f8f07d479046d7be4818035e5ded15163c7c674498421e"
 metafile = true
@@ -1164,6 +1189,11 @@ metafile = true
 [[files]]
 file = "mods/openblocks-elevator.pw.toml"
 hash = "a525007d8aff0c5ce3fb486b58406a9d33a7aac674afd0ce6de40ec33eace917"
+metafile = true
+
+[[files]]
+file = "mods/pantry-for-blockheads.pw.toml"
+hash = "59e06560835a0dc0acf01cab8b63946d799b0f47eae9a0677bb70fab268b87cc"
 metafile = true
 
 [[files]]
@@ -1189,6 +1219,16 @@ metafile = true
 [[files]]
 file = "mods/puzzles-lib.pw.toml"
 hash = "735f2b928f27fb1c16e2436fcf1b7e246d03e1f7e8bcf23db5e2408a6e3cc4f4"
+metafile = true
+
+[[files]]
+file = "mods/quality-food.pw.toml"
+hash = "fd2b3f13d430175766bb1daa7077c7afaeca9f583d9c3f5f8a314831bbb766fe"
+metafile = true
+
+[[files]]
+file = "mods/refined-cooking.pw.toml"
+hash = "712185ff8d73c7cd80b3ab10607563229baf09f02b53511f3230323c7af01359"
 metafile = true
 
 [[files]]
@@ -1229,6 +1269,11 @@ metafile = true
 [[files]]
 file = "mods/spark.pw.toml"
 hash = "d65ad29b9e9d012fea220ae2cf269441310ae71126ad0466bef347d299de5f94"
+metafile = true
+
+[[files]]
+file = "mods/spoiled.pw.toml"
+hash = "d15f7150051bc9a118d774edfa937d7aeb2c8a58bc37268c3c9fcd51d71d3f8b"
 metafile = true
 
 [[files]]
