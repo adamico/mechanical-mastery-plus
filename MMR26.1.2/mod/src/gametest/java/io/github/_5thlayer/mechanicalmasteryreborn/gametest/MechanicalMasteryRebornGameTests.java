@@ -66,6 +66,10 @@ public final class MechanicalMasteryRebornGameTests {
         if (ModList.get().isLoaded("voidworks")) {
             SuiteQuintessenceTests.registerCapabilities(modBus);
         }
+        // No food mod is on the game tests' runs: Quality Food's quality stands in for its own (#365).
+        if (!ModList.get().isLoaded("quality_food")) {
+            QualityFoodStandIn.register(modBus);
+        }
         TestYield.useFull();
     }
 
@@ -101,6 +105,9 @@ public final class MechanicalMasteryRebornGameTests {
         RecipeTests.register(tests);
         MoneyTests.register(tests);
         LifeTests.register(tests);
+        if (!ModList.get().isLoaded("quality_food")) {
+            QualityTests.register(tests);
+        }
         ChainTests.register(tests);
         EnergyChainTests.register(tests);
         HomeGateTests.register(tests);

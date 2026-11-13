@@ -5,10 +5,19 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AdvancedPlanterBlockEntityMixin",
+    "AnimalPenCage",
+    "AnimalPenFeedingMixin",
+    "AnimalPenKillMixin",
+    "AnimalPenProductMixin",
     "ArtisanPressBlockEntityMixin",
     "ArtisanPressProcessing",
+    "ArtisanPressQualityMixin",
+    "AssemblerQualityMixin",
     "CookingPotBlockEntityMixin",
+    "CookingPotQualityMixin",
     "PlanterBlockEntityMixin",
+    "PlanterOdds",
+    "PlanterQualityMixin",
     "SpoilHandlerMixin"
   ],
   "injectors": {

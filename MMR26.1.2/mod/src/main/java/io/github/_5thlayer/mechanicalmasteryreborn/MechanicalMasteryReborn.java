@@ -23,6 +23,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Spells;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.Stops;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WardTallow;
 import io.github._5thlayer.mechanicalmasteryreborn.cod.Cod;
+import io.github._5thlayer.mechanicalmasteryreborn.compat.food.PenFeed;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbchunks.FtbChunksExplosions;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.ftbteams.FtbPartySync;
 import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
@@ -63,6 +64,7 @@ public final class MechanicalMasteryReborn {
         GalvanicParts.register(modBus);
         Assault.register(modBus);
         LifeHandicap.register(modBus);
+        PenFeed.register(modBus);
         Chains.register();
         Stops.register();
         LastChapter.register();

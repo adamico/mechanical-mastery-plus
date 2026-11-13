@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn Core adds, 
 
 ## Unreleased
 
+- Quality Food's quality survives life's chain, with Quality Food installed: Farmer's Delight's Cooking Pot, Pantry's Artisan Press and Craftworks' Assembler give what they make the average quality of the food that went in, rounded, plain food counting as none and anything that isn't food left out. Agritech's planters roll a crop's quality at harvest, at better odds the better their soil and fertilizer, a crop its roll leaves no room for taking the quality of a stack of it they hold, so a full planter throws none away; and an Animal Pen rolls its products' and its kills' by the quality of what its animals were last fed, which its cage keeps as `mechanicalmasteryreborn:feed_quality`. The Personal Assembler carries none (#365).
 - The Recycler takes no rotten flesh, by hand or from automation, so spoiled food can't be thrown away or undone on one, and EMI shows nothing for it. What it refuses outright, whatever makes it or an override says, is the item tag `mechanicalmasteryreborn:unrecyclable`, which holds rotten flesh and the pack can add to (#364).
 - Food in a Cooking for Blockheads fridge with an ice unit no longer spoils, with Spoiled installed (#363).
 - Life's chain machines do no work on an island whose team hasn't started life, as energy's don't: Agritech's planters, Pantry's Artisan Press and Farmer's Delight's Cooking Pot. Their tooltips and EMI name the challenge. The Animal Pen, Cutting Board and butchering are never locked (#362).

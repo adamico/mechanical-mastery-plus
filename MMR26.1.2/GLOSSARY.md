@@ -126,6 +126,10 @@ _Avoid_: threat, debuff
 How fast a food rots into rotten flesh, life played or not: raw (crops, raw meat, fish, eggs), ingredient (cooked meat and what is made from raw food, and any food in no other class), meal (what the Cooking Pot makes, slowest) or preserved (a hand-picked few, never). Only a Cooking for Blockheads fridge keeps food, slower, and with an ice unit for good; every other container, a shulker box too, ages it as a player's inventory does.
 _Avoid_: freshness tier, food tier
 
+**Quality**:
+Quality Food's grade on a food, none, iron, gold or diamond, which the Vital Essence and the Hermetic Lab's life line ask for. It survives life's chain: what the Cooking Pot, the Artisan Press and an Assembler make has the average quality of the food that went in. A planter's crop rolls it at harvest, better on better soil and fertilizer, and an Animal Pen's products by its **feed quality**, the quality of what its animals were last fed, which the pen's cage keeps.
+_Avoid_: freshness, tier
+
 **Assault**:
 The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from one gate at a time unless the team calls more, on one of four platforms it builds in the void around the island, with unbreakable bridges to it. The waves grow harder, with a breather between each step, at which the gate moves to another side at random, and never stop until the quota is filled or Overproduction reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, what its mobs break is the team's refund when it ends, and it pauses while no one is on the island.
 _Avoid_: raid, siege, invasion

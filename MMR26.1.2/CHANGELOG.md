@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Food keeps its quality through life's chain: the Cooking Pot, the Artisan Press and the Assembler give what they make the average quality of the food that went in. Agritech's planters grow better crops on better soil and fertilizer, and an Animal Pen's eggs, milk, wool and meat are better the better its animals were last fed (#365).
 - Food spoils, life played or not, by spoil class: raw food rots into rotten flesh in about 10 minutes, ingredients and any other food in about 20, the Cooking Pot's meals in about an hour, and a few preserved goods (honey, dried kelp, smoked ham, Pantry's cheese, tofu and flatbread, golden food) never. Only Cooking for Blockheads' fridge keeps food: it ages at a quarter of the rate, and not at all with an ice unit. A shulker box no longer keeps it (#363).
 - Neo Vitae leaves the pack, and Agritech Evolved, Farmer's Delight (the 26 Neo Ver port), Animal Pens, Pantry for Blockheads, Cooking for Blockheads, Refined Cooking, Spoiled and Quality Food come in for life's food factory. The Advanced mix trades the Ara Vitae and Hellfire Forge for a Basic Planter, an oak Animal Pen, an Artisan Press and a Cooking Pot; the Basic mix loses the Tabula Rasa. The mixes take what those machines recycle into, and the Cooking Pot recycles into a bucket, not a water bucket. The Vital Essence has no recipe for now.
 - The Shop no longer sells raw ores, coal or redstone one at a time: they come from a mix, or from the ore blocks the money Permit opens.
