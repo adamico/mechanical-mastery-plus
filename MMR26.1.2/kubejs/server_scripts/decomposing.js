@@ -62,6 +62,10 @@ ServerEvents.recipes(event => {
     'butchery:basin',
     'pantryforblockheads:artisan_press',
     'farmersdelight:cooking_pot',
+    'minecraft:oak_fence',
+    'minecraft:iron_chain',
+    'minecraft:wooden_shovel',
+    'minecraft:mud_bricks',
     'mechanicalmasteryreborn:recycler_core_1',
     'mechanicalmasteryreborn:hand_drive',
     'mechanicalmasteryreborn:recycler_input',
@@ -95,11 +99,7 @@ ServerEvents.recipes(event => {
     'minecraft:copper_block',
     'minecraft:hay_block',
     'minecraft:resin_block',
-    'minecraft:oak_fence',
-    'minecraft:iron_chain',
     'minecraft:heavy_weighted_pressure_plate',
-    'minecraft:wooden_shovel',
-    'minecraft:mud_bricks',
   ]
   event.recipes.mechanicalmasteryreborn.decomposing(IMPROVED_MIX, '1x mechanicalmasteryreborn:improved_mechanical_essence')
     .id('mechanicalmasteryreborn:decomposing/improved_mechanical_essence')
