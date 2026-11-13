@@ -7,9 +7,7 @@
     "AdvancedPlanterBlockEntityMixin",
     "ArtisanPressBlockEntityMixin",
     "ArtisanPressProcessing",
-    "BasinProcedureMixin",
     "CookingPotBlockEntityMixin",
-    "MeatGrinderProcedureMixin",
     "PlanterBlockEntityMixin"
   ],
   "injectors": {

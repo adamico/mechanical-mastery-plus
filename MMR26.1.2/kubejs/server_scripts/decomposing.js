@@ -58,8 +58,6 @@ ServerEvents.recipes(event => {
     'theurgy:logistics_mercury_flux_connector',
     'agritechevolved:basic_planter',
     'animal_pen:animal_pen_oak',
-    'butchery:meat_grinder',
-    'butchery:basin',
     'pantryforblockheads:artisan_press',
     'farmersdelight:cooking_pot',
     'minecraft:oak_fence',

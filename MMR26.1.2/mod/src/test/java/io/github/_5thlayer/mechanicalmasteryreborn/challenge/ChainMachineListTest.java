@@ -17,8 +17,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The pack's own lists of each chain's machines (#246), the tags {@code ChainMachines} reads, in the pack this mod's
- * folder sits in: Theurgy's processing machines for energy, for life Agritech's planters, Butchery's Meat Grinder and
- * Basin, Pantry's Artisan Press and Farmer's Delight's Cooking Pot (#362), and none for
+ * folder sits in: Theurgy's processing machines for energy, for life Agritech's planters, Pantry's Artisan Press and Farmer's Delight's Cooking Pot (#362), and none for
  * protection or money. No Theurgy or food mod is on the game tests' runs, so the game test
  * {@code chain_machines_of_every_chain_idle_until_its_challenge_starts} plays the same lock on the game-test pack's
  * stand-ins.
@@ -47,7 +46,7 @@ class ChainMachineListTest {
     }
 
     @Test
-    void lifesMachinesArePlantersButcherysMachinesThePressAndTheCookingPot() throws IOException {
+    void lifesMachinesArePlantersThePressAndTheCookingPot() throws IOException {
         var expected = new ArrayList<String>();
         expected.add("agritechevolved:basic_planter");
         for (String wood : List.of("acacia", "bamboo", "birch", "cherry", "crimson", "dark_oak", "jungle", "mangrove",
@@ -59,8 +58,8 @@ class ChainMachineListTest {
                 "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black")) {
             expected.add("agritechevolved:" + colour + "_terracotta_planter");
         }
-        expected.addAll(List.of("agritechevolved:advanced_planter", "butchery:meat_grinder", "butchery:basin",
-                "pantryforblockheads:artisan_press", "farmersdelight:cooking_pot"));
+        expected.addAll(List.of("agritechevolved:advanced_planter", "pantryforblockheads:artisan_press",
+                "farmersdelight:cooking_pot"));
         assertEquals(expected, ids(Handicap.LIFE));
     }
 
