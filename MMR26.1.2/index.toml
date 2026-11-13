@@ -93,6 +93,10 @@ file = "config/skyblockbuilder/world.json5"
 hash = "59bb0f6d3ab7e4bec05fb479951022f9056b6e066f954536807e8831e0ba4c15"
 
 [[files]]
+file = "config/spoiled-common.toml"
+hash = "23c44b154b3a8042ecb38570574e6799b30b74be5050a6c5f6abae39f23d8085"
+
+[[files]]
 file = "config/theurgy-client.toml"
 hash = "aa5ec03cdd86b25f9092a081aeea91876ec061665d19f7bdaa7f7a52a88b8a18"
 
@@ -745,6 +749,18 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/sell/essence/warding_ess
 hash = "96c22be05defccaeb46e265164ec2a4e52cc97ca19dac97451a5f41d7a7aed4f"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/spoiling/ingredient.json"
+hash = "bf8408606dd56111ef344e8efb7ade8d9d21b3146a68466b463d64213f22365a"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/spoiling/meal.json"
+hash = "b3dbd6fc355bf9d4fee485d8022173ffd5c55f82fd2e95692ecd43f0c6b58402"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/spoiling/raw.json"
+hash = "f6c9d588caba01528b4a3eb6d67d1e767148adf28a2f054fa3e3f65806547342"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/tags/item/chain_machines/energy.json"
 hash = "6465cb38f0a203d40fff674aa2d74588ff34338278c5e5a383f7ff9e08fe4fe4"
 
@@ -761,8 +777,28 @@ file = "kubejs/data/mechanicalmasteryreborn/tags/item/rung/quintessence/quintess
 hash = "acad793984fd87a6b7159fa3672f6addc5b0341e1af8ffabbd08cfe4a72ed32e"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/tags/item/spoil_classes/ingredient.json"
+hash = "0ddd6d517647a2a7df57d9d1525eb4b6031c1dc23be37dad8e4a7c725b535ddf"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/tags/item/spoil_classes/meal.json"
+hash = "347f0ce2016614bd0ba97142243d06f94288f4f457989c5ef9b8b488fb486512"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/tags/item/spoil_classes/preserved.json"
+hash = "5c5fcb65d5879c24114b71c47543331b04999b044640ad2fac864808402d430b"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/tags/item/spoil_classes/raw.json"
+hash = "293b663d026d77b4efae71351793d0726678e0fb80b55151bacdb9054aee96f6"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/voidworks/family/quintessence.json"
 hash = "7dfdabdb3e7ef68caea852c4a1313b9f2d8b9e01cf9c1a39d063c222460d4428"
+
+[[files]]
+file = "kubejs/data/spoiled/tags/item/foods_blacklist.json"
+hash = "ff4846e4bd632385a11c43c056b73d6aedfdceb7838cd13083be5be0ca7cb86d"
 
 [[files]]
 file = "kubejs/data/voidworks/data_maps/dimension/void_pressure.json"
