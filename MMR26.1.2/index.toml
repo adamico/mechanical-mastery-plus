@@ -94,7 +94,7 @@ hash = "59bb0f6d3ab7e4bec05fb479951022f9056b6e066f954536807e8831e0ba4c15"
 
 [[files]]
 file = "config/spoiled-common.toml"
-hash = "23c44b154b3a8042ecb38570574e6799b30b74be5050a6c5f6abae39f23d8085"
+hash = "8b2a3b71eee39babe78ce4b85855b5c678bda33099cdbce956f33d27500aa60a"
 
 [[files]]
 file = "config/theurgy-client.toml"
