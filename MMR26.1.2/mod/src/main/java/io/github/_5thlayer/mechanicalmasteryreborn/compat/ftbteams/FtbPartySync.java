@@ -23,6 +23,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Chains;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.HomeGates;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.MoneyHandicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.WaveCaller;
+import io.github._5thlayer.mechanicalmasteryreborn.life.Pelican;
 import io.github._5thlayer.mechanicalmasteryreborn.record.IslandParties;
 import io.github._5thlayer.mechanicalmasteryreborn.record.PartySync;
 import io.github._5thlayer.mechanicalmasteryreborn.record.PartySync.Island;
@@ -91,6 +92,7 @@ public final class FtbPartySync {
                 MoneyHandicap.regrant(server, create.island());
                 HomeGates.grant(server, create.island());
                 WaveCaller.grant(server, create.island());
+                Pelican.grant(server, create.island());
                 LOGGER.info("Island {} has FTB party {}, owned by {}", create.island(), party.getId(), owner.getGameProfile().name());
             }
             case Move.Join join -> {

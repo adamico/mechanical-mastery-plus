@@ -87,7 +87,7 @@ final class ChainMachineTests {
                 checked++;
             }
         }
-        helper.assertValueEqual(checked, 3, "the machines the game-test pack's tags hold");
+        helper.assertValueEqual(checked, 4, "the machines the game-test pack's tags and the mod's own Pelican hold");
         for (Handicap handicap : Handicap.values()) {
             Challenges.begin(server, team, handicap);
             for (var item : BuiltInRegistries.ITEM.getTagOrEmpty(ChainMachines.tag(handicap))) {

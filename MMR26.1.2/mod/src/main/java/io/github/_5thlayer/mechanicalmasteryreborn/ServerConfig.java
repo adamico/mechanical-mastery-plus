@@ -30,7 +30,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  *
  * <p>And the share of a sale a team is paid while it plays the money challenge, and the quota a challenge's Port takes to win it.
  *
- * <p>And the life handicap's faster hunger and Diet.
+ * <p>And the life handicap's faster hunger and Diet, and the Pelican's thresholds and digesting time.
  *
  * <p>And how long a team waits between its lab's emergency saplings.
  *
@@ -225,6 +225,28 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue LIFE_FLOOR = BUILDER
             .comment("The least share of its hunger and saturation a food feeds, however often it is in the eater's Diet.")
             .defineInRange("life.floor", 0.25, 0.0, 1.0);
+
+    /** The saturation a Pelican's batch must hold (#366). */
+    public static final ModConfigSpec.DoubleValue PELICAN_SATURATION = BUILDER
+            .comment("The saturation the meals a Pelican has eaten since its last Vital Essence must give, added up, before it digests them.",
+                    "It is the meals' own saturation, not their hunger. 60 is a few of Farmer's Delight's stews.")
+            .defineInRange("life.pelican.saturation", 60.0, 0.0, 1_000_000.0);
+
+    /** The kinds of meal a Pelican's batch must hold. */
+    public static final ModConfigSpec.IntValue PELICAN_KINDS = BUILDER
+            .comment("The kinds of meal, by item and whatever their quality, a Pelican's batch must hold before it digests it.")
+            .defineInRange("life.pelican.kinds", 4, 1, 256);
+
+    /** The average quality a Pelican's batch must reach. */
+    public static final ModConfigSpec.DoubleValue PELICAN_QUALITY = BUILDER
+            .comment("The average Quality Food level a Pelican's batch must reach before it digests it: the plain mean of its meals'",
+                    "levels, none counting as 0, iron 1, gold 2 and diamond 3. 1.5 is halfway between iron and gold.")
+            .defineInRange("life.pelican.quality", 1.5, 0.0, 100.0);
+
+    /** How long a Pelican digests a ready batch. */
+    public static final ModConfigSpec.IntValue PELICAN_DIGESTING = BUILDER
+            .comment("The ticks a Pelican digests a ready batch for, eating nothing, before it gives a Vital Essence. 600 is half a minute.")
+            .defineInRange("life.pelican.digesting", 600, 0, 1_728_000);
 
     /** How long a team waits between emergency saplings from its lab: a Minecraft day (#302). */
     public static final ModConfigSpec.IntValue LAB_SAPLING_COOLDOWN = BUILDER
@@ -436,6 +458,26 @@ public final class ServerConfig {
     /** The least share a food in the Diet feeds. */
     public static double lifeFloor() {
         return SPEC.isLoaded() ? LIFE_FLOOR.getAsDouble() : LIFE_FLOOR.getDefault();
+    }
+
+    /** The saturation a Pelican's batch must hold. */
+    public static double pelicanSaturation() {
+        return SPEC.isLoaded() ? PELICAN_SATURATION.getAsDouble() : PELICAN_SATURATION.getDefault();
+    }
+
+    /** The kinds of meal a Pelican's batch must hold. */
+    public static int pelicanKinds() {
+        return SPEC.isLoaded() ? PELICAN_KINDS.getAsInt() : PELICAN_KINDS.getDefault();
+    }
+
+    /** The average quality a Pelican's batch must reach. */
+    public static double pelicanQuality() {
+        return SPEC.isLoaded() ? PELICAN_QUALITY.getAsDouble() : PELICAN_QUALITY.getDefault();
+    }
+
+    /** The ticks a Pelican digests a ready batch for. */
+    public static int pelicanDigesting() {
+        return SPEC.isLoaded() ? PELICAN_DIGESTING.getAsInt() : PELICAN_DIGESTING.getDefault();
     }
 
     /** The food exhaustion a hand drive's turn that counts adds. */
