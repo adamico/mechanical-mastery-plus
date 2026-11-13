@@ -271,7 +271,7 @@ public final class ServerConfig {
 
     /** The Essentia Vitae one heart given at the Hermetic Lab becomes. */
     public static final ModConfigSpec.IntValue HERMETIC_LAB_LIFE_PER_HEART = BUILDER
-            .comment("The mB of Essentia Vitae one heart given at the Hermetic Lab becomes")
+            .comment("The mB of Essentia Vitae one heart given at the Hermetic Lab becomes.")
             .defineInRange("hermetic_lab.life.per_heart", 100, 1, 100_000);
 
     /** How much faster hunger drains under the life spell: harder than the challenge's. */

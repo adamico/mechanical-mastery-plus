@@ -31,9 +31,8 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
  * and saturation alike. It hooks vanilla's food data itself, so whatever feeds a player counts; a feeding nothing names,
  * such as a cake's bite, counts as {@link #OTHER}.
  * The Diet is a player's attachment, synced to them for the tooltip, and forgotten when the challenge ends or resets.
- * A team that
- * bears the life spell at its Hermetic Lab (#263) bears it the same way, its hunger faster still, its Diet kept from the
- * spell's start and forgotten as it ends.
+ * A team that bears the life spell at its Hermetic Lab (#263) bears it the same way, its hunger faster still, its Diet
+ * kept from the spell's start and forgotten as it ends.
  */
 public final class LifeHandicap {
 
