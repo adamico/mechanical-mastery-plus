@@ -1,0 +1,8 @@
+{
+  "type": "adminshop:item_buying",
+  "price": 1000,
+  "result": {
+    "id": "farmersdelight:rice",
+    "count": 4
+  }
+}
