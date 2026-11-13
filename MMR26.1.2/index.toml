@@ -750,7 +750,7 @@ hash = "6465cb38f0a203d40fff674aa2d74588ff34338278c5e5a383f7ff9e08fe4fe4"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/tags/item/chain_machines/life.json"
-hash = "f74498097708215ee46031db7467ce3abed880ed8188eff156e81993d9787e31"
+hash = "06a64d0b591d6a26ff106fd8593c23010169e58d8713e81fa385c8ea34e5baa9"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/tags/item/rung/quintessence/quartessence.json"
@@ -774,7 +774,7 @@ hash = "e7f3199f4bacece01467ac1274b0f6bfd7d23e5a4364f91bf19d4f5fa6658b47"
 
 [[files]]
 file = "kubejs/server_scripts/decomposing.js"
-hash = "894f090b61902ef195377544bbdcfa52314510e097696bdc587419f532024f20"
+hash = "e84d89cf44cfee53402e68ccebb1233094a283bd84adb3b0f0251c57a1bbb9d4"
 
 [[files]]
 file = "kubejs/server_scripts/defences.js"
@@ -859,11 +859,6 @@ metafile = true
 [[files]]
 file = "mods/bridging-mod.pw.toml"
 hash = "d3839916e7610e951e2dea350cb5a5a3369238cdef279336b87ee0f71f7792c1"
-metafile = true
-
-[[files]]
-file = "mods/butchery.pw.toml"
-hash = "e5e5bfdd88bad3ca1f274406c4009c8003a1f1bc74009451deb71aee0b9f9baf"
 metafile = true
 
 [[files]]
