@@ -61,10 +61,6 @@ config = "${mod_id}.portal.mixins.json"
 [[mixins]]
 config = "${mod_id}.gateways.mixins.json"
 
-# An Ara Vitae or Hellfire Forge from a mix does no work while the life chain is locked (#243), and the Ritual of Full Stomach's feeding counts the food it feeds in a Diet (#244), applied only with Neo Vitae installed.
-[[mixins]]
-config = "${mod_id}.neovitae.mixins.json"
-
 # A Mutation Chamber climbs no Quartessence into Quintessence until its team has started its last stand, and a Void Crucible never takes one, applied only with Voidworks installed (#262).
 [[mixins]]
 config = "${mod_id}.voidworks.mixins.json"

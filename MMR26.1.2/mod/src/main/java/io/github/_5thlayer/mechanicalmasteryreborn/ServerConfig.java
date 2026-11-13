@@ -30,7 +30,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  *
  * <p>And the share of a sale a team is paid while it plays the money challenge, and the quota a challenge's Port takes to win it.
  *
- * <p>And the life handicap's faster hunger and Diet, and whether it pauses in Neo Vitae's Demon Realm.
+ * <p>And the life handicap's faster hunger and Diet.
  *
  * <p>And how long a team waits between its lab's emergency saplings.
  *
@@ -226,12 +226,6 @@ public final class ServerConfig {
             .comment("The least share of its hunger and saturation a food feeds, however often it is in the eater's Diet.")
             .defineInRange("life.floor", 0.25, 0.0, 1.0);
 
-    /** Whether the life handicap pauses for a player in Neo Vitae's Demon Realm. */
-    public static final ModConfigSpec.BooleanValue LIFE_PAUSE_IN_DEMON_REALM = BUILDER
-            .comment("Whether a player in Neo Vitae's Demon Realm (neovitae:dungeon) hungers and eats as in vanilla while their team",
-                    "plays the life challenge. Off, the handicap goes on there as anywhere else. Overproduction goes on either way.")
-            .define("life.pause_in_demon_realm", false);
-
     /** How long a team waits between emergency saplings from its lab: a Minecraft day (#302). */
     public static final ModConfigSpec.IntValue LAB_SAPLING_COOLDOWN = BUILDER
             .comment("The ticks a team waits after its lab gives it an emergency sapling, for a dirt, before it gives another.",
@@ -277,14 +271,8 @@ public final class ServerConfig {
 
     /** The Essentia Vitae one heart given at the Hermetic Lab becomes. */
     public static final ModConfigSpec.IntValue HERMETIC_LAB_LIFE_PER_HEART = BUILDER
-            .comment("The mB of Essentia Vitae one heart given at the Hermetic Lab becomes, before Neo Vitae's self-sacrifice runes nearby add theirs.")
+            .comment("The mB of Essentia Vitae one heart given at the Hermetic Lab becomes.")
             .defineInRange("hermetic_lab.life.per_heart", 100, 1, 100_000);
-
-    /** What each self-sacrifice rune near the Hermetic Lab adds to a heart's Essentia Vitae. */
-    public static final ModConfigSpec.DoubleValue HERMETIC_LAB_LIFE_RUNE_BONUS = BUILDER
-            .comment("The share more Essentia Vitae a heart becomes for each of Neo Vitae's Runes of Self Sacrifice within 2 blocks",
-                    "of the Hermetic Lab; a reinforced one counts twice.")
-            .defineInRange("hermetic_lab.life.rune_bonus", 0.1, 0.0, 10.0);
 
     /** How much faster hunger drains under the life spell: harder than the challenge's. */
     public static final ModConfigSpec.DoubleValue HERMETIC_LAB_LIFE_HUNGER_RATE = BUILDER
@@ -450,11 +438,6 @@ public final class ServerConfig {
         return SPEC.isLoaded() ? LIFE_FLOOR.getAsDouble() : LIFE_FLOOR.getDefault();
     }
 
-    /** Whether the life handicap pauses for a player in the Demon Realm. */
-    public static boolean lifePauseInDemonRealm() {
-        return SPEC.isLoaded() ? LIFE_PAUSE_IN_DEMON_REALM.getAsBoolean() : LIFE_PAUSE_IN_DEMON_REALM.getDefault();
-    }
-
     /** The food exhaustion a hand drive's turn that counts adds. */
     public static double handDriveExhaustion() {
         return SPEC.isLoaded() ? HAND_DRIVE_EXHAUSTION.getAsDouble() : HAND_DRIVE_EXHAUSTION.getDefault();
@@ -533,11 +516,6 @@ public final class ServerConfig {
     /** The mB of Essentia Vitae a heart given at the Hermetic Lab becomes. */
     public static int hermeticLabLifePerHeart() {
         return SPEC.isLoaded() ? HERMETIC_LAB_LIFE_PER_HEART.getAsInt() : HERMETIC_LAB_LIFE_PER_HEART.getDefault();
-    }
-
-    /** The share more a heart becomes for each self-sacrifice rune near the Hermetic Lab. */
-    public static double hermeticLabLifeRuneBonus() {
-        return SPEC.isLoaded() ? HERMETIC_LAB_LIFE_RUNE_BONUS.getAsDouble() : HERMETIC_LAB_LIFE_RUNE_BONUS.getDefault();
     }
 
     /** How many times faster hunger drains under the life spell. */

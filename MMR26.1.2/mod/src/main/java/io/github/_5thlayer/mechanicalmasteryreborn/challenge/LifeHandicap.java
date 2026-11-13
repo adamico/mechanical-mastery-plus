@@ -28,19 +28,16 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 /**
  * The life handicap, a hungrier {@link Diet} (ADR 0011): while a team plays the life challenge, its players' hunger
  * drains {@link ServerConfig#lifeHungerRate faster}, and a food already in a player's Diet feeds them less, in hunger
- * and saturation alike. It hooks vanilla's food data itself, so whatever feeds a player counts, Neo Vitae's Ritual of
- * Full Stomach too; a feeding nothing names, such as a cake's bite or the ritual's Essentia, counts as {@link #OTHER}.
+ * and saturation alike. It hooks vanilla's food data itself, so whatever feeds a player counts; a feeding nothing names,
+ * such as a cake's bite, counts as {@link #OTHER}.
  * The Diet is a player's attachment, synced to them for the tooltip, and forgotten when the challenge ends or resets.
- * With the server config's switch on, a player in Neo Vitae's Demon Realm hungers and eats as in vanilla. A team that
- * bears the life spell at its Hermetic Lab (#263) bears it the same way, its hunger faster still, its Diet kept from the
- * spell's start and forgotten as it ends.
+ * A team that bears the life spell at its Hermetic Lab (#263) bears it the same way, its hunger faster still, its Diet
+ * kept from the spell's start and forgotten as it ends.
  */
 public final class LifeHandicap {
 
     /** What a feeding nothing names counts as in a Diet. */
     public static final Identifier OTHER = Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "other_food");
-    /** Neo Vitae's Demon Realm. */
-    public static final Identifier DEMON_REALM = Identifier.fromNamespaceAndPath("neovitae", "dungeon");
 
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENTS =
             DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, MechanicalMasteryReborn.MOD_ID);
@@ -99,7 +96,7 @@ public final class LifeHandicap {
     /** The share {@code stack} would feed {@code player} now, by the Diet synced to them, which the tooltip shows; all of it if none is kept. */
     public static double shareNow(Player player, ItemStack stack) {
         Diet diet = player.getData(DIET);
-        if (!diet.kept() || paused(player)) {
+        if (!diet.kept()) {
             return 1.0;
         }
         return Diet.share(diet.repeats(BuiltInRegistries.ITEM.getKey(stack.getItem())), ServerConfig.lifeRepeatFalloff(), ServerConfig.lifeFloor());
@@ -107,7 +104,7 @@ public final class LifeHandicap {
 
     /** Whether {@code player}'s client is told a Diet is kept. */
     public static boolean kept(Player player) {
-        return player.getData(DIET).kept() && !paused(player);
+        return player.getData(DIET).kept();
     }
 
     /** Sets the Diet of each of {@code team}'s players online to what its challenge or spell keeps, as one starts, resets or ends. */
@@ -150,11 +147,7 @@ public final class LifeHandicap {
     }
 
     private static boolean applies(Player player) {
-        return !player.level().isClientSide() && !paused(player)
+        return !player.level().isClientSide()
                 && TeamState.get(player.level().getServer()).bears(Teams.of(player), Handicap.LIFE);
-    }
-
-    private static boolean paused(Player player) {
-        return ServerConfig.lifePauseInDemonRealm() && player.level().dimension().identifier().equals(DEMON_REALM);
     }
 }

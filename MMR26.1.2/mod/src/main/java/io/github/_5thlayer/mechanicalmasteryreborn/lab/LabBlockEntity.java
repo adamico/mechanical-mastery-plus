@@ -20,9 +20,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.record.Spell;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -70,13 +68,8 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
     public static final int INTERVAL = 20;
     /** The most Essentia Vitae it holds, in mB. */
     public static final int ESSENTIA_CAPACITY = 4000;
-    /** How far, in blocks each way, it counts Neo Vitae's self-sacrifice runes around it. */
-    public static final int RUNE_REACH = 2;
     /** The health a heart given at it costs. */
     public static final float HEART = 2.0F;
-    /** Neo Vitae's Rune of Self Sacrifice, and its reinforced one, which counts twice. */
-    static final Identifier RUNE = Identifier.fromNamespaceAndPath("neovitae", "rune_sacrifice_self");
-    static final Identifier REINFORCED_RUNE = Identifier.fromNamespaceAndPath("neovitae", "rune_2_sacrifice_self");
     private static final Component TITLE = Component.translatable("container.mechanicalmasteryreborn.hermetic_lab");
     /** Slots of Nullessence it holds: enough for the dearest Quintessence. */
     static final int NULLESSENCE_SLOTS = 8;
@@ -326,8 +319,7 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     /**
-     * Takes a heart of {@code player}'s, as Neo Vitae's self-sacrifice does, into Essentia Vitae, more for each
-     * self-sacrifice rune around, and says why not if it doesn't: only from its team's player, while its team's last stand
+     * Takes a heart of {@code player}'s into Essentia Vitae, and says why not if it doesn't: only from its team's player, while its team's last stand
      * runs and it bears the life spell, never a player's last heart, and not once it holds all it can.
      */
     public Optional<Component> giveHeart(Player player) {
@@ -349,24 +341,10 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
             return Optional.of(Component.translatable("mechanicalmasteryreborn.hermetic_lab.heart.full"));
         }
         player.setHealth(player.getHealth() - HEART);
-        int yield = (int) Math.round(ServerConfig.hermeticLabLifePerHeart() * (1 + ServerConfig.hermeticLabLifeRuneBonus() * runes()));
+        int yield = ServerConfig.hermeticLabLifePerHeart();
         setEssentia(Math.min(ESSENTIA_CAPACITY, essentia + yield));
         server.playSound(null, worldPosition, SoundEvents.PLAYER_HURT, SoundSource.PLAYERS, 1.0F, 0.8F);
         return Optional.empty();
-    }
-
-    /** The self-sacrifice runes within {@link #RUNE_REACH}, a reinforced one counting twice. */
-    int runes() {
-        if (level == null) {
-            return 0;
-        }
-        int runes = 0;
-        for (BlockPos at : BlockPos.betweenClosed(worldPosition.offset(-RUNE_REACH, -RUNE_REACH, -RUNE_REACH),
-                worldPosition.offset(RUNE_REACH, RUNE_REACH, RUNE_REACH))) {
-            Identifier block = BuiltInRegistries.BLOCK.getKey(level.getBlockState(at).getBlock());
-            runes += block.equals(RUNE) ? 1 : block.equals(REINFORCED_RUNE) ? 2 : 0;
-        }
-        return runes;
     }
 
     /**

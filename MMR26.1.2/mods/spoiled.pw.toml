@@ -1,0 +1,13 @@
+name = "Spoiled"
+filename = "Spoiled-neoforge-26.1.2-12.1.0.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "11a9e0acb6e6385b63e048769ac33177bff80ce2"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 8228737
+project-id = 364918

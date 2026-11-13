@@ -1,0 +1,13 @@
+name = "Quality Food"
+filename = "quality_food-26.1.2-2.4.7.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "95643ec1e1b5407a49a16c230eaaae7962645b14"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 9369674
+project-id = 973932

@@ -7,7 +7,5 @@
     "preventTransfer": false,
     "preventTravel": false
   },
-  "recipes": [
-    "mechanicalmasteryreborn:ara_vitae/vital_essence"
-  ]
+  "recipes": []
 }

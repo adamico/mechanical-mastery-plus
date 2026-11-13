@@ -270,7 +270,7 @@ public final class Recycling {
 
     /**
      * What {@code holder} makes, read as the rules read it, from its {@code result} or the first of its {@code results},
-     * or, as Neo Vitae's altar infusions name it, its {@code output} (#243), if it can be read.
+     * or, as some mods' recipes name it, its {@code output}, if it can be read.
      */
     public static Optional<Item> made(RecipeHolder<?> holder, DynamicOps<JsonElement> ops) {
         try {
