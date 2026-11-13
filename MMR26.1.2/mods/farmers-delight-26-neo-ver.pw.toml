@@ -1,0 +1,13 @@
+name = "Farmer's Delight 26 Neo Ver"
+filename = "FarmersDelight-26.1.2-1.3.3-fix8.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "bcbf86a26d2cad1aedac773fbe843e4ab6627759"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 9236195
+project-id = 1699768
