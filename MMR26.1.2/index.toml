@@ -509,12 +509,24 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/chicken_spaw
 hash = "27a5142d79936d19cbaf3cd6e2dac647a7ec6e2651e9a01248124a51d666c81c"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/cod_jar.json"
+hash = "071b089846c0b40ee11f4f349147eafc6634831c08a8ed9d1a73254b9a604813"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/cow_spawn_egg.json"
 hash = "282d0299ce869119a2406ef1a28df58891d6f9f75c43b552462ea72ce7e0bbf4"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/pig_spawn_egg.json"
 hash = "66ce11c00db6d3a8809802b3df61faed5a269d6db64e4a57b94cb45f2db04b82"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/rabbit_spawn_egg.json"
+hash = "7f7ab14599144a5e627708804b251cb346d8b581a2254e16693a615ed0e124b7"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/salmon_jar.json"
+hash = "01948178e135a27eb53ac5d435ec2f020d639d728271c5df9dd3a614600f2924"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/animals/sheep_spawn_egg.json"
@@ -669,12 +681,28 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/seeds/beetroot_seeds
 hash = "31dfe1379639d6333262b577586625aae6e5458f9e3533b747f41944182cda8d"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/seeds/cabbage_seeds.json"
+hash = "df82e48963598bab3ec98da67526f262cec32f830e989e0dd8b79faf1ad18d1a"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/seeds/carrot.json"
 hash = "c400640597504159eef2a01eb47d769eaecc672d3d4619ab4f07431b19969268"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/seeds/onion.json"
+hash = "95a1f0724edf08d72c2a88069723a876b3ea89ac2a0f66de06ead1f4f38aa84f"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/seeds/potato.json"
 hash = "56028fd7bf25e19884d554b7a8a138c885da30b6e1f941330c2e0e1eb5181d27"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/seeds/rice.json"
+hash = "aa8f7c2584382d86d0bf5aafc083da633af6d2ae154c636c1b2120dd7a54f189"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/seeds/tomato_seeds.json"
+hash = "3814ded33c0cba5a6eae51069925c5d764652107ae186f3a499e630a0ee0c6e2"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/seeds/wheat_seeds.json"
