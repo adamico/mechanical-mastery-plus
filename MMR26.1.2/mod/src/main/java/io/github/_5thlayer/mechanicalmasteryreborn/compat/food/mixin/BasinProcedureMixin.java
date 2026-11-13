@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(targets = "net.mcreator.butchery.procedures.BasinupdatetickProcedure")
 public abstract class BasinProcedureMixin {
 
-    @Inject(method = "execute", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "execute", at = @At("HEAD"), cancellable = true)
     private static void mechanicalmasteryreborn$locked(LevelAccessor world, double x, double y, double z, BlockState blockState,
                                                        CallbackInfo callback) {
         if (world instanceof Level level) {

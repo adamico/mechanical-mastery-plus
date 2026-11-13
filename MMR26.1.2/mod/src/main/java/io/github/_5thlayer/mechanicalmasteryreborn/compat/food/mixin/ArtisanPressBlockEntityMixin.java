@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(targets = "net.blay09.mods.pantryforblockheads.block.entity.ArtisanPressBlockEntity")
 public abstract class ArtisanPressBlockEntityMixin {
 
-    @Inject(method = "serverTick", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "serverTick", at = @At("HEAD"), cancellable = true)
     private static void mechanicalmasteryreborn$locked(Level level, BlockPos pos, BlockState state,
                                                        @Coerce BlockEntity entity, CallbackInfo callback) {
         if (ChainMachines.lockedAt(level, pos, state).isPresent()) {

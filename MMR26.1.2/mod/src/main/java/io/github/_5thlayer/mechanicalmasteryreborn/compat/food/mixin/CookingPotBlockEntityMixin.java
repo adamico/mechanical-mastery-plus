@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(targets = "vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity")
 public abstract class CookingPotBlockEntityMixin {
 
-    @Inject(method = "cookingTick", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "cookingTick", at = @At("HEAD"), cancellable = true)
     private static void mechanicalmasteryreborn$locked(Level level, BlockPos pos, BlockState state,
                                                        @Coerce BlockEntity entity, CallbackInfo callback) {
         if (ChainMachines.lockedAt(level, pos, state).isPresent()) {

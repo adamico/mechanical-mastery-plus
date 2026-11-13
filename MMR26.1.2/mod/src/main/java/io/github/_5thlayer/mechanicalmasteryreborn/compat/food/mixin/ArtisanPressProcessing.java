@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(targets = "net.blay09.mods.pantryforblockheads.block.entity.ArtisanPressBlockEntity")
 public interface ArtisanPressProcessing {
 
-    @Invoker(value = "setProcessing", remap = false)
+    @Invoker("setProcessing")
     void mechanicalmasteryreborn$setProcessing(boolean processing);
 }

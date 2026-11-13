@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(targets = "net.mcreator.butchery.procedures.MeatgrinderrecipeprocedureProcedure")
 public abstract class MeatGrinderProcedureMixin {
 
-    @Inject(method = "execute", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "execute", at = @At("HEAD"), cancellable = true)
     private static void mechanicalmasteryreborn$locked(LevelAccessor world, double x, double y, double z,
                                                        CallbackInfo callback) {
         if (world instanceof Level level) {

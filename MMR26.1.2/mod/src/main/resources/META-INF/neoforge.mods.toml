@@ -49,7 +49,7 @@ config = "${mod_id}.essence.mixins.json"
 [[mixins]]
 config = "${mod_id}.theurgy.mixins.json"
 
-# Life's chain machines (Agritech's planters, Butchery's, Pantry's press, FD's pot) do no work while life is locked,
+# Life's chain machines (Agritech's planters, Butchery's Meat Grinder and Basin, Pantry's Artisan Press, FD's Cooking Pot) do no work while life is locked,
 # each applied only with its mod installed (#362).
 [[mixins]]
 config = "${mod_id}.food.mixins.json"

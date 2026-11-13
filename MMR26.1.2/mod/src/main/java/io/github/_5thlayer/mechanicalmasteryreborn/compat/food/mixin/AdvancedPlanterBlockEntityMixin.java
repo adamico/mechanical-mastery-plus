@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(targets = "com.misterd.agritechevolved.blockentity.custom.AdvancedPlanterBlockEntity")
 public abstract class AdvancedPlanterBlockEntityMixin {
 
-    @Inject(method = "tick", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private static void mechanicalmasteryreborn$locked(Level level, BlockPos pos, BlockState state,
                                                        @Coerce BlockEntity entity, CallbackInfo callback) {
         if (ChainMachines.lockedAt(level, pos, state).isPresent()) {
