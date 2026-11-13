@@ -130,6 +130,10 @@ _Avoid_: freshness tier, food tier
 Quality Food's grade on a food, none, iron, gold or diamond, which the Vital Essence and the Hermetic Lab's life line ask for. It survives life's chain: what the Cooking Pot, the Artisan Press and an Assembler make has the average quality of the food that went in. A planter's crop rolls it at harvest, better on better soil and fertilizer, and an Animal Pen's products by its **feed quality**, the quality of what its animals were last fed, which the pen's cage keeps.
 _Avoid_: freshness, tier
 
+**Pelican**:
+The companion mod's vessel at the end of life's chain, which makes the Vital Essence by eating meals. It takes only meals, from automation, and eats each as it comes in. Once what it has eaten since its last Vital Essence holds enough saturation, enough kinds of meal and a high enough average quality, all three together, it digests the batch for a while, eating nothing meanwhile, and gives one Vital Essence. A stop or a reset loses the batch. Nothing crafts it: the Shop sells it from the start of the life challenge, and it is one of life's chain machines.
+_Avoid_: digester, stomach, maw
+
 **Assault**:
 The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from one gate at a time unless the team calls more, on one of four platforms it builds in the void around the island, with unbreakable bridges to it. The waves grow harder, with a breather between each step, at which the gate moves to another side at random, and never stop until the quota is filled or Overproduction reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, what its mobs break is the team's refund when it ends, and it pauses while no one is on the island.
 _Avoid_: raid, siege, invasion
@@ -177,7 +181,7 @@ _Avoid_: guide, quest book, wiki
 Where goods are traded for money: a second way to resources beside decomposing, and the skyblock's store for what no essence gives, as saplings, water and lava. A team buys what it lacks, and sells only the few goods the Shop takes, made things as metal blocks rather than whatever it has too much of; a fluid that only the Shop gives is never sold back. Whatever the Shop takes, it pays more for than what made it cost, at full price; the share the money handicap pays may leave a loss. It never buys what the first essence's mix holds, so a team's first money takes a step after decomposing; from the first win on, what a mix holds may be sold. It sells ores only as ore blocks, behind the money Permit, so a team's first ores come from Basic's mix; it is always the source of a team's first food: seeds and passive farm animals. Money was the heart of Mechanical Mastery Plus and stays a big part of its sequel. It is never locked, and the money handicap is what makes it costly.
 
 **Permit**:
-AdminShop's named unlock, held by a team's Account, which opens Offers gated by it. A Sell Permit opens Offers the Shop buys from the team, a Buy Permit Offers it sells to the team; one never opens both. The Shop sells none: a team holds only the two it is given, the money challenge's, which opens every Offer of its chain and is held while the chain is unlocked, from a start to a stop, and the protection win's, for good.
+AdminShop's named unlock, held by a team's Account, which opens Offers gated by it. A Sell Permit opens Offers the Shop buys from the team, a Buy Permit Offers it sells to the team; one never opens both. The Shop sells none: a team holds only those it is given: the money challenge's, which opens every Offer of its chain, the protection challenge's, for the Wave Caller, and the life challenge's, for the Pelican, each held while its chain is unlocked, from a start to a stop and past a win; and the protection win's, for good.
 _Avoid_: Trade Permit, license, tier
 
 **Gallery**:
