@@ -10,6 +10,8 @@
 - A Galvanic Essence takes half the reformations: a Salt or Sulfur Galvanic Charge takes 2 Reformed Salt or Sulfur in place of 4, each reformed from one salt or sulfur in place of two, in 7 seconds in place of 10, for 400 mercury flux in place of 200. One Reformation Array now feeds one Assembler, about one essence a minute, for the same FE (#342).
 - A Warding Essence takes one Charged Rift Shard, in place of two, so the Assault's Rift Shards keep one Assembler sealing about one essence a minute (#343).
 
+- The Shop sells soul sand, at $2000 like soul soil, since nothing else in the pack gives it.
+
 ## 0.0.6
 
 - A Mold is made three times as fast, so one Assembler making Molds keeps three casting copper, iron and gold busy.

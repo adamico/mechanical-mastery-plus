@@ -537,6 +537,10 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/sand.json"
 hash = "48c74798ae59fb2864e8e7b60222f1b8adb803a9902531c317c8c71469b55171"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/soul_sand.json"
+hash = "e4a91f3e13ebada07f1aa3c87c96779fa716a256abe6b475970fd35c50870f49"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/soul_soil.json"
 hash = "67029a72257963fbc3df51a197cbc7802932f3960afa48563680009ef6b7c817"
 
