@@ -82,9 +82,10 @@ dependencies {
     testImplementation 'com.google.code.gson:gson:2.13.2'
 }
 
-// The JUnit tests read the pack's data beside this folder, so a change there runs them again.
+// The JUnit tests read the pack's data and Spoiled's config beside this folder, so a change there runs them again.
 tasks.named('test') {
     inputs.dir('../kubejs/data').withPropertyName('packData').withPathSensitivity(PathSensitivity.RELATIVE)
+    inputs.file('../config/spoiled-common.toml').withPropertyName('spoiledConfig').withPathSensitivity(PathSensitivity.RELATIVE)
 }
 
 // The suite game tests, all named suite_*, run the pack's recipes on a real Assembler: the protection Chain's (#252),

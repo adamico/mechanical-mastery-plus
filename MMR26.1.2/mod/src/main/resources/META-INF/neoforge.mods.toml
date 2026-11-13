@@ -49,8 +49,9 @@ config = "${mod_id}.essence.mixins.json"
 [[mixins]]
 config = "${mod_id}.theurgy.mixins.json"
 
-# Life's chain machines (Agritech's planters, Pantry's Artisan Press, FD's Cooking Pot) do no work while life is locked,
-# each applied only with its mod installed (#362).
+# Life's chain machines (Agritech's planters, Pantry's Artisan Press, FD's Cooking Pot) do no work while life is locked
+# (#362), and Spoiled leaves the food in a Cooking for Blockheads fridge with an ice unit as it is (#363), each applied
+# only with its mod installed.
 [[mixins]]
 config = "${mod_id}.food.mixins.json"
 

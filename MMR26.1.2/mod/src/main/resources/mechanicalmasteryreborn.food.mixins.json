@@ -8,7 +8,8 @@
     "ArtisanPressBlockEntityMixin",
     "ArtisanPressProcessing",
     "CookingPotBlockEntityMixin",
-    "PlanterBlockEntityMixin"
+    "PlanterBlockEntityMixin",
+    "SpoilHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

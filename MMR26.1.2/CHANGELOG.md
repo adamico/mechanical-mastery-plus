@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Food spoils, life played or not, by spoil class: raw food rots into rotten flesh in about 20 minutes, ingredients and any other food in about 40, the Cooking Pot's meals in about 2 hours, and a few preserved goods (honey, dried kelp, smoked ham, Pantry's cheese, tofu and flatbread, golden food) never. Only Cooking for Blockheads' fridge keeps food: it ages at a quarter of the rate, and not at all with an ice unit. A shulker box no longer keeps it (#363).
 - Neo Vitae leaves the pack, and Agritech Evolved, Farmer's Delight (the 26 Neo Ver port), Animal Pens, Pantry for Blockheads, Cooking for Blockheads, Refined Cooking, Spoiled and Quality Food come in for life's food factory. The Advanced mix trades the Ara Vitae and Hellfire Forge for a Basic Planter, an oak Animal Pen, an Artisan Press and a Cooking Pot; the Basic mix loses the Tabula Rasa. The mixes take what those machines recycle into, and the Cooking Pot recycles into a bucket, not a water bucket. The Vital Essence has no recipe for now.
 - The Shop no longer sells raw ores, coal or redstone one at a time: they come from a mix, or from the ore blocks the money Permit opens.
 - The Shop prices crude oil as a consumable, as it does lava: $5 a bucket in place of $500.

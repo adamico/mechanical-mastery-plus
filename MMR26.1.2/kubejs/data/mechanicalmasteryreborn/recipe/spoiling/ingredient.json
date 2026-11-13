@@ -1,0 +1,9 @@
+{
+  "type": "spoiled:spoil_recipe",
+  "ingredient": "#mechanicalmasteryreborn:spoil_classes/ingredient",
+  "result": {
+    "id": "minecraft:rotten_flesh"
+  },
+  "spoiltime": 80,
+  "priority": 10
+}

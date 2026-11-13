@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn Core adds, 
 
 ## Unreleased
 
+- Food in a Cooking for Blockheads fridge with an ice unit no longer spoils, with Spoiled installed (#363).
 - Life's chain machines do no work on an island whose team hasn't started life, as energy's don't: Agritech's planters, Pantry's Artisan Press and Farmer's Delight's Cooking Pot. Their tooltips and EMI name the challenge. The Animal Pen, Cutting Board and butchering are never locked (#362).
 - Neo Vitae is gone: its Ara Vitae and Hellfire Forge no longer wait on the life chain, the Ritual of Full Stomach no longer counts in a Diet, the `life.pause_in_demon_realm` and `hermetic_lab.life.rune_bonus` server settings are removed, and a heart given at the Hermetic Lab becomes the same Essentia Vitae whatever stands around it (#360).
 - The Wave Caller (`wave_caller`), which the Shop sells from the protection challenge's start: placed anywhere on a team's island, its use brings on the next wave at once. The Assault's comes at a platform drawn at random from all four, the one in use included, ending any breather, so a team calling waves may fight on several fronts; with no Assault running, a home gate's next wave comes in the same gate. It calls nothing while the Assault waits for someone at home (#341).

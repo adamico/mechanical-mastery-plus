@@ -9,17 +9,23 @@ on:
     paths:
       - 'MMR26.1.2/mod/**'
       - 'MMR26.1.2/kubejs/data/**'
+      - 'MMR26.1.2/config/spoiled-common.toml'
       - 'MMR26.1.2/kubejs/server_scripts/decomposing.js'
       - 'MMR26.1.2/scripts/check_offers.py'
       - 'MMR26.1.2/scripts/test_check_offers.py'
+      - 'MMR26.1.2/scripts/check_spoil_classes.py'
+      - 'MMR26.1.2/scripts/test_check_spoil_classes.py'
       - '.github/workflows/mmr-mod-ci.yml'
   pull_request:
     paths:
       - 'MMR26.1.2/mod/**'
       - 'MMR26.1.2/kubejs/data/**'
+      - 'MMR26.1.2/config/spoiled-common.toml'
       - 'MMR26.1.2/kubejs/server_scripts/decomposing.js'
       - 'MMR26.1.2/scripts/check_offers.py'
       - 'MMR26.1.2/scripts/test_check_offers.py'
+      - 'MMR26.1.2/scripts/check_spoil_classes.py'
+      - 'MMR26.1.2/scripts/test_check_spoil_classes.py'
       - '.github/workflows/mmr-mod-ci.yml'
   workflow_dispatch:
 
@@ -76,6 +82,10 @@ jobs:
 
       # A case each of its price rules fails on (#319).
       - run: python3 ../scripts/test_check_offers.py
+
+      # A case each of the spoil classes check's rules flags (#363). The check itself needs the pack's jars, so it runs
+      # by hand, not here.
+      - run: python3 ../scripts/test_check_spoil_classes.py
 
       # The build, with the JUnit tests.
       - run: ./gradlew build
