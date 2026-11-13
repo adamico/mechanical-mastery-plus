@@ -27,20 +27,25 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
         "com.misterd.agritechevolved.blockentity.custom.AdvancedPlanterBlockEntity"})
 public abstract class PlanterQualityMixin {
 
+    /** The slot of a planter's soil. */
+    private static final int SOIL = 1;
+    /** How many output slots a planter has, the last of its inventory. */
+    private static final int OUTPUTS = 12;
+
     @ModifyArg(method = "harvestPlant", index = 2, at = @At(value = "INVOKE",
             target = "Lcom/misterd/agritechevolved/integration/PlanterPostHarvestEvent;<init>(Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/item/ItemStack;Ljava/util/List;)V"))
     private List<ItemStack> mechanicalmasteryreborn$quality(List<ItemStack> drops) {
         Level level = ((BlockEntity) (Object) this).getLevel();
         if (level != null) {
             PlanterOdds planter = (PlanterOdds) this;
-            double odds = planter.mechanicalmasteryreborn$soilGrowth(planter.mechanicalmasteryreborn$stack(PlanterOdds.SOIL))
+            double odds = planter.mechanicalmasteryreborn$soilGrowth(planter.mechanicalmasteryreborn$stack(SOIL))
                     * planter.mechanicalmasteryreborn$fertilizerYield();
             for (ItemStack drop : drops) {
                 FoodQuality.roll(drop, odds, 0, level.getRandom(), level.registryAccess());
             }
             int size = planter.mechanicalmasteryreborn$inventory().size();
             List<ItemStack> outputs = new ArrayList<>();
-            for (int slot = size - PlanterOdds.OUTPUTS; slot < size; slot++) {
+            for (int slot = size - OUTPUTS; slot < size; slot++) {
                 outputs.add(planter.mechanicalmasteryreborn$stack(slot));
             }
             FoodQuality.fitInto(drops, outputs);
