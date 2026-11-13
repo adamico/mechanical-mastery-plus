@@ -1,5 +1,7 @@
 # The life handicap is a hungrier Diet, not less max health
 
+Superseded by ADR 0021: life is a food factory, and food mods come in.
+
 Under the life handicap, every player of the playing team grows hungry faster, and keeps a Diet: the foods they have eaten lately. A food already in their Diet feeds them less, in hunger and saturation alike, the more often it is there. It lasts only while the challenge is played, and the Diet is forgotten when it ends, by a win or a reset. Neo Vitae's Essentia Vitae comes first from the players' own health, by bleeding into an orb, an altar's draw or the Feathered Knife, and health comes back only from food, so a team that eats one thing bleeds slowly. Winning life takes a factory that feeds its players a varied diet.
 
 We could have kept what the life challenge first read, less max health. Max health only caps how many hearts a player bleeds before waiting; how fast blood comes is set by healing, which food sets, and a skyblock has nothing else that a smaller health bar makes dangerous. We set aside three other handicaps: less Essentia Vitae from every source, as the money handicap halves sales, which makes the challenge longer without changing how it is played; slowed healing, which pushes a team to a mob line feeding a Well of Suffering and so gives the factory teeth, as protection's Defences already do (ADR 0010); and mortal stakes, a death costing the quota, which rewards care rather than building.
