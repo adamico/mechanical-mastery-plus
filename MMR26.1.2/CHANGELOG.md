@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Neo Vitae leaves the pack, and Agritech Evolved, Farmer's Delight (the 26 Neo Ver port), Animal Pens, Butchery, Pantry for Blockheads, Cooking for Blockheads, Refined Cooking and Spoiled come in for life's food factory. The Advanced mix trades the Ara Vitae and Hellfire Forge for a Basic Planter, an oak Animal Pen, a Meat Grinder, a Basin, an Artisan Press and a Cooking Pot; the Basic mix loses the Tabula Rasa. The Vital Essence has no recipe for now.
+- Neo Vitae leaves the pack, and Agritech Evolved, Farmer's Delight (the 26 Neo Ver port), Animal Pens, Butchery, Pantry for Blockheads, Cooking for Blockheads, Refined Cooking, Spoiled and Quality Food come in for life's food factory. The Advanced mix trades the Ara Vitae and Hellfire Forge for a Basic Planter, an oak Animal Pen, a Meat Grinder, a Basin, an Artisan Press and a Cooking Pot; the Basic mix loses the Tabula Rasa. The Vital Essence has no recipe for now.
 - The Shop no longer sells raw ores, coal or redstone one at a time: they come from a mix, or from the ore blocks the money Permit opens.
 - The Shop prices crude oil as a consumable, as it does lava: $5 a bucket in place of $500.
 - The Shop buys every Transmuted Essence for $2000, in place of $60 (Galvanic), $1500 (Warding), $340 (Vital) and $50 (Aureate): the price pays for the time a chain takes to set up, not for its inputs, and is the same for all four since the challenges are taken in any order.
