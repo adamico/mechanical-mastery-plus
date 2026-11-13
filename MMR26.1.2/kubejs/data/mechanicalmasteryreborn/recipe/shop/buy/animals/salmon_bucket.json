@@ -1,8 +1,0 @@
-{
-  "type": "adminshop:item_buying",
-  "price": 5000,
-  "result": {
-    "id": "minecraft:salmon_bucket",
-    "count": 1
-  }
-}

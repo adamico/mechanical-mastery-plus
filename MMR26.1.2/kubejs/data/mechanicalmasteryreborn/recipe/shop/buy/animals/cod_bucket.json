@@ -1,8 +1,0 @@
-{
-  "type": "adminshop:item_buying",
-  "price": 2147483647,
-  "result": {
-    "id": "minecraft:cod_bucket",
-    "count": 1
-  }
-}

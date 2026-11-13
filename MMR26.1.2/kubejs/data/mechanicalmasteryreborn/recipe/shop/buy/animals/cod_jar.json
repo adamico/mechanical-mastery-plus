@@ -1,0 +1,19 @@
+{
+  "type": "adminshop:item_buying",
+  "price": 2147483647,
+  "result": {
+    "id": "animal_pen:water_animal_container",
+    "count": 1,
+    "components": {
+      "animal_pen:mob": {
+        "entity_type": "minecraft:cod",
+        "tag": {}
+      },
+      "animal_pen:mob_data": {
+        "animal_count": 1,
+        "properties": {},
+        "cooldowns": {}
+      }
+    }
+  }
+}
