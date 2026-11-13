@@ -8,6 +8,6 @@ We could have kept Neo Vitae and only automated its blood, but its rituals, the 
 
 - Spoiled is always on, not only while life is played, and spoils at one rate. Only fridges keep food, so storage is part of the factory.
 - The modded machines that make meals don't keep Quality Food's quality, so the companion mod carries it through them and rolls it at harvest.
-- The chain's steps that a player would do by hand, the Cutting Board and butchering, are never locked. The companion mod's Homunculus can work them as chain steps.
+- The chain's one step a player would do by hand, the Cutting Board, is never locked. The companion mod's Homunculus can work it as a chain step. Butchering left with Butchery, whose Basin crashed when filled (#362).
 - The seeds, saplings and animals that start the raw step come from the Shop, not the mixes. The Advanced mix holds life's chain machines, as it holds the other chains'.
 - The Diet, faster hunger and the hand drive's food cost are unchanged. Neo Vitae's Demon Realm trip and its Ritual of Full Stomach go with it.
