@@ -1,0 +1,13 @@
+name = "Refined Cooking"
+filename = "refinedcooking-neoforge-26.1.2-7.3.1.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "12408931b61b660016dd6166069178ce6c1719ae"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 8531227
+project-id = 543972

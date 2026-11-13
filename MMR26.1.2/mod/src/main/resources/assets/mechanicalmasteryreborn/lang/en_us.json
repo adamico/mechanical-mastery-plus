@@ -278,7 +278,7 @@
   "mechanicalmasteryreborn.hermetic_lab.heart": "Self-Sacrifice",
   "mechanicalmasteryreborn.hermetic_lab.heart.held": "Essentia Vitae: %s mB",
   "mechanicalmasteryreborn.hermetic_lab.heart.give": "Give a heart",
-  "mechanicalmasteryreborn.hermetic_lab.heart.tooltip": "A heart of yours becomes Essentia Vitae for the life line, more with Runes of Self Sacrifice around.",
+  "mechanicalmasteryreborn.hermetic_lab.heart.tooltip": "A heart of yours becomes Essentia Vitae for the life line.",
   "mechanicalmasteryreborn.hermetic_lab.heart.no_spell": "Takes hearts only while your team bears the Life Spell here",
   "mechanicalmasteryreborn.hermetic_lab.heart.last": "You have no heart left to give",
   "mechanicalmasteryreborn.hermetic_lab.heart.full": "Holds all the Essentia Vitae it can",

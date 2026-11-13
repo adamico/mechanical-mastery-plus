@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The pack's own lists of each chain's machines (#246), the tags {@code ChainMachines} reads, in the pack this mod's
- * folder sits in: Theurgy's nine processing machines for energy, Neo Vitae's two for life, and none for protection or
- * money. No Theurgy or Neo Vitae is on the game tests' runs, so the game test
+ * folder sits in: Theurgy's processing machines for energy, none yet for life, whose food mods' machines are not hooked yet, and none for
+ * protection or money. No Theurgy or food mod is on the game tests' runs, so the game test
  * {@code chain_machines_of_every_chain_idle_until_its_challenge_starts} plays the same lock on the game-test pack's
  * stand-ins.
  */
@@ -45,8 +45,8 @@ class ChainMachineListTest {
     }
 
     @Test
-    void lifesMachinesAreTheAraVitaeAndTheHellfireForge() throws IOException {
-        assertEquals(List.of("neovitae:ara_vitae", "neovitae:hellfire_forge"), ids(Handicap.LIFE));
+    void lifeHasNoMachinesYet() throws IOException {
+        assertEquals(List.of(), ids(Handicap.LIFE));
     }
 
     @Test

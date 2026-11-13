@@ -1,0 +1,13 @@
+name = "Farmer's Delight Neoforged"
+filename = "FarmersDelight-Neoforged-MC26.1.2-FD1.3.4-3.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "411508d1d40885d9c5e9bb0e22d3800910c36baf"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 9526832
+project-id = 1782500

@@ -56,8 +56,12 @@ ServerEvents.recipes(event => {
     'theurgy:logistics_fluid_inserter',
     'theurgy:logistics_fluid_extractor',
     'theurgy:logistics_mercury_flux_connector',
-    'neovitae:ara_vitae',
-    'neovitae:hellfire_forge',
+    'agritechevolved:basic_planter',
+    'animal_pen:animal_pen_oak',
+    'butchery:meat_grinder',
+    'butchery:basin',
+    'pantryforblockheads:artisan_press',
+    'farmersdelight:cooking_pot',
     'mechanicalmasteryreborn:recycler_core_1',
     'mechanicalmasteryreborn:hand_drive',
     'mechanicalmasteryreborn:recycler_input',
@@ -91,6 +95,11 @@ ServerEvents.recipes(event => {
     'minecraft:copper_block',
     'minecraft:hay_block',
     'minecraft:resin_block',
+    'minecraft:oak_fence',
+    'minecraft:iron_chain',
+    'minecraft:heavy_weighted_pressure_plate',
+    'minecraft:wooden_shovel',
+    'minecraft:mud_bricks',
   ]
   event.recipes.mechanicalmasteryreborn.decomposing(IMPROVED_MIX, '1x mechanicalmasteryreborn:improved_mechanical_essence')
     .id('mechanicalmasteryreborn:decomposing/improved_mechanical_essence')
@@ -111,6 +120,9 @@ ServerEvents.recipes(event => {
     'minecraft:oak_slab',
     'minecraft:decorated_pot',
     'minecraft:brick',
+    'minecraft:iron_nugget',
+    'minecraft:smooth_stone_slab',
+    'minecraft:packed_mud',
   ]
   event.recipes.mechanicalmasteryreborn.decomposing(REGULAR_MIX, '1x mechanicalmasteryreborn:regular_mechanical_essence')
     .id('mechanicalmasteryreborn:decomposing/regular_mechanical_essence')
@@ -127,6 +139,7 @@ ServerEvents.recipes(event => {
     'minecraft:emerald',
     'minecraft:oak_log',
     'minecraft:dark_oak_log',
+    'minecraft:mud',
     'minecraft:pale_oak_log',
     'minecraft:kelp',
     'minecraft:cobblestone',
@@ -148,7 +161,6 @@ ServerEvents.recipes(event => {
     'theurgy:sal_ammoniac_crystal',
     'theurgy:alchemical_salt_strata',
     'theurgy:alchemical_sulfur_rotten_flesh',
-    'neovitae:tabula_rasa',
   ]
   event.recipes.mechanicalmasteryreborn.decomposing(BASIC_MIX, '1x mechanicalmasteryreborn:basic_mechanical_essence')
     .id('mechanicalmasteryreborn:decomposing/basic_mechanical_essence')

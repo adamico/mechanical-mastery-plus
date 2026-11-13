@@ -21,10 +21,10 @@ import net.minecraft.world.level.block.Blocks;
 /**
  * A chain machine does no work while its island's team hasn't started its challenge, and its crafting is never locked
  * (ADR 0007, #246). Each chain's machines are its tag, {@code mechanicalmasteryreborn:chain_machines/<handicap>}, not
- * what its stage file's recipes make: no Theurgy or Neo Vitae is on the game tests' runs, so the game-test pack's tags
- * hold the blast furnace and smoker for energy's and the brewing stand for life's, standing for the pack's own lists,
+ * what its stage file's recipes make: no Theurgy or food mod is on the game tests' runs, so the game-test pack's tags
+ * hold the blast furnace and smoker for energy's and the brewing stand, a test double, for life's, standing for the pack's own lists,
  * which {@code ChainMachineListTest} reads. Its stage files name the chain's own recipes, a smelting recipe for energy
- * and the shield's for protection, and the glass bottle's for life, which make no machine. Theurgy's and Neo Vitae's own hooks only ask
+ * and the shield's for protection, and the glass bottle's for life, which make no machine. The chain mods' own hooks only ask
  * {@link ChainMachines#lockedAt}, which these test.
  */
 final class ChainMachineTests {
