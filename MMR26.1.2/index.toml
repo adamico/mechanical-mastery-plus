@@ -481,8 +481,20 @@ file = "kubejs/data/mechanicalmasteryreborn/recipe/incubation/galvanic_core.json
 hash = "b98a7ca88292553a77d4f1fc2839884e625bc267064905726029cd53513fe36b"
 
 [[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/recycling/book.json"
+hash = "8c54fc56ec731eab66a6ae8990ebce8cec181651ccc0e4f2aa016c16bc4fcbbd"
+
+[[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/recycling/cooking_pot.json"
 hash = "97db45731d6f53c4c6c5c8c6a0dd89ac546b284583809451bd2f8b6434c7084b"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/recycling/packed_mud.json"
+hash = "c151d2919944e4b444cc120dd60a436f757ad2baaa15b45b84a80ac9d06fc022"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/recycling/string.json"
+hash = "aa35b3cebee6eb4d76604534a4defeaf7ac3270d836fa4657bccbfef380f21f8"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/reformation/reformed_salt.json"
