@@ -49,6 +49,11 @@ config = "${mod_id}.essence.mixins.json"
 [[mixins]]
 config = "${mod_id}.theurgy.mixins.json"
 
+# Life's chain machines (Agritech's planters, Butchery's, Pantry's press, FD's pot) do no work while life is locked,
+# each applied only with its mod installed (#362).
+[[mixins]]
+config = "${mod_id}.food.mixins.json"
+
 # The life handicap on a player's food data: faster hunger and the Diet (#244).
 [[mixins]]
 config = "${mod_id}.life.mixins.json"

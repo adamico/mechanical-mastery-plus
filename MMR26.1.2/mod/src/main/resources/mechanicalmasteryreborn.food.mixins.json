@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github._5thlayer.mechanicalmasteryreborn.compat.food.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AdvancedPlanterBlockEntityMixin",
+    "ArtisanPressBlockEntityMixin",
+    "ArtisanPressProcessing",
+    "BasinProcedureMixin",
+    "CookingPotBlockEntityMixin",
+    "MeatGrinderProcedureMixin",
+    "PlanterBlockEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
