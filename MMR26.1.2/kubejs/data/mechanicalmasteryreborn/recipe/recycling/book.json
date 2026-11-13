@@ -1,0 +1,8 @@
+{
+  "type": "mechanicalmasteryreborn:recycling",
+  "ingredient": {"ingredient": "minecraft:book", "count": 1},
+  "results": [
+    {"id": "minecraft:paper", "count": 3},
+    {"id": "minecraft:leather", "count": 1}
+  ]
+}

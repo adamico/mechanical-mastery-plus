@@ -1,0 +1,8 @@
+{
+  "type": "mechanicalmasteryreborn:recycling",
+  "ingredient": {"ingredient": "minecraft:packed_mud", "count": 1},
+  "results": [
+    {"id": "minecraft:mud", "count": 1},
+    {"id": "minecraft:wheat", "count": 1}
+  ]
+}
