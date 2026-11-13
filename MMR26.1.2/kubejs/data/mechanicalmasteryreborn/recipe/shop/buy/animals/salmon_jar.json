@@ -5,6 +5,7 @@
     "id": "animal_pen:water_animal_container",
     "count": 1,
     "components": {
+      "minecraft:item_name": "Aquatic Jar of Salmon",
       "animal_pen:mob": {
         "entity_type": "minecraft:salmon",
         "tag": {}
