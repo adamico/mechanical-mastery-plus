@@ -13,7 +13,7 @@
 	#This can be altered when custom food spoiling is set using a datapack) [default: 30]
 	# Default: 30
 	# Range: > 1
-	spoilRate = 30
+	spoilRate = 15
 	#When enabled Spoiled initializes spoiling for all vanilla food [default: true]
 	initializeSpoiling = true
 	#When enabled enables a special recipe to merge spoiling food together [default: false]
