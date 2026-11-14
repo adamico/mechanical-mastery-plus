@@ -53,7 +53,8 @@ public final class Pelican {
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MechanicalMasteryReborn.MOD_ID);
 
     public static final DeferredBlock<PelicanBlock> BLOCK = BLOCKS.registerBlock("pelican", PelicanBlock::new,
-            props -> props.mapColor(MapColor.TERRACOTTA_WHITE).strength(2.0F, 6.0F).sound(SoundType.DECORATED_POT));
+            props -> props.mapColor(MapColor.TERRACOTTA_WHITE).strength(2.0F, 6.0F).sound(SoundType.DECORATED_POT).noOcclusion()
+                    .lightLevel(state -> state.getValue(PelicanBlock.LIT) ? PelicanBlock.LIT_LIGHT : 0));
     public static final DeferredItem<BlockItem> ITEM = ITEMS.registerSimpleBlockItem("pelican", BLOCK);
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PelicanBlockEntity>> BLOCK_ENTITY =
             BLOCK_ENTITIES.register("pelican", () -> new BlockEntityType<>(PelicanBlockEntity::new, BLOCK.get()));

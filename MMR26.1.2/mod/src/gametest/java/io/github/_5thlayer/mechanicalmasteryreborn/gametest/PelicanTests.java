@@ -16,6 +16,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.life.Batch;
 import io.github._5thlayer.mechanicalmasteryreborn.life.Pelican;
+import io.github._5thlayer.mechanicalmasteryreborn.life.PelicanBlock;
 import io.github._5thlayer.mechanicalmasteryreborn.life.PelicanBlockEntity;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import net.minecraft.core.BlockPos;
@@ -81,6 +82,8 @@ final class PelicanTests {
         tests.test("pelican_keeps_its_batch_through_a_win", 1, PelicanTests::winKeepsBatch);
         tests.test("pelican_permit_given_on_a_start_and_taken_back_on_a_stop", 1, PelicanTests::permitStartAndStop);
         tests.test("pelican_permit_kept_through_a_win", 1, PelicanTests::permitKeptThroughAWin);
+        tests.test("pelican_is_lit_while_it_digests", 100, PelicanTests::litWhileDigesting);
+        tests.test("pelican_goes_dim_when_a_reset_loses_its_batch", 100, PelicanTests::dimAfterReset);
     }
 
     private static void configured(GameTestHelper helper) {
@@ -274,6 +277,47 @@ final class PelicanTests {
         Challenges.revert(server, team, Handicap.LIFE);
         helper.assertFalse(TestAccounts.holds(team, Pelican.PERMIT), "the Pelican's Permit past a reverted life win");
         helper.succeed();
+    }
+
+    /** Dim while it eats, lit while it digests a ready batch, counting its ticks down, and dim again once it gives the essence. */
+    private static void litWhileDigesting(GameTestHelper helper) {
+        playLife(helper);
+        place(helper);
+        feed(helper, Items.RABBIT_STEW, 2, 1);
+        helper.runAtTickTime(MARGIN, () -> {
+            helper.assertFalse(lit(helper), "a Pelican short of a ready batch is lit");
+            feedReady(helper);
+        });
+        helper.runAtTickTime(2 * MARGIN, () -> {
+            helper.assertTrue(lit(helper), "a digesting Pelican isn't lit");
+            int left = pelican(helper).digestingLeft();
+            helper.assertTrue(left > 0 && left < DIGESTING, "the digesting ticks left, " + left + ", aren't counting down");
+        });
+        helper.runAtTickTime(DIGESTING + 2 * MARGIN, () -> {
+            helper.assertFalse(output(helper).isEmpty(), "the Pelican gave nothing");
+            helper.assertFalse(lit(helper), "a Pelican that gave its essence is still lit");
+            helper.assertValueEqual(pelican(helper).digestingLeft(), 0, "the digesting ticks left once digested");
+            helper.succeed();
+        });
+    }
+
+    /** A reset loses a digesting batch, and the Pelican goes dim. */
+    private static void dimAfterReset(GameTestHelper helper) {
+        UUID team = playLife(helper);
+        place(helper);
+        feedReady(helper);
+        helper.runAtTickTime(MARGIN, () -> {
+            helper.assertTrue(lit(helper), "a digesting Pelican isn't lit");
+            Challenges.reset(helper.getLevel().getServer(), team);
+        });
+        helper.runAtTickTime(2 * MARGIN, () -> {
+            helper.assertFalse(lit(helper), "a Pelican whose batch a reset lost is still lit");
+            helper.succeed();
+        });
+    }
+
+    private static boolean lit(GameTestHelper helper) {
+        return helper.getBlockState(AT).getValue(PelicanBlock.LIT);
     }
 
     private static UUID playLife(GameTestHelper helper) {

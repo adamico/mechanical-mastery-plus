@@ -8,8 +8,8 @@ navigation:
 
 # The life challenge
 
-Its handicap is a hungrier **Diet**, and its Transmuted Essence is the **Vital Essence**, infused at the end of
-Neo Vitae's chain.
+Its handicap is a hungrier **Diet**, and its Transmuted Essence is the **Vital Essence**, which a **Pelican**
+makes from meals at the end of life's chain.
 
 ## The handicap
 
@@ -24,10 +24,23 @@ always does, and nothing worse.
 
 ## The chain
 
-Starting the challenge sets Neo Vitae's **Hellfire Forge** and **Ara Vitae** to work on your island.
+Starting the challenge sets life's chain machines to work on your island. The chain ends at the Pelican.
 
-The chain climbs Neo Vitae from the blood your team gives up to a tier-3 Ara Vitae, reached through the Demon
-Realm, where the **Vital Essence** is infused from a Tabula Spiritus with blood.
+## The Pelican
+
+<BlockImage id="pelican" scale="4" p:lit="true" />
+
+The **Pelican** is a glass vessel the Shop sells once your team starts the challenge. It makes the Vital Essence
+from meals, and eats nothing else: not raw food, not ingredients, and never rotten flesh. It takes them only from
+automation, on any side, and eats each as it comes in.
+
+What it has eaten since its last Vital Essence is its batch. Once the batch holds enough saturation, enough kinds of
+meal and a high enough average quality, all three at once, its contents light up and it digests the batch, eating
+nothing meanwhile. Then it gives one Vital Essence, and eats again once the essence is taken out. A varied menu of
+good meals fills it soonest; Jade shows how far its batch has got, and EMI has a page on it.
+
+Like every chain machine, it sits idle until your team starts life. A stop or a reset loses its batch, even one it
+was digesting; a win keeps it.
 
 ## The reset
 

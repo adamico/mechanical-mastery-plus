@@ -24,6 +24,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -94,6 +95,11 @@ public final class PelicanBlockEntity extends BlockEntity {
         return batch().ready(Pelican.thresholds());
     }
 
+    /** The ticks left to digest its ready batch; 0 while it eats, or holds a digested batch for want of room. */
+    public int digestingLeft() {
+        return current().digest();
+    }
+
     /** Its output, which holds one Vital Essence at most. */
     ResourceHandler<ItemResource> output() {
         return output;
@@ -154,6 +160,7 @@ public final class PelicanBlockEntity extends BlockEntity {
             setChanged();
         }
         if (!state.batch().ready(Pelican.thresholds())) {
+            light();
             return;
         }
         if (state.digest() > 0) {
@@ -165,6 +172,16 @@ public final class PelicanBlockEntity extends BlockEntity {
             output.set(0, ItemResource.of(new ItemStack(Essences.item(Essence.VITAL))), 1);
             state = State.EMPTY;
             setChanged();
+        }
+        light();
+    }
+
+    /** Lights its contents while it counts its digesting down, and dims them otherwise. */
+    private void light() {
+        boolean lit = state.digest() > 0;
+        BlockState blockState = getBlockState();
+        if (level != null && blockState.getValue(PelicanBlock.LIT) != lit) {
+            level.setBlock(worldPosition, blockState.setValue(PelicanBlock.LIT, lit), Block.UPDATE_ALL);
         }
     }
 
