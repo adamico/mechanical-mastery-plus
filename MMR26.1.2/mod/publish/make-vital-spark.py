@@ -10,14 +10,15 @@
 # It writes, both committed, in src/main/resources/assets/mechanicalmasteryreborn/textures/item/:
 #   - vital_spark.png, items/artifact_star.png with every pixel's hue turned to the Vital Port's green,
 #     its saturation and brightness kept;
-#   - vital_spark_spent.png, that star greyed: each pixel's luma times 0.6, a touch bluer.
+#   - vital_spark_spent.png, that star greyed: each pixel's luma times SPENT_DIM.
 import colorsys
 import sys
 
 from PIL import Image
 
 ITEM = 'src/main/resources/assets/mechanicalmasteryreborn/textures/item/'
-VITAL = (101, 219, 101)  # the Vital Port's colour
+VITAL = (101, 219, 101)  # the Vital Port's colour (NOTICE)
+SPENT_DIM = 0.6  # how dark a spent spark's grey is, as a share of the new one's luma
 HUE = colorsys.rgb_to_hsv(*(c / 255 for c in VITAL))[0]
 
 
@@ -38,8 +39,8 @@ def spent(img):
     for y in range(out.height):
         for x in range(out.width):
             r, g, b, a = px[x, y]
-            luma = (0.3 * r + 0.59 * g + 0.11 * b) * 0.6
-            px[x, y] = (round(luma), round(luma), min(255, round(luma * 1.05)), a)
+            luma = round((0.3 * r + 0.59 * g + 0.11 * b) * SPENT_DIM)
+            px[x, y] = (luma, luma, luma, a)
     return out
 
 
