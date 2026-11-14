@@ -120,6 +120,29 @@ public final class FoodQuality {
     }
 
     /**
+     * {@code held} and {@code incoming} as one stack, of their {@link #average} quality, when they are the same item, take
+     * quality and differ in nothing but it, so a slot that holds one item takes another of its quality (#372); empty
+     * otherwise, as when they are the same.
+     */
+    public static Optional<ItemStack> blend(ItemStack held, ItemStack incoming, HolderLookup.Provider registries) {
+        Optional<DataComponentType<Object>> component = component();
+        if (component.isEmpty() || held.isEmpty() || incoming.isEmpty() || !takesQuality(held)
+                || ItemStack.isSameItemSameComponents(held, incoming)) {
+            return Optional.empty();
+        }
+        ItemStack heldPlain = held.copy();
+        heldPlain.remove(component.get());
+        ItemStack incomingPlain = incoming.copy();
+        incomingPlain.remove(component.get());
+        if (!ItemStack.isSameItemSameComponents(heldPlain, incomingPlain)) {
+            return Optional.empty();
+        }
+        ItemStack blended = held.copyWithCount(held.getCount() + incoming.getCount());
+        carry(blended, List.of(held, incoming), registries);
+        return Optional.of(blended);
+    }
+
+    /**
      * Rolls {@code product}'s quality, as Quality Food rolls a crafted item's: each type, from the lowest, comes up at its
      * {@code chance} times {@code odds}, plus how far {@code weight} reaches into it, and the highest that came up is kept.
      * A planter's soil and fertilizer raise the {@code odds}, a pen's feed gives the {@code weight}: its quality's

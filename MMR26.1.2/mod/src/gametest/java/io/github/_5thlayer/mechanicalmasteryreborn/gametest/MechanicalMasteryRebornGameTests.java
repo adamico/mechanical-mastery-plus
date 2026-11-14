@@ -132,6 +132,7 @@ public final class MechanicalMasteryRebornGameTests {
             LastChapterFrameTests.register(tests);
             MintTests.register(tests);
             SuiteGalvanicTests.register(tests);
+            SuiteQualityTests.register(tests);
         }
         if (ModList.get().isLoaded("voidworks")) {
             SuiteQuintessenceTests.register(tests);
