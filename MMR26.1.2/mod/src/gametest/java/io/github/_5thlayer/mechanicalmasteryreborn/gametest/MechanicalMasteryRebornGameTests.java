@@ -111,6 +111,7 @@ public final class MechanicalMasteryRebornGameTests {
         PelicanTests.register(tests);
         HomunculusTests.register(tests);
         HomunculusClickTests.register(tests);
+        HomunculusTableTests.register(tests);
         if (!ModList.get().isLoaded("quality_food")) {
             QualityTests.register(tests);
         }

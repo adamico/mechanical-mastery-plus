@@ -64,6 +64,11 @@ import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
  * the player's own click path, never sneaking, as a fake player that carries its kindler's id, so a claim lets it work where
  * its kindler may. It holds what the click leaves in its hand, and drops by the block whatever else the click hands it; what
  * the block throws out it leaves where it falls. It never clicks empty-handed: with no item to take, it has no work.
+ *
+ * <p>Before any click, it sets a meal down on the Table a player assigned it, while the Table is clear and it has a meal,
+ * in {@link Homunculus#PLACES}, in its off hand or its Supply: it takes the meal from the first slot that has one into its
+ * off hand, walks to a space beside the Table and, at a work, places it on the block below as a sneaking player does, facing
+ * it, through the same click path. It takes its main hand's item from the first slot that holds no meal.
  */
 public final class HomunculusEntity extends PathfinderMob {
 
@@ -107,8 +112,12 @@ public final class HomunculusEntity extends PathfinderMob {
     private @Nullable BlockPos targetSpace;
     private Direction targetFace = Direction.NORTH;
     private int nextLook;
-    /** Whether its Supply, at its last look, held an item and it could walk there. */
-    private boolean supplyReady;
+    /** Whether its Supply, at its last look, held an item for its empty main hand, and it could walk there. */
+    private boolean toolReady;
+    /** Whether its Supply, at its last look, held a meal for its empty off hand, and it could walk there. */
+    private boolean mealReady;
+    /** The space beside its Table it sets a meal down from, at its last look, with the Table clear; or null. */
+    private @Nullable BlockPos placeSpace;
     /** The space beside its Supply it walks to, at its last look, or null. */
     private @Nullable BlockPos supplySpace;
     /** Ticks the work its stand calls for has waited. */
@@ -197,25 +206,45 @@ public final class HomunculusEntity extends PathfinderMob {
         return entityData.get(SUPPLIED);
     }
 
-    /** Whether it has a block to work and an item to work it with, held or in its Supply. */
+    /** Whether it has a meal to set down, or a block to work and an item to work it with, held or in its Supply. */
     boolean hasWork() {
-        var entity = standEntity();
-        return entity != null && target != null && (!getMainHandItem().isEmpty() || supplyReady);
+        return standEntity() != null && (placing() || target != null && (!getMainHandItem().isEmpty() || toolReady));
     }
 
-    /** The block it works, or null. */
-    @Nullable BlockPos target() {
-        return target;
-    }
-
-    /** The space it clicks its block from, or null. */
-    @Nullable BlockPos targetSpace() {
+    /** Where it walks for its work: beside its Supply to fetch, beside its Table to set a meal down, or to its block's space. */
+    @Nullable BlockPos walkTo() {
+        if (placing()) {
+            return getOffhandItem().isEmpty() ? supplySpace : placeSpace;
+        }
+        if (getMainHandItem().isEmpty()) {
+            return toolReady ? supplySpace : null;
+        }
         return targetSpace;
     }
 
-    /** The space beside its stand's Supply, if its hand is empty and it can walk there, so it does; else null. */
-    @Nullable BlockPos supplyToFetch() {
-        return supplyReady && getMainHandItem().isEmpty() ? supplySpace : null;
+    /** What it faces once it is there: the block under its Table, or the block it works; null while it walks to fetch. */
+    @Nullable BlockPos faces() {
+        var table = table();
+        if (placing() && table != null) {
+            return getOffhandItem().isEmpty() ? null : table.below();
+        }
+        return getMainHandItem().isEmpty() ? null : target;
+    }
+
+    /** Its stand's Table, or null. */
+    private @Nullable BlockPos table() {
+        var entity = standEntity();
+        return entity == null ? null : entity.table();
+    }
+
+    /** Whether it has a meal to set down now: its Table clear and a space beside it found, and a meal held or in its Supply. */
+    private boolean placing() {
+        var table = table();
+        return table != null && placeSpace != null && tableClear(table) && (!getOffhandItem().isEmpty() || mealReady);
+    }
+
+    private boolean tableClear(BlockPos table) {
+        return level().isLoaded(table) && level().getBlockState(table).canBeReplaced() && Homunculus.ringed(level(), table.below());
     }
 
     /**
@@ -236,21 +265,37 @@ public final class HomunculusEntity extends PathfinderMob {
 
     private Work tryWork() {
         var entity = standEntity();
-        if (entity == null || entity.kindler() == null || target == null || targetSpace == null || !worksAt(target)) {
+        if (entity == null || entity.kindler() == null) {
+            return Work.SPENT;
+        }
+        var table = entity.table();
+        if (placing() && table != null) {
+            if (getOffhandItem().isEmpty() || !blockPosition().equals(placeSpace)) {
+                return Work.WAITING;
+            }
+            use((ServerLevel) level(), entity.kindler(), table.below(), Direction.UP, InteractionHand.OFF_HAND);
+            // Its meal is a block it may work: it looks again at once.
+            nextLook = 0;
+            return Work.CLICKED;
+        }
+        if (target == null || targetSpace == null || !worksAt(target)) {
             return Work.SPENT;
         }
         if (getMainHandItem().isEmpty()) {
-            return supplyReady ? Work.WAITING : Work.SPENT;
+            return toolReady ? Work.WAITING : Work.SPENT;
         }
         if (!blockPosition().equals(targetSpace)) {
             return Work.WAITING;
         }
-        click((ServerLevel) level(), entity.kindler(), target, targetFace);
+        use((ServerLevel) level(), entity.kindler(), target, targetFace, InteractionHand.MAIN_HAND);
         return Work.CLICKED;
     }
 
-    /** Right-clicks the centre of {@code face} of {@code pos} with what it holds, as {@code kindler}, never sneaking. */
-    private void click(ServerLevel level, UUID kindler, BlockPos pos, Direction face) {
+    /**
+     * Right-clicks the centre of {@code face} of {@code pos} with what it holds in {@code hand}, as {@code kindler}: with its
+     * main hand never sneaking, a click; with its off hand sneaking, so the block doesn't take the click, a placing.
+     */
+    private void use(ServerLevel level, UUID kindler, BlockPos pos, Direction face, InteractionHand hand) {
         face(pos);
         if (clicker == null || clicker.level() != level || !clicker.getUUID().equals(kindler)) {
             clicker = new FakePlayer(level, new GameProfile(kindler, FAKE_NAME));
@@ -259,39 +304,54 @@ public final class HomunculusEntity extends PathfinderMob {
         Inventory inventory = player.getInventory();
         inventory.clearContent();
         player.snapTo(getX(), getY(), getZ(), getYRot(), 0F);
-        player.setShiftKeyDown(false);
-        player.setItemInHand(InteractionHand.MAIN_HAND, getMainHandItem());
+        player.setShiftKeyDown(hand == InteractionHand.OFF_HAND);
+        player.setItemInHand(hand, getItemInHand(hand));
         var hit = new BlockHitResult(Vec3.atCenterOf(pos).relative(face, 0.5), face, pos, false);
-        player.gameMode.useItemOn(player, level, player.getMainHandItem(), InteractionHand.MAIN_HAND, hit);
-        setItemInHand(InteractionHand.MAIN_HAND, player.getMainHandItem());
-        player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        player.gameMode.useItemOn(player, level, player.getItemInHand(hand), hand, hit);
+        setItemInHand(hand, player.getItemInHand(hand));
+        player.setItemInHand(hand, ItemStack.EMPTY);
+        player.setShiftKeyDown(false);
         for (int slot = 0; slot < inventory.getContainerSize(); slot++) {
             var handed = inventory.removeItemNoUpdate(slot);
             if (!handed.isEmpty()) {
                 Block.popResourceFromFace(level, pos, face, handed);
             }
         }
-        swing(InteractionHand.MAIN_HAND);
+        swing(hand);
     }
 
     /**
-     * Whether its stand's Supply holds an item, and it can walk to a space beside it, which it keeps as {@link #supplySpace}:
-     * a path to the storage itself would end on top of it, where a mob can't always stand.
+     * Looks at its stand's Supply: whether it holds an item for its empty main hand and a meal for its empty off hand, and the
+     * space beside it it can walk to, which it keeps as {@link #supplySpace}: a path to the storage itself would end on top
+     * of it, where a mob can't always stand.
      */
-    private boolean supplyReady(HomunculusStandBlockEntity entity) {
+    private void lookAtSupply(HomunculusStandBlockEntity entity) {
         supplySpace = null;
+        toolReady = false;
+        mealReady = false;
         var handler = entity.supplyHandler();
         if (handler == null || firstFilled(handler) < 0) {
-            return false;
+            return;
         }
-        for (var space : spacesBeside(entity.supply())) {
+        supplySpace = reachableBeside(entity.supply());
+        if (supplySpace != null) {
+            toolReady = getMainHandItem().isEmpty() && firstFilled(handler, false) >= 0;
+            mealReady = getOffhandItem().isEmpty() && firstFilled(handler, true) >= 0;
+        }
+    }
+
+    /** The first space beside {@code pos} it can walk to, nearest it first, or null. */
+    private @Nullable BlockPos reachableBeside(@Nullable BlockPos pos) {
+        if (pos == null) {
+            return null;
+        }
+        for (var space : spacesBeside(pos)) {
             var path = getNavigation().createPath(space, 0);
             if (path != null && path.canReach()) {
-                supplySpace = space;
-                return true;
+                return space;
             }
         }
-        return false;
+        return null;
     }
 
     /** The first slot of {@code handler} that holds anything, or -1. */
@@ -304,27 +364,52 @@ public final class HomunculusEntity extends PathfinderMob {
         return -1;
     }
 
-    /** With an empty hand, beside its Supply: takes one item, from the first slot that has any. */
+    /** The first slot of {@code handler} that holds a meal, if {@code meal}, or anything else; or -1. */
+    private static int firstFilled(ResourceHandler<ItemResource> handler, boolean meal) {
+        for (int slot = 0; slot < handler.size(); slot++) {
+            var resource = handler.getResource(slot);
+            if (!resource.isEmpty() && handler.getAmountAsInt(slot) > 0 && Homunculus.meal(resource.toStack(1)) == meal) {
+                return slot;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Beside its Supply: with a meal to set down and an empty off hand, takes one meal into it; else, with an empty main hand,
+     * one item that is no meal into that.
+     */
     private void takeFromSupply(HomunculusStandBlockEntity entity) {
         var supply = entity.supply();
-        if (!getMainHandItem().isEmpty() || supply == null || position().distanceToSqr(Vec3.atCenterOf(supply)) > SUPPLY_REACH_SQR) {
+        if (supply == null || position().distanceToSqr(Vec3.atCenterOf(supply)) > SUPPLY_REACH_SQR) {
             return;
         }
+        if (getOffhandItem().isEmpty() && placing()) {
+            if (!take(entity, supply, InteractionHand.OFF_HAND)) {
+                mealReady = false;
+            }
+        } else if (getMainHandItem().isEmpty() && !take(entity, supply, InteractionHand.MAIN_HAND)) {
+            toolReady = false;
+        }
+    }
+
+    /** Takes one item into {@code hand} from its Supply: a meal into its off hand, anything else into its main hand. */
+    private boolean take(HomunculusStandBlockEntity entity, BlockPos supply, InteractionHand hand) {
         var handler = entity.supplyHandler();
-        int slot = handler == null ? -1 : firstFilled(handler);
+        int slot = handler == null ? -1 : firstFilled(handler, hand == InteractionHand.OFF_HAND);
         if (slot < 0) {
-            supplyReady = false;
-            return;
+            return false;
         }
         var resource = handler.getResource(slot);
         try (var transaction = Transaction.openRoot()) {
             if (handler.extract(slot, resource, 1, transaction) == 1) {
                 transaction.commit();
-                setItemInHand(InteractionHand.MAIN_HAND, resource.toStack(1));
+                setItemInHand(hand, resource.toStack(1));
                 face(supply);
-                swing(InteractionHand.MAIN_HAND);
+                swing(hand);
             }
         }
+        return true;
     }
 
     /**
@@ -332,7 +417,9 @@ public final class HomunculusEntity extends PathfinderMob {
      * beside it, level with it or one below, that it can walk to, the space nearest it first.
      */
     private void lookForWork(HomunculusStandBlockEntity entity) {
-        supplyReady = getMainHandItem().isEmpty() && supplyReady(entity);
+        lookAtSupply(entity);
+        var table = entity.table();
+        placeSpace = table != null && tableClear(table) ? reachableBeside(table) : null;
         target = null;
         targetSpace = null;
         int across = ServerConfig.homunculusRangeAcross();
@@ -505,10 +592,12 @@ public final class HomunculusEntity extends PathfinderMob {
     @Override
     protected void dropCustomDeathLoot(ServerLevel level, DamageSource source, boolean killedByPlayer) {
         spawnAtLocation(level, Homunculus.vitalSpark(true));
-        var held = getMainHandItem();
-        if (!held.isEmpty()) {
-            spawnAtLocation(level, held.copy());
-            setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        for (var hand : InteractionHand.values()) {
+            var held = getItemInHand(hand);
+            if (!held.isEmpty()) {
+                spawnAtLocation(level, held.copy());
+                setItemInHand(hand, ItemStack.EMPTY);
+            }
         }
     }
 

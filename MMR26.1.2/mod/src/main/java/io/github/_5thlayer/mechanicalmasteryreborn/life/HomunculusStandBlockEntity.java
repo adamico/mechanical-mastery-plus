@@ -44,8 +44,8 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>Each work is a click of its Homunculus's (#368), which a finished work waits for, one at most, while it walks to the
  * block it works; with nothing to click, the work is spent. The stand keeps who kindled its Homunculus, as whom it clicks,
- * and the Supply a player assigned it, which it forgets once the storage is broken; a Homunculus raised again on it keeps
- * both.
+ * and the Supply and the Table a player assigned it, which it forgets once the storage is broken or the Table's ring of
+ * hoppers is; a Homunculus raised again on it keeps them.
  */
 public final class HomunculusStandBlockEntity extends BlockEntity {
 
@@ -71,7 +71,8 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
     private static final String KINDLER_KEY = "kindler";
     private static final String SUPPLY_KEY = "supply";
     private static final String SUPPLY_FACE_KEY = "supply_face";
-    /** Ticks between its checks that its Supply is still there. */
+    private static final String TABLE_KEY = "table";
+    /** Ticks between its checks that its Supply and its Table are still there. */
     private static final int SUPPLY_CHECK_INTERVAL = 20;
 
     private final Food food = new Food();
@@ -96,6 +97,8 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
     /** Its Homunculus's Supply, and the face it takes from, if a player assigned one. */
     private @Nullable BlockPos supply;
     private Direction supplyFace = Direction.UP;
+    /** Its Homunculus's Table, if a player assigned one. */
+    private @Nullable BlockPos table;
 
     public HomunculusStandBlockEntity(BlockPos pos, BlockState state) {
         super(Homunculus.STAND_ENTITY.get(), pos, state);
@@ -191,6 +194,17 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         return supply;
     }
 
+    /** Its Homunculus's Table, the space it sets its meals down in, or null if none is assigned. */
+    public @Nullable BlockPos table() {
+        return table;
+    }
+
+    /** Assigns the space at {@code pos}, above a block ringed by hoppers, as its Homunculus's Table. */
+    void assignTable(BlockPos pos) {
+        table = pos.immutable();
+        setChanged();
+    }
+
     /** Its Supply's items, from the face it takes from, or null with none assigned or its chunk unloaded. */
     @Nullable ResourceHandler<ItemResource> supplyHandler() {
         return supply == null || level == null || !level.isLoaded(supply) ? null
@@ -245,6 +259,11 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         if (supply != null && level.getGameTime() % SUPPLY_CHECK_INTERVAL == 0 && level.isLoaded(supply) && supplyHandler() == null) {
             // Its storage broken: forgotten.
             supply = null;
+            setChanged();
+        }
+        if (table != null && level.getGameTime() % SUPPLY_CHECK_INTERVAL == 0 && level.isLoaded(table) && !Homunculus.ringed(level, table.below())) {
+            // Its ring broken: forgotten.
+            table = null;
             setChanged();
         }
         if (homunculus == null || !(level.getEntity(homunculus) instanceof HomunculusEntity body)) {
@@ -325,6 +344,7 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         out.storeNullable(KINDLER_KEY, UUIDUtil.CODEC, kindler);
         out.storeNullable(SUPPLY_KEY, BlockPos.CODEC, supply);
         out.store(SUPPLY_FACE_KEY, Direction.CODEC, supplyFace);
+        out.storeNullable(TABLE_KEY, BlockPos.CODEC, table);
         food.serialize(out.child(FOOD_KEY));
         store.serialize(out.child(STORE_KEY));
     }
@@ -342,6 +362,7 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         kindler = in.read(KINDLER_KEY, UUIDUtil.CODEC).orElse(null);
         supply = in.read(SUPPLY_KEY, BlockPos.CODEC).orElse(null);
         supplyFace = in.read(SUPPLY_FACE_KEY, Direction.CODEC).orElse(Direction.UP);
+        table = in.read(TABLE_KEY, BlockPos.CODEC).orElse(null);
         food.deserialize(in.childOrEmpty(FOOD_KEY));
         store.deserialize(in.childOrEmpty(STORE_KEY));
     }

@@ -31,12 +31,12 @@ import net.minecraft.world.phys.Vec3;
  */
 final class HomunculusClickTests {
 
-    private static final String TOLD = "mechanicalmasteryreborn.homunculus.supply.";
+    static final String TOLD = "mechanicalmasteryreborn.homunculus.supply.";
 
-    private static final BlockPos BASE = new BlockPos(4, 1, 4);
-    private static final BlockPos PLAYER = new BlockPos(4, 1, 7);
-    private static final BlockPos CHEST = new BlockPos(1, 1, 1);
-    private static final BlockPos WORKED = new BlockPos(7, 1, 4);
+    static final BlockPos BASE = new BlockPos(4, 1, 4);
+    static final BlockPos PLAYER = new BlockPos(4, 1, 7);
+    static final BlockPos CHEST = new BlockPos(1, 1, 1);
+    static final BlockPos WORKED = new BlockPos(7, 1, 4);
 
     private HomunculusClickTests() {
     }
@@ -53,6 +53,7 @@ final class HomunculusClickTests {
         tests.test("homunculus_clicks_takes_from_beside_a_supply_it_cant_stand_on", 400, HomunculusClickTests::besideSupply);
         tests.test("homunculus_clicks_skips_a_block_whose_storage_is_empty", 600, HomunculusClickTests::skipsEmpty);
         tests.test("homunculus_clicks_from_atop_the_hoppers_round_its_block", 400, HomunculusClickTests::fromHoppers);
+        tests.test("homunculus_clicks_while_its_kindler_assigns", 400, HomunculusClickTests::whileAssigning);
     }
 
     /**
@@ -139,6 +140,26 @@ final class HomunculusClickTests {
         var worked = helper.absolutePos(WORKED.above());
         helper.succeedWhen(() -> {
             helper.assertFalse(ClickedBlock.clicks(worked).isEmpty(), "no click yet");
+            player.leave(helper);
+        });
+    }
+
+    /**
+     * Its kindler assigning again, its clicks, which carry its kindler's id, go to its block all the same, and assign
+     * nothing.
+     */
+    private static void whileAssigning(GameTestHelper helper) {
+        var player = woken(helper);
+        var homunculus = HomunculusTests.homunculus(helper, BASE);
+        helper.setBlock(WORKED, ClickedBlock.CLICKED.get());
+        chest(helper, CHEST, new ItemStack(Items.STICK, 3));
+        assign(helper, player, homunculus, CHEST);
+        sneakClick(player, homunculus);
+        var worked = helper.absolutePos(WORKED);
+        helper.succeedWhen(() -> {
+            helper.assertFalse(ClickedBlock.clicks(worked).isEmpty(), "no click yet");
+            helper.assertValueEqual(HomunculusTests.stand(helper, BASE).supply(), helper.absolutePos(CHEST), "its Supply");
+            helper.assertValueEqual(player.told(), List.of(TOLD + "assigning", TOLD + "set", TOLD + "assigning"), "what the action bar said");
             player.leave(helper);
         });
     }
@@ -296,7 +317,7 @@ final class HomunculusClickTests {
     }
 
     /** A Homunculus kindled at {@link #BASE} by a player standing at {@link #PLAYER}, jumpstarted, with stews to last. */
-    private static Clicker woken(GameTestHelper helper) {
+    static Clicker woken(GameTestHelper helper) {
         HomunculusTests.playLife(helper);
         var player = Clicker.of(helper);
         player.standAt(helper, PLAYER);
@@ -307,7 +328,7 @@ final class HomunculusClickTests {
         return player;
     }
 
-    private static void sneakClick(Clicker player, HomunculusEntity homunculus) {
+    static void sneakClick(Clicker player, HomunculusEntity homunculus) {
         player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
         player.setShiftKeyDown(true);
         player.interactOn(homunculus, InteractionHand.MAIN_HAND, homunculus.position());
@@ -315,18 +336,18 @@ final class HomunculusClickTests {
     }
 
     /** {@code player} assigns the chest at {@code chest} as the Homunculus's Supply. */
-    private static void assign(GameTestHelper helper, Clicker player, HomunculusEntity homunculus, BlockPos chest) {
+    static void assign(GameTestHelper helper, Clicker player, HomunculusEntity homunculus, BlockPos chest) {
         sneakClick(player, homunculus);
         player.click(helper, chest, Direction.UP, ItemStack.EMPTY);
         helper.assertValueEqual(HomunculusTests.stand(helper, BASE).supply(), helper.absolutePos(chest), "its Supply");
     }
 
-    private static void chest(GameTestHelper helper, BlockPos pos, ItemStack held) {
+    static void chest(GameTestHelper helper, BlockPos pos, ItemStack held) {
         helper.setBlock(pos, Blocks.CHEST);
         helper.getBlockEntity(pos, ChestBlockEntity.class).setItem(0, held);
     }
 
-    private static int count(GameTestHelper helper, BlockPos pos, Item item) {
+    static int count(GameTestHelper helper, BlockPos pos, Item item) {
         var chest = helper.getBlockEntity(pos, ChestBlockEntity.class);
         int count = 0;
         for (int slot = 0; slot < chest.getContainerSize(); slot++) {

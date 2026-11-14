@@ -9,8 +9,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 
 /**
- * An awake, fed and whole Homunculus's walk to its work (#368): with an empty hand, to its Supply, beside which it takes an
- * item; holding one, to the space it clicks the block it works from, where it stands facing the block. Its stand calls for
+ * An awake, fed and whole Homunculus's walk to its work (#368): to its Supply, beside which it takes an item or a meal;
+ * holding a meal for its clear Table, to a space beside the Table, facing the block under it; holding an item, to the space
+ * it clicks the block it works from, where it stands facing the block. Its stand calls for
  * each click. With no way on it waits where it stands, looking again.
  */
 final class WorkGoal extends Goal {
@@ -48,20 +49,18 @@ final class WorkGoal extends Goal {
 
     @Override
     public void tick() {
-        BlockPos supply = homunculus.supplyToFetch();
-        BlockPos space = homunculus.targetSpace();
-        BlockPos target = homunculus.target();
-        if (supply == null && space != null && target != null && homunculus.blockPosition().equals(space)) {
+        BlockPos to = homunculus.walkTo();
+        BlockPos faces = homunculus.faces();
+        if (to != null && faces != null && homunculus.blockPosition().equals(to)) {
             homunculus.getNavigation().stop();
-            homunculus.face(target);
+            homunculus.face(faces);
             return;
         }
         if (!homunculus.getNavigation().isDone() || homunculus.tickCount < nextLook) {
             return;
         }
         nextLook = homunculus.tickCount + LOOK_INTERVAL;
-        // To the space itself, beside its Supply or its block: a path that ends a block short of it ends off the space.
-        var to = supply != null ? supply : space;
+        // To the space itself, beside its Supply, its Table or its block: a path that ends a block short of it ends off the space.
         var path = to != null ? homunculus.getNavigation().createPath(to, 0) : null;
         if (path != null) {
             homunculus.getNavigation().moveTo(path, 1.0);

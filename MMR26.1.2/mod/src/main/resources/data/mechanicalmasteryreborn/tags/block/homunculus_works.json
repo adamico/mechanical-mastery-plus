@@ -3,6 +3,8 @@
     "mechanicalmasteryreborn:hand_drive",
     {"id": "farmersdelight:cutting_board", "required": false},
     {"id": "#farmersdelight:feasts", "required": false},
-    {"id": "#farmersdelight:pies", "required": false}
+    {"id": "#farmersdelight:pies", "required": false},
+    "minecraft:cake",
+    {"id": "#farmersdelight:drops_cake_slice", "required": false}
   ]
 }
