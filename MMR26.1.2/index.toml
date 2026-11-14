@@ -106,7 +106,7 @@ hash = "ba9a93fd7ff504848df2ce218cd28682b6aa1671f0f593f07a972c47785d3086"
 
 [[files]]
 file = "kubejs/assets/adminshop/lang/en_us.json"
-hash = "074579e281906d52c9e7f21983b0ea19468f5aabd10cf439b371cc913ee75cbe"
+hash = "246413e62bc2f9e051e0aaaf0f825a7c20bdb4643dc93b27589cefc4dd35fee9"
 
 [[files]]
 file = "kubejs/assets/emi/index/stacks/mechanicalmasteryreborn_manual.json"
@@ -571,6 +571,10 @@ hash = "e4a91f3e13ebada07f1aa3c87c96779fa716a256abe6b475970fd35c50870f49"
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ground/soul_soil.json"
 hash = "67029a72257963fbc3df51a197cbc7802932f3960afa48563680009ef6b7c817"
+
+[[files]]
+file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/life/pelican.json"
+hash = "9db96dbc979eaa805d881ffc499e41d1a753825994d75f44e14159f23d665be6"
 
 [[files]]
 file = "kubejs/data/mechanicalmasteryreborn/recipe/shop/buy/ores/coal_ore_block.json"
