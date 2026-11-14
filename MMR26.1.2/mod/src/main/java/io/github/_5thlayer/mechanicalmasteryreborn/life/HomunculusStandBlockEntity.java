@@ -91,10 +91,11 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
 
     /**
      * The stand's store, as a cable reaches it: there only while its Homunculus sleeps, insert only, to jumpstart it.
-     * Absent otherwise, so nothing offers FE to, or shows the store of, a stand that would take none.
+     * Absent otherwise, so nothing offers FE to, or shows the store of, a stand that would take none. A client, which
+     * doesn't know whether it sleeps, always has it, so Jade asks the server for it and shows what the server says.
      */
     public @Nullable EnergyHandler store() {
-        return sleeping() ? store : null;
+        return sleeping() || level != null && level.isClientSide() ? store : null;
     }
 
     /** Puts as much of {@code held} as the stand's food takes into it, from a player's hand, and says how many it took. */
