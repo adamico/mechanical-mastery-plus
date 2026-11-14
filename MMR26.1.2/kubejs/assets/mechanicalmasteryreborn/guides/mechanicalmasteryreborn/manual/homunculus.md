@@ -2,8 +2,8 @@
 navigation:
   title: The Homunculus
   parent: index.md
-  icon: vital_spark
-  position: 10
+  icon: homunculus_stand
+  position: 11
 ---
 
 # The Homunculus
