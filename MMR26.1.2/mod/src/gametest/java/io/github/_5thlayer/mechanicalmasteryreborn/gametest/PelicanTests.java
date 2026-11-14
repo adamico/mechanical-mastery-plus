@@ -300,13 +300,17 @@ final class PelicanTests {
         helper.succeed();
     }
 
-    /** A click with an empty hand takes out the Vital Essence it holds, and it eats again. */
+    /** A click with an empty hand takes out the Vital Essence it holds, and it eats again; one with another item in hand doesn't. */
     private static void takenByHand(GameTestHelper helper) {
         playLife(helper);
         place(helper);
         feedReady(helper);
         helper.runAtTickTime(DIGESTING + MARGIN, () -> {
             Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+            player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.TORCH));
+            helper.useBlock(AT, player);
+            helper.assertFalse(output(helper).isEmpty(), "a click with a torch in hand took the Vital Essence out");
+            player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
             helper.useBlock(AT, player);
             ItemStack taken = player.getMainHandItem();
             helper.assertTrue(taken.is(Essences.item(Essence.VITAL)) && taken.getCount() == 1, "the hand took " + taken + ", not a Vital Essence");

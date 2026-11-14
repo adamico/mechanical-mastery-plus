@@ -31,9 +31,9 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * A placed {@link Pelican}: fed and emptied by automation on any side, or by hand, a meal at a time in and its Vital
- * Essence out, its work in its {@link PelicanBlockEntity}. It
- * stands as the alchemical vessel it is named after (#371): a bronze base, a glass belly and a neck that rises and curves
- * back down into the belly on both sides. Its contents are dim while it eats and lit while it digests ({@link #LIT}).
+ * Essence out, its work in its {@link PelicanBlockEntity}. It stands as the alchemical vessel it is named after (#371): a
+ * bronze base, a glass belly and a neck that rises and curves back down into the belly on both sides. Its contents are
+ * dim while it eats and lit while it digests ({@link #LIT}).
  */
 public final class PelicanBlock extends BaseEntityBlock {
 
@@ -90,13 +90,17 @@ public final class PelicanBlock extends BaseEntityBlock {
 
     /**
      * A click with a meal in hand feeds it one, as automation would, if it would eat it now; the click is taken either
-     * way, so a meal is never eaten by the player while aiming at it. Anything else falls through to the item's own use.
+     * way, so a meal is never eaten by the player while aiming at it. An empty hand goes on to {@link #useWithoutItem};
+     * anything else falls through to the item's own use.
      */
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
             BlockHitResult hit) {
-        if (!Pelican.meal(ItemResource.of(stack))) {
+        if (stack.isEmpty()) {
             return InteractionResult.TRY_WITH_EMPTY_HAND;
+        }
+        if (!Pelican.meal(ItemResource.of(stack))) {
+            return InteractionResult.PASS;
         }
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
@@ -113,18 +117,21 @@ public final class PelicanBlock extends BaseEntityBlock {
         return eaten > 0 ? InteractionResult.SUCCESS_SERVER : InteractionResult.CONSUME;
     }
 
-    /** A click with an empty hand takes out the Vital Essence it holds, into the hand. */
+    /**
+     * A click with an empty hand takes out the Vital Essence it holds, into the player's inventory, or at their feet if it
+     * is full. The client can't see its output, so the click is taken either way, the same on both sides.
+     */
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        if (!(level.getBlockEntity(pos) instanceof PelicanBlockEntity pelican)) {
-            return InteractionResult.PASS;
-        }
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
+        if (!(level.getBlockEntity(pos) instanceof PelicanBlockEntity pelican)) {
+            return InteractionResult.PASS;
+        }
         ItemStack taken = pelican.takeOutput();
         if (taken.isEmpty()) {
-            return InteractionResult.PASS;
+            return InteractionResult.CONSUME;
         }
         player.getInventory().placeItemBackInInventory(taken);
         return InteractionResult.SUCCESS_SERVER;
