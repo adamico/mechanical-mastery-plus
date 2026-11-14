@@ -131,7 +131,7 @@ Quality Food's grade on a food, none, iron, gold or diamond, which the Vital Ess
 _Avoid_: freshness, tier
 
 **Pelican**:
-The companion mod's vessel at the end of life's chain, which makes the Vital Essence by eating meals. It takes only meals, from automation, and eats each as it comes in. Once what it has eaten since its last Vital Essence holds enough saturation, enough kinds of meal and a high enough average quality, all three together, it digests the batch for a while, eating nothing meanwhile, and gives one Vital Essence. A stop or a reset loses the batch. Nothing crafts it: the Shop sells it from the start of the life challenge, and it is one of life's chain machines.
+The companion mod's vessel at the end of life's chain, which makes the Vital Essence by eating meals. It takes only meals, from automation or a meal at a time by hand, and eats each as it comes in. Once what it has eaten since its last Vital Essence holds enough saturation, enough kinds of meal and a high enough average quality, all three together, it digests the batch for a while, eating nothing meanwhile, and gives one Vital Essence, which automation or an empty hand takes out. A stop or a reset loses the batch. Nothing crafts it: the Shop sells it from the start of the life challenge, and it is one of life's chain machines.
 _Avoid_: digester, stomach, maw
 
 **Assault**:

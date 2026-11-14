@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "lit=false": {
       "model": "mechanicalmasteryreborn:block/pelican"
+    },
+    "lit=true": {
+      "model": "mechanicalmasteryreborn:block/pelican_digesting"
     }
   }
 }

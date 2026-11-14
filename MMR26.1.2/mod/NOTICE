@@ -145,3 +145,23 @@ Source: https://github.com/malcolmriley/unused-textures, items/
         - reformed_salt.png is items/material_crystal_salt, copied unmodified.
         - reformed_sulfur.png is items/material_crystal_sulfur_fancy recoloured magenta.
 Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
+
+Pelican textures
+----------------
+
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/block/pelican_*.png and
+       pelican_contents_lit.png.mcmeta
+Author: Malcolm Riley
+Source: https://github.com/malcolmriley/unused-textures, blocks/, fluids/ and items/ at commit
+        8b85ad732023174d9a9da74e6bf2272d6c0bef17, made by publish/make-pelican.py
+        - pelican_bronze.png is blocks/block_metal_black_bronze_block_1, copied unmodified.
+        - pelican_glass.png is blocks/glass_crystal_0 with its clear pixels filled with a faint
+          pale glass (205, 230, 235) at alpha 56.
+        - pelican_contents_lit.png is fluids/fluid_molten recoloured to the Vital Port's colour
+          (101, 219, 101), each pixel that colour scaled by 0.3 plus its lightness, as the mint's
+          molten metals; pelican_contents_lit.png.mcmeta is fluids/fluid_molten.png.mcmeta, copied
+          unmodified. pelican_contents.png is its first frame at 45% brightness.
+        - pelican_drip.png is the drops of items/alchemy_pot_contents_dripping in the Vital Port's
+          colour, falling a pixel a frame down a strip of 16 frames (its .mcmeta is the
+          mod's own).
+Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)

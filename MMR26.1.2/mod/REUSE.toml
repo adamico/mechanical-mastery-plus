@@ -53,12 +53,14 @@ SPDX-FileCopyrightText = "2026 5thlayer"
 SPDX-License-Identifier = "MIT"
 
 # The Recycler's, the Electric Defence's, C.O.D.'s, the lab's, the Ports', the mint's and the Galvanic Charges',
-# Core's and reformed forms' and the Wave Caller's textures, from Malcolm Riley's unused-textures, some modified (NOTICE).
+# Core's and reformed forms', the Wave Caller's and the Pelican's textures, from Malcolm Riley's unused-textures, some modified (NOTICE).
 [[annotations]]
 path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/recycler_*.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/fe_defence_*.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/wave_caller_*.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/block/pelican_*.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/block/pelican_contents_lit.png.mcmeta",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/cod_*.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/lab_*.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/*_port_*.png",
