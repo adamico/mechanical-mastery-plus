@@ -5,6 +5,10 @@ package io.github._5thlayer.mechanicalmasteryreborn.life;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -17,13 +21,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jspecify.annotations.Nullable;
 
 /**
- * A placed {@link Pelican}: fed and emptied by automation on any side, its work in its {@link PelicanBlockEntity}. It
+ * A placed {@link Pelican}: fed and emptied by automation on any side, or by hand, a meal at a time in and its Vital
+ * Essence out, its work in its {@link PelicanBlockEntity}. It
  * stands as the alchemical vessel it is named after (#371): a bronze base, a glass belly and a neck that rises and curves
  * back down into the belly on both sides. Its contents are dim while it eats and lit while it digests ({@link #LIT}).
  */
@@ -78,6 +86,48 @@ public final class PelicanBlock extends BaseEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PelicanBlockEntity(pos, state);
+    }
+
+    /**
+     * A click with a meal in hand feeds it one, as automation would, if it would eat it now; the click is taken either
+     * way, so a meal is never eaten by the player while aiming at it. Anything else falls through to the item's own use.
+     */
+    @Override
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
+            BlockHitResult hit) {
+        if (!Pelican.meal(ItemResource.of(stack))) {
+            return InteractionResult.TRY_WITH_EMPTY_HAND;
+        }
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+        if (!(level.getBlockEntity(pos) instanceof PelicanBlockEntity pelican)) {
+            return InteractionResult.PASS;
+        }
+        int eaten;
+        try (var transaction = Transaction.openRoot()) {
+            eaten = pelican.face().insert(ItemResource.of(stack), 1, transaction);
+            transaction.commit();
+        }
+        stack.consume(eaten, player);
+        return eaten > 0 ? InteractionResult.SUCCESS_SERVER : InteractionResult.CONSUME;
+    }
+
+    /** A click with an empty hand takes out the Vital Essence it holds, into the hand. */
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        if (!(level.getBlockEntity(pos) instanceof PelicanBlockEntity pelican)) {
+            return InteractionResult.PASS;
+        }
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+        ItemStack taken = pelican.takeOutput();
+        if (taken.isEmpty()) {
+            return InteractionResult.PASS;
+        }
+        player.getInventory().placeItemBackInInventory(taken);
+        return InteractionResult.SUCCESS_SERVER;
     }
 
     @Override

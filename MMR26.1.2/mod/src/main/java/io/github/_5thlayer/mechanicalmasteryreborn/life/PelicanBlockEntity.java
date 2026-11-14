@@ -32,11 +32,12 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 import org.jspecify.annotations.Nullable;
 
 /**
- * A placed Pelican (#366). It eats each meal automation gives it as it comes in, into its batch, holding none; once the
+ * A placed Pelican (#366). It eats each meal automation or a hand gives it as it comes in, into its batch, holding none; once the
  * batch is {@link Batch#ready ready} it digests for {@link Pelican#digestingTicks} ticks, eating nothing, then puts one Vital
  * Essence in its output, which holds one, stamped with its team's attempt as it is made ({@code Making}), and begins a
  * new batch. It eats nothing while its team hasn't unlocked life's chain ({@link ChainMachines#lockedAt}), while it
@@ -98,6 +99,19 @@ public final class PelicanBlockEntity extends BlockEntity {
     /** The ticks left to digest its ready batch; 0 while it eats, or holds a digested batch for want of room. */
     public int digestingLeft() {
         return current().digest();
+    }
+
+    /** Takes out the Vital Essence its output holds, as a hand does; empty if it holds none. */
+    ItemStack takeOutput() {
+        ItemResource held = output.getResource(0);
+        if (held.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+        try (var transaction = Transaction.openRoot()) {
+            int taken = output.extract(0, held, output.getAmountAsInt(0), transaction);
+            transaction.commit();
+            return held.toStack(taken);
+        }
     }
 
     /** Its output, which holds one Vital Essence at most. */

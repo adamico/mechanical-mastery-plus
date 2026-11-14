@@ -23,9 +23,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
@@ -82,6 +85,8 @@ final class PelicanTests {
         tests.test("pelican_keeps_its_batch_through_a_win", 1, PelicanTests::winKeepsBatch);
         tests.test("pelican_permit_given_on_a_start_and_taken_back_on_a_stop", 1, PelicanTests::permitStartAndStop);
         tests.test("pelican_permit_kept_through_a_win", 1, PelicanTests::permitKeptThroughAWin);
+        tests.test("pelican_eats_a_meal_from_the_hand", 1, PelicanTests::handFed);
+        tests.test("pelican_gives_its_essence_to_an_empty_hand", 100, PelicanTests::takenByHand);
         tests.test("pelican_is_lit_while_it_digests", 100, PelicanTests::litWhileDigesting);
         tests.test("pelican_goes_dim_when_a_reset_loses_its_batch", 100, PelicanTests::dimAfterReset);
     }
@@ -277,6 +282,38 @@ final class PelicanTests {
         Challenges.revert(server, team, Handicap.LIFE);
         helper.assertFalse(TestAccounts.holds(team, Pelican.PERMIT), "the Pelican's Permit past a reverted life win");
         helper.succeed();
+    }
+
+    /** A click with a meal in hand feeds it one; anything else in hand it leaves there. */
+    private static void handFed(GameTestHelper helper) {
+        playLife(helper);
+        place(helper);
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.BREAD, 3));
+        helper.useBlock(AT, player);
+        helper.assertValueEqual(player.getMainHandItem().getCount(), 3, "the bread left in hand");
+        helper.assertValueEqual(pelican(helper).batch().meals(), 0, "the meals in the Pelican's batch after bread");
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.RABBIT_STEW, 3));
+        helper.useBlock(AT, player);
+        helper.assertValueEqual(player.getMainHandItem().getCount(), 2, "the rabbit stew left in hand");
+        helper.assertValueEqual(pelican(helper).batch().meals(), 1, "the meals in the Pelican's batch after a click");
+        helper.succeed();
+    }
+
+    /** A click with an empty hand takes out the Vital Essence it holds, and it eats again. */
+    private static void takenByHand(GameTestHelper helper) {
+        playLife(helper);
+        place(helper);
+        feedReady(helper);
+        helper.runAtTickTime(DIGESTING + MARGIN, () -> {
+            Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+            helper.useBlock(AT, player);
+            ItemStack taken = player.getMainHandItem();
+            helper.assertTrue(taken.is(Essences.item(Essence.VITAL)) && taken.getCount() == 1, "the hand took " + taken + ", not a Vital Essence");
+            helper.assertTrue(output(helper).isEmpty(), "the Pelican still holds " + output(helper));
+            helper.assertValueEqual(feed(helper, Items.MUSHROOM_STEW, 2, 1), 1, "the meal a Pelican emptied by hand ate");
+            helper.succeed();
+        });
     }
 
     /** Dim while it eats, lit while it digests a ready batch, counting its ticks down, and dim again once it gives the essence. */
