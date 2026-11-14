@@ -29,7 +29,11 @@ The rest of the pack:
 The protection, life and money challenges (#210), each one's chain locked until a team starts it (ADR 0007):
 
 - **Gateways to Eternity**: the protection challenge. The pack writes its gates: the Assault, which the companion mod sends at a playing team's island, and the home gate, a smaller one a team opens with a pearl once it has started protection. Only these gates give the Rift Shards its chain needs (ADR 0010).
-- **Neo Vitae**: the life challenge. Blood magic, paid for in the player's own health; its chain reaches a tier-3 Ara Vitae through the Demon Realm, where the Vital Essence is infused from a Tabula Spiritus.
+- **Agritech Evolved**, **Animal Pens**: the life challenge's raw step, crops and animals raised by machines, each rolling Quality Food's quality on what it gives (ADR 0021).
+- **Pantry for Blockheads**, **Farmer's Delight**: the life challenge's ingredients and meals, Farmer's Delight's Cooking Pot making the meals the Pelican eats; its Cutting Board, a hand step, is never locked and a Homunculus can work it.
+- **Cooking for Blockheads**, **Refined Cooking**: kitchens and fridges, the only storage that keeps food from spoiling.
+- **Spoiled**: food spoils as it ages, always on, so storage is part of life's factory.
+- **Quality Food**: a food's quality, which the Vital Essence asks for and the companion mod carries through life's chain.
 - **AdminShop**: the money challenge, and the Shop, which is never locked: the skyblock's store for seeds, spawn eggs, saplings, sand, ore blocks, water and lava, and where metal blocks sell. Its Offers are the pack's own, in `kubejs/data/mechanicalmasteryreborn/recipe/shop/`, one subfolder per type since the Shop lists them by id, checked by `scripts/check_offers.py`.
 
 Added from the pack's CurseForge profile:
@@ -62,4 +66,4 @@ Left out of the Showcase's list, as content with no role here: Animal Feeding Tr
 
 ## Libraries
 
-In the pack only because a mod above needs them: Apothic Attributes (Gateways to Eternity), Balm (Forgiving Void, KleeSlabs), Better Advanced Tooltips (KubeJS), Cloth Config, Collective, Configurable, Cupboard, FTB Library (FTB Chunks, FTB Teams, FTB Ultimine, AdminShop), FTB Teams (FTB Chunks, AdminShop, and the companion mod, which keeps each island's players in one FTB party), Fusion (Connected Glass), Fzzy Config, GeckoLib (Theurgy, Neo Vitae), JamLib, Kotlin for Forge, LibX (Skyblock Builder), MezzConfig (JEI), Modonomicon (Theurgy, Neo Vitae), Nanite Library, Patchouli (AdminShop's Econ Handbook), Placebo (Gateways to Eternity), Prickle, Puzzles Lib, Searchables, SuperMartijn642's Config Lib (Durability Tooltip), SuperMartijn642's Core Lib (Connected Glass), Titanium (Functional Storage) and YetAnotherConfigLib. A library no mod needs any more comes out with the mod.
+In the pack only because a mod above needs them: Apothic Attributes (Gateways to Eternity), Balm (Forgiving Void, KleeSlabs), Better Advanced Tooltips (KubeJS), Cloth Config, Collective, Configurable, Cupboard, FTB Library (FTB Chunks, FTB Teams, FTB Ultimine, AdminShop), FTB Teams (FTB Chunks, AdminShop, and the companion mod, which keeps each island's players in one FTB party), Fusion (Connected Glass), Fzzy Config, GeckoLib (Theurgy), JamLib, Kotlin for Forge, LibX (Skyblock Builder), MezzConfig (JEI), Modonomicon (Theurgy), Nanite Library, Patchouli (AdminShop's Econ Handbook), Placebo (Gateways to Eternity), Prickle, Puzzles Lib, Searchables, SuperMartijn642's Config Lib (Durability Tooltip), SuperMartijn642's Core Lib (Connected Glass), Titanium (Functional Storage) and YetAnotherConfigLib. A library no mod needs any more comes out with the mod.
