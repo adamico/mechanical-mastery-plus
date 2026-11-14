@@ -134,6 +134,18 @@ _Avoid_: freshness, tier
 The companion mod's vessel at the end of life's chain, which makes the Vital Essence by eating meals. It takes only meals, from automation or a meal at a time by hand, and eats each as it comes in. Once what it has eaten since its last Vital Essence holds enough saturation, enough kinds of meal and a high enough average quality, all three together, it digests the batch for a while, eating nothing meanwhile, and gives one Vital Essence, which automation or an empty hand takes out. A stop or a reset loses the batch. Nothing crafts it: the Shop sells it from the start of the life challenge, and it is one of life's chain machines.
 _Avoid_: digester, stomach, maw
 
+**Homunculus**:
+The companion mod's made figure, small, that lives at its **Homunculus Stand** and works from it. A **Vital Spark** used on a lightning rod set on a clay block kindles them: the clay and the rod become its two-block-tall stand, and the Homunculus rises beside it. A new one is full, and stands as a statue until a one-time jumpstart of FE from any source wakes it. Awake, it walks near its stand, works off its full belly, then eats from the stand's food, working faster on a better meal. Once it has nothing left to eat it falls asleep, a statue again, until a new jumpstart. It stands still while life's chain is locked, as after a stop, and works on through a reset. Dead, it leaves its Vital Spark, spent, which kindles one with an empty belly.
+_Avoid_: golem, servant, worker
+
+**Homunculus Stand**:
+What a Homunculus is kindled from and works from, two blocks tall, holding the food it eats and the FE that wakes it. A Vital Spark used on a stand with no Homunculus raises a new one. Broken, it drops itself and spills its food, and its Homunculus stands a statue for good. It is one of life's chain machines, and nothing crafts it.
+_Avoid_: pedestal, plinth, home
+
+**Vital Spark**:
+What kindles a lightning rod on a clay block into a Homunculus and its stand, made only while life is active or won. Kindling uses it up.
+_Avoid_: spark, animus, soul
+
 **Assault**:
 The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from one gate at a time unless the team calls more, on one of four platforms it builds in the void around the island, with unbreakable bridges to it. The waves grow harder, with a breather between each step, at which the gate moves to another side at random, and never stop until the quota is filled or Overproduction reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, what its mobs break is the team's refund when it ends, and it pauses while no one is on the island.
 _Avoid_: raid, siege, invasion

@@ -16,6 +16,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Attempts;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
+import io.github._5thlayer.mechanicalmasteryreborn.life.Homunculus;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.RecyclingTable;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
 import java.util.List;
@@ -54,6 +55,7 @@ public final class MechanicalMasteryRebornClient {
     public MechanicalMasteryRebornClient(IEventBus modBus) {
         modBus.addListener(MechanicalMasteryRebornClient::registerScreens);
         modBus.addListener(MechanicalMasteryRebornClient::registerRenderers);
+        modBus.addListener(MechanicalMasteryRebornClient::registerLayers);
         modBus.addListener(MechanicalMasteryRebornClient::registerFluidModels);
         modBus.addListener(MechanicalMasteryRebornClient::registerBlockTints);
         modBus.addListener((RegisterClientPayloadHandlersEvent event) -> event.register(RecyclingTable.TYPE,
@@ -121,6 +123,11 @@ public final class MechanicalMasteryRebornClient {
     private static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(Recycler.OUTPUT_ENTITY.get(), RecyclerOutputRenderer::new);
         event.registerBlockEntityRenderer(Defences.FE_DEFENCE_ENTITY.get(), FeDefenceRenderer::new);
+        event.registerEntityRenderer(Homunculus.HOMUNCULUS.get(), HomunculusRenderer::new);
+    }
+
+    private static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(HomunculusRenderer.LAYER, HomunculusModel::createBodyLayer);
     }
 
     /** Ward Tallow in the world, a tank or a pipe: vanilla water's sprites, drawn to be tinted, under a tallow tint; each molten metal its own. */

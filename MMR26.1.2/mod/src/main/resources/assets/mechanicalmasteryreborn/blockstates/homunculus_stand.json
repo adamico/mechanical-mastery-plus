@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=lower": { "model": "minecraft:block/clay" },
+    "half=upper": { "model": "minecraft:block/lightning_rod" }
+  }
+}

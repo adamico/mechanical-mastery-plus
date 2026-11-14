@@ -1,5 +1,6 @@
 {
   "recipes": [
-    "minecraft:glass_bottle"
+    "minecraft:glass_bottle",
+    "mechanicalmasteryreborn:gametest/vital_spark"
   ]
 }

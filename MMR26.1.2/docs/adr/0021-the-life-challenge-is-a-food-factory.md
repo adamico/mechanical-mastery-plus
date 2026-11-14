@@ -6,11 +6,14 @@ We could have kept Neo Vitae and only automated its blood, but its rituals, the 
 
 Life is the one challenge whose last step isn't a Craftworks Assembler recipe (#366). An Assembler takes a fixed list of ingredients, one per input slot, and can't tell meals apart beyond what one slot's ingredient checks, so a set of distinct meals needed a mixin on Craftworks' machine and capped the set at its five slots. Feeding fits the life theme better: the Pelican eats, as the team does under the handicap, and a batch fills up over time, which a recipe can't do. A lower tier asks for more Vital Essence through the quota, as the other challenges do, not for a harder batch.
 
+The Homunculus that works the chain's hand steps is a mob built like vanilla's golems, as A Touch of Darkness's Lampad is, not a figure drawn on a block. It has to walk to what it works and swing at it, and a block can do neither. Like an iron golem from its pumpkin, it is made in the world, not crafted: a Vital Spark used on a lightning rod set on a clay block calls down a harmless strike, the clay and the rod become its two-block-tall stand, and it rises beside it. Only the Vital Spark has a recipe, so life's stage file locks the Homunculus by locking the spark. A stand built in a crafting grid and a Homunculus item seated on it were the first design, and played as furniture rather than as a made servant.
+
 ## Consequences
 
 - Spoiled is always on, not only while life is played, and spoils at one rate. Only fridges keep food, so storage is part of the factory.
 - The modded machines that make meals don't keep Quality Food's quality, so the companion mod carries it through them and rolls it at harvest.
 - The chain's one step a player would do by hand, the Cutting Board, is never locked. The companion mod's Homunculus can work it as a chain step. Butchering left with Butchery, whose Basin crashed when filled (#362).
 - The seeds, saplings and animals that start the raw step come from the Shop, not the mixes. The Advanced mix holds life's chain machines, as it holds the other chains'.
+- The Homunculus and its stand have no recipe. A dead Homunculus leaves its Vital Spark, spent, which raises another with an empty belly, so a death costs food, not a new spark. A broken stand leaves its Homunculus a statue for good.
 - The Shop sells the Pelican from the start of life, as it sells the Wave Caller from the start of protection; nothing crafts it.
 - The Diet, faster hunger and the hand drive's food cost are unchanged. Neo Vitae's Demon Realm trip and its Ritual of Full Stomach go with it.

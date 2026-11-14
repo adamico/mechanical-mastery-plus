@@ -22,6 +22,15 @@ null_shard.png in the same folder) are not third-party: publish/make-shards.py d
 alone, reading no other image, only the Warding Essence's and Nullessence's colours copied in as
 numbers, so they are this repository's own work.
 
+The Homunculus
+--------------
+
+The Homunculus's model (client/HomunculusModel.java) is twelve boxes reduced by hand from a CC0
+sculpt, the "Homunculus" model on MakerWorld (https://makerworld.com/en/models/2537324), credited
+here though CC0 asks for no credit. Its textures (textures/entity/homunculus/homunculus.png and
+homunculus_statue.png) are not third-party: publish/make-homunculus.py paints them from code alone.
+Licence of the sculpt: CC0 1.0
+
 Recycler textures
 -----------------
 

@@ -248,6 +248,42 @@ public final class ServerConfig {
             .comment("The ticks a Pelican digests a ready batch for, eating nothing, before it gives a Vital Essence. 600 is half a minute.")
             .defineInRange("life.pelican.digesting", 600, 0, 1_728_000);
 
+    /** The FE that wakes a sleeping Homunculus (#367). */
+    public static final ModConfigSpec.IntValue HOMUNCULUS_JUMPSTART = BUILDER
+            .comment("The FE a Homunculus Stand must take, from any source, to wake its new or starved Homunculus. Spent as it wakes.")
+            .defineInRange("life.homunculus.jumpstart", 10_000, 1, 1_000_000_000);
+
+    /** How long a point of a food's hunger keeps a Homunculus working. */
+    public static final ModConfigSpec.IntValue HOMUNCULUS_TICKS_PER_HUNGER = BUILDER
+            .comment("The ticks a Homunculus works for each point of hunger the food it eats fills. 200 is ten seconds.")
+            .defineInRange("life.homunculus.ticks_per_hunger", 200, 1, 1_728_000);
+
+    /** The hunger points a new Homunculus's belly holds. */
+    public static final ModConfigSpec.IntValue HOMUNCULUS_FULL = BUILDER
+            .comment("The hunger points a newly built Homunculus is full with, worked off before it first eats. 20 is a player's full bar.")
+            .defineInRange("life.homunculus.full", 20, 0, 1_000_000);
+
+    /** The ticks between a Homunculus's works on a food of no quality. */
+    public static final ModConfigSpec.IntValue HOMUNCULUS_INTERVAL = BUILDER
+            .comment("The ticks between two of a Homunculus's works while it eats a food of no quality.")
+            .defineInRange("life.homunculus.interval", 40, 1, 1_728_000);
+
+    /** How much faster each Quality Food level makes a Homunculus work. */
+    public static final ModConfigSpec.DoubleValue HOMUNCULUS_SPEED_UP = BUILDER
+            .comment("How much faster a Homunculus works for each Quality Food level of the food it eats: iron 1, gold 2, diamond 3.",
+                    "Its interval is divided by 1 + this times the level, so 0.5 makes a diamond meal two and a half times as fast.")
+            .defineInRange("life.homunculus.speed_up", 0.5, 0.0, 100.0);
+
+    /** How far across from its stand an awake Homunculus walks. */
+    public static final ModConfigSpec.IntValue HOMUNCULUS_RANGE_ACROSS = BUILDER
+            .comment("How many blocks across from its stand an awake Homunculus walks.")
+            .defineInRange("life.homunculus.range_across", 8, 1, 64);
+
+    /** How far up or down from its stand an awake Homunculus walks. */
+    public static final ModConfigSpec.IntValue HOMUNCULUS_RANGE_UP = BUILDER
+            .comment("How many blocks up or down from its stand an awake Homunculus walks.")
+            .defineInRange("life.homunculus.range_up", 4, 0, 64);
+
     /** How long a team waits between emergency saplings from its lab: a Minecraft day (#302). */
     public static final ModConfigSpec.IntValue LAB_SAPLING_COOLDOWN = BUILDER
             .comment("The ticks a team waits after its lab gives it an emergency sapling, for a dirt, before it gives another.",
@@ -478,6 +514,41 @@ public final class ServerConfig {
     /** The ticks a Pelican digests a ready batch for. */
     public static int pelicanDigesting() {
         return SPEC.isLoaded() ? PELICAN_DIGESTING.getAsInt() : PELICAN_DIGESTING.getDefault();
+    }
+
+    /** The FE that wakes a sleeping Homunculus. */
+    public static int homunculusJumpstart() {
+        return SPEC.isLoaded() ? HOMUNCULUS_JUMPSTART.getAsInt() : HOMUNCULUS_JUMPSTART.getDefault();
+    }
+
+    /** The ticks a point of a food's hunger keeps a Homunculus working. */
+    public static int homunculusTicksPerHunger() {
+        return SPEC.isLoaded() ? HOMUNCULUS_TICKS_PER_HUNGER.getAsInt() : HOMUNCULUS_TICKS_PER_HUNGER.getDefault();
+    }
+
+    /** The hunger points a new Homunculus's belly holds. */
+    public static int homunculusFull() {
+        return SPEC.isLoaded() ? HOMUNCULUS_FULL.getAsInt() : HOMUNCULUS_FULL.getDefault();
+    }
+
+    /** The ticks between a Homunculus's works on a food of no quality. */
+    public static int homunculusInterval() {
+        return SPEC.isLoaded() ? HOMUNCULUS_INTERVAL.getAsInt() : HOMUNCULUS_INTERVAL.getDefault();
+    }
+
+    /** How much faster each Quality Food level makes a Homunculus work. */
+    public static double homunculusSpeedUp() {
+        return SPEC.isLoaded() ? HOMUNCULUS_SPEED_UP.getAsDouble() : HOMUNCULUS_SPEED_UP.getDefault();
+    }
+
+    /** How many blocks across from its stand an awake Homunculus walks. */
+    public static int homunculusRangeAcross() {
+        return SPEC.isLoaded() ? HOMUNCULUS_RANGE_ACROSS.getAsInt() : HOMUNCULUS_RANGE_ACROSS.getDefault();
+    }
+
+    /** How many blocks up or down from its stand an awake Homunculus walks. */
+    public static int homunculusRangeUp() {
+        return SPEC.isLoaded() ? HOMUNCULUS_RANGE_UP.getAsInt() : HOMUNCULUS_RANGE_UP.getDefault();
     }
 
     /** The food exhaustion a hand drive's turn that counts adds. */

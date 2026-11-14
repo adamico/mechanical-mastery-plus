@@ -1,0 +1,12 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting",
+  "ingredients": [
+    { "ingredient": "mechanicalmasteryreborn:vital_essence", "count": 1 },
+    { "ingredient": "minecraft:egg", "count": 1 }
+  ],
+  "results": [
+    { "id": "mechanicalmasteryreborn:vital_spark", "count": 1 }
+  ],
+  "time": 100
+}

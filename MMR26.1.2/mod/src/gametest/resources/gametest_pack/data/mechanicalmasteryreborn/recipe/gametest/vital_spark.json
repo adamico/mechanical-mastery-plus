@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": ["minecraft:glowstone_dust", "minecraft:egg"],
+  "result": {"id": "mechanicalmasteryreborn:vital_spark", "count": 1}
+}
