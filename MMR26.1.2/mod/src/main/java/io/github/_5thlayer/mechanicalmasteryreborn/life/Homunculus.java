@@ -83,7 +83,7 @@ public final class Homunculus {
         modBus.addListener(Homunculus::registerCapabilities);
         modBus.addListener((EntityAttributeCreationEvent event) -> event.put(HOMUNCULUS.get(), HomunculusEntity.createAttributes().build()));
         NeoForge.EVENT_BUS.addListener(Kindling::kindle);
-        NeoForge.EVENT_BUS.addListener(SupplyAssignment::click);
+        NeoForge.EVENT_BUS.addListener(Assignment::click);
     }
 
     /** {@link HomunculusPace#interval} at the server config's interval and speed-up. */

@@ -31,7 +31,7 @@ import net.minecraft.world.phys.Vec3;
  */
 final class HomunculusClickTests {
 
-    static final String TOLD = "mechanicalmasteryreborn.homunculus.supply.";
+    static final String TOLD = "mechanicalmasteryreborn.homunculus.assign.";
 
     static final BlockPos BASE = new BlockPos(4, 1, 4);
     static final BlockPos PLAYER = new BlockPos(4, 1, 7);
@@ -160,7 +160,7 @@ final class HomunculusClickTests {
         helper.succeedWhen(() -> {
             helper.assertFalse(ClickedBlock.clicks(worked).isEmpty(), "no click yet");
             helper.assertValueEqual(HomunculusTests.stand(helper, BASE).supply(), helper.absolutePos(CHEST), "its Supply");
-            helper.assertValueEqual(player.told(), List.of(TOLD + "assigning", TOLD + "set", TOLD + "assigning"), "what the action bar said");
+            helper.assertValueEqual(player.told(), List.of(TOLD + "assigning", TOLD + "supply_set", TOLD + "assigning"), "what the action bar said");
             player.leave(helper);
         });
     }
@@ -327,7 +327,7 @@ final class HomunculusClickTests {
         sneakClick(player, homunculus);
         player.click(helper, other, Direction.UP, ItemStack.EMPTY);
         helper.assertValueEqual(HomunculusTests.stand(helper, BASE).supply(), helper.absolutePos(CHEST), "its Supply after a cancelled assigning");
-        helper.assertValueEqual(player.told(), List.of(TOLD + "assigning", TOLD + "too_far", TOLD + "not_storage", TOLD + "set", TOLD + "assigning",
+        helper.assertValueEqual(player.told(), List.of(TOLD + "assigning", TOLD + "too_far", TOLD + "refused", TOLD + "supply_set", TOLD + "assigning",
                 TOLD + "cancelled"), "what the action bar said");
         var visitor = Clicker.of(helper);
         visitor.setGameMode(GameType.ADVENTURE);

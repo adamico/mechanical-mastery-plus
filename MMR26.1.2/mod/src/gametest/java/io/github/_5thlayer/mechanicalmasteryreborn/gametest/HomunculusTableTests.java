@@ -10,6 +10,7 @@ import static io.github._5thlayer.mechanicalmasteryreborn.gametest.HomunculusCli
 
 import java.util.List;
 
+import io.github._5thlayer.mechanicalmasteryreborn.life.HomunculusEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CarvedPumpkinBlock;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 
 /**
  * The Homunculus's Table (#368): the spot a player assigns it above a block ringed by eight hoppers, where it sets down the
@@ -25,7 +27,6 @@ import net.minecraft.world.level.block.CarvedPumpkinBlock;
  */
 final class HomunculusTableTests {
 
-    private static final String TABLE_TOLD = "mechanicalmasteryreborn.homunculus.table.";
     /** The block ringed by hoppers. */
     private static final BlockPos RINGED = WORKED;
     private static final BlockPos TABLE = RINGED.above();
@@ -38,6 +39,8 @@ final class HomunculusTableTests {
         tests.test("homunculus_table_sets_down_before_it_clicks", 400, HomunculusTableTests::beforeClicking);
         tests.test("homunculus_table_waits_while_it_is_taken", 600, HomunculusTableTests::waitsWhileTaken);
         tests.test("homunculus_table_a_player_assigns", 40, HomunculusTableTests::assigns);
+        tests.test("homunculus_table_clicks_on_past_a_meal_it_cant_set_down", 600, HomunculusTableTests::cantSetDown);
+        tests.test("homunculus_table_puts_back_its_meal_once_its_table_is_gone", 600, HomunculusTableTests::tableGone);
     }
 
     /**
@@ -71,7 +74,7 @@ final class HomunculusTableTests {
         var near = new BlockPos(4, 1, 1);
         helper.setBlock(near, ClickedBlock.CLICKED.get());
         HomunculusClickTests.chest(helper, CHEST, new ItemStack(Items.STICK));
-        helper.getBlockEntity(CHEST, net.minecraft.world.level.block.entity.ChestBlockEntity.class).setItem(1, new ItemStack(Items.CARVED_PUMPKIN));
+        helper.getBlockEntity(CHEST, ChestBlockEntity.class).setItem(1, new ItemStack(Items.CARVED_PUMPKIN));
         HomunculusClickTests.assign(helper, player, homunculus, CHEST);
         assignTable(helper, player, homunculus, RINGED);
         var clicked = helper.absolutePos(near);
@@ -108,6 +111,62 @@ final class HomunculusTableTests {
     }
 
     /**
+     * A cake can't stand on a carpet: its Table above a carpet ringed by hoppers, the placing is refused, it puts the cake
+     * back in its Supply, and, the cake then taken away so nothing races it, clicks its block with a stick.
+     */
+    private static void cantSetDown(GameTestHelper helper) {
+        var player = HomunculusClickTests.woken(helper);
+        var homunculus = HomunculusTests.homunculus(helper, BASE);
+        helper.setBlock(RINGED, Blocks.WHITE_CARPET);
+        ring(helper, RINGED);
+        var near = new BlockPos(4, 1, 1);
+        helper.setBlock(near, ClickedBlock.CLICKED.get());
+        HomunculusClickTests.chest(helper, CHEST, new ItemStack(Items.CAKE));
+        var chest = helper.getBlockEntity(CHEST, ChestBlockEntity.class);
+        chest.setItem(1, new ItemStack(Items.STICK));
+        HomunculusClickTests.assign(helper, player, homunculus, CHEST);
+        assignTable(helper, player, homunculus, RINGED);
+        var clicked = helper.absolutePos(near);
+        helper.startSequence()
+                .thenWaitUntil(() -> helper.assertTrue(homunculus.getOffhandItem().is(Items.CAKE), "it holds " + homunculus.getOffhandItem()))
+                .thenWaitUntil(() -> {
+                    helper.assertTrue(homunculus.getOffhandItem().isEmpty(), "it holds " + homunculus.getOffhandItem());
+                    helper.assertValueEqual(HomunculusClickTests.count(helper, CHEST, Items.CAKE), 1, "the cakes in its Supply");
+                })
+                .thenExecute(() -> {
+                    helper.assertBlockPresent(Blocks.AIR, TABLE);
+                    for (int slot = 0; slot < chest.getContainerSize(); slot++) {
+                        if (chest.getItem(slot).is(Items.CAKE)) {
+                            chest.setItem(slot, ItemStack.EMPTY);
+                        }
+                    }
+                })
+                .thenWaitUntil(() -> helper.assertFalse(ClickedBlock.clicks(clicked).isEmpty(), "no click after the placing was refused"))
+                .thenExecute(() -> player.leave(helper))
+                .thenSucceed();
+    }
+
+    /** Its Table forgotten, its ring broken, while it carries a meal there: it puts the meal back in its Supply. */
+    private static void tableGone(GameTestHelper helper) {
+        var player = HomunculusClickTests.woken(helper);
+        var homunculus = HomunculusTests.homunculus(helper, BASE);
+        ring(helper);
+        HomunculusClickTests.chest(helper, CHEST, new ItemStack(Items.CARVED_PUMPKIN));
+        HomunculusClickTests.assign(helper, player, homunculus, CHEST);
+        assignTable(helper, player, homunculus, RINGED);
+        helper.startSequence()
+                .thenWaitUntil(() -> helper.assertTrue(homunculus.getOffhandItem().is(Items.CARVED_PUMPKIN), "it holds " + homunculus.getOffhandItem()))
+                .thenExecute(() -> helper.setBlock(RINGED.north().east(), Blocks.AIR))
+                .thenWaitUntil(() -> {
+                    helper.assertTrue(homunculus.getOffhandItem().isEmpty(), "it holds " + homunculus.getOffhandItem());
+                    helper.assertValueEqual(HomunculusClickTests.count(helper, CHEST, Items.CARVED_PUMPKIN), 1, "the meals in its Supply");
+                    helper.assertBlockPresent(Blocks.AIR, TABLE);
+                })
+                .thenExecute(() -> player.leave(helper))
+                .thenSucceed();
+    }
+
+    /**
      * A player assigns its Table as its Supply: a block with only seven hoppers round it is refused, one out of range is
      * refused, and a block ringed by eight puts the Table above it; clicking a meal on a ringed block puts the Table where the
      * meal is. Its Table is forgotten once a hopper of its ring is gone.
@@ -134,8 +193,8 @@ final class HomunculusTableTests {
         player.click(helper, TABLE, Direction.UP, ItemStack.EMPTY);
         helper.assertValueEqual(HomunculusTests.stand(helper, BASE).table(), helper.absolutePos(TABLE), "its Table, clicked on its meal");
         helper.assertBlockPresent(Blocks.CAKE, TABLE);
-        helper.assertValueEqual(player.told(), List.of(TOLD + "assigning", TOLD + "not_storage", TOLD + "too_far", TABLE_TOLD + "set",
-                TOLD + "assigning", TABLE_TOLD + "set"), "what the action bar said");
+        helper.assertValueEqual(player.told(), List.of(TOLD + "assigning", TOLD + "refused", TOLD + "too_far", TOLD + "table_set",
+                TOLD + "assigning", TOLD + "table_set"), "what the action bar said");
         helper.setBlock(RINGED.south().west(), Blocks.AIR);
         helper.runAtTickTime(30, () -> {
             helper.assertTrue(HomunculusTests.stand(helper, BASE).table() == null, "a Table with its ring broken is kept");
@@ -145,8 +204,7 @@ final class HomunculusTableTests {
     }
 
     /** {@code player} assigns the space above {@code ringed} as the Homunculus's Table. */
-    private static void assignTable(GameTestHelper helper, Clicker player, io.github._5thlayer.mechanicalmasteryreborn.life.HomunculusEntity homunculus,
-            BlockPos ringed) {
+    private static void assignTable(GameTestHelper helper, Clicker player, HomunculusEntity homunculus, BlockPos ringed) {
         HomunculusClickTests.sneakClick(player, homunculus);
         player.click(helper, ringed, Direction.UP, ItemStack.EMPTY);
         helper.assertValueEqual(HomunculusTests.stand(helper, BASE).table(), helper.absolutePos(ringed.above()), "its Table");

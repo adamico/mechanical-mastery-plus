@@ -50,10 +50,10 @@ final class WorkGoal extends Goal {
     @Override
     public void tick() {
         BlockPos to = homunculus.walkTo();
-        BlockPos faces = homunculus.faces();
-        if (to != null && faces != null && homunculus.blockPosition().equals(to)) {
+        BlockPos facing = homunculus.facing();
+        if (to != null && facing != null && homunculus.blockPosition().equals(to)) {
             homunculus.getNavigation().stop();
-            homunculus.face(faces);
+            homunculus.face(facing);
             return;
         }
         if (!homunculus.getNavigation().isDone() || homunculus.tickCount < nextLook) {

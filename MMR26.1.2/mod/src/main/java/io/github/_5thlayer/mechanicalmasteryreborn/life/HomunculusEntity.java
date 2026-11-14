@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
@@ -62,7 +63,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
  *
  * <p>Awake, it works (#368) the nearest block to its stand among those in {@link Homunculus#WORKS}, within its range, that
  * it can reach: one with a space beside it, level with it or one below, that it can walk to. With an empty hand it walks to
- * the Supply a player assigned it ({@link SupplyAssignment}) and takes one item, from the first slot that has any; holding it,
+ * the Supply a player assigned it ({@link Assignment}) and takes one item, from the first slot that has any; holding it,
  * it walks to the space and, at each work its stand calls for, right-clicks the centre of the block's face toward it through
  * the player's own click path, never sneaking, as a fake player that carries its kindler's id, so a claim lets it work where
  * its kindler may. It holds what the click leaves of its item, and drops by the block whatever else the click hands it,
@@ -72,7 +73,9 @@ import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
  * <p>Before any click, it sets a meal down on the Table a player assigned it, while the Table is clear and it has a meal,
  * in {@link Homunculus#PLACES}, in its off hand or its Supply: it takes the meal from the first slot that has one into its
  * off hand, walks to a space beside the Table and, at a work, places it on the block below as a sneaking player does, facing
- * it, through the same click path. It takes its main hand's item from the first slot that holds no meal.
+ * it, through the same click path. It takes its main hand's item from the first slot that holds no meal. A placing the
+ * Table refuses, as a claim or a block the meal can't stand on does, puts the meal back, and it clicks on for 10 seconds
+ * before it tries again. A meal it holds with no Table left it puts back in its Supply.
  *
  * <p>A click its block refuses, doing nothing, as a feast does an item that isn't its container, puts the item back in its
  * Supply, and it takes another: it never takes an item that block refused again, until another block stands there.
@@ -97,6 +100,8 @@ public final class HomunculusEntity extends PathfinderMob {
     private static final int WORK_LOOK_INTERVAL = 40;
     /** Ticks a work waits for it to get to its click before it is spent, and it looks again. */
     private static final int MAX_WAIT = 200;
+    /** Ticks it waits to set a meal down again after its Table refused one. */
+    private static final int PLACE_RETRY = 200;
     /** How near the centre of its Supply it takes from it, squared: within two blocks. */
     private static final double SUPPLY_REACH_SQR = 4.0;
     /** The name its fake player goes by; its id is its kindler's. */
@@ -119,15 +124,18 @@ public final class HomunculusEntity extends PathfinderMob {
     private @Nullable BlockPos targetSpace;
     private Direction targetFace = Direction.NORTH;
     private int nextLook;
-    /** Whether its Supply, at its last look, held an item for its empty main hand, and it could walk there. */
+    /** Whether its Supply, at its last look, held an item for its empty main hand, with a block to work, and it could walk there. */
     private boolean toolReady;
     /** Whether its Supply, at its last look, held a meal for its empty off hand, and it could walk there. */
     private boolean mealReady;
-    /** The space beside its Table it sets a meal down from, at its last look, with the Table clear; or null. */
+    /** The space beside its Table it sets a meal down from, and that Table, at its last look with the Table clear; or null. */
     private @Nullable BlockPos placeSpace;
+    private @Nullable BlockPos placeTable;
+    /** The tick before which it sets no meal down, its Table having refused one: it clicks on meanwhile. */
+    private int placeAgainAt;
     /** The space beside its Supply it walks to, at its last look, or null. */
     private @Nullable BlockPos supplySpace;
-    /** The block it works that refused items, and those items: forgotten once another block stands there. */
+    /** The block it works that refused items, and those items, kept from it there: forgotten once another block stands there. */
     private @Nullable BlockPos refusedAt;
     private @Nullable Block refusedBy;
     private final Set<Item> refused = new HashSet<>();
@@ -219,7 +227,8 @@ public final class HomunculusEntity extends PathfinderMob {
 
     /** Whether it has a meal to set down, or a block to work and an item to work it with, held or in its Supply. */
     boolean hasWork() {
-        return standEntity() != null && (placing() || target != null && (!getMainHandItem().isEmpty() || toolReady));
+        return standEntity() != null && (placing() || strayMeal() && supplySpace != null
+                || target != null && (!getMainHandItem().isEmpty() || toolReady));
     }
 
     /** Where it walks for its work: beside its Supply to fetch, beside its Table to set a meal down, or to its block's space. */
@@ -227,19 +236,27 @@ public final class HomunculusEntity extends PathfinderMob {
         if (placing()) {
             return getOffhandItem().isEmpty() ? supplySpace : placeSpace;
         }
+        if (strayMeal() && supplySpace != null) {
+            return supplySpace;
+        }
         if (getMainHandItem().isEmpty()) {
             return toolReady ? supplySpace : null;
         }
         return targetSpace;
     }
 
-    /** What it faces once it is there: the block under its Table, or the block it works; null while it walks to fetch. */
-    @Nullable BlockPos faces() {
+    /** What it faces once it is there: the block under its Table, or the block it works; null while it walks to its Supply. */
+    @Nullable BlockPos facing() {
         var table = table();
         if (placing() && table != null) {
             return getOffhandItem().isEmpty() ? null : table.below();
         }
-        return getMainHandItem().isEmpty() ? null : target;
+        return getMainHandItem().isEmpty() || strayMeal() && supplySpace != null ? null : target;
+    }
+
+    /** Whether it holds a meal with no Table to set it down on, so it puts it back in its Supply. */
+    private boolean strayMeal() {
+        return !getOffhandItem().isEmpty() && table() == null;
     }
 
     /** Its stand's Table, or null. */
@@ -251,7 +268,8 @@ public final class HomunculusEntity extends PathfinderMob {
     /** Whether it has a meal to set down now: its Table clear and a space beside it found, and a meal held or in its Supply. */
     private boolean placing() {
         var table = table();
-        return table != null && placeSpace != null && tableClear(table) && (!getOffhandItem().isEmpty() || mealReady);
+        return table != null && placeSpace != null && table.equals(placeTable) && tickCount >= placeAgainAt && tableClear(table)
+                && (!getOffhandItem().isEmpty() || mealReady);
     }
 
     private boolean tableClear(BlockPos table) {
@@ -284,9 +302,14 @@ public final class HomunculusEntity extends PathfinderMob {
             if (getOffhandItem().isEmpty() || !blockPosition().equals(placeSpace)) {
                 return Work.WAITING;
             }
-            use((ServerLevel) level(), entity.kindler(), table.below(), Direction.UP, InteractionHand.OFF_HAND);
-            // Its meal is a block it may work: it looks again at once.
-            nextLook = 0;
+            if (use((ServerLevel) level(), entity.kindler(), table.below(), Direction.UP, InteractionHand.OFF_HAND).consumesAction()) {
+                // Its meal is a block it may work: it looks again at once.
+                nextLook = 0;
+            } else {
+                // Refused, as by a claim or a block the meal can't stand on: it clicks on, and tries again later.
+                placeAgainAt = tickCount + PLACE_RETRY;
+                putBack(entity, InteractionHand.OFF_HAND);
+            }
             return Work.CLICKED;
         }
         if (target == null || targetSpace == null || !worksAt(target)) {
@@ -350,27 +373,37 @@ public final class HomunculusEntity extends PathfinderMob {
         if (target == null) {
             return;
         }
-        forgetRefusals(target);
+        if (!target.equals(refusedAt)) {
+            refused.clear();
+        }
         refusedAt = target;
         refusedBy = level().getBlockState(target).getBlock();
         refused.add(held.getItem());
+        if (ItemStack.isSameItemSameComponents(getMainHandItem(), held)) {
+            putBack(entity, InteractionHand.MAIN_HAND);
+            // It takes another at once.
+            nextLook = 0;
+        }
+    }
+
+    /** Puts what it holds in {@code hand} back in its Supply, if all of it fits. */
+    private void putBack(HomunculusStandBlockEntity entity, InteractionHand hand) {
         var handler = entity.supplyHandler();
-        var holds = getMainHandItem();
-        if (handler == null || !ItemStack.isSameItemSameComponents(holds, held)) {
+        var holds = getItemInHand(hand);
+        if (handler == null || holds.isEmpty()) {
             return;
         }
         try (var transaction = Transaction.openRoot()) {
             if (handler.insert(ItemResource.of(holds), holds.getCount(), transaction) == holds.getCount()) {
                 transaction.commit();
-                setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-                nextLook = 0;
+                setItemInHand(hand, ItemStack.EMPTY);
             }
         }
     }
 
-    /** Forgets the items refused, unless by the same block at {@code pos}. */
-    private void forgetRefusals(@Nullable BlockPos pos) {
-        if (refusedAt != null && (pos == null || !pos.equals(refusedAt) || !level().getBlockState(pos).is(refusedBy))) {
+    /** Forgets the items refused once another block stands where they were refused. */
+    private void forgetRefusals() {
+        if (refusedAt != null && !(level().isLoaded(refusedAt) && level().getBlockState(refusedAt).is(refusedBy))) {
             refusedAt = null;
             refusedBy = null;
             refused.clear();
@@ -387,13 +420,13 @@ public final class HomunculusEntity extends PathfinderMob {
         toolReady = false;
         mealReady = false;
         var handler = entity.supplyHandler();
-        if (handler == null || firstFilled(handler) < 0) {
+        if (handler == null || firstFilled(handler) < 0 && !strayMeal()) {
             return;
         }
         supplySpace = reachableBeside(entity.supply());
         if (supplySpace != null) {
-            toolReady = getMainHandItem().isEmpty() && firstFilled(handler, false) >= 0;
-            mealReady = getOffhandItem().isEmpty() && firstFilled(handler, true) >= 0;
+            toolReady = target != null && getMainHandItem().isEmpty() && firstTool(handler) >= 0;
+            mealReady = getOffhandItem().isEmpty() && firstMeal(handler) >= 0;
         }
     }
 
@@ -413,20 +446,25 @@ public final class HomunculusEntity extends PathfinderMob {
 
     /** The first slot of {@code handler} that holds anything, or -1. */
     private static int firstFilled(ResourceHandler<ItemResource> handler) {
-        for (int slot = 0; slot < handler.size(); slot++) {
-            if (!handler.getResource(slot).isEmpty() && handler.getAmountAsInt(slot) > 0) {
-                return slot;
-            }
-        }
-        return -1;
+        return firstFilled(handler, resource -> true);
     }
 
-    /** The first slot of {@code handler} that holds a meal, if {@code meal}, or anything else its block hasn't refused; or -1. */
-    private int firstFilled(ResourceHandler<ItemResource> handler, boolean meal) {
+    /** The first slot of {@code handler} that holds a meal, or -1. */
+    private static int firstMeal(ResourceHandler<ItemResource> handler) {
+        return firstFilled(handler, resource -> Homunculus.meal(resource.toStack(1)));
+    }
+
+    /** The first slot of {@code handler} that holds an item that is no meal, and not one the block it works refused; or -1. */
+    private int firstTool(ResourceHandler<ItemResource> handler) {
+        boolean refusing = refusedAt != null && refusedAt.equals(target);
+        return firstFilled(handler, resource -> !Homunculus.meal(resource.toStack(1)) && !(refusing && refused.contains(resource.getItem())));
+    }
+
+    /** The first slot of {@code handler} that holds an item {@code wanted}, or -1. */
+    private static int firstFilled(ResourceHandler<ItemResource> handler, Predicate<ItemResource> wanted) {
         for (int slot = 0; slot < handler.size(); slot++) {
             var resource = handler.getResource(slot);
-            if (!resource.isEmpty() && handler.getAmountAsInt(slot) > 0 && Homunculus.meal(resource.toStack(1)) == meal
-                    && (meal || !refused.contains(resource.getItem()))) {
+            if (!resource.isEmpty() && handler.getAmountAsInt(slot) > 0 && wanted.test(resource)) {
                 return slot;
             }
         }
@@ -434,19 +472,23 @@ public final class HomunculusEntity extends PathfinderMob {
     }
 
     /**
-     * Beside its Supply: with a meal to set down and an empty off hand, takes one meal into it; else, with an empty main hand,
-     * one item that is no meal into that.
+     * Beside its Supply: puts back a meal it has no Table for; with a meal to set down and an empty off hand, takes one meal
+     * into it; else, with an empty main hand and a block to work, one item that is no meal into that. Strolling by with
+     * nothing to work, it takes nothing.
      */
     private void takeFromSupply(HomunculusStandBlockEntity entity) {
         var supply = entity.supply();
         if (supply == null || position().distanceToSqr(Vec3.atCenterOf(supply)) > SUPPLY_REACH_SQR) {
             return;
         }
+        if (strayMeal()) {
+            putBack(entity, InteractionHand.OFF_HAND);
+        }
         if (getOffhandItem().isEmpty() && placing()) {
             if (!take(entity, supply, InteractionHand.OFF_HAND)) {
                 mealReady = false;
             }
-        } else if (getMainHandItem().isEmpty() && !take(entity, supply, InteractionHand.MAIN_HAND)) {
+        } else if (getMainHandItem().isEmpty() && toolReady && !take(entity, supply, InteractionHand.MAIN_HAND)) {
             toolReady = false;
         }
     }
@@ -454,19 +496,20 @@ public final class HomunculusEntity extends PathfinderMob {
     /** Takes one item into {@code hand} from its Supply: a meal into its off hand, anything else into its main hand. */
     private boolean take(HomunculusStandBlockEntity entity, BlockPos supply, InteractionHand hand) {
         var handler = entity.supplyHandler();
-        int slot = handler == null ? -1 : firstFilled(handler, hand == InteractionHand.OFF_HAND);
+        int slot = handler == null ? -1 : hand == InteractionHand.OFF_HAND ? firstMeal(handler) : firstTool(handler);
         if (slot < 0) {
             return false;
         }
         var resource = handler.getResource(slot);
         try (var transaction = Transaction.openRoot()) {
-            if (handler.extract(slot, resource, 1, transaction) == 1) {
-                transaction.commit();
-                setItemInHand(hand, resource.toStack(1));
-                face(supply);
-                swing(hand);
+            if (handler.extract(slot, resource, 1, transaction) != 1) {
+                return false;
             }
+            transaction.commit();
         }
+        setItemInHand(hand, resource.toStack(1));
+        face(supply);
+        swing(hand);
         return true;
     }
 
@@ -476,9 +519,10 @@ public final class HomunculusEntity extends PathfinderMob {
      */
     private void lookForWork(HomunculusStandBlockEntity entity) {
         findTarget(entity);
-        forgetRefusals(target);
+        forgetRefusals();
         lookAtSupply(entity);
         var table = entity.table();
+        placeTable = table;
         placeSpace = table != null && tableClear(table) ? reachableBeside(table) : null;
     }
 
@@ -551,12 +595,12 @@ public final class HomunculusEntity extends PathfinderMob {
         }
     }
 
-    /** Empty-handed and sneaking, a player assigns its Supply ({@link SupplyAssignment}). */
+    /** Empty-handed and sneaking, a player assigns its Supply or its Table ({@link Assignment}). */
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         if (hand == InteractionHand.MAIN_HAND && player.isSecondaryUseActive() && player.getMainHandItem().isEmpty()) {
             if (player instanceof ServerPlayer serverPlayer) {
-                SupplyAssignment.toggle(serverPlayer, this);
+                Assignment.toggle(serverPlayer, this);
             }
             return InteractionResult.SUCCESS;
         }

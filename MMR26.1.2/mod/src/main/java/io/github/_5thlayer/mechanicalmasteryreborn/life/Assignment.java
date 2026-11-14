@@ -26,11 +26,11 @@ import org.jspecify.annotations.Nullable;
  * at, or any other block is refused and the assigning waits on. A sneak-click on the same Homunculus again cancels it. The
  * action bar says each step. A fake player's click, such as a Homunculus's own as its kindler, assigns nothing.
  */
-final class SupplyAssignment {
+final class Assignment {
 
     /** Ticks an assigning waits for its click. */
     private static final int WAIT = 30 * 20;
-    private static final String TOLD = MechanicalMasteryReborn.MOD_ID + ".homunculus.supply.";
+    private static final String TOLD = MechanicalMasteryReborn.MOD_ID + ".homunculus.assign.";
 
     private record Assigning(UUID homunculus, int until) {
     }
@@ -38,7 +38,7 @@ final class SupplyAssignment {
     /** Each assigning player's assigning, by the player's id. */
     private static final Map<UUID, Assigning> PENDING = new HashMap<>();
 
-    private SupplyAssignment() {
+    private Assignment() {
     }
 
     /** {@code player} sneak-clicked {@code homunculus} empty-handed: starts assigning its Supply, or cancels it. */
@@ -61,7 +61,7 @@ final class SupplyAssignment {
         tell(player, "assigning");
     }
 
-    /** An assigning player's right-click on a block: the storage they assign, instead of what the click would do. */
+    /** An assigning player's right-click on a block: the Supply or the Table they assign, instead of what the click would do. */
     static synchronized void click(PlayerInteractEvent.RightClickBlock event) {
         if (!(event.getLevel() instanceof ServerLevel level) || !(event.getEntity() instanceof ServerPlayer player) || player.isFakePlayer()) {
             return;
@@ -80,26 +80,22 @@ final class SupplyAssignment {
         var stand = homunculus.standEntity();
         var pos = event.getPos();
         var face = event.getFace() == null ? Direction.UP : event.getFace();
+        boolean supply = level.getCapability(Capabilities.Item.BLOCK, pos, face) != null;
+        var assigned = supply ? pos : tableAt(level, pos);
         if (!level.mayInteract(player, pos)) {
             tell(player, "not_allowed");
-        } else if (level.getCapability(Capabilities.Item.BLOCK, pos, face) != null) {
-            if (!stand.inRange(pos)) {
-                tell(player, "too_far");
-            } else {
-                PENDING.remove(player.getUUID());
-                stand.assignSupply(pos, face);
-                tell(player, "set");
-            }
-        } else if (tableAt(level, pos) instanceof BlockPos table) {
-            if (!stand.inRange(table)) {
-                tell(player, "too_far");
-            } else {
-                PENDING.remove(player.getUUID());
-                stand.assignTable(table);
-                player.sendOverlayMessage(Component.translatable(MechanicalMasteryReborn.MOD_ID + ".homunculus.table.set"));
-            }
+        } else if (assigned == null) {
+            tell(player, "refused");
+        } else if (!stand.inRange(assigned)) {
+            tell(player, "too_far");
         } else {
-            tell(player, "not_storage");
+            PENDING.remove(player.getUUID());
+            if (supply) {
+                stand.assignSupply(pos, face);
+            } else {
+                stand.assignTable(assigned);
+            }
+            tell(player, supply ? "supply_set" : "table_set");
         }
     }
 
