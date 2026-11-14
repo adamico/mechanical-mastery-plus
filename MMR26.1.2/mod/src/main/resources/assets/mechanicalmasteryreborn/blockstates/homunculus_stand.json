@@ -1,6 +1,6 @@
 {
   "variants": {
-    "half=lower": { "model": "minecraft:block/clay" },
-    "half=upper": { "model": "minecraft:block/lightning_rod" }
+    "half=lower": { "model": "mechanicalmasteryreborn:block/homunculus_stand_lower" },
+    "half=upper": { "model": "mechanicalmasteryreborn:block/homunculus_stand_upper" }
   }
 }

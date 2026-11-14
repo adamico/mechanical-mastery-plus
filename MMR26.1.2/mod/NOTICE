@@ -27,8 +27,7 @@ The Homunculus
 
 The Homunculus's model (client/HomunculusModel.java) is twelve boxes reduced by hand from a CC0
 sculpt, the "Homunculus" model on MakerWorld (https://makerworld.com/en/models/2537324), credited
-here though CC0 asks for no credit. Its textures (textures/entity/homunculus/homunculus.png and
-homunculus_statue.png) are not third-party: publish/make-homunculus.py paints them from code alone.
+here though CC0 asks for no credit; its textures are credited below.
 Licence of the sculpt: CC0 1.0
 
 Recycler textures
@@ -173,4 +172,20 @@ Source: https://github.com/malcolmriley/unused-textures, blocks/, fluids/ and it
         - pelican_drip.png is the drops of items/alchemy_pot_contents_dripping in the Vital Port's
           colour, falling a pixel a frame down a strip of 16 frames (its .mcmeta is the
           mod's own).
+Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
+
+Homunculus and Homunculus Stand textures
+----------------------------------------
+
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/entity/homunculus/*.png,
+       src/main/resources/assets/mechanicalmasteryreborn/textures/block/homunculus_stand_*.png
+Author: Malcolm Riley
+Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
+        8b85ad732023174d9a9da74e6bf2272d6c0bef17, made by publish/make-homunculus.py
+        - homunculus.png is the plain middle 12x12 of blocks/terracotta_tile_large, tiled over each
+          of the model's boxes at its UVs, shaded darker on its nose, ears, neck, limbs and feet,
+          its face drawn by darkening that clay.
+        - homunculus_statue.png is homunculus.png greyed: each pixel's luma times 0.75, plus 40.
+        - homunculus_stand_clay.png, homunculus_stand_rod.png and homunculus_stand_rod_end.png are
+          blocks/terracotta_tile_large, copper_coil_side and copper_coil_end, copied unmodified.
 Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
