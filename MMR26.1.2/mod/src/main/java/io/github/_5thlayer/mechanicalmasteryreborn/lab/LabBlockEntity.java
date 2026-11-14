@@ -177,7 +177,7 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
 
     /** The ticks the life line's last meal still keeps it fed for. */
     public int fedTicks() {
-        return meals.fed();
+        return meals.ticks();
     }
 
     /** The kinds of meal the life line took last, oldest first, by item id. */
@@ -210,14 +210,14 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
             lines.addAll(pay(level, owner, teams));
         }
         if (teams.underSpell(owner, Handicap.LIFE)) {
-            if (meals.fed() > 0) {
-                setMeals(meals.withFed(meals.fed() - 1));
+            if (meals.ticks() > 0) {
+                setMeals(meals.withTicks(meals.ticks() - 1));
             }
         } else {
             setMeals(Meals.NONE);
         }
         // A line paid for counts only while its spell runs, and the life line only while a meal keeps it fed.
-        lines.removeIf(handicap -> !teams.underSpell(owner, handicap) || handicap == Handicap.LIFE && meals.fed() == 0);
+        lines.removeIf(handicap -> !teams.underSpell(owner, handicap) || handicap == Handicap.LIFE && meals.ticks() == 0);
         phase = lines.isEmpty() ? Phase.IDLE : Phase.WORKING;
         work();
     }
@@ -237,7 +237,7 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
         if (teams.underSpell(owner, Handicap.ENERGY) && takeOutput(level, owner, (long) ServerConfig.hermeticLabEnergyDemand() * INTERVAL)) {
             counting.add(Handicap.ENERGY);
         }
-        if (teams.underSpell(owner, Handicap.LIFE) && meals.fed() > 0) {
+        if (teams.underSpell(owner, Handicap.LIFE) && meals.ticks() > 0) {
             counting.add(Handicap.LIFE);
         }
         Optional<Spell> protection = teams.spell(owner, Handicap.PROTECTION);
@@ -410,7 +410,7 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
         shards.serialize(out.child(SHARDS_KEY));
         output.serialize(out.child(OUTPUT_KEY));
         out.store(MEALS_KEY, Codec.STRING.listOf(), meals.kinds());
-        out.putInt(FED_KEY, meals.fed());
+        out.putInt(FED_KEY, meals.ticks());
         out.putDouble(SHARD_TICKS_KEY, shardTicks);
         out.putDouble(PROGRESS_KEY, progress);
         out.putDouble(OWED_KEY, owed);
@@ -564,12 +564,12 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
      * The life line's meals: the kinds it took last, oldest first, at most as many as a Pelican's batch's kinds, and the
      * ticks its last meal keeps it fed for.
      */
-    record Meals(List<String> kinds, int fed) {
+    record Meals(List<String> kinds, int ticks) {
 
         static final Meals NONE = new Meals(List.of(), 0);
 
-        Meals withFed(int ticks) {
-            return new Meals(kinds, ticks);
+        Meals withTicks(int left) {
+            return new Meals(kinds, left);
         }
 
         /** These meals with {@code kind} eaten last, keeping the line fed {@code ticks} from now, whatever was left. */
@@ -595,7 +595,7 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     /** The ticks {@code meal} keeps the life line fed for, by its own saturation. */
-    private static int fedFor(ItemResource meal) {
+    public static int fedFor(ItemResource meal) {
         FoodProperties food = meal.getComponents().get(DataComponents.FOOD);
         return food == null ? 0 : (int) Math.round(food.saturation() * ServerConfig.hermeticLabLifeTicksPerSaturation());
     }

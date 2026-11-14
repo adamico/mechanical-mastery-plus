@@ -291,7 +291,6 @@
   "mechanicalmasteryreborn.hermetic_lab.take_on.tooltip": "Your team bears this handicap for the whole spell: it can't be ended early.",
   "mechanicalmasteryreborn.hermetic_lab.line.fed": "%s left · %s line fed",
   "mechanicalmasteryreborn.hermetic_lab.line.unfed": "%s left · %s line not fed",
-  "mechanicalmasteryreborn.hermetic_lab.not_member": "This Hermetic Lab isn't your team's",
   "mechanicalmasteryreborn.hermetic_lab.full": "Takes no more Nullessence",
   "mechanicalmasteryreborn.hermetic_lab.shard_refused": "Takes only Null Shards of the Protection Spell running",
   "mechanicalmasteryreborn.homunculus.kindle.not_allowed": "You can't build here",

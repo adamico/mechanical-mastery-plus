@@ -30,6 +30,10 @@ import io.github._5thlayer.mechanicalmasteryreborn.lab.LabMenu;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Spell;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import net.minecraft.core.BlockPos;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.minecraft.world.level.block.entity.HopperBlockEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.resources.Identifier;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
@@ -227,8 +231,8 @@ final class HermeticLabTests {
         helper.setBlock(LAB, Lab.BLOCK.get());
         helper.assertTrue(Spells.begin(server(helper), team, Handicap.LIFE, 200), "the life spell wasn't taken on");
         helper.setBlock(LAB.above(), Blocks.HOPPER);
-        var hopper = (net.minecraft.world.level.block.entity.HopperBlockEntity) helper.getBlockEntity(LAB.above(),
-                net.minecraft.world.level.block.entity.HopperBlockEntity.class);
+        var hopper = (HopperBlockEntity) helper.getBlockEntity(LAB.above(),
+                HopperBlockEntity.class);
         hopper.setItem(0, meal(Items.MUSHROOM_STEW, 0));
         hopper.setItem(1, meal(Items.RABBIT_STEW, 2));
         hopper.setItem(2, meal(Items.BEETROOT_SOUP, 3));
@@ -263,20 +267,19 @@ final class HermeticLabTests {
     }
 
     /** One {@code item} at Quality Food {@code level}, none for 0. */
-    private static ItemStack meal(net.minecraft.world.item.Item item, int level) {
+    private static ItemStack meal(Item item, int level) {
         ItemStack stack = new ItemStack(item);
         if (level > 0) {
             String grade = level == 1 ? "iron" : level == 2 ? "gold" : "diamond";
             stack.set(QualityFoodStandIn.QUALITY.get(), new QualityFoodStandIn.Quality(
-                    net.minecraft.resources.Identifier.fromNamespaceAndPath("quality_food", grade), level));
+                    Identifier.fromNamespaceAndPath("quality_food", grade), level));
         }
         return stack;
     }
 
     /** The ticks a meal of {@code item} keeps the life line fed, by its own saturation. */
-    private static int fedFor(net.minecraft.world.item.Item item) {
-        var food = new ItemStack(item).get(DataComponents.FOOD);
-        return (int) Math.round(food.saturation() * ServerConfig.hermeticLabLifeTicksPerSaturation());
+    private static int fedFor(Item item) {
+        return LabBlockEntity.fedFor(ItemResource.of(item));
     }
 
     /** A protection spell's Null Shards go into the Hermetic Lab only during it: the next spell's line takes only its own. */
