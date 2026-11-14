@@ -135,7 +135,7 @@ The companion mod's vessel at the end of life's chain, which makes the Vital Ess
 _Avoid_: digester, stomach, maw
 
 **Homunculus**:
-The companion mod's made servant, a small figure that lives at its **Homunculus Stand** and works from it. A **Vital Spark** used on a lightning rod set on a clay block kindles them: the clay and the rod become its two-block-tall stand, and the Homunculus rises beside it. A new one is full, and stands as a statue until a one-time jumpstart of FE from any source wakes it. Awake, it walks near its stand, works off its full belly, then eats from the stand's food, working faster on a better meal. Once it has nothing left to eat it falls asleep, a statue again, until a new jumpstart. It stands still while life's chain is locked, as after a stop, and works on through a reset. Dead, it leaves its Vital Spark, spent, which kindles one with an empty belly.
+The companion mod's made figure, small, that lives at its **Homunculus Stand** and works from it. A **Vital Spark** used on a lightning rod set on a clay block kindles them: the clay and the rod become its two-block-tall stand, and the Homunculus rises beside it. A new one is full, and stands as a statue until a one-time jumpstart of FE from any source wakes it. Awake, it walks near its stand, works off its full belly, then eats from the stand's food, working faster on a better meal. Once it has nothing left to eat it falls asleep, a statue again, until a new jumpstart. It stands still while life's chain is locked, as after a stop, and works on through a reset. Dead, it leaves its Vital Spark, spent, which kindles one with an empty belly.
 _Avoid_: golem, servant, worker
 
 **Homunculus Stand**:
@@ -143,7 +143,7 @@ What a Homunculus is kindled from and works from, two blocks tall, holding the f
 _Avoid_: pedestal, plinth, home
 
 **Vital Spark**:
-What kindles a lightning rod on a clay block into a Homunculus and its stand, made from a Vital Essence and an egg while life is active or won. Kindling uses it up.
+What kindles a lightning rod on a clay block into a Homunculus and its stand, made only while life is active or won. Kindling uses it up.
 _Avoid_: spark, animus, soul
 
 **Assault**:

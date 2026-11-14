@@ -7,7 +7,6 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -125,12 +124,12 @@ public final class HomunculusStandBlock extends BaseEntityBlock {
         return super.playerWillDestroy(level, pos, state, player);
     }
 
-    /** Food in hand goes into the stand, on either half; anything else does what it would. */
+    /** Food the stand takes, in hand, goes into it, on either half; anything else does what it would. */
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
             BlockHitResult hit) {
         var stand = Homunculus.standAt(level, pos, state);
-        if (stand == null || !stack.has(DataComponents.FOOD)) {
+        if (stand == null || !stand.takes(stack)) {
             return InteractionResult.TRY_WITH_EMPTY_HAND;
         }
         if (level.isClientSide()) {

@@ -98,6 +98,11 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         return sleeping() || level != null && level.isClientSide() ? store : null;
     }
 
+    /** Whether the stand's food takes {@code held} at all: a food, but not rotten flesh. */
+    public boolean takes(ItemStack held) {
+        return !held.isEmpty() && food.isValid(0, ItemResource.of(held));
+    }
+
     /** Puts as much of {@code held} as the stand's food takes into it, from a player's hand, and says how many it took. */
     public int feed(ItemStack held) {
         if (held.isEmpty()) {
