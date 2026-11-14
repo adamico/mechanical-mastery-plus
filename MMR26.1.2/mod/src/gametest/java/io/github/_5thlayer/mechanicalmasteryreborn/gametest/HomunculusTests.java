@@ -537,7 +537,7 @@ final class HomunculusTests {
         });
     }
 
-    private static UUID playLife(GameTestHelper helper) {
+    static UUID playLife(GameTestHelper helper) {
         UUID team = TestTeams.claim(helper);
         Challenges.begin(helper.getLevel().getServer(), team, Handicap.LIFE);
         return team;
@@ -549,7 +549,7 @@ final class HomunculusTests {
         return Clicker.of(helper);
     }
 
-    private static void rodOnClay(GameTestHelper helper, BlockPos base) {
+    static void rodOnClay(GameTestHelper helper, BlockPos base) {
         helper.setBlock(base, Blocks.CLAY);
         helper.setBlock(base.above(), Blocks.LIGHTNING_ROD);
     }
@@ -600,19 +600,19 @@ final class HomunculusTests {
     }
 
     /** The Homunculus bound to the stand at {@code base}. */
-    private static HomunculusEntity homunculus(GameTestHelper helper, BlockPos base) {
+    static HomunculusEntity homunculus(GameTestHelper helper, BlockPos base) {
         var absolute = helper.absolutePos(base);
         var found = helper.getEntities(Homunculus.HOMUNCULUS.get()).stream().filter(entity -> absolute.equals(entity.stand())).toList();
         helper.assertValueEqual(found.size(), 1, "the Homunculi bound to the stand at " + base);
         return found.getFirst();
     }
 
-    private static HomunculusStandBlockEntity stand(GameTestHelper helper, BlockPos pos) {
+    static HomunculusStandBlockEntity stand(GameTestHelper helper, BlockPos pos) {
         return helper.getBlockEntity(pos, HomunculusStandBlockEntity.class);
     }
 
     /** The stacks lying within two blocks of {@code pos}. */
-    private static List<ItemStack> drops(GameTestHelper helper, BlockPos pos) {
+    static List<ItemStack> drops(GameTestHelper helper, BlockPos pos) {
         return helper.getLevel().getEntitiesOfClass(ItemEntity.class, new AABB(helper.absolutePos(pos)).inflate(2)).stream()
                 .map(ItemEntity::getItem).toList();
     }
@@ -623,7 +623,7 @@ final class HomunculusTests {
     }
 
     /** Offers the stand's half at {@code pos} {@code amount} FE from above and says how much it took: none while it has no FE face. */
-    private static int charge(GameTestHelper helper, BlockPos pos, int amount) {
+    static int charge(GameTestHelper helper, BlockPos pos, int amount) {
         EnergyHandler store = helper.getLevel().getCapability(Capabilities.Energy.BLOCK, helper.absolutePos(pos), Direction.UP);
         if (store == null) {
             return 0;
@@ -636,7 +636,7 @@ final class HomunculusTests {
     }
 
     /** Offers the stand's half at {@code pos} {@code count} of {@code item} at quality {@code level}, and says how many it took. */
-    private static int feed(GameTestHelper helper, BlockPos pos, Item item, int level, int count) {
+    static int feed(GameTestHelper helper, BlockPos pos, Item item, int level, int count) {
         ItemStack stack = new ItemStack(item);
         if (level > 0) {
             stack.set(QualityFoodStandIn.QUALITY.get(), new QualityFoodStandIn.Quality(DIAMOND, level));

@@ -9,12 +9,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -57,6 +62,12 @@ public final class Homunculus {
     public static final DeferredItem<BlockItem> STAND_ITEM = ITEMS.registerSimpleBlockItem("homunculus_stand", STAND);
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HomunculusStandBlockEntity>> STAND_ENTITY =
             BLOCK_ENTITIES.register("homunculus_stand", () -> new BlockEntityType<>(HomunculusStandBlockEntity::new, STAND.get()));
+    /** The blocks a Homunculus works (#368). */
+    public static final TagKey<Block> WORKS = TagKey.create(Registries.BLOCK,
+            Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "homunculus_works"));
+    /** The meals a Homunculus sets down on its Table (#368). */
+    public static final TagKey<Block> PLACES = TagKey.create(Registries.BLOCK,
+            Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "homunculus_places"));
     /** 18 pixels tall, its head half of it. */
     public static final DeferredHolder<EntityType<?>, EntityType<HomunculusEntity>> HOMUNCULUS = ENTITIES.registerEntityType("homunculus",
             HomunculusEntity::new, MobCategory.MISC, builder -> builder.sized(0.5F, 1.15F).eyeHeight(0.85F).clientTrackingRange(10));
@@ -72,6 +83,7 @@ public final class Homunculus {
         modBus.addListener(Homunculus::registerCapabilities);
         modBus.addListener((EntityAttributeCreationEvent event) -> event.put(HOMUNCULUS.get(), HomunculusEntity.createAttributes().build()));
         NeoForge.EVENT_BUS.addListener(Kindling::kindle);
+        NeoForge.EVENT_BUS.addListener(Assignment::click);
     }
 
     /** {@link HomunculusPace#interval} at the server config's interval and speed-up. */
@@ -94,6 +106,23 @@ public final class Homunculus {
     public static boolean spent(ItemStack stack) {
         CustomData data = stack.get(DataComponents.CUSTOM_DATA);
         return data != null && data.copyTag().getBooleanOr(SPENT, false);
+    }
+
+    /** Whether {@code stack} is a meal a Homunculus sets down: the item of a block in {@link #PLACES}. */
+    public static boolean meal(ItemStack stack) {
+        return stack.getItem() instanceof BlockItem item && item.getBlock().defaultBlockState().is(PLACES);
+    }
+
+    /** Whether the block at {@code pos} is ringed by hoppers, on its four sides and its four corners: a Table is above it. */
+    public static boolean ringed(BlockGetter level, BlockPos pos) {
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dz = -1; dz <= 1; dz++) {
+                if ((dx != 0 || dz != 0) && !level.getBlockState(pos.offset(dx, 0, dz)).is(Blocks.HOPPER)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /** The stand whose half is at {@code pos}, either half, or null. */

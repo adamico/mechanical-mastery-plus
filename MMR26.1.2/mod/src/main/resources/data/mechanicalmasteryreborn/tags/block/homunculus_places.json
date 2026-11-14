@@ -1,0 +1,7 @@
+{
+  "values": [
+    "minecraft:cake",
+    {"id": "#farmersdelight:feasts", "required": false},
+    {"id": "#farmersdelight:pies", "required": false}
+  ]
+}

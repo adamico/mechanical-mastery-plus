@@ -135,12 +135,20 @@ The companion mod's vessel at the end of life's chain, which makes the Vital Ess
 _Avoid_: digester, stomach, maw
 
 **Homunculus**:
-The companion mod's made figure, small, that lives at its **Homunculus Stand** and works from it. A **Vital Spark** used on a lightning rod set on a clay block kindles them: the clay and the rod become its two-block-tall stand, and the Homunculus rises beside it. A new one is full, and stands as a statue until a one-time jumpstart of FE from any source wakes it. Awake, it walks near its stand, works off its full belly, then eats from the stand's food, working faster on a better meal. Once it has nothing left to eat it falls asleep, a statue again, until a new jumpstart. It stands still while life's chain is locked, as after a stop, and works on through a reset. Dead, it leaves its Vital Spark, spent, which kindles one with an empty belly.
+The companion mod's made figure, small, that lives at its **Homunculus Stand** and works from it. A **Vital Spark** used on a lightning rod set on a clay block kindles them: the clay and the rod become its two-block-tall stand, and the Homunculus rises beside it. A new one is full, and stands as a statue until a one-time jumpstart of FE from any source wakes it. Awake, it walks near its stand, works off its full belly, then eats from the stand's food, working faster on a better meal. Once it has nothing left to eat it falls asleep, a statue again, until a new jumpstart. Its work is right-clicking blocks near its stand with items from its **Supply**, as the player who kindled it, and setting meals down on its **Table** to serve. It stands still while life's chain is locked, as after a stop, and works on through a reset. Dead, it leaves its Vital Spark, spent, which kindles one with an empty belly.
 _Avoid_: golem, servant, worker
 
 **Homunculus Stand**:
 What a Homunculus is kindled from and works from, two blocks tall, holding the food it eats and the FE that wakes it. A Vital Spark used on a stand with no Homunculus raises a new one. Broken, it drops itself and spills its food, and its Homunculus stands a statue for good. It is one of life's chain machines, and nothing crafts it.
 _Avoid_: pedestal, plinth, home
+
+**Supply**:
+The storage a player assigns a Homunculus, within its range of its stand, from which it takes the item it works with, one at a time, and the meals it sets on its **Table**.
+_Avoid_: input (a Recycler's part), tool chest
+
+**Table**:
+The spot a player assigns a Homunculus, within its range of its stand, above a block ringed by eight hoppers, where it sets down the meals from its **Supply**, such as feasts, pies and cakes, to serve them; the hoppers catch what the meal drops.
+_Avoid_: plate, serving spot, counter
 
 **Vital Spark**:
 What kindles a lightning rod on a clay block into a Homunculus and its stand, made only while life is active or won. Kindling uses it up.

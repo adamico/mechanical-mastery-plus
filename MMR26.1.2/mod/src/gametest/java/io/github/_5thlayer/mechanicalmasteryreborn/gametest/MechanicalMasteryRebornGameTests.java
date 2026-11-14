@@ -73,6 +73,7 @@ public final class MechanicalMasteryRebornGameTests {
         TestYield.useFull();
         PelicanTests.useTestThresholds();
         HomunculusTests.useTestPace();
+        ClickedBlock.register(modBus);
     }
 
     private static void registerTests(RegisterGameTestsEvent event) {
@@ -109,6 +110,8 @@ public final class MechanicalMasteryRebornGameTests {
         LifeTests.register(tests);
         PelicanTests.register(tests);
         HomunculusTests.register(tests);
+        HomunculusClickTests.register(tests);
+        HomunculusTableTests.register(tests);
         if (!ModList.get().isLoaded("quality_food")) {
             QualityTests.register(tests);
         }
