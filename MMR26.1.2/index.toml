@@ -126,7 +126,7 @@ hash = "b4c8f752e2703e4d5aee5461cc335f55e12011db399e0fd3475deface44dcf29"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/life.md"
-hash = "896d1615bec94b7aec9af3e0eb89980afabe4e84bebe13fa822a419006d59c09"
+hash = "efbec432b918097f9e5ee56cecf2ee33092a96b93fba68f5f3b06752907cfcc5"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/challenges/money.md"
@@ -154,7 +154,11 @@ hash = "4df9ebad7bcda620e02a3f483c796d7c7044f6b5a91025e4938054dde610ee8d"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/hermetic_lab.md"
-hash = "beebb550b36326b32aa9ddfa4adacab0a81d9287a6fbf2dbe655bacec5589b96"
+hash = "602a176363a9eda9c548cb54730ed1e4a1ea9f2abfc3191686d19816d893790b"
+
+[[files]]
+file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/homunculus.md"
+hash = "97e16c8cd67d1f4c2b383629b790b972c6731baeaf197d4ec22c679cb34360d9"
 
 [[files]]
 file = "kubejs/assets/mechanicalmasteryreborn/guides/mechanicalmasteryreborn/manual/index.md"
