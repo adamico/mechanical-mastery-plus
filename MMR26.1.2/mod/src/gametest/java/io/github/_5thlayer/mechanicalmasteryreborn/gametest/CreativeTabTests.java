@@ -17,7 +17,7 @@ final class CreativeTabTests {
     /** The paths of the Module's items, as the Works tab shows them. */
     private static final List<String> WORKS_TAB_ORDER = List.of("cod", "lab", "warding_port", "vital_port", "galvanic_port", "aureate_port", "basic_mechanical_essence", "regular_mechanical_essence",
             "improved_mechanical_essence", "advanced_mechanical_essence", "galvanic_essence", "warding_essence", "vital_essence", "aureate_essence", "quartessence", "quintessence", "nullessence", "rift_shard", "ward_tallow_bucket", "obsidian_flakes", "charged_rift", "molten_copper_bucket", "molten_iron_bucket", "molten_gold_bucket", "mold", "copper_cast", "iron_cast", "gold_cast", "burnt_sand", "copper_coin", "iron_coin", "gold_coin", "reformed_salt", "reformed_sulfur", "mercury_charge", "salt_charge", "sulfur_charge", "galvanic_core", "null_shard", "recycler_core_1", "recycler_core_2", "recycler_core_3", "recycler_core_4", "hand_drive", "fe_drive", "recycler_input", "recycler_output",
-            "recycler_casing", "fe_defence", "wave_caller", "pelican");
+            "recycler_casing", "fe_defence", "wave_caller", "pelican", "homunculus_stand", "homunculus");
 
     private CreativeTabTests() {
     }

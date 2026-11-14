@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": ["minecraft:clay_ball", "minecraft:bone"],
+  "result": {"id": "mechanicalmasteryreborn:homunculus", "count": 1}
+}

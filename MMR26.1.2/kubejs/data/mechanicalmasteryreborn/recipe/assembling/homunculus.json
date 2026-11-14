@@ -1,0 +1,13 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting",
+  "ingredients": [
+    { "ingredient": "minecraft:clay_ball", "count": 8 },
+    { "ingredient": "minecraft:bone", "count": 4 },
+    { "ingredient": "mechanicalmasteryreborn:vital_essence", "count": 1 }
+  ],
+  "results": [
+    { "id": "mechanicalmasteryreborn:homunculus", "count": 1 }
+  ],
+  "time": 100
+}

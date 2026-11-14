@@ -30,6 +30,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Attempts;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
+import io.github._5thlayer.mechanicalmasteryreborn.life.Homunculus;
 import io.github._5thlayer.mechanicalmasteryreborn.life.Pelican;
 import io.github._5thlayer.mechanicalmasteryreborn.port.Port;
 import io.github._5thlayer.mechanicalmasteryreborn.recipe.Decomposing;
@@ -66,6 +67,7 @@ public final class MechanicalMasteryReborn {
         Assault.register(modBus);
         LifeHandicap.register(modBus);
         Pelican.register(modBus);
+        Homunculus.register(modBus);
         PenFeed.register(modBus);
         Chains.register();
         Stops.register();

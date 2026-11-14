@@ -1,0 +1,12 @@
+{
+  "type": "craftworks:assembling",
+  "category": "crafting",
+  "ingredients": [
+    { "ingredient": "minecraft:armor_stand", "count": 1 },
+    { "ingredient": "minecraft:oak_planks", "count": 4 }
+  ],
+  "results": [
+    { "id": "mechanicalmasteryreborn:homunculus_stand", "count": 1 }
+  ],
+  "time": 33
+}

@@ -134,6 +134,10 @@ _Avoid_: freshness, tier
 The companion mod's vessel at the end of life's chain, which makes the Vital Essence by eating meals. It takes only meals, from automation, and eats each as it comes in. Once what it has eaten since its last Vital Essence holds enough saturation, enough kinds of meal and a high enough average quality, all three together, it digests the batch for a while, eating nothing meanwhile, and gives one Vital Essence. A stop or a reset loses the batch. Nothing crafts it: the Shop sells it from the start of the life challenge, and it is one of life's chain machines.
 _Avoid_: digester, stomach, maw
 
+**Homunculus**:
+The companion mod's made servant, which lives at its **stand**, one of life's chain machines. It is built while life is active or won, by a recipe in life's stage file, and used on a stand to take its place there. A new one is built full and sleeps until a one-time jumpstart of FE from any source wakes it. Awake, it works off its full belly, then eats from the stand's food, which automation fills, working faster on a better meal. Once it has nothing left to eat it falls asleep and needs a new jumpstart. It stands still while life's chain is locked, as after a stop, and works on through a reset.
+_Avoid_: golem, servant, worker
+
 **Assault**:
 The protection challenge's handicap: waves of mobs the companion mod sends at a playing team's island from one gate at a time unless the team calls more, on one of four platforms it builds in the void around the island, with unbreakable bridges to it. The waves grow harder, with a breather between each step, at which the gate moves to another side at random, and never stop until the quota is filled or Overproduction reaches its cap; a gate that fails opens again. Its mobs hunt the team's players and drop Rift Shards, explosions damage the team's island while it runs, claimed or not, what its mobs break is the team's refund when it ends, and it pauses while no one is on the island.
 _Avoid_: raid, siege, invasion

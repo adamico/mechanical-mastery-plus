@@ -7,5 +7,7 @@
     "preventTransfer": false,
     "preventTravel": false
   },
-  "recipes": []
+  "recipes": [
+    "mechanicalmasteryreborn:assembling/homunculus"
+  ]
 }

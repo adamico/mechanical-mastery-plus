@@ -17,6 +17,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.defence.Defences;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
 import io.github._5thlayer.mechanicalmasteryreborn.lab.Lab;
+import io.github._5thlayer.mechanicalmasteryreborn.life.Homunculus;
 import io.github._5thlayer.mechanicalmasteryreborn.life.Pelican;
 import io.github._5thlayer.mechanicalmasteryreborn.port.Port;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
@@ -27,7 +28,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
  * the lab and the four Ports, then every essence, then the protection Chain's Rift Shard, Ward Tallow bucket,
  * Obsidian Flakes and Charged Rift Shard, the money Chain's mint, from the molten metals' buckets to the Coins,
  * the energy chain's reformed salt and sulfur, Galvanic Charges and Core, and the Hermetic Lab's Null Shard, then the Recycler's parts, then the
- * Defences, the Wave Caller and the Pelican. One listener, in the order the tab shows them, which
+ * Defences, the Wave Caller, the Pelican and the Homunculus with its stand. One listener, in the order the tab shows them, which
  * {@code CreativeTabTests} lists too.
  */
 final class WorksTabContents {
@@ -80,5 +81,7 @@ final class WorksTabContents {
         event.accept(Defences.FE_DEFENCE_ITEM.get());
         event.accept(Assault.WAVE_CALLER_ITEM.get());
         event.accept(Pelican.ITEM.get());
+        event.accept(Homunculus.STAND_ITEM.get());
+        event.accept(Homunculus.ITEM.get());
     }
 }

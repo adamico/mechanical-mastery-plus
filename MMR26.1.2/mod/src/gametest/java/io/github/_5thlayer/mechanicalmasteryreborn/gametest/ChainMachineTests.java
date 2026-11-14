@@ -67,7 +67,9 @@ final class ChainMachineTests {
                 "the energy stage file's recipe's chain");
         helper.assertValueEqual(recipes.get(Identifier.withDefaultNamespace("shield")), Handicap.PROTECTION, "the protection stage file's recipe's chain");
         helper.assertValueEqual(recipes.get(Identifier.withDefaultNamespace("glass_bottle")), Handicap.LIFE, "the life stage file's recipe's chain");
-        helper.assertValueEqual(recipes.size(), 3, "the stage files' recipes, but the one no pack has");
+        helper.assertValueEqual(recipes.get(Identifier.fromNamespaceAndPath("mechanicalmasteryreborn", "gametest/homunculus")), Handicap.LIFE,
+                "the Homunculus's build recipe's chain");
+        helper.assertValueEqual(recipes.size(), 4, "the stage files' recipes, but the one no pack has");
         helper.succeed();
     }
 
@@ -87,7 +89,7 @@ final class ChainMachineTests {
                 checked++;
             }
         }
-        helper.assertValueEqual(checked, 4, "the machines the game-test pack's tags and the mod's own Pelican hold");
+        helper.assertValueEqual(checked, 5, "the machines the game-test pack's tags and the mod's own Pelican and Homunculus stand hold");
         for (Handicap handicap : Handicap.values()) {
             Challenges.begin(server, team, handicap);
             for (var item : BuiltInRegistries.ITEM.getTagOrEmpty(ChainMachines.tag(handicap))) {
