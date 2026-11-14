@@ -90,7 +90,11 @@ public final class HandDriveBlock extends Block implements RecyclerPart {
                 turn(server, pos, state, player);
             } else if (!state.getValue(QUEUED)) {
                 server.setBlock(pos, state.setValue(QUEUED, true), UPDATE_CLIENTS);
-                KEPT.computeIfAbsent(server, l -> new HashMap<>()).put(pos.immutable(), player.getUUID());
+                // A fake player's click, such as a Homunculus's, is kept for nobody: it carries a real player's id, who
+                // mustn't pay for it.
+                if (!player.isFakePlayer()) {
+                    KEPT.computeIfAbsent(server, l -> new HashMap<>()).put(pos.immutable(), player.getUUID());
+                }
             }
         }
         return InteractionResult.SUCCESS;

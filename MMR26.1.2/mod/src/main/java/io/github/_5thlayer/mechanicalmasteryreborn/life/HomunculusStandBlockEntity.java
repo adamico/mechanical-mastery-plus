@@ -9,6 +9,7 @@ import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import io.github._5thlayer.mechanicalmasteryreborn.compat.food.FoodQuality;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.energy.SimpleEnergyHandler;
@@ -39,6 +41,11 @@ import org.jspecify.annotations.Nullable;
  * eaten since it woke, it falls asleep; one jumpstarted again waits awake for its first food. While its team hasn't
  * unlocked life's chain, as after a stop, it stands still, eating nothing, and works on once life is started again; a
  * reset, which keeps the chain unlocked, changes nothing. While its Homunculus isn't loaded, the stand waits.
+ *
+ * <p>Each work is a click of its Homunculus's (#368), which a finished work waits for, one at most, while it walks to the
+ * block it works; with nothing to click, the work is spent. The stand keeps who kindled its Homunculus, as whom it clicks,
+ * and the Supply a player assigned it, which it forgets once the storage is broken; a Homunculus raised again on it keeps
+ * both.
  */
 public final class HomunculusStandBlockEntity extends BlockEntity {
 
@@ -61,6 +68,11 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
     private static final String EATEN_KEY = "eaten";
     private static final String FOOD_KEY = "food";
     private static final String STORE_KEY = "store";
+    private static final String KINDLER_KEY = "kindler";
+    private static final String SUPPLY_KEY = "supply";
+    private static final String SUPPLY_FACE_KEY = "supply_face";
+    /** Ticks between its checks that its Supply is still there. */
+    private static final int SUPPLY_CHECK_INTERVAL = 20;
 
     private final Food food = new Food();
     private final Store store = new Store();
@@ -77,8 +89,13 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
     private int quality;
     /** Ticks since its last work. */
     private int cooldown;
-    /** The works it has done. */
+    /** The works it has done, each a click or spent with nothing to click. */
     private int works;
+    /** The player who kindled its Homunculus, whose clicks its Homunculus's are. */
+    private @Nullable UUID kindler;
+    /** Its Homunculus's Supply, and the face it takes from, if a player assigned one. */
+    private @Nullable BlockPos supply;
+    private Direction supplyFace = Direction.UP;
 
     public HomunculusStandBlockEntity(BlockPos pos, BlockState state) {
         super(Homunculus.STAND_ENTITY.get(), pos, state);
@@ -164,9 +181,39 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         return works;
     }
 
-    /** Binds the Homunculus {@code id}, newly kindled, to this stand: full unless from a {@code spent} spark, and asleep. */
-    void bind(UUID id, boolean spent) {
+    /** The player who kindled its Homunculus, or null for a stand placed by hand that none was kindled on. */
+    public @Nullable UUID kindler() {
+        return kindler;
+    }
+
+    /** Its Homunculus's Supply, or null if none is assigned. */
+    public @Nullable BlockPos supply() {
+        return supply;
+    }
+
+    /** Its Supply's items, from the face it takes from, or null with none assigned or its chunk unloaded. */
+    @Nullable ResourceHandler<ItemResource> supplyHandler() {
+        return supply == null || level == null || !level.isLoaded(supply) ? null
+                : level.getCapability(Capabilities.Item.BLOCK, supply, supplyFace);
+    }
+
+    /** Assigns the storage at {@code pos} as its Homunculus's Supply, taken from its {@code face}. */
+    void assignSupply(BlockPos pos, Direction face) {
+        supply = pos.immutable();
+        supplyFace = face;
+        setChanged();
+    }
+
+    /** Whether {@code pos} is within a Homunculus's range of this stand. */
+    public boolean inRange(BlockPos pos) {
+        return Math.max(Math.abs(pos.getX() - worldPosition.getX()), Math.abs(pos.getZ() - worldPosition.getZ())) <= ServerConfig.homunculusRangeAcross()
+                && Math.abs(pos.getY() - worldPosition.getY()) <= ServerConfig.homunculusRangeUp();
+    }
+
+    /** Binds the Homunculus {@code id}, newly kindled by {@code kindler}, to this stand: full unless from a {@code spent} spark, and asleep. */
+    void bind(UUID id, boolean spent, UUID kindler) {
         homunculus = id;
+        this.kindler = kindler;
         awake = false;
         locked = false;
         // A full belly counts as a meal of no quality, so it starves once that and the stand's food are gone.
@@ -195,6 +242,11 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
 
     private void tick(ServerLevel level, BlockPos pos, BlockState state) {
         store.fit();
+        if (supply != null && level.getGameTime() % SUPPLY_CHECK_INTERVAL == 0 && level.isLoaded(supply) && supplyHandler() == null) {
+            // Its storage broken: forgotten.
+            supply = null;
+            setChanged();
+        }
         if (homunculus == null || !(level.getEntity(homunculus) instanceof HomunculusEntity body)) {
             return;
         }
@@ -223,11 +275,11 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
             }
         }
         fed--;
-        cooldown++;
-        if (cooldown >= Homunculus.interval(quality)) {
+        // A finished work waits, one at most, while it walks to click.
+        cooldown = Math.min(cooldown + 1, Homunculus.interval(quality));
+        if (cooldown >= Homunculus.interval(quality) && body.work() != HomunculusEntity.Work.WAITING) {
             cooldown = 0;
             works++;
-            body.worked();
         }
         setChanged();
     }
@@ -270,6 +322,9 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         out.putInt(COOLDOWN_KEY, cooldown);
         out.putInt(WORKS_KEY, works);
         out.putBoolean(EATEN_KEY, eaten);
+        out.storeNullable(KINDLER_KEY, UUIDUtil.CODEC, kindler);
+        out.storeNullable(SUPPLY_KEY, BlockPos.CODEC, supply);
+        out.store(SUPPLY_FACE_KEY, Direction.CODEC, supplyFace);
         food.serialize(out.child(FOOD_KEY));
         store.serialize(out.child(STORE_KEY));
     }
@@ -284,6 +339,9 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         cooldown = in.getIntOr(COOLDOWN_KEY, 0);
         works = in.getIntOr(WORKS_KEY, 0);
         eaten = in.getBooleanOr(EATEN_KEY, false);
+        kindler = in.read(KINDLER_KEY, UUIDUtil.CODEC).orElse(null);
+        supply = in.read(SUPPLY_KEY, BlockPos.CODEC).orElse(null);
+        supplyFace = in.read(SUPPLY_FACE_KEY, Direction.CODEC).orElse(Direction.UP);
         food.deserialize(in.childOrEmpty(FOOD_KEY));
         store.deserialize(in.childOrEmpty(STORE_KEY));
     }

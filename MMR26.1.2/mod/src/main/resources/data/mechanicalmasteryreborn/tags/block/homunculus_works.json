@@ -1,0 +1,6 @@
+{
+  "values": [
+    "mechanicalmasteryreborn:hand_drive",
+    {"id": "farmersdelight:cutting_board", "required": false}
+  ]
+}

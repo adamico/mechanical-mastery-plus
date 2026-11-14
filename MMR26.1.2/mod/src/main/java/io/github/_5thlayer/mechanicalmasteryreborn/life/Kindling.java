@@ -3,6 +3,8 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.life;
 
+import java.util.UUID;
+
 import io.github._5thlayer.mechanicalmasteryreborn.MechanicalMasteryReborn;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.ChainMachines;
 import net.minecraft.core.BlockPos;
@@ -59,7 +61,7 @@ final class Kindling {
             return;
         }
         ItemStack spark = event.getItemStack();
-        if (!raise(level, base, space.get(), fresh, Homunculus.spent(spark))) {
+        if (!raise(level, base, space.get(), fresh, Homunculus.spent(spark), player.getUUID())) {
             event.setCancellationResult(InteractionResult.FAIL);
             return;
         }
@@ -68,7 +70,7 @@ final class Kindling {
     }
 
     /** The strike, the stand if it is new, and its Homunculus on {@code space}; false if none could be made. */
-    private static boolean raise(ServerLevel level, BlockPos base, BlockPos space, boolean fresh, boolean spent) {
+    private static boolean raise(ServerLevel level, BlockPos base, BlockPos space, boolean fresh, boolean spent, UUID kindler) {
         var homunculus = Homunculus.HOMUNCULUS.get().create(level, EntitySpawnReason.TRIGGERED);
         if (homunculus == null) {
             return false;
@@ -90,7 +92,7 @@ final class Kindling {
         homunculus.snapTo(space.getX() + 0.5, space.getY(), space.getZ() + 0.5, 0F, 0F);
         homunculus.boundTo(base);
         level.addFreshEntity(homunculus);
-        stand.bind(homunculus.getUUID(), spent);
+        stand.bind(homunculus.getUUID(), spent, kindler);
         return true;
     }
 }

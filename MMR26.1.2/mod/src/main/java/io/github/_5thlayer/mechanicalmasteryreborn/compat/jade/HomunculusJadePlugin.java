@@ -21,7 +21,8 @@ import snownee.jade.api.config.IPluginConfig;
 
 /**
  * Says what a Homunculus is doing (#367): asleep until a jumpstart, standing still while life's chain is locked, awake with
- * how long its belly lasts or hungry, or a statue for good once its stand is gone. Its stand's food and, while it sleeps,
+ * how long its belly lasts or hungry, or a statue for good once its stand is gone; and, while it has a stand, what it holds
+ * and whether it has a Supply (#368). Its stand's food and, while it sleeps,
  * the stand's FE Jade shows on its own, from the stand's faces. Read from what the Homunculus sends every client, so it needs
  * no server data. Jade finds this by its annotation and loads it only when Jade is installed.
  */
@@ -38,6 +39,13 @@ public final class HomunculusJadePlugin implements IWailaPlugin {
             public void appendTooltip(ITooltip tooltip, EntityAccessor accessor, IPluginConfig config) {
                 if (accessor.getEntity() instanceof HomunculusEntity homunculus) {
                     tooltip.add(line(homunculus));
+                    if (homunculus.doing() != HomunculusEntity.STANDLESS) {
+                        var held = homunculus.getMainHandItem();
+                        tooltip.add(held.isEmpty() ? Component.translatable(KEY + "holds_nothing")
+                                : Component.translatable(KEY + "holds", held.getHoverName()));
+                        tooltip.add(homunculus.supplied() ? Component.translatable(KEY + "supplied")
+                                : Component.translatable(KEY + "unsupplied").withStyle(ChatFormatting.YELLOW));
+                    }
                 }
             }
 
