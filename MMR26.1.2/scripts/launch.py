@@ -5,7 +5,7 @@
 #
 # It is skillworks' quicklaunch pack launcher, launch_pack.py (skillworks 0.11.7 or later), taking mod
 # builds from this pack line's folder only, so the companion mod in mod/ is the one local build. Each run copies the pack's configs and kubejs/ into the profile and puts the newest local build of
-# the companion mod in mods/, in place of the pack's jar. The next run takes it out again, so --released
+# the companion mod in mods/, rebuilt first when its sources are newer than its jar, in place of the pack's jar. The next run takes it out again, so --released
 # plays the pack's own jars. The suite is always the pack's released jars.
 #
 # The launcher copies only what index.toml lists, so each run refreshes it with packwiz first, and
@@ -69,6 +69,27 @@ def refreshed():
             f.write_bytes(content)
 
 
+def stale(mod):
+    """Whether mod/build/libs lacks a jar, or holds one older than a source or build file of the mod."""
+    jars = [j for j in (mod / "build/libs").glob("*.jar") if not j.stem.endswith(("-sources", "-javadoc"))]
+    if not jars:
+        return True
+    built = max(j.stat().st_mtime for j in jars)
+    inputs = [*(mod / "src").rglob("*"), *mod.glob("*.gradle*"), mod / "gradle.properties"]
+    return any(f.is_file() and f.stat().st_mtime > built for f in inputs)
+
+
+def build(mod, dry_run):
+    """Builds the companion mod when its jar is older than its sources, so a launch never plays a stale jar."""
+    if not stale(mod):
+        return
+    print("launch: the companion mod's jar is older than its sources; building it", file=sys.stderr)
+    if dry_run:
+        return
+    if subprocess.call(["sh", "./gradlew", "build", "-x", "test", "--no-daemon", "-q"], cwd=mod):
+        fail("the companion mod failed to build.")
+
+
 def add(lp, game, mod, jar, version, dry_run):
     """Puts the local build of mod in the profile's mods/, unless the pack carries a jar of it, which the
     sync has already swapped for it."""
@@ -112,6 +133,9 @@ def main():
     if not save:
         latest = sorted(saves.glob("*/level.dat"), key=lambda p: p.stat().st_mtime)
         save = latest[-1].parent.name if latest else None
+
+    if not args.released:
+        build(PACK / "mod", args.dry_run)
 
     # launch_pack takes mod builds from the repo it is given and from <beside>/<mod id>: this folder as
     # the repo and an empty folder beside swap in the companion mod alone, and leave the suite as the
