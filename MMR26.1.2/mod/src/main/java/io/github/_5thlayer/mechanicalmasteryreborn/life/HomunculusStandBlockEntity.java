@@ -26,12 +26,13 @@ import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 
 /**
  * A Homunculus stand and the Homunculus built at it (#367). Its food takes any food but rotten flesh from automation on
- * any side and gives none back; its store takes FE only while a seated Homunculus sleeps, up to one jumpstart's worth
- * ({@code life.homunculus.jumpstart}), and a full store wakes it, spent. A new one is built full, {@code life.homunculus.full} hunger points of work. Awake, it eats one food when the last is used up,
- * which keeps it working {@code life.homunculus.ticks_per_hunger} ticks for each point of the food's hunger, and works
- * every {@link Homunculus#interval} ticks for that food's quality. With nothing left to eat once it has eaten since it woke, it falls asleep; one jumpstarted again waits awake for its first food. While its
- * team hasn't unlocked life's chain, as after a stop, it stands still awake, eating nothing, and works on once life is
- * started again; a reset, which keeps the chain unlocked, changes nothing.
+ * any side and gives none back. Its store takes FE only while a seated Homunculus sleeps, up to one jumpstart's worth,
+ * and a full store wakes it, spent. A new Homunculus is built full; one taken off a stand after it has ever woken is
+ * spent, and is built again with an empty belly, so breaking a stand never refills it. Awake, it works off what it last
+ * ate, then eats the next food, working faster the better that food's quality. With nothing left once it has eaten
+ * since it woke, it falls asleep; one jumpstarted again waits awake for its first food. While its team hasn't unlocked
+ * life's chain, as after a stop, it stands still awake, eating nothing, and works on once life is started again; a
+ * reset, which keeps the chain unlocked, changes nothing.
  */
 public final class HomunculusStandBlockEntity extends BlockEntity {
 
@@ -42,6 +43,7 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
     private static final String COOLDOWN_KEY = "cooldown";
     private static final String WORKS_KEY = "works";
     private static final String EATEN_KEY = "eaten";
+    private static final String SPENT_KEY = "spent";
     private static final String FOOD_KEY = "food";
     private static final String STORE_KEY = "store";
 
@@ -51,6 +53,8 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
     private boolean awake;
     /** Whether it has eaten since it last woke: one woken with nothing yet to eat waits for its first food. */
     private boolean eaten;
+    /** Whether its Homunculus has ever woken, so it leaves the stand spent. */
+    private boolean spent;
     /** Ticks of work the food it last ate has left. */
     private int fed;
     /** The Quality Food level of the food it last ate. */
@@ -89,13 +93,19 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         return works;
     }
 
-    /** Builds a Homunculus at this empty stand, full ({@code life.homunculus.full}): it sleeps until jumpstarted. */
+    /** Builds a new Homunculus, full, at this empty stand: it sleeps until jumpstarted. */
     public void seat() {
+        seat(false);
+    }
+
+    /** Builds a Homunculus at this empty stand, full if new and empty if {@code spent}: it sleeps until jumpstarted. */
+    public void seat(boolean spent) {
         seated = true;
         awake = false;
-        // Built full: its belly counts as a meal of no quality, so it starves once that and the stand's food are gone.
-        eaten = true;
-        fed = ServerConfig.homunculusFull() * ServerConfig.homunculusTicksPerHunger();
+        this.spent = spent;
+        // Built full, its belly counts as a meal of no quality, so it starves once that and the stand's food are gone.
+        eaten = !spent;
+        fed = spent ? 0 : ServerConfig.homunculusFull() * ServerConfig.homunculusTicksPerHunger();
         quality = 0;
         cooldown = 0;
         setChanged();
@@ -116,6 +126,7 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
             }
             store.set(0);
             awake = true;
+            spent = true;
             // A new one's full belly is a meal; one jumpstarted after starving has none yet.
             eaten = fed > 0;
             setChanged();
@@ -170,6 +181,7 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         out.putInt(COOLDOWN_KEY, cooldown);
         out.putInt(WORKS_KEY, works);
         out.putBoolean(EATEN_KEY, eaten);
+        out.putBoolean(SPENT_KEY, spent);
         food.serialize(out.child(FOOD_KEY));
         store.serialize(out.child(STORE_KEY));
     }
@@ -184,6 +196,7 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         cooldown = in.getIntOr(COOLDOWN_KEY, 0);
         works = in.getIntOr(WORKS_KEY, 0);
         eaten = in.getBooleanOr(EATEN_KEY, false);
+        spent = in.getBooleanOr(SPENT_KEY, false);
         food.deserialize(in.childOrEmpty(FOOD_KEY));
         store.deserialize(in.childOrEmpty(STORE_KEY));
     }
@@ -198,7 +211,7 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), food.getResource(slot).toStack(food.getAmountAsInt(slot)));
         }
         if (seated) {
-            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Homunculus.ITEM.get()));
+            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), Homunculus.item(spent));
         }
     }
 

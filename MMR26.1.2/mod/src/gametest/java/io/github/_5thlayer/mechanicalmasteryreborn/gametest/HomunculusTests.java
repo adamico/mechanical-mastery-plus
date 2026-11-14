@@ -65,6 +65,7 @@ final class HomunculusTests {
         tests.test("homunculus_stand_is_a_life_chain_machine", 1, HomunculusTests::lifeChainMachine);
         tests.test("homunculus_build_recipe_is_in_lifes_stage_file", 1, HomunculusTests::buildGate);
         tests.test("homunculus_is_built_by_using_one_on_its_stand", 1, HomunculusTests::built);
+        tests.test("homunculus_taken_off_its_stand_once_woken_is_built_again_empty", 20, HomunculusTests::rebuiltSpent);
         tests.test("homunculus_wakes_on_a_full_jumpstart_only", 20, HomunculusTests::jumpstart);
         tests.test("homunculus_stand_takes_only_food", 1, HomunculusTests::onlyFood);
         tests.test("homunculus_eats_one_food_at_a_time", 100, HomunculusTests::eats);
@@ -105,6 +106,28 @@ final class HomunculusTests {
         helper.useBlock(AT, player);
         helper.assertValueEqual(player.getMainHandItem().getCount(), 1, "the Homunculi left in hand past a seated stand");
         helper.succeed();
+    }
+
+    /** Broken off its stand once woken, it drops spent, and is built again with an empty belly: woken again, it waits for food, working nothing. */
+    private static void rebuiltSpent(GameTestHelper helper) {
+        playLife(helper);
+        awake(helper, AT);
+        helper.runAtTickTime(3, () -> {
+            helper.destroyBlock(AT);
+            var dropped = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
+                    new net.minecraft.world.phys.AABB(helper.absolutePos(AT)).inflate(2)).stream()
+                    .map(entity -> entity.getItem()).filter(stack -> stack.is(Homunculus.ITEM.get())).findFirst();
+            helper.assertTrue(dropped.isPresent(), "no Homunculus dropped from its broken stand");
+            helper.assertTrue(Homunculus.spent(dropped.get()), "a woken Homunculus dropped unspent");
+            helper.setBlock(AT, Homunculus.STAND.get());
+            stand(helper, AT).seat(Homunculus.spent(dropped.get()));
+            charge(helper, AT, JUMPSTART);
+        });
+        helper.runAtTickTime(10, () -> {
+            helper.assertTrue(stand(helper, AT).awake(), "a spent Homunculus with no food waits awake");
+            helper.assertValueEqual(stand(helper, AT).works(), 0, "the works of a spent Homunculus with an empty belly");
+            helper.succeed();
+        });
     }
 
     /** An empty stand takes no FE; a seated one takes a jumpstart's worth, wakes only once it is full, then takes none. */

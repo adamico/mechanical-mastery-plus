@@ -61,7 +61,7 @@ public final class HomunculusStandBlock extends BaseEntityBlock {
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
-        stand.seat();
+        stand.seat(Homunculus.spent(stack));
         stack.consume(1, player);
         return InteractionResult.SUCCESS_SERVER;
     }
