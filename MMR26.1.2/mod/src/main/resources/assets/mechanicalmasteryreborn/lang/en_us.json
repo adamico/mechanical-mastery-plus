@@ -7,7 +7,9 @@
   "block.mechanicalmasteryreborn.wave_caller": "Wave Caller",
   "block.mechanicalmasteryreborn.pelican": "Pelican",
   "block.mechanicalmasteryreborn.homunculus_stand": "Homunculus Stand",
-  "item.mechanicalmasteryreborn.homunculus": "Homunculus",
+  "item.mechanicalmasteryreborn.vital_spark": "Vital Spark",
+  "item.mechanicalmasteryreborn.vital_spark.spent": "Spent Vital Spark",
+  "entity.mechanicalmasteryreborn.homunculus": "Homunculus",
   "block.mechanicalmasteryreborn.galvanic_port": "Galvanic Port",
   "block.mechanicalmasteryreborn.hand_drive": "Recycler Hand Drive",
   "block.mechanicalmasteryreborn.molten_gold": "Molten Gold",
@@ -17,6 +19,7 @@
   "block.mechanicalmasteryreborn.ward_tallow": "Ward Tallow",
   "block.mechanicalmasteryreborn.warding_port": "Warding Port",
   "config.jade.plugin_mechanicalmasteryreborn.port": "Port",
+  "config.jade.plugin_mechanicalmasteryreborn.homunculus": "Homunculus",
   "mechanicalmasteryreborn.challenge.won": "Your team won the %s challenge: C.O.D. makes the tier below from now on.",
   "mechanicalmasteryreborn.challenge.won.title": "%s Won",
   "mechanicalmasteryreborn.nether_portal.locked": "The portal won't open: the Nether opens to an island's team once it has won all four challenges.",
@@ -288,5 +291,13 @@
   "mechanicalmasteryreborn.hermetic_lab.heart.full": "Holds all the Essentia Vitae it can",
   "mechanicalmasteryreborn.hermetic_lab.not_member": "This Hermetic Lab isn't your team's",
   "mechanicalmasteryreborn.hermetic_lab.full": "Takes no more Nullessence",
-  "mechanicalmasteryreborn.hermetic_lab.shard_refused": "Takes only Null Shards of the Protection Spell running"
+  "mechanicalmasteryreborn.hermetic_lab.shard_refused": "Takes only Null Shards of the Protection Spell running",
+  "mechanicalmasteryreborn.homunculus.kindle.not_allowed": "You can't build here",
+  "mechanicalmasteryreborn.homunculus.kindle.locked": "The spark won't take until your team plays life",
+  "mechanicalmasteryreborn.homunculus.kindle.no_room": "No room beside the base for a Homunculus",
+  "mechanicalmasteryreborn.jade.homunculus.asleep": "Asleep: a jumpstart of FE to its stand wakes it",
+  "mechanicalmasteryreborn.jade.homunculus.locked": "Standing still",
+  "mechanicalmasteryreborn.jade.homunculus.fed": "Awake: fed for %ss more",
+  "mechanicalmasteryreborn.jade.homunculus.hungry": "Awake, hungry: going to its stand to eat",
+  "mechanicalmasteryreborn.jade.homunculus.standless": "Its stand is gone: a statue for good"
 }

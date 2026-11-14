@@ -52,6 +52,13 @@ precedence = "override"
 SPDX-FileCopyrightText = "2026 5thlayer"
 SPDX-License-Identifier = "MIT"
 
+# The Homunculus's textures, which publish/make-homunculus.py paints (NOTICE).
+[[annotations]]
+path = ["src/main/resources/assets/mechanicalmasteryreborn/textures/entity/homunculus/*.png"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 5thlayer"
+SPDX-License-Identifier = "MIT"
+
 # The Recycler's, the Electric Defence's, C.O.D.'s, the lab's, the Ports', the mint's and the Galvanic Charges',
 # Core's and reformed forms' and the Wave Caller's textures, from Malcolm Riley's unused-textures, some modified (NOTICE).
 [[annotations]]

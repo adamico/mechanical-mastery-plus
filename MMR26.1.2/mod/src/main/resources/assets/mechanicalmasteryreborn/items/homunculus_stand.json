@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "mechanicalmasteryreborn:block/homunculus_stand"
+    "model": "mechanicalmasteryreborn:item/homunculus_stand"
   }
 }

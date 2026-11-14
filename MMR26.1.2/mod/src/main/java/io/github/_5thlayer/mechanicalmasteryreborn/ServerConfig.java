@@ -250,7 +250,7 @@ public final class ServerConfig {
 
     /** The FE that wakes a sleeping Homunculus (#367). */
     public static final ModConfigSpec.IntValue HOMUNCULUS_JUMPSTART = BUILDER
-            .comment("The FE a Homunculus stand must take, from any source, to wake its new or starved Homunculus. Spent as it wakes.")
+            .comment("The FE a Homunculus Stand must take, from any source, to wake its new or starved Homunculus. Spent as it wakes.")
             .defineInRange("life.homunculus.jumpstart", 10_000, 1, 1_000_000_000);
 
     /** How long a point of a food's hunger keeps a Homunculus working. */
@@ -273,6 +273,16 @@ public final class ServerConfig {
             .comment("How much faster a Homunculus works for each Quality Food level of the food it eats: iron 1, gold 2, diamond 3.",
                     "Its interval is divided by 1 + this times the level, so 0.5 makes a diamond meal two and a half times as fast.")
             .defineInRange("life.homunculus.speed_up", 0.5, 0.0, 100.0);
+
+    /** How far across from its stand an awake Homunculus walks. */
+    public static final ModConfigSpec.IntValue HOMUNCULUS_RANGE_ACROSS = BUILDER
+            .comment("How many blocks across from its stand an awake Homunculus walks.")
+            .defineInRange("life.homunculus.range_across", 8, 1, 64);
+
+    /** How far up or down from its stand an awake Homunculus walks. */
+    public static final ModConfigSpec.IntValue HOMUNCULUS_RANGE_UP = BUILDER
+            .comment("How many blocks up or down from its stand an awake Homunculus walks.")
+            .defineInRange("life.homunculus.range_up", 4, 0, 64);
 
     /** How long a team waits between emergency saplings from its lab: a Minecraft day (#302). */
     public static final ModConfigSpec.IntValue LAB_SAPLING_COOLDOWN = BUILDER
@@ -529,6 +539,16 @@ public final class ServerConfig {
     /** How much faster each Quality Food level makes a Homunculus work. */
     public static double homunculusSpeedUp() {
         return SPEC.isLoaded() ? HOMUNCULUS_SPEED_UP.getAsDouble() : HOMUNCULUS_SPEED_UP.getDefault();
+    }
+
+    /** How many blocks across from its stand an awake Homunculus walks. */
+    public static int homunculusRangeAcross() {
+        return SPEC.isLoaded() ? HOMUNCULUS_RANGE_ACROSS.getAsInt() : HOMUNCULUS_RANGE_ACROSS.getDefault();
+    }
+
+    /** How many blocks up or down from its stand an awake Homunculus walks. */
+    public static int homunculusRangeUp() {
+        return SPEC.isLoaded() ? HOMUNCULUS_RANGE_UP.getAsInt() : HOMUNCULUS_RANGE_UP.getDefault();
     }
 
     /** The food exhaustion a hand drive's turn that counts adds. */

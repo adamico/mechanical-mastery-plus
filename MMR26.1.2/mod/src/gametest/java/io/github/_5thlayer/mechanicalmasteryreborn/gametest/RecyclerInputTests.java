@@ -3,30 +3,16 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.gametest;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import com.mojang.authlib.GameProfile;
 import io.github._5thlayer.mechanicalmasteryreborn.recycler.Recycler;
-import io.netty.channel.embedded.EmbeddedChannel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.network.protocol.PacketFlow;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.CommonListenerCookie;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 
 /**
  * A player's right-click on a Recycler input (#218), as the server plays it, falling back to the held item's own use:
@@ -122,50 +108,5 @@ final class RecyclerInputTests {
         helper.assertValueEqual(player.told(), List.of(), "what the action bar said");
         player.leave(helper);
         helper.succeed();
-    }
-
-    /** A survival player online, as {@link GameTestHelper#makeMockServerPlayerInLevel} puts one, who keeps what its action bar says. */
-    private static final class Clicker extends ServerPlayer {
-
-        private final List<Component> overlay = new ArrayList<>();
-
-        private Clicker(GameTestHelper helper, CommonListenerCookie cookie) {
-            super(helper.getLevel().getServer(), helper.getLevel(), cookie.gameProfile(), cookie.clientInformation());
-        }
-
-        static Clicker of(GameTestHelper helper) {
-            var cookie = CommonListenerCookie.createInitial(new GameProfile(UUID.randomUUID(), "test-clicker"), false);
-            var player = new Clicker(helper, cookie);
-            // Named in full: inside a ServerPlayer subclass the simple name resolves to another, inherited type.
-            var connection = new net.minecraft.network.Connection(PacketFlow.SERVERBOUND);
-            new EmbeddedChannel(connection);
-            helper.getLevel().getServer().getPlayerList().placeNewPlayer(connection, player, cookie);
-            player.setGameMode(GameType.SURVIVAL);
-            return player;
-        }
-
-        /** Right-clicks the top of {@code relative} holding {@code held}, as the server plays a click. */
-        void click(GameTestHelper helper, BlockPos relative, ItemStack held) {
-            setItemInHand(InteractionHand.MAIN_HAND, held);
-            BlockPos absolute = helper.absolutePos(relative);
-            var hit = new BlockHitResult(Vec3.atCenterOf(absolute).relative(Direction.UP, 0.5), Direction.UP, absolute, false);
-            gameMode.useItemOn(this, helper.getLevel(), getMainHandItem(), InteractionHand.MAIN_HAND, hit);
-        }
-
-        @Override
-        public void sendOverlayMessage(Component message) {
-            overlay.add(message);
-            super.sendOverlayMessage(message);
-        }
-
-        /** The translation keys of what its action bar said, in order. */
-        List<String> told() {
-            return overlay.stream().map(line -> line.getContents() instanceof TranslatableContents contents ? contents.getKey() : line.getString())
-                    .toList();
-        }
-
-        void leave(GameTestHelper helper) {
-            helper.getLevel().getServer().getPlayerList().remove(this);
-        }
     }
 }

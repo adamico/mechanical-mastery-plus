@@ -28,7 +28,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
  * the lab and the four Ports, then every essence, then the protection Chain's Rift Shard, Ward Tallow bucket,
  * Obsidian Flakes and Charged Rift Shard, the money Chain's mint, from the molten metals' buckets to the Coins,
  * the energy chain's reformed salt and sulfur, Galvanic Charges and Core, and the Hermetic Lab's Null Shard, then the Recycler's parts, then the
- * Defences, the Wave Caller, the Pelican and the Homunculus with its stand. One listener, in the order the tab shows them, which
+ * Defences, the Wave Caller, the Pelican, the Homunculus Stand and the Vital Spark. One listener, in the order the tab shows them, which
  * {@code CreativeTabTests} lists too.
  */
 final class WorksTabContents {
@@ -82,6 +82,6 @@ final class WorksTabContents {
         event.accept(Assault.WAVE_CALLER_ITEM.get());
         event.accept(Pelican.ITEM.get());
         event.accept(Homunculus.STAND_ITEM.get());
-        event.accept(Homunculus.ITEM.get());
+        event.accept(Homunculus.VITAL_SPARK.get());
     }
 }
