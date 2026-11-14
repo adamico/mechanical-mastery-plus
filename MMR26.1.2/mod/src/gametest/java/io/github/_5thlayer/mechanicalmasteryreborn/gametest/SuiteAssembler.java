@@ -44,6 +44,11 @@ final class SuiteAssembler {
 
     /** A tier 1 Assembler placed at {@link #ORIGIN} by a player's click, holding the pack's recipe {@code assembling/<path>}. */
     static AssemblerBlockEntity holding(GameTestHelper helper, String path) {
+        return holding(helper, Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "assembling/" + path));
+    }
+
+    /** A tier 1 Assembler placed at {@link #ORIGIN} by a player's click, holding the assembling recipe {@code recipe}. */
+    static AssemblerBlockEntity holding(GameTestHelper helper, Identifier recipe) {
         FakePlayer player = new FakePlayer(helper.getLevel(), new GameProfile(UUID.randomUUID(), "suite_assembler"));
         player.setGameMode(GameType.SURVIVAL);
         ItemStack stack = new ItemStack(Assemblers.item(AssemblerTier.ONE).get());
@@ -52,7 +57,7 @@ final class SuiteAssembler {
         player.gameMode.useItemOn(player, helper.getLevel(), stack, InteractionHand.MAIN_HAND,
                 new BlockHitResult(Vec3.atCenterOf(floor).relative(Direction.UP, 0.5), Direction.UP, floor, false));
         AssemblerBlockEntity assembler = helper.getBlockEntity(ORIGIN, AssemblerBlockEntity.class);
-        assembler.setHeldRecipe(Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "assembling/" + path), player);
+        assembler.setHeldRecipe(recipe, player);
         return assembler;
     }
 
