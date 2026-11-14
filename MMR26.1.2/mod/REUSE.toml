@@ -53,7 +53,7 @@ SPDX-FileCopyrightText = "2026 5thlayer"
 SPDX-License-Identifier = "MIT"
 
 # The Recycler's, the Electric Defence's, C.O.D.'s, the lab's, the Ports', the mint's and the Galvanic Charges',
-# Core's and reformed forms', the Wave Caller's, the Pelican's and the Homunculus's and its stand's textures, from Malcolm Riley's unused-textures, some modified (NOTICE).
+# Core's and reformed forms', the Wave Caller's, the Pelican's, the Homunculus's and its stand's and the Vital Spark's textures, from Malcolm Riley's unused-textures, some modified (NOTICE).
 [[annotations]]
 path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/recycler_*.png",
@@ -63,6 +63,7 @@ path = [
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/pelican_contents_lit.png.mcmeta",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/homunculus_stand_*.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/entity/homunculus/*.png",
+    "src/main/resources/assets/mechanicalmasteryreborn/textures/item/vital_spark*.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/cod_*.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/lab_*.png",
     "src/main/resources/assets/mechanicalmasteryreborn/textures/block/*_port_*.png",

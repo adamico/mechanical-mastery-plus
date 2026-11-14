@@ -68,6 +68,8 @@ public final class MechanicalMasteryRebornClient {
                 (viewer, context) -> Attempts.Viewer.receive(viewer)));
         modBus.addListener((RegisterConditionalItemModelPropertyEvent event) -> event.register(
                 Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "stale"), StaleEssence.MAP_CODEC));
+        modBus.addListener((RegisterConditionalItemModelPropertyEvent event) -> event.register(
+                Identifier.fromNamespaceAndPath(MechanicalMasteryReborn.MOD_ID, "spent"), SpentVitalSpark.MAP_CODEC));
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::nameChain);
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::feedsNow);
         NeoForge.EVENT_BUS.addListener(MechanicalMasteryRebornClient::nullShardUse);
