@@ -32,6 +32,8 @@ final class SuiteQualityTests {
 
     private static final Identifier STEW = Identifier.withDefaultNamespace("rabbit_stew_from_brown_mushroom");
     private static final Identifier IRON = Identifier.fromNamespaceAndPath("quality_food", "iron");
+    private static final Identifier PIE = Identifier.withDefaultNamespace("pumpkin_pie");
+    private static final Identifier DIAMOND = Identifier.fromNamespaceAndPath("quality_food", "diamond");
     private static final Identifier GOLD = Identifier.fromNamespaceAndPath("quality_food", "gold");
     private static final Item[] INGREDIENTS = {Items.BAKED_POTATO, Items.COOKED_RABBIT, Items.CARROT, Items.BROWN_MUSHROOM, Items.BOWL};
 
@@ -42,6 +44,7 @@ final class SuiteQualityTests {
         tests.test("suite_quality_an_input_takes_food_of_another_quality", 1, SuiteQualityTests::pipedIn);
         tests.test("suite_quality_a_shift_click_puts_food_of_another_quality_in", 1, SuiteQualityTests::shiftClicked);
         tests.test("suite_quality_an_assembler_makes_its_product_at_its_ingredients_average", 1, SuiteQualityTests::product);
+        tests.test("suite_quality_a_product_with_no_room_at_its_quality_takes_a_held_stacks", 1, SuiteQualityTests::noRoom);
     }
 
     /** A pipe's gold potato into the input holding a plain one: both go in, at iron, their average. */
@@ -97,6 +100,26 @@ final class SuiteQualityTests {
         helper.succeed();
     }
 
+    /**
+     * The outputs hold plain, iron and diamond pie and a bucket, all with room: a gold pie, of a gold egg, has no slot of
+     * its own, so it goes onto the held pie nearest it, the lower of two as near, as a planter's crop does (#365).
+     */
+    private static void noRoom(GameTestHelper helper) {
+        AssemblerBlockEntity assembler = SuiteAssembler.holding(helper, PIE);
+        assembler.inventory().set(AssemblerSlots.OUTPUT, ItemResource.of(Items.PUMPKIN_PIE), 10);
+        assembler.inventory().set(AssemblerSlots.OUTPUT + 1, ItemResource.of(of(Items.PUMPKIN_PIE, IRON, 1)), 10);
+        assembler.inventory().set(AssemblerSlots.OUTPUT + 2, ItemResource.of(of(Items.PUMPKIN_PIE, DIAMOND, 3)), 10);
+        assembler.inventory().set(AssemblerSlots.OUTPUT + 3, ItemResource.of(Items.BUCKET), 1);
+        for (Item item : new Item[] {Items.PUMPKIN, Items.SUGAR}) {
+            SuiteAssembler.put(assembler, slotOf(helper, assembler, item), item, 1);
+        }
+        assembler.inventory().set(slotOf(helper, assembler, Items.EGG), ItemResource.of(of(Items.EGG, GOLD, 2)), 1);
+        SuiteAssembler.tickUntil(helper, assembler, () -> assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT + 1) > 10);
+        helper.assertValueEqual(assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT), 10, "the plain pie");
+        helper.assertValueEqual(assembler.inventory().getAmountAsInt(AssemblerSlots.OUTPUT + 2), 10, "the diamond pie");
+        helper.succeed();
+    }
+
     /** The input the held recipe puts {@code item} in. */
     private static int slotOf(GameTestHelper helper, AssemblerBlockEntity assembler, Item item) {
         for (int slot = 0; slot < AssemblerSlots.INPUTS; slot++) {
@@ -104,7 +127,7 @@ final class SuiteQualityTests {
                 return slot;
             }
         }
-        throw helper.assertionException("no input of the rabbit stew's recipe takes " + item);
+        throw helper.assertionException("no input of the held recipe takes " + item);
     }
 
     private static void expectInput(GameTestHelper helper, AssemblerBlockEntity assembler, int slot, int count, Identifier type,
