@@ -7,6 +7,9 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -28,6 +31,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -36,7 +40,8 @@ import org.jspecify.annotations.Nullable;
 /**
  * A Homunculus Stand: two blocks tall, a clay base under a rod, the same from every side. The base holds its
  * {@link HomunculusStandBlockEntity}; both halves give its food and FE. Breaking either half breaks both, and the stand
- * drops once, from its base, as a door does. Its item places both halves, and only where the space above is free.
+ * drops once, from its base, as a door does. Its item places both halves, and only where the space above is free. A
+ * player's right-click with food puts the held stack in it.
  */
 public final class HomunculusStandBlock extends BaseEntityBlock {
 
@@ -118,6 +123,25 @@ public final class HomunculusStandBlock extends BaseEntityBlock {
             }
         }
         return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    /** Food in hand goes into the stand, on either half; anything else does what it would. */
+    @Override
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
+            BlockHitResult hit) {
+        var stand = Homunculus.standAt(level, pos, state);
+        if (stand == null || !stack.has(DataComponents.FOOD)) {
+            return InteractionResult.TRY_WITH_EMPTY_HAND;
+        }
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+        int taken = stand.feed(stack);
+        if (taken == 0) {
+            return InteractionResult.TRY_WITH_EMPTY_HAND;
+        }
+        stack.consume(taken, player);
+        return InteractionResult.SUCCESS_SERVER;
     }
 
     @Override

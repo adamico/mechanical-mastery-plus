@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "mechanicalmasteryreborn:item/homunculus_stand"
+    "model": "minecraft:block/lightning_rod"
   }
 }

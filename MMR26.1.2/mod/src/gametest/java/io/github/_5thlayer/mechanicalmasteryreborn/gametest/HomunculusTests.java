@@ -92,6 +92,7 @@ final class HomunculusTests {
         tests.test("homunculus_statue_breaks_at_a_players_blow", 5, HomunculusTests::statueBreaks);
         tests.test("homunculus_wakes_on_a_full_jumpstart_only", 20, HomunculusTests::jumpstart);
         tests.test("homunculus_stand_takes_only_food", 1, HomunculusTests::onlyFood);
+        tests.test("homunculus_stand_is_fed_by_hand_on_either_half", 1, HomunculusTests::fedByHand);
         tests.test("homunculus_eats_one_food_at_a_time", 100, HomunculusTests::eats);
         tests.test("homunculus_kindled_full_works_before_it_eats", 40, HomunculusTests::kindledFull);
         tests.test("homunculus_works_faster_on_a_better_meal", 100, HomunculusTests::speedByMeal);
@@ -333,6 +334,21 @@ final class HomunculusTests {
         try (var transaction = Transaction.openRoot()) {
             helper.assertValueEqual(food(helper, BASE).extract(ItemResource.of(Items.BREAD), 3, transaction), 0, "the bread taken from the stand");
         }
+        helper.succeed();
+    }
+
+    /** A player's right-click with food puts the held stack in the stand, on either half; with anything else, nothing. */
+    private static void fedByHand(GameTestHelper helper) {
+        placeStand(helper, BASE);
+        var player = Clicker.of(helper);
+        player.click(helper, BASE, Direction.SOUTH, new ItemStack(Items.BREAD, 3));
+        helper.assertTrue(player.getMainHandItem().isEmpty(), "bread left in hand after feeding the base");
+        player.click(helper, BASE.above(), Direction.SOUTH, new ItemStack(Items.COOKED_BEEF, 2));
+        helper.assertTrue(player.getMainHandItem().isEmpty(), "beef left in hand after feeding the rod");
+        player.click(helper, BASE, Direction.SOUTH, new ItemStack(Items.ROTTEN_FLESH, 2));
+        helper.assertValueEqual(player.getMainHandItem().getCount(), 2, "the rotten flesh left in hand");
+        helper.assertValueEqual(held(helper, BASE), 5, "the food a player fed the stand");
+        player.leave(helper);
         helper.succeed();
     }
 

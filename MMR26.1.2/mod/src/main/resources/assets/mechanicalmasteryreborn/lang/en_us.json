@@ -299,5 +299,7 @@
   "mechanicalmasteryreborn.jade.homunculus.locked": "Standing still",
   "mechanicalmasteryreborn.jade.homunculus.fed": "Awake: fed for %ss more",
   "mechanicalmasteryreborn.jade.homunculus.hungry": "Awake, hungry: going to its stand to eat",
-  "mechanicalmasteryreborn.jade.homunculus.standless": "Its stand is gone: a statue for good"
+  "mechanicalmasteryreborn.jade.homunculus.standless": "Its stand is gone: a statue for good",
+  "mechanicalmasteryreborn.jade.homunculus.food": "Food on the stand: %s",
+  "config.jade.plugin_mechanicalmasteryreborn.homunculus_stand": "Homunculus Stand"
 }

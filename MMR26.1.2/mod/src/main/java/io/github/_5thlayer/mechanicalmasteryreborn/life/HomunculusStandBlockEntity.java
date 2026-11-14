@@ -26,6 +26,7 @@ import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.energy.SimpleEnergyHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 import org.jspecify.annotations.Nullable;
 
@@ -83,7 +84,7 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         super(Homunculus.STAND_ENTITY.get(), pos, state);
     }
 
-    /** The stand's food, as automation reaches it: insert only. */
+    /** The stand's food, as automation reaches it: insert only. A player's hand fills it too ({@link #feed}). */
     public ResourceHandler<ItemResource> food() {
         return food;
     }
@@ -96,9 +97,30 @@ public final class HomunculusStandBlockEntity extends BlockEntity {
         return sleeping() ? store : null;
     }
 
+    /** Puts as much of {@code held} as the stand's food takes into it, from a player's hand, and says how many it took. */
+    public int feed(ItemStack held) {
+        if (held.isEmpty()) {
+            return 0;
+        }
+        try (var transaction = Transaction.openRoot()) {
+            int taken = food.insert(ItemResource.of(held), held.getCount(), transaction);
+            transaction.commit();
+            return taken;
+        }
+    }
+
     /** Whether a Homunculus bound to this stand sleeps, so its store takes FE. */
     private boolean sleeping() {
         return homunculus != null && !awake;
+    }
+
+    /** How many foods the stand holds. */
+    public int foods() {
+        int foods = 0;
+        for (int slot = 0; slot < food.size(); slot++) {
+            foods += food.getAmountAsInt(slot);
+        }
+        return foods;
     }
 
     /** Whether a Homunculus is bound to this stand. */
