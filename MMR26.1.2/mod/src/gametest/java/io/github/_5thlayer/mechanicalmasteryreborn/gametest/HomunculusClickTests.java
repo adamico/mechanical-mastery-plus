@@ -46,7 +46,7 @@ final class HomunculusClickTests {
         tests.test("homunculus_clicks_a_hand_drive_round", 400, HomunculusClickTests::handDrive);
         tests.test("homunculus_clicks_nothing_empty_handed", 100, HomunculusClickTests::emptyHanded);
         tests.test("homunculus_clicks_the_nearest_block_it_can_reach", 400, HomunculusClickTests::nearestReachable);
-        tests.test("homunculus_clicks_holds_what_its_click_hands_it", 400, HomunculusClickTests::handedBack);
+        tests.test("homunculus_clicks_drops_what_its_click_turns_its_item_into", 400, HomunculusClickTests::handedBack);
         tests.test("homunculus_clicks_drops_what_it_holds_when_it_dies", 400, HomunculusClickTests::dropsHeld);
         tests.test("homunculus_clicks_spends_its_works_on_a_supply_it_cant_reach", 200, HomunculusClickTests::unreachableSupply);
         tests.test("homunculus_clicks_from_a_supply_a_player_assigns", 40, HomunculusClickTests::assigns);
@@ -257,7 +257,10 @@ final class HomunculusClickTests {
         });
     }
 
-    /** A click that swaps what it holds leaves it holding the new item; what the click puts anywhere else falls by the block. */
+    /**
+     * A click that turns what it holds into another item, as a feast turns the last bowl into a plate, drops the new item by
+     * the block, as it does what the click puts anywhere else, and it fetches the next.
+     */
     private static void handedBack(GameTestHelper helper) {
         var player = woken(helper);
         var homunculus = HomunculusTests.homunculus(helper, BASE);
@@ -266,11 +269,12 @@ final class HomunculusClickTests {
         assign(helper, player, homunculus, CHEST);
         helper.succeedWhen(() -> {
             var clicks = ClickedBlock.clicks(helper.absolutePos(WORKED));
-            helper.assertTrue(!clicks.isEmpty() && clicks.getFirst().held().is(Items.PAPER), "no click with paper yet");
-            helper.assertTrue(homunculus.getMainHandItem().is(Items.MAP), "it holds " + homunculus.getMainHandItem() + ", not the map");
-            helper.assertTrue(clicks.stream().allMatch(click -> !click.held().is(Items.PAPER) || click == clicks.getFirst()), "it clicked paper twice");
-            helper.assertValueEqual(count(helper, CHEST, Items.PAPER), 1, "the paper left in its Supply");
-            helper.assertTrue(HomunculusTests.drops(helper, WORKED).stream().anyMatch(stack -> stack.is(Items.FEATHER)), "no feather by the block");
+            helper.assertValueEqual(clicks.stream().filter(click -> click.held().is(Items.PAPER)).count(), 2L, "the clicks with paper");
+            helper.assertValueEqual(count(helper, CHEST, Items.PAPER), 0, "the paper left in its Supply");
+            var drops = HomunculusTests.drops(helper, WORKED);
+            helper.assertValueEqual(drops.stream().filter(stack -> stack.is(Items.MAP)).mapToInt(ItemStack::getCount).sum(), 2, "the maps by the block");
+            helper.assertTrue(drops.stream().anyMatch(stack -> stack.is(Items.FEATHER)), "no feather by the block");
+            helper.assertTrue(homunculus.getMainHandItem().isEmpty(), "it holds " + homunculus.getMainHandItem());
             player.leave(helper);
         });
     }

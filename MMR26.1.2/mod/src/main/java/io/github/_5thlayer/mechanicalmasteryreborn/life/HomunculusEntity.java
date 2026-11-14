@@ -65,8 +65,9 @@ import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
  * the Supply a player assigned it ({@link SupplyAssignment}) and takes one item, from the first slot that has any; holding it,
  * it walks to the space and, at each work its stand calls for, right-clicks the centre of the block's face toward it through
  * the player's own click path, never sneaking, as a fake player that carries its kindler's id, so a claim lets it work where
- * its kindler may. It holds what the click leaves in its hand, and drops by the block whatever else the click hands it; what
- * the block throws out it leaves where it falls. It never clicks empty-handed: with no item to take, it has no work.
+ * its kindler may. It holds what the click leaves of its item, and drops by the block whatever else the click hands it,
+ * the item its click turned its own into too, as a feast does the last bowl into a plate; what the block throws out it
+ * leaves where it falls. It never clicks empty-handed: with no item to take, it has no work.
  *
  * <p>Before any click, it sets a meal down on the Table a player assigned it, while the Table is clear and it has a meal,
  * in {@link Homunculus#PLACES}, in its off hand or its Supply: it takes the meal from the first slot that has one into its
@@ -318,11 +319,18 @@ public final class HomunculusEntity extends PathfinderMob {
         inventory.clearContent();
         player.snapTo(getX(), getY(), getZ(), getYRot(), 0F);
         player.setShiftKeyDown(hand == InteractionHand.OFF_HAND);
+        var used = getItemInHand(hand).copy();
         player.setItemInHand(hand, getItemInHand(hand));
         var hit = new BlockHitResult(Vec3.atCenterOf(pos).relative(face, 0.5), face, pos, false);
         var result = player.gameMode.useItemOn(player, level, player.getItemInHand(hand), hand, hit);
-        setItemInHand(hand, player.getItemInHand(hand));
+        var left = player.getItemInHand(hand);
         player.setItemInHand(hand, ItemStack.EMPTY);
+        if (!left.isEmpty() && !ItemStack.isSameItem(left, used)) {
+            // Turned into another item, as the last bowl into a plate: it drops that too.
+            Block.popResourceFromFace(level, pos, face, left);
+            left = ItemStack.EMPTY;
+        }
+        setItemInHand(hand, left);
         player.setShiftKeyDown(false);
         for (int slot = 0; slot < inventory.getContainerSize(); slot++) {
             var handed = inventory.removeItemNoUpdate(slot);
