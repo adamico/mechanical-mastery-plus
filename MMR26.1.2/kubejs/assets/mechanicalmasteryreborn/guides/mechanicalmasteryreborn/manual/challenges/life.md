@@ -24,7 +24,7 @@ worse.
 Life's chain is a food factory. Planters and Animal Pens raise crops and animals, machines turn them into
 ingredients, and cooking turns the ingredients into **meals**. Food spoils as it ages, so keep what you store in
 fridges. A meal keeps the average **quality** of what went into it, so better crops make better meals. A
-**Homunculus** can work the chain's hand steps, such as the Cutting Board, for you.
+[Homunculus](../homunculus.md) can work the chain's hand steps, such as the Cutting Board, for you.
 
 Starting the challenge sets life's chain machines to work on your island. The chain ends at the Pelican.
 
