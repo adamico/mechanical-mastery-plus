@@ -1,6 +1,8 @@
 {
   "values": [
     "mechanicalmasteryreborn:hand_drive",
-    {"id": "farmersdelight:cutting_board", "required": false}
+    {"id": "farmersdelight:cutting_board", "required": false},
+    {"id": "#farmersdelight:feasts", "required": false},
+    {"id": "#farmersdelight:pies", "required": false}
   ]
 }

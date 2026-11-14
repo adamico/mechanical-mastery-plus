@@ -35,6 +35,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.BlockHitResult;
@@ -372,7 +374,8 @@ public final class HomunculusEntity extends PathfinderMob {
         var spaces = new ArrayList<BlockPos>();
         for (var side : Direction.Plane.HORIZONTAL) {
             for (var space : List.of(pos.relative(side), pos.relative(side).below())) {
-                if (isWithinHome(space) && standsOn(level(), space)) {
+                // A space its pathfinding walks on: any floor, a hopper's rim too, not only a sturdy top.
+                if (isWithinHome(space) && WalkNodeEvaluator.getPathTypeStatic(this, space) == PathType.WALKABLE) {
                     spaces.add(space);
                 }
             }

@@ -52,6 +52,7 @@ final class HomunculusClickTests {
         tests.test("homunculus_clicks_from_a_supply_a_player_assigns", 40, HomunculusClickTests::assigns);
         tests.test("homunculus_clicks_takes_from_beside_a_supply_it_cant_stand_on", 400, HomunculusClickTests::besideSupply);
         tests.test("homunculus_clicks_skips_a_block_whose_storage_is_empty", 600, HomunculusClickTests::skipsEmpty);
+        tests.test("homunculus_clicks_from_atop_the_hoppers_round_its_block", 400, HomunculusClickTests::fromHoppers);
     }
 
     /**
@@ -118,6 +119,26 @@ final class HomunculusClickTests {
         });
         helper.succeedWhen(() -> {
             helper.assertTrue(helper.getTick() > 200 && pot.getTheItem().getCount() >= 2, "the pot holds " + pot.getTheItem());
+            player.leave(helper);
+        });
+    }
+
+    /**
+     * Its block raised on stone ringed by hoppers, which catch what the block throws out: it stands on a hopper to click.
+     */
+    private static void fromHoppers(GameTestHelper helper) {
+        var player = woken(helper);
+        var homunculus = HomunculusTests.homunculus(helper, BASE);
+        helper.setBlock(WORKED, Blocks.STONE);
+        for (var side : Direction.Plane.HORIZONTAL) {
+            helper.setBlock(WORKED.relative(side), Blocks.HOPPER);
+        }
+        helper.setBlock(WORKED.above(), ClickedBlock.CLICKED.get());
+        chest(helper, CHEST, new ItemStack(Items.STICK, 3));
+        assign(helper, player, homunculus, CHEST);
+        var worked = helper.absolutePos(WORKED.above());
+        helper.succeedWhen(() -> {
+            helper.assertFalse(ClickedBlock.clicks(worked).isEmpty(), "no click yet");
             player.leave(helper);
         });
     }
