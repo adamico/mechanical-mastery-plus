@@ -189,3 +189,15 @@ Source: https://github.com/malcolmriley/unused-textures, blocks/ at commit
         - homunculus_stand_clay.png, homunculus_stand_rod.png and homunculus_stand_rod_end.png are
           blocks/terracotta_tile_large, copper_coil_side and copper_coil_end, copied unmodified.
 Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
+
+Vital Spark textures
+--------------------
+
+Files: src/main/resources/assets/mechanicalmasteryreborn/textures/item/vital_spark*.png
+Author: Malcolm Riley
+Source: https://github.com/malcolmriley/unused-textures, items/ at commit
+        8b85ad732023174d9a9da74e6bf2272d6c0bef17, made by publish/make-vital-spark.py
+        - vital_spark.png is items/artifact_star with each pixel's hue turned to the Vital Port's
+          green, its saturation and brightness kept.
+        - vital_spark_spent.png is vital_spark.png greyed: each pixel's luma times 0.6.
+Licence: CC BY 4.0 (LICENSES/CC-BY-4.0.txt)
