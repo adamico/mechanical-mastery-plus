@@ -15,16 +15,14 @@ makes from meals at the end of life's chain.
 
 While your team plays life, every member grows hungry faster: sprinting, healing, cranking a hand drive and
 everything else that tires you tires you more. Each member keeps a [Diet](../diet.md), the foods they have eaten
-lately, and a food already in it feeds less each time it is eaten again, in hunger and saturation alike. A team
-living on one crop runs short; only a varied farm keeps up. Running empty starves as it always does, and nothing
-worse.
+lately, and a food already in it feeds less each time it is eaten again, in hunger and saturation alike. Neo
+Vitae's Essentia Vitae comes first from your own health, and health comes back only from food, so a team living
+on one crop bleeds slowly. Only a varied farm keeps up.
+
+The handicap goes on in Neo Vitae's Demon Realm, so plan what you eat for the trip. Running empty starves as it
+always does, and nothing worse.
 
 ## The chain
-
-Life's chain is a food factory. Planters and Animal Pens raise crops and animals, machines turn them into
-ingredients, and cooking turns the ingredients into **meals**. Food spoils as it ages, so keep what you store in
-fridges. A meal keeps the average **quality** of what went into it, so better crops make better meals. A
-[Homunculus](../homunculus.md) can work the chain's hand steps, such as the Cutting Board, for you.
 
 Starting the challenge sets life's chain machines to work on your island. The chain ends at the Pelican.
 
@@ -52,5 +50,5 @@ A reset forgets every member's Diet, and a new one starts with the attempt.
 ## In the last stand
 
 In the [last chapter](../last_chapter.md), your team can take the life handicap on again as a **spell** at the
-[Hermetic Lab](../hermetic_lab.md), under the hungriest Diet of all. Only good meals given at the Hermetic Lab itself
-feed its life line.
+[Hermetic Lab](../hermetic_lab.md), under the hungriest Diet of all. Only quality meals of kinds it hasn't
+taken lately, put into the Hermetic Lab itself, feed its life line.

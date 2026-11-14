@@ -80,7 +80,7 @@ public final class Pelican {
     }
 
     /** Whether {@code resource} is a meal; rotten flesh never is. */
-    static boolean meal(ItemResource resource) {
+    public static boolean meal(ItemResource resource) {
         return !resource.isEmpty() && !resource.is(Items.ROTTEN_FLESH) && resource.typeHolder().is(MEALS);
     }
 

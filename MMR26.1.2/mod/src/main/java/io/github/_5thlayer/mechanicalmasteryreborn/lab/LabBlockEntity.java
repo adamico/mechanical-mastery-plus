@@ -3,7 +3,10 @@
 
 package io.github._5thlayer.mechanicalmasteryreborn.lab;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,19 +18,23 @@ import io.github._5thlayer.mechanicalmasteryreborn.challenge.Handicap;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.LastStands;
 import io.github._5thlayer.mechanicalmasteryreborn.challenge.NullShards;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essence;
+import io.github._5thlayer.mechanicalmasteryreborn.compat.food.FoodQuality;
 import io.github._5thlayer.mechanicalmasteryreborn.essence.Essences;
+import io.github._5thlayer.mechanicalmasteryreborn.life.Pelican;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Spell;
 import io.github._5thlayer.mechanicalmasteryreborn.record.TeamState;
 import io.github._5thlayer.mechanicalmasteryreborn.record.Teams;
+import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
@@ -43,6 +50,8 @@ import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.energy.EnergyHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import net.neoforged.neoforge.transfer.TransferPreconditions;
+import net.neoforged.neoforge.transfer.transaction.SnapshotJournal;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 import org.jspecify.annotations.Nullable;
@@ -56,8 +65,8 @@ import org.jspecify.annotations.Nullable;
  * <p>Each line is fed only by what its handicap takes from the team, as it takes it, while the team bears that handicap's
  * {@link Spell spell}, and every {@link #INTERVAL} ticks it pays for the next: the team's generators' output on its island,
  * taken through their own faces ({@link Generators#output}), at {@link ServerConfig#hermeticLabEnergyDemand its demand}; the
- * Essentia Vitae the hearts given at it became, which only {@link #giveHeart} adds to, so none comes piped in; the
- * Null Shards of the spell running, which its Assault's mobs dropped, and only while that Assault isn't paused; and money
+ * quality meals it eats (#370), each of a kind not among the last it took and of the Pelican's quality, each keeping the
+ * line fed for a time set by its saturation from when it is eaten, with nothing saved up past it; the Null Shards of the spell running, which its Assault's mobs dropped, and only while that Assault isn't paused; and money
  * drained from the team's Account, which holds only what it earned during the spell. A line not paid for counts for
  * nothing until it is again; what it holds once its spell ends is lost, so nothing saved up feeds a line. The more lines
  * count, the faster it works and the fewer Nullessence a Quintessence takes ({@link HermeticLabWork}).
@@ -66,10 +75,6 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
 
     /** How often, in ticks, the supply lines are paid for, and so how long one paid for counts. */
     public static final int INTERVAL = 20;
-    /** The most Essentia Vitae it holds, in mB. */
-    public static final int ESSENTIA_CAPACITY = 4000;
-    /** The health a heart given at it costs. */
-    public static final float HEART = 2.0F;
     private static final Component TITLE = Component.translatable("container.mechanicalmasteryreborn.hermetic_lab");
     /** Slots of Nullessence it holds: enough for the dearest Quintessence. */
     static final int NULLESSENCE_SLOTS = 8;
@@ -77,7 +82,8 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
     private static final String NULLESSENCE_KEY = "nullessence";
     private static final String SHARDS_KEY = "null_shards";
     private static final String OUTPUT_KEY = "output";
-    private static final String ESSENTIA_KEY = "essentia";
+    private static final String MEALS_KEY = "meals";
+    private static final String FED_KEY = "fed";
     private static final String SHARD_TICKS_KEY = "shard_ticks";
     private static final String PROGRESS_KEY = "progress";
     private static final String OWED_KEY = "owed";
@@ -99,10 +105,11 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
     private final Input nullessence = new Input(this);
     private final Shards shards = new Shards(this);
     private final Output output = new Output(this::setChanged);
-    /** What automation reaches on every side: Quintessence to take, then Nullessence and Null Shards to put in. */
-    private final ResourceHandler<ItemResource> face = new CombinedResourceHandler<>(output, nullessence, shards);
-    /** The Essentia Vitae the hearts given at it became, in mB. */
-    private int essentia;
+    private final Mouth mouth = new Mouth(this);
+    /** What automation reaches on every side: Quintessence to take, then Nullessence, Null Shards and meals to put in. */
+    private final ResourceHandler<ItemResource> face = new CombinedResourceHandler<>(output, nullessence, shards, mouth);
+    /** The kinds of meal the life line took last, oldest first, and the ticks its last keeps the line fed for. */
+    private Meals meals = Meals.NONE;
     /** The ticks the Null Shards already taken still feed the protection line for. */
     private double shardTicks;
     /** How far it is toward the next Quintessence, from 0 to 1. */
@@ -168,9 +175,14 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
         return (int) shards.getAmountAsLong(0);
     }
 
-    /** The Essentia Vitae it holds, in mB. */
-    public int essentia() {
-        return essentia;
+    /** The ticks the life line's last meal still keeps it fed for. */
+    public int fedTicks() {
+        return meals.ticks();
+    }
+
+    /** The kinds of meal the life line took last, oldest first, by item id. */
+    public List<String> recentMeals() {
+        return meals.kinds();
     }
 
     /** How far it is toward the next Quintessence, from 0 to 1. */
@@ -197,8 +209,15 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
             lines.clear();
             lines.addAll(pay(level, owner, teams));
         }
-        // A line paid for counts only while its spell runs: one that just ended stops at once.
-        lines.removeIf(handicap -> !teams.underSpell(owner, handicap));
+        if (teams.underSpell(owner, Handicap.LIFE)) {
+            if (meals.ticks() > 0) {
+                setMeals(meals.withTicks(meals.ticks() - 1));
+            }
+        } else {
+            setMeals(Meals.NONE);
+        }
+        // A line paid for counts only while its spell runs, and the life line only while a meal keeps it fed.
+        lines.removeIf(handicap -> !teams.underSpell(owner, handicap) || handicap == Handicap.LIFE && meals.ticks() == 0);
         phase = lines.isEmpty() ? Phase.IDLE : Phase.WORKING;
         work();
     }
@@ -218,14 +237,8 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
         if (teams.underSpell(owner, Handicap.ENERGY) && takeOutput(level, owner, (long) ServerConfig.hermeticLabEnergyDemand() * INTERVAL)) {
             counting.add(Handicap.ENERGY);
         }
-        if (!teams.underSpell(owner, Handicap.LIFE)) {
-            setEssentia(0);
-        } else {
-            int need = ServerConfig.hermeticLabLifeDemand() * INTERVAL / TICKS_PER_SECOND;
-            if (essentia >= need) {
-                setEssentia(essentia - need);
-                counting.add(Handicap.LIFE);
-            }
+        if (teams.underSpell(owner, Handicap.LIFE) && meals.ticks() > 0) {
+            counting.add(Handicap.LIFE);
         }
         Optional<Spell> protection = teams.spell(owner, Handicap.PROTECTION);
         shards.voidAllBut(protection.map(Spell::id));
@@ -319,36 +332,7 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     /**
-     * Takes a heart of {@code player}'s into Essentia Vitae, and says why not if it doesn't: only from its team's player, while its team's last stand
-     * runs and it bears the life spell, never a player's last heart, and not once it holds all it can.
-     */
-    public Optional<Component> giveHeart(Player player) {
-        if (!(level instanceof ServerLevel server)) {
-            return Optional.of(Component.empty());
-        }
-        UUID owner = owner(server);
-        TeamState teams = TeamState.get(server.getServer());
-        if (!Teams.of(player).equals(owner)) {
-            return Optional.of(Component.translatable("mechanicalmasteryreborn.hermetic_lab.not_member"));
-        }
-        if (phase == Phase.LOCKED || phase == Phase.DONE || !teams.underSpell(owner, Handicap.LIFE)) {
-            return Optional.of(Component.translatable("mechanicalmasteryreborn.hermetic_lab.heart.no_spell"));
-        }
-        if (player.getHealth() <= HEART) {
-            return Optional.of(Component.translatable("mechanicalmasteryreborn.hermetic_lab.heart.last"));
-        }
-        if (essentia >= ESSENTIA_CAPACITY) {
-            return Optional.of(Component.translatable("mechanicalmasteryreborn.hermetic_lab.heart.full"));
-        }
-        player.setHealth(player.getHealth() - HEART);
-        int yield = ServerConfig.hermeticLabLifePerHeart();
-        setEssentia(Math.min(ESSENTIA_CAPACITY, essentia + yield));
-        server.playSound(null, worldPosition, SoundEvents.PLAYER_HURT, SoundSource.PLAYERS, 1.0F, 0.8F);
-        return Optional.empty();
-    }
-
-    /**
-     * Puts as much of {@code stack} in as it takes, Nullessence or the running spell's Null Shards, as a player's click
+     * Puts as much of {@code stack} in as it takes, Nullessence, the running spell's Null Shards or a meal, as a player's click
      * does, and says how many it took; the stack is left with the rest.
      */
     public int feed(ItemStack stack) {
@@ -365,6 +349,9 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
             if (taken < stack.getCount()) {
                 taken += shards.insert(0, resource, stack.getCount() - taken, transaction);
             }
+            if (taken < stack.getCount()) {
+                taken += mouth.insert(0, resource, stack.getCount() - taken, transaction);
+            }
             transaction.commit();
         }
         stack.shrink(taken);
@@ -374,6 +361,16 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
     /** Whether its team's last stand runs; never on a client. */
     boolean lastStandRuns() {
         return level instanceof ServerLevel server && TeamState.get(server.getServer()).inLastStand(owner(server));
+    }
+
+    /** Whether its team's last stand runs and it bears the life spell, so the life line eats; never on a client. */
+    boolean lifeSpellRuns() {
+        if (!(level instanceof ServerLevel server)) {
+            return false;
+        }
+        TeamState teams = TeamState.get(server.getServer());
+        UUID owner = owner(server);
+        return teams.inLastStand(owner) && teams.underSpell(owner, Handicap.LIFE);
     }
 
     /** The id of the protection spell its team bears, whose Null Shards it takes; none on a client. */
@@ -392,9 +389,9 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
         return team;
     }
 
-    private void setEssentia(int amount) {
-        if (essentia != amount) {
-            essentia = amount;
+    private void setMeals(Meals next) {
+        if (!meals.equals(next)) {
+            meals = next;
             setChanged();
         }
     }
@@ -412,7 +409,8 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
         nullessence.serialize(out.child(NULLESSENCE_KEY));
         shards.serialize(out.child(SHARDS_KEY));
         output.serialize(out.child(OUTPUT_KEY));
-        out.putInt(ESSENTIA_KEY, essentia);
+        out.store(MEALS_KEY, Codec.STRING.listOf(), meals.kinds());
+        out.putInt(FED_KEY, meals.ticks());
         out.putDouble(SHARD_TICKS_KEY, shardTicks);
         out.putDouble(PROGRESS_KEY, progress);
         out.putDouble(OWED_KEY, owed);
@@ -424,7 +422,7 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
         nullessence.deserialize(input.childOrEmpty(NULLESSENCE_KEY));
         shards.deserialize(input.childOrEmpty(SHARDS_KEY));
         output.deserialize(input.childOrEmpty(OUTPUT_KEY));
-        essentia = input.getIntOr(ESSENTIA_KEY, 0);
+        meals = new Meals(List.copyOf(input.read(MEALS_KEY, Codec.STRING.listOf()).orElse(List.of())), input.getIntOr(FED_KEY, 0));
         shardTicks = input.getDoubleOr(SHARD_TICKS_KEY, 0);
         progress = input.getDoubleOr(PROGRESS_KEY, 0);
         owed = input.getDoubleOr(OWED_KEY, 0);
@@ -559,6 +557,123 @@ public final class LabBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
             changed.run();
+        }
+    }
+
+    /**
+     * The life line's meals: the kinds it took last, oldest first, at most as many as a Pelican's batch's kinds, and the
+     * ticks its last meal keeps it fed for.
+     */
+    record Meals(List<String> kinds, int ticks) {
+
+        static final Meals NONE = new Meals(List.of(), 0);
+
+        Meals withTicks(int left) {
+            return new Meals(kinds, left);
+        }
+
+        /** These meals with {@code kind} eaten last, keeping the line fed {@code ticks} from now, whatever was left. */
+        Meals eat(String kind, int ticks) {
+            List<String> next = new ArrayList<>(kinds);
+            next.add(kind);
+            int window = ServerConfig.pelicanKinds();
+            while (next.size() > window) {
+                next.removeFirst();
+            }
+            return new Meals(List.copyOf(next), ticks);
+        }
+    }
+
+    /** Whether the life line would eat {@code meal} now: its spell runs, a meal of the Pelican's quality, of a kind not taken last. */
+    private boolean edible(ItemResource meal) {
+        return Pelican.meal(meal) && FoodQuality.level(meal.toStack(1)) >= ServerConfig.pelicanQuality()
+                && !meals.kinds().contains(kind(meal)) && lifeSpellRuns();
+    }
+
+    private static String kind(ItemResource meal) {
+        return BuiltInRegistries.ITEM.getKey(meal.getItem()).toString();
+    }
+
+    /** The ticks {@code meal} keeps the life line fed for, by its own saturation. */
+    public static int fedFor(ItemResource meal) {
+        FoodProperties food = meal.getComponents().get(DataComponents.FOOD);
+        return food == null ? 0 : (int) Math.round(food.saturation() * ServerConfig.hermeticLabLifeTicksPerSaturation());
+    }
+
+    /**
+     * The life line's mouth: takes one meal at a time, the one it would eat ({@link #edible}), and holds nothing, so a meal
+     * refused stays where it was; journalled, so an aborted or simulated insert eats nothing.
+     */
+    private static final class Mouth extends SnapshotJournal<Meals> implements ResourceHandler<ItemResource> {
+
+        private final LabBlockEntity lab;
+
+        Mouth(LabBlockEntity lab) {
+            this.lab = lab;
+        }
+
+        @Override
+        public int size() {
+            return 1;
+        }
+
+        @Override
+        public ItemResource getResource(int index) {
+            Objects.checkIndex(index, size());
+            return ItemResource.EMPTY;
+        }
+
+        @Override
+        public long getAmountAsLong(int index) {
+            Objects.checkIndex(index, size());
+            return 0;
+        }
+
+        @Override
+        public long getCapacityAsLong(int index, ItemResource resource) {
+            Objects.checkIndex(index, size());
+            if (resource.isEmpty()) {
+                return lab.lifeSpellRuns() ? 1 : 0;
+            }
+            return lab.edible(resource) ? 1 : 0;
+        }
+
+        @Override
+        public boolean isValid(int index, ItemResource resource) {
+            Objects.checkIndex(index, size());
+            return Pelican.meal(resource);
+        }
+
+        @Override
+        public int insert(int index, ItemResource resource, int amount, TransactionContext transaction) {
+            Objects.checkIndex(index, size());
+            TransferPreconditions.checkNonEmptyNonNegative(resource, amount);
+            if (amount == 0 || !lab.edible(resource)) {
+                return 0;
+            }
+            updateSnapshots(transaction);
+            lab.meals = lab.meals.eat(kind(resource), fedFor(resource));
+            return 1;
+        }
+
+        @Override
+        public int extract(int index, ItemResource resource, int amount, TransactionContext transaction) {
+            return 0;
+        }
+
+        @Override
+        protected Meals createSnapshot() {
+            return lab.meals;
+        }
+
+        @Override
+        protected void revertToSnapshot(Meals snapshot) {
+            lab.meals = snapshot;
+        }
+
+        @Override
+        protected void onRootCommit(Meals original) {
+            lab.setChanged();
         }
     }
 }

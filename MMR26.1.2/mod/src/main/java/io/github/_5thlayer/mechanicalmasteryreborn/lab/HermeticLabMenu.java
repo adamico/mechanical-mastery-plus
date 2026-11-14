@@ -27,25 +27,22 @@ import org.jspecify.annotations.Nullable;
 /**
  * The Hermetic Lab's spells and lines, and its one Quintessence slot over the player's inventory, which only gives: what
  * the lab opens once its team's last stand has started. A button per handicap, by its ordinal, has the team take it on for
- * a spell ({@link Spells#begin}), if the player is in the lab's team; {@link #GIVE_HEART} gives a heart of the player's
- * to the life line ({@link LabBlockEntity#giveHeart}); and {@link #OPEN_REFUND} opens the team's refund, which a protection
+ * a spell ({@link Spells#begin}), if the player is in the lab's team; and {@link #OPEN_REFUND} opens the team's refund, which a protection
  * spell's Assault fills as a challenge's does ({@link RefundMenu}). The client is sent what the Hermetic Lab is doing,
- * which lines count, what each spell has left, which can be taken on, the Nullessence and Essentia Vitae it holds, how far
+ * which lines count, what each spell has left, which can be taken on, the Nullessence it holds, how far
  * the next Quintessence is, how much of the refund waits, and whether the player is in its team.
  */
 public final class HermeticLabMenu extends AbstractContainerMenu {
 
-    /** The button that gives a heart, after one per handicap. */
-    public static final int GIVE_HEART = Handicap.values().length;
-    /** The button that opens the team's refund, after the heart's. */
-    public static final int OPEN_REFUND = GIVE_HEART + 1;
+    /** The button that opens the team's refund, after one per handicap. */
+    public static final int OPEN_REFUND = Handicap.values().length;
 
     public static final int WIDTH = 256;
     /** Where the rows start: below the title and two lines of what it is doing. */
     public static final int ROWS_Y = 42;
-    /** A row per handicap, then the heart's and the refund's. */
+    /** A row per handicap, then the refund's. */
     public static final int ROW = 22;
-    public static final int ROWS = Handicap.values().length + 2;
+    public static final int ROWS = Handicap.values().length + 1;
     public static final int INVENTORY_X = 48;
     public static final int INVENTORY_Y = ROWS_Y + ROWS * ROW + 14;
     public static final int HEIGHT = INVENTORY_Y + 82;
@@ -61,7 +58,6 @@ public final class HermeticLabMenu extends AbstractContainerMenu {
     private final DataSlot[] remaining = new DataSlot[Handicap.values().length];
     private final DataSlot offered;
     private final DataSlot nullessence;
-    private final DataSlot essentia;
     private final DataSlot progress;
     private final DataSlot member;
     private final DataSlot refund;
@@ -94,7 +90,6 @@ public final class HermeticLabMenu extends AbstractContainerMenu {
             return bits;
         }));
         this.nullessence = addDataSlot(computed(() -> Math.min(Short.MAX_VALUE, lab.nullessence())));
-        this.essentia = addDataSlot(computed(lab::essentia));
         this.progress = addDataSlot(computed(() -> (int) Math.round(lab.progress() * 1000)));
         this.member = addDataSlot(DataSlot.standalone());
         member.set(team.equals(Teams.of(inventory.player)) ? 1 : 0);
@@ -115,7 +110,6 @@ public final class HermeticLabMenu extends AbstractContainerMenu {
         }
         this.offered = addDataSlot(DataSlot.standalone());
         this.nullessence = addDataSlot(DataSlot.standalone());
-        this.essentia = addDataSlot(DataSlot.standalone());
         this.progress = addDataSlot(DataSlot.standalone());
         this.member = addDataSlot(DataSlot.standalone());
         this.refund = addDataSlot(DataSlot.standalone());
@@ -145,11 +139,6 @@ public final class HermeticLabMenu extends AbstractContainerMenu {
         if (id == OPEN_REFUND) {
             player.openMenu(RefundMenu.provider(level, pos));
             return true;
-        }
-        if (id == GIVE_HEART) {
-            var refused = lab.giveHeart(player);
-            refused.ifPresent(player::sendOverlayMessage);
-            return refused.isEmpty();
         }
         var handicap = Handicap.byOrdinal(id);
         UUID team = lab.owner(level);
@@ -186,18 +175,8 @@ public final class HermeticLabMenu extends AbstractContainerMenu {
         return isMember() && (offered.get() & 1 << handicap.ordinal()) != 0;
     }
 
-    /** Whether a heart can be given now: the life spell runs and the player is in the Hermetic Lab's team. */
-    public boolean canGiveHeart() {
-        return isMember() && remaining(Handicap.LIFE) > 0;
-    }
-
     public int nullessence() {
         return nullessence.get();
-    }
-
-    /** The Essentia Vitae held, in mB. */
-    public int essentia() {
-        return essentia.get();
     }
 
     /** How far the next Quintessence is, in thousandths. */
