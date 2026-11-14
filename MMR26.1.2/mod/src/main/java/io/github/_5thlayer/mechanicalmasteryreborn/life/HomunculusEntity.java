@@ -5,8 +5,10 @@ package io.github._5thlayer.mechanicalmasteryreborn.life;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
@@ -31,6 +33,7 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -69,6 +72,9 @@ import io.github._5thlayer.mechanicalmasteryreborn.ServerConfig;
  * in {@link Homunculus#PLACES}, in its off hand or its Supply: it takes the meal from the first slot that has one into its
  * off hand, walks to a space beside the Table and, at a work, places it on the block below as a sneaking player does, facing
  * it, through the same click path. It takes its main hand's item from the first slot that holds no meal.
+ *
+ * <p>A click its block refuses, doing nothing, as a feast does an item that isn't its container, puts the item back in its
+ * Supply, and it takes another: it never takes an item that block refused again, until another block stands there.
  */
 public final class HomunculusEntity extends PathfinderMob {
 
@@ -120,6 +126,10 @@ public final class HomunculusEntity extends PathfinderMob {
     private @Nullable BlockPos placeSpace;
     /** The space beside its Supply it walks to, at its last look, or null. */
     private @Nullable BlockPos supplySpace;
+    /** The block it works that refused items, and those items: forgotten once another block stands there. */
+    private @Nullable BlockPos refusedAt;
+    private @Nullable Block refusedBy;
+    private final Set<Item> refused = new HashSet<>();
     /** Ticks the work its stand calls for has waited. */
     private int waited;
     /** Its own fake player, as its kindler: one each, so no two share an item's cooldown. */
@@ -287,7 +297,10 @@ public final class HomunculusEntity extends PathfinderMob {
         if (!blockPosition().equals(targetSpace)) {
             return Work.WAITING;
         }
-        use((ServerLevel) level(), entity.kindler(), target, targetFace, InteractionHand.MAIN_HAND);
+        var held = getMainHandItem().copy();
+        if (!use((ServerLevel) level(), entity.kindler(), target, targetFace, InteractionHand.MAIN_HAND).consumesAction()) {
+            refuse(entity, held);
+        }
         return Work.CLICKED;
     }
 
@@ -295,7 +308,7 @@ public final class HomunculusEntity extends PathfinderMob {
      * Right-clicks the centre of {@code face} of {@code pos} with what it holds in {@code hand}, as {@code kindler}: with its
      * main hand never sneaking, a click; with its off hand sneaking, so the block doesn't take the click, a placing.
      */
-    private void use(ServerLevel level, UUID kindler, BlockPos pos, Direction face, InteractionHand hand) {
+    private InteractionResult use(ServerLevel level, UUID kindler, BlockPos pos, Direction face, InteractionHand hand) {
         face(pos);
         if (clicker == null || clicker.level() != level || !clicker.getUUID().equals(kindler)) {
             clicker = new FakePlayer(level, new GameProfile(kindler, FAKE_NAME));
@@ -307,7 +320,7 @@ public final class HomunculusEntity extends PathfinderMob {
         player.setShiftKeyDown(hand == InteractionHand.OFF_HAND);
         player.setItemInHand(hand, getItemInHand(hand));
         var hit = new BlockHitResult(Vec3.atCenterOf(pos).relative(face, 0.5), face, pos, false);
-        player.gameMode.useItemOn(player, level, player.getItemInHand(hand), hand, hit);
+        var result = player.gameMode.useItemOn(player, level, player.getItemInHand(hand), hand, hit);
         setItemInHand(hand, player.getItemInHand(hand));
         player.setItemInHand(hand, ItemStack.EMPTY);
         player.setShiftKeyDown(false);
@@ -318,6 +331,42 @@ public final class HomunculusEntity extends PathfinderMob {
             }
         }
         swing(hand);
+        return result;
+    }
+
+    /**
+     * Its block refused {@code held}: it keeps from taking that item for the block again, and puts what it holds back in its
+     * Supply if it is still {@code held}, all of it fitting, so it takes another at once.
+     */
+    private void refuse(HomunculusStandBlockEntity entity, ItemStack held) {
+        if (target == null) {
+            return;
+        }
+        forgetRefusals(target);
+        refusedAt = target;
+        refusedBy = level().getBlockState(target).getBlock();
+        refused.add(held.getItem());
+        var handler = entity.supplyHandler();
+        var holds = getMainHandItem();
+        if (handler == null || !ItemStack.isSameItemSameComponents(holds, held)) {
+            return;
+        }
+        try (var transaction = Transaction.openRoot()) {
+            if (handler.insert(ItemResource.of(holds), holds.getCount(), transaction) == holds.getCount()) {
+                transaction.commit();
+                setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+                nextLook = 0;
+            }
+        }
+    }
+
+    /** Forgets the items refused, unless by the same block at {@code pos}. */
+    private void forgetRefusals(@Nullable BlockPos pos) {
+        if (refusedAt != null && (pos == null || !pos.equals(refusedAt) || !level().getBlockState(pos).is(refusedBy))) {
+            refusedAt = null;
+            refusedBy = null;
+            refused.clear();
+        }
     }
 
     /**
@@ -364,11 +413,12 @@ public final class HomunculusEntity extends PathfinderMob {
         return -1;
     }
 
-    /** The first slot of {@code handler} that holds a meal, if {@code meal}, or anything else; or -1. */
-    private static int firstFilled(ResourceHandler<ItemResource> handler, boolean meal) {
+    /** The first slot of {@code handler} that holds a meal, if {@code meal}, or anything else its block hasn't refused; or -1. */
+    private int firstFilled(ResourceHandler<ItemResource> handler, boolean meal) {
         for (int slot = 0; slot < handler.size(); slot++) {
             var resource = handler.getResource(slot);
-            if (!resource.isEmpty() && handler.getAmountAsInt(slot) > 0 && Homunculus.meal(resource.toStack(1)) == meal) {
+            if (!resource.isEmpty() && handler.getAmountAsInt(slot) > 0 && Homunculus.meal(resource.toStack(1)) == meal
+                    && (meal || !refused.contains(resource.getItem()))) {
                 return slot;
             }
         }
@@ -417,9 +467,15 @@ public final class HomunculusEntity extends PathfinderMob {
      * beside it, level with it or one below, that it can walk to, the space nearest it first.
      */
     private void lookForWork(HomunculusStandBlockEntity entity) {
+        findTarget(entity);
+        forgetRefusals(target);
         lookAtSupply(entity);
         var table = entity.table();
         placeSpace = table != null && tableClear(table) ? reachableBeside(table) : null;
+    }
+
+    /** The block it works, the space it clicks from and the face it clicks, as {@link #lookForWork} finds them. */
+    private void findTarget(HomunculusStandBlockEntity entity) {
         target = null;
         targetSpace = null;
         int across = ServerConfig.homunculusRangeAcross();

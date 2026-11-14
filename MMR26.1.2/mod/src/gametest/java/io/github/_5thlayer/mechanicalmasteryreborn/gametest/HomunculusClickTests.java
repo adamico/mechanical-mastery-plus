@@ -54,6 +54,7 @@ final class HomunculusClickTests {
         tests.test("homunculus_clicks_skips_a_block_whose_storage_is_empty", 600, HomunculusClickTests::skipsEmpty);
         tests.test("homunculus_clicks_from_atop_the_hoppers_round_its_block", 400, HomunculusClickTests::fromHoppers);
         tests.test("homunculus_clicks_while_its_kindler_assigns", 400, HomunculusClickTests::whileAssigning);
+        tests.test("homunculus_clicks_puts_back_what_its_block_refuses", 600, HomunculusClickTests::putsBackRefused);
     }
 
     /**
@@ -160,6 +161,27 @@ final class HomunculusClickTests {
             helper.assertFalse(ClickedBlock.clicks(worked).isEmpty(), "no click yet");
             helper.assertValueEqual(HomunculusTests.stand(helper, BASE).supply(), helper.absolutePos(CHEST), "its Supply");
             helper.assertValueEqual(player.told(), List.of(TOLD + "assigning", TOLD + "set", TOLD + "assigning"), "what the action bar said");
+            player.leave(helper);
+        });
+    }
+
+    /**
+     * A bone first in its Supply, which its block refuses, and a stick after: it puts the bone back and clicks with the stick,
+     * and never takes the bone again for that block.
+     */
+    private static void putsBackRefused(GameTestHelper helper) {
+        var player = woken(helper);
+        var homunculus = HomunculusTests.homunculus(helper, BASE);
+        helper.setBlock(WORKED, ClickedBlock.CLICKED.get());
+        chest(helper, CHEST, new ItemStack(Items.BONE));
+        helper.getBlockEntity(CHEST, ChestBlockEntity.class).setItem(1, new ItemStack(Items.STICK));
+        assign(helper, player, homunculus, CHEST);
+        var worked = helper.absolutePos(WORKED);
+        helper.succeedWhen(() -> {
+            var clicks = ClickedBlock.clicks(worked);
+            helper.assertTrue(clicks.stream().filter(click -> click.held().is(Items.STICK)).count() >= 2, "clicks so far: " + clicks);
+            helper.assertValueEqual(clicks.stream().filter(click -> click.held().is(Items.BONE)).count(), 1L, "the clicks with a bone");
+            helper.assertValueEqual(count(helper, CHEST, Items.BONE), 1, "the bones in its Supply");
             player.leave(helper);
         });
     }

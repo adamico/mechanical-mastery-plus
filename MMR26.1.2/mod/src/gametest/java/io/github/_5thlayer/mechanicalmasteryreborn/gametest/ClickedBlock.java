@@ -29,7 +29,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 /**
  * The game tests' block a Homunculus works (#368), in the game-test pack's {@code homunculus_works} tag: it keeps every
  * right-click it is given and uses up nothing. Clicked with paper it plays a block that hands back another item: the paper
- * becomes a map, and a feather goes into the clicker's inventory.
+ * becomes a map, and a feather goes into the clicker's inventory. Clicked with a bone it refuses the click, as a feast does
+ * an item that isn't its container, and does nothing.
  */
 final class ClickedBlock extends Block {
 
@@ -65,6 +66,9 @@ final class ClickedBlock extends Block {
         synchronized (ClickedBlock.class) {
             CLICKS.computeIfAbsent(pos.immutable(), at -> new ArrayList<>()).add(new Click(player.getUUID(), player.isFakePlayer(),
                     player.isShiftKeyDown(), hand, held.copy(), hit.getDirection(), hit.getLocation()));
+        }
+        if (held.is(Items.BONE)) {
+            return InteractionResult.TRY_WITH_EMPTY_HAND;
         }
         if (held.is(Items.PAPER)) {
             player.setItemInHand(hand, new ItemStack(Items.MAP));
