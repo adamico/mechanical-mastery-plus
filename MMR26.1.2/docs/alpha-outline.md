@@ -73,7 +73,7 @@ the same thing (#273). The README's note that the companion mod isn't on CurseFo
     four platforms around the island, over unbreakable bridges, growing harder until the quota is filled. Its
     mobs alone drop the Rift Shards the chain needs. Defences fed by the factory hold the bridges, and what the
     mobs break is refunded at the lab [ADR 0010, ADR 0015, G Assault, G Defence].
-  - **Life** (Neo Vitae's blood magic, the Vital Essence): hunger drains faster and the same food feeds less each
+  - **Life** (a food factory, the Vital Essence): hunger drains faster and the same food feeds less each
     time it is eaten, so a team needs a factory that feeds it a varied diet [ADR 0011, G Diet].
   - **Money** (AdminShop, the Aureate Essence): money is set aside while the challenge is played, and less of it
     comes in [G Handicap, M].

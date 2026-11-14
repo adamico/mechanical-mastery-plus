@@ -12,7 +12,7 @@ For the factories I picked the -works, a suite of tech mods I make, designed aro
 
 The pack has no quest book. Instead, every player starts with the Manual, a GuideME book with 3D scenes that explains how to build the pack’s machines and how each challenge is played. Hold its key over a block or essence to open its page.
 
-You take on four challenges in any order you like, each built around a different mod: Money (AdminShop), Life (Neo Vitae), Protection (Gateways to Eternity) and Energy (Theurgy). Each one comes with a handicap that hinders its production line. Each challenge you win stops C.O.D. making one tier of essence, and once all four are won, the last chapter asks for Quintessence, the one essence that can shut C.O.D. down for good.
+You take on four challenges in any order you like, each built around a different mod: Money (AdminShop), Life (a food factory), Protection (Gateways to Eternity) and Energy (Theurgy). Each one comes with a handicap that hinders its production line. Each challenge you win stops C.O.D. making one tier of essence, and once all four are won, the last chapter asks for Quintessence, the one essence that can shut C.O.D. down for good.
 
 C.O.D. will not let you do that without a fight, though...
 
