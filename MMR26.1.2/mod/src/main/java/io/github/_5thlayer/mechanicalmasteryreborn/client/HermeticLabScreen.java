@@ -29,7 +29,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * The Hermetic Lab (#263): what it is doing, the Nullessence it holds and how far the next Quintessence is, with its one
  * Quintessence slot beside; then each handicap as a spell, with what it costs or how long it has left and whether its line
- * counts, and a button to take it on; then a row to give a heart, with the Essentia Vitae it holds; then the team's
+ * counts, and a button to take it on; then the team's
  * refund, with how much of it waits and a button to open it, which an Assault of a protection spell fills; in the suite's
  * stand-in machine look.
  */
@@ -43,16 +43,12 @@ final class HermeticLabScreen extends AbstractContainerScreen<HermeticLabMenu> {
     private static final Component TAKE_ON = Component.translatable("mechanicalmasteryreborn.hermetic_lab.take_on");
     private static final Component BEARING = Component.translatable("mechanicalmasteryreborn.hermetic_lab.bearing");
     private static final Component TAKE_ON_TOOLTIP = Component.translatable("mechanicalmasteryreborn.hermetic_lab.take_on.tooltip");
-    private static final Component HEART = Component.translatable("mechanicalmasteryreborn.hermetic_lab.heart");
-    private static final Component GIVE_HEART = Component.translatable("mechanicalmasteryreborn.hermetic_lab.heart.give");
-    private static final Component GIVE_HEART_TOOLTIP = Component.translatable("mechanicalmasteryreborn.hermetic_lab.heart.tooltip");
     private static final Component REFUND = Component.translatable("mechanicalmasteryreborn.lab.refund");
     private static final Component REFUND_OPEN = Component.translatable("mechanicalmasteryreborn.lab.refund.open");
     private static final Component REFUND_TOOLTIP = Component.translatable("mechanicalmasteryreborn.lab.refund.tooltip");
 
     private final Ghosts ghosts = new Ghosts(() -> leftPos, () -> topPos);
     private final List<Button> buttons = new ArrayList<>();
-    private @Nullable Button heart;
     private @Nullable Button refund;
 
     HermeticLabScreen(HermeticLabMenu menu, Inventory inventory, Component title) {
@@ -75,11 +71,6 @@ final class HermeticLabScreen extends AbstractContainerScreen<HermeticLabMenu> {
                     .tooltip(Tooltip.create(TAKE_ON_TOOLTIP))
                     .build()));
         }
-        heart = addRenderableWidget(Button.builder(GIVE_HEART, button -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId,
-                        HermeticLabMenu.GIVE_HEART))
-                .bounds(x, topPos + rowTop(HermeticLabMenu.GIVE_HEART), BUTTON_WIDTH, BUTTON_HEIGHT)
-                .tooltip(Tooltip.create(GIVE_HEART_TOOLTIP))
-                .build());
         refund = addRenderableWidget(Button.builder(REFUND_OPEN, button -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId,
                         HermeticLabMenu.OPEN_REFUND))
                 .bounds(x, topPos + rowTop(HermeticLabMenu.OPEN_REFUND), BUTTON_WIDTH, BUTTON_HEIGHT)
@@ -99,9 +90,6 @@ final class HermeticLabScreen extends AbstractContainerScreen<HermeticLabMenu> {
             Button button = buttons.get(handicap.ordinal());
             button.active = menu.canBegin(handicap);
             button.setMessage(menu.remaining(handicap) > 0 ? BEARING : TAKE_ON);
-        }
-        if (heart != null) {
-            heart.active = menu.canGiveHeart();
         }
         if (refund != null) {
             refund.active = menu.refund() > 0;
@@ -128,11 +116,6 @@ final class HermeticLabScreen extends AbstractContainerScreen<HermeticLabMenu> {
                     MachineDraw.MARGIN, y, MachineDraw.TEXT, false);
             graphics.text(font, MachineDraw.fitted(font, line(handicap), nameWidth), MachineDraw.MARGIN, y + COST_Y, MachineDraw.TEXT, false);
         }
-        int y = rowTop(HermeticLabMenu.GIVE_HEART);
-        graphics.text(font, MachineDraw.fitted(font, HEART.copy().withStyle(ChatFormatting.BOLD), nameWidth), MachineDraw.MARGIN, y,
-                MachineDraw.TEXT, false);
-        graphics.text(font, MachineDraw.fitted(font, Component.translatable("mechanicalmasteryreborn.hermetic_lab.heart.held", menu.essentia()), nameWidth),
-                MachineDraw.MARGIN, y + COST_Y, MachineDraw.TEXT, false);
         int refundY = rowTop(HermeticLabMenu.OPEN_REFUND);
         graphics.text(font, MachineDraw.fitted(font, REFUND.copy().withStyle(ChatFormatting.BOLD), nameWidth), MachineDraw.MARGIN, refundY,
                 MachineDraw.TEXT, false);
@@ -163,7 +146,7 @@ final class HermeticLabScreen extends AbstractContainerScreen<HermeticLabMenu> {
                 left, Challenges.name(handicap));
     }
 
-    /** Where row {@code index} starts: a handicap's by its ordinal, then the heart's, then the refund's. */
+    /** Where row {@code index} starts: a handicap's by its ordinal, then the refund's. */
     private static int rowTop(int index) {
         return HermeticLabMenu.ROWS_Y + index * HermeticLabMenu.ROW;
     }

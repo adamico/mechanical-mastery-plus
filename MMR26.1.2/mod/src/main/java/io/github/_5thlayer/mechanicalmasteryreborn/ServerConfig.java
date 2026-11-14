@@ -321,16 +321,11 @@ public final class ServerConfig {
             .comment("How many chunks around it, each way, the Hermetic Lab takes its team's generators' output from. 8 reaches 136 blocks.")
             .defineInRange("hermetic_lab.energy.reach", 8, 0, 32);
 
-    /** The Essentia Vitae a second the life line takes. */
-    public static final ModConfigSpec.IntValue HERMETIC_LAB_LIFE_DEMAND = BUILDER
-            .comment("The mB of Essentia Vitae a second the Hermetic Lab's life line takes, from hearts given at it.",
-                    "10 is a heart every 10 seconds at hermetic_lab.life.per_heart's default.")
-            .defineInRange("hermetic_lab.life.demand", 10, 1, 100_000);
-
-    /** The Essentia Vitae one heart given at the Hermetic Lab becomes. */
-    public static final ModConfigSpec.IntValue HERMETIC_LAB_LIFE_PER_HEART = BUILDER
-            .comment("The mB of Essentia Vitae one heart given at the Hermetic Lab becomes.")
-            .defineInRange("hermetic_lab.life.per_heart", 100, 1, 100_000);
+    /** The ticks a point of a meal's saturation keeps the life line fed for (#370). */
+    public static final ModConfigSpec.IntValue HERMETIC_LAB_LIFE_TICKS_PER_SATURATION = BUILDER
+            .comment("The ticks each point of its own saturation a meal the Hermetic Lab's life line eats keeps the line fed for,",
+                    "from when it is eaten: nothing left of the last meal carries over. 20 is a second, so a rabbit stew is 12 seconds.")
+            .defineInRange("hermetic_lab.life.ticks_per_saturation", 20, 1, 1_728_000);
 
     /** How much faster hunger drains under the life spell: harder than the challenge's. */
     public static final ModConfigSpec.DoubleValue HERMETIC_LAB_LIFE_HUNGER_RATE = BUILDER
@@ -621,14 +616,9 @@ public final class ServerConfig {
         return SPEC.isLoaded() ? HERMETIC_LAB_ENERGY_REACH.getAsInt() : HERMETIC_LAB_ENERGY_REACH.getDefault();
     }
 
-    /** The mB of Essentia Vitae a second the Hermetic Lab's life line takes. */
-    public static int hermeticLabLifeDemand() {
-        return SPEC.isLoaded() ? HERMETIC_LAB_LIFE_DEMAND.getAsInt() : HERMETIC_LAB_LIFE_DEMAND.getDefault();
-    }
-
-    /** The mB of Essentia Vitae a heart given at the Hermetic Lab becomes. */
-    public static int hermeticLabLifePerHeart() {
-        return SPEC.isLoaded() ? HERMETIC_LAB_LIFE_PER_HEART.getAsInt() : HERMETIC_LAB_LIFE_PER_HEART.getDefault();
+    /** The ticks a point of a meal's saturation keeps the life line fed for. */
+    public static int hermeticLabLifeTicksPerSaturation() {
+        return SPEC.isLoaded() ? HERMETIC_LAB_LIFE_TICKS_PER_SATURATION.getAsInt() : HERMETIC_LAB_LIFE_TICKS_PER_SATURATION.getDefault();
     }
 
     /** How many times faster hunger drains under the life spell. */

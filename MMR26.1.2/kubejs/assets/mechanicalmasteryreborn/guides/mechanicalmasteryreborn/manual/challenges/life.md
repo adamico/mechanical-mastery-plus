@@ -50,5 +50,5 @@ A reset forgets every member's Diet, and a new one starts with the attempt.
 ## In the last stand
 
 In the [last chapter](../last_chapter.md), your team can take the life handicap on again as a **spell** at the
-[Hermetic Lab](../hermetic_lab.md), under the hungriest Diet of all. Only hearts given at the Hermetic Lab itself
-feed its life line.
+[Hermetic Lab](../hermetic_lab.md), under the hungriest Diet of all. Only quality meals of kinds it hasn't
+taken lately, put into the Hermetic Lab itself, feed its life line.

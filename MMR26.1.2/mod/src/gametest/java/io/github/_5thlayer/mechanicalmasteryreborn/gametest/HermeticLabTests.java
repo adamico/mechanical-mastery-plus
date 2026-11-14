@@ -90,7 +90,9 @@ final class HermeticLabTests {
         tests.test("hermetic_lab_makes_nothing_with_no_spell", 2 * PAID, HermeticLabTests::nothingWithNoSpell);
         tests.test("hermetic_lab_energy_spell_feeds_on_generators_and_cuts_banked_fe", SHORT + 4, HermeticLabTests::energyLine);
         tests.test("hermetic_lab_energy_line_unfed_without_generators", SHORT + 4, HermeticLabTests::energyLineUnfed);
-        tests.test("hermetic_lab_hearts_feed_the_life_line_and_no_fluid_goes_in", SHORT + PAID + 4, HermeticLabTests::lifeLine);
+        tests.test("hermetic_lab_life_quality_meal_feeds_for_its_saturation_and_others_stay", SHORT + PAID + 4, HermeticLabTests::lifeLine);
+        tests.test("hermetic_lab_life_hopper_feeds_meals_as_a_hand_does", 60, HermeticLabTests::lifeHopper);
+        tests.test("hermetic_lab_life_line_stops_once_its_last_meal_runs_out", 200, HermeticLabTests::lifeRunsOut);
         tests.test("hermetic_lab_null_shards_of_an_earlier_spell_feed_nothing", 120, HermeticLabTests::earlierShards);
         tests.test("hermetic_lab_paused_assault_feeds_no_line", 2 * LabBlockEntity.INTERVAL + SHORT + 8, HermeticLabTests::pausedAssault);
         tests.test("hermetic_lab_spell_assault_mobs_drop_null_shards", SHORT + 6, HermeticLabTests::nullShardDrops);
@@ -177,9 +179,9 @@ final class HermeticLabTests {
     }
 
     /**
-     * A heart given at the Hermetic Lab under the life spell feeds the life line, as none can before it; the Hermetic Lab answers
-     * for no fluid, so no Essentia Vitae comes piped in; the spell's hunger is the hungriest; and what is left of the
-     * Essentia once the spell ends is lost.
+     * Under the life spell a meal of the Pelican's quality feeds the life line for its saturation's time; one below it, a
+     * kind among the last taken, rotten flesh, or any meal before the spell is refused and stays in hand. The Hermetic Lab
+     * answers for no fluid; the spell's hunger is the hungriest; and its meals are forgotten once the spell ends.
      */
     private static void lifeLine(GameTestHelper helper) {
         UUID team = started(helper);
@@ -188,28 +190,93 @@ final class HermeticLabTests {
         Player player = member(helper, team);
         helper.runAtTickTime(2, () -> {
             LabBlockEntity lab = lab(helper);
-            helper.assertTrue(lab.giveHeart(player).isPresent(), "a heart taken with no life spell");
+            ItemStack early = meal(Items.RABBIT_STEW, 2);
+            helper.assertValueEqual(lab.feed(early), 0, "a meal taken with no life spell");
             helper.assertTrue(Spells.begin(server(helper), team, Handicap.LIFE, SHORT), "the life spell wasn't taken on");
             helper.assertTrue(helper.getLevel().getCapability(Capabilities.Fluid.BLOCK, helper.absolutePos(LAB), null) == null,
                     "the Hermetic Lab answers for fluid");
-            float health = player.getHealth();
-            helper.assertTrue(lab.giveHeart(player).isEmpty(), "a heart refused under the life spell");
-            helper.assertValueEqual(player.getHealth(), health - LabBlockEntity.HEART, "the health left after a heart");
-            helper.assertValueEqual(lab.essentia(), ServerConfig.hermeticLabLifePerHeart(), "the Essentia Vitae a heart became");
+            ItemStack plain = meal(Items.MUSHROOM_STEW, 1);
+            helper.assertValueEqual(lab.feed(plain), 0, "a meal below the quality taken");
+            helper.assertValueEqual(plain.getCount(), 1, "the meal below the quality left in hand");
+            ItemStack rotten = meal(Items.ROTTEN_FLESH, 3);
+            helper.assertValueEqual(lab.feed(rotten), 0, "rotten flesh taken");
+            ItemStack stews = meal(Items.RABBIT_STEW, 2);
+            stews.setCount(2);
+            helper.assertValueEqual(lab.feed(stews), 1, "the quality meals taken from a stack of two");
+            helper.assertValueEqual(stews.getCount(), 1, "the repeated kind left in hand");
+            helper.assertValueEqual(lab.fedTicks(), fedFor(Items.RABBIT_STEW), "the ticks a rabbit stew feeds the line");
+            helper.assertValueEqual(lab.feed(meal(Items.MUSHROOM_STEW, 3)), 1, "a meal of another kind taken");
+            helper.assertValueEqual(lab.fedTicks(), fedFor(Items.MUSHROOM_STEW), "the ticks the last meal feeds, nothing carried over");
+            helper.assertValueEqual(lab.feed(meal(Items.RABBIT_STEW, 3)), 0, "a kind still in the window taken");
             helper.assertValueEqual(LifeHandicap.exhaustion(player, 1.0F), (float) ServerConfig.hermeticLabLifeHungerRate(),
                     "the exhaustion under the life spell");
         });
-        helper.runAtTickTime(PAID + 2, () -> {
-            LabBlockEntity lab = lab(helper);
-            helper.assertTrue(lab.counts(Handicap.LIFE), "the life line isn't fed by a heart");
-            helper.assertTrue(lab.essentia() < ServerConfig.hermeticLabLifePerHeart(), "the life line took no Essentia Vitae");
-        });
+        helper.runAtTickTime(PAID + 2, () -> helper.assertTrue(lab(helper).counts(Handicap.LIFE), "the life line isn't fed by a meal"));
         helper.runAtTickTime(SHORT + PAID + 2, () -> {
             helper.assertValueEqual(LifeHandicap.exhaustion(player, 1.0F), 1.0F, "the exhaustion once the life spell ended");
-            helper.assertValueEqual(lab(helper).essentia(), 0, "the Essentia Vitae kept past the life spell");
+            helper.assertValueEqual(lab(helper).fedTicks(), 0, "the fed time kept past the life spell");
+            helper.assertTrue(lab(helper).recentMeals().isEmpty(), "the meals remembered past the life spell");
             helper.assertFalse(lab(helper).counts(Handicap.LIFE), "the life line fed past its spell");
             helper.succeed();
         });
+    }
+
+    /** A hopper above feeds the life line as a hand does: the quality meals go in, the plain one stays in the hopper. */
+    private static void lifeHopper(GameTestHelper helper) {
+        UUID team = started(helper);
+        helper.setBlock(LAB, Lab.BLOCK.get());
+        helper.assertTrue(Spells.begin(server(helper), team, Handicap.LIFE, 200), "the life spell wasn't taken on");
+        helper.setBlock(LAB.above(), Blocks.HOPPER);
+        var hopper = (net.minecraft.world.level.block.entity.HopperBlockEntity) helper.getBlockEntity(LAB.above(),
+                net.minecraft.world.level.block.entity.HopperBlockEntity.class);
+        hopper.setItem(0, meal(Items.MUSHROOM_STEW, 0));
+        hopper.setItem(1, meal(Items.RABBIT_STEW, 2));
+        hopper.setItem(2, meal(Items.BEETROOT_SOUP, 3));
+        helper.runAtTickTime(50, () -> {
+            helper.assertValueEqual(lab(helper).recentMeals(), List.of("minecraft:rabbit_stew", "minecraft:beetroot_soup"),
+                    "the meals the hopper fed");
+            helper.assertTrue(hopper.getItem(0).is(Items.MUSHROOM_STEW), "the plain meal left in the hopper");
+            helper.assertTrue(hopper.getItem(1).isEmpty() && hopper.getItem(2).isEmpty(), "quality meals left in the hopper");
+            helper.assertTrue(lab(helper).counts(Handicap.LIFE), "the life line isn't fed by a hopper");
+            helper.succeed();
+        });
+    }
+
+    /** Nothing saved up feeds the line: once its one meal's time runs out it stops counting, the spell still running. */
+    private static void lifeRunsOut(GameTestHelper helper) {
+        UUID team = started(helper);
+        helper.setBlock(LAB, Lab.BLOCK.get());
+        lab(helper).feed(nullessence(64));
+        int fed = fedFor(Items.MUSHROOM_STEW);
+        helper.runAtTickTime(2, () -> {
+            helper.assertTrue(Spells.begin(server(helper), team, Handicap.LIFE, 400), "the life spell wasn't taken on");
+            helper.assertValueEqual(lab(helper).feed(meal(Items.MUSHROOM_STEW, 2)), 1, "the meal taken");
+        });
+        helper.runAtTickTime(PAID + 2, () -> helper.assertTrue(lab(helper).counts(Handicap.LIFE), "the life line isn't fed"));
+        helper.runAtTickTime(fed + 4, () -> {
+            helper.assertValueEqual(lab(helper).fedTicks(), 0, "the fed time left");
+            helper.assertFalse(lab(helper).counts(Handicap.LIFE), "the life line fed past its last meal");
+            helper.assertValueEqual(lab(helper).phase(), LabBlockEntity.Phase.IDLE, "the Hermetic Lab with its last meal gone");
+            helper.assertTrue(state(helper).underSpell(team, Handicap.LIFE), "the life spell ended early");
+            helper.succeed();
+        });
+    }
+
+    /** One {@code item} at Quality Food {@code level}, none for 0. */
+    private static ItemStack meal(net.minecraft.world.item.Item item, int level) {
+        ItemStack stack = new ItemStack(item);
+        if (level > 0) {
+            String grade = level == 1 ? "iron" : level == 2 ? "gold" : "diamond";
+            stack.set(QualityFoodStandIn.QUALITY.get(), new QualityFoodStandIn.Quality(
+                    net.minecraft.resources.Identifier.fromNamespaceAndPath("quality_food", grade), level));
+        }
+        return stack;
+    }
+
+    /** The ticks a meal of {@code item} keeps the life line fed, by its own saturation. */
+    private static int fedFor(net.minecraft.world.item.Item item) {
+        var food = new ItemStack(item).get(DataComponents.FOOD);
+        return (int) Math.round(food.saturation() * ServerConfig.hermeticLabLifeTicksPerSaturation());
     }
 
     /** A protection spell's Null Shards go into the Hermetic Lab only during it: the next spell's line takes only its own. */
@@ -333,7 +400,6 @@ final class HermeticLabTests {
         helper.setBlock(LAB, Lab.BLOCK.get());
         lab(helper).feed(nullessence(64));
         ServerPlayer home = AssaultAbsenceTests.player(helper, team);
-        Player giver = member(helper, team);
         int length = 360;
         helper.runAtTickTime(2, () -> {
             for (Handicap handicap : Handicap.values()) {
@@ -341,9 +407,10 @@ final class HermeticLabTests {
             }
             Accounts.get().give(server(helper), team, 100_000);
             lab(helper).feed(NullShards.of(state(helper).spell(team, Handicap.PROTECTION).orElseThrow(), 4));
-            lab(helper).giveHeart(giver);
-            lab(helper).giveHeart(giver);
+            lab(helper).feed(meal(Items.RABBIT_STEW, 2));
         });
+        // Each meal feeds from when it is eaten, so another keeps the line fed until the Quintessence is made.
+        helper.runAtTickTime(2 + fedFor(Items.RABBIT_STEW) - 10, () -> lab(helper).feed(meal(Items.MUSHROOM_STEW, 2)));
         helper.runAtTickTime(2 + PAID, () -> helper.assertValueEqual(lab(helper).linesCounting(), HermeticLabWork.LINES, "the lines counting"));
         int cost = HermeticLabWork.cost(HermeticLabWork.LINES, ServerConfig.hermeticLabCosts());
         helper.runAtTickTime(2 + PAID + ServerConfig.hermeticLabTicks().get(HermeticLabWork.LINES - 1), () -> {

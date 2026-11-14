@@ -25,7 +25,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
  * The lab's block, item, block entity and menus, its item face on every side once it is the Hermetic Lab (#263):
- * Quintessence out, Nullessence and Null Shards in, and no fluid, so no Essentia Vitae can be piped in; and what the lab's
+ * Quintessence out, Nullessence, Null Shards and meals in, and no fluid; and what the lab's
  * menu sends its client of the asks to stop a challenge.
  */
 public final class Lab {

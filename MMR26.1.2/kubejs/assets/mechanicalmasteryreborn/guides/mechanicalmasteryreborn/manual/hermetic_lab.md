@@ -33,10 +33,11 @@ and what a line still holds when its spell ends is lost. The row says whether it
 - **Energy**: your generators give their output to the Hermetic Lab and to nothing else, and no FE moves between
   blocks on your island. Banked FE can't be spent, and FE drives and Electric Defences stand still. The line is fed
   while the generators within the Hermetic Lab's reach, together, give it what it asks for.
-- **Life**: the hungriest [Diet](diet.md). Only hearts feed the line: give one at the Hermetic Lab's menu, as a
-  self-sacrifice, and it becomes Essentia Vitae there, more for each Rune of Self Sacrifice beside it. Only a
-  member can give, never their last heart, and the Hermetic Lab holds only so much. Essentia Vitae from anywhere
-  else never counts.
+- **Life**: the hungriest [Diet](diet.md). Quality meals feed the line: put them into the Hermetic Lab by hand or
+  by any automation, one at a time. A meal counts only if it is as good as a Pelican asks for and of a kind the
+  Hermetic Lab hasn't taken lately; any other, and rotten flesh, is refused and stays where it was. Each meal keeps
+  the line fed for a while, longer the more it satisfies, counted from when it goes in, so feed them steadily: nothing
+  left of the last carries over.
 - **Protection**: an Assault from its hardest waves, with explosions on and the refund as usual. Its mobs drop
   **Null Shards** instead of Rift Shards, and a Null Shard belongs to the spell it dropped in. Put them into the
   Hermetic Lab while that spell runs. Shards from an earlier spell are worthless, and the Hermetic Lab voids them.
