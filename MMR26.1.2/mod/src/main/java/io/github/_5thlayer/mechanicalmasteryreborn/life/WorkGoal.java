@@ -60,9 +60,9 @@ final class WorkGoal extends Goal {
             return;
         }
         nextLook = homunculus.tickCount + LOOK_INTERVAL;
-        // To its Supply's side, or to the space itself: a path that ends a block short of it ends off the space.
-        var path = supply != null ? homunculus.getNavigation().createPath(supply, 1)
-                : space != null ? homunculus.getNavigation().createPath(space, 0) : null;
+        // To the space itself, beside its Supply or its block: a path that ends a block short of it ends off the space.
+        var to = supply != null ? supply : space;
+        var path = to != null ? homunculus.getNavigation().createPath(to, 0) : null;
         if (path != null) {
             homunculus.getNavigation().moveTo(path, 1.0);
         }

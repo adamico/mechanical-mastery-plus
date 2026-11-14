@@ -39,6 +39,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
@@ -106,6 +107,8 @@ public final class HomunculusEntity extends PathfinderMob {
     private int nextLook;
     /** Whether its Supply, at its last look, held an item and it could walk there. */
     private boolean supplyReady;
+    /** The space beside its Supply it walks to, at its last look, or null. */
+    private @Nullable BlockPos supplySpace;
     /** Ticks the work its stand calls for has waited. */
     private int waited;
     /** Its own fake player, as its kindler: one each, so no two share an item's cooldown. */
@@ -208,10 +211,9 @@ public final class HomunculusEntity extends PathfinderMob {
         return targetSpace;
     }
 
-    /** Its stand's Supply, if its hand is empty and it has one, so it walks there; else null. */
+    /** The space beside its stand's Supply, if its hand is empty and it can walk there, so it does; else null. */
     @Nullable BlockPos supplyToFetch() {
-        var entity = standEntity();
-        return entity != null && getMainHandItem().isEmpty() ? entity.supply() : null;
+        return supplyReady && getMainHandItem().isEmpty() ? supplySpace : null;
     }
 
     /**
@@ -232,8 +234,7 @@ public final class HomunculusEntity extends PathfinderMob {
 
     private Work tryWork() {
         var entity = standEntity();
-        if (entity == null || entity.kindler() == null || target == null || targetSpace == null
-                || !level().getBlockState(target).is(Homunculus.WORKS)) {
+        if (entity == null || entity.kindler() == null || target == null || targetSpace == null || !worksAt(target)) {
             return Work.SPENT;
         }
         if (getMainHandItem().isEmpty()) {
@@ -271,14 +272,24 @@ public final class HomunculusEntity extends PathfinderMob {
         swing(InteractionHand.MAIN_HAND);
     }
 
-    /** Whether its stand's Supply holds an item, and it can walk there. */
+    /**
+     * Whether its stand's Supply holds an item, and it can walk to a space beside it, which it keeps as {@link #supplySpace}:
+     * a path to the storage itself would end on top of it, where a mob can't always stand.
+     */
     private boolean supplyReady(HomunculusStandBlockEntity entity) {
+        supplySpace = null;
         var handler = entity.supplyHandler();
         if (handler == null || firstFilled(handler) < 0) {
             return false;
         }
-        var path = getNavigation().createPath(entity.supply(), 1);
-        return path != null && path.canReach();
+        for (var space : spacesBeside(entity.supply())) {
+            var path = getNavigation().createPath(space, 0);
+            if (path != null && path.canReach()) {
+                supplySpace = space;
+                return true;
+            }
+        }
+        return false;
     }
 
     /** The first slot of {@code handler} that holds anything, or -1. */
@@ -327,7 +338,7 @@ public final class HomunculusEntity extends PathfinderMob {
         var base = entity.getBlockPos();
         var level = level();
         var found = BlockPos.betweenClosedStream(base.offset(-across, -up, -across), base.offset(across, up, across))
-                .filter(pos -> level.isLoaded(pos) && level.getBlockState(pos).is(Homunculus.WORKS))
+                .filter(pos -> level.isLoaded(pos) && worksAt(pos))
                 .map(BlockPos::immutable)
                 .sorted(Comparator.comparingDouble(pos -> pos.distSqr(base)))
                 .toList();
@@ -344,7 +355,19 @@ public final class HomunculusEntity extends PathfinderMob {
         }
     }
 
-    /** The spaces it could click {@code pos} from, within its range: beside it, level or one below, nearest it first. */
+    /**
+     * Whether the block at {@code pos} is one it works now: in {@link Homunculus#WORKS}, and, if it stores items, holding
+     * some. An empty one, such as a Cutting Board, would take what it holds, as its click puts it there.
+     */
+    private boolean worksAt(BlockPos pos) {
+        if (!level().getBlockState(pos).is(Homunculus.WORKS)) {
+            return false;
+        }
+        var stored = level().getCapability(Capabilities.Item.BLOCK, pos, null);
+        return stored == null || firstFilled(stored) >= 0;
+    }
+
+    /** The spaces it could stand on to reach {@code pos}, within its range: beside it, level or one below, nearest it first. */
     private List<BlockPos> spacesBeside(BlockPos pos) {
         var spaces = new ArrayList<BlockPos>();
         for (var side : Direction.Plane.HORIZONTAL) {

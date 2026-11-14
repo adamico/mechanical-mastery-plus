@@ -19,6 +19,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
 import net.minecraft.world.phys.Vec3;
 
 /**
@@ -49,6 +50,8 @@ final class HomunculusClickTests {
         tests.test("homunculus_clicks_drops_what_it_holds_when_it_dies", 400, HomunculusClickTests::dropsHeld);
         tests.test("homunculus_clicks_spends_its_works_on_a_supply_it_cant_reach", 200, HomunculusClickTests::unreachableSupply);
         tests.test("homunculus_clicks_from_a_supply_a_player_assigns", 40, HomunculusClickTests::assigns);
+        tests.test("homunculus_clicks_takes_from_beside_a_supply_it_cant_stand_on", 400, HomunculusClickTests::besideSupply);
+        tests.test("homunculus_clicks_skips_a_block_whose_storage_is_empty", 600, HomunculusClickTests::skipsEmpty);
     }
 
     /**
@@ -77,6 +80,44 @@ final class HomunculusClickTests {
             }
             helper.assertValueEqual(count(helper, CHEST, Items.STICK), 2, "the sticks left in its Supply");
             helper.assertTrue(homunculus.getMainHandItem().is(Items.STICK), "it holds " + homunculus.getMainHandItem());
+            player.leave(helper);
+        });
+    }
+
+    /** Its Supply under a block, so no mob stands on it: it takes from beside it, and clicks. */
+    private static void besideSupply(GameTestHelper helper) {
+        var player = woken(helper);
+        var homunculus = HomunculusTests.homunculus(helper, BASE);
+        helper.setBlock(WORKED, ClickedBlock.CLICKED.get());
+        chest(helper, CHEST, new ItemStack(Items.STICK, 3));
+        helper.setBlock(CHEST.above(), Blocks.STONE);
+        assign(helper, player, homunculus, CHEST);
+        var worked = helper.absolutePos(WORKED);
+        helper.succeedWhen(() -> {
+            helper.assertFalse(ClickedBlock.clicks(worked).isEmpty(), "no click yet");
+            helper.assertValueEqual(count(helper, CHEST, Items.STICK), 2, "the sticks left in its Supply");
+            player.leave(helper);
+        });
+    }
+
+    /**
+     * A decorated pot, in the game-test pack's tag, takes whatever an empty one is clicked with, as a Cutting Board does: it
+     * skips the pot while it is empty, and fetches and clicks once it holds a stick.
+     */
+    private static void skipsEmpty(GameTestHelper helper) {
+        var player = woken(helper);
+        var homunculus = HomunculusTests.homunculus(helper, BASE);
+        helper.setBlock(WORKED, Blocks.DECORATED_POT);
+        chest(helper, CHEST, new ItemStack(Items.STICK, 2));
+        assign(helper, player, homunculus, CHEST);
+        var pot = helper.getBlockEntity(WORKED, DecoratedPotBlockEntity.class);
+        helper.runAtTickTime(200, () -> {
+            helper.assertTrue(pot.getTheItem().isEmpty(), "the empty pot holds " + pot.getTheItem());
+            helper.assertValueEqual(count(helper, CHEST, Items.STICK), 2, "the sticks left in its Supply");
+            pot.setTheItem(new ItemStack(Items.STICK));
+        });
+        helper.succeedWhen(() -> {
+            helper.assertTrue(helper.getTick() > 200 && pot.getTheItem().getCount() >= 2, "the pot holds " + pot.getTheItem());
             player.leave(helper);
         });
     }
