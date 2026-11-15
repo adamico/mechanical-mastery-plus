@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- TimberReplant and Spice of Life: Carrot Edition join the pack. Beltworks 0.5.9, Craftworks 0.11.7, Pipeworks 0.4.3 and Wireworks 0.7.0 replace the older releases, and EpheroLib, which no mod needs, leaves.
 - Food keeps its quality through life's chain: the Cooking Pot, the Artisan Press and the Assembler give what they make the average quality of the food that went in. Agritech's planters grow better crops on better soil and fertilizer, and an Animal Pen's eggs, milk, wool and meat are better the better its animals were last fed (#365).
 - An Assembler takes food of another quality than its input holds, by pipe or by shift-click: the input holds both at their average quality, where it used to refuse it. A product with no room at its own quality goes onto the held stack of it nearest its quality, where the Assembler used to stall with room left (#372).
 - Food spoils, life played or not, by spoil class: raw food rots into rotten flesh in about 10 minutes, ingredients and any other food in about 20, the Cooking Pot's meals in about an hour, and a few preserved goods (honey, dried kelp, smoked ham, Pantry's cheese, tofu and flatbread, golden food) never. Only Cooking for Blockheads' fridge keeps food: it ages at a quarter of the rate, and not at all with an ice unit. A shulker box no longer keeps it (#363).

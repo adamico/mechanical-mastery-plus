@@ -45,6 +45,8 @@ Added from the pack's CurseForge profile:
 - **Forgiving Void**: falling into the void lands you back on the island instead of killing you.
 - **GraveStone**: what you carried waits in a grave where you died.
 - **Global XP**: stores experience in a block.
+- **TimberReplant**: a tree falls whole when its trunk is cut, and replants its sapling.
+- **Spice of Life: Carrot Edition**: eating new foods raises a player's max health.
 - **Squat Grow**: crouching grows the plants around you.
 - **FTB Chunks**: claims a team's island, and keeps its chunks loaded.
 - **FTB Backups 3**: world backups.

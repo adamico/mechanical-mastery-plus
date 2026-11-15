@@ -1,0 +1,13 @@
+name = "TimberReplant(Fabric/Forge/NeoForge)"
+filename = "TimberReplant-4.4.0.jar"
+side = "both"
+
+[download]
+hash-format = "sha1"
+hash = "227097f02f8d4c99a3b00a50ce75cbb77f56a87f"
+mode = "metadata:curseforge"
+
+[update]
+[update.curseforge]
+file-id = 8602553
+project-id = 1356053

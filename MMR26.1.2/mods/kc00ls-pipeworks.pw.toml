@@ -1,13 +1,13 @@
 name = "kc00l's Pipeworks"
-filename = "pipeworks-0.4.2.jar"
+filename = "pipeworks-0.4.3.jar"
 side = "both"
 
 [download]
 hash-format = "sha1"
-hash = "93c7bb7531f47839390e6f37f0f9a6f4ca8dce84"
+hash = "90c9682f567ddd37f25043715f40444128eb4a28"
 mode = "metadata:curseforge"
 
 [update]
 [update.curseforge]
-file-id = 9373963
+file-id = 9632731
 project-id = 1730637

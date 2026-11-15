@@ -891,7 +891,7 @@ metafile = true
 
 [[files]]
 file = "mods/beltworks.pw.toml"
-hash = "b3b180c161ee0a3c1e19599c3fb6193a17c9bc7dce1e6550338aecaa119aead6"
+hash = "d9428d2d5592d9d849043298ed641c811bff23de43133d1623c2897e079da66d"
 metafile = true
 
 [[files]]
@@ -1017,11 +1017,6 @@ metafile = true
 [[files]]
 file = "mods/entityculling.pw.toml"
 hash = "3361309a964408c302cb0cf0d410b6ea13bfbfdaa2bbb29204aeb9cfb9c73b4b"
-metafile = true
-
-[[files]]
-file = "mods/epherolib.pw.toml"
-hash = "f871491abaffbc9f1324377525c4cbf47d46ffdf65def452b2816a009ead74aa"
 metafile = true
 
 [[files]]
@@ -1171,7 +1166,7 @@ metafile = true
 
 [[files]]
 file = "mods/kc00l-craftworks.pw.toml"
-hash = "ac5625d24fc48df4c85567191359acf97fcd107ba777f9bd34f6265035512e0b"
+hash = "a990d3fd6aa3fbcb9d3f4b452290f80debc233595a42d6bec73087f992b0ced8"
 metafile = true
 
 [[files]]
@@ -1181,7 +1176,7 @@ metafile = true
 
 [[files]]
 file = "mods/kc00ls-pipeworks.pw.toml"
-hash = "af44e4ab7e55bf053d8144fca65a9eef29e243bb31f66423aa30eaec9158e269"
+hash = "95b789405a0636c1bc196a20325b8adc4dafb2fd56f191484bfae76525ebf59f"
 metafile = true
 
 [[files]]
@@ -1355,6 +1350,11 @@ hash = "d65ad29b9e9d012fea220ae2cf269441310ae71126ad0466bef347d299de5f94"
 metafile = true
 
 [[files]]
+file = "mods/spice-of-life-carrot-edition.pw.toml"
+hash = "8c3ab280a7e307a0ee3edda11ccff50f589ebe13b7a6b15d892cecd9e833a996"
+metafile = true
+
+[[files]]
 file = "mods/spoiled.pw.toml"
 hash = "d15f7150051bc9a118d774edfa937d7aeb2c8a58bc37268c3c9fcd51d71d3f8b"
 metafile = true
@@ -1385,6 +1385,11 @@ hash = "ebaa28b2e0aa21a92fbdf9263d1da594767715f6e75e3f2ad517c6d847a723a4"
 metafile = true
 
 [[files]]
+file = "mods/timberreplant.pw.toml"
+hash = "93a05b1972094d810a8251a09b7d9b23fca9da80a0d76445f6108076620afbfe"
+metafile = true
+
+[[files]]
 file = "mods/titanium.pw.toml"
 hash = "949591d522df25b06232af5a189c8070c03d6ffc6a42f5a80b337a591e07ddef"
 metafile = true
@@ -1401,7 +1406,7 @@ metafile = true
 
 [[files]]
 file = "mods/wireworks.pw.toml"
-hash = "c477de61d251a388f5b68c52c45a5612d5043ad75c839b8f1c10305c242e4c51"
+hash = "536f41329df874a6ecbc557f78bf30ce06482ff18e6a8230fca4c30a1e89df8e"
 metafile = true
 
 [[files]]
