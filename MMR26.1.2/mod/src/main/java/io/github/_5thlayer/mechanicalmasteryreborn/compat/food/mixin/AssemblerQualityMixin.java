@@ -31,7 +31,8 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
  * the stacks one craft took, which its {@code takeItems} fills, are kept for the product's placing, which follows in the
  * same {@code finish}. Its further results and the remainders take none. Both when it checks the product fits and when it
  * makes it. A product with no room at its own quality goes onto the held stack of its item nearest it, so its quality
- * never stalls the Assembler while it has room (#372). The Personal Assembler plans by each item's exact components, so it
+ * never stalls the Assembler while it has room (#372). Its {@code place} takes the Held recipe first, from Craftworks'
+ * fix for 5thlayer/craftworks#87 on, so this needs that Craftworks. The Personal Assembler plans by each item's exact components, so it
  * carries none. {@link Pseudo}, so without Craftworks it never applies.
  */
 @Pseudo
@@ -53,25 +54,25 @@ public abstract class AssemblerQualityMixin {
     }
 
     @WrapOperation(method = "finish", at = @At(value = "INVOKE", ordinal = 0,
-            target = "Lio/github/_5thlayer/craftworks/machine/AssemblerBlockEntity;place(Lnet/neoforged/neoforge/transfer/item/ItemResource;ILnet/neoforged/neoforge/transfer/transaction/TransactionContext;)Z"))
-    private boolean mechanicalmasteryreborn$quality(@Coerce Object self, ItemResource product, int count, TransactionContext tx,
-            Operation<Boolean> place) {
+            target = "Lio/github/_5thlayer/craftworks/machine/AssemblerBlockEntity;place(Lio/github/_5thlayer/craftworks/recipe/AssemblingRecipe;Lnet/neoforged/neoforge/transfer/item/ItemResource;ILnet/neoforged/neoforge/transfer/transaction/TransactionContext;)Z"))
+    private boolean mechanicalmasteryreborn$quality(@Coerce Object self, @Coerce Object recipe, ItemResource product, int count,
+            TransactionContext tx, Operation<Boolean> place) {
         Level level = ((BlockEntity) (Object) this).getLevel();
         List<ItemStack> consumed = mechanicalmasteryreborn$consumed;
         mechanicalmasteryreborn$consumed = List.of();
         if (level == null || product.isEmpty()) {
-            return place.call(self, product, count, tx);
+            return place.call(self, recipe, product, count, tx);
         }
         ItemStack made = product.toStack(1);
         if (!FoodQuality.takesQuality(made)) {
-            return place.call(self, product, count, tx);
+            return place.call(self, recipe, product, count, tx);
         }
         FoodQuality.carry(made, consumed, level.registryAccess());
-        if (mechanicalmasteryreborn$tryPlace(self, ItemResource.of(made), count, tx, place)) {
+        if (mechanicalmasteryreborn$tryPlace(self, recipe, ItemResource.of(made), count, tx, place)) {
             return true;
         }
         for (ItemResource held : mechanicalmasteryreborn$heldKinds(made, level)) {
-            if (mechanicalmasteryreborn$tryPlace(self, held, count, tx, place)) {
+            if (mechanicalmasteryreborn$tryPlace(self, recipe, held, count, tx, place)) {
                 return true;
             }
         }
@@ -80,10 +81,10 @@ public abstract class AssemblerQualityMixin {
 
     /** Places {@code count} of {@code product} if it all goes, in a transaction of its own so a part placed is undone. */
     @Unique
-    private static boolean mechanicalmasteryreborn$tryPlace(Object self, ItemResource product, int count, TransactionContext tx,
-            Operation<Boolean> place) {
+    private static boolean mechanicalmasteryreborn$tryPlace(Object self, Object recipe, ItemResource product, int count,
+            TransactionContext tx, Operation<Boolean> place) {
         try (Transaction trial = Transaction.open(tx)) {
-            if (place.call(self, product, count, trial)) {
+            if (place.call(self, recipe, product, count, trial)) {
                 trial.commit();
                 return true;
             }

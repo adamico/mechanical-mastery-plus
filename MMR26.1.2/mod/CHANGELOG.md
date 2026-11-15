@@ -4,6 +4,7 @@ Written for the pack and its players: what Mechanical Mastery Reborn Core adds, 
 
 ## Unreleased
 
+- A food made in a Craftworks Assembler keeps its ingredients' average quality on the Craftworks that fixes 5thlayer/craftworks#87, which no longer loads it otherwise: the game would not start with that Craftworks, and this needs it from now on.
 - The Vital Spark is a green star of its own in place of vanilla's glowstone dust, and a spent one is the same star gone grey (#375).
 - The Homunculus is a clay figure and its stand a terracotta block topped by a copper rod, their own art in place of vanilla's clay and lightning rod, the stand showing as its clay block in the inventory (#374).
 - The Hermetic Lab's life line eats quality meals in place of hearts. Under the life spell it takes, from a hand or any automation, one meal at a time as good as a Pelican's batch must average and of a kind not among as many it took last as a Pelican's batch needs kinds; it refuses any other and rotten flesh, which stay where they were. Each meal keeps the line fed for its own saturation times the new `hermetic_lab.life.ticks_per_saturation` server setting (20), from when it is eaten, nothing carried over. Hearts, Essentia Vitae, the menu's Self-Sacrifice row and the `hermetic_lab.life.demand` and `hermetic_lab.life.per_heart` server settings go (#370).
