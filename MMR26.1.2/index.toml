@@ -891,7 +891,7 @@ metafile = true
 
 [[files]]
 file = "mods/beltworks.pw.toml"
-hash = "d9428d2d5592d9d849043298ed641c811bff23de43133d1623c2897e079da66d"
+hash = "94eddb7d86af853be5e5bd731d10496d799c221eb2c6a503f22208dde037a8cb"
 metafile = true
 
 [[files]]

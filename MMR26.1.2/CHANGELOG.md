@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Beltworks 0.5.10 replaces 0.5.9: a loader whose source pauses, such as one fed by a Harvester, loads at its belt's start again instead of behind the last item down the belt, so the belt no longer fills backwards from its far end.
 - TimberReplant and Spice of Life: Carrot Edition join the pack. Beltworks 0.5.9, Craftworks 0.11.7, Pipeworks 0.4.3 and Wireworks 0.7.0 replace the older releases, and EpheroLib, which no mod needs, leaves.
 - Food keeps its quality through life's chain: the Cooking Pot, the Artisan Press and the Assembler give what they make the average quality of the food that went in. Agritech's planters grow better crops on better soil and fertilizer, and an Animal Pen's eggs, milk, wool and meat are better the better its animals were last fed (#365).
 - An Assembler takes food of another quality than its input holds, by pipe or by shift-click: the input holds both at their average quality, where it used to refuse it. A product with no room at its own quality goes onto the held stack of it nearest its quality, where the Assembler used to stall with room left (#372).
