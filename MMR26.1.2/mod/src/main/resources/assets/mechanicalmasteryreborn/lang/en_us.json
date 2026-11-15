@@ -141,7 +141,6 @@
   "item.mechanicalmasteryreborn.warding_essence": "Warding Essence",
   "mechanicalmasteryreborn.bar.challenge": "%s - %s",
   "mechanicalmasteryreborn.bar.overproduction": "Overproduction: %s of %s",
-  "mechanicalmasteryreborn.bar.resets": "%s · At the cap it resets, losing this attempt's essence",
   "mechanicalmasteryreborn.bar.assault": "%s · Wave %s, from the %s",
   "mechanicalmasteryreborn.assault.moved": "The Assault comes from the %s",
   "mechanicalmasteryreborn.assault.called": "A wave is called from the %s",
