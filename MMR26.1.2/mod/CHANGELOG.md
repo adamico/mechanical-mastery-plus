@@ -4,6 +4,8 @@ Written for the pack and its players: what Mechanical Mastery Reborn Core adds, 
 
 ## Unreleased
 
+## 0.3.0
+
 - A food made in a Craftworks Assembler keeps its ingredients' average quality on Craftworks 0.11.7, which fixes 5thlayer/craftworks#87 and which the game would not start with before. It needs that Craftworks from now on: with an older one installed, the game refuses to load and names Craftworks 0.11.7, in place of crashing.
 - The Vital Spark is a green star of its own in place of vanilla's glowstone dust, and a spent one is the same star gone grey (#375).
 - The Homunculus is a clay figure and its stand a terracotta block topped by a copper rod, their own art in place of vanilla's clay and lightning rod, the stand showing as its clay block in the inventory (#374).
