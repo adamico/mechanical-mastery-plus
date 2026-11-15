@@ -71,3 +71,12 @@ config = "${mod_id}.gateways.mixins.json"
 # A Mutation Chamber climbs no Quartessence into Quintessence until its team has started its last stand, and a Void Crucible never takes one, applied only with Voidworks installed (#262).
 [[mixins]]
 config = "${mod_id}.voidworks.mixins.json"
+
+# Optional: the food mixins wrap the Assembler as Craftworks 0.11.7 has it (5thlayer/craftworks#87), and an older one
+# fails to load with them.
+[[dependencies.${mod_id}]]
+modId = "craftworks"
+type = "optional"
+versionRange = "[0.11.7,)"
+ordering = "NONE"
+side = "BOTH"
